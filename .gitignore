@@ -172,3 +172,21 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# --- Project Specific ---
+
+# FAISS vector index (can be rebuilt)
+faiss_index_v2/
+
+# Streamlit secrets and config
+.streamlit/
+
+# Python virtual environment (common names)
+venv/
+.venv/
+
+# Environment variables file
+.env
+
+# Course Material
+course-content/
