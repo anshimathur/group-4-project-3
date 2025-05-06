@@ -1,0 +1,10 @@
+streamlit
+nbformat>=4.2.0 # For reading .ipynb files
+# Add libraries for your chosen LLM later (e.g., openai, langchain, transformers)
+sentence-transformers # For embedding text
+faiss-cpu # For vector store/similarity search (CPU version)
+langchain # Framework to help orchestrate RAG
+langchain-community # Required for some langchain components
+langchain-google-genai
+pypdf # Added for PDF reading
+google-generativeai
