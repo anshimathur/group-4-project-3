@@ -59,19 +59,20 @@ def create_content_manifest():
     manifest_file = script_location / "content_manifest.json"
 
     content_manifest = []
-    file_types_to_scan = {".py", ".md", ".ipynb", ".pdf"}
+    file_types_to_scan = {".py", ".md", ".ipynb", ".pdf", ".txt"}
     dirs_to_scan = {
         ".py": course_content_dir,
         ".md": course_content_dir,
         ".ipynb": course_content_dir,
         ".pdf": course_content_dir,
+        ".txt": course_content_dir,
     }
     base_dirs = { # Base directory for calculating relative path
         course_content_dir: course_content_dir,
     }
 
-    print(f"Scanning for {', '.join(file_types_to_scan)} files...")
-    print(f"Scanning .py, .md, .ipynb, .pdf in: {course_content_dir}")
+    print(f"Scanning for {', '.join(sorted(list(file_types_to_scan)))} files...")
+    print(f"Scanning {', '.join(sorted(list(file_types_to_scan)))} in: {course_content_dir}")
 
     processed_files = 0
     for file_ext, scan_dir in dirs_to_scan.items():

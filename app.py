@@ -10,9 +10,9 @@ import traceback # Import for printing traceback
 import time # To check manifest modification time
 
 # Langchain & Embedding specific imports
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter, Language # Keep Recursive here
 from langchain_community.vectorstores import FAISS # Updated import
-from langchain_community.embeddings import SentenceTransformerEmbeddings # Updated import
+from langchain_google_genai import GoogleGenerativeAIEmbeddings # Import Google embeddings
 from langchain.docstore.document import Document # Correct import
 from collections import Counter
 
@@ -22,16 +22,18 @@ st.set_page_config(layout="wide", page_title="AI Course Tutor")
 
 # --- Constants ---
 MANIFEST_PATH = Path(__file__).parent / "content_manifest.json"
-FAISS_INDEX_PATH = Path(__file__).parent / "faiss_index_v2" # Use a new folder for the revised index
-EMBEDDING_MODEL_NAME = 'all-MiniLM-L6-v2' # Common choice
+FAISS_INDEX_PATH = Path(__file__).parent / "faiss_index_google_v1" # New path for Google embeddings
+GOOGLE_EMBEDDING_MODEL = 'models/embedding-001' # Google embedding model
 COURSE_CONTENT_ROOT = Path(__file__).parent / "course-content" # Define root for relative paths
+NUM_FETCH_DOCS = 20 # Number of documents to fetch initially for MMR
+NUM_FINAL_DOCS = 8 # Number of diverse documents to select using MMR for the context
 
 # --- Gemini Configuration ---
 gemini_configured = False
 try:
     GOOGLE_API_KEY = st.secrets["google_api_key"]
     genai.configure(api_key=GOOGLE_API_KEY)
-    gemini_model = genai.GenerativeModel('gemini-1.5-flash') # Use a capable model
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash-preview-04-17') # Use a capable model
     gemini_configured = True
     print("Gemini configured successfully.")
 except KeyError:
@@ -108,7 +110,6 @@ def read_txt_file(file_path):
         
 
 # --- Map file extensions to reading functions ---
-# Note: PDF reader now returns a list, handled in build_or_load_index
 READERS = {
     '.py': read_py_file,
     '.md': read_md_file,
@@ -119,7 +120,7 @@ READERS = {
 
 # --- Build or Load FAISS Index ---
 
-# @st.cache_resource # Re-enable caching once stable
+@st.cache_resource # Re-enable caching
 def build_or_load_index(df):
     """
     Builds a FAISS index from documents or loads it.
@@ -163,7 +164,7 @@ def build_or_load_index(df):
     if not rebuild_needed:
         try:
             print(f"Loading existing FAISS index from {FAISS_INDEX_PATH}...")
-            embeddings = SentenceTransformerEmbeddings(model_name=EMBEDDING_MODEL_NAME)
+            embeddings = GoogleGenerativeAIEmbeddings(model=GOOGLE_EMBEDDING_MODEL, task_type="retrieval_document")
             faiss_index = FAISS.load_local(
                 FAISS_INDEX_PATH.as_posix(),
                 embeddings,
@@ -188,11 +189,9 @@ def build_or_load_index(df):
         progress_bar = st.progress(0.0, text="Initializing index build...")
 
         # Define the text splitter
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=750, # Slightly smaller chunks
-            chunk_overlap=100, # Smaller overlap
-            length_function=len,
-            add_start_index=True, # Helps locate chunk origin within source
+        recursive_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
+        python_splitter = RecursiveCharacterTextSplitter.from_language(
+            language=Language.PYTHON, chunk_size=1000, chunk_overlap=150 # Adjust chunk size for code? Maybe larger?
         )
 
         for index, row in df.iterrows():
@@ -228,12 +227,20 @@ def build_or_load_index(df):
                             if page_content:
                                 page_metadata = base_metadata.copy()
                                 page_metadata['page'] = page_num # Add page number
-                                docs_split = text_splitter.create_documents([page_content], metadatas=[page_metadata])
-                                all_docs_for_faiss.extend(docs_split)
+                                chunks = recursive_splitter.split_text(page_content)
+                                for chunk in chunks:
+                                    all_docs_for_faiss.append(Document(page_content=chunk, metadata=page_metadata))
                     elif isinstance(content_or_pages, str) and content_or_pages:
                         # Handle non-PDF content
-                        docs_split = text_splitter.create_documents([content_or_pages], metadatas=[base_metadata])
-                        all_docs_for_faiss.extend(docs_split)
+                        if file_ext == '.py':
+                            splitter = python_splitter
+                            print(f"DEBUG: Using RecursiveCharacterTextSplitter for {relative_path}")
+                        else: # Use recursive for .md, .ipynb, .txt etc.
+                            splitter = recursive_splitter
+                            # print(f"DEBUG: Using RecursiveTextSplitter for {relative_path}") # Less noisy
+                        chunks = splitter.split_text(content_or_pages)
+                        for chunk in chunks:
+                            all_docs_for_faiss.append(Document(page_content=chunk, metadata=base_metadata))
                     # else: content was empty or None, ignore
 
                 except Exception as e:
@@ -252,27 +259,18 @@ def build_or_load_index(df):
             st.error("No documents could be processed for indexing. Check file paths, readers, and content.")
             return None
 
-        file_type_counts = Counter(doc.metadata['file_type'] for doc in all_docs_for_faiss)
-        print("🔍 Indexed document chunks by type:", file_type_counts)
+        embeddings = GoogleGenerativeAIEmbeddings(model=GOOGLE_EMBEDDING_MODEL, task_type="retrieval_document")
+        faiss_index = FAISS.from_documents(all_docs_for_faiss, embeddings)
 
-        try:
-            print(f"Creating FAISS index from {len(all_docs_for_faiss)} document chunks...")
-            embeddings = SentenceTransformerEmbeddings(model_name=EMBEDDING_MODEL_NAME)
-            faiss_index = FAISS.from_documents(all_docs_for_faiss, embeddings)
-
-            FAISS_INDEX_PATH.mkdir(parents=True, exist_ok=True)
-            faiss_index.save_local(FAISS_INDEX_PATH.as_posix())
-            print(f"FAISS index successfully built and saved to {FAISS_INDEX_PATH}")
-            return faiss_index
-        except Exception as e:
-            st.error(f"Fatal Error creating or saving FAISS index: {e}")
-            traceback.print_exc()
-            return None
+        FAISS_INDEX_PATH.mkdir(parents=True, exist_ok=True)
+        faiss_index.save_local(FAISS_INDEX_PATH.as_posix())
+        print(f"FAISS index successfully built and saved to {FAISS_INDEX_PATH}")
+        return faiss_index
 
     return None # Should not be reached
 
 # --- Load Content Manifest ---
-# @st.cache_data # Cache the manifest loading
+@st.cache_data # Re-enable caching
 def load_manifest():
     """Loads the content manifest file into a pandas DataFrame."""
     if not MANIFEST_PATH.exists():
@@ -307,7 +305,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
         # Display sources if they exist for assistant messages
         if message["role"] == "assistant" and "sources" in message and message["sources"]:
-            with st.expander("View Sources Used", expanded=False):
+            with st.expander("View All Sources Used", expanded=False):
                 for source_path, meta in message["sources"].items():
                     page_info = f", Page {meta.get('page')}" if 'page' in meta else ""
                     st.write(f"- **{source_path}**{page_info}")
@@ -326,60 +324,40 @@ if faiss_index is not None and gemini_configured:
 
         # Prepare for assistant response
         full_response_content = "Error: Response generation failed."
-        sources_for_display = {}
+        sources_for_display = []
         
         with st.chat_message("assistant"):
             message_placeholder = st.empty() # Placeholder for streaming/final answer
             try:
                 with st.spinner("Searching course material and generating answer..."):
-                    # 1. Retrieve relevant documents
-                    k_results = 7 # Retrieve slightly more
-                    score_threshold = 1.2 # Adjusted threshold for all-MiniLM-L6-v2 L2 distance
+                    # 1. Retrieve relevant documents using MMR
+                    retriever = faiss_index.as_retriever(
+                        search_type="mmr",
+                        search_kwargs={'k': NUM_FINAL_DOCS, 'fetch_k': NUM_FETCH_DOCS} # MMR specific
+                    )
 
-                    # print(f"DEBUG: Performing similarity search for: '{prompt}' with k={k_results}")
-                    search_results_with_scores = faiss_index.similarity_search_with_score(prompt, k=k_results)
-                    print("🔎 Raw Top-K Search Results (pre-filter):")
-                    for doc, score in search_results_with_scores:
-                        print(f"  score={score:.2f}  file={doc.metadata['source']}  type={doc.metadata['file_type']}")
-                    
-                    # print(f"DEBUG: Initial search results count: {len(search_results_with_scores)}")
-                    # print(f"DEBUG: Scores: {[score for _, score in search_results_with_scores]}")
+                    # sources = retriever.get_relevant_documents(prompt) # DEPRECATED
+                    sources = retriever.invoke(prompt) # Use invoke instead
 
-                    # 2. Filter results
-                    filtered_results = [(doc, score) for doc, score in search_results_with_scores if score < score_threshold]
-                    # print(f"DEBUG: Filtered results count (threshold < {score_threshold}): {len(filtered_results)}")
+                    # --- Prepare Context --- 
+                    context = "\n\n".join([doc.page_content for doc in sources])
 
-                    if not filtered_results:
-                        # If filtering removed everything, maybe take the single best result if it exists?
-                        # Or just inform the user. Let's inform for now.
-                        if search_results_with_scores: # Check if there were any results initially
-                             st.warning(f"Could not find highly relevant documents (closest score: {search_results_with_scores[0][1]:.2f}, threshold: {score_threshold}). The answer might be less accurate or unavailable. Consider rephrasing.")
-                             # Fallback: use the single best result despite score
-                             # search_results_docs = [search_results_with_scores[0][0]]
-                             # Let's just use an empty context if nothing meets threshold
-                             search_results_docs = []
-                             
-                        else:
-                            st.error("Could not find any relevant documents in the course material for your query.")
-                            full_response_content = "I couldn't find any relevant documents in the course material matching your question."
-                            # Set response directly and skip Gemini call
-                            message_placeholder.markdown(full_response_content)
-                             # Add to history below, outside the try/except for Gemini
-                            st.session_state.messages.append({
-                                "role": "assistant",
-                                "content": full_response_content,
-                                "sources": {} # No sources found
-                            })
-                            st.stop() # Stop further processing for this query if nothing found
-                    else:
-                         search_results_docs = [doc for doc, score in filtered_results]
-
+                    # 2. Check if results were found
+                    if not sources:
+                        # Inform the user if nothing was found
+                        st.warning("Could not find relevant documents in the course material for your query. Please try rephrasing.")
+                        st.session_state.messages.append({
+                            "role": "assistant",
+                            "content": "Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course outline.",
+                            "sources": {} # No sources found
+                        })
+                        st.stop() # Stop further processing for this query if nothing found
 
                     # 3. Prepare Context and Source Tracking
                     context_parts = []
                     source_to_meta_map = {} # Use this for final display source list
 
-                    for i, doc in enumerate(search_results_docs):
+                    for i, doc in enumerate(sources):
                         metadata = doc.metadata
                         source = metadata.get('source', 'Unknown')
                         page_num = metadata.get('page', None)
@@ -402,40 +380,34 @@ if faiss_index is not None and gemini_configured:
                     context = "\n\n".join(context_parts)
                     sources_for_display = source_to_meta_map # Use the unique map for display
 
-                    # 4. Prepare Final Prompt for Gemini (No History)
+                    # 4. Prepare Final Prompt for Gemini
                     prompt_template = f"""
-You are an AI Tutor for a Machine Learning Bootcamp. Use ONLY the provided Context Chunks.     
-  - `### Answer` heading for your explanation.  
-  - Use **bullet points** or **numbered lists** for multi-step items.  
-  - Wrap any code or formulas in fenced blocks (```…```).      
-  - Do **not** repeat full file names inline.  
+You are an AI Tutor for a Machine Learning Bootcamp. Use ONLY the provided Context Chunks to answer the user's question.
 
-**Content Rules**  
-1. Base your answer **only** on Context Chunks below.  
-2. If the answer is in a chunk, synthesize it; don’t add outside info.  
-3. If the question asks **where/when** a concept appears, include its Module/Day/Source/File/Page in your Sources list.  
-4. If no chunk covers the question, reply exactly:  
-   > “Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course outline.”  
+**Instructions:**
+- Answer the user's question accurately based *only* on the information in the Context Chunks.
+- If the answer spans multiple chunks, synthesize the information concisely.
+- When the question asks **where/when** a concept appears, mention the Module/Day/Source File/Page (if available) and ensure it's listed in the 'Sources' section later.
+- If the question is related to a specific concept (e.g., a formula or method), explain it in a straightforward manner and provide any relevant details from the Context Chunks.
+- Format code examples, commands, or formulas using ```markdown fences``` for clarity.
+- Use **bullet points** or **numbered lists** for steps or key items when appropriate.
+- Start your response directly with the answer, preceded by `### Answer`.
+- Do **not** add information that is not present in the Context Chunks.
+- If the Context Chunks do not contain the answer, clearly state:
+  > Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course-content.
 
----
-
-**Context Chunks:**  
+**Context Chunks:**
 {context}
 
 **User Question:** {prompt}
 
-### Answer
+Answer:
 """
 
-                    # 5. Call Gemini API
-                    # print("DEBUG: Calling Gemini API...") # Optional debug
-                    # print("--- PROMPT START ---")
-                    # print(prompt_template)
-                    # print("--- PROMPT END ---")
 
+                    # 5. Call Gemini API
                     try:
                         response = gemini_model.generate_content(prompt_template)
-                        # print("DEBUG: Gemini Response Received.") # Optional debug
                         gemini_answer = response.text
                     except ValueError as ve:
                          # Handle potential value errors during text extraction (e.g., blocked content)
@@ -465,10 +437,6 @@ You are an AI Tutor for a Machine Learning Bootcamp. Use ONLY the provided Conte
                 "content": full_response_content,
                 "sources": sources_for_display # Store sources with the message
             })
-            # Update the sources expander for the *newly added* message immediately
-            # (This requires rerunning the loop that displays messages, which Streamlit handles automatically)
-            # st.rerun() # Force rerun might be too disruptive, usually updates automatically
-
 
 elif not gemini_configured:
     st.warning("Gemini API is not configured. Please check your `secrets.toml` file.")

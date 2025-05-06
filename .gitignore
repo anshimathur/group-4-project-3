@@ -176,10 +176,10 @@ cython_debug/
 # --- Project Specific ---
 
 # FAISS vector index (can be rebuilt)
-faiss_index_v2/
+faiss_index_google_v1/
 
 # Streamlit secrets and config
-.streamlit/
+.streamlit/secrets.toml
 
 # Python virtual environment (common names)
 venv/
@@ -189,4 +189,7 @@ venv/
 .env
 
 # Course Material
-course-content/
+course-content/*
+
+# Content manifest
+content_manifest.json

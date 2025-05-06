@@ -6,5 +6,6 @@ faiss-cpu # For vector store/similarity search (CPU version)
 langchain # Framework to help orchestrate RAG
 langchain-community # Required for some langchain components
 langchain-google-genai
+langchain-text-splitters
 pypdf # Added for PDF reading
 google-generativeai
