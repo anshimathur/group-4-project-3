@@ -193,3 +193,7 @@ course-content/*
 
 # Content manifest
 content_manifest.json
+
+# Exception for info.txt
+!course-content/info.txt
+!course-content/Transcripts/

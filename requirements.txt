@@ -6,3 +6,5 @@ nbformat>=4.2.0
 google-generativeai
 langchain-google-genai
 PyMuPDF
+langchain-community
+fitz
