@@ -23,9 +23,9 @@ This guide provides step-by-step instructions for setting up and running the AI 
 
 2.  **Create a Dedicated Conda Environment (Highly Recommended):**
     *   To avoid package conflicts (like potential OpenMP errors), create a new, clean environment specifically for this project. Open your Anaconda Prompt or terminal.
-    *   Choose a Python version (e.g., 3.10 or 3.11 are good choices):
+    *   Choose a Python version (e.g., 3.11 or 3.12 are good choices):
         ```bash
-        conda create --name tutor_env python=3.10 -y
+        conda create --name tutor_env python=3.12 -y
         ```
     *   Activate the newly created environment:
         ```bash
@@ -50,13 +50,15 @@ This guide provides step-by-step instructions for setting up and running the AI 
 
 5.  **Add Course Content:**
     *   Create a directory named `course-content` inside your `project root` directory (if it doesn't exist).
-    *   **Crucial Step:** Navigate into the `course-content` directory in your terminal and clone the official course materials repository into it:
+    *   **Crucial Step:** Navigate into the `course-content` directory in your terminal and clone the official course materials repository into it. Then move the transcripts directory into the course-content directory:
         ```bash
-        cd course-content
-        git clone https://git.bootcampcontent.com/boot-camp-consortium-west-coast/AI-PT-WEST-NOVEMBER-111824.git .
+        mkdir course-content
+        cd course-content/
+        git clone https://git.bootcampcontent.com/boot-camp-consortium-west-coast/ AI-PT-WEST-NOVEMBER-111824.git .
         rm -rf .git
         rm .gitignore
-        cd .. 
+        cd ..
+        mv transcripts/  course-content/
         ```
         *(Note: The `.` at the end of the `git clone` command ensures the content is cloned directly into the `course-content` folder, not into a subfolder named `AI-PT-WEST-NOVEMBER-111824`.)*
     *   The application will recursively scan this folder for `.pdf`, `.py`, `.md`, `.ipynb`, and `.txt` files.
