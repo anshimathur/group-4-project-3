@@ -23,7 +23,7 @@ def find_slideshow_pdf(file_path: Path, course_content_root: Path):
         module_dir = None
         current = day_dir.parent
         while current != course_content_root and current != current.parent:
-             # Match directories like XX-Some-Name or XX-SomeName
+            # Match directories like XX-Some-Name or XX-SomeName
             if re.match(r"^\d{2}-[\w-]+", current.name):
                 module_dir = current
                 break
@@ -94,14 +94,14 @@ def create_content_manifest():
                     # Find first part that looks like a module (e.g., "01-Intro...")
                     module_part = next((part for part in relative_path.parts if re.match(r"^\d{2}-", part)), None)
                     if module_part:
-                         module = module_part.split('-')[0]
-                         # Find first part *after* module that looks like a day ("1", "2", "3")
-                         day_part_index = -1
-                         for i, part in enumerate(relative_path.parts):
-                             if part == module_part:
-                                 day_part_index = i + 1
-                                 break
-                         if day_part_index != -1 and day_part_index < len(relative_path.parts):
+                        module = module_part.split('-')[0]
+                        # Find first part *after* module that looks like a day ("1", "2", "3")
+                        day_part_index = -1
+                        for i, part in enumerate(relative_path.parts):
+                            if part == module_part:
+                                day_part_index = i + 1
+                                break
+                        if day_part_index != -1 and day_part_index < len(relative_path.parts):
                             day_part_candidate = relative_path.parts[day_part_index]
                             if re.match(r"^[1-3]$", day_part_candidate):
                                 day = day_part_candidate

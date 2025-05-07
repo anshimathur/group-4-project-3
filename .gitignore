@@ -195,5 +195,5 @@ course-content/*
 content_manifest.json
 
 # Exception for info.txt
-!course-content/info.txt
+!course-content/placeholder.txt
 !course-content/Transcripts/
