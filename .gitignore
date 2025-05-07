@@ -193,3 +193,4 @@ course-content/
 
 # Content manifest
 content_manifest.json
+.DS_Store
