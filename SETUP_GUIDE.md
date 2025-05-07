@@ -41,15 +41,12 @@ This guide provides step-by-step instructions for setting up and running the AI 
 
 4.  **Configure Google API Key:**
     *   The application uses Google Gemini, which requires an API key.
-    *   Create a directory named `.streamlit` inside your `project root` directory (if it doesn't exist).
-    *   Inside the `.streamlit` directory, create a file named `secrets.toml`.
+    *   Create a file named `.env` inside your `project root` directory (if it doesn't exist).
     *   Add your Google API key to this file in the following format:
-        ```toml
-        # .streamlit/secrets.toml
-        google_api_key = "YOUR_ACTUAL_GOOGLE_API_KEY"
         ```
-    *   Replace `"YOUR_ACTUAL_GOOGLE_API_KEY"` with your real key.
-    *   **Security:** The `.gitignore` file should already be configured to prevent committing this `secrets.toml` file to Git. Double-check this to avoid exposing your key.
+        GOOGLE_API_KEY=YOUR_ACTUAL_GOOGLE_API_KEY
+        ```
+    *   Replace `YOUR_ACTUAL_GOOGLE_API_KEY` with your real key.
 
 5.  **Add Course Content:**
     *   Create a directory named `course-content` inside your `project root` directory (if it doesn't exist).
@@ -57,6 +54,8 @@ This guide provides step-by-step instructions for setting up and running the AI 
         ```bash
         cd course-content
         git clone https://git.bootcampcontent.com/boot-camp-consortium-west-coast/AI-PT-WEST-NOVEMBER-111824.git .
+        rm -rf .git
+        rm .gitignore
         cd .. 
         ```
         *(Note: The `.` at the end of the `git clone` command ensures the content is cloned directly into the `course-content` folder, not into a subfolder named `AI-PT-WEST-NOVEMBER-111824`.)*
