@@ -48,6 +48,7 @@ We're currently testing two deployment configurations:
 ### 🔍 RAG-Based QA Pipeline
 
 - Integrates document retrieval with LLM generation
+- Maintains limited conversation history to prevent context overflow
 - Uses either a local LLM or cloud-based models (e.g., Gemini)
 - Provides more natural, summarized answers
 

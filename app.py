@@ -9,6 +9,7 @@ import time # To check manifest modification time
 import fitz  # PyMuPDF
 from langchain.text_splitter import RecursiveCharacterTextSplitter, Language # Keep Recursive here
 from langchain_community.vectorstores import FAISS # Updated import
+from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_google_genai import GoogleGenerativeAIEmbeddings # Import Google embeddings
 from langchain.docstore.document import Document # Correct import
 from collections import Counter
@@ -52,6 +53,7 @@ try:
     print("Gemini configured successfully.")
 except Exception as e:
     st.error(f"Error configuring Google Gemini: {e}")
+    
 
 # --- Content Reading Functions ---
 
@@ -321,14 +323,20 @@ for message in st.session_state.messages:
                     st.write(f"- **{source_path}**{page_info}")
                     st.caption(f"  (Module: {meta.get('module', 'N/A')}, Day: {meta.get('day', 'N/A')}, Type: {meta.get('file_type', 'N/A')})")
                     if meta.get('slideshow') and meta['slideshow'] != 'N/A':
-                         st.caption(f"  Related Slideshow: `{meta['slideshow']}`")
-
+                        st.caption(f"  Related Slideshow: `{meta['slideshow']}`")
 
 # --- Main Chat Logic ---
+# Initialize conversation history in session state for persistence
+if 'conversation_history' not in st.session_state:
+    st.session_state.conversation_history = ChatMessageHistory()
+
 if faiss_index is not None and gemini_configured:
     if prompt := st.chat_input("Ask something about the course material..."):
         # Add user message to history and display it
         st.session_state.messages.append({"role": "user", "content": prompt})
+        
+        # Add user message to conversation history
+        st.session_state.conversation_history.add_user_message(prompt)
         with st.chat_message("user"):
             st.markdown(prompt)
 
@@ -354,14 +362,27 @@ if faiss_index is not None and gemini_configured:
 
                     # 2. Check if results were found
                     if not sources:
-                        # Inform the user if nothing was found
-                        st.warning("Could not find relevant documents in the course material for your query. Please try rephrasing.")
-                        st.session_state.messages.append({
-                            "role": "assistant",
-                            "content": "Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course outline.",
-                            "sources": {} # No sources found
-                        })
-                        st.stop() # Stop further processing for this query if nothing found
+                        # Check if query is about common ML/data science topics
+                        common_ml_topics = ['pandas', 'numpy', 'matplotlib', 'tensorflow', 'pytorch', 'scikit-learn', 
+                                        'machine learning', 'neural network', 'deep learning', 'data science', 
+                                        'regression', 'classification', 'clustering', 'python']
+                        
+                        is_common_topic = any(topic.lower() in prompt.lower() for topic in common_ml_topics)
+                        
+                        if is_common_topic:
+                            # Continue processing with general knowledge approach
+                            print(f"No specific course material found for '{prompt}', but recognized as common ML topic.")
+                            # We'll add a special flag to the context to indicate this is a general knowledge question
+                            context = f"[GENERAL_KNOWLEDGE_QUESTION]\nThe user is asking about a common ML/data science topic.\nQuestion: {prompt}"
+                        else:
+                            # Inform the user if nothing was found and not a common topic
+                            st.warning("Could not find relevant documents in the course material for your query. Please try rephrasing.")
+                            st.session_state.messages.append({
+                                "role": "assistant",
+                                "content": "Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course outline.",
+                                "sources": {} # No sources found
+                            })
+                            st.stop() # Stop further processing for this query if nothing found
 
                     # 3. Prepare Context and Source Tracking
                     context_parts = []
@@ -378,7 +399,7 @@ if faiss_index is not None and gemini_configured:
                         if page_num:
                             context_header += f" (Page: {page_num})"
                         if start_index is not None:
-                             context_header += f" (Approx. Start Index: {start_index})"
+                            context_header += f" (Approx. Start Index: {start_index})"
                         
                         context_parts.append(f"--- Context Chunk {i+1} ---\n{context_header}\n\n{doc.page_content}\n---")
 
@@ -388,31 +409,62 @@ if faiss_index is not None and gemini_configured:
                             source_to_meta_map[source_key] = metadata
 
                     context = "\n\n".join(context_parts)
+                    
+                    # Get conversation history from session state
+                    messages = st.session_state.conversation_history.messages
+                    if messages:  # Proceed only if there are messages
+                        # Limit conversation history to the most recent 10 messages
+                        if len(messages) > 10:
+                            st.session_state.conversation_history.messages = messages[-10:]
+                        # Create a more structured conversation history format
+                        conversation_pairs = []
+                        for i in range(0, len(messages)-1, 2):  # Process in user-AI pairs
+                            if i+1 < len(messages):  # Ensure we have a complete pair
+                                user_msg = messages[i].content if messages[i].type == 'human' else 'Unknown question'
+                                ai_msg = messages[i+1].content if i+1 < len(messages) and messages[i+1].type == 'ai' else 'Unknown response'
+                                conversation_pairs.append(f"User: {user_msg}\nAI: {ai_msg}")
+                        
+                        # Format the conversation history
+                        if conversation_pairs:
+                            context_history = "Previous Conversation:\n" + "\n\n".join(conversation_pairs) + "\n\n"
+                            # Prepend conversation history to context
+                            context = context_history + context
+                        
+                        print(f"Current conversation history ({len(messages)} messages):")
+                        for i, msg in enumerate(messages):
+                            print(f"  Message {i+1}: {msg.type} - {msg.content[:50]}...")
+                    else:
+                        print("Note: No conversation history yet")
+                        
                     sources_for_display = source_to_meta_map # Use the unique map for display
 
                     # 4. Prepare Final Prompt for Gemini
+                    # Check for follow-up questions
+                    follow_up = len(messages) >= 2  # If we have message history, this might be a follow-up
+                    
+                    # Prepare the prompt template
                     prompt_template = f"""
 You are an AI Tutor for a Machine Learning Bootcamp. Use ONLY the provided Context Chunks to answer the user's question.
 
 **Instructions:**
-- Answer the user's question accurately based *only* on the information in the Context Chunks.
-- If the answer spans multiple chunks, synthesize the information concisely.
-- When the question asks **where/when** a concept appears, mention the Module/Day/Source File/Page (if available) and ensure it's listed in the 'Sources' section later.
-- If the question is related to a specific concept (e.g., a formula or method), explain it in a straightforward manner and provide any relevant details from the Context Chunks.
+- Answer the user's question using ONLY information from the Context Chunks.
+- DO NOT use any general knowledge not found in the Context Chunks.
+- If you are complimented, feel free to respond in a friendly manner.
+- If the context includes pandas, numpy, or other libraries being asked about, provide an answer based strictly on how they are presented in the course materials.
+- If answering a follow-up question, refer to our previous conversation only as context, but still answer based solely on the Context Chunks.
+- Start your response directly with the answer, preceded by `### Answer`.
 - Format code examples, commands, or formulas using ```markdown fences``` for clarity.
 - Use **bullet points** or **numbered lists** for steps or key items when appropriate.
-- Start your response directly with the answer, preceded by `### Answer`.
-- Do **not** add information that is not present in the Context Chunks.
+- If the Context Chunks mention where the concept appears in the course (Module/Day/Source), include this information.
 - If the Context Chunks do not contain the answer, clearly state:
-  > Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course-content.
+  > Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course content.
 
 **Context Chunks:**
 {context}
 
-**User Question:** {prompt}
+**Current Question:** {prompt}
 
-Answer:
-"""
+Answer:"""
 
 
                     # 5. Call Gemini API
@@ -448,9 +500,9 @@ Answer:
                             message_placeholder.markdown(full_response_content)
 
                     except Exception as gen_e:
-                         print(f"Error during Gemini API call: {gen_e}")
-                         traceback.print_exc()
-                         full_response_content = f"Sorry, an error occurred while generating the response: {gen_e}"
+                        print(f"Error during Gemini API call: {gen_e}")
+                        traceback.print_exc()
+                        full_response_content = f"Sorry, an error occurred while generating the response: {gen_e}"
 
             except Exception as e:
                 # Catch errors in the main try block (retrieval, context prep)
@@ -465,10 +517,20 @@ Answer:
                 "content": full_response_content,
                 "sources": sources_for_display # Store sources with the message
             })
+                        
+            # Add the AI message to conversation history in session state
+            st.session_state.conversation_history.add_ai_message(full_response_content)
+            
+            # Debug print for conversation history
+            messages = st.session_state.conversation_history.messages
+            print(f"Debug - After adding AI message. Conversation history now has {len(messages)} messages")
+            for i, msg in enumerate(messages):
+                print(f"  Message {i+1}: {msg.type} - {msg.content[:50]}...")
+            
 
 elif not gemini_configured:
     st.warning("Gemini API is not configured. Please check your `secrets.toml` file.")
 elif faiss_index is None:
-     st.warning("FAISS index could not be loaded or built. Chatbot functionality is disabled.")
+    st.warning("FAISS index could not be loaded or built. Chatbot functionality is disabled.")
 else:
-     st.warning("An unknown configuration error occurred.")
+    st.warning("An unknown configuration error occurred.")
