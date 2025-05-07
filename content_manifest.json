@@ -9702,5 +9702,189 @@
         "module": "24",
         "day": "2",
         "slideshow_pdf": null
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/01-Ins-RBM/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/01-Ins-RBM/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/03-Evr_Train_Save_RBM/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/03-Evr_Train_Save_RBM/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/04-Evr_RBM_Utilities/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/04-Evr_RBM_Utilities/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/05-Ins_Evaluate_RBM/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/05-Ins_Evaluate_RBM/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/06-Evr_Make_Recommendations/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/06-Evr_Make_Recommendations/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/Activities/01-Ins-RBM/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/Activities/01-Ins-RBM/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/Activities/03-Evr_Train_Save_RBM/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/Activities/03-Evr_Train_Save_RBM/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/Activities/04-Evr_RBM_Utilities/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/Activities/04-Evr_RBM_Utilities/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/Activities/05-Ins_Evaluate_RBM/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/Activities/05-Ins_Evaluate_RBM/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/18-Neural-Networks-Deep-Learning-1/3/Activities/06-Evr_Make_Recommendations/LICENSE.txt",
+        "relative_path": "18-Neural-Networks-Deep-Learning-1/3/Activities/06-Evr_Make_Recommendations/LICENSE.txt",
+        "file_type": ".txt",
+        "module": "18",
+        "day": "3",
+        "slideshow_pdf": "18-Neural-Networks-Deep-Learning-1/3/M18.3_ RBMs and Recommendation Systems.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_180554-ardz9znk/files/requirements.txt",
+        "relative_path": "19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_180554-ardz9znk/files/requirements.txt",
+        "file_type": ".txt",
+        "module": "19",
+        "day": "1",
+        "slideshow_pdf": "19-Neural-Networks-Deep-Learning-2/1/M19.1_ Preprocessing Image Data.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183210-mzqsv3fk/files/requirements.txt",
+        "relative_path": "19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183210-mzqsv3fk/files/requirements.txt",
+        "file_type": ".txt",
+        "module": "19",
+        "day": "1",
+        "slideshow_pdf": "19-Neural-Networks-Deep-Learning-2/1/M19.1_ Preprocessing Image Data.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183238-cos4oc5u/files/requirements.txt",
+        "relative_path": "19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183238-cos4oc5u/files/requirements.txt",
+        "file_type": ".txt",
+        "module": "19",
+        "day": "1",
+        "slideshow_pdf": "19-Neural-Networks-Deep-Learning-2/1/M19.1_ Preprocessing Image Data.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183339-p8klqfio/files/requirements.txt",
+        "relative_path": "19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183339-p8klqfio/files/requirements.txt",
+        "file_type": ".txt",
+        "module": "19",
+        "day": "1",
+        "slideshow_pdf": "19-Neural-Networks-Deep-Learning-2/1/M19.1_ Preprocessing Image Data.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183414-g6chlva4/files/requirements.txt",
+        "relative_path": "19-Neural-Networks-Deep-Learning-2/1/Activities/09-Ins_Mnist_Digit_Recognition/wandb/run-20250408_183414-g6chlva4/files/requirements.txt",
+        "file_type": ".txt",
+        "module": "19",
+        "day": "1",
+        "slideshow_pdf": "19-Neural-Networks-Deep-Learning-2/1/M19.1_ Preprocessing Image Data.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/20-NLP/1/Activities/03-Ins_Stopwords/Gutenberg_README.txt",
+        "relative_path": "20-NLP/1/Activities/03-Ins_Stopwords/Gutenberg_README.txt",
+        "file_type": ".txt",
+        "module": "20",
+        "day": "1",
+        "slideshow_pdf": "20-NLP/1/M20.1_ Introduction to Natural Language Processing (NLP).pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/20-NLP/3/Activities/05-Ins_Text_Generation_LSTM/Solved/Resources/moby_dick_four_chapters.txt",
+        "relative_path": "20-NLP/3/Activities/05-Ins_Text_Generation_LSTM/Solved/Resources/moby_dick_four_chapters.txt",
+        "file_type": ".txt",
+        "module": "20",
+        "day": "3",
+        "slideshow_pdf": "20-NLP/3/M20.3_ Advanced NLP Techniques_ Topic Modeling and RNN.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/20-NLP/3/Activities/05-Ins_Text_Generation_LSTM/Unsolved/Resources/moby_dick_four_chapters.txt",
+        "relative_path": "20-NLP/3/Activities/05-Ins_Text_Generation_LSTM/Unsolved/Resources/moby_dick_four_chapters.txt",
+        "file_type": ".txt",
+        "module": "20",
+        "day": "3",
+        "slideshow_pdf": "20-NLP/3/M20.3_ Advanced NLP Techniques_ Topic Modeling and RNN.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/20-NLP/3/Activities/06-Stu_Sherlock_Holmes_Text_Generation/Solved/Resources/A_Case_Of_Identity.txt",
+        "relative_path": "20-NLP/3/Activities/06-Stu_Sherlock_Holmes_Text_Generation/Solved/Resources/A_Case_Of_Identity.txt",
+        "file_type": ".txt",
+        "module": "20",
+        "day": "3",
+        "slideshow_pdf": "20-NLP/3/M20.3_ Advanced NLP Techniques_ Topic Modeling and RNN.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/21-Transformers/2/Activities/06-Par_Q&A_Testing/Solved/Resources/video_game_history.txt",
+        "relative_path": "21-Transformers/2/Activities/06-Par_Q&A_Testing/Solved/Resources/video_game_history.txt",
+        "file_type": ".txt",
+        "module": "21",
+        "day": "2",
+        "slideshow_pdf": "21-Transformers/2/M21.2_ Introduction to Hugging Face Transformers.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/21-Transformers/2/Activities/08-Stu_Text_Summarization/Solved/Resources/AI_history.txt",
+        "relative_path": "21-Transformers/2/Activities/08-Stu_Text_Summarization/Solved/Resources/AI_history.txt",
+        "file_type": ".txt",
+        "module": "21",
+        "day": "2",
+        "slideshow_pdf": "21-Transformers/2/M21.2_ Introduction to Hugging Face Transformers.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/21-Transformers/3/Activities/04-Stu_Gradio_Text_Summarization/Solved/Resources/AI_history.txt",
+        "relative_path": "21-Transformers/3/Activities/04-Stu_Gradio_Text_Summarization/Solved/Resources/AI_history.txt",
+        "file_type": ".txt",
+        "module": "21",
+        "day": "3",
+        "slideshow_pdf": "21-Transformers/3/M21.3_ AI Applications with Gradio.pdf"
+    },
+    {
+        "absolute_path": "C:/Users/peyto/Desktop/group-4-project-3/course-content/21-Transformers/3/Activities/05-Ins_Gradio_Other_Components/Solved/Resources/AI_history.txt",
+        "relative_path": "21-Transformers/3/Activities/05-Ins_Gradio_Other_Components/Solved/Resources/AI_history.txt",
+        "file_type": ".txt",
+        "module": "21",
+        "day": "3",
+        "slideshow_pdf": "21-Transformers/3/M21.3_ AI Applications with Gradio.pdf"
     }
 ]
