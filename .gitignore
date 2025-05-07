@@ -188,12 +188,8 @@ venv/
 # Environment variables file
 .env
 
-# Course Material
-course-content/*
+# Course content folder
+course-content/
 
 # Content manifest
 content_manifest.json
-
-# Exception for info.txt
-!course-content/placeholder.txt
-!course-content/Transcripts/
