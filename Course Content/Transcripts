@@ -1,0 +1,1033 @@
+Skip to Main Content
+Accessibility Overview
+Zoom Logo
+Emerging Topics in AI II- Shared screen with speaker view
+May 1, 2025 08:33 PM
+
+00:00:00/01:22:26
+
+Speed
+
+
+Audio Transcript
+Search transcript
+Binoy Das
+Binoy Das
+00:00:01
+I think. Can you do that?
+Yeah.
+okay, so since ingrid, you asked the question about
+where else can you go to continue your learning.
+so let me show you a couple of things. Here is my screen visible.
+BI
+Blankevoort, Ingrid
+00:00:29
+Yes, you can see it.
+Binoy Das
+Binoy Das
+00:00:31
+Yeah.
+so this is one like, this is one of those AI specific online learning platform, deep learning.ai
+you will see courses on. So these are all the new courses right? All of your Llm.
+Prompting diffusion model, which is the image generation, Langchain chat.
+How to fine tune, large language model.
+How do you evaluate and debug generative AI model?
+How? So? So see? Remember, we talked about radio. We touched upon briefly on 1 1 HI kind of compress that. But if you want to do, see some more example of how people are using radio to build Jni driven application.
+So you you will see a lot of things here. Right?
+Now, this one you can sign in with Google. But
+and okay, hang on.
+Yeah.
+So then you can go to. Let's say,
+anything. Let's say, chat, gpt, prompt, prompt engineering for developers.
+And there you go. You can just go watch the videos, look at the different code examples. And all of that.
+Okay.
+okay, so that is one, I hope, ingrid. That answers your question
+at least one way which is deep learning.ai.
+BI
+Blankevoort, Ingrid
+00:02:19
+Yeah, it looks like it's free, right? So that's really nice.
+Binoy Das
+Binoy Das
+00:02:22
+Yeah. So that's that I'm going to put that link in the live channel.
+Okay. So now, to your other question, or or basically what I said, what I'm going to do right? So
+this one is going to cost you money. Well.
+so this is another one fast. AI,
+I do all of these. So the moment I type, I mean the thing coming. Okay. So I'll tell you this guy, the guy who runs this fast. AI. He's the one who is behind my develop development of all the core concept of deep neural network, all of convolutional neural network, recurrent neural network. So all of those things I learned from here. And this guy.
+okay, so that is fast. AI,
+okay, so that's 1. And then the other thing I wanted to show you, which is something I haven't done yet, but I will after this Bootcamp gets over, because I also need time for that.
+Which is this, so you can go on to Coursera. We all know Coursera right, and what I am planning to do myself is, I found from Upenn. They have recently started making some of their course. So they have these masters of master of science in engineering.
+so they call it Msc. In AI. So master of science in engineering with specialization on AI. So so I was looking for any graduate level courses. And I looked through many different universities. This one I like the most. Now I talked to the admission counselors. In fact, that is something that I'm planning to do for myself.
+Maybe in the next spring in Tech, because what I want to do is I want to basically go into formal like a deep down research area, like in a more development of the models and algorithms. And you really can't do that unless you basically get into academia. Pay your dues, do your master's degree and do some practicum, which is basically kind of the capstone project where they basically pair you up either with an academic advisor or with an industry
+who is actually trying to build models so they will patch pair you up with, with either an academic setting or in industry setting. And then you will do some project, and that basically give you
+something that you will basically then turn it around and then take it forward. Because when you go to go, Phd, you have to show that something you have done at master's level. So I'm going to. I'm planning to do that now. When I was talking to them, and also there is a professor. I talked to Professor Callison Burke, who is basically the one who runs this Msc AI program. So what they told me is.
+hang on is that 4 or 5 of their courses are actually available here. I'm trying to find which one was that
+-
+So you can actually go to Coursera. And instead of committing thousands of dollars again to do the university course, you can go there, and the membership cost like $50 per month.
+and you can do as many courses. You can go through as many lecture videos as you like. I mean, the thing is, the more you learn, the more money you save right? Because it's a $50 per month.
+But hang on, I'm trying to find.
+I think I had this.
+Yeah, let me
+not. Mit, was it this one.
+this one? So 4 course series.
+So these 4 courses, AI essential statistics for data, science, essential machine learning, essential and deep learning essential right? So these, they're saying, are very, very close to the courses they actually offer as 4 of the courses in their master's program.
+although in here you don't have the you won't have the rigor, basically. Meaning, here you are. Your professor is not going to tell you like, Hey, these are the weekly homework you are going to do at that with that academic rigor, but you will mostly get to see the same content that a Upenn Mse. AI students gets to see.
+So what they advised me to do is he said. They said, why don't you go and go through these courses and see how you feel. And then, if you feel that well, this is something that you want to take up with further rigor, then you can apply to the university. So that's what my plan is to do.
+So let me ping this these 4 courses, if any of you want to do that.
+Okay, so in great good I think you got
+answered. At least, so these are the 3 major areas things that comes to my mind when you asked me that question.
+BI
+Blankevoort, Ingrid
+00:07:43
+Thank you. That's a really good.
+Binoy Das
+Binoy Das
+00:07:45
+Yeah.
+BI
+Blankevoort, Ingrid
+00:07:46
+Appreciate the share. Thank you.
+Binoy Das
+Binoy Das
+00:07:50
+Cool.
+So, as I was saying before, today's class, we basically have no new net subject matter to learn. We are basically going to sit back and basically start thinking about or or collaboratively discuss what the future of AI looks like, where it stands today and what it what the future looks like. But before we I open the floor for discussion, there are a couple of things I just want to quickly touch upon. So in 1st section.
+you see, there is a 1 slide here. And you guys probably have already looked into the slide. It says, basically, how chat. Gpt models are actually trained. Right? I mean, we kind of got the theoretical understanding. We understand that all of these tokens series of tokens gets embedded into very high dimensional vector space and using some kind of a proximity algorithm, the model basically comes up what is
+best response to generate right? I mean, theoretically we do understand that. But these days, the way that the models are kind of behaving almost like humans, and, as we have seen in our experience, seems like they
+have personality, right? It almost feels like
+you are talking to a real human right? So almost like feels like the model has at the edge at the verge of passing the Turing test.
+So how does that happen?
+So so in this? So what I have done here is, I have put this link here, which is a blog, a very good one, actually, which basically mentions these 3 steps. And these are the 3 critical steps in actually putting today's large Llm. Like Chat Gpt. 4 onwards, or your Gemini 2.5 onwards. All of these large language models.
+How exactly it is trained right? I mean all of these things we have learned.
+That's not the end of everything. Right? So that basically creates your 1st generation model like Chat Gpt, one chatgpt 2, maybe even up to chat. Gpt 3, right? So chatgpt when it came out a lot of time. It used to give very nonsensical answer. It didn't feel like it's an intelligent being that you are talking to. But now it does right. So if you follow this blog here, which I'm going to post the link in a second.
+In this blog, the author actually talking about these 3 steps in a further detail. So basically, the way it works is, first, st they take a pre-trained model from a previous generation of Llm.
+And then they fine tune, fine tune these using additional level training data.
+Obviously, because it's it's at the end of the day at the core. It is a supervised training, right? So people have to generate level training data.
+Okay? So that's the supervised fine tuning that they do initially using the previous generation model. But then
+the question is, how does the model model really mimic human preferences? Right? That's where actually the model works in collaboration with humans. So after the initial step, which is the fine tuning with a lot of level data, then what they do is, they ask the model some questions and the model answers. And then the answers are basically ranked
+by humans to basically tell the machine
+whether the answers are human like, or the answers are kind of nonsense or robot, like sounds very mechanical, that kind of thing. So there are humans who basically evaluate the quality of the answer, and ranks the answers right from like a good not so good. Worse could be better. That kind of ranking right. And that
+is basically used to develop something called a reward model, because those judgment call that has been done by humans on the responses the model has provided is basically
+taken and put into a reward model meeting, the model will be rewarded if it has done a good job or gets a good score from a human judge or the model will be punished if it has done a gotten a bad score for a human judge, which is basically that step is called reinforcement learning collaboration with humans. So that's what happens many, many times going back and forth. And that's how they tune the model's response
+to make it feel very human like, because at the end of the day after the model learns everything. But it still don't know how to talk right? You know, some people like this. Some people there are people who knows a lot, but if you ask them to like, put them on a stage and ask them to do a give a public speech. They'll like, get frozen. They cannot talk. So this is like that. Right? So then they do that. And then, after they do this training a lot of time. That reward model
+quote unquote the basically get rewards the what is called the underlying Llm, and then they take it and to optimize these use this tactic called proximal policy optimization, which is basically use the reward model to select the best response
+given by the fine-tuned model from step one
+and based on humans preference. So that's essentially how it is. Now, if you go to this link.
+Oh, I already had it open. Never mind.
+Okay, so this is the link. So here, if you want to read through, it says how Chat Gpt actually works.
+So it's a pretty good read. So I would suggest, read through this.
+it's not very math heavy. But and there is very, very nice diagram here. So this is basically the step one, which is basically collect demonstration data and train a supervised policy kind of like, explain reinforcement learning to a 6 years old. Right? A prompt sample from our data set, and then a leveler demonstrate the desired output.
+like we give treat and punishment to teach, and then you give that to the fine-tuned model and use to find tune the Gpt. 3.5 with supervised learning. Right? So that's your step one. And then with that reward model, the goal is to directly learn from the human preferences right and how it works.
+A prompt and several model output are sampled like in reinforcement learning right?
+So explain reward, and then machine learning, we give treats and punishment to teach. Both are kind of the same thing, and then the leveler ranks the output from the best to worst and then use that to train the reward model. And then, finally, the fine tune, Sft model is optimized. Further, using this proximal policy optimization or Ppo, which is an algorithm that is used to train agents in reinforcement
+and learning. It is called on policy algorithm because it learns from and updates the current policy directly
+rather than learning from the past experience. So basically, every time you give it a particular prompt, and then you give it a reward
+like a ranking and based on that immediately. In that said it will go and make a incremental adjustment to the policy before it processes the next reward or punishment, whatever it is, right? So it does that in real time, instead of being trained on a past data, that's why it's called proximal policy optimization. So read through this.
+you, where did the slack go here?
+I think it's pretty interesting to read. Actually.
+okay, the other thing is this one. And this is also, I wanted to share something with you. So so this is basically a technique called stable diffusion. So stable diffusion. What it does is this is the tech technology that is used behind. Like all of these, you know.
+text to image generation where you prompt AI to generate an image. And the AI does generate some image, and I wanted to show you a couple of things that I did.
+So. You see this image right.
+Both of these images are actually generated. So this is the application I used openart.ai, I mean. Obviously, this is Llm powered behind the scene. Right? I think they are using Dali, or some some model, either either Openai Dali or some other model. So the specific prompt I used is
+acute, Maltese being groomed at a salon. So that is the prompt I used.
+and this one so, and the AI gave me 2 images, these and this.
+so this one exactly almost 99.9 9% looks like the Maltese I have. Personally.
+I have a Maltese looks very similar.
+It's like, how did the model know that I have this Maltese. So that's 1 example. Another example is again with Maltese. This I directly asked. Chat gpt generate an image showing a Maltese puppy getting confused, and this is the image that it generated.
+So so what do they do? How do they do all of these things? Right? So they use this technique called stable diffusion. so the how the stable diffusion work.
+So if you go to this website, they will actually
+help you understand how this actually works.
+Okay? And this is also, I'm going to post in a slack channel in a second. So basically how it works is. So let's say, you give a prompt like, I said, a cute Maltese puppy being groomed at a Salo
+fine. So it first, st
+it will basically generate these tokens and then using some kind of a text encoder to vectorize the token right? And those embeddings will basically then go to the next step.
+So this 1st step we all know
+any text has to be processed like this, so tokenizing, text encoding.
+and then what they it does is it does not immediately create the model, create the picture instead, what it does is it starts with a random noise
+like this. You see here how it is going through different iteration. If you see here.
+you will see that it starts with a random noise, and in this particular case I think the model the sorry. The text that they said is a cute and adorable. Bunny.
+Okay. Now, based on that encoding of in encoded vector. Format of that text. What the model does?
+It basically starts with a random noise, noisy image that is basically just pixels completely random. There is nothing.
+And then it goes to this iteration at every time. It basically weakens the noise at certain portion of the image.
+and sees and tries to see what abstract shape emerging.
+and then uses a large language model
+to basically compare that with the tokens that it gets and then based on that.
+it basically strengthens or weakens certain part further. And then this refinement goes on. So after about 50 or so iteration, you will see a picture of Bunny appears very clearly from within those images.
+So that is how this whole stable, deficient mechanism works.
+So this is pretty cool to actually see.
+And then finally, after it is done. So after a model has a certain threshold confidence level like, let's say, 70 80%. And then it takes it and then use a standard image upscaling to basically further denoise the image and upscale the image. And that's where all of those cute nice images gets generated.
+So let me put that in here.
+Okay.
+okay, do you guys have any any experience? Anyone to use this kind of prompting to generate image or videos, anything.
+Harrison, Donald
+Harrison, Donald
+00:20:48
+I I deployed like a stable division with AI or Ui that I was able to use with my like 2080 gpu
+Binoy Das
+Binoy Das
+00:20:58
+So when I say experience, meaning experience, not just playing around. But let's say I don't know. Maybe in any of your project, any of your creative pursuits or anything. I don't know what you guys do, either for living for all of you, or or maybe as your hobby, or anything, or any any fashion project or anything. Have you actually used
+these types signature, video and used for something else? That's what my question was.
+Matt Le
+Matt Le
+00:21:21
+I've used the Photoshop Generative fill. I use that quite a bit for photo editing, because I do a lot of concert photography. So sometimes I need to take out like microphone stands, or whatever.
+Binoy Das
+Binoy Das
+00:21:35
+Yeah, and and I think that's also the same kind of technology that today these days. Like, if you take a photo with your camera. And let's say you basically went there, which is a very like, say, famous picture photo taking spot.
+And these days everyone wants their best photo to put there on Instagram. And then a lot of people are kind of clogging that space like when I went to Japan it happened a lot of time. And I was like, Oh, I'm just waiting like when I'll get a clean view. And then my wife said, Don't worry about it. I'm going to. We are going to remove the people.
+So that's kind of what it does. Right? So you take an image, and then you circle the this thing people around. Now for some image, it does a very good job
+depending on how much data is there in the background? Right? Because it's kind of extrapolates. Sometimes you can see some kind of weird artifacts emerging there. So so I believe this generative refill is also kind of the similar
+technique that they use behind the scene.
+BI
+Blankevoort, Ingrid
+00:22:41
+Yeah, you can do that with the iphone. The latest.
+Binoy Das
+Binoy Das
+00:22:44
+Yeah, iphone android all phones. That's what I'm saying. All phones. Let you do that these days. Actually,
+What else this is oh, in canva. Also, you can do that.
+Turn imagination into reality with an AI image generation. App.
+Yeah.
+Anyone has any experience generating videos, though, or animating any image.
+BI
+Blankevoort, Ingrid
+00:23:16
+You can do that with sora chat gpt.
+sora right. You may have to pay for it. I don't know.
+Binoy Das
+Binoy Das
+00:23:24
+I saw.
+Harrison, Donald
+Harrison, Donald
+00:23:25
+I saw a really cool video where an animator was using it to generate the in between, like he would create the keyframes like manually, and then he'd have like AI do the in between animation. So it's like smoother. But like you can't control the movement by like doing the keyframe.
+Binoy Das
+Binoy Das
+00:23:43
+Yeah.
+And then also people who are into music. These are some of the music generation apps.
+right? For example, this is, if you look into this one right.
+you can actually prompt, like what kind of
+music that you want to generate hang on. What is.
+I think I had this open somewhere.
+No, not that one.
+Or is it this one? Yeah.
+So music effects. So it's from Google lag labs. Actually. So if you basically type kind of a theme of what kind of music you want to listen?
+It basically plays it
+when I'm playing these, are you guys listening? The audio or no? Is the audio going over? No.
+Matt Le
+Matt Le
+00:24:43
+So.
+Binoy Das
+Binoy Das
+00:24:44
+So it's only playing for me. But anyway, so you can try this one, too.
+Yeah. So that's music effects.
+Yeah. So these are some of the some of the basically cool things that are that you can do today right
+with these. And obviously like these things autonomic scars right?
+self driving, I mean. I I mean. Yes, Elon Musk has promised a lot that he couldn't deliver like I think he's been saying this for almost what more than 5 years now that autonomous taxi will be there by end of the year, it's still not happening. But, however however long we have come with the autonomous driving capability. So far, I think even that is pretty amazing. Right?
+Jesse Parent (He/Him)
+Jesse Parent (He/Him)
+00:25:36
+I have some friends who've taken like, I guess Ubers in that are autonomous in Arizona.
+Binoy Das
+Binoy Das
+00:25:43
+I. I have heard that, too, in some areas like just couple of weeks back, one of my friends said he went to San Francisco. And there, actually, you can get into a taxi that drives autonomously.
+Matt Le
+Matt Le
+00:25:57
+Yeah.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:25:58
+That is what.
+Matt Le
+Matt Le
+00:25:59
+Yeah. Those in Phoenix.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:26:00
+Yeah, in in Arizona, we have that. Actually. So we see a lot of autonomous cars like
+driving. Yeah, people take the back seat and just enjoy it.
+Really, weird. Yeah.
+Segovia, James
+Segovia, James
+00:26:15
+I've I've actually stopped taking Uber completely in favor of Waymo.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:26:20
+And.
+Binoy Das
+Binoy Das
+00:26:20
+Where do you live? James?
+Segovia, James
+Segovia, James
+00:26:22
+In Arizona.
+Binoy Das
+Binoy Das
+00:26:24
+In Arizona, like in Phoenix area.
+Segovia, James
+Segovia, James
+00:26:27
+Yeah.
+So how far do they like? Does it work for longer distance travel, or just local?
+Get from my place in mesa to
+the West valley. Pretty easily. It stops right around somewhere in the avenues. So yeah, I can get pretty far into town with it.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:26:49
+Yeah, that's what you mean.
+Binoy Das
+Binoy Das
+00:26:50
+That'll be what 1010, 15 miles, or more.
+Segovia, James
+Segovia, James
+00:26:54
+I would say more.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:26:56
+Yeah. Maybe like, maybe the city limits it's around 50, 50 miles around.
+Binoy Das
+Binoy Das
+00:27:02
+50 miles. Okay, has there been any incidents so far.
+BI
+Blankevoort, Ingrid
+00:27:08
+Oh, sorry!
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:27:10
+What kind of incidents you're referring to.
+Binoy Das
+Binoy Das
+00:27:12
+Incident, meaning where the where the autonomous vehicle mix missed.
+Matt Le
+Matt Le
+00:27:16
+I think Uber had an accident in Tempe, Arizona. Yeah, there was a death. Yeah, there was a death there. Yeah, that's right.
+Segovia, James
+Segovia, James
+00:27:22
+Yeah. Somebody ran out on the road a few years back.
+Binoy Das
+Binoy Das
+00:27:27
+So death of someone outside, like death of a pedestrian.
+Segovia, James
+Segovia, James
+00:27:30
+Yep.
+Binoy Das
+Binoy Das
+00:27:32
+Oh!
+Segovia, James
+Segovia, James
+00:27:33
+Yeah, some some lady. Jay walked and jumped in front of the the waymo and it hit her.
+Binoy Das
+Binoy Das
+00:27:41
+How was that dealt with like by by law enforcement.
+Segovia, James
+Segovia, James
+00:27:45
+I don't remember. Honestly.
+Binoy Das
+Binoy Das
+00:27:47
+Okay, because that.
+Harrison, Donald
+Harrison, Donald
+00:27:48
+Us doesn't have a lot of like road or like car safety regulations. So they kind of get away with a lot of this kind of stuff
+like this.
+Binoy Das
+Binoy Das
+00:27:57
+Yeah.
+Harrison, Donald
+Harrison, Donald
+00:27:57
+For the Cybertruck doesn't pass any like actual, like standards for safety or road safety, with like crumple zoning and stuff like the Us. Just lets them run around.
+Binoy Das
+Binoy Das
+00:28:08
+No? Well, yeah, that's fine, like, if you are choosing to buy a vehicle that does not keep you safe, that's up to you. But if you are getting into a vehicle, and that vehicle endures or harms or kills someone, then that's a different thing, right?
+So anyway. So what do you think the the going forward right? What do you think? The, the, how it should be actually implemented, if at all, in a large scale.
+like who is who is going to be held liable for these type of mistakes?
+Would it be the company who built the curve? The company who trained the model.
+Who is it you are going to hold responsible.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:28:51
+I think everybody will be.
+Binoy Das
+Binoy Das
+00:28:55
+Everybody meaning meaning the people who is riding.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:28:58
+Meaning the people that built the vehicle, the people that own the vehicle, the people that are in the vehicle.
+Binoy Das
+Binoy Das
+00:29:06
+Yeah, and how should that be? So let's think about the insurance. So what would the insurance do? So insurance has to be basically like someone has to take out a policy right for to cover the liability right? So in this case, what would? Who would be the who would pay the pay that
+or any damages right like.
+Jesse Parent (He/Him)
+Jesse Parent (He/Him)
+00:29:26
+It's the version of the AI. So you just have to up version one and then you can read. Then you can get a new policy.
+Binoy Das
+Binoy Das
+00:29:32
+I'm sorry, say that again, but.
+Jesse Parent (He/Him)
+Jesse Parent (He/Him)
+00:29:34
+It's it's the version of the ape. AI. So all you gotta do is do a minor release.
+Do a dot release, and then you get a new policy on that dot release.
+Binoy Das
+Binoy Das
+00:29:42
+Okay, yeah, yeah.
+BI
+Blankevoort, Ingrid
+00:29:46
+You a few months ago. I think there was an incident where Waymo, car in Phoenix, Arizona, get ticketed by a police because it kept doing the code. It was in the construction zone, and it doesn't know that it doesn't understand. So you went against the one way traffic. So Waymo did say that all of those tickets will be paid by Waymo, because it's really.
+you know, like, whose fault is it right? The car is not trained enough, but you know, if if that's the case, and probably the company should be responsible, or even the insurance company. But there were a lot of incidents where they get pulled over by police, and you know the car just doesn't know what to do.
+Binoy Das
+Binoy Das
+00:30:27
+Excuse me.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:30:27
+Okay.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:30:28
+See that all of these processes are gonna change quickly. Once this becomes a common practice, because they're gonna have to set some process in place.
+Binoy Das
+Binoy Das
+00:30:41
+So you are saying that legal framework has not been caught up yet.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:30:45
+I don't think it has.
+Binoy Das
+Binoy Das
+00:30:46
+Nice.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:30:47
+Correct me if you think I'm wrong.
+Binoy Das
+Binoy Das
+00:30:50
+No, I think you are right. You were spot on there.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:30:53
+I'm i i don't know, Vinay, because, like I'm hearing this almost like I came to us around 2017 to Michigan. So till that path like since then I was hearing about it, and when I was came to Arizona around 2019, I saw the cars going in that way, but I don't know if legal department can't put across the rules for so long. It's almost 8 years now, so.
+Binoy Das
+Binoy Das
+00:31:20
+So what's your what's your point, then?
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:31:23
+It may be some conspiracy around like promoting that like. Maybe they are killing it or covering it for some time, so that like, current business won't go. Kind of thing. Yeah.
+Binoy Das
+Binoy Das
+00:31:35
+So you were saying that the the business of these automotive, autonomous taxi might not actually
+be sustainable in the long run.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:31:43
+No, no, no, that that may in impact the the actual
+the the gas cars, or like non autonomous business. Maybe that's the reason they're shadowing for some time.
+I don't know. How long would that go? But like even even know if they're unable to nail down on the legal aspects of it.
+It seems like there is some conspiracy around it.
+Binoy Das
+Binoy Das
+00:32:09
+Okay. So are you, then worried about actually like a human driver being jobless like, think about taxi driver, or even truck drivers like long haul truck truck drivers. Is that kind of what you are thinking.
+Srinivasula, Vijay
+Srinivasula, Vijay
+00:32:21
+Yeah, yeah.
+Binoy Das
+Binoy Das
+00:32:23
+So that actually brings me to the next thing I wanted to discuss. So do you guys think that these AI's ability to basically mimic human skills, and not just these creative writing or decision-making skill. But also some hard skills, right? Such as the something more like a blue collar skills.
+like a working in a factory, driving a car. And that kind of thing, right? So do you think that people's jobs will be at risk or are at risk right now
+is that, do you think? Is that going to be a negative impact on the society in some way.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:33:00
+So I.
+Binoy Das
+Binoy Das
+00:33:01
+I'll take.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:33:02
+I have. I struggle with this question. Can you guys hear me.
+Binoy Das
+Binoy Das
+00:33:06
+Yeah, we.
+Jimenez, Tiffany
+Jimenez, Tiffany
+00:33:07
+Okay, so I struggle with this question because I don't think that AI is gonna take jobs. I think that people that don't
+grow and adapt to the business world changing are gonna lose their jobs. But I don't think AI is gonna take jobs. I think it's gonna make the tedious stuff, and the stuff that we do every day and spend a lot of time on that. AI can do easily. I think that they're going to take that part of our work away, and we're going to evolve and do more high level things.
+Binoy Das
+Binoy Das
+00:33:44
+Yeah.
+that is true, but I think and I totally agree. But I think there would be a short to medium term pain for the society, because I mean, this is something that happened at the beginning of the industrialization. Right? So think about to make a road, or a bridge, or building, or something like that, right? How many people were needed before right?
+And then, as the machines become stronger and powerful, powerful right, and these are like machines initially driven by steam
+and then buy Diesel and all. So we people we like as a society, a lot of people. We they don't. They're not needed to to work right. But those work, if you think about it, those are. There was a very hard work right? So now
+the
+the amount of labor we need for doing that has gone down like today, a big bridge or highway being built like, whenever we go through this construction zone, how many actual people you see.
+right like, if you let's say, if you drive through like a 2, 3, 4 mile stretch of construction zone where they are building a bridge or widening the highway, or whatever. You will hardly see. 5 to 10 people. Max, like working on a good solid 2, 3, 4, mile stretch of the highway. Right? So. But
+what is everyone else doing like? If so, what is everyone else doing right? I mean, I mean.
+it's still our, even with all of these, our unemployment rate is still low, right? Kind of in part of what fed wants it to be like around 4, 5%. Right. So this is not an end of the world. It hasn't been an end of the world at that time, but obviously people have gone through a pain until as a society, and it takes time to kind of generally come up with this alternative model. So in that there, in that instance, I think what happened is
+overall. As a society. We learn to be more like service centric. Right? So where machine is doing all of these things for us. But we need people to provide the services around those things. Right? So that's why we are now more service centric. And that helps things flow much smoother. Like think about earlier. We used to build road. But now even road is also a service like, think about some of those stores, for example. Right? So now, there is a
+company like like the companies that manages the toll road, for example, right? Like your easy pass, or or whatever these companies. So they are basically using these road infrastructure and providing them as a service. And that company is also employing people right? Similarly, since the volume of the construction that we can do or volume of the amount of machine we can make. So that means that has overall increased the size of the total economic output.
+Right? So that means we are mining more material. We are building a lot more stuff. So even though for one particular job, we need 10 people, not 100 people. So which is particularly what a 90% job loss. But at the same time we are probably building 10 times more things. So
+so I don't know whether this AI thing will still go the same way. But what I think is what is going to happen is, yes, people will find other ways to make them useful.
+But this time it is not going to be very easy, because where do you go from here, like you have seen over the last 6 months of right? So it takes lot of it's like it takes a different type of mindset. Right? Different kind of thinking process to be able to understand how these things are even actually working right?
+So
+how many people would actually be able to go behind on the other side and work in the industry. And what to build these models right? And then, unlike those machines that actually needs to be taken care of this digital model. Yes, they does need to be taken care of. There are still, there are people going to be need to do the devops and then production, engineering production, support, and all of that. A lot of these will
+happen, but not at the scale that happened in the Industrial Revolution. Right? So I think history will kind of repeat itself, but this time it will be a much longer cycle. That's just my opinion. Yes, Jesse, you are.
+Jesse Parent (He/Him)
+Jesse Parent (He/Him)
+00:38:17
+Yeah. And and there, there's there's 2. There's 2 things I keep thinking about. One is, you know, at what point
+does AI make
+obsolete the things that learned off of, and it has nothing left to learn off of itself, which is, which is just a degrading model, right?
+The other one is that anytime you have a hybrid model of AI and humans, you have agents, chaos.
+So I wonder at what point the insurance agencies will actually
+start to ding you if you are driving
+versus like if you're using if you're driving with AI, because if you're if you have AI, and every everything's coordinated via AI,
+and you're the agent of chaos in the middle of that, screwing everything up and causing accidents. Maybe you're gonna be penalized for that.
+Binoy Das
+Binoy Das
+00:39:05
+And that is true. I mean in some some context that actually happens. So think about a large manufacturing facility right where they basically are moving heavy machinery and building hundreds or thousands of cars, let's say, day in and day out, like all of those large factory, and not just cars. Any other large factory where everything is productionized. Right? So there are places that it is actually very risky to humans to actually walk in the middle of a
+production line because of everything, is very mechanized, very robotic. And then, if a human goes there, it will actually create more disruption. It can injure someone and create a lot of delay. The machine can start behaving in a way that was not planned for, because they were all programmed to do something in a perfect harmony. And now there is a monkey
+so like there's a monkey that's coming here and basically breaking the harmony, breaking the rhythm right? So kind of the same thing that might actually happen. But I don't think as a society.
+we are nowhere close to that. I mean that where the basically autonomous driving becomes a norm. And if
+you are found to be your hands on the steering Wheel Insurance Company will actually penalize you.
+It's good to think that way, but I
+like I don't think it's going to happen that way, like if it needs to happen that way. So think about it all of the fleet all the vehicles that are on the road today. They all have to be using that same platform, because if half the cars are autonomous and half the cars are human driven. You really cannot achieve that. So so it is, at least in my mind. It is at least a 50 year cycle right for the current generation of cars to completely retire, and the AI models are
+need to be mature enough that all manufacturers start to build cars where all the cars are 100% autonomous driven.
+So I don't see that happening at least in next 50 years, Erin, you wanted to add something.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+00:41:07
+Yeah, I think that the they may not penalize. But I think there's definitely going to be an incentivize.
+If you look at the
+commercial airline industry. They incentivize pilots to land with the autonomy, with the auto auto landing features, they incentivize that in their paychecks
+to incentivize them to take advantage of the the auto landing.
+So I think that that there is going to be an incentivize, and then that will naturally, if it starts actually happening that way transition to a penalizing system. So I think that could happen much faster than in the next 50 years, since we already have the framework in place in other industries.
+Binoy Das
+Binoy Das
+00:41:50
+Okay, yeah, I know that. That's, I think, is a valid thought. But even then, right, I mean, think about this pilot example. Right? Yes, planes today do have autonomous landing capability, but they have still not taken the pilot out of the cockpit.
+The pilot is still there, right? I mean, probably the the expectation and the pilot's skill set have evolved, too. Like, as you were saying, Erin like, let's say, a pilot who doesn't know how to use. This autonomous technology is not going to be basically very valuable to the industry as opposed to a pilot who knows how to make
+good use of these autonomous technology, and also knows how much human supervision to provide and when to take control. If the autonomic fails right, if the Intel, like a machine, fails. So basically as a pilot. Now, you don't only need to be knowing how to fly a plane. But you also need to be knowing how to
+cooperate with the machine.
+how to make effective use of the machine, and how and know when to interject, and to what extent, to make sure that things work perfectly
+right instead of completely taking the human out. So I think humans will always be in the game. Is just the expectation from humans
+on humans would change in general.
+Like
+the other example is like, think about the office workers from, let's say, before the windows. And Microsoft office was a thing right as an office worker, right? Maybe the most advanced skill you needed is typewriting. Right? You can. If you can type 30 words per minute. Then you are a good worker, right? So that's all it is.
+And then, when everything became computerized, right when Microsoft windows became a thing which is like what? 40 years back. Now, I think 40, yeah, 35, 40 years back.
+So that didn't immediately reduce the number of people that we needed for office work, but it just added a different kind of skill. Set that companies now expect for the office workers to be to have right, which is
+so similarly here, like all of these tools that we are seeing now, with this tool, you can start generating an image generating a video, an animation, a music, or a document and essay that you want to write right?
+But then
+that does not mean that you are letting machine do everything. So you start that as a as a use, the machine as a starting point. And then you basically use that in a constructive way to basically produce whatever work that you are
+going to produce right? So essentially, instead of
+giving the control to the machine, use the machine as your as your partner, basically.
+and then then co-develop, and then improve together right? So.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+00:44:59
+I have a quick comment. Possible question. Sorry?
+Binoy Das
+Binoy Das
+00:45:02
+Sure. Sure. Yeah. No head. No problem.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+00:45:04
+In regards to the workforce you mentioned how
+like, for example, your example for office workers, how at 1 point you just had to be good at typing. And then, once windows came out, you had to be good at
+faster typing, and you are then expected to also take on presentations and managing excel sheets. And so there's a higher. Not only is it's it's that that when these technologies develop.
+it increases the load of what the human is expected to do, and it actually doesn't make it easier, because now they're just expecting more. So do we think that there's going to be a higher level of burnout, I mean burnout is already very
+prevalent in the tech industry right now, simply because of the expectations in
+I mean honestly, burnout is everywhere, but I see it a lot in my industry in Fintech, because there's such a push for doing more and doing more. Do we think that there's going to be a higher.
+Binoy Das
+Binoy Das
+00:46:03
+I.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+00:46:04
+Burn out.
+Binoy Das
+Binoy Das
+00:46:04
+I think that is what I was like. That is not exactly what, but that is part of what I was mentioning to as that as a interim short to mid term pain, that we will probably endure all of us as a society will endure right? I mean, like over time. We will. Basically.
+maybe our brains are going to be rewired or the expectations are going to be readjusted both on our part and the and the corporations part that are employing us right? What is practicable, what is not practicable. But these things. It's basically a social change. It's a cultural change, right? It's going to take some time
+and then. But but you, said Fintech, right? But think about the finance industry in general, even before finance and technology got married and came out as a Fintech finance industry is notorious to have these cause, these burnout on people.
+So talking about Fintech, I don't know whether is that something that you can attribute to the tech part? Or is that more attributable to the fin part like the finance part? I don't know.
+Like, what's your experience? There.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+00:47:11
+I think it's both because it's both
+loan. Finance itself is already extremely complicated and nuanced because we're using old rules with new technology and then trying to adapt middle rules to incoming technology. So it's it's a knotted mess of legislation and logistics. And that's just the finance part. The tech part is then trying to get a hold of that and make some sort of sense of it
+with all of the new technology that we still barely understand, because we're trying to stay relevant
+and and not not relevant in the sense of
+of whether it's needed, but relevant in the sense of a company trying to remain relevant in the industry with every other competition.
+Binoy Das
+Binoy Das
+00:47:59
+Yeah.
+yeah, I think that's that's kind of something
+that is unfortunately unavoidable. I mean.
+I mean, there is always whatever progress we make as a society, you have to pay a price for the progress. Right? I mean 100 100 5,200 years back. The life, you can say, like, well, the life is so simple, but the life that we have gotten accustomed to right now
+you couldn't even dream of right 100 200 years back. I mean, obviously with the modern comfort of the life that we are enjoying, it also brings in modern challenge. But does that mean that when all of this technology was not there, there was no challenge, no, there was challenge, but in a different kind of challenge, right like back then, like staying healthy, I mean staying well fed, staying clean and healthy and disease free. That itself was a challenge, right?
+Because think about the condition of the sanitization condition. Right? People think about the average age people used to have right.
+Some people might think well, at least they were happier. Well, look at now. All the suicide rate is going up. Diverse rate is going up
+fine. But the thing is who is who maintained the data? What happened 200 years back
+because the data collection was also not match here. So and also another thing is, if let's say, if 10% of population is, let's say, depressed, chronically depressed. Right now, if you have a population of 1,000 people, 10% of that population is 100 people.
+Now, you have a population of 10,000 people. Now you have 1,000 people who are depressed, and then you will see that prevalence of
+whatever symptom, probably more.
+But again, I could be wrong. So anyway, what I would suggest you do is I found this video? So this video
+oops hang on, hang on, hang on! Hang on! Not that, because that was an ad, copy link.
+I'm going to open it on my personal Youtube, because I pay for Youtube. So
+it doesn't. Okay. So this is A. This is from Harvard Business School.
+So if you go through this and this person, he
+he was in the 1st batch of Harvard computer science graduate.
+So in this video, in one place, he's saying something funny like, up until I think, eighties, there was no computer science program at Harvard, because Howard thought, this whole computer thing is a fad, and it will likely pass.
+It was until not until 19 eighties that Howard realized. Like Nope, this computing thing is here to stay. And therefore we should start a computer science program. And he's he was in the 1st batch graduating out of Harvard with computer science Major.
+So I I really like this. So let me post this here also.
+And I liked it so much. I actually
+took 5 note out of his talk.
+Let's go through these and see whether what you guys think. So number 1 point he's making is AI is a tool.
+not a sentient sentient force so separate. I made some mistake.
+How
+so separate Hollywood fiction from reality. So basically, what he's talking about. Oftentimes we hear like, oh, machines are going to come and get you. They are going to be powerful, and they are going to make human obsolete, like all of those Hollywood stuff. So he's saying.
+AI is not a sentient force, it is never going to be.
+It's just a tool that we, as conscious beings, are going to use.
+Second point he's making is the AI race, has enormous, has enormous tech spanning economic and national security concerns
+which we all know.
+3rd point is very important, since we are all here to get illiterate in some way or shape or form in AI. So that's exactly what he's saying. AI literacy is essential, and leaders must understand and embrace it, to stay competitive and not just leaders. Every one of us
+right
+transparency and ethical AI governance is non negotiable for responsible deployment. And this is where some of the things that we are discussing about like, hey, what happens to the regulation when the cars drive themselves right? So that has to be more mature because currently it is not.
+And lastly, he argues that AI won't replace humans, but it will replace, though those who leverage it effectively will outperform those who do not.
+So basically, what he's saying, hey, AI, is not the risk for your job.
+The risk for your job is another person who understand and uses AI better than you do.
+Your competition is that person. Your competition is not AI in itself. AI is just a tool, and he says, Yes, it is a tool, but it's a very powerful tool, like any other powerful tool.
+You have to be very careful when you are using a tool that is so powerful. Otherwise you can get hurt. You can hurt yourself. So he's saying, AI is just that it's just a powerful tool. So use it with care and use it well, so that you do not get out competed by other humans. And when I say you meaning you as an individual, you or you as a company, you for the leaders, right for people running the corporations.
+So it's a pretty good video. I mean, I liked it and do watch it.
+And then doing that research. I also found these other page from Harvard Business School, and there are. So this is the 1st one right?
+so this. So you will find that article and a whole bunch of article like antitrusting tech regulation. How about Professor on tech regulation
+all of these. So this is basically a
+ethical AI section on Hbs blog.
+you'll get some really good reading material there, too.
+And then, similarly, this one. This is from mit tech review oops.
+So look at this. In a 1938, article Mit's president argued that technical progress didn't mean fewer job.
+And he's still right.
+So these tension that we are seeing feeling now as a society like, whether really AI is going to completely shake up the way that we work as a society. Is it really going to take place of what people are doing? And then people will be jobless, and they'll be just sitting there and collecting a universal income basic income paycheck.
+So this is not new. Like, 100 years back, we are still talking about the same thing. So we read this article so that that will also basically help you get a good historical context and put the today's today's what the argument that we are facing today. Put that into context, right of what happened, what was happening 100 years back.
+BI
+Blankevoort, Ingrid
+00:56:09
+So quick question.
+Blair Sonnen
+Blair Sonnen
+00:56:10
+Do you happen to know when like, how long after the class ends, we'll have access to our slack channels.
+Binoy Das
+Binoy Das
+00:56:20
+I think it's about couple months you do remain, have access. But
+What I would suggest is the links that we keep posting the ones you you think that is going. You are going to you like, or or even just in general, just bookmark this in your browser.
+Aynagoz, Margarita
+Aynagoz, Margarita
+00:56:35
+Blur. I'm not sure about the
+slack channel. But the administrators. I've asked about the access to the video, she said, during the whole year.
+Binoy Das
+Binoy Das
+00:56:56
+Okay.
+Aynagoz, Margarita
+Aynagoz, Margarita
+00:56:56
+Time.
+Binoy Das
+Binoy Das
+00:56:56
+But slack channels might not stay that long.
+Aynagoz, Margarita
+Aynagoz, Margarita
+00:56:59
+I agree? Yes.
+Binoy Das
+Binoy Das
+00:57:01
+Slack channels might not stick that long, because I have taught other Fintech courses here.
+I think about after a month or so those slack channels are gone, so don't rely on the slack channels.
+Blair Sonnen
+Blair Sonnen
+00:57:14
+Okay. Thank you.
+BI
+Blankevoort, Ingrid
+00:57:16
+Question. There were some articles that I read where CEO of companies would say they are not gonna hire more people. If you know AI can do the part of the work, you know. I think even Michael Dell, if I'm not mistaken. I have heard that he he mentioned about that. So I mean, that's pretty much like what the impact to the unemployment, right? Because you know, the higher ups basically decided. Well, you don't need more and more. You don't need more people. The AI can do
+more job for you. Maybe you know, on the coding part, or maybe some of the I don't know customer service part or whatever. But
+you know, my point is, basically there will be some job impacted, no matter what you know, because we.
+Binoy Das
+Binoy Das
+00:58:00
+For until that. That's what I'm saying. Until the time we as a society, the people and the business and the leadership, everyone
+learns how to. So currently the way. So I'll tell you, whenever companies are trying to cut back and thinking that AI is going to do their job, those leaders are going to be wrong, they are wrong, and some of them are already knowing that they are wrong.
+So think about in the tech world, for example. Right? So today, you can actually the other thing that we were talking about a couple days back, the vibe coding right? So where people are thinking, well, I don't even need to go to a coding school or do a com science class. I just have an idea. And then I'm just going to ask AI. And then AI is going to write the code. I'm going to take the code, package it and put it on the server, and there you go.
+What can go wrong? Guess what?
+Everything can go wrong and everything does go wrong.
+Right? So
+in the industry there is this thing called devops right? Which is basically not a new phenomenon. It's been around for last 1520 years, right? So where you not just simply build your application. And then someone else who are kind of more like a down with the hardware and stuff. They will take your application and put it up for people to use. Now you build your application, you automate everything and using the automation. The application gets
+deployed in production and people uses it right? So that's where the whole devops thing is
+so does that mean that with rise of the devops, the
+the, the it people needed in the tech industry has gone down.
+No, because writing these devops automation tool.
+These are very tedious tasks to do this and get this right. So earlier people were spending more time.
+Now, people are spending less time. And people are using these additional time to kind of like investing in themselves like today, a devops engineer, even though that person is paid for 40 h per week. That person is probably not working 40 h per week, and then leaders know that no one is expecting a person to be there 8 h, 8 by 5, and sitting in front of the computer right? And then doing something.
+There are some people, some bad leaders. Obviously there are good people and bad people. Similarly, with leaders, there are good leaders and bad leaders. So I have seen bad leaders who kind of will, you know, ping you on slack at odd or teams, and all time all the time at an unpredictable time, and expect that you will reply, and then, if they don't get your reply right away. They will make a big deal out of it.
+But industry as a whole. They know that a devops person today, and especially now that all of many of these devops can be automated right? Even further. Right? You can probably now use some modern AI based tool to basically create these automation yourself
+fine, you do it, but that does not mean that you are replaceable
+because things can and things will go wrong.
+So who is going to take care of this? Who is going to put those fire out when things do go wrong? Right?
+So I think this is similar. So let's say, media publishing company right? Or a marketing agency. Right? So they hire all of these creative writers or people who design like Powerpoint Slide, or artists and stuff like that. So now we saw like we can just put a prompt out there and then AI will generate, not just fill in the blanks in the images. They will create new image completely right, and some of these image will probably even look like original artwork.
+But do you really think any company in their right mind. Any marketing agency in their right mind will fire all of their creative department and completely rely on a Dali model to create those creative things for them.
+Harrison, Donald
+Harrison, Donald
+01:01:58
+So they find if they find out that their profits aren't dropping, they would 100% do that.
+Binoy Das
+Binoy Das
+01:02:06
+So now tell me one thing. Today
+you can buy, let's say,
+a cup or a pottery for very cheap. Why? Because all of those clay pottery are not made by humans. They're all made in machine, not today. It's been
+since almost the beginning of the industrialization
+so you can buy a cup for $1 from dollar store.
+but in the very same day people do go and buy
+cups or potteries made by artisan, and pay $100, or above for one cup. So what is the utility of that cup
+that is made by an artisan?
+If anything, the machine made cup probably looks better. It's quality better it will not break, is as easily right. It will probably hold the heat better because all of these technical and engineering innovation has gone behind making that cup
+as opposed to that cup made by an artisan, doesn't have any of those qualities by it. Still, it can still command 100 times more price. Why
+so.
+Harrison, Donald
+Harrison, Donald
+01:03:15
+So there's there's there's whole brands that that
+drop ship like mass, like produce products like that under like a branding of like a home like crafted good, and they still drive those prices even with the automation behind it. It's mostly just like a question about the branding, isn't it?
+Binoy Das
+Binoy Das
+01:03:35
+Yes, to some extent. Yes, some companies are very clever. They basically control that branding right? Like, when you buy a Gucci or Prada handbag. Right? So it is branding. It's not just. They are all using artisans and not using any automation. So it is branding. Yes, but even then, right? They cannot.
+they cannot afford to. So, like all of these, let's say luxury. Item, the handbags. Do you think they are using the automation or productionization in the way that a factory in China or Vietnam are using to
+make a bag and sell sell to you for $10 or less.
+Harrison, Donald
+Harrison, Donald
+01:04:16
+I thought I thought it just came that they
+do use. The bulk of the the product is made in China, and then they finish it off in like Italy.
+like a lot of like Chinese manufacturers are coming up.
+Make all those products.
+Binoy Das
+Binoy Das
+01:04:31
+Yeah, some. That is, yes, that is true, some extent. But yeah, what I'm saying is like, I don't see the whole area of either, let's say, talk about creative automation or technical automation.
+at least the way that the stage we are. Now, I don't see that
+AI will be able to do it just by themselves. But AI will make the people empower the people who are doing the exact same job to do it better to do it faster.
+And that's what like the last couple of link that I shared that video and a couple of articles, you will see. That's that's how people are thinking, too, like the leading thinkers in the industry. So but again, you don't have to take my word you don't have to take their word. But the idea here is to just engage in this type of open discussion and kind of form your opinion. And then, as you guys move forward, just keep your mind. Keep your eyes and ears open right and and just be cognizant of the changing.
+ever shifting landscape around you, because it is going to shift, no matter what those experts say, no matter what you say, no matter what I say. At the end of the day we are all completely ignorant. We really don't know what will come
+next.
+Yeah. Forget about 1020 years down the line. We don't even know what's going to happen next year or next month, some in sometimes
+like, are we going to pay twice more to bring things from China?
+We don't know.
+I hear that starting tomorrow this tariff is going to go to a go on effect.
+who knows what's going to happen by the time we go to next year? So
+so I think it's yeah, anyway,
+Harrison, Donald
+Harrison, Donald
+01:06:14
+Things day by day.
+Binoy Das
+Binoy Das
+01:06:16
+Yeah. Hey? What about the Ts Kian Karen Mohammed?
+Do you guys like to share your thought.
+Layson, Kian
+Layson, Kian
+01:06:30
+I mean.
+it's kind of interesting, really. Cause we do have the examples of. You know, when AI started taking over like the job market, for example, or sorry not the machine when we did the Industrial revolution machines started taking people's jobs. But they just hired the factory workers to instead look after the machines. So it did in a way, transition the job market more than remove the need for it.
+But of course some people got lost there. So I'm I'm just more kind of curious about
+So we kind of have something like Vibe code today.
+which I I think, is kind of similar to what's going to be the cheap production version of everything
+it's going to be. We. We have so many examples in history of having a hundred people who can quickly spout out garbage with AI is somehow actually going to be able to compete with the few developers who could do it more expensively and be well done.
+I know it's kind of a silly example at this point. But there was the the last stand of the samurai
+they lost to a bunch of what they would have considered kids with guns.
+The the Japanese just decided that it was cheaper and easier to give everyone a gun, and they could just point and shoot it. It was cheaper. It was easier. You have the same example with people and machines, instead of having everyone do it by hand. They just had a bunch of machines cheaply pumping it out. And I think AI is really the next step in that. But what's interesting is we, we can be those factory workers who get that job to work with the machine which is going to be the AI here.
+And so I I would definitely recommend integrating it as much as you can, because that's obviously gonna be the future. We? We have to learn to adapt with all these new tools. And it does put a lot of pressure on us because of how fast it's adapting.
+But if you're one of the few who can keep up with it, and you can prove your worth. You're gonna stand out from the crowd.
+Binoy Das
+Binoy Das
+01:08:29
+Yeah, I think so too. And maybe the next generation that will come after us.
+Who will? The newborn, starting like from the day that they they learn the human language, they will be exposed to machine, generated language, and work in some way and shape and form, right?
+So
+will probably eventually be rewired in a different way. And we know that this is basically just a just, a fundamental life skill that you have to learn.
+And this is how things are done, anyway. Maybe
+I mean, I have seen, like in the schools, for example, earlier, they were fighting like they will basically even not have the Internet. Sometimes in the classroom or block. In using firewall they will block certain Llm sites like Chat Gpt and stuff.
+And now, in the Education section sector I have, I see, like, based on my. What my son tell me is that they have already started talking about how to effectively use AI to do your homework.
+So the teachers, some teachers have already started talking about that. And they're not shying away from some, from being from letting their students use. AI, they're actually saying, Yes, you can use AI. Well, you cannot use AI on the test day.
+but in any of your work your group project, or individual project. You can use AI, but they're setting the right expectation, right? So kind of a like a basically in setting a standard of kind of what I'd say, standard and expectation of what ethical model behavior should be.
+Right.
+like, we can do a lot of things if we want to be able right and not get caught. And that's the reason we need to have a good ethical and moral infrastructure. So I think education sector is already kind of started to realize that and started to talk about that, at least in the high school level. I don't know what's happening at the elementary or middle school level, but at least at the high school level. What my son says is that it started to happen already.
+Some of these things, if you see my screen. So I had 2 prompt to this table diffusion. Right? My 1st prompt was
+to print a Maltese being groomed.
+So this 1st 2 image is basically the result of that prompt a Maltese dog being groomed.
+which is correct, and the next one by on purpose. I tried to be little odd.
+so I said, earth being shielded from space radiation.
+That was my exact prompt.
+And it created these 2 image.
+So I like this one.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+01:11:30
+Whatever that generator is on. Like, I just yeah
+want a good night with that.
+Binoy Das
+Binoy Das
+01:11:38
+Death star.
+Yeah, I mean, it got like, I don't know. I mean, this is not really shielding. I think it's trying to burn the heart down. But this one looks like, yeah, some kind of abstract representation how humanity is going to be the savior of the earth. Something with this astronaut, and with this fairy belt put around, I don't know
+but I'd say it's kind of creative in some way.
+But I so if you do these, I think if you do these enough, you will see that these images kind of have a certain feel like after you do a couple of 100 of them, you can easily tell which one of these is actually generated by AI versus which one of these is actually created by a human like. They have a certain kind of a undertone to these.
+It will be easily. Oh, another thing, I wanted to show you guys so talking about these
+things about like a fake versus hang on.
+I think I had the okay, anyway. Never mind. So let me. So this one tools for humanity. So you know, you guys all know who Sam Altman is. Right.
+So Sam Altman has
+is is basically doing his second venture here. He has co-founded this company called Tools for Humanity.
+With his partner is, I think, a physics professor from somewhere like
+Germany or somewhere. So a physics professor from there, and some artman has created this company.
+So what? Basically, they are saying? So they have this unique eye scan thing.
+and or they are calling it. And they also have this mobile app and they are doing currently doing some road shows about these. So what they're saying is
+like, in the digital age.
+Like validating any identity, right? Authenticating someone. Whether something is original or someone is original is extremely hard.
+So using this technology, they are saying, they're going to have a unique scan of your retina.
+and that will basically generate a unique, non-temperable identity of you as a human being which will be backed by a blockchain network that will create your unique fingerprint in the in the blockchain.
+So, therefore, somehow, like, whenever you are touching something, whether you are writing a piece of code or drawing something you basically touch or like scan your retina. And that basically attaches the person's identity to that work that you are producing.
+which then, is basically written in a blockchain so that identity cannot be tampered with. And that's how you basically provide a proof of authenticity for the work that are actually done by human beings. So that's kind of their
+wish or agenda that they are trying to build this whole identity ecosystem. So they're calling it tools for humanity.
+So check it out.
+Yeah, any other new new recent new development, something like these, or cooler. Anyone has heard about that you can share, like in the field of AI. Of course.
+Harrison, Donald
+Harrison, Donald
+01:15:04
+Oh, is it sorry? Is this gold coin? I I missed that I was struck.
+Binoy Das
+Binoy Das
+01:15:08
+I'm sorry.
+Harrison, Donald
+Harrison, Donald
+01:15:09
+It's like the world coin.
+Binoy Das
+Binoy Das
+01:15:11
+World coin. Yes, yes, yes. So so they basically minted world coin to basically back these, the the blockchain network that will be behind this identity system. You are right.
+Yep.
+Harrison, Donald
+Harrison, Donald
+01:15:37
+Yeah, I was, I was actually looking into this, because, like, I was trying to think of like, there's like so much a like slop online. And it's like hard to like, stop reposting of like content online, like, it's like an artist or like somebody like makes an original piece. And then, like it's like reposted or cross posted to another platform. There's like no way to stop that. And so I was trying to like, think of like there was like a possibility like make a blockchain network that like ties like each like user to like a unique id that's like universal.
+Binoy Das
+Binoy Das
+01:16:04
+Unique Id. And then before.
+Harrison, Donald
+Harrison, Donald
+01:16:06
+Yeah. And that's the like.
+Binoy Das
+Binoy Das
+01:16:07
+Yeah.
+Harrison, Donald
+Harrison, Donald
+01:16:07
+The world coin stuff! But.
+Binoy Das
+Binoy Das
+01:16:09
+Yeah, yeah. So maybe maybe something they can develop like that will say, like, Hey, before you repost something or or spread spread some misinformation. Right? You have to kind of scan your retina with this right, and then only after it authenticates you as you, then it will let you go through something like that like.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+01:16:29
+Question on that one. Sorry. I mean, I think that's an interesting idea. Kind of like having a social security number for content creation on the Internet. But I just wonder because hugging Face recently came under some fire because
+they scraped a fan fiction site
+for like 68,000 stories written by
+written by everyday average people, and.
+That without permission.
+Binoy Das
+Binoy Das
+01:17:01
+Yeah. And I have heard about that, too.
+Spencer-priebe, Erin
+Spencer-priebe, Erin
+01:17:03
+Yeah. And so the the site, the site, Creator owner actually went to them and said, No, you cannot use this. You must take this down, and they're trying their best to recover as much as they can. But that's 68,000 stories that people wrote that are now being
+that have been stolen. So
+where I'm going with this is a lot of those stories were written by minors
+or people who didn't want their identity revealed, because it's it's a fan fiction site. You don't want your employer knowing you're writing smurf fan fiction on the weekends. It's just doesn't. It's not a good look you make you get caught
+so wouldn't having this identifier to protect your online work. Couldn't that also like expose? Or
+it? Wouldn't that be a personal issue for both minors and a security issue. If.
+Binoy Das
+Binoy Das
+01:18:00
+Yeah, I mean, there has to be some kind of a regulation around that, too. Right? I mean, think about.
+Harrison, Donald
+Harrison, Donald
+01:18:05
+Everything.
+Binoy Das
+Binoy Das
+01:18:05
+Think about social security number, right? So if someone wants to misuse our social security number, they can right? They can pull out a lot of information about us by having our social security number right yet there are a lot of places, a lot of places when we do apply for a bank account to open a lot of stuff right? We have to provide our social security number.
+So we just have that trust that I'm putting my social security number in a form, either in a paper and a digital form. And we know that there's a human being on the other side who will be looking into that. So there will be humanized. So that's why there needs to be that ethical, moral, and regulatory structure right to kind of prevent that misuse.
+so I don't see this being any different than that.
+Harrison, Donald
+Harrison, Donald
+01:18:56
+Yeah, it. It'd be the same issue that you get with like a phone number.
+Binoy Das
+Binoy Das
+01:19:00
+Yeah.
+Harrison, Donald
+Harrison, Donald
+01:19:00
+Because you use that for identification, for, like most things. But you can't even spoof a phone number just by getting like another SIM card or something.
+Binoy Das
+Binoy Das
+01:19:08
+Yeah.
+okay, so
+I think we have had a very good discussion. So unless anyone else wants to share anything.
+anything cool that they have recently come about any recent
+innovation in the field of AI.
+If not, I think this is a good time for us to take, maybe a 15 min break.
+And then, after we come back, as I said in the last class that half of the time today, I can give you to basically start getting together with your group and start brainstorming
+and
+us the instructional stuff. We will come and spend maybe 10 min or so with each of the groups right? And then we can brainstorm with us and among your group as well.
+So that starting Monday, you are in a good shape that you can. You can basically be
+productively use that one additional day that I gave you guys right?
+Because I really really want and could hope that you guys will do something that will just wow us that will go way above and beyond than what we probably have
+what I have taught you right, so try to outsmart me.
+No one would be happier than me if I is seeing that you guys have outsmarted me. So that is my hope and I I'm sure that you guys will be able to do that.
+especially now that you have one extra day.
+Matt Le
+Matt Le
+01:20:47
+Is that even possible.
+Binoy Das
+Binoy Das
+01:20:49
+Yeah, of course.
+Matt Le
+Matt Le
+01:20:51
+You're pretty smart, but not.
+Binoy Das
+Binoy Das
+01:20:52
+No, but but the thing is, see, you have the number.
+You have the power of number. Because I'm just one guy.
+You guys are going to be 4 or 4 5 people. Right? So
+you can easily outsmart me easily. No problem like I have a lot of ideas. But the problem is, I don't have time.
+maybe starting January, when I go to do my master's at Upenn, and when I come, when I come out of my day job. Maybe I will have a lot of time right to take take my things to next level. That's that's kind of what my plan is right. But
+right now in my day job. Oh, my God! It's pathetic!
+Oops.
+Matt Le
+Matt Le
+01:21:36
+The word, like your highlight of the day.
+Binoy Das
+Binoy Das
+01:21:39
+Huh!
+Matt Le
+Matt Le
+01:21:41
+We're your highlight of your day.
+Binoy Das
+Binoy Das
+01:21:43
+Today.
+Matt Le
+Matt Le
+01:21:44
+I mean, just every day, like every day you look forward to it.
+Binoy Das
+Binoy Das
+01:21:48
+Shift of being with us.
+So every day I look forward on Mondays, Tuesday nights, and Thursdays. I look forward to meet all of you at this time, because everything else is just drudgery.
+and those of you who work in corporate sector. You know that.
+Harrison, Donald
+Harrison, Donald
+01:22:03
+I hear support, the noise.
+Binoy Das
+Binoy Das
+01:22:05
+It's just meeting after meeting a meeting to plan another meeting to plan another meeting.
+So it's just that.
+So yeah.
+anyway. Okay, so let's come back at 10 after. So now it's 1054, 11, so 8, 10, okay.
