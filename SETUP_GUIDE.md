@@ -54,7 +54,7 @@ This guide provides step-by-step instructions for setting up and running the AI 
         ```bash
         mkdir course-content
         cd course-content/
-        git clone https://git.bootcampcontent.com/boot-camp-consortium-west-coast/ AI-PT-WEST-NOVEMBER-111824.git .
+        git clone https://git.bootcampcontent.com/boot-camp-consortium-west-coast/AI-PT-WEST-NOVEMBER-111824.git .
         rm -rf .git
         rm .gitignore
         cd ..
