@@ -102,11 +102,10 @@ def read_pdf_file(file_path):
     pages_content = []
     try:
         doc = fitz.open(stream=file_path.read_bytes(), filetype="pdf")
-        text = ""
-        for page in doc:
-            text += page.get_text()
+        for page_num, page in enumerate(doc, start=1):
+            pages_content.append((page_num, page.get_text()))
         doc.close()
-        return [(1, text)] # Return as a single page for simplicity
+        return pages_content
     except Exception as e:
         print(f"Warning: Error reading PDF file {file_path}: {e}")
     return []
@@ -246,10 +245,8 @@ def build_or_load_index(df):
                         # Handle non-PDF content
                         if file_ext == '.py':
                             splitter = python_splitter
-                            print(f"DEBUG: Using RecursiveCharacterTextSplitter for {relative_path}")
                         else: # Use recursive for .md, .ipynb, .txt etc.
                             splitter = recursive_splitter
-                            # print(f"DEBUG: Using RecursiveTextSplitter for {relative_path}") # Less noisy
                         chunks = splitter.split_text(content_or_pages)
                         for chunk in chunks:
                             all_docs_for_faiss.append(Document(page_content=chunk, metadata=base_metadata))
