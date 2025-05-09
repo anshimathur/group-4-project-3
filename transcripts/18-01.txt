@@ -1,0 +1,1755 @@
+Unknown Speaker  0:18  
+Yeah, okay, thank you.
+
+Unknown Speaker  0:21  
+Has my screen sharing started?
+
+Unknown Speaker  0:25  
+Yeah, because yes,
+
+Unknown Speaker  0:28  
+do you see the neural networks and deep learning book, the online book? Yes, yes. Okay, perfect. Okay, so we are good then,
+
+Unknown Speaker  0:41  
+okay, so the YouTube channel that I was I have pinned earlier is this. Now here you will see there is a series of video. What I strongly suggest is at least go through the first two. Okay,
+
+Unknown Speaker  0:58  
+for your purpose, you don't need to go through all of the details. But if you just go through the first two and it is okay if you don't understand everything that he's saying, I mean, it is pretty
+
+Unknown Speaker  1:09  
+like he kind of, I think it has struck a right balance for non technical people. But some of the thing, if you have not taken math in high school, maybe like a calculus it might feel little difficult to follow, but just go through, if not one time is not very clear, maybe go through a couple of times sometime after this class. Now in there, there is also a link to this book. So this is on so this even though they say this book is basically a web page, kind of a blog. And then there are different chapters here. Also, I'd suggest the first chapter here, where the author is basically taking this example of handwritten digit recognition, which is like on MNIST. There is a database of all these different handwritten digits. I think there are 70 1000s or so handwritten digit collected from different people, and which is then used by machine learning practitioner in when they start their journey of doing neural network based basically machine learning. So this is almost like the hello world problem for neural network, right? So with that context here, the author basically recognizes, I mean, describes how you can use neural network to do this. And it also comes with a code sample, which we will go and take a look in a bit that basically shows you the Python code on how to implement that. And in this video,
+
+Unknown Speaker  2:40  
+this guy here, he basically talks about that same problem, and he basically does an even better job by using the visualization, three dimensional visualization with with basically color, dynamic coloring, highlighting to basically show how these neural networks are working When you are training them to recognize a particular data set.
+
+Unknown Speaker  3:05  
+So we'll go there. But
+
+Unknown Speaker  3:08  
+so what neural network is is basically nothing but a connection of note, right? So think about it this way, how? Let's say, let's take a simple perception, okay, and
+
+Unknown Speaker  3:25  
+so this, so this is basically a building block of a neural network. Now, what is this perception? Right? So perception is an idea. It's kind of a mathematical construct. So think about perception as a simple mathematic function, almost like your E files, logic that you write, right? So let's say if you want to create some condition, like, Hey, is it going to rain today? If it is going to rain today, then I'm not going to play soccer. If it does not rain today, then I'm going to play soccer, right? So if you want to just model this simple conditional logic, what would you do? You will write a simple Ethel's condition.
+
+Unknown Speaker  4:07  
+So think of perception at a very
+
+Unknown Speaker  4:11  
+fundamental level, a smarter way to replace your ethos condition. And this is the building block of all the neural network that we will going to we were going to be learning now how the perceptron can be used to model these binary decision making, or even multi class decision making, is basically what we need to understand as we begin our journey through The neural networks. Now, as I said, you can think of a perception almost like a Ethel's conditional logic, but you don't do this by writing conditional statement as per say. Instead, what you do is you basically create a mathematical construct where you can have two.
+
+Unknown Speaker  5:00  
+More input variable coming into that function. In this particular, very simple example, let's say there are three input variable coming into these mathematical function, and these are called x1, x2 x3 and then what you do is you basically assign a particular weightage value to each of these input so when I say weightage, which is basically a floating point number, a decimal number between zero and one,
+
+Unknown Speaker  5:28  
+or it could be anything. It does not need to be zero and one, even though, I mean, for a conceptual level, you can think of it could be anything. But when
+
+Unknown Speaker  5:41  
+the when you this perception is part of a larger network, you don't control this weight, and the weights are basically determined by the training algorithm. But for now, we are just going to see what some of the weights could be for one neuron, let's say, so once you assign the three words. So x1, x2 x3 will have, let's say three words, w1, w2 w3 and weights are basically, just think about it, a coefficient, numeric coefficient. So then what the output is going to be is going to be a sum of the
+
+Unknown Speaker  6:18  
+product of each individual input multiplied by the corresponding weight of that connection. So if your first input is coming, which is a variable x1 and if you assign a weight w1 to it, so it will be w1 x1 that will be your first term. And second term would be w2 x2 and w3 x3 and so on. So in general terms, your output of this neuron would be
+
+Unknown Speaker  6:44  
+sum of w, j, x, j, right? Because all you are doing is mathematical sum of three different variables, each multiplied by its corresponding weight. So this is a mathematical notation that says, hey, this is going to be the output. But wait a second. What we wanted to do is we wanted to do a decision problem. Now, if you just say output is multiplication of all the W's and all the x's, then your output will also be a continuous number, continuously varying number. It would not be a decision making problem.
+
+Unknown Speaker  7:19  
+So how do you how do you handle that? Well, there is a very easy way to handle that. You basically kind of take a threshold, very similar to what we have done in our classification problem when we are doing classification right. So we take a threshold. Let's say your if your output is ranging between zero to one in a must scaled
+
+Unknown Speaker  7:40  
+manner, then you can say, hey, if it is less than 0.5 then I you decide one way. If it is more than 0.5 then I'm going to decide other way. So if you do it this way, then you can basically model similar to a Ethel's function with as many conditional as you want, which are then x1 x2 then x3
+
+Unknown Speaker  8:01  
+now how do you actually
+
+Unknown Speaker  8:05  
+provide information or or basically provide guidance to your perception? To basically say, let's say there are multiple decision making variables. In fact, there is a nice story example here. So think about it this way, right? So let's say you are trying to decide whether to go to a cheese festival in your city. So that's the decision making problem. Hey, there is a cheese festival going on in my city, whether I'm going to visit it or not. Okay? Now forget about perception for a moment. So let's say you are writing if else conditional logic using simple Python programming or any programming, and then, as a decision maker, you are considering these three data points, is the weather good?
+
+Unknown Speaker  8:59  
+Yes and no.
+
+Unknown Speaker  9:01  
+Does your better half, whether your boyfriend or girlfriend want to accompany you, yes or no, and if the festival location is near public transit, meaning whether it is easy to get to without driving. So let's say these are the three decision making points. Now, how you are going to make a yes, no. Decision whether you are going to attend the festival will depend on your personal preference, right? Because, let's say some of you who are avid cheese lover and you are going to go to a cheese festival no matter what,
+
+Unknown Speaker  9:37  
+but maybe you don't really like when it is ready, so you will go no matter what, except if the weather is not good, if the weather is not good, then you are not going to
+
+Unknown Speaker  9:49  
+go. Right.
+
+Unknown Speaker  9:51  
+Whether your boyfriend or girlfriend is
+
+Unknown Speaker  9:55  
+going to accompany you may not matter to you that much. And if you.
+
+Unknown Speaker  10:00  
+Don't Own if you do own a car, you might say, hey, whether the location is near public transit may not also matter that much. Whether, if you don't own a car, and if you hate walking, I'll make you maybe, like a mile or a half a mile from the nearest subway station, then this would be a high importance to you, right? So what I'm trying to say is, depending on who you are, you can basically assign different numeric weight to these three questions and then do the sum of W's and product of W and x's, and then use a certain threshold value, and then the perception will suddenly become a decision maker for you.
+
+Unknown Speaker  10:44  
+Now, in this example for here, if you say, let's say,
+
+Unknown Speaker  10:49  
+like what I was talking about, the example I was referring to, let's say you love cheese and just the festival is happening there is probably
+
+Unknown Speaker  10:59  
+good, I'd say, influencer for your case, except for the weather. So then what you do is you basically create a perception like this, with three inputs, x1 x2 x3 where x1 being whether x2 being your boyfriend is going or boyfriend is growing, and x3 being your
+
+Unknown Speaker  11:19  
+proximity to your public transit, right? So each x1 x2 and x3 would be a zero or one a binary variable, right? Because the way that we are asking the question, these three are all binary question, whether zero or one. So what you now do have done is you have taken your decision making problem and modeled it as a set of three binary variables. Now you take these three binary variables and you basically channel it to these mathematical construct called perception, right, and then based on your personal liking of certain things, then what you do is you can then assign the different weights. So if you are going to go, no matter what it is happening, if on the only deciding factor would be wet, then you sorry, weather. Then you basically choose a, let's say, a higher weight w1, equal to six for the weather, and the other two, meaning whether your boyfriend or girlfriend is going or whether it is close to the public transit does not matter to you that much, then you assign a lower weightage for them. Let's say two each. So now see what will happen
+
+Unknown Speaker  12:28  
+if weather is good,
+
+Unknown Speaker  12:32  
+the w1 x1 would be one multiplied by six, which is six, whether is good, meaning one, right? And then w2 and w3 let's say your boyfriend is not our girlfriend is not going then it will be zero, right? X2 would be zero. And if it is not close to public transit, then your x3 would be also zero. So essentially, you will get a total score of six. So one multiplied by six times zero, multiplied by two times zero, multiplied by two. So your sum of W J x J would be six.
+
+Unknown Speaker  13:06  
+Then what you do is you create a threshold point to see whether the sum of w j x j is greater than or less than threshold.
+
+Unknown Speaker  13:14  
+Now, if you choose the threshold point to be five in this example, then if the weather is good, your perceptron is scoring at six, which would be higher than your threshold, which is five, that means you are definitely going to
+
+Unknown Speaker  13:31  
+go, okay. So conceptually, how does this differ from like decision tree as a random forest? Because if you're getting like, multiple inputs, and you're then you're like deciding into the next input, yeah, What? What? Conceptually is different conceptually, conceptually, this is very, very similar to random forest, actually, and as you will see a little bit later in the class, for some more simpler problem, you can actually get same or even better result using random forest compared to your neural network.
+
+Unknown Speaker  14:05  
+So that's actually very good question. Jesse, so conceptually, what we are saying is basically a way to mathematically model the decision making,
+
+Unknown Speaker  14:14  
+except in random forest, the algorithm that you that we use in random forest is different than the ones that we are going to use for training us. Network of perceptron, which is which we call neural network. The training algorithm is different, right? And the decision making algorithm is different, but conceptually this is very similar. You are basically trying to replace your details condition based on the training data that is coming right, so that you create some kind of network, and the native network automatically reflects your conditional decision making, dynamically based on the data that you present to it. So from that perspective, these two are very similar, but the training algorithm, what we are going to adopt here is going to be very different than what we.
+
+Unknown Speaker  15:00  
+That what we do for our decision tree, right? Or a random forest
+
+Unknown Speaker  15:06  
+now, so these 622 is one set of weight, right? Now, this might not work for everybody. So maybe now, let's say another person comes along, and this person
+
+Unknown Speaker  15:19  
+basically, probably, let's say, have a higher inclination to go to a cheese festival if his or her boyfriend or girlfriend accumpens him, right? So for that person, the weight w2 need to be higher compared to w1 and w3 and so on. So essentially, what will happen is if you basically go out there, and then with a survey questionnaire in your hand, right? And you basically ask this question, like, hey, whether these three things are happening, whether you are going to go and not right? And you take the survey questionnaire, go back, if you do have the time and patience, in theory, you should be able to come up with a set of weights, W ones, W twos and W threes, that when applied to this perceptron, will basically cater to each of the individual that you have surveyed,
+
+Unknown Speaker  16:11  
+provided you also are ready to change the decision making threshold accordingly. So what I'm saying is, with a combination of the weightages, w1 w2 w3 and the decision making threshold, you should be able to tweak this mathematical function to match the decision making, the collective decision making preference of a population, meaning the different data point. If you can do that successfully, then in theory, this perception can then be applied universally, at least within the survey population that you have surveyed
+
+Unknown Speaker  16:49  
+without having to write multiple different detail condition individually for each and every people, just by changing four mathematical numbers, the Three weightages and the threshold value in theory.
+
+Unknown Speaker  17:02  
+So this is something you have to see in your mind
+
+Unknown Speaker  17:06  
+and satisfy yourself that whether it is true. So you have to conceptually come to agreement to these, these
+
+Unknown Speaker  17:15  
+observations before we move forward. And this is way the big differentiator between like the random forest and the neural network approach, correct? That is one way, because in the random decision tree based approach, there is no concept of weightage. So here, there what we do is we basically take a population, we divide it into half, and we basically see where, given that random point that we are using to divide it into half, which part is going where, depending on whether it's a zero class or one class, and then we keep dividing in halves and so on. Right. That's how you build decision tree dynamically. You keep having it,
+
+Unknown Speaker  17:56  
+cutting it by half in each step, making sure that the two sides of the tree is as balanced as possible.
+
+Unknown Speaker  18:10  
+Okay,
+
+Unknown Speaker  18:13  
+so you are good. So you do agree that by just by varying the weights and threshold, that you can actually get a different model of decision making like look into this. This statement the one I have highlighted. So this is something you have to be very clear in your mind that, in theory, if you do have a very simple mathematical function like this, just by varying the weights and threshold, you can model different kind of decision making without having to write any specific if else called
+
+Unknown Speaker  18:41  
+just by changing the values.
+
+Unknown Speaker  18:44  
+Because this is the holy grail of everything these, these has a very deep consequence to be able to change the decision making of a mathematical function just by changing the values.
+
+Unknown Speaker  18:56  
+Because think about it in general, even in programming, right? We all know that when you are doing some traditional programming, if you are hard coding lot of your variables right in the program, then your program gets very hard to maintain right, as opposed to that instead of hard coding those, if you are getting those variable from internally, like on a runtime, then on the fly, your program can change behavior without anyone Having to go inside the code and change the values of these different variables, the decision making variables, like in a traditional programming so this is taking that same concept, but one level further here. What we are doing is we are not, not only not hard coding the threshold values.
+
+Unknown Speaker  19:39  
+We are going one step further, and we are not even hard coding the if elses itself, not just the values of equals condition. So we are doing it in a way so that we are going to achieve that same effect without even having to write any file statement. Because all you are going to do your your output of this program.
+
+Unknown Speaker  20:00  
+Would be a very simple sum of w, j and x, j, as j goes from zero to n and then only one, if else at the very end. So which is to take the sum and see whether the sum is greater than threshold or less than threshold. So no matter how many decision making variable you have, all you are doing is you are doing a mathematical sum of those n terms together, followed by only one if statement, whether it is less than threshold or greater than threshold. Instead of writing, if it rains, I'm going to go else. If my boyfriend goes, I'm going to go Else, if the location is so and so. Then I'm going to go so that, which will become very nasty, very quickly. Instead of doing that, you are basically modeling it as a mathematical function.
+
+Unknown Speaker  20:51  
+And that is why this perceptron is so flexible that you can with different combination of this you can actually model any operation with perceptron,
+
+Unknown Speaker  21:05  
+any operation,
+
+Unknown Speaker  21:08  
+any binary operation, any mathematical operation, anything can be done with perception. Now there are rigorous mathematical proof of doing so that it is possible, but you can take a simple example here. So let's say
+
+Unknown Speaker  21:23  
+we want to basically
+
+Unknown Speaker  21:27  
+mimic and get. Does anyone know what end is and logic?
+
+Unknown Speaker  21:36  
+This is basically similar to the have to be true, right, correct? Yeah, so if you date on the first truth, that's right. So and basically means it will only be the outcome will only be true if both of the input are true, right? So A and B would be true. If A is true and B is true, if either one of them is false or both of them are false, then the output would be zero. That is essentially the end logic, which we have used many, many times and and our logic in our programming at various point in time. Now let's take a simple case of and, and just to satisfy ourself in our mind, try to see how you can use a simple perceptron to formulate the and logic. How do you do that? So let's say,
+
+Unknown Speaker  22:30  
+so actually, no, this, this. I'm sorry, this particular one is an example of NAND, which is basically not end. I mean, if you can do NAND, and is much simpler which you can do. So NAND basically means the output will be true when both of the input are zero and the output will be false if either one is false or both are false. So basically just opposite of and
+
+Unknown Speaker  22:55  
+now, if you take a perceptron like this, where you have two variables, and you assign the weights negative two and negative two on these two variables.
+
+Unknown Speaker  23:08  
+And then you need to have a little bit more tweaking, power, some more control on this, on the decision making factor, which is called a bias. So think of bias as another variable that you are going to add to these W J x J. So if you just do w j x j, then the simple perceptrons output will depend on only the sum of W j's and X J's.
+
+Unknown Speaker  23:38  
+But what you can also do is you can add another single value, b, which is called bias, and you basically say, hey, my output would be sum of w, j, x, j, plus b. Now why adding these additional variable? Because it gives you more control that you can use to tweak the output, tweak the behavior, expected behavior of that perception. So in a real world perception, instead of just using the weights, we also have another level that we can tweak, which is called bias. So in this example, let's say you create a perceptron where the weights are negative two and negative to each and
+
+Unknown Speaker  24:21  
+the bias is three.
+
+Unknown Speaker  24:24  
+Now let's see what happens if x1 is zero and x2 is zero. What will happen zero times my negative two is 00, times negative two is zero. So that means your sum of your W, j, x j will be zero. But then you are adding a bias which is three. So you add that to three, so three is positive.
+
+Unknown Speaker  24:46  
+Now if your output threshold is zero, that means any positive value will produce a one. So that means zero and zero here will produce a one here. So.
+
+Unknown Speaker  25:02  
+Okay.
+
+Unknown Speaker  25:04  
+Now, on the other hand, what will happen if one of the input is zero and another is one, zero and one? So what will happen? Let's say x1 is zero, so a zero will flow in here. X2 is one, so a negative two will flow in here, right? And then you add a three on top of this, so now your output becomes negative one,
+
+Unknown Speaker  25:31  
+and then that means these will basically output a zero,
+
+Unknown Speaker  25:38  
+which is basically just opposite of n. So if this is one, this is one, one times negative two is negative two. One times negative two is negative two, so total of negative four. So three minus four gives you negative one. So negative one basically means below your decision making threshold, which is zero in this case. So that means when both of your input is one, your output will become zero, which is exactly opposite to the and get and we also already saw that when both of the input is zero, the output will be one.
+
+Unknown Speaker  26:12  
+Now whether we need to actually do that, and this is not just that, let's say, if you want to have any other operation, any complex operation, right? You can actually mathematically show that any arbitrarily complex binary operation which is at the core of all computing problem computational problem solving anyway, you can mathematically show that everything can be modeled just by adjusting the weights and bars as the perceptron. So when these came to people's attention, then they realized like, Well, if that is the possible, that is possible, then, by extension, we can actually use this perception to model any real life problem, any arbitrary real life decision making problem, not just being able to do and or NAND or being able to add or multiply numbers, it should be able to be, it should be extensible to any real life decision making problem.
+
+Unknown Speaker  27:12  
+And that is when people started getting excited, and they started building these machines, right back in 1950s
+
+Unknown Speaker  27:21  
+now
+
+Unknown Speaker  27:23  
+mathematically this is sound, but what happened is people soon realize like, no, no, that's not really happening. I mean, some you can like being able to model or the condition all the conditional logic, or the binary logic, being able to add numbers, multiply numbers, that is one thing, but when it comes to actually doing a much more complex decision making problem, which is by looking at a picture of a cat and being able to tell whether it is really a cat or not, this simple model failed terribly.
+
+Unknown Speaker  27:56  
+It could not do that, because what will happen is, if you try to do that, let's say the cat image, right? Let's say 100 megapixel by 100 megapixel square. And that image contains a image of that. That picture contains the image of a cat or dog or your handwritten digit or whatever, right? So now you have suddenly 10,000 input. Now, if you want to do that using a simple perceptron. Now you will have a one perceptron with 10,000 input,
+
+Unknown Speaker  28:25  
+x1 x2 x3 this will go up to x 10,000 so that means there would be 10,000 weights that you need to adjust and a bias variable right, 10,001 variable you need to adjust to be able to train this single perception to produce a single output, one or zero, where one being one meaning it is indeed an image of a cat, and zero being it is not an image of a cat. So that failed, because what happens is when your dimension of the decision making space becomes too large, and or and, or the boundary decision boundary, these between these two classes are not linear, as we saw in the classification week that we were talking about, right? So we saw there could be population with very linearly separable boundary, versus there could be population where the boundary is not linear, which could be very complex shape. So when that either of the this is true, this single perceptron based model did not
+
+Unknown Speaker  29:27  
+live up to the expectation.
+
+Unknown Speaker  29:30  
+But people didn't give up. They said, Well, it does not work. What if?
+
+Unknown Speaker  29:37  
+If we use multiple of these many, many neural network and many, many perceptron new ah, tied together, and they started to come up with structure like this.
+
+Unknown Speaker  29:50  
+And it so happened, it's so it was so observed that even though seemingly complex decision making problem that cannot be solved with a single neuron or maybe a group of.
+
+Unknown Speaker  30:00  
+Five or 10 neurons suddenly becomes very easily solvable if you have multiple layers of neurons stacked one after another, followed by a single decision making neuron like this, or maybe a 10 decision making neuron like this. If you are trying to do a digit recognition, let's say so when you do this, then these the power of these network grows exponentially. It was observed with the amount of
+
+Unknown Speaker  30:29  
+what is called the neurons that you are adding to your network.
+
+Unknown Speaker  30:34  
+Now the question is,
+
+Unknown Speaker  30:37  
+so going back here, in this simple, single perceptron network, how many mathematical variable we have
+
+Unknown Speaker  30:48  
+three input, x1 x2 x3 but how many variables we are going to have to control?
+
+Unknown Speaker  30:55  
+W1,
+
+Unknown Speaker  30:57  
+huh.
+
+Unknown Speaker  30:59  
+You have three inputs and one output, correct. So, w1 w2 w3 no, not one output. So, w1 w2 w3 are the weightages. Input is not something you are controlling input or output. You are not controlling what I'm saying is what parameters of this mathematical function. Think of it as a black box, and you can tweak the behavior of the black box, but by tweaking certain knobs or levers. So what are those knobs that you are controlling? Those knobs are w1 and w2 and w3 or in general, you can say the W J's. So there would be three W's and one bias variable, which is your B. So essentially, for these single perceptron you have four variable that you need to tweak.
+
+Unknown Speaker  31:46  
+In general, if a particular neuron have n number of connection, then you will have n plus one variables that can possibly change. Because for each of the n variables, there will be one weight assigned, so there would be n words, plus each of them will have a bias which is plus one. So that means these three neurons, if your input is a five dimensional input, let's say, right. So your input can be can have five columns, like x1, x2 x3 up to five. So now each of these
+
+Unknown Speaker  32:20  
+first layer of neurons will have six variables that you can tweak. So that means a total of six plus six plus 618, variables.
+
+Unknown Speaker  32:31  
+Now for this particular network that I have on my screen, now what you are doing is you are taking the output from each of these three and feeding it into another layer of neuron, and we have five of them. So that means in the second layer, each neuron have three incoming connection and one outgoing connection.
+
+Unknown Speaker  32:53  
+So that means each of them will have four variables that you can tweak. And now there are four of these that we are adding. So that means 16 variable here, so 18 variables here, 16 variables here, which is a total of what 34 and then each one of these four will come into the final neuron, final perceptron, so plus four plus one. So that gives us what 39 variables to tweak. Now suddenly our four variable, single perceptron network just become very, very complex, because now we don't have four levers to tweak. Instead, we have 39 levels that we have to tweak to so that this network is able to classify whether your data set which has five dimension belong to one class or the other, right? Yes or No, basically, in a binary classification case. So what that means is now training this network becomes very, very hard, because you cannot really wiggle your way through like go and run around with a question, sorry, questionnaire, and then come back and spend few hours in your desk and be able to somehow magically come up with, come up with your W's and B's, because now you have 39 of those that you have to figure out, which then means that it is not possible to do this in any human way. You need to resort to some sort of algorithm, which is going to be the training algorithm that we are going to be talking
+
+Unknown Speaker  34:24  
+about. Okay, so, vija, I see your hands up,
+
+Unknown Speaker  34:28  
+yes, we know, like actually at the last layer, right? So why only four got connected? There been I, but in the first and second layers, see the multiple inputs there, but at the last so how many? So see the this is called a network topology. So the the network topology is basically not a hard science, right? The only thing that matters is for the first layer. Each of the neuron that we will have in first layer will have a.
+
+Unknown Speaker  40:00  
+Before zero, beyond 0.5, or beyond zero, something less than zero, something but there could be multiple different activation function that you can choose when you are building this network. So some of the common
+
+Unknown Speaker  40:16  
+function that people choose is one is you remember, when we are talking about logistic regression, we talked about the sigmoid function. So these sigmoid function basically gives you a range between zero to one, and you can easily choose a decision making threshold on the sigmoid function that will help you do a binary classification, right?
+
+Unknown Speaker  40:42  
+So that is one sigmoid function. So basically, what I'm saying is, for each of these neurons that you have, or perceptrons that you have in your neural network, when these activation happens, you need to be able to specify mathematically Which one, which mathematical function you are going to use to be able to make a decision. Now it has to be some kind of a binary decision making function. So sigmoid is one, which is the same as the logistic regression function. Another is the tan hyperbolic which also gives you a similar step function. The difference being the sigmoid function basically goes from zero to one. The 10 hyperbolic goes from negative one to positive one, which happens to work better for certain problems. Then another function, which is actually much simpler that people have started to use now, which is called ReLU, or rectified linear unit. So this function simply says, Hey,
+
+Unknown Speaker  41:42  
+anything beyond zero, no matter how high is, goes from zero to infinity, will be your one, or anything less than zero will be zero. So that's the rectified linear unit. That is another decision making function. Then there is a slight variation in of this, which is called leaky value, which basically says, Hey, instead of transforms, transforming all the negative input to zero, you basically allow a very small negative value in there.
+
+Unknown Speaker  42:12  
+So these ReLU and leaky ReLU happens to have, basically have a much more convergence power in machine learning training when you are doing a training on a deep network. So essentially there are four different not algorithm decision making threshold function that people assign to their neural networks,
+
+Unknown Speaker  42:35  
+which is sigmoid, tan hyperbolic ReLU and leaky ReLU. And one thing also, you have to keep in mind that when you are doing this for each layer, you have to specify what is the activation function for that layer. So layer one will have one activation function. Layer two does not necessarily will need to have the same activation function. You can have a layer one with sigmoid, layer two with sigmoid, layer three, with ReLU and so on. Now, which combination will work? Well, that is kind of based on your some I'd say the common sense, the experience that you will develop as you go on training the different networks. So JC question, I see your hands up. You
+
+Unknown Speaker  43:26  
+Oh, sorry, I was trying to ask the question for Chad. He was asked. The question he was trying to ask is, are the weights applied at each stage? And I guess,
+
+Unknown Speaker  43:37  
+in addition to that, the bias at each stage on, on each perceptron, correct, correct. So basically what happens is, if you look into this mathematical formula, right? So what is happening is, so let's say your decision making function is a sigmoid, right, sigma. So now we know that the sigmoid function is one over one plus e to the power negative z, where z is basically your input. Now what is Z here? So mathematically, the Z is your sum of w, j, x, j, minus b. So now think about consider these mathematical function that I have highlighted. So these mathematical function is being computed in each and every perceptron within your network, each and every perceptron, because each perceptron will have different set of W values, right? And each perceptron will also have a different b value.
+
+Unknown Speaker  44:30  
+So these
+
+Unknown Speaker  44:32  
+sigmoid function, if you do choose to apply it to, let's say all of these four perceptron in your layer two. So that means for each of these perceptron, the output whether it is going to fire a zero or one as the outcome will be decided by a computation of this function within each of these perceptron.
+
+Unknown Speaker  44:59  
+Does that answer? Your.
+
+Unknown Speaker  45:00  
+Question, yeah, thank you. I was, I kind of figured that even if it was a default weight of one as a multiplier, that you still would
+
+Unknown Speaker  45:09  
+have a weight. Yeah. Is it clear, though? Is it clear here, though, that each node has its own weight? Yes, yeah. I think it really is. Each perceptron? Yeah, that's what we're calling for each node, each perceptron. Okay, just one minute. Yeah, that was clear. I think that's worth saying, though, Karen is to make sure that it's like really understood, because I think we're using it the later side. Because when you said, are the weights applied in in all stages, it's not one set of weights. It's a weight set of weights for every node. So if you have 20 hidden nodes, there'll be 20 sets of weights times the number of inputs to that to each node, which correct? So which right? So number of outputs from the previous layer. Or if it's the first hidden layer, that will be the number, the dimension of your data set for the first layer. Yeah. And I guess what I'm trying to, like shed in my head is the idea that, like you would visit each perceptron and configure it configured one by one, but it seems like there's a decision that's being made through more efficient means to assign those weights and biases to each perceptron. There is we're but for conceptu Ben always talking about, we'll not worry about too much. But I'll say simply, it's linear algebra.
+
+Unknown Speaker  46:29  
+Yes,
+
+Unknown Speaker  46:34  
+I'll leave it at that, because I know you're conceptually trying to explain a certain give a concern, right? Let's let's not go. Let's not go too much bogged down into the map. Instead, what we are going to do is, I'm going to actually show you some Python code, because you guys have been doing Python for what, four months now or more. So looking at the actual Python code behind this implementation probably help you make a better connection in your mind. And when you go and read through these, these website again, and also look into the video, and then you can look into the code. And that will you will be able to make a better connection in your mind what exactly is going on. And the reason understanding this, I mean, not understanding, at least going through this code once, is helpful, is because, just like we saw in the psychic learn days, we talked about all of these algorithm for doing the classification and regression, but unfortunately, we never really required to actually implement any of this algorithm, because scikit learn make everything super easy. All you need is basically take a particular classifier and basically just train with it, right? So similar to here, we are going to use a library called Keras, which is built upon an underlying framework called TensorFlow. But when you are training your model or building your model using Keras these and then you are basically just doing a fit method to train the model. How this training actually happens does not really become apparent to you unless you have written the code at least once by your hand. Now, within the these boot camp I do not expect you to write the code of a neural network from scratch, but I'm going to show you a particular code, and I'm going to point you to a repository which is basically by the repository of this book author, right? You can actually see the repository here itself if you go through this, but I have it on my VS code. So after this, I'm going to go, you go there and show the code that way it will be, you will be able to connect it better in your mind.
+
+Unknown Speaker  48:37  
+Okay, so that's W's and B's, right, the weights and biases. Now the question is, for a real classification problem, when we have a somewhat complex neural network like this, how do we choose the weights and biases? Who gets to choose these? What do you guys think
+
+Unknown Speaker  48:58  
+I do?
+
+Unknown Speaker  49:01  
+That's a good answer. Who gets to choose and his mic is working right now? See,
+
+Unknown Speaker  49:08  
+it is it is working. So who gets to choose the W's and B's for each of these?
+
+Unknown Speaker  49:15  
+Is it the neural network itself that you sing in based on what
+
+Unknown Speaker  49:23  
+I think based on the variables that you as the user enter based on your training data, right?
+
+Unknown Speaker  49:30  
+Right? So think about our simplistic example of being able to make a decision whether to attend a cheese festival or not, right? Why? I said, Hey, this is a very simple problem. You can potentially, let's say, find 10 of your friends and put this survey questionnaire for all 10 of them and collect the collective decision and see whether or not when they will want to go to the festival or not. So that basically becomes your training data with 10 records if you have 10.
+
+Unknown Speaker  50:00  
+Like this with a dimension of three, because there are three columns right that three questions that you are asking, so that's your training data. So you can have any training data, and we have done lot of machine learning training, and that based on that training data, now we have to write or implement a certain algorithm that all these w's and B's for all of these perceptrons will be chosen such that,
+
+Unknown Speaker  50:27  
+during the test phase, you take a random training data and then you put that, you convert that training data into a bunch of zeros and ones and put it through the network, and it should be able to give you the exact classification which it should be,
+
+Unknown Speaker  50:47  
+because that's what all machine learning training does. In fact, your model, if it is not over fitting, it should also be able to do that on any test data that you have not presented to your model before. So essentially, the model has to learn based on, let's say, if you have 10,000 data set, 10,000 record row data set, meaning 10,000 data points that you have. And based on that, the model has to
+
+Unknown Speaker  51:15  
+tweak the W's and B's for each of the neurons in your network, in your layer one, in your layer two and so on. And how many layer did you have? It has to do little nudges
+
+Unknown Speaker  51:26  
+in around these
+
+Unknown Speaker  51:28  
+floating point variables for each of the W's and each of the B's for each of the neurons of your network, so that
+
+Unknown Speaker  51:36  
+the output function that comes out of your final output layer becomes a true representation of what that particular data point should be classified as.
+
+Unknown Speaker  51:51  
+Now in order to do that, you have to basically adopt
+
+Unknown Speaker  51:58  
+a mechanism or an algorithm called gradient descent. So what gradient descent is is basically, hang on, let me see if there is a picture of gradient descent here in this book. Probably not in this book, but that is why, if you Yeah, there is not a good picture of gradient descent, well, maybe we can look into this. So essentially, what you are trying to do here is
+
+Unknown Speaker  52:24  
+you are trying to find so if you have a n dimensional data set, so think of all of your data set, your n dimension of your data set, and the outcome, if you put it in a n plus one dimensional hyperspace, your data set will basically form a curve like this? This is a three dimensional representation, because we cannot spot anything beyond three. So essentially, what you are trying to do is you are trying to find what is the minimum point is these data in this plane
+
+Unknown Speaker  52:56  
+that you can achieve by changing your W's and B's for all of your neural networks. So essentially, you are trying to minimum point of these,
+
+Unknown Speaker  53:09  
+these surface plot of your data set
+
+Unknown Speaker  53:13  
+and how you do this. Well, let's say if you are standing high up there in a hill, let's say here. Now you need to decide, in a completely blindfolded way you are trying to take a little step in any of the direction around you so that after, let's say, 10 or 20 or 100 step, you would be able to reach the bottom of the hill. Now how do you do that? You basically see which of these direction around you, gives you the stupid slope downward, and you choose that direction, and then you take a tiny little step in that direction, completely bind blindfolded, with the hope that the direction where the ground is sloping down most deeply must be the right path that I need to take if I have any hope to reach At the bottom of the hill with my eyes blindfolded.
+
+Unknown Speaker  54:05  
+So you take that, but you don't roll all the way,
+
+Unknown Speaker  54:09  
+so you take a little step, not like a roller ball, and then let the ball, because what will have what can happen is, even though at that particular instant, One Direction is showing the most, steepest slope, but if you do a little move around that direction at the next point, depending on the topography of the landscape, the direction of the stupid, stupid steepest slope might change. So that's why, instead of going down all the way, you need to take this little step and go down in this direction of the stupid steepest slope a little bit, and then do that same thing over again, figure out which way the slope is steepest and steepest, and go down again. And if you do that, you might end up going down this slope, maybe not in a straight line, if your surface is not
+
+Unknown Speaker  54:59  
+you.
+
+Unknown Speaker  55:00  
+Form, but you will be basically taking a zigzag, zigzag line. But eventually after, let's say, 100 or so steps, hopefully you will be close to where the bottom most point in this surface will be. And that algorithm is known as the gradient descent algorithm, because what you are trying to do is you are trying to descend from a hill to the optimal decision making point depending on the gradient, which is just the mathematical term of slope, depending on the steepest gradient. You are trying to descend from a hill to the minimum point of a surface of a decision making surface. And that algorithm is called gradient descent algorithm. So mathematically, then what you do, what your model does, is it starts by assigning a random set of W's and B's. So all of these w's and B's we are talking about here the w j and
+
+Unknown Speaker  55:57  
+right. So when you say W dot x plus b. So this is a vectorized representation, even though it's saying w is basically series of W's, like w1 w2 w3 and so on, and the b's. So your model will start by assigning a random set of weights and B's to each of the perceptrons. And that will obviously not put it anywhere close to the optimal point of your decision making surface. It will make your perception some random point in your decision making surface, let's say, up here. And then you calculate the derivative, the calc mathematical derivative using calculus. And that derivative is a definition of your slope or gradient in at that particular point. And then you see, well, in order to go there, what are the changes in W's and B's that we need to make so that the output from your network does that little incremental change.
+
+Unknown Speaker  56:52  
+And then you do that, and then you repeat that again, so you all of your W's and B's are not in a direction, so that your output of your model goes down the slope by a tiny little bit. So that tiny step is called the learning rate, which is also denoted you will see in many literature by a variable called alpha. So these learning rate, this is also a very crucial, important factor in choosing the in in basically deciding the performance of your training algorithm. Because what will happen is, if your learning rate is too big, then each of the steps you will go much, go too much down the hill, and then you will kind of lose your way, like you will overshoot the decision making point. If it is too big, if the learning rate is too small, then you will waste a lot of time at the upper corners of upper most areas of the hill, and then it will take a very long time for you to actually reach the minimum point. So that's why choosing the learning rate is basically kind of a model hyper parameter that people start with some heuristic, let's say point 01 or point 001, depending on what problem they are doing. And then they tweak that learning rate around to see which learning rate makes the solution. Makes the neural network converge fastest with a more efficient way. So that learning rate is basically how much you are going down to the direction of the steepest gradient. So that essentially is the gradient descent algorithm. And then when you go down all the W's and these changes, and you take the derivative again, find a new direction, you change the W's and B's again by that scaling factor. And then you keep repeating that over and over again. And until the time that like you can say, Hey, do this for 100 times or 100 epochs, let's say, and then your training will stop. Or you can also say, Hey, do this until you see that there is not much improvement between one training epoch to next training epoch, which basically means when the once the solution starts to converge, then you stop. Right? There are two different way of doing it, and when you do that, hopefully, then your decision, your basically decide, decision making factor,
+
+Unknown Speaker  59:07  
+basically your decided will be at the bottom of the hill, meaning you have already descended at the optimal point. And at that time, all the W's and B's that you have in your network are the correct W's and B's that when applied to any other data that even the model has not seen before will potentially give the desired output with a minimal error. So what we're trying to minimize here is the error in your decision. So conceptually, is the lean, is the learning rate, the number of steps, or the the the numbers, or is it, is it the number of the distance covered? Correct? The latter. So learning step is basically how, how far you are willing to go down the hill at each iteration.
+
+Unknown Speaker  59:54  
+And if it's too large, that means you're taking too big of a leap. Correct.
+
+Unknown Speaker  1:00:00  
+Uh,
+
+Unknown Speaker  1:00:03  
+and if it is too small, I mean by making it too large is actually worse than making it too small. So if you cannot decide always are on the side of being too small, because if you are too small, eventually it will converge. It will take a much more iteration. But if you are too large, then your model can never converge. It can happen. It will basically keep flip flopping on between the two sides like a ping pong ball, and it will never be able to reach the reach the bottom of the hill. Yeah. So, so you edge towards inefficiency to rather than accuracy. Loss of accuracy. Got it? Loss of accuracy? Yes.
+
+Unknown Speaker  1:00:40  
+Sorry if we have time, could you explain what a training epoch is, again, in respect to the gradient descent.
+
+Unknown Speaker  1:00:48  
+So the training epoch is basically so what you do is,
+
+Unknown Speaker  1:00:56  
+you
+
+Unknown Speaker  1:00:58  
+let me go here, so you basically calculate all of So given your W's and B's, right, you basically calculate, okay, these are all my W's and B's, and based on that, for all of these training data that you have, what is the output that you are having? And you do that for all 10,000
+
+Unknown Speaker  1:01:19  
+20,000 or however many trading data that you have, and then you took a partial derivative of that for each of the W's, and then you multiply that partial derivative by the learning rate, which is alpha, and then you basically take that as a delta w, and you apply the delta w to each of the weights. And so the weights are now changed, and that completes, concludes the one epoch of training, basically one iteration through,
+
+Unknown Speaker  1:01:48  
+and then you repeat the same thing again. So now instead of w1 w2 w3 you have, let's say, w1 prime, w2 prime, w3 prime, which is the new set of weights. Now you do the same computation throughout your network using these new sets of weights and BSS, and then you can compute the output. And then you not only compute the output, you also compute the new gradients, the new partial derivatives of your output function compared to all these w's. And that's your second depart. And you keep doing this as many time as you want, which either you can decide, or you can let the algorithm decide based on what is the deltas. If the Delta become too small from one epoch to next, then you say, you basically can. You can let your module conclude that the divergence has sorry, convergence has been reached, therefore stop training that way. So essentially, epoch is basically going all the way from one set of your input data, sorry, not one set using all of your input data, going running them through all of these different nodes of your neural network, and finding the output of all of these and using that output to find the gradients of gradients across all the different W's, which basically is the direction in your decision making service for that particular
+
+Unknown Speaker  1:03:12  
+set of W's and B's. So that essentially is one epoch, because you are repeating that over and over again.
+
+Unknown Speaker  1:03:20  
+So it's like optimizing the weights. Kind of, is that accurate? Okay, yes, that is that this is an optimization of weight problem. It's not kind of accurate. It is very accurate, actually, because you are basically optimizing the weight like, I don't know how much calculus some of you have done, but you know that, let's say y is a function of x right, y is equal to f of x. Now, in order to find the minimum point of y, you need to find the derivative of derivative of y with respect to x and set that to zero, right, like dy, dx equal to zero. Now, if y is a function of instead of 1x variable, if it is a function of five x5 variable x1 x2 x3 x4 and x5 so then you're basically to find the optimum. You need to find the partial derivative, which is delta y, delta x1 set it to zero, delta y, delta x2 set it to zero, and so on. So you basically need to do the same optimization five times if you have a five dimensional variable. So here you have basically doing the same thing, which is this. So essentially this is your calculus step, where you find the partial derivatives for your cost function, which is like cost function basically means, what is your cost of decision making, meaning in error, and then how that is changing for each v1 v2 which are the different direction, right? And then multiplying that for that little slope, and that gives you how much you are descending through that direction.
+
+Unknown Speaker  1:04:58  
+So go through this I'm not.
+
+Unknown Speaker  1:05:00  
+Going to go through the details of the mathematics here, but at least those of you who have, oh, this is, there is actually a good exam. I mean visualization here, if you go through so this ball basically shows your decision point. And it is showing that is finding the direction of Stephen gradient, steepest gradient, and rolling down little bit. And then it basically continues that over and over again, so eventually the ball rolls down to the to the bottom.
+
+Unknown Speaker  1:05:29  
+Now another thing people do is when the network like this for a very large and very deep network, and then you have a very high dimensional data set. Even doing this becomes very, very computationally expensive. So then what people do is they choose to do something called a mini batch. So what they do is, instead of, let's say, let's say you have a 10,000 data point. So instead of using all of these 10,000 data point for every epoch. What you do is you subdivide an epoch into a number of mini batches. So you can say, okay, you know what? I'm going to take 1000 of data so there would be 10 mini batches, because you have 10,000 data set, let's say 10,000 record data set. Let's say so, instead of running these gradient descent with all of the 10,000 data set, 10,000 data in your set, which will make it very computationally expensive, you can choose to run mini batches, which is subset. And so that way you will have 10 mini batch for each epoch. And now, if you want to do 10 epoch, so there would be 10 times 10, which is 100 mini batch, because you are basically
+
+Unknown Speaker  1:06:40  
+only looking at a subset of the data, and that happens to work just fine, except it is much faster than having to then attempting the gradient descent with all the data point that you have in your data set. For very large network, of course, for smaller network, you probably won't feel the difference, but for larger network or a higher dimensional data set. Keeping this in mind will help you that you can actually do a mini batch, so that way your convergence will be much faster with less requirement of computing power.
+
+Unknown Speaker  1:07:19  
+Okay? And when you go here,
+
+Unknown Speaker  1:07:23  
+you will see that
+
+Unknown Speaker  1:07:26  
+this is the Git repo here. So you can actually download this from this Git repo, or,
+
+Unknown Speaker  1:07:33  
+Oh,
+
+Unknown Speaker  1:07:34  
+he has actually put, actually a zip file here. Or you can just go to this particular GitHub, and then have it cloned. So in my case, I already have cloned it here,
+
+Unknown Speaker  1:07:50  
+here,
+
+Unknown Speaker  1:07:52  
+and then I wrote this notebook myself to use it. So if you see here, the network. So in this line, this file, which is what 144 lines of code with all the white spaces and all so these are less than 150 lines of code. If you review these, these basically does everything that we have been talking about for last hour or so, almost. These 145 lines of code will give you the complete implementation of a neural network without using any TensorFlow or Keras or any library, because if you look in here, the only library we are using is NumPy and a randomizer. And time is just to measure the time, which really doesn't have any value in the computing it is just to measure the time of the different epoch that you are running. So just using the simple NumPy, it is possible to actually code everything yourself without using any tensor flow or chaos. Now whether you should do that for for any problem that you are going to be working, the answer would be possibly a no, because this code would be not be nowhere as efficient as those frameworks that are well optimized to do this. But this code, if you study these, and at least use these once in any problem that you want, that you have on hand that will give you a good confidence and understanding that, okay, now you see how the internal of a neural network training works. So if you look into this code,
+
+Unknown Speaker  1:09:24  
+so this is again, an object oriented code where the network is basically a class which has a constructor, which is this init method. And within this constructor, you are basically providing how many layers you are going to have, what are going to be the sizes of your layers. So you can say, hey, my network is going to be having three layers, and my first so your num layers will be three, right? And the sizes will be an array. So let's say you decide that your first layer, first layer, will have five neurons, the second layer will have 10 neurons, and third layer we have will have four neurons.
+
+Unknown Speaker  1:10:00  
+So you basically provide all of these sizes for each of the layers in your network. And you can also provide the biases, which could be using a randomizer between so and so and the weights. So with all of these, you basically then create this network which essentially what you are doing with that piece of code. When you call this, you are essentially creating,
+
+Unknown Speaker  1:10:27  
+oops, where is that? My favorite picture that way?
+
+Unknown Speaker  1:10:35  
+Yeah. So you are basically creating something like this. So you can call these. This is just a instructor constructor, but it does not actually do any calculation or anything. But think about the data structure that it is creating. Is basically these data structure in memory, right? So where your numb layer says 123, and four. So you have four layers where the sizes are 643, and 1643.
+
+Unknown Speaker  1:11:03  
+And one. And then you are basically initializing each of these w's and B's with random numbers. So that's your construction of a neural network.
+
+Unknown Speaker  1:11:15  
+Then there are some functions that you are implementing. So the first one is a feed forward. So what feed forward means is, when you are starting from the left hand side, going to the right hand side, what is the mathematical operation that you are doing, which is basically W dot a.
+
+Unknown Speaker  1:11:38  
+So why W dot a? Because if you see here, these mathematical function, which is, where did it go? No, up there. So the summation of W, j x j, which in vector term is nothing but W dot a. So these, W, yeah, so sigmoid of W dot x plus b. So these, these mathematical function that sigmoid of W dot x plus b is basically what you are doing here.
+
+Unknown Speaker  1:12:10  
+Okay. And then you are returning a, which is your activation function from your
+
+Unknown Speaker  1:12:15  
+particular perception.
+
+Unknown Speaker  1:12:18  
+And then you are doing SGD, which is the stochastic gradient descent method, which is where you are using a particular specified size of mini batch, and then you are doing a feed forward, and then you are evaluating this network and changing the changing the weights and biases for one epoch. So I'm not going to go through the details of this code. But I just wanted to point you so if you have time or inclination, you can go here and find connection between this code and these page. And if you can do that, you will see that you will be able to make a complete sense of all of these mathematics provided here and this code here and how it is working.
+
+Unknown Speaker  1:13:04  
+Now what I am going to show you instead, instead of taking you through, walking you through, line by line, in this code, what I have done is I have created
+
+Unknown Speaker  1:13:14  
+a Jupyter notebook here, where what we are going to do here, you see here, what we are doing is import network, which is my network plus here, well, not mine, actually written by the author of the book. So this is the network.pi that we are importing here. And we also have something called MNIST loader. So this MNIST loader is nothing by but basically a Python library that the author has written that allows you to load
+
+Unknown Speaker  1:13:44  
+these hand written data set, which he is mentioning over here. So there are like 70,000
+
+Unknown Speaker  1:13:51  
+training samples that they have there, so you can basically load all of these data using these MNIST loader library. Hang on. There was a picture of all of this. Anyway, it's not important.
+
+Unknown Speaker  1:14:04  
+There was that famous picture with all of this,
+
+Unknown Speaker  1:14:08  
+maybe not here, maybe in our slide somewhere. But anyway, so what we are going to do is we are going to use this MNIST loader to load the data. And once the data is loaded, if you look into this, so it basically gives you the training data, validation data and test data. So what are these training validation data? So if you
+
+Unknown Speaker  1:14:34  
+see what training data is, oh, that is big.
+
+Unknown Speaker  1:14:40  
+I should not have done that.
+
+Unknown Speaker  1:14:43  
+Okay? So basically, training trading data is basically an array of array where each element is a 784, pixel character, which basically are these pixelated images. That's what I'm trying to find that you are here. So.
+
+Unknown Speaker  1:15:00  
+Each of these, each of the training data is basically 784 pixel array, I think 28 by 28 pixel across and 28 pixel vertical. So total of 784 pixel and each pixel can have a value zero or one, depending on whether that pixel is black or white. So that way, each of these handwritten digit is basically specified as a set of zeros and ones based on the pixel density values. So that's your one of these training data. And I think in these here you will have, I think, 70,000 training data and then
+
+Unknown Speaker  1:15:37  
+10,000 validation data, or 10,000 test it, or something like that, which you can even actually do a Len and, oops, not Len, and find out. Okay, so 50,000 training data we have and validation data. We have 10,000
+
+Unknown Speaker  1:15:55  
+and test data also we have, I think, 10,000 Yeah. So total of 70,000 data, 50,000 is going to be training for training, 10,000 for test, and another 10,000 for validation later.
+
+Unknown Speaker  1:16:08  
+Then what you do is you basically create your network by this simple one line call code, network where you are going to pass the three,
+
+Unknown Speaker  1:16:20  
+basically the three sizes of the network, the first layer of the network need to have 784 neurons, because, as I said, each of these has 784 pixel so that's why your first layer need to have 784
+
+Unknown Speaker  1:16:37  
+and then the second layer, it is completely arbitrary. So in this case, you are choosing to have a 30 neuron in the second layer and the output layer. Since this is not a binary classification problem, this is a classification problem with 10 possible classes from zero through nine, because it's hand rigid and hand written digit. So essentially, we are doing one versus N classification, where our output layer will have 10 perceptrons, and each perceptrons will fire if the digit belongs to that category, meaning the first perceptron will output a one, if the handwritten digit is a zero, the second perceptron will output a one, if the handwritten digit is one, the third perceptron will output a one, If the handwritten, the handwritten digit is two, and so on. So that's why we need to have 10 perceptron in your decision making layer. And as I said, 784, perception perceptron in the input layer and intermediary layer is totally arbitrary, right? So that will depend on how, when you train the model, you will see how the training works, how the accuracy of the model, and depending on that, you will change the network topology. You might also if, let's say, with this structure, it doesn't really work very well, maybe your output is not as accurate. Accuracy is not low, then you can choose to do, hey, instead of one, I will have multiple layers, which starting with a 50 neutron neuron layer, followed by a 40 neuron layer, followed by a 30 neuron layer, and so on, right. But the thing is, as you go on adding more neurons, keep in mind that your computational requirement will also keep going up. So it is always better to start smallest which is input output and just one hidden layer and come up with some arbitrary size, which, which kind of makes sense, and then train the network. So that's your network, and the training will happen when you call this function called SGD. So SGD is the function that we were seeing here, which is where that gradient descent is happening, where taking the partial derivative using the calculus for for, for each data point, and then running the epoch, and then for each step in the epoch, doing that necessary calculation for the change of the W's and B's, right? And when you run this training, it will basically do the training, and it will show the output how the now, this is not a state of the art framework, that's why it will probably take longer than it should if you do use a Keras or TensorFlow. But when you go through this, you will see that you simple handwritten 145 lines of code is actually able to very accurately identify all of those handwritten digits written by different people in a very low resolution, pixelated image.
+
+Unknown Speaker  1:19:26  
+Yes, go ahead, Jesse, I see your hands up. So when you showed the the inner workings of the network class, it seemed like, well, it was that you were our it was assigning random values to the weights and the biases, rather than taking in some sort of, I don't know, trained bias, or trained weight or or manual weight, is there a way to manually weight and biases? Yeah, so this that when you are creating this network, dot network here, you are not providing any weights and biases, right? So that.
+
+Unknown Speaker  1:20:00  
+Why that's where your untrained model should start. Always that it should start with a random set of weights and biases. Now, after you are done through this training, all of these weights and biases will be fine tuned so that the error is minimized. And then what you can do, and people do do all the time, is they take these weights and biases and send it in form of like, let's say, CSV file or pickle file, like different file formatted used by different libraries, right? And then when you are going to use this model, obviously, these are non trivial. Amount of time will be required in training this model, so it is not expected that people will run this training every time they want to train the model, then they will simply load that network with the W's and B's that have been saved after the training is done. So that way, you will have a trained model readily available in your hand, in memory, loaded in your memory, that you can run through the
+
+Unknown Speaker  1:21:00  
+any any further data that you want to do, the classification or decision making. So, so is the tuning stored as an attribute of the network object?
+
+Unknown Speaker  1:21:10  
+Uh, or, how's that? How is that presented to the user?
+
+Unknown Speaker  1:21:15  
+Oh, the So, the, are you talking about the output, the classification? Yeah, I'm just trying to think about, like, okay, like, I found, I finally tuned this model. How do I, how do I get at those values, like you said, the CSV, or what have you so, so that user, your user, is not going to be using those values. Well, it kind of right. I, in this case, I'm the user that's refining the model. Like, how do I, how do I get those optimized tuning values so that I have a good model?
+
+Unknown Speaker  1:21:47  
+You don't so you don't need to, actually, even if you are a data scientist, you don't really need to get those values, because the values are a huge data set, even the values, what you need to know is you need to be told by the person who has trained the model, like, Hey, Mr. Jesse, I have trained this model on these mnes data set, and I have achieved accuracy score of so and so, an f1 score of so and so and oh, by the way, this is our file. If you want to go and use it for your user in your application, go ahead and load the file in your machine, and then you run the inference or decision with that model, with that with that set of weights, you really don't need to actually do anything with the weights yourself. You are going to load a news network with those weights and biases that have been saved after a successful training run has been completed, and it and it's saved, where
+
+Unknown Speaker  1:22:42  
+you can save it just like a normal file, like in your and you can say, send it to anyone, right? Like, via File Share, GitHub is just a file, right? I mean, I'm just trying to think, I'm just trying to figure out, like, I just don't understand the mechanics of where that's saved. I think we will see we will see that in some of the ongoing we will see that, yes, we are not going to see that in as part of these example. Well,
+
+Unknown Speaker  1:23:09  
+I think I got little bit ahead of myself. I thought it, we it will finish within a specific time, but looks like it is taking much longer. Okay, last time I ran, it took five minutes and eight second anyway, so it will do, it will finish when it will be what it will finish. But anyway, this was a stretch thing. Anyway. I just wanted you to be aware of the existence of these. And as I showed you, you can actually get through,
+
+Unknown Speaker  1:23:38  
+get to these repo from this GitHub here in this book page, so feel free to go look into it and see whether you can play with it.
+
+Unknown Speaker  1:23:49  
+But now going back to our slides here. So let's see how we have been doing. So we have covered all of these. So basically here we are talking about like, hey, essentially what you are doing using this perception model is basically trying to find the decision boundary between the two classes, which is something we have done using many different method before, right? Such as your,
+
+Unknown Speaker  1:24:16  
+such as your, what is called your logistic regression, your decision tree, random forest and so on and so forth. So essentially, what we are doing is we are having, we are trying to use yet another different way to find the right boundary between the between the classes, but this time using the neural network construct, as we talked about, right? And we all talked about the input layer, hidden layer and output. So all of these we talked about, and we also talked about this representation with different access and the corresponding weights, and how these are multiplied, and then added a bias to it. And then you basically take that as a z, and then use one of these activation function, and that will give you an A.
+
+Unknown Speaker  1:25:00  
+Activation output from your neuron for each and every neuron in your network. So that essentially is neural network, and we have our training of one of those neural network going on here. Yeah, looks like the training have been completed. So
+
+Unknown Speaker  1:25:23  
+uh, why did do twice? Oh, I did one trial with a 30
+
+Unknown Speaker  1:25:30  
+perceptron in the middle layer, in the hidden layer, and then I did one with 100 in the hidden layer. So I was just trying to play around with this. I uh,
+
+Unknown Speaker  1:25:47  
+yeah. And then, if you see that the output of this is basically for each of the epoch. It is basically showing how many of these this thing, it is correctly identifying so after first epoch 903491859268,
+
+Unknown Speaker  1:26:07  
+out of the 10,000 right? So essentially, it basically went up from 9034,
+
+Unknown Speaker  1:26:13  
+digits out of 10,000 being correctly identified at the end of epoch zero to 95 so basically, your accuracy started at 0.9 even after the first run of epoch. And then after 25 runs, it went up. So not only sorry, not 2530 runs. After 30 runs, it went up to 0.95 which is 95% which is pretty impressive, if you think about it.
+
+Unknown Speaker  1:26:42  
+And then I was trying to see, hey, can I do something with a different network architecture? So I started with this. And there I found that my epoch zero was point seven, four, and it went up to at the end of 30 epoch, it went up to point nine, six, which is 96% accuracy in identifying these handwritten digit and what was the size of your data set? Was it? Was it 10,000 or was it larger? And these are a different so 50, 50,000 training data, and with the 10,000 test and validation data, got it. So the batches of 10,000 got it. Batches of 10,000 Yeah.
+
+Unknown Speaker  1:27:21  
+Okay. So that was that. How are we doing time wise? Let's see. Okay, so we will take a break before we actually look into the actual coding example using Chad, which is a TensorFlow based library. But before you do that, before we take a break, let me show you this TensorFlow playground. And this is basically a very nice way that Google has put together, who is, by the way, basically popularized TensorFlow to begin with. So here you can actually see some of these things that we talked about in practice, and you can play with it in a fun way without actually having to write any code.
+
+Unknown Speaker  1:28:06  
+So what this playground does is, by the way, like, I think the link is there
+
+Unknown Speaker  1:28:15  
+in the slide, but I'm not sure whether it is, let me put this.
+
+Unknown Speaker  1:28:24  
+Let me take this out.
+
+Unknown Speaker  1:28:31  
+Okay? It basically puts it back here, anyway.
+
+Unknown Speaker  1:28:35  
+So let me put this playground link here in the live channel,
+
+Unknown Speaker  1:28:41  
+and here what you can do is you can choose from one out of four of these different blob data set. Remember when we were doing playing with these blob data set in the circuit. Learn weeks when we did make blobs, make circle, make spiral, Mac moon and so on. So these are the different four different data set with two classes of things or object in each data set, which is a blue class and an orange class. And what we are going to try to do is we are, we are going to build a neural network that we are going to train to see whether the neural network can find the decision boundary between the two classes.
+
+Unknown Speaker  1:29:26  
+And you will see for how, for simple
+
+Unknown Speaker  1:29:30  
+problem, which is the first one, which I do call simple, or actually, let's take this one. This is even simpler, probably right.
+
+Unknown Speaker  1:29:38  
+So where you have the two blobs, and you can simply have a linear boundary between these two, which you can do using any of the traditional way, like logistic regression or anything, because it's just a linear model. So neural network probably is overkill for this, but let's try it anyway. So here you see by using these two plus and minus button, you.
+
+Unknown Speaker  1:30:00  
+Can actually specify how many hidden layers you want to have. So let's have one hidden layers, and let's have the hidden layer with oops, what happened? Oh, sorry. Let's have the hidden layer for each of the hidden layer, you can specify how many you have in hidden layer. So let's start with a very simple neural network where I have two input, because x1 and x2 is the two dimension of these dead dots, the blue and orange.in
+
+Unknown Speaker  1:30:29  
+x y, circle x y plot. So each of these data set will have two input, x1 and x2 so what I'm doing is I'm taking these two input and feeding each of the both of the inputs for to each of the nodes in the hidden layer, which I am starting with three and then my binary classification. You can do either using one neuron on two neuron. So let's do it with one neuron. So that's my neural network architecture going to look like. And now I'm going to play this. And now here you see there are other parameters that you can choose. So this is the learning rate I was talking about, like how far you want to walk once you find the steepest gradient, so the higher it is, basically you are basically taking a broader step. So let's start with point 01, and then you can specify what of these four different like a linear ReLU, tan, hyperbolic or sigmoid, which one of these you want to use? So let's do a linear activation. Class regularization is something that we talked about briefly before in the in the previous section of the boot camp, where it's basically a way to reduce the amount of overfitting. So for now, we are not considered concerned about regularization as particular in particular. So therefore regularization rate does not also apply, and this is a classification type problem. So with all of these, what we are can do is now we can start this, and it will train the model, and you see how this is showing the convergence. So since this is a very, very simple classification problem, so with the now we can stop this actually, you see the how epochs are going. But after the first few epochs, it basically diverged, right? So test loss is zero, total training loss is zero. So loss basically means what percentage of point was misclassified. So essentially loss zero, basically meaning none of the points was misclassified. That means the activities is 100%
+
+Unknown Speaker  1:32:30  
+which is something we would expect anyway,
+
+Unknown Speaker  1:32:33  
+right? So this helped us prove that if your decision boundary is linear, you can get away with a very simple network architecture, probably we can do even with a much more simpler so in the hidden layer, let's do two neurons instead of three, which makes it even simpler. So let's refresh it again, and we are not going to change any of these variables, any of these parameters.
+
+Unknown Speaker  1:33:00  
+See, even with two neuron it converge just the same.
+
+Unknown Speaker  1:33:06  
+Let's go one neuron here in the hidden layer, and
+
+Unknown Speaker  1:33:10  
+let's see whether that works.
+
+Unknown Speaker  1:33:14  
+Even that works right? Well, if that is the case, how about getting rid of the hidden layer at all? What if we just have a input directly into the output? Do you think that will work? Well, let's see even that works, because this is a simple matter, and every time it is basically drawing the same line, because that is giving you the the basically the optimal decision making, decision surface. So this clearly shows that if your data point is linearly separable with no noise in the data set, which, in this case, there is not right, at least the noise does not have very high dispersion rate, right. So that's why the decision boundary is very clean, and you do not really need
+
+Unknown Speaker  1:33:59  
+deep neural network. Essentially, here we have so these network. Do you recognize the structure of this network?
+
+Unknown Speaker  1:34:07  
+So this is basically nothing, but the first thing that we started talking about, which is one single perceptron, where we, when we are talking about that, making a decision about going to a cheese festival or not. So essentially, this is a single perception. So this single perceptron is this. So you can, for very simple model, you can actually model that with a single perceptron,
+
+Unknown Speaker  1:34:32  
+but that will not be the case if your decision boundary is more complex. So now what we are going to do, we are going to choose a different data set, which is here, where the decision boundary is circular, and we are going to see whether, without any change, our single perceptron network is able to do the classification of the between these two classes. So let's try
+
+Unknown Speaker  1:34:57  
+and you see how it is not.
+
+Unknown Speaker  1:35:00  
+Converging. So the loss is about 50%
+
+Unknown Speaker  1:35:04  
+and the decision boundary is like me, I am not sure that's what the model is telling you. Is basically a model at this point is a coin toss like there is a 5050, chance the model will be accurate versus not. So essentially, this is not going to work. So then what we are going to do, if the model does not work. The first thing people do is they add a hidden layer.
+
+Unknown Speaker  1:35:24  
+And the heuristic is that, if you have, let's say n dimension here, the hidden layer would be little bit more. Sorry, not little bit more, the hidden layer would be, well, actually, there is no heuristic here. So let's, let's pick up something. Let's do two neuron hidden layer, and
+
+Unknown Speaker  1:35:46  
+let's do one neuron output layer, something like this, and let's see whether our model succeeds.
+
+Unknown Speaker  1:35:57  
+Nope, not good enough.
+
+Unknown Speaker  1:36:01  
+Well, one thing now we can notice that activation function is linear, but this is not a linear one at all. How about we chose ReLU.
+
+Unknown Speaker  1:36:11  
+Let's try this
+
+Unknown Speaker  1:36:18  
+little bit better. So now you see the model is still failing, but the loss is not 50% the loss is about 34% it's still a very bad model
+
+Unknown Speaker  1:36:30  
+because our linear, our boundary, is more complex than that. So let's increase this
+
+Unknown Speaker  1:36:38  
+to four
+
+Unknown Speaker  1:36:42  
+less. Look at that.
+
+Unknown Speaker  1:36:46  
+Now it is classified well, but the boundary, as we all know, is not really what it should be. Probably we are thinking of a circular boundary.
+
+Unknown Speaker  1:36:55  
+Well, let's change this activation function to 10 hyperbolic, and let's see what happens.
+
+Unknown Speaker  1:37:06  
+Okay, looks like it is getting somewhere.
+
+Unknown Speaker  1:37:14  
+Well, it kind of stopped here. So then let's add one more neuron. So
+
+Unknown Speaker  1:37:20  
+instead of a one neuron classification, let's do two neuron classification, and let's see how that works.
+
+Unknown Speaker  1:37:28  
+Look at that,
+
+Unknown Speaker  1:37:31  
+and look at how the loss has come down to almost zero,
+
+Unknown Speaker  1:37:36  
+right? So by simply changing the network topology,
+
+Unknown Speaker  1:37:41  
+you can classify a complex decision boundary, identify a complex decision boundary between your classes. Now this is good, right? You all agree this is a good classification at this point,
+
+Unknown Speaker  1:37:56  
+this boundary that it has found.
+
+Unknown Speaker  1:37:59  
+So now, what will happen if I take this model and then apply it to a much more complex data set, which is a spiral? Do you think it will work?
+
+Unknown Speaker  1:38:12  
+So I'm not changing the model at all. I am simply just letting it run to see and now look at the losses. Now, the loss for this is
+
+Unknown Speaker  1:38:23  
+about 50% so essentially it's a coin toss. So this is a bad model. It's not going to work.
+
+Unknown Speaker  1:38:31  
+So now just by looking into this data set, we can kind of think that this model is probably too simplistic, so let's, let's add another layer, and let's go four, three and two.
+
+Unknown Speaker  1:38:46  
+So we make it little deeper, not as shallow as before.
+
+Unknown Speaker  1:38:50  
+And let's do our ReLU.
+
+Unknown Speaker  1:38:53  
+So let's try that.
+
+Unknown Speaker  1:39:01  
+Nope, not good enough. Little better than before, but still not good enough.
+
+Unknown Speaker  1:39:12  
+Okay, so still about 50% test loss. You see, the model is trying hard, but it cannot converge.
+
+Unknown Speaker  1:39:20  
+So let's do this. Let's do five neuron in the first four, in the second, three, in the third and then fitting into two neuron.
+
+Unknown Speaker  1:39:31  
+And let's start do a 10 hyperbolic and let's see where that takes us.
+
+Unknown Speaker  1:39:41  
+And you will see, the more complex the boundary is, the longer it will take for the model to converge.
+
+Unknown Speaker  1:39:52  
+So the epochs are going
+
+Unknown Speaker  1:39:55  
+the training losses have kind of stabilized. The model is not real.
+
+Unknown Speaker  1:40:00  
+Able to make much improvement here.
+
+Unknown Speaker  1:40:06  
+So ReLU did not give us anything, tan hyperbolic also did not give us anything. Probably sigmoid will also not give us much improvement. And linear does not even come into question here, because this is not a linear decision boundary. Yeah, sigmoid is even much worse. Sigmoid is not going to work here, so tan hyperbolic might get us somewhere, but not quite right. So how else do you think we can
+
+Unknown Speaker  1:40:33  
+improve this model, or is it even possible by just adding these neurons and all to be able to come up with a spiral decision boundary. What do you guys think?
+
+Unknown Speaker  1:40:46  
+Could we add more inputs? Yes, very good. So let's try that. So let's try
+
+Unknown Speaker  1:40:55  
+two more input which is basically nothing but square of these two
+
+Unknown Speaker  1:41:03  
+so let's try that.
+
+Unknown Speaker  1:41:11  
+Okay, seems like something going on there. Trade Training loss is down to 15% test loss is down to 22%
+
+Unknown Speaker  1:41:23  
+very promising, huh?
+
+Unknown Speaker  1:41:27  
+So why this will work? Because, as you can see now, instead of passing trying to come up with a linear, you are basically getting a higher order variable x1 square. So since this is a quadratic, right, so you are basically adding more information to your data set. So let's then add another variable, which is x1, x2 and these are all engineered variable, by the way, right now, since we have 12345,
+
+Unknown Speaker  1:41:53  
+here, let's also go do
+
+Unknown Speaker  1:41:58  
+let's do seven here,
+
+Unknown Speaker  1:42:01  
+going into five, going into three. So now we met the network, real large and complex,
+
+Unknown Speaker  1:42:10  
+and activation is 10 hyperbolic. That's fine, so let's run with it.
+
+Unknown Speaker  1:42:28  
+Okay,
+
+Unknown Speaker  1:42:30  
+what do you guys think now?
+
+Unknown Speaker  1:42:40  
+Look at the loss, almost zero, and
+
+Unknown Speaker  1:42:44  
+look at the boundary.
+
+Unknown Speaker  1:42:48  
+See. So this is the beauty of neural network. So you get to play around. So now if you head back to the code, right? So this is why I wanted you to show this simple handwritten neural network so you see this network, dot network. So essentially, all you are doing is you are just changing this one line here
+
+Unknown Speaker  1:43:13  
+to do various formation of these with different topology. And you can make it arbitrarily large, but you will only be limited by the compute power that you have available in your machine,
+
+Unknown Speaker  1:43:25  
+right? So basically, what this shows is you can
+
+Unknown Speaker  1:43:31  
+classify an arbitrarily complex decision, decision boundaries on arbitrarily large number of dimensional data set
+
+Unknown Speaker  1:43:40  
+just by tweaking the network topology of your neural network. You don't even have to write a single thing on stochastic gradient descent or anything that code is already provided by your library.
+
+Unknown Speaker  1:43:53  
+If your computer does not hold up, then you have the option to go to cloud and use something like Google, colab, or if you want to make real money, you have to shell up more money, then you actually have to pay the cloud providers to have a dedicated, heavyweight computer sitting on cloud, and that you can use on almost virtually unlimited amount of CPU and memory to that right. And you can form multiple of you. You can use multiple of these VMs to form a cluster right to scale it up in an almost limitless manner, which is what most of the companies do today in the field of AI.
+
+Unknown Speaker  1:44:33  
+Okay, so play with this thing. This is real fun to play with. Okay?
+
+Unknown Speaker  1:44:39  
+And you might also want to read through this, and it basically so this was basically done using a JavaScript library, and they actually do provide a GitHub repository for this. So for those of you who are interested, if you want to tweak this, you can download this, and it basically uses no JS so it's.
+
+Unknown Speaker  1:45:00  
+The whole thing is a no J's application, right? Like and the way that they have implemented neural net is very similar to this little network dot Python, which is a Python based version implementation. So if you look into their library, you will see they have done something similar, except using Node J's instead of Python, right? For those of you who are into that kind of mindset, you can always play with it yourself
+
+Unknown Speaker  1:45:25  
+back at the code level. And those who do not want to play with code level, at least, you can play with it from a UI, as we have been doing
+
+Unknown Speaker  1:45:37  
+cool so let's take a 10 minutes break, and then after that, we are going to do just a couple of others. So today's class is not so much as doing your student activity in instructor activity anymore. This is more heavy on clearly trying to get the concept of what essentially is a neural network right, and trying to come up with an understanding and appreciation of the fact that how very simplistic looking algorithm can be scaled up arbitrarily to be without any change in code, to be able to handle an arbitrarily complex classification problem or regression problem for that matter. So like in here, right you have, you see here it says the problem is classification. There is no reason you cannot point it do it as a regression problem. And if you want to do regression problem, then there are regression data set that is given to you. And then you see here, there is no simple orange and blue, but there is basically a variation between the orange and blue depending on the color. And our network had no problem. And you see, after just a few epoch, the training loss for a regression problem is also almost zero, right? So you can use the same exact same thing for classification regression, which essentially makes all of machine learning right? If you can do classification, and you can do regression, and if you can do that on arbitrary complex data set, that's it. What else do you need?
+
+Unknown Speaker  1:47:03  
+So anyway, that's that. So let's take a 10 minute break well, or maybe little more. So now is your 821, so let's come at, come back at around 35 835,
+
+Unknown Speaker  1:47:14  
+like 1135, my time, 835, Pacific time. Okay?
+
+Unknown Speaker  1:47:22  
+The the nine, Yeah, I bet your implementation of the neural network did not unlearn and go backwards ever.
+
+Unknown Speaker  1:47:33  
+There is no backdrop, yes, no backwards. It didn't learn backwards. I first did what you kind of, what you did, what the way I did. It implemented from scratch, neural network, you know, multi level receptron, and it ran right away, except
+
+Unknown Speaker  1:47:52  
+the loss kept going up and the accuracy down steadily. It went okay, backwards it was and I thought, well, I don't know. Did I just invent machine and learning, or is this a bug?
+
+Unknown Speaker  1:48:04  
+Machine and learning turned out, turned out it's just one of, one of the derivatives. I had the wrong, wrong sign. Oh, okay, and I found it. Then it worked, right? But I thought it was really funny. I was just watching it backwards, and, you know, getting stupider by the moment, and just laughing at it. And like, I think I invented machine and learning.
+
+Unknown Speaker  1:48:25  
+Yeah,
+
+Unknown Speaker  1:48:26  
+cool. Okay, thanks. Thanks for making this a a coding light workshop. I just got out of surgery, so I'm really enjoying just listening.
+
+Unknown Speaker  1:48:40  
+Oh, you mean the today's class,
+
+Unknown Speaker  1:48:43  
+yes, yeah, the coding light, yes. Well, yeah, this week, I'd say this is not much about not, I mean not so much about coding, but rather than kind of, as I said, right, to basically develop that intuition. And you will see on the third class of this week when we are going to do the recommended recommender engine, we are going to
+
+Unknown Speaker  1:49:05  
+probably spend even more time just talking through the different concepts when we are going to talk about things like Boltzmann machine, the restricted Boltzmann machine, right, which, by the way, comes from a statistical physics domain, right? The Machine Learning practitioner just found a different way of using Boltzmann machine in the field of machine learning, right? So it's more talking rather than actually doing, because doing is not a big deal. Anybody can do. I've got one I've got one hand, this COVID. So this is, this is happening. What happened to your other
+
+Unknown Speaker  1:49:39  
+How did you break it? It was the lifting the oven or lifting the dryer thing.
+
+Unknown Speaker  1:49:45  
+So I just had my bicep tendon and we reattached this morning. Ah, okay,
+
+Unknown Speaker  1:49:53  
+so that's why I'm begging.
+
+Unknown Speaker  1:49:59  
+Okay.
+
+Unknown Speaker  1:50:00  
+Yes. Okay, so I'll take a few minutes break, and I'll come back
+
+Unknown Speaker  1:50:05  
+using TensorFlow Keras
+
+Unknown Speaker  1:50:08  
+to actually do the very similar classification as we were doing here. Hang on, where did my this thing go? Like if you go when we are doing this classification, right? So we are going to do this classification, which we did using here, using the the tool, the toy. We are going to do this by writing code. Okay? Now, obviously, as we saw here, when we are playing around in this TensorFlow playground, if your decision boundary is simple, like this, you don't even on, you don't even need any of these, right? You can just do this using a simple reception model
+
+Unknown Speaker  1:50:49  
+like this
+
+Unknown Speaker  1:50:52  
+and this, if you just train it, it will be able to draw a decision boundary between the two, right? So we are going to see how we can do this using the Keras library.
+
+Unknown Speaker  1:51:03  
+Keras is basically a wrapper around the TensorFlow library. So we are going to
+
+Unknown Speaker  1:51:10  
+use this library called TensorFlow. So import, import TensorFlow with a shorthand called TF. And if you don't have TensorFlow installed already, you just have to do a pip install TensorFlow, and that will get you TensorFlow if, for some reason, you if you are a Mac silicon or something, if it doesn't work, then, like indeed was asking before, then you can just put this into Google colab, and then you can work from there.
+
+Unknown Speaker  1:51:40  
+So, so this is our library, and then we are going to use some of our well known scikit learn libraries, such as for scaling and for train test, train test, split and so on, right? So we have those.
+
+Unknown Speaker  1:51:55  
+Now, the sample data here is basically just like your blob data set that you have so very clearly separated in space, and you can draw just a linear boundary between the two
+
+Unknown Speaker  1:52:09  
+to be able to do the classification.
+
+Unknown Speaker  1:52:13  
+So the first step is to get your x and y.
+
+Unknown Speaker  1:52:17  
+So
+
+Unknown Speaker  1:52:19  
+basically my target column. I'm calling it as a y, and everything else is my x, which in this case is just two feature feature one, feature two, so a two dimensional data model and one target output, which is our y variable.
+
+Unknown Speaker  1:52:36  
+And then we do our train test split.
+
+Unknown Speaker  1:52:40  
+So that's our train and test data set that we have. And then we can also scale it, or not scale it. Let's actually do this without scaling. So let's keep the scaling part for now. So now here, we are going to create the network using this function here, which is called sequential. So Kera sequential model essentially allows you to do something similar to what we did in our homegrown code here. So here, remember how we did network, and we provided the list of nodes in each layer of the network. So we are going to do something similar, but this time using a standard library called TensorFlow Keras. So in order to do that, first, we create a model. So at this point we don't have any neurons added to the model. Is just an empty model.
+
+Unknown Speaker  1:53:38  
+Now we are going to add couple of layers. So the first layer we need to add is your input layer.
+
+Unknown Speaker  1:53:46  
+Now, in order to decide how many neurons will be there, first, let's do a x dot columns and length of those, and that will give you how many columns are there, which, in this case, we know that there will be two columns. And then, with this value of two, what we are going to do, we are going to take this neural network model that we have created up here, and we are going to say, add this particular layer, which is this layer to this neural network model here. So what is this add from? What do we pass to the add function? We basically add something called a dense layer. You see here, it says, add our first dense layer, which also includes the input layer. So we are deciding to add the first layer with five units, meaning five neurons in the first layer with a value as an activation and the input dimension of these would be equal to your number of input nodes. So when you run this code, you would essentially be
+
+Unknown Speaker  1:54:54  
+creating
+
+Unknown Speaker  1:54:57  
+this 123,
+
+Unknown Speaker  1:55:00  
+345,
+
+Unknown Speaker  1:55:02  
+so when we are saying my first dense layer will have five units with an activation of ReLU, right, and then the input dimension is equal to in number of input nodes here, which is two. So this structure is basically what is going to be created when I run this cell
+
+Unknown Speaker  1:55:25  
+and it is created,
+
+Unknown Speaker  1:55:27  
+there will be some of these warning that will come up occasionally. You can ignore those for the most part, because what happens is these TensorFlow libraries, they keep changing this. So some of the thing, they will say, Hey, this is a better way of doing it. So often time you will come up with this warning, unless and until your code is running into an error, you can ignore those warning.
+
+Unknown Speaker  1:55:51  
+There is a way to suppress those warnings as well, but let's just forget about that right now. If there is a user warning, we are not going to be too much concerned about it. So that's our first dense layer, which is our hidden layer.
+
+Unknown Speaker  1:56:06  
+Then we have to have an output layer. So as an output layer, we are doing another ad. So first we did one add and in here we provided a dense layer with five nodes. Then we are doing another ad. Here we are adding a dense layer with one node and a sigmoid activation, and this time. So basically, this is what I'm doing. So five node going into one node, which, if I run here, oh,
+
+Unknown Speaker  1:56:43  
+uh, ReLU is not going to be working here. Sigmoid,
+
+Unknown Speaker  1:56:47  
+yeah.
+
+Unknown Speaker  1:56:52  
+So in this one activation function, whatever you choose, it applies to all layers, because this tool does not give you all the full functionality. But in here, as you are seeing here, we are deciding to add the
+
+Unknown Speaker  1:57:06  
+intermediary layer, or the hidden layer, with the ReLU activation function and the final layer with the sigmoid activation function.
+
+Unknown Speaker  1:57:14  
+So then we have that. Now, if you want to see what is the model look like, what is the structure of the network model, you can call this function called summary. So if you do a network model, dot summary,
+
+Unknown Speaker  1:57:32  
+hang on. I have to do this again. I think let's do this. I think I forgot to run the next cell here, which is adding the output layer, yes. So now we have five neuron going into one neuron, and let's do a summary, yes. So this is the summary.
+
+Unknown Speaker  1:57:50  
+So let's look into the summary and try to understand what that summary is telling me.
+
+Unknown Speaker  1:57:56  
+So essentially, what it is saying is your first white is calling dense three.
+
+Unknown Speaker  1:58:05  
+Oh, because I already had another dense added. Okay, so let me do one thing, Hang on. Let me restart this and run this fresh.
+
+Unknown Speaker  1:58:17  
+I ended up, since I clicked those two times it is basically has created two different orphaned layers that is sitting and not doing anything. That's why I'm trying to restart these.
+
+Unknown Speaker  1:58:32  
+Okay, so restart it. The kernel import is done,
+
+Unknown Speaker  1:58:40  
+build pulled in the data,
+
+Unknown Speaker  1:58:43  
+do the train test, split.
+
+Unknown Speaker  1:58:49  
+Let's keep the scaling part. Then go to the model, create our placeholder for the model.
+
+Unknown Speaker  1:58:59  
+Then add the first dense layer with five neurons at the output layer with one neuron. And then we are going to do a model summary. Yes. So now if you look into the model summary, see what it is telling you here. So it is saying for the first dense layer, which is this thing here? What is the output shape? The output shape is basically an array of five numbers. Why it is an array of five numbers? Because 12345,
+
+Unknown Speaker  1:59:33  
+so these are the five numbers that you have, which is the shape of the output matrix. And total parameter for this is 15. Now, why 15 parameters? Because for each of these neurons, you will have two variables coming in, one and two. So that means for each of the two incoming connection, you will need to have two words, w1, and w2 but.
+
+Unknown Speaker  2:00:00  
+Also need to have a bias variable B, so essentially three variable for each of the five neurons, and that gives you a total of 15 variable or 15 parameters for the first layer
+
+Unknown Speaker  2:00:14  
+the second layer. I have five inputs coming into the second layer, which has only one neuron, by the way, but because of this five input variable, I have five weights plus one bias, so a total of six parameters for the second
+
+Unknown Speaker  2:00:32  
+okay.
+
+Unknown Speaker  2:00:34  
+And this is also, this also gives you the memory footprint, which is how much the memory that it is taking at this point, right, which is a very tiny, small model.
+
+Unknown Speaker  2:00:47  
+Now we are going to have to compile the model and then do the fit. So when you compile, so you have to basically provide what is the loss function that you are using, which in this case is binary cross entropy, and there are many different loss function, but binary cross entropy is the most most used, and there are different optimizer function the most used here is Adam. And what metrics that you are going to use to evaluate the model performance, which in this case is accuracy. So you can think of the loss function, optimizer function, and metrics as other hyper parameters that you can specify with your model.
+
+Unknown Speaker  2:01:32  
+And then once the model is compiled, then you are going to do fit, which is basically going to run the training. And here you are going to pass the x and y data, and you can specify how many epochs you want to run.
+
+Unknown Speaker  2:01:46  
+Now here you see it is using x train scaled because here there is this scaling code where user you are using standard scalar to scale the x data. So since we chose to skip the scaling for now, I'm going to have to remove the scale part and only use the pure, raw x and y data. And we are going to run this for 100 epochs.
+
+Unknown Speaker  2:02:14  
+So let's run this for 100 epochs,
+
+Unknown Speaker  2:02:20  
+and the epochs are running,
+
+Unknown Speaker  2:02:23  
+and the loss started from 0.63
+
+Unknown Speaker  2:02:28  
+that means 63% loss. And then if you look at the very end towards last few epochs, you see how the loss has been almost zero and accuracy is one. In fact, if you see here, the accuracy is one after about 25 epochs,
+
+Unknown Speaker  2:02:51  
+right? So we don't even need to run 100 epochs for this. We can run 25 epochs, and it will be just fine. Is that 25 or 1515,
+
+Unknown Speaker  2:03:02  
+oh, is it 50? Yeah, you read, you read the batches.
+
+Unknown Speaker  2:03:08  
+Oh, I see, I see. I see. Okay.
+
+Unknown Speaker  2:03:12  
+Now hang on, where is the accuracy going to? 115?
+
+Unknown Speaker  2:03:17  
+Yes, yes, yeah, sorry, yeah.
+
+Unknown Speaker  2:03:21  
+Okay. So that's that
+
+Unknown Speaker  2:03:27  
+down, so it's still kind of it is, yeah, but accuracy is your test accuracy might be better test accuracy, yeah. So these accuracy is on the training data and then losses on the trading data, test data, down, down to Yeah, decimal kind of Yeah.
+
+Unknown Speaker  2:03:47  
+You could stop much sooner than 100 but you can, you can, yeah, but this how you learn. Sometimes, this is how you learn, yeah. But yeah, we get that, and then really tiny, yeah. And if you want to show these in a graphical way, what you can do is, once the model is fitted, right? You see, after we do the model fit, we are storing the output in a different variable called Fit Model, which is basically the train model. And then you can take that train model and do a history, and that will give you basically the history of the model. And then if you do plot a loss of this, it will show that how loss started come down. And after about 40 or so epoch, the loss is almost flat.
+
+Unknown Speaker  2:04:39  
+Now history, DF, dot plot. So we this one. We are choosing to plot the loss, but you can also plot the accuracy, and it will show a reverse trend, which is basically the accuracy starting rather lower, around 0.5 ish, and after about 15.
+
+Unknown Speaker  2:05:00  
+Training it basically already gone to one, which is what we saw when we looked at the output of the training code as well.
+
+Unknown Speaker  2:05:11  
+So that's that. That's all you need to do,
+
+Unknown Speaker  2:05:14  
+very simple code which basically mimics the behavior here as you see there.
+
+Unknown Speaker  2:05:21  
+Now you can also use the evaluate function. And this evaluate function, you can do so I'm not going to use the scale, so using just that,
+
+Unknown Speaker  2:05:36  
+it will basically print the final result, which is the accuracy of one, and then last point, 0005,
+
+Unknown Speaker  2:05:43  
+which essentially is almost zero,
+
+Unknown Speaker  2:05:48  
+which is also, by the way, the output from the last epoch that you have,
+
+Unknown Speaker  2:05:56  
+from Last epoch that you have here.
+
+Unknown Speaker  2:06:01  
+And that's it. This is all you need to do, a simple neural network based training for classification.
+
+Unknown Speaker  2:06:14  
+Okay,
+
+Unknown Speaker  2:06:17  
+any questions. I
+
+Unknown Speaker  2:06:36  
+Okay,
+
+Unknown Speaker  2:06:38  
+so if there's no question. Let's go do the other activity, which is going to be the last one, and I am not going to do activity number three, because this is essentially the same. So here they are asking you to do the same thing, except me doing it. They're asking you to do it, but you can just look through the code, and there is nothing different, right? So once you understand the concept, there is no point running it over and over again. Well, this type, you will see the loss and accuracy would not be so easily converging, because in this the data set is little bit noisy. As you can see, there's a little bit of overlap. So if you run this, you will see the loss does not quite come down to zero, and accuracy does not quite go up to one. As you can see for this one, accuracy is going up to 95% or so and but still, it is a pretty good and this is actually more closer to what you will see in a real life data, where the data will be noisy, there will be some overlap between the different classes, but that does not make need you to make any change in your in your code, right? I mean, you can probably pay play around with it. You can see, hey, instead of having two layers with five and one, can we have more layers, and would that make any change in accuracy and loss? Okay, actually, let's do that here. Let's, why not, right? So, no, I have a question. This is Margarita. Do you remember skip this scale? Right?
+
+Unknown Speaker  2:08:14  
+Scaling, yes, yeah, the scaling. Is it going to be different if we will run it? No, no, no. So the scaling is something that is most of the time not needed, where you are using neural network, perfect. Thank you, yeah.
+
+Unknown Speaker  2:08:34  
+Okay, so now this one, so let me just run through it. This one. We know that this is a noisy data, so we are not going to get 100% accuracy. We know that.
+
+Unknown Speaker  2:08:44  
+But let's, let's run with our initial model, which is your sequential model with the first layer of five node and the second layer of one node, and then we check a model summary quickly? Yep, five going into one. And then we have that same compilation step with binary cross entropy, Adam and accuracy. And then let's train it for 50 epoch, and let's see what happens. Oh, sorry, since I did not scale,
+
+Unknown Speaker  2:09:19  
+I have to take that out.
+
+Unknown Speaker  2:09:31  
+So instead of 100, I'm stopping at 50.
+
+Unknown Speaker  2:09:41  
+Okay, so I got a 94% accuracy and about 13% loss. Not very good, right?
+
+Unknown Speaker  2:09:51  
+Sorry, here also, I need to take out the scaled thing.
+
+Unknown Speaker  2:09:58  
+Yeah, 0.12
+
+Unknown Speaker  2:10:00  
+Point 0.95,
+
+Unknown Speaker  2:10:03  
+now we know that this is noisy. So what I'm going to try to do here is I'm going to add another layer in between. So what I'm going to do just to try out,
+
+Unknown Speaker  2:10:21  
+I'm going to add a second layer,
+
+Unknown Speaker  2:10:27  
+and the second layer I'm going to have three and there is no input dimension needed, because input dimension is only for the first layer, and then I'm going to have the third layer with one. So now I have to reset the model. So reset the model by running this cell again.
+
+Unknown Speaker  2:10:46  
+Then recreate the first layer with five, second layer with 3/3,
+
+Unknown Speaker  2:10:52  
+layer with one.
+
+Unknown Speaker  2:10:56  
+You don't
+
+Unknown Speaker  2:10:57  
+need that input attribute if you're doing
+
+Unknown Speaker  2:11:00  
+a input attribute. Input attribute is only for the first layer. Very first layer, only for the first Yeah.
+
+Unknown Speaker  2:11:08  
+Okay. So now, basically I have made my network little bit deeper. Instead of five going into one, now I have five Going into three going into one.
+
+Unknown Speaker  2:11:20  
+Now let's train
+
+Unknown Speaker  2:11:42  
+so it was 0.95 and 0.12
+
+Unknown Speaker  2:11:47  
+No, actually, it became worse. The loss is 0.13 right now. So in this particular case, and this is what kind of I was expecting, because, essentially,
+
+Unknown Speaker  2:12:00  
+the reason I wanted to show you is because you might think looking into this, like when we are looking into this, we saw that we can grow the network, we can add more hidden layer and so on, and the network does better. Which is the case if you have,
+
+Unknown Speaker  2:12:16  
+if you think that you have a complex decision boundary and your model is too simplistic, then, by adding more layer, you will see an improvement. But that did not really work in this case, because since the data set, we know this is a toy data set, right? So we know that, essentially, there is a simple, linear boundary. The only reason accuracy is low because of the noise,
+
+Unknown Speaker  2:12:38  
+which, by the way, is something that will always be present in the real life data, right? So that's why, for these kind of thing,
+
+Unknown Speaker  2:12:46  
+if you add, keep on adding more nodes in the network, or more layers in the network, or more nodes per layer, it's probably not going to be of much help. Sometimes it might. But then you also have to keep in mind, if you keep adding more hidden layers and more number of nodes in each layer, you also tend to risk overfitting, right? And that's when all of your regularization and those things will come in which you will consider at a later point. But the point is that if you your decision boundary is not complex, you are better off having a simpler model rather than a deeper model, you should only go for a deeper model if your decision boundary is more complex and or your number of nodes in the input dimension, meaning your number of columns of your data set, keeps going up,
+
+Unknown Speaker  2:13:36  
+which we will see in the next example that we are going to do, where we are actually going to take a real data with not just two columns, but more than two columns, which we'll see in a sec. Is there a rule of thumb ratio between number of features inputs to number of layers in the in the depth of the neural network? Is there? Is there some sort of like loose math that's done there?
+
+Unknown Speaker  2:14:00  
+Not that I know of Karen or anyone else. Do you guys have any view on that? What is that? Again?
+
+Unknown Speaker  2:14:09  
+What Jesse is asking is, is there some sort of rule of thumb that will help you come up with at least our initial starting assumption, like, how many nodes or how many layers of nodes will have I wish I have seen some
+
+Unknown Speaker  2:14:24  
+have introduced a number of features,
+
+Unknown Speaker  2:14:28  
+but
+
+Unknown Speaker  2:14:30  
+what we do is number of input features divided by two will be the first layer and the second hidden layer will be the first layer divided by two, or the second option would be number of input layers times two will be our first hidden layer, and the second hidden layer will be first hidden there times two which is, which is following our kind of, our kind of, uh.
+
+Unknown Speaker  2:15:01  
+Uh, I don't know if it's more maybe sometimes a theological belief that the number of of nodes in each layer should increase or decrease by powers of two. I don't know if there's any real reason behind that, yeah, and that, then that dictates number of nodes per layers. But I'm also trying to lean into like, is there a number of layers? Yeah, some equation? No. Well, I just say, I wish there were no i Yeah. I had not heard of
+
+Unknown Speaker  2:15:33  
+any patient between the layers and input. I wish there were some kind of good ones like that. I've wondered that for for years, and well, it ends up just being, you know, maybe you get a good intuition about it with a problem or something in time, but it's, it's a it's much more an art than a science and that, yeah, and a lot of it just a lot of iterative experimentation.
+
+Unknown Speaker  2:16:01  
+That's right. I think we do. Do we go a little bit sooner? That kind of makes it. Can automate some of that, yeah, which we'll see in the next class, actually, yeah, where we'll basically ask carers to automatically tune the
+
+Unknown Speaker  2:16:17  
+network. Oh, by the way, Benoit, I don't know if you've noticed the news,
+
+Unknown Speaker  2:16:23  
+Keras is no longer. It would not be accurately described as a wrapper around TensorFlow. And in fact, Keras three now again, supports other back ends. Oh, after Francois chalet left Google to start his own company, and now his newest version of Keras will support other back ends again. Ah, I see. I think you can add came kind of like, to make it like, like this, you know, the two. But now it's no longer going to be the case. I think it's kind of interesting.
+
+Unknown Speaker  2:16:57  
+So you can use Keras on top of pytorch now. No, no, not pytorch, but I think things like Thanos, Thanos, oh, pianos, yeah. Like, you used to be able to have Keras one you would select back end you wanted, like back tension was just one possible back end. So it's going to be like that. I'm not sure all the ones that's going to use, but I just found that interesting.
+
+Unknown Speaker  2:17:19  
+Yeah, Brandon started their own company, and yes, he's no longer bound with Google to have to own a
+
+Unknown Speaker  2:17:28  
+TensorFlow for Keras,
+
+Unknown Speaker  2:17:30  
+yeah. Okay, cool. So let's look at the last example for today, which is to take data set that has more than two dimension which is this data set that we have, and
+
+Unknown Speaker  2:17:47  
+we have six columns here, and however many rows,
+
+Unknown Speaker  2:17:57  
+let's See, yeah, so we have six columns and then the class has two values, one and 230,
+
+Unknown Speaker  2:18:07  
+800 around 3800 of one class, around 1500 of one class with 12345,
+
+Unknown Speaker  2:18:16  
+actually five columns, because this, this is your output. Y, right? So then you take this data set and you drop the class column, and everything else is your x, and the class column is your y. So it's basically a five dimensional data set.
+
+Unknown Speaker  2:18:36  
+So then we take this data set
+
+Unknown Speaker  2:18:39  
+and we create a sequential model,
+
+Unknown Speaker  2:18:45  
+let's create with five and one, just like what we did in our previous example. First dense layer with five units, the second dense layer with one unit, and then Model Summary confirms that that is indeed the case.
+
+Unknown Speaker  2:19:00  
+Now these five units have a total of 30 parameters, because now my input dimension is five instead of two. So that means for each of these five neurons, we have five weights and one bias, so six, so six multiplied by five is 30. So 30 total parameter for the first layer, and then six parameter for the second layer, which is the output layer.
+
+Unknown Speaker  2:19:27  
+Then you compile and you train the model.
+
+Unknown Speaker  2:19:34  
+And what is going to happen.
+
+Unknown Speaker  2:19:37  
+Let's see what's going to happen. So
+
+Unknown Speaker  2:19:44  
+I keep an eye out on this. What is happening here? Do you think the accuracy is approaching somewhere?
+
+Unknown Speaker  2:19:53  
+Looks like it's kind of stuck around 70 ish,
+
+Unknown Speaker  2:19:58  
+and look at the loss value.
+
+Unknown Speaker  2:20:00  
+It actually went high on the negative side.
+
+Unknown Speaker  2:20:05  
+So what is really going on here?
+
+Unknown Speaker  2:20:08  
+So let let's take the history of the model, put it into a history data frame, and then let's plot the y.
+
+Unknown Speaker  2:20:18  
+So what is happening with the loss
+
+Unknown Speaker  2:20:22  
+the loss actually started from zero and came down. Isn't it kind of weird, like, if you compare this with like what we had here,
+
+Unknown Speaker  2:20:36  
+where
+
+Unknown Speaker  2:20:38  
+the loss needs to come down and almost approach zero in a asymptotic manner. That's not something that is happening here. Here, the loss is going down in a very unbounded way. It is not like there is something funky going on here in this model.
+
+Unknown Speaker  2:20:58  
+And if you plot the accuracy, accuracy is kind of stuck at 0.7
+
+Unknown Speaker  2:21:08  
+you can do this, and it will say, tell you the same thing, that accuracy is point seven and loss is negative 3.24
+
+Unknown Speaker  2:21:20  
+and that happened after 43rd epoch.
+
+Unknown Speaker  2:21:27  
+Now what you can do is you say, Hey, what is going on? Let's see. Let's try to create a classification report, which is what we did during last class, right
+
+Unknown Speaker  2:21:39  
+like before the project, so you can create the classification report in a similar way. In order to create the classification report, first, you take your test data, and you asked your trained model to do a prediction using the Predict method. So you do a model dot predict, and you pass in the test data, and then you will get a list of prediction in an array.
+
+Unknown Speaker  2:22:07  
+Now this is a decimal these are all decimal number. So you take this prediction and put it into a list. While you are at it, you basically round it up
+
+Unknown Speaker  2:22:21  
+to your zero or one. So then when you do that, now, your prediction will be zero or one. Essentially what we are saying is where the prediction is 0.999 will basically consider these at one, basically rounding it up. So now you have all this prediction zeros and ones, and here in our data set, we already have the classes here.
+
+Unknown Speaker  2:22:44  
+Now if you do take these two predictions and the original white test value and use that same classification report method from scikit learn,
+
+Unknown Speaker  2:22:58  
+so you see how odd the classification report is where you have a f1 score of 0.83
+
+Unknown Speaker  2:23:05  
+for this first class, but your f1 score is zero for the second class. So essentially, for the class one, your model is able to predict rate
+
+Unknown Speaker  2:23:17  
+pretty high accuracy
+
+Unknown Speaker  2:23:20  
+for the second class, it completely failed.
+
+Unknown Speaker  2:23:26  
+Does anyone have any idea why this is happening?
+
+Unknown Speaker  2:23:42  
+Even though the data set is not that imbalanced, right? We had what, around 1500 of one class and around 3800 of one class? Yes, there is slight dis imbalance, but not a lot.
+
+Unknown Speaker  2:23:54  
+But your your model is completely fail, failing in predicting one class. Why?
+
+Unknown Speaker  2:24:10  
+Is it? Is it missing?
+
+Unknown Speaker  2:24:13  
+I'm trying to, like, look at the array and say, Okay, is there? I don't know, yeah. Well,
+
+Unknown Speaker  2:24:20  
+let's, let's look into also this thing. So let's say, what if? What will happen if you use our old friend, which is the random forest classifier, which is something Jesse you were asking before, like, hey, this sounds a lot like a random forest classification. So let's use the Random Forest classifier with 128
+
+Unknown Speaker  2:24:38  
+mini forest, meaning the weak estimators, right?
+
+Unknown Speaker  2:24:42  
+And then we take that same x and y data and fit the model, and then we take that model score for training and test data.
+
+Unknown Speaker  2:24:54  
+So you get a training data score of 100% and a test data score of 90% so.
+
+Unknown Speaker  2:25:00  
+And you can take this random forest model in the same way you can do the prediction, and you can take the predictions and the original y to create a classification report, and it is doing just fine. It is doing 93 and 84 for the two classes,
+
+Unknown Speaker  2:25:17  
+whereas your new neural network is failing miserably.
+
+Unknown Speaker  2:25:22  
+Is it overly biased?
+
+Unknown Speaker  2:25:26  
+Not any of those. There is a much, much more
+
+Unknown Speaker  2:25:30  
+missed, simpler mistake that we have actually done,
+
+Unknown Speaker  2:25:35  
+which is, if you look into the class levels one and two,
+
+Unknown Speaker  2:25:42  
+what your neural net is thinking, Hey, what are my zeros and ones? So this is a simple matter of fact that we need to have a zero and one.
+
+Unknown Speaker  2:25:52  
+So there is a very simple fix to that. You take that data
+
+Unknown Speaker  2:26:01  
+and then
+
+Unknown Speaker  2:26:03  
+what you do is you take using a location operator, you basically find out all the rows where classes two and turn them to zero. So instead of having one and two, now you will have zeros and ones. So you're not really changing any data. You are simply changing the level,
+
+Unknown Speaker  2:26:24  
+and then you take your x and y from there, and then you basically keep doing the same thing that you have done, no further changes.
+
+Unknown Speaker  2:26:37  
+The model is still five going into one,
+
+Unknown Speaker  2:26:41  
+and we are going to train it for certain number of epochs, 100. And now see the loss function started at one and going down, and it is not going deeply negative.
+
+Unknown Speaker  2:26:58  
+So accuracy is still we are not going to expect our 90% or higher accuracy, which is fine, but looks like the behavior what we are seeing now is kind of more or less in line with what we should be seeing now, if we place a plot the loss now we are getting our traditional shape that we were expecting. That loss coming down sharply and then basically going towards the saturation level,
+
+Unknown Speaker  2:27:28  
+like 39% though, right?
+
+Unknown Speaker  2:27:31  
+Yeah,
+
+Unknown Speaker  2:27:34  
+and your accuracy is also kind of getting stagnated around what 7576
+
+Unknown Speaker  2:27:43  
+percentage,
+
+Unknown Speaker  2:27:47  
+you can do the evaluation. And that gives you a loss of 41 actually, and an accuracy of 76
+
+Unknown Speaker  2:27:58  
+which is not great, but it is good, considering this is a real data. This is not your two sets of blobs, right? This is a real data with five columns.
+
+Unknown Speaker  2:28:08  
+And then let's do a classification report on this one. So we are going to run the predictions first and then take this prediction round all of this, 0.99 up to one,
+
+Unknown Speaker  2:28:22  
+and then we will leave the zeros with zeros, and then we will take that and compare it with y test and do the classification report. So now we are saying seeing f2 is f1 is 58 and 84 for the two classes,
+
+Unknown Speaker  2:28:40  
+which is kind of we, I think we ended up recreating something that we had already done using the psychic learn libraries for a binary classification,
+
+Unknown Speaker  2:28:50  
+except in a using a completely different technology here,
+
+Unknown Speaker  2:28:56  
+and then, just to compare that with the random forest classifier, which we also did in the previous worksheet, previous notebook. So you see here, the random forest is actually producing a better result with the 84 and 93 as opposed to 58 and 84 from neural network.
+
+Unknown Speaker  2:29:17  
+Okay. Now let me ask you this question looking at this do you think this particular model will help if you increase the depth of the model and or the width of the model for each layer?
+
+Unknown Speaker  2:29:35  
+Do you think we should try or not do
+
+Unknown Speaker  2:29:40  
+uh,
+
+Unknown Speaker  2:29:44  
+yeah, given, given that there's no rule of thumb
+
+Unknown Speaker  2:29:49  
+well and and also that we have five input columns, right, not just two. So currently, what we have in our model is that.
+
+Unknown Speaker  2:30:00  
+First hidden layer is only five now, essentially we have five input coming into five nodes. So I kind of like what vija said, so let's double it up.
+
+Unknown Speaker  2:30:13  
+So let's do our
+
+Unknown Speaker  2:30:18  
+first layer. Hang on. Where is my first layer here? So let's do our first layer with 10,
+
+Unknown Speaker  2:30:28  
+and
+
+Unknown Speaker  2:30:31  
+let's do a second layer.
+
+Unknown Speaker  2:30:36  
+So this is be a second layer. Let's do a second layer with five,
+
+Unknown Speaker  2:30:43  
+and then that will eventually go into the final layer of one. So essentially, we went from 10 to five to one. So make the network little deeper and wider at the same time.
+
+Unknown Speaker  2:30:56  
+So let's rebuild the model. So
+
+Unknown Speaker  2:31:05  
+uh, let's see if it helps. So now we have 10, five going into one
+
+Unknown Speaker  2:31:11  
+and run.
+
+Unknown Speaker  2:31:17  
+So is this at this stage? Because there was, I remember reading that like there was a neural net that they were they found that, like, it's like, by randomly removing neurons during the training, that, like, improved the performance. Is this? Like, yeah, here we are, not there yet, and we are, I tell you, like, what you are referring to. Those are some of the state of the art techniques that are used in a more sophisticated machine learning training. We are not going to be going to that extent quite in this boot camp, but, but in a in a in a sentence or two, that's a form of regularization. And it's actually more for like overcoming over fitting. So it keeps it doesn't let the network become too acclimated to the training. Basically, yeah, okay, so now with our deeper network, you see that we are not now stuck at 70 ish percentage. We have gone higher, and the loss has come down to lower than what we saw before. But looking at these, what do you think we could we should be doing, looking at just these two plots?
+
+Unknown Speaker  2:32:35  
+Well, it doesn't really seem like it's, it's it's lined out yet, or
+
+Unknown Speaker  2:32:41  
+that's really found it's So probably we should be epoch running more epochs. Is that what you're saying? Yeah, more epochs. Yep, that's what I was thinking as well. So let's do that. So
+
+Unknown Speaker  2:32:57  
+let's run it for 200 epochs.
+
+Unknown Speaker  2:33:00  
+So now I'm going to recreate the model again to start fresh.
+
+Unknown Speaker  2:33:16  
+It kind of makes sense, right now, you have a larger model, more parameters, so it will take more epochs to converge, because now you have a much larger hill to climb down From right.
+
+Unknown Speaker  2:33:40  
+I think we have actually plateaued around 84 85% ish,
+
+Unknown Speaker  2:33:47  
+I mean now we
+
+Unknown Speaker  2:33:49  
+have
+
+Unknown Speaker  2:34:06  
+Okay,
+
+Unknown Speaker  2:34:10  
+yep, now it looks like it actually has plateaued, and
+
+Unknown Speaker  2:34:16  
+let's Look at the accuracy. Yeah,
+
+Unknown Speaker  2:34:21  
+right, so that looks good.
+
+Unknown Speaker  2:34:24  
+So now 8446 and 33
+
+Unknown Speaker  2:34:28  
+Oh,
+
+Unknown Speaker  2:34:30  
+but the accuracy is not actually higher. Well, let's do the classification report.
+
+Unknown Speaker  2:34:39  
+5884
+
+Unknown Speaker  2:34:40  
+Ah, yes,
+
+Unknown Speaker  2:34:43  
+73 and 89
+
+Unknown Speaker  2:34:45  
+as opposed to 84 and 93
+
+Unknown Speaker  2:34:50  
+right? So this kind of tells me there is probably room for further improvement. Maybe you can go from 20 going to 10 going to five and then in.
+
+Unknown Speaker  2:35:00  
+Of running 200 epochs. You run for 300 400 or 500 epochs, and you'll probably get a better
+
+Unknown Speaker  2:35:08  
+uh, scorecard.
+
+Unknown Speaker  2:35:10  
+But the thing is, like everything else in in life, there is always a balance you have to strike right. You have to think of, okay, how much your customer is willing to pay for right and how much
+
+Unknown Speaker  2:35:23  
+what is called inaccuracy, your stakeholders are willing to live by right? Like no one would expect any machine learning model to be 100% accurate at the time, at any point of time, because if it is 100% accurate, it is actually a bad model, and everyone knows that, right? So, so there is no, like, no theoretical limit of on how much you can scale this up with the limit. There is more of an economic limit, because the more you scale this up, and these are still toy data set, by the way, but in a real life data set, in a state of the art model, the more you scale it up, essentially, the more money you will be paying, specifically considering if you are running these on a cloud right, where every second, every millisecond counts right, because you are basically paying by the second. So that's why you kind of need to and that is, that is where your expertise as a data scientist will come in. As you get more experience by trying your hands more and more on this type of problem. So So you people will be looking for your guidance to say, Hey, what is the most optimal model which is optimized for accuracy and the cost of training and time at the same point, same time, right? So I would say, from what I'm seeing here, and specifically comparing that with our statistical model, which is random forest, I think this is probably the time that we should stop and not make the mod model further deeper or wider, right? So this kind of is a sweet spot in my mind.
+
+Unknown Speaker  2:36:55  
+Do you guys agree? Or anyone else
+
+Unknown Speaker  2:36:58  
+you guys think that we should continue doing further?
+
+Unknown Speaker  2:37:03  
+I would not say improvement. I'd say further scaling up of this model. Does anyone think that way?
+
+Unknown Speaker  2:37:10  
+Even though I got a quick question, yeah. Is there any way? So when you do the density right, I think I don't remember what number you have. I think like from 10 to five to one, for example, yeah. Is there any way that we can get that number from some kind of, like a half a parameter tuning, or something like that, instead of us guessing it, or yeah, you have 10 five one. Is there any way that we can get it?
+
+Unknown Speaker  2:37:37  
+No? Another analysis, no, no.
+
+Unknown Speaker  2:37:43  
+So what would be the best way to start? Then, you know, I think you start with five, and then one, and then you do 10, five one. Are you talking about? If we need to add another density level, maybe 1510, five, one.
+
+Unknown Speaker  2:37:55  
+That's what I exactly said. I mean, it all depends on how much time and money that you want to spend, or your customers are want to spend, Ah,
+
+Unknown Speaker  2:38:03  
+okay. And then the epoch, yeah, the epoch. How would you know, like, from 50 to 100 like, what would be your guardians on that and looking into the shape of this curve? If they if, if looking at the loss and accuracy, if you see that there are some kind of plateauing, then you should not be doing more like when we ran with this deeper model, when we had 100 epoch as JC mentioned. And I think we all noticed that seemed like loss and accuracy still had room for improvement, so they didn't quite plot you just yet. That's why we thought like, Okay, let's go from 100 to 200 epochs, right? And that obviously gave us better
+
+Unknown Speaker  2:38:42  
+classification here in both classes. Yeah. Thank you. Appreciate that.
+
+Unknown Speaker  2:38:53  
+Okay,
+
+Unknown Speaker  2:38:55  
+so that will be all for today.
+
+Unknown Speaker  2:39:00  
+Will the code from here and then your other code that you customize, will you be able to post it to the GitLab, please? Um, this code. These are basically the salt file this. This is something that we post anyway, right? And since Kian is usually, Kian does that, but I'm going to do that today, after the class, the other piece of code where you are talking about, like, this thing, the hand, like, DIY code for neural network, is that what you're mentioning was a Python code, not a Jupiter. I think you did it earlier.
+
+Unknown Speaker  2:39:34  
+Oh, you mean this one?
+
+Unknown Speaker  2:39:37  
+Well, whatever you have, we'll take it. So the Python code, so this Python code here, I'm telling you, if you go to that GitHub repository that is there inside that book that I showed you, which is also bookmarked, you will get this Python repository here. Now what you won't have is this Jupiter notebook, because this is the Jupiter notebook that I created. No if you want, I can give it to you.
+
+Unknown Speaker  2:40:00  
+Me, yeah,
+
+Unknown Speaker  2:40:02  
+okay, sorry, sorry. I've already, already posted in
+
+Unknown Speaker  2:40:07  
+resources, I think a
+
+Unknown Speaker  2:40:11  
+simpler Python implementation aid of a single perceptron
+
+Unknown Speaker  2:40:19  
+we had. I think this is the one that, yeah, this is a complete network. Yeah. This is not just I could do when I were complete. Did a complete network after I fixed the problem, of course,
+
+Unknown Speaker  2:40:31  
+yeah, but it's, it's a, it's an architecture I've not seen somebody do, which is that I, each layer is essentially treated as a as a node in a linked list. So that way the the each layer calls the next layer, and then the previous layer call
+
+Unknown Speaker  2:40:48  
+and then the each layer calls the previous layer during the back propagation. Yeah. So the code here that I showed you is basically this repository, and this is where this network, this thing is, and there are a couple of other version as well, but I basically use the first version, which is network.
+
+Unknown Speaker  2:41:06  
+This is something you can easily get from that book, or
+
+Unknown Speaker  2:41:13  
+just for your Quick Access, I can post this.
+
+Unknown Speaker  2:41:18  
+Hang on, what's going on here?
+
+Unknown Speaker  2:41:21  
+Oh, sorry, I'm on the pins.
+
+Unknown Speaker  2:41:25  
+I'm going to post this GitHub link. This is a GitHub repository done by the author of the book, Mike Nielsen, and I can
+
+Unknown Speaker  2:41:38  
+also have it pinned to the channel, so you will see the GitHub code here. Well, I think I already had pinned I think, yeah. So your GitHub notebook, you can do that yourself, or if you want, I can probably just put this Jupiter notebook code there.
+
+Unknown Speaker  2:42:00  
+Yeah, so let me actually just put that Jupiter notebook there on your site.
+
+Unknown Speaker  2:42:06  
+I'm going to do that.
+
+Unknown Speaker  2:42:10  
+Thank
+
+Unknown Speaker  2:42:14  
+you. Manoj, villain finder, I
+
+Unknown Speaker  2:42:24  
+so that Jupiter notebook, I'm going to put, keep it at this level, not inside any of the specific activities, but at the outside, and then all of the other solution folder, solution solved files. I'm going to post it right after the class.
+
+Unknown Speaker  2:42:40  
+Okay, thank you Benoit,
+
+Unknown Speaker  2:42:43  
+thank you. Have a great night
+
+Unknown Speaker  2:42:47  
+as well. Just for fun, I just put my artificial neural network Thank you. Code to resources, the correct one or the wrong one. Oh, it's the correct one. I never kept the incorrect one I should have. I should have. I remember where the mistake was. I don't know if I could put it back,
+
+Unknown Speaker  2:43:10  
+but yeah, I have both my perceptron, single perceptron and that, and then I could put also a Jupyter Notebook. I have it testable for them.
+
+Unknown Speaker  2:43:19  
+Okay, fine,
+
+Unknown Speaker  2:43:21  
+using the IRS data set,
+
+Unknown Speaker  2:43:27  
+but just people might find interesting. The second one, the bigger one, is a little more complicated to understand.
+
+Unknown Speaker  2:43:35  
+Probably,
+
+Unknown Speaker  2:43:37  
+basically I was, I was doing one of Andrew angs courses, and he was saying, oh, there's no way you can
+
+Unknown Speaker  2:43:46  
+do you can go from layer to layer, except by using a for loop,
+
+Unknown Speaker  2:43:52  
+yeah, show me. Watch me
+
+Unknown Speaker  2:43:56  
+where I said where. No, I actually had to use object oriented. So each a layer object, and then object is the whole network, and each
+
+Unknown Speaker  2:44:07  
+layer points to the net has a pointer to the next layer, and each layer has a point back to the previous layer. So it it and they literally call each calls the next layer the Forward, forward pass, and then each layer calls it the previous one, yeah, with partial derivatives back calls the next previous layer during back propagation.
+
+Unknown Speaker  2:44:34  
+So there's no for loop or anything like that to go through the layers, because
+
+Unknown Speaker  2:44:41  
+that's like, yeah, right, you can't do it.
+
+Unknown Speaker  2:44:46  
+And so, yeah, I did something Andrew ang doesn't know, didn't know how to do,
+
+Unknown Speaker  2:44:52  
+doesn't that wasn't that cool. That is,
+
+Unknown Speaker  2:44:57  
+oh, generally, seems, because you generally.
+
+Unknown Speaker  2:45:00  
+Seems to know everything
+
+Unknown Speaker  2:45:04  
+that is cool. Watch my tea, my watch my cup of tea. Hey, the solved, solved file has already been posted now in your report. Okay, so feel free to do a pool. Oh,
+
+Unknown Speaker  2:45:18  
+well, it's already done. Thank you. Just to let you know, I was able to install the TensorFlow actually in my Mac, MacBook Pro and four.
+
+Unknown Speaker  2:45:29  
+I did some reading that, if that works, and there's no problem, it's good. There is one more thing actually did, the TensorFlow does metal. Do you guys know what that is? I mean, I was just reading that. It should be both of them are installed. But anyway, so what? TensorFlow? What? That's metal, like, metal, base metal. Oh, that is, that is not for your machine. That is for your machine on the cloud. So essentially, when you get a virtual machine in the cloud they run on hypervisor platform, right, which is a virtualization, virtualization platform that allows the cloud provider to take a large rack of server and then virtually cut it into chop it into different pieces and spin out 1020, 3040, different virtual machine on a single hardware, which then you as a customer, when you are running it, you think that you are getting all the 32 GPUs or CPUs that they have and all of that, but essentially you are not, because you are going through a virtualization layer, right? So then when you run TensorFlow there, you oftentimes do not have a full control of the underlying GPUs that are installed. And for a very large model training, when you are trying to do a state of the art model for, let's say, video or image analysis and so on, or like kind of the model that Tesla probably trains for their self driving car, for those kind of thing, where you actually need access to the underlying hardware. So your plain vanilla version of TensorFlow does not work. But often time, not often time, always. These companies who really want to make those state of the art model, they shell out more money to the cloud provider to get actually a base metal, which basically means the customer is base metal, essentially, in this case being you are not running on a virtualization platform. You are essentially getting the whole machine down to the CPU, GPU and motherboard. You are getting the access to yourself, and that allows you to deploy TensorFlow with its fullest extent possible so that you can fine tune how you are going to use the all the GPUs that you have
+
+Unknown Speaker  2:47:44  
+for your trading and prediction, not something within our scope that is totally state of the art industry, not something you need to worry about. One you could do that for your own machine. Okay, alright. Well, yeah, okay, it's in between. If you are willing to pay a little bit for your use of colab, like $10 a month, you get to use better GPUs and more members. No, actually, was faster than the CoLab because I tested it running the same script. You know, most what we're doing right now, it doesn't matter. I mean, no, no. What Karen is saying is, if you pay money to colab, then you will get a bigger and better machine. Right now you are seeing your local PCs faster because you are using a free version, which is a community service Google is providing, right you cannot expect that kind of performance there. So and also, if it's kind of models that we're just doing tonight, really doesn't matter to even need a GPU like you still have Yes. And so all of these models that we are training, none of these are using GPU. By the way, it's all CPU best training, doesn't it? That's simple. There is actually lower level parameters that you need to tweak on your TensorFlow library. And actually, if you want to go low level, the simple PP install is never going to make the cut. So essentially, what you need to do is you need to download the original source code for the TensorFlow and make the changes depending on the current computer architecture that you have, your CPU and GPU architecture. You need to make those changes, and then you have to compile and build the TensorFlow from scratch that will match it with your underlying CPU and GPU architecture, but that is way beyond the scope of this bootcamp. Yeah. And by the way, when, when they're training something like the model for a Tesla car, Tesla has a super computer called dojo, which is 10s of 1000s cluster of 10s of 1000s of GPUs, yeah, dedicated to that. Though, actually, Musk was once claiming he was going when, when off hours he was going to use it for mining Bitcoin, at one
+
+Unknown Speaker  2:49:49  
+point would have the power to do it, you know, so
+
+Unknown Speaker  2:49:53  
+good to know. I look forward to this. But otherwise that was just that super computer is dedicated to training the models for the.
+
+Unknown Speaker  2:50:00  
+Hours, yeah? Well, now that mr. President has declared that Bitcoin is going to be our reserve of our currency, maybe his best friend is probably already have started doing that. Maybe, yeah, maybe so, well, he even
+
+Unknown Speaker  2:50:16  
+AI. He's built even bigger super computer for training. Yeah? Nice. That's like, actually huge, yeah, thank you so much. You can always do that and off cycles too, right?
+
+Unknown Speaker  2:50:29  
+Yeah, have a good night, everybody. Cool. Yeah, good night. Bye.
+

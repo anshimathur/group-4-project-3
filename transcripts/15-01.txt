@@ -1,0 +1,420 @@
+Speaker 1  0:04  
+Students, so let me just thank you for setting the recording. So Hi everyone. My name is Christina. I teach FinTech data and AI, and I also my nine to nine to five is data science position. So today I'm going to be your substitute instructor. I know that you have a regular instructor and then a regular substitute instructor. So a quick disclaimer. I'm here just only for tonight. No stress you. You'll get back to your basics. So don't worry about it.
+
+Unknown Speaker  0:35  
+That being said, let's get started.
+
+Speaker 1  0:42  
+Do so today's session is dedicated to AI ethics and introduction. Now this session is cool, not just because we all need to know how to act, you know, within the realm of AI what we can do and what we cannot do, but also because boot camp is so overwhelmingly complicated, like you have to manage your homework so that then projects and then bunch of chunks of code that is too complicated, and you have to now manage all of that, juggle all of that. So today's session is kind of for you to like pause and a learn how to do research. And I know some people like fish posh, what's what's about research? But once you're going to be in job settings, you understand the importance of knowing how to ask questions, how to find answers, and which answers to actually to accept. And then the second thing that is beneficial is, again, you will learn this a little bit during today's session, is how to be asked questions, how to ask questions, and then how to answer those questions. So it gives you some time to finally, like, comprehend why doing this boot camp a little bit. Comprehend why you actually using some particular code, like, why using AI? Or why AI is so popular right now, we'll just have this extra time to finally, you know, calm down a little bit and just understand, like, comprehend, a little bit of all of this business of AI world. So by the end of class, you'll be able to explain what ethics means, summarize the major ethical concerns related to AI. Explain why algorithm bias is such a significant ethical concern. List some common causes of algorithmic bias and analyze a case study in which researchers identify algorithm bias in the system. So let's again, let's make this class conversational. Just because today we do not have any coding assignments, we're just going to do some research, and let's engage. Okay, just because once you're going to be either in job settings or you're going to be interviewed, people will ask you so many different questions, and you have to feel comfortable answer them, even sometimes you're not going to know the answers, but you have to learn, and kind of like practice, how to think out of the box and kind of speculate with your answers. So let's read our first question here. What is the first thing you think of when you hear the term AI ethics again, as many people as can, please chime in and let's see your answers here.
+
+Speaker 2  3:28  
+I think about like, is AI being responsible in what it's producing?
+
+Speaker 1  3:35  
+Okay? Answer, excellent. Answer. Answer, yeah. Who else
+
+Speaker 3  3:40  
+um I when I think of AI ethics, a lot of the time I think about like, the ethical sourcing of training data.
+
+Unknown Speaker  3:48  
+Bingo. Yeah, very good answer as well.
+
+Unknown Speaker  3:53  
+Who else I
+
+Unknown Speaker  3:55  
+think about the movie, The Creator?
+
+Unknown Speaker  4:00  
+Okay, that's a very creative answer. Okay,
+
+Unknown Speaker  4:05  
+anyone else
+
+Unknown Speaker  4:08  
+I want to know why Sam thinks ultimately the Creator,
+
+Unknown Speaker  4:13  
+because, AI,
+
+Speaker 4  4:16  
+I don't know. I guess I think it can be scary and the the premise of that whole movie is AI versus humans, right? Like it gets into that huge debate of like, whether or not AI is like, at that point becomes like an entity itself, and whether or not they have feelings and all that. It just to me that I don't know that's what I think about ethics, if they don't, if we don't do it the right way, I think that's what we're going to get to maybe I
+
+Speaker 5  4:56  
+think about how, how. Yeah, AI is flawed as the people who built it, and so any flaw in the person is going to be reflected in the algorithm.
+
+Unknown Speaker  5:10  
+So you can't just take it at face value.
+
+Speaker 1  5:13  
+This is actually very deep answer. Okay, thank you.
+
+Unknown Speaker  5:18  
+I see Chad raising his hand, yeah,
+
+Speaker 6  5:21  
+so I work in in a place that I would describe it as, as an industrial scientific company. And when I think about bias, I think of what I think is called confirmation bias, and just the bias towards results that you think essentially to cut to the easiest example is something that would represent your work in a in a highly preferential way.
+
+Unknown Speaker  5:51  
+Okay, thank you.
+
+Unknown Speaker  5:54  
+Who else
+
+Speaker 7  5:57  
+I think about it like normalcy, like what do we consider to be normal, and how we train towards that, and how normal for one person is not a normal for another person?
+
+Speaker 1  6:10  
+Perfect. You guys already far ahead, because, you know, those kind of like topics we're going to review during our next slides. But okay, perfect. I saw someone else raised hand, but I don't see it anymore, so just unmute yourself and go ahead.
+
+Speaker 1  6:32  
+Okay, I guess yes, no one else wants to share so formal definition ethics or systems of principles that determine how people make decisions about what is good to do and bad to do. So the application of ethical principles to AI systems and technologies are concerns about the impacts of these systems cropping up at the same breakneck speed as AI technology development, also, these issues are complex, and awareness of the major ethical concerns within the AI sphere can help guide the responsible creation and application of these technologies, which all of you kind of like mentioned, if we put all of your answers together in summarize now next slide, three main areas of concern, privacy, consent and accountability. Now we'll all know these words, but in terms of AI, let's hear you out. How do you understand the words, privacy, consent and accountability? With some examples, if you can, maybe you heard something on the news recently.
+
+Speaker 8  7:47  
+I think the easiest way to say that is like when Elon Musk wanted to get all the data from the government, he just stepped in. I don't I mean, nothing can stop him at this point, but he started to get a lot of data from everyone, right? The IRS data, the Social Security and everything, which means there is no more privacy from all of our information. We don't give the consent. But I guess maybe from the Trump presidency, it is considered to be consent of everyone. I don't know, accountability wise, it's
+
+Unknown Speaker  8:19  
+going to be interesting to see why it's going to
+
+Speaker 1  8:23  
+be this is actually a good answer, just because it's like, literally recent news. So thank you. Ingrid Chad,
+
+Speaker 6  8:30  
+yeah, I've always considered medical information, or personal health information, kind of like the ultimate level of private data, and that feeds right back into the next
+
+Unknown Speaker  8:44  
+sell their consent as well. Yeah,
+
+Speaker 1  8:47  
+exactly about like, HIPAA regulations, right? They have so many different rules, and yet, do we really know? Like, if people are following them? I just like my, my student from my cohort, she just told me about, she works in the medical field. And she's like, I've seen so many, like, many responses from a third party, party medical vendors, that the response is that they write, they sound like, very, very like aI generated. And she was like, I'm not really sure if they can actually do that, just because these in our patients information. And then, you know, Scott, and paste it into just like Chad GPT, and then just write a nice email using that information. So that was a good example of yours. Yep, I'm not sure if it's Jess or Jesse. Jesse, yeah,
+
+Speaker 7  9:31  
+Jesse. And the consent part, I mean, I, I do a lot of art in my side gig and and a lot of us are concerned because, you know, we put our our our art out there to share, to entertain, and now it's being used without attribution to train something, to conglomerate it and pretend that it is original. And none of none of us really said this is this is something that we want
+
+Speaker 1  9:57  
+true. Are you concerned about it like? Are you. Concerned that your job was kind of being taken away from you, or not really, honestly,
+
+Speaker 7  10:04  
+I've had some discussions with somebody who produces a lot of the content that trains a lot of the poetry stuff. And I mean, I've been able to mimic my voice just by asking it to write on a paper in my voice and yeah, there, there's, there's something to be said for like somebody being able to come in and take take away an opportunity from me, as well as someone being able to impersonate,
+
+Speaker 1  10:32  
+yeah, thank you. Thank you for sharing. Okay. Anyone else wants to add
+
+Speaker 5  10:37  
+Um, another one for both privacy, consent and accountability, is the use of not just like our art images, but the images that we put online, of our faces, just a few images, and suddenly you can have some very inappropriate deep fakes put up by somebody who hates you, and that can ruin your career. It can ruin your relationships, because a lot of them are getting really good, and so it's not just professional lives, but personal lives that can be impacted by disregarding the like aI ethics.
+
+Speaker 1  11:11  
+Yeah, true, true and deep fakes are getting better and better. When I was doing research paper on deep fakes, the main problem was about fingers. They said, like, your hair and your fingers were like, like the parts of your body that AI couldn't, like, manage to do well, because, you know, our hair has, like, all those little hairs, I would say, like, fuzziness to it. And so it was hard for AI to kind of make it like looking real. And our fingers somehow cannot be repeated by AI. But if you look at what AI can do right now, you're like, I don't really know what's what's real, what's not, because it's just becoming that good.
+
+Speaker 7  11:50  
+We do deep detection at my work, and a lot of the early stuff was you look for breath. You'd look for if there was a breathtaking or something. Now you really need AI to detect AI. Yeah,
+
+Speaker 5  12:05  
+that's true. That's true. A lot of what I look for in the video, like, if I find a video and I'm like that something looks off, like, usually it's, it's, they're moving too smoothly. There's not like, they're not humans have a jerkiness to them when we're moving that AI replication just doesn't quite capture. So it's just, it's just like a one smooth movement, and that's usually what gives it away for me.
+
+Speaker 1  12:30  
+Wow, that's an interesting trick. I just, like, recently watched a video about like robot, and I couldn't tell, I couldn't tell if it was like real robot made out of metal and, you know, some plastic thing, or if it was just a made up video, I literally couldn't, couldn't tell Okay, great answers. Thank you for being so engaged in this conversation. So as I said, today's session is mostly dedicated to your practice of doing some research and asking questions and answering questions. So let's start our first activity, and this activity, you will research an ethical AI issue of your choice. Our TAs will help us to put in breakout rooms, please. And again, once you're doing this research,
+
+Unknown Speaker  13:17  
+once you're back to the main room, please be
+
+Speaker 1  13:21  
+open minded. Please. Conversate with us all like give us your ideas, what you found, because I want to hear all of your thoughts and how you understand, what you just read, how you can analyze it. Let's all turn on our critical thinking here. That being said, let's place you in breakout groups. Give me one. Me one. Okay, welcome back, guys. So let's hear you out what you found and what you want to share with us. Who
+
+Unknown Speaker  13:56  
+wants to start?
+
+Speaker 9  13:58  
+I found this article. It's like a research paper about building a fairness of fair equality of opportunity into like Bayesian networks models. That's just like talking about like embedding like certain variables for like fairness of equality into like the models themselves. So that way they they consider things other than just like, like training that indicates performance, I guess, like, like GPA or like it like builds, like in embeds, like socio economic status and Like other variables.
+
+Speaker 4  14:41  
+Yeah, part of that article is also reading, like, talking about whether or not, like, people get accepted to certain colleges based off of those things that that is crazy to me, because it's the it's causing. It would cause a bigger divide than we already have.
+
+Speaker 3  14:59  
+I think the. Big thing for me is, I remember the IBM there was that one IBM quote that they had, I think, like way, way back when they were just kind of getting started about how, because you can't hold a computer accountable, like computers in general shouldn't be making choices. But that's obviously completely out the window. We use algorithms for everything. It's just really interesting to see just how accepted we've gotten of I mean, and not even just like, look like AI, like, in the terms of, like, large language models, but just like algorithms in general, like, we're just completely okay with the sort of control that has over our lives.
+
+Speaker 10  15:42  
+Yeah, we ran into an article that actually was really recent, and it's basically the Department of Justice of California sending out two advisories to try to curb like the legislation of AI. So ultimately, like, you know, one was about patient privacy, but the second one was more interesting, the advisory basically, they don't want AI to kind of risk discrimination or denial of, like, needed health care. So like, if we were creating models that have bias in them that might be causing, you know, people to not receive proper health care, then that would be an issue that they're trying to curb. Thank you.
+
+Unknown Speaker  16:32  
+Okay, let's hear more. Please.
+
+Unknown Speaker  16:37  
+I was reading a medical article
+
+Speaker 7  16:40  
+from the University of Utah about using AI to de identify or deep de privatize HIPAA data so that you can make inferences about who this person was based on the larger model of information you have about the general population, and that there was a push and pull between that and giving enough information to train the models on, because they're also introducing like synthetic data and trying to come up with data that was like the humans data, but not quite, but close enough to be able to train it accurately, and like the arms race between that is The the idea, the idea that you could just completely bypass HIPAA by just taking what information you know and inferring it into the larger space and then bringing it back and saying, This is exactly who this was, is really frightening.
+
+Unknown Speaker  17:33  
+Yeah, that's That's true.
+
+Unknown Speaker  17:37  
+Thank you. Who else?
+
+Unknown Speaker  17:41  
+Let's hear one more answer.
+
+Speaker 3  17:45  
+We found an article about about, specifically about meta, and they're trading a an AI right now called llama, and they trained it on copyrighted data, and a judge is currently really on them right now, about making sure that they can prove that they have stripped all copyright information from its training data.
+
+Speaker 11  18:08  
+Yeah, that that's a good one, because what turns out is meta in place. We're actually using torrent servers to put to download copyrighted material for training.
+
+Speaker 1  18:24  
+Yeah, I'm not sure if to be happy about your answer, so be a little bit sad here, but just keep going. Thank you all for such a deep research. Next part of our session, algorithm bias and AI, and this is what I referred to when I said, you kind of, you know ahead of me when you were answering the reverse question of mine. So algorithmic bias refers to situations in which a computer system makes decisions that impact different people or groups of people in different, unequal ways. AI models are particularly susceptible to algorithmic bias because they are trained on massive amounts of existing data. Algorithms are set up logical, sequentially ordered steps, whether the algorithms are simple or complex, they're frequently applied to sets of data to process the data in some way. So in your head, you can just kind of like associate these two sentences with the word mathematics, because each and every AI model or algorithm is pretty much just math, right? Some kind of complicated logic or formula the types of algorithms, prioritization brings database and factors that the algorithm design specifies classification source information into categories. Association connects pieces of information typically related or used at the same. Time, and I need to minimize it because I cannot read the last one is filtering, removes or separates information that meets the certain criteria. So what is bias? Bias bias is usually defined as a situation in which one group, person or thing is treated differently than other groups, people or things. People often discuss bias in terms of fairness or unfairness. Additionally, this discussion often occurs in the context of highly personal experiences of bias related to gender, race or class. Advice can exist in many contexts. Think through all the decisions you made today. How did you choose to get to work? What did you have for breakfast? Did you shower take a bath, or did you just wash your face when you were getting ready this morning. Now this slide might seem funny, just to feel like what the slide has to do with what we just discussed, but let's think why this slide is actually very important. Like we have very simple down to earth questions here, but how is this slide is actually aligned with our definitions of advice. Who can try to make a connection here?
+
+Speaker 10  21:32  
+Well, we all have personal biases towards our preferences based on our characteristics and our personality, so these kinds of questions are inherently biased because they're based on our own personal preferences.
+
+Speaker 1  21:48  
+Yes, exactly, exactly. Thank you so much. So the next slide is pretty much answering that question that I just asked them. It's pretty much the same what we just received from our fellow student here. So it's not always easy to know why we make the decisions we do. We often have to make decisions quickly, and we might have to choose between options that seem basically equal. In these situations, we tend to make quick decisions based on our past experiences, and we're not always aware of the rationale behind our decisions. We just believe this is good, this is bad, this is correct. This is not correct. This is what I'm going to accept. This is what I'm not going to accept. Unconscious bias occurs when we make bias decisions based on factors we're not aware of, and it brings us to the next activity. So in this activity, you'll read a series of articles about three small markets in Seattle that were disqualified from the snap in 22 forcing customers to shop elsewhere. Now this assignment has actually four questions, so ask our TAs to place you in four different groups, and I believe you can see which group you belong to. So group number 1234, and since we have four questions, I would ask please, group number one to answer first question. Group number two, second, number 3/3, and group number 4/4, question,
+
+Speaker 11  23:27  
+there are five groups that happen, unless you want to change it to four, in which case would be
+
+Speaker 1  23:32  
+different group of people. Yeah, if you can, please change the four groups.
+
+Speaker 11  23:36  
+Yeah, there'll be different group of people, but that will work fine, yep.
+
+Speaker 1  23:40  
+And let's probably spend 20 minutes so to make sure that we're all finding good answers and do a deep research there.
+
+Unknown Speaker  23:49  
+Okay, so 20 minutes.
+
+Unknown Speaker  23:52  
+Okay, whenever any
+
+Speaker 1  23:55  
+Okay, welcome back. Um, let's, let's see what you've found. And again, let's practice public speaking, spinning our grounds. Like, why would they correct answer? And again, implement our critical thinking here. So we had four questions. Let's hear group number one then.
+
+Speaker 9  24:18  
+So what our group was discussing, at least for the questions it's like, what led the officials to disqualify the three markets from a SNAP program, according the article, the original like flagging that the federal government had like identified, was that that the store was bringing up even amounts of like, dollar amounts for like the the snap funds like, for the orders. The other thing was that it was, like a few $100 worth of amounts, compared to, like, the area's average of like $13 amounts, which initially flagged it. And so this seems like fine at first, but like, according to a. Shop owners, they were saying that like the shopping customs of like Somalis and like the people who shopped at those stores led to like this sort of system that they had. One of the other things that was flagged was that like these amounts were being charged within minutes of each other, which seems suspicious to the federal government, but the explanation that they gave was that, like the shopping customs of the Somalis and people who shop there, they would like come and then they would like order their their food, and like shopping orders ahead of time. So that way, when they got to the store, the store would just, like, ring those up. Like or like, have already had those orders rung up. So eventually this decision to like, restrict the snap accounts for these stores got, like, overturned after they, like, did some legal litigation. But, uh, the biases in here, like, are heavily biased towards like, like, sort of Western values, or Western ways of shopping, and then like considering that they're like shop owners to be like immigrants from other countries who have like, other ways of handling their business. And so like, like isn't like AI systems. You know, if there were like, AI systems, like set to, like, flag, these sorts of transactions and like, flag these for like, suspicious on like, basis of fraud, like, there could be issues where, like, some variables aren't being taken into account that like certain, like, like businesses and like people getting flagged to have, like, other customs that aren't like, you know, like, in line with the variables that it was said to, like, flag against. I
+
+Speaker 10  26:40  
+guess, oh, we, we also pointed out that this is this article is written 2002 2002 which is right, like after 911 so there probably was a very heightened sense of, like, you know, bias and suspicion of group of people because of that event. And so this group of people got unfairly, you know, targeted because of, you know, like, you know, they said that their transactions were unusual and irregular. So I think that was also interesting to note that a current event definitely probably fueled a lot of like heightened awareness of this.
+
+Speaker 1  27:28  
+Thank you. Does anyone from your group want to add,
+
+Speaker 12  27:36  
+yeah, because we had, we're a group two. We had the what the impact did? Exclude the markets. Pretty much the impact because of their dietary habits and everything they had to spend that much. It throws like 1000s of families that couldn't get their their groceries. So obviously, it definitely impacted the markets, because these people had to go to these specific stores to get the specific food that they needed for the diet. So be fun that. Yeah, it excluding these markets, it affect all these families so they because they couldn't get what they needed for their diets. So,
+
+Speaker 1  28:30  
+okay, thank you. I like to read your comments here in Chad. Okay, who else wants to add? And when I'm asking Who else, I mean, like from the same group, like, so I want, like, if you had like, four or five people, I want not just only one person to speak for everyone, but like people actually communicate and say, I also think that, and then go from there.
+
+Unknown Speaker  28:57  
+So anyone from group two wants to add, I
+
+Speaker 1  29:04  
+Okay, I guess Jason kind of shot everyone down. Okay, let's, let's hear group number three. Then.
+
+Speaker 7  29:22  
+So for group three, we kind of looked at, do we think this was intentional? We thought, you know, causation does not mean correlation. With the and Aaron made a great point of saying, with the information that we've get, we've been given, even with the follow up Article 2018 that was in the hint section, it still feels like they were going on a pattern of activity rather than going after identity. However, this was like three stores, and my AI prompting teacher said that you always have to have a human in the middle when you're making these kind of decisions and not having an empathetic common sense thinking. Human to ask questions and just go in and look at things, seemed like a huge miss. And even in the 2018 follow up, they talked about how arduous It was to be able to contend these charges, and it was you're basically guilty until proven innocent.
+
+Speaker 5  30:22  
+And even in the follow up, I don't think that there was any targeting the person who was in the third article under the hints like the person who was flagged and had his his ability to accept payments taken away, he had gone against the rules. He had broken the rules. It's unfortunate, because he was doing this kindness to his community, but he still broke the rules. He did go against the agreement he had with the USDA. So I don't, I can't like, it doesn't feel like that's targeting if you actually do something wrong. So I yeah, I don't think that the officials were with the information we have intentionally targeting the Somali markets. I think they were. They were victims of the context of the times cultural ignorance and a lack of human go between
+
+Speaker 9  31:23  
+that's like. The thing with like bias is that it's not always intentionally targeting. I think we're getting caught up on this like targeting, word like an intention.
+
+Speaker 5  31:34  
+Well, the question was, the question was, the question was, do they intentionally target
+
+Unknown Speaker  31:41  
+like? That was the legit question. So I just
+
+Unknown Speaker  31:43  
+wanted to expand on that. Thanks. Okay,
+
+Speaker 7  31:45  
+yeah, it's a good point, Donald, but it's but, I mean, like, we are trying to get to the the conscious versus unconscious, and our question was about conscious bias, but you're absolutely right. There's so much that we do in our decision making that we just don't know about, and exposing that
+
+Unknown Speaker  32:00  
+becomes a dei article,
+
+Speaker 2  32:02  
+whatever. I think another important point to make is like this, um, you know, this was pretty early on in their move to the EBT system, which, you know, you can, you can kind of see how they got there, right? It's like they can, all of a sudden, they have the ability to monitor all these transactions and have all this, you know, data to process, and they, they didn't have a lot of accurate guidance that you would normally get from human oversight, which is how they previously disqualified people, right? So I think, like Aaron said, you know, this is, it's kind of just like, this is there. It's like a they're a victim of this system that they just started at that time. You know,
+
+Speaker 1  32:52  
+I like how here we're not trying to do a debate, but we're trying to look from different standpoints. So this is actually kind of cool here,
+
+Speaker 7  33:01  
+it kind of got back into the question that brought up, or the point I brought up before, about normalcy, or the idea of what's normal versus what's irregular. When you have a system that says this is regular, this is our culture, and you have irregularities that are simple norms of another culture, that's where a lot of these biases get exposed, right? This is like, I bias this towards regular behavior.
+
+Unknown Speaker  33:30  
+Okay, thank you.
+
+Speaker 1  33:32  
+Anyone else, or we're done with this question.
+
+Unknown Speaker  33:42  
+Um, all right? Well, let's hear group number four then.
+
+Speaker 13  33:54  
+So for considering publication dates, was the issue evolved or remained consistent over time? It's definitely evolved,
+
+Unknown Speaker  34:04  
+I mean. But
+
+Speaker 13  34:05  
+I think the key, let's see, how do I phrase it, the consistency, I think, over time, is that the the misuse of the human element, kind of what was mentioned before is data is helpful, and it can guide and be very revealing, but it can't ask questions. It can't say, Hey, what is the pattern? What is going on? It can't go onto the ground and ask the shop owner. What's this inconsistency that we're seeing that could or could not have a completely justifiable explanation. And so I think that there's probably going to be consistency in that aspect of these scenarios, but it's definitely going to evolve. I mean, technologically we talked about, especially fraud industries, they're probably going to be jumping on the AI train because they're so algorithmically heavy anyway, that. But you know, if they don't, if they if they don't just you can't just take the data at face value. You have to ask further questions, regardless of how good the AI is.
+
+Unknown Speaker  35:15  
+Thank you. Does anyone want to add i
+
+Speaker 1  35:23  
+i see a few shy people here, so I guess I'm just going to do cold calling for the next assignment. What you have to say? Okay, now quickly, before we go on break, let me just introduce you to the causes of bias, because you kind of mentioned it already, just because you also outspoken. But let's see the official types. The two root causes are algorithms that are developed by large teams of company employees, making it difficult for anyone to take personal responsibility for ensuring that they are unbiased and humans have limited insight into why AI algorithms make the predictions they do, aka the black box issue. Oh, this one in particular, I would just align it with neural networks more than with other algorithms, right? Just because most of the machine learning models we can actually explain mathematically and neural networks, while we can explain them, we don't really know how exactly machine decides which particular weights and nodes to update. So two primary factors that can cause bias the people who develop the algorithm, they come from different backgrounds than those impacted by the algorithm, which some of you mentioned, I believe, once you were answering one of the questions that we had for the previous assignment, and the algorithm was trained with biased training data. Speaking of this, by the way, does any of you know the technique, word to back for natural language processing, say that again. Word to back, it's little spell like word number two, back for vector, no. So it's pretty much a technique that gives
+
+Speaker 9  37:19  
+for language model like, yeah, okay,
+
+Unknown Speaker  37:23  
+yeah, you've heard about it, yeah,
+
+Unknown Speaker  37:27  
+yeah. So this information technique that
+
+Speaker 1  37:31  
+places values or numbers to each of the words out there, right? Because machine can't understand words, but machine can't understand numbers, so each word is given a vector, okay, represented as a vector. And vectors have some operations, or they can
+
+Unknown Speaker  37:51  
+be applied,
+
+Speaker 1  37:53  
+some be applied on some operations, like they can be edits obstructed, right? So if you do like each word as a vector, if you represent each word as vector, and then you would try to add another word, you would just see the summation of these two vectors. So say that would represent those two vectors together. And so they did this experiment when they did something within, let's say hard working professional man and then hard working professional woman as three different words. I think they use like two words, professional man and professional one. But it's not the point. And so once you add these two actors as professional or hardworking man, and these two vectors together as professional or hardworking woman. For the first one, it was giving you the word programmer as the outcome. And what do they think was given for the second example, and maybe some of you have heard about it, they can say professional on women. What do they think is going to give
+
+Unknown Speaker  39:05  
+me? Did it do, like, nurse or something? They
+
+Unknown Speaker  39:07  
+were they were given housewives.
+
+Speaker 1  39:12  
+So it just tells you, right, that it's pretty much the same kind of meaning men and women in terms of, like, we're talking about people here about humans and then the same words, either hard working or professional or like some synonym, exactly the same word, but it gives you a different outcome. Why did it happen? Just because there was bias in articles, books, any type of text that that technique, word to back was trained on. So pretty much this second example here is what I try to explain so minority groups are less likely to be represented on development teams if minority groups behave differently than the majority or different to what developers anticipated their behaviors might. Be highlighted as abnormal or suspicious or being unaccounted for by the algorithm and as unconscious bias can easily cause developers of an algorithm to make decisions that favor their own backgrounds and don't account for others. This can lead to algorithms that perform better for people like those developers and less well for the others, there was like this interesting case, don't want to store the pod, but one accountant on reels, she said she was talking about like, you can claim yourself as a single, married filing jointly, head of household, whatever is the rest. And she was explaining why, actually, if you are claiming yourself as head of household instead of and you're the only one person who's working in like, let's say, two people's household, how you can actually save more taxes if you instead of claiming that you are married and just claiming yourself as one person, so like head of household and still only one person is working, or married filing jointly and still one person is working. Why? Actually, it's not the same thing in terms of taxation. And she explained the history behind it. So one example of bias.
+
+Unknown Speaker  41:23  
+So bias training data.
+
+Speaker 1  41:26  
+Training data refers to a label data set that's used to teach an algorithm how to make decisions. The algorithm bases its decisions on the patterns that it identifies regarding how the data points match the labels. So again, let's talk about that afraid about table. We have bunch of instances, bunch of columns, and all of these features for these columns, they have a label associated with them, right? And the job of the model is to find the relationship between all of these columns or all these features, the same meaning between these features and between each label. So if the data is skewed in some way, for example, it order represents a particular group and under represents another, they train the algorithm over from better when a given data point resembling something from the first group, and worse for the second, which is kind of second nature to us to understand right, to understand that if something is not representative in one way or another, there is no like, I shouldn't say no chance, but swing chance For that minority group to be actually taken into consideration, in contrast to majority of the group. If the data comes from an already biased source, for example, if an automated hiring algorithm is trained on hiring data from a company that has historically prioritized men over women, the training algorithm will lean to reproduce the bias and its decision making. Now let's quickly review this last example here. Let's check your knowledge of machine learning real quick. So when we have some data that is unbalanced, so I mean that we have our labels not normally distributed. Let's say 90% of all the labels are men and 10% of all the labels are women. What techniques do we know that we can use to implement so our machine learning algorithm is more accurate and effective unless bias.
+
+Speaker 1  43:55  
+Here we go. I said that we're not going to do anything technical today, and now I'm asking you all these technical questions, presampling, yes, perfect. What type of resampling do we know?
+
+Unknown Speaker  44:07  
+I think it's called, like, up sampling.
+
+Speaker 1  44:09  
+Okay, so we can down sample, we can up sample. And then there is one more algorithm. It's like, every richer starts with an S, S,
+
+Unknown Speaker  44:27  
+smooth. Yes,
+
+Unknown Speaker  44:28  
+excellent, great job. So
+
+Speaker 1  44:32  
+again, bias was detected back in the day, and people were thinking, okay, what can we actually do to fight it? And so a few different techniques were developed. There, okay, any questions before we go on break?
+
+Speaker 1  44:58  
+All right, if there are no questions. So let's take a 15 minute break, please, and I will see in 15 minutes. Okay, so now it's time for our last activity. That activity has five questions, and I guess since we have four groups, we can just ask group number one to answer the first two questions and then the rest of the questions in order. So in group number two, we can answer third, group number 3/4, and group number 4/5, let's spend 20 minutes, if our teams could please help us
+
+Unknown Speaker  45:36  
+to be placed in breakout rooms.
+
+Speaker 1  45:41  
+All right, welcome back. So let's, let's see what group number one has to say.
+
+Unknown Speaker  45:50  
+Okay, so
+
+Unknown Speaker  45:53  
+we're answering the first two questions.
+
+Speaker 14  45:58  
+The first question was, what did the algorithm do?
+
+Unknown Speaker  46:04  
+Assuming that we all read the article,
+
+Speaker 14  46:09  
+the algorithm was specifically designed based upon, based upon the cost in healthcare and not necessarily the need. So what the algorithm, what the algorithm was doing was determining the cost or or basing this decision on, on what was cheapest for the company, and then what information did the algorithm use to make its predictions? We had a couple of of things to to discuss with this. Give me a second here, as I'm kind of organizing some of my notes here. Actually,
+
+Unknown Speaker  46:58  
+does some of my group want to help me out here.
+
+Speaker 3  47:02  
+I mean data, the data was on, like, the amount of money that that each person was spending at the hospital, because the guy was saying, oh, that's like, such an efficient way, and it doesn't need to be cleaned.
+
+Unknown Speaker  47:13  
+That was yes, yes. The
+
+Unknown Speaker  47:19  
+other thing that we noticed too was that
+
+Speaker 14  47:23  
+the the data was unbalanced. 12% so of the 50,000 patients, 12% were black, and 88% were white. And as we've been learning in our class, with unbalanced data, and based on, you know what, Dax was just saying, sounds like they got the information based off of what was easiest for them to do. So they didn't, it didn't seem like they cleaned any of the information, which would also suggest that they weren't balancing the information. That was a that was something, another insight that we had.
+
+Speaker 9  48:01  
+Yeah, another thing is that having only 12% of the black population represented in data when, like, the national average for the US is like 14.5 to 15%
+
+Unknown Speaker  48:20  
+okay, thank you.
+
+Speaker 1  48:22  
+Let's, let's see what group number two has for us.
+
+Speaker 15  48:31  
+So he realized that, I think the question was asking, what information did the researchers use to determine that the algorithm was biased, basically, with comparing the risk scores across demographics, namely, the black to white, black patients with the same risk scores as white patients had more untreated illnesses and worse health conditions, because the proxy that was used was their previous healthcare expenses, so therefore they were not able to receive the same healthcare when they needed it.
+
+Unknown Speaker  49:14  
+Okay? Thank you. Anyone else from your book? You
+
+Speaker 1  49:34  
+all right, I guess that would summarize it. Let's hear our next group, please.
+
+Speaker 2  49:42  
+Um, so the impact of this was that the program was less likely to flag eligible black patients for high risk care management. So they did that population just simply didn't get the care as. Part of those high risk programs.
+
+Unknown Speaker  50:06  
+Okay, does anyone want to add anything?
+
+Speaker 7  50:11  
+Conversely, you have white patients receiving potentially unnecessary care where black patients are denied critical care. So you have, you have this seesaw effect. The other one is just obviously that you have folks who are in need and like, group two, I think, pointed out, if you're basing the proxy on like, how much did you spend before, when you didn't have access and you didn't have the means to spend any money on any preventative care, and you're only there when you absolutely need it, then you don't have that previous statement. And so folks who really need that care are not given the level of care that they need,
+
+Unknown Speaker  50:54  
+right? Yep,
+
+Speaker 1  50:56  
+okay, thank you. And let's, let's ask our last team, group number four,
+
+Unknown Speaker  51:07  
+okay, let's see. Let's see who is in that group
+
+Speaker 16  51:09  
+of the bias. I mean, we've kind of beaten them to death. It's, you know, the fact that the algorithm used cost as a primary determining factor, without considering people's access to resources and whatnot, cost of living that would, you know, make their their cost appear to be on par with somebody who is healthier. The other part of it, again, is like the huge disparity in the data set, not accounting properly for for everybody. So that's that's really it.
+
+Unknown Speaker  51:50  
+Okay. Does anyone else want to add anything?
+
+Unknown Speaker  52:00  
+I just think with
+
+Speaker 17  52:03  
+trying to classify who needs the most health care, like, I don't know that there is really a good measure of who needs the most. I think it's a lot of it is subjective. And you know, whether it's ER visit or cancer or something where it's not er, but it's a very serious condition. I think it's kind of hard to find a good measure of that. I think I heard a comedian once say that, you know, it's whoever moans the loudest that gets the most treatment or the most help quickly. But anyway, I just thought, I just think that's kind of a difficult thing to do with this problem in general.
+
+Speaker 1  52:44  
+Okay, thank you so much. You all have your analytical mindset here. So last part that I need to share with you, three possible strategies for avoiding algorithm bias auditing for actively review algorithms to seek out bias. This can be done internally or externally, so either you have a specific team within your department that can do it, or you just hire your party vendor. Transparency and documentation make algorithms more transparent, so that it's easier to point out overlooked areas of bias. Developers should be open about the source of data being processed, the specific information the algorithms uses, and how it prioritizes information and standards for what to expect as a result from the algorithm and contestable outcomes, building mechanisms to provide feedback and contest results. For example, this thumbs up or down systems for recommendation algorithms. So checklist for avoiding algorithmic bias, existing systems. Investigate how the system works. What it trained using historical was it trained using historical data? If so, think about biases the historical data might contain. Remember the case when I told you about professional man and professional woman? Right? Probably back in the day when that technique just came out. Most of the books and articles were about how a woman has to have her place in the kitchen and a man has to contribute to the family. Research similar systems to find out if they include examples of highest this particular case is widely used for research papers, people always trying to find some particular example of bias that was included in some algorithms for techniques, and they further trying to research it. For example, news media, maybe like five years ago, lots and lots of academia folks were based in their. Based on their researches on news media and how biased it is. Try auditing the system by testing it to find out if the accuracy of its results vary according to your input and check that the practices were consistent the results of the system exists. Systems and development, consider the types of people your system will serve or impact. How do these people compare to those who are developing the system? Make sure your team is aware of any differences and teach them to seek out potentially biased decisions. And I wouldn't say just about bias here. I would just say it's not it's also about not having that information. There is that this YouTuber, and he posted he wanted, like to represent, like to give a lesson on some NLP course, and he was using, I think it was fast text, so, like, it's a model that developed by Facebook. And he wanted to say that sometimes the model is not good enough for particular data. So in his case, he used some menu. I don't remember what was his national origin, but he used some menu of dishes, and based on that menu, model could not actually analyze that those words, let's say, and he's like, for example, if I was interested into analyzing some particular field of cooking of food from my culture, that particular model would not be able to help me, just because the training data did not include some particular menus of my food preferences for my culture. So again, it's not just only that someone wants to include the bias. It's sometimes the data source which was used for the modeling did not have enough information. Carefully review your training and testing data sets to find out if they under represent or over represent any groups of people, as you just witnessed, for example, the article that you just read for the previous assignment, consistently document your work in plain language so that others in your organization can both review and understand it as much as possible, choose model and techniques that people can understand and create an internal process for auditing your system and identify someone outside your development team who can test that process, pretty much you need a third pair of eyes who can be unbiased to you, to your teammates and the work that you do, and just can give you a fresh outlook of your work.
+
+Unknown Speaker  57:44  
+Any questions.
+
+Speaker 1  57:57  
+So in this lesson, you learn how to explain what ethics means, summarize the major ethical concerns related to AI, explain why algorithm bias in such a significant is such a significant ethical concern, plus some common causes of algorithmic bias, and analyze a case study in which researchers identify algorithm bias in a system. If there are no questions, I thank you all for your time, patience and energy today, and the session is over and we're going to start office hours.
+
+Unknown Speaker  58:41  
+Thank you. Bye.
+

@@ -1,0 +1,693 @@
+Speaker 1  0:17  
+Recording there. Hello everyone, and welcome to today's class. So I am going to be substituting for the next seven classes, including this one. So I'll just tell you a little bit about myself and about what we're going to be doing, and we can start with today's class. So most recently, I was the instructor for the AI boot camp at the University of Pennsylvania. UPenn, a little bit background about myself. I had an academic career at institutions such as Stanford, MIT, University of Toronto and London School of Economics. I had a focus on machine learning, on statistical econometrics and game theory and cryptography. I also have several years of industry experience in the quantitative traditional finance sector as a senior data scientist and AVP and a quantitative analyst, and I have experience in the web three space, currently being a founder and CTO working on deep research problems around the decentralized AI dai and cryptography. So if anyone is interested in any of the above, we can talk about it during office hours or breaks, or whichever you prefer. So as let me go ahead and share my screen there. As you are probably familiar from the last two classes around AI and laws and regulations and ethics, these classes are going to be more theoretical in nature, then they will be quantitative or mathematical or or statistical in any way. So so it's going to be just a conversation. And of course, if anyone has any questions besides this, we can take those to office hours. I would be more than happy to delve into any of of the questions that you have, and even if it's something that you want to go beyond the course, we can do that, especially if you want to do something on understanding, where did this come from, or what's the why is the equation like this? What is the math behind this? So usually in my classes, I focus so much on the math and the statistics side of things, so that you can actually not only apply them, but understand them. So that's certainly something we can do. But besides that, I'm going to be giving you today's class and then the projects, which we will talk about tomorrow. So today's lesson, before we start, anyone has any questions, any input, any comments?
+
+Unknown Speaker  2:58  
+I noticed we have a new ta too.
+
+Speaker 2  3:03  
+Sorry, what was that? So we have a new ta as well, right?
+
+Speaker 1  3:07  
+Oh, I didn't know that. That is me. Susanna, vija, okay, okay. I thought you're not, no, if you want to introduce yourself,
+
+Speaker 3  3:16  
+yeah, hi guys. I'm vija. I'll be TAing as well for the next few classes until the first of April, until your regular TA is back. And if you have any questions, let us know we are happy to help and support
+
+Unknown Speaker  3:36  
+Perfect. Okay,
+
+Speaker 1  3:39  
+so today's class is going to be about AI laws and regulations. We are going to focus on the legal and on the regulatory issues that arise when we work with data and more generally, with the AI, more generally with data, but more specifically with AI. And later in the class, you're going to familiarize yourselves with some of the specific laws and the regulations that are already in place, and we'll also work on developing some strategies to keep up with this ever evolving field. And as I mentioned earlier, just as a reminder like the two last classes, this will be more theoretical, but of course, understanding the legal and the ethical issues around AI will be critical to your work in the field, and again, sometimes you you might feel like, I'm, like, technically questioning your point of view. It's not that I am against your point of view, but it's just to foster a room for collaboration. So we will now continue where you probably left left off last time, and we are going to discuss more concrete legal regulations that impact the data scientists and the development of AI systems. And as we venture into the realm of the data regulations, you are going to find that it is a complex web and that the rapid technological advancements in the cross border active. Add a lot of complications to these so regulations move slowly, and they're often lagging behind the technology. Technology can spread quickly across borders regardless of where it is developed, and this makes it very difficult in order to enforce regional regulations. So we are going to start by looking at regulations that focus on data usage, since AI systems all work with data and are likely to be impacted by these regulations, so the bulk of our discussion will be focusing on laws and regulations that impact data major areas of data, regulations, laws and regulations that cover data and its use generally share these common goals, which is, one, protecting privacy. Two, keeping data secure. Three, providing transparency into algorithmic decision making, and four, requiring the option of human intervention. So there is no single set of rules that apply anywhere or everywhere, but the legal use of data generally depends on the source of the data. The industry that you're working with or in depends varies across industries, the location of where you are or where your company is, and, of course, the location of the people that you and your company work with. Most companies have entire departments that are dedicated to interpreting the laws and the regulations, including data regulation of the jurisdictions that they operate in. Now let's talk a little bit about three major areas of data regulation, but before we do so, I just like to open the room if anyone has anything to say or to add here. You can
+
+Speaker 2  6:46  
+isn't the type of data also, I mean, like, if we're dealing with PII, or, like, I mean, it's not just locality and industry. It's also just, there's some universal aspects of, hey, look, this is PII,
+
+Speaker 1  7:00  
+absolutely and honestly, if we were to go through the list of what, what the things are, it would be a very, very long list. So we're just focusing on these few things today. But, but certainly PII is, is a very, very major and important thing that takes place here and now. A lot of things, for example, like with with AI now, like they do, technically, sometimes train on this data, although it's not legal in quotations, but there's one entity, like, let's say, open AI or Google, that has all this control. It's technically like a centralized place where it happens. But if you think also about decentralized AI, which a lot of people think is the future of AI. We can't just put it publicly, where everything will be seen to the entire world. So certainly that's something very, very important, maybe one of the most important things about the type of data. Absolutely, thanks for bringing that up. So today we are going to focus about three major areas of data regulation. Of course not. It's not like the entire list, but we'll try to cover three of them, the first one being data security. So data security, what it does is focuses on how data might be unintentionally short, for example, by having data too easily accessible, or by having data at risk of being stolen, stolen by hackers. And this requires that companies have certain minimal security protections in place. And this also requires that there are certain obligations that a company needs to to have in case of a data breach. Now, the second area of data regulation is data privacy, which focuses on how data gets intentionally collected or shared. So the first one was unintentionally this one is how it's intentionally collected or shared, so, for example, the sale or the sharing of databases with industry partners or customers. And these regulations would limit how data can be shared. They would require consent for data sharing, and they would set standards for transparency so that customers are informed about how their data is or can be assured, which we can argue to some level of how much we are actually following these laws or not following them. And finally, the third area of data regulation is the automated decision making, which focuses on how decision making algorithms, such as pre policy algorithms or automated hiring processes impact people, so this requires people are informed about the automated decisions that are being made about them, and requires that people are able to contest the decisions that are made about them through some sign kind of human led auditing process. Now you are going to. Connectivity and this activity, you are going to be researching us, data regulations as a group. So we, I am pretty sure you're familiar with this, we're going to divide you into groups, and then you are going to respond to a series of questions about these different regulations. And then, after you discuss for some time, we will regroup, and we will discuss together where you are going to actually lead this conversation more than I will. And I'll go ahead divide you into five groups. Each group is going to research one of the fields of the US regulations. So this is going to be about children, Children's Online Privacy Protection Act of 1998 the Copa number two, it's going to be about communications. That's the Electronic Communications Privacy Act of 986, I'm not going to talk about what they are, because you will have access to those through your activities that you can discuss and decide on. But what the fields are, are children, communications, education, finance and healthcare. So you choose whichever team you find interesting, and you are going to share, after we come back, at least one story of an organization that got into legal trouble for violating your chosen role. So you are it's up to you what you want to focus on, what you want to what story you want to take, take, and then we'll come back and discuss together before I go ahead and open the breakout rooms. Does anyone have anything to add or say or comment on?
+
+Speaker 2  11:32  
+So I assume it's okay for us to choose the same topic and have two different groups talk on the same topic.
+
+Speaker 1  11:38  
+So so you can it's just going to be a bigger group technically, unless you have different stories,
+
+Speaker 4  11:44  
+five that are randomly selected. But do you want people just to choose which one? Yeah,
+
+Speaker 1  11:48  
+no. People will choose their groups. It depends what topic you're interested in. So let me modify that real quick. Oh, you're creating the breakout rooms. Okay? Already, already. If you want, if you don't know what the names are, I can, I can create,
+
+Speaker 4  12:07  
+okay, perfect. I'm just saying so people can just go to which room they're interested, yeah, exactly.
+
+Speaker 1  12:12  
+So whichever topic you're interested in, you can join that, that group. Okay, so,
+
+Speaker 4  12:18  
+yeah, I'll start going whenever everyone's ready. Let's have it set up, right? Allow person choose room. Yep, I have it all set up, right? So whenever you're ready, I'll hit the button and I'll begin. Yeah, go
+
+Unknown Speaker  12:31  
+perfect. Thank you.
+
+Speaker 1  12:36  
+I'm actually going to close those rooms. Sorry. I just I see a room one, room two, room three. I just want to name them
+
+Unknown Speaker  12:43  
+so they know what. I don't think there is a good way to name them that I know.
+
+Speaker 1  12:46  
+Yeah, like, I'll do that. I got it. That's okay. Thank you. Okay, because
+
+Unknown Speaker  12:51  
+I just haven't done that before.
+
+Speaker 1  12:52  
+Yeah, that's all right. Just so they know not going to room one, but going to healthcare, technically, no worries. Just
+
+Unknown Speaker  13:00  
+take it so I know how to do that. So
+
+Speaker 1  13:02  
+there's next to the room, it says Rename, and then you press on that and Okay, so good.
+
+Unknown Speaker  13:13  
+Since you're doing it, I'll let you do it. Yeah,
+
+Unknown Speaker  13:17  
+moment education. We'll be
+
+Unknown Speaker  13:18  
+stepping on each other. I
+
+Unknown Speaker  13:25  
+there I have this at the timer for 20 minutes. So,
+
+Speaker 1  13:31  
+okay, we'll see everyone in like 20 minutes or so. I don't
+
+Speaker 4  13:35  
+see it having Chad changed on them. Maybe it has, okay. I
+
+Speaker 1  13:42  
+A welcome back everyone. So usually I would have like a great ask of someone to be on camera, please. So whoever can go on camera, that would be much appreciated. So what we are going to do now is we're going to go through each of these teams, and then each team will want to talk about the story that they went through, what their thoughts are, and then we can open room for discussion. So having said that, can we start with the children team.
+
+Speaker 5  14:29  
+Yeah, so let me get my camera on. Thanks. So the Copa, hold on, let me pull it up. Yeah, Children's Online Privacy Protection Act of 1998 or COPA. Basically, it makes it so anything collected on children under the age of 13, parents need to be notified of or and parents need to give a. Up permission to collect or use that information, and also you need to limit the information collected in what it's used for. So the two cases that we looked at were one from YouTube, where they had been fined for several 100 million dollars for collecting data off of YouTube channels that were geared specifically towards children. And then another case, this time for the company epic, which runs the video or the game platform Fortnite, they had been collecting data for children under the age of 13 to include email addresses, but also were by default, allowing them to join and chat in game with strangers. And they were fined, I think, 202 170 some odd million dollars for that. So you know, both cases, they were collecting information and utilizing without the consent of the parents or notifying the parents and the FTC, in both situations where the group that kind of held them responsible for it. I think we, both, all three of us in our group, agreed that, you know, these companies had violated the Copa acts and were held accountable. The one thing that you know we talked about was the money was really given back to the US Treasury, rather than going out to those people that were affected by this. And then one of the things we talked about, you know, with AI, how could AI help with situations like this? Kind of talked about how, you know, right now you've got parental controls with, say, web browsing and stuff like that, where you say what a child can and cannot browse to or search and stuff like that. So it'd be something similar like that with interacting with AI platforms. So that way it limits what the you know child can say, ask or get in response to their questions, as well as, you know, maybe even the platforms and AI tools that they would have access to. But it's also largely in part on the parent to make sure that they're setting up those types of systems properly. Because I know a lot of times parents give their kids a lot of leeway, and when they're asked to input their ages, I know my kids at the time said, Oh, I just put in that. I'm 22 and I'm like, well, that's not doing us any good if you're lying about your age.
+
+Unknown Speaker  17:55  
+So yeah, that's kind of what we discussed in our
+
+Speaker 1  17:58  
+group. No, that's That's amazing. Actually, you did cover a lot and a lot of interesting questions that you raised beyond just whether or not it's morally right, but how to prevent it and how to correct for it, and how to be accountable. So anyone has anything to add
+
+Unknown Speaker  18:17  
+to what Jonathan said here? I i
+
+Speaker 2  18:23  
+definitely hear you on your kids pretending that they're to be older. That's what I found in my eight year old YouTube
+
+Speaker 6  18:32  
+account for forever, though, like lying on like the disney.com or whatever, like if you're 18 years or whatever. Like to get on the game websites or whatever
+
+Speaker 7  18:43  
+I like, to get my first Facebook account. I'm not Facebook MySpace. My first MySpace account.
+
+Speaker 1  18:50  
+I know. Am I the only one here who has never lied about that I
+
+Speaker 8  18:55  
+wasn't allowed on YouTube until I was 14. I don't think you could get away with doing that for kids nowadays, it's just too easy to have something that connects to it. But at least for, you know, zillennial born, you know, y, 2k, like, you know, you it's back then it was, it was way different attitude, like, Oh, you, you didn't, you weren't, like, I was you. You just were not allowed on it, and it was too hard to get to get to it because you had, like, the Family Computer, and that's it. Now every like, nine year old has a cell phone. I haven't
+
+Speaker 2  19:27  
+actually, during that had the phone phone tied up.
+
+Speaker 6  19:30  
+Utah is actually doing the first time I've ever seen, like, proper regulation, I guess, or they're, like, trying to mandate that. I think they just passed that legislation where it's like, you can't have your phone in schools, but they'll, like, take it. Like, actually legislated Well, well, the
+
+Speaker 8  19:45  
+default, yeah, so the default is no phones and is no phones in school. Individual school districts can still make their own policy, whether or not they want to allow it,
+
+Speaker 2  19:59  
+yeah. Like my kid. They have a brown bag thing. So if the teacher brings brown bag out, they're like, Hey, you're
+
+Unknown Speaker  20:04  
+using your phone my, um, what in the breast?
+
+Speaker 7  20:06  
+My mom's a physics teacher at a Utah high school, and she has a giant pouch container, kind of, you know, the ones that we kind of like put Beanie Babies in, but she has one of those hanging on a door and then with numbers. So the kids just go put their phone in, a number thing for the class, and then pick it up on their way out, just to kind of like converge. Because it's also a safety thing, like, if something happens or you need to get hold of your kid very quickly, excuse me, it you have to be able to have it.
+
+Unknown Speaker  20:39  
+So I think that's one way.
+
+Speaker 1  20:42  
+Yeah, that's that's a great point. Actually, the safety part of it, and especially in more in certain areas, more than others, it would be a more of a necessity, comfort. Absolutely great discussion, everyone. So let's move on to Team number two, which is communications. Yeah,
+
+Speaker 9  21:05  
+yeah, I'm not, I'm not sure who in our group is going to share. So we'll all do it. Do you want me to sure if you want to, if you want to do it? Desmond,
+
+Speaker 10  21:15  
+okay, I guess I'll help you. I want to now. Will I fine? I guess so ours was the Electronic Communications Privacy Act of 1986 the ECPA, and so the statute that extends government restrictions on wire taps from telephone calls to include transmissions of electronic data by computers so like emails and stuff messages and stuff like that. It protects wire oral electronic communications with those communications are while sorry, while those communications are being made, are in transit, and when they are stored on computers, the Act applies to emails, telephones, conversations and data stored electronically. So we found a case the United States first councilman, where Bradford C councilman, the Vice President of interlock Inc, and they, they were suspected of violating, violating this act. The company, interlock owns an online, rare and out of print book listing service, and so the claim of what they violated was that councilman, homie, the Vice President, man, directed his employees to intercept and copy all incoming emails from Amazon to interlocks dealer customers without their knowledge or consent, thus violating the ECPA prohibition against unauthorized interception electronic communications.
+
+Unknown Speaker  23:15  
+So
+
+Unknown Speaker  23:17  
+the DOJ is responsible for enforcing the rule.
+
+Unknown Speaker  23:22  
+There was a trial. There were multiple trials
+
+Speaker 10  23:26  
+where they were, at first found
+
+Unknown Speaker  23:32  
+they were indicted
+
+Speaker 10  23:36  
+on charges of conspiracy to violate the Wiretap Act. But then they were later acquitted.
+
+Speaker 10  23:50  
+We disagreed with that, with that decision, collectively, or at least, I think three, at least three of us did so it was because I just don't think that they should have that. Like they knew that they did it. They did something wrong it, just somebody chose not to, like, enforce it after it was appealed. So like they were found that they violated the act at first, but then after multiple appeals, they finally were acquitted.
+
+Speaker 1  24:27  
+Very interesting. Must must be a set of very good lawyers there.
+
+Unknown Speaker  24:32  
+They must have had them on it,
+
+Speaker 10  24:34  
+because this was, this was going on for the years. So you know.
+
+Speaker 1  24:42  
+So what anyone has anything to to add here?
+
+Unknown Speaker  24:55  
+What I will say is that like this,
+
+Speaker 10  24:59  
+one of the things. Things that I was thinking about is how it relates to AI and how there are regulations for AI email AI driven email filtering, and it's something that I personally have to like consider, because at my job, I am responsible for implementing like filters, and not just like our triage model, but what items get responses like what emails get filtered from our incoming box and pushed to our AI to see if we have enough like workflows with high enough like confidence threshold in order to reply accurately or not. So I think about like how much goes into, just like partnering with these, with these companies, like with AI companies and implementing and how, how many hours our lawyers have to spend looking over how, not just like the company's data is protected, but also like our customers data, and then like what It's done with that data. When certain people, like, ask for that data to be removed, like, certain people ask, Will just email and ask for, like, all their information to be deleted, and then is that deleted? Not just like in our system, but also like in a third party system as well. Like, it's a lot to it's a lot to keep track of. Oh,
+
+Speaker 1  26:41  
+absolutely no, I agree more. Okay, perfect, and let's move on to Team number three, education.
+
+Speaker 11  26:57  
+I guess I'll go, okay, all right, so our source education and the law is FERPA, which stands for the, sorry, I lost my place the family, education, Rights and Privacy Act, and So we found kind of a working case right now where basically a school suspect of a student using AI to generate the paper their paper, and so they upload it to basically a service that determines if there's plagiarism or if AI was used. And so it said that there was like a 90% probability that the AI was generated and so, so that basically comes into question, like, if, like a student's paper is considered like a document, a record of a student that where, like a School, a teacher uploaded that document to like a third party, and is that in violation of like, releasing a student document to like a third party? So, um, while I agree, like, you know, nobody should cheat themselves in education, like there was good reason for maybe that person, for that teacher to like, maybe roll out if there was plagiarism used, but I think I would still consider it like a student document that probably would be protected by FERPA. So I think maybe to kind of circumnavigate that, maybe school should have an agreement with the parents to say, like, if they could use a third party to, like, use that to, you know, to basically grade papers, to suspect students of using AI to generate their answers. So, but then again, like, I mean, AI is another tool to be used in education, so I understand why students are using it. I use it all the time, obviously, for a lot of reasons. And so it's kind of like a developing you know idea right now in education where you know what, what places aI have in, like, the school system and like, how do you like students? How to move forward with students, like, interfacing with that that's going to become more relevant. So, yeah, it was really interesting.
+
+Speaker 1  29:36  
+No, that's very, very interesting. And I think education, to me, is special one personally, because I see like education as like the level of education sets the country in a certain trajectory. Technically, I know one professor that used to write one of the questions in white font so it doesn't appear that there's a question, and then they would figure out if the students actually. To the used AI or not, if the question was answered, but I do agree with you, and anyone who doesn't agree, would love to hear your comment is that maybe, maybe the homework should be changed in a way that using AI isn't going to answer the questions, but maybe help you, because at the end of the it's just a tool that it's going to be part of everyone's life, just like using the the internet, technically using AI is but technically finding a way that you can actually teach the students something beyond what AI does. It does kill your creativity. I sometimes when I try to write something using AI immediately, it just completely destroys my my capability, my capacity to write something actually good, and it's gone. So I always try to use like, whatever it is, like Chad pew or whatever at the end, after I actually tried it myself over and over and over, because otherwise it will just be gone. So anyone has any additional comments there?
+
+Speaker 2  30:56  
+I have teacher friends who will use, who will ask their kids to use AI to write the assignment, and then they bring the assignments in. They say, Now, tell me what it got wrong. Tell me what. Tell me what you would, tell me what you would correct. And so they they, they use that as a critical thinking exercise to try to say, okay, look, know the material enough to be able to, like, critically analyze this a lot of times at my work, I'll tell people, if you're going to use AI use it like a very junior programmer who is very excited to please you and doesn't want to admit that they've made a mistake.
+
+Unknown Speaker  31:31  
+Yeah, no, that's ever interesting?
+
+Unknown Speaker  31:33  
+Jesse, actually,
+
+Unknown Speaker  31:36  
+I like that idea.
+
+Speaker 3  31:38  
+I've spoken to a few of the students, and they say the quality that the AI gives on any assignment, especially the written one, is not enough. Like, they're like, Okay, this is like, as though, like a grade five kid has written so it's not good enough to submit as an assignment at a higher level. So maybe minimum marks they might get, but if they're really striving for the higher grades, I don't think they're able to submit that quality.
+
+Speaker 4  32:11  
+I often, I often think that what teachers might do is, if they worried about a student using like Chad, E, P, T to write their assignment, simply question, ask them questions about it, and if they can answer them, Well, don't worry about it, even if Chad she paid he read it, that wrote it, they obviously read it through and obviously thought about what it was saying and everything.
+
+Unknown Speaker  32:37  
+If they can just answer questions about it.
+
+Speaker 1  32:40  
+Yeah, no, certainly agree with both of you. So let's move on to finance.
+
+Unknown Speaker  32:51  
+So we kind of,
+
+Speaker 12  32:56  
+well I started finding kind of I was getting interested in the Fair Credit piece, FCRA one, because my last job was a at a credit repair company that founded summies legally. And so I was, I was curious about that, and I was trying to remember why, exactly what had happened. It turns out it was a little different, so it wasn't quite as relevant. But the discussion still kind of was around that, but it was a credit repair repair company who lost, like a federal level lawsuit, and so their business model collapsed. And so we were all like, Go yada yada yada. It was like a big thing, and it was like in the news and whatnot, but it was more around I was thinking it was more like credit and perhaps data driven. But as we were talking about it, more and more came back and Google searches and stuff that there was a an a different act for, oh, is it TSR, it was, uh, tele, tele marketing, Sales, something where, um, oh, sorry, um, where we the whole model? It was a subscription based model to repair your credit, using legal means. We had, like, an entire law firm to, like, write all this, write all the letters bureaus, be honest, and, you know, yada yada. But because we couldn't guarantee results necessarily, if your situation couldn't be repaired, then, well, I mean, we still took your money, because we still did the effort and the things. But like mine, I got, I got, you know, discounted as an employee for their three years, nothing, nothing worked on, on my credit at the time because of just the nature of the things. And so it was about like making promises and also around taking payment up for. Attempt instead of what was deemed in, specifically in the Telemarketing Sales Rule, thanks Jesse, that they had to take payment six months after the services were proven rendered, which made the business model collapse. Because, you know, you can't, you can't take payments six months after proving it. And this was one where we couldn't often prove that anything was ever repaired if the nature of the dings on your credit are legit and can't be disputed. Thank you for your money. So, so yeah, it was an interesting discussion of the demise of a corporation, I guess so, not quite specifically, like data security or that kind of thing. The more we dug into, you know what actually happened? Realized it was a little off point, but it was still an interesting discussion.
+
+Unknown Speaker  36:01  
+No, absolutely,
+
+Speaker 1  36:04  
+anyone to add, ask comment, anything
+
+Speaker 12  36:09  
+about the company name, if anyone's interested, because usually people like to Google
+
+Unknown Speaker  36:13  
+it. So yeah, absolutely,
+
+Speaker 2  36:17  
+some of the things that came up that were AI related were just, you know, transparency and explainability that comes into like, how did your AI come up with? How do you train your knowledge right, as well as just making sure that you're training them on regulation, that you're training them to be compliant and good, legal citizens that are AI citizens, you know that there's a whole like, part of that. It's like, if you're going to do something efficiently necessary. It isn't necessarily legal,
+
+Unknown Speaker  36:46  
+absolutely
+
+Unknown Speaker  36:48  
+okay, and with that, we'll end with healthcare. Sorry, I
+
+Unknown Speaker  36:59  
+was trying to get myself off here.
+
+Speaker 13  37:02  
+And get my paperwork interview. So in the group that did healthcare, we chose anthem Inc, which is one of the largest healthcare insurance companies in the United States, and they violated the HIPAA regulations when they failed to protect sensitive, protected healthcare information, so like social security numbers, first and last names, Dataverse, all of that kind of stuff. So when talking about what they specifically violated anthem, violated the HIPAA Security Rule, and they violated in three different parts by failure to implement adequate safeguards, and then they also lacked the proper access codes from allowing hackers to come into their system, and then they also had insufficient monitoring of their system to detect unauthorized access in their system in a timely manner. So the next question you asked was, who is responsible for enforcing this rule. So in this specific violation, it was the US Department of Health and Human Services and also the Office of Civil Rights. And when they went in and looked at the organization to enforce enforce the rules they they did an investigation, and they were able to identify that Anthem security system and all the failures that they had in it. And then they also required anthem to pay, and it was a record high for HIPAA and all of history they were. They went through a settlement for $16 million they also enforced anthem to implement like corrective action and to make sure that they implemented stronger security measures and compliance in their in monitoring their system. And then, in addition to the $16 million the state attorneys sued anthem as well, and they sued them for $39.5 million in their settlement. So it ended up being significantly more um, so then the next question was, do we agree with this? And I think, I think I can say I do. The breach that they suffered from released 79 million people, and they're sensitive. Of like PTI, so a 79 million people's personal information was leaked, and because of this, I think that it was important for them to really make a statement for cyber security negligence, because this is just unacceptable, in my opinion. I that's kind of where I stand with it. And then when it comes to how this would relate to AI systems, I think the one thing that everybody needs to remember is that if they're utilizing AI in in healthcare data, they need to know that when using AI, it still falls underneath those HIPAA guidelines. It's not exempt from it. I think that understanding that and understanding the importance of proper security so that they don't weed down a HIPAA violation like anthem did. And then also, I do think that there's some, like AI tools that you could use for security purposes. One of the things that it said in this article was that they got in initially from an email. So I think that some security tools that identify malicious activity in their system, as well as hacking emails or um, hacking the tents, um, I think that could be significantly beneficial in regards to the situation that Anthem face.
+
+Unknown Speaker  41:42  
+So that's why, our team has
+
+Speaker 1  41:45  
+thank you for the very structured answer. Actually, I was trying
+
+Unknown Speaker  41:49  
+to make it fit, and I had some time
+
+Unknown Speaker  41:54  
+so great.
+
+Speaker 1  41:56  
+Certainly would have expected more than the money they have to pay. Given how many people were impacted and how big the impact was, it's just a shame. Like 16 million, think you said 39 for something.
+
+Speaker 13  42:11  
+The second lawsuit that the state attorney pushed on them was $39.5 million
+
+Speaker 1  42:16  
+and given how much money they make, it's it sometimes should be, maybe, relative to how much profit they make, the B that the losses could actually be. Also, I
+
+Speaker 13  42:27  
+was actually reading an article where there were some people saying that they felt that the penalty wasn't big enough because insurance companies have such deep pockets, and they felt that they should have reinforced a higher penalty to ensure that like security across the industry would hold up, just so that this wouldn't happen again. So I thought that was kind of interesting, because when I see 16,000,003 point 9 million, I think, oh my gosh, I can't even imagine, but retrospectively, that industry that that's changed to them.
+
+Speaker 1  43:08  
+Yeah, no, it's, it's nothing to them, absolutely. So anyone that's, that's a very interesting topic that I think every American can feel. So anyone here wants to add anything or comment on anything I like Tiffany's
+
+Speaker 2  43:24  
+comment about, like, AI tools needing to, like, actually evaluate the information, because that's something we do fraud detection for financial industries. And some of the things that we're doing with AI, we have to have flags in place to say, like, make sure that you're looking for PCI information and obscure it if we're doing anything that investigates that information and relays that to an agent so that that that can't be found or that can't be parsed, or that can't be stored somewhere, there's no security.
+
+Speaker 13  43:52  
+Yeah, it's, yeah, it's insane, but this is definitely the largest, I think, that we were looking at another article, and the second largest fine that HIPAA pushed out was 5.5 5 million. So this is significantly larger than anything HIPAA ever done, but this is one of the largest data breaches that they've ever experienced. I mean, 79 million people like it's likely that there's at least one person in this class that was affected by this.
+
+Speaker 1  44:25  
+When was this? Do you know the date of this? Yeah, so
+
+Speaker 13  44:29  
+they were breached on january 29 of 2015 and they didn't catch it and report it until March 13 of 2015 so there was, what, a little over a month before they even recognized that somebody was in their system. To me, that's negligent.
+
+Speaker 1  44:49  
+Yeah, no, absolutely, absolutely, okay. Great, great topic there. I am going to share my screen again. Am, and we can continue, but, but very, very good ending to that discussion. So we're going now to talk about major regional laws and regulations. So as workers in this industry navigate the global digital realm, understanding the international data privacy laws becomes very imperative. Data sharing is not neatly bound by industry, by country or by region, as as we mentioned earlier, regional laws and regulations are playing catch up with a non regional, unbounded tech world. So we're going to talk about the OECD, or the Organization for Economic Cooperation and Development privacy framework, and this is one of the attempts at creating a unified working framework for various industries made up of a loose organization of 38 different countries for the development of shared regulatory principles so it affects work with data primarily through its privacy framework. And this framework includes eight principles. As you can see here, I'm gonna go through them one by one, starting with the collection limitation principle. So of course, I don't require any of you to know this, like diligently, it's just to cross your mind. And then if you want to do like AI and law or something, then of course, you're going to have to do further. But for now, we'll just go over them briefly. The collection limitation principle is that the personal information that can be collected about people should have limits. People should be able to consent to sharing the information that's collected about them, and organizations should collect information in legal ways. The second one is data quality principle, which says that organizations should have a reason for collecting information about people, and that the information that's collected about the people should be maintained so that it's always accurate and up to date. The purpose specification principle is that organizations should determine why they're collecting information when they initially collect that information, and that they should use the information that they collect for that initial purpose and not for any other purposes. The use limitation principle says that information about person should not be shared without the consent of that person, but cases might exist in which for which information about the person must be shared according to that the fifth of these is the security safeguards principle, which says that information about people should be secured to prevent unauthorized access, sharing, destruction or modification of that information. The openness principle says that organizations should share information about their policies and their practices around information about people, and that people who interact with an organization should be able to find out what information that organization has stored and how that information is being used. I am reading, I know, but honestly, for these types of things, there's not much that I can do beyond reading here. Um, the individual participation principle is that people should be able to confirm whether an organization has information about them, which is pretty, pretty difficult by the way, request from personal experience, request all the information relating to them that an organization has stored, receive that information within a reasonable time frame, at a minimal cost and in a format that they can understand. Request changes to the organization's information that relates to them, request that personal information be deleted from the organization's record and be provided with reasons if any of the preceding requests, if the preceding requests are denied. And finally, there is the accountability principle, which says that organizations should be held accountable for following all the preceding seven principles.
+
+Unknown Speaker  49:06  
+So that was the OECD.
+
+Speaker 1  49:10  
+The next one is, I think a lot of you are familiar with these. The next one is the GDPR, or the general data privacy regulation. It is a set of rules based on the OECD privacy framework and applies specifically to the organizations that interact with EU citizens. So it covers an extensive range of topics in this two events to cover it in detail, but just the takeaway is that it implements the same basic ideas as the OECD privacy framework any organization that possesses data associated with EU citizens and that doesn't comply with the GDPR can receive huge fines, so these organizations are incentivized to follow it. And finally, in addition to implementing the eight principles of the ECD privacy framework, the GDPR has. Rules about automated decision making, and these require transparency around decisions that an algorithm or a computer program makes, and the right to contest those decisions. The second third one is the CCPA, or the California Consumer Privacy Act. It's a legal effort from 2018 that specifically covers interactions between businesses and Californian consumers. They give some them three of menu rights, which are the right to know what information gets collected and how it is used Chad or sold, the right to delete that personal information and to opt out of it being shared and protection against discrimination, including in terms of price or limiting services to users who exercise these rates. Now, the core difference between the CCPA and the GDPR is that the CCPA does not require active customer consent or P PII collection, but it does require notice of that collection and the opportunity to opt out of the sale of their information. Now this ties in with specific kinds of third party cookies and websites that and has led to the increase in these pop up and user setting options on websites that allow opting out of cookies that you would have noticed, probably over the years. Now, before closing out, I just want to remind you that the regulations covered are region specific, and that they differ differ from country to country and from state to state, and to give you a checklist for navigating the data regulatory environment, a non comprehensive checklist, but one consider your industry and the types of data that you process. Research the rules that are specific to these. Look up cases of other companies in your industry that are facing legal charges as a result of their use of data. Research the data and technology rules for your location most frequently, like big companies have department to do that for them, they don't need you don't need to care that at all. But it depends what you're working in. And if you're in the US, you want to look up all the relevant federal and state rules. If you're outside of the US, you want to look up the rules for your region. And if you're international, you technically look at different pieces. Third, figure out where your customers are located. If you have customers who live in places with comprehensive data security and data privacy rules, like EU member states, the UK or the state of California are going to adhere to those rules. And finally, determine if your if you process the data of children, or if children will likely use your product, and if so, you're going to want to handle their data in accordance with the relevant tools based on the locations of where you or your customers are, questions, comments, anything to add. I
+
+Speaker 2  52:54  
+think the big boogeyman of GDPR when we first started hearing about it was that it applies to any European citizen, no matter where they are, like if they become a customer of you, then GDPR applies to your business. Is that still true?
+
+Speaker 1  53:11  
+As of my last information, that is still true, but I can be wrong. I can't confirm it, given that with the legal stuff, things change very frequently, and I'm not at a legal position to answer that, but I do believe it is
+
+Unknown Speaker  53:32  
+okay, perfect.
+
+Speaker 1  53:35  
+Now we will take a 15 minute break and we'll see everyone afterwards. So let's see what time I am in a different location. So I think
+
+Unknown Speaker  53:50  
+I should not off by
+
+Unknown Speaker  53:53  
+58 I don't know what's the
+
+Unknown Speaker  53:57  
+one second. Let's see.
+
+Unknown Speaker  53:58  
+I think, what time
+
+Unknown Speaker  54:00  
+is it in your locations? It's 45 minutes. It's 845.
+
+Unknown Speaker  54:06  
+Would be 1045. There, I think where you are,
+
+Speaker 1  54:08  
+yeah, at your location. Just we'll come at the at the hour. I'm not sure what's the time difference. We'll come at the hour. You're
+
+Unknown Speaker  54:15  
+in Toronto, right?
+
+Unknown Speaker  54:19  
+Hello and welcome back everyone.
+
+Speaker 1  54:27  
+So next you're going to work on an activity where you are going to read an article about how open AI, which I'm pretty sure everyone here is familiar with, the company that created Chad chip T has been accused of violating GDPR data protection guidelines. And then, once you read the article, once you discuss, we'll come back and we will discuss as a class any questions before we open the breakout rooms,
+
+Unknown Speaker  54:56  
+how long and same, same groups I.
+
+Unknown Speaker  55:00  
+No, we'll just do 5555,
+
+Unknown Speaker  55:03  
+random assignments now, okay,
+
+Unknown Speaker  55:05  
+give me a moment here. And for how long
+
+Speaker 1  55:09  
+for? Let's do 15 minutes. Okay, perfect. Thank you. So that's we're
+
+Speaker 4  55:22  
+ready to go. Ready make sure that this I'm going to change to automatically move people,
+
+Unknown Speaker  55:29  
+and now it should be ready to go.
+
+Unknown Speaker  55:31  
+Perfect. Thank you. We'll see everyone.
+
+Speaker 1  55:44  
+Welcome back everyone. Hope that was a good discussion between yourselves and your teams, so we're going to discuss a little bit what you read, and then we will move on. So first, let's start with, is there any volunteer that would tell us a summary of the complaints that were filed against open AI,
+
+Speaker 14  56:13  
+well, basically what I gathered was this one person from Poland, like I try to pronounce his name, but he pretty much asked Chad GTP to, like, produce a biography of himself and and all the information, what that was given, what bunch of it was false. And so he kind of like, you know, accused
+
+Unknown Speaker  56:39  
+open, AI of
+
+Speaker 14  56:42  
+using his personal information without asking and not correcting the data and so forth.
+
+Speaker 1  56:54  
+Yeah, perfect, exactly. So you said it perfectly well. There's just one more thing that the complaint alleges that open AI failed to consult with the regulators prior to rolling out the tool, which is a violation of GDPR article 36 but everything else exactly like you mentioned. So was. I also don't know how to mention that name, but let me give it a try. Is Alex, Nick the first person technically, to bring a complaint against open AI for a privacy related violation.
+
+Unknown Speaker  57:29  
+No, he was not, yeah.
+
+Speaker 1  57:31  
+So in March 2023 there was guarantee, Italy's privacy watchdog that ordered open AI to hold its practice of processing data locally, which is a violation of GDP, GDPR as well, and it was actually forbidden from functioning in Italy until some time afterwards. And did the article make you reconsider your use of Chad, GPT or similar tools? Why or why not? And answer it as if you were in the place of college Nick.
+
+Speaker 14  58:05  
+Um, basically, I, actually, I kind of did that, like, asked it to do biophenone Like, and I think they fixed it, because when I searched it, a lot of it said that they couldn't find any information on me.
+
+Unknown Speaker  58:19  
+So I'm like, oh, okay,
+
+Speaker 1  58:22  
+interesting. That's, that's a nice experiment, right there, but would you be worried about other types of violations that maybe were not addressed yet?
+
+Speaker 14  58:41  
+I personally couldn't think of anything because, I mean, I've recently just started using Chet GCP for this class, so I mean, and I'm probably only going to use it for coding questions, so I don't think I would have any issues with it. So
+
+Unknown Speaker  58:57  
+TPT not. Tp,
+
+Unknown Speaker  59:00  
+thank you for correcting me.
+
+Speaker 1  59:02  
+Yeah, yeah. No worries. Okay, and what changes would open AI need to make to its algorithm in order to meet the GDPR privacy standards.
+
+Speaker 5  59:14  
+So one of the things that I think back when this, this occurred, I think it said back in what 2023 Chad GPT didn't have, or very had very limited referencing capabilities. You know, it would just spit out information, and you wouldn't be able to tell where it came from. However, with newer models and updates, probably because of stuff like this. You know, they provide references to where it's getting this information, which I find useful, because I'll ask it a question, and I'm like, Okay, where did you get this? Or what website did you get this from? And I can go there, and it's very useful. So I think they've, hey. Can steps towards revenue remedying this type of stuff, because in this situation, you know, Chad, G, B, T learned about this guy from some website, this false information or inaccurate information, and it was just kind of regurgitating what it had learned. So really, this guy, this individual, probably should have been trying to find websites that had his information out there incorrectly and address it with them, as well as open AI. But I think my thought was this was a case of somebody looking for a way to, you know, create a lawsuit for notability or financial reasons.
+
+Speaker 2  1:00:48  
+That came up a lot in our group, too. Donald was pretty adamant, of like, hey, look, this isn't like database. This is like you should be going after, like you're talking about problems that have existed for you ever since the internet's existed, where you've got false information. So going after an aggregator is, is an issue. The issue, I think the problem, is, exactly you're talking about Jonathan, is that when Chad TBT looks like a black box, it looks like they're the ones coming from information, versus I was using glean today to go look for information in the company. And it's like perplexity where it cites the art sites, where it found its sources, and I asked the question, that was absolutely wrong, but it cited all sources, so I can look and say, like, what? Why did you think that information was correct and I couldn't find it? So I said, No, I don't trust this and I don't trust this response. So you have to, like, you have to use the tool. It's not just chat to open AI that has to change its perspective. It's us as users that have to change our perspectives and say, hey, look, what is this? Is this the data? No. Or is this an aggregator? And if so, where did it get its aggregation?
+
+Unknown Speaker  1:01:54  
+Amazing point. I couldn't have said it better.
+
+Speaker 1  1:01:59  
+Yeah, no, absolutely agree, then the this, this demystifying of the black box is more of a rate than just, just like a privilege technically. Otherwise,
+
+Speaker 2  1:02:09  
+you become Google and you get a $45 billion GDPR sentiment, you know, it's, it's, it's, yeah, it's just, it's just wild,
+
+Speaker 1  1:02:18  
+absolutely okay, perfect. So let us move on.
+
+Speaker 1  1:02:27  
+So we are now going to talk about AI specific regulations. So AI algorithms are beholden to and often also accounted for in the data regulations that we've already discussed. For example, the GDPR not only covers the privacy concerns already discussed, but also places some limits on AI decision making, particularly where the decisions made can lead to legal or similarly significant consequences to the people that are actually affected by the systems in question. Now, there are different regulations across different parts of the world. Will focus primarily on the US and EU regulations for this section, first, EU's artificial intelligence Act. In short, this Act aims to change the application of AI across industries as it develops beyond what is already accounted for, focusing on limiting harms and the negative impact on EU citizens that is primarily concerned with identifying and placing protections on AI systems. According to an analysis of risk, unacceptable risk refers to systems that pose a danger to people's safety and freedoms, for example, facilitating social scoring processes and enabling discrimination and controls over people and groups or by encouraging dangerous or harmful behaviors. And as this category's name suggests, there should be they should be banned outright under the proposal. Now, high risk refers to systems that can have a significant impact on people's lives, for example, automated hiring processes, loan approval and other forms of vetting systems identified to post such a risk will be regulated with obligations and protections placed on them, along the lines of those already discussed earlier in today's class. Now let us move to the US AI regulation. So unlike the EU legislation that applies across the board to all member nations, EU, US law complicates the legislation because different states may pass the different laws. So 25 states, territories and districts have introduced bills governing AI, and 15 have implemented rules into law. Progress lags behind Europe in a lot of ways in terms of concrete proposals and of drafted legislation. Proposals have been made in Congress to form a specialized agency for the investigation and for the regulation of AI. Technologies and the AI experts have been called in for hearings on the state and risks of AI, including Sam Altman, the CEO of OpenAI. But honestly, this is a little bit outdated, because even if I give you in a week from now, it's going to be outdated given the pace of how things are moving so quickly nowadays. So just this is probably like, keep in mind that it's different now, and the Federal Trade Commission has been investigating open AI and the risks that it may hold for perpetuating misinformation and endangering consumers, as well as concerns for competition and monopoly. Now, the White House had drafted a blueprint for a potential AI bill of rights based on some principles like the ones you see here, safe and effective systems, algorithmic discrimination protections, data privacy notice and explanation, and finally, human alternatives, considerations and feedback, but Again, outdated now, academic and research institutions are also developing proposals around AI ethics. So for example, there's the University of Oxford center for the government, for the governance of AI, and it has published work on the topic of us, public opinion about AI and the offense, defense, balance of AI and scientific publishing on export controls, AI standards, the technology life cycle of AI, domestic politics and so much more. There's also the data and Society Research Institute, which is an independent research that focused independent research that is focused on non on gathering empirical evidence to advocate for more equitable and human oriented legislation that govern emerging technologies, AI being one of them. And finally, there's down touring institute that dedicates itself to research efforts in the areas of safeguarding people from unintended consequences of AI technologies and data science and how they can be used in order to promote social good. Additionally, tech companies have also made efforts at self regulation. Some significant examples include Accenture labs, IBM, Google, Sam, Samsung, Sony and more. Some may have concerns about how the drive for profitability and for market share may have an impact on how dedicated these are to these efforts, these companies are to these efforts. And the other side of the debate says that these efforts at regulation is best left to third parties and to companies that should be allowed to pursue technical technical advancements free from those concerns. Of course, it's a matter of debate, and different people believe different things. And in summary, AI does carry a number of risks that is related to privacy, to agency, to free unimpeded life, if not implemented responsibly, but the nature of technical advancement and of legislative processes operating in drastically different speeds does create challenges for addressing these issues, of course, also there's the messy, buried world of official jurisdictions and legislations that complicates matters for companies working across borders, making it even more difficult to know precisely what the limits are in different areas of operations.
+
+Unknown Speaker  1:08:22  
+Questions, comments, concerns.
+
+Speaker 1  1:08:28  
+Okay, for the last part of today's class, you are going to work on an activity that we will come back and talk about together, and I believe we'll have a little bit more time on our hands, and then we can discuss the project that you're going to start working on tomorrow, very briefly. But in this activity, you're going to have an opportunity to reflect on your personal feelings, your personal opinions and your personal thoughts around AI regulations. There's literally anything that you think that you can talk about, anything that you're concerned in. And then we'll come back and we'll discuss together questions before we go ahead and we open the breakout rooms.
+
+Unknown Speaker  1:09:08  
+So this is activity three.
+
+Speaker 1  1:09:10  
+This is yes, the final activity three, correct. Okay, perfect. We'll see everyone shortly. Hello and welcome back everyone. So as I promised, let's have this last activity before we jump on any volunteers. No need. It's not like group specific, just anyone who has anything that you would like to add, about your comments, your thoughts, your personal feelings about AI regulations, about AI in general.
+
+Speaker 2  1:09:54  
+My big worry with the industry I work in is that you'll have folks in government. That don't agree with what you've been able to find or detect as fake, or AI, or what have you, and decide that we shouldn't regulate output. For example, deep fake detection, if something comes up, is like, Oh, I retweeted this and it was, I thought it was hilarious. And you come back and say, like, well, that's actually fake. Say, Well, how dare you tell me? How dare you fact check me with your AI, you're, how do you know that you're you're reliable, therefore, stop doing what you're doing and what you're doing to detect fake things, or that will lead
+
+Speaker 10  1:10:36  
+Jesse. That made me think about how, like my biggest concern is how many dumb people there are in the world, like people just don't know. Like, AI is is new, but it's not new, right? And so, like the average person, I had a conversation with my sister earlier today, and I was like, Oh yeah, Chad, G, P, T, and she said, what is that? I'm like, Girl, you're only 34 like you're you're not even old. Like, what do you mean? What? What is that? And so to your point, Jesse, like you were dealing with people in like the government, who tend to be older, and their education often stopped 2030, years ago. Like we're not seeing like people keeping up with the times, like they still call things like the Twitter, you know, and so, like, these are the people that are supposed to be making regulations. When's the last time they read a book? Yep.
+
+Speaker 9  1:11:38  
+Great point. Desmond, because who's going to regulate them. We trust them,
+
+Unknown Speaker  1:11:42  
+right? How are they going to vote on something? I
+
+Speaker 8  1:11:44  
+will say the internet is full of tubes line. This is was actually right, because he was talking about bandwidth in that specific instance. It was clunky the way he said it. I just, I need to go to bat for I forget which politician was it was Al Gore. Al Gore was not wrong when he was talking about full of dudes, because he was talking about bandwidth, this I gotta go to bat for, for Mr. Gore. All right, sorry not, not to be too much of a tangent, but
+
+Speaker 7  1:12:16  
+for me, I I think that. I think what's really fascinating is that we've entered into the phase of development of AI where we're starting to get worried. Because just just a few years ago, when this was all first coming out, it was all potential, potential, potential. Look how great this could be. Look how great this how much this is going to improve our lives and our efficiency. And now we're entering into this phase of Wait, wait, hold on. What does this efficiency mean? What does this cost us? What does this what is this going What are we going to have to pay in order to make this reality? And are we going to get a choice and how if we pay it or not? And so I think it's interesting to see that kind of transition, like, like I said in my group, when it comes to trusting tech companies, I trust them as much as far about as far as I can throw one of their skyscrapers, not at all. Don't trust them at all. And I think that they aren't going to regulate themselves as long as there's money to be made, I have hope that the balance will like the pendulum will swing again, like swing towards the balance of augmenting human capacity rather than replacing it. But I do, I do worry about the cost of what so the pendulum is going to swing hard into the, you know, efficiency and replacing people with AI kind of deal, and I, and I, I worry about who's going to get hurt by that in the interim before it swings back to a Balance. And that's that's really what I've kind of concerned about AI systems, is not that it we're not going to be able to find a balance, but that we're going to what the astronomical cost will be in both human potential, human lives, and our abilities to live in this world while we're waiting for the pendulum to swing again.
+
+Speaker 6  1:14:22  
+My main takeaway from all this is that, like, the same sorts of pressures that we see, like coming to like the cyber security industries, or like, we're going to be putting pressures on like network security, on like, like user like phishing, like spam, whatever. It's like, the same sort of issues like exist for like policy, like government policies, you know, and like we're even talking about with like data concerns here. But it's like, in the same ways that like AI can take advantage of like cyber security systems, they can take advantage of government policy systems. And it's like, if I could automate, like, creating a company that will, like, defraud the government. In a way that, like, the legal, legality doesn't cover, you know, it's like, it's like, those same risks apply, you know, and we're like, oh, there's gonna be trillions of dollars in cyber security, or whatever, growing over the next couple years in order to defend against this. It's like, well, what about government? It's like, all this stuff aims just to, like, show us that, like, like, how, like, how much pressure is going to be put on all of our systems coming, like, in the coming years,
+
+Speaker 10  1:15:26  
+yeah, I will say like Aaron, as somebody that, like, has to implement like AI systems, like across like companies. We've had many conversations about this, about like, people ask the question like, are we going to lose our jobs? Our whole department is going to be replaced and like that. Those are questions that are being asked today, and what I can safely say is that for the majority of companies today, not enough people have clean enough data to get rid of their humans. That's the sad reality is that companies have a bunch of data that is unclean, and the AI cannot actually like replace the people that that they hope for, until companies learn how to not just like obtain clean data, but maintain clean data. And that's really hard when the primary when the majority of your workforce is humans, because there's always human error. And a lot of this stuff is so new that you are a lot of times companies that are adopting the these AI softwares, they don't have people that have any type of education on like actually utilizing AI, let alone how to actually implement it. And so they are relying 100% on all of these stupid, expensive like implementation third party companies that only sell you kind of what the potential of the software is, but not how to actually use it in your system. And as a result of that, yeah, they bought this AI software, but it can't replace anybody because it's not implemented like efficiently. The data is not clean. Nobody knows how to use it, and once they finish the implementation, they all pull out and wash their hands of it. They don't support it. It's up to you and your team, so that's not something that you really have to worry about right now. Maybe if you do choose to have like children, or if any of you guys have kids, your kids will probably have to face that. But I don't think it's any of us like in our lifetime.
+
+Unknown Speaker  1:17:30  
+Well and to really
+
+Speaker 2  1:17:35  
+use AI at scale inside your own organization to protect your IP, you have to have places like we're using glean right now as a AI search engine. And we have to use, like, our own instance, our own like we have our own corporate like, search for it, and it's still wrong because it's all it's not just You're right though. It's unclean data. It's all of this cruft that accumulates at any company, data that's wrong as soon as you write it, or or like manuals that are wrong, and as soon as soon as you write it. So people ask questions of people who have the wrong information, and unless you have people who are in the active, give and take of trying to train the model when it finds that it's wrong, versus throwing up their hands and saying, Well, this is dumb. That's wrong. Like you have to take the effort to actually train it, and then you know that's just more work. Hello.
+
+Speaker 1  1:18:42  
+A lot of very, very interesting arguments and different perspectives. And I love your perspective. Spencer freebie, like it's very, very interesting argument that you made there. One of the things that I always used to think of is I once read a book that says, I want AI to do my dishes and laundry so I can do my art and poetry, not that AI does my art and poetry and I go do the dishes and the laundry. So the way that we're using AI also would nearly very, very, very little regulation. I don't know what's going to happen next, and that the expense of, technically, an entire population, versus, like, 10 people who make all the money out of it. So it's very interesting argument. There
+
+Unknown Speaker  1:19:39  
+anything else from anyone,
+
+Unknown Speaker  1:19:47  
+also, one thing
+
+Speaker 1  1:19:50  
+is that different industry gets, get affected very differently. So for example, like, like, I know from, for example, like in in math or in cryptography, AI. Have as of now, fails miserably. Like, it's very, very, very low capacity for doing actually advanced stuff. But in other things, like in writing and these things, like, it's it's getting tougher. It's getting tougher. I can say I don't know, maybe I'm not a great writer. Sorry. I can't, like, give my opinion here greatly, but if anyone is, I would love to hear your opinion about when it comes to to the literature side of things.
+
+Speaker 2  1:20:27  
+I I've absolutely used AI to generate poetry that I was commissioned to generate because it was trained on by poetry. So it was like, Okay, well, then it gave me ideas, and I ideated and I edited, but when I was like, kind of like staring at the blank page, I was like, here's, here's, like, this prospectus, here's all of these like presentations that they want me to read. Give me some ideas on what I should do, and then use my voice. And it was pretty it was pretty decent.
+
+Speaker 1  1:20:59  
+Wow. What? Was it about? What was the topic?
+
+Speaker 2  1:21:03  
+This was on a presentation to get the Lego robotics, FIRST Robotics competition to come to Utah and host here for three years.
+
+Unknown Speaker  1:21:16  
+Oh, wow. Very, very interesting.
+
+Speaker 1  1:21:21  
+Yeah, like, now I'm very lazy, for example, like, for any birthday, I go to to, like, Chad, Chad, or write me a birthday message or some and I raised it better than I can in the given time, like, in a very decent amount of time. So, yeah, that's, that's amazing. And you're, like, a professional writer, so that's, that's the person to take this input from. Actually,
+
+Speaker 2  1:21:43  
+yeah, I had a conversation with another friend of mine who also had his work trained on it, and he's he was just aghast. He was like, please don't ever do that again. I won't and there. But that's the ethical part of it. Is if I feed into this, then it becomes, it becomes something that was acceptable. And the more people that say this is acceptable and do that, well, it just reinforces bad behavior. Is
+
+Speaker 10  1:22:08  
+it bad, though? Is it bad or are we finding new ways to utilize tools that are really readily available to us? It's efficiently.
+
+Speaker 2  1:22:18  
+My boss made the same way, same argument. He said, there's some quote up there from a CTO that he loves. That he loves, that said, you know, it's not good that AI is going to replace programmers. But if you are a programmer that doesn't know how to use AI, you will, you will be replaced by someone who does.
+
+Speaker 10  1:22:32  
+We are in we are facing a time when companies want to do more with less less labor, and that is,
+
+Speaker 15  1:22:42  
+that is the awful reality. Yeah, they want. They want the 10 times engineer they do and they they want.
+
+Speaker 10  1:22:47  
+They want employees that will have the most impact. And if you are not utilizing skills and tools to your advantage, then unfortunately, they will find someone that is either willing to learn or already has that those skills,
+
+Speaker 1  1:23:03  
+one one question that like, sorry, go ahead. Oh,
+
+Speaker 8  1:23:07  
+sorry. I was just going to say, I think we're seeing some of the, one of the first great, big waves of white collar automation. You know, we've had lots of blue collar automation throughout, you know, all of human history. I mean, like a lot of the, a lot of the arguments against AI are not like, they're not like new things, like the what was his name, the guy who, who Luddites are named after. And I'm not calling people who are against AI Luddites. I'm just saying that, like, that movement was started because, because industrial textile mills were moving in and putting out hand weavers out of business in Britain and so. And we've just kind of like, as a society, we have just kind of accepted, like, oh yeah, blue collar jobs get automated away. That's just what happens. And now I think we're starting to see, you know, like I said, the first kind of wave of white collar automation. And I think we're sort of it, well, I want to say unprepared, because in a lot of ways we aren't, because, like I said, like, this has been happening, some flavor of this for forever, but I think this like, like, genre of careers, for lack of a better word, is, I think suffering some of its first like rounds of that Ned blood. Thank you, Jesse, for posting that in chat.
+
+Speaker 10  1:24:34  
+Yeah, I think you're right, unprepared. Is the correct term. I think that the vast majority of people that are not in a tech space were not prepared for this and don't know how to react. And as a result, it's causing panic,
+
+Speaker 1  1:24:49  
+but, but it's actually, like, so far, so far, it's affecting white color more than blue color, much more. Yeah, I was
+
+Speaker 7  1:24:56  
+about to say, like, I think that the white color. Are the ones who are freaking out because we're like the white collar people were for the first we've spent the last, however many years going to college, getting our degrees, getting our experience, learning the languages, learning the syntax, learning the right, the how to solve the problems. And suddenly all of that knowledge, all of that experience, is almost worthless, because it feels like Joe Schmo, who just graduated high school, can just go into Chad, G, P, T, and spit out some amazing code that does exactly what it want he wants it to do. He can't tell you why it's doing it, but it does what he wants you to do, and that's what the companies are looking for, which are the results, not the journey of how they got there. They want the result. And so I think white collar people are freaking out a lot harder, because this is not something that they've ever actually had to deal with before. And they were, they were promised. We were promised that this, this was what we were supposed to do to get a good life, and now computers are coming for us.
+
+Speaker 1  1:26:07  
+Those also. It's very much. It's much more difficult to to technically automate blue collar jobs compared to white collar maybe because there's less money spent on doing that so far, and the the the objective was to do things like coding and stuff. But I,
+
+Speaker 2  1:26:26  
+when I was a kid, I wanted to be a garbage man because I thought it looked like such a cool job. Now, garbage when I was a kid, garbage men don't cut out of their their trucks anymore. I mean, they're just, they're just there to operate and learn. That
+
+Speaker 6  1:26:41  
+was something John Carmack said he worked on. They said that, uh, like, in his time, like, something that a a extreme graphics programmer could do one year, a nearly competent graphics programmer the next year, could do just as easily, um, like, just like, of like, building APIs on top of itself. Like this has been happening as long as we've been building up knowledge on top of each other. The real part real problem is like, like, it's kind of like the death of the middle class, to be honest. Like all these people, we've been paying these, like, white collar jobs, like, more and more, so that we've been able to have like, the sort of middle class of like, like higher earners, and now that that's gone, it's like, Well, are we going to start paying like, blue collar workers more? I doubt it like, what? So what are people going to do? We're just all going to become part of, like, a laboring clash.
+
+Speaker 1  1:27:27  
+Also, another question that I think of the actually, like goes and handled what you're saying. I always think of things from an economics perspective, because I did math and economics in my undergrad, so I I'm a lot into economics. Is, at the end of the day, these companies that are automating everything and using AI to replace humans have products that they want to sell. But if all these customers are getting laid off, who's going to actually, at the end of the day buy these products that they have been using AI to create? So are we going to just go back to Yeah, that
+
+Speaker 7  1:27:59  
+actually they that actually plays into what I said earlier, Susanna, about the pendulum, of how, like, what the cost of the pendulum is going to be, because suddenly we'd all the white class, people who had high paying jobs no longer have a job, therefore they can't afford stuff, and then we have Too many then people are losing money. So it that's it's about the swing,
+
+Speaker 1  1:28:25  
+absolutely, but, but then you think, for example, back in the day when, when, like in factories, they started automating things, also people started losing their minds. So is it just the evolution of humanity? And we will actually become more powerful than what it is have skills that it can never have, just like humans have proven time after time that we are more special than whatever technology you bring. We will actually be better than that. Yes, at the end of the day, it's just the technology, just like any other tool that we have, I think
+
+Speaker 7  1:29:01  
+there sorry, I'll sorry. I think there's absolute potential for the outcome of this to be that where humanity has been improved and we are, we've like, leveled up in a way. However, I I worry that about the people that will be trampled and destroyed by this. Not everybody came out of the Industrial Revolution better. Not everybody came out of the Information Age better. And I worry about the people who would not come out of this, the AI, age better.
+
+Speaker 1  1:29:35  
+But if you look in like a long term perspective, didn't people come out better look at life, the life standard back then versus now, things that were like a dream or now just normal for us.
+
+Speaker 10  1:29:48  
+Yeah. We also have like, the highest obesity rate in the world as like as a result of all of this industry so and we have the most. We have. The easiest access to technology and the smartest brains, you know, that we could access. And now, now looking at us. So, yeah,
+
+Speaker 6  1:30:13  
+so I should know Suzanne's right, it's, it's very easy to take, like, take for granted the things that we have. Like, if you're like, a feudalist peasant, like, you would be eating, like, fucking, like porridge and like bread. It's like, well, we have, like, our kitchens have, like, the most, like, wide array of spices that, like, not even kings would have exactly we use, we use aluminum, like foil and like aluminum, the metal was, like, more precious than gold to them. And it's like, it's like, it's like, we take a lot of these things for granted. And it's like, not to say that there like, are always, like, they're always going to be issues, but I think a lot of like, it's very easy to take for granted. Some of these like, things, you know, like, it's like dealing with issues, for sure, but it's like, it's not like we have it any worse than any other time in history, like we will always have, like, the best,
+
+Speaker 7  1:30:59  
+you know, yeah. I then wonder, though, are we? Is the pursuit of AI and the like we are living now, we are the ones who are going to be impacted. So is do? Should we be sacrificing the people now for the betterment of for the possible betterment of those later? But
+
+Speaker 8  1:31:19  
+it's free. I mean, you did nothing for this course, like, I
+
+Speaker 10  1:31:23  
+mean, well, I'm not, I'm not saying, like, something like this. I'm saying that you can access, like the the barrier to entry has never been, has never been thinner in terms of access to information, and so in those instances, there was always more friction. It was more challenging to get access to information, for you to be able to compete. That is less of a problem in today's day and age, because even in like we're talking about low income areas and places that are not financially well off, they more often than not, still have access to Internet, whether it's public Wi Fi, through through like cafes, or if it's somewhere like a library, a local library and being able to access the information. And I think that is where, yes, there will still people. There will still be people that fall behind, but it will be far less simply to how accessible information has been made, has become available with with technology
+
+Speaker 6  1:32:40  
+like I don't, I don't know if it'll be any worse or, like, not as worse as like, previous eras, but like, if we're trying to figure out who's gonna fall under the wheel, there's like, always gonna been growing pains with like eras. You know, it's like, like, with like, the industrial age, we had like, a period where, like, child labor, like, skyrocketed, or whatever. And like in order to like and like, like to be like minors and whatever, but then we like to have the government Come in and legislate.
+
+Speaker 6  1:33:19  
+Okay, automated the middle class will, like, disintegrate, but then, like,
+
+Unknown Speaker  1:33:31  
+possible,
+
+Speaker 1  1:33:33  
+I don't think we can hear anything on someone in the chat said, the government got i You're so funny. I mean, I've been laughing just treating the Chad insane things so we can't hear you. Actually, someone said earlier, also, I would rather be fat than dead, though. So that's another thing to take into account.
+
+Speaker 8  1:33:53  
+I think it is a pretty amazing accomplishment in the context of human history to go the problem with poor people is that they're getting fat, rather than the problem with poor people is that they're starving to death. I mean, not to say that hunger isn't still a big issue, but when it's yeah, like, obesity rates are really high amongst poor people. For a lot of people, be like that makes no sense. How could that even be possible? So, I mean, food used to be like, over 30% of someone's like, earnings like, would go to the purchase of food. Like, what do you guys think yours? So back
+
+Speaker 1  1:34:29  
+in the day, people couldn't even eat meat. Now, meat is just like, like, a regular food. But I want to ask everyone, have you watched 2001 Space Odyssey. Anyone who hasn't watched it, I would recommend this movie. It's my favorite movie of all time. I don't think there will ever come a movie that's that's better than it. I would love to be proven wrong, but if you haven't, I would recommend you watch it, especially now that you're taking an AI boot camp. And and give it a good amount of thought. And I don't know if some of you haven't watched it, I wanted to say something related to it to to present a point, but I'm not going to ruin it for you, because it would be very, very bad person to do that. So I'm going to skip that, but
+
+Speaker 2  1:35:14  
+I think you're past the spoiler. Time frame for 2000 I'm not, I'm done, no more words.
+
+Speaker 4  1:35:22  
+I watched it first, when it first came out, actually, and it's probably one of the real inspirations for me to be interested in doing in computers. And Wow, interesting. The idea of a computer that we could talk and whole conversation with you, it so fascinates me, like it's why some of the things that I mess around with now that I can, and, of course, I don't want it to become psychotic like, you know, how, which was not, you know, which is a different Director, 2010 and the parts about where they kind of reactivate Hal and the original programmer figure us out what figures out what went wrong. Basically, it's very interesting. And one thing I found very interesting about that is when he talks with, even in the beginning, the movie of a similar computer system in his office that he is talking to, and not just like a programmer, but also an almost like a psychologist,
+
+Unknown Speaker  1:36:27  
+which I find a very interesting idea
+
+Unknown Speaker  1:36:31  
+to think about.
+
+Unknown Speaker  1:36:33  
+They're starting with stuff
+
+Speaker 4  1:36:34  
+like that now, yeah, with prompt engineering. And, you know, people talk about AI whispering people are going to be we're going to be interacting with them almost as much as like psychologists as programmers. I feel that even talking with AI cannot conversational AI side yourself that way. I even feel that way sometimes when I'm trying to get it to do certain things, or, you know, trying to get it change its behavior. I actually store some of that, if it actually has a way of remembering, putting making many memories of things that's told to to do. Well, yeah, it's interesting that sequel is worth seeing that too, for that.
+
+Unknown Speaker  1:37:22  
+Yeah, absolutely, basically,
+
+Speaker 4  1:37:24  
+to give as a spoiler, basically what the original programmer, Doctor Chandra, figures out is that basically out was unable to lie, but was told to lie, and it got itself into a loop, and it couldn't and it just kind of lost it, because it couldn't handle that situation. It did not know how it's very interesting.
+
+Speaker 1  1:37:57  
+Gone, your your, your voice is all over. It's we can't hear anything.
+
+Unknown Speaker  1:38:03  
+Chad, if you want to
+
+Unknown Speaker  1:38:11  
+give it a try, you
+
+Speaker 1  1:38:27  
+so any more thoughts about AI, about ethics?
+
+Speaker 16  1:38:32  
+Yeah, I have a thought about it. This might be a simple thought, and it's kind of thinking in terms of how we're all in this boot camp together, you know, joining forces towards AI. And I think we've highlighted so many places where it can be improved or where there could be negative impact in the future. And we've identified there's so many interconnected pieces and layers in the development of AI and some of the fears that we talked about with job displacement and ethics and protection, and the uncertainty of how AI can take over and what the implications and impact of that could be, I still believe that the more we have like people of knowledge, The people who use their knowledgeable forces for good, who focus on ethics regulation and human centered goals, we can ensure that AI can be a force for good and not something to fear. So I think the fears can be countered by integrity and good responsibility for those who are creating AI, which kind of stems from where we are right now. So if we have good people, I think our outcomes could be favorable.
+
+Unknown Speaker  1:39:52  
+Hopefully the good in the world is stronger than the bad.
+
+Speaker 17  1:39:57  
+I just wanted to point out like I. I agree that white collar jobs are more affected, but I want to point out with robotics as well, AI is vastly changing that as well, or improving the programming of robots. Like at my company, I'm a quality engineer. We use camera systems to detect quality defects and stuff on our parts, rather than relying solely on humans to check them. And it's just advancing very rapidly, like they have AI that robots that use AI, where the robot can just watch a human do something and then imitate it themselves, without having to have a human go in and write all of the code themselves. And I just wanted to point that out that there is a huge effect from blue collar jobs as well, because of the improvement in robotics.
+
+Unknown Speaker  1:40:48  
+We see robots in the restaurant industry too.
+
+Speaker 8  1:40:52  
+Yeah, I have a speaking of 2001 and sort of stories, kind of from that era. I had kind of a thought the other day while I was reading an article about the declining the verbal and numeric reasoning like test results in like in adults and teenagers, in like the US, specifically over the past, like couple of years. And it was, it made me think of, has anyone here seen or read dune? So you guys know how they in the setting, they have one of the, like foundational things that happens, is they have something called the Butlerian Butlerian jihad, I think is something like that. And it sort of starts it's this idea that they don't want thinking computers, which is something that gets banned in the vast Interstellar, you know, people turn into worms. It's a crazy book, but I think the there is an interesting sort of idea behind it. It's not like it wasn't like them literally fighting like terminators. It was an idea that, like, you had to actively, when you had the option for computers to do your thinking for you, you had to, like, actively make the choice to cultivate those skills for yourself. Now I'm not saying we shouldn't have, like, I'm not saying, oh, you know, we need to, you know, we can't have thinking or or large language models to the extent that they think. But I do think it's something that's maybe worth like, you know, you go to the gym and you run on a treadmill, not because, you know, in your average day to day life, you might need to start breaking out into a, you know, a six minute mile long sprint, but it is a skill that it has other sort of knock on benefits. And I think it might be important as like, you know, maybe not necessarily Right, right right now, but as like aI becomes more and more integrated to you know, still remember to like, do your own thinking and to like, cultivate that part of Like your skill set, like as like a human I
+
+Speaker 1  1:43:25  
+interesting. Any more thoughts? Doesn't have to follow the discussion. So far,
+
+Speaker 2  1:43:37  
+I'm just realizing that the AI robot and alien is kind of like how we're like in Aliens, it's kind of like 2010 hell where, like, it becomes good, and you figure out, I know that's all I kept thinking about.
+
+Unknown Speaker  1:44:02  
+I love, I love what
+
+Speaker 2  1:44:06  
+was said about the the idea that we have to be like we have to sort of fight evil with good, that we have to keep, you know on, she said, What aunt, she said, was just really beautiful and hopeful. And it, I mean, it's something my CEO kept saying at our company, is that you need good AI to fight bad AI. But I think Auntie has said it better is that you need good people to make sure that good things get done.
+
+Unknown Speaker  1:44:38  
+I agree. Thank you. Yeah,
+
+Speaker 1  1:44:41  
+no, that that was. And one last addition to that, which actually I just realized when you were talking is I think each one of us needs to think about themselves being the good people doing it, and that's about it. If each one of us thinks that, that's the responsibility we have, because otherwise, you You'll go mad. Literally. Like, originally, when these things started going out, like some people literally couldn't take it anymore, like it was too much. So just think about your responsibility. It actually
+
+Unknown Speaker  1:45:20  
+okay. Final remarks, I
+
+Speaker 2  1:45:29  
+think this has been my favorite segment of the entire class. Yeah,
+
+Speaker 1  1:45:33  
+and you know, you know, this is, to me, the hardest ever. I really struggle teaching ethics, because there's, I don't want to say my opinion, and I don't want to, like, move people. It's very tough. I'm happy like that.
+
+Speaker 2  1:45:49  
+It's just everybody's so engaged and so passionate. And I just, I don't know, I this is really, really encouraging.
+
+Unknown Speaker  1:46:00  
+Okay, then let's,
+
+Unknown Speaker  1:46:04  
+let's end today's class and
+
+Unknown Speaker  1:46:08  
+see why this is right here.
+
+Speaker 4  1:46:14  
+So just want to sorry, go ahead. I'll just say that. Yeah, that's very good to have those discussions. But I think we have to also keep it more, keep our eye on the also goal of being able to build things. AI related, it's a lot of people can talk about all this philosophical stuff, but another thing to actually be able to build things, and then you can bring that ethical consideration into what you build, how you approach things.
+
+Speaker 1  1:46:47  
+So just wanted to go about the things that we discussed. We summarized why different types of organizations, such as governments, tech companies, research institutions, want to regulate AI. We spoke about us regulations that impact data collection and usage. We looked at different regional laws and regulations, we summarized how and why different organizations are developing regulations, and we discussed the importance of AI regulations, and compared this with how it might impact innovation and progress, which you just mentioned, Karen, now and again, ethics are regulations will continue to evolve. Even your thoughts about ethics and about AI ethics specifically will change with time. It's not a constant thing. As things change, your thoughts will change, and it will be essential that you keep up with this field as it evolves, keep questioning yourself, keep proving yourself wrong, instead of always finding valid validation, devalidate your thoughts. That's that's the the first lesson I learned when when doing your startup, is you don't want to seek that your thought is right. You want to seek the proof that your thought is wrong, so that you can move on. And just want to remind you that there's no challenge this week, but tomorrow, we're going to start working on projects, and since we do have six minutes here, why don't we take these six minutes to just talk a little bit briefly about the projects, just so people maybe can think about it as you sleep tonight, but so just like project one, you're going to be divided into teams. Tomorrow, I'll go through the PowerPoint and everything. We're going to be divided into teams, where you can be in groups of three to five, and each one of you is going to work on a project. First time you worked on exploratory data analysis. This time, you're going to do exploratory data analysis, which is going to be decent chunk of your project, but you're also going to do some machine learning algorithms, more of the classical things later, you're going to take the more advanced stuff later. So if you were to play around tonight with some data sets, I would recommend that don't waste your time on the topic. Don't waste your time finding good data. So good, like, like, interesting data topic, just find a good data set, and start working with it. It doesn't matter what it is. Tomorrow, I'll talk much more about this, but do not waste your time focusing too much on the data set. Another thing that I wanted to mention, that I wanted to mention today, actually, is, in the first class, your your, your teammates were chosen, right? You were automatically assigning groups, right? Or am I mistaken?
+
+Speaker 2  1:49:48  
+We were assigned groups and told that we'll probably help save group wedding. Yeah. Okay,
+
+Speaker 1  1:49:53  
+so this project, since the regular instructor is here and it wasn't. Verified. What we are going to do is you are going to choose your teammates. So I always do this in my classes. If you're happy to stay with your team, you're more than welcome, but I want to give you the freedom to choose your own team. And the reason for this is when choosing your teammates, you want to align on expectations, on timelines, on work division, on what topic you will be investigating. And I am giving you this opportunity to choose your own teammates, because this actually mirrors what often happens in the real world. In your careers. You're going to need to assess the strengths and the working styles of potential collaborators, of what companies you want to join, of what levels you want to join, and you're going to learn to build effective teams. And this is a crucial skill. It's not only that I'm going to choose them for you. You go ahead and choose those. Another reason is that it will allow you to take ownership of the process from the very first step. So by choosing who you work with, you're setting yourself up for success based on your preferences, for communication, for skills, for work style, for even ethical considerations, maybe people. And in my previous classes, people, to this day, I see them still posting on LinkedIn that they're still collaborating on projects because their team was with people that they like working with. So I want you to work with people that you like working with. Okay? And this will give you this chance to build on these personal relationships that you have developed. So it's six months nearly you need to build some real personal relationships here, and this will make your collaborations much smoother and much more enjoyable. So this freedom will help you develop your decision making skills and will give you the sense of responsibility. Now, as you form your teams, I just want to give you a few like tip is consider balancing the skills with the strength. So try to create a group where you can all learn from each other. It's not a good idea, by the way. Just as a heads up, it's not a good idea if you want to go with, like, maybe people who you think are so good at, like, like coding, because sometimes you work, you work better with people who you can be you can challenge, and they can challenge you. Just to give you an example, in my last class, there were poor people. It was a smaller class. Relatively. There were four people that everyone rejected. Now, no one wanted to work with them, and they just worked together, and they got the final highest grade. Why? Because they felt at ease to say, why is this like this? Why don't I try this, and together, they were able to actually get the highest grade. So again, I'm not going to talk more than this, but, but I want to tell you that tomorrow, we will start by you. I will start by introduction, and then I will allow you to go ahead see who you want to work with. Choose a good data set before you actually start jumping into coding and into exploring your data set. Okay, so tonight, if you want to message each other tomorrow, whatever it is, it's a good chance to do that. And we have reached time. Of course we're going to be here for it is time right? Class ends at 1030 and then 30 more minutes for okay? So, yeah, we will be here for 30 more minutes, if anyone has any questions, but tomorrow, we'll delve into how you can actually make the best out of this project, how you can learn the most from it, and how you not only go ahead and apply these machine learning algorithms, but how you actually go ahead and understand them, and you will only be good at it once you understand it, and this is your perfect chance to do that. So having mentioned that, I wish everyone who doesn't have any questions for us a great night. We'll see you tomorrow. And if anyone has any questions, please stay by so we can help you with that. Have a good night, everyone. Bye.
+

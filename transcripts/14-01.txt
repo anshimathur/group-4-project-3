@@ -1,0 +1,1662 @@
+Unknown Speaker  0:02  
+I got it. So what I was saying is that I don't know whether you guys kind of felt that way, that sorry. What happened, Jesse,
+
+Unknown Speaker  0:12  
+I was saying, I was just laughing, because you're like, Well, what I was saying, and I wonder how long you were saying, no, not not too long. Not too long. Yeah, because I saw that you basically
+
+Unknown Speaker  0:24  
+indicating that you cannot hear me.
+
+Unknown Speaker  0:28  
+Sorry. I kind of lost my thought, yeah. So up until last week, we kept talking about how great scikit learn is, how it makes things so easy.
+
+Unknown Speaker  0:38  
+Because no matter what algorithm you are using, it's all the same.
+
+Unknown Speaker  0:44  
+We kind of switched gear in yesterday's class, where we started to understand it is not as easy as it sounds, because there are a lot of things you need to
+
+Unknown Speaker  0:57  
+think of consider when it comes to measuring the outcome of the model, performance of the model,
+
+Unknown Speaker  1:03  
+and
+
+Unknown Speaker  1:05  
+when you are doing I am trying to do improvement of your model. These are all of these things that you need to keep in mind, like accuracy score, which is a first thing, fine, but that's not everything. Well, can we look into balanced accuracy score, which is accuracy score per class, and then averaged out over all the classes that you have. So we can look into that.
+
+Unknown Speaker  1:31  
+Also, if you want to basically understand the model sensitivity with the threshold, then we can do the AOC score and try to make sure that the AOC score, as we discussed, it's the lowest is 0.5 the highest could be one, which is not realistic, but theoretically the highest is one. So try to make a model that goes up to one, so that means the model then will be
+
+Unknown Speaker  1:59  
+basically more flexible to different kind of threshold points right
+
+Unknown Speaker  2:04  
+now,
+
+Unknown Speaker  2:07  
+but we didn't talk much about so let's say you start with a model with a data set, and you think, well, this probably is an algorithm that I want to try, SVM, random forest, whatever, And you come up with certain some of these scores. But how do you know
+
+Unknown Speaker  2:26  
+whether you can improve on that,
+
+Unknown Speaker  2:30  
+whether the data set is something that will actually given so let's say you take a set of data and you do a accuracy score. Accuracy score gives you point nine, five or something. And you know that that's nonsense, right? You find a balanced accuracy score, and balance accuracy score also give you limit, let's say point six, five or point seven, which is typical. And you say, well, that kind of looks like good, because I remember what dinner said. Balanced accuracy score, it is very unrealistic to expect 0.9, or above across both trading and test data. Training data you might but test data will not. In fact, if that happens, then you are overfitting. But what are some of the things you can actually try, right? And
+
+Unknown Speaker  3:17  
+it so happens that after all of these different like a painstaking fine tuning of your data, are doing different kind of encoding,
+
+Unknown Speaker  3:29  
+imputing the null values
+
+Unknown Speaker  3:32  
+or creating artificial features, computed feature, which is the feature engineering, dropping some of the columns that doesn't
+
+Unknown Speaker  3:43  
+basically contribute to the data, or dropping some of the columns that have very high collinearity. You can do all of these, and you will do all of these, but it might so happen that even after doing all of these, you might see that well my incremental change, the increment that I'm seeing in a balanced performance sorry, balanced accuracy score is probably not earth shattering, so I just wanted to make sure that you have that expectation. Let's say you start with a model and you you get an accuracy score of point six.
+
+Unknown Speaker  4:19  
+You spend all of this time. You spend hours after hours trying these different things, doing hyper parameter tuning, you might be able to go from point six to maybe point six 2.63,
+
+Unknown Speaker  4:32  
+but that does not mean that you are doing something wrong
+
+Unknown Speaker  4:36  
+right, because increasing the predictive accuracy of machine learning. Model is hard
+
+Unknown Speaker  4:44  
+when we do play around with toy data set, the toy data sets are designed in a way that you'll get basically very excited. Yep, my model is kind of fitting to the curve,
+
+Unknown Speaker  4:54  
+but when you have high dimensional data set from real world, think about the mathematical.
+
+Unknown Speaker  5:00  
+Complexity right of that, of that n dimensional space you have, and you are trying to fit either what is called linear or polynomial carbon surface, or you are trying to basically create a decision tree. I mean, it is extremely hard to get high accuracy. And if you look into some of the Kaggle competition, you will see that that's not what they shoot for, right? So this is the reason machine learning, for the most part, it can feel like a slog, because you are basically doing all of these
+
+Unknown Speaker  5:36  
+like you are basically applying everything that you learned in Python, Python weeks, right? And you are trying to do all these manipulation of the columns, filling in null values, dropping certain column, adding new column, all this stuff. Oh, and then also, don't forget about normalization or not normalization, because remember tree based model, I said normalization does not really
+
+Unknown Speaker  5:59  
+add any value, right? So you either normalize or not normalize. So you try all of these things,
+
+Unknown Speaker  6:06  
+but make sure that your expectation is set that way, that you might be able to get only incremental improvement after all of this hard work, right? Which you will see in your project too. By the way, I'm sure most of you guys, you will probably work with some data, that data set that you get from maybe UCI repo or Kaggle, or even just go out and basically find data set, like maybe some some government data set, some weather, climate data set, or whatever you do, right?
+
+Unknown Speaker  6:39  
+So you will see that, that the you will kind of feel that struggle yourself. So the class today, today's class will kind of expose you to certain extent to that struggle that you will actually feel when working with a realistic data set.
+
+Unknown Speaker  7:00  
+Okay,
+
+Unknown Speaker  7:02  
+so there is not much new thing that you are going to learn. So let me quickly share the slide first
+
+Unknown Speaker  7:14  
+two you're seeing the slide. Yep. Works great. Okay,
+
+Unknown Speaker  7:19  
+cool. So basically we are one thing we will learn. Well, not really learning in this case. I mean, there is this is no net new technique. But, like, we have kind of tried to see the collinearity between data set right before, remember the V test that we have done, and we have concluded that, well, if this is high, that means that particular column is CO linear with other column, right? So today we are going to look at
+
+Unknown Speaker  7:50  
+kind of a effect. What happens when there is this kind of high collinearity, and we are basically going to talk about an extreme case of co linearity, what is termed as data leakage,
+
+Unknown Speaker  8:05  
+okay, and then how we can possibly identify that. Now we are going to look at some happy scenario where we suspect that there is data leakage, and we look at some of the instruction, instruction instructor demo, and you will see that, oh, it is so easy to identify that. Then again, a disclaimer. There in real data set, even if you suspect that there is a data leakage, it may not be as straightforward to identify, right?
+
+Unknown Speaker  8:37  
+So we are going to look into that. And then the next thing we will see, how if there is a missing value, like a null value, we are not going to do drop any blindly, because we know that that's almost never a good idea. So if you have a imperfect data set with not a lot of null values, and if you do a drop in a you might end up losing half of the data, which is not good at all. So what alternate we can approach we can think of to fill some of the null values. Now, each of these thing that you will be doing can have its pros and cons, right? So dropping now is good because you are basically not your your you are not letting your model hallucinate, meaning you are not letting your model
+
+Unknown Speaker  9:22  
+pick on some of the artificially created value, you are basically just dropping all rows with null values. So that is the good thing. But on the flip side, you are losing valuable training data. So if you want to try the alternate which is, well, let's try to fill in those data with our best guess. Now, depending on how good your guess is, that might actually help your model, or that can actually make the performance worse or completely meaningless. And there is no right or wrong answer which one would give you, like which strategy you need to follow. Well, we are going to look at a couple of strategies here, but that does.
+
+Unknown Speaker  10:00  
+Not mean that is the only strategy that you should follow, right?
+
+Unknown Speaker  10:04  
+We will also talk about one hot encoding and ordinal encoding, which is very similar to like level encoding. And we will discuss when to use, when, when to use which, when one hot encoding should be used, or when you can kind of bypass one hot encoding and do some kind of a level based encoding, such as ordinal encoding.
+
+Unknown Speaker  10:27  
+And
+
+Unknown Speaker  10:30  
+then we are also going to talk about these importance of doing prevention of the data leakage during the train test data split, which is basically something that we have already discussed before, like whenever you are doing any using any transformer, whether it is a scaling transformer or whether it is a one hot encoder, all of these are transformer, right? So you should always fit the transformer with your training data after, after you split, you should not feed the transformer with everything. So that is this point.
+
+Unknown Speaker  11:03  
+And then when you do all of these, obviously you might want to do it in a repetitive manner. So we will see an example where we will basically create, put all of these pre processing steps for data into one function, which is a custom function, again, going back to basically the
+
+Unknown Speaker  11:22  
+principle of what is called
+
+Unknown Speaker  11:25  
+modular programming. So anything that you want to repeat, you basically put it in a modular fashion inside of function, right?
+
+Unknown Speaker  11:34  
+And then we will also see whether, in some cases,
+
+Unknown Speaker  11:39  
+you might be benefited by creating new features. Now these last piece, this is not something I recommend, because when you start going down that path and create new feature, if you are not very careful, you might actually introduce colinearity. You might actually introduce data leakage. So that thing is like, sometimes it might make sense, again, depending on the scenario, but it's not something that you should do in a take it lightly, right? You should have a you should do proper due diligence and talk through brainstorm with your peers to see well, whether creating any artificial features does actually make sense for my to our data set, right? So, so the bottom line is, everything that we are going to do in today's class is kind of exploratory in nature, right? That's why I said there is no net theoretical things to learn in today's class. More of exploration.
+
+Unknown Speaker  12:41  
+Okay,
+
+Unknown Speaker  12:44  
+so that's recap. That's fine, okay, so we are going to do a demonstration well before going there. So data leakage, okay, so data leakage, we talked about this. So these occurs when a model is trained using information that would not be available when making prediction. So the model, if that is the case, then the model will lack the performance in production. So this particular scenario it's talking about is, so what does it mean that model is trained using information that would not be available during prediction time? So basically, what it means is, if you take your train and test data
+
+Unknown Speaker  13:26  
+and you do you want to do, let's say standard scaling. Now, if your feed process contains both train and test data together, so then whether you do min, max scaling or standard scaling, or any transformation. For that matter, the fitment part of this is taking into consideration all of your let's say, if you have 100 record, it is taking into account all 100 records. But then you are dropping 30% from the training set, and then you are doing the rest of the 70% and transforming the 70% of the data, but using a transformer that was fitted with all the 100% of the data,
+
+Unknown Speaker  14:08  
+so that causes data leakage. So that means, inadvertently, you are leaking some information of your test data into your training set, into your training population that you have,
+
+Unknown Speaker  14:21  
+right? So that's why. So I keep emphasizing this.
+
+Unknown Speaker  14:26  
+The another, another kind of data leakage that could happen is, let's say,
+
+Unknown Speaker  14:33  
+like a target column, right? So let's say, if you have your target column, something now, there could be a column that is not a target column, but that kind of is a proxy to a target column. And let's say you have 50 columns you choose that. Okay, this, this column number 50 is going to be my target column, but it might so happen that the remaining of the 49 columns that you think will be x is.
+
+Unknown Speaker  15:00  
+There could be some column that is kind of actually mimicking the behavior of the target column,
+
+Unknown Speaker  15:08  
+so that will cause leakage. And we will show and see an example of that.
+
+Unknown Speaker  15:13  
+Sometime there could be, I know, the data set that you are getting. There could be serial number, like, let's say the data is coming from a database. And in the database there is like, a 12345, let's say you have a record of students, right? So, and then, then the students, student number, let's say, right, so. And then, let's say you are trying to predict the outcome of student success based on student score on certain steps, right? A certain test. I'm just taking an example. Now in order to do that, if you keep the student ID number, which is nothing but a sequential ID, if you keep that in your training set, so that basically does not make sense, because sequential ID is just an ID. It has no predictive power at all. So that is another pitfall you need to be aware of and avoid whenever possible. The scaling, we already talked about, its value scaling, right? And then eBay issue is basically nothing, but all of this thing when you are basically trying to basically
+
+Unknown Speaker  16:17  
+try to use this to basically predict Chad, right? So that's what it is talking about.
+
+Unknown Speaker  16:23  
+So then we will see all these three different kind of data leakage. And then we will go into imputation. So imputation is basically a general term that is used whenever we decide to not drop null values instead fill the null values with something else,
+
+Unknown Speaker  16:43  
+something that makes sense. It could be string, like say, instead of saying null, maybe we can fill it with something that says, Well, I unknown instead of null. Just say unknown, right? Or if it is a numeric column, if some of the some of the fields are now you might want to look at the value before it and value after it, and take the average and fill in the null column with that right and again, there is no it is not one size fits all. It depends on what is the type of column and what data is contained in the column. And based on that, you have to decide what kind of imputation strategy makes more sense. Okay, so that is the filling of this thing. And then encoding, as I talked about, one hot encoding and ordinal encoding, these are the two encoding scheme that we are going to see. So that's about it. And feature engineering also, we will see an example, we are not going to see what impact it has. Feature engineering has, because the thing is,
+
+Unknown Speaker  17:47  
+there are so many permutation and combination of things you can try within the within the last time, within an academic setting, in a lecture setting, it is not possible to try out all these example and see what
+
+Unknown Speaker  18:01  
+improvement that it that your model has? We will take one example, but keep in mind that is just one example specifically designed to drive the point. So do not ever think whatever we are going to see today as prescriptive. It is very important for you to understand that these are all exploratory strategy, and these should be used on as needed basis.
+
+Unknown Speaker  18:28  
+Okay,
+
+Unknown Speaker  18:30  
+so let's now get to some
+
+Unknown Speaker  18:36  
+let me first close everything I was actually playing with something. Okay,
+
+Unknown Speaker  18:41  
+so
+
+Unknown Speaker  18:43  
+to start with, we are going to take a look at
+
+Unknown Speaker  18:47  
+notebook that we also used in yesterday's class. And these, by the way, this bank marketing data set that we have whereby Bank is doing a marketing campaign. They are trying to sell some product to some customers, and they're collecting the data about the customers that they are targeting as an audience who they want to sell that product. And it could be like some kind of a any any product, let's say any banking product, right? It could be a savings account. It could be some deposit plan or something. It doesn't matter, some banking product. So these data set was basically taken from there. And the origin of these data set, as I showed you in the last example yesterday, is basically that UCI ml repo. And if you see that notebook that I posted there on your Git lab, you will, you will see that code where I'm actually fetching the data directly from UCI ml report, right? So this is that same data set, and we are going to use these exam these data set as an example over and over again in today's class.
+
+Unknown Speaker  19:55  
+So, so these are the different customer demographic data and.
+
+Unknown Speaker  20:00  
+And this y is the output column which has yes or no value. So what we did, and this is just a recap, right? So what we did as our quick and dirty machine learning exercise, we basically took the y column, converted in it into zero and one, using that weird
+
+Unknown Speaker  20:22  
+technique. Which is using PD dot get damage and take the second column. But there are obviously many ways to do it. There are a lot of ways to change no to zero and yes to one. But anyway, that's our why. And then what we did is,
+
+Unknown Speaker  20:39  
+just as our quick and dirty trial. We did not worry about any of the categorical column at all. We only took the column that are numeric type, which is what this one is, right? So this is what we did, and which is pretty naive thing to do. But if you Oh, sorry,
+
+Unknown Speaker  21:00  
+I have not selected a kernel here yet,
+
+Unknown Speaker  21:08  
+and this time, I'm just not changing it to use read it from UCI ml repo. I showed it to you so you guys can use that for this data set or for any other data set. So for now, we are just reading it from a BCS hosted copy.
+
+Unknown Speaker  21:25  
+So then this is what we are doing. And our x basically has just the numeric column, age balance, day duration, campaign periods and previous it does not have any of the columns, such as job, marital status, education, housing status, current loan status, contact. It doesn't have any of those at all,
+
+Unknown Speaker  21:49  
+which is a very,
+
+Unknown Speaker  21:51  
+as I said, very nice thing to do. But let's just do it anyway, and just randomly. Let's do a random forest classifier with max depth files,
+
+Unknown Speaker  22:01  
+okay? And then you do the prediction. And then, at least by this time, we knew that accuracy score doesn't hold much value. So we are doing balanced accuracy score, which is basically the average of recall of the two classes, recall for positive class, plus recall of negative class, divided by two, and we got a 57.75%
+
+Unknown Speaker  22:25  
+right? This is for the testing, but if you are curious and to see whether, what is that
+
+Unknown Speaker  22:32  
+accuracy score on the training set, it is higher 61.47
+
+Unknown Speaker  22:38  
+so does that mean that model is overfitting? Maybe because there is still some gap between the two. Now, as I said, 57 and 61 these are by no means bad,
+
+Unknown Speaker  22:54  
+balanced accuracy score. These are pretty good.
+
+Unknown Speaker  22:58  
+But the problem with this quick and dirty example is, in order to save time, we completely change the nature of the problem because all of these categorical column, right? So we basically ignored all the column,
+
+Unknown Speaker  23:14  
+right? So we really didn't do a got good job, but we still got a somewhat good score, right. 57% on test data is actually not bad as a balanced accuracy score. And then you can do the AOC score, and you can do all sorts of stuff with this.
+
+Unknown Speaker  23:31  
+So that was our first attempt. Now, after we are we go through all other demonstration, we are going to come back and see how we can improve upon this. So I'm going to keep this notebook open. So this is think of, this is our kind of baseline,
+
+Unknown Speaker  23:48  
+and then we are going to see how we can improve upon the baseline, this baseline, by applying all of the other techniques that we talked about and that we are going to see in the class today.
+
+Unknown Speaker  23:58  
+Okay, so that's the plan.
+
+Unknown Speaker  24:00  
+So let's keep this aside,
+
+Unknown Speaker  24:05  
+and now talking about the data leakage. This is actually very, very interesting example to me, at least.
+
+Unknown Speaker  24:13  
+So first we will see a
+
+Unknown Speaker  24:16  
+case where you should suspect that there is data leakage, when you should suspect that data leakage might be happening. So let's see this example.
+
+Unknown Speaker  24:27  
+So we have these,
+
+Unknown Speaker  24:31  
+these data that mobile app malware data, malware application data,
+
+Unknown Speaker  24:37  
+okay,
+
+Unknown Speaker  24:39  
+and we are not going to do any scaling that is not needed. We are not going to do any feature engineering, feature selection, nothing. Just train, test split, and then we are going to try to fit a random forest classifier, because we know that for higher dimensional data set, that is one of the more robust classifier for any high dimensional data set.
+
+Unknown Speaker  25:01  
+It. So now,
+
+Unknown Speaker  25:04  
+if you do the classification and do a score, not the balance score, just score on training data,
+
+Unknown Speaker  25:13  
+somehow it gives one even if we didn't do anything, we ended up getting a perfect model.
+
+Unknown Speaker  25:24  
+Right? So when that happens, that is your first indication that there might be some leakage happening. Actually, let's do one thing.
+
+Unknown Speaker  25:36  
+So let's also do the balance accuracy score for this thing,
+
+Unknown Speaker  25:43  
+for this suspect model that we think that data,
+
+Unknown Speaker  25:47  
+data
+
+Unknown Speaker  25:50  
+data leakage might be happening. Okay, so what we are going to do in here, where is my classification score here?
+
+Unknown Speaker  26:02  
+Um,
+
+Unknown Speaker  26:05  
+so we are going to do
+
+Unknown Speaker  26:09  
+classifier dot predict X trend. So this is going to bring give me my balanced accuracy score and look what I exactly suspected. Not only accuracy score is one, even the balanced accuracy score is also one.
+
+Unknown Speaker  26:27  
+What does this really mean?
+
+Unknown Speaker  26:33  
+When can this really happen? Why would it be the case? Why one?
+
+Unknown Speaker  26:39  
+And it's not tiny. It's not a very non trivial data set. It's a small data set, but not non trivial, and it has lot of columns, and we haven't dropped any of the columns. We haven't done any drop, any right, and still, we are getting 100%
+
+Unknown Speaker  26:54  
+balance accuracy score.
+
+Unknown Speaker  26:57  
+Now let's check the accuracy score in the test data set.
+
+Unknown Speaker  27:02  
+My God, even the test data set gives 100% accuracy score, right? So let's see the balanced accuracy score for the test data set.
+
+Unknown Speaker  27:15  
+So for that, we have to do Y test, oops, typo.
+
+Unknown Speaker  27:22  
+And here we have to do X test.
+
+Unknown Speaker  27:26  
+So balanced accuracy score for test data is also one.
+
+Unknown Speaker  27:32  
+So something funky going on here?
+
+Unknown Speaker  27:38  
+Then when this is the case? Then the first thing it come should come to your mind is, what?
+
+Unknown Speaker  27:47  
+Let's check the correlation,
+
+Unknown Speaker  27:50  
+right?
+
+Unknown Speaker  27:51  
+So let's apply a DF data frame, dot correlation on your result column. So what does this mean? So this function will give correlation, but we are only interested in correlation with the y column, which is the result,
+
+Unknown Speaker  28:10  
+and then we are going to sort the values and take the last five. So basically, we are going to see which five columns has the highest correlation with output.
+
+Unknown Speaker  28:21  
+I mean, you could have done that using VIP test as well, which you learned in the previous week.
+
+Unknown Speaker  28:28  
+Okay,
+
+Unknown Speaker  28:32  
+now, do you see what is happening?
+
+Unknown Speaker  28:37  
+What do you interpret?
+
+Unknown Speaker  28:40  
+And I'm not going to tell you how to interpret let's see what you guys think about this.
+
+Unknown Speaker  28:49  
+That the the app number zero point or the app number,
+
+Unknown Speaker  28:55  
+I was going to say the specific app number had a higher degree of bugs,
+
+Unknown Speaker  29:02  
+malware, 0.866
+
+Unknown Speaker  29:04  
+right?
+
+Unknown Speaker  29:06  
+There's a high correlation between the app like, there are certain apps that, like, were really buggy or really exposed to malware, right, right? And then it could also be the case, looking at the name of the column app number, it could just be a sequential number,
+
+Unknown Speaker  29:22  
+and maybe someone who collected the data, they probably didn't shuffle the data,
+
+Unknown Speaker  29:30  
+right, because they were probably keeping a record in a database, something like that, app one, app two, app three. Maybe that is your app number,
+
+Unknown Speaker  29:40  
+right? But why you did have high correlation.
+
+Unknown Speaker  29:47  
+So we will look into that quickly
+
+Unknown Speaker  29:51  
+in the in our next notebook. But you might want to do a scatter plot, because it is kind of a suspect column the app number, it has a very high correlation.
+
+Unknown Speaker  30:00  
+So since this looks very suspect, we decide to do a scatter plot. So if it had a very high correlation in otherwise, I would expect that we will basically get a straight line with a perfect slope, right?
+
+Unknown Speaker  30:14  
+But this is even weirder than that. Look what is happening here.
+
+Unknown Speaker  30:20  
+My y axis is result, basically result, meaning whether the app is a malware, yes or no, right?
+
+Unknown Speaker  30:29  
+Which is zero, we have converted to zero and one. So Y axis can only take two values, either zero or one. Now look at the x axis, where all the app numbers are plotted.
+
+Unknown Speaker  30:40  
+Do you see there is a threshold, like all the apps below 15 1000s
+
+Unknown Speaker  30:47  
+basically belong to class zero, and all the apps above 15,000
+
+Unknown Speaker  30:53  
+belongs to class one.
+
+Unknown Speaker  30:57  
+So it was just how the apps were numbered numerically. They just numbered all of the zeros first, correct, right. So that basically means, whoever collected this data and then when they published they predict, basically did a very shoddy job of it,
+
+Unknown Speaker  31:16  
+if they collected all of these data and then based on the user input, then they basically put it into two different groups, and then they added sequential number one through 15,015 1000 to 30,000 and then club the two group together and published it like, Here you go. This is your data.
+
+Unknown Speaker  31:37  
+Now we did this blindly, without looking into this. So what is essentially happening is this app number column is basically making our model cheat, because it is leaking the information about the target into your one of your training column,
+
+Unknown Speaker  31:56  
+and no wonder you are getting a perfect score all the time, because your x column, all of these x columns,
+
+Unknown Speaker  32:05  
+not all of these x columns, sorry, one of the X columns already exactly reflecting what y would be,
+
+Unknown Speaker  32:14  
+right now, this is an extreme example. As I said,
+
+Unknown Speaker  32:19  
+all other examples might not be these extreme, but this is just an extreme example to show
+
+Unknown Speaker  32:26  
+the dangers that can can be hiding underneath if you are not very careful about understanding your data. So can we fix this just by dropping the app number column and then returning Yeah? Yeah. Okay. Actually, I really interesting thing also I find is if especially Random Forest classifier, if you were to look at the
+
+Unknown Speaker  32:50  
+featured importances,
+
+Unknown Speaker  32:53  
+that one will probably be huge and all the others will be smaller.
+
+Unknown Speaker  32:58  
+That was actually a class I said. Well, here are the extra challenges, find the data leakage. And that's find the data leakage. Yeah, it was, like, this huge amount for this one feature and everything else was way smaller.
+
+Unknown Speaker  33:11  
+Yeah, when you're, like, collecting data for, like, the AI, it's like, you have to, like, collect data in a way that it doesn't make it too obvious for the model to know what the answer is to like, check the correlation is that right, you're like, because, like, if, like, one of the columns is like, making it way too obvious to like for it to find out which is which then makes it for like, A bad like, training data set.
+
+Unknown Speaker  33:40  
+Uh, hang on,
+
+Unknown Speaker  33:42  
+what did I do at the bottom? Ah, okay, yeah, point four, five, as opposed to all the other things are much, are pretty much, yep, correct. So exactly. So this is showing app numbers. Importance is 0.45,
+
+Unknown Speaker  33:59  
+now look at the well read phone state, kind of in the same order of magnitude, 0.17
+
+Unknown Speaker  34:06  
+everything else from here onward has much lower importance. And majority of the columns has the importance 10 to the power negative five, negative four, negative three. Only these two columns have high importance. And even then that second important column is about 1/3
+
+Unknown Speaker  34:24  
+as important as the most important column, which is app number.
+
+Unknown Speaker  34:30  
+Yeah, thank you, Karen for pointing that out. That is also another way I've seen really cool examples of us with a decision tree, especially because then you plot the tree, and it turns out there's only, like, three, there's only one layer, yeah, it goes greater than or less than the number, yeah, and then zero or one, and it goes well, I'm done,
+
+Unknown Speaker  34:54  
+because the model will be lazy if it can so well, I'm done. Haha.
+
+Unknown Speaker  35:00  
+Yep. Okay, that's cool. So now let's look at another example, and let's see whether you can plot the data leakage. And this is student example, but I think it will be better if we just discuss this in the class. Oh, and by the way, my plan is to make you guys get into your groups. And it could be random group to do the very last exercise of today's class, which is basically where you are trying to improve upon the first model with the bank marketing data set. So that is the last activity I would like you guys to actually do in group. Because the thing is, there is no right and wrong when it comes to improving your model. So I really would like to see that if five different groups tries their approach, which group kind of wins. So I basically want to use the last activity, almost like a mini car competition. Okay,
+
+Unknown Speaker  36:00  
+everything else we will do in class. And for that reason, I'm thinking what we'll do is we will cover everything else and then take a break, and then after break, then we will get into the room, get into the groups, and do the last activity, and basically treat these as the groups competing against each other.
+
+Unknown Speaker  36:22  
+And
+
+Unknown Speaker  36:27  
+okay, so let's take another example.
+
+Unknown Speaker  36:31  
+So, and this is again, data leakage is something that we need to figure out. Oops. Let's look into the data first.
+
+Unknown Speaker  36:40  
+So this is the crowdfunding data. So this is basically data about a whole bunch of crowdfunding campaign. What was the goal, what was the pledged amount and how many? What was the number of backers, the rewards given which country the staff pick spotlight like couple of different, few different attribute about the crowdfunding campaign, and then outcome column zero or one, which basically says whether the crowdfunding campaign were successful or not.
+
+Unknown Speaker  37:10  
+Okay.
+
+Unknown Speaker  37:14  
+Now
+
+Unknown Speaker  37:16  
+we are going to do the same thing as we did in the previous activity, we are just going to do a train test split and do a random forest classifier,
+
+Unknown Speaker  37:27  
+and we are getting a score of zero or one,
+
+Unknown Speaker  37:32  
+if you want to see that in test, even in the test, I'm seeing a score of one. So that means very similar to the previous example. There could be some data leakage. So how do we find whether the data leakage is happening?
+
+Unknown Speaker  37:57  
+I really liked Karen's idea. Actually, let's do this way. So instead of trying to find it and do it, find the correlation and all, maybe
+
+Unknown Speaker  38:09  
+just look at the feature importances and see whether we are lucky, whether we can see some feature that seems to be way highly important compared to the others.
+
+Unknown Speaker  38:24  
+Do you see anything
+
+Unknown Speaker  38:34  
+which columns seems to be the offending column?
+
+Unknown Speaker  38:40  
+Given reward, given. Yeah. Now if you go here, and if you look in this data,
+
+Unknown Speaker  38:47  
+look at the reward given for outcome,
+
+Unknown Speaker  38:52  
+and look at where the reward given is, what the reward given is, where outcome is zero.
+
+Unknown Speaker  38:58  
+So do you see what is happening here? Rewards are only being rewarded when they're funded. The outcome is success, right? And that so that basically is a data leakage.
+
+Unknown Speaker  39:11  
+So there is obviously other way to look at it, is, well, let's find the correlation, and we can see that rewards given has a high correlation with outcome.
+
+Unknown Speaker  39:24  
+And then we can try to do the scatter plot,
+
+Unknown Speaker  39:28  
+and we can see there is just zero here, like so there are, this is basically imbalanced data set. A majority of these probably is a success, but you see, when you see rewards given versus this, the only one where outcome is zero is basically where the rewards given is zero. For any other value of rewards, given any positive value of rewards given which is non zero value, your outcome is one.
+
+Unknown Speaker  39:58  
+So that means we should not be.
+
+Unknown Speaker  40:01  
+Uh, using the rewards given column, because that is leaking the data about your output into your training, into your x feature set.
+
+Unknown Speaker  40:10  
+So, so maybe dependent features or dependent variables, those are bad, because they can cause leakage. I mean, this is an example of dependency correct, and that is why I mentioned in the last bullet point where we are looking at the summary slide right the topic of today's discussion in the last point, where it was talking about creating new feature, like synthetic feature. And this is why I said you really have to be careful about that. Because if you are not careful, you might inadvertently cause leakage.
+
+Unknown Speaker  40:48  
+In fact, I am not a very big proponent of using artificially created like computed feature
+
+Unknown Speaker  40:55  
+that, in my mind, always kind of
+
+Unknown Speaker  41:00  
+disturbs the level playing field. So I really do not like to do that. Some people do.
+
+Unknown Speaker  41:07  
+The other thing is, in these day and age, most of the state of the art, art machine learning model that people use for classification, which will be mostly neural net based model, many of these things would probably not be a cause of concern, because when it comes to the neural net based model, all of these things that we are talking about, many of not all, many of these things would not matter that much. In fact, for one, for example, when we are talking about converting all these categorical column into numeric values, that is something you don't need to do when you are using a neural net based classifier.
+
+Unknown Speaker  41:43  
+But still, some of these are best practices that you should keep in mind, and hopefully even in neural net also you will be
+
+Unknown Speaker  41:51  
+benefited by doing some of these. But creating artificial feature is not one of these that is at least this is not something that is high on priority in my toolbox. I don't use that for this risk, because it can actually cause feature leak. Feature leakage,
+
+Unknown Speaker  42:14  
+okay,
+
+Unknown Speaker  42:18  
+so that was this data. Okay, so now let's take another example. This is a data set about
+
+Unknown Speaker  42:29  
+a whole bunch of startup form and whether the startup form succeeded or not.
+
+Unknown Speaker  42:37  
+Okay, so financial performance, farm, ID, industry health, and then the category zero or one, meaning whether the startup is a success or failure.
+
+Unknown Speaker  42:48  
+So here the farm category is our y, meaning our target, and then three of the other column or our feature column.
+
+Unknown Speaker  42:57  
+So
+
+Unknown Speaker  42:59  
+again, the same thing.
+
+Unknown Speaker  43:01  
+We get perfect score of one. But this probably is very easy to actually see, even without doing any further analysis,
+
+Unknown Speaker  43:10  
+just by looking at the names of the columns. Do you guys see it?
+
+Unknown Speaker  43:16  
+What is it for my D, yes, yeah. So this one is actually very easy to see,
+
+Unknown Speaker  43:24  
+yeah. So if you do a correlation,
+
+Unknown Speaker  43:29  
+well, the correlation is actually kind of little,
+
+Unknown Speaker  43:35  
+what I would say, it's not very informative here, because here I am seeing all three columns are having
+
+Unknown Speaker  43:44  
+high correlation. Now, since farm category is sorry, farm ID is our suspect column, so let's do a scatter plot. And this scatter plot will basically show the same thing as before, where basically for zero and one, there is a clear delineation. So basically same thing as our malware data set. Someone put all the successful firm together, and then they put all the unsuccessful form together, and then slap without shuffling the data, then put a sequential number. And that's why all the form up from with the ID 02 1000 are basically fell firm. And all the firm that has a farm ID more than 1000, 1001 plus, they are the successful firms. So this is basically same as the two other cases that we saw. It is just an example of bad data collection,
+
+Unknown Speaker  44:39  
+okay? And same thing. If you want to do the feature importance, you will, you will be able to easily spot it.
+
+Unknown Speaker  44:46  
+That I did, that was a lot more clear.
+
+Unknown Speaker  44:49  
+Yeah, of course, yeah,
+
+Unknown Speaker  44:52  
+you want to do that here, so let's do that. Do.
+
+Unknown Speaker  45:03  
+Hang on. No actually, in this case, feature importance is not going to give you too much, because here the correlation for all
+
+Unknown Speaker  45:13  
+three columns are high. So that's why, for this one, at least feature importance is not giving you clearly that form ID is the offender.
+
+Unknown Speaker  45:26  
+See, in this case, it is not giving you actually. So yes, I did like Karen's idea, but sometimes that so that's why I said there is no right or wrong thing, like what works for one data set might not work for other data set, and that's why you have to use a mix of strategy like finding correlation, doing scatter plot, oh, and then also maybe doing the VIP test right,
+
+Unknown Speaker  45:49  
+or simply looking at the feature importances. So
+
+Unknown Speaker  45:55  
+you need to use the combination of these when you are suspecting that feature leakage is happening or might be happening
+
+Unknown Speaker  46:06  
+anyway. Do you think that they're so close because there's so few features?
+
+Unknown Speaker  46:11  
+Yeah,
+
+Unknown Speaker  46:14  
+yes, I think so.
+
+Unknown Speaker  46:16  
+Also, the other thing, if you look into this, not just because it is few, but if you look into the financial performance,
+
+Unknown Speaker  46:25  
+right? So obviously, if the firm has a high financial performance,
+
+Unknown Speaker  46:32  
+that means the firm will be a success. So I would say all three column here are leaking data, leaking information. The farm ID is leaking the most, but even without farm ID, and then the other one is overall the health of that industry where the farm is operating. So obviously, in an industry where the overall industry health is good, then a majority of the startup in that industry will succeed. So it's, I would say, JC, it's happening, not because there is less row, but it is happening because there is less column. And the only two other columns that we have other than form ID, they are both very highly correlated. Yeah, well, that's what I mean by there's there's fewer columns, features. Oh, okay, okay, yes, I thought columns map to features. Okay, yes, yes. That's why we are seeing this. So I think this kind of served as a good example to show is for you to see how the problem can kind of raise its ugly head in a different way, and sometimes it might be easy to spot, and sometimes it might be difficult to spot. So
+
+Unknown Speaker  47:44  
+okay,
+
+Unknown Speaker  47:46  
+so we are good with the data leakage thing.
+
+Unknown Speaker  47:50  
+Now let's look at the imputation part, like what we could do if you see that data is missing a lot. If you see only maybe 1% or 2% rows have missing data, and if you already have hundreds of 1000s of records, you can just go ahead and do a drop in a maybe for the most part,
+
+Unknown Speaker  48:14  
+but if you end up losing a substantial percentage of your data set
+
+Unknown Speaker  48:19  
+by doing a drop in a that's where you need to think about, well, what else we can do? How we can replace the missing values with something that might be little more meaningful than having a now value, right? So that's why we are going to see one example here.
+
+Unknown Speaker  48:39  
+So
+
+Unknown Speaker  48:42  
+this is that the first data set in the previous notebook, which is that crowdfunding
+
+Unknown Speaker  48:48  
+with less number of columns, it's kind of a cartel down.
+
+Unknown Speaker  48:55  
+So
+
+Unknown Speaker  48:59  
+you can do train, test, split and all. Now, if you want to see whether there is any null values, right? So ideally, how you see the null values? You take a
+
+Unknown Speaker  49:15  
+data frame that you suspect does have null values, and you do a easily.
+
+Unknown Speaker  49:22  
+Now, if you do a easily, it will basically say wherever there is now, it will say true. So this true here basically means there is a now, and wherever there their value exist, which basically which will say false. So false meaning it is good, true meaning it is bad, that means there is a now, because the function is is NA.
+
+Unknown Speaker  49:45  
+Now, by looking at this, you do not know exactly how much, how many null values are there across which column. So then you can apply an aggregation function, which is to submit. When you submit.
+
+Unknown Speaker  50:00  
+It will tell you which column has null values. Gold does not have a null value. Pledged column does not have a null value. Backers count. Which is this column? This is the one that has some null values, and 106 of them.
+
+Unknown Speaker  50:18  
+Now what I said earlier is if the proportion of null values is much less compared to the overall length of your data frame, you probably don't need to worry about much. You can just blindly do drop any
+
+Unknown Speaker  50:33  
+so how do you find the proportion? Well, simple. You take this and you divide this by the length of your data frame,
+
+Unknown Speaker  50:41  
+and that will give you the proportion of your data size, proportion of the null values. So goal, pledge, days, active, date, and we know that already they don't have so these 106 null values, it constitutes about 9.3 9.4% let's say of your data, which is about 1/10 of your data set, 1/10 of your rows have a null value in the backers count column.
+
+Unknown Speaker  51:08  
+Now
+
+Unknown Speaker  51:10  
+1/10 may or may not be trivial. If you have let's say 1 million record dropping 110 will still leave you 900,000 record.
+
+Unknown Speaker  51:22  
+But if you have only 1000 record dropping 1/10 and now you have 900 records. Now you are kind of
+
+Unknown Speaker  51:30  
+trying to base, I mean, not trying to you are basically kind of ending up in a like a on the lower side, where your data might not have any statistical significance, right? So you can also see, hey, what is the total length of my data frame? Or you can DF, dot shape, or length dot lane of DF, whatever you can do. So we have 1100 29
+
+Unknown Speaker  51:55  
+so out of 1100 29 if you drop 106
+
+Unknown Speaker  52:00  
+so that means you are ending up having something around 1000,
+
+Unknown Speaker  52:05  
+right? So well, let's decide that this is kind of not worth dropping. Let's see whether we can fix it somehow. If it is cannot be fixed, then in the worst case, we will drop it.
+
+Unknown Speaker  52:17  
+But how can we fix it?
+
+Unknown Speaker  52:21  
+Now, in order to come up with that strategy, you need to look at, well, what are the other values here?
+
+Unknown Speaker  52:28  
+And try to understand the interplay of this column with other column.
+
+Unknown Speaker  52:35  
+So what does backers count mean here
+
+Unknown Speaker  52:39  
+in this crowdfunding data?
+
+Unknown Speaker  52:43  
+Many people paid an amount to it to like, back the fundraiser?
+
+Unknown Speaker  52:50  
+Yeah. So one thing I'm seeing here
+
+Unknown Speaker  52:54  
+where backers count is none. Basically means there is no record of how many backers were there for that campaign.
+
+Unknown Speaker  53:03  
+And just in these the first five that we are seeing here for the head, we see that the day Dave active seems to be very low.
+
+Unknown Speaker  53:14  
+So it could be
+
+Unknown Speaker  53:16  
+the backers count is zero because the crowdfunding campaign got wrapped up even before it kind of caught on.
+
+Unknown Speaker  53:30  
+So
+
+Unknown Speaker  53:32  
+if you want to see what is going on, one thing you can do using the lock selection, you can say, hey, select from these extreme data frames. Select only those where the backup count is actually now and then. Do a describe, which will basically show you the descriptive statistics.
+
+Unknown Speaker  53:55  
+Like, if you without describe, what it will give you, it will give you basically all the data, 106 rows where the backer count is now.
+
+Unknown Speaker  54:05  
+And if you look into this, backer count is now, you see the days active are pretty on the lower side,
+
+Unknown Speaker  54:12  
+whereas other data that you have, the days active is higher.
+
+Unknown Speaker  54:19  
+So now, if you do a
+
+Unknown Speaker  54:22  
+describe here,
+
+Unknown Speaker  54:26  
+so now look at it and think about what we are seeing here.
+
+Unknown Speaker  54:37  
+When there is no backer, it just sitting there for idle for 100 days or so? No, no, no, that's that's actually not it. So what it is saying is where. So this is basically descriptive statistics of all the 106 records where backer count is now.
+
+Unknown Speaker  54:59  
+Now, the way.
+
+Unknown Speaker  55:00  
+To interpret this is out of these 106 records, what is the average number that they remained active? So you basically need to look into this one, 3.25
+
+Unknown Speaker  55:15  
+so basically, what it is telling me is that
+
+Unknown Speaker  55:19  
+those 106
+
+Unknown Speaker  55:23  
+crowdfunding campaign were back. There are no backers. They were active on an average of 3.25 days, which is pretty short.
+
+Unknown Speaker  55:36  
+Now you can do the same
+
+Unknown Speaker  55:40  
+statistic, but for all the features, all the call, all the rows together without applying this selection, just take everything in X train and then do a describe.
+
+Unknown Speaker  55:52  
+And here look the average number of days a campaign typically is active,
+
+Unknown Speaker  55:59  
+looking across everything,
+
+Unknown Speaker  56:02  
+which is 27 days,
+
+Unknown Speaker  56:06  
+as opposed to that,
+
+Unknown Speaker  56:08  
+the one that has null value in backers count, they are active on average of three days, Almost
+
+Unknown Speaker  56:17  
+so basically, we can conclude that the short lived campaigns are the ones where the backer count, value is missing.
+
+Unknown Speaker  56:32  
+Do you guys see the decision here?
+
+Unknown Speaker  56:36  
+Short lived campaigns only about 3.25 days on average, are the ones where backer count. Backers count is missing.
+
+Unknown Speaker  56:45  
+So can you do like a ratio formula to figure out what the backer count would be for those three days, and fill in those values?
+
+Unknown Speaker  56:56  
+You can,
+
+Unknown Speaker  56:58  
+but no, so you are saying, talking about the imputation strategy, yeah. So like user ratio of the backers count to the days active, yeah, yeah, to solve for x, basically. So you basically are drawing a straight line, assuming that so, but in order to do that, when you are doing that, you are implicitly assuming that there is a straight relation between the backers count and days active, right? Yeah, yeah, that is one way you can do yes, definitely. And I'm really glad that you already started thinking about the solution, yeah.
+
+Unknown Speaker  57:40  
+Okay, so before doing that, let's do so these two statistics that we saw, you can basically try to plot the these two thing into different histogram and plot them side by side, and that will make it very clear. So this is, this is basically histogram of days active,
+
+Unknown Speaker  58:01  
+and these grayish, sorry, these bluish,
+
+Unknown Speaker  58:06  
+this histogram, this is basically across whole data frame. And these orange color is basically the histogram of
+
+Unknown Speaker  58:12  
+the backers count, where, sorry, histogram of histogram of histogram of days active, where backers count is now, and this thing is histogram of days active across all the data set, which basically this graph is nothing, but
+
+Unknown Speaker  58:34  
+basically helps you see the 3.25 number here, And the 27.16 number like the mean, right? So we basically do the two distribution, and you can see how it is kind of much lower.
+
+Unknown Speaker  58:53  
+So now it comes to the strategy, how we are going to fill it.
+
+Unknown Speaker  59:01  
+And this is where you can be as creative as you want,
+
+Unknown Speaker  59:05  
+like you can look something that is proportionate today's active, and then do that
+
+Unknown Speaker  59:12  
+you might also want to. It is not shown here. But whoever said that, I'm sorry, who who get came up with this idea. Who was talking that was me. Oh, that was you, Matt, yeah. So I really like the idea. And there is one other thing you can do, actually. You can do a linear regression model
+
+Unknown Speaker  59:33  
+with just these two columns,
+
+Unknown Speaker  59:36  
+just a two dimensional linear regression with backers count and day as active, and you can train the model
+
+Unknown Speaker  59:45  
+with the columns, sorry, with the rows that have a non null value of backers count,
+
+Unknown Speaker  59:51  
+so that will help you come up with that line that you are saying, and then take the model and throw in the.
+
+Unknown Speaker  1:00:00  
+Days active for the rows that does not have a backers count, and take the models predicted outcome and fill that in the backers count column.
+
+Unknown Speaker  1:00:13  
+So you can actually take a linear regression model to impute that.
+
+Unknown Speaker  1:00:18  
+That will be really super cool.
+
+Unknown Speaker  1:00:21  
+But
+
+Unknown Speaker  1:00:23  
+here it's basically not doing that. Instead, it is.
+
+Unknown Speaker  1:00:29  
+This is just an example. Something very simplistic we are going to do.
+
+Unknown Speaker  1:00:36  
+We are basically going to take the mean of two weeks backer count and fill that in.
+
+Unknown Speaker  1:00:45  
+So if you take from this x train, let's first take all the rows, all the records where days active is greater or equal to six and less or equal to 30,
+
+Unknown Speaker  1:00:59  
+because we know the one that does not have a backup count
+
+Unknown Speaker  1:01:03  
+are active in for less than one week, like three, day four, day five, day, something like that, right? Because average was
+
+Unknown Speaker  1:01:11  
+3.25,
+
+Unknown Speaker  1:01:13  
+meaning half of a week. So now this is kind of doing what you said, Matt, but in a little more simplistic manner. So essentially, what this example is showing you take all the rows where the days active is between more than one week but less than two week.
+
+Unknown Speaker  1:01:34  
+That is what this selection is doing, greater or equal to six and less or equal to 13. And it doesn't have to be exact. You can change these values like you can say, Hey, why greater or equal to seven? It should be greater than it should be greater than seven and less than 14, something like that. So this is all open to interpretation, but the thing that I just said, like, you can use another regression model to impute this. That is also a very cool technique you might want to try. But the philosophy is the same. So you basically say, okay, the one that are active less than one week, there is no backers count. Now it could be that there was no backers, or maybe before we got a chance to collect the data, that the campaign was wrapped up anyway, and with the it basically fell off of the radar. So with that assumption, what we are doing is we are looking at the one that are active, like around two weeks, and then take the mean of that, which is 746,
+
+Unknown Speaker  1:02:36  
+and now we know that the average lifespan of these guys, I mean, these campaigns that have no backers are half of that so therefore we take that mean and divide that by two and then use that to fill in our unknown or not unknown, the null values.
+
+Unknown Speaker  1:02:59  
+Now, in order to do that, you can directly do that, or you can basically, since you have to do that for both training data and test data twice, it is a good idea to actually write it as a function.
+
+Unknown Speaker  1:03:13  
+So in the function, you are providing a x data frame, and then from that x data frame you are filling in the backers count
+
+Unknown Speaker  1:03:25  
+where, where they are now. So what does this? Fill na do? So fill na will only fill in the places where there is any where there is data. It would not go. It is not going to touch. So what it is you are saying is, for the backers count column. Only fill the rows that have that are now with this value and what is the value? The value is basically what we calculated here, the mean of two week backer count. So you take that value, divide by two, convert it to a round it up and convert to an integer, and that is the value that you are going to use as the backers. Count for those where it is originally none.
+
+Unknown Speaker  1:04:09  
+So you could have done it directly on the train and test data. But the reason it is showing here to do it in a function is not only because you have to apply it again across train and test. But this function strategy would also come in handy when you have to do multiple different pre processing steps, because this is just one, it could happen that there are five, six different columns that are null, so you have to do five, six different strategy for each of the column now you can put those together after your exploration is done and you come up with the different strategies for different imputation, you can put all of this together in one single pre processing function and then just run that pre processing function whenever you get new data,
+
+Unknown Speaker  1:04:55  
+or, like, when you have to retrain the model with new data. I mean.
+
+Unknown Speaker  1:04:59  
+So now.
+
+Unknown Speaker  1:05:00  
+Now you apply that, and then you will get your clean model where the backers count. If you do a ease any you will see now backers count. Do not have any null, so it's basically showing zero. So
+
+Unknown Speaker  1:05:26  
+yeah, so see where days active is one backers count is basically coming as 373 so this is one of your inputted value. Why 373
+
+Unknown Speaker  1:05:37  
+it is basically half of that
+
+Unknown Speaker  1:05:41  
+so that this basically shows our function actually worked. So instead of now, now we are getting a low value, such as 373, not a now anymore.
+
+Unknown Speaker  1:05:53  
+Now again.
+
+Unknown Speaker  1:05:55  
+I just want to emphasize it over and over again. Whatever you are saying in this demo, don't think that this is the only way to input value. Like, just within this course of within the like, just with the example of this, we already talked about two, three different thing, right? One that is shown here, and then Matt proposed an improvement, right? And then I said, Well, maybe you can be even fancier and actually train a tiny linear regression model, and then calculate the backers count. So there are many, many different ways that you can apply, that you can adopt to do this imputation, depending on the nature of the column and the other data in the other other role, other values in that column.
+
+Unknown Speaker  1:06:39  
+But this is just, this is just taking the mean of that week, right? This isn't doing a little regression. No, no, yeah, that's what I'm saying.
+
+Unknown Speaker  1:06:48  
+It is basically saying, blindly, we will just take the mean, single value. So by doing this, all of the 106 rows that has had now, they will all be filled it with same number, 373
+
+Unknown Speaker  1:07:02  
+not different. But what Matt was suggesting, or what I was suggesting, if you do that, then you would see variation of that, because essentially, you are kind of assuming a line slope, and then you are multiplying that by day one or one day or two, day or three, day or four day, basically, however many days that they are active, yeah, it doesn't seem
+
+Unknown Speaker  1:07:24  
+very scientific. Just saying, like, hey, in that week, we expected this many people to back based on,
+
+Unknown Speaker  1:07:30  
+well, yeah.
+
+Unknown Speaker  1:07:34  
+Again, as I said, this is none of these will feel scientific because these are more like, I'd say slate of hand
+
+Unknown Speaker  1:07:43  
+heuristic base, more like common sense based. So these are, these are not. So this is more of art than science, actually, because there is, you are, right. There is no scientific back into it. Like, why are we doing this? Well, I don't know, because I just don't want to lose 10% of my data set, that's all.
+
+Unknown Speaker  1:08:03  
+I'm just really desperate,
+
+Unknown Speaker  1:08:06  
+so I'm just doing the best that I could.
+
+Unknown Speaker  1:08:18  
+Okay, moving on to the encoding solution. And this is something that I'm not going to spend too much time on, on this one, because we all know what encoding is and how we have done encoding before. So
+
+Unknown Speaker  1:08:33  
+when you have different categorical values, such as in here, all of the columns are categorical, backpack color grade, favorite creature arrived later on time. So we have used this strategy called one hot encoding, right? So this is think of it just as a recap. So in order to do one hot encoding, you can just do pandas, dot get dummies, and that will do it.
+
+Unknown Speaker  1:09:02  
+A better strategy is to basically take a scikit learn transformer. Why it is better strategy? Because then if you use a scikit learn transformer, you can easily put it in your machine learning pipeline. Remember the pipeline that we saw last week, right? So all of the scikit learn transformer. They use the same
+
+Unknown Speaker  1:09:23  
+contractual obligation that they will follow the contract of for being included in a pipeline.
+
+Unknown Speaker  1:09:34  
+So now this is a transformer. So going back to the other discussion point that I was having, whenever you have a transformer, you have to fit it and transform it, and the fitment should be done only on the training data after you do the split. So therefore, what we are doing, we are basically taking the column and
+
+Unknown Speaker  1:09:59  
+fitting.
+
+Unknown Speaker  1:10:00  
+That with the one hot encoder and with the train data, of course,
+
+Unknown Speaker  1:10:06  
+here extreme
+
+Unknown Speaker  1:10:08  
+and then
+
+Unknown Speaker  1:10:11  
+you will transform that
+
+Unknown Speaker  1:10:14  
+for separately for your test and what is called train and test data
+
+Unknown Speaker  1:10:23  
+so that you can do for things like your backpack, color like blue, yellow or your favorite creature, right? And the reason, if you remember, why we said, like some people might think, Well, what about we say blue for one, yellow for two, orange for three, green for four and so on. So that is called, basically ordinal encoding. Now ordinal encoding should not be done for a column where these values does not have any intrinsic numeric order,
+
+Unknown Speaker  1:10:54  
+which is the case for backpack color column, favorite creature column and arrived column.
+
+Unknown Speaker  1:11:00  
+So for all three columns, you should be using one hot encoding.
+
+Unknown Speaker  1:11:06  
+But for the grade column,
+
+Unknown Speaker  1:11:09  
+you could do one hot encoding also, then you will basically have different column, which is Grade A, Grade B, Grade C would be the column header, and it will just be a one hot encoding. But here, in this case, since these ABCDEF letter grades, they actually does have a numerical value, meaning numerical sequence that they map to, right so you can actually use ordinal encoding for these cases, which is all that it is saying. It is basically saying for that column you are fitting it. You are taking an instance of an ordinal encoder with your categories be in this order, FDC, da, well, I don't know why there is no B, but eth, so there should be an E as well. And then you fit that with your train. And then when you are going to do the transform, you are basically going to take that fitted encoder and do the transform on both train and test.
+
+Unknown Speaker  1:12:12  
+Okay,
+
+Unknown Speaker  1:12:14  
+similarly for creature column, which is this one favorite creature that should also be one hot encoded. So then you need to have a
+
+Unknown Speaker  1:12:25  
+one hot encoder for favorite crater column.
+
+Unknown Speaker  1:12:31  
+And then where is the arrived column? Are we doing anything about the arrived? Well, arrived is our y, okay, so this is only for the A, for the x. So basically, we have three different transformation.
+
+Unknown Speaker  1:12:46  
+The first column is one hot encoding, the second column is ordinal encoding, and the third column is one hot encoding again. So now,
+
+Unknown Speaker  1:12:56  
+going back to the previous example, we don't want to fit and transform feet and transform feet and transform. Instead of doing that, we basically create one function where we basically use all of these three transformed transformer and then just apply the transform one after another into one single function, and then apply that function on the overall training data set once, and then overall test data set once. And when you do that in one single function, all of the column will be encoded in the way that they are supposed to be encoded. And same for your test column. That's all so essentially, is just some syntactic discipline that it is demonstrated in this notebook, not anything new compared to what you have learned before. It's just when you have many, many columns that you have to encode some categorical, some ordinal, sorry,
+
+Unknown Speaker  1:13:55  
+not categorical, some one hot or some ordinal. Then
+
+Unknown Speaker  1:14:00  
+doing this kind of a coding
+
+Unknown Speaker  1:14:04  
+what is called
+
+Unknown Speaker  1:14:07  
+Best Practice. Following this coding best practice will make your transformation easier to do when you are applying this over and over again, especially in a machine learning pipeline type setting or in real life, you have to take these models and keep it retraining every so often. So if you have this coded, so then you have some readily available too. And whenever you have to take this, do this again. If the data domain is the same, you know that, okay, these are the set of my transformation that you have to apply, so you can just go and blindly apply that.
+
+Unknown Speaker  1:14:45  
+And you said not to use ordinal with this. Why was that?
+
+Unknown Speaker  1:14:50  
+No, no, we are using ordinal. We are only using ordinal for the great column,
+
+Unknown Speaker  1:14:57  
+but we are not using ordinal for.
+
+Unknown Speaker  1:15:00  
+The backpack column or the crater column, because that is because,
+
+Unknown Speaker  1:15:08  
+yeah, because ordinal. When you are doing ordinal, you are implicitly assuming that those text values actually mean something numerically, meaning you are assuming that one is better than the other,
+
+Unknown Speaker  1:15:23  
+which, in case of grade Yes, that is true, A is better than b, b is better than C, but in case of backpack, color blue is not better than yellow or anything or yellow is or vice versa. So that's why you should not be using the ordinal encoding unless the column actually tells you that that's what it is. Yeah, because you brought this up before saying that it, like, introduces bias to your model. Um, but is it good practice to, like, kind of, like, embed those like meanings, like, say, like, you're working with a column and you got like, five values, and it's like, it's like, I don't know, like, worse, like, worst, worser, worse. And then, like, neutral, and then like, bad, like, you know, like, good, best, like, you know. And then, like, Would it be better to, like, do an ordinal encoding of that since, like, they're, like, there's like, a implicit, sort of, like, stepping,
+
+Unknown Speaker  1:16:15  
+I guess, yeah. I mean exactly like, if looking at the column, if you can, like, look at the all the unique values that the column have, right,
+
+Unknown Speaker  1:16:25  
+or like, like this, right? So which is why we are doing a value counts here. So looking at their these, you'd be able to tell, using your common sense, your judgment, you will be able to tell whether one is better than the other. So
+
+Unknown Speaker  1:16:44  
+so that's good. It's a good practice to like, do that when you're like, kind of like working with data is to like, embed your own kind of biases, I guess, because like, like, for like, the like the
+
+Unknown Speaker  1:16:56  
+you should not be embedding your own bias. That's what I'm saying. Because if you take this favorite creature column, and if you do want to do it ordinal encoding, and in ordinal encoding, you can actually specify the order. So now let's say if you are doing, if we want to do the ordinal, ordinal encoding for the feature column, and you basically say, Hey, I like elf better than Sphinx. Therefore I'm going to put L first, and then Sphinx and then troll. I like the list I so I put the troll at the end. So essentially, your own personal bias is now reflected in your model,
+
+Unknown Speaker  1:17:37  
+in your data, and then eventually it will go into your model. That is what I said it you should not be doing so. So if you can objectively measure something, it's ordinal. If you are subjectively correct, if something is universal, the meaning of a, b, c, d, letter grade is universal. That's why there is no harm in using that, because there is no subjective judgment.
+
+Unknown Speaker  1:18:04  
+There's no bias that is clipping in, like, with the on time and like late thing, you know, like, if it's on time, versus like late, and then very late, if you had, like those three, could you use like, an ordinal encoding for that? Or is it just bad period? So I think you you are already answering your question. There is no right or wrong answer. It is up to you. As a data scientist, you have to, at the end of the day, explain yourself to your user,
+
+Unknown Speaker  1:18:29  
+to your stakeholders, to your manager, to your customers. So it's all up to you. If you think that you are going to
+
+Unknown Speaker  1:18:37  
+basically do that, then yes, you can do that. In this case, we are not doing that because that is our, not even our feature column. That's our target column.
+
+Unknown Speaker  1:18:47  
+So that is basically going to be our class level, right? But in general, let's say, if it were feature column, then you could have done that, but then even if that is the case, so let's say, let's say, just for the sake of the argument, if you think that on time is good, late is bad, and very late is even worse. So basically, if this is about
+
+Unknown Speaker  1:19:10  
+this is about what this if this is about a person, which I think this case is, so you are basically assuming the kids who are arriving on time in school are somehow better than the kids who are arriving late, which may or may not be true, because you don't know where people are coming from. You don't know what traffic condition, weather condition, they are facing. You don't know their family situation. How many kids are in the house? How, like, how long does the parent take for to get all the kids ready?
+
+Unknown Speaker  1:19:41  
+Okay, so yeah, I guess
+
+Unknown Speaker  1:19:44  
+the bottom line is, let's let's not waste much time. The bottom line is, if you think that is universal, apply ordinal encoding. Else apply categorical encoding. Okay, otherwise, we will be keep discussing this throughout the remaining of the cloud. There is no end of this discussion.
+
+Unknown Speaker  1:19:59  
+So let's move on.
+
+Unknown Speaker  1:20:03  
+Okay,
+
+Unknown Speaker  1:20:05  
+so the next one is, as I said, My least favorite technique,
+
+Unknown Speaker  1:20:11  
+which is feature engineering. I don't like doing it, but just for the sake of showing it, I'm do, going to do a very, very quick demo here. So in the feature engineering is basically, let's look into that crowdfunding data. Okay,
+
+Unknown Speaker  1:20:27  
+so first of all, think about, what is the what is the reason people might think that they would do feature engineering.
+
+Unknown Speaker  1:20:39  
+Feature engineering, by the way, will add more feature
+
+Unknown Speaker  1:20:43  
+on top of what you have.
+
+Unknown Speaker  1:20:46  
+Why you'd someone want to do that in the first place? Because you're trying to sum up data, or compute data, so that you can get some logic out of it implicitly. So for example, you might say, like this, I'm going to include the average of some some of my features, or
+
+Unknown Speaker  1:21:02  
+I'm going to introduce some computation based on my features,
+
+Unknown Speaker  1:21:06  
+huh? That is more like a how I'm saying. Why? Why would you want to do that?
+
+Unknown Speaker  1:21:13  
+Because, because it's easier
+
+Unknown Speaker  1:21:17  
+to read.
+
+Unknown Speaker  1:21:18  
+Actually, no, that first the thing is the thought of feature engineering. Why should it come to your mind in the first class? Maybe you're trying to look at this, huh? More data, more better model. Yes. So basically, if you think that you don't have enough number of features
+
+Unknown Speaker  1:21:41  
+now, before you do anything
+
+Unknown Speaker  1:21:45  
+you should do, you should look at the shape of your data frame.
+
+Unknown Speaker  1:21:52  
+And for these data frame, I have 1100 rows and nine columns. So if you ask me that Benoit is it? Should I even think about feature engineering for this? My answer would be a farm No,
+
+Unknown Speaker  1:22:10  
+because think about the ratio, the relation of this,
+
+Unknown Speaker  1:22:14  
+it's one is 200 about right?
+
+Unknown Speaker  1:22:17  
+No, sorry, one is 2000
+
+Unknown Speaker  1:22:22  
+and No, no, no. Sorry, one is 200 so one is 200 is a good ratio. Whereas, on the other hand, instead of having 1000 rows, if I had 10,000 rows, 100,000 rows, 1 million rows, then I might think that, well, we have all of these data that we have to fit, but we have point 1% or point zero 1% feature column that is very less, actually,
+
+Unknown Speaker  1:22:51  
+that is when the thought of feature I engineering should come to your mind when You think that there are not enough feature
+
+Unknown Speaker  1:23:02  
+for us to learn all of these hundreds of 1000s of millions of data.
+
+Unknown Speaker  1:23:08  
+That is why.
+
+Unknown Speaker  1:23:11  
+Okay, that's why some people think that doing feature engineering is a good idea to increase the number of predictors in your model so
+
+Unknown Speaker  1:23:23  
+uh, now what Jesse was saying is basically how we should add it meaning, obviously feature engineering does not mean meaningless. Like you should not be taking one feature, one column and other column and then do a third column, which is the average of these two column without understanding what you are doing. Because if you are doing that, then you are essentially using a meaningless column with a very high colinearity, which is which is again bad,
+
+Unknown Speaker  1:23:49  
+right? You should not be going around and randomly adding and subtracting or multiplying two columns and creating a third column, right? You shouldn't be doing that. So now, going back to what Jesse you were saying, is you should do that when it makes sense for you to add a computed feature based on your understanding of the domain. Now this is more of our domain knowledge that you will need for the domain that you are trying to train the model whether in that domain the computed feature actually does make any sense or not,
+
+Unknown Speaker  1:24:24  
+and it is not a machine learning question at all, you should very validate that with the domain experts who you are working with to make sure that adding that additional computed feature actually does give any better predictive input to your model.
+
+Unknown Speaker  1:24:44  
+Here, the example is you have pledged and you have backers.
+
+Unknown Speaker  1:24:53  
+So in this example, it is been decided by the domain experts and.
+
+Unknown Speaker  1:25:00  
+That number of pledges per backer
+
+Unknown Speaker  1:25:06  
+probably gives some additional input to the model.
+
+Unknown Speaker  1:25:13  
+Is it true?
+
+Unknown Speaker  1:25:16  
+May or may not be,
+
+Unknown Speaker  1:25:19  
+if you ask me, Vinay would do it. Would you use this? My answer would be, no, I really don't like taking the two, do two of these, and just doing these divided by this, this will actually have a high collinearity.
+
+Unknown Speaker  1:25:35  
+I don't like this.
+
+Unknown Speaker  1:25:38  
+And rarely I have seen people actually using this very, very rarely. If you were to eliminate the if you were to compute the value and then eliminate the inputs that you use to compute them, would that defeat the collinear Exactly, yes, yes.
+
+Unknown Speaker  1:25:57  
+But that, that is one, one example that you could do that
+
+Unknown Speaker  1:26:03  
+also. Let's say another thing I'm telling you. Let's say you have a lot of these IoT device that are embedded in different machines right in a production line, and you are trying to do a anomaly detection right, which is basically a classification problem with a very, very imbalanced data set.
+
+Unknown Speaker  1:26:22  
+So anomaly detection basically means and it is used in industrial manufacturing all the time. So you have all of this sensor embedded right, and they basically keep spitting out this data that basically tells you different parameters of the machine right, like maybe the RPM or heat, temperature, or voltage, current, and whole bunch of thing, right? It keeps spitting you. And if you, if the idea is that that you basically will time to time, maybe every few seconds, or every minute or every other minute, you will basically run this through a predictor model. And if this value seems out of whack, then your model will be able to tell you, like, hey, there is something wrong going on in this machine. So Mr. Operator, go and take a look. So that's what, basically, animal detection does. Right now, what could happen in that particular domain? So let's say you have these 50 of this sensor in many different places in a large machine, and they are giving you your RPMs, what is called temperature, voltage, current, and all of this thing
+
+Unknown Speaker  1:27:30  
+now, there might be some meaning to it. Now if an engineer comes in who have deep understanding about the internal working of that machine. Now that engineer does have some human knowledge, that engineer knows that if my current is within this limit, then my temperature should be within this limit, and then my RPM should be within this limit. And maybe he will be able to formulate that using some kind of a mathematical model,
+
+Unknown Speaker  1:28:04  
+and this is one case if you don't do that, and you are simply relying on machine learning model, which is basically just calculating the posterior probability based On the ulterior probability, like Bayesian probability, that intrinsic relation between those 50 feature column is not going to be apparent to your model.
+
+Unknown Speaker  1:28:29  
+So that is an area when the multiple features within your data set does have a complex relation, and combining them through that complex relationship gives you something insightful about the domain that you are trying to predict or regress upon. That is the reason only time where you should be doing artificial feature creation.
+
+Unknown Speaker  1:28:52  
+In this case, it is too simplistic. You should not be doing it because these ratio data. It is too simple. These data is already available, your statistical model will, even without you doing it, it will be able to pick up on this data, on this relation,
+
+Unknown Speaker  1:29:09  
+and that's why I don't like it,
+
+Unknown Speaker  1:29:13  
+because I unfortunately or fortunately, didn't happen to work in that kind of a complex setting where I am getting all of these hundreds of 1000s of data that I need to, you know, pre compute, to come up with some some,
+
+Unknown Speaker  1:29:27  
+what is called relation some structure, pre computer structure. I haven't worked in that field, but I'm sure people who do work in that field, they will have a valid use case to do feature engineering.
+
+Unknown Speaker  1:29:42  
+Okay,
+
+Unknown Speaker  1:29:43  
+and then there are a couple of other examples. I'm not going to go into details, because, as I said, these are just toy example. You can take a look. But please, please, don't learn from this notebook. I'm telling you specifically do not learn from this notebook. Do.
+
+Unknown Speaker  1:30:00  
+Three.
+
+Unknown Speaker  1:30:01  
+Okay.
+
+Unknown Speaker  1:30:03  
+So what we are going to do now is we are going to take a break, maybe 15 minute break, and then after that. So the only thing that we have left here is this thing,
+
+Unknown Speaker  1:30:18  
+the activity seven, where you are going to use the combination of all of this thing that we have talked about to take the bank marketing data set, which is the first one that we worked on, and see whether you can
+
+Unknown Speaker  1:30:35  
+improve the model somehow. What was the first one? This one? Yeah, so with balanced accuracy score of
+
+Unknown Speaker  1:30:45  
+61 on train and 57 on test. So the idea is that you are going to so. So this one was your naive attempt, where you didn't do anything, you simply dropped all the categorical column and then only took the numerical column and you didn't even check the different depths of the tree or anything. You just took a one
+
+Unknown Speaker  1:31:05  
+max depth equal to five without any due diligence, and you kind of got lucky. Now in this project, that idea is that you are going to be applying some of these techniques that we just discussed in the first half of the class and see whether you can get a better model.
+
+Unknown Speaker  1:31:23  
+Okay,
+
+Unknown Speaker  1:31:28  
+so let's take a 15 minute break and come back at 820 and then we will get into breakout rooms, and then we will try
+
+Unknown Speaker  1:31:39  
+these strategies. So okay.
+
+Unknown Speaker  1:31:47  
+So one thing I noticed, I was looking into the unsolved file for this activity.
+
+Unknown Speaker  1:31:54  
+And if you follow the unsolved file,
+
+Unknown Speaker  1:32:01  
+I see that it's like lot of things that they have actually provided. So if you keep end up following the unsolved file, you will probably
+
+Unknown Speaker  1:32:13  
+end up having the same kind of accuracy score as everyone else, right? So you can use the unsolved file to guide you. I leave it up to you, but I wanted you guys to actually try your own. So it's totally up to you whether you want to use the unsold file and those do some modification, or whether you take the data set and create a fresh new notebook and then talk through among the group that you are going to be in and see what kind of maxims right? Whichever approach suits better for your group.
+
+Unknown Speaker  1:32:47  
+When I was looking through the one of the files for the install ones, it was doing an analysis with with the max depth of the random forest when the training and the test data start to diverge. What's what's the what's the optimal max depth? Is it when they start to diverge significantly, or when they are, yeah, close together. Again. That's a very subjective call Jesse. So as you have, as we have seen in the couple of example that we did the other day, I mean,
+
+Unknown Speaker  1:33:21  
+you just trying to figure out what the relationship is between the balanced accuracy score of the training and the test data, like, why is it significant if they have a tight coupling or a large or large gap between them?
+
+Unknown Speaker  1:33:36  
+So let me actually open that here. So this is the one that you are referring to, right? Yeah, yeah. I just, I just can't remember, like, why it matters with the balanced accuracy score,
+
+Unknown Speaker  1:33:50  
+why it matters with balanced when you're tracking between the training and the test data. I don't remember what, why it's significant when they're when they converge versus when they diverge? No. So the idea is that whenever you see that the gap is widening,
+
+Unknown Speaker  1:34:07  
+that basically means that your model is over the complexity threshold that you can do safely without causing it to overfit. So that's why, when you are going from left to right. As you are increasing your max depth, that means you are increasing the complexity of your model.
+
+Unknown Speaker  1:34:28  
+So after a certain depth, your model is basically trying to overfit to the training data, and that's why the performance between these two data set will start to widen.
+
+Unknown Speaker  1:34:40  
+So in this case, you can, as you will see, like here, right, the max depth of five seems to be optimal, because after that, the gaps started widening. Now some people might think like, well, maybe max depth four is optimal, because after four, it is like, whether you four is good for you or.
+
+Unknown Speaker  1:35:00  
+Five is good for you. That is subjective, or subjective to begin with, but then there is nothing stopping you from trying four and then trying five and see what is the difference you are actually getting.
+
+Unknown Speaker  1:35:15  
+So to the left shows over fitting and to the right, shows underpinning,
+
+Unknown Speaker  1:35:21  
+no to the right shows over fitting.
+
+Unknown Speaker  1:35:25  
+If it's over fit, wouldn't it be convergent?
+
+Unknown Speaker  1:35:28  
+No. So when it is overfitting, that means your train score will be much higher than your test score. That is the textbook definition of overfitting. Yes, okay, I had that totally swelled.
+
+Unknown Speaker  1:35:43  
+Okay, yeah, no, that's fine. It's good to have things clarified, right? Because you guys are learning now, so yes, so that is the definition of overfitting, that you are getting a much higher accuracy for your training data
+
+Unknown Speaker  1:35:57  
+compared to your test data,
+
+Unknown Speaker  1:36:00  
+yeah. So this second model thing, so you will see there are two files, right, second model and third model. So in the second model, it is basically saying no other like, no imputation, no nothing. You basically, instead of randomly taking a depth, you are basically trying out a several depth values and then picking the one that you that shows that where the overfitting is starting to occur, that's what the second model is, right? So you can ignore that, because in the third model,
+
+Unknown Speaker  1:36:34  
+you are supposed to do all of the other things first, and then at the very end, when your data is ready, then you do this test to basically see what is the ideal depth for your model.
+
+Unknown Speaker  1:36:48  
+And also, by the way, if you want, you can also try other classifiers, also like after you are you are done, done with the analysis of the data and all of these, feature selection, your imputation and everything. There is no reason for you to only try random forest. You can also try SVM or KNN and see which one gives you better balance score.
+
+Unknown Speaker  1:37:20  
+Okay, so let's get started then, I mean, you can consider these. Treat these as a micro project, the mini project we'll be doing next Monday, consider these as a micro project and see what you can achieve. What's the best score that you can achieve,
+
+Unknown Speaker  1:37:38  
+what's the best score that you can achieve for well, for your test data, because that is your goal is to achieve as high score as possible in your test data.
+
+Unknown Speaker  1:37:51  
+And that includes which score,
+
+Unknown Speaker  1:37:55  
+the balance score, which metric or the balance score, balance score, which metric too. Yeah. I mean, you can also check your f1
+
+Unknown Speaker  1:38:04  
+right. You can do
+
+Unknown Speaker  1:38:06  
+the, what is called the, not the classification matrix, the, basically the
+
+Unknown Speaker  1:38:12  
+HA, the classification report, sorry, yes, classification report, and that will also show you the f1 score. So you can also look into your f1 score. Just notice, in the classification report, if we go under the column for recall
+
+Unknown Speaker  1:38:26  
+as it's macro,
+
+Unknown Speaker  1:38:29  
+average is, actually is looks to me, is the balanced accuracy?
+
+Unknown Speaker  1:38:38  
+Is it? So I think so, because I bought it looks like the right, right number for adding those two, you know, the recall values together and dividing them.
+
+Unknown Speaker  1:38:52  
+Yeah, that one, 115,
+
+Unknown Speaker  1:38:57  
+about 58 that's pretty close. Oh, this one. Yeah, I think that's pretty, pretty, actually, right? Yeah. So roundup number for it right there. I just noticed that, yeah,
+
+Unknown Speaker  1:39:10  
+that macro average seems to be the Yes, that's right,
+
+Unknown Speaker  1:39:16  
+yeah. Anyway, so I'd like people to kind of figure out and play around with these things. So let's open that last chart real quick, though, because you said the highest test score, right
+
+Unknown Speaker  1:39:31  
+this one? Yeah, would it? Would it just be the highest test score, right here?
+
+Unknown Speaker  1:39:38  
+This will give you high, highest test score, yes,
+
+Unknown Speaker  1:39:43  
+but you are overfitting at that point, so it's the highest test score with the least with the with the least amount of overfitting, yes,
+
+Unknown Speaker  1:39:53  
+yes.
+
+Unknown Speaker  1:39:57  
+So for how long? And I have them in.
+
+Unknown Speaker  1:40:00  
+Three so let's do for so we have about one hour left in the class, so let's do for 45 minutes. Okay,
+
+Unknown Speaker  1:40:08  
+and set up this random one, so yeah, and then maybe exclude, exclude us from getting into the room. I checked the right thing this time. Okay,
+
+Unknown Speaker  1:40:22  
+pretty sure I got it right. We'll see Wow, let me, let me. Now I'm nervous. I'm going to do it again. Okay, now I did it right. So
+
+Unknown Speaker  1:40:33  
+I did do it right. I'll stop sharing
+
+Unknown Speaker  1:40:38  
+45 minutes. There we go. I So how did you guys do? What's the outcome?
+
+Unknown Speaker  1:40:53  
+Was it a trick for us that? No, like, I'm really curious to see what, what's the score that you guys achieved, like both on the train and test set.
+
+Unknown Speaker  1:41:07  
+So any, any, any volunteer from any groups,
+
+Unknown Speaker  1:41:12  
+the one we did got we went from like point five nine for that first, the Y train. What
+
+Unknown Speaker  1:41:19  
+is the difference between these last two values. Actually, it looks extra. Oh, that train and test. So we went from test, yeah. We went from point five, 9x
+
+Unknown Speaker  1:41:30  
+train 2.63
+
+Unknown Speaker  1:41:33  
+and then we went from point 858,
+
+Unknown Speaker  1:41:38  
+test 2.596
+
+Unknown Speaker  1:41:42  
+so hang on, are you comparing the second model to third model, or are you comparing that very first one that you did that this is the third model, and then like, like, before our change and after our change? Okay,
+
+Unknown Speaker  1:41:56  
+so in the third model, what are the values that you got? Finally, after all the changes. We went from point five eight and our point five nine and point five eight to point six, three to end point five nine for the I'm a little confused. What is your one at a time? Tell me what's your accuracy Score on test data.
+
+Unknown Speaker  1:42:20  
+The accuracy score, the balanced accuracy score for the test, the balanced, I'm sorry. Oh, score, yeah, balance, bounce test, accuracy scores, point 7.7,
+
+Unknown Speaker  1:42:35  
+and train, oh, our trends, one, I didn't see that. Sorry. Oh, we're like, then, then, then, then, your model does not count. You are overfitting.
+
+Unknown Speaker  1:42:50  
+Okay? Anybody else?
+
+Unknown Speaker  1:42:55  
+No,
+
+Unknown Speaker  1:42:57  
+we tried a few things, and it kept going down. The test the test score kept going down
+
+Unknown Speaker  1:43:04  
+from 5.59
+
+Unknown Speaker  1:43:06  
+on the first one that we were trying to improve
+
+Unknown Speaker  1:43:09  
+kept getting like point five, 6.55 and like point five three. Then we noticed that the data description itself said that, like, hey, duration, don't use that
+
+Unknown Speaker  1:43:19  
+unless, if you want to do like an actual model, like, get rid of it. So then I tried dropping duration, it's it didn't, it didn't get above point five, six. I tried dropping the next column that had the highest correlation,
+
+Unknown Speaker  1:43:33  
+which was P days. I think,
+
+Unknown Speaker  1:43:37  
+yeah, P days. And then still going down the charts,
+
+Unknown Speaker  1:43:44  
+yeah, it's it didn't get above
+
+Unknown Speaker  1:43:48  
+point five
+
+Unknown Speaker  1:43:50  
+two. So point five two, okay,
+
+Unknown Speaker  1:43:57  
+did you follow your own approach, or did you more or less followed the one in the that was provided in the unsolved notebook.
+
+Unknown Speaker  1:44:05  
+Well, I try to follow the one in the results. And then we're I was going to do a fourth one where, because you said we could use KNN and SBA. So I was going back to
+
+Unknown Speaker  1:44:15  
+13 lesson, 13
+
+Unknown Speaker  1:44:21  
+activity, three and then, okay, so you basically focused more or more on using different algorithm rather than, rather than imputing your non values, or those things, mostly focused on those well
+
+Unknown Speaker  1:44:39  
+focused on, Yeah, I guess, I guess. I don't know, honestly, but no, I'm not gonna lie, little lost. So
+
+Unknown Speaker  1:44:47  
+for me, it was, it was trying to figure out, well, what's the is it, are these columns significant for this prediction or not? So if they're not, if they seem like they are, have too high of a correlation, let's drop them.
+
+Unknown Speaker  1:45:00  
+And how did you find which one is high correlation? I use that the zip
+
+Unknown Speaker  1:45:07  
+one. Okay, did you? Did anyone, not just you, did anyone try to use the hypothesis test that we saw, not the last week, the week before,
+
+Unknown Speaker  1:45:20  
+the
+
+Unknown Speaker  1:45:22  
+value, Viv, value test, hypothesis test, anybody?
+
+Unknown Speaker  1:45:28  
+No,
+
+Unknown Speaker  1:45:30  
+I thought, well, but I didn't get to it, yeah, because I said, right, this is a micro project. But these are some of the things my point is, and this is the what I said at the very beginning of the class, that the point of today's class is for you guys to realize the struggle and the slog that it could be to train a good model
+
+Unknown Speaker  1:45:52  
+and get a buy in from your stakeholders. It is really, really hard, which JC, I'm sure in your world, you probably experience that all the time, how your engineers are fighting to kind of have to basically establish their supremacy, right? Like, yep, so that's kind of what they go through. Yeah,
+
+Unknown Speaker  1:46:13  
+my group spent on our time doing was trying to turn the values in the month column into like a sign encoding. So like, the January and December, where like came back together in like value. So we like, we're like, we spaced out the 12 values across, like, zero to two pi, and then plug them in sign and then use those values. Okay, really did that help you think
+
+Unknown Speaker  1:46:40  
+we're just qualified i I'm trying to figure out how to get rid of that one.
+
+Unknown Speaker  1:46:47  
+What did you guys do with the ones that have none, like a null values? For example, let's say the contact column, so where you have, like, a telephone, cellular and some of those have null values. What did you do with those didn't have enough time. We just, like, most of it was spent with, like, trying to do that encoding for the months, and then trying to trying different encodings for, like, via some of these other values. Like, there's, like, ordinal encodings. I'm like, yes, no, I understand. No. My point is, before you did the coding encoding, right? Whether you did one hot or, you know, whatever it is, I suppose you either have dropped the null values with a drop in a or filled the null values with something else. Is that not
+
+Unknown Speaker  1:47:29  
+what you did? That's whatever was already in the third model code. I think that fills it, fills it with unknown,
+
+Unknown Speaker  1:47:35  
+which,
+
+Unknown Speaker  1:47:37  
+oh, so you actually filled in with like a text called none. Yeah. That's, yeah. That's what the code does. If you look at the third model, it like, says, like, it goes through some inspection in the comments, and it's just like, this is, this is interesting. For example, we kind of questioned the education. Jonathan was saying, like, Well, how do we know if a blue collar job is just primary? Is that? Well, if you go through their thought process, they're saying, hey, look, most of these null educations are in blue collar jobs, therefore, let's assume they have a primary education, not secondary and tertiary.
+
+Unknown Speaker  1:48:08  
+That's right, and and that that that logic is not foolproof, right? Because if you look into that, not all of those are blue collar job. There are management job there as well. There are entrepreneur there as well. So what makes you think that entrepreneur will have just primary education, and then there are retired as well? So retired people can have any level of education. They did the job in their primes.
+
+Unknown Speaker  1:48:34  
+Yeah, and that I said, don't follow everything the learning you should take from this. Is this, all of this thing is kind of a open to interpretation, your personal experience, your judgment, and the domain that you are working on, working in, right? And what makes sense for each and every column, that is all I basically wanted you guys to realize the first hand I'm going to
+
+Unknown Speaker  1:48:59  
+show you. So Margarita was right, this is a trick. Yeah, you want.
+
+Unknown Speaker  1:49:08  
+You can call it that. It is a trick in a sense that there is no right or wrong answer, right? So, are you seeing my screen?
+
+Unknown Speaker  1:49:17  
+So I basically was trying to find on Kaggle, where whether anyone has done anything on Kaggle with these UCI data, okay? And this is the page I came across, and this is the same bank marketing data from UCI, right?
+
+Unknown Speaker  1:49:35  
+So you can even download the code here, but here you can look into like the code, and here you will see submission done by different people at different times, right? The problem is basically it's a predictive model for customer churn, so that yes, no, the outcome is basically whether the customer is churning out or not, right? So you can look through some of the work that different people have done at different.
+
+Unknown Speaker  1:50:00  
+Point you can look at, well, there are no models here. Some case, in some of these, you will actually see some of the models published discussion, also not here, leaderboard, yeah, there is a leaderboard here.
+
+Unknown Speaker  1:50:17  
+A
+
+Unknown Speaker  1:50:19  
+these are private, though
+
+Unknown Speaker  1:50:22  
+public.
+
+Unknown Speaker  1:50:27  
+I wonder whether these are balanced score or just score.
+
+Unknown Speaker  1:50:35  
+Yeah, these may not be as exciting a competition, but at least what you can do is someone got 0.91196
+
+Unknown Speaker  1:50:44  
+I don't suppose you can actually get a balance score these high on this data set.
+
+Unknown Speaker  1:50:52  
+Yeah. So then other thing, what I was saying is, if you go into the code, this is where, if you go into some of these, for example, this one, let's see what this guy have done, and you can actually look through just just to get yourself familiar with the different kind of approaches that people might take, right? But do not adopt a style, because this is just like, let's say if you are a writer, author, right, or you are a painter, right? It's kind of an art like over time you will develop your style of work. So machine learning is something similar to that, right? So do not try to adapt to any particular thought process. Try to understand that these are statistical models, and the outcome of this statistical model that behavior you really cannot predict, or it is not always very, there is not very, always a functional, very objective relationship, like, if you do this, then the outcome would be better, right? So it is important to kind of keep this in mind and approach any problem with an open mind and think out of the box, right? For example, that that example that we are talking about when we are discussing the impute, imputation of that values right, where the what is called
+
+Unknown Speaker  1:52:09  
+the the
+
+Unknown Speaker  1:52:10  
+the fundraising campaign, right, where Matt and I, we basically expressed our ideas, like, how you can do a better imputation of the values where the backers count is missing, right? How you can do, do another train another model and use the outcome of that model to impute the values of this data set, right? So this is what I'll call like thinking out of the box, right? And that's why it is important for you to learn as many of these tricks and these, these techniques as possible before you actually will be starting to do actual real good, right on some with some real world data set. And that is the reason I basically decided to postpone that week 13.3 plus to next week, so that you will have all of this thing, and you will have some time to reflect upon hopefully you will be also looking into Kaggle. So let me actually put this link in our live channel. So feel free to go and look at what some of the other some people have done with these exact same data set. Because when you go to code, if you click on any one of these, right? So they have actually done some thing like classification, something, meaning classification problem. And you can see the different approach that people have been taking.
+
+Unknown Speaker  1:53:31  
+And you will see people have using the pipeline.
+
+Unknown Speaker  1:53:36  
+Sometimes they are using some custom transformer. So there are a lot of things that you will learn. And some of this thing here you will see, like hyper parameter tuning, using using grid search, and all of these. These will be the topic of our next class, which is on Thursday.
+
+Unknown Speaker  1:53:57  
+So with that, after that next class, you will basically have all the tools theoretically in your toolbox to be able to apply in any classification and regression problem within this statistical machine learning domain right now, all of these are all one side of machine learning, which is using The Bayesian statistics,
+
+Unknown Speaker  1:54:19  
+and then comes the other side, which is your neural network based machine learning, which is something we will be doing after your project,
+
+Unknown Speaker  1:54:29  
+but after Thursday's class you will have, you will be covering everything else that there is to learn for the statistical machine learning, or, quote, unquote, classical machine Learning. I love to use the term classical machine learning, right? This is like before, before neural networks were cool. All of these are before, but these are still used, yeah,
+
+Unknown Speaker  1:54:53  
+okay,
+
+Unknown Speaker  1:54:58  
+what does your T shirt say?
+
+Unknown Speaker  1:55:00  
+Agency.
+
+Unknown Speaker  1:55:04  
+Something about Canada itself says, because you can't always,
+
+Unknown Speaker  1:55:11  
+it's actually, it's actually a Splunk swag shirt that they have, and it's based on a South Park, but it
+
+Unknown Speaker  1:55:21  
+and then you chose to wear it today, of all days, you know, God bless. You know, it's laundry day, isn't isn't that just the best kind of divining device?
+
+Unknown Speaker  1:55:37  
+Yeah, I didn't even think about that. It's hilarious. Oh, you didn't think of about that, so you must not have checked your investment portfolio. Yeah? Well, no, I did, actually. And I Oh, you did. After I wept, I said, I wonder what Governor Trudeau will do next. Yeah, yeah, I don't know it's,
+
+Unknown Speaker  1:55:59  
+yeah.
+
+Unknown Speaker  1:56:01  
+Cool. So that will be all then, I suppose, unless anyone has any other question.
+
+Unknown Speaker  1:56:09  
+If not, we can wrap up the day and we'll see you guys here on Thursday. Thank you. Have a great Day. Night.
+
+Unknown Speaker  1:56:17  
+Good night, everyone. Bye.
+
+Unknown Speaker  1:56:43  
+It looks like everyone left.
+
+Unknown Speaker  1:56:46  
+Yep, it's time for us to leave as well.
+

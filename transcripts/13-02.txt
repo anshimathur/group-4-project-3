@@ -1,0 +1,2379 @@
+Unknown Speaker  0:14  
+Okay,
+
+Unknown Speaker  0:17  
+so in today's class, we are basically going to build upon what we
+
+Unknown Speaker  0:22  
+did the last class, which is classification. But we are going to learn a couple more methods of classification, algorithms for classification. So before we start a quick check of understanding. So in the last class. If you guys try to think, what was the first classification method we learned,
+
+Unknown Speaker  0:49  
+logistic regression, logistic regression. And can you guys recall what kind of classification we discussed that it is good at, and what when it is not good.
+
+Unknown Speaker  1:12  
+Like, when there it's more like, binary or discrete, yeah, like when there's
+
+Unknown Speaker  1:18  
+like, like, that's the main point. Yeah, binary, binary. Well, binary, when you say binary, you mean like binary classification. So binary classification can come in many sizes and shapes and forms, but when logistic regression would be good is when there is a linear separation between the different classes that you are trying to classify.
+
+Unknown Speaker  1:43  
+But it often, so happens that in real world, the data we come across,
+
+Unknown Speaker  1:50  
+there is no linear boundary between the two. So that's why people have come up with other regression methods. That is supposedly
+
+Unknown Speaker  2:02  
+better able to draw linear boundary. For example, let's say you have two classes where your linear boundary of that is basically a quadratic function, right? Which is a circle quadratic function, so degree two polynomial or, or any, any other, like a higher degree polynomial, or some kind of a like a exponential, or any other function, basically anything other than not linear.
+
+Unknown Speaker  2:31  
+So that is something that,
+
+Unknown Speaker  2:35  
+what is called the logistic regression, kind of fails to do, because it always do does a threshold base. So it basically does a linear regression, except it changes the
+
+Unknown Speaker  2:48  
+Y equal to A plus Bx to y equal to one over one plus exponential of negative x, which basically gives a sigmoid curve. And based on that, you basically take a threshold value of probability. If it is more than 0.5 you'd say it is one plus less than so it's pretty straightforward, simplistic. Is very fast, much faster than most other classification algorithm,
+
+Unknown Speaker  3:13  
+but it doesn't always work very well because it is linear, and that's why we do non linear methods now simple vector machine. Why did we
+
+Unknown Speaker  3:27  
+Why were we able to or how were we able to use this for non linear boundaries?
+
+Unknown Speaker  3:34  
+Can you guys recall what in SVM we can tweak to use different mathematical function as the boundary of the classes,
+
+Unknown Speaker  3:46  
+min, max, yeah, so kernel. So basically we can choose different type of kernel, linear, RBF, sigmoid, polynomial. And based on that, if you have a data, data that are basically non not linearly separated, like that or these. You can try different type of non linear kernels to try out which one gives you higher accuracy right. And depending on which kernel you are using, you can actually choose what the decision boundary is going to look like, as you can see, the same data if you are using as SVN or SVC, is the name of the library so support vector machine with different kernel, it will come up with different classification boundary between the two classes. Now, there is no way that you can tell without trying out for your particular data set in hand, which kernel would work better, right? So just like most things in machine learning or statistical machine or any machine learning as well, so you basically have to try out different algorithm, different parameters, right, and so on and so forth. But it at least gives you the option to try out non linear boundaries, right? And this is where
+
+Unknown Speaker  4:59  
+I think.
+
+Unknown Speaker  5:00  
+Think this is the link that I slacked last class. So if you go through this, you will see that there is basically a code example here. You can even try it in your own notebook. So given a particular data set, how you can generate different decision boundary just by switching the kernel method for your SVM classifier, right? So that was what we did last class.
+
+Unknown Speaker  5:26  
+In this class, we are going to learn couple of other methods that are that happens to be, also be pretty good at classifying classes where the boundary is not linear,
+
+Unknown Speaker  5:39  
+and the first of that method is called K, nn. So the
+
+Unknown Speaker  5:48  
+full form of KNN is k, nearest neighbor, K, meaning a variable number. So the idea behind this algorithm is loosely speaking like it. We we apply this to people also, right? Like you tend to become like people that you usually mix with, like your close friend group, and people sometimes who you basically work closely. So you guys kind of tend to develop some certain attributes, and that's our human nature, right? We all do. So basically, you are who you mix with. So that is the idea behind this KNN. And KNN is also an algorithm that is very simple and simple I in a sense that it is also very scalable. So what happens is, in many of these algorithm where you are trying to do like a SVM with a polynomial kernel, or later, when you will see the decision tree based algorithm with very large data set, the training time goes up very quickly. The KNN method is actually very simple in that it can scale well meaning, even though you apply this with a ton of data, the training time does not go up, and you will see in a moment why, when, when we discuss this. So the idea behind this algorithm is actually stupidly simple. So idea is, let's say you want to find who you are. So let's say this green.is basically doesn't have an identity. So this green.is trying to find who am I? Do I belong to the blue square class, or do I belong to the yellow triangle class? Right? So then what KNN would do, KNN would basically look around and see who are the nearest neighbor. And if the nearest neighbors are more of yellow triangle, then it will decide like, okay, so this point must be belonging to the yellow triangle class
+
+Unknown Speaker  7:58  
+and vice versa.
+
+Unknown Speaker  8:00  
+Now how far it will look in the vector space that depends on what is the number that you are asking the algorithm to look like. Are you asking it to look only one neighbor? So if you say, okay, find this with k equal to one. So then this decision circle, which is this black circle, will basically be even smaller. So it will start from the data point itself, and it will keep expanding. As soon as it finds one other neighbor, which is somewhere around here, and it will stop. It will say, Okay, I found my one neighbor is yellow triangle, therefore I belong to yellow triangle.
+
+Unknown Speaker  8:38  
+But if you say, no, no, no, not k equal to one. Try this with k equal to three. So then it will keep expanding its like basically search radius, and as soon as it finds three net, three neighbors within that radius, then it will stop. And then it will make a decision out of these three neighbors, which one is more? The yellow triangle is more, or the blue square is more. Which is what this example it is showing. Now, instead of three, if you say more, okay, I want to do this with k equal to five, then this search radius will keep increasing even further. Which is this dotted circle? Because within this dotted circle there are five data points, five neighbors, and if it is k equal to five, then at that radius, you will see that there are more blue squares than yellow triangles. So at k equal to five, it will decide that this point belongs to the blue square class. So that means, depending on what is the search radius that you are specifying, meaning the value of k, a particular data point, can be classified as one group belonging to one class versus the other class.
+
+Unknown Speaker  9:49  
+Now the question you might be thinking, then, what do I do? Because I don't know. Well, the only thing is, you basically have to apply this.
+
+Unknown Speaker  10:00  
+Okay with across all of your training data with different k values, and see which one gives you the best accuracy.
+
+Unknown Speaker  10:09  
+Just like, as I said, most things, is in machine learning, right? You just have to try out and see which one gives you better accuracy. So that's that's all it is. Now, the reason this algorithm is so fast. Fast is because the training time is almost trivial, because this decision making that is happening, it's actually happening during the prediction time.
+
+Unknown Speaker  10:34  
+So when you do a fit on KNN, the Fit method almost don't do anything.
+
+Unknown Speaker  10:42  
+Because when you do the dot predict at that time, given the data point that you are asking it to predict upon during the prediction time, it will make a decision on the fly, like around my site, in within my search radius, which kind of class is more therefore this data point must belong to that class. That's all. And that's why, no matter how large your data set is, that's why I made the statement that it scales very well. And this is the reason it scales very well.
+
+Unknown Speaker  11:16  
+And since the prediction happened during the decision time, there is no decision or class boundary, so to speak, like unlike what we saw in SDM, so you can actually plot the class boundary here. There is no class boundary you can plot
+
+Unknown Speaker  11:33  
+because during the training, the model doesn't do anything.
+
+Unknown Speaker  11:38  
+It's basically a lazy model. It basically offer delays your decisioning task during the your prediction time, not during the training time. So training is basically nothing. You get a free model to train, almost free in the sense like free in times of in term of time and resource.
+
+Unknown Speaker  11:56  
+But your prediction would be taking little bit of time if your data set is large. Well, even prediction would not take that much, because even if your data set is large, what it will do is it will look only in the immediate vicinity. Right? It doesn't matter whether you have 1 million data point or 100 million data points, it will only look into the vicinity. It will keep growing the search radius. As soon as it finds the specified number of neighbors, the K neighbors, it will stop, and it will give you the decision.
+
+Unknown Speaker  12:28  
+So I hope you see and understand these algorithm, because this is something you would actually not be able to experience in the code, because fortunately or unfortunately, psychic learn make things very easy. So all you do is change the name of the class that you are, taking the initial classifier off, right, and then you do a dot fit, and then dot score and not predict. So looking at the code, you didn't understand what is really going on. So that's why it is very important to understand this concept and let the concept sink in through this class discussions. So feel free to ask any question you might have at this point.
+
+Unknown Speaker  13:15  
+So if you have a data point, look at its neighbors, yeah. And it changes over based on like, hey, my nearest neighbors are two blue squares versus one yellow Chad, who therefore I'm a blue square. And then it goes to look at the next data point, which is actually right beside it.
+
+Unknown Speaker  13:37  
+Have you kind of artificially
+
+Unknown Speaker  13:40  
+created a bias towards the blue squares by by having that, that point, say, hey, look,
+
+Unknown Speaker  13:47  
+I've just, I've just multiplied, almost like a virus. I've almost, I've kind of multiplied in this space,
+
+Unknown Speaker  13:55  
+even though I might have if I was no that will, well, that will happen if you are trying to change anything, but I know what you are saying, right? But that's not you are not really changing any data.
+
+Unknown Speaker  14:09  
+So you are not repainting a blue to yellow or vice versa, right? You're
+
+Unknown Speaker  14:15  
+you are just classifying another data point, right? Depending on who else is around it, but you might bias the next classification, depending on the order of the classifications,
+
+Unknown Speaker  14:26  
+depending on the what the order of the order of the analysis, the points that are analyzed. I'm just kind of trying to think through this. I might be like, No, actually, no, because we see these, algorithm is in no way trying to change either the position of the data point or trying to repaint one color data point into another color. That's not what it is doing.
+
+Unknown Speaker  14:50  
+Given the test data point, basically the question that you are asking that's your test data point, depending on where that data point is in the space, it basically simply starts.
+
+Unknown Speaker  15:00  
+Looking around, think about like it has this little radar, and it starts scanning around with that radar, and as soon as it gets one or three or five or seven or nine data points, it will stop, and then it will count that which class wins. I see, I think, I think my mistake was thinking that test data would become training data as it's as it's classified. But right now, that doesn't happen, right? Yeah, that's that. That's a that's wrong. So thank you.
+
+Unknown Speaker  15:34  
+And in other also, other thing is, fortunately, this is like, how true democracy, in a true democracy, voting system should work, right? Like there is no electoral college here.
+
+Unknown Speaker  15:46  
+If you know what I mean, it's not that in a state, you basically win this, these many seats, and you win everything in that state, right? No, there is no electoral college here.
+
+Unknown Speaker  16:00  
+So
+
+Unknown Speaker  16:02  
+anyway, so you get the idea. Now, why did I keep saying one or three or five or seven or nine? Have you guys thought about that? Why am I only talking about odd numbers k? Odd number k, I assumed, is for voting rights, so that one could win.
+
+Unknown Speaker  16:21  
+That is the only little tweak we do.
+
+Unknown Speaker  16:24  
+Otherwise, we want a free and fair election without any without any inference,
+
+Unknown Speaker  16:33  
+someone talking,
+
+Unknown Speaker  16:36  
+no, okay,
+
+Unknown Speaker  16:37  
+without any inference, the only thing that we basically enforce, well, it's not like you have to, but it is a good practice that if you take a odd number, so you basically there would be no possibility of a tie. If you have a choose a even number, there could be a tie, right? So,
+
+Unknown Speaker  16:55  
+so that's about it. That is what you do in logistic regression, right? So the code, as I said, looks very similar. So you take the classifier, and in the classifier, you basically provide a parameter which is, what is the number of your K, and that parameter is basically called N, underscore, neighbors, and then you fit, and then you predict or score or whatever you want to do. Now,
+
+Unknown Speaker  17:23  
+what these little code example is showing is, since you don't know which classifier which point is going to give you highest accuracy score, you basically try different values of k, ranging from one to 19,
+
+Unknown Speaker  17:39  
+and then see which one gets you training like, what is a training and test score, right? And we will see that in an action right now.
+
+Unknown Speaker  17:49  
+And this is one activity today. After I do the instructor demo, I would actually like you guys to work in your group. And that could be random group. That's fine, but I want to try this thing out at least once by hand.
+
+Unknown Speaker  18:04  
+Okay,
+
+Unknown Speaker  18:06  
+okay. So what do we need for our import from SQL learn dot neighbors. We need the K neighbors classifier. So this is the only difference between the previous examples and this one. So that's all our import.
+
+Unknown Speaker  18:24  
+And
+
+Unknown Speaker  18:28  
+why is my import taking so long?
+
+Unknown Speaker  18:38  
+That is very odd.
+
+Unknown Speaker  18:40  
+Okay, finally, anyway, okay, now we have the data set. So the data set basically, and this, by the way, is actually a multi class classification, which you will see in a second. So basically, what it does is, so this is a chemical analysis of glass.
+
+Unknown Speaker  19:01  
+So you know different glass. You can have glass that is used for your car windshield. You have glass that is we use for a mirror, and that different you it uses of glass. And depending on what is the use of the glass, their chemical composition varies right, what element have, how much percentage of right, like your sodium, magnesium, aluminum, silicon, all of this thing. So this is a data set that basically looks into the chemical composition of a given sample of a glass material and basically predicts what is the uses of this glass. Now this data set is basically encoded already, so that's why, when I do glass dot value counts here, so you only see 1234567,
+
+Unknown Speaker  19:48  
+so basically there are seven different types of class. So pay attention to here, right? This is not a binary classification. This is a multi class classification.
+
+Unknown Speaker  19:58  
+But guess what?
+
+Unknown Speaker  20:00  
+So our example will work nevertheless, right? Because when you are doing KNN like here, instead of two different classes, if you have 10 different classes, it doesn't matter. You will still look around, and the moment you get the highest number of any particular class, you will take a decision that this data point must be belonging to the class that got the highest number of neighbors, right? So it is a multi class classification.
+
+Unknown Speaker  20:29  
+So then what we do? We basically do what we always do. We take everything as x, and we take this last column glass, which is basically the type of class, essentially
+
+Unknown Speaker  20:40  
+as our why? Now, in real data set, wherever the data is sourced from, these glass, probably would say industrial glass, auto glass, household glass, mirror glass, something like that, depending on the user and someone has level encoded that column and put a 12345, level, right? Numeric level.
+
+Unknown Speaker  20:59  
+Okay. So then we have our data set, we split it into train and test, and then we scale.
+
+Unknown Speaker  21:09  
+Looking at this data set, probably we could have gotten away without scaling,
+
+Unknown Speaker  21:15  
+because there are some difference in the in the units, but not that much? Well, yeah, except between this column and this column, this is 10 to the power negative two, and this is 10 to the power two. But anyway, there is no harm doing a scaling. But these are the things like, when you will actually work on you might want to try these things, like, depending on your data that, Hey, am I going to scale it, or am I not going to scale it? Well, I can make up my mind, let's try both.
+
+Unknown Speaker  21:43  
+But when you see much wider variation, variation of unit like, let's say some column is in 10s of 1000, and some column is just in 123, like that kind of wide variation, then you definitely need to scale,
+
+Unknown Speaker  21:59  
+not for all algorithm, though. So hold on to the scaling thought. After this, when we go to the decision tree, I'm going to tell you something else which will sound completely different, okay, but let's just go through this one now. Okay, so we have this, and we will do the scaling, and now we have do the transform, and that gives us our scaled data. Now this is where we are basically trying out different
+
+Unknown Speaker  22:28  
+k values, right? So what are we saying?
+
+Unknown Speaker  22:33  
+Train scores. I'm going to put it in a list. Test score. I'm going to save it in a list, and then I'm going from one to 20, which basically will stop at 19
+
+Unknown Speaker  22:45  
+with a step count of two. So this range function, the first parameter is start, the second parameter is end, and the third parameter is optional. If you do provide that, that basically means it is the step count. So I'm basically counting by two so that I only get the odd numbers so for each value of k. So just like you saw in that little example in a slide, so you take the classifier instance from the K neighbors classifier, you provide the N neighbors equal to k, which is varying in the loop. And with that classifier, you do a fit, and then you do score twice.
+
+Unknown Speaker  23:24  
+You do a score first using the train data, scale train data, and then train y value. And then you also take a test score using the scaled test data and the Y test value,
+
+Unknown Speaker  23:39  
+and then you take these two scores and append the scores in the respective list that you have
+
+Unknown Speaker  23:46  
+declared up here above.
+
+Unknown Speaker  23:49  
+And why do we do that? So that we can actually plot it.
+
+Unknown Speaker  23:55  
+So then we take that and we do a simple matplotlib plot.
+
+Unknown Speaker  24:01  
+So in that plot, so what we are doing? So there are basically this first line here. It creates the plot of one series, which is strange, course. And the first parameter here, this is your x axis, basically.
+
+Unknown Speaker  24:20  
+And the second parameter is your Y axis, which is your train scores.
+
+Unknown Speaker  24:25  
+Similarly, you put another plot where with the same x axis, but in the y axis, you plot the test scores with a different marker, right a circle versus a cross. So essentially, you are drawing two lines on the same plot,
+
+Unknown Speaker  24:43  
+and based on how these lines show up, we are going to make a decision what value of k would be optimal for our
+
+Unknown Speaker  24:53  
+for this particular data data set. So let's draw this
+
+Unknown Speaker  24:59  
+so as you can.
+
+Unknown Speaker  25:00  
+See this print statement here. It basically says the train test score, train and test score. So for k equal to one,
+
+Unknown Speaker  25:09  
+your train score would almost always be very high. In this case, it is one because you you are basically so narrow focused you are just looking in your immediate vicinity. As soon as you are getting another data point, you are saying, Okay, this is it. So when you do that, your Trend score becomes very high,
+
+Unknown Speaker  25:32  
+but at k equal to one, the model will almost always overfit, meaning your test score will suffer, which, as you can see here,
+
+Unknown Speaker  25:43  
+in k equal to two, seems like it probably still is over vetting, but slightly better, because the train score came down to 0.8
+
+Unknown Speaker  25:53  
+and the test score also came down little bit, and so on it goes.
+
+Unknown Speaker  25:59  
+And then at a certain point you will see that trend will flip so where your train score would be lower than your test score,
+
+Unknown Speaker  26:09  
+which is kind of your inflection point. And that usually gives you the idea like, Okay, you should basically stop there, because if you go further, then you will have an under fitting problem. So essentially, wherever these two line crosses at whichever value. I mean, you can even do this without plotting, because you can just quickly I through these and say, Okay, where is the trend flipping? And you can see exactly at k equal to nine that the trend flips. So therefore k equal to nine is the value that you must be using for this data set. So this plot is not essential. It just gives you a nice to looking nice looking visual thing. But you can even look at this print output and then make a decision,
+
+Unknown Speaker  26:58  
+okay?
+
+Unknown Speaker  26:59  
+And then finally, you create your real train model, which end neighbors nine, and
+
+Unknown Speaker  27:07  
+print the accuracy. And let's see whether we get the same accuracy as in when we are doing the trial. Yep, 0.722
+
+Unknown Speaker  27:15  
+0.722
+
+Unknown Speaker  27:18  
+so that's it, pretty much. There is nothing much else to it.
+
+Unknown Speaker  27:32  
+The reason I want you guys to actually do the next one is so that you get a little practice in trying out these different k values. Okay, so,
+
+Unknown Speaker  27:46  
+number two, so in the review, what it says, Sorry, the preview, it basically says, So calculate the training and testing score for same range, one through 20. Use only odd numbers for the K values, which we know y, so that there is no tie, and then plot the k values, and then retrain your model with the optimal value, and make sure that it basically the exact same thing, but with a different data set. So the data set here would be,
+
+Unknown Speaker  28:16  
+hang on, not that one,
+
+Unknown Speaker  28:20  
+this one.
+
+Unknown Speaker  28:22  
+So the data set here would be your malware data set, the one that we worked on in the last class, which is basically the android permission based malware detection. So let's do one thing, Karen, if you can create,
+
+Unknown Speaker  28:38  
+how many people do we have here today? What's the attendance? Number five rooms of I think
+
+Unknown Speaker  28:45  
+45
+
+Unknown Speaker  28:46  
+it should be 2120,
+
+Unknown Speaker  28:50  
+okay, so let's do five rooms, and let's do it random this time. Yeah, just randomly people. Put people into five different rooms. How long?
+
+Unknown Speaker  29:00  
+15 minutes. Okay, I've got
+
+Unknown Speaker  29:04  
+that time
+
+Unknown Speaker  29:06  
+anytime.
+
+Unknown Speaker  29:07  
+Just say when so is it going to force force people into one of these rooms? Yeah? Okay, yeah, yeah.
+
+Unknown Speaker  29:50  
+Then just writing that for loop, yeah, yeah, it was just essentially that, nothing else. So I'm not going to go too much into.
+
+Unknown Speaker  30:00  
+Health discussion, and did you find your
+
+Unknown Speaker  30:04  
+optimal k to be nine?
+
+Unknown Speaker  30:08  
+Yeah. I mean, yeah, it kind of tells you that in the prompt there,
+
+Unknown Speaker  30:13  
+yeah, it kind of does, but, but my question was like, no, no. But what I'm saying is, when you did the plot, did your plot actually show that? Yeah, yeah, for sure. So look at crossover. Are you really just comparing the point at which K for the test scores, the returns a higher value than the training score and the training score? Yes, that that's what it is. Yes, nothing else.
+
+Unknown Speaker  30:45  
+Okay, so that was good.
+
+Unknown Speaker  30:49  
+Okay, so let's then move on. Am I sharing my screen? Yes, you are. You're sharing. I will say that I did change the random state. I thought I did already, but I changed random state from three to one. And I will definitely get different
+
+Unknown Speaker  31:05  
+results. You change the range to what the random state?
+
+Unknown Speaker  31:09  
+Oh, okay, three to one.
+
+Unknown Speaker  31:14  
+So you put a random state in your this here, when you're doing, no, no, I'm sorry. Which the training where we do the test training school. Oh, here.
+
+Unknown Speaker  31:28  
+Okay, so I never actually got to, I got to a convergence right at 19.
+
+Unknown Speaker  31:36  
+Oh, you got a convergence in 19.
+
+Unknown Speaker  31:39  
+I thought it was interesting, like random what value? What value did you use for your random state there? Let me try that one. Okay, let me see.
+
+Unknown Speaker  31:52  
+So this is the yes, this is the right one. And I did it because that's what the first module, what are you and did you use any random state for Your KNN or no? No, okay,
+
+Unknown Speaker  32:07  
+so let's see. I
+
+Unknown Speaker  32:23  
+You are right. It is not flipping yet. It keeps going down.
+
+Unknown Speaker  32:34  
+Yeah,
+
+Unknown Speaker  32:36  
+is that what you got? Yeah, yeah, the converters, I so you know that that's, that's the part I think that frustrates me, is that there's, it's not just the magic of picking the right k value, but sometimes picking the wrong random state can really mess up where you're trying to go. Yeah, again, problem of having less number of data.
+
+Unknown Speaker  33:00  
+Yes, yeah,
+
+Unknown Speaker  33:04  
+but no, i
+
+Unknown Speaker  33:06  
+Yes, random state if, let's say we start with one, and then, because we don't know how many data, right, I think you said that earlier. But would it be a good idea to do this kind of approach? You put one, and then maybe you put, you know, two, and then maybe 1050, 100 and then just see what the numbers started to change here and there. You shouldn't be, No, you shouldn't actually be. You just need to simply choose a random, real random number for your random state. Oh, okay, you shouldn't be paying any attention to this. Here. You are seeing so much impact of using one random state to another is because the size of your data set is limited, because these are mostly toy exercise for academic purposes only.
+
+Unknown Speaker  33:51  
+Okay, thank you. You should play with other parameters of a model, such as k value here, such as your number of sorry, type of kernels for your SVM,
+
+Unknown Speaker  34:03  
+or such as maybe your threshold value for your logistic regression. So those are the ones that are, in general, known as hyper parameters of your model. So you should play with around with those, but not with random state.
+
+Unknown Speaker  34:18  
+What about the rings, the 120 and two, this is that is totally up to you, like for example, here, if you want to continue, yeah, please do continue. Yes, that's fine. Okay,
+
+Unknown Speaker  34:35  
+yeah, okay,
+
+Unknown Speaker  34:39  
+okay, so that is for our that's all we had for cannon K, nearest neighbor.
+
+Unknown Speaker  34:47  
+Now the next thing we are going to learn, the next classification algorithm, that is a completely different paradigm. Again,
+
+Unknown Speaker  34:55  
+I hope you kind of see, like you see the three algorithms that we learned, right?
+
+Unknown Speaker  35:00  
+Your our logistic, then our SVM, and then canon, three, very, very different paradigm. There is no similarity between this classification.
+
+Unknown Speaker  35:13  
+And now we are going to learn a fourth one,
+
+Unknown Speaker  35:16  
+which, again might sound stupidly simple. So essentially, it is kind of like writing a lot of if else statement to do the classification
+
+Unknown Speaker  35:28  
+right so, so kind of like, if I go back to these, let's say our my first example
+
+Unknown Speaker  35:36  
+right here. So think about a very naive approach. Let's say someone, a very talented individual, talented in some way, actually found out all the pattern, and that individual managed to write a whole bunch of nested if else, if else statement saying that if value of this column is less than 1.5
+
+Unknown Speaker  35:58  
+and value of the second column is greater than 13.2 and the value of third column is less than these and so on and so forth. So he basically wrote like nine or 10 nested IF, then it will be plus one. And then somewhere he branched off, and then he said, else if the value is within this range and this range. So if someone wrote like that,
+
+Unknown Speaker  36:21  
+ideally, I mean, theoretically, you can actually create a decision tree like that with a whole bunch of E file statement nested and chained together, and that way that, if else, tree will be able to classify each of your training data with perfect accuracy.
+
+Unknown Speaker  36:41  
+Do you guys agree to the this observation
+
+Unknown Speaker  36:46  
+you can write, theoretically you can, but it will be absurd to expect that some human being can actually sit there and do write that kind of if else statement unless you only have a trivial amount of data. Let's say you only have 10 rows of data, which may be two or three columns. Maybe you can do that, right? But for even for these academic interest toy data sets, even there, it is not possible, unless you have something like this. This is like a mockery of that. It's basically you are asking a question. Like, Hey, you are asking a person a question,
+
+Unknown Speaker  37:24  
+do you travel? If the person says yes or no, if the person says no, you he doesn't travel, then you like, Hey, do you like to dress your pet? If the person says yes, then you must be having a dog, because dogs like to be dressed. If the person says no, then his pet must be a cat, because cats will not let you dress them. Whereas if the person says, Yes, I do travel. So that means cats and dogs are out of question, because when you are gone for a long time, your cats and dogs cannot survive, then you ask like, Okay, are you gone more than a week per month, if the person says no, so that means yes, probably the person can have fish aquarium, a fish tank, and have a bunch of fish as a pet, because they can probably survive a week if you put some food, and then you can have some water filtration going on. But if it is more than that, even your fishes will die, then good luck. You can just have a rock as you picked, right? So this is just a mockery. But the point here is that unless, if you have unless and until, you have a very trivial data set like that, it is not possible to realistically code this and classify which is which which which series of decision leads to which outcome.
+
+Unknown Speaker  38:41  
+But what you can do is you can actually have an algorithm look into this data, and instead of you manually writing this if else condition, you can have an algorithm create this if else condition for you, and create what is known as a decision tree. And that decision tree will basically look something like this. It will start with a root, and then you will branch depending on a decision on one of the columns. So if you have 10 columns, you don't know which, what is the first decision point will be. Your model will figure that out when you do the fit, meaning the training. And then, based on that, let's say your first column is let's say your model decided okay, my first column split would be at the value of sodium, and I will if the model decided okay. If the value of short sodium is greater than 13.5 then this whole thing will be the follow on that side. And if it is less than 13.5 this whole thing will follow on the other side, but that way you still cannot go to the decision, because these so your depth of your tree right will basically need to be such that you split, split, split, and finally, at your leaf node, you basically have a uniquely identified class, right? That is how you need to do the split. So.
+
+Unknown Speaker  40:00  
+So that's why the depth of your tree will depend on how,
+
+Unknown Speaker  40:06  
+how I would say how spread out your classes are, right? If your classes have lot of similarity between them or between the feature column, then you will probably have a decision tree with a with a less depth versus if your data is very diverse, then you will have a decision tree which can be at the worst case as deep as the number of feature columns that you have at the worst case, right? If your data is truly diverse, but the idea is that your model is basically writing these type of series of email statement on behalf of you, that is the whole premise bit behind decision trees,
+
+Unknown Speaker  40:45  
+right? So
+
+Unknown Speaker  40:48  
+we can so these are some of the terminologies, okay? What? This is a root node. This is a brand sub tree. You don't need to basically care that much, although most of these are common sense. But the thing is, in order to, just like anything else in scikit learn world, you really don't need to draw a tree or build a tree or call a node a terminal node or a decision node, or anything like that. You just understand that your decision tree will basically or go all the way until it hits the terminal node where you can it can uniquely identify a data point as being as belonging to one plus or the other. Until that point, it will go and that, when that point arrives, that will be the terminal node of your decision tree.
+
+Unknown Speaker  41:33  
+Now,
+
+Unknown Speaker  41:35  
+decision tree, why do you think this is advantageous? Why do you think this might be actually doing something valuable
+
+Unknown Speaker  41:47  
+because of the conditions. There are so many conditions,
+
+Unknown Speaker  41:52  
+yeah, so because of the way that it basically understand these conditionals, it can fit to arbitrarily shaped data, similar to KNN, you can use it without worrying about the boundary, the class boundary between the two. There is no concept of class boundary when it comes to decision tree, because you are nitpicking, right? But at the same time, decision tree can also be prone to overfitting,
+
+Unknown Speaker  42:23  
+right? So this, for example, and you can actually print your decision tree. And this is a decision tree, and I'm not going to zoom in here, but we will create a decision tree like this when we do that demo, and then we'll zoom in there, and we'll see, try to understand what the tree actually means. Okay,
+
+Unknown Speaker  42:44  
+so let's go to the code and try to understand what decision tree, how decision tree, can be implemented. Okay, so for that,
+
+Unknown Speaker  42:55  
+we have this activity number three,
+
+Unknown Speaker  43:00  
+ah,
+
+Unknown Speaker  43:04  
+so let's first load our data.
+
+Unknown Speaker  43:09  
+So this is data set,
+
+Unknown Speaker  43:16  
+crowdfunding data. Okay, goal, pledged. How many backers? County. Sorry, country. Staff, fix spotlight. Days active. So some crowdfunding campaign, and I think the outcome basically means whether the crowdfunding campaign was successful or not based on these attributes. Now, one thing when you are doing classification problem,
+
+Unknown Speaker  43:39  
+it almost always is a good idea to basically look into your output column, which is outcome here, and do a value counts, just to see what your class distribution look like, right? So this one looks like a pretty equally distributed and it's a binary classification when I did that,
+
+Unknown Speaker  43:59  
+so almost the same on both sides.
+
+Unknown Speaker  44:03  
+So then we take everything else, other than outcome column as x, and take the outcome column as y,
+
+Unknown Speaker  44:12  
+and then there is something it is here, which I'm not going to do, and I'll tell you why.
+
+Unknown Speaker  44:21  
+Sorry, not here. So train test split you will do, sorry, not here, here, the next one. So the standard scaling, or any kind of scaling that, for that matter,
+
+Unknown Speaker  44:34  
+keep in mind, guys, when it comes to decision tree or any other related tree based algorithm, which we will see little bit later in the class. Today, whenever you are deciding to choose any tree based algorithm,
+
+Unknown Speaker  44:49  
+your model becomes completely,
+
+Unknown Speaker  44:55  
+I would say, invariant to your scaling
+
+Unknown Speaker  44:59  
+so decision.
+
+Unknown Speaker  45:00  
+Entry or scale, unaware it does not get affected by scaling.
+
+Unknown Speaker  45:06  
+And think about why.
+
+Unknown Speaker  45:10  
+Because, when you are trying to fit a mathematical curve,
+
+Unknown Speaker  45:14  
+or when you are trying to find a n minus one dimensional surface,
+
+Unknown Speaker  45:20  
+or when even for KNN, essentially, in KNN, what you are doing is you are still thinking about your point being projected in an n dimensional space and then looking around within your search radius to see who else is around you.
+
+Unknown Speaker  45:36  
+So all of these
+
+Unknown Speaker  45:39  
+kind of, not kind of it actually assumes that your data is represented in a n dimensional hyperspace.
+
+Unknown Speaker  45:49  
+Now if the scale of x y z axis, let's think about in three dimension, right? If your scale in x y z axis in are not around the same dimensionality, then you will have a very distorted feature space, because if your x1, tick in x is let's say it is one tick means 1000. In y1, ticks mean only one. And in your z1, ticks means 0.1
+
+Unknown Speaker  46:17  
+so when that is the case, then your space is not really what it seems to be because it is distorted. So that's why, for all of these algorithm, scaling almost always gives you better result. But that does not mean that it will not work without scaling. In fact, in many of these data set, I can guarantee you that you try it with scaling and without scaling, in some cases, because these are toy data set. Your without scaling might be able to get almost similar performance, or if sometimes, luckily, even better performance than your scale data. But that does not mean anything. The thing is because of what I said, because of this assumption that the data is presented in an n dimensional hyperspace in all of the three algorithms we learned before, scaling is, in principle, very, very important. Whenever you see difference in scale, you should be scaling.
+
+Unknown Speaker  47:13  
+Decision Tree, on the other hand, is a completely different story. Here you are basically writing, not you are writing, but the model is writing. When you are fitting the model, the model is writing a whole bunch of E file statement.
+
+Unknown Speaker  47:28  
+So those e file statement simply looks into whether at a particular node, a particular value of a feature is greater than or less than us in a from a boundary. It's just a greater or less. So. That means if that particular feature is within a scale of one to 1000 versus in a scale of one to 10, it really doesn't matter,
+
+Unknown Speaker  47:53  
+because if the decision point is halfway, then non scale version will have a decision point and 500 and scale version will have a decision point at five because you scale the data down to 10, but that's not going to change the outcome of your decision tree at all.
+
+Unknown Speaker  48:09  
+So that's why, for decision tree, scaling is completely unnecessary.
+
+Unknown Speaker  48:14  
+Now, does that mean that scaling will give you bad result?
+
+Unknown Speaker  48:20  
+No
+
+Unknown Speaker  48:22  
+ideally, if you try with scale and without scale, you should get the exact same output.
+
+Unknown Speaker  48:32  
+But then if you do scaling, then there is another problem that will happen, not for the accuracy of the model, the model will be just fine. But another reason people
+
+Unknown Speaker  48:45  
+like the decision tree many times is this concept called model explainability,
+
+Unknown Speaker  48:52  
+and this is becoming a big thing like you'd probably discuss this more in the data ethics week
+
+Unknown Speaker  48:59  
+next to next week. So let's say your model, you, you are basically create a very state of the art High Five model, and your model is performing very well. But lot of time when you are trying to apply the model on something that that is that basically kind of very sensitive area, right, that kind of touches people's lives or their feelings, right? People would like to know why the model choose a decision in the way that the model did. And that's why, why explainability in AI is a big topic.
+
+Unknown Speaker  49:36  
+So one of the reason people in classification problem choose decision tree based model that it is easy for someone to explain the model,
+
+Unknown Speaker  49:45  
+like think about that tree, which you will see in a second. If you want to know why a particular data point is belonging to class zero or class one, you can actually follow that the path from the root node through that.
+
+Unknown Speaker  50:00  
+Different intermediate node all the way to child node, and you can actually see why. What are the values that resulted in a particular data point as being classified to a particular class?
+
+Unknown Speaker  50:14  
+So when you are doing that with scale data, now you don't have a real value
+
+Unknown Speaker  50:21  
+with the unscaled, pure data. So then you can easily follow along in the decision tree. And in case your user asks you, like, Hey, Mr. Data Scientist, why did your model? Answer it this way, you can clearly show like, look, there is a proof. So your model becomes auditable. Basically, that is one of the main attraction behind decision tree based model, besides other.
+
+Unknown Speaker  50:46  
+But this is one of the major attraction. But when you scale the data, you lose that advantage. Well, you not kind of lose but basically it makes it more trickier, because now let's say you do a standard scaling, right? Min max scaling is still fine, because minmax scaling, you are simply squeezing or stretching a rubber band. But when you are doing a standard scaling, you are now changing the shape of the what is called the normal distribution curve. So that means the amount of change in every data point will not be proportionate. So that's why it will be hard you can still do reverse calculation and get the original value back, but that will be way more difficult than simply trading the model with unscaled data.
+
+Unknown Speaker  51:29  
+So that's why you will see and for some reason, I don't know why this point is not covered in your training material. And when I look through this notebook, I see that in all the decision tree based notebook, it is showing that the scaling is used just in a standard way for any other model, but it is not needed.
+
+Unknown Speaker  51:52  
+But don't take my word. Let's run through and we will see the outcome with scaled and non scaled version. Okay,
+
+Unknown Speaker  52:03  
+Karen, did you? Did you want to add something?
+
+Unknown Speaker  52:08  
+Finally, somebody says that.
+
+Unknown Speaker  52:12  
+Many people say, Well, you go to scale. I go to scale and
+
+Unknown Speaker  52:17  
+try. Okay, let's see many times and it makes no difference. Yes. Okay, so let's do this. So we have train and test split, and we know what is the best practice in training. Remember the data leakage discussion that we had, so you should always train. Sorry, feed your scalar on your train data, and then take the fitted scalar and then do transform the train and test separately. So now we have two data sets. One is the original train data and one is a scaled version of data. So now we are going to go to the actual decision tree classification. So again, it is simple decision tree classifier, which comes from, where did it go, Skeleton Tree. So from skeleton Import tree, and then inside tree, or you should, you can actually say, you know, the ideal way of writing this would be from SK learn dot tree import decision classifier. So let's write it this way.
+
+Unknown Speaker  53:22  
+So from a scale under tree, you basically so differences in for K, nearest neighbor, it was SK, learn dot neighbors. You see how the class structure is right? So all the neighborhood based classification algorithm are combined in a dot neighbors class, and all the tree based algorithms are inside the escalan dot tree class. Okay, so that's how the library is structured.
+
+Unknown Speaker  53:48  
+So now we go here, and we don't need the tree dot here, because we already did that. So this is our model, decision tree classifier,
+
+Unknown Speaker  54:01  
+and first we are going to fit the model with
+
+Unknown Speaker  54:07  
+our unscaled data.
+
+Unknown Speaker  54:10  
+Okay, so let's fit the model with unscaled data. And if you want to predict, you will do a predict, and then give you the prediction. Well, that is also another way you can do a score. Then you can take this y test and prediction and print the accuracy score. What value did you get?
+
+Unknown Speaker  54:30  
+0.95759,
+
+Unknown Speaker  54:34  
+keep that in mind. Okay,
+
+Unknown Speaker  54:37  
+now we are going to do this with our scaled data.
+
+Unknown Speaker  54:45  
+So let's do this model training. Actually, no first, I have to recreate the model,
+
+Unknown Speaker  54:52  
+and then do the training with scaled data,
+
+Unknown Speaker  54:55  
+and then when I'm training with scale data, my prediction, let's.
+
+Unknown Speaker  55:00  
+Also do with scale data.
+
+Unknown Speaker  55:04  
+And now we are going to print a accuracy score
+
+Unknown Speaker  55:09  
+exactly the same. You see no change, not even to the like at the at the very end of the resume, exactly the same.
+
+Unknown Speaker  55:19  
+And that is the reason I said do not use scaling,
+
+Unknown Speaker  55:26  
+okay. Now, now what we are going to do is we are going to create that visualization.
+
+Unknown Speaker  55:35  
+Okay,
+
+Unknown Speaker  55:41  
+okay,
+
+Unknown Speaker  55:43  
+so, because of this here, we have to do another tree also, okay, so,
+
+Unknown Speaker  55:56  
+yeah, or so from that same SK under tree class, there is a utility function that we have to import, which is called Export, grab this. Basically export graphical visualization. So we have to export, import that as well.
+
+Unknown Speaker  56:12  
+And then in here, we can just say, export, grab this. And we basically say, Hey, this is our model.
+
+Unknown Speaker  56:21  
+You can provide a out file. If you provide a out file, then it will not be displayed here. Instead it will be saved in a file.
+
+Unknown Speaker  56:29  
+And then you can provide the feature column, which is your x dot columns, and the class names for your outcome. You can provide any class name as you want,
+
+Unknown Speaker  56:39  
+instead of zero or one. If you want to say good or bad, you can do that as well,
+
+Unknown Speaker  56:44  
+and then filled equal to true, like some nice cosmetic things. So then what this will do, it will basically create that graph. But then in order to display that,
+
+Unknown Speaker  56:56  
+you need to have this library installed called pi dot plus. So if you don't have that, you have to do a peep install, which I'm not sure whether any of you guys have done that. But in case you didn't
+
+Unknown Speaker  57:13  
+just do this peep, install PI, dot plus.
+
+Unknown Speaker  57:20  
+So in my case, if I run it,
+
+Unknown Speaker  57:23  
+it will say it's already satisfied, because I already installed it.
+
+Unknown Speaker  57:28  
+And
+
+Unknown Speaker  57:30  
+you will need another installation, which is the grab phase. So even though here you are importing grab this from tree class, it is not going to work unless and until you do a conda install. So this is not a pip install. These installation would be using your conda package manager because you are running it inside the Jupyter notebook, which is the Anaconda, right? So in using your conda packet manager, this install should be done within your conda environment, and in my so it's conda, install hyphen y, grab fees this hyphen y basically make sure, like when you do this install, it will do something, and they'll say, okay, these many files, packages need to be changed. Proceed, yes or no. And that is pretty annoying, because when you are running it, not from a real command line, but instead, from a Jupyter Notebook, you do not get a chance to type the yes or no. So this hyphen y basically says okay, answer yes to anything and everything any question that the installer asks. So with that way, it will basically install the package. In my case, it says all requested packages already installed. So keep install pi dot plus. Actually, let me
+
+Unknown Speaker  58:44  
+put these two command in here. So first, do this, pip install pi dot plus, and then conda install of grab this.
+
+Unknown Speaker  58:55  
+Okay,
+
+Unknown Speaker  58:57  
+got it.
+
+Unknown Speaker  58:59  
+And then in here. Once that is installed, then your pi dot plus will basically draw the graph, and then it will display you will display the graph using this image function, and let's see what it displays
+
+Unknown Speaker  59:16  
+here.
+
+Unknown Speaker  59:17  
+So now we have to study this. Okay, so let me make it bigger. But first thing, if you look into the root, note, what do you see here? The first line, read it out.
+
+Unknown Speaker  59:38  
+Days active. Are you seeing it? Is this font big enough? I don't even know whether I can make it bigger this days active is less or equal to negative, 0.865,
+
+Unknown Speaker  59:50  
+does that make any sense? What do you mean? Days active, negative? Why did this happen?
+
+Unknown Speaker  59:57  
+Because I trained this model with scale data.
+
+Unknown Speaker  1:00:00  
+And that's what I wanted to show you why it is a not a good idea, because now you really cannot read this decision tree, because now you are getting weird value. What do you mean? Days active, negative 0.865 it doesn't make sense. It is because if you look into the data, the days active, they are positive integer, the negative 0.865
+
+Unknown Speaker  1:00:23  
+should not happen, but it is happening because we scaled it
+
+Unknown Speaker  1:00:28  
+now, since we already saw that, accuracy score doesn't make any difference at all, so therefore it doesn't make sense for us to use the scale data.
+
+Unknown Speaker  1:00:38  
+So now what I'm going to do instead, I'm going to
+
+Unknown Speaker  1:00:47  
+recreate the model again, and this time I'm going to take that scaled out, so I'm basically taking it back to the my previous state.
+
+Unknown Speaker  1:00:57  
+So now I'm going to training the model with unscaled data.
+
+Unknown Speaker  1:01:05  
+Generate prediction,
+
+Unknown Speaker  1:01:07  
+and let's just make sure this didn't change. No, this didn't change. And now with this model, which is predict trained with unscaled data, I'm going to generate this graph again now see what happens.
+
+Unknown Speaker  1:01:22  
+Now, look at that.
+
+Unknown Speaker  1:01:26  
+Okay? So now it clearly says that the first root node. So the way it does is basically at each point it is taking a binary decision, right?
+
+Unknown Speaker  1:01:37  
+So
+
+Unknown Speaker  1:01:39  
+what the model did. It looked at all the range of values for that day's active column. Why it choose days active column to be the first decision point? Well, I don't know that's how the model train that's what machine learning does, but at least here, the model is exactly telling me the decision path that it is going to take for each prediction that it does. So first decision point is, if days active is less than or equal to 13.5
+
+Unknown Speaker  1:02:06  
+and it says that, hey, Mr. User, you have a total of 846 rows in your data set, and there are 425
+
+Unknown Speaker  1:02:16  
+values that is belonging to when this condition is true, meaning the days active is really less than 13.5
+
+Unknown Speaker  1:02:24  
+and 421
+
+Unknown Speaker  1:02:27  
+values that is on the other side.
+
+Unknown Speaker  1:02:32  
+And when it says class equal to zero, what that means is, at the boundary case, it will be class zero, but it is not the boundary case, because this is not a leaf node.
+
+Unknown Speaker  1:02:43  
+So then if it is not the boundary Oh, another thing is Genie since Genie score basically says what is the split of the data.
+
+Unknown Speaker  1:02:53  
+So if you take 13.5 your genie score is 0.5
+
+Unknown Speaker  1:02:58  
+basically it says it is doing an almost equal split of the data.
+
+Unknown Speaker  1:03:04  
+And then
+
+Unknown Speaker  1:03:07  
+on the left hand side,
+
+Unknown Speaker  1:03:11  
+when days active is less than 13.5
+
+Unknown Speaker  1:03:14  
+really less than equal to 13.5
+
+Unknown Speaker  1:03:17  
+then every all the data that you have, then it classified all of these data based on these samples column. And samples is equal to 162,
+
+Unknown Speaker  1:03:29  
+and then Genie score is zero. So basically, if something is at zero at the sorry, at the boundary value, it basically says, okay, it belongs to class zero, and Genie score is zero
+
+Unknown Speaker  1:03:41  
+on the right hand side. Now, after the days active is greater than 13.5 then it looks into, okay, what is the other variable? Which is goal? So if you go up here, you will see that goal is another variable. So the next decision point, it decided like, Okay, I'm going to use the goal variable. And with the goal variable, we have 263, versus 421, split, which gives a Gini score of 0.473
+
+Unknown Speaker  1:04:07  
+and so on. And then, based on which side is gold, then it looks into another column called pledge. And then based on which then it can also, depending on how the sample is divided, it can continue to keep going down using the same column, or it can go to another column. Like in the left hand side, it used the plate as a decision, and then in the legs next here, it also used placed as a decision, but at a separate point, and you see how the genie score is changing, right? So the idea is that the highest Genie score that it will start with will be 0.5
+
+Unknown Speaker  1:04:44  
+and that will be always be at the top,
+
+Unknown Speaker  1:04:47  
+because for a well balanced data set, if you really take a midpoint, there will be 5050, split. So Genie score basically says what percentage of data is on one side. So that's 0.5 and.
+
+Unknown Speaker  1:05:00  
+As you keep going down this list, you will see this genie score will keep going down, eventually to zero at the leaf nodes. So basically, Gini score zero means the decision work of decision making is done at that point. There is no further ambiguity. Therefore the model is ready to give you a decision
+
+Unknown Speaker  1:05:22  
+so if you follow this you will see the genie score keeps going down at that end. At any intermediate point, if you want to see how many classes belong to which side, it will give you the distribution of the classes this value column. So that is how you should read this decision tree.
+
+Unknown Speaker  1:05:42  
+Okay, now I hope you can kind of relate to that pet picker example, the funny pet picker example, and see how it is kind of the same thing, except the decisions are so complex. Instead of rewriting it, we ask the decision tree classifier model to write this for us, and this is what it wrote,
+
+Unknown Speaker  1:06:02  
+I was looking at a tutorial on decision trees. I think I remember that the true is always represented on the left and the false is on the right. When you're doing those evaluation
+
+Unknown Speaker  1:06:16  
+notes. Is that true? Probably the truth is on the left, yes, yes, truth is on the left, yep,
+
+Unknown Speaker  1:06:28  
+truth is on the left, and the false is on the right. Is that what you said just yet? Yes, sir, yeah, that's what I know as well.
+
+Unknown Speaker  1:06:37  
+They're all less than or equal. So if it was just a binary search tree, less would be to the left,
+
+Unknown Speaker  1:06:45  
+right. If it matches true to the Boolean evaluator of less than or equal, it will be on the left. So the left would have to be less than or equal. Less than or equal, yeah, in a binary search, you would always go to it was less than that value. Oh, seriously, binary search tree, yeah, greater than go to the right. So it kind of works the same way.
+
+Unknown Speaker  1:07:10  
+And half six, one, half dozen, the other
+
+Unknown Speaker  1:07:15  
+Yeah. And then finally, this graph object that you created here.
+
+Unknown Speaker  1:07:21  
+They can take this graph object, and you can do a graph, dot write PDF or graph, dot write PNG and provide a file path, and it will basically save this in a PDF file or a png file. And that is something you can then give it to your
+
+Unknown Speaker  1:07:38  
+like your stakeholders or like your auditors, like if someone wants to see, hey, what your model is doing, and this is something that is not possible for any other model that you have seen whatsoever.
+
+Unknown Speaker  1:07:50  
+So remember decision tree classification, meaning no scaling. And the main advantage of these in addition to being able to fit an arbitrary decision boundary. That is one advantage, but the main advantage is the explainability of your model.
+
+Unknown Speaker  1:08:09  
+Okay,
+
+Unknown Speaker  1:08:10  
+what do you think the disadvantage of this could be? I
+
+Unknown Speaker  1:08:26  
+any thoughts, I feel
+
+Unknown Speaker  1:08:29  
+like it would be pretty applicable to
+
+Unknown Speaker  1:08:32  
+marketing attribution models.
+
+Unknown Speaker  1:08:35  
+That is a benefit, yes, actually, so one of my last consulting projects. So my current project, I'm actually working with Toyota North America. My previous project now, last to last project was with a company with their marketing division, and their work was marketing attribution. So yes, that is area that this thing is used
+
+Unknown Speaker  1:09:01  
+very, very well said, But my question was different. My question was, what do you think a disadvantage of this could be? I
+
+Unknown Speaker  1:09:24  
+so decisions are going to be binary. Maybe that could be one reason,
+
+Unknown Speaker  1:09:28  
+no, because all these binary This is decisions are being stitched together, and you can apply to a non binary model, like multi class models, it will work. But the problem here is two things. One is
+
+Unknown Speaker  1:09:43  
+unlike KNN that I said, it scales very well, this actually scales very poorly.
+
+Unknown Speaker  1:09:52  
+So when it comes to the scaling aspect of thing, there is a this is at a complete disadvantage compared to the KNN. So.
+
+Unknown Speaker  1:10:00  
+And you can probably see why, right like think about how exponentially this graph will grow as your data set grows,
+
+Unknown Speaker  1:10:08  
+and very soon, this model could become very, very complex and very computationally intensive.
+
+Unknown Speaker  1:10:17  
+Number One
+
+Unknown Speaker  1:10:19  
+disadvantage
+
+Unknown Speaker  1:10:22  
+now think about what number two disadvantage could be,
+
+Unknown Speaker  1:10:27  
+because you have a complex model, can you be? Yes, exactly. Thank you for saying that, and that's why, for number one, I use the term complex to give you a hint that whenever you have a complex model, that means now your model is tend to be overfitting.
+
+Unknown Speaker  1:10:47  
+So that's another danger for this.
+
+Unknown Speaker  1:10:51  
+But there are remedies for that as well,
+
+Unknown Speaker  1:10:55  
+and when you do apply the remedy, it happens this tree based decision mod tree classifiers actually gives you the most robust classification that you can have,
+
+Unknown Speaker  1:11:07  
+short of being neural network based classifiers. Neural Network we are not even going there, right? We'll go do that in the final 1/3 portion of the boot camp. You can do all of these that we are doing, scikit learn, by the way, using neural nets.
+
+Unknown Speaker  1:11:22  
+But I hope you already realized that we are not using neural nets. These are all statistical based model.
+
+Unknown Speaker  1:11:30  
+This is the core of machine learning. I mean, lot of people, especially the new people who are coming into machine learning, they'll say, Oh, you are like, they'll probably make a mockery at people like me, like, Oh, you are still using psychic learn. You should use TensorFlow. Dude, I said, Okay, you are ready. You don't even know in which the you put yourself by saying that, because these are completely different tools for different purposes. And even in the industry, know this, even in that with the advent of all of these neural nets and all of that psychic plan. Are these type of statistical tool is very, very heavily used in the industry, because of their simplicity, because of their low cost, because of their predictability.
+
+Unknown Speaker  1:12:14  
+They are very, very widely used in the industry. Okay,
+
+Unknown Speaker  1:12:18  
+anyway, so sorry for getting sidetracked little bit. So what I was going to say is, so decision tree, we know, kind of understand that why it is, why it is very attractive. It could be very attractive for certain use cases, but we also kind of understood why it could it is, what its weakness could be, right, especially when it comes to large data set. And we will see how we can overcome this data set in the next technique that we are going to learn. Okay, but before we learn
+
+Unknown Speaker  1:12:49  
+what's one thing that kind of shocked me is that we didn't tell the model like what the most important features are to like start with.
+
+Unknown Speaker  1:12:58  
+I will come to that. I will come to that. So hold on to that thought. That is also another thing. You can actually use this model to find the importance of the feature, and that is also another part of explainability. But I chose to hold on to that conversation a little bit. We will come back to that conversation after we do the next technique. Okay. Now, before doing that, we are going to take a break, but before taking a break, there is just the other activity, and this is also a student activity, but this time, as I said, I'm not going to let Have you run through this, because this is exactly same steps you just blindly follow, just with a different data set. Okay, so let's just run through it together, and then we'll take a break.
+
+Unknown Speaker  1:13:42  
+Okay?
+
+Unknown Speaker  1:13:44  
+Okay, so here the model is, oh, our friend, which is
+
+Unknown Speaker  1:13:52  
+malware.
+
+Unknown Speaker  1:13:55  
+So these why it says, DF, crowdfunding. This is not even crowdfunding.
+
+Unknown Speaker  1:14:01  
+Someone did a copy paste mistake. Anyway. This is the, this is the malware data set. Okay. So now we have everything as x. We have the result as a y. Again, you can just, yeah, doing values. So see if you are doing dot values, then you have to reshape, or you can just do,
+
+Unknown Speaker  1:14:28  
+just do that. And you really don't need to do a reshape. Just keep it as a instead of doing dot values. That works too
+
+Unknown Speaker  1:14:36  
+anyway. And then we are doing, going to do a train test split. And this time, I'm going to actually delete the scaling. I'm not going to use scaling at all,
+
+Unknown Speaker  1:14:50  
+okay?
+
+Unknown Speaker  1:14:52  
+And no scaling, no fitting, no transformation.
+
+Unknown Speaker  1:14:56  
+And then I'm going to straight away, jump to the classifier.
+
+Unknown Speaker  1:15:01  
+Okay, and then I'm going to fit the model with my x and y, and boom, I get a 98.2%
+
+Unknown Speaker  1:15:08  
+accuracy score
+
+Unknown Speaker  1:15:12  
+right. And then this is prediction. This is just the other way of doing the accuracy right. You will get the same accuracy score. Oh, hang on. Oh, no, sorry, this is the test accuracy. Sorry, that was the training accuracy. And this is the test accuracy because this is what we did. So anyway, so we got a 98.26 on train and 96.12
+
+Unknown Speaker  1:15:31  
+on test. So at least in this case, the model did not overfit. 98 to 96 is still fine. I would not say this is overfitted. This is good.
+
+Unknown Speaker  1:15:42  
+And then you visualize the data, which gives you that same kind of thing, but you see the shape of the graph is very different here.
+
+Unknown Speaker  1:15:53  
+Now it depends on, as I said, how dispersed your data is.
+
+Unknown Speaker  1:15:58  
+So here, if the graph did not go as deep, probably because after a couple of level of decision making, lot of data could be dumped together under one bucket. So that's why the algorithm did not feel the need to keep chopping, chopping, chopping, and go that deep.
+
+Unknown Speaker  1:16:18  
+So this, this tree structure is not something you or I can control. This is what the tree comes up with. That comes up with, okay? And this is so like a wide spread, and the graphing library kind of try to fit it. It's not even possible to read it, but you can always save it, and then you can open the
+
+Unknown Speaker  1:16:41  
+file, and then you can zoom in into the picture.
+
+Unknown Speaker  1:16:46  
+Okay, this is what the so look in very quickly see how the genie score is going down, 0.5 to 0.31 0.164
+
+Unknown Speaker  1:16:57  
+Well, in this case, the Gini score bumped up again to 0.342
+
+Unknown Speaker  1:17:02  
+and then 0.1730
+
+Unknown Speaker  1:17:06  
+this is not even going all the way to the bottom. It's the max depth.
+
+Unknown Speaker  1:17:12  
+Oh, yeah. If you get rid of the max depth equals five, the whole tree shows up. And it's, it's huge. It's, oh, right. I tried. Oh, okay, sorry, okay. I didn't notice that there is a max depth five. Okay,
+
+Unknown Speaker  1:17:28  
+huh?
+
+Unknown Speaker  1:17:30  
+So let's do without you can't control the tree. No, no, no, no. This is printing. This is printing. Okay, I'm just saying oh,
+
+Unknown Speaker  1:17:41  
+let's have the back steps will control how. Well, yeah, yeah,
+
+Unknown Speaker  1:17:46  
+oh, so, so sorry, my bad. So that means this tree is not shallow, actually. In fact, it's Oh, I think it's probably going to break my kernel,
+
+Unknown Speaker  1:17:55  
+yep.
+
+Unknown Speaker  1:17:59  
+Oh, my God.
+
+Unknown Speaker  1:18:01  
+Oh, my God.
+
+Unknown Speaker  1:18:04  
+Okay, so it didn't break my carnal but it almost did. So there was a reason for the box.
+
+Unknown Speaker  1:18:12  
+Yeah, that is an extreme overbeated For sure.
+
+Unknown Speaker  1:18:18  
+Okay, now let's see this.
+
+Unknown Speaker  1:18:21  
+Ah,
+
+Unknown Speaker  1:18:24  
+huh,
+
+Unknown Speaker  1:18:26  
+yeah,
+
+Unknown Speaker  1:18:28  
+wow, yes,
+
+Unknown Speaker  1:18:31  
+yeah. Now within VS code, I cannot zoom it further, but yeah, no, it's pretty good. Actually, it didn't look that bad. Okay.
+
+Unknown Speaker  1:18:42  
+Anyhow, so let's take
+
+Unknown Speaker  1:18:46  
+what 15 minute break maybe, and come back at 2820
+
+Unknown Speaker  1:18:53  
+everyone back. You
+
+Unknown Speaker  1:19:05  
+okay,
+
+Unknown Speaker  1:19:06  
+so we talked about the decision tree, right? And
+
+Unknown Speaker  1:19:14  
+we kind of talked about these, the risk of overfitting, right? So overfitting, as you would probably recall over when overfitting happens, you basically
+
+Unknown Speaker  1:19:25  
+tend to have a more complex model and where the decision boundary basically takes all sorts of twists and turns to try to fit your
+
+Unknown Speaker  1:19:37  
+sorry. I was not sharing to fit your
+
+Unknown Speaker  1:19:41  
+feature space as accurately as possible, so that it fails to generalize when you present the test data to it right. That is the general idea of overfitting, which we kind of developed an intuition that with decision tree that might happen not.
+
+Unknown Speaker  1:20:00  
+That we did see that in the few data set, couple of data set that we tried, but just trust me that it might happen for a larger data set, right? So now we are going to see couple of different technique that you can use to counter that, but still using a decision tree based model.
+
+Unknown Speaker  1:20:21  
+So the idea here is, might seem very counter intuitive. So the idea here is to use the general technique call which is known as ensemble learning. So when you say ensemble learning, so what you are doing is you are not making one decision tree out of your data.
+
+Unknown Speaker  1:20:43  
+Instead, what you are doing is you are creating multiple smaller decision trees,
+
+Unknown Speaker  1:20:50  
+and you are training these decision trees
+
+Unknown Speaker  1:20:54  
+on a subset of your data.
+
+Unknown Speaker  1:20:58  
+Okay?
+
+Unknown Speaker  1:21:01  
+Now, in itself, if you take any of these small decision trees, they'll be very, very inaccurate,
+
+Unknown Speaker  1:21:09  
+because if you have, let's say, 10,000 data,
+
+Unknown Speaker  1:21:14  
+and you are basically spinning up 100 different trees.
+
+Unknown Speaker  1:21:20  
+So each decision tree is basically looking at only 1% of your data, right, like 100 data each.
+
+Unknown Speaker  1:21:29  
+So in itself, these decision trees would be very inaccurate. So we call them weak learners, because they're very weak in doing their job.
+
+Unknown Speaker  1:21:40  
+But it so happens that when you combine the decision made by these group of weak learners, or these ensemble of weak learners,
+
+Unknown Speaker  1:21:51  
+and then apply a voting mechanism
+
+Unknown Speaker  1:21:56  
+with the majority wins, then you tend to come up with decision on Classic Plus classification, decision that tends to be highly accurate, and it is also very I'd say it doesn't have the risk of overfitting.
+
+Unknown Speaker  1:22:16  
+So that that's what the all these ensemble based classifier does so you take multiple
+
+Unknown Speaker  1:22:24  
+smaller decision sorry, smaller decision trees. So in general, any ensemble learning basically meaning you are having multiple different algorithm and doing any prediction, and then you are doing a voting on this prediction, whichever prediction, whichever model gives you the highest
+
+Unknown Speaker  1:22:41  
+outcome, highest, largest number of outcome, you basically take, okay, that is my final decision. That's in general, what any ensemble based method does.
+
+Unknown Speaker  1:22:52  
+And as I said, that each of these algorithms will essentially fail at learning adequately, and that's why they are called weak learners. I really kind of like this
+
+Unknown Speaker  1:23:05  
+photograph.
+
+Unknown Speaker  1:23:07  
+So you take a very slow, weak creature and put it on steroid, and put it on boost, and then it becomes very fast, very funny picture,
+
+Unknown Speaker  1:23:21  
+but, but this, in general, this approach, approach is that we can, we will boost weak learners with other algorithms for an ensemble approach. Well, in this case, our other algorithms all will be different decision trees.
+
+Unknown Speaker  1:23:35  
+Now, when it comes to decision tree, there are a couple of different way that, like when it comes to ensemble learning, there are a couple of different ways that you can do so two main type of method that are used in this domain, one is called bagging, and then another is called boosting.
+
+Unknown Speaker  1:23:55  
+So what is the difference between bagging and boosting?
+
+Unknown Speaker  1:23:59  
+Okay,
+
+Unknown Speaker  1:24:00  
+so in bagging, what you are doing is, let's say you want to take 100 different small decision tree or 100 week learner.
+
+Unknown Speaker  1:24:11  
+So you are basically randomly sampling data
+
+Unknown Speaker  1:24:15  
+across all these different small decision trees, and you are taking an average of the decision,
+
+Unknown Speaker  1:24:24  
+and whichever class you see is the is higher in your average decision. When you do the voting, you take that as your final decision. So this technique is generally called bagging.
+
+Unknown Speaker  1:24:36  
+In bagging, if you have 100 tree, you are essentially training all these 100 tree in parallel.
+
+Unknown Speaker  1:24:45  
+So bagging is a very parallel method,
+
+Unknown Speaker  1:24:50  
+and for very, very large data set, when you have, let's say terabytes of data,
+
+Unknown Speaker  1:24:57  
+bagging can become very computation.
+
+Unknown Speaker  1:25:00  
+Intense, computationally effective, actually, and that's because
+
+Unknown Speaker  1:25:07  
+you can use libraries to do the bagging, you taking advantage of multiple different different course in your CPU. Or sometimes you can even do using in computing, what is called a MAP Reduce type algorithm where you have a cluster of machine, and you basically split up this task and spread your workload across multiple different machines, and they will each do their own little area, like if you have 100 terabytes of data, and instead of using one machine, if you are using 100 machines, right? And in today's day of cloud computing, within just an using an API call, within a matter of few seconds, you can immediately spin up 100 different machine, let your trading job run across these different machine, and when it's done, done, you basically destroy those machines. So there are a lot of these type of industrial optimization that basically goes on in the state of the art machine learning that it does right? So for that purpose, bagging is very
+
+Unknown Speaker  1:26:10  
+effective in
+
+Unknown Speaker  1:26:12  
+parallelizing your training job for very large workload. That is also another advantage. So that's bagging.
+
+Unknown Speaker  1:26:20  
+And then there is another type of algorithm that is called boosting. So boosting is more successive, like a serial in nature. So in boosting, what you do? You take a little bit of data, you trade a small tree, knowing that the small tree will give you inaccurate result. But then you take the outcome of the small tree. And then you add little more data, and you train a little bigger tree
+
+Unknown Speaker  1:26:48  
+with the aim of correcting the error that the previous generation of smaller tree meant,
+
+Unknown Speaker  1:26:56  
+then your second tree will be little bit more accurate. And you take that and you feed little bit more data and create another model. So you keep doing this model with increasing sizes, with each successive generation of model, trying to correct the error that is made by the previous generation of model. So that technique is called the boosting. So bagging versus boosting. So these are the two general types of ensemble learning that people mostly use.
+
+Unknown Speaker  1:27:29  
+You said bagging is done in parallel, so you combine the results at the end. Yes, so bagging is done in parallel, and then after you fit all of your small parallel decision trees at the end you combine and you do a majority voting, then boosting is like an iterative improvement. Boosting is an iterative improvement.
+
+Unknown Speaker  1:27:52  
+Now, even within bagging and boosting, there are also different
+
+Unknown Speaker  1:27:59  
+sub categories. Okay. So here there are three example, three algorithms shown gradient boosted tree, which is the general class of boosting algorithm. And then XG boost is a specific boosting algorithm within the boosting family. And then you will see another called Ada boost, Ada boost, XG boost, there are like any algorithm that ends with his name. Boost is within the boosting domain,
+
+Unknown Speaker  1:28:29  
+and in the bagging you will see this thing most commonly used, which is called random forest. So random forest basically just what the name sounds like. It randomly create different set of trees,
+
+Unknown Speaker  1:28:44  
+which together, you can think of collectively as a forest. But that structure of the forest is completely random, right? One tree is a tree. When you have 100 trees, you end up having a forest. But these forest is randomly generated, so that's why it is called random forest.
+
+Unknown Speaker  1:29:03  
+So now when you do random forest, Hang on. Let me see whether there is a slide for that. No. So when you do random forest, then also, there are two kind of decision to make. Like, how do you choose these random set subset of data. So one approach is to sample the data 100 times,
+
+Unknown Speaker  1:29:30  
+and you will end up getting disjoint data set that you spread across these 100 forests, or 100 trees in your forest. So that is your random forest.
+
+Unknown Speaker  1:29:44  
+And then there is another algorithm that basically does this without replace. We are sorry, random forest does it.
+
+Unknown Speaker  1:29:54  
+Random Forest does it without replacement. And then x there is another thing called.
+
+Unknown Speaker  1:30:00  
+The extreme tree or extra tree. I forgot the name will seen when we go in the code, when what they do is they do the sampling by but with replacement. So basically, with that algorithm, you can end up having a particular data point show up in multiple different trees as well. So it's just how you are sampling the data. So the first one, as I said, let's say you have 100 data point you randomly select 10 and you train one tree, and then remaining 90 data points, you randomly select another 10 and draw another and train another tree and so on. So that way these trees or will have very disjointed subsets of data. That's your random forest,
+
+Unknown Speaker  1:30:46  
+whereas in the other method, the extreme forest thing, you take 10, you create a tree randomly, but then you return those 10 to the pool of 100, and then you randomly take another 10.
+
+Unknown Speaker  1:30:59  
+Now, when you take the second sample of 10 data, since you have returned the first 10 back into your population, some feature might get picked up multiple times.
+
+Unknown Speaker  1:31:13  
+So that's the difference how you do the sampling.
+
+Unknown Speaker  1:31:16  
+So now the thing is, again, going back to that same question, which one is better?
+
+Unknown Speaker  1:31:22  
+The answer is, I don't know. It depends. You got to try the different things, right? And that is why, in the next week, you will see we will talk about how we can optimize this thing. We can do things like grid search, where you basically cast a wide net and you basically run your model through different, not only different classification algorithm, but also within the ensemble. You run it through different boosting and bagging. Like you try XG boost, you try ADA boost, you try random forest, you try extreme forest, all of this thing you try. And basically you pick whichever gives you the best result for your data set.
+
+Unknown Speaker  1:32:02  
+So that is the general idea. Okay.
+
+Unknown Speaker  1:32:07  
+So what, what we talked about is decision tree, where you are training you you are creating a large tree with all of your data thrown in, which is good, but which doesn't scale very well and which tend to over fit. So then what we do is we chop it into chop it into multiple different trees. And when we do that, there are two main approaches, boosting versus bagging. In boosting, you are trading multiple trees in parallel and averaging out their score.
+
+Unknown Speaker  1:32:38  
+In bagging, sorry, in bagging, you are trading multiple in parallel and averaging out their score in boosting you are trying, starting with a very small tree, and then you take the decision prediction, and then you take that and build a little bigger tree. So you keep building successively bigger tree until you achieve your
+
+Unknown Speaker  1:32:59  
+until your accuracy converges, basically.
+
+Unknown Speaker  1:33:03  
+So that's your boosting. So, so in boosting, I guess I'm trying to think of this as, are you using? Ultimately going to be using test data as training data in each iteration. No, no, no, no, no, no. Like, all of this training will be used within your training data, testing data, you are not giving any so because you are doing the train test split at the very beginning, before you even supply that data to your fit method. Thank you, yeah.
+
+Unknown Speaker  1:33:35  
+Okay, so that's about it,
+
+Unknown Speaker  1:33:38  
+yeah. And then this is, oh, this is what they're talking about, feature selection, right? One technique that uses a random forest model. So you take decision tree, one result, one result, two, result, 10, and then you take a majority average. That's your final result. So this is basically your bagging, which is random forest.
+
+Unknown Speaker  1:33:57  
+Okay, we will go into feature selection little bit later. Okay, so this thing, so
+
+Unknown Speaker  1:34:06  
+feature selection, no hang on, random forest benefits. Okay, so let's talk about the benefits little bit from this slide.
+
+Unknown Speaker  1:34:16  
+So one benefit is it is robust against overfitting, which is the first point that I mentioned, because all weak learners are trained on different pieces of data.
+
+Unknown Speaker  1:34:29  
+So what happens is, when you are trying to create a know all tree, since that tree has to work with all these millions of data points, that tree becomes very deep and fits you to your training data too well.
+
+Unknown Speaker  1:34:45  
+Here, when you are having multiple different trees, each tree is trained on different pieces of data, therefore each of the trees itself will remain very simple and therefore not overfit. So that's the first benefit. So.
+
+Unknown Speaker  1:35:01  
+The second one is, can rank the importance of input variables in a nature, natural way, this is where the feature importance come in,
+
+Unknown Speaker  1:35:10  
+which I will talk in a second,
+
+Unknown Speaker  1:35:14  
+robust to outliers are non linear data,
+
+Unknown Speaker  1:35:17  
+like even if you heard your data has some outliers, or your data have non linear decision boundary, it doesn't care. It still runs fine, runs efficiently on larger data set. This is where I talked about the benefit of having multiple cores in your machine, or even a cluster of multiple machine, right containerized workloads in cloud, so that's also another advantage, and then the feature importance thing. I'm going to hold on to that discussion just for a bit. We'll do a demo, and then we'll come back to that discussion.
+
+Unknown Speaker  1:35:53  
+So let's look at a quick demo here.
+
+Unknown Speaker  1:36:02  
+Okay,
+
+Unknown Speaker  1:36:04  
+so
+
+Unknown Speaker  1:36:06  
+random forest, okay. So if you see here, the random forest classifier is inside a package called SK learn dot ensemble. This is not under SK learn dot tree, rather, it is under SQL learn dot ensemble, because it is ensemble learning in general.
+
+Unknown Speaker  1:36:25  
+So that's our library.
+
+Unknown Speaker  1:36:29  
+Then we read our data set.
+
+Unknown Speaker  1:36:35  
+So the data set is basically what is called,
+
+Unknown Speaker  1:36:40  
+kind of a geo mapping data set, like from using a satellite image imagery. So these data set looks into several aspects of different areas, and based on that, it is trying to see what kind of tree cover that area of land is most likely to have, depending on elevation, slope, water distribution, road and all of these shedding amount of shade or sunlight it gets, and so on.
+
+Unknown Speaker  1:37:13  
+So, so we have this data set here,
+
+Unknown Speaker  1:37:18  
+and our
+
+Unknown Speaker  1:37:21  
+output column is cover. So one thing I always like to do is do a value count on the output.
+
+Unknown Speaker  1:37:33  
+So two class binary classification, pretty well balanced, 28k versus 21k
+
+Unknown Speaker  1:37:41  
+so let's take our x and y,
+
+Unknown Speaker  1:37:45  
+split the data,
+
+Unknown Speaker  1:37:49  
+and then I already deleted the scaling thing from this notebook, actually, so no more scaling gone.
+
+Unknown Speaker  1:37:57  
+Okay, so now we are going to create this random forest classifier,
+
+Unknown Speaker  1:38:05  
+and here you can actually specify how many trees that you are going to make
+
+Unknown Speaker  1:38:13  
+by this using this parameter called N estimators. So let's first start with small number of decision tree, let's say five.
+
+Unknown Speaker  1:38:24  
+I'm going to create five week learner,
+
+Unknown Speaker  1:38:28  
+and I'm going to print the training score and test score right here. I don't even need to do prediction. I just want to do this check the score. So let's train this.
+
+Unknown Speaker  1:38:42  
+So you see what is saying here.
+
+Unknown Speaker  1:38:46  
+What does this output tell you?
+
+Unknown Speaker  1:38:52  
+98 versus 85 in train and test
+
+Unknown Speaker  1:38:58  
+seems less than ideal.
+
+Unknown Speaker  1:39:01  
+Overfitting.
+
+Unknown Speaker  1:39:04  
+So now we are going to increase it to, let's say, 50.
+
+Unknown Speaker  1:39:09  
+Okay, also look at how much time it took, 557 millisecond. Now, in order to print the time, I use this Jupiter magic command called time.
+
+Unknown Speaker  1:39:22  
+So when you do person percent time as the first line in your cell, once the execution completes, it will basically tell you what is the CPU time it took, which is 456, millisecond, and what is the wall time, meaning the time between you invoking the request and the result being printed is total 557 millisecond out of that 456 millisecond is your pure CPU time that is used
+
+Unknown Speaker  1:39:48  
+that is only with five estimators. Now I'm doing this with 50 estimators.
+
+Unknown Speaker  1:39:54  
+Now see how that changes. So.
+
+Unknown Speaker  1:40:02  
+4.25 second CPU time,
+
+Unknown Speaker  1:40:06  
+because we increased this,
+
+Unknown Speaker  1:40:08  
+but now the trading score has gone up 99%
+
+Unknown Speaker  1:40:14  
+almost one,
+
+Unknown Speaker  1:40:16  
+but testing score is still not good.
+
+Unknown Speaker  1:40:20  
+So this is not optimal.
+
+Unknown Speaker  1:40:23  
+Let's go up 100.
+
+Unknown Speaker  1:40:27  
+It will take longer, obviously,
+
+Unknown Speaker  1:40:30  
+so let's run it
+
+Unknown Speaker  1:40:42  
+one.
+
+Unknown Speaker  1:40:47  
+And 89%
+
+Unknown Speaker  1:40:51  
+took the almost double time compared to 50.
+
+Unknown Speaker  1:40:55  
+Now shoot all the way to 500 is
+
+Unknown Speaker  1:41:00  
+going to take a long time. Okay,
+
+Unknown Speaker  1:41:04  
+stretch out a little bit.
+
+Unknown Speaker  1:41:10  
+Go get a coffee. Maybe, nah, it's not going to take that long.
+
+Unknown Speaker  1:41:15  
+Maybe 30/42, maybe, let's see. Do
+
+Unknown Speaker  1:41:45  
+not much improvement. I think we were good with 100.
+
+Unknown Speaker  1:41:52  
+Okay,
+
+Unknown Speaker  1:41:54  
+so anyway, so that's how the Random Forest classifier work. Now, if you want to recall what category is this random forest classifier?
+
+Unknown Speaker  1:42:03  
+Is it single learner, or is it ensemble learner? Let's do a recap,
+
+Unknown Speaker  1:42:10  
+single or ensemble,
+
+Unknown Speaker  1:42:13  
+ensemble, ensemble, okay, between ensemble. Is it a boosting or bagging?
+
+Unknown Speaker  1:42:21  
+Bagging? Okay, between bagging it is, is it sampling with substitution or without substitution?
+
+Unknown Speaker  1:42:34  
+Huh?
+
+Unknown Speaker  1:42:35  
+No, this is without substitution.
+
+Unknown Speaker  1:42:40  
+Okay? So that's that.
+
+Unknown Speaker  1:42:46  
+Now, before going into feature importance thing, let's run through the fixed notebook, which is, again, it was supposed to be student, but we just want to play through here
+
+Unknown Speaker  1:43:00  
+with another data set, which, again, is our malware data set actually.
+
+Unknown Speaker  1:43:09  
+Okay, so this is our malware data set,
+
+Unknown Speaker  1:43:13  
+x and y. Okay.
+
+Unknown Speaker  1:43:22  
+I forget about this. What do I need to Ravel,
+
+Unknown Speaker  1:43:26  
+guess. Why is fine?
+
+Unknown Speaker  1:43:28  
+Okay,
+
+Unknown Speaker  1:43:30  
+train, test suite,
+
+Unknown Speaker  1:43:33  
+random forest, classifier.
+
+Unknown Speaker  1:43:36  
+So this one I put used 512,
+
+Unknown Speaker  1:43:41  
+sometimes I try to, I tend to use this
+
+Unknown Speaker  1:43:45  
+power of two,
+
+Unknown Speaker  1:43:47  
+like I go, like, 3264 128, 256, 500 and for no particular reason, but sometimes I do that.
+
+Unknown Speaker  1:43:55  
+And yeah, you can do the scoring here, or you can do the scoring separately. Also. That gives the accuracy score of 0.96
+
+Unknown Speaker  1:44:07  
+actually, let me do one thing. Let me print both the training and text accuracy.
+
+Unknown Speaker  1:44:14  
+So my RF model, right? That's what I call this.
+
+Unknown Speaker  1:44:22  
+We oops.
+
+Unknown Speaker  1:44:33  
+What happened?
+
+Unknown Speaker  1:44:35  
+No, I don't want
+
+Unknown Speaker  1:44:40  
+okay.
+
+Unknown Speaker  1:44:47  
+Oh, sorry. I had two statements I have to do to print here. I.
+
+Unknown Speaker  1:45:02  
+98 and 96 so this is a good one with more than 500
+
+Unknown Speaker  1:45:08  
+classifier ensemble.
+
+Unknown Speaker  1:45:12  
+Okay,
+
+Unknown Speaker  1:45:14  
+so we saw two different things. So now we are going to come back to the discussion about feature importance and what does that really mean?
+
+Unknown Speaker  1:45:22  
+So,
+
+Unknown Speaker  1:45:24  
+in any tree based algorithm, not just your ensemble, even your original the first decision tree we tried, for all of these cases, there is a way that you can calculate the importance of certain feature.
+
+Unknown Speaker  1:45:39  
+Okay, now the way that you do that these you take your trained model after the training is done, like after, somewhere after the fit is done, anytime after, you can take the fitted model. And there is the attribute of fitted model, which is called feature importances. Feature underscore importance is underscore,
+
+Unknown Speaker  1:46:01  
+and it will give you for all the features. Actually, let me also print it. It
+
+Unknown Speaker  1:46:09  
+will give you a whole bunch of number.
+
+Unknown Speaker  1:46:13  
+Now, the higher the values are,
+
+Unknown Speaker  1:46:17  
+that means the more important the feature is.
+
+Unknown Speaker  1:46:21  
+But we don't know which column these features are for, because, unfortunately, this feature importance variable, it only gives you
+
+Unknown Speaker  1:46:32  
+the importance of the feature, not the names of the feature.
+
+Unknown Speaker  1:46:38  
+Fortunately for us, though, the order that these importances are printed are the same order that the columns are there in your x data set.
+
+Unknown Speaker  1:46:50  
+So that means what we can do, we can take all the column headings from here
+
+Unknown Speaker  1:46:56  
+and zip it, meaning print these column headings and the actual importance values side by side,
+
+Unknown Speaker  1:47:03  
+so that way we know which feature will have how much importance. So the way to do that is this little Python function called Zip.
+
+Unknown Speaker  1:47:14  
+So what zip does?
+
+Unknown Speaker  1:47:17  
+Let me just do a zip so uh.
+
+Unknown Speaker  1:47:27  
+So if you do a zip,
+
+Unknown Speaker  1:47:30  
+oh, actually, this is a zip object. Actually, this zip object itself does not print anything, because this is an object. Now to print it, then you can apply a sorted function, which is same as what we used for sorting a list. It's the same sorted function, but when you apply the sorted function instead of on a list, and if you apply it on a zip, it achieves the same result. It basically unzips. It.
+
+Unknown Speaker  1:47:55  
+Think about you take these and you do a zip, and then you unzip, and it will actually see the values. And let's print all the values and we do reverse equal to true, meaning it will now do in a descending order, because, by default, it is ascending,
+
+Unknown Speaker  1:48:14  
+and this is what we get. So elevation has the highest importance at 34%
+
+Unknown Speaker  1:48:20  
+next is horizontal this distribution road, or whatever horizontal road 12% and then fire 11.6% and so on. So these are the feature importances.
+
+Unknown Speaker  1:48:35  
+And then you can take this whole thing and put it in a plot,
+
+Unknown Speaker  1:48:42  
+like in a bar chart, and you can actually visible visually see which feature has how much importance.
+
+Unknown Speaker  1:48:53  
+Okay,
+
+Unknown Speaker  1:48:55  
+so this is a good thing. Now, there are couple of different uses of these.
+
+Unknown Speaker  1:49:01  
+One is obviously the explainability of the model. So when you, when we printed that whole decision tree, that is one way that you can explain why a particular decision is taken.
+
+Unknown Speaker  1:49:13  
+These also give you more like an aggregate view. Like, okay, out of this 10 feature, I see that these like, think about these if you apply this with our housing data set right and with their housing data set, let's say you are trying to you that was a classification model, but you can easily turn it into a, sorry, that was a regression model, but you can easily model that as a classification model. So let's say, instead of predicting the price of the house, if you want to predict Hey, whether the house is below 100k or between 100k or half a mil, or between half a mill to a million or a million plus, right, like cheap or mid end or high end houses. So if you model it that way, then it becomes a classification problem. You can always do that right. You can change from one one to another. You.
+
+Unknown Speaker  1:50:01  
+And then, if you do this feature importance, then you can very clearly see what types of features in a house are most sought after,
+
+Unknown Speaker  1:50:12  
+right? Like whether people like having more bedroom or more bathroom or a pool in the backyard, or what is something that is more desirable, you can actually see that on an aggregate level. So that's another use of having this feature importance.
+
+Unknown Speaker  1:50:30  
+Another use of this is when you have very, very large number of features,
+
+Unknown Speaker  1:50:38  
+and you are thinking, Well, I have 100 features,
+
+Unknown Speaker  1:50:44  
+so my data set is 100 column wide, but I only have 10,000 data,
+
+Unknown Speaker  1:50:50  
+and that should not happen,
+
+Unknown Speaker  1:50:54  
+because with 100 features, you, if you only have only 10,000
+
+Unknown Speaker  1:50:59  
+that model is not going to be statistically significant. If you have 100 feature, you better have have at least 100,000 row,
+
+Unknown Speaker  1:51:09  
+or maybe a million row in order to have a good model.
+
+Unknown Speaker  1:51:14  
+If you cannot have more rows there, because it is understandable that it is as a data scientist, it is not always in your control to generate data out of thin air. Maybe the data is not available. So then what can you do?
+
+Unknown Speaker  1:51:31  
+Well, you can think of, can we eliminate some of these columns?
+
+Unknown Speaker  1:51:38  
+Now, if you remember, last week, we did see couple of ways that we can do feature selection, right?
+
+Unknown Speaker  1:51:43  
+Do you remember what are the two things that we tried for feature selection?
+
+Unknown Speaker  1:51:52  
+Anybody
+
+Unknown Speaker  1:52:00  
+remember the hypothesis test we
+
+Unknown Speaker  1:52:05  
+did, and multi co linearity test.
+
+Unknown Speaker  1:52:09  
+So that is one way
+
+Unknown Speaker  1:52:11  
+right, and we use that within the context of regression. We can also use that in within the context of classification. But here is another way you can do that.
+
+Unknown Speaker  1:52:26  
+What you can do is you can fit that model through some kind of a tree based algorithm, whether it is decision tree, random forest, XG, boost, it doesn't matter, some kind of algorithm,
+
+Unknown Speaker  1:52:39  
+right? And then look into this feature importance
+
+Unknown Speaker  1:52:44  
+and see if you have 100 feature
+
+Unknown Speaker  1:52:47  
+I'm sure when you have 100 features, some of these feature importance would be very low, almost zero. So you can say, hey, if my feature in importance is less than 0.1
+
+Unknown Speaker  1:52:56  
+that means they don't matter that much,
+
+Unknown Speaker  1:52:59  
+and that, I would say, is a much better way to eliminate unwanted column than using your hypothesis test or your collinearity test,
+
+Unknown Speaker  1:53:10  
+because those are based on statistical assumption, those two tests, whereas this test is based on an actual outcome from a machine learning algorithm.
+
+Unknown Speaker  1:53:20  
+So I would say if you do have to do feature feature selection because you don't have enough data and you think you have lot more columns than you actually need,
+
+Unknown Speaker  1:53:30  
+you can actually create a decision tree
+
+Unknown Speaker  1:53:33  
+and then weed out Some of the features with very low importance.
+
+Unknown Speaker  1:53:42  
+Okay, so that's what feature importance is.
+
+Unknown Speaker  1:53:47  
+Is this what decision trees do, implicitly, to figure out their first node?
+
+Unknown Speaker  1:53:54  
+I'm sorry say that again, yes. Is that what decision trees do? Like when I was saying, I was shocked that we didn't have to say this is, this is the first decision that I want you to make. I assume that you're in decision trees. You're making the first decision on the most important correct teacher. And that is why I said hold on to that thought. Now I'm going to go back to the decision tree. So let's take one of the decision tree example.
+
+Unknown Speaker  1:54:22  
+Let's say this one. Okay,
+
+Unknown Speaker  1:54:25  
+so what we are going to do now, we are going to create
+
+Unknown Speaker  1:54:32  
+feature importance plot on this one.
+
+Unknown Speaker  1:54:36  
+So
+
+Unknown Speaker  1:54:39  
+where is the code that I just wrote here.
+
+Unknown Speaker  1:54:56  
+Here, let me just copy this thing
+
+Unknown Speaker  1:54:59  
+and I'm.
+
+Unknown Speaker  1:55:00  
+To go and apply that for this decision tree.
+
+Unknown Speaker  1:55:08  
+Did I do?
+
+Unknown Speaker  1:55:11  
+I think I ended up doing a markdown cell. No,
+
+Unknown Speaker  1:55:15  
+okay, so now I have to calculate the feature importances.
+
+Unknown Speaker  1:55:22  
+We which is, what is our model name,
+
+Unknown Speaker  1:55:26  
+model,
+
+Unknown Speaker  1:55:31  
+actually, I can do just model dot feature importances here. So
+
+Unknown Speaker  1:55:40  
+okay,
+
+Unknown Speaker  1:55:46  
+we didn't have that here, so let's add that import right here. Okay,
+
+Unknown Speaker  1:55:58  
+so feature importances, we have pledged goal days active backers count, and then here it's almost zero.
+
+Unknown Speaker  1:56:08  
+Okay,
+
+Unknown Speaker  1:56:09  
+now to your question, Jesse, even though the first decision was on days active in feature importance, days active is pretty high, but not the highest.
+
+Unknown Speaker  1:56:25  
+Highest is pledged. And pledged basically comes in your second level of decision,
+
+Unknown Speaker  1:56:32  
+and then the second highest is goal, which comes in your
+
+Unknown Speaker  1:56:38  
+third third level, and then pledged is also used here, and goal is also now. The question you might think is how the feature importances are calculated. That is what you need to understand.
+
+Unknown Speaker  1:56:53  
+The feature importances are actually calculated based on your genie scores.
+
+Unknown Speaker  1:57:02  
+So the idea is that for each and every feature, as you go down the tree, whenever that particular feature is a decision maker, and from that to the next one down the tree with that same what is called column. So from here to here, what is the decrease of Genie score? So when we go from here to here, Genie score comes down from 0.469
+
+Unknown Speaker  1:57:31  
+to 0.154
+
+Unknown Speaker  1:57:34  
+and likewise, when you when they calculate the feature importance, they basically look at the total Genie score decrease that has happened across all the decision node that uses that particular feature.
+
+Unknown Speaker  1:57:53  
+So basically, the thing about, think about what Genie score is. Genie score is basically how your data is divided into two different classes for a binary classification, let's say right? And if you have a feature when you have like a genie score of point five, and then your genie score is going down considerably due to the decision made on a particular feature. What that means is that feature has a lot of say in changing that partition of the population.
+
+Unknown Speaker  1:58:25  
+So that's why they calculate it based on the genie score. Now, if you look into some of the smaller like lower importance feature, let's say spotlight or staff pick, and you look here, where is spotlight or staff pick is even used?
+
+Unknown Speaker  1:58:41  
+I see nowhere.
+
+Unknown Speaker  1:58:46  
+Let's do next two of country and category.
+
+Unknown Speaker  1:58:50  
+Country and category
+
+Unknown Speaker  1:58:54  
+is used.
+
+Unknown Speaker  1:58:58  
+This is goal.
+
+Unknown Speaker  1:59:01  
+Do you see any country or category anywhere? I'm not seeing anywhere
+
+Unknown Speaker  1:59:07  
+categories in the in that in that tree.
+
+Unknown Speaker  1:59:12  
+Ah, here. Category,
+
+Unknown Speaker  1:59:15  
+here, yes.
+
+Unknown Speaker  1:59:18  
+So category is there, but it's basically pretty low down.
+
+Unknown Speaker  1:59:24  
+So the lower importance feature you will see will mostly be used more closer towards the leaf nodes, and the higher importance feature, or an average, will be used towards the higher notes, because they have more effect in reducing the genie score successively.
+
+Unknown Speaker  1:59:40  
+I mean, at the end of the day, the genie score, if you follow any one of the branch, you will see the genie score starts from 0.5 and if you keep doing the hops like if you keep following towards any leaf, it will go down to zero. Now the idea is, as you go through any of the path, that genie score decreases that are happening.
+
+Unknown Speaker  2:00:00  
+Using which features are contributing to the genus code differences. So it looks at the aggregate of such genus code decreases across all the branches, all the possible branches that are going to the different leaf nodes. And then it is averaging out to see which feature is contributing to the most amount of genus code decrease from the root to the leaf,
+
+Unknown Speaker  2:00:23  
+and the feature that contributes the highest has the highest importance.
+
+Unknown Speaker  2:00:32  
+Okay,
+
+Unknown Speaker  2:00:35  
+so I do have
+
+Unknown Speaker  2:00:39  
+good reading material here about this on feature importance,
+
+Unknown Speaker  2:00:45  
+I'm going to put that in the Slack channel.
+
+Unknown Speaker  2:00:53  
+So this is basically called the Gini impurity. So Gini impurity is the metric that is used to calculate the feature importance, and you can read through it, how it is exactly calculated if you want. I mean, not that you have to, but I thought if some of you, if you want to just read, I think this is a pretty good explanation of how feature importance is calculated internally. And there is some code example, which is something that we have already done.
+
+Unknown Speaker  2:01:22  
+So okay.
+
+Unknown Speaker  2:01:26  
+Now
+
+Unknown Speaker  2:01:28  
+the last point I wanted to make here is feature importance can be done using decision tree based classifier as well. You don't have to go to the ensemble based like random method, a random forest type method, even for a pure like an all in one decision tree, you can still do the feature importance,
+
+Unknown Speaker  2:01:48  
+but because of the nature the way that this works, the feature importance calculation of these tree
+
+Unknown Speaker  2:01:57  
+may not be accurate,
+
+Unknown Speaker  2:02:01  
+because what happens is going back to your point Jesse,
+
+Unknown Speaker  2:02:06  
+in like intuitively, you will think the root note,
+
+Unknown Speaker  2:02:11  
+the decision point it makes at the root note, should have the highest importance. And I totally agree with you that is true.
+
+Unknown Speaker  2:02:19  
+But when you have a very complex tree, and when you have many, many different paths going from the root to the leaf, and when you aggregate that out, it may not always turn up that way. And that's why, in this example, we saw, even though days active was the root note,
+
+Unknown Speaker  2:02:38  
+it still came up with a very high importance score, but not the highest,
+
+Unknown Speaker  2:02:45  
+and that is why now, going back to this slide,
+
+Unknown Speaker  2:02:51  
+look at this number two, which I skipped this point. It says can rank the importance of input variables in a natural way. So
+
+Unknown Speaker  2:03:03  
+okay. Why? Because now you are not creating a big, gigantic decision tree. You are splitting the data into 100 or 200 small trees. So now what your intuition told you
+
+Unknown Speaker  2:03:18  
+there is a more chance that it will be accurate when you average this genie score across all of these 100 child trees. And that is why it says can rank the importance of input variables in a natural way. That's what that means. And that's why I held off onto this discussion few minutes back. And I hope you can see why now. Yeah, it's even more explainable.
+
+Unknown Speaker  2:03:40  
+It's even more explainable. Yes,
+
+Unknown Speaker  2:03:55  
+cool, and I think that's about it. Oh, there is a, there was a slide about boosting, yeah,
+
+Unknown Speaker  2:04:04  
+yeah.
+
+Unknown Speaker  2:04:07  
+Boosting is an aggregation where individual weak learners get boosted if they are contributing correct solution, but get diminished if they are not. While we can use boosting method for regression, our focus is here on classification. Oh, by the way,
+
+Unknown Speaker  2:04:21  
+many of these classification models can also be used for regression.
+
+Unknown Speaker  2:04:29  
+Okay, we can see some examples, maybe in the next day's class. One other reading material today I wanted to show you is if you go to the scikit learn documentation. So, so there are all of these things. So decision tree, you can read like this is about everything about decision tree, and then particularly the ensemble right gradient boosting, random for it, forest bagging and how does the voice.
+
+Unknown Speaker  2:05:00  
+And stacking mechanism work. So if you really want to go a little deep,
+
+Unknown Speaker  2:05:07  
+give it a rig.
+
+Unknown Speaker  2:05:16  
+Okay?
+
+Unknown Speaker  2:05:41  
+Yeah, so what I was saying is all of these
+
+Unknown Speaker  2:05:47  
+classification model like xgboost, Ada boost, K N, E, R, S, neighbor, they all have their regressor counterparts as well.
+
+Unknown Speaker  2:05:58  
+So in this notebook. So this is actually supposed to be in the next class, and Monday's class we can, we can run it through then, but just take a look here. So here, there is basically combination comparison of different linear regression. One is using our familiar linear regression, which is the first thing we learned. But K nearest neighbor. There is a regressor counterpart to that random forest. There is a regress counterpart to that
+
+Unknown Speaker  2:06:29  
+extra trees, regressor counterpart, Ada boost, regressor counterpart, SVM. It is their SVM regress counterpart, SVR.
+
+Unknown Speaker  2:06:39  
+So most of these classification model can also be used as regression as well.
+
+Unknown Speaker  2:06:46  
+But the good thing is, you don't need to tweak anything. You just have to use the specific class and just see where the
+
+Unknown Speaker  2:06:55  
+how the import is working. So for the import,
+
+Unknown Speaker  2:07:02  
+here, so linear regression import is we know SK learn dot linear model. That's where we are getting linear regression from
+
+Unknown Speaker  2:07:11  
+the K nearest neighbor as a classifier. Remember, we were importing it from SK learn dot neighbors. So in the SK learn dot neighbors, there is also the regressor counterpart sitting inside the same package,
+
+Unknown Speaker  2:07:25  
+like you can say, k neighbors, regressor. And if you do this,
+
+Unknown Speaker  2:07:31  
+No where is our
+
+Unknown Speaker  2:07:33  
+K
+
+Unknown Speaker  2:07:36  
+neighbors, classifier. So classifier and regressor sits in the same package, same for ensemble, your random forest expertise, Ada, boost, all of these are available in ensemble, but that same ensemble package also have the corresponding regressors as well.
+
+Unknown Speaker  2:07:53  
+Similarly for SVM, we did SVC, which is the SVM based classifier, and SVR, is SVM based regressor,
+
+Unknown Speaker  2:08:07  
+okay,
+
+Unknown Speaker  2:08:08  
+but the use of this is pretty simple. And in this example, there is also a utility method, which is pretty cool. So it's basically one utility method where we are passing a general model. It's kind of that pipeline that you saw, but it's kind of a custom built so you basically pass the data and the model, and then inside this model, this, because this is a repetitive thing, you take the data, you do the split. Sorry,
+
+Unknown Speaker  2:08:38  
+what is the splitting here? So
+
+Unknown Speaker  2:08:43  
+uh, oh, the splitting is probably done before. So you basically take these four values and you do a fit, and then you do the train and test score. So you repeat that for all of these, and you basically print that or split. Split is basically done here, and the splitted data is actually passed to that
+
+Unknown Speaker  2:09:05  
+utility method
+
+Unknown Speaker  2:09:08  
+anyway. So overall, it's the same thing, but just know that all of this classifier have corresponding regressor as well.
+
+Unknown Speaker  2:09:17  
+It is enough for you to know that right now, when you are actually going to try your hands out on a regression problem. Just keep this in mind that linear regression is not your only two linear tool toolbox. Everything that you have learned in this class, you can also use those for your regression problem. You just have to look into that same library and import the corresponding regressor
+
+Unknown Speaker  2:09:41  
+algorithm
+
+Unknown Speaker  2:09:43  
+and that's it. And feet and predict doesn't make Chad. If there is no change, you can still do your feet and predict the same way you do for a linear regression.
+
+Unknown Speaker  2:09:55  
+Okay,
+
+Unknown Speaker  2:09:58  
+so that's about.
+
+Unknown Speaker  2:10:00  
+Out everything today.
+
+Unknown Speaker  2:10:02  
+In fact, that leaves us
+
+Unknown Speaker  2:10:06  
+with almost nothing new to new to learn on Monday's class. So what you will do in Monday's class, mostly, you will do the same thing that you did last week Monday's class, which is a mini project. So where we are going to give you some data set to choose from, and you can work with your regular group and do a mini project in the class.
+
+Unknown Speaker  2:10:28  
+So, but no, are you not going to go over the bag and boost
+
+Unknown Speaker  2:10:33  
+seven activity?
+
+Unknown Speaker  2:10:36  
+Oh, did I miss something? Okay. Sorry, yeah. So bag and boost is basically so let's go through this so all of these different models that I talked about, xgboost, Ada Boost, which is in the books, boosting category, right, and ensemble, sorry, extra trees and Random Forest classifier is in your bagging category.
+
+Unknown Speaker  2:11:00  
+Now
+
+Unknown Speaker  2:11:02  
+as with everything in SQL learn world, you basically just import the corresponding classifier. So extra trees classifier, you import it, and since this is part of ensemble, you have to provide how many estimators that you want to use.
+
+Unknown Speaker  2:11:21  
+And then
+
+Unknown Speaker  2:11:24  
+you do that and print your training and test score on this data set, whatever
+
+Unknown Speaker  2:11:29  
+the data set is, it's not important. The important thing is, we are using the same data set, so and then
+
+Unknown Speaker  2:11:36  
+from same s, k, r, dot ensemble, you can use the gradient boosting classifier, which is on the boosting side of things. So
+
+Unknown Speaker  2:11:47  
+come on. Extra tease was bagging.
+
+Unknown Speaker  2:11:52  
+Gradient boosting is boosting. So we got a one and 0.9
+
+Unknown Speaker  2:11:57  
+and gradient boosting is so I am using same 512 number of estimator for each of these to be able to do an apples to apples comparison.
+
+Unknown Speaker  2:12:13  
+Now, since I'm using 512
+
+Unknown Speaker  2:12:15  
+these will take pretty long to actually train each of these. So
+
+Unknown Speaker  2:12:30  
+okay, so this one performed worse 83 and 81
+
+Unknown Speaker  2:12:36  
+so looks like for these one at least bagging provided better performance than gradient boosting. Now there is another boosting called Ada boost.
+
+Unknown Speaker  2:12:48  
+So let's do
+
+Unknown Speaker  2:12:50  
+ADA boost.
+
+Unknown Speaker  2:12:53  
+And I forgot whether scikit learn have any XG boost
+
+Unknown Speaker  2:12:58  
+from i Good,
+
+Unknown Speaker  2:13:05  
+huh? So there is. It's called xgb classifier.
+
+Unknown Speaker  2:13:10  
+Okay, so ADA boost gave even worse, 77 and 7070s
+
+Unknown Speaker  2:13:15  
+well, both very close.
+
+Unknown Speaker  2:13:18  
+Now let's do an
+
+Unknown Speaker  2:13:23  
+xgboost classifier.
+
+Unknown Speaker  2:13:25  
+Oops, what happened?
+
+Unknown Speaker  2:13:32  
+Oh,
+
+Unknown Speaker  2:13:35  
+there is no xgboost.
+
+Unknown Speaker  2:13:41  
+Hey, Karen, or anyone. Do you guys know whether Escalon have any exe boost? Or maybe I can check here.
+
+Unknown Speaker  2:13:51  
+I think XG boost is its own library. Specifically, I'm sure there's lots of boosting options. I know xgboost has its own library, but I'm thinking whether SK learn has any XG boost or not. I don't think so.
+
+Unknown Speaker  2:14:05  
+No, I don't think so. I
+
+Unknown Speaker  2:14:12  
+mean, it's kind of like the same it's just a separate one, yeah,
+
+Unknown Speaker  2:14:18  
+like, no, hang on, all right, you have to do import xgboost as xgb. So that's a separate library. Yeah, that's a separate library. But I don't know whether I have this. Nope, I don't have it. So in order to use xgboost, you have to do a pip install, I suppose
+
+Unknown Speaker  2:14:41  
+xgboost, I have the my previous use of exe boost is using uh AWS supplied package. So xgboost is actually more industry standard, and many of these large machine learning provider, they actually have a hosted exe boost package available. So when I use.
+
+Unknown Speaker  2:15:00  
+To do that kind of machine learning, I would always use this classifier or regressor. So what happens is all of these things that you will learn doing in scikit learn. These are good to learn in a single machine, but when you are running it on an industrial scale data,
+
+Unknown Speaker  2:15:16  
+instead of doing scikit learn, which you can do, you can do a DIY, large machine learning cluster. But people usually don't do that because large, for large models, the these cloud providers, they actually provide their hosted algorithm that basically does all of these parallelism and everything behind the scene. So in that model, xgboost is actually very, very
+
+Unknown Speaker  2:15:41  
+what is called, uh, popular, but you can run exhibit boost here as well. And then
+
+Unknown Speaker  2:15:49  
+xgb dot, XDB classifier, okay,
+
+Unknown Speaker  2:15:52  
+just, I just put
+
+Unknown Speaker  2:15:55  
+the link. Oh, you did passion on the chat.
+
+Unknown Speaker  2:15:59  
+Oh, on the chat. Okay, yeah, this will be right there,
+
+Unknown Speaker  2:16:03  
+yeah, so, let me
+
+Unknown Speaker  2:16:06  
+do this. I
+
+Unknown Speaker  2:16:29  
+and then print the score.
+
+Unknown Speaker  2:16:33  
+I hope it will use the same syntax as the scikit learn methods,
+
+Unknown Speaker  2:16:38  
+no
+
+Unknown Speaker  2:16:42  
+invalid class input from unique values of y, what?
+
+Unknown Speaker  2:16:55  
+Oh,
+
+Unknown Speaker  2:16:58  
+okay,
+
+Unknown Speaker  2:17:00  
+so xgboost, hang on. Let me do a unique
+
+Unknown Speaker  2:17:08  
+So, what is my data set? DF, DF, dot,
+
+Unknown Speaker  2:17:14  
+cover.
+
+Unknown Speaker  2:17:16  
+Dot value counts.
+
+Unknown Speaker  2:17:19  
+Oh, so XG boost expects your values to be zero and one. Only here we have one and two. So that's why it is.
+
+Unknown Speaker  2:17:29  
+Why does it have to be so opinionated? So now you have to do some transformation. You have to apply a lambda and convert your one and two to zero and one. That is weird. I didn't know this
+
+Unknown Speaker  2:17:41  
+anyway. I don't want to do that right now. You can do that yourself, if you want to Jesse or anyone who is interested so,
+
+Unknown Speaker  2:17:53  
+or I don't know whether there is any,
+
+Unknown Speaker  2:17:57  
+where did you put the documentation? Is there any way we can override this? I just put it on the chat.
+
+Unknown Speaker  2:18:03  
+Oh, we chat,
+
+Unknown Speaker  2:18:08  
+Zoom chat, Zoom chat.
+
+Unknown Speaker  2:18:18  
+Okay, so this is the whole full documentation. No. What I'm saying is, do you know if we can override that weird 01
+
+Unknown Speaker  2:18:26  
+restriction does it have? Why
+
+Unknown Speaker  2:18:32  
+not
+
+Unknown Speaker  2:18:33  
+just right is have to subtract one from everything.
+
+Unknown Speaker  2:18:39  
+So that's easy to do. I do.
+
+Unknown Speaker  2:18:50  
+I'm not getting anything on overriding
+
+Unknown Speaker  2:18:53  
+because if it were there, this Google search would have probably shown up. But now, just what the column dot apply,
+
+Unknown Speaker  2:19:05  
+lambda x, x minus one. Okay, that's homework for you. Karen, that's like, really easy. Do that? Do that and post
+
+Unknown Speaker  2:19:18  
+out loud,
+
+Unknown Speaker  2:19:19  
+or Jessie, or anyone, yeah, but no, it's, there's a transformer to from one ones and twos to zeros and ones. It's, it's one line. I
+
+Unknown Speaker  2:19:31  
+just put it. Which transformer did you use? I didn't, I didn't. I just used list
+
+Unknown Speaker  2:19:38  
+operation. Oh,
+
+Unknown Speaker  2:19:40  
+okay, you Oh, that's right. You can Ha, one and two. There you go, right. There you got it. That's even simpler, yeah,
+
+Unknown Speaker  2:19:50  
+okay, yes, that's good. Okay, so let's do that then,
+
+Unknown Speaker  2:19:56  
+yeah, right. White trend is
+
+Unknown Speaker  2:19:59  
+correct.
+
+Unknown Speaker  2:20:01  
+Yeah and oh, so we have to do that for white test also.
+
+Unknown Speaker  2:20:07  
+Now let's see cool. So
+
+Unknown Speaker  2:20:11  
+91 and 86
+
+Unknown Speaker  2:20:15  
+Yeah, so which one won?
+
+Unknown Speaker  2:20:18  
+8381
+
+Unknown Speaker  2:20:22  
+are you? You'd say excused. Give us the best results.
+
+Unknown Speaker  2:20:27  
+Extra treat trees. I don't think we should trust that, because it is giving a training score of one.
+
+Unknown Speaker  2:20:35  
+This one is 8381 for gradient, Ada is giving us 77 much lower,
+
+Unknown Speaker  2:20:45  
+and this is giving us 9186
+
+Unknown Speaker  2:20:48  
+Yeah, so I think xgboost gives us The best result on this data.
+
+Unknown Speaker  2:20:59  
+So this guy,
+
+Unknown Speaker  2:21:03  
+so this psychic learn guys, they provided gradient boosting. They provided ADA boost. So these two,
+
+Unknown Speaker  2:21:19  
+you can actually see here, what are the ADA boost. Ada boost? Oh, they have something called bagging classifier, bagging regressor. Extra trees, classifier regression gradient boosting classifier regressor,
+
+Unknown Speaker  2:21:36  
+yes. Dogram, best, histogram based, gradient boosting classifier, regressor, there's a whole bunch of thing,
+
+Unknown Speaker  2:21:44  
+yeah.
+
+Unknown Speaker  2:21:46  
+See, even after all of these, what 5678,
+
+Unknown Speaker  2:21:50  
+algorithms we learned, but that is still a subset of everything that is out there. So,
+
+Unknown Speaker  2:21:57  
+so if you want to explore more, you can always go to the scikit learn API page, and for any package, whether it is ensemble package or whether it is your what was the other one tree? So if you look into SK learn dot tree right or SVM, so you can see other classifiers that we probably haven't used. Well, tree only has two and we have used both decision tree and extra tree.
+
+Unknown Speaker  2:22:25  
+What else did we use SVM? So SVM, they have a linear SVC, linear SVR, and then plain SVC and SVR, which you can do with change kernel and the new SVC, new SVR.
+
+Unknown Speaker  2:22:40  
+I have never used it. I don't know what it does.
+
+Unknown Speaker  2:22:45  
+And then they have a one class, SVM, that's also I don't know anyway.
+
+Unknown Speaker  2:22:52  
+But now that you know where to go and look for more classifier and regressor,
+
+Unknown Speaker  2:22:58  
+in case you feel what we discussed is not enough,
+
+Unknown Speaker  2:23:02  
+and you you need to do more research so there is always more things. Surprise we're not doing Naive Bayes, though,
+
+Unknown Speaker  2:23:13  
+ah, yeah, it's really common for a lot of things, especially NLP, stuff like, you know, doing, like spam, you know, spam,
+
+Unknown Speaker  2:23:22  
+stuff like that. You know, classifying emails as big spam or not, things like that.
+
+Unknown Speaker  2:23:27  
+Maybe when we do new NLP, maybe we'll do that.
+
+Unknown Speaker  2:23:32  
+Maybe we do some NLP stuff, we'll do that. Use that one
+
+Unknown Speaker  2:23:37  
+very common for that. Yeah, cool. And this one I posted there for the future. Importance, yeah,
+
+Unknown Speaker  2:23:49  
+okay,
+
+Unknown Speaker  2:23:50  
+any last minute question or any thoughts anyone like to share?
+
+Unknown Speaker  2:24:00  
+So are you guys feeling pretty confident to tackle any Kaggle challenge right now?
+
+Unknown Speaker  2:24:07  
+No, why not? Totally. I mean, really, you don't need anything else. You have everything that you need to know. So go, start trying your luck out there.
+
+Unknown Speaker  2:24:21  
+I mean, at least try the one that has already been closed, because that one, you will already get the leaderboard. So look into the leaderboard and look into the sum of the top scorer. Maybe you can just take a leaderboard, one of the closed competition, do it yourself.
+
+Unknown Speaker  2:24:39  
+It might be pretty bad, and then look at the leaderboard and see how they did it differently. That is how you learn anyway, right? And there's some basic ones under, under competitions that are, yeah. There are some basic, very basic ones, yeah. Other categories is knowledge, where you're you're doing it, just you could, you know, for learning, and you Yeah, you can just see how you yeah.
+
+Unknown Speaker  2:25:00  
+Yeah, and you and you can look at all the note different notebooks people have done. You can see how they've approached it.
+
+Unknown Speaker  2:25:09  
+Some of them are pretty much very common ones, like the Titanic one, a very common
+
+Unknown Speaker  2:25:16  
+that's a very common one.
+
+Unknown Speaker  2:25:19  
+Figure out, predict whether somebody will survive or not.
+
+Unknown Speaker  2:25:26  
+Yeah, that's fun. Anyway, cool.
+
+Unknown Speaker  2:25:30  
+Okay, so let's formally call you today.
+
+Unknown Speaker  2:25:35  
+If you have any question, we are free to hang around a bit more.
+
+Unknown Speaker  2:25:42  
+Thank you good night yeah, thanks. Thanks. Benoit,
+
+Unknown Speaker  2:25:47  
+thank you guys, thank you Good night everyone. Thank you. Good night you.
+

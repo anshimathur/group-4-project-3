@@ -1,0 +1,897 @@
+Speaker 1  0:03  
+I'm going to be your substitute instructor, again, just because your regular staff student instructor, and your regular instructor is out. And again, today's session is going to be more conversational, which is going to do more research, and let's talk even more and debate a little bit more, just because, again, I wanted to be a second nature for you just to express your opinion about AI, stand your ground. Sometimes, when it's needed, you will need it, especially when so many like legal team members going to be like against you, when you would have some cool project in your mind. So let's, let's talk about it.
+
+Speaker 1  0:46  
+So legal and ethical issues in AI, by the end of class, you'll be able to describe the concept of data privacy and how it relates to AI, explain the concept of content and why it is important for AI projects outline the key legal parameters governing AI training data and summarize some legal considerations for selecting AI training data. So let's start with questions, and again, let's please all be engaged and try to sit here. So question number one, in which circumstances in your life do you want privacy?
+
+Unknown Speaker  1:27  
+And let's think broadly,
+
+Speaker 1  1:30  
+not just like saying I don't want anyone to peep into my window, let's think
+
+Speaker 2  1:34  
+you want your financial information to be private.
+
+Unknown Speaker  1:39  
+That's for sure. Yes, healthcare,
+
+Unknown Speaker  1:45  
+healthcare, yeah. What else
+
+Speaker 3  1:51  
+I'm gonna say face recognition, because right now, everywhere you go, you are always being observed through all the cameras in the whole world, and who knows what they do with it? Yep,
+
+Speaker 1  2:03  
+exactly. And we actually read about one of the cases. What about DNA? Yeah, DNA, excellent. Sample,
+
+Speaker 4  2:13  
+my personal life, yeah, like, like, my personal life, like, if I don't want to share that with you, I don't want to share that with you.
+
+Speaker 1  2:23  
+On point, yeah, what do you guys think about companies who are checking your social media before hiring you? What do you guys think about that issue? I think it's
+
+Speaker 4  2:33  
+massive invasion of privacy, like there is a clean delineation between your work life and your personal life. Least there should be like your work life balance, they should be separated. You know, church and state, work and personal, those are all like, they should be separated. And so to have a potential employer come in and try to get access or demand access to your social media pages in order to be considered for hiring. It's a massive personal invasion of privacy. What
+
+Speaker 5  3:04  
+is your liability, though, like, what if your activities in your personal life can be detrimental to the company? What that? What if the only way that they know that is based on activities that you've posted on social media? How would you know, and then how would like, especially if we talk about bias, what if you have, like, inherent bias that you then introduce into the workplace, especially if you're doing the data, just something to think about? No, it absolutely
+
+Speaker 6  3:36  
+has the capacity for that. Whether or not they post it online, it's like between like you posting it online and like somebody who doesn't have an account would be capable of doing anything. It's like, there is no like correlation, I would think, unless it's like, like psycho, I guess, like, kill those or stuff.
+
+Speaker 4  3:54  
+And I don't think they're screening for psychopaths, really, when they're looking at your social media
+
+Speaker 7  4:02  
+function like, the demand, like, if they were to demand access, versus like, you know, whatever you're doing to cultivate your social, your public, social persona, that's on you. But if you're like, if you have things that are held off or or cordoned off, like family, friend connections, and someone's like, hey, no, I want to be able to, like, add me. Add me. That's that'd be weird.
+
+Speaker 8  4:27  
+Yeah, I'd say I have a very different view of privacy, just because I have a security clearance with the government, and because of that, I know that essentially everything I do is under a microscope, or could be because of the nature of work that I'm in. And so I guess I'm one of those folks that I just assume that anything that I put out on the Internet, whether it's, you know, I have my privacy settings enabled or whatever. It's there's a good chance that somebody's going to be able to see it and have access to it, whether I want them to or not, you know, and I am sure that, you know, China and Russia and all these other countries have full profiles of me, if they if they so desire, just because of the nature of work that I'm in. So I take that into consideration when I do anything on the internet like I'm not a an avid social media person. I do have it, but I I know that anything that I put on there, even though I have it set to private, is liable to be looked at or used for some sort of, you know, analysis algorithm, you know, targeting of ads or whatever. And I think that's just because the nature of the world we live in now.
+
+Speaker 1  5:51  
+I like your approach. I like to be like, extra careful. I guess it's like, you know, professional What should I use here, which were like, like, professional consequences that you were that's how your brain works right now, you have to be extra careful just because of the nature of the work you do. But I like the logic too. What's your name? Jonathan, I'll be extra careful with you, since you're working for the government. So you guys take a notice. Okay? Who else? Jesse, yeah,
+
+Speaker 7  6:20  
+I was gonna say, I know this is the second question, but there's, there's sort of a reasonable expectation of, like, what you communicate and what it should be used for. For example, I had a pretty open Facebook page, and then I had a poem of mine go viral, and was getting picked up on international news agencies in the guardian in the UK, went on to my Facebook page and grabbed pictures of my children for an article that without my without my consent, without my knowledge, they just appeared in a news article on the guardian.com and that was just egregious. We have to go after them and get them to take it down. And there's another instance of that when my wife used to help organize an organization called mom's club, and in the 90s, one of the members, she was a teacher, and her student, accused her of sexual misconduct, and it was a he said, she said thing, and they said, You're never going to win this, so you might as well just plead down and have to be on a registry. And that's it. And then the advent of the Internet, that registry became online, very accessible, and she was easily found for something that was, in her words, something that she just had had to plead to, and didn't expect it to follow her in this way. So there's, there's sort of this expectation of, at the time these things evolve, there's no way that I could have anticipated my art being crawled for AI content or AI training.
+
+Speaker 1  7:45  
+Oh, wow. That was deep. Thank you. That was actually, yeah, it's like, nervous laugh. I didn't mean to like to laugh. It just like, that was, you know, yeah, that was bad, yes. Aaron, thank you. I
+
+Speaker 4  7:56  
+really like, how, what, what you said, Jesse, where it's like there is an expectation of privacy, and I and just because the world is changing around us doesn't mean that the expectation we have now is invalid. I think that there is an expectation for privacy, and there is an expectation that if it's violated, somebody will will have some kind of retribution for for doing that. And so, like, I think that that's like there, I think privacy, it's not so much about what we expect to be private, but that when it's violated somebody, there is some comeuppance. There's some retribution. When that kind of violation occurs.
+
+Unknown Speaker  8:44  
+Yeah, thank you. Donald,
+
+Speaker 6  8:48  
+yeah, I think it's like, I think the one of the major issues with, like, privacy concerns is that it like, it's not a two way street. It's just like a it's like an avenue for control, for like, like, it's like a company itself. It's like, you have to, like, reach out to the company and get hired by them. So you're kind of at the mercy of them for the job, and so they're able to use, like, their access to that, this information as like, a means of, like, control over you. You know where, like you, you don't have any other option, really, to other, like, get hired by a company, unless you, like, work for yourself, right? So now there's this, like, this unequal, like, balance of power in like, I guess, our world with like, stuff we're able to post publicly on the internet being used against us in like, an unequal fashion. It's not like you can be like, oh, like, I'm going to not hire this company because of, like, the stuff there's executives or, you know, that stuff like, I think, gets a pass most of the time.
+
+Speaker 1  9:48  
+Yeah, I agree. And I also think that I wish all the companies, especially big companies, were held accountable as much as just regular folks I held accountable. Of times when they rejected the positions, right? Just because one thing is just to settle in court for some amount of money that is like your daily your daily profit, right, and another thing for some person to not be able to find a job and not be able to be hired for extensive number of years or months, even in this economy special, which can mean, you know, coming homeless content, what is on the internet right now? All right, thank you. Question number two, and we kind of like heard one example, who else wants to share? Was your privacy ever violated, maybe not in such vivid way that like, like, literally someone was just like staring at you, but
+
+Unknown Speaker  10:49  
+in some way that you felt like,
+
+Unknown Speaker  10:51  
+I wish it never happened.
+
+Unknown Speaker  11:00  
+Yes. Erin, please,
+
+Speaker 4  11:01  
+yeah. So when I was 19, I got I got pregnant, and I told my mother, because, you know, tell your mom kind of thing for help. And she told her friend and her sister who told her my grandmother, who told her friends, who so suddenly I had someone reaching out to me on my personal phone number to ask about adoption options for my unborn child that I was literally just pregnant with, like it was. It was really a traumatic event that
+
+Unknown Speaker  11:42  
+all happened because my mom violated my privacy.
+
+Speaker 1  11:47  
+Oh my gosh, this is shocking. I'm really sorry that happened to you. This is like traumatic event for the, you know, rest of your life. I'm very, very sorry. Well,
+
+Speaker 4  11:56  
+I mean, thank you. But I think the the things that we when we remember our when our privacy was violated, it's usually the things that had a lasting impact, like I'm sure somebody has looked at my photo that I didn't want them to look at my photo, or something like that, but it doesn't. It didn't impact me. But when your privacy is violated and you're impacted by it, you remember that, and it's usually not for something happy,
+
+Speaker 1  12:24  
+not true, yeah. I like the last sentence of yours when you said most of the time, we would probably consider, you know, invasion of privacy when something is not happy. If something was like, graduated with point like, 4.0 GPA and someone was just like, telling everyone, will probably be happy about it, even that it's invasion of privacy, but we are proud of our achievements, but when something is bad, we would pay more attention about, you know, the situation that occurred, and why someone else would be in our space. Thank you so much for sharing this. Okay? And question number three, when was the time that you might have violated someone else's privacy? Does anyone have such a story or bravery to share? Maybe unconsciously, you didn't expect that you would be actually a violator, but it happened,
+
+Speaker 9  13:18  
+I think we've all walked in on somebody going to the bathroom on accident. So that's kind of like,
+
+Speaker 8  13:27  
+so I was going to say, you know, I'm, I'm sure there's a number of us on the call that are parents, right? I mean, where does that line, where's the line drawn? And it's probably different for every, every parent of what's considered, you know, being a, a, you know, someone who is trying to protect their child, and where does that line cross into violating privacy like, you know, when I bought my children their phones, I was like, Hey, if you have a phone and I'm paying for it, you need to be aware that at any time, I can ask for you to hand over your phone, and I should be able to go through it without you being concerned of what's on your phone. Now I haven't done that, but I have that expectation with them, so that, you know, to make sure they're not doing anything that, at least in my with my standards, that would be viewed as inappropriate. But, you know, I'm sure there's others that would view that as a violation of their rights. But you know, I think as parents, it's kind of that gray area, and it's different for everybody. So you know, that might be that's kind of my thought, yeah,
+
+Speaker 1  14:40  
+this is definitely new generation of parents, because I don't think my parents would ever even consider to kind of discuss or apologize for getting to my phone or my room. I would just say by default settings,
+
+Unknown Speaker  14:54  
+anyone else, yeah,
+
+Unknown Speaker  14:56  
+I have vibrate your privacy.
+
+Speaker 10  15:02  
+Anybody else's kid said something incredibly embarrassing about you in front of a bunch of people thinking it's funny,
+
+Unknown Speaker  15:10  
+probably, but I probably got him back for it
+
+Unknown Speaker  15:15  
+Ingrid, please.
+
+Speaker 3  15:18  
+Yeah. So we have a family plan with AT and T, where I can probably track where my husband is or my daughter is. But with my husband, he already said, Hey, I don't want you to track me. So fine. You know, of course, that's not a problem. But for our daughter, she was a man that at one point, and so I was able to track versus with she was okay with it, actually, just to think about it with one time when she went to London with the University of Utah in our group, her her phone was stolen there, I was able to actually find out what it was, but obviously nothing we can do, because it was just the last place that the plate that the phone was found, which she was not even there at the time. But I think what I was trying to say is probably always ask that person, you know, if it's okay if you know a tracking device like that is, you know, is is available, and if the family is okay with that, and I think that's totally okay with their concept. But when you have, you know, some kind of tracking device where other people probably didn't know, but you are tracking them, that's probably where it's going to borderline wrong, and you should probably try to not do that. So anyway, air Tech is a it's a good device. You can find a lot of things. You know your car, your pets, you know your family members and stuff, or even your languages, you know, but the culture conscious of that is sometimes you may have followed to somebody else's privacy.
+
+Speaker 2  16:48  
+Yeah, thank you. Thank you. I have a perfect example of I've opened my wife's phone and looked at her text messages, but then again, we both have each other's passwords for the phone too, but I mean still kind of, I guess invading her privacy a little bit. But
+
+Speaker 1  17:12  
+yeah, thank you. Anyone else are you guys steer clear from other people. I well, it was definitely cool to see so many self aware adults that understand what they're doing, even if sometimes it's for good reasons, but they still violate some privacy there. So keeping your answers to the previous questions in mind, how would you explain the concept of privacy to someone else? Well, there is a official, more formal definition. Generally speaking, you can think of privacy as a person's right to control how information about them is shared. Should always be aware that the bounds of your privacy will differ in different contexts, and it is as much of a social issue as a legal one. Furthermore, your expectations of privacy may be different than your friends, as well as anyone who is from a different geographic, socio economic and cultural background. Now let's talk about personally identifiable information. So PII refers to information that can pinpoint the identity of a specific person, including full names, personal identification numbers such as SNN, driver's license number or password number, Director information, such as address, email address and phone number, technical identifiers, such as IP address, personal characteristics, such as an image of a person, recording of a voice or other biometric information and information that can be linked to any of the above, such as date of birth, race, employment information and education information that being said, we have our first activity. So in this activity, you'll use the how unique am I? Tools created by Dr Sweeney's data privacy lab at Harvard, and you'll find out if it's difficult to be found or not. I'll review my results in my zip code error. There are 34,000 people, and it's still sad that I'm pretty much unique here by the questions they were asking me on that tool. So even in a big city, metropolitan city, it's still very, very easy to be found. But let's see what results you're going to get. Now let's ask please our TAs to place you in breakout rooms, and let's spend like 10 minutes on it. All right, welcome back. So we had a few questions in that assignment, so let's combine two questions together so it was how. Is it was for you to identify yourself based on your date of birth, birth, year and age range. And how do these results make you feel? So whoever wants to volunteer and answer,
+
+Unknown Speaker  20:17  
+it seems like it's pretty
+
+Speaker 8  20:20  
+like linking zip code and date of birth is a pretty easy way to identify someone as being unique, like everybody in our group, to my knowledge, I think maybe des you can comment, but everybody in our group had basically was the only person with their birthday in their own in that particular zip code. And then we tried different
+
+Unknown Speaker  20:44  
+zip codes too,
+
+Unknown Speaker  20:45  
+and it was kind of the same thing.
+
+Speaker 6  20:49  
+You know, ironically, web pages like this are also scraping your data when you input it in. I yeah, I did not want to input any information. It's like those BuzzFeed articles that, like, collect data like
+
+Unknown Speaker  21:03  
+that. We put
+
+Speaker 9  21:05  
+in a lot of dummy data just to kind of like, see what would happen. So not our personal actual birth dates, but yeah, I
+
+Unknown Speaker  21:13  
+put in my Social Security.
+
+Unknown Speaker  21:18  
+Hey, Jesse, you still have to send me your bank information.
+
+Unknown Speaker  21:22  
+Yeah, we just need that rounding number. We're all set.
+
+Speaker 6  21:24  
+Yeah, rolling right on. Aaron, I just found that online, actually, I can send that
+
+Unknown Speaker  21:28  
+on already one time fast.
+
+Unknown Speaker  21:32  
+I got that too. Jesse, don't worry about
+
+Speaker 11  21:34  
+it. It made me realize why it's so easy to stalk people on Facebook with our city.
+
+Unknown Speaker  21:44  
+Oh, yeah. I mean, if you look at,
+
+Speaker 8  21:47  
+you know, dating apps right now, when you start texting somebody, you can go into Facebook and type in the phone number, and because people don't lock down their their profiles like they should. Their phone number is often linked to their Facebook profile, so they can go from you know, finding you on, you know, whatever fill in the blank dating app, to getting your whole social media presence from just the phone number that you give them to start texting on, or something like that. So
+
+Speaker 10  22:19  
+Jonathan, speaking for all girls in the world, can you please keep that secret?
+
+Speaker 8  22:25  
+Yes, I will endeavor to hold that secret. Let me, Jonathan, do that.
+
+Speaker 2  22:33  
+I have a little thing I find out that this the website is kind of wrong, because when I entered mine for the zip code I live in, and it said one, I know it's wrong, because I actually have met somebody in the same city with the exact birth date as me. So I know there's more than just one person with my birthday. One
+
+Speaker 8  22:55  
+thing that we found was that the the data is going off the 2010 census. So I think a lot of those numbers are are way out of date, especially for areas that have grown up a lot over the last few years. Oh
+
+Unknown Speaker  23:09  
+yeah, 2010 I wasn't in the zip code either. So
+
+Speaker 12  23:12  
+yeah, it's one
+
+Speaker 4  23:15  
+of the benefits of my last name. So you guys can all see my last name, my real last name, but I only use half of it for my social media. So there, because there are many Aaron Spencers in the world. There are many of them. There's only one with my full last name. So that's one of the ways that I try and protect myself from that exact situation, because I don't really want, you know, random stalkers. I've avoided them so far. I'd like to continue my trend throughout this for fun, a program I was in for career development stuff, they're saying, Well, you know, you should be aware of what people will find if they search your name on Google. So I plugged in Karen Fisher on Google. First whole page is a porn star. I for employers.
+
+Unknown Speaker  24:08  
+Know that about you? Yeah, it's
+
+Unknown Speaker  24:10  
+a lot of information to share. Karen to the club,
+
+Unknown Speaker  24:14  
+yeah, nobody go looking.
+
+Speaker 13  24:15  
+I have no resemblance with that person. I don't need to double check. I don't think I'd want to either,
+
+Speaker 6  24:22  
+you know, that's something interesting about the phone number thing, though. And like, I just, I, I don't understand why phone like, the systems that we use lately, like, like, because you use your phone number for everything, for like, signing up for like, grocery stuff, or like, you know, like, I don't understand why that's still, like, commonplace. It seems like outdated, especially with the advent of, like, dual authentication and like stuff like that. Like you could do slim swapping if you have, like the phone number and like their their provider. And it's like, such a secure, like, a crazy security vector that, like, I don't like, and you see it like, at least socially this, like, amongst like people. Who like using Snapchat to like the the switch from like, using your phone number to be like, Oh, give me your SNAP, or give me your discord. That's like, opting in for these alternative, like, communication platforms. Because, like, it's like, giving out your phone number. It's like, it's like, one it's like, hard to like, block people like, especially because, like, we can get different phone numbers, or, like, spoof their phone number. Like, you know, it's, like, it's really hard to, like, get people off your back. If you get if you give your phone number out, and they get it, and it's so easy to scrape it online too. Like, especially with that Facebook thing that Jonathan was talking about,
+
+Speaker 1  25:36  
+this is definitely a very beneficial class. Your financials can be taken care of. Your personal life can be taken care of. Let's, let's, let's continue. I guess,
+
+Speaker 14  25:44  
+guys, have you tried any, I mean, anyone try to search and Google your friend's name or even your name? And I tried it, and I've been really surprised when I found my address, my phone number, my date of birth, and the people who lives in my house. I mean, there was the name as well, and it's been before AI, or I don't know, I've made it a couple years ago, maybe five, and it's, you know, open source, so it's in a Google Go ahead, check check on that.
+
+Speaker 3  26:29  
+So that's a that's a good question, though, because you know what, what I've done within the last, I'm gonna say probably seven to eight years. When I google my own name, go to basically whatever website it came up with, and I basically said, I want you to remove my name, and you just have to keep persistent doing that, so it's getting less and lesser. I mean, of course they still have, you know, my LinkedIn, maybe my instagram or whatever, right? But I think the one that you're referring to, Margarita is kind of like related to maybe, like your phone number or stuff. So I've been diligently doing that for last seven to eight years, and it started to get less and lesser, which I think I like it, because I'm more like a private person, but I don't know. I mean, you just have to be diligent enough to keep requesting those websites to remove your data. And there is a way to do it. You can go to the footer of the website, and then you can always submit it, they will probably remove it within, I don't know, a week or two.
+
+Speaker 9  27:25  
+It's funny, because I'm on the opposite end of, like, not wanting to be found. Because I do want to be found because I am a photographer. So I did a lot of wedding photographers, so I actually embed, like, my name and my the name my business, and like all the files that I upload. So like, if there's a picture that's related to, like wedding photography, then I always put, like, my first and last name in photography. So I mean, I've leveraged, like, the idea of trying to be tracked so that people can find my business.
+
+Speaker 14  28:05  
+Uh, will you like when that someone will try to find your name, just like for your business, and they will see your address, your they will see your phone number, date of birth, and people who lives in your house, I think that would be an issue. No, yeah, sure, for sure.
+
+Speaker 13  28:29  
+So, So Matt, you you put that information in the metadata for the images,
+
+Unknown Speaker  28:33  
+yeah, so I put in the metadata.
+
+Speaker 13  28:37  
+What are you saying that it's your work too. Yeah, that's important, right? Yeah, people can steal those images as well. And if you have that your information is in the metadata, you can prove that it was your work Correct. Yeah,
+
+Speaker 7  28:49  
+any watermarks and with, like, a picture of his face, it's only seen if you put on 3d glasses. Okay,
+
+Speaker 1  29:01  
+we have next question, and I already afraid to ask you this, because you're going to be like, you know, there is no consent of me to for you to ask this question. But what kind of information is available about you online? Did you post anything in private about your employer, if you have kids?
+
+Unknown Speaker  29:20  
+If anyone can share please.
+
+Speaker 1  29:24  
+But we've got one answer too much from grace. So
+
+Speaker 15  29:29  
+anything personal of mine is all under an alias, apart from my LinkedIn. That's really the as far as I know, should be the extent, unless you like, you dig into one of those people tracking plates or whatever. But, yeah, no, I have everything under an artist alias, so really just my job history and skill sets as far as I know.
+
+Unknown Speaker  29:54  
+Okay, thank you. You.
+
+Speaker 1  30:00  
+Okay, I guess that's it. Let's go to the next question. Can you think of any anonymized data sources that may include information about you?
+
+Speaker 7  30:13  
+Yeah, I mentioned DNA before I submitted to both ancestry and 23andme because I thought it would be really interesting to find data about lineage, and, you know, like, find relatives. And then they started coming out with all these articles about how 23andme was disclosing, without consent to law enforcement, genetic information to help solve murders, which you know on the face is like, Wouldn't want to solve a murder, but now you have this whole like, fuzzy gray area of like, well, I didn't really consent to that. That's, that's, that's interesting,
+
+Unknown Speaker  30:47  
+yeah, that's, that's
+
+Speaker 8  30:48  
+like, I don't there was that trend, I don't know, probably 10 plus years ago now, but it was like, hey, post the picture of you now, and 10 years ago, you know? And it sounds, it seems like it's fun trend, but then you can look at what that enables, you know, data miners to do, because then they just got 10s of 1000s, if not hundreds of 1000s or millions of of age progression photos that they can use for machine and AI learning to be able to help with, you know, I forget who it was, but the facial recognition type of stuff, and then, you know, like Jesse was saying, with the DNA stuff, you know, I've been very interested in that kind of thing, just because, you know, I like genealogy and stuff, but it's one of those things that I'm like. I know as soon as I give up my my DNA, it's out of my control, even as much as I wouldn't want it to be used in that way. I know as soon as I make it available or use it for something like that, it it is out of my control, and they can essentially, even though they shouldn't, do whatever they want with it. You know, same with, like, fingerprints, right? Like, lot of jobs, even teachers and stuff like that, have to get fingerprints. And they all go into databases now and can be used for, you know, crime searches and stuff like that. And hopefully nobody in those fields are doing it, but they're probably not aware, to an extent, that because they're getting their fingerprint done, it's going into some database somewhere that is going to be searched against for, you know, crimes and other types of activities.
+
+Speaker 6  32:41  
+Yeah, that's like, speaking of teachers too. It's like, it's like, the these systems that we've built up to like, kind of benefit these, like, big companies making money off of all these, this data, we've sort of, like, built this infrastructure around it to, like, almost require you to, like, have it some sort of digital print in order to interact in these spaces. But like, and it puts like the most vulnerable at risk, like teachers, like, like, like, education system, school systems and hospitals who, like might not have, like built up or, like have the funds to, like, invest in cyber security in order to protect that info. And so really, like, they're the most vulnerable in this like system.
+
+Speaker 8  33:19  
+Yeah. I mean, like, how many things nowadays, when you buy it, do you have to log into it now, right? You can't just own a piece of electronics without signing into it with some sort of email, phone number, something like that. So that that's one more data point that they now have on you, you know, like even appliances nowadays, right? Like, I've got a washing machine that it has an app so I can be told when it's done, but I had to create an account for that. And so, you know, now, what is it? Samsung or LG knows how many times a day or week I'm doing laundry, and, you know, probably other things, like how heavy the loads are, and you know what kind of things I'm doing. So it's all those things that the convenience comes with, that trade off of maybe losing some of that, that privacy, because you want that convenience for it.
+
+Speaker 5  34:20  
+Listen, I am of the opinion that Liam Neeson will not be able to come save me if I am kidnapped, so I have all the tracking stuff turned on for me. Come get me. Somebody somewhere.
+
+Unknown Speaker  34:35  
+I'll find you. Desmond,
+
+Speaker 6  34:37  
+yeah, when, when your credit card declines for your subscription service, Samsung will send out one of the agents to come get you
+
+Speaker 10  34:46  
+is make sure that anywhere that you go, you're driving to on a regular basis, because even your car GPS is tracking where you go and like documenting your more regular trips and where you stop at. You know, all that kind of stuff
+
+Unknown Speaker  35:01  
+too. Yeah.
+
+Speaker 8  35:02  
+I mean, that's how Google Maps gets its traffic data, right? It's based off of the phones in that area on those routes. So, yeah,
+
+Speaker 6  35:12  
+there were, there was an artist who, like, did that? Was it in Venezuela? I forget where, but he basically, like, drug around, like a, like, a wheelbarrow full of, like, phones and like and like, recorded it because, like, all of the cars were, like, off those streets. He was, like, going down.
+
+Speaker 7  35:31  
+Like, yeah, yeah, because it made it look like it was traffic, like, so, like,
+
+Speaker 6  35:35  
+Google is rerouting people around those, like, the streets.
+
+Speaker 2  35:40  
+Well, then, and also for like, insurance companies, like all state like, they have the that driveway is an app, and, you know, it's on all the time, apparently, because I'll be sitting watching TV, and I'll get a beep and I'll say, drive wise is looking for a trip. I'm like, What the heck I'm sitting, not even moving. It's checking to see if I'm driving,
+
+Speaker 8  36:05  
+but you enabled that so you could get a discount right on, yeah, insurance exactly that, you know, that's how they entice us to give up our privacy, is they're like, Hey, we will give you a discount if you let us track your driving habits. And, you know, I've looked into it, and I've thought about doing it, and because, like, I, like I said earlier, I know everything that I do is tracked in some way. So I'm, like, it doesn't matter one more thing that's tracking me. But you know, that's how, that's how the companies entice people to give up more and more information as they provide incentives. Now I
+
+Speaker 7  36:42  
+just, I just use my face to log into my phone, use my fingerprint. So now it's like, okay, so that's, that's convenience. Now I just gave it that I just gave it.
+
+Speaker 6  36:53  
+Well, they always, they always sell it as like an opportunity to like, get lower rates. But the truth is, is like, like, it will never be lower than like, what their lowest rate it like, they will only aid to like, like, either increase your rate or like, you know, like, make it harder for you. Well,
+
+Speaker 8  37:09  
+that you know, they're making money off of the data they're gathering from you too, though. So like, even if they do give you a slight discount, the money that they're extracting and selling is, you know, more profitable than the little bit that they're losing on you every month. Jason
+
+Speaker 7  37:23  
+just reminded me, I need to go like flag myself as passenger on a bunch of trips.
+
+Speaker 1  37:31  
+Did you guys watch the Netflix documentary about social media? And when they said it, if you do not buy a product, you are a product. And that was actually pretty deep, I think so. All right, next question, how difficult Do you think it would be for someone to use your personal information that is available online to identify you in an anonymized data set
+
+Speaker 8  38:00  
+like how easy would it be for someone to with basic information, be able to find me in a data set? Oh, probably pretty easy. I don't know how many points of data they say you need, but you know, just there's, there's so much data out on all of us, intentional or unintentional, that with the right database, they could figure you out with pretty minimal information, or at least narrow it down enough to where they can make a pretty good logical guess. I
+
+Speaker 7  38:32  
+was at the doctors the other day, and right next to their HIPAA announcement, they had a list of all the employees birthdays to celebrate.
+
+Speaker 6  38:49  
+I'd laugh, but that's just that's so par for the course. That's just like disappointing.
+
+Speaker 2  38:55  
+I did that Google for Jack one on something that made me happy, because apparently they have my current number as a number I haven't had for 10 years. So,
+
+Unknown Speaker  39:08  
+so that's fine with me.
+
+Speaker 4  39:12  
+I'm feeling the urge to go live off grid and hide in a bunker. Um, I think I'm ready to go, guys, I'm done. I already
+
+Unknown Speaker  39:19  
+told you, let's put in for
+
+Unknown Speaker  39:23  
+like, money so that we can all go in for a bunker to get
+
+Unknown Speaker  39:27  
+down. Yeah, let's use our credit cards and get points.
+
+Speaker 6  39:31  
+Yeah, that's that bunker that we picked out. I just already took a picture of it, and the metadata got scraped already so they know where,
+
+Speaker 7  39:36  
+dang it. Matthew Lee took this picture. Yeah. It
+
+Speaker 1  39:43  
+All right. And then we have last question. Let's see if it's going to be a positive note or not. How do you feel about your privacy? Let's talk more about living off creed and being
+
+Unknown Speaker  39:56  
+I know how to dehydrate food. Has
+
+Speaker 6  39:58  
+anyone seen the movie The. Circle with them, a Watson in it. Oh,
+
+Speaker 4  40:02  
+my God. The book is so much better, but it is a good movie. Well,
+
+Unknown Speaker  40:06  
+yellow shows, really, there's a I want to read that. Uh,
+
+Speaker 2  40:09  
+it's called a circle. I'm glad to worry about my my financial privacy too much, because I have crappy credit score. So I don't think anybody's want cares about my financial information, because they can't do anything with it here, Jacob, I owe too much money anyways to the government. We'll
+
+Unknown Speaker  40:29  
+talk offline. I'm sure I could find a use for it.
+
+Unknown Speaker  40:33  
+Yeah, if you're not using your credit card, I'll take off.
+
+Speaker 5  40:37  
+Is anyone like thinking about how distinctly Our conversations are American, like, in terms of our views on, like privacy, like, it's so interesting, like, our answers earlier on today, and then even, like now, because, you know, Atlanta the free right? So we have very, like, critical views on what privacy is and what like, what should happen is that if that privacy, if we feel like our privacy, is invaded. So just find that interesting.
+
+Speaker 6  41:19  
+I don't in comparison to what, though, like, what would be the alternative
+
+Speaker 5  41:23  
+other countries that don't have the same freedoms that we have in terms of privacy? What, like, any country that doesn't have as much, China is a great example. They
+
+Unknown Speaker  41:35  
+they have, no they've got. I mean,
+
+Speaker 5  41:36  
+even like, in like, like Korea or in Japan, like you are, like they, they can tout that their countries are so safe. I think it's cameras everywhere, everywhere, like you, like they can find you, like so, equally and so, yeah, safe, but they know everything about you. But that's what that's all that that, like, triple that grow up there. Now,
+
+Speaker 6  42:04  
+I think the distinction there, though, is information that's being used to for the like, for the safety and like, like a regulation from the government or law enforcement, versus like, anybody with a LLC can just buy up swaths of your data and decide to like, target you as an individual with a product and that is limited
+
+Unknown Speaker  42:23  
+to the government. Like, do we know that?
+
+Speaker 5  42:27  
+Do we know if it's limited to just them, or is it just that you because you have to think about it like, you give up so much information just to, like, lease an apartment in Asia, like, in countries like Korea and Japan, like, there's so much information that you give up to landlords, and those are regular people, and like, there's no, there's, it's not the same where, like, we have the expectation that, like, certain information only stays, like, in that office, you know, it's just, it's true,
+
+Speaker 6  42:58  
+it's just this, This argument, like serves to just normalize it and then more like being like, accepting of like, data violation, like privacy concerns is like arguing whether or not it should our data should be violated or privacy should be violated in the first place. I don't think makes it distinctly American. I think that that cultural lens is important. But I don't, I don't think just because other countries are doing it doesn't necessarily mean it should be normalized.
+
+Speaker 5  43:32  
+Yeah, I'm not like, suggesting it's normalized. I'm just saying that our games are distinctly, like, a potential thing, like, that's all
+
+Speaker 8  43:37  
+but I think that the question comes in too, is like, is it a violation when we give away our data for a discount on something and it, you know, the small text in the the agreement says that they can sell the the stuff, but because none of us read those 20 page EULA agreements, we just click. OK, so is it, at that point? Is it a violation, or is it us, you know, agreeing to something that we didn't fully understand because we wanted the, you know, the thing, or the the benefit.
+
+Speaker 7  44:12  
+And now we're in the South Park episode, human sent iPad.
+
+Unknown Speaker  44:19  
+I'm worried to even look that up.
+
+Speaker 6  44:21  
+Don't do it. The Chad shows Apple was hiding ridiculous terms and conditions inside of the terms and conditions.
+
+Unknown Speaker  44:31  
+I think that was
+
+Speaker 6  44:33  
+an interesting point in time, though. Like, like, the in the interest of serving free products, we like, we stopped. It wasn't like a monetary expense. It was like, You volunteered like information, which I think is interesting, but like, it like, like, a mass scale, suddenly it becomes a problem, right? Like, if someone was like, I don't know, like, give me your name and phone number and I'll give you like this, like, I don't know, like. Candy bar or something. It's like, Would you do that? Or like, I don't know what it was, something you really wanted
+
+Speaker 4  45:05  
+totally I really love strangers with white bands and candy bars, but I do think that there's a line because there's one thing where you're agreeing to informed consent is, I think is important, and you reading ULA agreements is also really important, even though nobody does because they're so ridiculous. But I think that when we have the expectation of, okay, I've signed up with my cell phone provider, and I've signed up with them to provide me a service, and I understand that they are going to have access to my phone records and stuff like that, because that's a part of the agreement. However, when suddenly governor so and so is soliciting my cell phone with 100 texts a day to say, hey, come and support me. And I didn't sign up for anything like that, and they got my number through my cell phone provider, that's where I feel like it's it starts. It starts getting really gray and and I don't feel like I consented to that.
+
+Speaker 8  46:05  
+Oh, yeah, no, I agree that, you know, the the use of the things that we consent for are probably stretched beyond what we anticipated them to be used for. But because we did sign up for a thing. You know, in a sense, we gave consent at one level, and it's probably been stretched beyond what it should have been. But at some point, consent was given with this information, and it's probably been mismanaged or misused or changed what we wanted it for, used for. But, you know, rarely is information that we've put out there on the internet, you know, accessed in a way from big companies. Anyways, that it shouldn't be, because there's all these lawsuits and stuff that come after in them, at least nowadays, probably in the past, it was more so, but that's why these EULAs are so crazy, because you sign up for something and it's like, Hey, we're going to sell your your stuff, but we'll give you this discount, or give you this thing and or they say they're going to limit who they sell it to, but then who they sell it to isn't under that same constraint of the original person, right? So there's a way they'll find
+
+Unknown Speaker  47:25  
+it, but I have this trunk organizer
+
+Speaker 8  47:28  
+exactly you get or or you signed a petition for something, right? You, you've filled out a petition with your email and and phone number to show support for that. Nowhere on that does it say they can't do anything with that information, but because you wanted to support a cause, now that information you put out there is available to whoever collected it.
+
+Speaker 3  47:55  
+So I want to say that we also have a, you know, the option not to provide us. And like, I think maybe, Jonathan, you don't want to say you have an LG, right, a refrigerator or washer and dryer that will track, you know, your levels of long term stuff, but we have the option, right? Maybe not using an LG. Maybe we can use another one that doesn't even track that. It doesn't require you to register that through your so you can use, you know, that stop button through the Wi Fi and stuff like that. So there are some ways, you know, you can live basically off the grid. You can live up in the mountain and use the natural gas or whatever, so that you don't have to use, you know, the utilities and stuff. But you know, with technology, unfortunately, we have to sacrifice, you know, this personal information, which I don't know if there's a way out of it, you know, I think we're all too spoiled to use, you know, all these nice technologies and cell phones and stuff that, in return, our data are being used by them. But if we don't want to, I think there is a way you can be off grid completely.
+
+Speaker 8  48:58  
+Yeah, I agree. You know, we like, I willingly give up, you know, that kind of information, because I like the convenience and like, you know, they're going to do with it whatever they want. But now I can be told when my dryer is done, and I don't have to worry about, you know, setting a timer or something, which is, you know, a sad excuse for giving up my my information. But you know, like you said, we you could live off the grid, but nobody really wants to do that. They like the conveniences, right?
+
+Speaker 7  49:27  
+Yeah, and password management too, because you're signing into those with different passwords. People. We use passwords all the time, oh, yeah, like a certain couple of passwords. I use that for stuff that I don't care about, and other ones that are super secure, but all I need is for it's sort of, it's sort of like the easiest way into a home network is through your printer, because no one ever changes the admin password on your printer. They don't even know that it's there. That's, that's, that's, that's how people get into it. The easiest way to get into your bank account is to, is to use a call center, because they have to support call center. Dollars. It's just, you go through the like, the least, the least amount of friction, you just, you go to LG, wash your site, and they've stored all their passwords and clear text. And now maybe it's some schmuck use that for their city, bank, Visa card,
+
+Speaker 13  50:12  
+Yep, yeah. That's, that's kind of like, just recently that was discovered that there's a huge bot being used for doing DDoS attacks, and it's all video recorders for like surveillance cameras and stuff, because they generally have just a manufacturer password. So there's a whole network using the better computers, right? Using those computers to to mount DDoS attacks, that's
+
+Speaker 6  50:43  
+how the no fly list got leaked. Was on a it was a the text file was stored on a Jenkins build artifacts with like, default credentials.
+
+Unknown Speaker  50:54  
+It sounds like a very gloomy class today. Okay, nothing
+
+Speaker 1  50:59  
+is good anymore, so let's get going. Then we kind of like touch base about consent. So consent can be understood as agreeing for something to happen, which is, again, kind of like a vague term. So consent is our context. Consent in our context gives people control over what happens to their information. We exerted this control in one of two ways, providing consent for our information to be used in a certain way, like someone mentioned. You know, I'm a business owner, and I want people to actually see my images, my my work, right? And I want to be recognized or refusing consent for our information to be used in any different way. So first case, Henrietta Lacks cancer. Cells were taken in 1951 without consent. They've been used for medical research for the decades, continuing to this day, her cells have been replicated indefinitely. Her genome has been sequenced, and all of her future relatives can be easily identified through the harvested genetic information. And again, we can look at this case from, you know, positive and negative standpoints. While this has led to numerous medical advancements, it has also enriched pharmaceutical companies and brought fame and fortune to scientists and research organizations without an acknowledgement of Henrietta's part of the process. Because Henrietta's last family was never given an opportunity to consent to the removal and use of her cells, they were not able to share in profits or to celebrate the impact their genetic line had on the world. Second case, facial recognition, also mentioned by some of you. In November 2021 clear UAI was fined $22.6 million for using images collected via web scraping to train a facial recognition algorithm without the pictured individuals content. These participants have no way of knowing how this technology will evolve, or what impact the inclusion in the data set might have on their lives. What if being included in this data set reveals who someone is, and that results in sensitive information being leaked. But what if someone didn't consent to being included in this data set? What if they did consent but they didn't understand how that information might ultimately be used, especially in plant? No one right? So concerns regarding consent for the use of personal data within AI stems from the opacity or black box nature of the technology, and again, especially it portrays to neural networks, just because they're working with images audio, this means that it is often impossible to know how algorithms are using the data They have had to make decisions. Recall in Cambridge Analytica, probably most of you heard about it. So a consultant group Cambridge Analytica scrape the personal Facebook data of millions of users to train models. The model was used to politically target users and push them towards voting for particular candidates, in this case, Donald Trump in elections, this candle revealed not only how easily private user data could be accessed by third parties, but also how well it could be wielded in manipulative ways with little to no awareness by those affected. So this case in particular, there was a big documentary on it, and pretty much they were targeting people who on like were on decisive they didn't know who to vote for, and they decided that with some analysis and some techniques, they just can persuade people to vote for particular candidate, but just analyzing their. Features, their characteristics. Our next activity, in this activity, you'll review and discuss the ways that clear up your AI obtains and uses information about people for its facial recognition tool. And again, I believe there are five questions, and we'll just ask you to volunteer and answer them last please have 15 minutes for this assignment.
+
+Unknown Speaker  55:26  
+Okay, welcome back. So let's see.
+
+Speaker 1  55:31  
+First question, how do you feel about clear view? AI stored images of your face, and instead of base,
+
+Unknown Speaker  55:41  
+Matt as hell I don't like the company.
+
+Speaker 4  55:46  
+I'm I'm so irritated, like I don't feel good about it at all, like they're getting fined and what's going on? Am I getting any of that money? No. Like I can't even ask them to get rid of it. That's just it's insane. It is truly insane.
+
+Speaker 6  56:03  
+It's like, it's like, imagine everyone's angry about the Patriot Act, but instead the government doing it. It's just some guy who owns a company.
+
+Speaker 1  56:11  
+And I get as it answers our second question of, should this be legal? If you express that, it shouldn't be.
+
+Unknown Speaker  56:19  
+It should be,
+
+Speaker 7  56:21  
+it's, it's interesting too. Again, because you're, you're, we're talking about, like, what did we really consent to by being online? And if someone can find our information and use it to their own means, if a company does that, and a corporation is a person, I say with my tongue firmly in my cheek.
+
+Unknown Speaker  56:43  
+You know, where's the where's the line?
+
+Unknown Speaker  56:46  
+And it just, just because it feels wrong, is it?
+
+Speaker 4  56:52  
+Yes, yes, I didn't. Can like it is wrong because there are photo even said in one of the articles that the photos they're pulling from, even if they are private now they weren't before. So those photos of your kids that were scraped, those are still clear and accessible to this to this company. That's wrong. By removing the privacy, by increasing privacy, we are not consenting to have our images scraped, and they're ignoring that consent. It is wrong,
+
+Speaker 2  57:20  
+right? And then then them saying that, Oh, first it was for law enforcement, but then they found out that they were also given the information to, like, Best Buy and other companies like that.
+
+Speaker 4  57:33  
+It's a, it's a complete violation of independent and of a, of a personhood, yep, like, it's one thing. It's just I'm angry, yeah,
+
+Speaker 7  57:43  
+and it still gets into the same ridge to chat GPT and other AI is these large language models that are crawling the internet for our content that we didn't think was going to be used in this way,
+
+Unknown Speaker  57:58  
+and they're using it to, like, solve problems,
+
+Speaker 7  58:02  
+but without our consent, for the for IP, yeah,
+
+Unknown Speaker  58:07  
+or part any having any part in the profits,
+
+Speaker 7  58:09  
+yeah, yeah, we're just cancer cells perpetually, perpetually being replicated.
+
+Speaker 1  58:17  
+So let's then summarize the answer. Does the ability of clear view AI to support criminal investigations justify the way that infringes on individual privacy?
+
+Unknown Speaker  58:28  
+No, no.
+
+Unknown Speaker  58:34  
+I like I think that, if I think that, if the
+
+Unknown Speaker  58:39  
+if the
+
+Speaker 4  58:41  
+criminal investigation department wanted to create their own proprietary software that was complete, that was part of their own thing, that I get that. But when you have a public or even a private company selling this data, selling this this technology, it's no longer about criminal investigations, it's about money, and as soon as it's about money, we're no longer people. We're we're cancer cells.
+
+Speaker 1  59:11  
+Given what you've learned about these issues, do you have any concerns about peer review? Ai misidentifying certain types of people?
+
+Speaker 7  59:24  
+Absolutely, and especially if you're having folks who are vulnerable with, like, the levels of documentation that they might have on them to disprove that they are not the person that they say they are. Yeah, it's, it's it really, you can just have someone get disappeared for like, years, while they try to fight to prove that they're not who you say they are, or you
+
+Speaker 2  59:51  
+and I see the increase of people being wrongly arrested and put put in jail because the. Misidentification,
+
+Speaker 4  1:00:02  
+or if this technology gets leaked to the wrong people, which it will witness. Protection Program is gone. There is no way we can protect our protect people. You want to find anybody in the world who has done you wrong or who you're mildly irritated at. There you go. Now you can find them. You can find out where they're at right this moment and go take care of it. There's no waiting, there's no planning, there's no there's no it reduces the chance of reasonably thought thinking people to make better decisions.
+
+Unknown Speaker  1:00:36  
+It it's dangerous.
+
+Speaker 1  1:00:39  
+Yeah, it is. And especially something that was supposed to be just a, you know, smart new startup that is going to disrupt the, you know, the world in a good way actually can have very deep, profound consequences, right, on a large, different level. And the last question that I kind of like touched on at the beginning, in a way, express my opinion about that. Do you think that the fines that were levied against square view, AI will change? How does business do you think that their lives were appropriate? I don't
+
+Speaker 2  1:01:14  
+think it will change the way they find business. And I don't think they I don't think the fines were severe enough that they should have been punished more, especially since they keep on doing business the same way.
+
+Speaker 4  1:01:31  
+Yeah, like, and the the fines that were levied, what happened? Who got paid? Is it? Because I kind of feel like we're just creating an incentive on a if the money didn't get paid back to the victims, then you're just creating an incentive for another tax revenue. Yeah, oh, an easy 24 million. Yeah, we'll just, we'll just charge them 24 million, and we can put that money somewhere else and get more money from our taxpayers, because, you know, they're making that in a day. So we're just gonna it's a new income stream for the government. If that's where the money goes. Brian
+
+Unknown Speaker  1:02:11  
+can pay if you can afford
+
+Speaker 7  1:02:15  
+it, gonna find me $50 sure want to make $1,000 on this name
+
+Unknown Speaker  1:02:19  
+a bigger criminal enterprise.
+
+Speaker 6  1:02:20  
+What is that? If it's if the punishment for a crime is monetary value, it's a crime for the poor, not for the rich. Yep,
+
+Unknown Speaker  1:02:32  
+that was a fantastic quote. I need to know where that was from.
+
+Speaker 1  1:02:39  
+Okay, again, on such a positive note, let's take a 15 minute break, and let's be back in 15 please.
+
+Speaker 1  1:02:53  
+So exclusion and discrimination when working with data sets for the training of AI algorithms, it's important to begin by asking the questions, who will be impacted by the decisions made based on the data and are all those people represented in this data set? Remember, people working on AI and AI ethics are often not representative of the groups who will be impacted by the technology and their decisions, whether intentional or unintentional, the results of exclusionary practices are the same. The perceived improvements that computer based decision making has over human decision making complicates our ability to notice and acknowledge built in biases because it can be hard to determine precisely how an algorithm came to a particular decision excluding data labels that carry the risk of discrimination does not prevent an algorithm from using related traits to reproduce the same biases. Checklist for ethically using data. Review your data set for any personally identifiable information, investigate how your data set was collected, and think about who the people represented in your data set are and how they relate to the people who you work is likely to impact
+
+Unknown Speaker  1:04:25  
+and our next activity,
+
+Speaker 1  1:04:28  
+in this activity, you'll learn about an instance of exclusion bias from an example of initiative designed to help fix potholes in the city of Boston. Let's please do 15 minutes and then again, there are a number of questions, and we'll ask you voluntarily to answer them.
+
+Speaker 1  1:04:55  
+All right, welcome back. So let's start answering questions. So what did the initiative do, and what problems was it designed to solve?
+
+Speaker 3  1:05:07  
+So I was going to share about this. But Sonic city, where I'm sure actually has similar app, I'm actually very familiar with what this app does. You can report potholes. You can report graffiti. People illegally park their cars. I mean, a bunch of things, right? But most of the times, I think people who report those are actually people that live in kind of like more affluent neighborhoods, and they have the on their smartphones, which kind of, that's what my initial suspicion is. And when I read the next article at the bottom of that read me file, it did mention about people that are living in maybe not so afloat neighborhoods are the one that should be getting their potholes fixed, but because they don't certainly have the smart apps or the information about this particular app, they don't even report it, and so their neighborhoods kind of being left disheveled because nothing is being fixed there.
+
+Unknown Speaker  1:06:03  
+And this this article also took place in 2012
+
+Unknown Speaker  1:06:07  
+when smartphones were just starting to get going.
+
+Speaker 1  1:06:13  
+Yep, thank you. So We answered pretty much three of our questions. So the next one is, what issues of exclusion could be raised by project street bump. Let's
+
+Unknown Speaker  1:06:24  
+kind of continue on. Ingrid's answer here.
+
+Speaker 8  1:06:34  
+Yeah, it said it in the article about it. You know, if you didn't have a phone, you didn't have access to this technology in and this avenue to report potholes,
+
+Unknown Speaker  1:06:50  
+and I was talking with
+
+Speaker 8  1:06:54  
+my group about how, you know something like this, I think, was made with good intention, and was trying to address a problem, but because of, you know, someone not thinking of all the different avenues, or or you know aspects of it, which, you know, we're all human, we're all we can't think of everything, right? They excluded a group, and my guess would be unintentionally. But so it but then, you know, you probably get punished, or, you know, not punished, but, you know, made unpopular because of you, unintentionally leaving out a group. But their, their intention was to try and help, and now they're, you know, called out for discrimination because of something they didn't think of when they were just trying to help. So, like, I feel for them because I'm like, you know, you got these great ideas. People want to help and do things, but then they get in trouble because of something they didn't consider.
+
+Speaker 16  1:07:59  
+Thank you. I think with this one, it doesn't directly harm anyone, it's just there are some areas where they can maybe better use resources. And I I think that's one thing too. Like I've heard people say that rear or cameras on the rear, for your rear, on vehicles or whatever, are bad, but because people rely on them too much, yeah, it's a tool, and if you use it wrong, and you're only using that, and you're forgetting how to look, you know, behind and use the other tools that you use before that, then yeah, it could be a bad thing. But if you're using that as just another tool in the toolbox, it's not necessarily a bad thing, right? If people are still going to those other neighborhoods and checking they can still find those other potholes, and they also might be notified of ones they wouldn't have found as quickly.
+
+Speaker 7  1:08:50  
+Well, well, wouldn't it cause harm if you have civil service money, or you have like, government tax money, and you're over committing that tax money to certain areas that are over reporting they're the squeakiest wheels, then what's left over for the folks that you have to do extra effort to go find?
+
+Speaker 8  1:09:09  
+Well, let's be honest. You know potholes are getting fixed anywhere. I know they don't get fixed here, but yeah, no, I can see that the squeaky wheel gets the grease or the whatever they say. But, you know, there's still other avenues for reporting things right. Like people reported potholes before this app came out, and they still continue to do it. I think it was just a way to try and, you know, help maybe, or make people feel like they cared by by doing something like this, whether or not it actually made a difference. You know, that's I didn't see that, but,
+
+Speaker 6  1:09:51  
+yeah, it's almost like the problem kind of stems from, like, over reliance on data, just by virtue of there being more. More of it, you know. But like that, it is biased, but only in like, the sense that, like, there's just more data in these areas. And like, they're the people who are, like, allocating the funds, or, like considering the data are, like, overly biased towards, like, more the areas where there's more data, you know.
+
+Speaker 7  1:10:19  
+I think the article mentioned like they have to take a hint out of the social psychologists Handbook of really inspecting Where did you get this data? How did you gather this data? If you've gathered this from people in the upper 25% of the income range in certain neighborhoods where they exist, are you really serving the entire community? Or, you know, just like Hunter said, like, this has to be a tool, and they have to have the the Inspect, the introspection to say, this is only one data point to consider, but it's still valid in this way.
+
+Speaker 1  1:10:56  
+Okay, so now imagine that you are designing an AI algorithm to replace the project straight phone app. Consider the following questions, and I'm going to read them in consecutive orders so we can answer them like as a summary, what training data will you use? How will users interact with your algorithm, and how will you avoid the pitfalls of exclusion caused by project? Straight ball.
+
+Unknown Speaker  1:11:22  
+Let's please hear a few answers here, few ideas.
+
+Speaker 6  1:11:25  
+I thought I had a good one. Um, you'd probably want to use, like, like, keep track of, like, the contracts you make to, like, install roads or make road work in certain areas, and like, where that road work was done to, kind of, like age roads. And then you'd also want to keep track of, like, maybe weather conditions throughout the city, and see, like, where there's more icy conditions that kind of track, like, maybe which roads are getting hit the hardest with like, weather conditions. But like, I feel like, like aging the pothole would be like, a first step in, like, a more equitable decision, because then it's like, not rely on like, who's reporting it, or, like, in what areas it's more about, like, you're considering, like, Okay, well, when did we last do road work in this area? And it's like, okay, well, let's do road work on these areas over here that haven't been worked in.
+
+Speaker 8  1:12:12  
+I could almost see something like this being implemented on, you know, government vehicles or public works, vehicles that go everywhere, like your garbage trucks and stuff like that, you know, because those go everywhere, right? They're in all neighborhoods. They're on, you know, at least most major streets to get places,
+
+Unknown Speaker  1:12:33  
+yeah? So those creepers for sure, still, yeah,
+
+Speaker 8  1:12:37  
+yeah. I think that would be like a good, you know, data set, because they're going more places, rather than just relying on people with an app installed where, you know, you put it on government vehicles or even, like, UPS trucks, Amazon things like that, because everybody gets something and delivered to them nowadays,
+
+Speaker 12  1:13:00  
+right? Oh yeah, trucks, garbage trucks. Yeah, right. I love that idea. That's a really clever idea.
+
+Speaker 1  1:13:13  
+Any other ideas, come on, this is going to be your job. Pretty much. You will think, how, together with data, how to see how it's going to be like your tool that you're going to create. You're going to be interactive to users.
+
+Unknown Speaker  1:13:28  
+Let's think on a spot,
+
+Speaker 3  1:13:31  
+and they use the GP, not GPS satellite scan. I mean, is it too far out? I don't know. They could zoom in quite a bit.
+
+Speaker 6  1:13:40  
+We can't say I think that level of fidelity is reserved for, like government enhance
+
+Speaker 8  1:13:49  
+but no, I mean the level of detail that you can get on like Google Earth and stuff nowadays like especially when it comes to imagery analysis that AI can perform. They can pick up things that the human eye can't. So I think that's that's a good idea. You know, it's just reliant on how up to date the images they have access to. And, you know, in the public sector, that's probably a little slower than what I think somebody was alluding to, that the government has at their fingertips. But no, I think that's another avenue of collecting visual data.
+
+Speaker 3  1:14:32  
+Yeah, that's the right. I was thinking about it because I was, you know, looking into Google Earth the other day. I was like, wow, that image is not bad. But again, privacy, right? How much do you want them to start looking into your backyard, or
+
+Unknown Speaker  1:14:48  
+how often it's updated, right? Right?
+
+Speaker 8  1:14:52  
+I was gonna, I was thinking for a second like, you know, more and more cars these days are having cameras put on them. But then there again, you run into that unintentional exclusion, because the cars that have the cameras on them are probably your higher end things, and they're not going to be in some of the neighborhoods that might need the attention more than others, as
+
+Speaker 7  1:15:17  
+mentioned in our group that a friend of my wife's she followed a complaint against the road rager, and it was a Tesla, and Tesla pulled the footage from their servers to give to the police to beef up the case. And I mean, I have cameras on every one of my cars, but they're all SD cards. They're all like, you have to like be there to access them. The idea that you can have cameras go up into a cloud that are on vehicles, oh,
+
+Speaker 6  1:15:48  
+because they're using that. They're using that for training their their machine learning algorithms for Drive self driving cars.
+
+Speaker 13  1:15:54  
+Gonna say it records, not only that information, records what you do when you're driving, your responses to things. It's
+
+Speaker 6  1:16:01  
+also recording it when you're parked, I think too, is like one of the things that can use
+
+Unknown Speaker  1:16:05  
+that to train. So
+
+Speaker 7  1:16:06  
+again, you just put this app on every Tesla. That's, that's, that's how you make a modern problem from a 2012 Yeah,
+
+Speaker 1  1:16:17  
+I thought you guys gonna come up with ideas like, make it a challenge on a tick tock, you know, okay,
+
+Speaker 8  1:16:25  
+like, that's the last thing we need more tick tock challenges. But, you know, I that the Pokemon thing that, you know, I don't know if it's as popular as it used to be, but they were, there was, there was discussion about how they were using, what are they called the Poke stops that they wanted you to take pictures of so you could get special things like that. That data, those pictures that they were using, were being used to, like, Update Image databases for landmarks and stuff like that. Yeah,
+
+Speaker 6  1:16:59  
+Niantic was using like or collecting 3d spatial data, and so if there was like areas where they wouldn't have like as much info on they would just stick like Pokemon gyms there, and then people go, like, catch pokemons over there. They did their work for them, right?
+
+Speaker 1  1:17:15  
+Yeah. I mentioned it just because, again, I live in a big city, and I've heard and seen so many different people that have been to the craziest part of the city that I, you know, I could even imagine that people would just go somewhere by the back. And that's why I mentioned it, because I'm like, why would you ever like go there, and just because it was of the game. So I guess, I
+
+Speaker 8  1:17:36  
+mean, software developers do it all the time, where they have bug bounties, right? I mean, cities could do something along the same lines as you know, pothole bounties, stuff like that, to incentivize granted, they have to do something with the information. But you know, there's ways to incentivize people to collect data for you.
+
+Unknown Speaker  1:18:02  
+That's true, that's true.
+
+Speaker 6  1:18:04  
+Then you get, like, things of that, though, like, of that nature end up, like, into, like, like policy, like engineering, because, like, there was, there's been stuff like that, like, historical examples of, like, like, how was that? Like, where, like, there'll be, like, an invasive species. So they pay people to bring in those, like, the skins of those species. What people end up doing is just breeding that species, and then they can collect on it, you know, yeah, you didn't dig more potholes or make potholes and report it, yeah? Yeah.
+
+Speaker 8  1:18:33  
+My, my dad always tells the story of when he was a kid, back in the, like, 50s, right? They had an over population of stray cats, you know, feral cats, and the city put out a bounty on them, and it was like, you know, they got a nickel or something like that for every stray cat they brought in. And, you know, that's what they would do after school. They'd go out with their dad, my grandfather, and they'd go hunt down cats. They had this city had a bounty on them so, but I could definitely see that being abused.
+
+Speaker 1  1:19:11  
+Yeah, you can incentivize people with, you know, lots of stuff. So, all right, so next part of this session. So what is copyright? Copyright grants authors of original work the automatic right to determine how their works can and cannot be used. Original works include, but are not limited to literary works such as books, musical compositions, dramatic works like bass, choreography, choreography, visual arts, including pictures, audio and video, Republican recordings and architectural designs. However, these rights do not extend to the ideas, concepts or principles used in or introduced by the works. Quite. Two so can databases or data sets be under copyright? This is the subject for legal president. So what is President? Well decisions made in previously litigated cases. They're used as an authority for interpreting the law and future cases. And as we can see to the right of it, consider feast versus rural. The court case ruled that rules subscriber list was a collection of facts and was therefore not copyrightable. So if we're all going to be relied on this case, I guess financially protected contracts and licenses. Contracts are agreements that can be enforced by law. These include contracts for large purchases and employment arrangements, but are also included in the use of software, websites and data sets, end user license agreements, Terms of Use or Terms of Service, are contracts that most companies require you to agree to in order to use their products, which you mentioned 11 to seven times today. In most cases, this has been ruled to be legally enforceable protections of particular databases and data sets, but there are notable exceptions, such as in the case of proceed versus zdenberg. So work web scraping, I think you already had the module dedicated to web scraping. So Web Scraping is a process of extracting information from websites. It can be a powerful way to gather information for the assembly of large data sets. In many cases, data sets created by using web scraping are legal to use, but it remains a legal gray area as regulatory bodies struggle to catch up to advancing technologies used to automate the process. So three questions, are you web scraping legally. So are you accessing a computer? Are you authorized to access the computer in the way that you are accessing it? And are you updating information from a protected computer? Can generate generative AI be ethically trained on existing works. And this is a big question, so we're about to do a quick study on it. And this activity do research, a little case of your choice that revolves around genomic AI. And so we can answer the question, if AI actually can be added to it on the system works. Let's please do 15 minutes. Okay, welcome back, guys, and let's answer our last silence questions. So the first question was, can you summarize the essence of the case in a sentence or two that you can present to the class again. Please speak this module is your opportunity to feel comfort, even though some of you I feel like way too comfortable. So
+
+Speaker 1  1:23:25  
+come on so I don't do cold calling, asking the
+
+Unknown Speaker  1:23:29  
+chai of yours
+
+Unknown Speaker  1:23:38  
+are people who are way too comfortable to talk.
+
+Unknown Speaker  1:23:41  
+Sure, okay, I don't know.
+
+Speaker 6  1:23:45  
+I thought it was interesting. The conversation me and Peyton had where, like, Peyton was thinking of it like, as, like, oh, I don't know. Peyton say the thing about the paint again, that was
+
+Speaker 17  1:23:54  
+cool. Like, I don't, I don't know if this is like, screwed up to say. But like, people are like, the when you have like a painting, and like, somebody made that painting, the companies that made like the paint don't sue the artist for using their paint. But like, I don't know it's like, it feels like it's different with data, like,
+
+Speaker 6  1:24:16  
+when you're like, just providing a resource, like, intended to be used as like a tool. It's like, not an issue, but like, there's like cases where, like, like, like, developers, like, there was this one game company where the developers, like, weren't going to or, well, like, the company wasn't going to pursue like, this sequel to a game that that they had, that they were making. And so like, some of the developers had left the company and started, like, making a game that was like, based on that game that was never going to get released, and then that the old the company that they had left sued them because they were using their IP to, like, make it a sequel, basically about like, under a different name. And so it's like, so I thought like, the difference between those two kind of ideas of like, looking at you. A like, the way AI is being used, or what the way the content that they're sourcing is being used is kind of interesting. Like, is it a paint, or is it IP
+
+Speaker 18  1:25:10  
+the paint is, like, purchased, if it's stolen, it might be an equivalent,
+
+Unknown Speaker  1:25:15  
+or if it's copyrighted, like the van to black that someone mentioned,
+
+Unknown Speaker  1:25:19  
+that's a great point.
+
+Speaker 6  1:25:23  
+I do need to do more research on this. The way, the way I was reading it was that, like it says in the article. It says in both claims, the authors say that they did not consent to use the use of their copyrighted books as training material. So it's like, because we didn't think that like, that the materials could be used in this way. That's it's a problem, you know? It's like, is that in copyright law? I doubt it, you know, but it's like, it's like, you're using the information from these copyrighted materials to train a language model. It's not like, so it's like, like, the copyrighted materials is like lives in the language model, in spirit, but not in exactness. And is that, is that plagiarism, you know, or is it, well, the plagiarism to learn something and then write a paper about it?
+
+Speaker 2  1:26:10  
+I think the they more or so had a problem with them using it and not crediting the authors for using it. That's mainly, I think, what they had probably not that, not that they used it. They just didn't get credit for their works being used in the train.
+
+Speaker 18  1:26:31  
+Yeah, if they paid for it, then, yeah, they can do it. They can burn it for all they want, you know. But if they didn't pay for it and then they used it without consenting in that kind of ways. And that's,
+
+Speaker 4  1:26:41  
+that's, that's theft. Like, yeah, I think that the paint analogy is actually a really good one. Because if I go to the store and I buy paint and I use it to recreate a beautiful rendition of Vincent van Gogh for my personal use, or if I sell it and saying, Hey, this is a recreation of Vincent van Gogh print. Then that's still again, I'm acknowledging the original author. But if I go to there, if I go into the store, I steal the paint, and then I paint something. I paint starry, starry night from Vincent van Gogh. And I say, I painted this. And this is an original work by me. It's it's wrong, like I've stolen on every level. I've taken credit for something that wasn't mine. I've stolen paint from the store, and I've stolen IP and physical material. I think the paint example is actually a really good one.
+
+Speaker 7  1:27:35  
+So a collage example would be probably a pretty good one as well. It's like, if you used part of somebody's copyrighted image to create a bigger piece, what does that mean? And some of the co pilot stuff is really scary, especially as a software engineer who is using at my company, copilot, the idea that I could inadvertently inject GPL licensed code into my company's code base, forcing it to open source its entire code base. Because of that is really frightening.
+
+Speaker 6  1:28:13  
+I've seen this big movement on GitHub where, like, people don't store their actual files on GitHub. I don't know exactly how they were doing it, but I saw one repo that was like talking about it and like citing what it was doing, and like in opposition to co pilot,
+
+Speaker 13  1:28:30  
+I've noticed recently, co pilot sometimes actually telling that There are references in code that's generating two different
+
+Speaker 2  1:28:41  
+sources. I think they update it, because I noticed that the article was in 2022, so it probably made the change to reference the code that they get.
+
+Speaker 7  1:28:54  
+It's, it's, I use perplexity to see if there are any modern articles and there are still class action litigation? No, there
+
+Speaker 13  1:29:03  
+still is. I saw one lawsuit though that was going on that I thought was totally ridiculous, because the examples they were showing as as supposedly plagiarizing, were actually just textbook examples of algorithms, and just about every programmer probably has them, mostly memorized. A lot of them memorized.
+
+Speaker 7  1:29:21  
+You use, you use this variable i in your for loop.
+
+Speaker 8  1:29:26  
+So I think that brings up a good point. Like, you know, we've all gone through school, we've all read books and stuff like that, and we've all seen pictures and images, and so if we were to do something that is in we're inspired because of something, but we're not crediting crediting it. You know, is that a copyright violation? Because we got our inspiration, we got our idea because of something that we've seen or learned over the years. You know, at what point does it become a copyright violation? Or is it. A, you know, a true original, and not based off of anything that you've observed, absorbed or seen. You
+
+Speaker 4  1:30:10  
+know that that's actually really great point, because, I mean, some of the biggest selling books in the world, on the top 10 sellers were inspired by other books. They were fan fiction to start with, and then they got name changes, and they were published like there's,
+
+Unknown Speaker  1:30:28  
+oh, sorry,
+
+Unknown Speaker  1:30:31  
+50 Shades of Gray. Yeah, more
+
+Speaker 13  1:30:34  
+or more, simply, everyone who learns to write, usually from reading lots and lots of writing, and that's shaping their sensibility,
+
+Unknown Speaker  1:30:47  
+I guess I mean
+
+Speaker 13  1:30:48  
+imitating anything. That's where they read, but it's influenced how they write. It's how you learned how to write, is by having read lots of writing.
+
+Speaker 4  1:30:56  
+But would it be so bad to credit the artists
+
+Speaker 13  1:31:02  
+I'm saying that it's so abstracted at that point in your neural network, as it were, that it's not attributable anymore. I can't necessarily remember everything every painting ever saw. What influences a painting?
+
+Speaker 8  1:31:20  
+Yeah, I think you get to a point where it's like, if you, if you start saying, you know, give credit where credit's due, right? But when you start doing it, if somebody feels like they were left out of it, then, then, does that open you up to litigation, because you did give credit to some, but you didn't give credit to others where they they felt like they they should have, but like you were saying, you know, everything, like books, they they're basically nowadays, they're re skins of other books, like even video games, apps, everything like that. They're re skin of something that was proven to be successful. And it's just, you know, what is it? They said avatar, the one with the blue aliens. They said that was, that was Pocahontas, but in space, and, you know, you're like, oh, yeah, okay, I can see that. But does that mean? Who the Pocahontas? Pocahontas copyright folks got any money because it was essentially a retelling of that story, but in space like I don't know, it's definitely interesting to think about.
+
+Speaker 4  1:32:31  
+This is probably why those litigations are still happening. It's complicated. It is.
+
+Speaker 1  1:32:36  
+And bring us to the next question, so does this case remind you of any other cases that you are familiar with? And if you were a juror in the case, how will you choose to rule and why?
+
+Speaker 17  1:32:54  
+I think if you stole it, there's issues like, if you stole the data, there's like it, like big issues. So I think for me, it depends on that
+
+Speaker 19  1:33:08  
+great and I found an article, this one's about music, and it says Google and Universal Music Group negotiating AI generated music toll, and they're trying to understand because AI is creating new songs with our top names, like Taylor Swift, Ariana Grande. And so there are songs that are out there that are not theirs, that people are making. And so it brings this case of royalties. Should they receive royalties by songs that they didn't actually write and compose because that's impersonating their sound and copyright, they are saying that they're only going to use copyright for those submissions from humans, not computer generated. So it's kind of raising some concerns across the music world
+
+Speaker 6  1:34:02  
+that's spooky. Yeah, Grimes actually came out ahead of it and like, she, like, posted, like a voice model of hers, or had somebody else make it, and said that she would give people 10% royalties of her songs if they made it with her voice model, yes,
+
+Speaker 19  1:34:16  
+using her voice without penalty, as long as she receives a 50% split on royalties.
+
+Speaker 4  1:34:27  
+Is there any aspect that AI doesn't make more complicated and less fun?
+
+Speaker 6  1:34:33  
+I know. Why is our generation burdened with like these, like philosophical questions? I
+
+Speaker 4  1:34:39  
+was prepared for white picket fence problems. All right, I was not ready for this.
+
+Unknown Speaker  1:34:43  
+It's so great.
+
+Speaker 6  1:34:46  
+Yeah, instead of, instead of beeping with your neighbors across the fence like you would normally, you like, you like, send out a DDoS attack on their home network using AI distributed
+
+Speaker 4  1:34:54  
+network, I was so ready to get my fence just seven feet tall to annoy my neighbors and. Now I've got to worry about AI. These
+
+Speaker 13  1:35:03  
+same sorts of debates went on. Though, in the past technological innovations like the Gutenberg Printing Press, there were issues like this around that. There were issues like this around photography.
+
+Speaker 6  1:35:19  
+With the Gutenberg Press. It was like, Should we let poor people read? But now it's, should we let anybody? Yeah, I think, I think we're getting a little grayer here.
+
+Speaker 13  1:35:28  
+There were a lot of issues of every technology,
+
+Unknown Speaker  1:35:34  
+photography would that totally supplant art and things
+
+Speaker 4  1:35:36  
+like, I don't know. I think that, yes, you're right, Karen, that there are. They're always resistance and bumps in the road and hiccups and stuff and questions and debates about new technology. But I do think that the AI is kind of introducing us a new level of of complexity that we can't just write off as, oh, it's just new technology. It's it's calling into question creativity and human ingenuity and the value of a human in the day to day life of work and living. And so I do think that AI is throwing a lot more light on those issues, and in a way that we haven't actually had to experience to this degree of nuance in the past?
+
+Unknown Speaker  1:36:22  
+Yeah, I just don't know. I think it's,
+
+Speaker 6  1:36:25  
+it's probably more likened to like, issues with immigration that we've had in the past, where, like, like, you know, like with Irish or like Chinese people, or like, you know, like with the railroads. It's like this, like, concern with, like, our jobs are being taken, or whatever, that people have always had throughout history. But it's like, rather than it like being like, a kind of a racist thing, or, like, you know, like an immigration issue. It's, it's a like, it's a technology issue that, like, Are these like, agentic models going to replace us? Like, like, you know, our ability to work, our ability to, like, live, you know,
+
+Speaker 18  1:37:00  
+it's kind of like our the next industrial revolution. A lot of these same kind of arguments were occurring then, especially with jobs and things. But it's just a grander scale. It's like moving from 2d to 3d because the scale is just so much bigger now the cost, the cost to us in every way, it's bigger and, you know,
+
+Speaker 7  1:37:22  
+well, it was the same in the information age, right? You're talking about the Industrial Age. The information age was a huge transformation, because it made all of these things accessible that maybe to in a way that was easy in the easier, the more. And, you know, Jonathan touched on this, it's, it's the, it's the ability to like be convenient, and so to have convenient banking, I must therefore expose my banking to the Internet where bad people are to get better a to get AI accessibility and ease of like summarization of articles or or content creation. I now have to train it on data that perhaps is not ethical, or I have to give it access to information that may put me out of a job. It's it. There's no good without evil. On this one, this it's very caught. Oh yeah,
+
+Unknown Speaker  1:38:13  
+now it's just scaled that much bigger
+
+Speaker 7  1:38:17  
+when you give people dumb, dumb people, the access to do a lot of damage by making it very easy. People think that that's a good thing, but it's really it's really terrible.
+
+Speaker 13  1:38:32  
+In terms of generative AI and art, I think I'd really recommend people reflect on an old article by Walter Benjamin that was called Art in the Age mechanical reproduction, and that was really about photography and photographic reproductions of artworks. And that art that the artworks lose an aura that has to do if they're actually being created by a person and so on. And then very interesting to kind of look at that in hindsight reflect on generative AI, because generative AI of art actually produces high quality that appear like reproductions of paintings rather than actual paintings. So it's an interesting area that I've often thought about as an artist myself, and thinking of how some things I do in art that would never be able to be done by a generative AI, because the painting is not Chad an image, but it's also an object itself that is something that's Made. Okay, just a thread. I never thought people might find in turn.
+
+Speaker 6  1:39:45  
+Yeah, that is interesting. Like, the defining factor of like historic paintings isn't like the painting itself, but rather like the materials that was used to make it, you know, are like,
+
+Speaker 13  1:39:55  
+like, the reason I was looking at some paintings I did a while. Back that integrated tangible materials that were like gauze and such that were actually leftovers from wound care stuff that I went through. And so in a way, the paintings also became part of the my personal history, in a way, in the physicality of them, not just in representation, representative, but they they had material and stuff in them and and that was part of my life, making them at that point. And that's something I realized that no generative AI could do.
+
+Unknown Speaker  1:40:34  
+There's something, uh, make reproductions
+
+Speaker 13  1:40:35  
+without originals. Basically,
+
+Speaker 6  1:40:40  
+at Brookhaven National Lab, they were scanning Rembrandts with X rays. And one of the ways that they tracked whether or not like a painting is like a reproduction or like a like a part of version. So they check to see like the like, see what the actual like paint was made of, and if it was like available for like the artist at the time. And that's how they're able to, like, trace it and see if it's like a an original, you know, it was like made with materials that really
+
+Speaker 13  1:41:08  
+are major in Italy, there was a major retrospective of modigliani's paintings. Only was discovered that maybe 1/3 of the paintings in the exhibit were forgeries. This is very, very readily forged because it's a fairly easy style for people to copy.
+
+Speaker 1  1:41:33  
+All right. Well, that would be the end of our session. But if anyone else wants to add anything, please go ahead, I still officially have five minutes of the class so they're all yours. If not, I thank you all for such an engaging class. Again. Thank you so much. That was awesome. And we're going to start our office hours where you can, you know, keep keep talking with all of us.
+

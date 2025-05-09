@@ -1,0 +1,618 @@
+Speaker 1  0:12  
+Today is the mini project, which was supposed to be week 13, class three, and a little outline of the project. Which screen Am I showing?
+
+Unknown Speaker  0:24  
+Classification mini project? Okay,
+
+Speaker 1  0:27  
+so I'm seeing showing the right one. Okay, so basically, this is what you are do, going to do? So there are five data sets given here. Two of them are binary, the customer churn and sports article objectivity, and three of them are multi class letter recognition, phishing and automatic orthopedic patients. Now in here you will see the link to the five different data sets, all on UCI machine learning repository. So the first one is Chan data set, similar to the bank marketing churn activity that we did. The second one is letter recognition, but here, so ideally you will see later, like when we do deep neural net, network, or neural network, let's say I shouldn't say deep. So one of the kind of, sort of hello world of neural network is basically take all these handwritten digit zero through nine and then train a neural network to classify those right from the actual digits, like the bit, bit map images here, instead of doing that, these dataset actually gives you certain feature of the letters that have been already pre processed as different category feature columns. And then, based on that, you have to do the classification as to, like, basically which of these 26 letter the given a give given particular data point is belong to, right? So you don't actually have to take the pixel and then basically feed the pixel directly. Instead of that, if you choose to use these data set, you will see that different what is called higher level abstraction of the written letters are given in form of some pneumatic values, and based on that, this is the target that you are going to predict upon which is what the letter is. So this is a 26 class, multi class classification, right the sports article for objectivity analysis. This also, ideally people would like to do this, like if you are trying to do it from scratch. So you would basically collect these articles. And this is like a typical sentiment analysis type activity that people do using mostly neural network type
+
+Unknown Speaker  2:58  
+mechanism. So
+
+Speaker 1  3:01  
+if these were actual sports article, then you have to do natural language processing to extract some token from the article. Here you don't have to do that, because if you look into this data set, you will see certain features have already been extracted, much like your previous data set that I talked about, right? So the tokenization and some higher level abstraction has already been provided in form of different variables, and that's what you are basically predicting upon. In fact, these data set is little odd. If you see all other data set, they are much more organized. They have some description here, and they have a direct import in Python. Letter recognition does not, sorry, sports article does not it. Basically just have a download button. So if you choose to use these data set, you have to download which I think I had downloaded this before it, yeah, so I did download it, download this before. So here, if someone wants to do start from scratch and basically do natural language processing, processing, they can do that like these are basically the different articles. The idea here is that some of these articles are neutral. Some of them these articles are actually here on was it neutral? What are the classes there? Oh, no. So some of these articles were very subjective. Some of those articles were very objective. So the target variable here is basically whether it is subjective or objective. And in your case, since you guys have not done any natural language processing, you don't have to use the raw data. You just have to use the features, which is presented as a Excel file. You basically load it in here. And similar to the handwritten letter recognition here, there are a whole bunch of. Uh, what is called properties about the articles that have been already pre processed. And I don't think there is very good explanation of what all of these means. Some of them are like, Okay, how many question marks are there, whether there are any codes, whether there are any full stop, comma, semi colon, colon, and all of that. So these, all of these data is basically part of pre processing these, these text articles, right? But you don't have to do that. You can just take load the data from these, just like you do in any pandas dot read CHV or pandas dot read Excel, and then just go from there, right? And your target column, where is the target column? Here level. Okay, so column C would be your target column, which basically have two classes, objective or subjective. Okay, one thing I'd suggest here, you see here, all of these objectives comes before all of this subjective. Do you see that? So if you see here, when you if you are going to load this, what your pandas data frame will have, all of the data point from one class is grouped together, and all of the data point from another class is grouped afterwards. So now, if you don't notice that, and if you do a train test split. So now your test data suddenly will have data from only one class, right? So what you need to do is, after loading this data, you actually have to shuffle this data.
+
+Speaker 2  6:30  
+No, actually, actually, the brain trust test split shuffles usually, normally,
+
+Speaker 3  6:36  
+by default, is, does it? Yeah, it seems to
+
+Speaker 2  6:40  
+there, there is, there is a an argument as to whether it should shuffle or not, and I and the default is true
+
+Speaker 1  6:46  
+that, oh, the default is true. Okay, then there you go.
+
+Speaker 2  6:50  
+So you guys look at and see things shuffled anyway, but okay,
+
+Speaker 1  6:54  
+but keep an eye out. Make sure that. Make sure both your train and
+
+Speaker 2  6:58  
+test stratified being true, and that means that it puts the right same proportions in each of those sets, same
+
+Unknown Speaker  7:05  
+proportion in each of those Yeah.
+
+Speaker 2  7:10  
+But normally that's on so that if you have 5% of the things are one class and the rest the other, it'll it'll keep that proportion in both the test and training
+
+Speaker 1  7:20  
+sets. Yeah. And then the next one is website classification, whether a particular website is, it is a phishing site, or whether it is a legitimate site, a legitimate website. So this one is also multi class, and that's because I think the target column has three values, legitimate, suspicious or phishing. So suspicious is basically means something in between. It can be legitimate or it can be a phishing website. So it's a three class, multi class subscription. And if you look into this data set, these will look very similar to that malware data set that we are using, like different Android apps based on the different permission level on the apps, trying to predict whether particular apps could be a malware or a legitimate app. This is very similar to that data set. And then the last one is from the medical domain. So here you will have certain feature of certain feature extracted from like a medical imaging, and based on that, the target that you will be classifying is whether a patient has dyscarnia, spondylosis and abnormal so three classes. So this is also three class classification, right? But one thing you will see all of these data set, they are not asking you to actually go at the source and do all of those tokenization, pre processing like think about the article, right? The sports article, all of these natural language processing is already done when it comes to medical image, right? So they are not actually asking you to start at the image and then have your algorithm train with the image, because in order to do all of these, you will actually use need neural network based model, which we haven't done yet. So that's why these are already pre processed. Hence, these are all pretty good candidate to try out given up to which point you guys have learned, right? So that's that. Now we are going to break into five different groups, and we will set, let's say, about two hours time initially, but we are not going to take a formal break, because you guys will be within your rooms, and we are going to visit maybe couple of times, not too much. So we are going to give you about, let's say, 10 minutes of time initially, to kind of brainstorm among your groups which one of these dataset that you are going to choose to work with. And then after about 10 minutes or so, we'll come and visit you and have a quick two, three minutes conversation, if you want to run something by us, to just. Confirm your understanding, right? And then we will leave you to work with your group members. You can take your break anytime, as you see fit, right? And if you guys are done before the allotted two hour time, you can always come out and say, Hey, we are done. We are ready to discuss. We can do that. On the other hand, if you think that you will not need more time after two hours. I mean, we'll obviously have more time left, then we can extend the rooms at timing again, right? If, if the work is not done, right? So, but if you are done in two hours, then you basically get some time back for yourself. It's totally up to you. Yeah. So one more thing, so make sure to try as many things that is as you have learned today, right? So when I say as many things as you have learned, meaning, hang on a second, Jesse, let me just finish my thought here. So when I say as many things as I as you learn, meeting things like, for example, feature selection, right? Feature like importance analysis, any kind of pre processing, if you need to do right such as your do you have to do dimensional energy reduction? Probably not, because these are not very high dimensional data set, but well, you can think of it then. The other things are, like looking into whether these data sets are balanced or imbalanced. If they are imbalanced, you can try in a first Chad, you can try with the data set as is, and then you can try to either up, sample the lower class or down, sample the higher class, right? So those kind of thing you can also do, like when I'm talking about feature selection, you can do hypothesis testing or thief testing to kind of figure out, okay, some of the feature that has high collinearity, maybe drop those, or some of the feature that does not have a high P value, high No, that does not have a that does not have a low p value, right? It is like less than 0.05 it did. So basically drop those. It doesn't mean that you have to try all of these blindly. The idea is that, I mean, you can try plain vanilla with the data fit as is, and then if you are not happy with your result, then make sure that you try out all of those things as well, right? Also when you are measuring the performance of your model. Needless to say that you shouldn't be only looking at the accuracy score. You should look at more relevant metrics, such as your balanced accuracy score, your precision recall of the both classes, right, overall f1 score of the both classes, and also the ROC AUC right, to basically see which, what, what prediction makes more sense. Also, when you are trying to tune your model, feel free to try different algorithm, which is basically goes in the area of domain model selection, like you can try SVM, KNN, or any tree based classification model, such as plain decision tree, or any ensemble model, such as your random forest, or XG Boost, or stuff like that, right? Or ADA boost within each class of model, if time permits, try to do some hyper parameter tuning. You can either use grid search, or you can use the randomized search, right? All of these we have covered. So try to connect to all of the learning that has happened over the last two, three weeks, and use as much of that as possible, right? And this is like, not graded, right? So this is basically just for you to learn. Someone was asking me, Hey, whether we have to do a presentation. No, you don't have to. But if at the end of your work, if you want to come and share your insights, share your learning with the class, that's always welcome, right? So
+
+Unknown Speaker  13:38  
+okay, Jesse,
+
+Speaker 4  13:40  
+you pretty much answered all my questions. Okay, okay,
+
+Speaker 1  13:44  
+thank you. Okay. So then, without further ado, let's 945 okay, so we are at 15 minutes mark, so let's go into the room for two hours, and I will still leave us another 45 minutes of time at the end if we need more time or to discuss stuff. Okay, so let's get started. Do you want to continue any group I saw? Group force work that is good work. Chad, that you guys have posted there you
+
+Speaker 1  14:24  
+so anyone, any group, would like to volunteer to kind of walk us through their experience as you went on through the journey.
+
+Unknown Speaker  14:38  
+We can do it from group two.
+
+Speaker 1  14:40  
+Group two, yeah, sure. Did you guys actually create a Git repo or anything?
+
+Unknown Speaker  14:46  
+No, no,
+
+Speaker 5  14:48  
+we just shared in the private group chat. But I can probably put the code to be no,
+
+Speaker 1  14:54  
+yeah or, I mean, feel free to share your screen if you want to walk everyone through. Like, what? Was your approach, what you did, what you find that worked or did not work?
+
+Speaker 5  15:08  
+Okay, awesome. Can you see my screen? Yeah, yeah, I can see. Awesome. Thank you. Because I can't see what you're seeing. Because right now, my screen doesn't join me All right, so first of all, I know it's gonna win. I don't know why it's doing that, but so first of all, we are running all the import just open up my video, that way you can see me All right. So we're doing all the imports. They're all pretty much from what we have learned before reading the file, CSV file, everything in here is like either 01 minus one. I think those are all what we got from the from the from the CSV file. Looking at the unique results confirm the suspicion that is also the 01 minus one, which I think it is either fishing legitimate or not fishing, right? One of those, okay? And then Data tab shows everything is integer, so that's good. Shape shows us how many rows and columns all right? So we use the result columns for the Y and then we drop everything on the data frame, except the result, so that would be our x,
+
+Speaker 1  16:23  
+sorry, how many? How many? Hang on, go back up. How many columns was there in this data set? Is it 10?
+
+Unknown Speaker  16:32  
+Only 10 columns? Okay,
+
+Speaker 5  16:33  
+yeah, the fishing is only 10.
+
+Speaker 1  16:37  
+Fishing is only 10. Okay, yeah, yeah, only 10 You're right.
+
+Speaker 5  16:45  
+Yeah, pretty small. All right. And then, all right, why? And actually talk about that. And then the model, you know, excellent exercise. I think that's pretty much the same. We originally put point two five for 25% test, and then 75% train, and then we increase it to 40% because we wanted to see if any thing changes. The number eventually changes, but the rank of the train and then the test percentage are still the same, regardless if it is 25% or 40% on the test size. So that's pretty much consistent. The random state is always one. We want to keep that consistency so it doesn't change all over. So we always pick the random state one. Originally, I put this one hot encoder, but I don't think we need it open, or if we need to put it back, that's fine. We we may have to do that again.
+
+Speaker 1  17:39  
+No, you don't need it for this one because there is no categorical data, right, right. Think about it. When do you need one hot encoding? If you do have something that is non numeric, here, you already showed us that everything is integers, so you don't need any one heart.
+
+Speaker 5  17:54  
+That's what I thought. Yeah. If you have, like, let's say blue, green, yellow, color, whatever, then you need that. But this is already 01, whatever. So, okay, perfect, good. All right, training the model. So starting it with the logistic regression, you know, kind of like, same thing using the logistic regression model there. I'm gonna actually skip this really quick, because I so we cheat a little bit. You know, after seeing the similarities between the same kind of like, model name, right? Like, if this is the logistic that's the support method, machine, SDN did a little bit of a Google search and Chad GPT, and then it created a loop, which is really, really nice. This loop actually help you to get everything all at once, everything all at once, including all the models that the readme file told us to do. And then after we run that, what I proposed to the group is to rank this on this order, because we can see right from the very beginning, gradient boosting has the highest, best accuracy, the train accuracy, not necessarily the highest. There are some other that are higher than that, like the extra, the extra trees and random forestation trees, but these three items, the train, even though higher than the gradient boost, but the test accuracy is lower. So ranking this, just on the on the look, kind of help us to, you know, kind of remember back, you know, like, what was the higher, or what was which model give us the better you know result. So just remember that result, right? So the gradient is the highest, the logistic actually the lowest one at this point, and as somewhere in the middle, you get the random forest decision, K neighbors and so forth. Okay, so then what we did next is, Oh, yeah. So then the summary is the gradient boosting is the best model, because the delta between the train and then the test are not too much, is about point 5% I think, which is pretty good. It's pretty closely, not over fitting. Then we go to the hyper parameter tuning for the knivers. And then this one, we just choose the K neighbors, and then the gradient boosting, and also the SVC, just, you know, to see if it changes our, you know, diction based on on the hyper parameter tuning. And then same thing using the until the grid random tune model. These are all pretty much from you, but not didn't change much on that. And then looking at this result for the key neighbors, actually, the the legitimate is low, kind of interesting, right? You got point four. Everything else is 493. Point. 89 point 87 but the legitimate one, sorry, this one f1, score. Yeah,
+
+Speaker 1  20:40  
+one class is lower. That's yeah, that's fine. You can kind of expect that, right? I mean, if you look into the proportion of these population, you will see probably the legitimate class is underrepresented in your data set.
+
+Unknown Speaker  20:57  
+Very, very much. Yeah.
+
+Speaker 5  21:01  
+Okay, so then looking at that, the balance accuracy score for these k neighbors is also point 73% Yeah, and it's still on the K neighbors, neighbor, I guess, model we're creating, the the heat map, right for these confusion matrix. So originally, I think Matt maybe talk to you, you know, if we should keep it with the three labels with, you know, not fishing, zero, legitimate management, facing one, or should we combine the not fishing to legitimate? Because theoretically a legitimate email is not a fishing anyway, right? So why wouldn't we combine that? But I think when Matt went back. He said that it's probably okay to leave it three because it's kind of like more specific, unless you disagree on that.
+
+Unknown Speaker  21:48  
+But this is good, yeah, okay, so, and
+
+Speaker 5  21:51  
+then interpretation from that, you know, looks like it's, I don't know, semi good. I guess it's not too bad. Still, the balance accuracy, 72% is, I think we already talked about that. We want to see is the gradient boosting, which give us the highest result from, you know, earlier analysis. So we wanted to see how it performed, right with the, sorry, with the the model here, the hyper parameter tuning. So looking at this, actually still a little bit underrepresented for the legitimate but the result, but
+
+Speaker 1  22:22  
+better, but better than the previous one. Yeah, much
+
+Speaker 5  22:26  
+better. Higher point five or 0.5, and higher, which is represented pretty well on the gradient boosting um confusion matrix, also looks a little bit,
+
+Speaker 1  22:36  
+shows that yeah, I can see from the numbers, yep, yes. More
+
+Speaker 5  22:41  
+spread out, right? So that is good too. And guess what? The balance accuracy is spot on point 83 seven or 83% right? 83.78% better than the 70 something percent that we have on this one, the K neighbors, and then we did also one more for the ROC, everything from negative one zero and one for the it's a deficiency email, I guess, is above seven or above 90 something percent. So that was represented really well on the gradient boosting. We wanted to see what the SV SVC looks like. And as we see, and you can see that this is performing pretty bad. The you know, f1 score for the legitimate is 419 whereas, if you look at the gradient boosting is still like way better, under 70% so SVC was probably not a good idea, not a good idea, neither the key neighbor. So the gradient boosting is probably the best one from all Yeah. So the even like this, Roc or, sorry, the BIOS accuracy for SVC is not 6% so the conclusion on this is the gradient boosting is the best model.
+
+Unknown Speaker  23:58  
+Perfect.
+
+Speaker 1  24:00  
+Very Did you very good work? And I can also see your AUC score, they are very, very high for all three classes. So Correct,
+
+Speaker 5  24:09  
+yeah, yeah. Okay, that's the group too. Thank you. Spot on. Appreciate it.
+
+Speaker 1  24:16  
+Congrats, guys. Really, really good work. I'm super impressed. Hey, any other group use this data set the fishing? Yes, I'm sorry, do you guys want to show your approach?
+
+Unknown Speaker  24:34  
+No, no.
+
+Speaker 4  24:39  
+I mean, honestly, we kind of went off into our own corners and kind of shared information, and kind of tried to attack it in our own and compare results. We did a very similar approach to what Ingrid group did, where it was a lot of just listing out all of the different models. The only thing. Different that I did from hyper parameter tuning was I went through I said, Well, if we've got the best results are really coming from this gradient boosting where, you know, I think we're all in agreement on that one, why not look and see if we can look at different values and try tuning them and so just going through, you know, a multi dimensional for loop and just saying, okay, look, I want the best accuracy as well As the best balanced accuracy based on these different parameters that I'm trying to tune and going through really didn't get much better than the defaults. So we you know this is the same as the default untuned model was. So it really thought I was sharing the whole time. So anyway, did A a hyper parameter tuning on just a few different values, and did triply embedded like so you know, the the efficiency on this is not is not great, but I wanted to get the best accuracy and the best balanced accuracy as as my criteria for saying this is the best tuning that I've done, we didn't get much better than the the defaults. So the best parameters that we found were just an estimators at 100 and I didn't read it for one in the next step, for three, based on what we value, but based on Ingrid's results, we had pretty similar results, but we just tried to print the ball at once.
+
+Speaker 1  26:50  
+So what was that? What was the hyper parameter for your best performing model? For
+
+Speaker 4  26:58  
+the hyper parameters that we found that were the best that gave the best accuracy and the best,
+
+Unknown Speaker  27:02  
+yep, 100
+
+Speaker 1  27:04  
+estimator, point one learning and Max Step Three Ingrid. Can you compare that with the hopper parameter that you ended up using for your best performing? Oh,
+
+Unknown Speaker  27:12  
+we
+
+Speaker 5  27:14  
+didn't use the max depth, but Jesse using the gradient Boost is the the best model, correct? Yeah, you got it, buddy. So let me see gradient boosting, point 94 for train, and then point 18, point 90 basically for test.
+
+Speaker 1  27:35  
+So you didn't do a hyper parameter tuning on the gradient boost.
+
+Speaker 5  27:41  
+Me or No, I do. Oh, you did, yeah. So let me see
+
+Speaker 4  27:46  
+she had, she had three different values in there, yeah.
+
+Speaker 5  27:50  
+So the not facing, okay, so which value are you looking for? Jesse, which? Which one? The f1
+
+Speaker 1  27:57  
+the No, no, I'm saying, I'm saying that combination of hyper parameters that you ended up choosing for your best performing model. I just want to compare what you guys ended up choosing versus what Jess group got,
+
+Unknown Speaker  28:08  
+which is the gradient boosting,
+
+Speaker 1  28:12  
+huh. But what are the values of the hyper parameters that you ended up choosing for gradient boosting
+
+Speaker 4  28:19  
+and by hyper parameters. Ingredient, he's talking about the max depth, like the parameters that go into the actual model. So you can do the default parameters and just say this model, or I can start adjusting things like an estimators learning
+
+Speaker 5  28:34  
+range. No, we just use the default for all three models, the gradient.
+
+Speaker 1  28:39  
+Okay, so you just use the defaults, but the
+
+Speaker 5  28:43  
+comment in a minute is random. Set equals one for all of them.
+
+Unknown Speaker  28:49  
+Okay, so you didn't do a hyper parameter.
+
+Speaker 5  28:51  
+We didn't use the max depth. Yeah,
+
+Speaker 1  28:55  
+Jesse, I have a question for you. So why did you write a nested for loop by hand and not use any, any of the five kitten libraries, the grid search or random search. I
+
+Speaker 4  29:07  
+didn't remember how to do it, honestly, I
+
+Unknown Speaker  29:12  
+but yeah, I got that far, buddy.
+
+Speaker 4  29:17  
+So I pretty much reinvented it and I didn't remember. That's
+
+Unknown Speaker  29:20  
+what it seems like you kind of rewrote.
+
+Speaker 4  29:24  
+Yeah, yeah. I'll have to go back and look at that again. Because, you know, I spent today sort of trying to relearn what we've learned in the last few weeks, just because a lot of it's It feels like I've been doing it by rope, and I really want to understand what I'm doing.
+
+Speaker 2  29:43  
+Okay, okay, I have a question just put out for both of those groups, which is for fun, given, given what you saw the best model, can you think about how that might relate to the nature of the day? That why that model would seem most effective,
+
+Unknown Speaker  30:04  
+given the logic of those different models,
+
+Unknown Speaker  30:07  
+just something to think about.
+
+Speaker 4  30:20  
+Are you saying this is something we should think about? Are you looking for an answer
+
+Speaker 2  30:24  
+with that pregnant pause? I have my own ideas, but I just
+
+Speaker 1  30:29  
+she's basically asking you to reflect upon your finding like, Can you can you tie that to your common sense? I mean, my hunch also said the felt said, told me the same like, probably tree based ensemble is the best way to handle these data. So what she's asking is, like, try to put some verbalize it. Like, why do you think that might be the case?
+
+Speaker 4  30:49  
+Honestly, I thought that random forest was going to be best
+
+Speaker 2  30:54  
+well, but they're all tree based, and that's what I was saying. You first off, is tree based because you have the simple splits, it's one or zero or minus one, if it's greater than zero, go to this side. If it's less than zero, go to this side. You know, kind of very basic splits like that. Yeah, I
+
+Speaker 4  31:13  
+honestly you'll have to look more into the gradient. I did it because it was in the list.
+
+Speaker 2  31:20  
+Yeah. I think the interesting is to learn from that experience of looking at the data and going, Gee, why would this one seem to end up being better that can maybe, I'm thinking, you can develop one's intuition. Look at the data, saying, Go, you know, I think maybe I might serve tree based, or maybe I do need to do some kind of regret, you know, logistic regression. Or I'm doing some kind of, like, creating a linear equation,
+
+Speaker 4  31:43  
+yeah, what I definitely realized is that I did not need to do an encoder, do something. So I was like, I'm not going to do an ordinal encoder, because this is already done.
+
+Speaker 2  31:54  
+No, I'm just saying that's just, you know, just putting out that thinking process to think, look back, reflect, like vinoy said, and why? Why did it turn out that model seem best on this data? What is the nature of this data? What is the nature of that algorithm? Oh, tree base, because there's these simple splits. It's greater and or less.
+
+Speaker 5  32:21  
+But if you look at the percentage number, right, the score itself without caring if it is, you know, like a three base or a gradient or linear or whatever, if you look at the score, the score should be the one to determine if it is a good model or not. Right? We're not looking into the highest or the high or the lowest or low, but whatever that is, the efficiency score is, you know, that's how I explain it earlier, because I think the three base are pretty much almost the same. All of those three group, right? You have the random three, you have the forest, and what was the other one? Yeah, the number are closely together, almost the same, not exactly the same, though, but when you start looking into like, the most efficient number, the most efficient is the gradient boosting now, but you're asking, you know, Karen, why based on the data? I mean, I don't know, the data may just come up, because the way it is, I like the numbers.
+
+Unknown Speaker  33:17  
+I'll show you one thing.
+
+Speaker 2  33:19  
+I'll show you to think about it. That's all
+
+Speaker 1  33:24  
+okay. So I'll show you a quick spectrum, a two by two for all these different classes of algorithm. And whenever you are thinking about which algorithm to choose, one trade off that you often have to make is the accuracy versus interpretability, right? So, and I'm just going to show you a slide from week 18 material, actually, so take a look.
+
+Speaker 5  33:59  
+So this pushing close to the deep learning. Maybe, I don't know, it
+
+Speaker 1  34:03  
+is basically for for many, many problem you will see boosting or bagging method, like, in general, the ensemble method, the tree based ensemble methods are similar, or maybe even higher accuracies than some of the noodle based models. Okay, like these are one of the most performing statistical machine learning model
+
+Unknown Speaker  34:31  
+if you don't want to go all the way to neural nets,
+
+Speaker 1  34:35  
+okay. But one thing is, whenever you are going towards the right side of the spectrum, you see how overall you are going towards like vertically, you are kind of going towards the bottom. So basically, your interpretability of the model suffers right decision tree if you look here, or linear or logistic regression, these are the two kind of models that are most. Highly interpretable, but they are not as accurate as these more advanced models. Okay, so just something to keep in mind. I mean, this is, this is like, this is just a, like, a very high level, right? Don't think that this is going to be true for each and every data, each and every problem that you are working on, but just something to keep in mind in these two spectrum, the two dimension of accuracy versus interpretability, right and see where deep learning comes in. The most accurate but least interpretable. Let's okay. That's why a lot of people don't like when companies tend to use deep learning to make decision about us ourselves. Like people don't like when companies say, Oh, we are going screening job application using a Gen AI model. Like, nope. I mean, not Gen AI. Sorry. People don't use Gen AI for that. That's a bad example, but any AI driven model basically, right? So people don't like that because of the lack of interpretability. So
+
+Unknown Speaker  36:11  
+any other group would like to share
+
+Speaker 2  36:14  
+the equivalent to that would be using some and then trying to classify a classifier on top of that to to choose yes on resumes, yeah, though it'd be very hard to interpret and explain why it made that decision. Yeah,
+
+Speaker 4  36:32  
+I know you. I'm challenging myself the grid search. That's kind of taking twice as long as my embedded 40,
+
+Unknown Speaker  36:40  
+the grid search.
+
+Unknown Speaker  36:43  
+It is taking longer than your follow,
+
+Unknown Speaker  36:45  
+is it? Yeah, by a factor.
+
+Unknown Speaker  36:51  
+Oh, wow.
+
+Unknown Speaker  36:55  
+Which model?
+
+Unknown Speaker  36:58  
+Oh, it's doing the grid search on the gradient boosting classifier.
+
+Speaker 2  37:01  
+Oh, okay, defend, you know, depending on the computational, you know, the level the computation resources that are needed will make
+
+Speaker 4  37:12  
+grid search take longer, yeah, this laptop is definitely a Model T,
+
+Speaker 2  37:15  
+yeah, exciting. Of like SVM. And if SVM, you know, doing like, like, doing higher degree polynomials, it took a lot of computational resources, so the grid search took much longer, for example,
+
+Speaker 1  37:35  
+Okay, any other group would like to share your experience with us.
+
+Unknown Speaker  37:45  
+We have three other groups. Come on.
+
+Unknown Speaker  37:52  
+How about group four?
+
+Unknown Speaker  37:58  
+Huh,
+
+Unknown Speaker  38:01  
+Ingrid, which group?
+
+Speaker 5  38:03  
+Group two, what group two? You're one, right? So 112, and done already. We should skip, we should skip the group project now, but now because we did this. So that's it, group one and two, yes,
+
+Speaker 1  38:20  
+yeah. So when your project will happen, that's actually a good point. There would be a substitute instructor who will be filling for me,
+
+Unknown Speaker  38:30  
+and then you can talk to her. You can say, Hey, give us some credit.
+
+Unknown Speaker  38:39  
+Yeah, it's recorded.
+
+Speaker 3  38:41  
+Oh yeah, it's recorded. Yes, yeah, it is recorded Yes. All right,
+
+Speaker 1  38:53  
+okay, looks like there are no other brave hearts left in this room in this class, would like to share, but I hope you all kind of had a similar experience, right? Like, what these two groups stolen, group one and two, right? You guys, JC, were group one, see, group one and group two is the best. Okay, so now, so what that means is, going forward, my grading for your group project will be biased, because I know
+
+Unknown Speaker  39:23  
+I'm just kidding.
+
+Speaker 1  39:27  
+Don't worry about it. So anyway, cool. So I hope these last, what five, six weeks we did all the machine learning. So I hope now you can kind of see and feel, to some extent, the power of machine learning and why, why machine learning is basically used like almost every work in our life. I mean, there are hardly any areas that you can think of that does not in machine learning. Use machine learning today, right? But when we come. Back after your group project, you will see that we are going to basically learn a completely different approach to solve essentially some of the same problems and then go way further, way beyond these the domain of this problem. And we are going to learn some very simplistic looking techniques in theory that you can scale up and you will be amazed to see the level of complexity that your model will be able to handle. Right? So,
+
+Unknown Speaker  40:39  
+okay,
+
+Speaker 1  40:41  
+cool. So, Jesse, I see that grid search you are saying, giving you a local lower accuracy. I think there is something you probably have done differently, like, think about it, if the logic that you are doing by hand, if you are doing the exact same thing in grid search, you will you should see the same accuracy, because at the end of the day you are training with I think what you have done in your custom method, I remember you basically probably manually looked into accuracy and balanced accuracy, and kind of made some comparison, yeah,
+
+Speaker 4  41:16  
+and I added that later to see if it made a difference, and it didn't. It didn't. So it was just it was the same accuracy. Anyway, I I'm sure I'm doing something wrong. I need to, like, learn this more in depth and try to figure out what you did
+
+Speaker 2  41:31  
+grid search and then gave you the what you thought was the best, but that was not as good as the kind of naive one. Now that could be a matter of what range of values that you're looking at,
+
+Speaker 1  41:42  
+what range of values? Yeah, no, I think what he's saying is he used the same combination of the values, yeah, not range. So he's not talking about randomized search. He's talking about grid search with specific values. So one significant,
+
+Speaker 2  41:55  
+one difference I was saying is between like, okay, so if you're doing it the the original way, and you have any of the train test split, right? So you're training on the train, then you're evaluating on the test. Sometimes when you do cross validation instead, the average of the cross validation will be lower than you would get when you do that kind of usual train test split.
+
+Speaker 2  42:27  
+Do you see what I'm saying? So that, yeah. In other words, if I, if I take a data set and I split it some percentage off, and I do it that way, so I train on the train report and then I evaluate against that test. Well, sometimes might produce, like, apparently, a higher score than if I take the whole thing and do like, five cross five fold cross validation, because then I'm getting the average. It's taking different segments of that as a
+
+Speaker 1  42:54  
+test. So basically, what you are saying is, if you don't do a full scale cross validation, sometime you might come out ahead and just be lucky,
+
+Unknown Speaker  43:03  
+yeah, the simply, yeah, exactly. But sometimes
+
+Unknown Speaker  43:06  
+you may not.
+
+Speaker 2  43:08  
+I've noticed often then that it ends up being less think why. And I think because you're you're taking these different sections as the test and averaging across the on each of those and and that can make different but in a way that could be more reliable, that's more reliable in the long run, yep. And that might be more better to rely on that in terms of the, you know, the evaluation of the model that you then you would be applying to totally unseen data. Yeah. Uh, cross foundation is considered generally the superior way, and the more.
+
+Speaker 2  43:52  
+But, yeah, I've done grid searches with cross validation after I've done the other way, and it comes out less. I'm like, Oh, I wanted to get better.
+
+Speaker 1  44:02  
+Hey, let me do one thing, actually, before I leave you guys for three weeks, let me
+
+Unknown Speaker  44:11  
+Where are you going?
+
+Speaker 1  44:14  
+Oh, I'm actually going on a vacation. I'm taking a trip to Japan. Oh,
+
+Unknown Speaker  44:19  
+how fun. Wow,
+
+Unknown Speaker  44:22  
+you're going during Sumo. I'm so jealous.
+
+Speaker 3  44:27  
+During what Sumo? I'm like, a huge sumo fan. Oh, are you
+
+Speaker 1  44:34  
+so but I don't know. Like, is there any, like, a sumo event going on there? Yeah,
+
+Unknown Speaker  44:39  
+it's in Osaka right now.
+
+Speaker 1  44:42  
+Oh, now I see like, why the hotels are so expensive.
+
+Speaker 4  44:49  
+Yeah. So, so my wife and I are planning a vacation in Japan, but it has to be during one of the boss shows. And it has to be where the boss show is happening, because it happens in Tokyo three times a year.
+
+Speaker 6  44:59  
+You're also entering in and during cherry blossom season. That that might be more of the reason why Sumo is a little niche. But everybody tends to go, no Erin, yeah, I guess
+
+Speaker 1  45:11  
+they also have a spring break around the same time in Japan. I suppose so. So families with kids, they'll be out, like traveling up and down throughout their country, and then we are foreign tourists, bunch of like, rubbing shoulder with the locals, and then fighting for space. It's good to be finance.
+
+Speaker 6  45:29  
+If you're going to Tokyo, you're fighting for space no matter what time of year. I did an internship there and lived there for two months. It was, yeah, it was amazing. But you're always fighting for space, no matter what time of the time. Yeah, we
+
+Unknown Speaker  45:43  
+are. We are flying in and out of Tokyo, yeah,
+
+Speaker 2  45:46  
+that's where they push people onto the subway, right? They have the pushers.
+
+Speaker 6  45:50  
+They do have the pushers. I never encountered them. Usually, the pushers are only in, like, the super concentrated areas during the work week,
+
+Speaker 2  45:58  
+okay, yeah, I've always heard about that, though, so I
+
+Speaker 1  46:03  
+should go to, you should go to Mumbai. Like, out of all the rail, like, what is called the Metro suburban rail, I have not seen that level of crowding anywhere in the world. So there people are the pushers. Like, you have a whole crowd pushing and packing you, and they'll actually kick your butts like you have a layer of human being and going there, and then another people set comes in, and they kick their butts, and then the people go in. And then that sounds
+
+Speaker 6  46:33  
+like a wonderful vacation, but no, I so look forward to the bruises.
+
+Speaker 2  46:38  
+Is that it's like that in the movies, with all the people on the roof and everything
+
+Speaker 1  46:42  
+they have. They have a separate a coach for females, though. So
+
+Speaker 2  46:48  
+is that like the noise I like in the movies we've seen all the people on the roof of the train and everything, yeah, yeah,
+
+Speaker 1  46:54  
+yeah. And that is, that is actually not just movies. That's like just a day in life, another day in commuters life in Mumbai, not in all cities in India, though, just Mumbai.
+
+Speaker 6  47:06  
+Japan also has the individual trains for women. Those generally only run during the evenings, though, so Okay, during the weird hours where women are more at risk from questionable people. In fact, here, like, you'll have separate coaches
+
+Unknown Speaker  47:26  
+there for women, so yeah,
+
+Speaker 1  47:28  
+though there's yeah in yeah in India, in Mumbai, what I'm saying is, in all train, there'll be, like a 10 coach, and one or two of them will be women only.
+
+Unknown Speaker  47:39  
+But just
+
+Speaker 2  47:41  
+kind of facetiously, Jesse, yes. So during that though, Sumo things, did they like have a lot of all you can eat buffets? Uh,
+
+Speaker 4  47:49  
+yeah, they definitely have the chunko, which is the chunkanavi, which is what the sumo wrestlers usually eat in their stables. It's a high protein broth, yeah,
+
+Speaker 2  47:58  
+I think they have a special thing, it's, I'm just being facetious. Oh, they put on lots of lots for the wannabes. They put on lots of like, oh, you can eat the face.
+
+Speaker 1  48:09  
+Okay, hey, before I leave you guys. So have you guys heard about this channel called Three? Three, blue, one, Brown. Yeah.
+
+Unknown Speaker  48:21  
+Okay. So what is that?
+
+Speaker 1  48:24  
+Okay, so, so these guys, they basically create series of videos in different things like math, science, computing. So these particular channels that I'm going to share with you, they basically talk about neural net. So let me share my screen. So this is the channel, and here you will see a series of videos. And if you go through these videos, these guys are amazing, by the way, like my son, my son, no, there are two, two of them, brothers,
+
+Unknown Speaker  48:59  
+no, that's grant Sanderson.
+
+Unknown Speaker  49:02  
+I think there are two of them Now, granted
+
+Speaker 2  49:05  
+Sanderson, just one person. He was taught for Khan Academy, and then broke off to do his own thing.
+
+Speaker 7  49:12  
+Then broke off, yeah? He like, wrote his own JavaScript libraries for all the animations he does in his videos. Yeah.
+
+Speaker 1  49:17  
+Yeah. All of these, yeah. I remember sometime back when my son first started using these he was in middle school, and he taught himself calculus, my son while he was in middle school going through these guys videos. So they're super awesome. And I was so excited. I actually looked into the video, into their library, and I cloned their GitHub repo, and then tried to do something, and then I kind of lost patience. So, but anyway, these guys are super cool. So so I'm going to just post this link in the live channel, so in your time, which I'm sure you will have ton of in next three weeks before we come back. For Week, Week 18, I suppose, right? We get teen is when we are starting this, right? And within the within the class period where all the demonstration I we do, we basically just go and do the hands on demonstration, right? We, we don't have scope to basically talk about all of these basics, the fundamental like, why neural network even works, right? So go through this video, some of them at least first two, if not all. So just these first two video, if you go through you will see that you will come in week 18, much better prepared.
+
+Speaker 2  50:36  
+Okay, I also really recommend his series on on on linear algebra? Yeah, yeah. There's also a useful basis for understanding neural networks, yeah.
+
+Speaker 1  50:50  
+And yeah, he actually talks about that in one of these videos. Like, if you are not too familiar with linear algebra, go and watch my video there. So
+
+Speaker 2  50:58  
+yeah. And he just explains things so beautifully and beautiful,
+
+Unknown Speaker  51:02  
+beautiful. Yes,
+
+Speaker 2  51:07  
+okay, I've listened to also good interviews with him, interviews between him and Lex Fridman. So if you ever want to look at Lex Fridman podcasts, interviews, okay, very interesting. And his whole approach to and he basically kind of says, like, I feel that math is just not taught, right, generally, and so people were not interested in it. And he tries to make it something where people would be interested in it, yeah, I
+
+Speaker 7  51:35  
+was talking to my girlfriend because she's a she's doing an internship right now, and something that they're talking about the national lab is that it's like science communication. And I was like, I was making a joke. I was like, yeah. I was like, with physics, it's like science outreach is, like, talking about, like the sciences and making it relatable for people. Math outreach is like, answer my riddles three, and it's like thought experiments, and it's like, unintuitive, like nonsense.
+
+Speaker 2  51:59  
+He's he's very much about math outreach. I would say. In fact, during during COVID, when people were having to stay home, he did a whole series of videos, kind of for people staying at home to just learn about aspects of math.
+
+Unknown Speaker  52:14  
+You're talking about this guy. Grant Henson, yeah, yeah.
+
+Speaker 2  52:17  
+He did not just so much the graphics. He did more like he was sitting in this study, teaching about different areas of math, and it was just intended for people who are stuck at home during COVID. Yeah, no, he's a he's been a guest lecturer at MIT and stuff, yeah.
+
+Unknown Speaker  52:38  
+So I figure if they invite him, he knows what he's talking about.
+
+Speaker 1  52:46  
+Yeah. His library is called manim mathematical animation engine, the library he created for his videos. Mathematical animation engine. Yeah. So in a sense, when I, when I think about this guy, he's like Newton, almost like, think about it, Newton. He wanted to do physics, and at that time, we didn't have the tools to do physics, so he just invented calculus so that he can do physics. So in a sense, these guys like that, right? It's a modern digital version of Sarah Isaac Newton,
+
+Speaker 2  53:21  
+Newton and Leibniz, yeah, in parallel, but independent of each other. Invented. Yeah, they're both at the same idea, independent
+
+Speaker 1  53:29  
+of each other about the same time. Yeah. Interesting about
+
+Speaker 7  53:33  
+that is the reason why live business theories never really caught on or like in this like semantics in person Texas. It's because Newton was head of the Royal Society of, like, mathematics, and he, like, kind of, like, politically outmaneuvered him and, like, made it so
+
+Speaker 2  53:56  
+well noon ended up being the first in the Lucas chair in Cambridge, which was later was Stephen Hawking's chair, Luca professor of mathematics, or something like that.
+
+Unknown Speaker  54:22  
+Well, have a nice trip the night.
+
+Unknown Speaker  54:24  
+Yeah, thank you so
+
+Unknown Speaker  54:26  
+yeah, thank
+
+Speaker 1  54:29  
+you guys in next month, actually, April next month. Yeah, April, April 1, yeah, April Fool's Day. Actually, have a
+
+Unknown Speaker  54:42  
+fun trip. That sounds really cool. Yeah, really
+
+Speaker 5  54:45  
+good. Thank you. Japan, beautiful place to visit.
+
+Speaker 1  54:49  
+Yan is also going somewhere closer, around the same area, same region. Yeah, I'm visiting
+
+Speaker 7  54:56  
+Korea at the same time, pretty much. I never go anywhere.
+
+Unknown Speaker  55:00  
+I'll be here in Moab.
+
+Speaker 1  55:06  
+Look the place that where you are in, you don't, you don't need to go anywhere.
+
+Speaker 2  55:11  
+Well, you know, I sometimes like to think, I tried to, like to think about,
+
+Unknown Speaker  55:16  
+well, what's, what's his name?
+
+Unknown Speaker  55:21  
+Oh, Walden Pond guy.
+
+Unknown Speaker  55:25  
+Oh, thorough, Henry. Henry,
+
+Speaker 2  55:28  
+yeah, he has traveled widely in the environs of Concord, Massachusetts.
+
+Unknown Speaker  55:39  
+Yeah, that's funny. That's funny.
+
+Speaker 2  55:40  
+I kind of like, well, yeah, I've kind of traveled widely this little bit of Moab.
+
+Speaker 5  55:48  
+I like my I go to every winter, like, usually in February, except this year,
+
+Speaker 2  55:53  
+yes, we always hike up in the winter. Don't tell lots of people that it's nice in the winter, because, though, right, you like to have a little quiet time. But it is really, it can be. I mean, this winter was barely anything winter, you know? Yeah, it's been, but you could do a lot during the day all winter. Now there was, we hadn't like, no snow on the ground, deer in the valley, and, yeah, and a lot of times you could be pretty nice to go to, and not many people in the in the parks and stuff. But just don't tell people it's good, because then
+
+Speaker 5  56:30  
+every time we get in the window, it's like, no traffic, no people, because
+
+Speaker 2  56:33  
+it was horrible. You had a miserable time.
+
+Unknown Speaker  56:39  
+Nothing got it so okay, you just
+
+Speaker 2  56:41  
+pros all the time. You just stay in your hotel room because it was too cold to do anything.
+
+Speaker 1  56:49  
+Okay, guys, I will drop off. Have a good night, all of you. I'll see you in three weeks. Thank you. Yes. Same time. Everyone. Nice to.
+

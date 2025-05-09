@@ -1,0 +1,1923 @@
+Unknown Speaker  0:02  
+A section of the boot camp,
+
+Unknown Speaker  0:05  
+and then you will start getting your hands dirty.
+
+Unknown Speaker  0:10  
+And I'm sure you guys are going to do amazing stuff,
+
+Unknown Speaker  0:15  
+given everything that you have learned. Okay, so today's class, let's first start with reviewing that last activity, the what I said, micro project, right towards the end of last class. So let's just walk through just for a recap, right? I'm not going to focus too much on what exact result that you got, like what accuracy score or AUC score, or whatever you got, but just as a recap on what we did and what else we could do to get it make it even better, right? So we are going to review that last activity from last class, and then we are going to talk about couple of other techniques how when it comes to tuning your model, by tuning your hyper parameters, and what you could do if your data set is imbalanced, meaning if one class is much higher, highly represented than the other class. So what you could do? Right? So these are the two main thing to do today, and then second half of the class,
+
+Unknown Speaker  1:14  
+I'm thinking of letting my guys go into another breakout room again for about an hour, and basically use that same example, same
+
+Unknown Speaker  1:25  
+use case that we have been working on, that bank marketing data and doing the Chad prediction on the bank marketing data set to see whether you can get something better, right So, and then I also did something, and I was able to get much better balanced accuracy score than what we have done up until last class. So after you guys try it out for about an hour, last 15 minutes or so in the class, I'm going to show you what I did, nothing earth shattering, just couple of things here and there. I didn't even do any model tuning or anything. But that's just a beginning. So yeah, so you will see how things can improve when you when you do the right things. Okay,
+
+Unknown Speaker  2:08  
+cool, so let's share my screen and get started doing that recap of
+
+Unknown Speaker  2:16  
+what we have done. Am I sharing my VS code?
+
+Unknown Speaker  2:20  
+Yes, yes.
+
+Unknown Speaker  2:24  
+Oh, also I was confused, because, like, I was looking at the third model thing again, and like, when I, like, ran it for the default code that it had, it had, like a one for the balance score, because we were talking about how, like that disqualified it yesterday, yeah, but it just had that by default. So that was just already in there. Okay, well, it could be, let's see. So, so this was our data, right? This is the data set that we had.
+
+Unknown Speaker  2:53  
+And then what we did, we did the train test, split the first thing after, after splitting X and Y, of course. So you are doing x y, and you are doing train, test split, and then
+
+Unknown Speaker  3:10  
+you are doing describe. Well, although looking at the stats of the numeric column in this case, doesn't tell me much,
+
+Unknown Speaker  3:23  
+then this thing is even more important to basically find the missing values, right? So usually we find the missing value by using this, which is, you take the data frame, apply it is any function, and then on top of that, you apply an aggregation function called sum. Oops, that gives you how many values are there in each column. Sorry, huh, yeah, how many null values are there in each column? But if you want to see percentage wise what percentage of values are null, then you can divide that by the length of the data frame, and that will give you percentage wise values. So that way you can know, like, okay, which color has mostly null values and which column has little bit of null values. So when we apply that on our x data set, X feature set, and then what I did here is I basically there are, like, all of these columns, right? But I just wanted to see the one that has a non zero value, non zero percentage of none. And I got 12345,
+
+Unknown Speaker  4:31  
+columns. Now, if you see the job, it has point 6%
+
+Unknown Speaker  4:37  
+null values education has about 4% null values. Contact has 28% now, P days have 81% now, and P outcome also has 81% now. So that basically tells me that these data set has lot of null values, and that means if I simply do drop any to make our life simpler, we are not going to do justice.
+
+Unknown Speaker  5:00  
+Us to our model, because we are going to lose more than 81% of data if you just do drop any so that's out of the question, and that's why we need to be creative, which is why we talked about the different field na strategy, which is the other name, is called imputation, right? Different imputation strategy we saw
+
+Unknown Speaker  5:21  
+So the approach here is, instead of blindly adopting one strategy, you basically go on a case by case basis. So now that you know that job, education, contact, P days, meaning prior days and prior outcome, these are the five columns that have null values. So we start with the first one, which is job now doing the value counts. Counts. Basically tell me, what are the unique values are there, and what are how many numbers?
+
+Unknown Speaker  5:52  
+Now,
+
+Unknown Speaker  5:55  
+these are the values that we have, but we also know that there are about point 6% of now. So since it is very, very less, we'll just say hey, whenever it is now, just fill it with a text, call unknown, and then call it a day, because it's less than point, less than 1% so it's not going to matter that much. Okay, so we are not going to worry or too much about it, we simply do this. But instead of applying it right away, we were following these,
+
+Unknown Speaker  6:29  
+basically best practice of putting things in a function, so that we can actually write a kind of a utility function at the end then, so that we can apply it repeatedly over and over as your data keeps coming.
+
+Unknown Speaker  6:42  
+So that is our strategy to fill in the job column.
+
+Unknown Speaker  6:49  
+Then the next column is education. So in education, these are the different values you have, sorry, these are the different values you have, secondary, tertiary and primary.
+
+Unknown Speaker  7:02  
+But here, the strategy that was given here is look into the education. And this is basically purely based on our interpretation, which is education and job.
+
+Unknown Speaker  7:18  
+By the nature of it sounds like these two columns will be dependent on each other. So therefore, what we are doing here is we are seeing what is the job that people that does not have an education value in the column is holding mostly so these selection basically says, Give me all the rows in the x data frame where the column education is now,
+
+Unknown Speaker  7:53  
+right. And then from all those rows, only look at the job column. So that tells me these many people have blue collar job out of the ones that does not have a value in education.
+
+Unknown Speaker  8:09  
+So basically meaning a null value in education. So 266, people have blue collar 145 technician. 133 are management. 102 are students. 97 are admin, and so on.
+
+Unknown Speaker  8:22  
+And then the strategy that has been shown here in the default notebook. This is, in fact, the default notebook. It basically the idea is that, hey, looks like a majority of these
+
+Unknown Speaker  8:34  
+rows where the education column is missing. The jobs that are showing are kind of job that requires lower skill set, like unskilled job, mostly. So therefore, since there are three unique values for education, primary, secondary and tertiary, so we are going to make a pretty crude estimate that for all the caller all the roles where education is now, we can simply fill it with the value primary, which is basically the lowest level of education value. And that's why they did not that. I like it very much. And I'm going to show you at the very end of the class what I did, something along the line of like what Matt and I was discussing in the last class, right? Little different, but something along that line.
+
+Unknown Speaker  9:26  
+But this is how the default was, okay. And then you do the same thing for contact. You say, Okay, cellular telephone
+
+Unknown Speaker  9:34  
+education. Okay, no. So then you see, okay, what is the education for people who do not have a contact number listed, we see that it is kind of equally distributed. So these are the people who does not have a contact number listed, but some of them have primary education, some of them have secondary some of them and tertiary. So that means we really cannot find out any type
+
+Unknown Speaker  9:59  
+depend.
+
+Unknown Speaker  10:00  
+Sense of contact and education.
+
+Unknown Speaker  10:03  
+When you look into the contact and job, same thing out of all the rows where contact is now, if you look at what is the value of job, you kind of see a broad distribution. It's not just one type of job is mostly prevalent, although blue collar is mostly prevalent, right? But not very highly represented. So therefore, what we decided at that time that same as the one before, we are simply going to fill it with the value unknown,
+
+Unknown Speaker  10:34  
+and that's what we did.
+
+Unknown Speaker  10:37  
+Then there is the other column, called P days, meaning the P is basically mean prior days. So basically what it means is,
+
+Unknown Speaker  10:50  
+what it means is, what is the,
+
+Unknown Speaker  10:59  
+how much, what was the P days column? Mean?
+
+Unknown Speaker  11:03  
+Biggest previous day since contact? I think so. Yeah, I have to look into that. UCI email. I forgot about this. Hang on.
+
+Unknown Speaker  11:13  
+Let's see what they're saying.
+
+Unknown Speaker  11:16  
+P days, oh, number of days passed by after the client was last contacted. Yes, you are right. Jesse, so this is the days passed after the client was last contacted. So then we are looking into the data that has
+
+Unknown Speaker  11:33  
+Well, first we are doing is we are doing a histogram of P days, and we see the mean is somewhere around 150 to between 150 200 is the mean, with a slightly skewed towards the left, right.
+
+Unknown Speaker  11:51  
+And then we look into all the columns where P days is now, and then looking at the stat of these,
+
+Unknown Speaker  12:03  
+and this is where we are seeing that for all the rows where P days is now
+
+Unknown Speaker  12:14  
+the previous value, the previous day value that are zero, so you see for The previous column. So there is another column called previous. So previous basically mean number of contacts performed before this campaign and for this client. So how many times the bank attempted to make contact with the customer. So that is your previous. So now what we are seeing here is we are looking at all the columns that have P days is now and then. Out of all those column looking at the status statistics across all the columns we see for the previous columns, the value is always zero. So basically what that means is that makes this strategy pretty easy, that we know that where P day is now,
+
+Unknown Speaker  13:03  
+then it should be filled in with the value previous. And that's what we are doing. We are just simply saying previous,
+
+Unknown Speaker  13:14  
+and that is that, and we put that, oh, sorry, not my bad. So basically, what we are saying is, whenever P days is now, we are simply putting this value to negative one. Why negative one? Because P days is now basically mean the customer has not been contacted at all. So that's why we decided, okay, having a negative one probably is a good strategy, because if a positive number shows the days that have passed by, then if the customer has not been contacted before,
+
+Unknown Speaker  13:49  
+having a negative one makes sense, because there would be only one negative value everything else is positive. So that one negative value will
+
+Unknown Speaker  13:58  
+show that these rows are different than the other rows, right? And the reason we have to do that is, remember, when we are looking at the percentage the speed is has almost more than 80% of data that was now. So that means, what that means is the majority of customer that we have in this data frame were not contacted before.
+
+Unknown Speaker  14:18  
+So that's why this is now, and that's why we are basically filling it with negative one value.
+
+Unknown Speaker  14:25  
+And when you do that, oh, and then the last one is P outcome, which is previous outcome. So what this P outcome means is, this is the outcome of the previous marketing campaign. So these are the customers where who were reached out before the last time the campaign was launched, and what was the outcome that time, whether the customer actually ended up buying the product, product, or they did not buy the product. So that is the P outcome. So in the P outcome, we see that out of all the values that are.
+
+Unknown Speaker  15:00  
+Now, not that are now a majority has a previous value of zero.
+
+Unknown Speaker  15:11  
+So therefore what we can do is, for all the P outcome column, we can just fill it with a special value called non existent. Basically means we are saying something that is different than the text that are already there, because current text or text that are there in this column is your failure, other and success. These are the three kind of outcome that we have in that column today.
+
+Unknown Speaker  15:39  
+And then there are about 80% column where the P outcome does not have any value.
+
+Unknown Speaker  15:45  
+So what we are saying is we are going to fill those null values with a text called non existent. And why do we decide that is because we do see that whenever the previous outcome is now,
+
+Unknown Speaker  16:04  
+the value of the column previous is zero. That means the customer has not been reached before a single time, right? That was the
+
+Unknown Speaker  16:16  
+yeah number of contacts performed before this campaign. So that means the customer has not reached, single time, zero time. So obviously, when the customer has not reached, then the previous outcome does not apply. So you can say non existent, or you can even say does not apply something, it doesn't matter, because ultimately, at the end of the day, you are going to change it to categorical column through one hotel encoding, right? So the idea is basically there that
+
+Unknown Speaker  16:45  
+use something that is not in one of these three values that are already present. That's all
+
+Unknown Speaker  16:52  
+and that's basically all of these field method.
+
+Unknown Speaker  16:57  
+And then in this notebook, you will see the demonstration is you put all of these method together in another big method called fill missing, and then you, once this is done, you just simply call the Fill missing with your train and test, and that way all the missing values are filled in.
+
+Unknown Speaker  17:18  
+Okay,
+
+Unknown Speaker  17:21  
+so
+
+Unknown Speaker  17:24  
+and then you
+
+Unknown Speaker  17:28  
+take a look at the categorical variables,
+
+Unknown Speaker  17:33  
+and the categorical variables are, what categorical variables are basically your
+
+Unknown Speaker  17:41  
+The first one is your job, then marital status, marital education, housing loan, contact, month and P outcome. So these are the categorical value variables. So now, what do we do? Need to do for categorical variables?
+
+Unknown Speaker  18:06  
+We need to encode those right. We need to convert them to numeric variable. So this is where what you have to do is you have to choose between two types of
+
+Unknown Speaker  18:17  
+encoding that we have talked about. One is your one hot encoding and another is your ordinal encoding. The difference being
+
+Unknown Speaker  18:28  
+one hot encoding does not assume any numeric order of the classes, class levels,
+
+Unknown Speaker  18:36  
+whereas ordinal in ordinal encoding assumes that there is a numeric order and that that numeric order is somehow relevant to the problem domain.
+
+Unknown Speaker  18:48  
+So now we have to figure out, out of these six or seven categorical columns that we have, which ones are suitable for one hot encoding versus which one are suitable for ordinal encoding.
+
+Unknown Speaker  19:02  
+So without looking into the code, let's just quickly discuss this. So the first one is job. So what kind of encoding you will use for job column
+
+Unknown Speaker  19:15  
+one, and why
+
+Unknown Speaker  19:18  
+one hot? Is that what I'm hearing? Yes.
+
+Unknown Speaker  19:23  
+Does everyone agree? Or anyone has any different idea I agree?
+
+Unknown Speaker  19:28  
+Yeah. So job has, I think, 10 or 11 different values, and it would be very unfair to say like, Hey, someone who is work as, like,
+
+Unknown Speaker  19:41  
+you know, customer service agent is somehow lesser than someone who is working as a teacher or a doctor. Okay, that would be very unfired unfair, and that is where the bias clips in. So we should not be doing any ordinal encoding there. If the goal is to like see which people will be.
+
+Unknown Speaker  20:00  
+Own a or whatever, or pay for a product that you're reaching out to, because that's, like, the whole goal, right? Like, would it be useful for the stakeholders then to, like, embed like, average finance info into like, the job category? Sure, if you want to, if that's that's how your customers would like my,
+
+Unknown Speaker  20:19  
+yeah, again. So my point is saying, Is it, is it is dependent on, like a domain. But just don't think too deeply about it. Just what makes common sense, marital status, married, diverse, single. What do you think?
+
+Unknown Speaker  20:41  
+Probably, I mean, there's an implied order, isn't there? But,
+
+Unknown Speaker  20:47  
+yeah,
+
+Unknown Speaker  20:48  
+I'm sorry your voice is cutting. Diffie, what did I say? I was saying there was, there's an implied order to that
+
+Unknown Speaker  20:55  
+marriage always leads to divorce. Gotta be single before you can be married. Yeah. Well, there is order, but that's that order does not mean when it comes to bank making a decision about you, one is better than the another,
+
+Unknown Speaker  21:13  
+I'd say. But again, this could be open to interpretation,
+
+Unknown Speaker  21:17  
+education, secondary, primary, secondary, tertiary. Judy
+
+Unknown Speaker  21:22  
+or no,
+
+Unknown Speaker  21:24  
+this is, this is this is tricky, because someone could say, Hey, you just said, based on the job, we shouldn't classify numerically classified people. We could probably say the same thing about education as well.
+
+Unknown Speaker  21:38  
+Whereas, on the other hand, you can also say the level of education is a very good predictor of persons credit worthiness. And since this is banks product decision, maybe ordinary ordinal encoding makes sense for this one,
+
+Unknown Speaker  21:56  
+you cannot go either way.
+
+Unknown Speaker  21:58  
+Housing. Yes, no, what will you do?
+
+Unknown Speaker  22:05  
+One hot or just 01?
+
+Unknown Speaker  22:10  
+COVID, binary, one hot, right?
+
+Unknown Speaker  22:13  
+You can do one hot. But the idea is that when we do one hot with only two values and we drop the first value, it becomes binary encoding anyway, because there are two values. So when there are only two values, your there is not much difference between your 100 and your binary,
+
+Unknown Speaker  22:32  
+meaning your ordinal, because one hood becomes almost the same, not almost exactly the same, as your ordinal. So for anything that has only two values,
+
+Unknown Speaker  22:43  
+both will be fine. You can use ordinal here with the assumption that people who are homeowners are probably going have a higher possibility of becoming a customer.
+
+Unknown Speaker  22:56  
+Same thing with loan, assuming that the value of the column, meaning of the column loan, is whether the customer has taken a loan from our bank before. If that is the case, then we probably put higher weightage to that customer. So we can do a zero for no and one for a year,
+
+Unknown Speaker  23:12  
+right? And then your cell phone, so we'll have a cellular and I think what cellular landline, and then we filled in some non values with unknown so if there were no null values, then I would say it would have been binary. But since we have some null values, which is fin filled in with the unknown column, it is not binary. It becomes ternary. So therefore,
+
+Unknown Speaker  23:36  
+one hot, maybe
+
+Unknown Speaker  23:39  
+for cellular, for contact,
+
+Unknown Speaker  23:46  
+and then outcome,
+
+Unknown Speaker  23:48  
+what did you do for outcome? What was outcome? Anyway? Outcome was, oh, failure, other, success. So there were three values, and then we added another value called whether does not apply, or non existent or something. So basically, four values. So what will you do for the outcome column?
+
+Unknown Speaker  24:12  
+Would you do already now for this or No,
+
+Unknown Speaker  24:17  
+it has Hang on, where did the outcome column go? Would you
+
+Unknown Speaker  24:24  
+want to do ordinals that way? It's like biased towards the ones with more success.
+
+Unknown Speaker  24:31  
+Yeah, that's what I am thinking too. You can. This is another one where you can actually there failure, other success. But the thing is, you see other the column, the value other has a very high percentage. Now here you really know, don't know what other really means.
+
+Unknown Speaker  24:53  
+So if you do already now, then you will end up applying one certain numeric value to this other.
+
+Unknown Speaker  25:00  
+Uh, cases. So now, should that value be zero, or should that value be one? Should that value be two? Should that value be three? So where does it come in the spectrum, and if the number of other were very less, I would not bother. But here I see a pretty big percentage of that is other. So for this reason, I would say
+
+Unknown Speaker  25:20  
+probably just do one hot encoding and call it a day, right? So essentially, we will have about, I think, four
+
+Unknown Speaker  25:31  
+categorical and five ordinal categorical, not categorical, sorry, four, one hot encoding and five ordinal encoding.
+
+Unknown Speaker  25:41  
+So then here in the following cells, what you see here is
+
+Unknown Speaker  25:48  
+basically declare each of these encoders separately and fit it with the train data. I mean corresponding column of the train data. So the job encoder is fitted with the job columns right, and these encoder is the one hot encoder. Marital encoder is fitted with the marital column, which also is a one hot encoder. These are basically everything that we discussed, right, all of those eight or nine cases.
+
+Unknown Speaker  26:18  
+And then education encoder is an ordinal encoder. This is not one heart. This is ordinal and filled with the education column of your trained data set, good.
+
+Unknown Speaker  26:34  
+Similarly, default and default column encoder is an ordinal encoder with no use values fitted with your default column of your training data set. So there goes that
+
+Unknown Speaker  26:47  
+housing column,
+
+Unknown Speaker  26:49  
+ordinal with no and yes, filled with the housing column.
+
+Unknown Speaker  26:56  
+Loan encoder filled with no and yes ordinal filled with the loan column,
+
+Unknown Speaker  27:03  
+sorry, fitted with the loan column.
+
+Unknown Speaker  27:09  
+Contact encoder.
+
+Unknown Speaker  27:11  
+One hot, fitted with the contact column. This is not ordinal.
+
+Unknown Speaker  27:18  
+And then finally, for the month, which has all these 12 values. And this is something, I suppose it will be okay to use the ordinal encoding, because the thing is another thing you sometimes have to also think of, kind of, what is the even though, whether it is in introducing bias or not, that question kind of be subjective, right, depending on the domain, depending on the interpretation of your result. But another thing you should also think of from a more technical perspective is that one hot encoding will blow the number of columns up, so that means more features. So that means your model will be more complex, so that might increase, increase your chance of overfitting. So from that perspective, also
+
+Unknown Speaker  28:07  
+it like, not like that. That should not be like black and white again, but that is something that you should keep in your decision making as well. Now
+
+Unknown Speaker  28:18  
+for month,
+
+Unknown Speaker  28:20  
+given the domain that we have, the use case, there doesn't seem to be any unwanted buyers that we'll be introducing if we just go 01234567,
+
+Unknown Speaker  28:30  
+so that's why in the month, we decide to use an ordinal encoder for month And then fit it with the month column.
+
+Unknown Speaker  28:42  
+Previous outcome, non existent failure or other success, four different so that is fine. We can do one hot encoding and we cannot. Shouldn't even do ordinal here,
+
+Unknown Speaker  28:54  
+so that come becomes all of our nine different columns and corresponding encoders that are fitted with the train data so that is done. Now we have to do transform using the fitted encoder, and the transform has to be done, one for the train data set, one for the test data set, right? So since we have to do all of this together, we put this in a large function called encode categorical, and we pass the X feature set. And then here we first take all the numeric data out. So these are basically using the select D types, where columns are numeric type. So these x data numeric gives me all of my numeric column in a separate data set. We set it aside, then using one of these encoders that we fitted, we basically do the transformation and keep creating separate data frames, which we are finally going to merge together side by side.
+
+Unknown Speaker  30:00  
+To make the final data.
+
+Unknown Speaker  30:02  
+But here it is doing in two separate groups. These are the one that are multi column encoder meaning the one hot encoding, and then these are the ones that are single column encoders, meaning ordinal encoding.
+
+Unknown Speaker  30:16  
+But all of these are basically merged together at the end to this field, not field, sorry, this data frame called x data encoded, and that data frame is returned from this function. The beauty of this function is, since we have put all of this code packaged into one function,
+
+Unknown Speaker  30:39  
+then we can just say, encode categorical meaning, just invoke that function two times, one for train data, one for test data. And in future, when new data comes our way that we have to do our prediction upon, we can just use this function on any new data that comes in,
+
+Unknown Speaker  30:59  
+because think about it, all of this model that we are training and testing that is not the end of the model life cycle. So in reality, after you are done training and testing your model, then you are going to hand the model over to the production team, and they will take your model and they'll put it behind an API or some server, and then your model will actually starts it work. Because what you are doing, you are just building the model. You are building the engine, and then engine will be put into production, and that is where it will basically see new data that people will throw at it, and it will keep generating prediction, right? So anytime that new data comes in, you have to apply that same set of transformation steps that you are doing during a training and testing phase. So that's why these type of utility function is always, always a good idea
+
+Unknown Speaker  31:47  
+for future data that comes to your model. You can just apply those, right? So,
+
+Unknown Speaker  31:56  
+so then, after all of these, this is how your frame looks like, you see, these have 25 columns. Now, because some of those one hot encoding we did that kind of blew up the number of columns.
+
+Unknown Speaker  32:10  
+And for the ordinal encoding, for example, housing loan month, they did not increase the number of columns because they are just using, using this sequential numeric values in that same column itself, right? So this is how your encoded data frame looks like,
+
+Unknown Speaker  32:28  
+and this is your white trend, which is just yes or no. So that means we have to convert this to zero and one again. Now, in order to do that, you can do that nice, nifty trick that I used Yes, not yesterday, the last class, like you can do, get dummies and take the first or you can do essentially the same thing,
+
+Unknown Speaker  32:52  
+but with one hot encoding with drop equal to first. So basically what that means is you will basically change these no and yes to zero and one.
+
+Unknown Speaker  33:03  
+And even though you are doing one hot encoding, which will create two columns, but you are dropping the first column, so your second column essentially becomes an ordinal encoding, almost so you could have directly used ordinal encoding as well. You could have also used level encoding as well, or you could do one hot encoding and drop the first the effect is all the same, no matter what you use.
+
+Unknown Speaker  33:27  
+So that's what our encoded y look like, which now basically becomes a series of zeros and ones.
+
+Unknown Speaker  33:36  
+So up until this much is your data preparation,
+
+Unknown Speaker  33:41  
+then the actual training starts the model selection and training,
+
+Unknown Speaker  33:46  
+right? So in the data preparation, first, we tried a random forest classifier.
+
+Unknown Speaker  33:52  
+So trying, I would say, whenever for for classification cases, it is probably even though there are many different classification algorithm or family of algorithm, I should say Right. One is the distance based algorithm, which is KNN, then another is your support vector based algorithm, the SDMS. Then another is your regression based algorithm, which is logistic regression, then your tree based algorithm, which is your decision tree, and then tree based, but ensemble algorithm, which is all of your bagging and boosting algorithm, right? Which is your random forest, XG boost, Ada boost, and all of these. So these are five different primary classes, the broad classes of classification algorithm. Now, ideally, when you are dealing with any problem. Since you don't know which of these classes will be applied best, performing like a produce based outcome from your data set, you should actually try all of those. But I would say starting with a random forest or any tree based.
+
+Unknown Speaker  35:00  
+Thing is probably a better idea, because, remember, it actually helps you figure out the importance of the feature, one of the benefit of ensemble tree based learning, we said that it it comes up with a natural feature importance, right? So that way, here we haven't done any feature selection, like we haven't done any p test, we haven't done any vif based testing, right? We haven't done any of those that if we could have if we wanted to, but we haven't, if you don't do want to do any of the other previous statistical based feature selection,
+
+Unknown Speaker  35:39  
+trying something with random forest classifier, or some tree based, let's say even decision tree classifier. One thing you could do is you can easily look at the feature importance after the model is fitted and see which features have probably very low importance. And if you see that some features have very low importance, you might want to drop it as well.
+
+Unknown Speaker  36:00  
+But don't do that initially. First see how your model performs, right?
+
+Unknown Speaker  36:05  
+So then you fit it with your random forest classifier. Oh, I think I already did. I think I probably clicked it again, and that should give you a balanced accuracy score, about 69%
+
+Unknown Speaker  36:19  
+but this is just beginning, right
+
+Unknown Speaker  36:22  
+beginning, meaning just one random value estimated equal to 500 but you can tune lot of things on this.
+
+Unknown Speaker  36:34  
+So it gives me 68% but this 68% is on test data, but if you try this balanced accuracy score on trading data, you see that you are getting one.
+
+Unknown Speaker  36:48  
+So that means this is not good. That means we are overfitting. So when we are overfitting, what is the general strategy?
+
+Unknown Speaker  37:00  
+Give me two words, the correlation, nope,
+
+Unknown Speaker  37:06  
+you are overfitting. What is the first thing you should attempt in two words,
+
+Unknown Speaker  37:17  
+reduce complexity
+
+Unknown Speaker  37:20  
+overfitting, meaning your model is more complex. Reduce complexity.
+
+Unknown Speaker  37:26  
+Okay,
+
+Unknown Speaker  37:27  
+so how do you reduce complexity? Well, there are many different ways. One way for random forest classifier is to
+
+Unknown Speaker  37:36  
+control the maximum depth, depth that you would allow the trees to grow the deeper the trees grow, the more they tend to fit very tightly around the training data. Now you don't know what your tree depth, ideal tree depth would be, so you basically try 10 different depth value and run through it, and you basically plot the balanced accuracy score for each of these depth values, right? And I'm not running it now, because it will take over a minute. And then you plot it, and then you see what is the train and test score. And ideally, looking at this, you basically make a very subjective decision, as you have seen notice before
+
+Unknown Speaker  38:22  
+that, what is the best
+
+Unknown Speaker  38:25  
+depth, or what is the maximum depth? You depth you should allow your tree to grow, making sure it is not fitting too much with your training data. And it seems like the value could be around seven here.
+
+Unknown Speaker  38:40  
+And that's all we did, and we got a balanced accuracy score of 59 and 58% respectively with your train and test data.
+
+Unknown Speaker  38:52  
+Now if you guys look at the micro project that you did towards the end of the last class, did anyone got substantially higher than these values.
+
+Unknown Speaker  39:03  
+Or did you guys try it afterwards? Even anyone after the class, we went up to point six, three and point 5963
+
+Unknown Speaker  39:12  
+and five nine. Yeah, when we, when we did that, signing coding for the months, okay, okay, cool, six, three and five, nine looks like that. It's probably it was little bit of overfitting still, because, like, about 4% difference for these data set. Anything above one to 2% I'd say the data was probably overfitting.
+
+Unknown Speaker  39:38  
+But anyhow, so, so that's that, right? So that was a good recap. I hope what we have done up until now is very clear in your mind after this discussion.
+
+Unknown Speaker  39:51  
+Now think about ask any question you might have, or think about how other ways we could improve based on your previous reading of the.
+
+Unknown Speaker  40:00  
+Last material today, or anyone you probably have heard others doing, or maybe something you have done before, how we can attempt to improve on this result?
+
+Unknown Speaker  40:11  
+What are the things that will come to your mind?
+
+Unknown Speaker  40:15  
+You mentioned vif at the end of last class and asked us if anybody had tried
+
+Unknown Speaker  40:22  
+it, what? Oh, that is for colinearity, collinearity testing,
+
+Unknown Speaker  40:30  
+yeah, you could do that. So that will basically come under the general area of feature selection, whether you do a VIV test or whether you do a p test, or whether you even look into the feature importance from a random forest classifier and then try to prune some of the less important feature so all of these together will come under a category called feature selection, which, by the way, is a it is a very important strategy. But this is not something that we have not learned before. What I was thinking, saying, asking is forward looking, something that we haven't done up until now. What else do you think we could have done
+
+Unknown Speaker  41:14  
+for Brander testing?
+
+Unknown Speaker  41:18  
+I'm sorry, which one
+
+Unknown Speaker  41:21  
+we're like parameters on the model that we can test. But I think that's one of the topics we haven't covered yet. Is hyper parameter testing? Yes, yeah. So basically, you are right. So the next kind of technique that we could try is, in general, called hyper parameter tuning, right?
+
+Unknown Speaker  41:40  
+So in hyper parameter tuning, conceptually, it will be very similar to, for example, here, what we are doing here, where we have a loop. We are looping from one through 10 right, and then for each value, we are basically training a different model, a separate model with different depth values, and we are seeing which one performs better.
+
+Unknown Speaker  42:05  
+So this essentially is a special exam, special case example of hyper parameter tuning.
+
+Unknown Speaker  42:13  
+But
+
+Unknown Speaker  42:15  
+what happens is, for any of these algorithm, it appears that, like, this is what I was showing you the other day. If you control click on the on the name of the this thing, the algorithm, so it will basically take you to the
+
+Unknown Speaker  42:32  
+function. And here, if you look into the documentation of the function, rev up the function declaration itself, you will see there are many different things that you can tweak. So for random forest, for example, you can tweak the number of estimator. And these are like, how many weak learners you are going to create, whether you want to create 50 100, 200 500 or whatever.
+
+Unknown Speaker  42:56  
+So this is something that you can to tune criteria, which is basically the loss criteria, log loss, Genie, or entropy. There are three things you can choose, maximum depth. Depth you can vary, which is the continuous value to take any integer value, right? 2123456,
+
+Unknown Speaker  43:14  
+so you see maximum death is depth is not the only thing that you can
+
+Unknown Speaker  43:21  
+tweak. There are a lot of levers available to you for any algorithm, whether it is KNN, whether it is SDM, whether it is random forest. When you go in the escalan documentation, you will see there are many, many different things that you can try.
+
+Unknown Speaker  43:36  
+So the idea is, if you are really trying to either win a competition and pocket $100,000 prize money, or whether your job is on the line if you you if your models accuracy is not above 80% let's say, let's say you are working for a quantitative trading firm, right? And your boss has given you a problem, and they say, Nope, 80% is the minimum that we have to attend, right? So then you you cannot leave any stone unturned. You have to try each and everything, and that is where you have to try, not just these one dimensional loop, which is basically you take any one variable, which in this case is max depth, and you are trying 10 different values. Instead of doing that, you have to spread your search grid across all the different parameters that are tunable. And what are the tunable parameters, which you can easily see here from the documentation. Now there are a lot, but does that mean you have to do like if you want to change all of these, then it's going to take forever. So that's where you need to basically look through this documentation. And there is no this is not something that you can learn in a class, right? Some of the things will seem very common sense. And also, when you look more into other people's work, read through the documentation, you will slowly try to get a develop an intuition in.
+
+Unknown Speaker  45:00  
+And this is the algorithm that I am using. What are the hyper parameters I should search on or try to tune on right, which, in case of random forest, as you can probably imagine, an estimator, criterion, max depth.
+
+Unknown Speaker  45:17  
+These three seems pretty good.
+
+Unknown Speaker  45:22  
+You can probably do, no, I think these three would be good.
+
+Unknown Speaker  45:35  
+Yeah, and then if your class is in balance, then you can do class where, and stuff like that. But anyway, the idea is that, so we are going to see in a second how to do that in code. Okay, so referring back to the slide for today, which we actually haven't looked at at all,
+
+Unknown Speaker  45:55  
+sorry, not under sampling, that we will talk about in a second. So this is what we are talking about, hyper parameter tuning, right which is the process of adjusting the model parameters to improve the performance. Now, this is what we are going to look in right now. And there are two different texts, like similar but slightly different strategies that we will see. One is called a grid search, and another is called a randomized search.
+
+Unknown Speaker  46:23  
+Both basically tries different hyper parameter that you supply. The only difference between grid search is very deterministic. If you give it 10 different hyper parameters, it will try all 10 of them, whereas randomized search is more probabilistic in nature. You give them a large range of hyper parameter, and it will randomly try few values.
+
+Unknown Speaker  46:50  
+The beauty of doing randomized search is that you are casting a wider net across a larger potential
+
+Unknown Speaker  46:59  
+problem, not problem solution domain, and your chance of hitting the sweet spot becomes better. Instead of only focusing in a small area in the space and trying each and every value, which is what grid search does.
+
+Unknown Speaker  47:18  
+Randomized Search allows you to try a wider net, but since that will take an immense amount of time, it basically randomizes a search so it does not try each and every combination of value that you are providing, it will randomly pick some values. Now, just like any other probabilistic algorithm, the if you do not use a random state, then outcome of this would vary from one execution to another, because it is a probabilistic in nature, right? So these are the two things that we are going to take a quick look now.
+
+Unknown Speaker  47:56  
+Hey, vinoy, yep, are we? Are we going to cover? I think I don't know how it's pronounced, but by Asian,
+
+Unknown Speaker  48:05  
+like the
+
+Unknown Speaker  48:06  
+the type of Beijing, yeah, yeah, Bayesian, we don't have in the class material, so we are not going to cover that explicitly. The thing is, there are basically a lot more than what we are covering, right? Like, if you go into a scaler and you can probably spend at least a year just learning each and everything scikit learn has to offer. So it's not possible to cover everything that scikit learn has offered, but some of the more,
+
+Unknown Speaker  48:39  
+like more frequently used things are what we are covering in the class.
+
+Unknown Speaker  48:46  
+Okay, so
+
+Unknown Speaker  48:49  
+in this example, you will see that.
+
+Unknown Speaker  48:55  
+So this is a age balance. So this is a data set about, okay, so this is basically a subset of that previous data set, but for simplicity, there are no categorical column. There are just numerical column, right? So, so that we don't have to worry about
+
+Unknown Speaker  49:14  
+what is called encoding and all right at this moment.
+
+Unknown Speaker  49:17  
+So that's your x, and this is your y,
+
+Unknown Speaker  49:21  
+and then what you will see that we are going to do is, after we do the trend test split. And also, of course,
+
+Unknown Speaker  49:30  
+then let's say we are going to see how the KNN classifier, the K neighbors classifier, works on this okay.
+
+Unknown Speaker  49:40  
+So what we do is, first, we will do an untuned model.
+
+Unknown Speaker  49:45  
+So this here, we are basically have three different instances of algorithm. Nothing is trained at this time.
+
+Unknown Speaker  49:53  
+So first, we take that untuned model and try to fit this with default values with no high.
+
+Unknown Speaker  50:00  
+Parameter at all. So until model, we are fitting it with just x and y, and then we are going to do a prediction and do a classification report.
+
+Unknown Speaker  50:10  
+So you do that quickly, and you see that you are getting a balanced accuracy score of 0.59
+
+Unknown Speaker  50:17  
+and the f1 score of 93, and 28 for your
+
+Unknown Speaker  50:22  
+higher and lower class. So whenever you see f1, score is varying, so that should also tell you that your data set is imbalanced, which it is actually
+
+Unknown Speaker  50:33  
+so, and then an average score, balance score about 59 which is basically the average of the two recalls.
+
+Unknown Speaker  50:41  
+So that is how we do
+
+Unknown Speaker  50:47  
+as this is, by the way, on the,
+
+Unknown Speaker  50:51  
+no, actually, this is the so then if you do that, you will basically see that same value repeated here with the higher precision, which is 58.6,
+
+Unknown Speaker  50:58  
+so that's your untuned model right out of the box.
+
+Unknown Speaker  51:04  
+Then what we will do, we will use something called grid search CV.
+
+Unknown Speaker  51:10  
+So this comes from a library called model selection under scikit learn. This is not feature selection. This is model selection. So here we are going to see which model we are going to select, meaning model with which parameter.
+
+Unknown Speaker  51:27  
+Now here you see there are three fields that we are defining in a JSON dictionary structure, and these fields are n neighbors, weights and lip size. So where do this field name come from?
+
+Unknown Speaker  51:43  
+Well, this field name are basically three of the many parameters that KNN classifier algorithm
+
+Unknown Speaker  51:53  
+allows user to tweak,
+
+Unknown Speaker  51:55  
+which you can easily find by clicking Control clicking on the name of the thing. So now what we are using here N neighbors, weights, and let's leave size, and you will see n neighbors here,
+
+Unknown Speaker  52:10  
+which is basically number of neighbors to use by default, weights,
+
+Unknown Speaker  52:15  
+which is whether uniform weight or distance based weight and leaf size.
+
+Unknown Speaker  52:23  
+This can affect the speed of construction and query, as well as memory required to store the tree. So out of
+
+Unknown Speaker  52:30  
+almost a dozen different parameter, we are choosing three more commonly used parameters that we tune.
+
+Unknown Speaker  52:39  
+Now this is actually not executing. This is just a dictionary structure. So what we are saying is for end neighbors, we are going to try different values with so and so,
+
+Unknown Speaker  52:53  
+point like in neighbors, 1357,
+
+Unknown Speaker  52:56  
+911, and so on. So how many values we are trying here, five and 510 total 10 values,
+
+Unknown Speaker  53:04  
+and then weights, we are going to try two values, uniform and distance. So that means for each of the n neighbors, we are going to try two different weight values. So that means just this line will result in 10 different model trainings that multiplied by two result in 20 different model training. And then for leaf size, we are trying four different values. So that is 20 times four, so 80 different times that the model will be trained when you invoke this grid search CD.
+
+Unknown Speaker  53:36  
+So you have to basically initialize the grid search with a empty model, meaning a untrained model,
+
+Unknown Speaker  53:46  
+and then this parameter grid, which is the dictionary structure,
+
+Unknown Speaker  53:51  
+and then you can
+
+Unknown Speaker  53:53  
+run it. So this verbose equal to three. I think it means that to suppress all the verbosity, let me see what other values. Verbose, okay. Verbose three is the fold and candidate parameter indexes are also together with the starting time of the computation.
+
+Unknown Speaker  54:17  
+Oops.
+
+Unknown Speaker  54:21  
+Okay, so this basically what this means is it will print everything with verbosity of three. So now we are, this is not trained. This is just your
+
+Unknown Speaker  54:32  
+initialization of the grid search.
+
+Unknown Speaker  54:35  
+Now we take this parameter, this variable, where your grid search is initialized, and then you do similar to what you do to a model. You do model dot fit. So here this grid search becomes your model,
+
+Unknown Speaker  54:49  
+but this fit essentially will run fit 80 different times using this algorithm that you have provided
+
+Unknown Speaker  54:59  
+so it.
+
+Unknown Speaker  55:00  
+Will basically run KNN, K neighbors classifier algorithm 80 times with this combination of values. So it will basically use all combination of values from the parameter grid that you provide. That's why it's called grid search.
+
+Unknown Speaker  55:15  
+So then you do that,
+
+Unknown Speaker  55:17  
+and once the grid search completes, you can treat this just like you the single model.
+
+Unknown Speaker  55:28  
+So that's done. So grid search is completed, but you don't know which parameter combination it finally took. So it took 80 different combination, but you don't know which one it finalized on so if you want to know that, you can print this attribute called Best parameters, or best params, and that will tell you, out of these 80 candidate that entered the competition, the winning candidate had a leaf size of 10 N neighbors of 17 and weights, value set to distance. So this is your winning combination.
+
+Unknown Speaker  56:09  
+Now, once you know these three,
+
+Unknown Speaker  56:12  
+you might think, well, now I can train a K neighbors classifier again. Instead of default values, we are going to use these three values, lift size 10 and never 17, and weights distance and is that getting the best score? Is that? Is that what that's getting? Yes,
+
+Unknown Speaker  56:30  
+now you can do that, but you can do even better. You can just treat these trained, fitted version of your grid search as your model,
+
+Unknown Speaker  56:42  
+because these grid search acts as a wrap around in your best model, and any fit, any predict you do, it will basically return prediction result using the best model that it has already decided upon during this fit process, trying 80 different models.
+
+Unknown Speaker  57:01  
+So therefore, here we just take our grid search variable and do a predict and then print the classification report in a regular way, and we get our classification report,
+
+Unknown Speaker  57:13  
+which in this case, unfortunately, didn't actually improve much. In fact, if anything, if you see, there is a slight decrease here.
+
+Unknown Speaker  57:24  
+And that can happen actually, because what you are doing is, when you think about all of these different tunable parameters that you have, and all different permutation and combination, there are almost always an infinite number of data points that you can try your model at.
+
+Unknown Speaker  57:45  
+Now that is not physically possible, realistically possible. It is possible physically if you have enough time. But since that is not very realistic, then you are basically providing only a subset of that to your grid search. So essentially, think about you have a football field size of area to look for, which grass looks the best.
+
+Unknown Speaker  58:09  
+Okay, so what are your chances?
+
+Unknown Speaker  58:13  
+So that's that might happen. Now, when you are doing grid search, you are probably focusing on, let's say, a golf ball size of area.
+
+Unknown Speaker  58:21  
+Any golf ball size area in a whole football field, and you are essentially trying to find the best grass, best looking grass in a golf ball size area.
+
+Unknown Speaker  58:33  
+So that's why it is very localized.
+
+Unknown Speaker  58:38  
+Now, using the other strategy, the statistical, probabilistic search across whole football field. What you are doing, you are casting a net wide, but you are not nitpicking on each and every data point. You are basically taking a sample from different area, hopefully to get the best.
+
+Unknown Speaker  58:57  
+Now, obviously the ideal thing to be would be for you to do, is do a best of both worlds, but that will take
+
+Unknown Speaker  59:07  
+events, amount of time and energy. That's why people usually don't do it.
+
+Unknown Speaker  59:12  
+Okay?
+
+Unknown Speaker  59:14  
+So that's the other strategy. Now, how do you do that other strategy, which is the more probabilistic in nature? So in order to do that, you need a similar parameter grid.
+
+Unknown Speaker  59:26  
+But here in neighbors, which has numeric value, you are basically providing one through 20. And you can even put more like y 20. Come on, let's do n neighbors, right? Let's go to 51. Weights will be two uniform and distance and leaf size instead of so here we chose leaf size of four. Leaf sizes, 1050, 105 100.
+
+Unknown Speaker  59:54  
+Here we are saying go for all the values between one to 500
+
+Unknown Speaker  1:00:00  
+It.
+
+Unknown Speaker  1:00:01  
+But that does not mean it will result in 500 times times two. That is 1000 times 50. That means 50,000 if you did it with grid search, these combination will result in 50,000 trial of models, 50,000
+
+Unknown Speaker  1:00:18  
+and that means it will almost go till the end of this class.
+
+Unknown Speaker  1:00:23  
+So that's why it is not always realistic, right? For a tiny toy data set like this, you say, okay, you know what? What's the big deal? I'll run it. It will run for a couple of hours, and it will be done. Yes, I agree. But remember, these are all toy data sets we are playing around with, right?
+
+Unknown Speaker  1:00:39  
+So for this strategy, then we don't use grid search. Instead, we use another algorithm called randomized search city, which is what I talked about right now.
+
+Unknown Speaker  1:00:50  
+The syntax is exactly the same. You initialize with a classifier model and this parameter grid,
+
+Unknown Speaker  1:00:57  
+and then you do a train
+
+Unknown Speaker  1:01:02  
+and see here, it says fitting five folds for each of 10 candidates, totaling to 50 fits. So instead of doing 50,000 fitments, it only did 50 randomly
+
+Unknown Speaker  1:01:16  
+right? If I don't provide a random state here, then it will, if I run it again, it will create another 50. It will, it will choose another 50. Point out of this 50,000 possible combination, it will randomly choose 50.
+
+Unknown Speaker  1:01:33  
+And then, same as here, you can see the best parameters.
+
+Unknown Speaker  1:01:38  
+Now this looks different in the previous one when we did the grid search, our winning model had leaf size of 10, neighbors of 17 and weights equal to distance. Here neighbors and weights is good, but leaf size is 500 instead of 10, because we casted a much wider net.
+
+Unknown Speaker  1:02:01  
+Now let's see, what if any changes that does to our classification report?
+
+Unknown Speaker  1:02:10  
+Unfortunately, nothing. It didn't change a thing. So looks like probably that leaf size parameter does not have too much effect on the outcome of your model,
+
+Unknown Speaker  1:02:23  
+and which might be, which will be the case in many cases, like if you look into here, this is not grid search. If you want to see, let's say what is that parameter do for KNN classifier, right. Come on, where is my cannon classified here? So I'm going to
+
+Unknown Speaker  1:02:44  
+go there
+
+Unknown Speaker  1:02:46  
+and then leaf size.
+
+Unknown Speaker  1:02:49  
+You see this. This can affect the speed of construction and query, as well as the memory required to store the tree. The optimal value depends on the nature of the problem. So by reading these, you can probably guess that this is something to do with the efficiency of the computation, not so much on the accuracy or the f1 score of the output.
+
+Unknown Speaker  1:03:16  
+So that's why, even in this case, we did grid search, and it went from 10 to 500 and you see one thing when I provided this thing to 500 so when I did the randomized search, right,
+
+Unknown Speaker  1:03:32  
+I said, for leaf sites, try the upper limit of 500 and the best winning candidate picked up that 500 value. So which basically means, the higher the leaf size, the more efficient your computation would be. So if you instead of 500 if you give it higher 1000 your best candidate will have 1000 but in this case, what we just learned that leaf size doesn't matter that much, but neighbor size and distance weight, the method to calculate the weights of the,
+
+Unknown Speaker  1:04:03  
+what is called weights of the neighbors that actually matters.
+
+Unknown Speaker  1:04:07  
+Okay, so anyhow, we in this here. We did not get too fortunate, so we basically, kind of produce slightly worse result than our default model.
+
+Unknown Speaker  1:04:21  
+But
+
+Unknown Speaker  1:04:23  
+you kind of know what the technique is and when to apply it, right.
+
+Unknown Speaker  1:04:30  
+So that's about your hyper parameter tuning, tuning
+
+Unknown Speaker  1:04:37  
+or model selection. You can also say model selection or hyper parameter tuning.
+
+Unknown Speaker  1:04:46  
+Now this is only one part, though, right? I mean, ideally what you should do. So here, when we are doing hyper parameter tuning, right, either using grid search or randomized search, we are choosing only one model.
+
+Unknown Speaker  1:05:00  
+One algorithm, which is K neighbors classifier.
+
+Unknown Speaker  1:05:03  
+But don't forget that there are also other algorithms.
+
+Unknown Speaker  1:05:08  
+So ideally, in a real production developed production ready model, to build a production ready model, you have to repeat this with different model algorithms altogether,
+
+Unknown Speaker  1:05:21  
+right? Which you might want to try out today in the second half of the class, when you try on that bank marketing data set right to see whether something makes it better, even
+
+Unknown Speaker  1:05:40  
+in that case, could you just provide a list of dicts of different,
+
+Unknown Speaker  1:05:47  
+different approaches initially, move through those and get and try to figure out best result? Yeah, yeah, you can.
+
+Unknown Speaker  1:05:58  
+Okay, so before, before we go there, let's quickly look at the under sampling and over sampling. So there are, there is a activity number three, actually, yeah, we can. We can just quickly run through it. So basically, what is under sampling and what is over sampling, right? So under sampling, what it does is just what it sounds like. It removes the rows from a majority class. If you have one class with 1000 feature 1000 rows, not feature 1000 rows, another class with 100 rows, when you do under sample, you are bringing the 1000 row class down 200 so essentially you will have and at the end of the day, you will have 200 rows only. So that's what under sample does. It cuts down from a highly populated class.
+
+Unknown Speaker  1:06:51  
+Over sampling does exactly the opposite. It adds synthetic rows to the minority class to try to bring it up to the bigger one.
+
+Unknown Speaker  1:07:01  
+Now,
+
+Unknown Speaker  1:07:03  
+which one of these under sampling and over sampling would you use
+
+Unknown Speaker  1:07:08  
+like, try to apply your like common sense thinking, what do you think would be the best
+
+Unknown Speaker  1:07:15  
+over
+
+Unknown Speaker  1:07:17  
+over why?
+
+Unknown Speaker  1:07:19  
+Because then you have more data?
+
+Unknown Speaker  1:07:22  
+Yes, but the answer, just like most other things in machine learning, is, it depends, yeah, it depends, yes,
+
+Unknown Speaker  1:07:31  
+under sampling, one thing is, at least
+
+Unknown Speaker  1:07:35  
+you are not creating synthetic data over sampling, even though you are using statistically proven technique, widely adopted technique, to over sample. But at the end of the day, you are basically hallucinating
+
+Unknown Speaker  1:07:49  
+like you have five data points here, and suddenly you are seeing as if you have 10, you are creating 10 more samples in between,
+
+Unknown Speaker  1:07:57  
+right? It's kind of like,
+
+Unknown Speaker  1:08:01  
+you know, some of these TVs, right? Lower resolution TV 4k and they will do 8k with up sampling. So over sampling is just that the up sampling,
+
+Unknown Speaker  1:08:12  
+okay,
+
+Unknown Speaker  1:08:14  
+so it may or may not work.
+
+Unknown Speaker  1:08:19  
+Under sampling is safe in that sense, but then under sampling could result in you having much less data. So if you have less data to begin with, then that might be a problem.
+
+Unknown Speaker  1:08:33  
+Okay.
+
+Unknown Speaker  1:08:34  
+Now,
+
+Unknown Speaker  1:08:37  
+when it comes to this thing, there are two different ways that you can do this. One is a random way where you basically randomly choose what data to add,
+
+Unknown Speaker  1:08:50  
+and then the other type of sampling is synthetic, where you basically choose a certain algorithm instead of randomly adding on dropping data. So these are only the two major classes which you will see.
+
+Unknown Speaker  1:09:04  
+Okay,
+
+Unknown Speaker  1:09:06  
+and that's about it. There is nothing else. It's very, very simple. So in the first activity demonstration, we are basically going to take our one of our make blobs, the toy data set, which we used, if you remember, when we are doing the unsupervised clustering, right? So we are creating a toy data set here. And when you are creating these, make blobs toy data set, you can actually provide how many samples of each kind that you want to use, want to generate. And here we are saying, give me 5000 data points of one class and only 50 data points of other class.
+
+Unknown Speaker  1:09:48  
+Purposefully, we are creating a very highly imbalanced data set. And when you plot this data set with the y value being the color, you basically see and you can easily.
+
+Unknown Speaker  1:10:00  
+See which one is 5000 which one is 550 right? The yellow and the purple one,
+
+Unknown Speaker  1:10:08  
+then you will basically, you want to do any the regular thing that you want to do,
+
+Unknown Speaker  1:10:14  
+and then you will train a model. So here we are not trading a model in this notebook. We are just saying, Okay, we had total of 5050 and we took our direct train test split. Now we have three, 737, 53, and 34 in our training data.
+
+Unknown Speaker  1:10:29  
+So now we are going to do some resampling. So first we are going to try a random technique called random under sampling. What is it going to do? It will look at all these 50,000 or 3753 data points in training, if you only apply it on training,
+
+Unknown Speaker  1:10:50  
+and it will, it will randomly choose around 34 point and drop the rest completely randomly.
+
+Unknown Speaker  1:10:57  
+And this is under sampling. So the end result will be around 34 members of each class.
+
+Unknown Speaker  1:11:04  
+So how do you do it? You take a random on your sampler class object,
+
+Unknown Speaker  1:11:11  
+and then you just do that same fit. And just like we do fit transform, similarly here we do fit resample, you can do two different call. First you can do a fit, and then you can do a resample, or you can do feet underscore resample. That way, one function call achieves the both,
+
+Unknown Speaker  1:11:29  
+and you just pass the x and y value that you are trying to resample, and it will give you the resampled x and y values.
+
+Unknown Speaker  1:11:38  
+So if you do that and here, just like why what we did the Y train dot value concern the original data. Now we are going to do the value count on, resample data and exactly what we thought that. Now we have 34 of each classes.
+
+Unknown Speaker  1:11:55  
+So this clearly shows that there could be a extreme loss of data that you can suffer by doing under sampling, especially when the classes are very, very imbalanced.
+
+Unknown Speaker  1:12:09  
+Then let's feed this data actually to the random forest.
+
+Unknown Speaker  1:12:15  
+So we are going to do two fitment. One fitment is the unscaled data, X train and white train is the original on scale data with only what 34 and 3700
+
+Unknown Speaker  1:12:28  
+data point that was the original data. So this model is basically trained on a very imbalanced data set.
+
+Unknown Speaker  1:12:35  
+So that's one model, and then we are going to train another model of same algorithm, but this time, we are going to train it with the balanced data set,
+
+Unknown Speaker  1:12:47  
+and then from these two model, we are going to create two different predictions,
+
+Unknown Speaker  1:12:54  
+and now we are going to plot the test data with these predictions. So
+
+Unknown Speaker  1:13:03  
+so this is the prediction.
+
+Unknown Speaker  1:13:05  
+So this is the data from the test, but the color is coming from your
+
+Unknown Speaker  1:13:15  
+coming from your white test. So this is the test data originally. So this is not outcome, of our model. This is how the test data looks like before fitting the model.
+
+Unknown Speaker  1:13:26  
+Now we are going to see how the test data look like if color code instead of being white, test if the color code is y prediction, meaning your prediction from your model,
+
+Unknown Speaker  1:13:38  
+prediction from which model, prediction from the model that was of imbalanced trend with imbalanced data meaning before sampling.
+
+Unknown Speaker  1:13:48  
+So watch carefully to see whether you can spot any difference.
+
+Unknown Speaker  1:13:55  
+What do you think is the difference between this and this? I
+
+Unknown Speaker  1:14:04  
+So this guy had about what, maybe about 20 or so yellow points. Maybe there is, there are some more high hidden behind. But here you see,
+
+Unknown Speaker  1:14:16  
+when you are doing the prediction using a very imbalanced data set, the prediction is leaning more towards the majority class. So many of the minority class have been misclassified as belonging to majority class because the model is trained with a highly imbalanced data set, so the model has developed an inherent bias
+
+Unknown Speaker  1:14:39  
+towards the majority class.
+
+Unknown Speaker  1:14:43  
+Right
+
+Unknown Speaker  1:14:45  
+now we also have the prediction from the balanced model, which is prediction resampled, so we can do the same plot, except call for color coding instead of using the output prediction from the imbalance model. We.
+
+Unknown Speaker  1:15:00  
+We are going to use the prediction from balanced model, and when you do that,
+
+Unknown Speaker  1:15:06  
+now we have opposite problem,
+
+Unknown Speaker  1:15:09  
+because this balanced model was
+
+Unknown Speaker  1:15:13  
+trained with only 34 of minority class and 34 of majority class. So that means most of the valuable information that was already present in 3700 of majority class. By doing under sampling, we lost. We threw all of those valuable information. So now the model thinks the world is black and white, and there is half black and half white, meaning half yellow and half purple, in this case, so both
+
+Unknown Speaker  1:15:42  
+the balance imbalance model and balance model, they are both bad,
+
+Unknown Speaker  1:15:53  
+which you can also see if you print the classification report.
+
+Unknown Speaker  1:15:57  
+Well, the classification report for this thing will probably seem pretty good, because if you have a balanced accuracy score of 78%
+
+Unknown Speaker  1:16:08  
+as opposed to 53%
+
+Unknown Speaker  1:16:11  
+you will say, Well,
+
+Unknown Speaker  1:16:14  
+that is pretty Good,
+
+Unknown Speaker  1:16:17  
+but it's actually not, because look at
+
+Unknown Speaker  1:16:22  
+the f1 score for the minority class,
+
+Unknown Speaker  1:16:26  
+which is the hardest thing to get. Minority class is hardest to predict. So here, our unbalanced data produced a accurate f1 score of point one one for the minority class.
+
+Unknown Speaker  1:16:40  
+But after doing this bad resampling, which is a random under sampling, the f1 score for the minority class has actually gotten worse. It has gone to point 09
+
+Unknown Speaker  1:16:54  
+so this kind of you can see from these intuition, intuitive thing here, that plot here, so these actually did not help at all.
+
+Unknown Speaker  1:17:05  
+It made things worse.
+
+Unknown Speaker  1:17:09  
+So then if you think that it met thing worse, you can change just one word. Instead of saying random under sampler, you can try random over sampler,
+
+Unknown Speaker  1:17:20  
+which will again create point randomly. But here the effect will be just be opposite. Now we have 3753
+
+Unknown Speaker  1:17:28  
+data points of both classes instead of 34 of both classes.
+
+Unknown Speaker  1:17:35  
+And then you create two model, one with balanced, one with imbalanced. So and now you see what it looks like. So this is the outcome it looks like from the model that is trained on the up sample data set. So here we are not throwing away all those 3700
+
+Unknown Speaker  1:17:58  
+or so majority class. Instead, we are creating some members of the minority class to make it bring it up to the parity.
+
+Unknown Speaker  1:18:10  
+So looks like this model probably will be better just by this so let's see what our classification results says.
+
+Unknown Speaker  1:18:21  
+This one is saying 0.26
+
+Unknown Speaker  1:18:26  
+f1 score for the minority.
+
+Unknown Speaker  1:18:30  
+So it is definitely better than having
+
+Unknown Speaker  1:18:36  
+0.09
+
+Unknown Speaker  1:18:37  
+which we got from here.
+
+Unknown Speaker  1:18:41  
+So in this particular case, over sampling produced a better result than under sampling,
+
+Unknown Speaker  1:18:47  
+which kind of aligns with what Jesse said when I asked, even though I said it depends this example, prove that Jesse was right in the first place.
+
+Unknown Speaker  1:18:59  
+But you may not always be lucky in the exact same way.
+
+Unknown Speaker  1:19:07  
+So now that was the example on
+
+Unknown Speaker  1:19:11  
+make toy. Toy data fit, make blob data fit. And now also, because the macro average went up, that also proves that it's better to Is that Is that correct? Yes, yeah.
+
+Unknown Speaker  1:19:25  
+So now we are going to apply this on our bank data set, and we are also going to see couple of other method which are more methodical, up sampling or down sampling, rather than just a random approach, right, which is the synthetic approach, so we will see what that means.
+
+Unknown Speaker  1:19:45  
+So we have our same bank dataset,
+
+Unknown Speaker  1:19:50  
+and here
+
+Unknown Speaker  1:19:53  
+we just blindly do
+
+Unknown Speaker  1:19:55  
+get dummies
+
+Unknown Speaker  1:19:58  
+to encode all the categorical.
+
+Unknown Speaker  1:20:00  
+Variable. We don't want to do case by case basis, because that's not the focus here.
+
+Unknown Speaker  1:20:06  
+And then we do the train test split, and then we try to see, okay, what is my data set look like? Well, again, one is to 10, balance imbalance,
+
+Unknown Speaker  1:20:17  
+right?
+
+Unknown Speaker  1:20:20  
+So
+
+Unknown Speaker  1:20:22  
+now we have to do the same thing. So first, let's do a random random first classifier with imbalance data set, no balancing,
+
+Unknown Speaker  1:20:32  
+and we collect the prediction, leave it aside.
+
+Unknown Speaker  1:20:37  
+Now we are going to do a random under sampling, same thing as we did with the blob data set. We take the under sampler, we do a fit, resample on X train and y train, everything same, no changes
+
+Unknown Speaker  1:20:51  
+except the data. Here is more realistic data,
+
+Unknown Speaker  1:20:55  
+and my under sample value count becomes 378, and 378
+
+Unknown Speaker  1:21:00  
+so the class with more than 3000 3000 data point came down to 378
+
+Unknown Speaker  1:21:07  
+so that means we lost lot of valuable information here as well. So that's that's all that the under sampler does, is it just samples to like the minority, correct?
+
+Unknown Speaker  1:21:22  
+So now we are going to train another random forest classifier with the under sample population,
+
+Unknown Speaker  1:21:30  
+and we capture our y values,
+
+Unknown Speaker  1:21:33  
+and we are going to print the two classification reports side by side, just like we did.
+
+Unknown Speaker  1:21:40  
+What do you see? What's your interpretation of this?
+
+Unknown Speaker  1:21:44  
+I'll let you take a moment to
+
+Unknown Speaker  1:21:47  
+think through i
+
+Unknown Speaker  1:22:05  
+Is it good or bad? Under sampling, compared to the make blob,
+
+Unknown Speaker  1:22:18  
+one score came up, so I have to assume that means it's better.
+
+Unknown Speaker  1:22:22  
+Yeah. So two things, if you concentrate on this two. One is this, which basically is your balance score, balanced accuracy score. So it's went up from 59 to 80, which is always good.
+
+Unknown Speaker  1:22:39  
+But you also have to look at one very, very important data point, which is the f1 score of the minority class, which is the yes class here,
+
+Unknown Speaker  1:22:51  
+did it go up or go down?
+
+Unknown Speaker  1:22:54  
+It looks like it went up from 0.29 to 0.5
+
+Unknown Speaker  1:22:59  
+so almost half of the minority classes were correctly classified. Although the f1 score of the majority classes suffered little bit. It went down 5% but I would say this 21 point percentage point increase in the f1 score of the minority class is always a big win.
+
+Unknown Speaker  1:23:20  
+So if I say like, Hey, am I going to create the under sample model or the regular one? In this example, I would lean on keeping the under sample model, even though we lost lot of data,
+
+Unknown Speaker  1:23:34  
+but still, this model is better
+
+Unknown Speaker  1:23:40  
+based on this improvement from 0.29 to 0.50
+
+Unknown Speaker  1:23:44  
+not based on the macro average, only based on the f1 score of the minority class.
+
+Unknown Speaker  1:23:58  
+Now you can try doing the same thing we did in our blog data set, which is now let's try to do over sample.
+
+Unknown Speaker  1:24:07  
+So let's do over sample exact same code,
+
+Unknown Speaker  1:24:11  
+and just confirm the value count 3000 on both now,
+
+Unknown Speaker  1:24:18  
+and we trade that train the random forest,
+
+Unknown Speaker  1:24:23  
+collect the prediction, and now we print all three classification report, the regular one without family sampling, under sampled and over sampled next to each other.
+
+Unknown Speaker  1:24:39  
+So the first two, we already saw
+
+Unknown Speaker  1:24:43  
+balanced accuracy, 5980
+
+Unknown Speaker  1:24:46  
+with f1 score, 29 and 50.
+
+Unknown Speaker  1:24:53  
+Now this one,
+
+Unknown Speaker  1:24:57  
+it went down to 63 with over sampling.
+
+Unknown Speaker  1:25:04  
+Hang on. Which one?
+
+Unknown Speaker  1:25:10  
+Hey, why is it
+
+Unknown Speaker  1:25:13  
+under sampling? Is a lot better.
+
+Unknown Speaker  1:25:17  
+No, no, hang on. But is it showing me the same.
+
+Unknown Speaker  1:25:25  
+9329 was original. 9329
+
+Unknown Speaker  1:25:30  
+with a 59 here, 8850 with the 80 here. Are we seeing those two here? Ah, yes, 9329 with 5988
+
+Unknown Speaker  1:25:41  
+50 with the 80 here, huh? And then over sample is 9439
+
+Unknown Speaker  1:25:48  
+with a 63 here. So yes, I am with you on this one. So I think the under sampled here produced even better outcome than the over sampled one.
+
+Unknown Speaker  1:25:58  
+Anyone thinks differently? I think Karen, you probably have some different opinion.
+
+Unknown Speaker  1:26:06  
+Are you seeing this result any differently? Like, is your interpretation any different? And it could be because many of these interpretation kind of is also, like, subjective, how the practitioner thinks about it. I was just confused for a moment because the support numbers didn't change, but that's because you're doing it on the test. Yeah,
+
+Unknown Speaker  1:26:25  
+this classification report is on the test. That's why the support number is not changing and it shouldn't change. Yes, I was confused. Like, yeah,
+
+Unknown Speaker  1:26:33  
+I'd say you did better if the under sampling here, under sampling, right? Yeah. I'd say in this case, yeah, yeah, I think so too. It's under sampling the majority. Then
+
+Unknown Speaker  1:26:45  
+those under sampling the majority. Yeah, you always under sample the majority, of course, then you short change yourself on the training data, correct? That's what I said earlier, right? Because you don't have much data, then you can end up under fitting, actually, yeah.
+
+Unknown Speaker  1:27:07  
+Okay, so now, very quickly, couple of other algorithm, and this is not something that you will actually see your touch or fill. You just have to take my word for it, and these are the synthetic sampling case where it is not random.
+
+Unknown Speaker  1:27:23  
+So random sampling, under sampling, when you do, if you have 100 data point and you want to go down to 10, it will basically do a coin toss and basically keep any 10, whichever whoever wins the lottery, and the unfortunate ones will be killed just that
+
+Unknown Speaker  1:27:42  
+cluster centroid does things very differently. What it does is with a cluster centroid algorithm, when you are doing fit, resample these algorithm will look at what is the sample size it has to go down to. So let's say your majority class has 1000 data points and your minority class has 100 data point, right? So that means you have take your majority class down to 100.
+
+Unknown Speaker  1:28:14  
+So what it will do internally, without you actually explicitly doing it? It will take the majority class and do a clustering similar to the k means clustering you learned in the unsupervised class.
+
+Unknown Speaker  1:28:28  
+So it will basically do a clustering and try to find 100 clusters. It will say, Okay, you have this 1000 data point. How about you? I go and find 100 clusters that these data points are grouped, and then for each of these 100 cluster, I'm going to take the coordinate of the center of the cluster
+
+Unknown Speaker  1:28:51  
+and that will give me my 100 data point that I want to keep.
+
+Unknown Speaker  1:28:57  
+So essentially, the cluster centroid algorithm will produce member of the majority class that are equally spread over the whole vector space.
+
+Unknown Speaker  1:29:11  
+Because if your 1000 class are spread all over, you are basically taking uniform sample all over the population and making sure that those 100 classes that you are 100 data points that you are retaining,
+
+Unknown Speaker  1:29:25  
+they are spread out, even in uniformly. So there is no bias.
+
+Unknown Speaker  1:29:33  
+Is that a benefit? Is that a good thing or bad thing? What do you guys think?
+
+Unknown Speaker  1:29:40  
+Well, if they're uniformly spread,
+
+Unknown Speaker  1:29:43  
+it feels like that might be inaccurate, because you might have clustering in.
+
+Unknown Speaker  1:29:51  
+No, no, I'm not saying uniformly split. So uniformly meaning uniformly with respect to the specific constraint of the vectors.
+
+Unknown Speaker  1:30:00  
+So obviously, in a space, if once area vectors are more clustered, then it will choose more cluster there. But what I'm saying is uniformly meaning, as in, everywhere in the space where there are actual representations, or representation of the data point, it will basically go and pick one from the populated population centers.
+
+Unknown Speaker  1:30:22  
+So is that, just like biasing it towards the mean,
+
+Unknown Speaker  1:30:27  
+then,
+
+Unknown Speaker  1:30:28  
+so you are saying it is not a good thing.
+
+Unknown Speaker  1:30:34  
+Is that what you mean? I don't I don't know.
+
+Unknown Speaker  1:30:38  
+No, it's not a bias to the mean. I'll tell you it is a good thing. It is a good thing with one little thing you have to care about. Think about is that this cluster centroid, they may not be an actual data point.
+
+Unknown Speaker  1:30:59  
+So if you look into the coefficient of the cluster centroid. That could be a point that just appeared out of nowhere, because these are none of the cluster centroid. They may be. They may, by chance, become one of the point. But by definition, when you are taking 10 point, identify 10 points, and finding, Okay, where is the center of that which is basically where the momentum, the cumulative momentum, is minimized. That data point is just a random point in the space which happens to be at the equal distance from all the 10 points in that cluster. So it can actually give rise to completely artificial data point,
+
+Unknown Speaker  1:31:39  
+which may or may not be
+
+Unknown Speaker  1:31:44  
+wanted by, like, by the data scientists, or sometimes your customers, or something right? Like, think about the implication. You are essentially trading the data on something that doesn't really exist.
+
+Unknown Speaker  1:31:57  
+Statistically, this is very good, but the interpretation of these kind of spooks people.
+
+Unknown Speaker  1:32:06  
+So let's see how this performs, though.
+
+Unknown Speaker  1:32:13  
+So we are doing the exact same thing, and then this time, we are just comparing with our original test report, which was 9329 and 59
+
+Unknown Speaker  1:32:24  
+very bad. 1523, and 52 it basically went down across the board,
+
+Unknown Speaker  1:32:33  
+probably because of what I just said.
+
+Unknown Speaker  1:32:38  
+But again, that does not mean cluster centroid is bad across the board. It is just in this example it turned out to be bad.
+
+Unknown Speaker  1:32:47  
+But again, that's why I keep repeating this. Anything and everything the outcome that you are observing here, do not take the outcome as a learning.
+
+Unknown Speaker  1:32:55  
+Focus on the thought process, not on the outcome, because outcome will change.
+
+Unknown Speaker  1:33:01  
+So outcome should not be part of the learning. The thought process should be part of the learning.
+
+Unknown Speaker  1:33:11  
+Okay,
+
+Unknown Speaker  1:33:14  
+so then we are going to learn about another one which is smart. This basically I keep forgetting how synthetic minority over sampling technique. So what it will do is it will use that similar cluster center type technique, but here, instead of dropping thing, dropping points, and returning only the cluster center in a smooth technique, it will create the cluster center, and it will create the additional point
+
+Unknown Speaker  1:33:45  
+around that cluster center to make sure the overall center of center of mass stays around the cluster center. So it will not go and create randomly. It will create, let's say, 100 cluster center, and then it has to, if it has to add 1000 points, it will add around 10 points around each of the 100 cluster center more or less equally distributed with a standard deviation, right standard deviation of one, so that your points are not ran completely random. They are kind of representing how the original population centers were, except you are populating the cities with more population.
+
+Unknown Speaker  1:34:26  
+So basically, the thing is, let's say if you have a country and there are 10 major metropolitan city and everything else is rural area, and then government is basically starting a scheme to increase the population of the country. And they are bringing immigrants from outside, and they are coming in, and most of the immigrants are basically choosing to base around the large population centers anyway, so the rural farmland area, they stay under populated. So that's what smart does,
+
+Unknown Speaker  1:34:53  
+which, again, may or may not be a good thing, right? So so let's see how that performs. So.
+
+Unknown Speaker  1:35:00  
+It so it's redistributing the population more evenly. Yes. So that is the idea that instead of randomly dropping people here and there, you drop people to make sure that they are around certain cluster centers, like as many cluster centers, as many classes are there in the minority class, and then the additional things that you are, you make sure that you are adding those additional data points around each of the cluster center so that no one side of the vector space gets unduly populated compared to the other.
+
+Unknown Speaker  1:35:38  
+So that's what smart does,
+
+Unknown Speaker  1:35:41  
+and it gives
+
+Unknown Speaker  1:35:44  
+9438
+
+Unknown Speaker  1:35:47  
+63
+
+Unknown Speaker  1:35:50  
+compared to 9329
+
+Unknown Speaker  1:35:53  
+and 59
+
+Unknown Speaker  1:35:55  
+What do you guys think about it?
+
+Unknown Speaker  1:35:59  
+It's definitely a fruit.
+
+Unknown Speaker  1:36:01  
+Normally. Yeah, I would say it is an improvement.
+
+Unknown Speaker  1:36:07  
+And then smart has a big brother called smoting. So it does use smote. And then it uses some algorithm to look into the nearest neighboring logic. I do not exactly understand how that algorithm work. It's called Smart with edited nearest new neighbor.
+
+Unknown Speaker  1:36:26  
+So after it applies the smart algorithm, it does something to look into the nearest neighbor and adjust the position of the data point little bit exactly how it does that, I do not know very clearly. But what I have seen, out of all of this sampling technique, these ones tends to produce the most balanced results, the smoking. So this is the one that I use the most when I do these things.
+
+Unknown Speaker  1:36:53  
+So let's see how smoteen works
+
+Unknown Speaker  1:36:58  
+exactly all the same steps
+
+Unknown Speaker  1:37:07  
+92
+
+Unknown Speaker  1:37:09  
+the lower class went to 54
+
+Unknown Speaker  1:37:12  
+and the balance scorecard, score goal went up to 75
+
+Unknown Speaker  1:37:21  
+good. So you see why, why this is my best, best one.
+
+Unknown Speaker  1:37:29  
+Yes,
+
+Unknown Speaker  1:37:31  
+say that, Donald, are you saying something? I
+
+Unknown Speaker  1:37:34  
+just said pretty good. Yeah, yeah, it is pretty good. I
+
+Unknown Speaker  1:37:44  
+Okay,
+
+Unknown Speaker  1:37:48  
+and that basically is everything
+
+Unknown Speaker  1:37:53  
+that you can have at your disposal to be able to become a master in this field,
+
+Unknown Speaker  1:38:00  
+in psychic learn based statistical machine learning. That's it. This is basically the end from here on, the more you practice, the better you become.
+
+Unknown Speaker  1:38:13  
+Just it's like trying to play chess, right? I mean, if you haven't learned how to play chess when in your childhood. Trying to learn it as an adult is hard, extremely hard,
+
+Unknown Speaker  1:38:25  
+but once you learn it, then you are nowhere near becoming a good player, and probably you will never be, because someone who have started it since their childhood, they have so much practice that they will machine learning. Fortunately, people don't start from the childhood. Most people start probably around the median age of this class, and that's okay, that's a good start.
+
+Unknown Speaker  1:38:47  
+So
+
+Unknown Speaker  1:38:49  
+cool. So the other part, other half of the class, so we are about 10 after Okay, so let's take a 10 minutes break today. I'm trying to do 10 minutes instead of 15 minutes, so that you get a little a little bit more time, I want you to want to give you at least one hour time to go and practice that same bank marketing thing, but this time,
+
+Unknown Speaker  1:39:12  
+you are free to choose whatever you want to Okay.
+
+Unknown Speaker  1:39:17  
+So the instruction basically says, feel free to use any technique to improve your score and to prevent overfitting.
+
+Unknown Speaker  1:39:25  
+Okay, so it's everything is a fair game, and let's see what's the solved model a file gives here.
+
+Unknown Speaker  1:39:34  
+Does it give you everything?
+
+Unknown Speaker  1:39:36  
+Well, if it does give you everything, I would say
+
+Unknown Speaker  1:39:40  
+you can take a look at it as a suggestion, but try to do things on your own and see what is the best you could do.
+
+Unknown Speaker  1:39:47  
+Actually, it doesn't do anything art shattering compared to the third one, because this is the solution from the third model. So that's good. So we'll see how you can improve. Okay, so let's take a quick 10 minute break and.
+
+Unknown Speaker  1:40:00  
+Come back 20 after and Karen, when we come back, we'll immediately break out into the rooms. Okay,
+
+Unknown Speaker  1:40:07  
+see you guys start the rooms.
+
+Unknown Speaker  1:40:10  
+Anyone has any question,
+
+Unknown Speaker  1:40:17  
+this is activity. Oh six, right? Oh 505.
+
+Unknown Speaker  1:40:25  
+Yes.
+
+Unknown Speaker  1:40:28  
+I saw the readme that
+
+Unknown Speaker  1:40:30  
+it's trying to coach us to use a utility Python file for all our
+
+Unknown Speaker  1:40:36  
+functions.
+
+Unknown Speaker  1:40:39  
+Yes, so that's a good one. So here you will see that in the everything that is done on the third model solution, all of these have been put together in a ml utils.pi file. And they are saying, if you want to reuse those, you can just get it from like, use those function, import the function, and do it that way,
+
+Unknown Speaker  1:41:02  
+but that way, you will be basically producing the same result. So I leave it up to you guys whether you want to do that or whether you want to take another shot through your what is called, especially in your
+
+Unknown Speaker  1:41:16  
+when you are doing the null value filling the imputation, right?
+
+Unknown Speaker  1:41:22  
+Because there are a couple of things that you could possibly improve there. So
+
+Unknown Speaker  1:41:29  
+I leave it up to you. And then obviously you will try your under sampling and over sampling, which you haven't done before. And you will also try either grid search or randomized search, or both.
+
+Unknown Speaker  1:41:44  
+So these are the three things that you will do in addition to what you have done before in the last class. Okay? And if any point, if anyone has any questions, feel free to come out to the main room. We'll be right here if you want to ask anything, okay.
+
+Unknown Speaker  1:42:00  
+Okay, let's get the rooms going pan for an hour.
+
+Unknown Speaker  1:42:10  
+So what new techniques did you guys apply? I tried smote team.
+
+Unknown Speaker  1:42:15  
+Okay. Did it help? It seems to, I don't know if I did it right. We were all pretty lost. I mean, honestly, we're all, like, we don't know what we're doing, and we're going to have to, like, spend some time going over this material again and again, because I don't, I really didn't know what to do, so I tried something, and it seemed to work.
+
+Unknown Speaker  1:42:35  
+Okay, so smoking is one thing you tried. What else
+
+Unknown Speaker  1:42:40  
+dimensionality reduction as well.
+
+Unknown Speaker  1:42:44  
+Okay,
+
+Unknown Speaker  1:42:47  
+yeah, we did the smoke team. And then I also tried to, I did the scaling on the train and test
+
+Unknown Speaker  1:42:56  
+using the standard, using the standard scale, or helped a little bit,
+
+Unknown Speaker  1:43:00  
+okay? And then we also tried to that hyper parameter tuning
+
+Unknown Speaker  1:43:06  
+with the random search CV and that. So we got point eight four and point eight three, with the
+
+Unknown Speaker  1:43:15  
+scaling and the so teen. But then we tried hyper parameter tuning, point eight, four, no point eight, four, as in, were your balanced accuracy score. So, so at the end, it prints out two values for train and test. So, like in, in respective of the two values that print out, which is, I think,
+
+Unknown Speaker  1:43:36  
+what is it? So have you, have you guys just printed the balance accuracy score. Or have you actually printed out the classification report
+
+Unknown Speaker  1:43:46  
+looking at the balance accuracy score for white train and white test? Yeah. Well, one thing is, when you are specifically for imbalanced data set, you should look into the full classification report, because remember what I was saying that between your majority and minority class, you will see the f1 score for majority class will be higher generally, but your goal is to make the f1 score for the minority class as high as possible.
+
+Unknown Speaker  1:44:17  
+And if you do classification report and look into the macro average under recall. That is your balanced accuracy score, anyway. So those are the three numbers I typically look at when doing this type of stuff. I
+
+Unknown Speaker  1:44:33  
+tried doing that with the classification report, and then I was lost at how I get to like the original
+
+Unknown Speaker  1:44:40  
+Okay. So let me quickly run you through what I did
+
+Unknown Speaker  1:44:45  
+so, and this is the notebook I already posted, by the way, on your GitLab,
+
+Unknown Speaker  1:44:52  
+under
+
+Unknown Speaker  1:44:54  
+activity five, you will see that the fourth model solution was already present.
+
+Unknown Speaker  1:45:00  
+And then this one bank marketing, Chad prediction. This is a new file that I have added. Okay,
+
+Unknown Speaker  1:45:09  
+so let me quickly walk you through to show you what I did, very little different than what was already there.
+
+Unknown Speaker  1:45:20  
+So first thing is, I chose to get the data set directly from the UCI repo, and not from the BCS server.
+
+Unknown Speaker  1:45:29  
+So that is here, where I'm getting the full data set from here, and it has 45,211
+
+Unknown Speaker  1:45:37  
+rows. So this is the whole data set that I have.
+
+Unknown Speaker  1:45:41  
+And if you look into the value counts for y 39,000 versus 5000 so clearly there is an imbalance.
+
+Unknown Speaker  1:45:51  
+And then I did these
+
+Unknown Speaker  1:45:54  
+actually, I have to run it again.
+
+Unknown Speaker  1:45:58  
+Okay, so run it again one more time.
+
+Unknown Speaker  1:46:03  
+And then, if you do this, you will see that there are four columns here that have null values, job, education, contact and outcome, previous outcome,
+
+Unknown Speaker  1:46:15  
+like what you saw before, 81% of previous outcome is none. 28% of contact is none. 4% of education is none, and point, 6% of job is now value.
+
+Unknown Speaker  1:46:28  
+Then what I did is that fill with, fill job, fill education, those type of functions I chose to write one generic function that you can use for different columns and you can provide which value to fill with, basically, kind of the same thing. Just added an extra, extra parameter here, and the column thing, I also made that a variable so that you can pass the name or names of the column that you want to fill with, and what is the value that you want to fill with. So that is my general, generic utility method. And then I applied this utility method on the job first, because the job we saw that there are only very few of those are that are missing. So I just said, just fill with the text unknown. So which is what I did here. So when I run this, and then if you go back up and run this again, you will see this job column will drop off from this list.
+
+Unknown Speaker  1:47:28  
+So now the job column is gone because of the all the non values in Job column is now filled with the text unknown
+
+Unknown Speaker  1:47:37  
+due to application of this function here.
+
+Unknown Speaker  1:47:41  
+Then I did something different for the education column.
+
+Unknown Speaker  1:47:47  
+And this is what I was referring before that these, I think, is really good. So what I did is, since looking into this data set, like
+
+Unknown Speaker  1:47:57  
+just using our common sense, so we kind of figured that job and education kind of are dependent on each other. So therefore we can try to find what is the prevalent education level for across these different 10 or 11 job categories and use that mapping to fill out any missing education value.
+
+Unknown Speaker  1:48:23  
+So in order to do that, what I do is I take just the job and education column separately in a separate Mini, tiny data frame with two columns,
+
+Unknown Speaker  1:48:34  
+and on that data set data frame, I do a group by on job. And for each job, I basically do the count of the corresponding education,
+
+Unknown Speaker  1:48:45  
+and then that's what I display here. So in this display, you are seeing that for job category, admin, prevalent education type is secondary, with 4219
+
+Unknown Speaker  1:48:59  
+as opposed to these two
+
+Unknown Speaker  1:49:02  
+for the blue collar job, the prevalent education type is primary, for enterpreneur, prevalent education type is tertiary and so on.
+
+Unknown Speaker  1:49:13  
+Then I take these and do something called there is a function called IDX max. So what this does is it will give you, for each of these headers, the row, column, row headers. It will tell you which column is most prevalent, like which column has the max value across all these different rows, and then I convert that into a Python dictionary, and then print that dictionary.
+
+Unknown Speaker  1:49:42  
+So when I do that, you will see basically a summary of these in a JSON format, which is a mapping. So for admin, it's saying secondary is the most prevalent. Blue color is secondary. Entrepreneur is tertiary, housemate is primary, and so on. So.
+
+Unknown Speaker  1:50:00  
+So the idea here is, unlike what was shown there in your given notebook, that don't just fill all the null values for education with primary rather, you pick one of these three primary, secondary or tertiary, depend looking at the rest of the job that are not now, and look at what are the most prevalent education category for those respective job types.
+
+Unknown Speaker  1:50:33  
+Okay, so now I did this code in here just to try out, and once I'm satisfied with the result. Then I turn that into a reusable method, which I call fill education, where I'm basically doing the same thing here. And this is my mapping. And then I take this mapping, JSON, which is this, and apply it as a lambda function across all the rows of the x data frame
+
+Unknown Speaker  1:51:05  
+where the education column is currently. Now, as you can see here, if the education column is currently now, we are filling this up with the mapped value from these key value pair using the job field as the key. So basically, what it is saying is, if for any given row the education is value is not present, look into what is present in the job column, and then with that value, go into this dictionary and see for that job category, what is the most prevalent education type, and bring this in as your education type.
+
+Unknown Speaker  1:51:49  
+Otherwise, if education is not now, then leave it as is, which is education.
+
+Unknown Speaker  1:51:56  
+So by doing that, I'm filling in the missing values of education column with either of the three values, primary, secondary or tertiary, instead of blindly applying primary across all of those.
+
+Unknown Speaker  1:52:11  
+So that is my function.
+
+Unknown Speaker  1:52:15  
+And then I apply the function on all of the x data frame,
+
+Unknown Speaker  1:52:21  
+and then for contact, same thing, I simply apply unknown.
+
+Unknown Speaker  1:52:27  
+And then for previous outcome, I apply a value called non existent.
+
+Unknown Speaker  1:52:32  
+And with these, all my null values are gone.
+
+Unknown Speaker  1:52:38  
+So if I go back up,
+
+Unknown Speaker  1:52:41  
+rerun this cell again, you will see all of these columns will be gone from here.
+
+Unknown Speaker  1:52:46  
+So this is gone. So that means no more null values here.
+
+Unknown Speaker  1:52:53  
+So my all my null problem is now gone
+
+Unknown Speaker  1:52:57  
+then
+
+Unknown Speaker  1:52:59  
+for all the categorical columns. So I basically put them in a loop just to print, what are the different unique values that you have for all the categories, Category column. So for the job, you have these ones. For the marital you have married, single and divorced. For the education, you have primary, secondary, tertiary. For the default you have yes and no and so on.
+
+Unknown Speaker  1:53:23  
+Why I did this so that looking at these, we can make a decision for each one of these, which one to use one hot encoder and which one to use ordinal encoder, basically the same as what is done here. Nothing different.
+
+Unknown Speaker  1:53:39  
+So then I put all of these into these encode categorical function, where I take each of these respective encoder do a fit transform on the x data, and then concat all of these together in a single data frame.
+
+Unknown Speaker  1:53:56  
+And then for the ordinal columns, I just replace them in place with the ordinal encoder by doing a fit transform.
+
+Unknown Speaker  1:54:06  
+So now, once you are done with this, then you can take the whole x data frame and apply that encode categorical feature function on this, and this is how your x data frame would look like, which will now have 31 rows up from 17, because some of the one hot encoding we have done
+
+Unknown Speaker  1:54:27  
+and where we have done ordinal encoding, for example, where did we do ordinal like housing, we converted it to zeros and ones loans, we converted it to zeros and one month, We converted into one through zero through 12 and so on.
+
+Unknown Speaker  1:54:44  
+So that is my encoded
+
+Unknown Speaker  1:54:48  
+data frame.
+
+Unknown Speaker  1:54:51  
+And then finally, for y, I apply the one hot encoder with drop first, and that turns all the yes, no value in the y column, y do.
+
+Unknown Speaker  1:55:00  
+Frame into zeros and ones.
+
+Unknown Speaker  1:55:03  
+So in here, all my encoding is done. Then only thing remaining is doing the train test split, reshaping the y values to negative one and one.
+
+Unknown Speaker  1:55:16  
+And then finally, from today's class topic, which is your up sampling.
+
+Unknown Speaker  1:55:22  
+So since we noticed that smoking tends to give the best outcome, so instead of taking doing down sampling or doing random up sampling, I use that smoking as my up sampling method, which basically does synthetic up sampling. And with this up sampling,
+
+Unknown Speaker  1:55:45  
+we basically now have more rows, 51,000 rows,
+
+Unknown Speaker  1:55:52  
+and then here.
+
+Unknown Speaker  1:55:55  
+So here, this is not the grid search or random search yet. I didn't do that, but you can do that afterwards. I just didn't have time to do that. Instead, what I did is I basically took three of the most common classifier, which is logistic regression, KNN and random forest.
+
+Unknown Speaker  1:56:16  
+So what I did is I put one instance of each of these algorithm in a list which is this,
+
+Unknown Speaker  1:56:23  
+and then iterated over this list. And for each of this classifier, I do a model fit using my training data,
+
+Unknown Speaker  1:56:34  
+and then I do a predict, and this is the prediction using the training data.
+
+Unknown Speaker  1:56:42  
+So resample data is training and test data is just test, and then I find the balanced accuracy score from training data, which is why sample and prediction from this.
+
+Unknown Speaker  1:56:56  
+And then I do the using the same model. I do the prediction with test data. So my y2 is my prediction outcome with my test data,
+
+Unknown Speaker  1:57:07  
+and then this accuracy score is my accuracy score on my test data. So that means accuracy is accuracy for training. Accuracy te meaning test is the accuracy for test and then there, here I am printing both the accuracy values, and then I'm also printing the classification report based on the test outcome. And then I do this across all these three different classifier
+
+Unknown Speaker  1:57:35  
+and then print a horizontal line with dashes.
+
+Unknown Speaker  1:57:38  
+And when I do this, and see here, I'm not doing any hyper parameter tuning at all. I'm just tuning using the three model with their default hyper parameters.
+
+Unknown Speaker  1:57:50  
+With this, with this, I am getting for the logistic regression, I'm getting a f1 score of 43 for the minority class, 82 for the majority class. So majority class suffered, but minority class shows a big improvement with the overall average balance score of 78
+
+Unknown Speaker  1:58:14  
+then it printed the result for this is for the logistic, then it printed the same result for KNN.
+
+Unknown Speaker  1:58:21  
+Here we are getting 90 versus 56 so both improved
+
+Unknown Speaker  1:58:28  
+compared to logistic and then balanced accuracy score also improved to 85
+
+Unknown Speaker  1:58:37  
+and then finally, for random forest, 93 and 64
+
+Unknown Speaker  1:58:46  
+with balanced accuracy score going up to 86
+
+Unknown Speaker  1:58:51  
+Are you over fit
+
+Unknown Speaker  1:58:53  
+on that one? So this last one is Yes, I was going to say this last one is overfit. But even then, with just these three first trial, I can see out of these three algorithm, random forest looks to be most promising.
+
+Unknown Speaker  1:59:11  
+Now the next thing that you should do, which I didn't do because I ran out of time. So now, out of these three algorithm, you should now do hyper parameter tuning on random forest classifier only.
+
+Unknown Speaker  1:59:24  
+Now what you should do is you should either do grid search or random search and look into the Random Forest classifier and figure out what are the hyper parameters that you are going to tune like do the grid search on which should be an estimator. You could use one of these three criteria value. You could use a range of max depth value.
+
+Unknown Speaker  1:59:49  
+You can also do a minimum sample split, which the default is two. You can change the split level. So there are a whole bunch of things. So.
+
+Unknown Speaker  2:00:00  
+So now the more hyper parameter you use for tuning your search space is going to be wider, so therefore it will need more time for your grid search or random hyper parameter search to be finding the winner model. But what I suppose suggest you do is you take this notebook and continue on this work, take the Random Forest classifier and do a grid or random search with different hyper parameter values to see whether you can improve upon this result, and at the same time, reduce the overfitting which is happening here with the default random forest. It is not uncommon to have overfitting with default, because by default, the tree can trees can be of arbitrary depth, and that's why it kind of tends to overfit with your data. So I suppose that if you do that tuning, so this last one will give you best results. And if these were a Kaggle competition, you will probably be within the top 10%
+
+Unknown Speaker  2:01:03  
+so in this model, I would have gone with KNN, because it wasn't over fit and
+
+Unknown Speaker  2:01:10  
+it was you can,
+
+Unknown Speaker  2:01:13  
+yeah, you can try that too, because it is 99 and 80 versus 84 Well, it is still overfitting 99% I would say, if anything, logistic regression showed the least amount of overfitting with the default parameters,
+
+Unknown Speaker  2:01:29  
+both KNN and random forest over fitted. So you can do hyper parameter tuning on both if you want K, nn and random forest logistic regression, you shouldn't do too much, because it tends to create a little simplistic model
+
+Unknown Speaker  2:01:45  
+when your parameter, like feature space, is higher dimension. So or you can also try other things, like your ADA boost, your XG boost, some of the other things we talked about, I just chose these three randomly. Or you can also try as VM, which I didn't do. So,
+
+Unknown Speaker  2:02:08  
+okay,
+
+Unknown Speaker  2:02:11  
+so I hope this whole four weeks of machine learning was useful. I hope you more practice, you will slowly start to get the hang of it. Okay, and then we will, you will meet with me for one more day, which is next week Monday, which is where you are going back to Week 13.3
+
+Unknown Speaker  2:02:33  
+and we are not going to have any class lecture time. Instead, what you guys will be doing is, if you look into the readme file, this is the readme for week 13 plus three activity number three, which is your mini project, which is what we didn't do last week, didn't do this week, which you are going to do next Monday. And now you probably realize why, because if you did it last week, you would not have applied all of these techniques. So here, if you go here, there are links to five different data set on UCI ml repo. So you are free to choose any one of these as a group and try these technique and that will give you a lot of practice.
+
+Unknown Speaker  2:03:24  
+Now, if you guys want, you have these, you know, what are the five data set? Feel free to give it a try, even before coming to class on Monday, right? So it's up to you. You don't have to, but if you want, you can, because you said that as a group, are we sticking with the people we are in the last group with for the product,
+
+Unknown Speaker  2:03:43  
+if you want to, we can do that, yeah? Because this is kind of a non trivial amount of work. Yeah. So why not? So maybe that that project you will do within your with your the group that you will be doing your group, project two with right project, two groups. So, so, yeah, we will do that. So you guys know which other people you worked with, right? I mean, I'm sure Karen has it written down somewhere, but I don't remember exactly, but so what we'll do is we'll just going to open, we are just going to open the five rooms. And then you know which group you belong to, you will just go there.
+
+Unknown Speaker  2:04:20  
+Okay, okay.
+
+Unknown Speaker  2:04:22  
+And then I will be off for three weeks. There would be a sub instructor. And then by the time you I'm coming, I'll be back. You will probably be done with your project too. But I believe I managed to prepare you guys well enough, even though, JC, you said you don't know what you are doing, believe me, take a little bit time in your own time. Look into this. This stuff is not that hard. So, yeah,
+
+Unknown Speaker  2:04:52  
+well, is there anything you'd really recommend like doing outside on our own time to kind of try to, like.
+
+Unknown Speaker  2:05:00  
+Lock in what we've done the past couple of class periods. Yeah, that's what I was referring to these,
+
+Unknown Speaker  2:05:08  
+what is called the Kaggle. You can also go into UCI ml repo, and you can look into different type of database, sorry, data set. And if you want to practice some classification problem, you go and search some classification data set. If you want to type some regression problem, there are some regression data set.
+
+Unknown Speaker  2:05:30  
+What I sometimes do is if some of these data set looks interesting to me, I search in Kaggle to see what other people have done with this data set.
+
+Unknown Speaker  2:05:42  
+Okay, so I do that, and then if you want to so another thing you will notice, most of these data set are kind of academic in nature. They are not very big, huge data set.
+
+Unknown Speaker  2:05:55  
+If you are looking to try on really huge, big data set. Another place you could go Go is registry of open data on AWS,
+
+Unknown Speaker  2:06:05  
+and I can put the link on Slack,
+
+Unknown Speaker  2:06:11  
+live chat here.
+
+Unknown Speaker  2:06:17  
+So here, if you go in, explore the catalog that will bring you here,
+
+Unknown Speaker  2:06:24  
+and here you will get some state of the art data set.
+
+Unknown Speaker  2:06:29  
+You can start looking into these, but these are the kind of data set where you will get most benefit by using neural network, because there are more large and complex data set. That does not mean that you cannot use circuit learn on this you can definitely, I leave it up to you, since you asked DAX, like, what else you can do? So these are, like, stretch goals. And
+
+Unknown Speaker  2:06:52  
+this is not for everyone, not for the faint of the heart, but if some of you are more enthusiastic to try out and really build new skills, more industry specific skills these AWS Marketplace for open data, that's a really good way to look into some really cool, exciting data set,
+
+Unknown Speaker  2:07:12  
+all right? And thank you so much.
+
+Unknown Speaker  2:07:16  
+Cool. Thank you.
+
+Unknown Speaker  2:07:18  
+Thank you guys. See you Monday. Thanks. Have a nice weekend. Bye, everyone. Good day.
+
