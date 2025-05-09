@@ -1,0 +1,681 @@
+Speaker 1  0:03  
+Hello. In attendance, I'm seeing 25 people have joined. I guess we can get started. Or, I don't know whether someone is already getting into Thanksgiving mode, and if someone is going to skip the class today,
+
+Unknown Speaker  0:19  
+showing up a little bit. Sadly, people are coming Yeah,
+
+Unknown Speaker  0:22  
+oh, now, now people are coming in. Yep, yep.
+
+Speaker 2  0:26  
+The numbers wander in. Or, you know, not necessarily.
+
+Speaker 1  0:29  
+Um, do you guys see the slide on my screen? No,
+
+Unknown Speaker  0:35  
+we see a bunch of code. Like,
+
+Speaker 1  0:38  
+Oh, you see a bunch of code. Hang on. So then I am probably sharing a wrong screen. That's
+
+Speaker 3  0:44  
+a great bank account. Yeah,
+
+Speaker 1  0:51  
+okay, I have to share this one here. How about now programming?
+
+Unknown Speaker  1:00  
+Okay, yes,
+
+Speaker 1  1:01  
+so that's good. And then I also, we are also going to go coding so, and you can see my VS code now, okay, so let me see if the switching occurs, and the slide now, because we have to keep switching back and forth. Perfect. Okay, system check pass. Let's get started. Okay, so guys, today, we are going to do something little bit more interesting than what we did yesterday. So yesterday, we learned about basic things like how to declare a variable, how we can have different types of variables, how we can assign values to the variables, how we can do some simple arithmetic operation with the variables, and how we can print using various function and formatting and so on right. So that's a quick recap. Just a quick refresher. Can someone remind everyone what are the four different data types that we learned in yesterday's class?
+
+Unknown Speaker  2:13  
+Integer, load,
+
+Unknown Speaker  2:17  
+float, yes, sold, string,
+
+Unknown Speaker  2:19  
+string,
+
+Unknown Speaker  2:21  
+variables,
+
+Unknown Speaker  2:24  
+Boolean,
+
+Speaker 1  2:26  
+booleans. Yeah, boolean is the one that can have only two value, true or false. So four different data types that we have learned. Today, we are going to do a few things. So first we will see some different types of variables that can hold more than a single value. So if you think about last class, what we did if you create an integer that can hold only one number, same for a float, same for a string, only one piece of text, right? And same for a Boolean. But often time it happens that you have to have a multiple of these variables kind of tied together, connected together, so that you can apply some operation across the board, like, let's say, for example, if I have to go and talk to each of you in chat, I can direct message you. So in that example, you will be one variable each, let's say, but if I want to talk to all of you, I can probably do a broadcast, broadcast message through zoom. And then what zoom will do, it will basically go through all the participants that are present in the meeting and broadcast the message to all of them, right? So this is, this is one scenario where a program would like to have all the different, all the things that are of interest, kind of tied together with a single variable, so that any operation that we do that can be applied across the board. So these types of variables are also called data structures, meaning these are a way to structure the data using some more sophisticated way, rather than having one variable each, right? So that's the first thing that we are going to do. We will learn about what are lists and what are tuples. So list and tuples are two different data types that we are going to learn, and we will then learn how we manipulate the list, different elements on the list and apply different functions on top of the list. From there on, we will go on understanding how we can apply conditional so if you think about that pseudo code example that we were discussing yesterday. Remember when we are tech stacking the plates and bowls, we had to write some conditional, like, if it's a fancy plate, then stack on the top shelf, if it's a regular plate, stack on the bottom shelf, if it's a cracked plate, then throw it in the trash. So those are the kind of thing that if you want to do and code, you have to use some condition. Statement, which is the second part of the class today, which is if else statements, right? And we will see how we can apply the different conditions on different types of variables based on the values that the variables have. We will also learn about looping. So loop basically means iterating through or repeating some action through multiple variables that are part of a list, which is what I was saying before. If you have a same type of operation that you want to apply to more than one variables, let's say you have five or 10 or 50 or 100 variables, and you want to apply some operation to each one of those, then instead of writing 50 different commands in Python, you will use something called looping, and that will loop through all the different 50 or 100 or however many you have. So you don't have to write each and every command separately, because otherwise your code is not going to be of any use when you when you do multiple same thing, when multiple times in a repetitive manner. So, so these are basically the three main topic, understanding the data structure, understanding conditional logic and understanding looping. So these are the three main topic of today's class. So starting with the data structure first. So data structure are could be anything that holds information, which is so it says and is not a variable. Well, it is kind of a variable. It's just a different type of variable. So when it says and is not a variable, meaning it is not one of the fundamental variable, which is integer, float, string and Boolean. Those are fundamental variable. So those itself are not data structure. Data structures are something that holds more information and is not one of the foundational variable, but it can store multiple of these variables. That's what the data structure mean. So there are two kind of data structure that we will learn. One is called list. So what does a list do? So it can hold multiple pieces of data with one variable, and these multiple pieces of data can be of different type. So you can have a list of, let's say, 10 items. The first item could be a string, the second item could be an integer, third item could be a float or any combination thereof. So Python is such a it is such a cool feature of Python. And for those of you who have programmed in other language, such as C, C Plus Plus or Java, you guys would probably appreciate that, unlike in those other language, Python does not put any restriction on what you can or cannot store inside your list or inside your data structure, you can store mix and match of things, and for that reason, Python is called a dynamically typed language. So what that means is the type of a variable is not decided when you are writing the program, instead when the program is running. On the fly, Python decides what is the type of variable depending on what is the value that is stored inside the variable. So the typing is happening in the dynamic dynamically when the program is running, so which is basically the run type bind, runtime binding of the data type. That's what Python does, and that's why you will see that we will have a list that will have different types of variables all within one data structure. And then when we are talking about the list, we will have to do something like, Hey, I have a list. How I can get the first item from the list or the second item for the list. So for that, we will have to use something called indexing. So index is basically nothing but in but a number that says which position in the list that you are looking at currently. And one thing in Python and in most other programming language, the numbering starts from zero. So please, please, please, keep that in mind. Lot of new programmers kind of make this mistake and end up getting wrong result. They think the numbering starts from one, but no, if you have a list that has trend items, the sequence of the first item or index of the first item, I should say not sequence index. The first item would be zero and it will go to nine. So 10 item, meaning it will go from zero to nine. If it is five item, it will go from zero to four. Okay, so that's list index. So using the index, then we can find a single item from a list, or we can find a range of items from the list. So if, let's say there are 10 items, I want to see anywhere from like all the items between third to seventh position in the list. So we can do that, or we can say, hey, give me the first item. Or give me the. Fifth item, or give me the last item. Or we can say, give me all the item from position number six onward. So there are various way you can access items from the list, and that's what you do with indexing and slicing. So the indexing is the left hand side, as you're seeing here, info list, for example, is our list variable. If you say info list zero, you will get the first item. If you do info list one, you will get the second item. In full list two will give you third item and so on. Now this one is little bit odd, yeah, it says if it says negative one. So these are two different things, right? So it says info is zero, or info list one. So if you use zero as an index, you will get the first item. If you get negative one as an index, you will get the last item.
+
+Speaker 1  10:57  
+If you do negative two, you will get the second from the last item and so on. So when it comes to indexing in Python, and this is something also not available in other languages, Python and some of the new modern languages have this feature where indexing can be positive or negative. If it is positive, then it will start counting from the beginning from the front, and if it is negative, it will start counting from the end. So you can do indexing both way. And the other one I was talking about, if you want to say from this to this, let's say out of the 10 elements, if you want to do element number three to element number five, so you can use start, whatever that number is, and then a colon, and then a stop. So that will give you just those many elements. Similarly, if you want to do starting from a some point, let's say fourth element onwards, and all the way to the end. So you use a very similar syntax as this, except you don't specify anything for stop. That means start from this position and go all the way to the end. So some number, colon, and then you close the bracket. If you do the other way, if you start with colon and then just say, Stop. What that means is you start from the beginning and stop when you get the fourth element. So to get first four element of a string, you will have to say, colon, three. That means 0123, and that will give you the first four element. And if you don't specify anything, just just put a colon. That basically means, hey, give me all the items, which is basically same as the list itself. So that's basically all the slicing mechanism that you have in Python. Could
+
+Speaker 2  12:40  
+I just interject, actually, if you do colon three, that'll give you 01, and 201, and two, yeah, the number goes to a number one is right after the last one you want. Yep, yep,
+
+Speaker 1  12:55  
+okay. And then couple of other function that we are going to use. Well, index, we learned how we use the index to return a list of item. Then we will see how we can append a list. Append an item to a list. So let's say if you have a list containing five items and you want to add another one, so you use a method called append, and that appends one another item to the end of the list. You can if you want to remove something that you can use POP or you can use remove. So the difference between pop and remove is so let's say there are five items in the list. Okay, so let's say there is a dog and a cat and a bird and a horse and an elephant. Now you want to remove the cat. So if you know that cat is at position number one or position second element, then you will basically say pop, and provide the num value of the index, which in this case would be one, and it will remove the second element. So if you already know that which position the particular object that you are trying to remove is currently at, on the other hand, if you don't know which position that the object is at, but you know what the value of that object is, then you can say dot remove, list, dot remove, and say cat. So then what Python will do, it will automatically find where in the list that object cat resides, and it will go and remove the object that is kept. If you want to find what is the length of the element or not element, sorry, a list, you will have to use this function called Len, which is basically just a short form of length. And then three other aggregation function that you can do that applies to the whole list, which are max, min and sum. So with the max, it returns the maximum value of the elements in the list. Main will return the minimum value from the list and some. Will return the sum of all the items in the list summed up together. So these are some of the list function that we will be using today.
+
+Unknown Speaker  15:12  
+Any question before we go to the next one.
+
+Speaker 3  15:19  
+So something that keeps throwing me off with Python is that those are list functions and not list methods.
+
+Unknown Speaker  15:28  
+So you don't use.no correct
+
+Speaker 1  15:33  
+these, yeah, because these are not, these are not instance methods. These are essentially like, if you know what object oriented programming terminology, these are plus methods, instead
+
+Unknown Speaker  15:50  
+of instant methods.
+
+Speaker 4  15:54  
+You're okay. I'm so sorry. Um, can you go to Slide five? I'm sorry. Slide six. That was my mistake. Okay, and slide six when you're talking about the list. So let's just say your list is six items. So six items would be zero through five. If I wanted to identify five, I would put negative one, or could I put five? Did I do one or the other?
+
+Speaker 1  16:23  
+Yes, exactly, both will give you the same result. Okay,
+
+Unknown Speaker  16:28  
+cool, thank you.
+
+Unknown Speaker  16:32  
+My question is,
+
+Speaker 5  16:34  
+the on this slide, the the value that we put in, or I'm not sure if that's the right word, is in brackets, but previously, we've put things in parentheses. Is there a difference?
+
+Speaker 1  16:45  
+There is a difference. So when you put things in parenthesis, that's where, where you are calling a function. So let's say someone has written a piece of code and saved in as a separate routine or function, and you are calling that piece of code, and you are passing some data that that CO piece of code is going to operate upon, and that's when you are going to use parenthesis. So what you have seen in the previous class is we have used this thing called print. So that print thing is actually a function, and when you put something within parenthesis after the word print. So what that means is you are invoking a function someone else have written, and you are passing some data that the function will work with, which in case of print, it will just print it in the console. So that's so anytime you see that you use a statement with a parenthesis, that means that's a function. List, on the other hand, is not a function. Is just a variable, but it's a special type of variable that contains other variables. So whenever you see something like this, and you use these square brackets, and the square brackets is a way to tell Python like, Hey, I'm not calling a function. Instead, I am trying to access a particular element from a list of other elements from this variable.
+
+Unknown Speaker  18:10  
+Okay, thank you and
+
+Speaker 1  18:12  
+you. These are not interchangeable. If you buy mistake, use square bracket where you are supposed to use parenthesis, the Python will error out. These are expected many, yeah,
+
+Speaker 4  18:29  
+so if it does error out, is there a specific error code or message that it gives to indicate, like, Hey, you used brackets versus parentheses or something like that, we know well,
+
+Speaker 1  18:43  
+it yes and no, it depends. So sometimes this error message, like, if you are programming for the first time and you see the error message, it may or may not make sense for you, because the error message sometimes, what it does is it strikes, it tries to correct you with all the good intention, but it doesn't know the context or what you are thinking in mind, why you use that in the first place. But over time, when you do see these error you will see that as you keep programming, first you will see that you will probably get a lot of errors. And then you start trying to run the code and it shows an error message, and then you keep scratching your head. But before too long, you will see that you will see that you will get much better at understanding what the error message says.
+
+Speaker 1  19:30  
+Okay, so, so we talked about list, we talked about the different functions that we can operate on list, and then the next thing we will learn is something called tuple. Now tuple is, for most purposes, you will think that tuple is nothing but a list. So what happens is, let's say if you create a variable called like in this case, for example, info list, someone created a list of variables. That is info list. Here we are creating something called tuple, and we are calling it info tuple. And when we declare a tuple, instead of putting like, when we are first declaring like, Hey, this is my tuple, and that tuple needs to have these two, three or four items in there, that first declaration happens with the parenthesis, not with a square bracket, but after that, any list indexing method that you apply like here, indexing and slicing all of those you can apply on a couple variable as well. But the difference is, when you are declaring something with as a couple, you put the declaration within a parenthesis rather than a pair of square brackets. Now the question is, why would you really do that? Well, there is a difference between tuple and the list in the way that it internally handles the memory and how the variables are stored there. So the list that we talked about it is something that we call mutable, meaning after you declare a list with, let's say, 125, or 10 variable, after that, you can go and add more element to the list, you can go and delete elements from the list. That means the list can mutate or change tuple. On the other hand, even though it works exactly like list. But one big difference is this is immutable. So if after you create a tuple with, let's say, three items or four items after the first line of creation, it is not possible to do an append or remove or anything like that, that item, those four item for the tuple is fixed from the beginning, so that's the only difference now, because of that, when you are going to do some operation on the tuple, the operations on the tuples are slightly more efficient in terms of computing time needed, because internally, Python knows that this tuple is never going to change. The moment it see that sees that the programmer has created a tuple with four elements. Now it knows that what we expect, that anything and everything that the user is going to do on this tuple from this time onward will always operate on four elements. So there is no variation. Because of this assumption, any operation that you do on tuple turns out to be a little bit more faster than the corresponding operation on list. Now keep in mind, though, you would not actually see this if you write a list, a list of 10 elements of if you write a list of, sorry, tuple of 10 elements and you want to print, you will see it's probably taking the same thing same time, which is just a blink of your eye, or not even that. So these time difference that I'm talking about is probably in the order of nanoseconds. So this thing will be prevalent when you are working with millions of lists with millions of items in them, right? So for now, for your purpose, list and tuple will behave the same way, except in the list, you can add and remove new items. In tuple, you cannot add and remove new items. Other than that, everything else is the same.
+
+Speaker 6  23:13  
+Hey, Bin, now I have a good question. So on this tuple, you have like a combination of string, Boolean, number, right? Is that the difference also between tuple and list, but list, maybe it's all has to be the same kind of data type, and then tuple can
+
+Speaker 1  23:27  
+mix no both list and tuple can have mix of data types.
+
+Speaker 6  23:32  
+Okay. And then is the word tuple something that has to be used as part of that code, or is it something? Can be like, info, underscore, whatever, x, right? Is that what it is? I just,
+
+Speaker 1  23:46  
+yeah, no, yeah, no, no, no, yeah, exactly. This is just a variable name. Oh, okay, okay, yeah, you can, you can name the tuple Ingrid, your name, it's it, but you have to have a meaningful variable name. But this is just showing so they have chosen, in the in the slide, they have chosen to use this word tuple, just to, just to kind of indicate that this is a tuple type of object. It's not a list type of object. This is just a name.
+
+Unknown Speaker  24:10  
+Yeah. All right, thank you.
+
+Unknown Speaker  24:14  
+Okay, so now question about that,
+
+Speaker 5  24:19  
+yes, question. So if you can name that anything you want, how does Python know if you want a list or a tuple
+
+Speaker 1  24:28  
+based on what you are based on what you are assigning to it? So on the right, so you basically put the name of the variable and put an equal sign, and then after that whatever you are assigning. So if you So, here you see that you have this thing within a pair of parentheses, right? So now Python knows, by looking at this and this, that this is a tuple instead of this. If you change it to this and this, then Python will know that this is a list. It is based on what. You are assigning to the variable, not the variable name, that even name does not have any meaning at all, it is just
+
+Unknown Speaker  25:08  
+and the tuple is the immutable one.
+
+Unknown Speaker  25:11  
+Tuple is the immutable one, and thank you.
+
+Speaker 1  25:20  
+Okay, so let's actually quickly. Let me run a few of some example before I ask you to go into a breakout room and do your first activity. Now, one thing I'm going to show here today, I'm going to run Python code in a way whereby I'm going to not use the terminal, unlike what I did earlier, and I'm also not going to run the Python file from VS code as a python file. Instead, I'm going to run it as a notebook, which is, remember, with Anaconda, you can run it as a Jupiter notebook. So you can run the same Jupiter notebook here from inside your VS code, and I'm going to show you how to do that now. Can you first confirm that you see my VS code studio VS code window? You
+
+Speaker 7  26:10  
+can Okay, so
+
+Speaker 1  26:14  
+there is a prerequisite here, and I don't know whether it already comes with it, because I've been using this for quite some time. But if you can do this, go to this tab that says extension, not tab. Sorry. Icon, first, second, third, fourth, fifth. Icon. If you click on this icon that says extension, and here, type the word Jupiter, and the first one that will come up, it says, Jupiter, if it is not installed on your VS code, there will be a Install button. In my case, it is already installed. Can you guys try and see what you see? Do you see it installed already?
+
+Unknown Speaker  26:58  
+Nope, install
+
+Unknown Speaker  27:00  
+Okay. Install them.
+
+Speaker 1  27:02  
+Yeah, because that is something I was not sure whether it came pre installed or whether I installed it at a later point, but seems like I did some time and I forgot. So just wanted to confirm, yeah,
+
+Unknown Speaker  27:14  
+you have to add the extension. I
+
+Speaker 8  27:29  
+so it's giving different options of create or open in Jupiter notebook, select Jupiter kernel, yeah,
+
+Speaker 1  27:37  
+it will, it will, yeah, just have this installed, and then it will okay. So once you have this installed, then you can actually create or open a Jupyter Notebook button. You can click on that, like what Vijay said, or in my case, it was already installed, and I just now want to create a new Jupiter notebook file. So how do I do that, I'm going to file and actually, yeah, so file and I'm saying new file. So when I say new file, here it is giving me some options. Do you want to use text file, Python file, or Jupiter notebook, file? So here I can choose Jupiter notebook, and now it will open something like this, where there is a cell where you can write, run some code and run the cell with this little button here, execute, and then the output will be printed right right there. And then there will be a new cell, so you run some other code in the next cell and then use so the beauty of doing this is, like yesterday, when we all these activities that we were doing, right, there were like five, six different things that we are doing, and we write the whole thing in a python file, and when we are executing the Python file, it is running everything. So if you have a python file and you are running the whole file, then there is no way you can only run a few lines, whereas in the Jupyter Notebook, there are different cells, and you can group your code that you are writing in the cells in whichever way you want, and you can just run one cell, and that will just run that piece of code. And the other thing you can also do, you can have two different kind of cell. You can have a code cell and you can have a markdown cell. So in the markdown cell, you can use the same type of markdown that you use in the Git, GitHub, MD files like the readme.md, on those files. Remember, in the first week, we did talk about the Markdown syntax. So you can actually use this Jupiter notebook to annotate your code with nice HTML, type formatted markdown with picture and all the niceties, and then inter, Inter, check that with your actual working code. So if you think about that, x. Example that I shared with you guys in the first week, where by GitHub repository that I did in my Amazon AWS repo, where we are, basically I showcased how to use time series forecasting for stock market prediction. So if you go into this that repo, you will see that in a Jupyter notebook, I have lot of nicely formatted text, graphics image, and then I have interjected that with actual functioning Python code. So that's essentially a Jupyter notebook that I created. So here, let's say in the first line, hang on, not marked down. I wanted to do markdown. Yeah, sorry, not code. So now,
+
+Unknown Speaker  30:48  
+why is it not letting me move it up here?
+
+Unknown Speaker  30:53  
+Nope, okay,
+
+Speaker 1  30:56  
+okay. So what I did is I used inserted the first cell as a markdown so this is a markdown cell, and this is a Python cell. So in the markdown cell, I can write,
+
+Speaker 1  31:17  
+let's learn Python data structures, let's say so then what I did is I hit a Shift Enter, which you can also do is you can click this, that little button there, the play button. Well, no, actually, yeah, you can for markdown sale. You can click this little arrow, or you can just hit enter and see how it renders like that and just like what I showed the other day. So these one hash means heading level one. If you have two hash, then you will have heading level two. So right? So that's how you can basically use the markdown.
+
+Unknown Speaker  32:09  
+Now let's create a list,
+
+Speaker 1  32:13  
+just like what we are looking in the slide. So we are going to create a list with a mix of, let's say text and text and number. So let's create a list that will have a name of a person. Let's say James and his age. Let's say 34 and I'm going to have another name. Let's say Jane and her age, let's say, oops, 25 so now with this, I have a list with four elements. Now I can print this list. Oh, sorry.
+
+Speaker 9  33:06  
+Is there any way you could make your text a little bit bigger, zoom in a little bit maybe?
+
+Speaker 1  33:12  
+Oh, sorry, yes, I will sorry. One thing I forgot. I forgot to select a kernel, and that's why this thing is not running. It is instead here showing me select your kernel, and this is where I'm going to use that same dev environment that we have created. Now it will run, okay, so the first cell didn't run, and now the first cell run and the second cell run. Okay, let's see how I can zoom in.
+
+Unknown Speaker  33:45  
+Can I do a command? Plus? Oh, yeah. I
+
+Speaker 3  33:48  
+think what I almost missed is that you ran the first cell to declare the variable and then the second so you can print it right? Yes.
+
+Speaker 1  33:57  
+So this cell, when I run this, it creates the list, and then I basically print the list. And there is no reason you have to write it in two cells. You can also write it in one cell. So that way you run this, it basically creates the list and print it right there.
+
+Speaker 4  34:12  
+So I'm sorry I tried to run it, and it's telling me to select a colonel, Colonel, and what did you select again? So
+
+Speaker 1  34:23  
+if you hit Command Shift P, oops, sorry, hang on, what did I do? Command shift, shift P, and then, if you type python there, and then there would be a list. In that list, there will be item that says, Select interpreter, use, click on there. And then you have to select the work source, sorry, workspace folder, which is the current folder. And then it will say, it will show you whatever Python runtimes are available in your computer. In my case, I have 123456, Different Python runtimes, and I am selecting the one that is Dev, which is the conda runtime that we have created in the first week. So once I select this, then the program will run. So you have to select some runtime before before you can execute. So
+
+Speaker 4  35:16  
+I did that, and it's still telling me to select something. Okay,
+
+Speaker 1  35:21  
+so why don't you quickly share your screen? I'm going to stop mine.
+
+Unknown Speaker  35:30  
+Okay, can you see mine? Yep,
+
+Speaker 1  35:33  
+you see now on the top right, it still says, Select kernel. So what that means is your kernel is not selected, okay? Click on Yeah, click on Python environments,
+
+Unknown Speaker  35:48  
+yep, and then click on dev,
+
+Unknown Speaker  35:52  
+and that's it. And now,
+
+Unknown Speaker  35:56  
+yeah, so, okay,
+
+Unknown Speaker  35:58  
+so I must
+
+Unknown Speaker  35:59  
+hit a shift enter
+
+Speaker 1  36:04  
+or just click on that little play button. Yeah, there you go.
+
+Unknown Speaker  36:07  
+Okay,
+
+Speaker 4  36:10  
+okay, thank you. I apologize. No problem.
+
+Unknown Speaker  36:13  
+And what did you type after
+
+Speaker 3  36:16  
+Command Shift P to get the Python kernels to
+
+Speaker 1  36:19  
+pop down, you just type python and it will filter. The list will filter as you keep typing,
+
+Speaker 6  36:29  
+hey, the No, sorry. But by I created, or I selected the kernel already, it's is there. But when I try to run it, I kept getting syntax error unmet. Or maybe, you know, I think I miss a bracket. Never mind.
+
+Speaker 1  36:46  
+Syntax error is something that you have to fix, unfortunately, because I cannot go and fix everyone's syntax error, right? Anyway. So let's quickly run through this, and if you can hold on to your question little bit, and then maybe when you do the group activity. You will have to do lot of these yourself anyway. Okay, so info list, we printed. Another thing here is, even if you don't use the print statement, if you just say info list, it, it still prints. So this is another cool thing in Jupiter notebook, if you just want to print something, you just say that in a cell, and it will just do the print, because print is the default behavior of a Jupyter Notebook cell if you have a variable there at the last line. So info list gives me the whole list. Now, remember, we talked about indexing, so if we say info list zero, it should give me gems. So let's see that. Yep, you see that the output is now changed to James. If I do info list negative one,
+
+Unknown Speaker  37:52  
+it will give me 25 because the last item is 25
+
+Speaker 1  37:58  
+if I say info list three, I will also get 25 because the list has four items, starting from zero to three. Now the error I was talking about is, instead of three, let's say, by mistake, I put four, and the list doesn't even have have got a five items. So now I will get an error. And then this case, the error clearly says the list index out of range. Now, going back to, I think Tiffany, you are asking, how do we understand that? So some error message would probably be kind of straightforward, like here, it says list index out of range. So when you know list index out of range, what it means now, okay, so here in this line, it says, in this particular line, you have list index out of range, but it will not tell you what value your list index should take, because Python doesn't know whether it will be zero to three or zero to 30. All it knows is, when you make a mistake, that you have made a mistake. It will not tell you what the mistake is, okay, okay. Similarly, if you say negative one, it will print 25 right? If you do negative two, what is it going to print?
+
+Unknown Speaker  39:13  
+J, right.
+
+Speaker 1  39:17  
+If you do negative three, so now we are going from the end to the beginning. If you do negative three, it will say 34 which is 123, and then if you say negative four, it will print the first element, which is James. But what happens if you print a negative five, now you get the same error, which is the list out of range. So either way, when you make that provide an index that is not within the zero to four range, it is going to give you an error. Okay. The other thing is, we talked about the slicing. So what if, if I want to get only the first and second item from the list, not the. Third and fourth. So what we can do, we can say, Hey, start from my index zero and go until index one. Actually, I made a mistake. Zero to One basically means zero, then up to less than one. So you have to and this is what Karen corrected me, and I made the same mistake again. So thank you, Karen for corrector here earlier. So here, if you put zero to two, so it will go zero and then one and then two, it will not print because it says stop when at two. So if you say zero to two, it will print the first two element, James and 34 now, can you tell me? What is it I have to write if I want to print only Jane and 25 what would the slicing be?
+
+Unknown Speaker  40:47  
+Colin's 2012,
+
+Unknown Speaker  40:51  
+like that.
+
+Speaker 1  40:57  
+That will only gems or sorry gems. 34 still. 34
+
+Speaker 1  41:05  
+Okay, hang on. Someone said three to four is that the right one?
+
+Unknown Speaker  41:11  
+It will only give you one.
+
+Unknown Speaker  41:14  
+Then you can start it from two.
+
+Speaker 7  41:16  
+Two. Yeah, two or Colin.
+
+Speaker 1  41:21  
+There you go. You have to say two to four, not three to four or 25 is the one. Hang on. I think you will see your question. You can just do this. Okay, so see some of this question when you have in mind, you don't have to ask this question. If you have your thing you can just try it, right? So ask me only something that you cannot conceptually understand, but these are something that you just play with it, and very soon things will be clear to you. Now the other thing is, if you don't know which position this item Gen is at. What would you like to see which position Jane is at?
+
+Speaker 4  42:10  
+Can you just type in info list Jane and will it tell you
+
+Unknown Speaker  42:16  
+almost
+
+Speaker 1  42:19  
+I mean, I understand your thinking. You are thinking the right way. But you don't do that if you do infinite index, and then there you have to provide the value of the variable, and then it will say it is at position two, which is these. Okay, if you type something that is not there, let's say I'm typing, hey, give me the Linda index of the item below. Now the item below is not there in the list today, and it will say it is not in list. In this case, though, the error message is pretty clear. It says the item that you are asking that item is not in list. Okay. What else? Let's see. Let's do an append. Okay, so now Benoit was not there, but I can add there, so I can say in full, is dot append, and then say benign, and then it appended. Now, the other good thing about Jupiter notebook is you can go and run the cell in any order. So last time, when I ran this cell, it said that Benoit is not in the list. Now I ran this now I can go back here. Just click here and run this cell. And now it says below. Is that position number four? Because I have already run the cell below. So you can run this in any order. So it comes in real handy when you are trying to play around with your code in different sequence, when you are trying to kind of build your program or algorithm.
+
+Speaker 4  44:02  
+What if you want to put Benoit as position two?
+
+Speaker 1  44:10  
+What if you want to put Benoit at position two? Okay, who can tell me what you do?
+
+Unknown Speaker  44:22  
+Can you do that
+
+Speaker 3  44:25  
+when to insert it at position two? Yeah, well, the pop command takes an index. So does the Append command take an index?
+
+Unknown Speaker  44:37  
+It does not.
+
+Speaker 1  44:39  
+So the reason you cannot do that is this list in Python is a sequence like you can go to position two and change the item value to be not, but you cannot go and insert an item in the middle of the list that simply is not allowed. So. So if you want to do that, then you have to write a code, like you have to write a function. So let's say you want to append benign position number two. So what you need to do first, you need to see what are the element from two onwards, like position number two onwards, and then you need to copy those into a separate list. And then you have to add benign position number two, and then you have to delete everything after Benoit, and then all of those things that you kept separately, then you have to append backing. So it is a lot of work. So Python does not allow you to insert anything in the middle of the list, so
+
+Unknown Speaker  45:37  
+try not to make edits.
+
+Speaker 1  45:41  
+Yeah, well, there would be other data structure that you can do this, I mean, but all of those will be someone made that custom made, not something natively available, but
+
+Speaker 3  45:53  
+Benoit. It's actually the insert method for the array. So if you do info list, dot insert. It takes two values, the index to insert at, and the value that you're inserting. So info,
+
+Unknown Speaker  46:10  
+dot insert. Can
+
+Unknown Speaker  46:12  
+you do that in list? Oh,
+
+Unknown Speaker  46:19  
+it says index and object. So
+
+Unknown Speaker  46:22  
+if you do, like two minutes, but
+
+Unknown Speaker  46:24  
+I just put it in the chat,
+
+Unknown Speaker  46:26  
+oh, I didn't know that.
+
+Speaker 1  46:31  
+Okay? And then if I print in full list again, oops, sorry,
+
+Unknown Speaker  46:37  
+if I put in full list again,
+
+Speaker 6  46:38  
+when we restart, like if we started gonna clean up, right? Rather than adding things in the middle, which is very hard to kind of keep track. What if we restart and then adding it manually from the first, I don't know, the first cell in there. Is that possible to do that?
+
+Speaker 1  46:55  
+Yeah, because Jupiter notebook cell you can, you can insert, delete, or rewrite, or any order that you want. So here what we are doing is we are just so let's say I don't need this list, right? I mean this cell, I can just delete that. I don't need this I can delete this cell. I can delete this cell, right? So you can delete this cell at any time, and then you can even copy the cell. Sorry, if you, let's say your code is kind of getting little bit messy. You have five different cell and if you want to put things in one cell, well, there is no problem. You can just move the code and run everything together. And there you go. Right,
+
+Speaker 6  47:37  
+yeah, because to see it kind of alphabetically from top to bottom, maybe.
+
+Speaker 1  47:44  
+So Jupiter notebook makes it really flexible for you, but I totally hear you. So when you are running lot of experimentation and you have a lot of different ports spread around, spread around, it can get little tricky to kind of keep track of which code you run after which So, but that is totally up to you to maintain the discipline, to clean up and to make sure that you are running cell in one in that order. The other thing you can do is in here, there is a button that says, clear all outputs. If you do clear all outputs, everything that you have run before is gone, and then you can start running fresh.
+
+Unknown Speaker  48:24  
+Is there a hot key to run at all?
+
+Speaker 1  48:28  
+Yeah, here, right, here, run out. So if you have 10 cell, if you hit run out, run all the cells. Yeah. Okay. What else? Oh, we talked about those some and minimum and maximum and those function. So let's say we create a list. Let's call it scores, and this list will have numbers. So let's put some random numbers. I
+
+Unknown Speaker  49:07  
+course. So let's say this is my list sports.
+
+Speaker 1  49:10  
+So now, if I want to see what is the maximum value of sports, I can use the max function and apply this, apply it to the scores list, and that will give you, oh, Max course is not a variable in that sense. So you have to say, print Max course, and that gives you 61 if you do min scores, that will give you 14, I suppose, yep. And then if you want to do some of all the scores,
+
+Unknown Speaker  49:56  
+then it will sum up all the scores and give you the sum so.
+
+Speaker 1  50:02  
+Okay, so that's about it all the list functions that we've talked about, the activity that you guys have now is you will see that on your BCS dashboard. No, sorry, ah, what I'm saying not the vicious dashboard, but GitLab repository. So if you go there for second week class, two activities, and then there is this activity number two, which is student creator menu. So what it says is, hey, create a tuple, tuple containing these, print the tuple list of items for the menu selection, and then create a list of prices for each and then ask the user to input a new item and then append it. Ask the user to input a price and then append it also, and then print the minimum prices, and then the next few is basically how you do a remove and a pop, and how you find the most expensive things on the menu and the cheapest thing on the menu, basically using the mix and mean and max function and find the total cost if someone bought all the items in the menu, which is basically using the sum function. So you will have a prompt file, which is just like this, and then you just have to write the code. Now, when you are doing it, if you want to just put the codes here and run the whole thing is a Python file that is totally fine. If you want to run it as a Jupiter notebook, then you have to kind of copy and paste and things into a Jupiter notebook and run the cells there. So I leave it totally up to you how you want to run it. So let's do about 10 minutes. Let's see what the suggested time was. 15 minutes, yeah, I guess we are fine. So it's 10, 723, right now. So let's create the breakout rooms. And Karen, what's the attendance today? 28 people. I think I see,
+
+Speaker 2  52:08  
+I see 35 to almost every 31
+
+Speaker 1  52:13  
+Oh, for me, it is showing 30 Oh, no, 35 Sorry, my bad. Yeah. 35 so 31 Yeah. So let's create rooms. Or can we use the same room from yesterday? Or is it all random? No, because
+
+Unknown Speaker  52:29  
+I kind of recreated, okay.
+
+Speaker 1  52:37  
+Okay, so let's create the rooms and give everybody 15 minutes to work on these activities,
+
+Unknown Speaker  52:43  
+five rooms.
+
+Speaker 1  52:45  
+Five should be fine, yeah, that would be like, what, six people each, yeah, okay.
+
+Unknown Speaker  53:00  
+One second there.
+
+Unknown Speaker  53:04  
+Okay, I'm ready to roll
+
+Unknown Speaker  53:14  
+like that. Jesse, I
+
+Speaker 4  53:17  
+don't like your thinking over there, let's let's not do that.
+
+Unknown Speaker  53:20  
+No, we're gonna do all three tonight.
+
+Speaker 1  53:25  
+Okay, cool. So how did you guys feel doing that seemed pretty easy.
+
+Speaker 3  53:34  
+You know? What really caught us up was the difference between remove and talk that remove takes a value, ah, it's an index, yeah,
+
+Speaker 1  53:44  
+okay, but hopefully you were able to figure that out how the two works, and what's the difference? Yes,
+
+Speaker 3  53:49  
+Ingrid is a genius, yeah. Okay, cool.
+
+Unknown Speaker  53:54  
+Actually, it's good to have caught up on,
+
+Speaker 10  53:58  
+I got caught up on the menu, append. Wasn't able to quite resolve that. I don't know if, if I could share my screen. If you might have input on on this.
+
+Speaker 1  54:10  
+Why don't I actually do this? I'm going to just very quickly run through this, and I'm not going to type everything in the just for the interest of time, I'm actually going to go to my use my magic wand and magically bring the code in, right? So, so the first was, you had to create a menu section with snack, mail, drink, dessert and print this. Oops. Where did it go? Oh, here. So that was your first and then, and Blair, or anyone stopped me, where, when you see the place where you had difficulties, right? So then we were asked to create a list of item for one of the menu selection we. Which is
+
+Unknown Speaker  55:04  
+this.
+
+Speaker 1  55:06  
+So let's say you have these items, and then you have to create another list for the prices.
+
+Speaker 7  55:12  
+And what I mean by that is all these people just chilled, endless. Ah. That.
+
+Speaker 1  55:25  
+Oh, what was that? Was there some videos playing? That's weird. Yeah, that was okay. Okay, so you had basically two lists, one which is a list of food items, like dessert item, and then another list where you had the prices, and then you had to ask the user input for another item that you wanted to add. And when you run this,
+
+Unknown Speaker  56:00  
+up on top, the prompts up on top.
+
+Unknown Speaker  56:03  
+Yeah, where did it go
+
+Unknown Speaker  56:06  
+at the very top of your screen? Oh, huh,
+
+Speaker 1  56:09  
+this thing has changed. This is probably a new version of VS code. It used to be coming right there, huh? I haven't run VS code, sorry. Jupyter Notebook within VS code in few months. So okay, so let's add another item in the list. Let's call it ice cream. Okay, yes. And then we also have to add what is the price of the ice cream going to be now when you do that, you see what we are doing. Here is we are saying, How much does deserts minus one cost? And this is an F string. So what it will do is it will look into this desserts list, and it will take the last item and use that in the prompt itself. So when I run these, it will say, How much does ice cream cost here? So let's say 349, and now I have captured the ice cream prices. Now we can print both of these, the desert and prices. Why does it keep jumping here? Let me delete this. Yeah. So now we have desert and desert prices, and then comes the Remove part. So let's say the next prompt was ask the user which item you want to remove, and then you will basically take that item and remove now, in order to do that, one way you can do this is do a dot index. So let's say when you run this, the user says, hey, I want to remove something. Let's say charity chart. So then you can do a dot index on that and save the index. And then there are two different ways you can remove. One is using the Remove function with the item which will be that. Or you can also do using POP. So here we are showing two different way that you can remove. So the first one is using the function called remove, and there we are using the item name itself. Why? Because the question, think about the question that we are asking, Which item you want to remove. Now, if the user says, hey, I want to remove cherry turd. I know the index of cherry turt is three, but I also know that these two lists are kind of aligned next to each other, so item number three here will also have corresponding price at item number three there. So for that reason, what we are doing here is we are doing a dot index on the first list and capturing the index, and then we are going to use this index on the price list to do a pop but for the desert list, we could do that. We could say desert dot pop index. Or, since we already have the item name being captured from the user prompt. For user prompt, we can just say desert, start, remove, and then provide the item name directly. So now, if we run this, and let's run this, and we are going to say charity, and now we are done. So now if I go back one level up and run this cell again, it should show me four items instead of five, minus the cherry tart, and then this 3.5 should be gone from here. So let's confirm that, yep, charity chart is gone and 3.5 is also gone. So that's how. So you can do remove our pop on a depending on which which kind of removal you want to and then the last few things were, find the most expensive menu item, which is basically just max of desert prices, and it says 699 because, yep, 699 is this thing of lower, and that is the most expensive. And the next thing was the cheapest menu item, which is 349 and the next prompt was to find the sum of all menu items, which is basically just a sum function, which turns out to be $19.72 cent. And then the last prompt was confirmed that the menu and price lists are the same length. So to do that, you basically apply the land function on deserts and land pump function on desert prices, and then it will print the menu length is four and the prices length is four. So that was basically all right. So now, Blair and anyone did anything you did in this differ from what I showed you, or any difficulty you had in any of these steps.
+
+Speaker 10  1:01:29  
+My question got cleared up. I didn't make it okay as far as you did in this demonstration, but I followed along.
+
+Speaker 1  1:01:39  
+But please feel free to run these in your own time that, because you will have the so unsolved file you all already have. And Kian will also post the solved files later. And then I what I suggest is, for those of you who couldn't run through all all of these today, and the ones, those who wants to learn Python who haven't programmed in Python paper before, please go through this before looking into the solid files, and that way your learning will be most effective. Okay, cool. So that's that the next is what we are going to do is conditional. So the conditional is something that allows you to direct the program flow in one way or the other, right? And there are three kind of conditional statement that we will see now. One is a simple if, like, if something happens, that do do this. The second flavor of this is if else, which is basically do one of two things. If something is true, go right, else, go left, something like that. And then Elif is something that you can use in conjunction with if else, when you need to do multiple branching. So if using, if you can do only one decision making one branch, if else makes you do two branching and if else combined with Elif can will let you do multiple branching as many as you want. You just have to keep writing them, one after another. So these are the three main ways that you will see that we will use the conditional statement, and they look like if, and then condition. Condition is basically something that will evaluate to a Boolean condition. And then you have statement. And the statement can be one statement, multiple statement. It doesn't matter, but there would be a statement block after this, like this is one example. If you say, hey, if temp is greater than 80, then you call a function, turn on AC, else call another function called open windows, right? So someone was asking me, what happened? When do we use the pair of parenthesis? So this is one example. So in this fictitious example, this turn on AC and open windows are presumed to be two functions that are already available in some library that we have included in our program, right? So that's a quick example of your E files question, yes.
+
+Speaker 5  1:04:19  
+So the the difference between the top half of the black section of the bottom half is the top half, just like the pseudo code, how to write it in pseudo code, and then the bottom how to actually write it in Python. Yeah.
+
+Speaker 1  1:04:30  
+Well, it's not really pseudo code. I would say this is showing the syntax, or not really syntax, the structure of how an if else would should look like you have to read this condition as a placeholder for where actual condition will be coming in, which in this case is temperature than 80. So if you match this to this, in the top half, we are saying condition. In the bottom half we are actually specifying or providing. An example what a condition might look like, which in this case is this variable 10 value greater than 80. And then this block here, it shows that there could be one or more statement after that. It will have to follow with an else with a colon, and then it can follow with one or more statement. So same thing here we are showing, instead of just showing statement one and two, we are actually writing a statement which, in this case, happens to be a function power the another thing you have to hang on a second, another thing you have to note here is how this code is indented. And this indentation is something that is very important whenever you are writing something inside a E, for else block, whatever you are writing inside needs to be indented by one tab. Python is very finicky about this indentation. If you get your indentation wrong, your program execution will error out. Okay, question.
+
+Speaker 4  1:05:55  
+So if we so, I don't want you to go back, say on this slide, but in the slide prior, it talked about grades. So if you wanted to put 90 equals an A, anything from 80 to 90 or 89 equals A, B, and so on and so forth. For A, B, C, D, you would put all of those is, if conditions right, they wouldn't be else. Conditions else would be like if it's an F,
+
+Speaker 1  1:06:26  
+it depends on what your condition is. If you want to say, hey, if the temperature is below 10, do something temperature is between 10 to 20, do something else. 10 to 30, do something else, then you will do if, L, if, L, if, and then finally, else, if you want to, on the other hand, say if this thing happens, or this thing happens, or this thing happens and this thing happens, then you will bunch with all of those inside the if shadow. But hold on to that question. We are going to answer all of these by the time we end the class. Okay, okay, so for now, this conditional, here we are showing greater than, but in the next slide, take note, or what are the different kind of conditional that you can do? One is greater than which we saw, and then you can say greater or equal to, and I presume you already know what the difference between these two is so then similarly less than and less than or equal to, and then double equal sign means only if it is equal to, and then exclamation mark equal mean not equal to. So these are the six conditional operator that we will be using. Another conditional you will be using the in the activity is to check whether something is numeric. Remember yesterday, someone asked the question that, when we are asking the user to provide some number as with the input, what happens if they don't provide an input and we are trying to cast it into an integer? And at that time, I said, Okay, hold on to that. Thought. We will come to that in a later class. So in here you will see that you can do some sanity check on the data. So let's say you are asking user a question, What is your age, and you are expecting the user will type some numbers, but you have no control over what user types. I mean, intentionally or unintentionally, user can hit any key on the keyboard and enter and enter something that is not an integer. So then, if you simply do typecast it to integer, it will the program will error out. What you can do instead is you can take that user input and apply a function called is digit. And this is digit function is something that returns a Boolean value. That means you can use it as a condition with a f if statement, and then if that statement is true, then only you basically take that input and convert it into our integer, so that way you can have some additional checks and bounds on the user input. Okay, so that's that. Now I am going to skip the actual instructor demo part, just in the interest of time, I will ask you to continue with the next student activity here, which will be, hang on, where did I okay here? So the activity that you will be doing will be activity number four. And here you actually don't have to write anything. So you will be given pre written conditional, and you have to predict what will be printed on the console. So if you go into the unsolved file, you will see all of these are written for you. You don't have to do anything what you have to do for each of these. So this is problem number one. This is problem number two. So there are multiple of these problems given, six of those given. So for. Each of these, you have to predict what is the outcome of this code block going to be by manually evaluating the condition yourself. I mean, you can obviously just copy paste and run this code in your VS code or Python terminal, whatever. But the idea is for you to make a guess, make a prediction, what the output should be, and then run it to see whether your prediction is correct, so that you can just check yourself okay. You don't have to write any code. So what you can do is you can predict Okay, did the output would be this or that. And then you can copy, paste the code in your terminal or your Jupiter notebook, or whatever you are prefer you prefer to and then run that piece of code and see what output it produces. So that's all you have to do for all these six sample problems that is given as part of this activity. And these ones, since you don't have to write a code, let's take a little less time, 10 minutes from now, and after this 10 minute, I think what time it is now, so we are almost halfway through, right? Okay, so do this, and we will take a break. So, Karen, if you can set, set the room timer for 10 minutes, yep, and let's recreate the room. After that, we will come back in the class for a minute or two, we will do the review, and then we'll take a break for 10 Minutes. Here we go.
+
+Unknown Speaker  1:11:36  
+Okay,
+
+Unknown Speaker  1:11:39  
+so I hope
+
+Speaker 1  1:11:42  
+you guys did all of get all of those answers correctly.
+
+Unknown Speaker  1:11:48  
+We did not do the last one. We didn't get the last one
+
+Speaker 1  1:11:52  
+done. You didn't get the last one. Okay, how about the others?
+
+Unknown Speaker  1:11:55  
+Yeah, we do.
+
+Unknown Speaker  1:12:00  
+I'm sorry say that again.
+
+Speaker 3  1:12:02  
+The last one was tricky, but we got it. Okay,
+
+Speaker 1  1:12:05  
+so let's see the first one. What do you get?
+
+Unknown Speaker  1:12:17  
+Question works, yeah, no,
+
+Unknown Speaker  1:12:20  
+no, oh, need
+
+Speaker 1  1:12:23  
+some work. Yes, and this is pretty easy to see, right? Two times five is 10, but it says, if this thing is greater than 10, then only print this. But 10 is not greater than 10, so it will go here, if you used greater or equals, then it would have printed the first one, the second one. What you got? Question two words. Question two words, why?
+
+Speaker 8  1:12:56  
+Because of the length, the length of this dog is three.
+
+Speaker 1  1:13:00  
+Dog is three, yes, so three is less than five, therefore the if statement works.
+
+Unknown Speaker  1:13:08  
+Next, 123,
+
+Unknown Speaker  1:13:14  
+it is eight.
+
+Unknown Speaker  1:13:16  
+And that question three,
+
+Unknown Speaker  1:13:19  
+question three, yep,
+
+Unknown Speaker  1:13:22  
+yep. So this one, okay, number
+
+Speaker 8  1:13:24  
+four, yeah, countries in Africa.
+
+Unknown Speaker  1:13:30  
+In Africa, yeah,
+
+Unknown Speaker  1:13:33  
+uh. Number five,
+
+Unknown Speaker  1:13:35  
+you're going places.
+
+Speaker 1  1:13:39  
+Yeah. And then number six,
+
+Speaker 8  1:13:42  
+number six, that's cannot be, remember, yeah,
+
+Unknown Speaker  1:13:47  
+why?
+
+Speaker 8  1:13:51  
+Because common also, then strings, double quotes, and then,
+
+Speaker 1  1:13:56  
+no, actually, no, not because of the string. Sorry, yes, even the comma are not there, then is digit would have evaluated to true, because is digit, you are actually supposed to apply it on a string, but then it will return true if the string contains only numeric values, even if a single non numeric values will cause this is digit to return a false.
+
+Speaker 3  1:14:21  
+Oh, yeah. What's really frustrating is that you can't call is digit on anything but a string. Yeah.
+
+Speaker 1  1:14:28  
+Well, what else would you call it on? And it has your order. So,
+
+Speaker 3  1:14:33  
+so if you get a variable back and say, like, is this variable an int, then you have to do like, type is int and, yeah, it's, it's, it's frustrating.
+
+Speaker 1  1:14:45  
+Well, it's just a different way. Like, are you thinking about, let's say, when you get a variable back, you're trying to figure out whether this is a integer or a floating point number, like,
+
+Speaker 3  1:14:55  
+doing type checking just just to make sure that you're not, like, operating on a type doesn't write. Yeah, so awful,
+
+Speaker 1  1:15:09  
+yeah. Okay, so that's that. So let's take a 10 minute break. Or can we make it like, Yeah, let's make a 10 minute break. And now is 1112, my time, which is 812, Pacific. So let, let's come back at 822 let's do exact 10 minutes, because we have three more activities to do. So 822 will be back. Okay.
+
+Unknown Speaker  1:15:38  
+Is everyone back? I
+
+Speaker 1  1:15:59  
+Okay. I hope everyone is back. Yep, I see people have come back. Okay, so let's get started. So now we are going to basically look into some other logical operators in our that we can use in our conditional statement in if else statement. So in the previous activity, right? We saw that how we can use one conditional where we are saying if this is greater than that, or whether if this is is digit, and so on. Now, what happens if you need to have multiple thing that you need to check? For example. In this example, you see that we are trying to check if two variables, x and y, they both satisfy certain condition. In this case, we are checking if x is equal to five and y is equal to five, then do something else, do something else. So when you have multiple condition and you need your if to evaluate to true, if all of them are true, you use this conditional operator call. And so in mind and is an operator that applies to two conditionals, two conditionals. So X, double equals five is one conditional. Y, double equal to five is another conditional. Since you have two conditionals on the two side, you can apply an AND operator in between. There would be cases where you need to check whether one or the other is true. So in this example, you see if x equal to three or y equal to five is true, then do something else. Do something now, the example here says it prints true, meaning it goes in here, why we have x equal to five and y equal to five. So now when you come to the conditional, the first condition is actually false, because x is not equal to three, but since the second one is true, the overall, the whole conditional will evaluate to true because we have used the conditional operator OR and NOT end. If we used end here, then it would have been evaluated to false and print false instead. And the last one in conditional operator is called Not. Not is something when you want to reverse the condition. So if you have, let's say x and y both equals to 5x, greater than y will evaluate to false, because x is not greater than y. So now, if you apply a NOT operator in front and put the conditional within a pair of parenthesis, what you are doing effectively, you are checking as if x is less or equal to y, so not greater than is equal to is the same as less or equals because you are essentially just flipping the table over and looking at from the other side. So that's what the not does. Okay? So these are the three conditional operators that you have. And in another example, going back to that pseudo code thing that we were talking about yesterday, where you have, if you have a cracked plate, then you say, Hey, throw the dish away. Else, if it is a fancy plate, then you do something else, put the shelf in the bottom shelf. So this is a chaining of the conditional one. With this statement called L if. In the previous cases, we saw if and else. Remember, I was telling you, if you have multiple things that you want to check that, then you can have one if, followed by as many Elif as you want. And then finally, if none of these, if conditions are true, then you have a else. So this is basically the leftover. So let's say if you want to award different grades to student and say, hey, if someone is getting greater than 90, you give them a, a. If someone is getting 80 to 90, you give them a, b. If someone is getting 70 to 80, you give them a C, else you give them a D. So this is type of thing where you what you can do with L if condition, and you can have as many Elif as you want, following your if. And then finally, you may or may not want to have else, depending on what's your problem statement that you are trying to Solve question.
+
+Unknown Speaker  1:21:12  
+So I assume it's all clear, then
+
+Speaker 1  1:21:19  
+clear. Was there a question? I heard someone? No, okay. So then the next thing is, there is another type of conditional statement that you can use using this operator called in and this in operator you can apply to a list or to a tuple. So if, let's say you have a list, and the list have multiple elements, and you want to check whether a certain element is contained within the given list, then you can use this conditional state operator called in. So in this case, we have three counties, Arapaho, Denver and Jefferson. And we are saying if Arapaho in counties now, counties has three element, and Arapaho happens to be one of them. So therefore it will evaluate to true, and then it will print true from here, if it is not in so, then you can use this not in operator. So in this case, El Paso is not in this list. So therefore, if you do not in counties, then it will again evaluate it through because this is similar to the NOT operator that we saw before, where not negates the any outcome of the conditional. Similarly here, if you put not in it basically negates the outcome of this in condition and checks the other way, checks for the falsity of the statement. Okay?
+
+Unknown Speaker  1:23:08  
+And then
+
+Speaker 1  1:23:12  
+finally, is, this is something I think Jesse or someone you were saying, like, hey, how do we do this type checking. So let's say if you have a variable, and if you want to check whether a variable is of certain type, then you can apply a type operator on the variable and say, if this variable is of type, so and so. So in this case, the variable we are checking here is this whole thing, which is a list. Therefore, if you check if the type of this whole thing is list. So this list is basically the data type. So I'm trying to check whether this data type of this thing is list. If it is, then it will execute this statement, which, in this case, it would and similarly, if you can, if you want to use is not, then, actually, there is a typo here. What they meant to say is, if type this is not integer, is not integer, then it will print true,
+
+Unknown Speaker  1:24:32  
+because this is not an integer,
+
+Speaker 3  1:24:37  
+because The difference between is and the double equal sign, difference
+
+Speaker 1  1:24:45  
+the IS and double equal sign, yeah, for
+
+Speaker 3  1:24:49  
+example, why wouldn't you put if type double equals list?
+
+Speaker 1  1:24:55  
+I believe you could actually, I have to check that before I say. So why don't I take this and quickly just run it? Here
+
+Unknown Speaker  1:25:05  
+is it used for value comparisons too?
+
+Speaker 1  1:25:10  
+Let's see. So if this is and then if you do double equals, yeah, double equal will also work. In fact, what you can do is, let's just print this type and see what this prints. Yeah, the type basically prints list. So is list and double equals list, in this case, will produce the exact cell output.
+
+Speaker 11  1:25:34  
+So because you're using the type wrapper, like around it, if you just do the object and then do is list, right? That works too, right? Like without the type parentheses, it should,
+
+Unknown Speaker  1:25:45  
+it should.
+
+Speaker 1  1:25:48  
+So let's try that. Yep. So, in fact, that actually is a typo here. I mean, not typo. It's like a, it's not a, right, example. So thank you for bringing this so in this example, if you are when you are using the is or is not operator, you really don't need to use the type, because if you want to use the type, then you You are right. You can just use the double equals operator. You don't need to use the ease, wait,
+
+Speaker 3  1:26:22  
+wait, hold on a second. Can you go back to your Jupyter Notebook? Yep. So that says, if that list is list, print object is a list, and if not, print object is not a list. And it said object is not a list. So when I was doing the Python so, so if you put type around that, would that be true? So if you put if type Oceana, Europe, Asia is list, would that have printed object is a list? Because,
+
+Unknown Speaker  1:26:57  
+right now it's printing object is not a list. Oh, yeah.
+
+Unknown Speaker  1:27:08  
+So let's do an str,
+
+Unknown Speaker  1:27:11  
+oh, str is also saying
+
+Unknown Speaker  1:27:16  
+novelist, okay.
+
+Unknown Speaker  1:27:22  
+And then type,
+
+Unknown Speaker  1:27:25  
+yeah, so why?
+
+Speaker 1  1:27:32  
+What is really the type of this type? What if I do this? Ah, so the type operator actually okay. So here it is, guys, okay. So when you apply type on an object, this type itself returns something that is of a data, type of type. So therefore this is condition is basically going to operate only if the preceding thing before is is actually of a Type, Type. Now if you don't do this, then this is not a type. This is the name of a class, so therefore you are checking an object to a type, and therefore it is going to false. I mean going to else. The only way that you will get the first thing as of Type, Type is by using the word type or the operator type. And that's why this is okay, so my bad,
+
+Speaker 2  1:28:43  
+yeah, or the other way to use the is instance function
+
+Speaker 1  1:28:48  
+are Yes. So the other thing would be, if you can say,
+
+Unknown Speaker  1:28:55  
+if
+
+Unknown Speaker  1:29:01  
+is instance,
+
+Unknown Speaker  1:29:08  
+is list.
+
+Unknown Speaker  1:29:14  
+Actually it's if,
+
+Unknown Speaker  1:29:16  
+let's see what
+
+Speaker 2  1:29:19  
+is instance and presence. He's takes two arguments. One is the item that you want to know about. The other is you would be list. In this case, inside the parentheses, it would be is, instance, the list, comma, list.
+
+Speaker 1  1:29:39  
+So you are saying it will be like this, yeah, and then take out the is list, so then it will be equal to true, yeah, that should be true. Or you can just that, yeah, that should be true. That should be true. But if
+
+Speaker 2  1:29:55  
+you put instead of, let's say, let's you put int instead of list, yeah, yeah.
+

@@ -1,0 +1,885 @@
+Speaker 1  0:44  
+Um, so first of all, I'd like to ask, how are you guys all doing, given the crazy thing that is happening in Southern California, anyone affected, or anyone you know got affected,
+
+Unknown Speaker  0:56  
+everyone is safe and Sound. I suppose
+
+Speaker 2  0:59  
+my sister lives there, and so she been giving me updates, but she's safe. So it is. It's really scary, because I have family there. It
+
+Speaker 1  1:09  
+is, yeah, yeah. I only have one person that I know, one of my childhood friend from school, so they live there, and they and my friend, he actually is out in walk trip, but his wife and they have a dog, they actually was rescue, not rescued, actually evacuated, like on a cautionary basis. So I think their house is still okay, but they were evacuated. So yeah, and the most scary thing, I was looking at the news, they're saying it's 0% containment. So I don't know what that means. Like, what do you mean 0% containment? Like, what is all that fire department doing, all this dropping water and stuff? Like,
+
+Speaker 3  1:58  
+they're out of water. They can't get the water pumped up to this to the hydrants well,
+
+Speaker 1  2:03  
+but don't they take water from the ocean in a plane and then just drop it
+
+Speaker 4  2:07  
+the wind blowing through our Yeah? So one thing that they can't use ocean water because the equipment's not built to handle the salt, and so it'll break and tear the equipment apart. Yeah, it's, we've been dealing with all sorts of stuff like this, yeah, there's just, there's not enough water. Yeah, it's rough down there, yeah,
+
+Speaker 1  2:29  
+but no one here in this class are from that area, right? Anyone here in this room? No,
+
+Unknown Speaker  2:37  
+okay, cool. Yeah, that's good to know.
+
+Speaker 1  2:41  
+Okay, so let's get started. Um, so I was looking at the week seven material, right? So I'm going to share my honest opinion with you first. So I think especially in the first and second day of class for week one, and when I look into the third day of class, I think the most interesting thing starts to happen on from third day onwards, okay, which is where you are kind of trying, starting to make inroading to the actual area of trying to understand what is machine learning, right? Like up until now, all we have been doing is we have basically been learning just the machinery that we will eventually need, but not actually talking about, what is it that mission like, how does a machine even learn? What does the machine learning actually mean, right? So I was thinking, if time permits, and I'll see how it goes, depending on how the questions come and all, but if time permits, I was hoping to cover first and second class both as much as possible today, to free up time later to focus more on that. Do you guys all be okay with that?
+
+Speaker 4  3:53  
+You're saying like week seven plus one and two, week
+
+Unknown Speaker  3:58  
+seven plus one and two, if time permits,
+
+Speaker 1  4:02  
+because essentially, this is all like, hey, just, you just have to know in that in pandas there are different, like, four or five different kind of plots. And obviously, just like anything else in pandas, there are a lot of different ways you can do something like, that's all you need to know. But spending two days just to do different kind of plots. I think it's a little bit too much, so I was thinking maybe we can just rush it a little bit to save more time later. Also, another thing in my other classes, student liked, if we do this and then if we can give them one day extra at the end of week eight, for additional day of project work because project work, essentially you have five class days because out of the two weeks of projects, three days plus three days, the final day is your presentation. So essentially you have five plus days for project work. So I have seen in other classes, student actually do appreciate if they get a little bit more time. So I'm going to try. To accelerate a little bit, but if any point you feel that you want me to slow down, please speak up. Okay? And in order to do that, I'll probably cut down all the group activity time for these two classes, class one and class two, when it comes to the real important stuff, then I'm going to actually focus more on having the group activity, and then I'll you will see me more and more visiting your room from now onwards, like when that starts, that section starts, which is where the machine learning actually work starts. So so let's get started then, okay, I hope that's okay with everyone. It's okay to me. Thank you. Okay, so there is no need to actually follow the slides for these two classes, because it's mostly just learning the different plotting features for that you have, either using matplotlib, directly or indirectly via the pandas plotting function, both usually use actually uses matplotlib and in pandas, there are also other plotting function libraries that are available. We are not even going there. There is, for example, another plotting library called C bond that actually provides much richer and cooler graph. But if you happen to plan to use c1 let me know. I can probably send you some link, or you can just type panda c1 graphing, plotting. It's C bond, C like SCA bond, P, O, R, N, but that is not specifically covered within this course, so I just wanted to throw the word out there. Obviously, these days, anyone can Google search and you will see those. So most of the functionalities you will get using the native matplotlib and pandas functionality as well, but c1 actually gives little bit more professional looking graph with more control over the appearance of the graph and so on. Right again, all of it is just appearance. None of these actually matters when it comes to training. The model is just to make your project look cooler. Okay, hang on. Am I sharing screen? No, right? Nope. Did it start? Yeah, something happened. I did hit Share, and then it was going on in circle for a few seconds, and then let me try again.
+
+Unknown Speaker  7:28  
+How about now?
+
+Unknown Speaker  7:30  
+Yep, got it
+
+Speaker 1  7:33  
+okay. Do you see my visual code? Visual Studio Code? Yes, we can see it. Okay. Nice. I us just okay. So if you look into the first class, first week seven, right the first activity, which is that explored relationship, I'm going to skip that activity right now, and that is, in fact, very, very important activity, but I think the order is kind of better if we go do everything else first and then come back to the number one. Okay, so I'm going to take a little bit of liberty myself to go through all of these activities, and then we will come and come back at number one and explore some of this relationship, which will make a good headway to the next sections that we'll be talking about from day three onwards. So we'll come back and visit that. Okay. So first activity I'd like to do today is line plots. And this is also something, if you remember, I already showed you how we can plot data on from a pandas data frame using line and dots, which is called scatter plot. So you kind of already know this, but we are going to learn it formally today, how it is done. So the first example here, what we are going to do is it's basically like, Have you guys heard about a website called Desmos, which is basically an online graphing calculator where you can put any mathematical function, and it actually calculates a graph, and it shows a graph for you. Anyone seen that?
+
+Unknown Speaker  9:16  
+If not,
+
+Speaker 1  9:18  
+you have used it, right? Okay, so for others, I'm just going to so it's called desmos.com D, E, S, M, O, s.com you don't need to bookmark it or anything. This is not something that you record for this, course, but it actually looks cool. It allows you to plot, sorry, yeah, draw graphs for mathematical functions. So for example, let's say I'm going to draw a function for let's say I'll say is trigonometric function. So I'll say y equal to sine of x. So we all know that sine graph is basically a simple oscillating graph. Yes. So you see it creates the sign x, right? If you want to create another graph. So let's say I call y equal to which is the exponential I'll call it e to the power x, and you can turn off this graph. So this is the graph of your y equals e to the power x, right, which is the exponential increase. So you can basically draw any graph on these Desmos calculator. Sorry, was there a question? I heard someone talking
+
+Unknown Speaker  10:31  
+just to have something great to be back here. It's just
+
+Speaker 1  10:33  
+James has his mic up, came down. Okay. Is that James? Can you go on mute? Yeah. Sorry about that. Okay, no problem. Okay. So, so I just wanted to show that there are online tools there that you can use to draw graphs of any mathematical function, right? So what we are going to do in the first activity today, we are going to do the same thing here using Python. And how do we do that? So as you have seen here, when you are plotting a mathematical function, right? So hang on, where did my window go here? So there is your x axis and there is your Y axis, right? So if you want to draw a graph like this, what you need to do. So when I'm saying, let's say y equals e to the power x. So when you are writing a function like this, this x is basically your independent variable which is plotted in that horizontal axis, like this one, and then y becomes your dependent variable which is plotted along the vertical axis, and that's what the graph is, right? So now, if you want to draw this graph programmatically using Python. What you need to do is you need to have a series of points that represents your X axis. And this could be point, let's say 0.1 or 0.01 apart. The closer the points are much, the smoother your graph would be. And then you need to so, and that could be like a list or a panda series or something. And then all you have to do is similar to here, I'm writing sign x or e to the power x. Here, all of this mathematical function you can write using NumPy, which is what we have been using before, right when we do import NumPy as NP. So using NumPy, you can then construct the mathematical function in your code and then supply that series of values that you are declaring as your x variable, and bingo, you will get a series of values which will be your y variable. And then you take this y and x, which will be basically two list of values, and you use the matplotlib or pandas plot function, and that will render a similar looking plot in your Jupiter net notebook right there, which is what we are going to see. So first thing we are going to do, we need our x axis, right so x axis, as I said, it will be a series of point. So the series of point you can get using a numpy function called a range, as you can see here. Now this a range function takes three parameter the first parameter is, what is the lowest value you want. The second parameter is, what is the highest value you want, and the third parameter is, what is the step you want? So let's say if I do 05, and one. So what it will do is, so it will create an array that will be 01234, because I got a step count of one. Sorry, step size of one. Now that will only give me five points. Now, obviously, yes, I can draw a line, but that line will be Chad because the granularity will not be there. So it's probably better if you take a point which is only 0.1 apart, which is basically 1/10 of a whole unit. And if you do that, then you get a larger series. It still goes from zero to 4.9 but with a smaller step jump, which is 0.1 and then you take that and you follow that your x variable. Okay, so we have one. Yes. Jesse, do you have a question, or can it wait? I was just going
+
+Speaker 4  14:21  
+to say, you said from that number to that number, it's actually like the Python range function where
+
+Speaker 1  14:28  
+it's exclusive, yeah, yeah, yeah. Those are like small details. I mean, in Python, whenever you have a range, it is basically inclusive of the first one, but exclusive excluding the last one, right? So it is basically closed on the left side and open on the right side. That's kind of the mathematical term, and that applies on any range that you do in Python. So okay, so now I have that x variable created, which basically means, now I have this x axis here, so I'm just flipping back and forth between these and this, so that you will be able to. Make that connection better. And let's say now I'm going to create a y. So why would be just like here we did e to the power x. So similarly here I have to write np dot. Now e to the power x is done using a function called exponential of X and that's your y. So your X and Y is created. Now, in case you are thinking, hey, what's there in my y, you can try printing y. And y will print these 50 numbers. And unlike X, you see that these are not going linearly, but all of these numbers are exponential of these numbers, and that's why you see how these numbers are growing much rapidly, much faster compared to the X numbers, because x numbers are going on a straight line. But if you look at the pattern here, the trend, they are exponentially growing, which will basically, when rendered, will render this. This graph, which is a very fast pricing curve, right, which we will do in a second. So now we have our y and we have our x, so now we have to plot. Well, one thing we can do, if these were a data frame, we can take the data frame and do a plot function there. But these are just two lists in Python. This is not even data frame, and you don't need to create a data frame. If they happen to be in a data frame, that's fine, but if you just happen to have two different Python lists lying around somewhere, like in your notebook, you can use the plot function directly, using this PLT, which is the import of matplotlib by plot class. So using PLT, you can just say, PLT, dot plot. And the first parameter there is the your x variable or x axis, and second parameter there is your Y variable or y axis. And then you will do PLT dot show and you do these two, and you run this, and that's what creates this graph, which, as you can see, very similar looking to what we did on Desmos. Okay, now in Desmos, it's a much richer graphing calculator, so you can do lot of interacting zoom in, zoom out, drag you cannot do that using this matplotlib, but this will give you a static graph, which is good to show the behavior of the data. And later, little bit later, we'll see you can actually save this graph as picture file, like a JPEG or PNG files. You can save this, and you can include these, any of our your other documentation, PowerPoint slide or any presentation, anywhere you want to make. Okay, so that's, that's the basic functionality for plotting using matplotlib.
+
+Speaker 5  17:56  
+I'm so sorry. Could you scroll up a little bit to show how you created the
+
+Unknown Speaker  18:01  
+Okay. Thank you so much. My bad.
+
+Speaker 1  18:03  
+Yeah, it just blocked. PLT, dot, plot. Will
+
+Speaker 3  18:07  
+you scroll up to the top? I just wanted to, I'm trying to write that down. What you had at the top,
+
+Speaker 1  18:13  
+you will. So don't worry, Gary, if you don't, you don't, you don't need to follow. If you don't need to write down, if you are okay to follow along. We can start. You can open the unsolved file. You can you can code, but I would not suggest you actually trying to keep pace and writing it down, right? So, because all of these will be available to you anyway as part of the solved file. So okay, and then you will also have the access to the recording of the class. So, so I would say focus on what we are discussing here, rather than
+
+Unknown Speaker  18:46  
+getting busy with writing down on paper. Okay,
+
+Unknown Speaker  18:48  
+I think that's why I've listened so much of it, too.
+
+Speaker 1  18:51  
+Yeah, yeah. You need to go back and look at the recording, and that way you can make better connection, right? So, okay, so what I was saying is, in this plane graph, it's very simple, but there are there's a very important thing missing, like, for example here, I don't know what the x axis mean, what the y axis mean, right? So I don't know. So in a graph, like any graph that we will draw, it is better to basically say, what is the variable that you are plotting in x axis, and what is the variable you are plotting in Y axis. So how do you do that? Well, the graph is already plotted here, but even that is done in a next cell or anywhere, even before anywhere in your Jupiter notebook, really, you can use this function called X level, right? So you can do PLT, dot, x level, oops. Why did I type C level? Type? Am I bad? C level? And you can provide what variable you are putting. You can, let's say, let's say my x variable represents time, distance. Or whatever, right? So let's call it time. Let's say, okay, so that will be your x level and your y level. You can basically type, yeah, whatever. Copilot suggesting growth of or, let's say, exponential growth or something,
+
+Speaker 1  20:27  
+right, exponential growth, or maybe actually, let's do because, let's call it population. So let's say this is a function of a population versus time. So if you do this, then when I run this, let's see what happens. Oh, why did apply? Oh, okay, sorry. In this way you actually have to it. Will not go and apply it up there. You have to do this also, after you do this, yeah, so you have to do this first and then apply and then the whole chart plot will be redisplayed with your levels as you put it. Okay. So essentially, what you are learning is, if you have a Python list or a panda series as your x variable. You have another python list or Panda series as your Y variable, you can use this pipe plot, sorry, matplotlib plot function with those two variable and that will draw a line graph using the x and y as a dependent and independent variable. Okay. And then you can, you can do lot of other customization, which we will see here. We can change the look and feel of the graph and stuff like that.
+
+Unknown Speaker  21:54  
+Okay, any questions so far, I
+
+Speaker 1  22:03  
+Okay, so let's do another one. So this one was exponential. So what if I want to create a trigonometric which is basically what I did here. So when you create a sine of x, or cosine of x, it will basically create a waveform, right? Like this, which is what the sign part is. So now let's try to create that. So what is something? First thing we need to do, well, we need to have our x, and x would would be our NP. Now this one. So let's start from zero, and let's go up to so two pi. So two Pi would be two times np.pi, I believe np.pi, is something that gives me Let me try. Yeah, so x does actually go and actually let me also print x, yeah. So it is going from zero to 6.2. So two pi. Why did I do two pi? Because in trigonometry, you would like from here to here. One full length of wave is basically goes from zero to two pi. So I'm taking a x variable from zero to two pi, and then I'm going to create a Y variable, which will be NP, dot sign of x, and that's it. Actually let me plot two things together. So I'm going to plot y1 and y2 together on a single graph, and that will actually look very cool. So let me to take to a Y variable, y1 would be sine x, and y2 would be cosine x. So two variables, okay, oh, actually, it already prompts it here, oops, so sine x and cosine x, and now we are going to plot both. So how we can do plot both? Well, I have to do plot and then x and y1 and then you have to plot another 1x, and y2 and then you have to do PLT. Dot show. Now when I do this, these renders which grows from one full cycle. So the blue one is sine curve because it starts from zero, goes back up to one, and then ends up at zero. And then yellow one is the cosine curve because it starts at one, goes back to negative one, and then ends up at one again, right? If you want to draw it longer. So let's say instead of two pi, you go it up to four pi, then you will see that you will get two full period of this graph so it goes up one. Cycle and then grows up another cycle. Right now, the reason I went to longer scale two Pi is to show that sometimes the default size that matplotlib comes up with kind of makes the graph little tight and clumsy. Sometimes it probably would make sense if you can, like, stretch it given how much data you want to show. So that's why I went little bit longer here, which kind of makes this graph feel like a little bit squeezed. So what we can do is, before we plot this, if we can somehow change the size and shape of the plot, then that will help sometimes. And fortunately, you can easily do that. All you have to do is use a function called PLT, dot. Oops, not fig aspect, PLT, dot figure. And inside PLT dot figure, you have to pass your size of your figure with a parameter called Fit size, which actually takes a tuple. In the tuple, the first one is your width and the second one is your height. So now I'm doing 15 by five, which will make it more like a stretched white aspect ratio graph. So let's run this and see now it looks much better, right? Otherwise, it was feeling little bit squeezed and and you cannot really see very well, so now you can see very well. So that's all there is to know about the basic plot functionality that are available in matplotlib. And I hope that was clear to everyone. You
+
+Unknown Speaker  26:44  
+any question,
+
+Speaker 5  26:47  
+yeah. So what is the 15 and the five representing is that just like 10s of pixels, hundreds of pixels, like for if you wanted, like, a really specific size for your graph?
+
+Speaker 1  26:58  
+Yeah, I think it is in centimeter. I have to check documentation. You can actually specify what is the unit of this. But if I'm not mystical, I think the default is centimeter. Oh, okay, yeah, yeah. But matplotlibs have has these, like probably hundreds of different things that you can tune tweak, you know, I think I have a,
+
+Speaker 5  27:20  
+I think I have a measuring tape right next to me. I want to check.
+
+Speaker 1  27:27  
+Yeah, it looks like the default is an inches, inches, okay, my bad. Then, okay, inches. But now, the thing is, I don't know. I mean these whole inches or centimeter thing would be relative, right? Like, let's see if I make this right, like depending on this, you see. So they have to, they have to have something with respect to something. So I really don't know how they calculate it. And this is something I don't even need to know. I'll just play around with the number and then whatever kind of suits my need at that point, I'm happy with it.
+
+Speaker 1  28:08  
+Okay, so the next activity is actually student activity. Now, as I said, instead of breaking you guys into the room, let's try to do it here. And since this is a student activity, I'd like you guys to actually drive this, and I'll simply type it. So the ideally what you should do is you should open your activity three look into the prompts and then try it, and at the same time, also read it out to me loud, so that I do the same thing. So that way it will effectively make it like a group activity, right?
+
+Unknown Speaker  28:43  
+And let's do this very quickly,
+
+Speaker 1  28:47  
+because these are very, very simple activities. So what we need to do is we basically need to open the preview here also, so you have the average temperature per month in Fahrenheit. So using the following data plot the monthly average for temperature in both degrees and Fahrenheit. So essentially, what it is saying is we actually have to create this list manually. Like, this is actually kind of stupid. Like, I Why do you create get temperature data manually. You should ideally get from some data source. But I think the idea here is that you basically have these 12 data points which are the temperature of the 12 months. So what you need to do is you need to point the plot these 12 data points in both Fahrenheit scale and Celsius scale using the conversion formula between Celsius to paradigm, which is this, and then you have to plot it with month in your x axis and temperature in your Y axis. That is the very simple ask. So how do you go about doing it? So how do you define your X axis? X label the. No, not level. We are not there yet. First, we have to define our values of x axis, the variables, which
+
+Unknown Speaker  30:07  
+should be the tuple.
+
+Speaker 1  30:13  
+Oh, you may sorry. Well, that was not a tuple. That was a function, by the way, would be x axis Equals NP, a range, yeah, yeah, yeah, let's call it month, because we know that it's month, right?
+
+Unknown Speaker  30:34  
+This stupid copilot.
+
+Speaker 1  30:38  
+Well, not stupid, actually, over smart copilot kind of destroys the fun. So, yes, so it's not a tuple. I don't know who said tupple, it's not a tuple. A range is a function that you are yes, yes. Sorry. Was me with two parameters, which is the beginning and ending. And why we're calling 13, because it has to go starting from one and then ending up to 12. So as Jesse pointed out later, it will basically stop one shot right, and then step size would be one if you don't provide one, but default, okay, default step size would be one anyway.
+
+Unknown Speaker  31:17  
+Okay, so that would be your month array. So
+
+Speaker 1  31:24  
+it will fail because I forgot to run the first cell, yeah, so I forgot to run this first first cell, and that's why it fell.
+
+Unknown Speaker  31:34  
+So that will be your x axis. Okay,
+
+Unknown Speaker  31:38  
+how about the y axis? I
+
+Speaker 1  31:43  
+uh, y axis is already done, right? It's already typed in for you. But hang on, did it say it is a temperature in Fahrenheit? Yeah.
+
+Unknown Speaker  31:53  
+So let I don't like this variable. Then there
+
+Speaker 6  31:55  
+isn't and there is no NP, right? But I think
+
+Speaker 1  31:59  
+it should be. This is a hard coded data. There is no NP, okay. So in the previous activity, we used NumPy to generate the y axis using some mathematical function. Here they are saying, forget about mathematical function. These are the y data that you have, which probably, in a real case, you will probably get it from some weather API or something, right? But here, that whole part is not the focus. The focus is that you have two series of data, that's all. So I'm going to call it temp underscore F. I don't like the variable and points, so I have temp in Fahrenheit. Okay? So now the next thing is I need to do, is I need to plot this. So what function I need to write to plot this?
+
+Unknown Speaker  32:47  
+ELT, dot plot. Okay,
+
+Unknown Speaker  32:49  
+ELT, dot plot.
+
+Speaker 1  32:53  
+And then, yeah, what would be my x axis, months, months. And then y axis would be temp of F. Okay. Now, is there anything else you'd like to do before you draw this plot? Anything else that will make it more name it. I say name. But what about the level? Yeah, the labels, yeah. So let's do that level. So what is the what is level? What level do you want to put for this chart, for the x and y axis? So what is the function first for us? First? Lt X, label, PLT, dot x, level. Oh, call it. Call it months. Yeah, and co pilot is suggesting the same thing. And how about the vertical axis? Do you like suggesting? Yeah, why level? And we'll call it average temperature in Fahrenheit. That looks good to me. And then we'll plot this. And finally, we will issue a show command, which is PLT, dot show.
+
+Unknown Speaker  34:07  
+And let's run it nice. Okay,
+
+Speaker 1  34:15  
+next thing, convert fare high to Celsius. So how would you do that? So you see that comment in this cell. That is the mathematical formula you have to write. So what am I going to write here?
+
+Unknown Speaker  34:31  
+Temp c,
+
+Unknown Speaker  34:33  
+temp c, yeah, is
+
+Speaker 4  34:35  
+equal to and then, since it's a list, it would be square bracket. Then we put it and then we're going to put in the formula, because we're going to do a for loop. So it'll be in the parentheses, F minus 32 Yeah. And then outside of the parentheses, times zero. Point five, six,
+
+Unknown Speaker  35:02  
+yep. Or F in temp F,
+
+Speaker 1  35:07  
+that's it. And let's also print temp c, just to validate that it's working. That's exactly what it does. Yeah. And now we have to plot the Celsius. So how do we plot the Celsius? We can actually probably copy paste this, right? So why? Why bother typing the whole thing?
+
+Unknown Speaker  35:36  
+So what it will change here?
+
+Speaker 1  35:39  
+Just this temp F will now need to change to temp c, your y level, y level will change it to C, and that's it. That's my average temperature in Celsius. Now, how would you what you need to do to plot both on the center? So I'm copying the whole thing again. What else you need to do to show both lines in the semi Chad? Why one? Why two?
+
+Unknown Speaker  36:08  
+Just plus,
+
+Speaker 1  36:12  
+not plus. Actually, if you do a plus, then it will basically take that Celsius and Fahrenheit, and you it will do an arithmetic class, and it will give you a completely different number. So you can use the comma between them, so
+
+Unknown Speaker  36:28  
+no wait something
+
+Speaker 7  36:30  
+else to create a sine and a cosine.
+
+Speaker 1  36:35  
+Okay, so let's go back to that one so see how I did sine and cosine on the same plot. You can take your clue from here. So
+
+Speaker 4  36:44  
+two lines in the middle the two plots, yeah. So
+
+Speaker 1  36:47  
+you basically have to issue the plot command twice, like once we are doing for temp F, you have to do a PLT, dot plot another time, but this time it would be temp c, right? Now, obviously here then for y level, saying a for C does not make sense, because now we are plotting both on the same chart, so we'll just call it average temperature, temperature, and that's it, right? So obviously, as we expected, both Chad shows that same pattern, which is around June, July, being the hardest is just the scale is different.
+
+Unknown Speaker  37:32  
+Can we label the lines like themselves?
+
+Unknown Speaker  37:37  
+We can. We will come to that. That's
+
+Unknown Speaker  37:39  
+where you have a legend.
+
+Speaker 1  37:44  
+Yeah, we will come to that. So let's go through the activities, and then we will see, okay, so then the next one is also, hang on. We did this one, right? Okay, so the next one is where we are going to see how we can configure some of the line plots. Okay, now this one for the instructor demo. I'm just not going to bother writing everything again, because we kind of know how it is done. So we'll just go through and follow how we can configure some of the properties of this line plot, right? So one thing you will see here, that there is this is these are called Jupiter magic commands that starts with a percentage. So if you start your like, anywhere in your Jupiter notebook, if you execute this, then the graph, it will provide you some better functionality. So, but in order to be able to run this like if you run this right now, you will probably get an error, so try running this so in a new cell, try running matplotlib widget with a percentage sign in the front and see what you get.
+
+Speaker 8  38:55  
+Yeah, I got some commercials. So runtime program Anaconda
+
+Speaker 1  39:00  
+correct, and the reason is that in order to do that, you have to do a pip install. So do a pip install, and pip install you can do in a new cell, and it has to start with exclamation mark. So pip install, I think the library was i, p, y, M, P L, i P y, M, P L, just do this and install this library and use that same conduct runtime. Of course, in my case, it will say requirement already satisfied, because I already have it Library. In your case, it will probably take a few seconds and it will install a library.
+
+Speaker 8  39:45  
+Do I need to do this? Abortion of MATLAB
+
+Speaker 1  39:49  
+doesn't matter. Doesn't matter, because you will only do this once. You will never they will be required to run a peep install, because this is just installing our dependence. Right? You install it once, and that's it.
+
+Speaker 8  40:03  
+But still, I'm getting the same value. I don't know what's going wrong with this. Me too.
+
+Speaker 1  40:08  
+No. So then once you are done, then hit this restart button. Sometimes the new install does not take effect until you restart the kernel. So now there is this restart button, restart that, and then you can actually now delete the people install cell. We don't need that anymore. And now you should be able to run the matplotlib widget, and you should see that it should successfully run. Perfect.
+
+Unknown Speaker  40:30  
+It was. Thank you.
+
+Speaker 1  40:33  
+Okay, so we have that now and then other dependencies are the same. So now, so here we have our two old graphs, which is sine and cos, actually I really like going to four point. It kind of shows very nice two oscillation. So anyway, okay, so we have these x axis, and we have a sine and cosine both. So now what we are going to do is we are going to do a PLT dot plot. But earlier, all we did is this, right? So we did basically, PLT dot plot, and then we did it PLT dot plot. This is what we did in the last activity. So if you do that, it will show and now look here, I'm not even having to do a PLT dot show. Just by doing this plot, it is showing up. And look something else is happening here. If you hover, you will see that download plot. So you can actually save the plot as a PNG file. And these things are result of what you just did, which is installing ipy PMP and then initializing this matplotlib widget. And that's why it is basically giving you this additional hovering and this thing, okay. Now, when I was doing this, it basically plotted two graphs in its own color that just chosen and all of that. Now here we didn't use lot of attributes that are available in pipe plot. Sorry, the plot function. But if you hover over the plot function and maybe do a command, nope, sorry, not click, just command hover. Actually, the this thing is not very descriptive here, but anyway, there are, there are lot of different attributes that you can provide here. So for example, you can provide how narrow or thick you want this line to be. So by changing your line width, you can also say what kind of markers that you need to provide. You can also actually choose the color and you can provide a level, which is what I think someone was asking. How can we provide a level? So what I want to do first is forget about this line, white and marker. Let me just
+
+Unknown Speaker  43:02  
+do this
+
+Speaker 1  43:05  
+with color and level. And for this one, let me do a blue and green, and so my sign will be blue and cosine will be green. So you can do a PLT dot show but now you see, I have been able to change the color.
+
+Unknown Speaker  43:26  
+Hang on. Why is my level not showing up?
+
+Speaker 1  43:39  
+You need the PLT dot legend, oh, right, right, right. I need to have that PLT dot legend, and the location could be upper right or lower right or something. So let's do upper right, yeah. What is mine does? Yeah,
+
+Speaker 6  43:59  
+let me i
+
+Speaker 1  44:05  
+Oh, it is basically adding up to what Okay, so let's do a restart reset, basically, because now what happens is, now, since we have ipy MPL, anytime you do PLT, dot, something that will basically apply to all other charts that you have in that notebook. So this first chart that we did, it is also going back and retroactively applying that there. That's why. So let me rerun this, rerun this, generate the data points, and now I'm not going to run the plain vanilla Chad anymore. Instead, I'm just going to run this where I have the level and I have the location. So now this should provide a clean graph,
+
+Unknown Speaker  44:46  
+yep, all right, how did you restart your kernel? Again?
+
+Unknown Speaker  44:50  
+This button here, restart.
+
+Speaker 2  44:52  
+Oh, I did that. So getting, like, multiple inputs for legend, for some reason, E,
+
+Speaker 1  44:59  
+E. You do a restart, it should clear out, but sometime it does stay longer. I mean, if I have seen that too, that double duplicate behavior sometimes persist after kernel restart. Also why that happens? I have no idea. Sometimes it does, sometimes it does not.
+
+Speaker 4  45:20  
+The CLF method will clear the chart. If you want to render a new chart, you can do PLT, dot. CLF, before you bought anything.
+
+Unknown Speaker  45:29  
+Oh, okay, so
+
+Speaker 1  45:33  
+that's a good one. PLT, dot CLF, you said, pls,
+
+Unknown Speaker  45:37  
+yeah, I had to look it up.
+
+Unknown Speaker  45:41  
+Okay, nice.
+
+Unknown Speaker  45:44  
+Oh yeah, that worked. Thank you. Okay,
+
+Speaker 1  45:46  
+and now, since I had CLF, I think now to specifically do a show, yeah, because I did a CLF before. Okay, nice, thanks for looking that up. Jessie. Okay, so that's good. Now the other couple of things that I didn't use before, so let's say I want to do line width. So let's just do line with so I'm going to do one with, line with one and another way. Let's say line width equal to two, and let's see how that looks like.
+
+Unknown Speaker  46:28  
+I think you have too many E's in line with,
+
+Speaker 1  46:32  
+huh, oh, sorry, yeah, yeah. So you see the one line width one is the sign one, which is thinner, and this is line width, two, which is thicker. So you can change the line width, you can also change the marker. So if you do, let's say marker equal to O. No, not zero, O and another one. I'm going to do marker equals let's say x. These are two very common markers people use. And let me change the line with back to, let's say one on both. So now you see what it did is it still did the overall graph, which is a line, but along that graph wherever the actual points are, it could either a.or a cross in there, so that way, it actually shows where the real data points are lying. Okay, let me see if I can do a line with zero. And how would that change the appearance? Yeah, zero and one are kind of, oh, sorry, no. So when you say zero, the actual connecting line disappears, okay, got it. And when you say line with one, the markers appear, but then it also is connected by the actual line behind it. So that's the difference.
+
+Speaker 6  48:12  
+I have a question, yeah, how do you assign your marker to your data or values.
+
+Speaker 1  48:21  
+No marker has nothing to do with the data, but the markers are appearing where the data points are. So remember, what are these? So these, wherever this marker is appearing, that's where the data points are. So we have our x axis, which is going from zero to four pi with an increment of 0.1 and for each of those values, you have a sine and cosine value, which is your Y axis. So these are the actual data points at that x and y coordinates,
+
+Unknown Speaker  48:50  
+honestly. Thank you. Okay,
+
+Speaker 1  48:52  
+so now let's say I want to draw like a like a line in the middle, which would be basically like, what is the x equal to zero value will be so you can add something called PLT, dot, h line, and you can basically say where it is. And you see it just got added here, and here it went from zero to 10. But since our graph is going to zero to four pi, so we have to change that also to four pi, and then it will basically go from here to here, right? And this alpha basically controls the transparency. So if you do alpha equal to, let's say one, that line would be solid. If you do alpha equals any number less than one, let's say 0.1, that line would be,
+
+Unknown Speaker  49:48  
+didn't it become semi transparent?
+
+Unknown Speaker  49:52  
+It didn't I?
+
+Speaker 1  50:01  
+Oh, I think okay, since it is additive, that's why. So I already plotted a line with alpha one, so that's why 0.1 and 0.25 is not taking effect. So I have to first redraw this and then run this with a lower value, let's say 0.1 and then you will see a light, semi transparent line. Now, depending on the value, if you go from 0.1 to 0.2 then it will be little darker, and so on. So it goes up to one. And then this thing we already saw before you can type, provide X level, y level, and you can also provide a title, which basically will appear at the very top here, like instead of saying figure one, well actually it will say figure one. Then beneath that, it will have a title, I guess. So let's do that. Yeah, it will have figure one, but then it will also have a title here, which is what we have put there using PLT, dot, title, okay? And then, if you want to change the limits of the axis, like from which value to which value to show you can do that using the X limb or y limb. If you don't do that by default, pandas is smart enough to see what is the maximum and minimum value of your x and y, and it automatically adjust the graph to that. Since here it knows that in Y axis, it goes between plus one to minus one, that, by default, it's itself is the value of the, sorry, value of the y limits. And similarly, for the X limits, it's go from zero to around 12, something, right? But if, in case you need to change, let's say you want to expand this to, let's say 30. And then instead of a negative one to positive one, let's say I want to do negative two to positive two. So obviously, now your chart area would be bigger, and then your actual chart will look much smaller here. Obviously, there is no reason for you to do that because, for most part, because this looks funny, right? The point here is, even if you don't provide x limit and y limit, for most part, the by default that pandas figures up out, and that is basically good enough. So you should basically turn it back to something smaller, which basically fits your data well, and not make your graph sitting in one corner, like something like this, but you don't have to worry about all of these. And similar to this, there are, like lot of different things to so another function is like PLT dot greet. So if you do a PLT dot grid, it will draw the graph, but with a grid line here, right? So there is basically no end of how many the features that are available, but there is no reason to go all of to all of this, right? And here, what you are seeing here is basically subset of all the features available, but as you go on, using these libraries more and more, like Jesse figured out how to clear the clear plot, right? So the idea is that when you come across a problem you cannot, you typically do a Google search, and these days there are high chances, like the first try, you will be lucky, and you will basically see how to do something, as long as you are not something asking to do something very wild, and that's not even possible for that library, but otherwise you will be able to Now, lastly, as I, as we already saw here, when you hover over this, there is a save button here, so you can save the button, sorry, save the Chad as a file here, And you can this basically opens up your regular like a location selector, and you can basically choose to share it anywhere that you want. So that's one way of setting it. You can also save it using a programmatically, using this PLT, dot safe thing. And if you run that, you can then provide a particular location to save and it will save in that location, and this is what the result will be. So let's run this. And now this is a PNG file. So now this PNG file is basically as you see. This is not within your Jupyter Notebook. This is just a PNG, right? So if you go here, see that your PNG file is sitting here, and you can open it with anything. Let's say, if I want to open it in my Adobe Acrobat, it will open it in Adobe Acrobat, right, which is basically So Adobe Acrobat tried to open through in browser. But the point is, this is just a PNG file that you can open with anything. Let's just do a Mac preview. Yeah, so this is the MacBook preview, so I can see the plot here, and I can include it in my Word document, Excel, PowerPoint, or wherever I want. So.
+
+Unknown Speaker  55:00  
+Cool, any question.
+
+Speaker 1  55:14  
+Yeah, the next student activity I'm just going to skip. It is basically that same Celsius Fauci it is asking you to add this legend, which we already know how to do. So I'm skipping activity four,
+
+Unknown Speaker  55:29  
+just in the interest of time. I hope that's okay.
+
+Unknown Speaker  55:38  
+Okay, I'll take that silence of the conference.
+
+Unknown Speaker  55:43  
+Sorry, not four, five, actually.
+
+Speaker 1  55:47  
+Okay. So now we are going to look at some other kind of chart. So bar chart and scattered chart. These are the two other kind of charts that we are going to look at. So let's look into the bar chart. So bar chart is basically when you have a whole bunch of data, and you can do a line to connect all the data. Or this is also another view. Sometimes is useful if you want to show like the relative importance of different things. Like, let's say you have a data that shows rainfall every month, right? Using a bar chart, sometimes it helps you to better emphasize that's the how the weightage of something changes from one period to another and stuff like that. So that's when this type of bar charts come handy. And all you need to do is that there is a function called PLT, dot bar the earlier one, when we were doing lines, we were doing PLT dot plot here, all we have to do is we have, we still need to have a x axis and a Y axis, because, like, without having an x and y axis data, you cannot have a plot at all. So you need to have a x axis and you need to have a Y axis. All you need to do is, instead of a plot, you need to do a PLT dot bar, and that will basically create a bar chart like this. So let's run through these so you will see how that thing actually renders. So in this particular example, my x axis is basically going from zero through four. Why? Because this is a synthetic data, just a dummy data, where, basically I have five numbers which I'm going to plot in my y axis. And these are just like our Celsius paradig example. These are some dummy data. So if these are the five data points that I want to plot, then I need to have an x axis. So x axis can be zero for these one, one, and then two, three and four. So what I'm doing here is I'm providing len of users, so users is five. So lane of users, it will be five. So then essentially you are doing NP, dot a range five, which basically gives you your x axis. So you can even print that, yeah. So now we have 01234, this five number x your as your x axis, and this 13,000 26,000, these numbers as your Y axis. So now, before doing the bar, let's quickly do what we already know, which is our plot. So if you want to plot this with x axis and users, you will get a line plot just like what we got before. The shape of the line looks different. Now, is this useful, or is showing the graph bars useful? Well, that depends on the context, right what kind of story you want to tell. If, through your graphing, you are trying to highlight the trend of a variable that varies over time, then line would make sense. If, on the other hand, if you are trying to show the cumulative effect, cumulative effect of a variable on something, then the bar will probably make sense. So the only difference going from this line graph to bar graph is you have to change this PLT dot plot to PLT dot bar, and even if you do not provide any other parameters. So these are all additional parameters that you can use, just like we saw for line. Also, there are many different parameters we can use. If you don't provide any parameter, it will still do a bar like that. And since I already did a line, it's basically doing a cumulative so you can see the bars and you can also see the lines. And since I didn't choose any color or anything. It is printing, plotting this using a default blue color. And since I haven't done a PLT, dot show here, what it did is it basically goes on up above, because this is where the last chart was displayed, displayed, and it is basically appending that bar on. Top of the line. So let's get rid of this line. And here, thanks to Jesse, we know how to clear the effect of that. So we can do PLT dot CLF, and now we can do a PLT dot bar. And, oh, since we are doing that, we have to do a show here too. Okay,
+
+Speaker 1  1:00:27  
+yes, so it will show like this. Now we haven't used other parameter, so if you do add parameter, let's say color alpha, which is basically the transparency and then alignment. So all of these, you can then change the alignment of these things, sorry, appearance of these things, like your color alignment and stuff like that. Now, by default, when you do plot this, you will see it actually puts these tick marks right, 10,000 20,000 30,000 40,000 50,000 so these are called X ticks, and the ticks that are provided here are called White ticks. Okay, so you can change where the ticks appear, how many of ticks appear, and how do they appear? So by default, what it will do is it will basically try to do the thing that makes most sense, like if there are, let's say, 100 data point. Obviously, it is not going to draw 100 ticks. It will basically look at the figure size that you have your plot, and it will make the most, I would say, most effective estimation, like at what interval tick should appear so as to not make the chart looks overly clumsy. Sometimes it works. Sometimes it does not like I have done charting where it basically prints so many ticks that no one can read anything. There is like things, one over another, one over another. So when that is the case, you might want to change the tick location, and you might also want to change the text of the location. So the question is, how do we do that? Right? So when we do here by default, the ticks here are 0123, and four in here. Okay, now my tick location, if I do for value, for value in x axis, okay. So that will give me actual, my real value in the x axis, which will basically not make any changes, but it will basically give me these, 01234, but what you can do is you can say, hey, instead of 01234, being the number, I want to put some text that makes more sense in this particular example. Say we are assuming that these are the different number of users using different programming languages if that's the case. So let's say if my first bar is user of Java language, user of C Plus Plus user of Python and so on. So if we want, if that is the case, we can use these text sticks function to actually provide a list of our custom text to appear on the graph. If you do that, and we don't even need to do the PLT dot show, I guess, if we don't do that, it will basically go and apply on the previous graph. Yep. So it will basically add your tick location. At your tick location, it will add your custom text instead of just the numbers that your data point has, and that's how you can kind of configure how the x and y axis will read.
+
+Speaker 8  1:03:58  
+When I when I'm running, I'm not getting that. So am I doing anything wrong here? Like it's not applying to the earlier Chad, it's not.
+
+Speaker 1  1:04:08  
+If you do have, if you run this matplotlib widget at the beginning, then it should, and if it does not, then just do a PLT, dot show here afterwards, then it will basically render A new chart, okay?
+
+Speaker 1  1:04:41  
+And then, obviously, there are other things that you can add that we have seen. You can change the title, you can change the X and Y level. You can do all the standard thing that you can you have done with the line plot as also as well, right? So everything and anything and everything that you can do with line plot, you can also do that with a bar. Chad, that doesn't change. And same next thing when we are going to look at the scatter plot, the same thing applies most of these, PLT, program, sorry, not program function. They applied no matter what kind of plot you are doing, whether it's a bar, whether it's a scatter point, or whether it's line. So
+
+Unknown Speaker  1:05:32  
+any other question on the bar, could
+
+Speaker 4  1:05:35  
+you just scroll to the top of your chart? I want to see if there's a figure one at the top of that. Okay, is your, yeah, there is,
+
+Unknown Speaker  1:05:43  
+I don't know,
+
+Unknown Speaker  1:05:45  
+yeah, I'm sure that something exists. Do it?
+
+Unknown Speaker  1:05:47  
+Do a Google search, yeah, right.
+
+Speaker 7  1:05:50  
+It seems when you save it, it doesn't save the figure one text,
+
+Speaker 1  1:05:54  
+yeah, that I noticed too. Yeah, that figure one, I think, I think you know what it is showing. So if I do plot multiple different charts in this same Jupiter notebook, it is basically keeping account on how many charts we have displayed throughout the notebook. Probably,
+
+Unknown Speaker  1:06:14  
+I did mind that I showed everyone.
+
+Speaker 4  1:06:18  
+It seems that well, you know, honestly, you're right, because it was just a copy of that first one.
+
+Speaker 9  1:06:23  
+Matt MATLAB does that where, if you do multiple shows for different graphs, yeah, it'll increment that figure.
+
+Speaker 1  1:06:38  
+Okay, cool. Um, so let's take a quick look at the scatter chart. Then,
+
+Unknown Speaker  1:06:44  
+which is my favorite, by the way,
+
+Speaker 1  1:06:50  
+that is so useful the scatter chart. Okay, so what does the scatter Chad do? Scatter Chad basically plots data using dots like not lines, kind of what you saw when we did in the line chart. Actually, where is my line chart example for configuring line plots, right? So let's say, if I configure this line plot with
+
+Speaker 1  1:07:30  
+here. Okay, so let's do a line with zero
+
+Unknown Speaker  1:07:36  
+and with marker,
+
+Speaker 1  1:07:38  
+so this essentially becomes a scatter plot. Well, line, yeah, so see now I don't have a line, but we only have marker placed wherever the data is with PLT, dot plot. So essentially, this is very similar to what a scatter plot would be. Now here the data is not looking as scattered because we have used a well defined mathematical function, which is sine and cosine of x. That's why you see is nice pattern. But if your Y variable were basically result of some data that you are fetching or some observation you are making using some machine interface or something, so essentially, there will be lot of noise in your observation, and the data will be not as nicely lined up in as a mathematical function. So essentially, what you see is that looks like a scattered points, and that's why it's scatter plot right now. So my point is, if you just do a plot with a line width of zero and with a marker that is almost same as Cat plot. But what you can do is you can also use a specific function called PLT dot scatter, which basically does the same thing. And the only reason the point here is looking all over the place is because, if you look here, my x axis is np to NP of zero to x limit, which is 100, just like what we did. But my y axis, I am not using a mathematical function. Instead, I am basically using a randomizer to create random values of my y points to mimic the noise in the real life data. So when you have a data observed from something happening, like, let's say, weather observation, or your stock market movement, or your census data, economic data, something like that, right? Typically, this is the way that the graphs will appear right now. The whole reason we do machine learning in the first place, the whole purpose of the machine learning is when your data is actually noisy. Unlike our happy case, where we know there is a sinusoidal relation or there is an exponential relation, and therefore you do it either a plot. Be the scatter that you can look at the data and you immediately know which x will provide what value of y in real life, just looking at the data, you cannot really figure out what is the functional relation between your x and y behavior. And that is why we do the machine learning in the fast first place, right? And that's why I said that scatter plot is one of my most favorite plot, because as you start putting your machine learning hat on, you need to spend more and more time looking into these scattered dots and figuring out what pattern this data is telling. Now, fortunately, you are not alone in this journey. There are models that you will use. There are libraries that you use that will help you find out that hidden pattern. And that's what I was talking about that book earlier, right? That pattern recognition is machine in machine learning. So machine learning is nothing but recognizes this pattern among a seemingly random scatter of data points. That's what machine learning is, right? So here, what we are seeing here is we created a purposefully a randomized, noisy data point, and all we are doing is just using PLT, dot scatter with all of those usual, your face color marker, H color, yada yada yada, alpha and all of that. I'm not even going into details of all of these. You can all play around with with it, and change and tune your how your things will look like. And basically you will get a scatter plot. But the idea is that you know that you do have an x and y data, and when the data is noisy, scatter plot is one of the first thing you should do to kind of get a first cut idea of what is the functional relationship that might be within your data, only for two dimensional data, though, if you have X, Y and Z, no matplotlib cannot help you, because matplotlib is not three dimensional. There are some other 3d libraries that can help but not matplotlib. Now, if you have four or five dimensional data, then no visual library can help you, but that's why, since as a human being, we can only think only up to three dimension right, using our physical senses, right, our organs, our eyes and our touch and feel, but our mind is dimensionless. In our mind, as we put our mathematical lens through our mind, then we can basically go and think through this pattern in multiple dimension, with limitations, of course, but that is why machines excel at finding this pattern for us. So that's why it is very important for us to understand all of this pattern finding, and there's this matching of what is called the functional relation from the data. And so that in your mind, even though you are writing probably two three line of Python code, which we will do very soon in coming weeks, days and weeks, but you should always be able to connect that in your mind what exactly this piece of code is doing okay. So this is our scatter plot. And as I told you, instead of a marker row, if you do a marker X, and instead of face color red, if you do a space color blue, it will basically create a, oh, sorry, I didn't even probably run this. Okay, it will basically create a scatter plot that is blue and cross instead of red and round. Now another thing I did here, do you see how the plots in the left hand side are smaller, like the dots, and as we go to the right hand side, the process are bigger and bigger that is happening because so if you think about that temperature graph that I showed you the other day, right that additional extra work that I provided where we were showing the cooler temperature with the bluer shade and a warmer temperature with a more reddish type of shade. So here also something that we are using. So you see this parameter called s. So s basically means size. Now I think instead of s, if you just do size, I think that will still work size and S is probably the same thing. Or I might be wrong. No, I am wrong. Sometimes some of these can have, does have a and this is so weird. Some of these have a one word, one letter abbreviation, and some of this does not. But anyway, in this case, s basically is the size of the markers. And if you do a fixed size, let's say s equal to one, then
+
+Unknown Speaker  1:14:38  
+what's happening?
+
+Speaker 1  1:14:41  
+Okay, let me use Jessie's solution again. Yeah, so when I do s equal to one, you see now all of these dots are same size, right? Or if you do s equal to five, you will see bigger points, right? Or s equal to. 10, you will see bigger markers. Now you can actually provide something that is very with the data, which in this case, if I say, hey, x axis is my the thing that changes the size. And now what it will happen is so basically dependent on the value of the x as x grows, the size of the markers also grow. So that's why, when you do x axis from left to right, the size of the markers grow. And you can even do that for your color also. So if you have a different color, sorry, if you want to use a different color, you can do that too. So let's see if uh,
+
+Speaker 1  1:15:47  
+okay, no, so this is scatter plot, right? Can we do? Yeah, some of these does not take a numeric, number, though.
+
+Speaker 4  1:15:59  
+It is here, huh? Where you try to feed it like an RGB value?
+
+Speaker 1  1:16:05  
+Yeah, no. Sometimes you can actually provide a like, almost like a color temperature. So it will use a continuous variable to determine what, in a scale, the color temperature would be. But that, I have to check that out, but anyway that you get the idea. So another thing is, let's say the size. Instead of doing s x axis, if you do Y axis, then, oh, we don't even have a Y axis. Y axis is my data. So if I do data, then, yeah, if I do Y axis as a size, all of these are small, because my y axis varies from zero to one. So yes, they are different, but they are still very small. So you don't see that, but if you very closely look, you will see the ones on the top a little bit bigger than the ones at the bottom, because this one is basically size 0.1 and this is probably size one, but both of those are small. I mean, the idea is, I want to show here is, you can basically provide any continuously varying value as the size, and so with the color as
+
+Unknown Speaker  1:17:09  
+well. Could you do mathematical formulas too?
+
+Speaker 4  1:17:13  
+Sure, yeah, like Y axis times 10, yeah, or the absolute value of the X standard, of
+
+Speaker 1  1:17:20  
+course, so that's actually a good idea. So let's do data times 10. Oh, you cannot. Oh, it says s must be a scalar.
+
+Unknown Speaker  1:17:34  
+Why you days need to be a scalar. So do you have
+
+Unknown Speaker  1:17:37  
+to do like an end of it.
+
+Speaker 1  1:17:42  
+So your data? Oh, no, so then, yeah, so you cannot do that. You basically have to do a list comprehension.
+
+Speaker 1  1:17:55  
+Let's say z times 10 or Z in theta. I think that will make the trick, yep. So it basically needs to be spelled out. It cannot take a vector. It needs to have a scalar. Anyway. So let's, let's not waste too much time in all of these tuning. As I said. I mean this tuning will slowly come to you, and you will automatically know, believe me, when, when to use, which tuning. We all know there is no no magic here. So cool. So now I think we have covered almost all of these, like we have talked about line plot, power plots, scatter plot. And we have also touched upon that there are different things that you can change in the appearance, right? You can change the width, color, transparency, and so on. So now it is a good time to go back and tackle the first one, which is the exploding, the relationship, the first one that we skipped, and you will see in a moment why this is one of the most important activity in today's class. And now that we have already seen what are the functionalities available, it should be
+
+Unknown Speaker  1:19:16  
+easier for us to follow.
+
+Speaker 1  1:19:20  
+Okay, so in this activity, unlike everything that we have done, we basically didn't really work with real data. We were basically coming up with some dummy, custom data, right, using our range function, or using a mathematical function, stuff like that. So here, what we have is some data that gives us global happiness scope. So what is global happy global Happiness Index, basically, and believe me, this is actually a thing. This is not a made up data. So if you search global Happiness Index, you will actually be there are places where you can go and get this data. So here the data is provided to you in form of two Cs. Default. So one is the reference data. So reference data basically says what each of these variable means, country means name of country. Year means survey year happiness means a happiness ranking on a scale of zero to 10. This is basically you can think of as a description of columns, because columns are just one word, which may or may not be obvious what that column means. So there is a reference file that is given that provides a descriptive, like a description of the column, right? So now what we are going to do is we are going to load the data. So the actual data is in our global happiness CSD file. So that is our happiness data frame we have. And when you plot the data, sorry, not plot display the head of the data frame, you basically see these are the data that we have for each country. We have different years data. So multiple years for each country, and then for each year, we have all these different observation happiness well support these that all of this, if you do a display of the reference data that we loaded from the other CSV file, which is the description, you will see that it basically tells you what this thing mean. Okay, so this is our reference data,
+
+Unknown Speaker  1:21:28  
+so now we know, okay, fine, we have this
+
+Speaker 1  1:21:33  
+so we after reviewing the data set, so we have to find what patterns in relationship we need to explore, and how you might use this visualization, visualization to gain insight on the global happiness. Okay, so one thing we know that the global happiness is not same for all countries in the countries, we also have other data points, such as, what is the wealth score of the country? So wealth is log logarithm of GDP per capita, which indicates the wealth of the country. What is the support score, which is a value that indicates how many people in have family and friends? So there are basically, you can see all of these, happiness, wealth, support, health, freedom, generosity. You can think of all of these as kind of input to the net happiness in people's life, like what typically makes us happy, money is one thing. Family support is one thing. Being healthy is one thing, being freedom to do our thing that is also one thing. Lack of corruption is one thing. So that's what the data point says. Now, this is a typical data point that many people use as like a machine learning, model training. Some of the very beginning activities that you do, you will have a data set similar to this, where there will be 568, or 10 or 12 different attribute that will contribute to one attribute that you will observe, which in this case is the happiness, which is the outcome. So think of this as a function y, as a function of x, where your X has multiple different variable which are well, support, health, freedom, generosity and all of these. And as a outcome of all of these eight variables, you are observing one output, which is your happiness. And that is why, a little bit back, I was talking about being able to understand the relation of y and x in two dimension, through scatter plot and being able to expand that to three dimension, four dimension or n dimension. So this is basically a problem in a eight, nine dimensional data space, right? Well, actually more than that, because countries also another dimension. So 10 dimensional data space, where your why is your happiness year? You can probably ignore and you can probably take an average of year, right? And you don't have to take my word for it, because these are the analysis that you will basically do in your mind, looking at the data. And you will think, okay, how am I going to go explore that pattern? Right? So based on that, then we'll probably try to find out, what is the happiness outcome of that going to be of that particular like now, let's say, if you have some countries here and tomorrow, you have another country that you haven't seen here with you can find a pattern that correctly explains people happiness given a wealth, their support level and freedom and so on. Then the model or that function that you come up with, it should be able to predict what a happiness level of a society would be if it knows all the other parameters, right? So that's essentially what machine learning does. Essentially turns into a regression problem. Now, in today's class, we are not going to go all the way, because that's where in the coming weeks we are going to go, but. This gives you a glimpse on, like, what kind of pattern you kind of need to start to think about, okay, so let's do one thing. So first we need to so we have country, right? We have different country. And if you see in the data, like, if you can do a group by or even looking into the CSV file directly, you will see for each country actually, let me take a look at the CSV file directly. So each country has data from 2008 to 2018 or some has 2007 or some countries have more data. Some countries have less data. So about 10 to 11 years of worth of data. We have 1011, 12 years of data for each country right now. One thing we can do, we can go year by year. One thing we can do is, hey, we can take a snapshot of single year, let's say 2010 and we look what happened in 2010 across all the countries. That is one approach. The other approach could be get rid of the time dimension by taking an average of the countries over the years that we have. So if you have 10 years worth of data for all countries, you group by the countries and take average over the 10 years. So that way you will have only one data point for each country. So here what we are doing is we are first doing a drop of the year. We don't need the year now, because we are trying to get rid of year as a dimension that's kind of not value valid for our analysis these analysis that we are trying to do. So we are doing a drop, a column of year, and then we are doing a group by of country, exactly like I suggested, and on that group by we are taking the average, which is a mean. So now, by doing that, we will have a new data frame which is by country. And if we print that data frame by country, you will see that now we have 165 rows, only one for each country. We don't have a year because what we did is we took all those 10 or 12 years of data that we have for each of these countries, and we got an average of all the scores, which basically makes it little bit easy. We don't have to we at least have one less dimension to worry about. Okay, in another analysis, if let's say for any particular country, let's say you take one country, let's say for us. And I want to see over last 10 years, how the happiness level of us has changed and how other social factors have contributed that, then that would be another analysis. Of course, that is also a valid analysis, that is a different kind of analysis, right? But in the here, what we are trying to see is, in general, looking across the globe for all countries, we are trying to find what is the significance of different socio economic factors in determining the happiness level of the people in that country. So that's the analysis we are trying to do, and that's why we got rid of the time as a dimension, and we did a group by and we took the average of all the countries. Make sense. Okay, so now this is our data. Now one type of plot we didn't do in any of the activities. We did plot, line plot, we did scatter plot. We did bar plot. One thing we didn't do in any one of those, which is what we are introducing here first, which is the histogram. And this is something, if you go back to that example that I shared with you guys earlier, with the stock market data. So you will see that I have used the histogram plot there, where we where I basically showed that distribution right of that percentage change, daily percentage change. So now if you look into the histogram, so, what does histogram does? So histogram is basically it shows the cumulative frequency of certain events happening.
+
+Speaker 1  1:29:00  
+So what am I plotting here? So I'm plotting a histogram, and what is the column I'm plotting? I'm plotting this column called happiness. Okay, so now, what happiness on which data frame on this data frame, which is by country. So I'm saying from the pandas data frame by country, do a plot, which is an histogram, and take the value from the happiness column, which is our observable target variable happiness. Like, first I want to see how the happiness is distributed, like in US overall, looking at globally, how is the statistical distribution look like, if that gives is an idea, an idea. And while doing that now, you will see the happiness is a continuous variable. You see 3.7 4.995 Point, 4841, so essentially it means that it is a continuous variable that can vary between, maybe, I don't know, zero to five or zero to 10 scale, but it's a continuously varying variable. Now, if we want to count how many countries are they are there with a certain happiness level, we need to take this continuous interval and need to be able to chop it up into certain pieces, and that's what we control by saying bins. So bins basically means how many categories you need to do, how many buckets you need to divide it by. So you can say, if I say, let's say five bins. Let's say zero to two is low. Two to four is maybe medium. Four to six is high. Six to eight is very high. Eight to high is ultra high, right? I'm just saying some main so if you do this plot with, let's say bin size of five, and if I redo this plot, it will look very different, because now what I did is I took all the very happiness level. And I only counted them, bucketed them into five distinct levels, and counted how many countries fall in each level. And we see that most of the countries fall kind of in the middle, which, by the way, happens to be a nature of most normal distribution as well. Right? Most normally, we have data that we see in nature, right? Whether in nature, natural science or it, or in our economics or people's behavior. So these normal behavior, this bell shaped curve, kind of appears over and over again, right? So now, if we do it with the bins of five, you kind of see the pattern. But if you do more bins, like instead of chopping it into five buckets, if you chop it into 10 buckets, the pattern is little bit more apparent. Now, this is not a clear normal distribution because there are some aberration. It is not it does not look like a smooth car with a peak and then too slow, but it's kind of like that. And the reason it is not very smooth because the number of data points are very limited, actually. So as you have more and more data points, as you go to the limit of infinity, then the collective behavior tends to follow more and more like a bell shaped curve, right? So similarly, if you go from 10 to 100, then you will get more granularity, but at the same time your like a some of the categories that are more imbalanced, that also becomes more apparent, reaching here, this case is this, but overall, we kind of see that there is a some resemblance of a central tendency, like most of the happiness level kind of falls into the middle and kind of goes, flattens out towards the two side. And we will. We'll talk more about these in the class three in this week, right? So if you don't understand everything that I'm saying, Don't worry about it. There is a separate class. What I'm doing is I'm discussing doing some additional discussion to kind of prep you up, because this is something we'll actually have to learn in third class this week. So anyway, this gives us a histogram. So now you should know why you will when you will need a histogram. You will need a histogram when you are trying to find frequency distribution of any data or any variable that you are looking at, and you can do that with any histogram. So let's say here I'm doing with happiness. I can also do it with wealth, another column. So any variable I can take a histogram of, let's say, if I do it with wealth, it looks very different. So here all the wealth are kind of towards side. But even then this side, also, I do have kind of like these rights, right? So you can do histogram with different data point, sorry, different column of the variable to kind of understand the distribution.
+
+Unknown Speaker  1:33:48  
+So that's your histogram chart.
+
+Speaker 1  1:33:53  
+Then if you want to show Okay, so I have all these countries, 165 countries, which one of the top happiest countries and which one are the least happiest countries? That's kind of something that you'll probably everyone wants to know, right? Like, we all are basically very prone to, like, a curious about ranking anytime anything. Like, let's say, hey, I want to get into a school or a university. I want to see ranking, right? Hey, what are the top five universities in this area and that kind of thing? So what if I want to do a rank? Well, you can do ranking by in a simple two step. You can do a sort so you take this by country data frame, which is this guy here, and you can apply a sort function and provide the happiness column as a sorting column, which is sort values by equal to happiness and ascending false, that means it will be descending order. So that way you will have the happiest countries on the top and then the least happy country at the bottom. Then you. Take that and on that data frame, you do a bar plot, and then there you go. You have the happy happy countries from top to bottom. But since here you see, I have done a head of 15. That's why, if it is giving me top 15 happy country, if I do top 10 only, then it will give me Top 10 happiest countries, right? Like, as you can see, the Nordic countries kind of at the top, followed by, well, Canada is kind of also there Iceland. For some reason, everyone is happy there, and so are the Kiwis down there. So, so that gives me a list of all the happy countries in a graphical way, we can do the same thing for the least happy countries. So instead of sort by with the ascending false, you remember when we were sorting, if you don't do ascending by default, it is smallest to largest. So ascending would be true. So if you just do that, then you will get and you repeat that same activity, you will basically get the least happiest countries, which unfortunately are mostly African countries. So now with this analysis, why does this analysis helpful? Well, if nothing else, it helps build that curiosity in your mind. Why is that why these countries are happier and these countries are not maybe the answer lies in all of these socio economic factors, and that is what we are trying to analyze with this data. Why are these 10 or 15 countries the happiest and these countries are not happy? Do you think wealth is one issue? Do we think
+
+Unknown Speaker  1:36:57  
+corruption is one issue? Yes,
+
+Speaker 1  1:37:01  
+yeah. Or maybe if your analysis, in your analysis, you don't find that any of this is an issue, then you'd probably go on and hunt for more data. Maybe there is something else I am missing, right? So that's essentially how it goes, like in any machine learning project, that's that's the approach, right? You come up with a problem, and then you have a hypothesis. So maybe this set of data will give me a good explanation of these target variable that I'm trying to predict. And then you do this type of introductory analysis, which is a mix of your human intuition and the output that you get using different kind of plots and histograms and bars, and then based on that, and also you will do some other statistical analysis. I'm not going all the way. We'll look at correlation, standard deviation and all of this stuff very soon. And based on that, then you as a practitioner, have to make the determination that whether this data I have is enough or do I need to go and get some more data to be able to do a more like a higher confidence level prediction, right? So that's like how it goes. So for example here, if say, Hey, what did this? Chad tell you about the global happiness. These are some examples. I mean, if your your observation, your opinion, might vary, but it could include something like this, like, hey, the maximum Happy Happiness rating are for countries on eight to 10. That's fine. Most of the countries have a happiness rating in the middle of the scale, which we saw from that histogram, that most of the countries are in the middle and the highest happy country are most or more like highly developed countries in Europe and North America and Australia, of course, as we saw. And the least happy countries are less developed, and several countries have major conflicts and natural disaster. Now this last bit, I don't know whether the data tells us that. Does it say anything about conflict or natural disaster, does it? No, why did I point you to that? Because this is also a very common scenario based on our world view. We know something might be true. We have our hypothesis in our own mind. But when we go and explore the data, there might not be supporting evidence, either supporting, either proving or disproving that hypothesis, like we don't know whether war or terrorism or global climate change could be a factor, and these data doesn't give me that. And that's why we were learning all of these different tools, learning about how to get an API, how to get data from API, all of these tools because, as in itself, none of those tools have any value. Like, what is this a bunch of Python code, and what is the reason for that? Right? What? Why should we even learn that? You should learn that because, when you are doing this kind of analysis now. You see, like, Okay, I think just the wealth and support system and freedom and generosity probably, probably is not enough to explain the happiness level. I need to get data on climate change. I need to get data on violence. Let's say violent crime or or something right, or corruption is already there, like some something else. So that's why you need to then go and hunt for more data. Maybe you go to UN website, right? And try to see, well, who else provides you additional data on that, right? Sometimes you might want to use large language models to do that for yourself, right? So maybe you can ask an LLM to basically give a summary of these countries some status, and maybe apply a score to that, right? There are a lot of natural language processing model summarization tool that allows you to do that, right? So there are a lot of fun ways to get data.
+
+Unknown Speaker  1:40:59  
+So, yeah.
+
+Speaker 1  1:41:02  
+So that was one type of analysis where, as I said before, we are not looking into the ER at all. We are looking at, what are the factors contributing to the happiness level in general. Now, the other kind of analysis that you might want to do, like, hey, how does the happiness level change over time. So what we have done up here, we dropped the Time column. We dropped the year column because we were, in general, trying to understand what might cause happiness level to go up or go down. Another thing you might also look at is, how does it change over time? So how do we do that? Well, there might be many, many different ways of doing that. One way of doing that is this time you drop the country color, you take the country out as a variable in instead group by year, just like opposite to what I did before. So initially we dropped the year grouped by countries and took the average. Now we are dropping the country grouping by year, and take the average.
+
+Unknown Speaker  1:42:10  
+And when you do that, you will get a
+
+Speaker 1  1:42:15  
+happiness by year, and that will have only a limited amount of row, which I think would be 10 or 12 rows, only, actually 13 rows or 14 rows, 2005 to 2018 because here I am not looking at the country. I am averaging over all the countries. But then I am going year by year, and this is the global average now, right? Global average happiness, global average net wealth and so on. Now, how does that change over the last 1314, years? Well, here I can do a simple plot, which could be plot this happiness with year. So here is my index. So if I just plot the happiness, my x axis will be here, because that is the index. So to do that, I can simply take that pandas data frame, take the happiness column and then do a plot, and then provide all those y, limit x, limit x, sticks, y sticks, figure size, anything, any beautification that you want to your heart's content. So essentially, you will get a graph like this, which shows something happened from 2005 to six, the happiness level abruptly dropped. Since then we have met probably marginal improvement. Now, see it doesn't go all the way up to 2019, 2020, so we know what happened then, right? So I'd probably be curious to extend this data and see what happened after COVID hit, right? So that is also another example where you might, you might not need more dimension always, but sometimes you might want to expand the timeline the horizon of your observation, right? So this is one scenario that will probably prompt you to go and get more data to see how that trend kind of continues further down the line.
+
+Speaker 7  1:44:08  
+Can you, can you cross reference like multiple APIs? So if you have like this one is charting the happiness, and then you can combine it with like climate data to figure that out, of
+
+Speaker 1  1:44:18  
+course, and that is, that is your job as a data scientist. That's exactly what the data scientists do. Now, if you are thinking of a tool or any easy shortcut formula, no, there is none, but that's the kind of exploration that you have to do, and that is something probably Gen AI cannot help you. Maybe co pilot can suggest but that is where your human intuition is still valuable.
+
+Unknown Speaker  1:44:45  
+Gotcha. Thank you.
+
+Speaker 1  1:44:50  
+Yeah, and then similarly, you can do plot of so this one was plot of global happiness over the last 14 years, you can take do the same plot. Instead of happiness. Now I'm going to plot the wealth, and I see this is the global wealth, like, who that sounds like a coincidence, or maybe not. So we were just plotting happiness, and we are also plotting wealth, and we resume see that there is a striking resemblance between the two. So could it be that wealth is one of the most important input to the happiness? So these are type of the question that would come to your mind when you go on doing this. Sometimes it will be pure luck that you stumble upon a pattern like that, right? And sometimes it will be more like your statistical analysis that you are putting in, and we will see more and more of this thing as we go in the discussion in the following days, right? Yeah, so now when you see that, so you see that, okay, fine, the happiness maybe looks like very highly influenced by the wealth. But can we do something to kind of prove that hypothesis a little bit better, right? So what can we do? Well, let's see what we can do now. We can use a scatter plot, so see how I was saying earlier that when you have a data that coming from some natural source that you are observing and your plot, you will basically plot this, and you will see some relation with a lot of noise. And that makes it sense like It looks like a random so in that particular scatter plot example, by like intentionally, we created a randomizer to create plots all along data points. But here, when you take a happiness and wealth and plot them in y and x axis. See how it looks like.
+
+Unknown Speaker  1:46:45  
+What does it look like?
+
+Speaker 1  1:46:48  
+It looks like they are random, but not that random. There is some kind of underlying trend there. As we go from left to right, the wealth goes up, but so does the happiness on an average. So maybe we can draw some kind of a functional relation, some kind of decision out of these, maybe a straight line that connects with a certain slope, and that will be providing us with that insight that we are looking for. Now this is just one dimension. Remember, there are 1012, dimension, but looks like this is one of the dimension that is very important, highly important, which we stumbled upon by looking at these two graphs, right the time graph of happiness and wealth. And now we took the happiness and wealth to see how they are interrelated. And we see that, yes, there is interrelated. So that means there must be something, some correlation between the two.
+
+Unknown Speaker  1:47:49  
+Now see the correlation is a statistical term.
+
+Speaker 1  1:47:53  
+So correlation is a mathematical measure of how change in one variable causes a change in another variable. But there is a very easy way to find that that numerically. And do you know what is the highest and lowest value a correlation can have? The highest value of correlation is one plus one. So if you have two variables where one variable completely defines the other variable, the correlation is one, meaning if one variable goes up, if the other is also going up at the same rate, the correlation is one. And if one variable goes up, if the other variable goes down at the same rate, which is the opposite of that, which is a perfect negative correlation, your correlation is negative one. So if your correlation between the two variable is one, if happiness and wealth, let's say if they were perfectly correlated, and you do a scatter plot, you will see all these dot align on a perfect straight line with no noise. If they were a negative one, they will also appear in a perfect straight line, straight line, but going from top left to bottom down, which is the negative slope. The other common correlation that you will often find is almost close to zero, where the points would be all over the place, which basically means these two variables are not correlated at all. So here it looks like there is a very strong correlation, not perfect one, but anything above 0.5 we will say strong correlation. Now you can actually do that by using this function called C, O, R, R correlation. And there are many, many function in NumPy, SciPy, pandas, almost all libraries have some sort of correlation, correlation function or the other. So here in pandas, you can actually take a data frames column, which in this case, I'm taking happiness column and applying the correlation, and then as a parameter, I have to pass the other column that I'm trying to find. The correlation width. So here what I'm saying is, hey, Mr. Pandas, take the happiness column from by country data frame and find how that happiness column is correlated with the wealth column, and I get a value of 0.82 something. Now think about the scale minus one to plus one, or you can even say zero to plus one. Let's take the minus out. So zero means not related at all. One means perfectly related. Now we have a 0.82 so we just score 82% in our test. That means that's yes, that's a sure pass that we know that happiness is wealth is one of, probably one of the top contributors to happiness, right? You guys all agree and see, this is not made of data. Actually, this is acquire data. You can probably do a Google search, and you should be able to find this data somewhere, and you can do that yourself. Why now you can do this now, since we did this for happiness versus wealth, now, there is nothing stopping me from doing this with happiness versus let's say family support, happiness versus corruption, happiness versus anything, all of those other 10 columns that we have. Now let's do happiness versus generosity. What do we see here?
+
+Unknown Speaker  1:51:26  
+So this is a relation between generosity and happiness.
+
+Unknown Speaker  1:51:31  
+Actually, you know what?
+
+Speaker 1  1:51:35  
+I should change that happiness should be my Y column, because happiness is my target variable. I'm just noticing this, and X column would be generosity, which basically tilts the graph. And then your x level would be would also change. X level would be
+
+Unknown Speaker  1:52:06  
+generosity, and y level would be happiness.
+
+Speaker 1  1:52:10  
+That would be the right way, because whatever is my target variable, what I'm trying to predict is my Y axis, so happiness versus generosity. So now it seems like there is probably not much correlation. They are not as random. But if you look at this picture versus this picture, do you see how well correlated this thing is like, how wealth going up clearly explain happiness going up, but generosity not that much? Yes, you can, in general, see going from here to here, but not very correlated. So I am guessing the if I find the correlation between the two, it will probably be zero, less than 0.5
+
+Unknown Speaker  1:52:56  
+let's see
+
+Speaker 1  1:52:59  
+0.2 i right now, does that mean? I don't look at it at all, no, because we don't know what intricate way multiple variable together depends. And that is what something we are not as a human, very good to find we and we can do this, happiness with generosity, happiness with that, like all 10 pairs, we can do that, and we will find different degrees of correlation. We can do that as a human, and we can develop some kind of intuition what things are more, what factors are more contributing to the happiness level. But that does not mean as a human, we can We are expert in predicting exactly how quantitatively these 10 barrier, various factor will contribute to happiness of a country, and that is why now we need to create a statistical model that will look into all these 10 variables and find out in a 10 dimensional space. How these 10 different variables will contribute to that target variable, which is happiness, and that essentially is a regression problem in machine learning, which we will be doing in the coming weeks. Okay, so with that said, I think it is a time to take our hard earned break. So let's break for 10 minutes, and then when we come back, we will try covering some of the activities from the second day of today of this week's class. So that way we spend we basically make more time for ourselves to engage these type of discussion in the coming classes.
+
+Unknown Speaker  1:54:44  
+Sounds good.
+
+Unknown Speaker  1:54:47  
+10 minutes. Okay, guys, everyone
+
+Speaker 10  1:54:50  
+can I ask for TAs help in a breakout room. Just briefly I.
+
+Unknown Speaker  1:55:00  
+On what we have discussed so far.
+
+Speaker 1  1:55:18  
+Okay, so let me ask you a question to the class. So after all this discussion, why do you think we are learning plotting like different kind of bar chart, histogram, scatter. How do you see this plotting functionality to be useful?
+
+Unknown Speaker  1:55:37  
+Is it for forecasting, prediction?
+
+Unknown Speaker  1:55:41  
+Eventually,
+
+Speaker 2  1:55:43  
+just to see value, like what the data is doing, to see if you can notice any correlations or anything like that,
+
+Speaker 1  1:55:50  
+exactly. So, essentially, this is part of your exploratory analysis. It's
+
+Unknown Speaker  1:55:59  
+also machine learning,
+
+Speaker 6  1:56:02  
+sorry, go ahead. It also helps to analyze data. Yep, yeah,
+
+Speaker 8  1:56:09  
+when I have one question, we kind of do the similar kind of exploration, even using all the business intelligence tools and all the existing process of it, right. Like, like, what difference it makes with Python and like this, statistical analysis is already, already in place, and what these are differently we are doing using the machine learning. So it was not
+
+Speaker 1  1:56:30  
+so we have not done machine learning yet, right? So what happens is, if you look into a project, life cycle of a machine learning project, right, the actual machine learning part is only about 20% 60 to 70% is collecting data and exploring what story the data is telling you, whether the Data is worthwhile, whether the data has the necessary information that would make your machine learning model any value of any value, right? Like, let's say, if you are trying to predict rainfall, average rainfall of a month, and if you have a bunch of data that gives you a country's GDP and wealth. Obviously, that does not relate to the rainfall prediction, right? I mean, that is an extreme example, but you get the idea, right? So, like going back to the last discussion we were having to generally predict the happiness level. We do have 10 variables, but is that all we need to understand? What do you think the weightage that these variables might carry. Now, yes, you will say, Well, that is what the machines are for. You are absolutely right. But at the same time, as a human, you have a responsibility to basically help the gather the right set of data to make your model as good predictor as as they can be, and that's why you need to do this type of data exploration before you start thinking about, Okay, what model we are going to use, how much data we need to train, and so on. So that comes all comes afterwards, and that's why you need to do this analysis. And these tools are, as you said, vija, these are just tools. There are a lot of these tools available. You can even do lot of these analysis using even simple Excel files, right or any business intelligence tool, analytics tool. So Python is not the only tool in the market, but it has become a de facto tool for data and data scientist and machine learning practitioner to use Python all along as a single set of programming language. You can basically do everything from end to end, and that's why we are learning in these machine learning boot camp. AI machine learning boot camp. The reason we have spent for six, seven weeks learning all of these Python tools and libraries is because of that. But that does not mean this is the only tool. I mean in a real world, when a project is happening in a corporate world, you will see that data can comes from many places, and often time it's kind of a hot spot of let's say, hey, some data team, they have already done some analysis, and some data is readily available in in their data repository that are available organization wide. So you might be able to just use some data with the analysis report or paper that they have already generated, generated, right? But when you talk about end to end analysis, these are the de facto kind of tools that has that's how the industry has shaped up over the last five to eight to 10 years, right? And that's why we are learning Python based tool pandas and all of this plotting to do these analysis, right?
+
+Speaker 8  1:59:56  
+One last thing, which I want to just check, like as part of touch. Spark as well? Or
+
+Speaker 1  2:00:01  
+no? No, okay, we are not going there. Because when you are talking about Spark, we are talking about, hey, if a single machine, it does not prove to be sufficient in doing a large scale analysis, how you can scale that up by using a cluster and all of that. But that is a completely different skill set, right? That is a data engineering skill set. That's not even a data analysis skill set. That is what the role of a data engineer do, right in in combination with your infrastructure engineering and all of that, that's a completely different side of things. Yeah, but what happens is, I mean when, people do these type of analysis using Python, right? So there is a library called PI Spark, for example. So you probably have heard the name. So if you see that, like in your laptop, in a single machine, you cannot run this. So if you have, let's say, millions or billions of rows of data, and you try to load that into a pandas data frame, a single machine is not sufficient, because it will overflow your memory, right? So that's when you need to use a PI Spark, which, behind the scene, will use a cluster of machine to load a distributed data frame across multiple machines, right? That you will run on a cloud infrastructure or something. So that's what that is for. That is not the focus of this boot camp. Thank you.
+
+Speaker 1  2:01:26  
+Thank you. Okay, cool. So let's now look at a couple of other activities from the second class of this week.
+
+Speaker 1  2:01:41  
+Can skip the first one. I'm just looking at which one is actually going to be adding some value here. So
+
+Unknown Speaker  2:02:23  
+just give me a moment and
+
+Speaker 1  2:02:46  
+Okay, so in this next week's class activity number one, two and three, if you can look at it in your own time, but you will see it's kind of repeating, almost like A warm up and recap of something that we have already looked at. So the first thing I think we would be it would be valuable to look at, is activity number four, which is a instructor demo. So that's what we are going to look at, which is how we can plot the different groups within the data. And this is something we also have looked at. But let's, let's go through that activity, which is number four. Let me share my screen. Is the screen visible? Now? Did it okay?
+
+Speaker 1  2:03:45  
+Okay, so here we are going to do some plotting with some grouping, and this time, we are not going to use made up data. We are actually going to use some data that we have accumulated from some external source, which in this case is basically, I think this is from probably National Highway Safety Commission data. So this basically gives me some traffic accident data,
+
+Unknown Speaker  2:04:21  
+the data has state,
+
+Speaker 1  2:04:26  
+some Oh, this one doesn't have a metadata, by the way. This one doesn't have a metadata. Anyway, let's load the data here first in Python. Okay, so this is my accident data set, and we have a whole bunch of state so we have a state code and state name. We have some st case V total form, a whole bunch of column. So that is you see how I'm feeling lost. And this is something. Assume that when you are exploring a data from the first time, if there is no metadata available, it is okay to get lost, right? That is part of your analysis process. So we have to kind of find out what this data is actually telling me. Yeah, so it shows me, for each accident that a whole bunch of attributes, whether there was pedestrian involved, whether there were person involved, whether it caused any fatality, whether it was a drunk driving or not. So looks like some accident report database. That's that so
+
+Unknown Speaker  2:05:47  
+it, okay, and then,
+
+Speaker 1  2:05:54  
+so we don't even know how many columns are there. Oh, my God, 91 columns. Okay, 91 columns is a huge data set. Okay, so there seems to be a column called Fu, NC, func, system. So if I look into that column, this is actually not a very good example. There should be a explanation, or a metadata for this data that explaining what each column means. Yeah, but looks like there is a function system column, and if we look into the unique value of those columns, it basically gives me these values, which tells me what is the kind of road where that particular incident happened, whether it's a local road or a interstate or major arterial road or so on. So we have that, and we kind of are also figuring out that each of these 33,300 33,000 rows of these data frame is basically one incident each, and then these incident happened on these type of roads, like 123456789, kind of roads. Well, seven kind of roads, and some are unknown, and some where the type of road is not reported. So now, if I want to first get an idea that out of all of these different kind of roads that the incidents happened,
+
+Unknown Speaker  2:07:33  
+how many incidents happened, where?
+
+Speaker 1  2:07:36  
+So what we can do, we did a unique on this particular column, and that gives me the seven or eight unique values. So therefore we can do a group by on this particular column func system and find out the count of each of these. And when you do that, you will see that for interest rate, I'm getting 4168 for local I'm getting 4151 and so on. So this is the count of incident, or grouping of incident, by the road types. So then we can try to see how that looks like visually. So how do I do that? This is one example what looks like a bar chart probably would be helpful, because I want to kind of see the relative importance of different roads and the traffic incident that happened. So we can take this count road types and do a plot. And this is where it's another way of doing bar chart. So earlier, if you think about this, we did this way. We did PLT, dot bar. And inside here we provided our x and y axis variable. That's how we were doing. So actually, let me first do it in the previous way, and this example is just showing you that there are different ways of doing the same thing. So here we if we do counter types, dot values, let's see what it produces.
+
+Speaker 1  2:09:40  
+Yeah, so it produces the, basically a graphical representation of this grouping. Now here, because these fields are very long, you see the X sticks are kind of overlapping. Each other, and that's why we cannot see the X things very well. But if you look at the way that we did the bar, this is basically similar to what we saw before the break in the previous set of activities, we use the matplotlib bar function, which is PLT, dot bar, and you provide the x and y axis as a series. Now here my x axis comes from the index of these data frame or this series, and Y axis is the values of this series. So ideally, sorry earlier, what we are doing is we are creating an y and x2 variables ourselves. But here we have a data series, and if we look at the index and values, the index is basically my x axis and values are my y axis. So if we want, we can use that same technique, which we did before. We can do PLT, dot bar, and provide index at the x values and what values as the y times, and that will create a bar chart. So that is one way of doing that. Now, another way of doing that is you take this data frame or series, which is count road types this guy over here, which is the result of our group by and count and on that you can do a plot, dot plot. And when you do a dot plot as a kind you can do a bar, or you can do, if you want to do a histogram, you can do a histogram, and so on. So here, if you do a bar, and then that will basically produce that bar chart, and now you see here, y, t sorry, x Ts are rotated 90 degree. Why? Because each of these x values are long text. So by default, when you do a plotting, they basically are shown horizontally, and that's how they are overlapping with each other, and no one can read anything in this example. But you can change that by using the
+
+Speaker 1  2:12:18  
+actually here let me plot this. Sorry, that is left over.
+
+Speaker 1  2:12:34  
+So if you do it this way, so by default, it is already rotating it sideways, and I believe you can also change this orientation using the X t orientation in some way. And then we are also using a function called tight layout, which basically makes it everything sized accordingly, so that the graph is either expanded or contracted in a way that you should see all the text right, all the way to the end. So that's what this tight layout is doing. So it is essentially this graph, and this graph is the same, but in here, because of the layout, it becomes much easier to read, right? So that's why this thing and my x level and y level actually let me plot this again without tight layout and with the PLT dot, CLS at the beginning. Okay. So even without tight layout, it is showing well, so Okay, so that is then one major difference, because if I'm doing PLT dot bar. So here we learned that with that way, your ex ticks kind of overlaps each other, but if you do pandas plot function, then your ex ticks level are rotated by 90 degree, and therefore for long levels, it becomes much easier to read. Okay, so these are some of the things. Again, you don't need to know. Even I don't need I don't know or remember all of these things. But whenever you are plotting something, you can figure this out on yourself. Now, the other thing I can also try to do is maybe right now, as I'm talking to you guys, I can try to see I'm doing going to do a search. So let's say matplot lead text sticks rotation. Let's say I don't know how to rotate it in the way that I want. I just want to see how it is rotated. Yeah. So if I do an X sticks with a rotation variable, rotation parameter, it actually allows me to rotate. So what that means is, in here. Right.
+
+Unknown Speaker  2:15:06  
+Okay, so the levels are
+
+Speaker 1  2:15:10  
+this, so if you do PLT, dot, x sticks, oh, can I just do that rotation 90 degree? Yeah. So we don't even need to do anything, just with do X tricks and the rotation 90 degree. So even when I'm doing matplotlib bar, by applying rotation 90 degree, I can make sure, even in our older way of doing this, these are rotated 90 degree so that it is easier to read. If you do, let's say 45 degree, you will see they will appear in an angled fashion like this way. Now sometimes this might be his helpful, but in this case, you see how this is overlapping. So probably, for this 190, degrees a better way to rotate. So you rotate by 90 degree and you get this Chad. But alternatively, in this cell, when you do the data frame dot plot instead of PLT dot plot, even without setting the rotation, it automatically figures out the rotation, and it rotates 90 degree and it shows the X sticks in a nice, readable way. But overall, here we saw that how we can group data using some column, and we take the outcome of the group by and take that data frame and do a bar chart from that plot, which is this, which basically tells me that most of the accident happened in the principal arterial road, and the lowest number of accident happened in this is a dirty data, because this says principal arterial other and this says principal arterial other freeways and expressways. So this data doesn't even tell me much, because looks like, if I have to do some analysis, I'm not even going to go by these grouping, because this looks like coming from some free from entry of text or someone have basically made some mistake, like, what is really the difference between principal arterial other and principal arterial other freeways and expressways? So looks like there is some cleaning of these data to be done. So that's one insight that I could have, that maybe these two needs to be grouped together. But one thing I see that minor collected road have the lowest amount of accident reported. And then there are the issues of having unknown and not reported, which we can probably drop those roles, because those does not give me any values, right? So this is just one example of showing that the data that you have, they can be very noisy, that can be very confusing, and they can be imperfect, imperfectly collected at the source in the first place. So everything that we were doing in the discussing, in the previous discussion, where we are trying to find, okay, which variable is probably a good predictor of my target variable. Even before that, you first need to understand what the data set is actually telling you and whether the data set is clean enough that you can use it. So this one, it doesn't look like very clean. So therefore, in my opinion, if you ask me, it needs further cleansing, right? First of all, I also need to understand what all of these variables will mean, right, if I want to be able to do some analysis for this. So that's all that you can do for now, unless you get some better information on overall what these data sets does. Data Set does, okay?
+
+Unknown Speaker  2:18:47  
+Any question on this particular one, where is the
+
+Speaker 1  2:19:04  
+Okay, so if there are no question, we will go on to the next one, which is plotting group by and plotting a library users. And this is shown as a student activity. So
+
+Speaker 1  2:19:26  
+okay, yeah, this one is basically doing looking at a particular library and how items are being borrowed by different people. So okay, and then there is this scatter plot for miles per gallon. This one I remember, is a better example. Yeah, so let's do this one actually as a student activity that we have. Graph, which is your activity number six, which is miles per gallon, scatter plot, okay, because some of these data set are dirtier than the other, but this one I remember was much cleaner, actually. So in this data set, it's not very big. These data set is, let me see how big the data set is. How many rows and columns do we have first? Sorry, Mr. A here. So 398, rows and nine columns. So it basically gives me an NPG of different cars. So this is the car. This is the model year. How many cylinder does the car have? What is the displacement of the cylinder, horsepower, weight of the car, acceleration and origin. I don't know what origin means, but some data maybe origin one means made in us or something. But overall looks like from these data. We can do some plotting to show how, let's say, the MPG of a gas depends on cylinder displacement, horsepower and so on. So we can probably do the kind of analysis, what we did with the happiness level index, database, similar analysis for the cars mpg, and see which one of these will probably be more predictive to the mpg. So that's something we can do here. So if you first do horsepower, so we have these different types of horsepowers, right? So all over the place, somewhere between 50 to 150 I suppose.
+
+Unknown Speaker  2:21:58  
+Okay. And then
+
+Speaker 1  2:22:04  
+there are some horsepowers, some of these rows where horsepower is not reported. So if you do a location finding, sorry, lock finding with a horsepower equal to question mark, you will see some of these horsepowers are not reported. So what we can do is we can ignore those rows, and we can only get the data where the horsepower is reported by taking only the rows from that data frame where horsepower is not equal to question so that will gives me almost like a drop any type thing. So here some of the horsepowers were not na but it was a question mark, which is almost as good as na. So we choose to ignore those rows, those five or six rows that we have. So that way we only have the horsepowers where we have everything. I mean, where we have the data. Now, origin also another thing, it doesn't make sense. So we can delete the origin column by using the Dell function, and we can take this card name, since we are going to do the plotting with the card name as a variable, we can take this card name and set it as a index of this data frame, instead of this 0123, as an index. Now when we do all of this, we will get a much cleaner data set like this, where all my card names are indices, and we have all the data with no null or anything. Now, since we had this question mark before in the horsepower column when we loaded it from CSV, if we look into the car data, dot d types, you will see that horsepower is coming as an object and not as an integer or floating point number. And even though we drop this question mark, but the data type was originally set when the CSV file was read, so therefore it will make sense for us to change the data type for the horsepower first, which we can do by applying the pandas to numeric method, and that will take the horsepower column, convert into two numeric and reassign that to the horsepower column again. So if you run this and then go back up and run these D types again, you will see this horsepower object will now change to integer, because this is an all integer. So now our data frame is all good. There is no non numeric value, and this is the data frame we have. So now what we can plot, well, we are trying to find what is the effect of mpg on horsepower, or what is the effect of m? PG on displacement and stuff like that. So that means we can do a scatter plot with MPG as your Y axis, because that is the target variable that we are trying to find the relationship with. And then we can plot the horsepower as an X axis. And when you do that by using these method, which is taking the data frame itself and do a plot function on top of that with kind equal to scatter. And then you provide what is your x column and what is your Y column. And then if you want to provide grid line, you can provide grid line. If you want to provide figure size, you can provide figure size and all other niceties as you want to put and that will create a plot like this.
+
+Unknown Speaker  2:25:54  
+So that's one way.
+
+Speaker 1  2:25:56  
+Now let me ask you, what is the other way? Do you think we can create the same plot? So let's take that as an exercise and help me write the other way, where we use the PLT dot plot to create that same graph, instead of using data frame dot plot. So here we are using the data frame and plot. On top of that, the other one we did is PLT dot plot. So can you guys recall what we learned in the previous activities before break and try to write a statement that will create an equivalent plot there.
+
+Unknown Speaker  2:26:33  
+What would that be? PLTS, dot scattered,
+
+Speaker 1  2:26:38  
+exactly. So you can do PLT dot scatters. So I hope you see that two different ways of doing that right, whether it is a scatter plot, whether it is a histogram, whether it is a bar plot, these are the two different ways, and that is essentially all there was to learn in the second week of today, second day of this week's class, which is to understand that everything you have done using PLT, you can do that on data frame, and that is why I wanted to squeeze the whole of day two into day one itself, because there is not much incremental learning there. Okay, so now I'm happy to see that you guys are seeing the difference. Anything you can do this way, you can also do PLT, dot scatter or PLT dot bar isn't that way, right? So then what parameter we are going to provide in PLT, dot, scatter,
+
+Unknown Speaker  2:27:30  
+horsepower, comma, mpg.
+
+Unknown Speaker  2:27:33  
+Would it be just horsepower?
+
+Speaker 1  2:27:37  
+If I write horsepower, think about what happens if I just write horsepower, get
+
+Speaker 2  2:27:42  
+to do the data frame, and then, uh huh, exactly.
+
+Speaker 1  2:27:46  
+So you have to do car data. And then you can either do dot horsepower, or you can write horsepower like that, right? You can do here, if the column name does not have any space or anything. I actually like writing this way. So car data dot horsepower, and you can do our data dot mpg.
+
+Speaker 1  2:28:21  
+Let's try to clear any other plot drawn and do,
+
+Unknown Speaker  2:28:26  
+uh, fresh show here, yeah,
+
+Speaker 1  2:28:34  
+minus all the grid lines and everything, but everything, all other thing that you have added here you can also add here, so that's the only thing, that there are two different ways of doing this, either using a pipeline method or using a pandas method. But most of the time, they have very comparable features that you can apply because essentially underlying, even even when you are doing a data frame dot plot underlying, it is actually using matplotlib. If you do not have matplotlib installed in your Ponda environment, this call will not work. It will fail even though you think that, Oh, I'm not using matplotlib. I'm using Pandas DataFrame. Dot plot, but No, that's wrong underlying it's still using matplotlib, and that's why these two graph are actually as you can probably see, they're using the same underlying graphing plotting engine. Now, what do you think the correlation between these two now, let's go back to our statistical insight thing. How do you think MPG is affected by horsepower?
+
+Speaker 2  2:29:42  
+MP? MPG is exponentially decreasing as force power increases.
+
+Speaker 1  2:29:49  
+That is a little bit too much. It is decreasing exponentially. Let's not go there. We are not doing regression right now. We are not doing car fitting, but it is. Decreasing. Now, is there a tight correlation, or is there a loose correlation? Let's first understand that tight correlation, meaning when the data, when the correlation value is closer to plus one or minus one. That is tight correlation, or I would say greater than 0.5 or less than negative 0.5
+
+Unknown Speaker  2:30:22  
+so what do you think do you think
+
+Unknown Speaker  2:30:25  
+more than point five?
+
+Speaker 1  2:30:28  
+In this case, it will be negative point five, right? Because it's a reverse, because increasing horsepower does not increase mpg, it decreases the mpg. So you are saying it will be less than negative point five, but it does seem that horsepower does have a say on mpg,
+
+Unknown Speaker  2:30:49  
+and it does
+
+Unknown Speaker  2:30:53  
+negative 0.77
+
+Speaker 1  2:30:58  
+Right? So I would say, focus more on having developing this kind of insight, rather than getting too much lost on how to create a plot, whether using matte plot leave or that, or how to change the color, how to change the orientation. Those are small details that will come to you naturally, but you need to start thinking about why we are doing this in the first place, rather than how we are doing it, how part you can just Google search and do any time, but understanding the why part is more important, starting from now onwards. Could
+
+Speaker 4  2:31:33  
+you scroll down to the correlation one that you just made? Yeah,
+
+Speaker 1  2:31:41  
+so I took the car data as NPG column, did apply a correlation function. So this is a pandas correlation function, and provided the another column. Now let me ask you, what do you think it will show if I do horsepower, dot correlate mpg, would it provide the same value? Well,
+
+Unknown Speaker  2:32:03  
+I actually did that first and okay,
+
+Speaker 4  2:32:06  
+that's why I was like, I just wanted to check that I had, I had it reversed. I was like, Oh, that's interesting. It's the
+
+Speaker 1  2:32:11  
+same value. Yes, it is the same value, because the correlation is still the same.
+
+Speaker 1  2:32:22  
+Okay, how do you plot so? So we know, if, like, from our natural intuition that MPG will be correlated to horsepower. How about mpg to
+
+Unknown Speaker  2:32:34  
+displacement? Do you think there will be correlation?
+
+Speaker 10  2:32:40  
+Yeah, I would expect that there to be correlation between those two, yeah.
+
+Speaker 1  2:32:45  
+So let's try. Let's do a PLT, dot scatter, and my y axis would be mpg, right? Yeah. So Y axis would be mpg and sorry, in here I provide x axis first, right? I keep forgetting ah, X, first. Sorry, first X and then Y. So then these would be your what axis, and the x axis would be our data dot displacement. And I'm not bothering to print the levels and headings and all of that. I just want to see a very quick view. Okay,
+
+Unknown Speaker  2:33:38  
+looks like it is
+
+Unknown Speaker  2:33:41  
+now. What do you think the value of this correlation would be?
+
+Unknown Speaker  2:33:46  
+Any guess on the numeric value,
+
+Unknown Speaker  2:33:51  
+point seven zero,
+
+Unknown Speaker  2:33:54  
+someone did. It already looks like or
+
+Speaker 10  2:33:56  
+negative. Point seven zero, maybe. So that will
+
+Speaker 1  2:34:00  
+be, yeah, it will be, it will be negative. That's what that's important, because it's also inverse, right? It's inverse proportional. So let's do card data, dot displacement, dot correlate. Thank you, copilot. Yeah, negative, 0.8, can you think of two variables that will not be correlated, probably
+
+Unknown Speaker  2:34:24  
+weight in cylinders.
+
+Speaker 1  2:34:29  
+Cylinders, yeah, cylinders is a good one. So at this point, we might just do the correlation. Car data, dot cylinders,
+
+Unknown Speaker  2:34:49  
+and then let's correlate that with mpg.
+
+Unknown Speaker  2:34:55  
+They are correlated. Yeah, so.
+
+Speaker 1  2:35:02  
+They have to be right. Like, I have a v8 car that gives me 16 mpg, and my wife's drive drives an inline four, and she gets 38 mpg. So yeah, but there are other things too, but these data set, I would say so looking at like, let's go back and let's try to think about looking at these columns. Do you think this is a good data that you could probably train a prediction model to predict the MPG of a car? Is this a good data set?
+
+Speaker 4  2:35:35  
+It looks pretty good, although, if you want, you asked if there were two variables that weren't correlated,
+
+Unknown Speaker  2:35:42  
+I would say cylinders in year,
+
+Speaker 1  2:35:45  
+no cylinders. We just saw it is no two variables, two variables, right?
+
+Speaker 4  2:35:53  
+There's no correlation between, uh, well, how about this year? Then?
+
+Unknown Speaker  2:35:58  
+Yeah, yes,
+
+Unknown Speaker  2:36:01  
+year is probably not correlated.
+
+Speaker 1  2:36:04  
+So does everyone think that this is a good model? Sorry, good data to train a model.
+
+Unknown Speaker  2:36:13  
+Yes or no, yes, yes. I
+
+Speaker 7  2:36:16  
+would imagine that the the closer they are correlated, or the higher the percentage, maybe the better the data is for learning. Yeah,
+
+Speaker 1  2:36:29  
+does anyone think that there is a problem with this data set?
+
+Speaker 10  2:36:37  
+It's like, kind of only showing one thing, like everything kind of has the same result, like, there's not exactly,
+
+Speaker 1  2:36:42  
+thank not like a lot, that is, that is my opinion. Thank you for saying that. So that's what I was thinking when I was looking at so see if you get a data set where almost no column has high correlation with your target column, that's bad, because that means your data set is garbage. You need to have some correlation. But this thing is kind of seems like you know, too good of a good thing is also not good. Too much of a good thing. So this one looks like too much of a good thing, because all of these variables we have, they are all very, very highly correlated. And guess what? These variables do not seem like a dependent variable in the first place. Why I say that? Because when cylinder go up, most of the time, the bigger engine with more cylinder also have more displacement, and they also have more horsepower. So essentially, we are kind of fooling ourselves. We are thinking that we have six different measurement but they are all the outcome of the one single thing, which is a more powerful machine, and that's why you do that this data set is not a good would not be a good predictor if MPG is the target variable that we are trying to predict, right? Because there is basically, it's like a repetition of one thing over and over and over and over and again, you might actually get, like, if you train a model which takes cylinder displacement, horsepower, weight acceleration, okay, model here, I leave it out. So if you take these five columns and create a model, that model will probably almost as accurate as you take any one column and create a model with just horsepower and mpg, you will probably get the same accuracy as if you create take all the five columns. And that is also something you need to keep in mind that whether some of my attributes or properties that I have in my data set, are they internally related, or are they truly independent of each other in a good data set, ideally you should have multiple features. So these columns are also called features, right? Because these are the features of something that you are trying to find. Ideally, you need to have more features. And second, your features need to be independent of each other here, these features themselves are so tightly coupled that they are not telling you anything new, as Blair said, it's kind of repeating things over and over again. Totally agree.
+
+Speaker 1  2:39:45  
+Uh, multiple line. This is also something we saw like, if you want to draw multiple lines, like, which is something we draw when we did the remember the sine and cosine we did on the same plot, which is essential in x. Example of having multiple line. In this example, we are just going to do that, but on a actual data, not a mathematically made data. So here we basically have unemployment data that we load, and these are the different country and the how the unemployment rate varies from year 2010 to 2020 Okay, so here each year is a column instead of years being row. So the data is done this way, and then you have two different data frame one gives you 2020, 10 from 2015 another gives you next five years, so five year and five year. And then what we are doing is we are loading to data frame and then doing a pandas March. Remember, few weeks back we learned how to march things. So we are doing March. And both of these data set has country name as an index. And then, therefore, that's what the march is being done, as you can see, on country name, and that's why we're getting this now, obviously, now country code is kind of coming from both side. So what we can do is, on this combined data frame, we can get rid of this duplicate column country code, x and y we don't need. We can get rid of that, and then we can just keep one and call it country code, and that's the your combined data set looks like. That gives you 2010, through 2020, all. Okay. So now to low plot this, we can take this country code as an index, so that way my x variable would be these index, and let's see what our so this is my data frame, which is called combined unemployment data. So now, if I do this combined unemployment data dot describe, what do we get? So this gives me, just like it does the describe method, it gives me some statistical output, which is count, means standard deviation and mean, meaning minimum maximum, and then 25th 50th and 75th percentile, right? So now if we only take the second row of these. This is the second row that basically tells me the average,
+
+Unknown Speaker  2:42:50  
+oops, sorry, what happened here?
+
+Speaker 1  2:42:54  
+So that tells me the average unemployment over the years, averaged over all the countries that we have. So that's why I am doing here. Give me i log one. That means I'm getting the second row from the output of the described function, and then that is my average employment, which I can then plot in my y axis, and then years would be the keys of these, which is 2010 1112, so if you do this, let me actually print also. So let's print average employment and print just to make sure that we have the right x and y variable, yeah, oh, actually, even average employment will have years, right, because we are taking these roles. So this will have 2010, 1112, as years. So we basically have average employment over the years. So
+
+Speaker 1  2:44:03  
+uh, so therefore, since we are doing that, so I, so I did that initially, to make sure that what I get right. So then we are going to take that and create these data frame called average unemployed, sorry, called years. And then we can plot these two lines. One is the average for the world, and one is for the average of one country. Now how do we get the one country? So years is years which goes from 2010 to 22,020. So essentially, we are going to do two PLT dot plot because, as we saw in the previous sign and cosine example, if we have to plot two lines on same plot, we just have to do PLT dot plot twice. So we can do two lines, three lines, five line, 10s, line, it. Doesn't matter. You can plot multiple lines on one and it will plot this way, right? So, and then you can put the world average in blue color, which is basically coming from this data. So this is the world average data.
+
+Unknown Speaker  2:45:17  
+And for the, uh,
+
+Speaker 1  2:45:23  
+uh, what is called the unemployment data for us. You can take the original frame that we had, which is the combined unemployment data, and we can apply a location selector and say, give me the unemployment data for USA, right? And then on that you can do the plot, and you can plot that in a green and one in a blue. And that basically shows me how the unemployment data us compares to the unemployment data with the world average. So
+
+Speaker 1  2:46:03  
+so that is one way of plotting where we are doing two PLT dot plot, one after another and then adding a legend and so on. So that's one way. But remember, whenever we are doing this using PLT plot, we can also do that with the pandas plot. So now we are going to look at what is the second way of doing that. Well for the second way we can do average unemployment data frame itself. So that is my pandas data frame, and we are plotting that, and we are putting that level as a world average, because this is coming from the average unemployment data. And then we are doing that same thing, but this time with the combined unemployment data applying USA as a country between 2010 to 2020 and then doing a plot on these resulting data frame that you have, which is the output of a location function, lock function, and doing a plot. So the only difference between the code in this cell and the code in this cell is here we are doing PLT dot plot. Here we are doing and here we are doing data frame dot plot. But essentially, that's how we are plotting the unemployment data between the world and Okay, and again, I could go on into all the statistical discussion on what the story of the data is. But looking at the time, I think we have covered enough ground, and hopefully all the discussion that we had with related to the happiness data set with related to the car, mpg data set and others should kind of help you start getting into a mindset that you need to start putting on his thinking hat and look at the data as an explorer. So everything that you have been doing up until now you are basically simply following the instruction. But as you become more closer to actually doing a machine learning, you need to start putting that thinking hat on, because without that, there is no machine learning. So machine learning is first of all our learning and our exploration, and that's when we can choose what is the right data to choose, and what depending on that, what machine learning model or algorithm that we are going to choose?
+
+Unknown Speaker  2:48:28  
+Jesse, I see your hands up.
+
+Speaker 4  2:48:31  
+Familiar with with this, then the first, first chart, if you could, show up their world average in country one have commas after the variable before their before the equal sign. What does that do? I'm not familiar with that.
+
+Unknown Speaker  2:48:49  
+Okay, so
+
+Unknown Speaker  2:48:55  
+for that,
+
+Unknown Speaker  2:48:59  
+if you do PLT, dot, plot.
+
+Speaker 2  2:49:11  
+I read in one of our things, it's like a way to handle, it's like
+
+Speaker 1  2:49:15  
+a handler, yeah, it's but it's a way to store, like
+
+Unknown Speaker  2:49:18  
+the plot with, with here,
+
+Speaker 1  2:49:24  
+here it is not actually in some plot. It actually shows you two variable. But here it is not showing it is just telling you that, like, Hey, this is the object and so and so, memory location,
+
+Unknown Speaker  2:49:37  
+yeah,
+
+Speaker 1  2:49:40  
+for this one, you basically, you are right. You even don't need these two. Oops, these. These are the kind of things I'll tell you when this becomes handy. So let's say you are trying to do multiple plots. Let's say four plots you are going to do, and you are going to put these four plots on a two by two. Great. That is when this type of technique would be useful, which we will see in the course of some of the other activities that we will do going down the line. But that's where you will basically have create, basically, almost like what is called Canvas. Let's say you want to do four plot, you can do a two by two canvas. Or if you want to do 10 plots. You can do a two by five canvas, and then you want to, let's say there are 10 different correlation or scatter plot you are going to do with 10 data column that you have. So you will maybe create a two by five canvas, and then each plot you are going to put in a respective point in the canvas. So they basically look like, instead of one cell after another cell, that becomes kind of too much. You have to scroll through the cell. So if you do it that way, you will basically get a canvas combining of different charts. So that's when you are going to use this handle, right, as Matt said, and you use the index of the canvas to put these, one of these handle into the inject into the corresponding place in the canvas, which is not part of these activity. So that's actually a good observation for this one. There is no reason to actually get handle of this, although no here, sorry. So you see what they did is they took that handle and provided, okay, sorry, my bad. I didn't see this line. So what? Since these are two different plot so now if you want to do a PLT dot legend and slap that onto that, so that's where you are going to use these handles, and you are saying location equal to best. So basically, you are asking matplotlib to use the handle for both of these and then put the legend in a way that is best fit, meaning that does not overlap any of the lines. That's why you need the handle to put the legend in a right location. That's why otherwise this location equal to best would not work without the handles. So let me try this without the handles. Let's see if it does work. It actually does. So these things keep changing. So probably it was not clear your plot.
+
+Speaker 4  2:52:13  
+I did that Matt, and it still worked. It was kind of okay.
+
+Speaker 1  2:52:19  
+It still works? Yeah, yeah, that's what I'm saying. I mean, all of these things, they keep improving as the time goes by. So now you can do a location equal to best, even without providing the handle. What if, if I even do not even use location best,
+
+Unknown Speaker  2:52:42  
+will it still work? So, so these things
+
+Speaker 1  2:52:47  
+are getting smarter day by day. So you don't need to do all of that. Just do PLD dot legend, and it will put the legend up there, yeah, just like in this one also, right? So here, when we are doing data frame dot plot, instead of doing PLT dot plot, all we are doing is PLT, dot legend, and it is putting the legend in the right place as it is filled. So, yeah. Cool. So that will be all that today's class is a question. Oh, sorry, I didn't see, um, go on Margarita, yeah, maybe
+
+Unknown Speaker  2:53:30  
+this question
+
+Unknown Speaker  2:53:33  
+for tonight's class. But generally, are we be are we?
+
+Speaker 6  2:53:40  
+I mean, can, can we allow three dimensional using Python?
+
+Speaker 1  2:53:47  
+Two dimensional or three dimensional? You mean dimensional? I'm sorry your voice is three. You were saying, yes, yeah, you can do three dimensional plot using Python, but that is not using matplotlib. There are other libraries that allows you to do three dimensional plot in Python. Okay?
+
+Unknown Speaker  2:54:17  
+Any other question.
+
+Unknown Speaker  2:54:18  
+Have a great night, everyone.
+
+Speaker 10  2:54:23  
+I was looking to get just some quick technical help on something. If I could get into a breakout room with someone now
+
+Unknown Speaker  2:54:30  
+you can just ask us here. We are all here. Okay?
+

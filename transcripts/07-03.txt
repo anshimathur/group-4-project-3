@@ -1,0 +1,1854 @@
+Unknown Speaker  0:31  
+So since we finished module seven one day early, so I decided that we are going to start module eight today, which we kind of agreed upon right towards the end of the last class. So now the thing about module eight is kind of similar to what we have seen in module seven.
+
+Unknown Speaker  0:52  
+The first two units, we can basically tackle them in one shot, one goal. Okay, so this is what I plan to do that, Jesse, I know you were asking yesterday, like, what comes next? And I said I didn't really think through yet, but which I did now. So so module eight, first two class given like kind of things that we have discussed so far, and in many cases, I have provided additional material to you guys, so you will probably see the first two classes. Material of module eight might feel a little repetitive.
+
+Unknown Speaker  1:32  
+The third class of module eight is where the rubber hits the road, which is where you are actually doing the machine learning based prediction, which is a specific kind of machine learning, which is forecasting, in this case, which is in
+
+Unknown Speaker  1:48  
+class three of this week of module eight, right? So what I plan to do is today, we are going to cover one and two, and I apologize in advance if some of these feels repetitive, probably I am to blame, because I probably already gave you lot of thing in advance. So now you come here and modulate and you like, wait a second, I already know that. Then I already talked about it. Okay, so if you are thinking that I totally take all the blame, but we have to go through this formally. What I'm planning to do is condense the two classes today, and then we'll have two more classes. And this is what my plan is. So we are next class, which is Thursday, we are going to do module eight, class three, and then the next week, Monday, we don't have a class, MLK, Tuesdays class, I am going to provide you some brand new material, building on what you have learned on the third class of module eight. So third class of module eight, you are going to learn to use that first machine learning framework in this course, which is profit, which is a time series forecasting
+
+Unknown Speaker  3:06  
+algorithm or framework, which is made by Facebook. So we are going to do some activities on Thursdays class, all the activities that are provided by BCS. But then the day after, which is next week, Tuesday, I'm going to bring in some additional material and we will do some deeper dive. And what I'm thinking is, remember one notebook that I showed you couple of days back couple of weeks back where we had this, that trading API alpaca through which we actually got the real time stock market data, well near real time, right? So what I'm going to do is, for Tuesday's class next week, I'm going to build on to that example, and I'm going to show you how we can get the data through the alpaca API on certain stock or some index or something, whatever security that you choose. And we are actually going to do the forecasting using profit. But in doing so, what we will do is we will get all the data for, let's say, last two years, but not up to the today's date. So we will take all the data up until, let's say, one month back, and that is the data that we are going to train our model on. And then we will ask our model to forecast one month looking forward. Because the beauty is now we will have that data already available from last month, and we will say, see how our model, whole models, prediction, matches up with what actually happened in the market for that index or that stock? Okay, I need some time to build up on that, which I'm going to work over the weekend, and I'm going to discuss that so you can consider almost like a mini project
+
+Unknown Speaker  4:55  
+that's that. And I'm also thinking, if I get time to probably do.
+
+Unknown Speaker  5:00  
+Use something like a weather prediction model, but I don't want to promise anything right now, because I still have to go and see whether I can find some data and so on. But the stock market one, I think this would be, that would be a really good experience to kind of, you know, be able to extend on what we have discussed and take it all the way to the end, which is actually see how Facebook profit is for forecasting, right? So we'll do those stuff Tuesday. So that means today, we are going to cover one and two, and Thursday, we are going to cover three, which will introduce you to profit, and then we can build up on that on Tuesday to do more advanced profit based examples, right? Or mini, mini project in class.
+
+Unknown Speaker  5:45  
+Does that make sense? Sounds good.
+
+Unknown Speaker  5:49  
+Yes. Sounds good.
+
+Unknown Speaker  5:53  
+Okay, so let's get started.
+
+Unknown Speaker  5:56  
+So this first two module is mostly about
+
+Unknown Speaker  6:00  
+time series data. Like, how do you load time series data? How do you plot time series data? That's about it, right?
+
+Unknown Speaker  6:07  
+And we will basically be doing machine learning. So just a quick recap, and this is something that we discussed in the first week of the boot camp. We talked about two main approaches of machine learning, right? Supervised learning, unsupervised learning.
+
+Unknown Speaker  6:24  
+What is supervised learning
+
+Unknown Speaker  6:27  
+is when I have
+
+Unknown Speaker  6:30  
+data that I have observed from the past and we also have a target or level or output. So there are different names that you will see. So basically, an example of supervised learning would be if you do have a whole bunch of images that you want to classify, and you already know that some of your images that you have seen before, and you know what image is that. So you can train a model, and the model will basically take the clue, it will. It will
+
+Unknown Speaker  7:03  
+take all of those images and train itself essentially under the hood. It will basically create a probability distribution that most closely models what is the probability of a particular image falling to a certain class given all the events that has happened before, meaning in events, in this case, meaning all the images that it has seen before, right, which, in a sense, is kind of similar to the curve fitting problem that we looked at in the last class, where we had x and Y, Y is a function of x right and based on the previous data we had, we were trying to fit either a straight line or a quadratic function to that curve. So the idea is that once you can find a mathematical functional relation, then tomorrow, if a new data comes in, you will simply plug it in that mathematical formula, and voila, you will get a value of y. So that's essentially what
+
+Unknown Speaker  8:06  
+supervised learning does, right? And then supervised learning also have two sub classes, which basically differs in what you are trying to predict as an outcome. The thing that you are trying to predict as an outcome, if it is a continuous variable. For example, talking about like, hey, given the weather data in the past, I want to predict what is the temperature going to be tomorrow, and the temperature can be a continuous variable that can take any value. This type of problem, essentially is called regression, if, on the other hand, your prediction. A can only take a few designated values, not a continuous value. So then that becomes classification, right? So one example of classification would be, let's say,
+
+Unknown Speaker  8:56  
+like you have a whole bunch of extra images, right? And based on the extra images. The expert basically make a prediction like whether extra image or scan image or something right prediction that whether a certain disease is present in the patient's body based on the image. So essentially you have two outcome, two classes here, whether the patient has the disease or the patient does not have the disease. So then you can take all of these hundreds or 1000s of images that have already been leveled by expert physicians in the past, and you train the model, and then you ask the model to predict on other images that comes tomorrow or anytime in the future, and ask the model to predict which, what you do think whether there is A disease or whether there is not a disease. So here you can see the output is basically fixed category, which, in this case, is two categories, or it could be multiple categories as well. So these type of model is called classification, but the underlying mechanism is still the same, the probabilistic model that is being done.
+
+Unknown Speaker  10:00  
+One or when you train the model is still the same. Is just your output. Mechanism is different. One is having discrete values, which is classification, and one is a continuous values, which is regression. So that's your supervised learning,
+
+Unknown Speaker  10:16  
+which, intuitively, we all know by now. It kind of makes sense. That's kind of the bread and butter of all machine learning problem, right? Most of the application of machine learning, you can think about now on the other hand side, unsupervised learning, why that would be useful?
+
+Unknown Speaker  10:33  
+Well, unsupervised learning, I'd say,
+
+Unknown Speaker  10:39  
+most of the time it is used as kind of upstream. When your final goal is to do some kind of a supervised learning, you usually do some level of unsupervised learning at the beginning to basically provide some additional structure to the data. So the two thing that you see here, one is clustering, one is dimensionality reduction. And I talked about this before, but I'm just doing a recap here today. So clustering is something what you do when, let's say you are trying to do classification right which is your supervised learning, but classification you only will be able to do if a human can already tell which is which on your trading data, like going back to my city scan example, or extra image example, if you can have a physician who can sort through 1000s of images and give you a reliable
+
+Unknown Speaker  11:34  
+what is a reliable decision on the classification, then you can use A classification model. But sometimes it happens. What happens is, you have a whole bunch of data point, but you cannot really categorize into different classes based on a human input, because we don't know. So then what you can do that's when you use these type of machine learning technique called clustering, where you basically simply ask the machine or the model just look at which groups of data are similar and cluster them together.
+
+Unknown Speaker  12:13  
+Why do you think that would be necessary? So let's say,
+
+Unknown Speaker  12:18  
+as I said, right? Like if I don't know what the cluster level or class would be. One example would be, let's say I am looking into,
+
+Unknown Speaker  12:30  
+I am looking into different
+
+Unknown Speaker  12:34  
+customer activity, right? So let's say I'm an online retail store. Let's say amazon.com and I do collect all the data about customers, buying habits. They're there. How do they browse our website? How do they look through the different product categories and so on right now, based on that, let's say my marketing department wants to know what are the different customer segments we have, and when we are trying to show like sponsored ads or recommended products based on the segment of the customer, we want to show the kind of ads or recommended products or sponsored product products that that particular segment of customer is more likely to buy. So that is one segmentation problem. Now in order to do that, when you have this whole bunch of data,
+
+Unknown Speaker  13:21  
+it is not humanly possible to look through the data and find out what classification makes more sense. Like, are we? Are you only going to classify by age of the customer? Are you only going to classify by customers income or the total purchase value or or is there something else? Or are you also going to look at what kind of product category it's he's he or she searches. So there are a lot of variables, and we don't know which customer belongs to which group. So then what we can do is we can use this clustering algorithm and ask the machine to find out, okay, look at look in this data, and find out which customers are based on their behavior, based on their purchasing habit, and so on which groups of customer and closer together. So that way. Now you know, okay, so I have these distinct five sets of customer. Maybe the type one of customer is someone who always like to buy the latest and coolest gadgets, and they don't mind spending money. So now I have that custom group. I have another group who are more conservative in their buying habits, and they always look to shock around. They always look for deals and so on and stuff like that. Now, after the algorithm does the clustering, then as a human, we can come in, then we look into the clustering, and then we try to make sense, okay, so if these are the attributes of the customer. We will call this customer group one which is characterized by these, these, these attributes, right? So now you see by using clustering mechanism, now we can basically, we basically have a help from the algorithm to help us identify how many different classes of customers are there. And then we can take that and.
+
+Unknown Speaker  15:00  
+Level our data, and then going forward, we can use that level data to do downstream classification problem or use it for any other purposes. So that's one example of upstream processing using the unsupervised algorithm, which is clustering.
+
+Unknown Speaker  15:18  
+The other one I talked about dimensionality reduction. So let me ask you, does anyone remember what I talked about in dimensionality reduction? And I think I added a few slides on that too. Does anyone remember what it does you take a non dimensional hyperspace and reduce it down to like a set of like n by n, right? Yeah, yeah. I remember the example where you were, like shot, if you were to shine a flashlight on a on a 3d model up against a 2d plane, it was basically reducing dimensions that way as well. That way. Very good, very good. Yes, so And why do we do that? Why do we need to do that? Okay,
+
+Unknown Speaker  16:05  
+uh, simplify our analysis. Simplify, simplify the model complexity. Because sometimes, when you have like, all the data that we have seen like probably what 1020 30 columns, meaning 1020 30 dimensions. But it is not uncommon for machine learning practitioners in the field to come across data that has hundreds of columns right and with the hundreds of columns meaning hundreds of dimension, which is good in a sense, because the more attribute that you have, the more would be predictive power of your algorithm. But it also has a downside. Meaning, if you have a high, very high dimensional data to feed a to train a model properly, you also need a lot of numbers of data point
+
+Unknown Speaker  16:54  
+like it does not make sense if you have 100 Dimension Data, meaning a pandas data frame 800 column, but you only have 1000 rows,
+
+Unknown Speaker  17:05  
+so the number of data point need to go up commensurately in order for your high dimensional data to be trained properly. Otherwise your model will suffer something called overfitting, which we also discussed yesterday's class. Right? So that is that basically, people call it like a curse of dimensionality. Dimensionality is good, but sometimes high dimensionality kind of makes a big, big problem, especially when it is hard for you to scale up your data collection effort and get the large amount of data right. That's one reason. The other reason is simple. Is computing power. The more dimension you have, the more computing power at time you need, and then more money you have to spend, right? So even for that purpose, sometimes it makes sense to kind of come down to a lower dimension. Now, when you come down to a lower dimension. One approach you can do, which is, remember, yesterday we were doing this pair wise scatter plot and finding the pair wise correlation. We sometimes people do and and this is like a mix and mix of mix and match of approaches people will do right? There is no right or wrong thing, but I'm just saying few other things that comes to my mind. So one approach is Okay, so let's say I have 100 dimension can I find maybe some of these dimensions are so highly correlated, so using my pair wise scatter plot or heat map, the one that we did using the heat map, maybe we find out of these 100 variables we have, maybe 20 are very highly correlated, like almost close to correlation of one or maybe 0.8 0.9 even, right? So if those are highly correlated, then people take a look and they think, okay, so these 10 variables are highly correlated. Let's look and what these variables are. Does that mean that they are kind of measuring the same thing? If it is, then we can probably safely discard some of those variables. So that is one way of reducing dimensionality, which
+
+Unknown Speaker  19:07  
+always is not possible because it might so happen that you do get 100 variables or 100 columns and none of them are highly correlated,
+
+Unknown Speaker  19:16  
+then you cannot do that kind of a manual, like a looking into the heat map and and reducing some of these, you may not be lucky enough to that. So then what do you do? Well, then you will say, okay, hey, Mr. Data engineer, can you you only give me 1000 data, but that is not good enough, because I have 100 columns, so I need at least 10,000 data to be able to treat 100 dimensional model without the risk of overfitting, and the data engineer comes back, sorry, this is what all we can do. We don't have any further data collected. Then what do you do? We say, Okay, this model is going to be very, very complex, and it is going to be over fitted. So what I'm going to do, I'm going to zip this dimension and reduce that 100 dimension into 10 dimension. So.
+
+Unknown Speaker  20:01  
+That is the reason that people will use dimensionality reduction, right? And that way, not only your risk of overfitting goes down, but your model also becomes simpler, meaning more efficient, less costly to run, less time consuming, more responsive model.
+
+Unknown Speaker  20:20  
+So
+
+Unknown Speaker  20:23  
+a better way like to have a smaller database, and it depends. I think, no, yeah, no, we are not talking about database here. Margarita, so data, it's not a question of databases.
+
+Unknown Speaker  20:37  
+So let's say, yeah.
+
+Unknown Speaker  20:41  
+I'm sorry if you have, let's say 10 dimensional data, right? And all of these dimensional let's say some numeric value. Okay, so now if you can somehow plot this 10 dimensional data on a 10 dimensional space, it will be a vector in a 10 dimensional space. Now if that is too much for your model to handle, what you can do is you can basically take a projection from a 10 dimensional space to a lower dimensional space, maybe two, three or four dimensional space, and whatever that projection is, you will get those four coordinate and you only take those now, those coordinate or projection values that you will get, they will be completely meaningless number to you. Because what is happening is mathematically that dimensional reduction algorithm, it will create a vector space, and it will basically try to,
+
+Unknown Speaker  21:33  
+basically create an image of the your data in a 10 dimensional space, and almost think of like now put a shiny spotlight from above and see what is the shadow coming on a lower dimensional plane, which is, let's say, two, three or four dimensional plane, and then look at the shadow and see what coordinate the shadow is coming. And then give you that coordinate, right? And that's why, in the other day, at the beginning, I basically gave this example of, let's say you have a three dimensional object, sorry, three dimensional space, which is where we live in. And I have this object mid air, so there is a x, y and z coordinate. If you specify, you can exactly look at the object. But if you shine a light from top, and let's say your shadow is coming on, let's say on a x, y graph paper, then you can see exactly where your shadow is right, and then you can get the x and y coordinate from a graph paper. And that would be a reduction from a three dimension to two dimension. So I always take this example from three to two, because it is easy for us to visualize, because we all know that right, because we live in a 3d world, but mathematically, that's the similar concept happening, even if you are going from 300 dimension down to 200
+
+Unknown Speaker  22:45  
+dimension, or 300 dimension down to three dimension, even right now how much you will go down that again, there is no golden rule. Because the thing is, as you can probably imagine, imagine, the more you go down, the more you more details of the data you lose. Right? If you go from 10 dimension to five dimension, you probably return a lot. But if you suddenly go from 10 dimension to two dimension, even though the algorithm will try doing its best to retain as much valuable information as possible, but the lower further you go down in the dimension, you basically tend to lose some fidelity in the data, so then your model will probably have to kind of do that balance with accuracy versus simplicity, right?
+
+Unknown Speaker  23:31  
+Thank you. Ask a clarifying question real quick, yes, when we're talking about dimensionality, can we just think of this as like columns or like variables? We can like measure like like, we're like, with the 10 dimensional exactly like model that we have, we can like, like, they have a data points within like a 10 dimensional space with regards to like, 10 other variables. Exactly, exactly. Yeah. So essentially, if, when you collect the data on the things that you are trying to analyze or observe, if it has 10 attributes. So you'll basically load your pandas data frame and that will have 10 columns. So these 10 columns are your 10 dimensions, right?
+
+Unknown Speaker  24:08  
+Yeah. So like yesterday we were, we're checking, like, in a 2d graph, you know, like you're trying to do linear regressions on like a two dimensional, I guess, yeah, like a two dimensional space. And so like, with like models we can train. We can, like, up that up to like, 10 dimensional, and then that's a model will, like, kind of do that regression on it, okay, yeah, yeah.
+
+Unknown Speaker  24:30  
+I mean, at that point you cannot plot it anymore,
+
+Unknown Speaker  24:34  
+but yeah, unless we change your dimension, I guess,
+
+Unknown Speaker  24:38  
+unless you, yeah, right. Okay, so that is a quick recap of machine learning, and this one you know, like classification and regression. We already talked about continuous variable versus discrete variable. Now talking about this
+
+Unknown Speaker  24:56  
+forecasting, right? We have talked about that. We said.
+
+Unknown Speaker  25:00  
+That, yes, the third class of this week, we are actually going to do forecasting, which is where we are going to look into the data that comes as a time series from the past. So what is the time series data? Right? So time series data is regular data, except where the index is a time, and that could be hour by hour or minute by minute, or day by day, or whatever granularity you have. So essentially, that is your time series data. So the forecasting algorithm that we will be doing, so what that algorithm will do, it will look into what happened in the past, and then it will try to predict what happened with in some forward looking period, right? So if you have, let's say, daily interval data, and you have 1000 days of data in the past, okay, what will happen in coming 10 days or 20 days, right? So that is what we will do. So now, if I ask you, like, hey, if we we know that these are the different classes of machine learning algorithm. Which class does, does forecasting, fitting?
+
+Unknown Speaker  26:00  
+Do think out of these four broad classes that we have here
+
+Unknown Speaker  26:08  
+in regression, yeah, exactly. So it is a regression, because essentially what we are doing is we are doing something like this, except my axis here is time. So we have some y values, which is our observed value, which could be your weather reading, which could be your stock market, stock prices, or whatever. That's your y value. The only difference is your x axis is basically time,
+
+Unknown Speaker  26:35  
+right? So think about forecasting is as a regression problem
+
+Unknown Speaker  26:41  
+with your dependent variable, or the primary dependent variable being time,
+
+Unknown Speaker  26:46  
+and that's what we will do in the class three of this week, which will tackle Thursday.
+
+Unknown Speaker  26:52  
+Okay, so for today's class, we just are going to look at a few activities which will prepare us and build the required skill sets so that on the Thursdays class, we can jump right in and start tackling this forecasting problem using that profit framework from Facebook, right? So that's kind of what the reason for these first two classes.
+
+Unknown Speaker  27:20  
+Okay, so we will now jump into doing some quick activities. Any questions so far,
+
+Unknown Speaker  27:32  
+so we're going to use profit? Are we going to use like TensorFlow or pytorch at all in the course? No, apart for not, not for forecasting. For forecasting, we are only going to use profit. And I don't think we are using TensorFlow either.
+
+Unknown Speaker  27:50  
+In this scopes, TensorFlow, we usually, normally, we don't use TensorFlow here.
+
+Unknown Speaker  27:56  
+Pytorch, I'm not so sure. I have to look through the material whether we will, probably not. We are going to use some scikit learn based techniques, and then we are going to use, I haven't even looked into because this is the first time I'm teaching the AI boot camp. The other boot camp I have taught before is the FinTech boot camp. So in FinTech boot camp, we use scikit learn for regression and classification, and we use profit for time series forecasting. And then the after that, that boot camp, kind of diverges its goals into cryptocurrency and all of that stuff, which we don't have here, right? So that third part of the this boot camp, I will know as I go forward, right? So I don't even know what is, what we have in store for us. So, Karen, or anyone else from the TSU
+
+Unknown Speaker  28:45  
+they do,
+
+Unknown Speaker  28:48  
+there is a part with neural networks. Oh, okay, and so now, but do you know whether we are using TensorFlow or anything? I'm gonna look and see. But
+
+Unknown Speaker  29:00  
+thank you. Well, because Keras makes it really easy, and that's yeah, chaos is basically just a wrapper around TensorFlow, yeah, originally, but now, yeah, now, yeah, yeah. Ever since, ever since Google hired Francois chalet
+
+Unknown Speaker  29:18  
+Karas went away from using other back ends
+
+Unknown Speaker  29:25  
+more popular is by torch. Is
+
+Unknown Speaker  29:29  
+actually becoming more popular in research and such, I think, yeah,
+
+Unknown Speaker  29:37  
+even the recent LMS are all built in by torch? I think so, based on, based on what you said, if there are, there are stuff can you confirm, like whether we are going to be using Keras or TensorFlow or pytorch, or anything else? I'm just trying to look ahead. Okay, that's fine. You don't have to come up with the answer right now. But whoever asked this question was this Donald.
+
+Unknown Speaker  30:00  
+Who has the question? I think you've got your answer, yeah, that's that's perfectly good, yeah,
+
+Unknown Speaker  30:06  
+so yeah. We will do some that is in the third part of the course, but we will see when we get there. Okay, so time for us to
+
+Unknown Speaker  30:17  
+get our hands into some time series data.
+
+Unknown Speaker  30:22  
+You see my screen right
+
+Unknown Speaker  30:25  
+the VS code?
+
+Unknown Speaker  30:28  
+No. So you don't see VS code,
+
+Unknown Speaker  30:32  
+I don't, but I might have clicked on a different view.
+
+Unknown Speaker  30:37  
+Oh, yeah, you might at the top see like the noise screen versus like the meeting.
+
+Unknown Speaker  30:46  
+So are you not seeing my screen at all up until I can see we can see. Okay, okay, cool.
+
+Unknown Speaker  30:54  
+Okay. So the first activity, what we are going to do is we are going to read SNP, 500
+
+Unknown Speaker  31:01  
+right? Some data, which is basically the closing price of S and p5 100
+
+Unknown Speaker  31:08  
+with certain time. So just by taking a look, quick look at the head of this data frame.
+
+Unknown Speaker  31:16  
+What is the what are the two columns? What is the first column look like,
+
+Unknown Speaker  31:27  
+date time, date time, and the second column looks like
+
+Unknown Speaker  31:33  
+a float right
+
+Unknown Speaker  31:35  
+now here we have read it from a CSV, and we did read CSV, we didn't ask pandas to actually convert these to a date time.
+
+Unknown Speaker  31:48  
+So when you do that,
+
+Unknown Speaker  31:51  
+pandas does not follow the this format. And essentially, if you now do a D types, you will see
+
+Unknown Speaker  32:02  
+that the Time column is an object which basically is a string,
+
+Unknown Speaker  32:10  
+right? So even though it looks like a dead time, and it should be a dead time, if you just do a plain, simple PD dot read CSV, it does not automatically read this as a dead time, so it read this just as a string. So that's our first observation.
+
+Unknown Speaker  32:31  
+So if you look into any specific value of the time, well, this is a specific value, but this is coming as a string.
+
+Unknown Speaker  32:39  
+Now how do you convert it to dead time?
+
+Unknown Speaker  32:44  
+Now, to convert it to dead time, there are obviously different ways of doing it. In this particular activity, we are going to look at one way of doing it, which is using a built in pandas function called Two dead time, t, O, underscore, dead time.
+
+Unknown Speaker  33:01  
+So pd.to date. Time is a pandas function, and you can pass in stuff, and it will create a dead time object out of it. So just a quick try, try to for the two day time function. If you find, pass the string called today, and you run this, it will give you a timestamp object, as you can see here, and that timestamp object basically captures the current system time in my computer, which is this.
+
+Unknown Speaker  33:35  
+So what that means is you can so it got current timestamp, because today is a special string that we pass. But I can pass,
+
+Unknown Speaker  33:48  
+I can call pt.to, Date Time. And basically, let's say I'm going to pass this string, which happens to be the first item in our data frame, right? So let's pass that frame, that string to the two day time function and see what it returns. So you see now it took that and it converted into a timestamp.
+
+Unknown Speaker  34:12  
+So that means, anything that you pass to the two day time that looks like a timestamp, it will convert it to a timestamp,
+
+Unknown Speaker  34:21  
+if you don't. So here you have yy mm, dd, and then space, and then you have hh mm, ss, and then your time zone. So you have the whole thing. If your data does not have everything, let's say if it only has up to Yy mmdd, it will still work if you try to run it, you will get a timestamp where all the hour minutes, second are zeroed out because the string that you are passing it doesn't have all the details going down to second.
+
+Unknown Speaker  34:54  
+But what will happen if you pass invalid value?
+
+Unknown Speaker  35:00  
+Let's say 50 here. What do you think will
+
+Unknown Speaker  35:06  
+happen
+
+Unknown Speaker  35:10  
+error and what the error says?
+
+Unknown Speaker  35:13  
+It very clearly says, month must be in one to 12, right? So basically, two dead time function will only work if whatever you are passing to it is actually a valid date and or time, then only this will work.
+
+Unknown Speaker  35:30  
+So now, knowing that the data frame we just loaded freshly from our CSV file, knowing that that's the first column is looks like it's a valid time, so we should be able to apply pd.to date time on this column, the whole column, so the whole column will be now converted into timestamp.
+
+Unknown Speaker  35:54  
+So which is what we are going to do right here.
+
+Unknown Speaker  35:58  
+So this one, we know that this will basically not work if, if it's not a valid date time, and you will get some kind of error, and the error message will clearly tell you what's wrong with your date.
+
+Unknown Speaker  36:09  
+So now what we are doing here, we are applying pd.to date time, but this time, we are not providing a variable only. We are providing a whole column, which is basically a series, which is the Time column of our DF, SP, 500 data frame,
+
+Unknown Speaker  36:30  
+and then I am assigning that output of this PD dot dead time back into the Time column again. So basically I'm overwriting the Time column with the date time converted Time column.
+
+Unknown Speaker  36:46  
+Okay,
+
+Unknown Speaker  36:49  
+let's run this, and then I am also doing a dot info. Now, when I'm doing a dot info, you will see that the Time column is now showing at a dead time, 64
+
+Unknown Speaker  37:03  
+which is basically says it's a 64 bit Date Time, and internally it has nanosecond level precision. And the time zone is UTC.
+
+Unknown Speaker  37:14  
+UTC is basically your British time,
+
+Unknown Speaker  37:18  
+which is the time right now in Greenwich. So that's your UTC. Now, why did it do UTC?
+
+Unknown Speaker  37:29  
+Is it because UTC equals true on the cell above it, Binoy, or is it because of the plus 00,
+
+Unknown Speaker  37:36  
+on cell number? Yeah, good observation. The answer is both Okay. So here we have plus 00, so this format here is, if you have, if it is a UTC, it will be 00, if it is ahead of UTC, let's say, if you go into, let's say Eastern Europe, or any Asian time or Japan, they are all ahead, right. So it will be UTC plus one plus two plus three, whereas in Americas we have UTC minus 45678,
+
+Unknown Speaker  38:05  
+and so on. So that's where we'll come in here. So in this particular data, we have plus 00,
+
+Unknown Speaker  38:13  
+and then when we were converting we said UTC equal to true. That means assume that it is going to be UTC if nothing else is specified. So in this case, all of these were coming with a plus 00, and then we, we basically instructed the two dead time function with a UTC equal to true parameter. And that's why all of the time now has become UTC time.
+
+Unknown Speaker  38:39  
+Now, if you do a head at this time,
+
+Unknown Speaker  38:45  
+let's see whether the what head prints, the head will probably like. Looking at the head, you probably would not know the difference, right? Because even before the conversion, the head was still looking like this, even though it was string,
+
+Unknown Speaker  39:00  
+the only way you can understand whether it is string or not is either doing a dot info or dot d types. So when you do dot info, it clearly shows you can get a similar information with dot d types as well.
+
+Unknown Speaker  39:14  
+So I have a quick question about this, about the setting UTC
+
+Unknown Speaker  39:21  
+say you have a data set with mixed time zones, some of the times in, you know, UTC, some of it in MST, or what have you if you say UTC, true, will it convert all of the time stamps to
+
+Unknown Speaker  39:37  
+be uniform with UTC? Good question. I don't have the answer right on top of my head. Yeah, I have, I have. What I have seen is, if you don't pass this, let's say if you don't pass it, then let's see what happens.
+
+Unknown Speaker  39:54  
+It actually still taking a UTC because it's the date it's already been.
+
+Unknown Speaker  40:00  
+Convert it to UTC.
+
+Unknown Speaker  40:02  
+So you'd have to refetch it to reconvert it. Ah, right, right, right. Sorry, yes, I have to re fetch it. Yeah,
+
+Unknown Speaker  40:10  
+I asked because I have, like, a number of devices. I'm going to be collecting statistics from and logs from that. I'll probably leverage panda for in parsing through but not all of them have the time zone set correctly, so being able to sync all that data could be handy.
+
+Unknown Speaker  40:29  
+I guess it's worth just testing. Cool. Thanks, man,
+
+Unknown Speaker  40:33  
+yeah. So what you can do is, I'll tell you what you can do as a to try it out. So you have this S, p5, 100 CSV file here, right? So what you can do is open the CSV file, and just to test out this theory, you can go and change some of the first five rows, like you change the time zone to different time zone, and then load the data and then see what else. That's an idea.
+
+Unknown Speaker  40:58  
+Cool. So,
+
+Unknown Speaker  41:03  
+okay.
+
+Unknown Speaker  41:04  
+So now, since we had 00 so everything was in UTC,
+
+Unknown Speaker  41:09  
+but it is possible for you to convert it to a different time zone after you convert it to a UTC. So initially we converted all the UTC, as we can see here, the dead time 64 it's a nanosecond and UTC
+
+Unknown Speaker  41:24  
+now what you can do is there is a function property called dt. So any, any pandas column that is of dead time type, which in this case is this.
+
+Unknown Speaker  41:40  
+So this is your dead time if you apply a.dt on it. So.dt
+
+Unknown Speaker  41:47  
+is a property, and that basically gives you date time properties. So this is a property, and then on this.dt
+
+Unknown Speaker  41:56  
+you can apply different functions. So for example, if you say, Hey, give me.dt
+
+Unknown Speaker  42:04  
+day of week.
+
+Unknown Speaker  42:12  
+So it basically gives you what day of week. Each of this is
+
+Unknown Speaker  42:16  
+right. So these are all properties. My bad. I said functions. It's not function. You can also get.dt
+
+Unknown Speaker  42:25  
+let's say
+
+Unknown Speaker  42:27  
+day of year, and it will give you the different days of year, day one, day two, and so on. So another function that we have on the DT, it's called tz convert, which basically is the time zone convert. And in this time zone convert, you can specify the different time zones, for example, US Eastern. If you want to convert it to from UTC you take that.dt
+
+Unknown Speaker  42:56  
+on top of the column, which is Time column, and you convert it to US Eastern, and let's assign it back to the time again. And then, if you do that, and then you do an info, you will see that it says date, time 64 but this time, it is not UTC anymore. That is US Eastern.
+
+Unknown Speaker  43:17  
+Now, if you do a head now, you would be able to see a difference, because now you have converted the time zone.
+
+Unknown Speaker  43:26  
+So now look at the first line. It was 1245, UTC
+
+Unknown Speaker  43:32  
+before conversion, we converted it to US East time zone. So that became 745, minus five,
+
+Unknown Speaker  43:42  
+because it is five hours behind.
+
+Unknown Speaker  43:47  
+So that's how you can switch from one time zone to another time zone.
+
+Unknown Speaker  43:56  
+If you want. You can also do D types. And D types will also show you the same info that it's a US Eastern time.
+
+Unknown Speaker  44:07  
+Okay,
+
+Unknown Speaker  44:10  
+so good on this one.
+
+Unknown Speaker  44:17  
+Okay,
+
+Unknown Speaker  44:19  
+so I'm skipping the student activity the next one, which basically is the same thing, you can look into it yourself.
+
+Unknown Speaker  44:28  
+I don't think there is any any additional thing for us to learn from there.
+
+Unknown Speaker  44:34  
+And you're going to do go into the third one, which is now we are going to apply this
+
+Unknown Speaker  44:44  
+to basically see some of the other features that we can have and how we can set use this timestamp column as index of a data frame,
+
+Unknown Speaker  44:53  
+and we are going to use some of the techniques that we have done in the first activity. Okay,
+
+Unknown Speaker  44:59  
+so we will you.
+
+Unknown Speaker  45:00  
+Use that same data frame, which is S, p5, 100,
+
+Unknown Speaker  45:05  
+and this time, we will just take it, convert it to dead time, and then convert it to us eastern time zone right away, because we already know that that works.
+
+Unknown Speaker  45:16  
+Now, if you do ahead
+
+Unknown Speaker  45:21  
+of this,
+
+Unknown Speaker  45:25  
+it will give you time as a column. And this closing price is a column,
+
+Unknown Speaker  45:31  
+but if you want to plot it now, and if you want to have the time coming as a x axis, it actually makes it easy to do so if you take this time column and convert it to the index of the data frame, rather than just a simple column,
+
+Unknown Speaker  45:49  
+because currently time is just a pure column. And what is the range? What is the index of this data frame?
+
+Unknown Speaker  45:57  
+This 01234, these are the index right, which is the default index that it takes, which is also called range index. So if you do a
+
+Unknown Speaker  46:08  
+dot index, it will show that it is using a range index, starting from zero, stopping at this value, and the step value of one. So that is by default, pandas reads the data, but what we can do is we can change that after we read the data and we say the set index on the data frame and set the time column as an index. Now, when you do that, see what happens.
+
+Unknown Speaker  46:39  
+Now you see how this time is displayed here versus here. So here time and close, they are both columns. So here the time is printed here. Why? Because now time is an index. It's not a column anymore.
+
+Unknown Speaker  46:55  
+And now if you try to print what is the index of the data frame, you will see that it's not going to show range index. Instead, it will show that it is actually using a dead time index here,
+
+Unknown Speaker  47:09  
+here. So now it is telling me that the index is a dead time index with the value starting in so and so and ending in so and so values.
+
+Unknown Speaker  47:19  
+And it also says, Hey, this is dead time. 64 with US Eastern and we have total of these many values, so we have converted this to an index.
+
+Unknown Speaker  47:34  
+Okay.
+
+Unknown Speaker  47:36  
+Now there is another benefit of doing so
+
+Unknown Speaker  47:41  
+when you do index, and if your index is a dead time index, then you can also take specific part of date time from that index. So if you do, if you print index, it will print the whole dead time your month, day, hour, minutes, second, everything. But you can also say, on that index, give me all the years, give me all the months, or give me all the quarters, like whatever time granularity that you want. You can actually use that on the index, and this will help if, let's say, if you want to group by at certain levels of
+
+Unknown Speaker  48:21  
+what is called the time unit.
+
+Unknown Speaker  48:23  
+So let's actually run this one at a time instead of running the whole thing in one cell. Oops.
+
+Unknown Speaker  48:31  
+So if I do DF,
+
+Unknown Speaker  48:33  
+dot, index, dot, year,
+
+Unknown Speaker  48:39  
+you see, it is printing for all the 9328
+
+Unknown Speaker  48:43  
+item. It is just printing 2019 2019 2019 repeatedly. Why? Because the data that we have, all of these data that are all 2019 year. So that's why it is printing that over and over again. But that is my year. If you had a multi year data frame, then some will be 2019, some will be 2020, and so on. So you can, if you want to do a group buy on year, you can then use this index level to do a group buy on year, which we will do real soon. Actually.
+
+Unknown Speaker  49:13  
+Similarly, if you want to get the month part of the index, you can do a dot month, and it will for first few, it will say one, which is January, and then two, and then last, the last few, we will see that it says 12, because this data frame has data going from somewhere in January all the way to somewhere in December.
+
+Unknown Speaker  49:34  
+So that's that you can also say quarter. And quarter values will go from one to four, and you will see the first all of the first one will be quarter one, and all of the ending one will be quarter four, right? So just the different time units that you can extract from this index,
+
+Unknown Speaker  49:57  
+you can also do lot of other things, like day of.
+
+Unknown Speaker  50:00  
+Week, Day of year. Day name. Look at this thing.
+
+Unknown Speaker  50:05  
+Oh. Day NAME IS method. Okay,
+
+Unknown Speaker  50:11  
+so day name is a method. So if you sue day name, then all of these, it will actually tell you which day of week it is, right? So first few Awareness Day, and then last few were one day. So there are a lot of different level of level that you can access through these dead time index. That is one beauty.
+
+Unknown Speaker  50:32  
+Yeah? Because guess what? This is S, p5, 100 data. Oh, stock market is closed, yeah?
+
+Unknown Speaker  50:41  
+Yeah.
+
+Unknown Speaker  50:45  
+Okay, so we know that now,
+
+Unknown Speaker  50:50  
+since we have the date time already set as an index, now we can very quickly do a plot. And to do that, if I want to plot the closing price, so we'll take the close column and do a dot plot,
+
+Unknown Speaker  51:04  
+and that will print me this plot simple, which is something we have also done before, and I put a fixed size of 20 and 10. That's why the graph is coming big, right? Basically
+
+Unknown Speaker  51:19  
+covering the whole screen almost.
+
+Unknown Speaker  51:29  
+Okay. So sorry, was there a question?
+
+Unknown Speaker  51:39  
+Okay, so now let's see how we can select a subset of this data. I'm sorry, Karen, what is it?
+
+Unknown Speaker  51:47  
+No, I didn't. I wasn't, not. I was not muted and I sneezed. Oh, okay, no worries.
+
+Unknown Speaker  51:55  
+Okay. So now this is all the data, starting from 2019 January to 20 to 19 December. I think I mean the last thing is 2020 January. But we have data until 2019 December, I suppose the end of December. Okay. So now let's say, if we want to take a subset of this data, not the whole data, what we can do?
+
+Unknown Speaker  52:19  
+Well, we can apply a lock selection now, since our index is a date time, so that means when selecting the data, we can be very creative, actually.
+
+Unknown Speaker  52:33  
+So now we know that this is hourly data, right? So for any given date, let's say 2019, June 6, there would be multiple rows
+
+Unknown Speaker  52:44  
+because it is going hourly, or actually not hourly. I think it is every 15 minutes. There is a reading there.
+
+Unknown Speaker  52:50  
+So now let's say, if I want to get all the data which belongs to one certain date.
+
+Unknown Speaker  52:56  
+So if you do a lock function
+
+Unknown Speaker  52:59  
+and then apply only date, not our minute second. So see what it does. It basically does a selection, looking at all of this time stamp that is has that it has in the index, and since you have only passed up to day, it captures all the rows that have the matching day, ignoring what hour minutes second you have. So essentially, you get everything for that date, no matter which particular time of day it was.
+
+Unknown Speaker  53:31  
+So that way you can easily select a subset. And just like we did a plot here, there is nothing stopping oops, sorry, there is nothing stopping you from even plotting this subset.
+
+Unknown Speaker  53:46  
+Now, if I plot this subset, you will see now have a plot
+
+Unknown Speaker  53:53  
+of
+
+Unknown Speaker  53:56  
+SNP, hang on why this is showing 06068,
+
+Unknown Speaker  54:02  
+10, 212.
+
+Unknown Speaker  54:15  
+I think it's showing hours of day, because it's not you think of space in there. Ah, okay, okay, okay, okay, yeah, yeah. So it is 0606 which is sixth of June, and then 08 hours, 10 hours, 12 hours, 14 hours, okay, yes, sorry, my bad, yeah. So it's basically, essentially that all the the subset of data that we just saw, this is a plot of that, which basically, essentially you are zooming into a tiny portion somewhere here, maybe just one days of data, and you are just zooming into so that is essentially kind of a zoom function, almost you can say
+
+Unknown Speaker  54:53  
+now,
+
+Unknown Speaker  54:56  
+if you want to do have a full control, you can also provide a.
+
+Unknown Speaker  55:00  
+Change like this in this lock function. So let's say I want data, not even all of June 6. I want data starting from 7am to 9:30am
+
+Unknown Speaker  55:10  
+which is even a smaller subset. So if you do that, you will get only few rows, because it's only goes from seven o'clock to 930
+
+Unknown Speaker  55:23  
+right? So this one is not possible by omitting our minute second, because here we want to use the hour minute second also to select an even smaller subset here. And then if you plot this, it will basically zoom into this part of data up to 930
+
+Unknown Speaker  55:44  
+and fill in the whole graph with that data, right? So basically, we kind of zoomed in even further.
+
+Unknown Speaker  55:51  
+Make sense.
+
+Unknown Speaker  55:57  
+Cool. And then rest of these are just different permutations and combination of these. Let's say, Hey, someone is telling you plot the pre market hours, basically before the market opens, which is between seven to 930 because the market opens as 930 In fact, I would say it would be seven to 945
+
+Unknown Speaker  56:17  
+because it's a 15 minute interval data. And if the market opens at 10 o'clock, then all the pre market hours would be up to 945 right? So you do that, you will get everything starting from seven o'clock to 930 and then this would be 945
+
+Unknown Speaker  56:35  
+so you can do and then this is just reputation.
+
+Unknown Speaker  56:40  
+You can take a look. There is no need to run all of these unless there is something interesting. Yeah,
+
+Unknown Speaker  56:47  
+it's basically the repetition of, hey, 30 minutes here, little over here and there and so on. So I'm not even running through all of this, but you get the idea in general how to select a select a subset of time series data. So
+
+Unknown Speaker  57:18  
+next one, let's do some further exploration.
+
+Unknown Speaker  57:24  
+Okay, so this one is a different data set. It's a national home sales data.
+
+Unknown Speaker  57:38  
+Yeah, actually, for this next set, I'm going to skip the instructor notebook. I'd actually rather use the student activity part and run through that, simply because of the continuity purpose, because it's S p5 100 data sets. Since we are looking S and p5 100, it will probably be better to relate. So now here we are doing one thing differently than we have done before. So if you look into the previous two notebooks, go up to the very top,
+
+Unknown Speaker  58:14  
+how did we read the data?
+
+Unknown Speaker  58:17  
+We said, PD dot read CSV with nothing else,
+
+Unknown Speaker  58:21  
+just everything default. And what was the outcome of this? The outcome of this is pandas read all the dates as string,
+
+Unknown Speaker  58:32  
+and it also didn't set the date as an index.
+
+Unknown Speaker  58:37  
+Because of that, we had to do apply two other steps after we read it. One is using the two date time to convert the date to a time,
+
+Unknown Speaker  58:48  
+and then we did the set index down here to apply the date time as an index of the data frame.
+
+Unknown Speaker  58:56  
+But if you are absolutely certain that that is what you want to do, you can do, achieve both of these when you are reading the data in the first place by adding additional using additional attributes to the read CSV, which is the first one is, let's actually write, do one at a time. So if you just say parse, that's equal to true,
+
+Unknown Speaker  59:25  
+it will oops, sorry, I forgot to run this one first. Yeah, if you just say par, state will true, and it will read the so here there are two columns Other than that, close and volume.
+
+Unknown Speaker  59:38  
+And then if you do
+
+Unknown Speaker  59:42  
+D types on this
+
+Unknown Speaker  59:44  
+or info, oops by
+
+Unknown Speaker  59:48  
+mistake, I do comma so you will see that since I said par steps is true.
+
+Unknown Speaker  59:56  
+Oh, hang on,
+
+Unknown Speaker  59:59  
+still.
+
+Unknown Speaker  1:00:00  
+Didn't parse it as a date.
+
+Unknown Speaker  1:00:04  
+Let me do an info I
+
+Unknown Speaker  1:00:11  
+think because you removed the index column right earlier, just now, yeah, but when I do parse states equal to true, I would expect that this column will comment as a Date Time column.
+
+Unknown Speaker  1:00:27  
+I wanted to do it in two step, huh?
+
+Unknown Speaker  1:00:31  
+I guess not. Okay, so let's put the index. So what this index call does? It basically takes the Date Time column and applied that as an index, so you don't have to do the set index afterwards. That's what the index call
+
+Unknown Speaker  1:00:47  
+field does here. Index call attribute.
+
+Unknown Speaker  1:00:50  
+But let's okay. Let me run it now. Okay, so now the date is coming as index, and if you do an info
+
+Unknown Speaker  1:01:01  
+now it actually clearly says date, time index,
+
+Unknown Speaker  1:01:08  
+that is art,
+
+Unknown Speaker  1:01:10  
+okay, so parsed, it is working only when you combine this with index Cow,
+
+Unknown Speaker  1:01:18  
+so good sense, good question. So I get the index column. Date is to index the date column. But what is the parts? What is the parse for again? So the parse is to take a string and convert it to a dead time object,
+
+Unknown Speaker  1:01:36  
+which is basically similar functionality, what your PD, dot two day time is supposed to do so in a previous notebook, when we did pd.to do that time, it is basically taking the string and parsing this into data.
+
+Unknown Speaker  1:01:52  
+But when you provide this directly in the read CSV, it is supposed to do the parsing while reading the data,
+
+Unknown Speaker  1:02:00  
+and it appears that it is actually doing that when you assign that column as an index, which is what I did, and now I print the index, and it says it is indeed a dead time index. So essentially, by doing this, just this one line helped us achieve both the parsing and setting of the index at the one shot.
+
+Unknown Speaker  1:02:30  
+Thank you. Appreciate it. I don't know why the par state didn't seem to work without the index power.
+
+Unknown Speaker  1:02:37  
+That just doesn't make any sense. But I don't know why, if someone else can find out why that is, feel free to pitch in.
+
+Unknown Speaker  1:02:49  
+If not, that's fine. It's not a big deal.
+
+Unknown Speaker  1:02:55  
+Okay, I got it to work without that. Oh no, no. Sorry, no, it will read. The problem is not that it will read. The problem is the data type was showing as object and not as a date. Time. That was my problem. It was the putting an index call, which, which? Did you think was the deciding factor? Kind of parameters, the index? Yes.
+
+Unknown Speaker  1:03:16  
+Thank you. So when I, when I did this, read CSV without the index call, but with parse test equal to true, it seems like the parse didn't almost work, because the date was still showing as an object. The date column, it was not showing as a timestamp,
+
+Unknown Speaker  1:03:32  
+which shouldn't be the case, but that's how it is.
+
+Unknown Speaker  1:03:37  
+Maybe pandas will fix it in the next version, I don't know, but it shouldn't be that way. I remember doing something around that by creating a function that will read that column,
+
+Unknown Speaker  1:03:50  
+pass it to pandas,
+
+Unknown Speaker  1:03:52  
+I can try and look to the code, yeah, but I know. I mean, there could be million different ways that you can do that, but what I'm saying is, from the common sense perspective, when they have the par state parameter, when you said that to true, the type, data type for that column should be dead time. It shouldn't be coming as a stream. That's correct. Yeah.
+
+Unknown Speaker  1:04:17  
+Anyway,
+
+Unknown Speaker  1:04:18  
+it is what it is. What can we do? Right?
+
+Unknown Speaker  1:04:25  
+Okay. So now in this one, let's work with one column. So here we have two column close and volume.
+
+Unknown Speaker  1:04:33  
+So we are going to work with the volume column. So we selected the volume column only and under this variable, which is a series, basically, SP, 500 volume.
+
+Unknown Speaker  1:04:44  
+Now, as we have seen before, if you do actually, let's so as this, S, p5, 100 volume is created. So if you look into the index of this, so index will be a dead type index, because this is just one volume from a whole.
+
+Unknown Speaker  1:05:00  
+Data frame. So the index is still the same, and we have already saw that on index, we can basically find day of week, day of year, days in month, like lot of different things we can do, right? So if you do something like day of week
+
+Unknown Speaker  1:05:18  
+on the index, you are going to get just the day of the week right, which is like 12345,
+
+Unknown Speaker  1:05:25  
+for Monday, Tuesday, Thursday, and stuff like that.
+
+Unknown Speaker  1:05:28  
+So that's so you can basically from the index. You can go to any level of granularity.
+
+Unknown Speaker  1:05:34  
+And remember, during the previous activity, I said, Because of this, it a lot. It makes it very easy to do a group by a different level, which is what we are going to do now. So we have this whole data.
+
+Unknown Speaker  1:05:48  
+Let me actually just quickly do a print this data. So the data is basically one hour interval, right? Yeah. So this one has one hour interval data, which is fine.
+
+Unknown Speaker  1:06:00  
+So now, if I want to group by day of week, like I want to take all the data that belongs to a Monday and group them together, and then all the twisted data will be grouped together. So since Monday twisted these things are day of week at the group by when we are doing the same group. By that, we have learned few weeks back. But here we can provide what group level we are going to use, which is my index dot day of week. And then on that group level we can do, apply any aggregation function. We can do, mean, median, average, total, whatever it is. And if you do that, you will basically get 01234,
+
+Unknown Speaker  1:06:43  
+you see you are getting only five values. Why? Because no matter how many data is there, they will always belong to one of these five days of week, where zero means Monday, one means Tuesday, all the way to four, which means Friday and Saturday, Sunday. We don't have any data, because this is stock market data,
+
+Unknown Speaker  1:07:04  
+okay? And then if you do a plot on this,
+
+Unknown Speaker  1:07:09  
+it will then plot this
+
+Unknown Speaker  1:07:13  
+on a simple curve where you only have five things. So now, whether it is valuable or not in this context? That's a different question. But the idea here is you can group by at any level that you want. In this particular example, we grouped by on the weekday level,
+
+Unknown Speaker  1:07:37  
+if you want to group by at a more granular level, so let's say our level we want to group by, so how many hours in a day? 24 hours. But we probably don't have all the 24 hours data. We probably have, I don't know, eight or 10 hours like that. So all you have to do is change your group by level to say index dot r instead of saying index dot weekday. And if you do that and apply the same mean function, you get eight, 910, 1112, 1314, so it's only have
+
+Unknown Speaker  1:08:09  
+what seven hours worth of data each day,
+
+Unknown Speaker  1:08:14  
+and then you can plot that, and it will give you what was the volume At eight o'clock across all these days that you have, what was the average volume at nine o'clock? Average volume at 10 o'clock and so on,
+
+Unknown Speaker  1:08:29  
+right? Well, one interpretation could be, since we are looking at trading volume, this can probably give tell you that on an average, when we did on the day of week level on an average, you can say like, Hey, Thursday is probably the busiest day in the stock market, because the total trading average on the Thursday seems to be the highest. That is one insight you can derive on a week by week basis. Similarly, here, you can say, Okay, starting from eight o'clock all the way to two o'clock, right around the lunch hour, which is 12 noon. You can see the average volume is low, which you can probably think, why? Because it is lunch hour, and then the activity starts when everyone is trying to rush their order before the market closes. So that's why, after lunch hour, there is a big jump in the total volume that gets transacted in the stock market after lunch, right? So the morning is kind of, yeah, going and then people are kind of waiting, letting see how it goes, letting the market play out for the day. And then lunch is kind of the bottom hour. Then after lunch, okay, rush, rush, rush, let's, let's put all the orders in, right? So that's kind of some insight that you can probably derive from this graph.
+
+Unknown Speaker  1:09:52  
+Okay,
+
+Unknown Speaker  1:09:54  
+if you want to group the data by calendar week of the year, which means like.
+
+Unknown Speaker  1:10:00  
+Year, you have week one, week two, so up to 52 calendar week of the year, right? So if you want to group by that level, you cannot really directly do that using the index, and I'll show you why. So let's take our data frame,
+
+Unknown Speaker  1:10:18  
+SP, 500 No, we are looking at SP 500 volume, this one. So let's take SP 500 volume, and we were doing index. Now, when I want to find the calendar week of the year,
+
+Unknown Speaker  1:10:37  
+do we have anything? We have day
+
+Unknown Speaker  1:10:41  
+which is day, just the day, this is the day, name day of week, day of year.
+
+Unknown Speaker  1:10:50  
+This is probably day, okay, there are two day of weeks. I don't know why there are two day of weeks, days in month, and then difference floor, frequency, and all of these other methods that you have, but nothing here that tells me that I can get which calendar week it is in, like whether it is the first week of the year, whether it is the second week of the year, or whether it is the 52nd week of the year. We don't have that data, but let's suppose we want to group by at that level. So you cannot directly get that from there.
+
+Unknown Speaker  1:11:26  
+So instead, what you do need to do is there is a pandas function called,
+
+Unknown Speaker  1:11:34  
+so basically, if you just do PD dot, dead time index.
+
+Unknown Speaker  1:11:39  
+So that is a dead time index object. Now on these dead time index object you can create an ISO calendar, and in these ISO calendar you can actually provide any dead time object. So let's say I create a one dead time object, which, let's say today's date, so? PD dot,
+
+Unknown Speaker  1:12:10  
+come on. What was that thing? Why it is not showing up
+
+Unknown Speaker  1:12:15  
+the one I did with, oh, it's underscore, sorry, it's lower. PD dot, two dead time, and let's do today. So now this is a dead time, and now we are going to apply an ISO calendar method on top of this
+
+Unknown Speaker  1:12:35  
+unknown date, time, string format.
+
+Unknown Speaker  1:12:40  
+Why?
+
+Unknown Speaker  1:12:47  
+Oh, I think that's because we have upper caste.
+
+Unknown Speaker  1:12:52  
+No, it still didn't.
+
+Unknown Speaker  1:12:55  
+Oh, time, strand, object has more attribute, data,
+
+Unknown Speaker  1:13:01  
+ah, so it does not work on a PD or two dead time. It only works on
+
+Unknown Speaker  1:13:10  
+Ah here. So when you hover over this, it shows that it works on a dead time index object, not a dead time object. Okay, so that means I was going to say, like in a do a side example to see how what we get from today. So we cannot, so we basically have to provide it with something that is a index, not at a time, which means our S, p5, 100 volume dot index. Now, when you do that, this ISO calendar, this basically returns you for each of the items in the index, which year it is, which week it is, and which day it is. So now we can take the week part out of this, and that would be the week of year. That's what I wanted to show. So this is where what we are going to do so now that means, if I now say dot week now for all of these, I will get which week it is.
+
+Unknown Speaker  1:14:10  
+So now, since we can do that, so that means I can use that as my group by and in here I am saying for every year. So this is two level group by instead of one level. So I'm saying for every year, and then for every week, do a two level group by, and for each level find the mean. So which is what we are going to do? So instead of doing the plot first, I'm going to just
+
+Unknown Speaker  1:14:38  
+apply the group by and do the mean.
+
+Unknown Speaker  1:14:41  
+Just to show you what you will get. So what you will get is a multi level index.
+
+Unknown Speaker  1:14:47  
+Why we are getting this multi level index? Because in this particular example, we are doing two level of group by first level is year, the second level is your week. So now if you look in.
+
+Unknown Speaker  1:15:00  
+To the output, it says for year 2022,
+
+Unknown Speaker  1:15:04  
+first week of data that we have have is the 11th week of the year, and then 12th week of the year, and so on.
+
+Unknown Speaker  1:15:12  
+And it goes up to 34 and then,
+
+Unknown Speaker  1:15:16  
+sorry, it goes up to 53 because 52nd week and then the last week you will have two days, two or three days, right? Because it is not exactly 52 weeks. So one or two days you will have so 53rd week, and then it goes on to 2021 and then we have first six weeks of data on 2021
+
+Unknown Speaker  1:15:33  
+so that's how we are getting year and week two level
+
+Unknown Speaker  1:15:38  
+group by and now, if you take this data and do a plot,
+
+Unknown Speaker  1:15:44  
+this is the weekly volume of cells, which essentially what we did, we took the detailed volume of cells, and we kind of aggregated on a running basis, and which basically smoothens out the data little bit. We still have all the data, but we just smoothened out on a week by week basis. Now, one thing it might help to show, if you do this plot of all the data and show it side by side. So if I say, get rid of all these group by and mean, if I just do a plot of S, p5, 100.
+
+Unknown Speaker  1:16:27  
+Yeah. So here you can almost see how this every week's volume, and there is a gap every week's volume, and there is a gap every week's volume, and there is a gap. This is basically plot of the raw data.
+
+Unknown Speaker  1:16:38  
+And here we what we have done is we have zoomed into each of these five days of week and taken an average of that, and then the next one, and then the next one, and so on. And this is what you you are getting here. So each of the data points here are basically average of one of these weak clusters. And overall, if you look at the trend, you will see, first few weeks, the activity was very high, and then it came down, and then some up, down, up down. So overall, that trend line you will be able to see in this
+
+Unknown Speaker  1:17:18  
+now this technique actually could be helpful, because sometimes, when you have lot of data and you want to zoom out and see, Hey, forget about all the daily ups and downs and all the noise. What is the overall trend of the underlying stock, whether it is a volume or closing price or whatever. By doing an aggregation in this level, it actually helps you to kind of able to cut through the noise and see what is the underlying pattern looks like
+
+Unknown Speaker  1:17:47  
+later on Thursdays class, when we are going to do profit, you will see profit actually brings this for you. So you will be able to actually see this trend line from the output of profit.
+
+Unknown Speaker  1:18:01  
+But short of using profit, you can do this type of elementary analysis to kind of bring these types of trend out. And this example, we are showing per week basis, there is nothing stopping you from doing in a month basis or quarter basis or whatever, whatever time unit that suits the need of the analysis that you are going to do.
+
+Unknown Speaker  1:18:22  
+So
+
+Unknown Speaker  1:18:33  
+okay, so that was basically everything, all the new materials that we had to cover for the first day of class, and we are right about the halfway mark.
+
+Unknown Speaker  1:18:46  
+So that tells me that my plan to cover two days of class in one was good. Well, granted that we didn't do the group breaking into breakout room and those activities, but those are some things that like you can do on your own time, because you will have all of these other notebooks that we didn't cover. We covered three out of six, right? But you can go and so you will see that it's basically the same thing repeating over again with this different set of data. So you scroll up just a little bit of ridiculous coding cell, huh? Did you scroll up just a touch to that cell that you have a coding here? Yes, I
+
+Unknown Speaker  1:19:49  
+Okay, good, anything you want to ask on that quote,
+
+Unknown Speaker  1:19:56  
+no, I said
+
+Unknown Speaker  1:19:58  
+anything you wanted to ask about?
+
+Unknown Speaker  1:20:00  
+Code, just that when I was trying to follow along with you, like I get
+
+Unknown Speaker  1:20:05  
+there, the series. Series object has no attribute group by. So I'm trying to just figure out where, oh,
+
+Unknown Speaker  1:20:14  
+the series object does have a method called group by,
+
+Unknown Speaker  1:20:19  
+so check whether the thing that you are applying group by is indeed a series or not.
+
+Unknown Speaker  1:20:24  
+Do a type on that and see whether it is a sales if it is a panda series, then it will have a group by method.
+
+Unknown Speaker  1:20:34  
+So let me do that here. So if I do a type of that variable, what does it show? Yeah, it says it's a panda series. Yeah, I got the same thing, yeah. So then if you are doing group buying your group by is not working, yeah, it's weird. I'm not sure what's going on. Oh,
+
+Unknown Speaker  1:20:54  
+maybe some maybe read the error message. Maybe it is saying something else. Maybe the way that you are doing the comma or something, something probably, or maybe you have missed some brackets somewhere. Maybe it is not that,
+
+Unknown Speaker  1:21:09  
+not what you think it is. And then remember, the output of group by is not a data frame. The output is actually a group by object. And then you take that group by object, and then you apply one of the application functions, which, in this case, is mean, and that mean will give you another series. But the output of group by is a group by object. So do step by step, you should be able to figure it out. Oh, you know what? I
+
+Unknown Speaker  1:21:33  
+just figured it off.
+
+Unknown Speaker  1:21:35  
+Okay, there you go. Who's a typo? Yeah,
+
+Unknown Speaker  1:21:40  
+yeah, it was, it was the P and group by and like, what the hell's going on anyway? Thank you.
+
+Unknown Speaker  1:21:46  
+Yeah, it's always little things. Okay, cool. So let's take a little longer break. How about we come 10 after so that way it will give us good 18 minutes break.
+
+Unknown Speaker  1:22:00  
+Can I ask a quick question on the PDF 8.1, there is a video of how AI like Chad GPT learn, but I don't have the video link. Do you mind to share that to the class? Please? Sure. Thank you.
+
+Unknown Speaker  1:22:19  
+This video you are talking about, right? Yeah, there is no link. Let me hang on. Why? No, I remember, I did play it here, here, here, hang on. So if you now click on YouTube and then,
+
+Unknown Speaker  1:22:39  
+so once after this ad finishes, then the video will start, or let's escape, and now I should be able to copy this, and then I can put this on Slack channel.
+
+Unknown Speaker  1:22:54  
+Okay, thank you. That's my slack comes up. I'll put it in there.
+
+Unknown Speaker  1:22:59  
+What is
+
+Unknown Speaker  1:23:02  
+that? Huh? What is that?
+
+Unknown Speaker  1:23:04  
+What is what? Oh, that video, yeah, yeah.
+
+Unknown Speaker  1:23:09  
+I see a few people, yep.
+
+Unknown Speaker  1:23:16  
+Okay, so in this part, we are going to do the basically the day two of the class, and you will see there is not too much, especially given correlation and stuff we already talked about that, right? So think of this almost like a recap of some of the things that you have done. And then I'm going to show you just one other thing is, if you want to run these notebooks in a hosted environment. So there is a Google collab, which is an online hosted environment. So everything that we are doing here in our own computer,
+
+Unknown Speaker  1:23:54  
+if for any reason we want, we can do it on the cloud as well. So we'll just see how we can set that up and how we can so we'll basically take one of these notebook and we will run it on both places, on our local computer and also on online. It's not absolutely necessary for you to run it online, but usually running it in cloud makes sense when, let's say you are training a large model, and your computer simply don't have the capacity, especially when you are using GPU to train it, and you don't your computer, you cannot have that that type of GPU to run that so running on a cloud environment makes sense, but at the same time, for all these free things that you get, I mean, there is only a limited amount of compute power you will get for free. Because just like anything in this in this else in this world, it takes money to make money, right? So if you want to trade a state of the art model with 100 GPU, you have to basically shell up, right? So Google color free turn can it's good for the.
+
+Unknown Speaker  1:25:00  
+Quick try out to see how things will run online. But if you need to have a real firepower under the hood, you need to basically share out money for that. And that's true for anything like Amazon Azure cloud, which is Microsoft, everyone provides these online environment where you can run but you have to pay for, like, on a hourly or per minute basis, right?
+
+Unknown Speaker  1:25:27  
+However long,
+
+Unknown Speaker  1:25:30  
+for $10 a month, you can do pretty well, does it? Yeah, you can do a subscription for $10 a month. If you up that time, you can get it. You bought by blocks of time additional compute units, like for another $10 if you need to. But
+
+Unknown Speaker  1:25:50  
+I've done stuff with just the $10 a month. Oh, that's good to know. I haven't tried ever, because whenever I have done online since I, as you probably know, I have said before I worked in Amazon, so I basically, at that time, I used to get anything and everything that I can I want to do on AWS for free. Even after that, I always kind of had access to Amazon account through work or somewhere. And there are a lot of these events that I used to go. They will hand out these little credit like they'll give you a code that you can go and apply and if they will get $25 here and there. So
+
+Unknown Speaker  1:26:25  
+I wanted to run, I run it on Amazon. I have never run anything of substantial capacity on Google, except for these academic purposes and demonstrations. So I'm not saying that's a Google Cloud, but colab just by itself. Yeah, I know colab is their separate initiatives, like, if you go through normal Google Cloud,
+
+Unknown Speaker  1:26:45  
+that is expensive, but colab is an initiative that Google provides, and that's probably to kind of promote these, like adoption of machine learning, so that more and more people can come on and try their hands out. So that's kind of a service they provide to the machine learning community, something similar to to co pilot. So make a mistake, you can click on a button and know if the AI will explain the error, and we'll even give you suggestions about how to fix it. Yeah, Gemini, right? Yeah. Gem using Gemini is the using Gemini model. It's pretty cool,
+
+Unknown Speaker  1:27:19  
+but yeah, AWS, it's like, yeah, here's some credit. Forget, forget the credits. Read Out, and here comes the bills, right? Yep,
+
+Unknown Speaker  1:27:29  
+that's right.
+
+Unknown Speaker  1:27:31  
+Anyway, okay, so let's get started. So So for day two of the classes. So first activity is just a warm up, which is a recap of everything that we have done since we just have done that a few minutes back. I'm skipping that. So I'm going to the activity number two, which is where we are going to see this correlation, which is, again, something that we have done before in the last class, when we were doing the pair wise correlation. So here we are going to do the same, except we will have our time series data, which in this case is national home sales database. Okay, so that's our home sales data, and when we are reading this file, we are going to use those two option, which is par states equal to true, and then that column, which is period ended I'm going to use that column as an index. So what is this? Period End Date? If you look into the resources the CSV file you have, if you look up in the columns, the first column is period end date, which is this? So essentially, what we are asking pandas to do is parse this date column and set it as an index of the data frame that we are going to load. So we are going to do these two things in one shot while we are doing the read CSV up here, so that we don't have to do that afterwards.
+
+Unknown Speaker  1:29:01  
+And this is, in general, what we are going to do anytime we do any time series data where we know that there is a date column that date or Date Time column that we have to use it as our index. It's always a good idea to do that right in the read CSV function so that you don't have to worry about it later.
+
+Unknown Speaker  1:29:21  
+So that's that. So that's our DF home sales. And this is a sample of the data so we have and this is
+
+Unknown Speaker  1:29:32  
+month by month. This is not daily, this is not hourly. This is a monthly data. So for every month, it gives you the inventory, number of units sold, and the median sale price. So, very simple, small data set, not too big.
+
+Unknown Speaker  1:29:49  
+Now, one thing you will notice that the data set is not sorted by time.
+
+Unknown Speaker  1:29:56  
+Why do I say that? If you look into the first.
+
+Unknown Speaker  1:30:00  
+You entries. It is 2020 January, February, March, April, and so on. And then suddenly it goes to 2012 here
+
+Unknown Speaker  1:30:10  
+because it is not sorted.
+
+Unknown Speaker  1:30:12  
+So if the data set is not sorted, since this thing is your index, you can simply apply a sort index, and that way the data set will be sorted.
+
+Unknown Speaker  1:30:25  
+So let's do that.
+
+Unknown Speaker  1:30:27  
+And after we done that,
+
+Unknown Speaker  1:30:30  
+and then we do a head. Now you see that it starts from 2012 instead of starting from 2020
+
+Unknown Speaker  1:30:39  
+we only needed to do that because, for some reason, the CSV file we had was not sorted. For whatever reason, it could be like someone basically copy pasted some data here and there, and it was not sorted, right? So, no big deal. We just applied a sort index, and we have the data sorted by time.
+
+Unknown Speaker  1:30:56  
+Okay, now we are going to plot the inventory versus home sold,
+
+Unknown Speaker  1:31:04  
+and why do we need to plot that? Because we want to see
+
+Unknown Speaker  1:31:10  
+have a very rough first cut idea how these two time series go side by side. And these are both time series data, because both of these series, which is home sold and inventory, are basically pegged to the period date, which is the month.
+
+Unknown Speaker  1:31:28  
+So as you can see, there is a periodic ups and downs in both and that kind of goes hand in hand. So every year
+
+Unknown Speaker  1:31:42  
+around the mid year, which is around the summer time, which is where the inventory peaks, and also the home sale peaks.
+
+Unknown Speaker  1:31:52  
+And then around the winter month, it comes down, and then picks next summer again, which I think we all know based on our participation in the real estate market, right, or all the long signs we see in our neighborhood, right, which kind of makes sense that home sold and inventory kind of picks in the summer and then bottoms in the winter.
+
+Unknown Speaker  1:32:14  
+So that's our first observation for our from this data.
+
+Unknown Speaker  1:32:19  
+Now this gives me a rough idea that maybe these two variables are correlated, meaning having high correlation.
+
+Unknown Speaker  1:32:28  
+Now what we are going to do, we are basically going to apply the correlation function,
+
+Unknown Speaker  1:32:35  
+same as what we have applied in the previous class. So what we are going to do, we will take these two column so from the DF home cells, we are taking these two columns and apply a correlation function on top of this.
+
+Unknown Speaker  1:32:51  
+And when you do that,
+
+Unknown Speaker  1:32:54  
+it will create a two by two matrix,
+
+Unknown Speaker  1:32:59  
+because we have selected only two variable. So inventory versus inventory, if you see correlation is one. So all the diagonal values will be one, because the diagonal basically means you are comparing same, very a variable with itself. So obviously the correlation with itself is one. But then what you need to look at it the other one, which is inventory versus home sold, which is this?
+
+Unknown Speaker  1:33:24  
+Now,
+
+Unknown Speaker  1:33:26  
+see what happens. Something looks odd, right?
+
+Unknown Speaker  1:33:32  
+What do you see is happening here? What is this value?
+
+Unknown Speaker  1:33:36  
+It's super close to zero,
+
+Unknown Speaker  1:33:39  
+so there doesn't seem to be any correlation,
+
+Unknown Speaker  1:33:45  
+even though the periodic cycle kind of matches.
+
+Unknown Speaker  1:33:50  
+And that is why we need specialized algorithm to do the time series forecasting. Because when it comes to time series,
+
+Unknown Speaker  1:34:00  
+if you just look at the value of correlation. So the one thing is, when you are doing the correlation, you are treating all of these as random data points, so there is no time component to it. And that's why, if you do a scatter plot of these two you will probably get a blob of data.
+
+Unknown Speaker  1:34:22  
+Okay,
+
+Unknown Speaker  1:34:24  
+let's actually do a scatter plot. Does anyone know how to do remember how to do a scatter plot between these two columns? How would you do it? There would be multiple ways. Let's try doing it and try to understand why the
+
+Unknown Speaker  1:34:37  
+the correlation number is so low. So help me, let's, let's do that as an exercise. So I want you guys to drive here.
+
+Unknown Speaker  1:34:49  
+One of the options, PLT, dot, scatter. Okay, so let's do that option. Okay, so if you want to do that, one thing we need to do is we have to.
+
+Unknown Speaker  1:35:00  
+To import, because this one was not set up for plotting scatter. So do you remember the import?
+
+Unknown Speaker  1:35:10  
+Is it the matplotlib.by plot? PLT, exactly. Thank you. Matplotlib, dot, pipe, plot, and we usually say as PLT.
+
+Unknown Speaker  1:35:25  
+Okay, now we are going to, let's do PLT actually that day, what Jesse said, I have started using that always. I'm going to do a PLT dot, CLF initially, so that later, if we run it, it doesn't create duplicate plots, and then the actual plot, which is PLT, dot,
+
+Unknown Speaker  1:35:49  
+what we are going to use, scatter, scatter, PLT, dot, scatter,
+
+Unknown Speaker  1:35:57  
+and X would be what will be your x?
+
+Unknown Speaker  1:36:08  
+It will be inventory, yep. DF, polysells, dot,
+
+Unknown Speaker  1:36:15  
+inventory,
+
+Unknown Speaker  1:36:20  
+and then y will be
+
+Unknown Speaker  1:36:23  
+DF, consoles, dot,
+
+Unknown Speaker  1:36:28  
+homes sold.
+
+Unknown Speaker  1:36:31  
+Do we need to say anything else to the scatter function?
+
+Unknown Speaker  1:36:41  
+And then lastly, we will do a PLT dot show.
+
+Unknown Speaker  1:36:48  
+So let's see what comes up,
+
+Unknown Speaker  1:36:54  
+which explains why this value is super close to zero.
+
+Unknown Speaker  1:37:01  
+The reason is, usually, if you look very carefully, even though these two kind of follows the same pattern, there is usually a lag. So inventory kind of goes up first, and then the sales number follows after maybe a few week or a month or two,
+
+Unknown Speaker  1:37:22  
+which is not apparent if you take inventory and home sales and take them on a face value,
+
+Unknown Speaker  1:37:30  
+because if you measure this month, sitting in January,
+
+Unknown Speaker  1:37:35  
+even if there is a uptick in the inventory, the Sales will probably follow in February or March.
+
+Unknown Speaker  1:37:42  
+And that trend that both are following that trend in that seasonality that will come out when you do a plotting against the time axis, but when we are simply doing a correlation, that correlation pattern is not coming out because of that reason.
+
+Unknown Speaker  1:38:01  
+Okay, and that's why I wanted to make this suggestion that never make a decision yourself like when you are let's say you have, you are doing a, let's say time series, and you want to use two, three different column as your predictor in a multi variable. Time Series
+
+Unknown Speaker  1:38:21  
+don't get put off if you think that, Oh, these other column doesn't have high correlation, because that is not always the case for time series. Even if the columns are not correlated, they might still have
+
+Unknown Speaker  1:38:35  
+a good predictive power. So it is always better to actually plot them side by side and see whether you kind of have a seasonality, or if it is still not clear. In this case, the seasonality was clear, sometimes it might not be. So then throw everything you have to profit and let profit figure it out.
+
+Unknown Speaker  1:38:57  
+Okay, so
+
+Unknown Speaker  1:39:08  
+any question,
+
+Unknown Speaker  1:39:11  
+you say, throw everything you can to profit.
+
+Unknown Speaker  1:39:14  
+Profit. What's Facebook profit? Profit is the model that we are going to use in the next class,
+
+Unknown Speaker  1:39:22  
+the prediction model got it. Thanks. Yeah,
+
+Unknown Speaker  1:39:32  
+okay, the next one is basically looking into some of these, more of these volatility and trends. And this time,
+
+Unknown Speaker  1:39:41  
+this one we are going to look into actual stock market data.
+
+Unknown Speaker  1:39:45  
+And the stock market data that we have is for one stock, which is Apple, and we are reading it using the same way parts that's true and setting the date to be the index column. And there you go. You.
+
+Unknown Speaker  1:40:00  
+The daily stock data.
+
+Unknown Speaker  1:40:02  
+So unlike the stock data we have seen before, it is not 15 minutes or anything. It is just at the end of the day.
+
+Unknown Speaker  1:40:11  
+And then we have another data,
+
+Unknown Speaker  1:40:14  
+which basically is Apple trends. So here we are going to look into two things. One is how the Apple stock market stock price is moving versus the Google trend for Apple. So the second data set that we have here,
+
+Unknown Speaker  1:40:31  
+let me load it first. It basically gives a numeric value of Google trend, which basically is a summary of the Google search trend for that day that has Apple as a search keyword. So this is a Google trend data that you can get from Google.
+
+Unknown Speaker  1:40:53  
+So what we are trying to understand is that based on how people are searching about Apple or Apple products,
+
+Unknown Speaker  1:41:04  
+the higher this number is basically meaning the more active search is happening in Google related to Apple.
+
+Unknown Speaker  1:41:11  
+So whether that has any effect or impact on the trend of the Apple stock price, that's what we are trying to figure out.
+
+Unknown Speaker  1:41:20  
+So we have two different data loaded in from two different CSV files.
+
+Unknown Speaker  1:41:27  
+So here, since we have two different files, then we can use our concatenation that we have learned few weeks back. We can take this and this and combine them into one single data frame by axis one,
+
+Unknown Speaker  1:41:45  
+right? Because the two columns we are combined so simple, we are doing a PD dot concat, and we are providing a list of data frames, which is the DF stock and df trends, two data frames, and we are combining by column, so column after column after column, it will be combined like that, sidewise. And if there are any null values, we are dropping the null while we are at it.
+
+Unknown Speaker  1:42:09  
+And that's our combined data frame. So we have the close value. This is the closing price, and this is the worldwide trend. So
+
+Unknown Speaker  1:42:23  
+so now we are trying to find
+
+Unknown Speaker  1:42:27  
+whether there are any seasonal patterns, basically, kind of similar to what we are trying to do on the home sales and listing, right listing of home and amount of cells. So we are trying to find the same thing in here.
+
+Unknown Speaker  1:42:41  
+So here the DF, Apple data frame has two two column. So we can simply do that. Data Frame dot plot because there are only two columns. So it will plot both,
+
+Unknown Speaker  1:42:52  
+and that's how the plot is.
+
+Unknown Speaker  1:42:57  
+HV. Plot, is that just another way to say xy plot,
+
+Unknown Speaker  1:43:03  
+or a horizontal trend.
+
+Unknown Speaker  1:43:07  
+So I saying, like, what is my x axis? Is that what you're saying? No, no. The comment says, Use HV plot. And I was like, well, is that some sort of method we haven't seen before? Oh, no. So HD plot is not something that you will use here. HD plot is basically something that you can use on Google colab.
+
+Unknown Speaker  1:43:27  
+Thank you. So HD plot is a, actually a library. You can think people install it, but I think this is by default, available in Google colab itself.
+
+Unknown Speaker  1:43:39  
+And as I said, I don't want to get into 10 different plotting libraries, because the more advanced library kind of make the plot look prettier and interactive, where you can do zoom in and zoom out and all that such sort of fancy stuff, not very important for what we are trying to do here. Okay,
+
+Unknown Speaker  1:44:04  
+okay, so that's our trend. So what does it? What do you think? Do you think these two have any relation, like, do you think correlation would be high? Or, what do you think?
+
+Unknown Speaker  1:44:21  
+I don't think so,
+
+Unknown Speaker  1:44:25  
+because there are these certain spike in Google trend, but this spike is not overlapping with the spike in the stock price. Also, another thing I see here that that stock price has a continuous upward trend, even if you ignore the daily ups and downs, there is a continuous upward trend in the stock price. Not so much for the Google search trend.
+
+Unknown Speaker  1:44:53  
+Okay, so that's my first rough observation, which may be true.
+
+Unknown Speaker  1:44:59  
+So.
+
+Unknown Speaker  1:45:00  
+Now what we are going to do is we are going to take a subset of the data. So basically, like that zoom in thing that I showed you in the one of the previous activity. So since our date, sorry, index is a dead time index, we can apply the location function selector and either select one date or select a range of date. So here, what we are saying is like, hey, during this time, Apple has launched a new product, which was iPhone 11 family and watch series five. So basically the apple launch event that happens around that time.
+
+Unknown Speaker  1:45:33  
+So what if we select so this happened in September 2019
+
+Unknown Speaker  1:45:43  
+so if it is September 2019 Okay, so basically, we are trying to zoom in from few months before September to few months after September. So we are going from March 2019 to January 2020
+
+Unknown Speaker  1:46:01  
+so now we have a smaller data set just with those few months.
+
+Unknown Speaker  1:46:07  
+And now we are going to do a plot of this data set, which, as you can see, is now zooming in on one sub section of that whole data that we have.
+
+Unknown Speaker  1:46:18  
+And this around September, this is where the trend spiked, which is where the apple launch event happened. So this Google trend spike makes sense, but as you can see, that spike did not immediately result in out of the world spike in the stock price. The stock basically kept doing what it does, which is, over the long term, it kept climbing. But so that means the first assumption that we had, that they may not be related, it kind of it seems more valid after you zoom in, into one event, when you know that something happened and you can prove that the stock price actually didn't quite jump dramatically.
+
+Unknown Speaker  1:47:13  
+Now, one thing I'll sometimes people do is, like I said, right the in the previous example, when we are talking about the house listing versus actual units sold, that there could be a lag.
+
+Unknown Speaker  1:47:28  
+So you might have two data set. Sorry, two, not data set, one data set, but you might have two different column in the data
+
+Unknown Speaker  1:47:38  
+they might follow. They might have some cause effect relation, but sometimes the effect comes afterward, so there could be a lag.
+
+Unknown Speaker  1:47:47  
+So here what we are thinking is, hey,
+
+Unknown Speaker  1:47:54  
+if
+
+Unknown Speaker  1:47:57  
+my trend
+
+Unknown Speaker  1:47:59  
+is going to have any effect on the price? Maybe there would be a one period lag. So let's say if the trend happens, trend, meaning the search trend, if the trend spikes this month, could it be that the next month that the stock price spike? Can we look into this?
+
+Unknown Speaker  1:48:18  
+Well, in order to do that, what we are going to do is there is a pandas function called shift. So what shift does is it basically takes all the rows and shifts them down or up, depending on what number you provide here. So shift one basically will do it will take all the rows and shift everything. One down, shift minus one will shift everything one up.
+
+Unknown Speaker  1:48:44  
+So what we are doing is our index is the date, and then we are taking the worldwide trend column and shifting it one down.
+
+Unknown Speaker  1:48:57  
+But my date is still the same. So essentially, this new column that we have, it is lagged by one period
+
+Unknown Speaker  1:49:05  
+because of the shifting.
+
+Unknown Speaker  1:49:07  
+So we are calling this a lagged trend. So let's do that, and then after that, we are also going to do a head
+
+Unknown Speaker  1:49:19  
+so now you see the new column lag trends that we have created. It appears here,
+
+Unknown Speaker  1:49:26  
+and look into the first row where trend was 32
+
+Unknown Speaker  1:49:31  
+lag trend column is a null value because it is shifting everything down. That's why the first one doesn't have anything. And this 32 came down here. These 33 came down here, these 32 came down here, and so on. So everything has been shifted. One down.
+
+Unknown Speaker  1:49:47  
+That is my lead trend.
+
+Unknown Speaker  1:49:54  
+Okay. Now the other thing we also might like to do is.
+
+Unknown Speaker  1:50:01  
+Here we are looking at the price, but remember, there is a commentary that I made earlier when few weeks back, I gave you guys
+
+Unknown Speaker  1:50:11  
+stock analysis notebook that I created and I made a commentary about stock price versus percentage change.
+
+Unknown Speaker  1:50:19  
+Because sometimes when you do look into the stock price, any jump that happened might not be immediately apparent, because there is an underlying trend of the overall stock price based on the in basically, yeah, based on the how the broad stock market is moving. So rather a good measurement of
+
+Unknown Speaker  1:50:41  
+sensitivity of a stock price to an external event is to see what is the percentage change of the stock price from the previous day.
+
+Unknown Speaker  1:50:52  
+So here, since we are trying to understand whether the stock price is sensitive to Google search trend,
+
+Unknown Speaker  1:50:59  
+in our first attempt, we are trying to plot stock price versus trend. In our next attempt, we are going to take the price and apply this percentage change function and create a new column
+
+Unknown Speaker  1:51:14  
+that will only have the percentage change,
+
+Unknown Speaker  1:51:19  
+and now we are going to see whether that percentage change.
+
+Unknown Speaker  1:51:25  
+So these are my Percentage Change column. These are the weekly returns,
+
+Unknown Speaker  1:51:31  
+because this is week by week. So now we are going to see how these two things, the lag trends and weekly returns, whether they kind of move together, because we did two thing right. First, we shifted the trend. One because assuming that there might be a cause effect relation, and it might take a week or so for the trend to catch up in the cost stock price. And then another thing we did is, instead of measuring the pure play price, we measured a difference of price in percentage terms from the previous day.
+
+Unknown Speaker  1:52:12  
+So
+
+Unknown Speaker  1:52:14  
+we can, if you want, we can plot that now and see how that looks like. So what we will do is, let's actually plot that here. It is not plotted. So let's do DF apple,
+
+Unknown Speaker  1:52:30  
+and then we will say,
+
+Unknown Speaker  1:52:38  
+Oh, I miss my co pilot, my free tier expired.
+
+Unknown Speaker  1:52:46  
+That was so good. I'm thinking, I've now got hooked. I'm thinking, I'll probably buy a subscription.
+
+Unknown Speaker  1:52:56  
+Okay,
+
+Unknown Speaker  1:52:59  
+just, just, you know. Oh, oh, okay, yeah,
+
+Unknown Speaker  1:53:04  
+see you get spoiled by AI,
+
+Unknown Speaker  1:53:09  
+okay.
+
+Unknown Speaker  1:53:16  
+Oh, sorry, not weekly trend,
+
+Unknown Speaker  1:53:19  
+another type of weekly returns.
+
+Unknown Speaker  1:53:26  
+Oh, this is not what I expected. So the scale of these, it's, yeah, the weekly returns is kind of flat. We need to do some more, yeah, because the weekly late return, yeah. So let's actually do this.
+
+Unknown Speaker  1:53:45  
+Can you multiply?
+
+Unknown Speaker  1:53:48  
+Can you multiply the weekly returns by like 1000 so it's, it's on scale with that.
+
+Unknown Speaker  1:53:55  
+That's not a bad idea, actually, yeah. So
+
+Unknown Speaker  1:53:59  
+times 10 to the power or
+
+Unknown Speaker  1:54:02  
+second one, yeah. So you multiply by 10,000
+
+Unknown Speaker  1:54:08  
+10,000 No, 1000 right? Oh, 1000 Yeah, right,
+
+Unknown Speaker  1:54:12  
+yeah, that's actually not a bad idea. So let's see. I
+
+Unknown Speaker  1:54:20  
+uh,
+
+Unknown Speaker  1:54:23  
+no, I think what we need to do is we need to create a separate column here. I believe.
+
+Unknown Speaker  1:54:34  
+Let's see, then, do you see your mistake? Look at look at your code again. Benoit, see your mistake. What did I do? Look at your code.
+
+Unknown Speaker  1:54:45  
+Look at your code. Which code this line? Yeah. Oh my, okay. I have something off. Yeah, you see your 1000 times a string?
+
+Unknown Speaker  1:54:55  
+Oh, right. Ah, that's not gonna do, yeah, that's that's gonna say.
+
+Unknown Speaker  1:55:00  
+Okay, so we get 1000 by the multiply by 1000. Here you get weekly strength weekly, yeah, sometimes that's why I was there when I saw that. Yeah,
+
+Unknown Speaker  1:55:14  
+there you go.
+
+Unknown Speaker  1:55:17  
+Yep, I'm sorry. So now, huh? So now let's do one thing. Now, remember how we applied these on a subset of this? So let's do that and on this slice which is around that launch event. So for that, I have to do,
+
+Unknown Speaker  1:55:43  
+can I do a dot lock here? I think I can, right? So this gives me and then this gives me that it should be, yep, that's it,
+
+Unknown Speaker  1:55:56  
+yeah.
+
+Unknown Speaker  1:55:58  
+So now, if there were a call, there was a correlation here, it would have shown up in this plot, but looking like, looking at it, it doesn't seem like there is a correlation, because
+
+Unknown Speaker  1:56:10  
+lagged trends. So now the trend has lagged here, and at that time, not only the stock price didn't go up, the percentage return actually went down during that day. So there is no direct correlation that you can derive here, but again, based on what I said, if you do happen to have additional
+
+Unknown Speaker  1:56:33  
+properties about that stock or any any time series data, for example, whether it is a stock or whether it is a daily record of temperature, or whatever it is. If you think that there is another variable that you can bring into the picture, even if you do not always see a direct correlation, or if you do not see a direct trend side by side, it is still a good idea. If you do have that, throw it in your time series prediction model, which we will be doing using profit, if you happen to have one,
+
+Unknown Speaker  1:57:05  
+because sometimes these trends, because time series prediction, forecasting is intent, intrinsically a hard problem, right? I mean, we do all of these, but as a human, there is only so much we can understand looking into all these series of data. So if I were you, and if I had these data, and I'm trying to forecast, let's say I'm serious in predicting Apple stock movement, and if I do have that Google trend data, I'll say definitely, I'm going to use that as one of the additional variable in my forecasting. I
+
+Unknown Speaker  1:57:45  
+Okay?
+
+Unknown Speaker  1:57:48  
+Another thing I'm sometimes people also do is they take these volatility so volatility is basically says, Hey, this is basically a measure of the standard deviation, right? So if you have
+
+Unknown Speaker  1:58:05  
+any set of data, remember we applied two function. One is standard deviation and one is variance. When we are talking about the normal distribution, the bell shaped curve and the standard deviation and or variance basically provides the measure of how widely dispersed that population? Sorry, not population, the probability density is right. So
+
+Unknown Speaker  1:58:30  
+in the time series case, we can treat that as a volatility of the series. And the way we decide where we calculate that is using this STD function on top of the column that you are trying to find the standard deviation for. So this will basically show on a rolling window basis how your volatility is moving.
+
+Unknown Speaker  1:58:54  
+Now when I say rolling window basis, meaning what, so think about it. What is volatility? Volatility is the measure of the dispersed nest of data when you have a group of data.
+
+Unknown Speaker  1:59:10  
+Now, how do you get that group of data if you are looking at only one day's data or one month's data, that is not a group of data. So that means, in order to find the volatility of any given day or given month, you have to see some of the data around it to
+
+Unknown Speaker  1:59:26  
+measure how spread the data is, and that is done using this function called rolling. So what it does is it gives you a rolling window average of four data point around it. So then you can apply a standard deviation on top of this. And when you do that, you will basically get a new column which should have been printed here before
+
+Unknown Speaker  1:59:57  
+here. So it will give you a volatile.
+
+Unknown Speaker  2:00:00  
+T now, since it is doing a rolling window on basis of four, so that means first four rows will have null value, and then you will start getting volatility from here.
+
+Unknown Speaker  2:00:11  
+Oh, we already had, I already had DF, Apple, dot head written here,
+
+Unknown Speaker  2:00:16  
+right? So then you might want to say, Hey, can why can I
+
+Unknown Speaker  2:00:22  
+plot volatility versus volatility versus what is called the
+
+Unknown Speaker  2:00:32  
+let's say trend like, does this Google search trend cause any ripple in the market? Does it make the volatility of the
+
+Unknown Speaker  2:00:41  
+stock go up or go down, right? But if we try to plot it, we are going to run into the same problem. So I'm going to multiply this by 1000 this time,
+
+Unknown Speaker  2:00:52  
+so we will have the volatility in the same scale. And then let's start try plotting lagged trend versus volatility and see what we get.
+
+Unknown Speaker  2:01:07  
+Yeah, so we are going to plot it here. This time we are going to trend, take lag trends, and we are going to plot it that one with the weekly volatility. So
+
+Unknown Speaker  2:01:25  
+yeah, this also doesn't kind of similar to what we saw in the percentage change, that not only there is no correlation, sometimes it probably there is a negative correlation. Well, the thing is, negative correlation is also a correlation. So one thing we see that when the trend spiked, which is that launch event, volatility of the stock actually went down. The stock became a little bit more stable and so on. So anyway, there is no basically
+
+Unknown Speaker  2:01:51  
+hard science behind this, and that's why I keep saying this. You can do this a little bit to understand whether these additional variable that you have might be worthwhile to throw in, but lot of time it comes down to basically a judgment call, right? So let's say, if you're trying to predict a stock market, stock price of Apple, and you basically say, hey, in addition to that, I have a data that basically tells me what is the house sold in that month.
+
+Unknown Speaker  2:02:19  
+Just from a common sense perspective, you can probably think that number of housing units sold in the country probably would not have any bearing on the Apple stock price. But hey, if it were a Home Depot stock price, maybe that would make sense, because after people buy home maybe they'll run to Home Depot to do stuff, right? So that's kind of the judgment that you have a lot of times the machine learning is like more of like your judgment call and more of like an art than science when it comes to deciding which data that you are going to or not going to use to train your model right. Which are your which are your useful attributes are going to be right? So that's kind of the gist of this
+
+Unknown Speaker  2:03:02  
+discussion,
+
+Unknown Speaker  2:03:07  
+can I ask a quick question? So when training the model, I think in the perfect world, we can say that the historical data give us the most of you know the trend and prediction, but what if there's also extra external factors, right? Maybe some, I don't know, political situation, yes, yeah, and that is why, that is why time series forecasting is art, because it's not possible for any human being to get everything, all the things that are going to influence the time series that you are forecasting in some domain, it is easier, probably, for example, weather forecasting, because we all know now how accurate our weather forecasts are,
+
+Unknown Speaker  2:03:52  
+yes, but if you think about a few years back, maybe 3040, years back, the weather prediction was not as accurate. Why it is accurate now? Because essentially, there it is basically scientific model. And over time that weather scientists, the meteorologists, have learned all of the different global factors that can probably have an effect on the weather, at least on the Long Range Weather right Short Range Weather Forecast is still tricky, because there is lot more variable place, but in the long range, weather forecast, like when you go at a Day Level, it's it has become much, much more accurate, right? But when it comes to predicting hour by hour hour, yeah, you can probably do that in a shorter time horizon, but beyond 24 hours or 48 hour horizon, hourly forecast would not be as accurate because the accuracy of the product forecasting depends on your how much the complete view of the world that you can find, or at least the part of world that has an effect on the quantity that you are trying to predict, which, in case of stock market, is.
+
+Unknown Speaker  2:05:00  
+Exponentially more difficult, because, as you correctly said in grade, there could be for the geopolitical reason, there could be war going on, even there is a la wildfire will have effect on lot of stocks, right? Some stocks, we know that there will be effect. Probably all the insurance company stocks will take a hit. But sometimes it might not be so simple, right? Like, what do you think about the effect of that on Home Depot stock would be, is it going to go down? Is it going to go up? You might think, well, it might go up, because people run to Home Depot, but you might not be so sure so, and that's why prediction is always a hard problem. Yeah, I heard in like, like these, like quant fields, you know, or like, yeah, they hire a lot of mathematicians or FPGA programmers, so that they can, like, input, real time data and, like, get like market sentiment, like as things are happening, in order to, like, make stock investment decisions, right? Yeah. So that is basically, that's why there are so many, like a smart people, and lot of them, you will see the they have basically a PhD in quantum physics, right? And they are basically hired by this algorithmic trading firm because that's what all they do. They basically sit there and put their thought mind together to kind of try to come up with a model that will beat the market. That's what the hedge hedge funds do.
+
+Unknown Speaker  2:06:21  
+But even then, even after all of these hiring all these smart people, smartest people, I would say, in the country or in the world, and spending all this money, even then, in the long run, they still don't, doesn't always come out ahead. Some year they do some year they don't.
+
+Unknown Speaker  2:06:38  
+So
+
+Unknown Speaker  2:06:39  
+now make whatever sense that makes that you can from this fact, right?
+
+Unknown Speaker  2:06:45  
+So, how many hedge fund Do you know that has consistently beaten the stock market year over year, at least in a five year in a row? Can you point me to index,
+
+Unknown Speaker  2:06:56  
+the Nancy Pelosi index? The Nancy Pelosi index,
+
+Unknown Speaker  2:07:02  
+yeah. Yes, yeah.
+
+Unknown Speaker  2:07:06  
+Anyway, so
+
+Unknown Speaker  2:07:10  
+that's that. And now the next one we are not going to basically do anything. So this is where I'm just going to let you know what we are going to use in the next class is this particular library called profit.
+
+Unknown Speaker  2:07:26  
+So profit is the library from Facebook,
+
+Unknown Speaker  2:07:30  
+and if you don't have it, just do a peep. Install profit. Run this, or just run this cell, which basically, essentially does a PP install profit with a bunch of with a bunch of print characters. So I have it already before, so that's why it ran all of these. And it finally says library successfully installed. So you will need these library, which is profit we are going to use this next week. And if you have been able to successfully install this, then you should be able to do these import which is from profit with a lower p import profit with the upper case p. So lowercase p profit is the name of the library, and uppercase P profit is the name of the actual class. That gives you that forecasting algorithm.
+
+Unknown Speaker  2:08:22  
+So keep that in mind.
+
+Unknown Speaker  2:08:26  
+Okay,
+
+Unknown Speaker  2:08:29  
+and then the next thing I'm going to show you here, so you see there, there is something called from Google dot colab import files and so on.
+
+Unknown Speaker  2:08:38  
+So this basically is a file that you can run on the Google colab itself. And why you need this from Google colab import file. This thing is because, unlike here, where you have the file sitting here, when you are doing a PD dot read CSV, you can directly point it to the file location. But in Google colab, since this is an online, hosted environment, you need a way to upload the file to your notebook,
+
+Unknown Speaker  2:09:05  
+so that's why you will need this from Google colab import files, and that will let you Upload a file locally
+
+Unknown Speaker  2:09:12  
+to your Google colab workspace. So
+
+Unknown Speaker  2:09:31  
+yeah, so let me quickly go to my Google colab and show you.
+
+Unknown Speaker  2:09:41  
+I think this is this one. Is it collab? Dot,
+
+Unknown Speaker  2:09:48  
+this one.
+
+Unknown Speaker  2:09:52  
+So you can go to this colab.research.google.com,
+
+Unknown Speaker  2:09:55  
+and in each first time, when you go there, it will ask you to create a new notebook. So we.
+
+Unknown Speaker  2:10:00  
+I created. This is my new notebook I created.
+
+Unknown Speaker  2:10:04  
+And essentially you will see that everything that you do in your local notebook, you can basically run it. I'm not running through this all over again, because it's just another way of running this. But anything you do in a local that my point is that you can actually run it on an online environment here as well.
+
+Unknown Speaker  2:10:25  
+So is it like a Jupiter notebook? Yes, Google, okay, it's not like it is a Jupiter notebook. That's what I'm saying, which is running on a remote server in Google, not on your local machine. So you basically access it through the browser, but you are essentially getting a Jupiter notebook in your browser, and you can run the code just like you will use in your local except here you here is this little run cell button that you have to hit, and then it will run. So first time, it will take a little time connecting, and it will actually see how much RAM and disk it is using. Since I have not used this for a few hours. So what Google does is it basically turns the Compute Engine off behind it to save money. And when you use it first time, you will see that it will basically take some time. What it will do is, on the fly, as you start running, it will bring back those RAM and memory and disk, whatever needed, and apply that to this environment, and then you are essentially running your Jupiter notebook in that virtual environment over the cloud. So do we have to upload our Jupyter Notebooks into here? Is there a connection that's made between Visual Studio code and collab? I don't know that. As I said, I have not used this environment, I think what you can do is you see this locating drive, right? That's gonna be Google Drive, exactly. So in Google Drive, so whenever you create a notebook here, if you go to Google Drive, it automatically creates a folder called colab notebooks, right? I think what you can do is you can probably upload a file from your local to here. Let me actually try this right now, and then you should be able to connect to that or open that from your colab Jupyter environment. So let's see.
+
+Unknown Speaker  2:12:16  
+I haven't done this before. I'm just trying this for the first time. As I said, I'm not very big fan of this environment, but,
+
+Unknown Speaker  2:12:25  
+but the reason you would use it is because you don't have enough juice on your machine, and
+
+Unknown Speaker  2:12:31  
+you need a little bit more, right? Yep. But as Karen mentioned, in order, in order to have enough juice, you need to shell out a small time fortune, $10 a month.
+
+Unknown Speaker  2:12:43  
+Yeah,
+
+Unknown Speaker  2:12:46  
+actually, so let's Alternatively, you can also just buy
+
+Unknown Speaker  2:12:50  
+a compute unit, kind of a la carte, so you can buy, like 100 for $10 and not necessarily make a commitment for them to keep charging you $10
+
+Unknown Speaker  2:13:02  
+Okay, so this one here, I have uploaded a, i, p, y, n, d, but for some reason, the icon is different.
+
+Unknown Speaker  2:13:12  
+So now I don't know whether Google cola will recognize this. Find out. So let's do file. Open notebook.
+
+Unknown Speaker  2:13:23  
+If you do upload, you can do it from your computer, just any file, and then go to your google drive on the left.
+
+Unknown Speaker  2:13:31  
+Because,
+
+Unknown Speaker  2:13:33  
+yeah, well, I still don't see that here. You see I would
+
+Unknown Speaker  2:13:38  
+have expected it to do that either file or I was, yeah, but for some reason, the stupid Google do not recognize anything that have been directly uploaded. Oh, no, you know, here you can actually do upload from here. Oh, interesting. Okay, so you have to upload it through the CoLab UI, rather than uploading in directly on the Google Drive UI,
+
+Unknown Speaker  2:14:04  
+yeah,
+
+Unknown Speaker  2:14:11  
+okay, now it is uploading. Let's see how it comes up.
+
+Unknown Speaker  2:14:16  
+Yep, it did. I
+
+Unknown Speaker  2:14:23  
+Okay, so now another thing I want to show you here. It's good that we uploaded this. So let's say I'm going to run these in locally. So this is one of the files that we have here. So that was one I think I uploaded
+
+Unknown Speaker  2:14:42  
+day three.
+
+Unknown Speaker  2:14:48  
+Which one I uploaded? Yeah, so I basically uploaded this particular notebook into Google colab. So this is my local view, and this is the Google colab running the.
+
+Unknown Speaker  2:15:00  
+Same notebook now just a couple of very small differences. So when you are running it from local you definitely need these two lines, which is importing matplotlib and do a matplotlib in line in Google colab, you actually don't need these two lines.
+
+Unknown Speaker  2:15:22  
+And the other thing is, in Google colab, you will need to definitely run this, which is from Google dot colab, import files, and I will show you why in a second.
+
+Unknown Speaker  2:15:34  
+So here, if you see how I'm doing the PD dot, read CSV like this is only needed if you are trying to read from a CSV file. If you are trying to read from a remote API or some other place over the internet, then it doesn't matter. So these different only applies if you have a locally a CSV drive saved locally that you are going to read off of. So in this particular case, you see my CSV file is under this Resources folder. So locally, you do what we always do. You basically provide the full file path here, and it reads the CSV file.
+
+Unknown Speaker  2:16:10  
+If you try to run this in Google colab, it will not be able to find this, and it will fail because this path does not exist.
+
+Unknown Speaker  2:16:20  
+So that's why, first you need to import this one time at the top, which is from Google, dot collab, import files. And then whenever you are going to read the CSV, before that, you have to run this command, which is files. So these files dot upload.
+
+Unknown Speaker  2:16:41  
+And when you run that, it will basically open this file upload dialog box here.
+
+Unknown Speaker  2:16:48  
+And now you click on this, and then you choose files, and you choose whichever files you want to upload, which, in this case, is that, and then the file is uploading.
+
+Unknown Speaker  2:17:02  
+So that's one little difference in running something on Google, colab and when you are doing this. So here now you don't need dot, dot slash resources or this thing anymore, because that file that you just uploaded that sits right next to wherever your
+
+Unknown Speaker  2:17:19  
+notebook is. So what you can do is you can simply run this,
+
+Unknown Speaker  2:17:25  
+and then it will basically load the file
+
+Unknown Speaker  2:17:29  
+that you just uploaded in the previous step, which is the same as here.
+
+Unknown Speaker  2:17:35  
+So that's the only difference, guys, everything else is exactly the same. Yeah, and Benoit, if you, if you click on that little folder icon on the left side, below the key icon, right here, yeah, you'll see your file there. Oh, right, my sample data. Oh no, no, no, no no. Oh, this one. Yeah, this file, yeah. So that the one that I uploaded, it basically comes here, yeah, and it was only stay that during the session, so only during the session. Yeah,
+
+Unknown Speaker  2:18:06  
+you know, like if you are reading the file from history or from ADLs or blob storage, so that would be like the same sort of you will use the s3 API. That's true, right? So that's what I was trying, yeah, that's like, basically same as getting from any API, right? Because whenever you are loading a file from s3 it's essentially you are using s3 API. You can also, you can also upload those files to your your Google Drive, and you can map your Google Drive, and then you can set the path to that on your Google Drive, yeah. And
+
+Unknown Speaker  2:18:42  
+then you permanently have it in notebook. You won't have to do it every time you open the notebook.
+
+Unknown Speaker  2:18:50  
+You just run that cell, just get
+
+Unknown Speaker  2:19:00  
+the data. By any chance, do you know is the code, and maybe even more importantly, the source data that you provide into colab? Does it enter the public domain, or is it? Does Google have access to it?
+
+Unknown Speaker  2:19:13  
+I don't believe so. I don't know exactly about the Google, but most of the cloud providers, they are very big on the privacy of the data, so they always say this, like their tagline, anywhere any of the cloud event that you go, you'll say, like, Hey, your code, your data, is all yours. We don't have any access to that. So that's like a big thing. They they would not know this will not enter public domain, sure, but you may get a bunch of ads about it.
+
+Unknown Speaker  2:19:42  
+Yeah. Yeah, yeah, that's true.
+
+Unknown Speaker  2:19:46  
+I know I will ask you the question, yeah. But the thing is, for our personal use, it is okay, but for organizational use. I mean, you know how some of the C source, they are, they are so very security sensitive, so.
+
+Unknown Speaker  2:20:00  
+Like they don't buy any of their, like any of the their, what is called the cloud service providers, all those crap, they'll say, Nope, we still don't trust you still have to go through these so and so audit process, and you still need to prove us. And then only after months and months of deliberation, then we will probably make a little exception, that you can provide our data on cloud and that so on and so like, that's how enterprises work, right?
+
+Unknown Speaker  2:20:32  
+And if you happen to work for us a government client, then God bless you. Although government is using a lot, but for I don't know about Google, but for Amazon, I know they actually have something called golf cloud, which is basically a separate region in the cloud which is specifically made for government queues. So
+
+Unknown Speaker  2:20:51  
+So government client, they mostly use the golf cloud. So yeah, Amazon probably lobbied like hell
+
+Unknown Speaker  2:21:00  
+with the different levels of government to kind of have that white listed everywhere
+
+Unknown Speaker  2:21:07  
+anyway.
+
+Unknown Speaker  2:21:13  
+What else I think we have covered, everything that we had to cover today.
+
+Unknown Speaker  2:21:21  
+Um, one last thing about profit is
+
+Unknown Speaker  2:21:28  
+when you are going to use profit to do the time series forecasting, and we will see that in the next class. So your data frame can have column with any name, like you can have date, closing price, volume, housing sales is that for profit, it doesn't matter.
+
+Unknown Speaker  2:21:45  
+It needs columns names to be very specific,
+
+Unknown Speaker  2:21:50  
+for whatever reason they call it DS and Y. Y makes sense. Basically, when you are trying to predict a function y equal to f of x, y is basically your output, right? So anything that you're you're trying to predict is y, which is output, and DS, it should have been Ts, if anything. So DS is basically your timestamp. So essentially it's a time series forecasting. So any so let me actually run through this. So let's say we are trying to load this data from this CSV file, which is basically
+
+Unknown Speaker  2:22:27  
+hourly price of
+
+Unknown Speaker  2:22:31  
+something, oh, grid price. So utility price, electric grid price, right? So something, some time series data we have, so you have these day hour column, which is our index, and then price, which is our the variable that we are trying to predict, right? And you can plot it, and it will show like a plot like, hey, now we are going to
+
+Unknown Speaker  2:22:53  
+do, run this through profit and actually try to do a predict. So what you need to do is, so any time stamp that you that you have as an index, it cannot be indexed anymore. So all of those set index thing we did, we have to kind of undo that. And the way of undoing that is calling this function called reset index. So after you do the reset index, then you basically have, basically the index is flattened out like a column. So now your day hour becomes a regular column, not a special column anymore. That is one of the requirement for profit, which is kind of odd, if you ask me, even though they are doing a time series forecasting, they would not work with the data frame that has a dead time index as a column. Your dead time needs to be a simple, plain column, not a index.
+
+Unknown Speaker  2:23:48  
+And then the other thing is that column that does have your timestamp needs to be renamed to ds. And the other column that you are trying to predict upon, no matter what value you are predicting, that column has to be named as y. So essentially, you have to apply this DS and y to those two column now this is a data frame. Now you can feed into a profit model to train the model.
+
+Unknown Speaker  2:24:15  
+So we are not training a model right now, but just wanted to make sure that you understand this. We will be using these over and over again in all the activities that we do next week, next class, and the class after so you will see that we always do this. And this is the reason.
+
+Unknown Speaker  2:24:36  
+I think I do have a huh. So I do have these handy. So let me select this out so that maybe over next year or two, you can give it a quick read. So this is
+
+Unknown Speaker  2:24:50  
+documentation for the profit the API that we are going to use the Machine Learning API. So maybe you can start looking at this Python API. Quick Start. So.
+
+Unknown Speaker  2:25:00  
+So they have a R and Python. R is another language that people commonly also use for machine learning. So they have a Python and r2, language that they have this profit available. So since we are going to be using
+
+Unknown Speaker  2:25:15  
+what is called Python, so it will probably make sense, if you guys take a look at this. I'm going to put in to the live channel there.
+
+Unknown Speaker  2:25:27  
+So
+
+Unknown Speaker  2:25:29  
+just give it a quick read. You don't have to go super deep. If something that you don't quite understand, that's fine. Things will be much clearer in next two, three classes. So
+
+Unknown Speaker  2:25:43  
+okay, so that is all from my side,
+
+Unknown Speaker  2:25:47  
+and we finished 16 minutes early today.
+
+Unknown Speaker  2:25:57  
+Hey, thanks again. Binoy for class. Yeah, thank you.
+
+Unknown Speaker  2:26:03  
+Thank you.
+
+Unknown Speaker  2:26:04  
+Good night. Bye.
+

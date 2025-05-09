@@ -1,0 +1,1059 @@
+Speaker 1  0:02  
+In today's class, one thing is, which is probably a good news for people, at least for those who are kind of very, very new to Python, that today we are not going to do too much compared to what we did last class in just one single concept that we are going to learn, which is object oriented programming in Python. And I will explain to that what what that is in a minute or so. But just know that in today's class, you will probably have a lot of time to kind of reflect on your learning, like not just in today's class, right, learning from your previous class. I'm going to take it little slow today, and I will give you opportunity to ask question all you want, because we do not have a ton of activity to do today. I think we have the luxury to kind of, you know, take a little bit slow and relax and reflect upon our past learning make sure we really, really understand Python language syntax, because this is the last class we are talking about. The language syntax of Python. Starting from next week, we are going to learn a specific library called pandas, which is one of the core library when it comes to doing data science with Python, right? So, which is a more specialized focus area, starting from next week? This is kind of you can think of end of your honeymoon period, almost, right? So this is, this is your last opportunity to kind of make sure that you understand the language. So please ask lots of question. Do not feel shy. No question is dumb question. And we are going to me and all the tears, we are going to try to do our best, because, as I said, this is the last opportunity we'll ever get to ask this type of question. Okay, so with that being said, we will get started. I think the rooms are all closed now.
+
+Unknown Speaker  2:07  
+Yeah, that's correct. Okay,
+
+Speaker 1  2:15  
+okay, so, as I said, Before I jump in first, I'd like to open the floor for questioning, any question that you have related to the topics that we have covered in last couple of classes. This week,
+
+Speaker 2  2:34  
+I'm still behind a little. I've been working with the w3 classes and tutors and stuff, but okay, still back a little ways, as far as like directories or dictionaries and lists. Okay,
+
+Speaker 1  2:49  
+okay. And I think you are also working with Karen, if I'm not mistaken, in one of the breakout rooms. Gary, yeah.
+
+Speaker 3  2:54  
+And Gary, I think you should have gotten the last step that we didn't quite make to before we got moved back. But I think you should see the next step and we can work on it whenever,
+
+Unknown Speaker  3:05  
+office hours, whatever.
+
+Speaker 1  3:11  
+Okay, so no specific question at this point, then, okay, so let's get started. So another question in general to the class. So I don't know how you guys are working like you are supposed to actually look into the boot camp spot and at least do a self review of the material before coming to the class. Right? Is that how you guys are operating? Because that that way you can make the most out of this time, this three hours time that you have with me. Yeah. Okay, so have you gotten a chance to look into these fundamental concepts of object oriented programming?
+
+Speaker 4  3:55  
+Now, yeah, I have, but it's only through the this presentation that you're in, there's not much on boot camp spot other than here's a link to this presentation.
+
+Unknown Speaker  4:08  
+Ah, yeah. So the same slide,
+
+Speaker 4  4:10  
+yeah, the same slide deck. So it's just going through that slide. Then I then I just go through the activities.
+
+Speaker 1  4:15  
+Okay, okay, how about others? Has anyone else gotten a chance to look through this deck. Yeah, I have
+
+Unknown Speaker  4:25  
+okay as well. What's your
+
+Speaker 1  4:26  
+learning? Some of you who have gone through if I ask you a question, what is this concept of object oriented programming? Which is the, basically the first bullet point here. So how do you define object oriented programming? What is it?
+
+Speaker 2  4:47  
+I mean, I don't, I didn't say I learned it. I looked through the deck, okay? I mean, about defining information, and obviously there's like, classes. Assigned to objects, and then you can, I guess, have user input as far as, like, what those you know, what those different classes are or something. It's like a blueprint. Classes like a blueprint, and it's like objects are like instances of it, more so let
+
+Speaker 1  5:25  
+me, let me ask you one question here from our Hang on, what is my lesson slide? This is here. Okay, so I'm going to open a file from last week. Let's say the last activity, which was that ATM modularization, right? So in this if you remember that we had the data in a folder, and we had some action that says, Make deposit, make withdrawal, right? And then you had a function that then you had a file where the main program is running with this run command. I mean run method where you have this login Main Menu, and then, depending on the user choice, where you are doing, make deposit, make withdrawal, and so on right. And if you run this, you will see that it kind of creates a somewhat nice interactive menu for an ATM right, where you log in and you perform certain transaction with your account, right? So in this particular program, uses lot of best practices in programming, which is modularization, defining your module in separate as separate folder, as libraries, and then importing those libraries, like lot of this thing. But would you call these object oriented programming? If yes, why? If no, why not? Can someone try to take a step? I mean, I know we haven't formally discussed what object oriented programming is, but I'm just trying to understand from your prior reading or whatever your general common sense tells you, would you call this particular example? That was the last activity from previous class? Would you call these object oriented programming? Okay, anyone else other than Jesse, you'd like to add their thoughts, comments, observation, for sure, like whatever we did in last players, it's not an object oriented programming. They're more of like a modular programming. They are more of a modular programming, right functional basically, so where you are basically grouping your grouping certain section of code in form of functions so that you can reuse them later. And you are also grouping some functions that kind of are logically related to each other into different files, which we are calling it modules, right? So that we basically don't have to write all the function in one single file. So that way, our main function in the main Python file that we run that stays clean because all of the other functions that we are going to reuse that are hidden outside with some other file as modules. So that's that. Now, why do we not call it object oriented programming? Or, let me ask you this way, what would have made us call it object oriented programming,
+
+Speaker 5  8:36  
+the use of classes and with attributes, and, you know, inherited correct,
+
+Speaker 1  8:44  
+very true. Now we all know what the domain of this problem is, right, which is basically a bank account which is fronted by an ATM machine, right, this particular program and which user is interacted with. So if I say, hey, I want to redesign this as a object oriented program, right? So keep this in mind. You don't have to answer this right away. We will come back. Keep coming back to this as we go through the discussion. So what is it we can do in this program to make it object oriented, and why that is going to be helpful? So that is something we are going to try to learn in today's class. Okay?
+
+Unknown Speaker  9:29  
+So
+
+Speaker 1  9:32  
+first, let's talk about what is object oriented program, or what is what is basically an object, right? So let's let me give you. What example can I give you? Okay, so let's say you have a program that loads employee data from a database. Okay, and you have 1000 employee and you have 1000 records in the database, and you want to load this program. Now, let's say this program has something to do with employees interacting with this program. Maybe they are punching in and punching out their time right as they enter and leave the office right. Or maybe you want to use this employee database to perform some operations such as, hey at the basically beginning of the year, update the employees address, or, let's say employees for one key contribution, or employees benefit selection plan and stuff like that, right? So you want to do some operation with your employee dates. Okay, now you can write procedural programming like we have done before, like in our ATM example, click case where you can basically write some code to read the employee data and put it into memory and then write some function. One function to do, basically update for one k1 function to do the timing check in or time check out, and different functions such as that, and you can modularize that right now. Think about what happens when these employee data each of the objects in the employee. So let's say you have 1000 records, right? Each employee has different first name, last name, email id, phone number, address and so on. But whenever you load one of these employees into the memory, each employee becomes like a virtual like an object in the virtual space, right, in the Python memory space, right? So you can almost think of as kind of a digital avatar of a person who is an employee. Now let's say when the employee checks in, you also have to pull in which department the employee belongs to, so that the time checking goes against that department, like employee from the SO and SO department just checked into the office. Similarly, for checkout also, let's say you also want to calculate, let's say these are hourly employees, right, salary and hourly wage employees. And then you also have to deduce the total time that the person has worked in a given day, and then you have to add it to the employees payroll, right? And now payroll happens to be another table in a different database table, right? So when you load all this payroll, that becomes something else, not an employee. So what is a better way to handle so as you see, as more and more things interact with each other. And some of you probably have done work with database, right? I'm sure some of you probably are working with database right now as we speak, right? And it is not uncommon when you are loading data from a database to have many, many different on entities, right? We call it in your database. We call it entities, right? Like in these example, your employee, your department, your payroll and whatnot, right? There could be hundreds of entities in a large, complex application, right? And when the application works, all of these entities have to be loaded from somewhere, and as the different events happen as user interact with your program through terminal or through a time card machine, touch screen or whatever, right? So, somehow, as the program interacts with the real world, or then as the real world works with the digital world, then each of these entities, they go through some changes in their state, in their life. Right now, what is the best way to model this, other than creating digital avatar for each of these objects, like your department would be, then an object, your employee would be an object. So you can then almost think of them as if like a digital world, incarnation of that real thing with certain properties and behaviors that you can manipulate, which we call attributes and methods. So now you can write your employee program, or employee time card program, in a way where your employee becomes a class, and then as you load 1000 employees from the database, you basically end up creating 1000 so called instances of employees following one blueprint that you define that specifies what properties and what behaviors that employee will have. And then all 1000 or millions of employees, however many objects you create following that blueprint, all of the object now have the benefit of having that same property and same behavior. So now any other program, whether written by you or written by someone else that your program is interacting with, now they have a standard way to interact with all employees. They don't have to know the. Internal details of the employee. They just know, okay, these are the behaviors that employees have, and if I invoke this behavior, then this effect will happen on the employee. So that way, not only your now code becomes modular, but now you have the added advantage to make your code mimic how the objects and things exist and behave in real life, so that, essentially, is the reason why we do object oriented programming. If you have followed these slides, you will see that in the slide they basically give an example of a car, right? Yeah. I mean, you can think of as a car in with an example of a car, or with an example of anything. I just wanted to use something that probably you can relate little bit more. I mean, there is nothing wrong with the car, I suppose, say. So I live in Detroit, right, which is the auto capital of the country, right? So there are car manufacturing companies, factories all around me, right? So if someone is basically, let's say, in one of these car plant, right, or even a car dealership, right, if they want to have a car database, there is nothing wrong to create a Python program that will model the car as an object, as a, sorry, as a class, in a same way as I defined that describe the employee as a class, and then create objects of employee when you load the employees the same way. This is just example you can think of as a car. So when you do have a car, right? So then car can have different attributes, such as your make and model and color and body type and so on. All of these becomes your properties, right? So now let's, since I said properties, let's talk about a little bit about properties and behaviors. So in this slide, it says two things, we create function in classes that define the objects, properties and behavior. So what are these two things? So
+
+Unknown Speaker  17:03  
+before I explain,
+
+Speaker 1  17:07  
+take a few moments to think of just looking from the English language, even if you don't have even if you have not done object oriented programming before, what could be a property and what could be a behavior property?
+
+Speaker 6  17:23  
+Go ahead. Jesse, okay, maybe some kind of a category, categorization, something that uniquely identified him, for some similar similarities, maybe
+
+Unknown Speaker  17:35  
+which one the property or behavior you are talking about.
+
+Speaker 6  17:40  
+So Well, okay, the behavior will be something similar for all of them. The properties can be the different categories or the groupings. I guess
+
+Speaker 1  17:48  
+that is a very good way to put it, actually, yeah.
+
+Speaker 2  17:52  
+Well, just using the terms that we've come across, you could think of it as like an assignment of attributes and functions that a that a particular class has,
+
+Speaker 1  18:04  
+yeah, so, from a right, Python programming standpoint, right? But when I'm thinking about, like the object oriented, like a philosophy, the paradigm, right? What are the things that you will call a property versus, what are the things that you will call a behavior of a class?
+
+Speaker 4  18:21  
+A property might be an adjective and a behavior might be a verb.
+
+Speaker 1  18:26  
+Yeah, that's one good way, right? A property, like in this example, your make model color, these are properties because these are the different adjectives that you will use to describe what a particular car object is.
+
+Speaker 2  18:46  
+So for like, if we go back to the ATM example, would would the properties be like account, balance and things of that nature, and then the behaviors would be like withdrawal and deposit and check balance, exactly,
+
+Speaker 1  19:00  
+exactly. That is a very good segue to that example like activity solution from last week. If we have to redesign that in an object oriented program as an object oriented program, we will probably be starting with the account as a class, and then account number as a property. Account holder is a property. Account balance is a property, right? These are the three that comes to my mind.
+
+Unknown Speaker  19:33  
+And then behavior would be
+
+Speaker 1  19:37  
+the deposit balance. Behavior or the functions or verb, as Jesse said, that other people do interact with the class. So how does a user in ATM interact with your account class? Well, there are only two ways they interact, make deposit and make withdrawal. Maybe another one would be check balance. So. Uh, maybe three. Well, now the last one is a tricky one. Remember what I say? When I said balance, I said, balance is a property, but when I say check, balance, I said, that's the behavior.
+
+Unknown Speaker  20:16  
+Do you see the difference?
+
+Speaker 1  20:18  
+I mean, ideally, if you just so let's say balance is a property, and your class is kind of an open book. You are not hiding anything from anyone, and you are letting anyone else, anyone else, meaning any other program, to pick directly inside your class. Then for when it comes to just letting people look at the properties. They can just look into the properties, because your class is an open book, right? But if you want to kind of hide what your class, real classes, real properties are, and if you only want to have them interact through the behaviors of the class, then ideally you would not want anyone to directly look at the balance instead, you will use a prop, sorry, you will use a behavior called check balance instead of letting them directly look into the balance. Now you might think, Wait a minute. If balance is one single variable, which is a floating point number, what is the value add? If I model it as a behavior rather than as a property, what is the benefit of exposing your property as a behavior?
+
+Speaker 7  21:41  
+Oh, question. Yeah, if I know we're talking about accounts and more banking type. But if we were to pull back to this car example, just to make sure I understand. So the car would be like the make, the model, the color would be the properties, but the behavior would be like speed acceleration or the sound of the horn or yeah,
+
+Speaker 1  22:07  
+basically, yeah, brake, like run, accelerate or halt, stop, slow down, speed up. Like anything that you can operate on, that thing, on that object, that can make the object change its property. So for example, if, let's say speed up or accelerate is a behavior, that behavior will affect certain property, and that property could be current speed. So if current speed is, let's say 30 miles per hour, and you have a behavior on this that says speed up, right or press on gas. So when someone clicks on that press on gas button, or in this case, calls that press on gas function, then the effect that will have is this property called speed increasing. Okay, yeah, but, but to your Tiffany, to your point, Tiffany, it might increase by the acceleration. So the acceleration becomes a property of, like, how fast can it go? Can accelerate or go? But the but the action
+
+Unknown Speaker  23:06  
+is still to go to speed up,
+
+Speaker 7  23:09  
+okay? So the behavior is the action of speeding up, but the property would be the actual current speed,
+
+Speaker 1  23:17  
+correct? The property would be some something that is intrinsic to the current state of the object, which, as I said, the current speed. Yeah,
+
+Speaker 7  23:26  
+okay, that explains it. Thank you. I appreciate it. Guys, yeah. So
+
+Speaker 1  23:30  
+now going back to my previous question, why? What is the we will take a look at the some of the code example in a moment, but try to answer the question I posed. So why would you expose a property through a behavior and not directly? What do you think the benefit of that might be? And think with our account, bank account, example, let's say bank account has a balance which is a property. Now, if someone else wants to check the balance, they can just check, Hey, what is the value of the property balance? And they are they be happy with it, right? Like, oh, okay, I wanted to know the balance. I checked the property balance, and I'm happy. But as a designer of the bank account, would you really want to do that? Why or why not?
+
+Speaker 2  24:14  
+I mean, some things have to be discrete, right? When you have, like, sensitive information,
+
+Unknown Speaker  24:19  
+yes, go on. You are on right track.
+
+Speaker 2  24:23  
+So if you have, like the if you're allowing certain accesses, access to libraries, or I don't know, dictionaries of attributes, or whatever you would, you would need to keep that information secure. That's
+
+Speaker 1  24:40  
+one. Also. Another thing is you probably don't want any Tom Dick Harry to be able to check balance of any account. You might want to put some checks and balance there. So if me as a benai want to look into, let's say, Gary's account. When I am locked is and Gary in as Benoit, and then system lets me take a look into Gary's account. Do you think Gary is going to be happy like No, right? So, so as a designer of the system, you have to, probably, it is better for you to do the balance as a not as a prop. Well, you have to have a balance as a proper property, but you have to expose this as a behavior to rest of the world, through a behavior that will say, check balance. And the benefit of doing that is, when you go and implement the code for check balance, that gives you an opportunity to put these additional safeguard in place, which is, hey, check if whether the person who is checking the balance is really the owner of the account. If not, then deny. Don't let him see the balance. So when you want to put this kind of check security and these kind of things in place, then also it is useful to expose something as a behavior, rather than as a as a property. Because when in when we go to the code level, you will say properties are just variables, the only just like the variables that we have used so far. The only difference is, these variables are declared inside a class, but they are just variables. But what are behaviors? Now we are talking about implementation. We implement the properties as variables, but we implement the behavior as functions, just like how we have defined the functions, except here, these functions will be defined inside a class. So now you can imagine, whenever you are defining something as a function that gives you immense power as a designer, you can do whatever you want inside your function to control what behavior your object would exhibit to the outside world, to the function you can basically control. And that's why it is always a good idea to write behavior that wraps around the properties. And this concept in object oriented paradigm is also known as encapsulation. Basically what you do, you encapsulate your property and only expose the behaviors of your class, so that way all of your internal someone said something discrete, right? Things, some things that needs to be discrete, like all of your internal, right, sensitive information, data that can remain hidden and secure to you or to the owner who is running the program, and you only expose things that can be exposed in a safe and secure manner to the outside world or to the other program who are interacting with your program, other program or other human who are interacting with your program, right? And that's why you will use this kind of encapsulation mechanism. Okay, okay, so that's about that, that initial kind of concept of the object oriented programming. I hope that makes this idea a little bit clear in your mind. And the idea, guys, to be frank, the idea is very, I mean, it's, it's pretty simple. It's not rocket science. Once you look into the code, and when you start getting to do it, you will see that, okay, yeah. I mean, that's kind of the way that we design that that will kind of start to feel very natural to you. That does not mean that all the programming that you will be doing in this bootcamp, you have to use object oriented style. You don't have to because, let's be honest here. So object oriented style will mostly be helpful when you are doing developing a full on business application, right? Like, for example, these bank account application, or, let's say that employee record keeping application, something you are developing for a business right? As opposed to that, most of the actual programming here you will be doing, you will basically taking a data and training a model on your data to do some regression, classification and natural language processing, right? So even if you don't apply any object oriented programming, you are full. I mean, you are good on I mean, more than good, actually, for the purpose of this boot camp. But the reason we are talking about object oriented programming is without learning about object oriented programming, any learning of any modern language events are incomplete because that is a paradigm that is kind of part of your should be part of your toolbox, right? You should know when to use that tool. Now. It is a useful tool. That does not mean that you have to use it all the time. Okay? So now we are going to take a look at the code. Soon. Any question before we do that? I.
+
+Speaker 1  30:02  
+Okay, okay, so let's start writing a quote. So what we are going to do is, I'm going to write class that basically models an employee, not a card, even though in the slide you saw, there is an example of a car, and some of the activities that you will be doing today with very concerned with the example of a car, but I just want to do with an employee, and you will understand in some time why I am choosing employee in particularly Okay, so how do I define a car class called employee with the keyword called class. So whenever you start writing a definition of a class, you have to start with this word called class, and let's call it well, actually needs to why employee? Let's call it person, because employee is a person, right? It's just a special type of person. So let's create a thing called person, actually, no, you know what? What I'm thinking of showing you probably the name employee makes sense anyway. It's just a name, okay, so that's where the definition of the class starts. Class, employee. Now, what did we learn a class need to have two kinds of things. What are the kinds of things, properties and behavior, right? So what are the properties of employees that we need to have? Let's have two properties. Let's call it a name, or let's call it first name, last name and age. How about that? Every employee we are storing first name, last name and and an h you can you can also even say data part actually, let's do a date of birth. Okay. So now, how do I define
+
+Unknown Speaker  32:14  
+the properties?
+
+Speaker 1  32:17  
+The way you define the properties is this way. So first you have to understand in Python, there are two kinds of or not Python. In any object oriented language, for example, there are some properties that you can associate with the class itself. Those are called class properties. And then there are some properties that you have to you can associate with the instance of that class, which is the instance properties. So in this case of an employee, the name, first name, last name, date of birth, age, are they common to all employees, or are they specific to one employee? So that's the question you have to ask. They are specific to one employee, not all employees, right? So that is what we call instance properties. Now, how do we do instance properties? So we do instance properties by using a specific type of method, and that method is called in it, okay? And inside the init, there is a specific way that you have to write this in it. So the first argument is the in this in it would be a special word called self. So in case of Python, whenever you are calling self, self basically means the blueprint of the function. And then you have to say, Hey, what are the properties that we want to set on it? And let's say we call first name,
+
+Unknown Speaker  34:07  
+last name,
+
+Unknown Speaker  34:10  
+and dob, meaning data quality.
+
+Speaker 1  34:13  
+So that function is basically going to be allowing you to create a new employee with so and so, first name, last name, and date of birth. Only after I write three lines of code that will take all the three parameters, except for the self, because self is self, it basically says which object that these attributes apply to the self object, meaning these employee class object.
+
+Unknown Speaker  34:45  
+Can you have one in it?
+
+Unknown Speaker  34:49  
+I'm sorry say that again.
+
+Unknown Speaker  34:50  
+Can you have more than one in it? Function?
+
+Unknown Speaker  34:55  
+So basically, can you have more than one constructor? Um.
+
+Speaker 5  35:02  
+You cannot, well, we can give we can give it optional parameters. Here still, you can
+
+Speaker 1  35:07  
+have optional parameters. Yes, that's how you will do it in Python. Okay, so let's say now, let's stick with the three parameters. And now what you need to do is this first name is something that user is passing, but think about your employee need to have on a property called fast name, which that first name will basically be assigned to this value that user is passing. So you basically have a handle to the current class, which is self. And you specify self dot first name equals whatever the first name the user is passing.
+
+Unknown Speaker  35:43  
+And similarly, self dot
+
+Speaker 1  35:46  
+line, self dot last name is equal to whatever the last name that you are passing, and then self dot and these names can be different, right? I mean, just because here I'm using first name, here you I'm using first name, that does not mean that these two variable names has to be the same. So to prove that fact, the last one, I'm going to say self dot, debt of birth equals
+
+Unknown Speaker  36:19  
+do B.
+
+Speaker 1  36:22  
+In fact, let's use this camel case convention for first name and last name as well first name and last name. So okay, so now I have to save this.
+
+Unknown Speaker  36:40  
+Save it in, actually, I think
+
+Unknown Speaker  36:45  
+I can save it anywhere, just 75
+
+Unknown Speaker  36:50  
+documents.
+
+Unknown Speaker  37:02  
+So now our class is created,
+
+Unknown Speaker  37:06  
+but now I want to see whether
+
+Speaker 1  37:11  
+this have been actually working. So what I'm going to do, do you guys remember how we do the if name equal to main thing? Like, how do we write the main body of the program? Can someone guide me? Like,
+
+Speaker 5  37:26  
+if underscore, underscore equals like, quote, underscore, underscore, main, or something
+
+Speaker 1  37:34  
+name equals underscore, underscore, main, right?
+
+Unknown Speaker  37:41  
+Well, its names are enough. Seven. Sorry,
+
+Unknown Speaker  37:47  
+why? What is it? Say?
+
+Unknown Speaker  37:59  
+Indentation. I
+
+Speaker 1  38:06  
+Okay, let's just do a pre instrument here. I just want to make sure that the program works. I'm just going to run this program quickly, and if it works, it will just print done. Yeah, so the program works. I have defined the employee class, but I have not done anything with it. I just wrote a dummy main section of the program, which actually doesn't create the employee class, but it just to make sure that this class definition is correct. And now see what I'm going to do. I'm going to put it in a debug mode, and then I want to see in memory what gets created when this employee class is declared or defined. I'm not creating any actual employees. All I'm doing is just defining the employee part,
+
+Unknown Speaker  39:07  
+employee classes, blueprint
+
+Speaker 1  39:09  
+and what I'm going to see now I'm going to try to see for myself what gets initiated because of that. So what I did in order to do that, I put a break point in my main method, because I know that before coming here, the program will basically go through everything before that, and here it will stop there. And let's see whether that happens. So now, since I have stopped the program here or paused the program here, and in the left hand side, I can see what are all the variables that got created in memory. So now you see, under the class variables, I have something called employee you see that, why is this thing happening? Because I have this definition of employee class written in. This file so these employee class is now loaded into the memory of Python as a blueprint that can then be used to create multiple objects of these employee class in our main program. We have not done that yet, because I just wanted to show you, when you just create the blueprint, what do you expect to see in the memory area of the program? And you are expected to see not multiple objects of employee, just a one blueprint of the employee class, which in this this one employee class, and it will also have some special variables and each of the class that you create in Python has these special variables right, which starts and ends with two underscores any class, they will always, always, always have these special variables. These are not something that you are defining, okay? So we have this class and the special variables, but you don't have any actual variable, even though, here in your blueprint, you are saying, Hey, first name, last name, date of birth, they will be actual variable, but they are going to be the actual variable of not the employee class, but an object of employee class, not the blueprint itself. That's why in the left hand side, you still don't see first name, last name or data. But yet, because I haven't really created any object of employee class yet, it's just a blueprint I have created. Okay, now I'm done with this introspection. I'm going to stop this execution now, and then I'm going to write some code which is creating the employee. So let's create our first employee, and we are going to call it EMP one. So how do I create a EMP one variable, which is the employee, one that is off, employee type. How do I do that?
+
+Unknown Speaker  42:14  
+The employee, and then parentheses, the
+
+Speaker 1  42:17  
+yeah, basically do employee, and then that's it. Does it work? Let's see if it works or not, if the program prints done. That means it works, but it does not work. Why? Because, and this is the reason I wanted to show you this way now you see the error message it is printing. It says, employee, dot, underscore, underscore, init, underscore, underscore, meaning this function. It is missing three required arguments, first name, last name, and DOB. That means what that means when you are creating a new object from your employee blue plane Blueprint Using This syntax, which almost looks like a function call, but you see there is no deaf employee. Here we have a class employee, but there is no employee function we have defined. But the idea here is, whenever someone uses the class name to create an object, which is also called the construction of a new object. The construction function that Python internally uses happens to be the function that has this special name, which is underscore, underscore in it, and that's why here, when I'm trying to create a new employee. Python things that I'm trying to call these init function with zero arguments, but here I have defined this to have three arguments, therefore it is giving me an error that, yeah, you are missing three required positional arguments.
+
+Unknown Speaker  44:01  
+Okay, now
+
+Speaker 1  44:05  
+to properly initiate it, I have to actually provide some name of employees, right? So let's put some name of employees. Let's call first name Matt and last name, Lee, sorry, Matt. I'm using your name. I have no clue what your date of birth is, so I'm just going to say January one
+
+Unknown Speaker  44:35  
+of 2000
+
+Unknown Speaker  44:40  
+Okay. Am I close? Anyway, you made me younger. I appreciate that.
+
+Speaker 1  44:49  
+Okay, so now this course should run. What do you guys think? Should it? Yeah, let's try it. So. So run the code. It says Done. That means that mad guy must have been created in memory. Okay, now let's check that again. Now I'm going to remove my breakpoint from here. I'm going to put my breakpoint in the last statement, which is print, and then I'm going to put it in debug mode. The idea is that when the program comes here and pause, then by the time that mad guy will already be existing in the memory, which is what we are going to confirm right now. Okay, so I'm going to do it debug again, and by the time program pauses there, it will always be already be there. Yeah, look at that. So now in class variables, you have employee just like that. But outside of the class as your local variable, you have something called EMP one. What is this? EMP one? This is the variable name where I stored this particular object. And now if you expand this EMP one, there you go. There is the date of birth, first time and last time that I passed from here. Now you see how these employee one. It clearly says employee object. What object? Employee object with an upper case E. So remember, these, employee is the blueprint. So what here? Python is telling you that, hey, Mr. User, in so and so address, you see this hexadecimal number that 0x, 105, so that's the memory location. So what these VS code is showing you that in so and so location of the memory there is a variable named employee one is stored which is not a variable of any of the built in type, but it is of a variable of employee type. And these employee type happens to be a class that you have defined, which you can see here. This is the blueprint. And here it's saying, using that employee blueprint, we have an object called EMP one at, at, so and so, location. And by the way, these are the different properties of the object, which are date of birth, first came. And lastly, Okay,
+
+Speaker 8  47:26  
+quick question, did you use the capital eon employee, because it's a class that you're defining?
+
+Speaker 1  47:33  
+Yeah, yeah, okay, these are some of the style guides. I think in one of this slide, there is a link to a Python style guide, yeah, but it's, it's a customary again, even though names are name, it doesn't matter. But just like English language, you are expected to follow some kind of a style guide to make sure your code is universally, universally readable and recognized by humans. Computers don't care, but you need your code to be understandable by email. So it's always good to use this kind of style guides. And what I use for this variable name, you see how I started. First name, if he's a, if it's if it's a mono soluble word, you can start just a small lower case, if it's a multi syllable word. This is customary to do this like a first syllable, syllable with all lowercase, and the second syllable starts with an uppercase, and so on. So that's why first name I started first all lowercase and then name I did an uppercase, right? That's one sometimes people use when there are multiple syllables in a variable name. Sometimes people you will see also use this convention where you basically separate the multiple syllable with the underscore and keep everything lower score. And that is also a valid style. Some people like to use this style like first underscore name. I personally like first name with the N up case, probably because I started my programming with CE and Java, and that's kind of customer to there. So
+
+Unknown Speaker  49:08  
+Gotcha. Thank you. So
+
+Speaker 9  49:11  
+here you passed, you passed strings into the constructor. Can you pass any kind of data type?
+
+Unknown Speaker  49:18  
+Yeah, you can pass anything,
+
+Speaker 1  49:26  
+okay, so that's your we pass functions.
+
+Unknown Speaker  49:32  
+You can pass
+
+Speaker 1  49:35  
+the clamp functions. Yes, you can Yes, yep, because in Python, function is a first class object. Yes, you can actually pass functions, okay, so, so we created an employee. Now if I want to do a clean statement, right? So, so here. I'm looking into these variables from like I am pausing the program, right? And then here in the variable pane that shows me all the variable in the memory I'm seeing this. But what if, if I want to print these properties or attributes of these employee? How do I do that? Well, I can simply use a print statement, right? I can say print, employee one dot, and look at the magic. Now, when I'm saying employee one dot, you see the Visual Studio auto complete actually knows that first name, last name, date of birth. These are the different attributes of employee class. And it also recognizes that these EMP one variable happens to be of the employee class type. So that's why it is actually giving me this addition, which is pretty cool, actually, right? So I can say print employee wanted first name, right? And if you want, you can try to make it nicer, you can say, Hey, first name is such and such,
+
+Unknown Speaker  51:14  
+okay, and last name is such and such. I
+
+Speaker 1  51:25  
+now, if I want to run this actually, let's first stop it. Now it should print Max first name and last name here, because now I have added two print statement, right? So let's try that and see whether it is working. It should, because we already double checked in the debug pen, yep. So it sends first name and last name exactly as we declared it to be. So that means our class works. The attributes have been set or the properties have been set, and we can read the properties back using print statements. So now the next thing that we have to think about, okay, let's say, if someone says, Hey, can you print the employees full name? How would you do that? So let's say you are using this employee class in your that company program that I talked about right in your time, in time on program and there you want these employee class to actually have a feature that allows a programmer to print the full name of the employee in one shot, not just first time and last time separately. How do you do it?
+
+Unknown Speaker  52:40  
+Create a full name method.
+
+Speaker 1  52:43  
+Okay, create a full name method. That's one way anything else you can think of.
+
+Speaker 6  52:52  
+Can you just combine it within that line 13, both of the other Yeah,
+
+Speaker 1  52:56  
+exactly. So you can say employee first name, oops, sorry, employee first name and employee last name in a one statement and call it, call it a day, right? So you don't need a behavior, okay, yeah, so like, if you run this right now, oh, hang on, what did I do? I Oh, I have a typo here. Sorry. Okay, so now I'm saying, hey, full name is Matt Lee, that's it, but I can do this. But is this really the object oriented way of doing it, because what is happening is I am taking two variables and then doing something. But imagine what if it is something more complex. So let's say, instead of first name and last name, there are some other numeric variable, numeric data about the person you are storing and based on that, let's say you are applying some complex formula to basically calculate, let's say the person's tax withholding, right. So let's say you have employees, marital status, their what is called whatever they whatever we fill in in our w2 forms, right, all of the deduction, option, withholding, whatever we did right based on that, let's say, as a nature person, you want to calculate what the total withholding would be for this employee in every paycheck.
+
+Unknown Speaker  54:33  
+What did you do?
+
+Speaker 1  54:36  
+You would probably not want to pull all of those complex logic outside of employee and actually do that math every time you want to do that, you'd want to internalize all of these as a behavior of employee that will say, calculate tax with authority in a real employee app. Application. Now we are not creating a real employee Employee Application. But just to drive that point home, what we are going to do that we are actually now going to create a method of employee class. I think someone already suggested that, hey, create a last name as a method. So what we can do is going back up here inside our employee class. Here you see the indentation in this point we are inside employee class, but now we are going to create a new method. This new method or function. Method and function are used interchangeably, by the way, in this new method, I am going to say full name, right, and this full name inside here, So imagine this concatenation of first name and last name, even though this is very simple, but for a moment, imagine this is a very complex calculation that you have to do over and over again. Just assume so now what we are going to do that we are going to sorry I deleted something. We are going to internalize this complex operation, or assuming complex operation inside this function, so that in my main method I don't have to do this complex operation. I'll just say, Hey, give me my employee one's full name, and we are good. So how do we do that? Well, we are going to return as F string from there, from inside that function. Now see what the problem is. When I am outside the employee class, I have an employee one object, and I can operate first name and last name on top of that object, which is EMP one dot, right. Now I'm trying to move this code internal to the class, which is the blueprint. So inside the class, you really don't have an way to have an object, because the blueprint is a blueprint. So this blueprint is something that comes into existence before even any object is created. So now you have to somehow be able to refer to this first name and last name field of that blueprint itself. And how do we do that? We use that same special variable called self. So when we are saying full name, in the definition of full name, we have to pass a we have to pass a reference to self. Whenever you see self in your mind, say out loud it is a reference to the blueprint itself.
+
+Unknown Speaker  58:04  
+So what is self say out loud?
+
+Speaker 1  58:11  
+It's a reference to blueprint itself. You see how I worded it this way, so that you remember like it ends with self programming is it always self? Yes, it's always self. This is a special kind of variable name. This is one of the rare cases where the name matters for people coming from other programming language. You might already be able to compare this with a keyword called this. So this is your this keyword. Self is equivalent to this in Java or C Plus Plus? No. Is there this in C Plus Plus? No, it doesn't. No, it doesn't have it's just in Java, yeah. But anyway,
+
+Speaker 10  58:58  
+JavaScript as well. This is in JavaScript. This
+
+Unknown Speaker  59:01  
+is in JavaScript. Yes.
+
+Unknown Speaker  59:04  
+Okay, cool. So now I have a full name.
+
+Speaker 1  59:09  
+So now here, when I want to do the full name, all I have to do is I'm going to say employee one dot. Full Name. Is that going to work? Yes or No. No. Why? Because,
+
+Speaker 2  59:26  
+in the method, you still have EMP one as opposed to self in the returns.
+
+Speaker 1  59:34  
+Oh, right, yeah. Well, that was not intentional. Okay, yeah. So here everything that you outside, you would have operated on an EMP one or any object inside the class you have to operate on the self object or self, self instance, let's call it. So now, would it work if I run this program? We. It print the full name.
+
+Unknown Speaker  1:00:07  
+Yes or no, yes,
+
+Unknown Speaker  1:00:10  
+okay, let's see if it works. It may or may not.
+
+Speaker 1  1:00:18  
+You're missing parentheses. Exactly. I was hoping that someone would be able to catch that so you see the difference when I'm saying EMB wonder, first name, it is printing the first name. No problem at all. Dot, last name is printing the last time. No problem at all. But now I'm saying full name. Wait a minute. Full Name is not even a property, it's a behavior. And remember what I said, behavior is a function. And how do we call a function? We call it this way, right? So now it should work. So now, instead of saying employee, employee, wonder full name, I'm calling it as a function, and now it will work. So up. See, full length, metally so these concatenated version is not being calculated here outside the class. It is coming directly, ready made, pre cooked, from inside the class itself. So if you think of blueprint as a recipe when you are cooking, so here essentially what the chef is doing. The chef is giving you the recipe, and inside the recipe, the chef is providing exact, step by step instruction on how to cook a complex meal, which happens to be the full name. Now, instead of a full name, if it were tax withholding or some other complex calculation. By doing this, you as a chef is providing the recipe to do that to your users so that your users don't have to worry about it. All they know is, okay, there is a tax withholding. I'll just say, Hey, give me employee one dot tax withholding, and I'm done, because all of your complex code will be inside that tax withholding method.
+
+Speaker 1  1:02:12  
+Okay, there is also another syntax in Python. Let's see if this works, actually, yeah, I think it will work. So there is this annotation that you can add. So let's say you have a function and you add an annotation that says property. So annotation are basically special instruction that you provide to Python to indicate certain behavior of certain local portion of code. So now what I'm trying to say is, hey, full name is a behavior, just if it is defined like that, it's a behavior. But I want to change that behavior. I'm saying, hey, even though it is a defined as a function, but this does not really change any state or anything. So for all practical purposes, let's consider this as any other property. With that Now, coming back down here, I would be able to take that parenthesis out, which makes it a function call, and the program should run fine, or at least it used to let me see whether the newer version of Python, they have made any changes. No, they haven't. So now see what I did. I defined full name as a function. When you define something as a function, ideally, you have to call it like a function with a pair of brackets like this. But what if I'm creating a function that does not really need to be called as a function, especially the read only type of function, where, if you want to write a function, have a function that actually changes something or does some really, really complex and cool operation calculation? Then yes, for all practical purposes, go ahead and define it as a function and call it like a function. But here, this is, this is kind of a little, you know, like, I'd say, like a syntactic preference, like when I write program, I actually prefer to write it this way, like if I'm creating a synthetic property by using a function I would use at the rate property and then use it like a property and not as a function. So now, if I have a property there and I'm trying to call this as a function, now it says that, hey, this is not callable because by the fact that these Annotation Properties there. Now Python thinks that full name is not a function. It is just a property. And now when I'm trying to call it as a function, now it is saying it's not a callable because I have said it is a property up there. So these are just the two different ways to basically define your differentiate between your. Properties and behavior. So one is this, where you define a behavior. If you want to call it as a property, put a add property here, and then just call this property. The other thing people do is, if you don't want to be do this, then going back to the style guide. So ideally, if you have something which is a behavior like what Jesse said, it should be a verb. Now, full name is not a verb. So if you really want to make it like a verb, make and sound it like a verb, well, let's just add a verb there. So call it get full name. I mean, if you don't add get, Python really doesn't care. But hey, again, this is human readable code also, right? So now you can do employee one dot get full name. Now this get full name is basically a behavior and not a property, right? And just for your reference, I'm going to write the two versions side by side. If you want to expose full name as a behavior, you use the function and do a get full name. And if you want to expose full name as a property, you don't use get Institute you as an annotation that says property, and that's it. So now, since we have get full name and full name both now in the main method, I can demonstrate that I can get the full name in one of the either way one is saying employee, wonder, get full name with a function call, and one is just employee, one dot full name as a property call, and both will produce the same result, which we can see in this execution, that both will give me Matt Lee as the full name. So
+
+Speaker 1  1:07:07  
+uh, okay, similarly, let's say, if I want to use another property, let's say in this company, they use a standard email, right? So lot of companies does that, right? The company that I work for does the same. I mean, this trilogy also does that, which is first name, dot last name at companies, domain name.com, right? So let's say I want to now create a property which will be email, and that will use the first name and last name and return the whole thing as an email. How do I do that?
+
+Unknown Speaker  1:07:56  
+You have to add it to the class the email. Yeah,
+
+Speaker 1  1:07:59  
+uh huh. So what do I how do I add?
+
+Unknown Speaker  1:08:05  
+Would be append?
+
+Speaker 1  1:08:08  
+No, no, I'm just adding code. Yeah, I'm just adding a code that will return. Email, yes. Email, yeah, death, email, email, shelf, self, yep,
+
+Speaker 4  1:08:24  
+column and Return, return, and going to be f and the full and then parentheses, can it be
+
+Speaker 1  1:08:39  
+dot? Last Name, right? Yes, and domain. And domain, let's say xyz.com and in the first thing is basically just like the previous function, right? I'm just showing another thing. It's just same thing, self, dot, last name@xyz.com and then if you want to use my kind of style, I would put a property in there, and that's it. Now, if I want to print this, I will print employee one dot email. And with a nice little prompt here, well, not prompt a level here, and it gives me the email form, right? Just wanted to show another reason why you would like to use a behavior or a synthetic property.
+
+Speaker 1  1:09:49  
+Okay, one last thing before we break into the breakout room. I now, now that we have added all of these, I want to see what the debug. Looks like, okay. So I have my break point in my last line. So let's put it into debug mode, just to take a quick peek on how the memory area looks like. Okay, so I have the MP one object as expected from before. Now, you see this beauty here. So you have the first name, you have the last name, and you have the date of birth. Those three are true properties. But then we have two synthetic properties, full name and email. So you see what is happening here. So as the class is being defined, and even though you are only passing three values, first name, last name and your data birth, it is using the first name and last name to combine it into a full name. And it is also combining them in a different way to create email, and they are having both of these as properties, which is part of the memory location where these object is saved. So do you see another benefit of this, other than the nice city and code packaging? What is the other benefit of this? Yes, you can use the full name and then the domain. Yeah, not only that. Think about, think about the computational time perspective. What if doing this operation is a non trivial operation, and there that will take probably, let's say, couple of seconds, if you don't do this like this, then every time you call this function, this function will execute, and it will take, let's say, two seconds to do a set of complex operation, as opposed to that when you define it as a pseudo property, that operation will be done whenever the Fun state of any of the properties change. And then, anytime you call this, that two second will be saved, no matter how many time you call it will simply refer to pre computed value here, and that pre computed value can be reused multiple time, times without you having to have the overhead and wait for two seconds every time you call it. Do
+
+Unknown Speaker  1:12:26  
+you understand this last point?
+
+Unknown Speaker  1:12:29  
+Let's say get email
+
+Speaker 1  1:12:32  
+if it's a function. And if you want to print this email in 10 different places, let's say in 10 different form that you are filling it. And every time you have to get the email, if it were a function, that the function will be executed 10 times. When it is a property, the property will be executed once. That function will be executed once, and the output of that function will be stored here in the memory itself, so that no matter how many places you call it, you are not going to execute the email function 10 times. It is only called once, and this is a proof of that, that the output of the function is already saved in the memory, so there is no reason for Python to invoke the function over and over again. So I
+
+Speaker 4  1:13:18  
+assume that if you do a set on the on the first name, that it'll change that once the email, once, yes,
+
+Unknown Speaker  1:13:29  
+not that it would store the wrong email.
+
+Speaker 1  1:13:32  
+It would not store the rabbi. No, it will. It will make the changes on the fly.
+
+Speaker 9  1:13:40  
+Do you always need to be in debug mode to see those variables on the side? Excuse me, yeah,
+
+Speaker 1  1:13:45  
+yeah, if you want to see the variable, obviously you have to pause it, right? Because otherwise the whole thing runs through so fast, like within a couple of microsecond, right? How would you see it? And plus, this view is only available for the debug only that is the visual capability. Is debug. Yeah, okay, now I'm going to pause the stop the program, and we have done
+
+Unknown Speaker  1:14:10  
+cool so I hope that was helpful.
+
+Unknown Speaker  1:14:16  
+Any question,
+
+Speaker 1  1:14:21  
+okay, and I didn't basically go through the slide, but you can go through these, and you will see all of these have now been covered. Except in the slide, you will see the examples are using car and then make model color. Here we kind of have done the same thing, but we imply which is a good thing anyway, because now I'm going to ask you to go into your breakout room. So today, let's just do the breakout room. Okay? I think it's good today, and that way I know in most of the room there would be one or two people who probably understand or have done object oriented. On programming before, and I have seen before some great example of peer learning. So let's get into that mode. Try to get this activity in a collaborative manner. Now, let's see which activity we are going to do now. So this is
+
+Unknown Speaker  1:15:21  
+plus three activities.
+
+Speaker 1  1:15:27  
+Okay, so the first activity is this, since I have already covered the one, so let's keep activity number two, and we are directly going into activity number four, activity number if you do activity four, then two becomes redundant, right? So essentially, what you are doing here is you are creating a class with car class with some methods and in the unsolved folder,
+
+Unknown Speaker  1:16:07  
+yeah. So just review this code.
+
+Speaker 1  1:16:12  
+Review this code, and you have to add three additional getter and setter method with three parameters of the clown, and hang on, three getters at the meter to change the three parameter of the car class, yes. And then, what are the three methods they're saying
+
+Unknown Speaker  1:16:35  
+from the user to change the three attributes of the car
+
+Unknown Speaker  1:16:37  
+if they're saying,
+
+Unknown Speaker  1:16:41  
+Did this say which? Nor anything. No, just, it
+
+Unknown Speaker  1:16:44  
+just says you're basically changing any three you.
+
+Speaker 1  1:16:48  
+Okay, just 23 Yeah. Okay, so that's good. That will give you some opportunity to kind of study these code also, and refer back to what I just showed you with the employee class, and now it's a car class, so you'll be probably be able to compare like, Hey, what did I just said and what we are doing here. So hopefully that will kind of make this idea a little bit more concrete in your mind. Okay, so let's get into the breakout room and how many people we have today. Karen, 30 people.
+
+Unknown Speaker  1:17:18  
+3430
+
+Speaker 3  1:17:20  
+So, 30 So, 30 people, right? 3130 Yeah. I have already said for four rooms so we could each go to one. Is that good? Um,
+
+Speaker 1  1:17:30  
+yeah, but don't put four of us into the rooms right away. No, yeah, yeah. So let's, yeah, let's create four rooms. Or, or, do you want to create five? That will be six people in each room, right? Let's do five. I'll do five. Yeah, no, I think that's a good, nice number, six people in each room that
+
+Speaker 3  1:17:52  
+include co hosts, so we won't get abducted into a room right away. Yeah. And for how many minutes? 15 minutes, okay, I got that, and we're ready. Is it? Run, ready, set, go.
+
+Unknown Speaker  1:18:22  
+Let everyone got Bradford,
+
+Unknown Speaker  1:18:30  
+hello, hello,
+
+Unknown Speaker  1:18:32  
+welcome back, everybody.
+
+Unknown Speaker  1:18:36  
+How did that go?
+
+Unknown Speaker  1:18:40  
+We got there. You got there?
+
+Speaker 1  1:18:45  
+Okay, anyone had any particular problem difficulty in understanding what was asked? I
+
+Speaker 9  1:18:58  
+think there was confusion in ours about when we were doing this set, how to actually make the change, but I think that there was the like, the distinction we were confused about is what we're building is not making a change, it's the ability for a change to be made
+
+Speaker 1  1:19:15  
+and and also making the change in the main section of your program. Both, yeah,
+
+Speaker 9  1:19:20  
+we didn't get that far. So we only got to the setter, the three set things, and so that's we got kind of stuck there, of like, well, how do we now change it when? But we had to, at least, I had to separate that out, that this isn't making a change to a make. It's the ability to make the change to a make.
+
+Unknown Speaker  1:19:39  
+Yeah, and that, okay, that was kind of confusing. Yeah,
+
+Speaker 1  1:19:42  
+no, we are going to review that together. So the reason I didn't actually walk through the setter method because I wanted you guys to kind of a try and see for yourself whether you can figure out. But we are going to review that now. So let me share my desktop again. You.
+
+Unknown Speaker  1:20:06  
+Okay,
+
+Speaker 1  1:20:09  
+okay, so here the class is already given for you. It's a car class, and there are 123456, properties that have been set. And so one thing you have to say like if you provide some properties in your init method, which is your constructor of the class. So what that means is, whenever you later in your main program, whenever you are creating an object of that class, you have to pass all of those properties that you set an expectation here in your init method. So essentially, by declaring this line, you are setting an expectation on the user of your class to provide all these pieces of data when the class is first constructed or instantiated, which is what is being done here and then here we are simply calling the getter methods to see what those properties are. But it often happens that after a class object comes into existence, comes into life later throughout the program, as the time goes on, you will have the need to change some of those. How do you do that? The proper way of doing that is to create something called setter method. So what are the three methods that we want to change? I
+
+Unknown Speaker  1:21:43  
+They say, create three setter methods. So what? What
+
+Speaker 2  1:21:47  
+setter method that you guys, we did, year make and model, I think,
+
+Unknown Speaker  1:21:52  
+uh, year make and model,
+
+Unknown Speaker  1:21:56  
+year make and model, anything?
+
+Speaker 1  1:21:57  
+Anything right? I'm just going to write one right. So let's do color. Is color our one of our attribute, yes. So let's just do one, and you can do the same thing for other. So you can say just going by this convention that they have shown here. I'm using that underscore convention here, as I said, the other convention you can also use is this set color with a C upper case, or you can stick to this convention. Both. Convention is absolutely fine. And just like your getter methods, also here, you have to provide the self. But then, unlike getter so when you are declaring the getter methods just self is fine, because you are not going to write any value with this self reference. You are basically reading a value and returning it like, return color, return here, return engine. But when you are going to set something in addition to the self object or self reference to the self, you have to actually provide a variable that you want to apply to that method, apply to that property of the object. So here we are going to change it. So let's call it another variable. Let's call it new color. So that is the definition of my setter method. And here we don't need to return anything, because this is a writing method, not a reading method, right? So all we have to do is self dot color. So basically, I'm overwriting the self dot color with the new value that the color of this function is going to pass, which is new color. So I say new color, and that's it.
+
+Unknown Speaker  1:23:51  
+So now
+
+Speaker 1  1:23:56  
+here initial color was part blue, so pass the updated car information. So all I have to do is I have to take this car, car with a lowercase c, because uppercase C is the class, lowercase c, A R, car is the object. Now we have to do car dot,
+
+Unknown Speaker  1:24:19  
+set color.
+
+Speaker 1  1:24:23  
+Let's call it something like ivory white. Now everything else is the same. Now, if I run the program, what I expect to see is in these set of print outputs, make, model, body, engine, your everything will be whatever is provided here, except the color. Instead of fall blue, it will print the new color, ivory white, because I have already changed that here right before I go to the print. And if my code does that, then I'm good. So. And you can repeat that for however many methods, right? But the idea is, so let's run this and see whether it provides the right output. Yep. So you see the last line, it says color is ivory white instead of quad blue. So that's all there was to this activity. Question. Activity. Yeah,
+
+Speaker 9  1:25:26  
+so the the prompt right above the car, dot set underscore color says prompt the user to change the three parameters. How would we do? Would we just do a regular input statement, map it to a new variable and then put the new variable where you put ivory white.
+
+Speaker 1  1:25:44  
+Okay, so you if you want to do it that way, so what you can do is, so that's actually a good question, so if you want to make it this way, right? So you don't you, let's say first print everything that was already there, and then you can say corner set color, and instead of passing ivory white input
+
+Unknown Speaker  1:26:09  
+and then provide a prompt,
+
+Speaker 1  1:26:12  
+let's say which color Would you like to repaint your car something like that, and you are basically grabbing that input and setting that as a color. Now let's print your new color. Your car is now painted in here. New color. So now, if you run this, it will first show you the original color that the car came out of the factory, which is called blue, and then it says, Which color do you want to repaint your car? Let's say red, and it says your card is now painted in red. So that demonstrates that how your object is being changed in response to a user event, right like which is an input. So
+
+Unknown Speaker  1:27:26  
+any other question.
+
+Speaker 1  1:27:36  
+Okay, so I hope up to this part was clear to everyone. So that's that adding methods to classes we have already done this
+
+Unknown Speaker  1:27:50  
+encapsulate the related actions together.
+
+Speaker 1  1:27:54  
+Yeah. So get Mac, my car, current Mac. Um. Uh, yep, when we do getter method, we just do self dot, whatever property that you want to return. We have already covered these. And now, as part of this activity, we covered manipulating the attribute of an instance using the set method. We set a new make, model, color, whatever you like to and then this is the activity that you just completed. I basically skipped one activity and then made you do the second one. So up to this part, we are covered.
+
+Unknown Speaker  1:28:33  
+Okay, let's move on.
+
+Speaker 1  1:28:37  
+We are going to take a break, but let's do one instruction, instructor demo, and then we are going to take a break, and then we'll come back for another activity. Okay, so the next thing we would like to see is how we can store the classes as modules right now. Again, think back to that ATM example from the last class, where in the final state of the program, we had all of these withdrawal, deposit everything was stored in different files as modules, and then we basically did an import of those modules in our main program file, and then made use of those modules there. That is the same idea that you should do whenever you are doing this kind of object oriented programming. Because presumably, if you are deciding to adopt this object oriented programming style, you are creating something not just type program like this, you are creating something that is more complex than this. So it is always good practice for the organization of your program to write those in a separate file as modules, and then invoke these modules by importing How do you do that? It's very similar to what. We saw in last week's class, you basically have a different Python file. Earlier we had a python file where we are defining just the methods like make deposit, make withdrawal. Those methods here we are having a different file. Inside that file, we are having the class and all the attributes and methods of that class inside that different file, which is our library file. Now in the main file, we are simply doing an import of this car class from this library file called car. So here, when you say, see from car import car, this first word car refers to this file car.pi, and the second word car refers to this class named car that is defined inside that car file. And these two names can be different. There is no reason that they too have these two have to be the same. It's just in this example, they happen to be the same. Now, once you do this in your main method, in your main method, it is very clean, because here all of the internal details of the car is hidden from the actual program inside this car library, all you are doing is importing it and then using the constructor to create a new instance of the object and then do whatever operation that you want to make on that object. It's a very clean way to separate your internal details into a separate library file. So if you look into these two files, the one that we are showing here in the slide, so this is a file. If you look in here, look in the left hand side, right we have this file name car, dot pie, and inside here we have only one thing called class car, which I just collapsed. If you extra expand it, you will see all of these in it, method and all the Get set, all the methods are there. Everything is encapsulated inside this car class. So all of these lines of code, right? These 70 or 80 lines of code is now my library. Once this library is written, set aside, then I can focus my attention to actually do what I set out to do in the first place, which is creating an object of car and then printing, changing printing, or whatever it is we want to do, we don't have to worry about what the car class behavior should be, because they are already defined here. We are simply importing it from here.
+
+Unknown Speaker  1:32:57  
+Make sense.
+
+Speaker 1  1:33:01  
+And another thing I'd like to show you, as I said, that these name of this file, car does not need to be same as this car. To do that, I'm going to change the name of this file just to prove that this name does not need to be the same. So the file where I'm writing the car class I'm calling the file vehicle, so vehicle.pi now has a definition of a class named car. Now with that, how do you think this import statement should change? Now the moment I change this to vehicle. You see here in our main program, there is a squiggly yellow line appeared. It says, import car could not be resolved. Why? Because there is no file named car in this folder, and VS code is detecting that, and this is your problem.
+
+Unknown Speaker  1:34:11  
+So how should I change that?
+
+Unknown Speaker  1:34:15  
+I just have to say from vehicle,
+
+Speaker 1  1:34:20  
+and now see that quickly, line is gone. So now the car class is defined inside the library, which is named vehicle, which is totally acceptable. And now this program will run
+
+Unknown Speaker  1:34:35  
+without any problem here, right?
+
+Speaker 1  1:34:38  
+And then you can provide the input and all of that, which I'm not running right now. I'm just going to kill the program. I just wanted to show you that that actually works.
+
+Unknown Speaker  1:34:54  
+Question, do.
+
+Unknown Speaker  1:35:03  
+Are we all good?
+
+Unknown Speaker  1:35:10  
+Sounds good?
+
+Speaker 1  1:35:12  
+Okay, before so we are going to take a break, but I just want you to show that example of that one of my previous projects. Remember I was showing you earlier, there's a lot of Python coding there, and I just want to show you how I had restructured. I had structured the libraries in that program. So in that program, I had this folder called layers. So these layers are basically all the libraries where we have stored, I have stored in that and in this layer. So you see that I had a folder named model, and then in this model, these were my different entities. So this is that example that I was referring to, that police training report that program, and all the entities of my program, which is officer training phase reports, scorecard scoring dimension user. So these are all my domain object that that is relevant to that particular business case that I was implementing in that program. So what I chose to do is each one of these is a class. So officer file has an officer class, report file has a report class, and so on. So just, I just wanted to see how the organization should be done for a large, complex program, right? You have multiple libraries defined in multiple different files, and sometimes one of these files will use library or class from other files. For example, when I'm doing a report file, this report class actually uses other classes, like officer, event type scorecard. So here inside my report class, I am importing other classes here, because when I am doing these different things, I'm actually using objects from these other classes. Now all of these things inside the model. One thing you can probably note that there is no behavioral method in here. It's all just declaration of the properties, no behaviors. This is also another style that you have to maintain for when you write large program that sometimes it actually makes sense to say, do even more segregation between your class behavior and plus properties. So in this case, what I did is I had this, another library called handler. So these handler is basically where all the actions are there. Now for each of the model that I had here inside the model library, I had a corresponding handler in the handler library. So here you see I have an officer class, and that tells me what are the different attributes of an officer, which is bad, ID, Name, rank, date of birth, and so and so. And then in the handler class, this is where all my deaths are. Insert officer, view officers, detail. Officer, right? So all of this handler, I have put it in a different class to make the code even more modular and manageable.
+
+Unknown Speaker  1:38:38  
+Okay, so this
+
+Speaker 4  1:38:40  
+is reason why you imported star instead of just importing the whole class,
+
+Speaker 1  1:38:47  
+because I know that I'm going to use everything inside that, right? But why not just model model dot zone? Oh, that's just because if I just do import model dot. Officer, wherever I'm using officer, I have to say, officer, dot these. Officer, dot that. But if I do import from officer, import star, then I don't have to use this officer term everywhere. That's all.
+
+Unknown Speaker  1:39:14  
+That's very helpful. Thanks.
+
+Speaker 2  1:39:17  
+So this may not be relevant, but what's in the init.pi, files that are in each one of those folders.
+
+Speaker 1  1:39:23  
+This is something that I think I said, pasted this line of code. This basically tells you so, this is telling you, telling Python, that there is a library in this folder that has this name. So essentially, what it does is it uses, so don't, don't read into it too much. But the idea is that actually, let me compare this with your thing. So when we have our our Where did it go here? So when we. Have this vehicle and car data solution. So the reason I can say from vehicle import car is because your vehicle file is sitting in the same folder as your Python program, which is car data solution.py, that's why I can do this. If it's in a different folder, you cannot directly do it, then you actually have to put the corresponding location of where that file is, that folder location. So you have to import the OS library and then basically create a basically what is called the relative path from this folder to wherever folder your library files are stored now, in this case, by having this init dot file sitting at that package folder level, you basically make sure that wherever you are using these you don't have to do that, because this code actually does that for you.
+
+Speaker 1  1:41:01  
+And in this particular case, it is needed because these are going to be run from completely different like it will be basically loaded very differently. So the way it does is all of these code inside this layer folder, this basically gets zipped into one big zip file and that gets uploaded into the cloud container that runs this program, and then the user supplied port that you will be running, where all of your business logic would be, they will be actually going inside this thing called lambdas, and this is where the input output and all of the user interaction is going to happen. So here I am, the reason that I'm being able to do model dot officer, import star, even though there is no model class here in this folder, is because I had that initat pi sitting there in that model folder where all my models were stored.
+
+Speaker 1  1:42:01  
+But you don't have to for your purpose. You don't have to worry about that right now, like, even if, let's say, during the course of this boot camp, if you decide to do a project, like, kind of a full blown project, where you were actually creating a complex program with all these different classes and methods, it is okay for you to have them under a single parent folder, so you don't have to do this kind of interaction to a completely different part of your file system or memory at any time. So okay,
+
+Speaker 1  1:42:35  
+okay, so that was that. And then we are going to take a break, and then after the break, we can come back and we can do the next activity. So we basically have
+
+Unknown Speaker  1:42:50  
+how many more activities, right? So we did.
+
+Speaker 1  1:42:54  
+We completed activity number four. So then, after the black break, you will do the activity number six, and then we'll talk about inheritance, and then we'll do one more activity. Okay, so let's take about 10 minutes break. I hope that's fine with you guys, and come back at 840 here what you have been given is this file called bank account dot i, and this is basically another step with that bank account that we were working on in the last class. So this is a object oriented version of that bank account, right, which are the kind that I was alluding to towards the beginning of the class. So you see how this class is written. So we have a bank account as a class, we have an init method, which is the constructor. And the way that constructor is written is, when you create that account in the first place, you have to provide some kind of a balance, which kind of makes sense. You are opening a bank account, even if it's a zero balance, like you pass a value zero there, right, or whatever value you pass. So you open a bank account with the initial balance. And then there are two behaviors, balance is a property, and then there are two behaviors that are modeled here in this class. One is called deposit. What the deposit does? It expects one variable amount, other than the self. Of course, self is always there, but when you are going to call it from your main program, you have to call this with the one variable called amount. And this method will then basically take the balance and then add the amount to it. You see this plus equal operator. It basically says, increase the balance by this amount. So if your initial balance is they say $100 and you do a deposit. Of 10, your new balance should be 110 and then there is another behavior called withdraw. You also provide an amount there, and the operation it will do is minus equals, which is basically deduce that amount from the balance. But there is a check here, if the amount that you are passing to the withdraw, it happens to be greater than the current balance that the account has, it will not let you withdraw. Instead, it will print an error message saying insufficient funds, which also makes sense, right? You cannot withdraw more money than you have in the account. And then finally, to check the balance, you have a getter method that basically returns just the balance. So this is a simple bank account class, and then you are given a banking dot Python file where you have to import the account. Sorry, yeah, import the bank account here, and then create a new instance of the bank account. And here the code is written for the prompt, like how much money you want to deposit. And then here you have to write the code to deposit that money, and then display the balance these two lines. And then the prompt is added to asking how much money you would like to withdraw. And then here you will write the code to withdraw the money and then print the new balance. Again, that's all. Essentially, you have to write, like, literally, five lines of code here. Okay, so let's get into the breakout rooms. And I think for this 10 minutes should be good enough. So, Karen, if you can recreate those breakout rooms for 10 minutes, I
+
+Unknown Speaker  1:47:25  
+Okay,
+
+Unknown Speaker  1:47:27  
+how did you guys do?
+
+Speaker 5  1:47:32  
+I keep not reading and then rewriting the code again.
+
+Speaker 1  1:47:38  
+But were you able to get it? Finally, yeah. Anyone had any particular issues understanding the instruction?
+
+Unknown Speaker  1:47:51  
+I didn't understand the instructions at line 17.
+
+Speaker 1  1:47:56  
+Instruction in line 17, yeah, you're in the class file right now. Oh, okay, so this one,
+
+Speaker 2  1:48:06  
+no, it's actually sorry. I didn't realize I added code. It's passed the user's pay to the deposit method using the instance of the bank account class.
+
+Unknown Speaker  1:48:17  
+Yeah,
+
+Unknown Speaker  1:48:20  
+it's just say, dot withdraw, basically.
+
+Speaker 1  1:48:27  
+So let's, let's actually review this. So first import the bank account class from the bank account file. So what did you write here? Line number two, where my car cities. What is it? What is it you are going to write from
+
+Speaker 2  1:48:43  
+bank account, import bank account. Yeah, correct,
+
+Speaker 1  1:48:48  
+from bank account, import bank account. So everyone did this, yes, cool. So then the next actually use asterik next to import. So sure you can do that. But if you do that, then you have to do bank account. Dot something. Wherever you do that, I'd use it, right. Okay. So then in here, create an instance of the bank account and set the user starting balance. And the starting balance is basically whatever you are getting from this input. Convert it to a floating point number. So what code will go here?
+
+Speaker 2  1:49:37  
+I just, I just called it new underscore, bank account equals bank account, parentheses, starting balance,
+
+Speaker 1  1:49:45  
+sure. So let's call it My Account equals, instantiate a bank account with starting balance. Okay. Okay, then you have another prompt, how much were you paid this week? And then, essentially, that's what is going to be deposited in your account. So what code you will write here,
+
+Speaker 7  1:50:17  
+my account dot deposit. And then A and not brackets, but parentheses or not, yeah, parentheses, yeah,
+
+Unknown Speaker  1:50:29  
+yeah, you're right.
+
+Unknown Speaker  1:50:33  
+And then in here,
+
+Speaker 7  1:50:40  
+print, and then parentheses, quote, your current balance is dollar sign, and then end, quote,
+
+Unknown Speaker  1:50:52  
+comma, format,
+
+Speaker 7  1:50:56  
+yep, parenthesis, account, get balance.
+
+Unknown Speaker  1:51:00  
+Current balance is
+
+Speaker 1  1:51:04  
+basically you are going to write my account right. Dot get balance.
+
+Speaker 7  1:51:12  
+I put format and then put my account. Dot get balance in parentheses.
+
+Speaker 1  1:51:22  
+Okay. Sure, who can do that? So you did my account dot get balance. So you added a format here, right? And what did you use the format for? Exactly No.
+
+Unknown Speaker  1:51:38  
+Look online 12. That's the that's the way that
+
+Speaker 1  1:51:40  
+oh, it actually says, with the balance and format the amount to two decimal places. So what does
+
+Unknown Speaker  1:51:47  
+using an F string? So it's not
+
+Speaker 1  1:51:53  
+going to work that way. I think it will still work. Yeah, you're right. It will still work. This is just another way of doing the same thing that we have been doing before. Point 2f right? Point 2f that
+
+Unknown Speaker  1:52:11  
+get balance is a method, right? So you need the parentheses,
+
+Speaker 1  1:52:13  
+oh, sorry I missed that. Get balance, yep.
+
+Unknown Speaker  1:52:19  
+And then it says, withdraw.
+
+Speaker 7  1:52:22  
+Can I ask you a quick question? Yeah, so you put format my account, get balance all of that. You put it in brackets. I didn't put it in brackets. Does it matter that I didn't put it in brackets?
+
+Unknown Speaker  1:52:39  
+I did it similar to two lines up,
+
+Speaker 1  1:52:43  
+you did similar to two lines up like this.
+
+Unknown Speaker  1:52:49  
+So the noise using an F string.
+
+Speaker 1  1:52:51  
+I am using the same thing as here, except I'm using this F string. So now this whole thing is inside this pair of curly braces. Okay, do the same thing, but the format is still within brackets, within parenthesis here, as you see, okay, that is same thing as what I have done here. My whole format thing is inside this, because I am using an F string.
+
+Speaker 2  1:53:17  
+So I have a question, isn't that.to F going to print a literal.to F, rather than formatting it. Because I had i colon comma dot 2f and I don't see a colon there,
+
+Speaker 1  1:53:29  
+because that is a different way of doing it. That is, you can do it for that. You don't, oh, format
+
+Speaker 2  1:53:36  
+function. I didn't use the format I see. Okay,
+
+Speaker 1  1:53:39  
+there are many, many ways of doing this printing, so as long as he gets the job done, right, okay, so then you are basically asking how much cash you like to withdraw, and then what code goes here,
+
+Unknown Speaker  1:53:55  
+I count dot withdraw.
+
+Unknown Speaker  1:53:59  
+Parent disease, cash,
+
+Unknown Speaker  1:54:02  
+withdraw cash.
+
+Unknown Speaker  1:54:06  
+And then finally,
+
+Speaker 1  1:54:12  
+you can add another print statement, which you can probably just copy paste, right? Yeah,
+
+Unknown Speaker  1:54:21  
+so that's kind of what you wrote correct.
+
+Unknown Speaker  1:54:29  
+Let's see if this work
+
+Speaker 1  1:54:32  
+enter your starting balance. How much were you paid this week? So now my new balance is 120 how much you would like to withdraw? That's a $5 and now my new balance is 150 Oh.
+
+Speaker 1  1:54:53  
+Okay, so I hope everyone got that right. It should be clear. I. Okay, let's move on to the last concept of the day, which is basically inheritance. So what does inheritance mean? It basically means whatever your parents own. As a child, you inherit just like what it means in plain, simple English, right? So where, if you have a parent class, and then parent class have, let's say, five properties and 10 behaviors, if you create another class which is extending from the parent class, then that sub class or child class will inherit all the attributes and behaviors from the parent class. An example, or example of that is this, where you have a class called car, and it has the attribute like, make model color, well, Mac, model, body, engineer, color, all of that, which is on the left hand side of the screen. And then you are creating another class called plus extras. And you see the difference in this way of creating a new defining a new class is when you are defining a class like our party now we have only said class and then the name of the class. Here I'm saying class, name of the class, and then within the parenthesis, I am passing the name of another class. So these other class now becomes the parent of this class. So in this case, the class called car becomes a parent of the class called car extras. And then if when you are writing an init of this method, sorry, this sub class. If you do pass bank model, which is part of your parent class, but then you can also pass other things such as anti theft or extended warranty that are not part of your parent class. And then anything that is part of your parent class, you can do a parent class.in, it, and then pass it up to the parent up the inheritance chain, and anything new that the child class have such as anti theft and extended warranty. You do that on the self of the child with the self of the child plus. So now child class essentially have these, all six properties and then two more. And when it comes to these methods or behavior, if the Parent PLUS have six and six, let's say 12, getter and setter methods, all of those methods will be applicable to the child class object, which is car extracts. And then whatever additionally defined here, those will be available for the child class as well. So if you look into the actual code here,
+
+Speaker 1  1:58:31  
+so this is our car extras class, and the parrot class is in my car class here. So this is my class car, and this is, again, that module thing. So both of these class are defined in a separate module file, and here I have this new class called car extras, where I'm adding 1234, additional parameters here, and then the first six parameters are from parent class. So then I have to do something with all these 10 parameters. So what do I do for the parent parameters? I take those parameters and then call the parent classes in it method here to move it up the inheritance chain, and then the extra four parameters, I add those with the self reference here in this init method itself, and then I add the additional getter methods for my new properties. So now my this class will have six and 410 methods of integer altogether. And then in the main method, I have my car extras, which is an object of the child class. And that's why I'm passing. Make model, body type, engine, ear color. But then I also have four additional parameters, which is whether or not anti theft is installed, whether or not alarm is installed, tint is installed, and whether or not extended warranty is applied. So these four, and then when you print this, you basically get all of these 10 parameters from a my car object, which is a car extract. Even though get my get model, get body, these are not directly defined in the child class. It is still inheriting this because my child plus, sorry, because my child plus derived from the Parent PLUS which has those other six methods. So that's all there is to learn in the inheritance. Now, I had a conceptual question for you guys to answer. Why do you think this technique should be used? I uh, like, think of some scenario that will prompt you to use this inheritance of classes.
+
+Speaker 3  2:01:11  
+Yeah, modularization and, like, having everything at one place may confuse So, inheriting from,
+
+Speaker 1  2:01:21  
+yeah, it's basically the that same principle called D, R, Y, do not repeat yourself, right? So wherever you have a case where you have basically, let's think about this account cases, right? In a bank account, an account is an account, but then you can have a settings account, you can have a checking or deposit account, or you can have some kind of a brokerage account. And depending on what these accounts are, there are some commonality across these accounts. For example, all of these accounts will have a balance. All of these accounts will have a, let's say, account holder name and stuff like that. But then, depending on what type of account there is, that is, the balance may or may not be used exactly right. Like, for example, in a brokerage account, there might not be a balance. Instead, there would be, like, kind of stocks that you hold and how many units of stock you hold, because it's a brokerage account, you might not need a cash balance, right? It's just a stock, stock and holding account, whereas in a deposit account, it would be basically the, let's say, the future value of the deposit whenever the deposit comes mature, whereas a regular checking account, it will be just a balance. So if you have a scenario like this, then if you want to write completely three different classes, you can do that. No problem. Your program, fine. But now think about if there are five properties that applies across all these three kinds of account. Now you are creating three classes, but then you are repeating these five properties in all three classes, which basically goes against the dry principle, which is, do not repeat yourself principle.
+
+Unknown Speaker  2:03:13  
+It's gonna say. What's
+
+Speaker 4  2:03:15  
+interesting is that, I mean, the instructions say to import car and car extras, but you didn't need to. You just imported car extras, and then you got the car parent class for free by just calling car extra. So you got everything that came with car you didn't
+
+Speaker 1  2:03:29  
+Oh, yeah, yeah. That's kind of that's neat. Yeah, yeah. It should not be needing, well, you will be needing to import car if you also happen to have the need to also, let's say, let's call it a plane car. If you want to do that, then you will need that you see. Now, if I'm when I'm saying car, it's showing me a squiggly line. If as long as you only are creating a object for the child class, then you are good with importing the child class. But if you have to have the need to create object for both parent and child plus, then you have to import both, right? So then you have to from power data, then you have to provide R, comma, car extras, and now the squid line is gone. This, by the way, actually shows you another thing. So with the from import statement, you can have multiple things imported by common. I mean, sure you can do just say star. That's one way. But if these library card data happens to have 20 different classes, and you only need two of them, it might actually make sense and make your name space cleaner if you just import what is needed, but you can import one or more or with a wild card. Our asteroid that will import everything.
+
+Speaker 1  2:05:07  
+Okay, so then we have just one last
+
+Unknown Speaker  2:05:16  
+activity to do,
+
+Speaker 1  2:05:19  
+which is basically kind of the example I was just alluding to, where you have a accounts file, and then there are two kinds of account. So you have a settings account and you have a CD account right the deposit account, and the savings account does have a balance and interest, but then you are adding a CD account which extends from savings account, and then it adds one more method, which is Get month. And then, obviously, you also have to do the init accordingly, right? So in the preview, sorry, in the in the instruction, it tells you that create a savings account with balance and interest, and then get balance, get interest, of course, the getter method, and then Siri inherits everything, but then you have to add a month parameter additionally and have the corresponding getter method, and that's about it. And then you have these account inheritance now this is where you are basically kind of similar to the last activity. You will import these classes, and you will add the prompt to take the balance interest rate, and then then create an instance here with the balance, and then set the balance with the setter method. And then create an instance of the Chad other child class, which is CD
+
+Unknown Speaker  2:07:07  
+and then display all this data.
+
+Unknown Speaker  2:07:13  
+Okay, was there a question
+
+Unknown Speaker  2:07:16  
+before we go into breakout room? I
+
+Speaker 1  2:07:23  
+Okay? So if not, I know we have little less than 15 minutes left, so this will go a few minutes over by the time you come back and we do a quick review, but I hope that is okay with everyone to get into a 15 minutes breakout room, handle this assignment quickly, and then come back do a quick review, and then we can call it today. Okay, so, Karen, let's open the breakout rooms please. Yeah.
+
+Unknown Speaker  2:07:53  
+Did it go well?
+
+Unknown Speaker  2:07:59  
+As well as it could.
+
+Speaker 1  2:08:01  
+Okay. Let's do a quick review here, starting from the accounts file. So what is it we have to pass in the init method here,
+
+Unknown Speaker  2:08:21  
+self comma
+
+Speaker 1  2:08:24  
+balance, balance and comma interest, comma interest, and then we have to basically set those two things right, correct. So we have to do self dot balance equals balance and self dot interest equals interest. Cool. The next one is pretty simple. Get balance. What are we returning here?
+
+Unknown Speaker  2:09:10  
+Self dot balance,
+
+Unknown Speaker  2:09:15  
+and then get interest the same way
+
+Unknown Speaker  2:09:19  
+return
+
+Unknown Speaker  2:09:22  
+self, dot, interest.
+
+Speaker 1  2:09:26  
+Oh, and now that was our parent class, savings account, right? This class does not extend anything. This is the parent and then the CD account, which extends the savings account. So here what we are going to pass. So so we have to pass the whatever we were passing in the parent class, which is balance and interest. And then so. There is also months Right, correct. And then we are calling the super class constructor with
+
+Unknown Speaker  2:10:10  
+self,
+
+Unknown Speaker  2:10:12  
+balance
+
+Unknown Speaker  2:10:15  
+and interest.
+
+Speaker 1  2:10:18  
+And then, since this is a subclass. So then we have to create a new property here, which is months, which will be months. Okay? Now, one thing I wanted to show you, and thanks to Karen, she reminded me while you guys were doing it. So you see how here the kind of a placeholder that kind of prompted it to use super plus name.in it, there is actually another better way to pass these to the Parent PLUS constructor using a special function called Super. So when you do pass super, then you don't have to pass use this self. You just do super and call it with balance and interest. So these two lines will do the same thing. If you come in this line out and just using super it will produce the same effect. So the super keyword specific, or super function specifically, involves the Parent PLUS aid function.
+
+Speaker 6  2:11:34  
+But now just a quick question on that super is it? Why do we use the balance comma interested? Because balance is right after self? Is that? Why you're using that? Why is it not interesting?
+
+Speaker 1  2:11:50  
+So you have to pass the same way as the Super plus constructor expects it. Okay? So this order here has to be the same order here.
+
+Speaker 6  2:12:00  
+Oh, the symbol, okay, that makes sense. Thank you. Is that
+
+Speaker 3  2:12:03  
+I don't think that's same way of super. Try run it.
+
+Unknown Speaker  2:12:11  
+Oh, do you think I made some mistake here?
+
+Speaker 3  2:12:13  
+Yeah, I think, unless there's something I don't know, super, if you put it like that, I don't think that work. Usually it's like super, and then just open and close parentheses. Dot underscore in it, etc. Instead, it says super with parentheses instead of savings account.
+
+Speaker 1  2:12:33  
+Let's see, okay, so let's, let's finish the code, and then maybe so let's do this. Return self, dot months here, right? And then we move on to our account inheritance, right? So in account inheritance, what are the things we have to do here? So first you have to import so we have to do from accounts,
+
+Unknown Speaker  2:13:04  
+import
+
+Speaker 1  2:13:08  
+savings account and CD, so we imported that and then from the user to basically you. Uh, savings balance and interest rate so that, and then you have to create a variable for savings data, and it is of the Parent PLUS type savings account. And there you have to pass the two parameter that you captured from the user input. And then you prompt the user for CD, balance, interest rate and months. So three things. So let's do these three prompts here, right? So three prompts here, and then we have to create an instance for the child class, which is CD. And here we are passing CD balance, CD interest and CD maturity. That's pretty much it. And then print statement are already done, provided to you. Okay, I hope you guys all did it this way.
+
+Unknown Speaker  2:14:50  
+Anything anyone done differently?
+
+Unknown Speaker  2:14:56  
+That looks good.
+
+Unknown Speaker  2:14:58  
+Okay? So. Let's run it.
+
+Speaker 1  2:15:03  
+Okay, what is your savings account balance? 100 APR for savings account. Let's say five initial CD balance. Let's say 500 APR for the CD account. Let's say eight and length of months, let's say 12. Ah, it says super argument. Word must be a type, not float. You are right.
+
+Unknown Speaker  2:15:34  
+So what did I do wrong
+
+Speaker 3  2:15:35  
+in parenthesis is actually like, more like the name of the typing the class and you don't even use it, so instead, just do super open and close parentheses.in it isn't that.
+
+Speaker 1  2:15:56  
+Hang on, if I do it that way, then I have to somehow pass those two variables, right? Yeah, yeah.
+
+Speaker 4  2:16:02  
+Do basically what you did on savings account, but you just don't have self so you say.in, it, balance.
+
+Unknown Speaker  2:16:07  
+Oh, okay, that's what,
+
+Unknown Speaker  2:16:13  
+yeah, yeah, in it,
+
+Speaker 10  2:16:15  
+and then parentheses, yeah, that's that should be enough.
+
+Unknown Speaker  2:16:18  
+You just don't need to sell
+
+Unknown Speaker  2:16:22  
+this. Too, yeah, yeah,
+
+Speaker 5  2:16:24  
+did you type self for that first argument? If you're using super
+
+Speaker 10  2:16:28  
+I don't think you need to pass the balance and the interest.
+
+Speaker 1  2:16:33  
+Yeah, you do. You need to. You have to. Otherwise, how the Parent PLUS, know, right, okay,
+
+Unknown Speaker  2:16:40  
+parent class, otherwise, have no way to know.
+
+Unknown Speaker  2:16:44  
+Yeah, I did a quick test. You need to. I'm sorry
+
+Speaker 4  2:16:50  
+I said I did. I did a quick test without balance and interest, and you definitely need balance and interest. Yeah,
+
+Unknown Speaker  2:16:58  
+parameters for that function do,
+
+Speaker 1  2:17:04  
+yep, that's it cool.
+
+Speaker 1  2:17:14  
+Okay, so then that is it, okay. So I'd suggest you probably have already done a review of the material for the week. This one what? Hang on this one week third, right? So fourth week material, which is pandas, so please do a self review, if possible, before you come to today's tomorrow's class, we are going to start two week long journey understanding pandas and what pandas is just a quick one liner preview. Pandas is basically a spreadsheet within Python. So essentially, whatever you do in Excel, you kind of do the similar kind of stuff, except with much more control in your hand using the Python code. Okay, so that's what we'll be learning for next two weeks before we break for the holidays,
+
+Unknown Speaker  2:18:17  
+six more classes.
+
+Speaker 5  2:18:19  
+I have a question about, yeah, like, how the classes are working in pipeline. I was like, that's, like, curious, because I know in like, C Plus Plus, you can, like, set aside, like chunks in memory by, like, declaring a class and, like declaring types in it, because then it'll block out, like, the memory that's the size of all those types. But I was, like, printing out. I like, did like sis, dot get size of int and get size of float, and it prints out, like 408 for each of them. But when I, like, declare a class of, like, two variables inside of it for in float, it like, and then get size of the class, it's like 48 Okay,
+
+Speaker 1  2:19:08  
+yeah, I think that's because that 48 you were saying. That's essentially the machinery for defining the class. It's probably not showing what is supposed to come in the class. Oh, okay, yeah,
+
+Speaker 5  2:19:24  
+yeah, okay, yeah, just that to do, like, the low level kind of
+
+Speaker 1  2:19:30  
+stuff. So what is your full lowercase? Is that your an object of the class? Okay,
+
+Speaker 5  2:19:36  
+yeah. So I was just, like, instantiating this class. It's just like, two stuff, two things inside of it. Okay, it's like the same. If I then you are
+
+Speaker 1  2:19:45  
+doing a Get Size off, huh? That's an interesting observation. Yeah. So when you are doing the size of that class variable or the instance variable, you. It's basically showing you so the size 48 that basically includes all the methods and parameters that you have defined in the class, not the variable that you have stored. That's what I can think of looking at what you are showing here. Okay, yeah, yeah, that would be a good yeah, add a new method and run this and see if it prints any different No.
+
+Unknown Speaker  2:20:28  
+Is it still printing 48 Yeah?
+
+Unknown Speaker  2:20:32  
+Oh, wow. I
+
+Speaker 5  2:20:40  
+uh, yeah, I don't know. I thought it was interesting. It's probably the some skeleton then, like, what you're saying that like represents it. That's like, chunked out, maybe like it holds its own reference to like the object somewhere else. Uh.
+
+Speaker 5  2:21:02  
+So I'm Yeah, I don't know. I wouldn't trust this get size of function in Python anywhere. It's like, I don't really know what it's doing under the hood.
+
+Unknown Speaker  2:21:14  
+So that was weird.
+
+Speaker 10  2:21:17  
+You tried to, if you create a variable with the four and just initiate the values and see what would be. Yeah,
+
+Speaker 5  2:21:23  
+I thought that maybe do that. That's commented out right now, but
+
+Unknown Speaker  2:21:28  
+you have already,
+
+Speaker 1  2:21:32  
+oh, right, right, right. So you, you haven't initiated with anything,
+
+Speaker 5  2:21:37  
+yeah, so when I load them with values for it's still the same, yes, I guess it doesn't really matter what what you do this function like the reference,
+
+Speaker 10  2:21:48  
+I think it just seems like, maybe it's a pointer that points to something else. Like, yeah, yeah. And like, it doesn't like, associate a memory for that class is just like, for example, I think of points. Oh, right. If you want that variable, you go there. You want that variable size, you go there, and
+
+Unknown Speaker  2:22:07  
+oh, now I'm even more confused.
+
+Speaker 10  2:22:10  
+Oh, my God, right now. Oh, my float. Oh, okay. Is that
+
+Speaker 3  2:22:16  
+not even more confused? What also makes sense when you pass, how you pass things. So when you're passing an object, it's going to pass just a reference to the object.
+
+Speaker 10  2:22:26  
+So I check the size, get the size of number one and see how that would be.
+
+Unknown Speaker  2:22:33  
+Oh, my float. Oh, point. Oh, one.
+
+Speaker 5  2:22:36  
+Oh, it's the size of the type. Yeah, because this, this value is 24
+
+Speaker 10  2:22:40  
+Yeah, exactly the size of the value itself, that's three, four, no, 28
+
+Unknown Speaker  2:22:55  
+Yeah. Anyway,
+
+Unknown Speaker  2:22:56  
+it's an interesting group sensation, to be honest. I
+
+Speaker 10  2:23:07  
+Yeah. So the method itself is 64 Yeah, so
+
+Speaker 5  2:23:14  
+I guess it just doesn't work the same way as it has another language. It doesn't like block this out, yeah.
+
+Speaker 1  2:23:18  
+So I'm basically reading something. It says it will not give you the full memory footprint of an object. It basically always returns a constant size. If you want to do that, then you actually have to do write a recursive function that will actually go through all of these properties of that, and then apply the, Get Size off, and then add it somehow.
+
+Unknown Speaker  2:23:44  
+Oh my gosh. That's awesome.
+
+Speaker 1  2:23:49  
+That sucks. Yeah, that's horrible, yeah, yeah,
+
+Speaker 10  2:23:52  
+this is yeah, yeah. And by then you have a garbage collector, so yeah,
+
+Unknown Speaker  2:23:56  
+never have to worry about it. Don't have to worry
+
+Unknown Speaker  2:23:59  
+Yeah, you that. That's why people, yeah, I
+
+Speaker 5  2:24:03  
+just thought it would might be useful. I was trying to figure that out because I thought it might be useful for, like, when we're doing Panda, we like, import data sets or something. There's, like, a way we could, like, tell what size of the data set we were importing was
+
+Unknown Speaker  2:24:16  
+the file would be your size? Kind of, Oh,
+
+Speaker 5  2:24:19  
+yeah. We could just check the systems. Yeah. So if
+
+Speaker 10  2:24:23  
+you have like a one terabyte file, then, or like one two gigabytes, you need to know, make sure that you have one gig or two gigabytes of RAM available on your machine. Have you guys
+
+Unknown Speaker  2:24:34  
+gigabytes, not terabytes,
+
+Speaker 5  2:24:38  
+like I've seen, I've seen, like models get up to like 28 gigs, but
+
+Speaker 1  2:24:41  
+yeah, so when people do load that large size of data, they don't usually use it in one machine, and that's where your things like your Hadoop or Spark data frame that comes into play, which is like a dynamic data frame. So using things like framework, like Apache. Spark. So then you can actually have a cluster of machines running, right? Well, no, not an ass. No, not an ass. It's basically you have a master node through which you basically send the command to load the data frame, dynamic data frame, and then that node basically manages a set of worker nodes, and these worker nodes basically, so basically all of these data is shared across all the different worker nodes, right? So now if you have 10 worker nodes each with, let's say, eight gigs of memory, now you have a total of 80 gigs, minus some overhead, of course, right? So, yeah, yeah. How do you
+
+Speaker 5  2:25:42  
+okay? Is that? Can you send me a reference for that? Is that like Kubernetes? Or do you, how do you set that up?
+
+Speaker 1  2:25:51  
+So that is a completely different topic. But yeah, so Apache Spark. So I have used Apache Spark in AWS. So in AWS, for example, you basically create like a cluster using like I can remember that I have used a service called Glue, which is basically a large scale data processing library. And when you create an instance of a glue node, you basically specify how many nodes you want and what are the sizes of node, and then AWS manages that in itself. Now, obviously AWS provides this as a managed service, but people who do that kind of stuff, they can actually create their own Python, sorry, Spark instances and manage that whole cluster, but that is basically outside of my skill set to my for my use case. Whenever I needed to use that, I just use managed AWS service, which at that point is a simple AWS API call, and then the AWS controller manages everything, all the complexities, without you having to worry about all you need to do provide is, hey, how many machines you want and what are the sizes of each machine.
+
+Speaker 5  2:27:04  
+Interesting, of course, it's Apache, though everything's an Apache, but everything, okay, cool. Sorry, I didn't mean to take up the rest of the time. Thanks, guys. No no, it's fine. It's fine.
+
+Speaker 5  2:27:29  
+All right, I'll catch you guys later. Next. Bye, okay. Bye,
+
+Unknown Speaker  2:27:39  
+okay, guys, so let's wrap up the day.
+
+Unknown Speaker  2:27:43  
+We'll see you tomorrow.
+

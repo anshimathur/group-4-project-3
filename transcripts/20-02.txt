@@ -1,0 +1,1245 @@
+Unknown Speaker  0:01  
+Natural Language Processing,
+
+Speaker 1  0:08  
+I'd like to do a quick recap of what you guys remember from the last class. So
+
+Unknown Speaker  0:18  
+can you guys help
+
+Speaker 1  0:21  
+remind all of us what we learned in the first class of NLP. So basically, let me phrase the question this way, right? So natural language processing is a way for to train the machine learning model to understand the natural language, but in order to do that, we discussed that the text cannot be given to a model just like that, just like a paragraph. We have to go through certain processes, some for to prepare the text. Now we learned about a few techniques, and we talked about other techniques that we are going to learn, which we haven't completed yet, and that's why, even in today's class, we probably are not, at least in the beginning of the class, we are not ready to do the full machine learning yet. So now, with that in context, let's try to remind ourselves what are the techniques that we learned, and why do we think those techniques will be useful? Well, we
+
+Unknown Speaker  1:23  
+remove stop words and
+
+Speaker 2  1:28  
+like punctuation and like spaces, and that's kind of like the start to tokenizing.
+
+Speaker 1  1:34  
+So we basically learned that we have to tokenize the text, right? So, tokenize, tokenization. How is it different than simply doing a Python string split,
+
+Speaker 3  1:53  
+takes out a lot more white space, separates out punctuation for you. You can also do sentences rather than by just just new lines, right?
+
+Speaker 1  2:06  
+Okay, so then, what other function we could use to tokenize the text, other than the string split? I mean, we can start with Python string split to begin with. But what other function that we learned, what are the library we learned
+
+Unknown Speaker  2:25  
+to lemma ties and to use the stemming.
+
+Unknown Speaker  2:30  
+Yes,
+
+Unknown Speaker  2:33  
+so what is stemming?
+
+Speaker 4  2:38  
+You basically just get rid of all of the ING, the ED, all of the other additional words, just bare bottom word, you know, kind of like cutting it off to just whatever the boarding become both root word, yeah.
+
+Speaker 1  2:52  
+So basically, convert all the words to their root form, like where the Think about the linguistic origin of what is the original word, and then based on the Word, depending on the tense, past tense or present tense, or whether, whether the subject, whether it's first person or third person, different form, is derived. So what are the two techniques we learned for that, that we could possibly work, possibly use
+
+Unknown Speaker  3:26  
+angry kind of said already, but stemming and limitation,
+
+Speaker 1  3:29  
+stemming and limitation, yes, okay, so what else do we? Can we do other than stemming and limitation? Is there any other way we can make our tokens more meaningful?
+
+Unknown Speaker  3:47  
+We could use n grams.
+
+Speaker 1  3:50  
+We can use n grams. What would the N gram give us
+
+Speaker 5  3:56  
+so we have unigram, bigram and trigram, each one separating like a sentence, for example, into the first second or third words, etc, kind of boxing them into those so
+
+Speaker 1  4:10  
+basically, it will tell how many times, if it's a unigram, how many times each word is occurring in the total like The body of the
+
+Unknown Speaker  4:20  
+whole text, right? Or the combination of those words,
+
+Speaker 1  4:23  
+for by gravity, combination of each two successive actually, you shouldn't say words. You should say tokens twice, because there is a difference between words and tokens when we are talking about the original text, which is the human language, it is composed of words, when you split it into tokens and you convert it into lemmatized form, remove the stop words. Okay, so we, we forgot to talk about that removing the stop words, because that is also one thing that can basically add noise to the data, which is stop words. You. Because those are just kind of syntactic sugar that holds the language together, but they do not convey any special meaning, so we remove those. So after we do all of these, the pieces of text that we find those are not really words anymore. Those are just tokens, because many of those will not be meaningful English language words like, if you lemme die something, and you look at the output of the limitation that may not be a valid English word, right? So, so we will call it tokens, right? So then we can count the tokens, and we can find how many times each token is occurring in the in the whole body of text, or how many times pairs of two token are occurring in the whole body of space text and so on. Right? We
+
+Unknown Speaker  5:52  
+also learned that there's no such thing as an advert,
+
+Speaker 1  5:57  
+yeah, for some reason, that limitation when we tried with the POS are, it didn't seem to be recognizing it, yeah, so, so all the adverbs are basically even after limitation, it was the original, like the word that it appeared, right? I did find some
+
+Speaker 3  6:19  
+transformations when I was like, looking at it more deeply, but it wasn't. It seemed like it didn't really happen in a significant way.
+
+Speaker 1  6:28  
+Yeah. I mean, it could be that there are other libraries. So these are nltk libraries. Now, the thing is, nltk or scikit learn these are not state of the art when it comes to this type of NLP processing. So if you look through, you will probably find other libraries that can do better limitation compared to the ones that we learned. So if anyone in your research, if you have found a better limitizer, feel free to share what you have found, okay, either through chat or in here. Okay, so that was the previous class. Now the last one, the last point we kind of left the last class with, is counting the number of tokens, right? So in today's class, we are actually going to pick up right from there, where we are going to find something that will help us count how many times a token appear within a text, and also like a compared to compared to the text. We are analyzing how many times the token is appearing in that text versus how many times the token is appearing the universe of all text that are there. So for example, like nltk writers, right that might have 10,000 articles. Right now, if 10,000 article we will see for each of these token given an article that we are trying to process, how many times the token is appearing in this article that we are processing, and we are also going to compare how many times the article can appear in not article the token is appearing in all articles across the whole corpus of text, okay, and let me actually share my screen to talk through this with the slides. Okay, yeah. So basically that is called Term Frequency, inverse document frequency, right? So, TF, idea for short. So, what is Term Frequency? As I said, count of a word in a document. Well, even here they made, I mean this, this thing should not be word. It should be token. Count of a token in a in a document. But anyway, let's say what token we can use interchangeably. Although I would prefer the word, prefer the term token here instead of word, because you are doing this after your tokenization. But let's say, okay, so how many times a token is occurring in one particular document? So that's your term frequency, which is kind of what we did towards the end of the last class, like the count that we did when you are not doing bigram the unigram. That's basically your term frequency, right count of word in a document. So why is that useful? Because if a term appears more in a document, then that term is probably more useful, more significant, compared to the other terms that are occurring less mainly, but something that could be even more useful is COVID. Called inverse document frequency. Okay, so what that does is it basically gives you, so let's say a term appearing a lot of time in this document. Okay, so let's say the term is, let's say I don't know something. Let's say country. So if the world country, or the token country, appears 10 times in the document that you are processing, then that kind of tells you that the term is probably more significant. Probably the article is something about country. But then you also have to look how many times this is appearing in other document within the body of text that you are not immediately processing. So going back to these 10,000 articles that you might have from Reuters, if this word country appears maybe five to 10 times in every document, then probably that word is not so special anymore. Maybe that is just a commonly occurring word that appears anyway.
+
+Unknown Speaker  11:20  
+Right? So
+
+Speaker 1  11:23  
+a word would be more significant, significant if the term frequency is higher for the current document, but your inverse document frequency, which is this ratio the total number of documents divided by the number of documents containing the target word. If that is low, then that means that term or that word, that token, or that word, is more important to this document. If the word is appearing lot of time in this document and all other document, there is nothing great about it. Maybe that's just a stop word, so you might as well just put that word in your custom stop word list and just get rid of it, because A is just a common word. It doesn't matter that much, right? So that's why we need to calculate the IDF also. So TF, IDF is basically the product of these two thing. So TF basically drives up the score, right? And IDF will bring it down if the words occurs in all or many document. So they are kind of inverse to each other. So this is what we are going to learn today to see how to calculate this, right? So the rational behind TF, as I said, it indicates how frequently a word appears. A word that appears multiple time is likely more really relevant and meaningful than other words in the same text. But IDF comes into action when you analyzing multiple document and also what also appears among a collection of documents, it may be a frequent word, therefore not a relevant one. Okay, so basically, the weights is so terms with a low TF, Term Frequency and low but high document frequency, this means what?
+
+Speaker 1  13:20  
+So if the term frequency is low, an IDF is high, does that mean the word is more meaningful or less meaningful? Seems like it'd be less less because not only the word is commonly appearing across all the text that you have, but it's also term frequency in this document is also low, so both way it is less, but the weightage of a word to the machine will be more if the TF is high, but IDF is low, that means that what is, what is something that you need To care about? Now we are talking about all of these things, though, but you will see in the next class when we do that, and you might actually just trying to set the expectation here. So we are learning all of these things, like, how am I going to do this thing? Like vectorization by hand here? But the combination of this week, the last project, the last work that we are going to do, where we are actually going to do a generative AI, where we are not only going to just classify the text, we are actually going to generate texts. So you will see that we don't actually have to do all of this. We are simply going to use some chaos library to do this, right? So understanding this is important, but you will see when we go there, the last activity in the in the next class on the Monday's class, you will see, we are, we are kind of, we are going to have these in the. Back of our mind, but we are rather going to focus on some other architecture of our deep neural network that we are going to do right? So these things are just for your understanding the techniques that you were learning in the last class, in today's class, you may not have to apply all of those. In some scenario, you may have to, but don't think that like counting N, gram counting, P, F, I, D, F, it's not that you don't have to apply that anytime you do an n, l, p, work. Okay, so just keep that in mind. Okay. So with that being said, let's go and look at our first activity. No, not tokenization. Relevance of terms. Okay, so relevance of terms, we are going to look into our Reuters articles from nltk. So in Reuters, we know that these are the different categories that have that are available, right? Do you guys remember how many categories were there?
+
+Speaker 1  16:07  
+90 or something? Oh, 90. Yes, I do remember, actually, 90 different categories, right? But how many documents are there, right? So, documents are remember when you do writers dot file IDs, that gives you the list of all files, which is also documents, right? So if you do writers dot file IDs, you will get a total of 10,000 document now, one thing is, these documents belong to a category. So if you do writers dot file IDs and say categories equal to something, categories equal to, let's say, oops, coffee,
+
+Unknown Speaker  17:01  
+you will get a subset of this, only 139
+
+Speaker 1  17:05  
+but these document to category mapping. This is not a one to one mapping. One document can belong to more than one categories. Similarly, one category will definitely have more than one document. So it's basically a many to many mapping, which you can see. So let me reset that. So that's my all document. So now, if I go through each of these 10,788 documents, and then I am going to do a reverse query to see which categories of Reuters these document belongs to. So for each document, we will say, hey, document ID this and this particular document ID belongs to this category. And you will see there are many documents that belongs to more than one category, like a document about coffee. Could also be a document about business. Maybe it is a document about international trade of coffee, right? It could also be a document about politics, especially given what is happening today, right? So, so you will see that when I run this, you see the first document belongs to only one category. Second document is belong to one category, but a third one belongs to two category, crude and natural gas. Fourth one belongs to six categories, corn, grain, rice, rubber, sugar, tin and tread in general, right? So just to this is kind of a side tracking, but just wanted to make sure that you guys understand that if you are working with Reuters categories, these categories are kind of overlapping because of this many to many mapping between category and documents. Okay, so now we are going to take a one random document from our list of document IDs. Which this one? Right? Which we have 10,788 of those. Right? So we are simply just taking one document. Let's say document number two. So that's our document number two,
+
+Unknown Speaker  19:19  
+Japan to revise long term energy demand downwards,
+
+Unknown Speaker  19:23  
+okay, probably this is from 1980s
+
+Unknown Speaker  19:27  
+when Japan's economic growth started to slow down.
+
+Speaker 1  19:33  
+Okay, so that's our document. So now what we are going to do, we are going to count how many times each token or Well, in this case, we are just using it as is. So we are basically not tokenizing it. We are simply taking that whole document and we are going to use this technique called count this. Sorry, not technique. It's basically a transformer, a scikit learn transformer called count Vectorizer. So there are two things we are going to basically see in this demonstration, count vectorization and tf idea vectorization. So count vectorization basically gives you just simple like your unigram counts. But this is using your psychic learn library. So that means if you are building a psychic learn pipeline these libraries, you can actually put it into your psychic learn pipeline, so that you don't have to do these processing outside manually, which saves you a lot of work, which we are going to see in next couple of activities. Okay, so we did counting also last class, but this time, we are going to do the same count, but using a scikit learn transformer called count Vectorizer. And when you are doing that, you can when I'm initializing, initializing the count Vectorizer, you can actually specify that stop words is English. So what it will do is, well, it will not limit eyes or anything. It will not do stemming or lemmatization, but at least it will remove the stop words and then count the token. So it will give you the count of token minus the stop words that are there in English language, right? I think there are almost like 200 or so stop words are there in English language, so it will give you that count. So just like all transformer or model in our algorithm in scikit learn, you initialize it it, and then you fit it to the data, and then transform the data. Or if you don't want to fit it separately, you just do a combined method called Fit transform, which is what we are going to do. So we are going to take this doc text, which is basically this whole paragraph about Japan's energy demand, and we are going to pass this dark text to here. But notice one thing though we are even though we are passing only one one article, like one essay,
+
+Unknown Speaker  22:12  
+but we are passing these as a list,
+
+Speaker 1  22:17  
+because the way that this count vectorized transformer is written. It is expecting a list of many documents, multiple documents. So that means you could ideally pass all of those 10,788 document in one shot and let it go. You can do that. It will take a little more time here we are passing one. But even though, when we are passing one, keep in mind that you have to pass this as a list, meaning wrap it around with a pair of square brackets. Okay, so that's what we are going to do, and it will basically count all the frequencies of all the tokens, right? So now let's say what it got. So what am I going to get when I do print x?
+
+Unknown Speaker  23:09  
+Okay, so what is it saying?
+
+Unknown Speaker  23:14  
+What is coordinates and values mean?
+
+Speaker 1  23:20  
+This is where first the idea of vector space is coming out. Remember, what is the name of this transformer? It's called count Vectorizer. So basically, the algorithm behind this count Vectorizer is not just counting based on the count and occurrence. It is basically logically putting these tokens in a vector space, in an n dimensional vector space, and it is giving you actually not N, in this case, two dimensional vector space. And it is giving you the coordinates of those like, where this particular word will belong. Like, it is kind of creating that word cloud, right? And based on the importance of the terms, it is spacing the placing the token in a particular position in the word cloud. That's what is doing? So if we want to print the shape, we are getting 181 so basically, I have 81 of these. So what does this 81 mean?
+
+Speaker 1  24:39  
+Can anyone guess the forget about the shape zero, which is basically meaning there is a list. But what is 81 mean? Why is there 8081 81 tokens? Yes, because there are 81 unique tokens there. There could be more tokens, but 81 unique tokens. Uh, some of these tokens are occurring more than once, right? So there are 81 unique tokens that are there in the document now. So now looking at this, it's kind of hard for us to understand. I mean, if we had to fit it in a pipeline, then it's fine. We don't care. But as a human, if we want to see what really is going on, which what is occurring, how much, unlike our last exercise that we did in the previous class, here, it is not immediately clear to us what really went on, right. So what we are going to do, we are going to take the same Vectorizer, which we fitted up here, right, and then we are going to do get feature names out. So when you do get featured names out, it will actually give you all those 81 unique tokens that it found. And that is why this x dot shape had a dimension of 81 because here I am getting all the words, and when I'm printing length of words, I'm getting 81 so it matches up. So these are the 81 unique, different tokens that are there in that essay, in that article.
+
+Unknown Speaker  26:13  
+So far so good. Okay,
+
+Speaker 1  26:18  
+so now, if you want to see how many times each word appears, so you see x when I'm printing X. X is not really a list. It is not really a numpy array, but it is a different data type, which is which is called a sparse matrix. So the sparse matrix is a special mathematical data type. We don't need to get into the details of that. But the reason it is a sparse matrix is that, because when a word is when the terms tokens are getting vectorized, for many of the tokens, for many of the places in the in the vector space, there would basically be nothing. That's why sparse basically mean it's basically sparse, which not dense, right? Sparse is just the opposite term of dense, so it is a special mathematical representation. So we don't need to understand why they have used sparse matrix. There definitely is a reason. But what we need to understand is, how do we get the underlying data out of this sparse matrix? So instead of getting doing X, we can do X, dot, two, array, zero. And then what it will give me is basically these things. It will give you 1111, so most of these tokens here, it basically gives you for this token, how many times this is appearing and so on, right? So you will see most of these tokens are appearing once. Some are appearing twice. Some are appearing three times. There is one particular token appearing eight times and so on. So these are my two sides, the number of words, sorry, the list of words or tokens, and then the their frequencies. Now what we can do is we can put them side by side and create a data frame so we see how this looks like, right? So what we are going to do, we are going to do this x dot two array, and we are going to convert it to a data frame, and as the column names of the data frame, we are going to use this so we are basically going to get a very white 81 column data frame. Okay, and we are calling this bag of words. So this is what we are going to get, a data frame, which is of shape, one row, 81 columns. Now, obviously 81 columns are not being displayed here because of the width, right? I mean, you can display it. There is, what is that data Wrangler, right? So let me do one thing. So that day, I actually disabled my data Wrangler, this one. So if you have this, okay, so now I have enabled this. So now let's see,
+
+Unknown Speaker  29:27  
+no, I might have to
+
+Speaker 1  29:30  
+hang on. I think I have to close and reopen this. Maybe.
+
+Speaker 6  29:34  
+Is there a spot that says open bar in data Wrangler? Right?
+
+Unknown Speaker  29:40  
+Where do you see that?
+
+Speaker 1  29:43  
+No, what that's yeah, you can do that. But what I'm trying to do is, what I'm trying to do is with the data, Angular activated. Oh,
+
+Unknown Speaker  29:56  
+something is going on. I.
+
+Unknown Speaker  30:00  
+I think I'm pushing ideas code too much. Hang on.
+
+Unknown Speaker  30:05  
+Okay. It is getting very slow. Oh, okay. What is going on?
+
+Speaker 4  30:14  
+I think you're in data rank, or what if you go back to the Explorer on the
+
+Speaker 1  30:17  
+top, yeah, yeah. Hang on. I this data Wrangler is I think something is giving me problem. Okay,
+
+Unknown Speaker  30:30  
+so let me reopen this again.
+
+Unknown Speaker  30:36  
+Come on. Please don't die on me. Okay?
+
+Unknown Speaker  30:44  
+Let me restart the kernel So
+
+Unknown Speaker  31:03  
+wow, wow, that took quite some time. Anyway.
+
+Speaker 1  31:19  
+Okay, so let's get all the file IDs, then take only one doc from there, create the Vectorizer,
+
+Unknown Speaker  31:39  
+get the feature names,
+
+Unknown Speaker  31:43  
+get the occurrences
+
+Unknown Speaker  31:47  
+and then print the
+
+Speaker 1  31:51  
+HA. So this is what I was saying. So if you have that plug in enabled, it will actually not truncate. It is actually going to show as a display scroll bar, and you can actually see all the words here. Okay, so these are all the tokens and their corresponding frequencies. Now this is kind of sideways, so remember, we've learned back in the pandas days, we learned a function called melt. So basically, what the melt will do here, what we are going to do, we are going to melt it so that each of these columns will now become a row, right? And we are going to take this word to be a var name. So essentially, when I do this melt, it will basically become a instead of a wide it will become a proper, normal looking,
+
+Unknown Speaker  32:58  
+what is called data frame.
+
+Speaker 1  33:01  
+So now you can easily scroll through and since I have that plugin open, so I can actually see so now remember, there was one token that occurred eight times, and that token now look at this energy, right? So what does that tell you? Now go back and look the first line of this Japan to revise long term energy demand downwards. So, yes, this is an article about energy, energy, and our count vectorization shows that energy is the most occurring, frequently occurring token. Yeah. So now, if the energy also occurs similarly with high frequency in other token, sorry, other documents, then the importance of energy will be diminished. However, if the energy does not occur this high in other document, then the relevance of energy in this document will be higher. So that's what your TF, IDF tell you, right? The inverse inverse document frequency.
+
+Speaker 1  34:15  
+Okay, so this is that. Oh, and then you can also take this and sort it. If you sort it, you will basically get, it's a simple sorting, right? You will basically get most frequently occurring token at the top and then going down in ascending order, so energy demand. So I don't know where this meeting came from.
+
+Unknown Speaker  34:37  
+It should be mitigation,
+
+Unknown Speaker  34:40  
+actually, where is this meeting is coming from? Hang on.
+
+Unknown Speaker  34:51  
+Ah, here, so,
+
+Unknown Speaker  34:57  
+but what about in the original document? I.
+
+Speaker 1  35:00  
+Oh, MITI, Ministry of international. So that's an abbreviation, and since this basically convert everything to lower case, that's why, okay, that's not thinking like that. One does not well, this is where, if you can do entity recognition, then you can say, Hey, these are entities. And then you can do something about it, right, which we will do in in a later activity this class. Okay, but anyway, we basically got all the counting for now, so that's good. So this is one way of preparing these into a data frame. There is another way you can also do it. You can take the feature names from the Vectorizer, and you can take that XP, X, dot two array, and you can convert it. You can Ravel it and convert it into a list. So that basically gives you two same size list, basically. And then you take these two lists and you can just do a PD dot data frame, so that way you don't have to do that melting thingy. But at the end, you are basically going to get that same data frame. So these are just an alternate way of taking the count and converting into a data frame, not super important from a machine learning standpoint, because you're probably never going to do this in your actual pipeline. Okay. Anyway, so that part is done Term Frequency is done like, sorry, huh, term frequency. Now we are going to do TF IDF, which is the term frequency combined with inverse document frequency, which is the more valuable measure of the importance of a token
+
+Unknown Speaker  36:51  
+now, so for that,
+
+Speaker 1  36:56  
+when we are doing a simple counting up there, We could have applied to multiple documents, but we didn't need to. We applied it to only one document, which is the Japan's energy demand document. But when you are doing IDF, definitely you have to find a relative frequency compared to other documents also. So that means you have to applied it, apply it to a group of documents, like a larger group of text or the corpus, because otherwise the IDF does not really have a meaning if you have only one document in your entire universe of documents. So if you we have this 10,788 doc IDs, right, which we saw up there, but that list of Doc IDs just gives you the title of the document, like 12345, something like that. Those titles, those doc IDs, are not actual documents, the document you need to do. To do the document, you need to fetch the document using Reuters dot raw, and then pass the doc ID there, which is what we are doing in this loop. And then that way, if you fetch all of this document and put it in a list, so then this corpus will actually have all those 10,788 articles fetched from Reuters into your kernel, into your Jupiter kernel here, right?
+
+Unknown Speaker  38:29  
+So let's do that.
+
+Unknown Speaker  38:37  
+Okay, not too bad. 10,788
+
+Speaker 1  38:41  
+and then we just printed a sample document just to see. But now this corpus, even though it has still the 10,788 but this is the big list, because each of these item in this list is article,
+
+Unknown Speaker  38:56  
+pretty large object. Now this corpus.
+
+Speaker 1  39:02  
+So now we are going to take this corpus and apply the TF IDF Vectorizer on this. The syntax is same because most all scikit learn transformers work the same way. So you initialize this, you provide the English talk words, and then you do a fit transform. This time, you don't pass one document, you pass that list of 10,788
+
+Unknown Speaker  39:29  
+news articles from Reuters, the whole thing.
+
+Speaker 1  39:34  
+And that would be your fit transform. And that's why it's going to take a little bit of time. But not too bad. For second, it's done pretty fast, actually, right? So now, if I print the X corpus, how would it look like? Any guess, like a dictionary or this? Yes, no, it will be some kind of a sparse matrix, just like how we did. We have to change it to some other format that we know, but if you just print x corpus, so now it is basically saying, so these are your TF ideas. So why this decimal? Because, if you see the formula right, so this is a logarithm of this fraction, and that is the decimal for the different words. You don't know for which words we will know in a set, but we know that this is a vector representation of one token, some token, and this is the corresponding TF IDF, TF IDF score for that token. Okay, so if you do X corpus dot shape, it will tell you that there are 10,788 of these, because that's how many documents we have. But then look at the other shape, 30,627
+
+Unknown Speaker  41:14  
+what does this mean?
+
+Speaker 1  41:22  
+Meaning, these many documents we have in our body. And this is the number of tokens that they have across all these 10,000 documents,
+
+Speaker 1  41:40  
+which is what I'm printing here too. X corpus dot shape is the number of documents. X corpus dot shape zero and shape one is basically the total number of unique words, 30,000 unique words or tokens. Now, similar to our count Vectorizer, we can do a get feature names out, and that will give you actual list of 30,627
+
+Unknown Speaker  42:04  
+tokens. Which are these?
+
+Unknown Speaker  42:09  
+Okay, these are your 30,627 tokens.
+
+Speaker 1  42:15  
+We can also do a x corpus dot two array. Then that will give me all of these in a array format, 10,788
+
+Unknown Speaker  42:29  
+by 30,627 I
+
+Speaker 2  42:34  
+don't know why. I'm not surprised by how low that number is like for I'm surprised by how low, then token, how
+
+Speaker 1  42:41  
+low? Yes, because, because, what happens is, many time a word is reused, right? It's the English language. So how many words are there in English language? Think about it,
+
+Unknown Speaker  42:54  
+about what, 70,000
+
+Speaker 1  42:57  
+so you have almost half of English language already here. So it's not that low if you think from that perspective. Okay, so Okay, so now we have this. So this is a 10,788 is basically your number of rows, because each row represent one document and 30,627 columns. Because there are total of that many tokens. Now each row column intersection will tell you what is the TF IDF score for this particular token in this particular document. That's what the row column intersection will give you, right?
+
+Unknown Speaker  43:46  
+So that's that representation.
+
+Speaker 1  43:49  
+But what we want to see is, for each word, what is the total TF, IDF score across all the documents. So for that, we are going to take this x corpus and do a sum on x is equal to zero. And when you do that, you will get one by 30,627 so basically, what I'm doing is, for each of these 30,627
+
+Unknown Speaker  44:20  
+tokens, I know that I have 10,788
+
+Speaker 1  44:23  
+scores available, because that's how many document we have. So I'm summing up all of them together to get only one value, and then I'm doing the same thing for the next token and the next token. So now that's why I have one value, which is your TF, IDF score for each of the 30,627 tokens. Got it
+
+Speaker 3  44:54  
+makes sense, right? No. So, um, now so you say you have a one dimensional array with. Yeah, 30,000
+
+Speaker 1  45:03  
+items in it. And so those 30,000 items are the words, or they're the snow, or they're both scores, the scores. So they're just the scores. They're just the scores. And we are going to show them. Why is this thing jumping? Or something weird is happening with my
+
+Unknown Speaker  45:21  
+huh? These are just the scores, and
+
+Speaker 3  45:24  
+then the previous cell is just the words. No, it's the words in every this
+
+Speaker 1  45:28  
+is where I just wanted to show you what is the dimension of your x corpus is right? And the
+
+Speaker 3  45:33  
+first dimension is the number of documents, and x is the number of words, unique words, yes.
+
+Speaker 1  45:38  
+Now for each unique word, there are 10,788 scores for all these documents, we are squishing them up with an aggregation function, which is some so that way now we are going to have only one score for each of the 30,627 tokens. So
+
+Speaker 1  46:04  
+So then, when we have that, then we can take this thing, this thing, and Ravel it to a list, and then combine with our feature names out, and then put it in a data frame, and that will look like this. Okay,
+
+Speaker 1  46:33  
+so here remember TF, IDF, the higher it is, that means less relevant that is so vs mean, CTS, 000, said these are all high
+
+Unknown Speaker  46:48  
+TF, IDF,
+
+Speaker 1  46:51  
+but since we have done ascending equal to false, we are getting this way. So now we this is the head now, if you look into the tail part, these are the tokens that have very low TF, IDF, so these are the tokens that have higher importance compared to these tokens.
+
+Speaker 1  47:19  
+Okay, now don't try to read too much into it, like, Why? Why? So some of these I don't even know, like, I think there is some German name or something that kind of converted to this something happened. So I'm not going to go and try to analyze where this came from. But just know, just just trust the transformers that they have done a good job and just leave it there.
+
+Speaker 3  47:48  
+Said, I bet it's a name.
+
+Unknown Speaker  47:51  
+Is this a name?
+
+Unknown Speaker  47:55  
+Maybe?
+
+Speaker 1  47:57  
+Yeah. Anyway, so that's your count vectorization and tf, IDF vectorization. Okay,
+
+Unknown Speaker  48:11  
+any question,
+
+Speaker 2  48:13  
+what's what's the practical usage of that, like in your workflow?
+
+Speaker 1  48:20  
+So the practical use of that that is to convert the your document to a format which is called bag of Word format. So these basically all of these. So here, remember when we just said print x? So this is basically a bag of Word format. This basically tells you, based on these frequencies in your vector space, what is the coordinate of a token. Because, remember, whenever we pass anything to a neural network model or to any machine language more machine learning model. For that matter, it has to be a number. But your tokens, even after all of the work that we have done in the last class, your tokens are still text. We have to do something about it. So what we are doing here is we are converting this into corresponding numbers and the vector coordinate that particular token will get which we are not applying in this activity, which we will later. So that vector quantity that is going to be representing your word in a numeric term. So think about almost like encoding, right? So, so you know how like in terms of like like during first World War, Second World War, right? When, when people like allied force were sending messages to their other, other station, outpost, right? What were they doing? They were simply converting these into some numbers, right? Very naive encryption, and they were sending those numbers hoping that the enemy would have no. Clue what those numbers were. So essentially, here we are trying to do the same thing, converting text to Representative numbers using some logic. That logic is counting the TF IDF score, that's all
+
+Speaker 2  50:15  
+got it. Thanks for that explanation. Yeah. Okay,
+
+Speaker 1  50:26  
+the next one, I think we can. This is supposed to be a student activity, but if you guys would like, it is basically the same thing. If you guys would like, we will just go through here
+
+Speaker 3  50:42  
+and just to confirm, because I think we might have heard you say something different, a high Term Frequency with a low document frequency is a very meaningful word. Is that correct?
+
+Speaker 1  50:55  
+High Term Frequency with a low document IDF, yes, that is correct. Thank you. Okay, so in here you are basically supposed to do the same thing,
+
+Unknown Speaker  51:18  
+except
+
+Speaker 1  51:20  
+with all the articles about money. Okay? Now, if you do writers dot categories.
+
+Unknown Speaker  51:34  
+There are 90 categories there. Remember
+
+Unknown Speaker  51:37  
+now it said,
+
+Unknown Speaker  51:40  
+get all the articles about money.
+
+Speaker 1  51:44  
+How do you get all the articles about money? That means the category name, whatever that is, is it has to have the word called money. So this is money effects and money supply. So in the prompt, it kind of gives you a hint, like, get all the file IDs in the money effects and money supply categories. And in the unsolved notebook that you have, you will see that money effects and money supply is hard coded. I did a little change. I said in my using my list comprehension, I said, Hey, give me for all categories. Retain only the categories if the word money is in category, and when you do that, it will actually retain just these two money effects and many supply, you don't have to hard code it. And then you will have all the file IDs, which is basically your 10,788 file IDs. And then you are going to get all of these. Sorry, filter these file IDs based on whether that belongs to one of these categories, which is money FX or money supply. And then you do the length of these money news ideas that will give you all the news articles belonging to either money effects category or money supply category or both.
+
+Unknown Speaker  53:20  
+So when you run this,
+
+Speaker 1  53:22  
+you see money effects and money supply. So these two is coming from here without us having to hard code it. And then I'm basically in here. I'm doing the filtering out of this 10,788 article. In this activity, they asked you to work with this smaller subset of Article, which is 883, articles. So that's the list of articles we got. We haven't actually downloaded the articles yet. This is just the list of 883, articles. Now, obviously we have to download so in the next cell, they're asking you to use a list comprehension or a for loop to actually retrieve the text for these articles, so the full corpus. So which is using the function Reuters dot raw, you basically go through these, these lists here, this list here, and basically download all the list, all the articles in the list, and just print one random one, and it basically gives you the article, okay? And then rest is, is the same thing you take, take the TF IDF Vectorizer with a stock word of English, because these are hopefully English language, you do a fit transform to what, what is money news? It's a list of actual articles, not just the file IDs, which is this one. And. It so your vectorization is done 0.6 seconds. It took much less because we only have a small subset. And then we are going to get all the words out, using the feature names out, and we are get going to get all the frequencies out by doing a sum on x is equal to x is zero, which is what we saw. Why do we have to do the sum? Because if you just do x dot shape, you will see the first one would be 883, which is as many documents as we have in these two categories. So now we have 883 rows and 707,356 unique tokens, so that many columns. Now we are going to squish these with an X dot Sum that will give me one by 7356, and then I'm converting that to a list and feature names out also gives me the names of those. So then I'm taking these two list and creating a data frame with these two column header, Word and frequency, and I'm done. That's it, right? If you want to sort it by value, you can sort it by value. Obviously these ones would be lowest relevance, because these are
+
+Unknown Speaker  56:40  
+high IDF.
+
+Speaker 1  56:44  
+And then there is another alternate way to create these using the same thing, list, zip, zip, and all of these things, so you don't have to actually look through and memorize any of this code. This This version is actually, I like. It is very simple. You are getting to list here, here, and then you are basically using a JSON structure, a dictionary structure, to basically give a key value pair, where key is your column name, value is your list, and you give this to PD, dot, data frame that creates the data frame. Pretty neat. So
+
+Unknown Speaker  57:23  
+okay.
+
+Speaker 1  57:28  
+Now they are asking you to write a function
+
+Unknown Speaker  57:34  
+that will
+
+Speaker 1  57:36  
+tell you given a specific word,
+
+Unknown Speaker  57:42  
+how many documents contain that word?
+
+Speaker 1  57:49  
+It's not that something that machine needs, but this is just to kind of clarify your understanding a little bit better. That's all.
+
+Unknown Speaker  57:59  
+If I have any word, let's say,
+
+Speaker 1  58:03  
+let's say stock or market or invest. How many documents have that? So they are asking you to write a function to do that. Now, again, as I said, the actual importance of this in your machine learning pipeline that you are going to create is almost nothing, and that's why I didn't want you guys to actually spend time and scratch your head to write this, because at the end of the day, this is just a simple Python function. So what do you do? You create this function where the words are being passed, meaning the query. We are basically passing this word and trying to query these the document to see how many, how many documents this word occurs, right? How many documents this particular word occur? So, how do you do
+
+Unknown Speaker  59:00  
+so?
+
+Speaker 1  59:03  
+These money news IDs, if you remember, what are the money news IDs? These money news IDs is basically 883 documents, but these are just the IDs, not the actual document. So what I'm going to do is I'm going to look through all the 883 list of documents that I have, and I'm going to see
+
+Unknown Speaker  59:36  
+whether
+
+Speaker 1  59:38  
+in all the words that are there in that document. So here I'm doing the fetch of the document just in time and for using the writers dot words, and then I'm looking through that with a word,
+
+Unknown Speaker  59:54  
+and then I'm checking whether
+
+Speaker 1  59:58  
+any of the terms. Numbers that we have passed here does appear in the words in all the words. So term in word, dot lower for term in terms. But there we have to apply a function called any which is a Python built in so that will if it is then I'm going to capture this in my list. And then if I find that list in length is greater than zero, that means yes, in this document, the term does occur, then I'm going to add these documents ID to my result, and then I'm going to do this through all 883, document IDs, and finally, I'm going to pass the result back, and that will tell me that these are the documents that the word exist. That's all so you don't have to memorize these are practice days again. This is not a machine learning skill. That's why I'm just flying through it. Okay. Anyway, so then simple question, hey, how many articles are there in your money category that are talking about yen, meaning Japanese currency? So you can simply use the Retrieve dot fund retrieve docs function that you wrote and pass yen, and it will tell you, it will give you the resulting docs. And then, if you do a length, then you will see 182 documents out of 883, documents contains the word yen. Okay. Okay, how many articles talks about Japan or banks? I think it will probably also be high, yeah, 326 so somehow, in these Reuters news articles, a majority of this is about Japanese market economy, Japanese money supply and stuff like that. How many articles talk about England or dealers? Well, I don't know. Maybe low, no, that's actually high. Okay, I don't know why dealers is grouped here. What if I ask how many articles talk about just England,
+
+Unknown Speaker  1:02:26  
+not that low. 35 anyway.
+
+Speaker 1  1:02:30  
+So, yeah, what to make of these last piece? Nothing. Anyhow. Okay, cool. So the core thing is basically here. The takeaway from all of this is that there is a scikit learn transformer called dfidf Vectorizer. You initialize this. That transformer with the English top word, and you do a fit transform by passing a list of all the articles that are there in your corpus. And then the output of the fit transform gives you a sparse matrix containing the vectorized TF, IDF forms. TF, IDF count of all the tokens across all the documents. That's all even, I'd say, when I'm converting these into pandas data frame. This is, again, also for our purpose. These pandas data frame format is not something the machine need. Machine actually need that original, sparse format.
+
+Unknown Speaker  1:03:50  
+Okay,
+
+Unknown Speaker  1:03:57  
+so in the next activity,
+
+Speaker 1  1:04:01  
+what we are going to do is we are actually going to do a machine learning
+
+Unknown Speaker  1:04:10  
+to classify a group of text.
+
+Speaker 1  1:04:16  
+And this group of text is basically here. This is not from writer writers. So here, what is given is a whole bunch of messages that people have received. So instead of a list of articles, now we have a list of messages, like SMS messages that people have received. And this is a level data set. So this is basically supervised classification we are going to do. So the data set basically gives you your text message, which are these, and for each text message, there is a level that says whether it's a spam message or not. So. So Ham or spam? Ham basically meaning, no, it's not a spam, like it's it's good ham, if not, it's a spam. That's a funny way to say. It's basically binary classification zero and one. Okay,
+
+Unknown Speaker  1:05:18  
+which is what we are going to do.
+
+Speaker 1  1:05:22  
+So how we are going to do it? We can use any algorithm. Remember, we have learned many, many algorithm for binary classification. Can you guys name a few?
+
+Unknown Speaker  1:05:40  
+Logistic Regression.
+
+Unknown Speaker  1:05:42  
+Logistic Regression is one, yes,
+
+Unknown Speaker  1:05:46  
+SVM,
+
+Unknown Speaker  1:05:48  
+decision trees,
+
+Speaker 1  1:05:49  
+decision trees, yeah, you guys remember all of these, so we can use any anything, right? But there is only one little problem. My trading data is a whole bunch of text messages string. When we learned all of those algorithm, our data came in a tabular format where majority of the columns were just numbers and the ones that were not numbers, we were doing either level encoding or one hot and one hot encoding to convert them to numbers. Now we don't have that luxury. Now our x is only one column, but each item in that column is a whole bunch of words.
+
+Unknown Speaker  1:06:35  
+So what am I going to do about it? I
+
+Speaker 1  1:06:46  
+So how many, how many we have? Let's see. Okay, 4825
+
+Unknown Speaker  1:06:54  
+non spam and 747 spams.
+
+Unknown Speaker  1:06:58  
+So about 5500, data that we have,
+
+Speaker 1  1:07:03  
+okay? So basically, this column, text message is my x, just one column, and this is my y, right? So let's do that first, and now we are going to think, Okay, fine. We have x train, X, test, y, train, white and split fine, but my x strain is just one column. How am I going to convert them to a numeric representation? So that's where I think, Blair, you are asking, what is the use of this? So that's where my vectorization will come into play with vectorization. Now I can take the x column and convert that to numeric representation, like I'm going to encode this using some algorithm. We just have to make sure that algorithm is consist consistent all across like, if a particular word right, like any word, let's say like entry. If the word entry is represented by a number, let's say 156, anywhere the word entry appears, it has to be represented by the same number. We just have to be consistent or across. That's it. That's all we need. But even though we are saying that's all we need, but since we are going to use TF IDF Vectorizer to do that, by the algorithm that are there behind TF IDF Vectorizer, make sure that these words however many there are however many 1000s or hundreds of 1000s, they are not going to be assigned a random number. They are going to assign the number that are that is a good representation of that words relative importance with respect to the whole corpus of text. That's why we need to do a vectorization of that, which is my dfidf Vectorizer. So initialize the Vectorizer and fit transform with your training data.
+
+Speaker 3  1:09:18  
+And so in this case, the number of documents is the number of texts. So you're looking for word counts across the number of texts,
+
+Speaker 1  1:09:25  
+yep. So if you do X train, dot, wow. Anyway, fine, and I'm going to print the whole thing. So X train has 3733, by one. Now I'm going to fit transform with X train. So when I'm going to take the output of this, the TF IDF vector, and do a shape, what do you expect? The first dimension of this vector, this sparse matrix, be 732, Yes. And the second dimension would be something based on how many unique vector it found, sorry, how many unique token it found, which we don't know yet, we will see when we run it.
+
+Unknown Speaker  1:10:15  
+Okay, so 3733
+
+Speaker 1  1:10:19  
+and across all these messages, there are 660 823 unique tokens. If you want to see you can take the Vectorizer feature name out to a list, and you can take the TF, TF, IDF, the sparse matrix, do a sum on axis zero, convert it to a list, and then you can put them side by side, and you will see the TF idea vector. Again. This representation is just for us, just for us to get a pic. Now, when we are actually going to do the classification we are, let's use a linear SVC, basically your support vector machine. So in here, when I'm doing that model and dot fit you see, what am I passing? I'm simply passing the output of my Vectorizer transformer, which is extra in TF, IDF, and that's why I kept saying all of these way to take the feature names, Ravel, it revel all the sum into a list and showing this, this is not something you actually need to pass. Just this step, which is doing the Fit transform is good enough. You can take the output of fit transform, and you can directly pass it to your model. If it's a scikit learn model, you just pass it to there. If it's a neural network model, you pass it to the first layer of your nodes, the input layer, but you basically take that Vectorizer out.
+
+Unknown Speaker  1:12:01  
+Okay, so, oh,
+
+Speaker 1  1:12:04  
+okay, I already ran this. So that's it. My model training is done. Now, all I need to do, it's predict. Well, for prediction, we already have a test. So can we just do an X test predict?
+
+Unknown Speaker  1:12:24  
+No, you have to.
+
+Unknown Speaker  1:12:26  
+That's in the next cell. Okay,
+
+Unknown Speaker  1:12:27  
+yeah, because if you do this,
+
+Unknown Speaker  1:12:31  
+you will, you are going to get a slap on your face.
+
+Speaker 1  1:12:39  
+Yes, so that's the slap of on your face. So basically, without reading through this, essentially, what I'm trying to do is X test is basically a list of strings. I'm trying to pass a list of string to the model and say, Hey, Mr. Model, predict. And the model says, here, I don't know, I don't know what you're talking about. It's your language. It's not my language. That's what model is freaking out. So what you need to do is you need to take that X test and then that same Vectorizer that you fitted with your training data, same Vectorizer, right? This Vectorizer, you are going to use this and not to do a fit transform, just a transform, because it is fitted on the training data. If you fit it on the test data again, then the same word in training will not have a same value in test so you cannot do that. So this is very important thing to remember, fitment should only happen on the train data, but transform will happen once on train data and then on test data. No double fitting. Fitting only once, and transform as you need it, where you need it. So that will give you the TF IDF vectorized version of your test data now that you can pass to the model, and then model will do a prediction. And the prediction will basically be, hey, whether it's a hair or whether it's a spam,
+
+Unknown Speaker  1:14:15  
+right? So that's your prediction.
+
+Speaker 1  1:14:18  
+Now this is just linear classifier, binary classifier, right using an SVM with a linear kernel, basically. So essentially we are using this. We are basically trying to draw a plane that provides the best support right from the two side using the support vector. And it is linear. We are using linear SDC. Now we can do the same thing as we have done in all psychedland model. You can do a score, right? You can do a score on your train data, which is pass the X train and y train, but except here, the only difference is the x. Has to be a TF idea, vectorized version of X train, because that's what the numeric values are, and that will give you your training score. And then if you do that, excuse me, same thing on test that will give you your test score, and we are getting a 100% accuracy in training data and 98.9% on test data, pretty good, right? So, very easy, right now, watch out. Watch this one next, when you use this psychic line pipeline, how this vectorization becomes even more easier, like you don't have to worry about all of these. You know what you need to do? You need to create just one pipeline. And in the pipeline you add two stages or two transformers, the first transformer being your TF idea, Vectorizer, and the second transformer is actually not a transformer, it's an algorithm. But it all in scikit learn. It all has the same interface, right? So you can in you can intermingle transformers and algorithm, the ML algorithms. So all we are doing is we are just slapping these two things together, sticking them together in a pipeline, and call it a drain. So now imagine if we just started this way here, when we are passing X train and y train. This is not the TF, IDF vectorized version. This is the original x train, right? Remember, just to see, what does my x train look like?
+
+Unknown Speaker  1:16:47  
+X train is
+
+Unknown Speaker  1:16:52  
+these messages.
+
+Speaker 1  1:16:55  
+So these are all the text. So since my vectorization is now part of my pipeline. I can do a pipelines fit algorithm. Instead of doing a linear SVC, I'm going to do a pipeline fit and I'm simply going to pass X train without any transformationality at all, and the pipeline is going to take care of everything. One line you are done, and it almost seems like that you are passing the data without doing anything. You are passing the raw text data, almost because everything else have been internalized into the pipeline. And this is how your pipeline looks like, and you should be having the same train and test accuracy, because we really didn't do anything different, so we get the same training and test accuracy, right? Pretty cool, huh?
+
+Speaker 1  1:17:59  
+Okay, now, if you want to actually see for yourself how the prediction looks like, let's do this just for fun. Well, let's first do the confusion matrix and classification report and all of this, and then we are going to do this right so
+
+Unknown Speaker  1:18:20  
+you pass the X test directly to
+
+Speaker 1  1:18:24  
+test CLF. Text, CLF dot predict here, but here text, CLF is my pipeline. So I don't have to transform the X test at all, because the pipeline will take care of it, just like in the training time. Also, I didn't have to do the vectorization. Same thing for prediction. I don't have to do the vectorization, and this is the prediction that we have generated. Now, since you have the original y and the predicted y, you can do all of the traditional thing. You can do your confusion matrix, you can do your classification report, accuracy score, all of these things, right? So it's getting an f1 score of point nine, nine and point nine, six on both positive and negative classes. That is just amazing. Maybe these messages are pretty easy to for anyone to see whether it's a spam or not spam. So for that, they have given us four messages. So let's first try to do it ourselves. Which one do you think is a spam and which one is not a spam? You are a lucky winner of dollar 5000
+
+Unknown Speaker  1:19:33  
+tell me whether, what do you guys think is it a spam or ham
+
+Unknown Speaker  1:19:39  
+the spam?
+
+Unknown Speaker  1:19:42  
+Does everyone agree it's a spam? Yeah, it's a spam.
+
+Speaker 1  1:19:46  
+Okay, how about the second one? I'm just noting your collective so. Judy decision, so make sure you guys agree. What is the second one you think? So? Spam.
+
+Unknown Speaker  1:20:03  
+So you are saying all are spam.
+
+Speaker 4  1:20:06  
+No, the last one, I think, is so okay, but yes, the last one is okay. So
+
+Unknown Speaker  1:20:13  
+you are saying this one is also spam,
+
+Unknown Speaker  1:20:17  
+and the last one is not spam.
+
+Speaker 4  1:20:21  
+Yeah, usually, when it says, Hey, you want something, it's usually clicking,
+
+Unknown Speaker  1:20:27  
+there's no free gift.
+
+Speaker 7  1:20:29  
+The one nowadays is telling you that you have a parcel that's tied up and
+
+Unknown Speaker  1:20:34  
+you gotta pay to get
+
+Unknown Speaker  1:20:35  
+it out. I
+
+Unknown Speaker  1:20:36  
+think the last one is, is
+
+Speaker 6  1:20:40  
+one that you get, they get your number, and they have access to your phone. Now, because you texted the number, it looks like a
+
+Speaker 1  1:20:48  
+fishing the last one looks like a spam. No, it
+
+Unknown Speaker  1:20:51  
+does to me, but
+
+Unknown Speaker  1:20:54  
+no period, and I
+
+Speaker 1  1:20:55  
+think you won two free tickets to the Super Bowl. These may not be a spam, actually, but when they're saying text us to claim your price, maybe that classifies it as a spam, yeah,
+
+Unknown Speaker  1:21:07  
+yeah, that's probably it. Let's
+
+Unknown Speaker  1:21:10  
+see Medicare to pay your toll.
+
+Unknown Speaker  1:21:13  
+Yeah, to
+
+Unknown Speaker  1:21:17  
+me last one, yeah,
+
+Speaker 7  1:21:19  
+I got one of those, actually, just like a week ago, told me I had an unpaid toll ticket. Yeah, yeah.
+
+Speaker 3  1:21:24  
+I get like two of those, like a month. Yeah, let's see.
+
+Speaker 1  1:21:34  
+Oops, sorry, I forgot to run this text in excitement. Now let's learn it. Yeah, the last tool both look like spam to me, because the third one, there is a sense of urgency that the message is telling you, hey, text us to claim your prize, that and then same thing, also, that last one, they're asking you to take some action, text, something, someone, some number. So that's what the machine is picking up. That those are spams, anyway. So essentially, this is not spam. This is not spam. But these last two are spams, right? That's what we figured. Anyway, cool. Okay, so the next activity I'd actually like you guys to do yourself. It is very similar, but here you will have
+
+Unknown Speaker  1:22:40  
+movie review,
+
+Speaker 1  1:22:44  
+and the review will basically tell you whether the sentiment, sorry, the level will tell you whether it is it has a positive sentiment or a negative sentiment. So basically, two columns, very similar to this one. Instead of a SMS message, you will have a review written by some movie critic and then someone leveled the review, some human actually read through the review and classified each review as being a positive review or a negative review. You are going to train a classifier with this review to be able to predict whether any review that comes in in future, whether the reviewer is saying good things or bad things about that movie.
+
+Unknown Speaker  1:23:34  
+Okay, so very simple
+
+Speaker 1  1:23:37  
+meaning using that same techniques. So what am I going to do is, let's do one thing. Let's take a break for about 1015, minutes. I think. Let's come back 10 after like 810, meanwhile, I'm going to upload the salt files for activity, one, two and three. And for activity number four, you don't have the solved files, so this is the one that you are going to do in your group after we come back from break. Okay.
+
+Unknown Speaker  1:24:19  
+So 810, that gives us 15 minutes.
+
+Unknown Speaker  1:24:25  
+Okay, see you. Then
+
+Speaker 1  1:24:32  
+I'm thinking we can afford to take at least 20 minutes to do this activity. It might not take that long. If you guys are done before that, you can always come back. But Karen has set up the breakout rooms, and you should be able to go there. Now just pick and choose your own room. So basically, stay with your usual group, right? 12345, you should be having about 20 are the room started already. Oh, no, no, they are not. Okay, sorry. So yes, so Karen said he she made it ready. So yeah, let's start it when. Yeah, now, now, okay, yeah,
+
+Unknown Speaker  1:25:18  
+okay, so how was it
+
+Unknown Speaker  1:25:21  
+hard? Easy.
+
+Speaker 3  1:25:23  
+It was pretty copy and paste for the most part.
+
+Speaker 1  1:25:27  
+So, yeah, so if you, if you, I forgot to ask you to try to not look at the solution that I posted.
+
+Unknown Speaker  1:25:37  
+Oh no, I didn't even think about that. No, based off of what you have
+
+Unknown Speaker  1:25:42  
+gone through from the previous activity. Yeah,
+
+Unknown Speaker  1:25:45  
+it mapped almost perfectly,
+
+Speaker 1  1:25:48  
+okay, but change a few things, yeah, what kind of f1 score you guys got? Was it as high as the previous one?
+
+Unknown Speaker  1:25:57  
+I'm sorry say that one more time, the f1 score,
+
+Unknown Speaker  1:26:00  
+one score the classification report
+
+Unknown Speaker  1:26:03  
+mine was not run 77%
+
+Speaker 1  1:26:07  
+Yeah, that's what it is supposed to be. So if you look into here, right? So am I sharing my screen?
+
+Unknown Speaker  1:26:13  
+Yes, great. That's a great bank account.
+
+Unknown Speaker  1:26:18  
+Sorry, no luck there.
+
+Unknown Speaker  1:26:22  
+Okay, so in
+
+Speaker 1  1:26:23  
+the first one, the first attempt, if you look into this, right? So they said, build a pipeline using TF IDF Vectorizer, without the stop words, right? So when you do that, is basically just one line in the pipeline. You provide the TF IDF and the linear SVC, and the test accuracy for that one is not so great, right? Point 742, and then, if you look into the classification report, 71 and 77 for the negative and positive class, so not that good. Then the next one, they asked you to redo this using English stop words. Now here, if you do export, sorry, import these text class from the Scikit, learn feature extraction, and just do a text dot English stock words, it will actually tell you that 318, English stock words are there right now. When you do use stock words, supposedly, it should help in cutting down some noise in the data, and ideally, in theory, you should be able to get a better classification report. So in the second attempt, they asked you to redo that. Except here in the Vectorizer, use the stock words equal English, and you do that, your test accuracy is still not that good. It was earlier. It was 742,
+
+Unknown Speaker  1:28:03  
+it will go up to 756,
+
+Speaker 1  1:28:07  
+and the classification report is also 73 and 78 not that good, right? Now, there is one particular prompt that is given here, which is this one, a review about that Barbie movie, so let's read this. What does it say? I was curious to see how they would evolve the stereotypical Barbie into something more, but the messaging in this movie was so heavy handed that it completely lost the plot. I consider myself a proponent of gender equality, and these are in the way to get it is
+
+Unknown Speaker  1:28:41  
+that your review?
+
+Speaker 1  1:28:46  
+Now, this one, our first classifier predicted this to be positive. But does it sound positive, right? But you kind of see the difficulty the machine is having here, because there is no real negative word here. It is probably trained to pick up on some negative words, and it's not getting the negative words, and it is misclassifying this to be positive, which we can see. Then we redo this with the stop words this time, and not only, our report does not improve. Now, if you do that same prediction for bird B,
+
+Unknown Speaker  1:29:35  
+the model is still saying it is positive.
+
+Speaker 1  1:29:40  
+So the point here is, even though the stopwatch should be improving your prediction, performance accuracy, it's it always does not help. So these type of these, Scikit learns, libraries, English, stop words. Is maybe not that good. So that's why, in the third attempt, if you look into your unsolved notebook, this list of stop words was already given, and this is a list of custom stop words.
+
+Unknown Speaker  1:30:17  
+And with these stock words,
+
+Speaker 1  1:30:20  
+we will do that same thing, except in stock words equal to instead of saying equals English, we are providing our custom stock word. Let's list. And this time, the state test accuracy went up slightly. But if you look into the classification reports, 75 and 80. So not ground shattering improvement, but still an improvement. And this time, if you see the prediction on the barbie movie, it actually said negative. So sometimes the idea here is, the point here to drive is sometimes you might have to take control of things and provide your own stop words, at least using the scikit learn library. So that's the final takeaway from this activity. Now, did you guys get the same result? Or does anyone's result differ from what is being shown here
+
+Speaker 3  1:31:27  
+at the same accuracy and f1 for evolution, but I couldn't come up with reviews that challenged the model,
+
+Unknown Speaker  1:31:36  
+so I got the same predictions every single time. Okay,
+
+Speaker 1  1:31:43  
+yeah. Now the other thing is the data set, right? So in order to do something like this, just like any machine learning model, the larger your data set, the better your models. Performance would be, the accuracy would be. So I'd say the reviews that we have, how many reviews that we have here? 748, reviews, that's probably not that good, right? So that's why it's probably model is having hard time. So that's what my conclusion would be so just go and get more training data. There is nothing wrong in particular, even without this custom stopwatch, the default stopper should still work pretty good, provided you get some more, like at least two, 3000 review would probably do better than just a few 100 reviews, right? So it's just the data set is not enough. Fill is one. Okay,
+
+Unknown Speaker  1:32:49  
+so any other question on this?
+
+Unknown Speaker  1:32:53  
+This activity?
+
+Speaker 3  1:32:58  
+Yeah, Chase Jason posted this. I wonder, if you, I wonder would have happened if you changed a to isn't if that would have made it more accurate petition, I don't know. That's probably more of a curiosity than a technical question.
+
+Speaker 4  1:33:11  
+Do, what do also, what if it is misspelled? Right? Ain't is not a word. But what if it is misspelled? What if there is no apostrophe on that, you know, like, does it recognize it? Will it? Will it? Now,
+
+Speaker 1  1:33:25  
+let's try. So let's go to the let's go to which one splitting. This is done.
+
+Unknown Speaker  1:33:36  
+Let's do the one with, with
+
+Speaker 1  1:33:42  
+default stop words, which is this thing, the default English stop words, oh, actually, this is already fitted. And then you are saying, change this
+
+Unknown Speaker  1:33:58  
+to saying, yeah,
+
+Unknown Speaker  1:34:05  
+like this, right? Yeah, let's see
+
+Unknown Speaker  1:34:12  
+CLF, two, dot credit,
+
+Unknown Speaker  1:34:16  
+no luck. It's still saying positive,
+
+Speaker 1  1:34:20  
+even though we turn this to is not even with the stop words, even with the stop words, yes, because this is text CLF two, and we are using text CLF two to do the prediction, and It's still saying positive.
+
+Speaker 6  1:34:41  
+You have to read run that that cell, if you change, isn't or ain't it is not.
+
+Speaker 1  1:34:47  
+I did. I did, okay, I did put on. I did, yeah,
+
+Speaker 3  1:34:51  
+yeah. And you could run it below, because you just redefine it later. But like, as long as you don't, like, override it, you could run it from the third and make sure that it. Yeah, comes up as negative.
+
+Unknown Speaker  1:35:01  
+That makes sense. Okay.
+
+Speaker 1  1:35:04  
+So see, I run it now, so it went 29 to 30 sequence number to make sure that I have put it, that this is not the way to get it. And then I am going to run it again. And just to prove that it did not change. It still says positive. Yeah, when
+
+Speaker 8  1:35:27  
+I was messing with it, it's like, it seems kind of weighted heavily towards like, if only if like you're including like, specific words that are like, it considers negative or positive and like, how many you include. You know, if you could, like, maybe, like, you say, like, love, like, all right, and then do like, hate once, and then like,
+
+Speaker 1  1:35:47  
+let me oops, sorry, let me do one thing, try to find, if not is In here, okay, nothing is filtered out. Huh? You see, if you are using the default stop word, then not is being filtered out. Cannot filtered out, nothing, not and cannot is being filtered out. Maybe that is the case.
+
+Unknown Speaker  1:36:18  
+Is there any end here?
+
+Unknown Speaker  1:36:22  
+No. There is no ain't.
+
+Speaker 1  1:36:26  
+How about without apostrophe? No, I don't know somehow, since not is being filtered out, somehow, it did not pick up that ain't thing. And in here, we are not filtering out any negative sounding word in our list of custom stop words. So that's where the difference is, because in the default stop work, some of the negative sounding words are being filtered out in our custom stocks, custom stop words, we are not doing that,
+
+Speaker 9  1:37:09  
+and let's end the in any of the training. And where is it, or is it just like an example someone wrote after like a new kind of example that has a word that is not in the vocabulary of the corpus.
+
+Unknown Speaker  1:37:35  
+No aim does not appear in here.
+
+Speaker 9  1:37:38  
+So you're going to have the kind of typical Bag of Words Problem of out of vocabulary words. Yeah, it's not really going to be able to make sense of
+
+Speaker 1  1:37:51  
+the word not appears several times, right? So there are 62 occurrences of the word not in here. Now when you are using the default stop words, we saw that not is also one of the stop words, so that not is getting filtered out.
+
+Unknown Speaker  1:38:14  
+Maybe that's what is making a difference.
+
+Unknown Speaker  1:38:18  
+But yeah,
+
+Speaker 9  1:38:22  
+yeah, yeah. That's, well, yeah, that's, like, I said, that's the typical out of vocabulary from, yeah, yeah. Or any, any NLP, actually,
+
+Speaker 1  1:38:32  
+and all the work that's not training, you know,
+
+Unknown Speaker  1:38:36  
+it's not going to make sense of it.
+
+Speaker 1  1:38:40  
+All those, not always, not as bad. Like, look at this one. This is a positive review, and it still uses the word not that is not enough. But again, that's that you are right. So it is actually using that bag of what format from the TF IDF Vectorizer, right? So it is actually looking into the TF IDF score of these words and finding out what is the relative importance of this word compared to the when measured against the whole corpus of text,
+
+Speaker 9  1:39:12  
+that should make actually, shouldn't that make eight then really relevant,
+
+Unknown Speaker  1:39:19  
+if you do the TF IDF,
+
+Unknown Speaker  1:39:24  
+any other document,
+
+Speaker 1  1:39:25  
+but your aim is aims, TF will be zero. So TF IDF will also be zero. It has to have some small value,
+
+Speaker 9  1:39:36  
+right? It has not seen before. If it does TF IDF with, with, you know, the model of that train on the training,
+
+Speaker 1  1:39:44  
+most of them not appears for negative, so
+
+Unknown Speaker  1:39:47  
+it's going to be unique.
+
+Speaker 9  1:39:52  
+Yeah, I don't know. What does it do if it everybody can't handle it all,
+
+Speaker 1  1:39:57  
+yeah? I mean, the thing is, when it comes. Comes to NLP. I mean, trying to this is, this is where we are basically going into the EXPLAIN ability of the model, right? And that is a whole another can of form, right? We really do not want to open that. And that's why a lot some, I mean, people wait, sometimes they hate using machine learning algorithm to, like, like, lot of time, like, You have heard like, hey, companies are screening out application, the job applications using AI, and people are not happy about that, because it's not always possible to explain why the model is taking a particular decision. So this, I think, is kind of attributed to that, that what you are doing in model is not always explainable. I
+
+Speaker 1  1:41:03  
+Okay, so let's move on to the next few activities that we have, and this is where we are going to use that library called Spacey. And the other day, I basically posted this instruction, but then Kian also posted easy way just to provide your NumPy version number, like less than something, right that he posted. So did you? Any of you guys try to install spacey and validated that it works
+
+Unknown Speaker  1:41:40  
+using either key on instruction or my instruction,
+
+Speaker 3  1:41:44  
+my key ins, but I didn't follow mine's working, yeah,
+
+Unknown Speaker  1:41:47  
+okay, mine is working using key ons instruction.
+
+Unknown Speaker  1:41:50  
+Okay, that's good to know.
+
+Speaker 1  1:41:53  
+Anyone who is having problem running spacey, I
+
+Speaker 1  1:42:03  
+because if you are having problem, the only thing I tell you is not waste too much time on it. Just go and run this on Google, colab, these notebooks, okay, like when you would run it. So anyway, assuming that everyone's is working, either on your local computer or on Google colab. So what we are going to do now is use this library called spacey to do some kind of cool stuff. So, so, so basically what we are going to do is, so this space is different from nltk in a way that the core function of spacey depends on the language model that are learned from tag tagged text, not programmed rules. So nltk is basically old world. Whatever nltk does, your tokenization and all of that, it is based on rules implemented by humans. Spacey kind of does lot of the similar stuff and more and behind the scene. Under the hood, spacey actually has models that have been trained to understand the nuances of the language. So that's a big, big advantage of using spacey to do some of these things, which is tagging parts of speech, recognizing any named entity which is basically proper nouns and dependency person, like looking into one sentence, English language sentence, and doing a dependency graph which word qualifies which other word right? Like, if you have a noun and you have an adjective, we know that that adjective applies to the noun. So you can actually do lot of those stuff using this space library, which is what we are going to see. And it can actually look at a sentence and basically repeat a part and see and tell you which word is which part of speech and how they are related to each other. For example, Jose made a book collector happy the other day. If you pass it to spacey, will be able to tell you that Jose is a noun which is acting as a subject to this verb, and that is working on this object, which is a book collector. And this is the modifier which is applied to the this verb made happy. And then this is the verb modifier which is applied to. This like, when did it make happy? Right? So these are kind of the dependency parsing that you can do with spacy, which is what we are going to see in a set in our notebook.
+
+Unknown Speaker  1:45:14  
+So let's go to the example.
+
+Speaker 1  1:45:18  
+So we are going to start with a very simple sentence, the brown cow jumped over the round moon. Okay, so just like we did tokenization using nltk, we can also do tokenization using NLP, using spacey here when after we import spacey, we have to load one of the language models. So spacey has many, many different language models. So for English language model, there is a English core web, and then SM for small, and then is a one for medium, I think MD. And then, then, what is the one is large, which is LG, I think I did have it once open spacy language models, yeah,
+
+Speaker 1  1:46:18  
+yeah. So these are the language packages, so if you look into English. So the English is en core web SM, so this is the English core web small and then English core web medium. So basically, Small Medium, Large meanings, how many, how much text has been used to train this model, and how many parameters are there in a model? So large model is basically trained on a larger body of text and it has larger parameters. Meaning, these models are also neural net models behind the scene that spacey has trained. So large meaning it has more layers, more deeper layers, and more neurons in every layer, which obviously is then trained with a larger body of text. So therefore large model will be more capable than small model, because it has more training data and the model is also more sophisticated. The architecture is deeper. But for now, we are going to just use the small model, which is good for our purpose. And the way that you do the load the small model is using the function called spacey dot load. But in order to do that, first, you need to have these things downloaded to your local which is Python, hyphen M, spacey download, and then the name of the model, which is English, small. So you need to have this run before you can do the spacy dot load. And after you load it, you put it, you save it in a handle called NLP, and that's the handle we are going to use to do the tokenization. So now, if I just take NLP and then apply these on a body of text, which is sentence, it will generate some tokens. Now if you just print tokens, okay, it just says tokens. But if you do, tokens dot text,
+
+Unknown Speaker  1:48:24  
+now it gives you the text.
+
+Speaker 1  1:48:28  
+And if you do, sorry, not tokens dot text, sorry. So these tokens basically let me actually print the type. So even though, when I printed tokens, it printed as if the whole thing is a one single string, but if you do the type, it will see it is actually a spacey tokens type, and in that tokens type, there are at two attributes. One is the text, and that gives you the list of all the text, and one is the corresponding POS. So now, if you do token, start text, oops, sorry,
+
+Unknown Speaker  1:49:10  
+what did I do?
+
+Unknown Speaker  1:49:16  
+If I do type
+
+Unknown Speaker  1:49:20  
+of what is happening.
+
+Speaker 1  1:49:24  
+Tokens, dot text. Tokens, dot text is a string,
+
+Speaker 3  1:49:31  
+and you do type of tokens, a spacey token, dot, dot. Yeah,
+
+Speaker 1  1:49:36  
+no, actually not tokens, dot text. So because you have, you have multiple things in tokens, right? So tokens dot text does not give you anything. You have to do len of tokens. So that gives you nine. And then if you take one of these tokens, let's say if I do token zero, then. That gives you the meaning the first token. And then if you do a text that gives you the again, but if you do a POS underscore that tells you what that token is, which is dt. Now we have to go and see what deity means. Deity probably means their article, but I now I'm trying to understand
+
+Unknown Speaker  1:50:30  
+why it is called dt,
+
+Speaker 1  1:50:34  
+or we can do this way. Hang on, I have another piece of code written, so let's say you don't know what DT means, right? So you can actually ask spacey to explain itself. You can use this function called spacey dot explain and then it will give you determiner. So it will give you a more human readable name. So now, if you take all these tokens and do a loop and print token dot text and token dot parts of speech, you will basically get this so each of the word is a token, and even the last one period, it also says that it's a punctuation mark. And if you rerun the same thing, except this time you apply the spacy dot explain, then it will actually tell you the full word. This is the determiner. This is an adjective, this is a noun, verb at position and so on, and then punctuation. So that's how you get each token and the corresponding parts of speech for that token. So okay,
+
+Speaker 1  1:51:47  
+so when you have this, that means you can do whatever you want to you can be really creative. For example, like, some of the random things we are going to be doing here, right? Like, hey, let's see. What are all the nouns there? Fine, we can look through all the tokens, and we can only keep the one where the parts of speech is a noun, and then it will print us all the noun which is cow and Moon. From here, right? Cow and Moon. So I just filter down out of the nine words in that this sent in that sentence, there are two nouns which is cow and Moon. So okay, there is also another attribute in token called dependency, which is DEP underscore. So if you print the dependency, so it prints something very similar to this. But if you look into it, when you are printing the POS for the brown, it is saying adjective. When you are doing dependency, it's saying Brown is amount, meaning a modifier. Now, when you are printing the dependency, you can also apply the spacey dot explain to get more meaningful names of those dependencies. And when you do that, it will actually give you the full name. So a mod basically mean adjectable modifier, cow is a nominal subject. Jumped is the root. So that is essentially the root of the whole sentence, like the brown cow jumped over the round moon. What is this sentence talking about? The sentence is talking about the jump. The sentence is not about the cow, the sentence is not about the moon, the sentence is about jump, the action. So that's the root, and it basically tells you how everything else is modifying that root.
+
+Speaker 8  1:53:56  
+Is it basically choosing the verb of the sentence as a root.
+
+Speaker 1  1:54:02  
+Ah, not always in this case, yes, but try with some complex sentence and try this out and see how it does. But it's not always the case that the verb will be root. In this particular case, the verb is root. So it really understand the English grammar actually almost the way that we do as humans. Now there is a cool way to actually display this thing graphically. So for that, you have to import this library from space, equal displace,
+
+Unknown Speaker  1:54:39  
+meaning display space,
+
+Speaker 1  1:54:42  
+and then you take all these tokens that you have generated, and you say, display, dot, render tokens. And for the style, you say depth, meaning dependency. So now it will give you a full dependency graph. And. Now it is very easy for you to visual. It is the same information that is presented here, but here it graphically shows the whole thing, so it becomes easier for you to understand.
+
+Speaker 1  1:55:22  
+So it is telling you which token is which parts of speech and which token is modifying which other token.
+
+Unknown Speaker  1:55:40  
+Okay, it was dot explain,
+
+Speaker 1  1:55:45  
+Render, oh, the explain is like when you are printing these, what is called the dependencies, or the parts of speech. The names of the parts of speech or names or the dependencies, can be little cryptic because they are kind of shortened when you do Spacey. Dot explain. On top of that, it gives you the full form. That's all, thank you.
+
+Unknown Speaker  1:56:15  
+Okay,
+
+Unknown Speaker  1:56:17  
+now if you want to change the
+
+Speaker 1  1:56:21  
+the display of these, you can also pass a set of options in form of a Python dictionary, where you can provide the color, background color, font size, and so on. And when you do that, let's say now I have a different color and different style of Arrow. Why this is coming as a rectangular arrow, because of compact equal to true. If I don't provide compact true, then only the color change will be applicable and the distance I have also changed, I have compacted it to 125, so that is applicable. Now on top of that, when you do compact true, that basically makes it compact this way.
+
+Unknown Speaker  1:57:16  
+So just some nicety,
+
+Speaker 1  1:57:20  
+there is also option whether where you can actually do a display dot serve instead of render, and that actually shows this in a port. So let me use a different port, because I think I used that port before. Let me do 5252
+
+Unknown Speaker  1:57:37  
+so when I run this,
+
+Unknown Speaker  1:57:40  
+it is displaying here,
+
+Speaker 1  1:57:43  
+but you see it gives me that 50 to 52 port number on my local host, 000, and if you click on this,
+
+Unknown Speaker  1:57:52  
+this actually opens in a browser.
+
+Speaker 1  1:57:56  
+You see the browser URL right localhost, 5252 so it actually runs a tiny, teeny, tiny server behind that Port and actually serves it there.
+
+Unknown Speaker  1:58:09  
+Okay, interrupt.
+
+Unknown Speaker  1:58:21  
+Okay, another
+
+Speaker 1  1:58:26  
+way to print this is for each token. You can earlier, we will provide printing the token and the token parts of speech. You can also print the head of text for each token. So what does head of text do? It actually tells you, basically, again, the same information in here, right? So if you look into the graph, the is the determiner, and it basically applies to the cow, the cow. So that same information is also presented here. So essentially, that information is saved inside a property called head. So token dot head gives you another token. So what is the head of the token? The head of the token, the is another token which is cow. So that's what it is saying. So the is a determiner, determiner, and that applies to other token, cow. Similarly, Brown is a adjective which also applies to cow, which you can also see in this graph. Brown is an adjective modifier for cow. Jumped is a verb, and the head of these is jumped itself, so jump does not depend on anyone else, because jump is the root of this sentence. Over is an acquisition that applies to jump, which is this, over applies to jump. And so on. So essentially the same information. Now you can also be fancier. Let's say someone asks you, hey, give me the adjectives that describe the word cow,
+
+Unknown Speaker  2:00:20  
+meaning what,
+
+Speaker 1  2:00:24  
+where Brown, which, which other token will describe cow. Hello, brown, meaning brown. So how do you find that? You will need to find a token whose head is cow, and the token should also be an adjective. So essentially, I have to apply two filtering condition out of all the tokens. Give me the token where parts of speech is an adjective and the head of the token is cow. If I can do that, then that will give me this token, which is brown, which is what we are doing here. So for all tokens, I am applying this condition, where TOS is adjective and head is cow. And if you do that, you will get brown. So you can, essentially, using a query, you can explain the grammar of a sentence. So that is the beauty of this library. So
+
+Unknown Speaker  2:01:45  
+there goes my third grade English homework. Yeah,
+
+Unknown Speaker  2:01:51  
+yes.
+
+Speaker 1  2:01:56  
+I don't know how, like, how this works, sweet for other language. Like, I don't know any other language that I can even use this with a test,
+
+Speaker 8  2:02:07  
+yeah? Because some some languages swap the subject verb object order, like in Japanese, like the right, the subject comes after the verb. Well,
+
+Speaker 9  2:02:16  
+yeah, it finally, let's say German, and the verb goes away the end of the sentence, but it would still be able map is where the verb relates to in the sentence. Yeah, most,
+
+Speaker 1  2:02:26  
+most Asian language is like that, like the language from India that I speak same structure as Japanese, so it's the order is reversed. Well,
+
+Speaker 9  2:02:37  
+I was saying like, let's say in German, where the verb might be at the end of the sentence, but you know, if so, they will find the relationships of the words of each other kind of aside from that. You know, the word order and the language happens to impose, it has more of a conceptual relations, yeah, and that's why I say how you could find, maybe you could have used translation that way, like mapping, you know, the sentence structures. Yeah, I don't know how that was, that was done, but cool. I mean space, it could be used also for a lot of, like linguistic study and stuff too. So,
+
+Unknown Speaker  2:03:23  
+like, not just training the model. You mean, not
+
+Speaker 9  2:03:25  
+just training model, but it could be Yeah, for linguistics, linguistic like
+
+Speaker 1  2:03:29  
+analysis, yeah? Like, human driven analysis, linguistic analysis,
+
+Speaker 9  2:03:33  
+yeah, natural languages, yeah, probably use something similar for or for formal languages like programming languages, probably good too. Yeah, different. It's all interesting. It is. I kind of, when I was in college, I read a bunch of Noam Chomsky structural of his stuff on structural linguistics. And basically, one thing he says is that the syntax is built into our brains. Whatever language you have is going to have similar set of rules underneath them. So any language would have a generative, generative syntax. I think that was the trick you used. So there's a structure, tactic, structure, syntax kind of structures in our brains. And now languages might put the words in different orders and stuff, but it's still those underlying rules are should be under all languages. I think it's kind of his thesis. Yeah, he originally wrote his dissertation on that in analyzing Hebrew,
+
+Unknown Speaker  2:04:44  
+which is quite different from, like
+
+Unknown Speaker  2:04:46  
+English, quite different. Yes, that's right,
+
+Speaker 1  2:04:50  
+cool. Okay, so the next two activities is basically just having some fun with language. Okay? So. So activity number six, you are supposed to do with partners, meaning your groups. Do you guys want to do that or just run through here?
+
+Unknown Speaker  2:05:13  
+Well, we have only 15 minutes left, just right.
+
+Speaker 1  2:05:18  
+Yeah. Oh, so here we are going to be using a particular nltk corpus call inaugural instead of writers. So we have been using writers for all this time. This is a different corpus call inaugural. So this corpus basically have inaugural speeches by the presidents of the United States. Okay, so this is our corpus, nltk, and if you look into the file IDs, it will give you all the file IDs. And then we will go through all the file IDs and do a dot raw inaugural dot raw, and that will give you all the articles. And we have 60, so 60 inaugural addresses by 60 presidents. And if you pick one, let's say, let's pick the number 10. So the ID for the 10th one is by President Jackson on 1829,
+
+Unknown Speaker  2:06:26  
+and this is what the speech was.
+
+Unknown Speaker  2:06:34  
+Okay. So now the next
+
+Speaker 1  2:06:39  
+task is to find out, what are the most frequent adjectives in each of these addresses, each of these 60 inaugural speeches that we have, what is the adjective that is occurring most frequently? So before looking into the code. How do you think we should be doing it?
+
+Unknown Speaker  2:07:14  
+What our approach could be?
+
+Speaker 3  2:07:19  
+Thinking about previous example, when you get the nouns, you
+
+Unknown Speaker  2:07:23  
+would be getting the adjectives, where the
+
+Unknown Speaker  2:07:28  
+token costs is equal to adjo.
+
+Speaker 1  2:07:32  
+Yeah. So you can basically use spacy to tokenize instead of an LTK tokenize because spacey tokens will also have the POS. And then you can look through the tokens, and basically only keep the one that has a POS of adjective, and then just do a count, right? And then that will have multiple then you keep the one that has the highest that's all so let's see how we are going to do it. So first we are going to do apply the NLP. This is basically the tokenization.
+
+Unknown Speaker  2:08:09  
+And then
+
+Speaker 1  2:08:11  
+what we are doing is for each token in token, and we are taking the lower case version of it. So for all the tokens, so token, dot, text dot lower is what we are going to keep. But for what, for each token in doc? So, what is Doc? So Doc is, where is Doc? Doc, Doc, which variable was doc? Oh, right. So Doc is basically this, I'm sorry. So Doc is basically our list of all the tokens for this body of text. So this is basically going to be one speech that we are going to passing, and we are going to converting that to a list of tokens. And that list of token is Doc, which is basically list of however many tokens, right? 100, 200 300 however many tokens. So we are past looping through each of the tokens in this list of tokens, and we are on checking whether the token dot parts of speech is adjective. If it is, then we are going to keep it in this list called adjectives. So when you do that, you will basically have list of all the adjectives. Then in Python, there is a counter class, so counter of adjective, and then we will apply a function called most common and one meaning the first one. So when you do that,
+
+Unknown Speaker  2:09:46  
+so then in here,
+
+Speaker 1  2:09:50  
+it is going to give me sorry most common is not the most common. Hang on.
+
+Speaker 1  2:10:04  
+Uh, yes. Most common will give the first one yes. And then we are going to use this function, most common adjective for all the text. So let me actually first apply this for one text that Jackson text. So if I take this text by President Jackson and apply this function, it is telling me the most common adjective that he has used is the word public. And that is eight times well, or at least according to spacey, public is an adjective. Now, depending on the context, you can say, well, public could be a noun too, but spacey has basically found, or decided determined that at least in this context, I public is adjective. So let's look through where public appears, the tendency to public and private profligacy, which is a profuse expenditure. Yeah, so this is an adjective I think,
+
+Speaker 1  2:11:29  
+public officers, yeah, public service,
+
+Unknown Speaker  2:11:35  
+public virtue,
+
+Unknown Speaker  2:11:38  
+public sentiment,
+
+Speaker 1  2:11:41  
+public revenue. Yeah, what do you guys think? I think these are our objectives. I think spaces right, like he's not talking to the general public. If that was the case, then public would be a noun, but in all of these eight context, public is actually an adjective, so Stacy is correct. So now, instead of applying this to one text, they have asked us to find it in all text. So basically, we are getting public six times, fellow one time, foreign aid time and so on. So all these different speeches, right? You just apply it in a loop. So So now, since you can do that, then you can
+
+Unknown Speaker  2:12:29  
+then find
+
+Unknown Speaker  2:12:32  
+these common adjectives,
+
+Speaker 1  2:12:36  
+and then you can find the frequencies, so you can find public and six fellow and one foreign and eight separately, so that way, oops, sorry, I forgot to run this cell. Okay, it is going through all 60 documents. It's taking little time. So
+
+Unknown Speaker  2:13:07  
+well, it's taking quite some time, actually. Okay, cool.
+
+Speaker 1  2:13:12  
+So now I can look through this adjective and only find the 08 part of it, which is the actual objective, and then find the one meaning second part of it, which is the frequency. So that way we can get the list of all 60 adjectives and list of all 60 corresponding frequencies as two separate list instead of tuple, right. And then what we are going to do is, for all the IDs that we have, the inaugural addresses, we are going to take the name of the file, except we are going to drop the extension, and that will give you the name of the 60 inaugural addresses that we have. So essentially, we have a list three list each with 60 element, list of all the addresses, the list of corresponding adjective and list of corresponding frequency. And then we can simply combine these three things in form of a data frame and sort by frequency, and we will get this. So in 1997 address, Clinton used the adjective new, 29 times. 1821 address, President Monroe used the adjective great, 26 times and so on. And this is actually pretty cool to look at. By looking at this, you can actually kind of try to why it is not showing 50. Anyhow, my this extension is not working very well, but anyway, so you get the idea. So.
+
+Unknown Speaker  2:15:03  
+So that is one, right?
+
+Unknown Speaker  2:15:06  
+It's not showing 50 because you did ahead of 10.
+
+Unknown Speaker  2:15:10  
+Oh, right. I did ahead of 10,
+
+Speaker 1  2:15:14  
+yes, good one, yeah, so now it's going to show 50, yeah,
+
+Unknown Speaker  2:15:25  
+let's see which president doesn't it use adjective.
+
+Unknown Speaker  2:15:32  
+Washington did not use very,
+
+Unknown Speaker  2:15:34  
+very adjective.
+
+Speaker 1  2:15:37  
+Maybe he just said, My fellow Americans, just one adjective, and that's it. No other adjective in his own speech.
+
+Unknown Speaker  2:15:46  
+Yeah.
+
+Unknown Speaker  2:15:52  
+Wow, fascinating.
+
+Unknown Speaker  2:15:54  
+He later reincarnated Hemingway,
+
+Unknown Speaker  2:15:59  
+famous for now using adjectives.
+
+Unknown Speaker  2:16:12  
+Okay, cool.
+
+Speaker 1  2:16:14  
+So the next task is to find out. Hang on. I
+
+Speaker 1  2:16:30  
+uh, most common adjective used in inaugural addresses, didn't we just do this? Oh, no, these were most frequent adjectives. Sorry. So the next task is to find out what are the most common adjectives. So in order to do that, what we are going to do is, first, we are going to capture all adjectives from the given text. So basically, kind of the same thing as before, except here we are not doing the counter and keeping the maximum. I'm saying, hey, given this text, tokenize this first and go through all the tokens and just retain the ones that are adjectives and return me the list of all adjectives. So that means, if I now want to use all adjectives on that text that we were looking at, so it is giving me all the adjective that was used in this particular inaugural speech, not just the most common one all the adjectives in that speech. So now we can apply this on all the text, meaning all 60 inaugural speeches, and now we are going to have all the adjectives that have been used by all the presidents in all the 60 speeches that are there. So that will give me everything. And it's going to take some time, because it will run through 60 of these. And
+
+Speaker 1  2:18:22  
+and now we are going to take this and then apply that most common function on all of these adjectives, like there will be couple of 100 of these adjectives, I suppose. Now we are going to say, across all of these 60 features, what are the top three adjectives that have been used by any President anytime
+
+Unknown Speaker  2:18:47  
+so let's see what it comes up with.
+
+Unknown Speaker  2:19:03  
+Wow, this is taking long.
+
+Speaker 1  2:19:07  
+How much does the other one take? Other one took 20 seconds. This one is taking longer. I
+
+Unknown Speaker  2:19:33  
+Okay, so how many adjectives we have? I uh,
+
+Unknown Speaker  2:19:49  
+wow, 11,890
+
+Unknown Speaker  2:19:52  
+adjectives.
+
+Speaker 1  2:19:55  
+Okay, so now we can do that same thing. We can do a counter and keep. The most common three, and then that will give us this great other and own. Again, own is adjective. Own could also be a verb, but this one is all adjective.
+
+Unknown Speaker  2:20:21  
+Okay?
+
+Unknown Speaker  2:20:33  
+So now
+
+Speaker 1  2:20:36  
+what we are going to do is we are going to take these three adjective great, other and own. And now we are going to find the word counts in the corresponding text with this word
+
+Unknown Speaker  2:20:57  
+great,
+
+Speaker 1  2:21:01  
+with all the tokens retrieved from all the list. So essentially, we are going to pass a text. We are going to pass one of these adjectives, let's say great, and we are going to ward tokenize this time using nltk, tokenize. We could have done spacy. Tokenize also. And then for each word, I'm going to see, hey, if the word is this, adjective is in the token, then give me the token. Okay? And then we are going to do this for great other and own and then we are going to display some sample data,
+
+Unknown Speaker  2:21:43  
+which basically gives me the count.
+
+Speaker 1  2:21:50  
+Yeah, and then you can do basically all of this stuff. And then you can see, hey, analyze the adjectives over time. You can take, let's say, the different dates, right? So our IDs, the inaugural ID, has a president's name hyphen year. You can split this and just keep the date, which basically the year. And then you can also split these and keep the first part, which will retain the names of the presidents. So now you have all the presidents name here, the counts of how many times the great have been used, how many times other have been used, how many times own have been used. And you can put all of these together in a data frame, and that will tell you that among those three most commonly used adjectives, which President have used how many times
+
+Unknown Speaker  2:22:50  
+and in which year speech.
+
+Speaker 1  2:22:54  
+Okay, so again, as I said, these are just for fun, there is none of these. Is actually you are probably going to be using this way to train your model. But as Karen was saying, if you are ever going to do any kind of a linguistic analysis study, study of your large bodies of text, then these are the techniques that might come in handy. And if you can take these, you can do anything, all the thing that you do with data, like you can do a bar plot, and that will basically the same data you are plotting in a bar. So by the year, and every year, how many times great other and on these three of the most common adjective have been used. So basically, take this, this,
+
+Unknown Speaker  2:23:44  
+this data frame, and do a bar plot here.
+
+Speaker 1  2:23:53  
+So another one, the last one is basically similar thing. Here you are trying to find all the tokens that are adjective and where the head of the token is America. So basically, trying to find this one is pretty cool, trying to find all the adjectives in a given speech where the adjective applied to America. So this one, I'm curious to see what it takes. Oh, this is going to again take a lot of time, because it's going to do again across 60 speeches.
+
+Unknown Speaker  2:24:33  
+But this will tell huh, go ahead. Go ahead.
+
+Speaker 9  2:24:38  
+Moment, you know the pause. Let's just interject that actually, there are times when you might use point of speech in building a model, when you might want, for example, want to not have adjectives
+
+Unknown Speaker  2:24:53  
+because they're not relevant to what you're predicting.
+
+Speaker 1  2:24:57  
+Right? You are saying my I mean, kind of. Like, how we do stock Ward removal. If you want to custom remove a particular parts of speech, you can, well,
+
+Speaker 9  2:25:07  
+that might be proper nouns. Might not be relevant at all, yeah. Like sentiment analysis, it doesn't care that it's Joe or Susan or whoever made the review, or what it was commented in the review, yeah.
+
+Unknown Speaker  2:25:25  
+In the sentiment,
+
+Unknown Speaker  2:25:27  
+yeah. I mean, in the proper nouns, in
+
+Speaker 1  2:25:30  
+spacey term, that would be your named entity, right? Named entity recognition. Ner, so if you want to proper
+
+Speaker 9  2:25:37  
+proper noun as part of part of speech you might want drop off,
+
+Speaker 1  2:25:42  
+I do they have a proper noun? Would be, yeah, it is. It has noun. I think I don't know whether proper noun or noun
+
+Unknown Speaker  2:25:51  
+differentiated in that,
+
+Speaker 9  2:25:55  
+okay, or you might want to drop on nouns like, yeah, so you know, might not matter where the person lives, or something like that. No. So there are times I was saying, Hey,
+
+Speaker 1  2:26:06  
+look at this. This is, this is interesting. Sorry, sorry to cut you there. Just in the interest of time, Karen, because we still have another activity to quickly run through. Okay, yeah. So if you look here, this is pretty interesting, like, productive America. I understand a lot America. Some president says, Little America, strong America. Stronger America, reach America. I don't know what's the context of Little America? I know, but anyway, oh, is it?
+
+Unknown Speaker  2:26:43  
+There is a little American like, in Utah, and
+
+Unknown Speaker  2:26:46  
+that's a salt lake joke, yeah.
+
+Speaker 1  2:26:51  
+Well, there are, there are, like these, Little Italy, little Greece, Little China, all over the place where people, immigrants from those country kind of stay together, Little America I've never heard, at least not in America. If you go to Japan, there might be a little America there. Yeah. Anyway, so let me quickly run through the last one. So this last activity, we are basically going to find some entities. So I'm going to take this sentence, Patrick mahomes is quarterback for the Kansas City Chiefs in the American Conference, blah, blah, blah, and then I'm applying this NLP on this and this time you see I am not looping over all the tokens, like not looking over Doc, I'm looping over something called Dog dot Ents, which basically that means is the dog dot Ents will only give me just the entities, meaning the named entities, not all the tokens. And for each entity, I am going to print the text, and I'm going to print the label, and let's see what comes out of it. Now look at that. Patrick mahomes, so this token, the two word together is one token, one entity. And Patrick mahomes is an entity. Who is what kind of entity is a person? The Kansas City Chiefs is an entity which is an organization, American the American Conference is an organization. The National Football League is an organization and so on. Whereas this one two, these are also entities, but these are just cardinals, meaning numbers. So this is actually pretty cool, like what Karen was saying, right? If you want to get rid of like proper noun when you are tokenizing and feeding it, if you want, you can apply a filter like where, whereby you are going to get rid of all the tokens where the types is entity and the level is person or org. So that way you will have a filtered list of token where these things will not exist, which probably would be applicable better for some of your text classification problem.
+
+Speaker 1  2:29:35  
+Similarly, if we let's say take one category, one article from the coffee category of Reuters. Let's say take this one and we are going to apply the spacey NLP on top. And then I'm going to display these using this display C but in the previous display that we did here, we used a style called depth, meaning dependency. So. Here we are going to do the display with a style called ENT, meaning entities. Now that will give us a different type of display, which is this. And this is pretty cool, too. So this basically prints out that whole paragraph, but only highlights the entities, and it tells you what is the type of the entity. So Colombia is a GPE, meaning a geopolitical entity, Arango, same thing. I don't know how come it missed Gilberto. I think Gilberto Arango should be a person. It basically missed this. This is a misclassification, the Gilberto Arango, the whole thing should have been a person, but anyway, it did good for most part. Reuters is an organization. March 13 is a date. Colombia, geopolitical. April is a date. This is a cardinal meaning number. This one is this calendar year up to April 6. So the whole thing, it combined together and says, This is a date. Look at this one. This is cool, roughly 440,000 it took the roughly, and this together and say, Hey, these two together is a number, meaning a Cardinal. So that's like another cool feature. Similarly, let's say if you want to take all of these entities for all the articles that are coffee, and then if you want to retain only the ones that are geopolitical entity and organization or or organization, you can do this. This is just another possibility. If you want to retain some entities matching certain specific type, you can do that, which is what we will be doing here, and that will give me all the geopolitical entities, or all the organization across all the articles under the coffee category, and by taking a quick look at first 20 of these, I hope you can see how spacey did actually a really good job finding all the geopolitical entities and organization right now, If you want to add it to your stop word, you just have to take this as a custom stop word and provide your Vectorizer with this, and then this will be treated as stop words.
+
+Speaker 1  2:32:40  
+Okay, so that's about it. And you can do all these fancy stuff. You can actually, yeah, so these are all the geopolitical entities. You can find the most frequent entities, similar to how we did the most frequent adjectives there in the previous activity. And then you can find which entities occurring how many times? And you can then play side by side to basically make it look like a nice, cool data frame, which entity is occurring, which how many times? So lot of feature in this space library. Feel free to play around it, around with it. And when you guys are going to do the project, if you think that there are some ways that you can possibly use some of these feature to maybe not at the first iteration. Let's say you are trying to do either a text generation model or text classification model, and your model is not getting a very good accuracy, maybe that's the time you might think of, hey, let's do something like this, right? Let's, let's try to help the model by removing some of those things that might actually causing the model to kind of a diverge from the from what the goal is, right? So you can think of those and when, when the time comes, you can basically discuss that with Karen Kia and Aras like all of us, right? So, anyone of us so? So that will be all for today, and this time I went 15 minutes over, almost 13 minutes over. Wow. Okay,
+
+Unknown Speaker  2:34:19  
+thank you. Bradford.
+

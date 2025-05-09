@@ -1,0 +1,1467 @@
+Unknown Speaker  0:00  
+But we are about two minutes over
+
+Speaker 1  0:05  
+five people. Attendance is little lower, but let's get started. Hopefully some more people will join you. Someone else joined. Okay, cool. So today's class, guys, as I mentioned yesterday, we are going to learn about a cute little animal, right? His name is pandas. I'm just kidding.
+
+Speaker 2  0:33  
+It's not only one animal. It's a couple, right? Multiple animals, pandas, multiple
+
+Speaker 1  0:42  
+okay? So this is one library that is going to be your best friend from now onwards, throughout the remaining of the boot camp, because these library, as I was mentioning before, allows you to load data and slice and dice the data, filter the data, kind of things that many of us are used to do using spreadsheet software, like either Google Sheet or Microsoft, like MS Office Excel, it allows you to do similar thing, but In a much more, I'd say more intuitive way, or maybe I am biased, like people like I sometimes have gotten in fight with some of my colleagues. They say, Hey, why are you doing this in Python? I can do better in Excel. Maybe, yeah, to some extent. But if you know how to do it with Python using libraries like pandas, there is basically no going back. Okay, so in this class today, we are going to learn something that is called data frame in pandas, which is kind of the core concept here. So whenever you see the word data frame, think in your mind one spreadsheet that has a bunch of rows and columns. Maybe you have some column headers, and you have row headers, which we also call indexes, and you have a bunch of data in the cells, right? So that's essentially what a data frame is, except this data frame is loaded into your Python memory, and then you can print it. You can tweak data in it, you can do some operation and different kind of things. So learn about data frame, and we will also see how we can load data from a file into the data frame. And then we will look into how we can slice and dice and filter the data using various condition and then we will also learn how to export data from a data frame into a file to save the data. So these are some of the agenda item in today's class. Okay, so as I was saying before, so these are some of the pain points, as you can see here. So it says, Yeah, Office Excel is expensive. Google spreadsheet is not as advanced difficulty in auditing complex cell formulas, slow workbook for large files, automation and custom function you have to learn macros and VBA and data is in a static spreadsheet and all of that. Now, out of all of these, I have personally felt two main challenges when you work with Excel. One, so first of all, lot of advanced filtering functions formula that you can do with pandas. You can do that directly in an Excel Office Excel software as well. But the biggest problem is in Excel, as some of you have already probably known, when you have a whole bunch of data, there is one gigantic Excel file, and it becomes very heavyweight, very clunky. So imagine if you have, let's say maybe, 100 gigabytes of data, which is not uncommon when you are trying to train a machine learning model. And if you have to, let's say you get these 100 gigabyte of data from somewhere now, looking little bit forward into we will learn this later in further details, when we are basically going to talk about the different stages of machine learning. One of the first stage of machine learning is to get the data and cleans up the data. Because often time when you are going to get data from various sources, the data is going to be noisy. There be some missing data, right? There are there will be some smoothing. You need to do some kind of a pre processing you have to do before you feed it into a machine learning model. So imagine doing that on an Excel. Theoretically, you can do all of these on an Excel or any spreadsheet, but the problem is then you are loading these 100 gigabyte data into memory, and the Excel almost becomes worthless. When you have such a large volume of data, another problem is often time you are going to have to pull this data on the fly from some other source on the web using what is known as API, which is also one of our class. I think week week six, I think we are basically going to talk about how to source data from external sources using API. So it so happens that Excel is not so good at connecting to external data and pulling the data data source and pulling the data from there. So mainly two reason I stay away from Excel and use pandas is, first of all, Excel is very clunky, and it does not have give you a very good ability to pull in data from remote sources, right? The third thing is, in Excel, your data and formula everything is together, very tightly correlated to one other, right? So if you have a Excel notebook that get corrupted, God bless you. Okay, in pandas, the way that approach that we are going to see, we will see that the data can happily live in a file in your file system, and you can have it safely stored somewhere. You are only loading the portion of data that you need to just in time for doing the processing through Python program, and then, once you are done, your Python program saves the file back again and you are done. So even if, let's say there is a whole bunch of data that you had to load and your Python program ran out of memory and it kind of crashed, the program kind of hanged up on you, right? Hung up on you. No big deal. Your data is still safe because data is separately sitting somewhere, safely in a file. And these are some of the reason the data scientist do not use any spreadsheet. They use these type of libraries, which, in this case is pandas, to operate on data, to do data manipulation, cleansing, transformation and those kind of operations, right? So that's kind of the why, why we use it any question before we move forward.
+
+Speaker 1  7:15  
+Okay, so here, what we are showing here is using Pandas, essentially what we will be doing is we will be creating, as I said, whenever we are saying data frame, think of like an a spreadsheet, kind of taboo here, with rows and columns. So there are two main things that we will be learning, first, which is how to read data from file or some other variable into a data frame, which is basically a spreadsheet in memory, and then how we write data from there into some file, one when our work, our done work is done. So this is one of the major value proposition in pandas. And another concept is series. So data frame we talked about. So data frame is basically think of it as a two by two. Sorry, two dimensional table. You have a row set of rows and set of columns and series. You can think of each column as a series. So you can essentially think of a data frame as composed of multiple series. So anything that goes vertically, this is a series in pandas. So in this example, for example, the graphic on the left hand side, you have four columns. So you can think of this as a data frame that is composed of four series. Each series is a column, but series itself also is a first class object that you can create from one list of data. So essentially you will see as when we jump into the code, a series is basically a list. So one list that we have used in Python before, you can basically make a series out of it, and when you have multiple of these series appended side by side together, you basically get a table, and that is your data frame. So that's kind of the basics of the data structure and the two main data structure that we'll be using, data frame and sales. And then we will jump into the code to do some demonstration. Sorry, was there a question?
+
+Unknown Speaker  9:22  
+Yeah, I'm sorry I couldn't
+
+Speaker 1  9:23  
+have the chance to join the class from the beginning. Maybe you explained it before, but how panda library is different than Python library and how it's important for data science program? Yeah, so that's basically, that's what I explained. So first of all, pandas is a library. So keep in mind, Python is not a library. Python is a programming language on Python. On top of Python, you there are multiple libraries that you can use. Pandas is one of those many, many different libraries that are available to you. So. Okay, and to your other question, the short answer is to do data science. You use pandas because it allows you to load large data sets into Python memory and do different data transformation operation on your data rather easily using very simple commands. That's kind of the short answer. Why you use
+
+Speaker 3  10:24  
+it. Okay. Thank you so much. Hi, but no, sorry. One more question, if you don't mind, is there any way we can also use things like Oracle SQL, you know, any of the SQL program to do those go SO,
+
+Speaker 1  10:38  
+SO SQL program you can use to do data manipulation? Yes, but people have in the industry as a whole, has moved out of that paradigm where people use SQL to do data manipulation. Because the thing is, SQL is really good at directly reading and writing data into database, but the way that the most SQL engines are designed the moment you put more and more processing logic the SQL program, the SQL engine gets really, really sluggish, really slow, really sluggish. So while the answer to your question is, can you do that? Yes, you can. Should you do that? No, you should not.
+
+Unknown Speaker  11:19  
+Okay. Thank you. Yeah. You
+
+Speaker 4  11:26  
+it, yeah, so on the you said there are libraries. Pandas is considered a library.
+
+Speaker 1  11:35  
+And so that's you remember how we did the import statement in some many of the previous classes. Yeah, similarly here, you basically do an import statement and that imports pandas. So I have to select my kernel. So you see when I say import pandas, and it imports a pandas. So you see there is a green check mark here appeared. So, oh. Another thing is all the activities and examples that we will be doing in this class, and in the following class, you will see we are going to use the Jupyter Notebook for all of these, which has the extension of dot i P y, n, b, as opposed to simple dot p y extension, which are your plain Python files. Because what happens is, whenever you are manipulating data, to doing transform, interacting with the data, it makes it way more simple to have this kind of interactive ability. So that you can have little bit of code in a cell, you can run, you can see the output, and then you can move up and run the same cell. In any order, you can clear the output, rerun it again. You don't have to go back and and basically running the whole Python program from terminal. That becomes really, really, really, really inconvenient when you are doing lot of data processing. So for that reason, we are going to be using Pandas library from this class onward, using the Jupiter notebook, right? And I hope you all, you guys all have your conda environment set up, which you should have done during the first week of the class, and you should be able to open the Jupyter Notebook even from inside your Visual Studio Code, although I think you do need to install a VS code plugin in order to be able to do that. If you cannot, then you can run these Anaconda navigator here, and you can get to your Jupiter notebook through your Anaconda navigator. And I will come to that. So let me do some demo first, and then, before we break you guys out into breakout room, I will make sure that everyone has either VS code extension for Jupyter notebook or a conda separately installed that they can actually run a Jupyter notebook in their system. Okay, so our first demonstration, I just proved here that pandas is a library by doing this import statement, import pandas, and I hit display button, and it ran just fine with the tick mark. It basically shows Yes, pandas can be it's imported, just like any other libraries. Now one thing is, pandas, right? How many characters? Six Characters, not that many. But the thing is, throughout the program, the all of these statements that we will be writing, we have to write lot of pandas. Dot these pandas dot that like so that basically means you have to type pandas over and over again. So that's why, in industry, it's kind of almost become a de facto standard that they put a pseudo name for pandas. So when you import a library, any library, not just pandas, you can say, import library name, but if the library name is very long, you can add a shortcut shorthand to it. So in this case, people usually use PD for pandas. So import pandas as PD has. Kind of synonym becomes synonymous to the data science. So anyone learning data science, this is probably the one import statement that that they start their learning journey with, import pandas as PD. Why PD? Because, well, instead of six characters, now we have to do right type, two characters anywhere we use any pandas functions. So that's why people always use PD, so if I do import pandas as PD, so import is done, and now we are going to use the pandas, right? Okay, so first thing we are going to look into, and I'm going to refer back and forth to the slide. So here, remember I talked about two different kind of data structure. One is a one dimensional list, and then another is a two dimensional table. So this one dimensional list is called series, right? So first, we are going to learn how we create a series in pandas. Okay, so how do I create a series? Well, it's very simple. PD is our library. You simply do PD, dot series, and your series is created. But well, when you are creating a series, it is just like creating any other variable, right? Like for your bank account class from your previous year studies class, right? You had a bank account library, and you said, import bank account. And then you basically say, bank account, but then you have to pass some parameter to it, right, like balance or whatever it is you had in your init method. So here series is basically a class that developers have built, and then, if you just do pandas, dot series, yes, it will create that series object, but there would be nothing in it, right? Also, just like any of your other object, when you are creating this, you have to save it in a variable. So let's call it my series. So So now, if I run this, there would be a series variable in the stored as my series. But is there anything in the series? Well, let's just first see what type of variable my series is, and it should tell me that it is a series type variable. Yep. So when I apply type, it says it belongs to this class hierarchy, which is under pandas. There is a library called core. Under core, there is a library called series with a lower s, and under that, there is a class called series with an upper case s, and that's where this series object class definition is residing. So that's what the class type statement tells you right now, if you want to just say, if you just want to print a series in Jupyter Notebook, you can just name that, and it will print the data inside the series. So here it says series. And you see here there is a pair of empty square brackets with nothing inside it. And why is that? Well, because we created series here passing no parameter, so we didn't really pass any data to the series, right? Because first, I just wanted to show you how a series is created, and now we are going to make this series little useful by passing it some data. So what kind of data should I pass when I invoke the series? Can someone take a guess, especially looking into this diagram here, what do you think I need to pass to series in order to bootstrap the series with some valuable data? What kind of what kind of parameter I need to pass here? List? Yeah, a list, because that's what it is. As I said, this is a one dimensional array of numbers, or not numbers, any data, right? So obviously it's a list. So if, let's say, I create a list, let's call it students. So let's say student is a list, and we have some students. Let's call some students. I can see Blair here. I can see, oops, it has to be basically a list of things, which, in this case would be just
+
+Unknown Speaker  19:25  
+names of people,
+
+Speaker 1  19:28  
+right? I'm just typing few name that just comes to my mind. It's not that these people are specially favorite for me, though. It's just some of the names that comes to my mind. Okay, anyway, so we have a list, right? So now students is a list, as you guys already know, because it is enclosed within a pair of square brackets. So that makes it a list. And now I can take this list and throw it to the series class constructor, and that is it. So that way I now will have a series with some data in it. Now I'm going to come here and rerun this cell and you will see now you will actually be able to see this data in here as a series. There you go, right now. What is the difference between this and this? So let's say if I also now print just students, which is the plain vanilla list. No, oops, sorry, not the whole students. I just want to print the list. So this is this students. Is a Python list, basic list, right? And you see how this list is printing. It basically just prints like the way that you declare it. But when I take this list and wrap it into a series and then trying to print the series, what is the difference that you see from this output and this output, there's an index, there is an index, yes, so that basically tells you that, wait a minute, it's not just a plain, simple series. There is something more going on here, right? So now question, what? Sorry,
+
+Unknown Speaker  21:13  
+is that a question? Yeah,
+
+Speaker 5  21:15  
+what is the difference between? So this indexes it and puts it in a list. Is there a difference between what enumerate function does.
+
+Speaker 1  21:25  
+So enumerate function basically works on Python iterable objects. This is not a Python iterable object. You will see in a moment that you can do lot more stuff with these objects that you cannot do with the Python iterable plane, Python iterable. Okay, thank you. Okay, so now we have, we know how to create a series. Now, how about this thing? Now, data frame. How do you think we can create a data frame? Series is done. So let's create a data frame. So what do you think I have to call on PD data frame? Yeah, often time it's very intuitive. If you want to create a data frame, you call the data frame right, and let's call it my frame
+
+Unknown Speaker  22:18  
+right, and that creates your data frame.
+
+Unknown Speaker  22:22  
+But now, if you print my friend,
+
+Speaker 1  22:27  
+there is even no output produced, because there is nothing in it. This cell ran, but it didn't produce anything. Okay. Now we have to supply some data to this similar to how we supplied some data in here. Now, what comes to your mind? If I say, hey, I want you to think about a data structure that has some row and column that you are going to pass to the data frame. What kind of structure comes to your mind? Table, dictionary, dictionary. Okay. So I'm just brainstorming here. What you are saying. So what is a dictionary in Python? Keys and values. Keys and values. So if you do pass a dictionary, right? So keys and values will translate to what? So let's say this is a table and columns and rows, but if you have a key and value, key and value, key and value, key and value, let's say that will give you all the columns and the rows. But how about the multiple rows? What do you do about that? It would need to be a list of dictionaries or dictionary if you list, if you pass one dictionary, it will all it will create, but it will create only one row, but there are multiple rows. So I want you to able to kind of relate that, like, what is a dictionary in this? So if you, let's say the name of the first column is, let's column A, Column B, Column C, Column D. So if you do have to pass a dictionary, then the dictionary keys will be similar to same as your column name, which is column A, B, C and D, but then the values that you are passing, those are just one values you are passing, and that will create just one row. But in general, data frame needs to have multiple rows. So what do you do? Well, you pass list of dictionaries in series. You just passed a list of items, and those items could be your string or integer or float, those kind of thing. Here, you also pass a list, but the items in the list are dictionaries. So there is one this is one way to create your data frame.
+
+Unknown Speaker  24:50  
+What is the other way you can create so.
+
+Unknown Speaker  25:01  
+With a dictionary of lists.
+
+Speaker 1  25:02  
+Yes. So other way you can create you can so when you say list of dictionaries. So basically, one dictionary will give you first row and the keys will give you the column name. The second dictionary in the list will give you the second row, but the keys have to be sent, which will give you the column name and so on.
+
+Unknown Speaker  25:22  
+The other way to think about it as
+
+Speaker 1  25:27  
+so I'm going to type basically two things into cells. So I'm just making some placeholder so I'll say dictionary, not dictionaries, dictionary of lists. So basically, the idea is, when I use this approach, I'm going to have only one dictionary, and that dictionary will have, let's say, four key and each of the four keys will turn into the column name, and the value against those four keys will be a list each and each of these item in the list will basically provide a column, basically kind of a series. So these are the two approach we can use to create a data frame. Now, which one would you use? Well, it kind of depends on a case by case basis, like what kind of data source that you have, so wherever you are getting this data from. Often time, you will see that your the nature of the data structure is kind of dictated by the source where you are getting the data frame data from, and you kind of have to adjust your data frame loading command that way to make sure to basically align whichever makes sense, right? So I'm going to give you two examples here. So first, we are going to do a dictionary, sorry, list of dictionaries. So let's say I want to create a data frame where we will have, let's say, three column. So the first column would be, let's say state, oops, it's coming. Let me see. Can I change the color here? How
+
+Unknown Speaker  27:20  
+do we change text?
+
+Speaker 1  27:23  
+Yeah, okay, so let's say I want to create a data frame that will have columns as state and then let's say abbreviation, like two letter abbreviation, and then state capital, right? And then I'll have, let's say New York NY, New York City, right? Similarly, we have Washington WA, Seattle. So we want to create a data frame with this data. So now, how I can do that using a list of dictionaries, right? So Well, we can have a dictionary that says state, and what is the name of the state, let's call it Washington, and then we will have another key that will say abbreviation, and let's call it wa and then we will have another key. We'll call it capital. Anyone knows what is the capital is for Washington? Olympia, yeah, it's not Seattle, okay? So now we have one step like that, but we need to have multiple of these, and that's where the list of dictionaries come, right? So what we are going to do, we are going to basically put it inside list like that, and then we will have multiple of these, one for each state. Okay,
+
+Unknown Speaker  29:07  
+let's say New York
+
+Unknown Speaker  29:16  
+NY
+
+Speaker 1  29:19  
+and let's say New York City. Let's do one more. Any other state I should include. What's the capital of Utah? I don't know,
+
+Unknown Speaker  29:34  
+Salt Lake City. Is it? Salt Lake City? Actually?
+
+Unknown Speaker  29:40  
+Yes, yes, it is okay, and New York City is Albany,
+
+Speaker 1  29:45  
+oh, actually, that's not New York City. Yes, that's Albany, yeah. Sorry, thank you for correcting that. Okay, let's add one more. This one I know because I'm in here, which is. Michigan MI and the capital city is Lansing, so we have four which is enough. Now, obviously this is going to be a list, so let's call it
+
+Unknown Speaker  30:15  
+states list.
+
+Speaker 1  30:18  
+So now we have a list of dictionaries, right? So you guys all see and agree that this is a list of dictionaries.
+
+Unknown Speaker  30:26  
+How many items we have in this list?
+
+Unknown Speaker  30:30  
+Four? No, not three, four.
+
+Speaker 1  30:34  
+Each of these four items have three keys. So that means, essentially what I mean. I'm going to turn this into a data frame, there will be four rows, and each row will have three columns. Okay, so now let's I'm going to pass this steps list to these data frame constructor, and instead of my frame, I will say, let's call it something different. Let's call it state strand. Okay. And now I'm going to try to display how state stream looks like. Bingo. See what I told you. You will get almost tiny Excel, like spreadsheet. You have state aggregation capital, Washington and all of this. And you also have the row numbers, which is basically the index, 0123, okay, now let's do the other one, which is dictionary of list. So what can I use for dictionary of list?
+
+Unknown Speaker  31:44  
+Can you do the same thing?
+
+Speaker 1  31:47  
+I can probably do the same thing, if that's what I'm thinking. If I want to do the same thing, how am I going to do Yeah, so I can basically take that same data, but I'm going to have to convert into a into a single dictionary that have multiple key value pair, where the keys are going to be state abbreviation and capital and the lists will be Those, right? So we have got some work to do. So yeah, so then I cannot really do copy paste, essentially, because, yeah, so to so let's actually type it. So we have to say stats, dict. Let's say, and that's going to be my dictionary. And as you know, dictionary means it starts and ends with a pair of curly brackets, not square bracket. And my first key, I'm going to say, state, the column name, and then there would be a list. And the second key would be
+
+Unknown Speaker  33:05  
+abbreviation,
+
+Speaker 1  33:08  
+and then there is going to be a list for that, and the third one would be capital, and there is going to be a list for that. Now, what are these items in the list going to be? Well, this is where I have to put now across, right? So I have to say Washington. Here, in practice, you are, this is you are never actually going to hand code this, right? This is just, I'm demonstrating you how what kind of data structure you can use to create your data frame. In practice, when you will be creating your data frame, your data will almost come, always come from external sources, either a file that is sitting somewhere, or from a database or from some other API that you are calling over the web. Okay, so then I have all the four states listed. Then I have to provide the abbreviation in the same order, which will be WA and then NY,
+
+Unknown Speaker  34:16  
+and then UT,
+
+Unknown Speaker  34:20  
+and then MI
+
+Unknown Speaker  34:25  
+and then finally, for capital,
+
+Speaker 1  34:29  
+again, I have to provide that exact same order, Olympia, followed by
+
+Unknown Speaker  34:37  
+Albany,
+
+Speaker 1  34:40  
+followed by Salt Lake City
+
+Unknown Speaker  34:48  
+Lansing.
+
+Unknown Speaker  34:53  
+Okay, and
+
+Speaker 1  34:56  
+I am going to now, sorry. I don't need state list anymore. Now I'm going to create states frame using this dictionary, this time, not the list, and let's see what the status frame gave me, whether I get the same data frame. Bingo. So you see these two data frame looks exactly the same, but they are built different way. The first one is built row by row, because each one of these item is one row, and this is first row, this is second row, this is third row, and this is fourth row. When these are combined, you get a table like this. So this is one approach using list of dictionaries. Second approach where we build column by column. So here this first entry State is one column with Washington, New York, Michigan. Secondary abbreviation is the second column, which W, A, n, y, U, T and M, I, and then so on for the third column. So here these, these are kind of sandwiched side by side, and the result is you get the same data frame. Okay,
+
+Unknown Speaker  36:17  
+question, comment, observation. So
+
+Unknown Speaker  36:24  
+is there any benefit to one or the other?
+
+Unknown Speaker  36:29  
+You tell me, what do you think?
+
+Unknown Speaker  36:32  
+I guess it just depends on how your data is coming in exactly.
+
+Speaker 1  36:35  
+That's what I said earlier. Because here I'm just typing creating some cosmetic data by typing it right. But in reality, the data source, how the data source is structured, it's kind of not really in your control, so it basically depends on that.
+
+Speaker 6  36:52  
+But if you had the opportunity to control the structure of the incoming data, Would you, could you essentially prescribe that in a beneficial way? Or it doesn't really matter.
+
+Speaker 1  37:00  
+Um, well, one thing I can say is the second approach is little bit better from a memory requirement standpoint, because here you have, you see here in the first one, your keys are being duplicated, right? So you have same keys, state and abbreviation and capital repeated over and over again, and that basically increases the memory footprint of that input data structure. But here, if you have three keys, and the three keys are only once, so as you can probably see, this dictionary will have lot less memory requirement than your list this. So this is probably a little bit better, but after you load either of these two into data frame, in the pandas data frame, there is going to be no difference. Thank you.
+
+Speaker 1  37:57  
+Okay, cool, so we covered all of these, and then we have an activity. So let's see what this activity is. So this activity is number two. So create a data frame for a frame shop three rows painting, price, popularity, and have four rows of data stored with it, you basically have to use that same thing that I showed you to basically create these two data frames, one using the list of dictionary and then another using the alternative method, which is dictionary of list. Okay, so for that, you have been given a solution file, sorry, unsolved file.
+
+Speaker 1  38:53  
+So in unsolved, oh, okay, so here the data is given in dictionary, so you have to create the list, and you have to create the data frame yourself, and then you have to pass this with the pandas data frame constructor. So that's essentially, is your job. Okay? So now, before we get into the breakout room, Can all of you confirm that whether you can open and run these unsolved file for this assignment, either using Jupyter Notebook, on browser or on VS code, either of these two way. Is there anyone who cannot run any of these two ways? How do we know? Well, so let me ask you, how are you accessing these homework assignments or not? Homework class assignments,
+
+Speaker 4  39:48  
+the same place you are I'm in vs so do you so
+
+Speaker 1  39:52  
+do you have this thing, just like as you see in my screen? Do you have the same Yes. So what happens when you double click on these? One of these? No. Book files does as this thing open up, just like it has, where you have this little run button, yes, yeah, and then try running it. So when you first run it, there will be a pop up that come up at the top. It will basically say, hey, select the kernel, because first time when you are opening a notebook on your machine, it is not associated to a Python runtime. So kernel basically means which Python runtime that you are using. And these will be one of your virtual environment, which I believe you all use the name called Dev, d, e, v, and that's what I did, too, during the first week of our classes, when we created right? So that's one is going to show up here, and I select this, and immediately that dev kernel shows up here, and you just have, only have to do it for the first time run, and then you just click this, and it runs. That's all.
+
+Speaker 4  40:57  
+I don't see the dev like when I go into my terminal, I type in dev, it pops up. But when I go to select kernel, it just says Python environments or Jupiter kernel.
+
+Speaker 1  41:07  
+Okay, so let's do one thing. So that's one. So who is this? May I know I'm not seeing everyone get this. Ryan, Okay, anyone else having any question in running Jupiter notebook, or everyone else is good. Everyone else is good. Okay, so let's do one thing, Karen, so let's break go into breakout room, and we have about 30 people, right? So there's, Let's do five and five, yeah, and then, Ryan, you said that you have some question. I
+
+Speaker 7  41:43  
+think what I'll do is I'll add a room that'll be empty initially, but we can always move to that with someone if we want, how's that sound,
+
+Speaker 1  41:53  
+or maybe, let's add everyone to the room. And if Ryan or anyone have some question, that's just stay here in the main room here for a couple of minutes, and then, yeah,
+
+Speaker 7  42:04  
+that is sixth room. It'll be empty, but if people wanted to use it, just
+
+Speaker 1  42:08  
+stay here. Just stay here. Just figure that out how to run these Jupiter Notebooks. And then you can Karen. You can then send him to one of the rooms.
+
+Speaker 7  42:17  
+Okay, so I'm just going to open the rooms. Yeah, and everyone go there, and then we can come back and they need to
+
+Speaker 1  42:23  
+Sure. Let's do 15 minutes, okay?
+
+Unknown Speaker  42:27  
+And I think that's what I said, Yep,
+
+Unknown Speaker  42:31  
+okay, hit it.
+
+Speaker 1  42:46  
+Okay, so now, do you want to share your screen? Gary, you had question, right? Hello, you are on mute if you're talking. Gary,
+
+Unknown Speaker  42:58  
+Hey, there we go. Sorry. Yeah.
+
+Unknown Speaker  43:04  
+Hold on. I gotta get back in the zoom. Share my screen.
+
+Speaker 1  43:17  
+Okay, yeah, so now you hit, hit that little play button next to the first cell. No, not that one, yep, yep.
+
+Unknown Speaker  43:30  
+Okay. So now click on Python environments,
+
+Speaker 1  43:35  
+and there is your dev at the bottom that one. Okay, yeah, yeah, select, click that, and you are golden.
+
+Unknown Speaker  43:43  
+Okay, awesome.
+
+Speaker 1  43:45  
+You're all set. Okay, that's all I need. So which room Gary is supposed to go? Karen somewhere, just
+
+Speaker 7  43:52  
+waiting to see if, see if it goes through. Does it take a little So, okay, I've installed an event. No, it's good. We're going as well make sure you had it installed too, just in case. Okay, so it looks good. So which you were in which room? Let's see,
+
+Unknown Speaker  44:10  
+I don't whichever one
+
+Speaker 7  44:13  
+I know, but I think you were supposed to be in one, whichever
+
+Speaker 1  44:17  
+room has one person list. Okay, I'll put you in room, 234, any one of these? Oh, room five, actually, yeah, that is one person less in room five.
+
+Unknown Speaker  44:27  
+That's it. Yeah.
+
+Speaker 7  44:43  
+That's good. I think we did better on getting people started, on making the virtual environment other cohorts, they haven't, and we end up a lot of people kind of lost at this point, just trying to get started.
+
+Speaker 1  44:55  
+Yeah, I'm actually very pleasantly surprised when everyone. Has their virtual environment, and then VS code, and they can just run Jupiter notebook. So much time, I was actually expecting a little bit noise, more disturbance here.
+
+Speaker 5  45:10  
+I spent a lot of time in the first two weeks getting people set Okay, now
+
+Speaker 1  45:14  
+you're so your hard work has paid off. We can see that. Yeah, I'm glad. Yes,
+
+Speaker 7  45:20  
+we're halfway through, halfway through things, and there's some package missing.
+
+Unknown Speaker  45:26  
+They don't even know what should what environment they're in and stuff. And yep,
+
+Speaker 7  45:33  
+I always was no this. Oh, sorry. My belief was always that for these courses, they should just have a requirements dot tech, you know, requirements file, and everybody at the beginning just makes an environment and installs everything in that, in that file that they'll ever need through the whole duration of the boot camp. Just do it at the beginning, you know, just list all the requirements for all the all the modules, and they just install something, and install all those things right away, and it's all good and done. We don't worry about it, yeah, but that's a moot point. We're not going to do another day. So
+
+Speaker 1  46:13  
+yeah. So I was having this conversation before the news came out with Maddie one of these days, and I was suggesting, hey, Maddie, I have some suggestion that I can I want to share with the curriculum team that will actually help the boot camp better. And then Maddie said, I guess she also didn't know that this news is going to come down the pipe. And she said, Oh yeah, I'll connect you with someone there, and then we can have a conversation. Suggestions are always welcome. And then, oops, the following week, this thing
+
+Unknown Speaker  46:49  
+came down. Fantastic, yeah, like,
+
+Speaker 7  46:55  
+like, I was talking about my beginning of interviews for Google getting pulled out from under the rug because they because they laid off the recruiters I was talking with, yeah, all of a sudden it's like, well, that's not going to happen now, and here I already was building a history with them, right? So start from zero again. You know, it's kind of really discouraging. I
+
+Speaker 1  47:32  
+Yeah, but this assignment, I probably would have given them just 10 minutes, but since it's their first time being exposed to pandas, I said, Okay, let's do 15.
+
+Speaker 7  47:54  
+Yeah, I really prefer using Jupyter notebooks and VS code and Jupiter. Does you have much more of the context, that much more the auto complete, much more richness. The other thing I like even better than that is using colab in colab, colab, Google, colab, yeah, yeah. VS code is more like that in some ways. That works, yeah, but yeah, and colab now as their Gemini AI that you make it, you have an error in in colab, and it says, you know, have to explain this error. And you do that, it opens up the side window on the side with the AI, and it tells you what the why the air is happening. And you could, you actually have a conversation with it about how you should figure out you can fix it. Yeah, pretty cool. You can ask questions and it'll suggest a fix, but you can ask questions about that fix and stuff and learn from it. I was like, I thought that was pretty impressed when I saw that recently. I
+
+Speaker 1  49:17  
+Okay, I am going to be walking out for a couple of minutes. I'll be back,
+
+Unknown Speaker  49:21  
+maybe I'll see What's happening in the room. Yeah,
+
+Unknown Speaker  53:07  
+Was it
+
+Speaker 1  53:10  
+so you guys were all able to do it independently? Yes, yes, nice to know. Do we need to review.
+
+Unknown Speaker  53:23  
+Yes, no, good.
+
+Unknown Speaker  53:25  
+Yes. I had a quick question for you,
+
+Unknown Speaker  53:28  
+yeah, before we review
+
+Unknown Speaker  53:32  
+when I printed
+
+Speaker 8  53:34  
+or when it when I got the table below the Price column came over with only one decimal is there? Do you, if you were to how would you get the two decimals in there? Do you have to do it number at a time, or can you do the entire thing?
+
+Speaker 1  53:57  
+You can do the entire thing, but I have to look into it. That's a good thing that, you know. So, oh, okay, so for the second one, you were saying, yeah, these ones are all integer for the second one, right? Yes, yeah, yeah. I'm sure there is a way that you can apply the formatting. Let me look into it. I'll probably look into it over the break, and then I'll come back with the solution. Okay, you think you have to do it. You don't have to do a loop. There is something that you should be able to apply across the
+
+Speaker 9  54:25  
+board. There is a methods called as type in pandas, and that should be fast
+
+Speaker 7  54:31  
+type. There is a way to format a floating point value, and I don't remember it either,
+
+Speaker 1  54:37  
+but yeah, so as type, basically, when you are changing from one data type to another. Here, the question is, how I can make it print, let's say two decimal, right? Because it's money. Oh,
+
+Speaker 9  54:49  
+you can use the function NP, dot round, and yeah,
+
+Speaker 1  54:55  
+might not know dot round will probably not do it anyway. We'll. Into it. That's fine. Yeah. Anyway. So basically, everything on
+
+Speaker 8  55:04  
+there, on the chat, you just posted it. Thank you. We will look into it, and then we will post
+
+Speaker 1  55:10  
+it. Or, thank you so much after the break, thank you. Okay, so here the first one, yeah, let's, let's keep it aside for now, Carol. Or if you want to do you do some search yourself. Let's do that. And I
+
+Speaker 7  55:24  
+was actually talking to myself just saying I forgot I was so not very okay,
+
+Speaker 1  55:29  
+cool. So the first one you have four things right, which are each, each, dictionaries. And then you have to create a list, right? So you can create a list, and say, paintings, and then this list will have row one,
+
+Unknown Speaker  55:49  
+row two,
+
+Speaker 1  55:53  
+row three, and all four rows, basically row four. And then we have to create a data frame. Let's call it
+
+Unknown Speaker  56:04  
+paintings.
+
+Speaker 1  56:08  
+Underscore DF, meaning paintings data frame, which will then be PD, dot, data frame, and then you pass that list that you created, which is paintings. And then you basically print it, which is just the name of the data frame, and that should be it. Okay,
+
+Unknown Speaker  56:33  
+so you guys did the exact same way.
+
+Speaker 1  56:40  
+Yep, okay. In the second section, they have given you three list, and you have to create the dictionary, right? So frame on it, classical frame column. Okay, so let's say call it frame dict, and we have to basically create a dictionary with a key value pair. So the first one is, let's say call it frame type and the value for that frame type key would be your frame column. And these frame type the key that I have decided here, this will basically go as a column header when I turn it into data frame right second one is frame price, so let's call it frame price, and then it will be price column, and then the third One is sales column, okay, so let's call it uni unit sold something meaningful. And then we pass cell scholar. So that is our dictionary of lists. And here we basically have to create a frame DF as a variable that makes sense, and then same as before, PD dot data frame, except here we are passing the dictionary, which is our frame date, and then PRINT FRAME DF, and that will create this output. So as you can see, the three keys that I chose, they all turned into the color headers of this little table. Okay, so I hope you are all able to get it if there are no other question, let's move on.
+
+Speaker 1  58:59  
+Okay, so in the next section, we are going to learn how to load data from a file that is sitting outside your Jupiter notebook file, and why this is important. Because in reality, whenever you are going to do some machine learning project, you will very often get these as CSV files, like from Kaggle or any other data source, or in many cases where you will see that your assignment will give you CSV file, just like the case here. And then you have to load the data from the CSV file, so you don't have to type all the data. Data is already there. And then we will load the data, and then we do some data analysis, and then once we are done, then we can back up the data using another file and so on. So that's what we are going to do. So we are going to do some demo here. Now, when it comes to loading the data from a file. So there is one thing you have to keep in mind is what kind of what is called, what kind of encoding that you are using. So these are the four different kinds of encoding that are available, and depending on which type of encoding that the file chooses, you have to match the corresponding encoding in your pandas CSV read command or function so that no characters are basically loaded as they are supposed to be loaded. So if you don't specify what kind of encoding that you want to choose by default, pandas assume ut of 16, which is a 16 bit Unicode character, and almost always you will see that any data that you will have English language, text and number, UTF 16 is good enough. ASCII is also good for many of the cases. But ASCII is kind of limited, because it can if the data does have some special symbols and stuff, then ASCII will basically blow up. ISO 8859, is good because it is kind of an international standard and non English language character and everything, so it can interpret everything correctly. But for our purpose, if I just do UTF 16, that is good enough, or if I just omit the encoding for now, as I said, the default is UTF 60. So we will see that in a demonstration, which we are going to do now. So for this one, you will see that here there is a folder called resources, and there is your file. So you see the file name is dot CSV. When I double click on the file, it basically gives me the plain text file and why it is called CSV, because it is comma separated value. So if you look into each of the lines of these files, this file, except for the first one remaining of these basically have data, and the data follows the exact same format for each of the row, which is the ID followed by a comma followed by a person's name and a comma, again, followed by the person's email and The person's gender. Only exception being the first row, which basically serves as the column header for these things. Okay, so this is the file that you will be loading using Pandas into a data frame. So let's get started. So what is the first thing we are going to do, just like we do in everywhere else. When we do a pandas project, which is import pandas as PD and selecting the kernel, and then run it, it is running and is done. Now we have to know where my file is. So the file path. So where is my file path, or file path? So you have to here, provide the file path using the same syntax. When you did that, remember, in the first week when we were doing the terminal, we were using the cd command. We are doing CD these folder name, and it will go into a folder name. If you want to go one folder up, you will do a CD dot.so, that's the same type of convention here you will be using. So now this particular Jupiter notebook, name, a, three dot, i, p, y, N, V is sitting in this folder. Now you have to figure out where the data file is. So data file is not in this folder. You have to go one level up here, and then inside there, there is a resource folder. And then inside the resource folder is your data file. So you have to specify the path accordingly, and from this current folder relative to this current folder, we are going to say dot, dot meaning go one folder up. And when we go one folder up, then we know that there is a folder named resources. And inside the resources there is a file named data, one dot, CSV. So that is the file path that we are going to load the data from. And then the magic happens when we use this particular pandas function called read CSV. So now, before I do that, I just want you to take a quick look at this, and these are the different read statement that are available here. And you can see that you there are actually a whole bunch of different kind of sources that you can read the data from. For now, we are going to use CSV so. If you had an Excel file, you can even read it from Excel file or a JSON file or an HTML file or a parquet file or C file, and these are different special file format that people use for different purposes. So for now, we have a CSV file. So we are going to use read CSV and in read CSV The first parameter that we used to we have to pass is the file path, which is the variable i created in the previous cell. And that's it. And then optionally you can specify encoding. And you can say encoding is, let's say UTF 16. But even if you don't pass the encoding by default, it is UTF 16. And as we have taken a quick look, this looks like all English language names with some special character. Well, specifically one kind of special character, which is that at the red symbol. So I think even ASCII should be fine, but let's just go ahead with UTF 16 in case there are some non ASCII characters, so that we don't want to miss those. So now that is your pandas dot read CSV. Now, similar to our previous example, when we did pandas dot data frame, and then we have to store it in a variable. So this function was creating a data frame, and we are storing the data frame in a variable. So here this function is creating the data frame, which is read CSV. Now we also have to store it in a variable. So let's figure out a variable name. Let's say, what is this thing, persons, right? Well, let's use a meaningful name. Let's call it persons underscore DF. So this is also one convention that you might want to adopt whenever you see you are using a variable to store a pandas data frame. It is kind of customary, although not necessary or mandatory, to use an underscore DF. That way, anyone who is reading your code, he or she can quickly figure out, Oh, this must be a panda state of time, so just use an underscore DF at the end in the variable name.
+
+Unknown Speaker  1:07:16  
+Okay, so Ooh,
+
+Speaker 1  1:07:22  
+UTF, 16. Stream does not start with B, O, M,
+
+Speaker 5  1:07:26  
+if you, if you open up the data one dot CSV, you'll see in the bottom right that it's a UTF eight.
+
+Unknown Speaker  1:07:35  
+Oh, isn't it?
+
+Speaker 5  1:07:38  
+See in the bottom right where it says UTF eight, CRLF, CSV, prettier, ah,
+
+Unknown Speaker  1:07:44  
+here. Okay,
+
+Speaker 1  1:07:50  
+so let's do it that way. Then, okay, yeah, so it is not UTF 16, V double, okay, I didn't notice that, so thanks for pointing that out. Let me actually try one thing. What happens if I completely omit this encoding? Let's see if it still reads.
+
+Unknown Speaker  1:08:12  
+It actually does read, even without encoding.
+
+Speaker 5  1:08:17  
+Okay, so default beauty of 16 or UTF eight, beauty of
+
+Unknown Speaker  1:08:22  
+16. I thought,
+
+Speaker 1  1:08:26  
+oh, let's look into it. Pandas, read CSP. So if you go here, this is basically the official pandas API documentation and let's look for encoding.
+
+Unknown Speaker  1:08:53  
+Default is none. Default is UTF eight.
+
+Speaker 1  1:08:56  
+UTF eight, I think, yeah, inputting to you, no, hang on, huh? Default is UTF eight. Yeah, yeah. Sorry, my bad. Default is not 16,
+
+Unknown Speaker  1:09:06  
+probably adverse.
+
+Speaker 1  1:09:10  
+It says UTF eight here, Karen, yeah, I know, yeah. So it's a string. It's optional, and default is UTF eight. Oh,
+
+Speaker 7  1:09:21  
+because up here I thought I said, nod, I'm I must have gone by too fast.
+
+Speaker 4  1:09:24  
+So quick question down here in the bottom, where it said UTF eight earlier in the bottom right hand corner, it says prettier, or
+
+Unknown Speaker  1:09:32  
+here this one, yeah,
+
+Unknown Speaker  1:09:34  
+we'll go to the right too, where it says
+
+Speaker 1  1:09:39  
+this, I believe is coming from, yeah. So this is a basically a VS code plugin that basically renders the code in a pretty way so that has nothing to do with the file. So you see even how, how these different columns are coming in different color. That is because I basically have a plug in. All my VS code that basically renders this in a pretty way to have a better readability. So that's what that is. All right, thank you. If you don't have that plug in, and you open this, you will see all the text will come in one single flat color. But it's just because of the plug in. It's showing different color for the different columns. Yeah, don't worry about it right now. Okay, cool. So here we have loaded now, if you do persons, DF, so you see there are 100 rows it at the end. So it renders the sum rows. It is rendering first six rows and then last five rows. No, actually, first five and last five, and then at the end it says total of 100 rows. Why didn't render everything? Well, because it is too big to render, right? So if, if you do render everything, then it's basically kind of useless. Because the idea here, when you are loading data into Python, into pandas, data frame. The idea is not to be able to display all the data. That's not the purpose of it. So that's why, when you just display a data like that, it makes an assumption that, hey, you probably just want to see some data from the beginning and some data from the end, and that's it. Now, if you do not want to see five from the beginning and five from the end. You can use something called head or tail, and that way, you can actually tell handers which rows you want to use. Sorry, not use display. So if you do the data frame dot head, it will give you the first five rows, which you can see is this one. If you do dot tail, it will print you just the last five rows instead of last five. If you want to say, see last 10 rows, you can do tail of 10, and it will do last 10 rows. If you just want to see first 10 rows, you can do head of 10 in the same way. So the idea is, if you just use header tail by default, it will show only five, either from the beginning or from the end. But you can override that with any number as you'd like you just see those roles. The idea here why people want to see it is not so that they can go through these 1000s, or sometimes even hundreds of 1000s of rows, because that's not the point. But just to take a quick peek into the data and understand, oh, okay, this is the kind of data we have. So now you know what kind of process you want to do, mostly investigative purposes. Right? Not to print the whole data frame. That is never advisable. Actually, there is another function you can use if you just want to randomly look into some of those you can do that data frame dot sample, and that sample will give you only one random row from anywhere. So see, I ran it, it gave me row number 73 if I run it another time, it gave me row number 90. So it will basically give me one random row every time I run it, if I want to see more than one sample I can do. Hey, sample me five rows, and it will give me five random rows selected. And every time I run it, it will change which five rows it's giving so this is just to sample the data, just like what the name of the function suggests sample. So
+
+Unknown Speaker  1:13:43  
+Okay,
+
+Speaker 1  1:13:47  
+the next thing we might also like to do sometimes. So here see this is a small data set and you only have like, four columns. What if, if you have a data set that has 400 columns, and you only want to look into a subset of columns. You want only two or three columns that are of interest to you. You don't want to see the whole column. How can you select a subset of color?
+
+Speaker 4  1:14:11  
+Just instead of putting five, put, say, five dash 10, and it will go from five to 10. No,
+
+Speaker 1  1:14:17  
+but that that's rows, plus that if don't do Fiverr dash 10, what I'm saying is column wise. Don't think of row wise when you are doing head or tail or sample, it is giving you a subset of all the 100 rows. But what I'm asking now is, if you want to take a subset of columns instead of four columns, let's say, what if, if you only want to see full name and email. Maybe you don't care about the gender and you don't care about the person's ID. You are only caring about full name and email. How do you do that?
+
+Speaker 2  1:14:52  
+Put the full name and email in the brackets in the Bradford
+
+Speaker 1  1:14:56  
+basically in here you do that. At so you basically persons DF, and then you have to pass in here a list. So persons DF, this first set of square bracket is not a list. So this is your selector. Now inside this selector function, you have to pass a list. So now we know a list is basically with this. So essentially you have two pairs of brackets, opening and closing square brackets. And inner pair of bracket is basically the list containing your column name, which the first column is full name, and let's say I want to see the other column, which is email. Now if you do that, you see that it since I did not do head or tail, it's still showing first five and last five, but it's not reproducing all four columns. Instead, it's only giving me two columns, because that's what I asked it to do. And even with this, you can still do head tail or whatever you want to do with the full on data frame. So even if you are slicing the data column wise, that sliced version, you have all the function that you have available with the original function, original version, such as your head and tail and sample, everything is available in your sliced data frame. Because After slicing also, that sliced version is still a full blown data frame. So you have all the same methods available, because going back to the object oriented programming learning, so these methods are basically the behaviors of the data frame class. So no matter what object or data frame you have, you can still apply the same methods no matter what.
+
+Speaker 3  1:16:43  
+Quick question, if you were able to do the random for the rows, will you be able to do the random for the columns too? No, you cannot. So the column, you have to always define the column name. Yes, I see. Okay. Thank you. I
+
+Speaker 1  1:17:04  
+Okay. So now let's say I load the data, and in this particular demonstration, we are not doing anything with the data, but let's say you do some something, some processing with the data, and then you want to save the data again. So then what you want to use. So see here we are doing read CSV. Now, after the data is loaded into Python program memory and after my work is done, I want to save the data back into a file.
+
+Unknown Speaker  1:17:34  
+So what command Do you think we should be using,
+
+Speaker 1  1:17:38  
+not to CSV? Yeah, but this time, would it be PD dot two CSV or something else the data frame? Yeah. So if you do PD dot two CSV, that does not exist because read CSV, when you are doing read CSV, you don't have the data frame at that time. So read CSV applies to the pan data frame. Sorry, pandas library, right. But when you do two CSV, you have to apply that on a data frame object, which is your Parsons TF. So then you have to do Parsons TF, dot two CSV, and in here you have to provide a file name, so let's call it test output, dot CSV, and that's it. Now if as soon as I run it, you will see in the left hand side a new file will appear, which will name test output, dot CSV. So let's run this. You see here the test output dot CSV appeared, so in the test output dot CSV, now I have everything. Now, do you see one difference between the original file we read and the file we written, do you see any difference between the
+
+Unknown Speaker  1:19:05  
+two? The index, the index
+
+Speaker 1  1:19:09  
+correct. So what happened is, even though there was a column called ID, but when we read the file, we did not say that, hey, which column we want to use as an index. So it basically added a sequential index, which is 0123, anyway. And now when we are saying to CSV, it is the first column is basically the pandas added index, and the second column is the ID that was there in the part of the data. So essentially, it seems like we are kind of having some redundant data, and we don't want that, right? So what can we do to avoid that situation? Well, there is a way that we can say, when you are writing this, do not write the index. So we can call. It index equals false.
+
+Unknown Speaker  1:20:03  
+And now I'm going to run this again.
+
+Speaker 1  1:20:06  
+And now this file must have gotten overwritten now, so now let's open the file, and we are good. So now the output data looks exactly the same as the input data, with no extra index column added, because we didn't want that.
+
+Speaker 1  1:20:27  
+So that essentially is how you read and write data. Let me show you one other little thing so you can take this file and even create an Excel file out of it. So or all the different format that you saw for read, you have all of these also available for write. So you can even say two clipboards. So if you say two clipboard it is almost like it will act like as if you did a control scene on the whole data, you can do two CSV, you can do two dictionary, you can do two Excel, and a whole bunch of different other format. So let's try out the two Excel. And here I'm going to type a file name. Let's call it two test output. Dot Excel SX, because this is Excel file, and let's do index equal to false. Now, when I'm going to write you will see an Excel file will appear here. And there is your Excel file with this little Excel familiar Excel icon here, right now, obviously you cannot open this Excel file from inside VS code, because this is not a text file. But what I can do, I can right click on these and say, open, sorry, Reveal in Finder. So that way it will take me to the folder location where this is created, which is here, and then I can open it using the Excel that is installed on my computer, and there is your Excel file.
+
+Unknown Speaker  1:22:07  
+Wow, yeah.
+
+Speaker 1  1:22:15  
+So now we understood how we can read and write data from a file to and from a file into pandas data frame.
+
+Speaker 4  1:22:24  
+I hate to ask this, but where did you go again to get to that Excel sheet, to your to the reader?
+
+Speaker 1  1:22:30  
+Now, wherever you are setting it right, like everything you are saying here this, there is a location in your computer where you have this. This is your workspace folder. So in my Mac, I have this, I think even in Windows, you will have this right click and say reveal in Well, in this case, it says Reveal in Finder. In Windows machine, it will probably say something different. I don't know what it will say,
+
+Speaker 4  1:22:53  
+but it should say, No, I'm on a Mac, so that'll be the same. That's good, yeah, for
+
+Unknown Speaker  1:22:57  
+Mac will be the same, yeah, okay, thank you.
+
+Speaker 2  1:22:59  
+It says reveal in File Explorer. I don't want to know There
+
+Unknown Speaker  1:23:04  
+you go, reveal in File Explorer. Yeah.
+
+Unknown Speaker  1:23:17  
+Okay, so we covered that. I
+
+Unknown Speaker  1:23:23  
+um, any question before we move forward
+
+Speaker 10  1:23:29  
+for your data, how did it have the color coding for the name?
+
+Speaker 1  1:23:37  
+Okay, so for that, you know, I think I showed you in the left column of here left menu, there is a whole bunch of little icons here you do. You see where my cursor are moving here, yes. And then there is these thing that says extension, which is basically four blocks. So if you go here, and if you type rainbow CSV, so this is the plugin. So you can just go here and type rainbow CSV, and that is the plugin. If you select it. In my case, it is already installed. If you do it for the first time, instead of an uninstall button, you will have an install button, click that once, and then you are done. From that point onward, all CSV will have this nice color coding, which is actually very helpful,
+
+Unknown Speaker  1:24:26  
+very helpful. Thank you.
+
+Speaker 1  1:24:42  
+Okay, so let's move on to the next section, whereby what we are going to do now. So we have just loaded the data so far, we looked into a subset of columns, subset of rows, and then save the data back into a file. So far right? So we haven't actually done anything terribly useful. So now we are going to see how we can do some data manipulation
+
+Unknown Speaker  1:25:13  
+once a data is loaded.
+
+Speaker 1  1:25:17  
+Okay? So for that, we are going to work with this other file, which is called people dot CSV. So this one is little bigger, right as you can see, there are multiple different columns, and I don't know however many rows are there. I don't even need to come out right now, but we have this file. So what we are going to do now, we are now going to load this file into our
+
+Unknown Speaker  1:25:45  
+pandas data frame.
+
+Speaker 1  1:25:48  
+So first thing first, we need to do import pandas. And the reason we are using a bigger file now because there are multiple columns, and we want to be able to kind of try out the concept on what kind of data manipulation, filtering, etc, we can do when we have a little bit of large set of data, right? So we have the import pandas that we ran, and then what else do we need? Oh, we need a file path. So let's get our file path. So in this case, my file path would be resource, and then under Resources, it will be people, dot, CSV. And then let's also read this here in the same cell, people, DF, and we are going to use PD dot
+
+Unknown Speaker  1:26:47  
+read CSV,
+
+Speaker 1  1:26:50  
+and we are going to provide the file path, and then we are going to do people DF. Let's do a sample of five rows from the people.
+
+Speaker 10  1:27:04  
+And we have one other quick question. How did you create Jupiter notebook right there in underneath? Solved.
+
+Speaker 1  1:27:15  
+Oh, it's very simple. So if you go to file, new file. And then here you see a drop down coming in. It says, text file, Python file, Jupyter Notebook. File. You just select Jupyter Notebook.
+
+Speaker 10  1:27:31  
+It doesn't go right underneath the resources with people
+
+Speaker 1  1:27:37  
+can. You can create a Jupyter notebook in any location in this folder structure, anywhere you want. So whichever location, whichever location you so if I click the source, and I can also do it this way, I can say, hey, new file. And I can even type in my new file name here. Let's say new file. Dot i, p, y, n, b, and that makes it a Jupyter Notebook file. Thank you. Okay, but I didn't want to do that because Resources folder is only for resources or data in this case, so I wanted to create it in a somewhere else, which is here. Okay, so we loaded the data now, and we see that, yep, the data has been loaded. Now. How do we find out how many rows or columns are there in these people, DF, data frame, any idea like, remember, in list, we had a function called Len that we are using, that used to give us what is the length of that so similar to that people, DF, how do you find how many rows and columns are there?
+
+Speaker 4  1:28:49  
+Could you just call tails and then read the index
+
+Speaker 1  1:28:54  
+that tail? No, no, that's that's not a very good way, because I have to find how many rows and how many columns. And if you have many columns, not all of the columns would even show so here you are seeing all the column, but if you had, let's say, 100 column, it will show a few column, then it will show ellipses like dot, dot, dot, and then it will show last few columns, not even all the column will show up. So you can use either shape or size. So if you do people, dear, dot shape, it gives you 510 so it basically gives you a tuple that tells you the there are 500 rows and 10 columns, I believe the size will also give you something similar. Let me confirm. Oh, no, the size gives you total how many cells are there. So basically row multiplied by column, so total is 5000 and he will give you how many rows and how many column you. That. Sorry, forgot about that distinction. Yeah, shape gives you 500 by 10, and size gives tells you, hey, there are total of 5000 elements in there.
+
+Speaker 3  1:30:11  
+So, but now the total column, then that excluded the index, right? That's just only true column,
+
+Unknown Speaker  1:30:18  
+only the columns.
+
+Speaker 1  1:30:21  
+And that actually is a good segue to the next thing I'm going to show you. How do you know what are the column names here? So we have people DF, we here, we can see like, Hey, first name, last name, gender, age. But let's say it's a much wider data frame, and you want to know how many columns are there and what those columns are. What can you do? So that should be dot coms, please. Yeah, so you just say dot columns. And when you do dot columns, you will basically get a list of index and this is where your columns are. And if you want to know how many columns, I suppose you can actually apply a length here, and it will give you 10. Yeah, because when you see dot columns, it is essentially giving you a list, just like a regular python list. The list, in this case, contains all the column name. So then you can just apply a len function, just like you do to any other Python list, and that gives you 10 because there are 10 columns here.
+
+Speaker 1  1:31:40  
+It. Okay. So now let's say we want to rename some of these columns so you see how these first underscore name, last underscore name. Let's say I don't like it. I just want very English language type name, like first name with a space with F and N uppercase and stuff like that. And I want to do same thing for last name, like last name with a L and N uppercase. So how do we do that?
+
+Speaker 1  1:32:22  
+Title? Essentially, um, someone has some something going on. Can you put yourself on mute? Yeah, thank you, um. So what you can do is there is a function called Rename. So with this rename, it basically allows you to rename columns. So here you have to provide what columns you want to rename, and the columns that you are going to want to rename would basically be provided as a dictionary, as a key value pair, where the key would be the current column name, like first underscore name, and the value for that would be the new column name that you want to apply, which is, let's say first name. And I also want to do that for last name. So let's do two of these,
+
+Unknown Speaker  1:33:19  
+last name, oh, I forgot the double quote.
+
+Speaker 1  1:33:25  
+So now you see that first name and last name has been changed.
+
+Speaker 1  1:33:36  
+Now has it really been changed? I just said people, date of people, DF, dot Rename, and I change this. So now I want to display people DF again to see whether this thing have really been changed. And to my surprise, when I do this again, I see, nope, the original people DF has not been changed. But here, when I said rename, it actually showed me that the column names have been changed. Do you guys know why? Because you're not saving it to the object. You're not overwriting object, right? So what this rename function is doing, essentially, it is creating a copy of your data frame and giving him the copy, the new copy. But if that new copy is not saved into either a different variable or maybe in the same variable, then sorry, then it will get lost, and that's what is happening. So if you do this, then that change will be permanent. So there is another way of doing this. For most of the function you will see there comes an option called in place equal to true. So you can say in place equal to true. So what that tells pandas is like, hey, apply these. Operation, whatever I'm asking you to, but do that in place, like, Don't create a new copy of the data frame, but apply those change to the original data frame right where it is. And when I do that, you will see that this cell will not print an output, because in this case, the Rename operation will be applied on the people DF in place, and nothing will be returned. You see it didn't return anything. But now in the next cell, if I try to display original people DF, you will now see that those changes have been permanently written there. So there are two different ways to do it right. If you don't use in place, then you have to assign it back to a variable if you don't want to do that. A better, nicer way to do this is just say, in place equal to two. And this one is a much better way, because now you are avoiding unnecessarily creating a new variable and passing that whole popping, that whole thing over into another section of the memory. So you basically save lot of unnecessary memory users by doing in place equality.
+
+Speaker 1  1:36:19  
+Okay? The other thing I also showed you, like, if you want to do a subset of the column, let's say if I just want to have a data frame with two columns, first name and last name, right? How do I do I basically do now this time, I have to use the new column names, because I have already changed them to more human readable column name. So if I do this, then it will give me a smaller data set with just two columns. Now, just like what I said here, if you just do that and then don't save it in a variable, then it will be lost. So if you do want to save this in a different save this for future, use what you have. What you would like to do is you would basically put it in a separate variable, like, let's say, call it people named. And now I have saved these two columns into a different variable. And now, if I just want to display the people name DF, it will only give me a small data frame with 500 rows and two columns that has only first name and last name. So
+
+Speaker 1  1:37:40  
+uh, there are a lot more other manipulation we are also going to do, but before that, let me just show you. So the next activity is a student activity, but this is the one I'm choosing to kind of keep it for now and then we'll just talk through it. This is pretty simple, actually, which is the same kind of column manipulation here. So here, what they are saying is, there is a CSV file, and when you load this, you will get some column names, and they are asking you to change the column names to human readable column names, and then create a new table that contains this column name in the following order. So essentially, the original column name would be in this order. They're asking you to create a new data frame with a column in a different order, which, as you can probably imagine, is basically going to be the same way that I showed you here, where you let me first clear all outputs here, and you load these pandas, data frame, which is your donors? 2021, file, which is this file? So this is a larger file, donor name, employee name, city, state, zip code and USD. Okay, so we are going to load this file, and we call it donors. Dot head just to get the first five and see that, yep, the data have been loaded. And then the next thing it is asking you to do is change this type of donor name, employer name, which looks like variable name, change that to a English language name, which is where you are going to use the Rename function and provide the key value pair with the old values as key and new values as values, right? So donor name becomes donor, employer name becomes employer zip code with a single word all lowercase becomes zip code with two word with upper case and USD becomes donation amount. And then, in this example, what we are showing here is you can apply this into a save this in a. New data frame, if you want to, or if you don't want to, you can just say in place equal to true, and then that will be applied in place. So now we have a renamed column, new data frame with a more user friendly column name here. And the next thing it's asking is organize the columns so that it appears in this order, which is first the donor, then donation amount, and then employer and city, and I don't even donor employer, sorry, donor, donation amount, employer and city. And I really don't need the state or zip code, so you basically create a new data frame with a subset of columns. And please do remember whenever we have subset of columns that has to be encoded with two pairs of square bracket, just like this here, this and this, and then you save it in a new data frame, and you call that new data frame, and it basically gives you only four columns instead of six. So exactly like I showed here, and that's why I just wanted to skip this activity. I hope you understand the concept also interest of time, because the next concept that what we are going to learn here is indexing, which is what you will see even more fun we are going to have. So when we go to the indexing and slice and dice the data using index and Column Name and row name, and we can even do conditional index indexing and so on, there's a lot of fun there we are going to do, I believe that was it. Yeah, this activity we just skipped so. And then after this, we are going to do the local Okay, so let's do one thing. Let's take a little early break. So now is 818 so let's take a 12 minute break and come back right at 830 and then we will start with the more fun stuff.
+
+Unknown Speaker  1:42:01  
+Oh, is it not being recorded?
+
+Unknown Speaker  1:42:04  
+Start Recording.
+
+Speaker 1  1:42:08  
+Yeah. So this is going to be the same, because we have people dot CSV under resources, so essentially the same file we are going to it's, did I not run the first one. Okay, I forgot to run the first one. Okay, cool. So now my data is loaded. It is the same people data. And just to make sure again, what is the shape of these? Let's see we have the same 500 by Why am I typing a comma study. Yep, 500 by 10. So we have the data frame. Now we are going to do some selecting from here.
+
+Unknown Speaker  1:42:54  
+Okay, so to do that, I'm
+
+Speaker 1  1:43:03  
+okay, so first, let's say I want to select only the first row of these. Okay, actually, let's, let's first do a dot head, and that will print the first five rows, and now I know what first five rows look like. Now let's say my requirement is I only want to select the first row, very first row here. So remember how in the slide I mentioned here that I lock uses the integer based indexing, and then lock uses the column and column name and row index based selection. So first we are going to try this using the integer based indexing, which is I lock. So if I want to do people DF, so first row I'm trying to select, right? So what I can do is, I do I lock and then say zero.
+
+Unknown Speaker  1:44:06  
+What that means is
+
+Speaker 1  1:44:09  
+give me the row number zero from all the 500 rows that you have. And if I run this, it gives me the row number zero, but it prints this in a different way, because when you are selecting one row, pandas treats this output as a series, and when you print a series, series means only one column, so it basically turns this row into one column series, where all of Your column header becomes your row header, but you essentially have the exact same set of data as the first column, except shown as a series, which is a single one column. And you can even see that it is a series. You can apply a type on this, and it will show that it is a series. So. Right? So, and that's why, when I'm printing this, it is printing just like a series prints, which is just one column. Now let's say I want to print first three columns. How do I do well, with zero, it gives me first column. If I do one, it will give me the second column. You see Berkey Morrison, which is the second column, and if I do two, then it will give me the third column and so on. I think you mean row, sorry, row, yes. So first row, second row and third row. Now if I want to select all three rows from the beginning, 01, and two, what I need to do is I need to put zero colon two. So by doing that, I am now, instead of providing a single row index, I'm providing a range of row index, and I'm saying, Hey, give me that. Now I said zero to two, so I made a mistake, because it starts from zero, ends to one before the last one. So it will go to 01 but it will actually not give two. Zero to two, meaning starting from zero but end before two, essentially only two rows, so you have to do zero colon three, and that way you will get the first three. And it doesn't have to be just that. If you want to select, let's say, from four to five, then you have to do four colon six, and that will give you number four and number five, because I'm starting with four stopping before six, so four and 644, and five. So this way you can select any rows, any set of rows, from anywhere within this pen. So Okay, quick
+
+Speaker 3  1:47:06  
+question, but now I thought the row zero is like the first one, so if you want to do four to six, wouldn't that be like three to five,
+
+Speaker 1  1:47:16  
+or is it one? I'm starting from row number four. Oh, you are saying 012, huh, okay, right, yeah, sorry, yeah, so Alfonso and this guy, so that will be three to five, yeah,
+
+Speaker 3  1:47:31  
+yeah, because the zero is always worth the first, yeah, yeah, it
+
+Unknown Speaker  1:47:35  
+will be three to five. Hey, Benoit.
+
+Speaker 4  1:47:38  
+So when you're doing a like an Excel file. The keys are in column zero, and then your first line, your first row is actually number one, right? So do you want to print that? If you print the keys, that will be zero.
+
+Unknown Speaker  1:47:58  
+But why does this
+
+Unknown Speaker  1:48:00  
+when you say key, you mean this column here, the first column,
+
+Speaker 4  1:48:03  
+no. So like, first name, last name, gender, age, on an Excel spreadsheet that would typically be zero, that would be the row of zero and then where it says, roof. Oh, okay,
+
+Speaker 1  1:48:15  
+okay, okay. What do you know? So here, the way that pandas data frame treats this, this first one, it is treated specifically as column name, so the column name does not count as a row.
+
+Speaker 4  1:48:28  
+Okay, now what if you're gonna try your that into Excel? How do you need to change that?
+
+Speaker 1  1:48:33  
+No. So remember when I when we did the two Excel or two CSV, it basically prints that as the first line in your Excel or CSV. It knows that the first thing is column header, and it will print the column header into your Excel or CSV file.
+
+Speaker 5  1:48:50  
+Okay, and there's an argument to not print the header. I don't know why you Yeah, but you can exclude that.
+
+Speaker 1  1:48:58  
+You can exclude that. Yes, you can say that like, Hey, don't, don't include my header. Okay.
+
+Speaker 1  1:49:12  
+Okay, so that's that. Now let me ask you, let's say I want you to print the last row using I lock what value you will use, negative one.
+
+Unknown Speaker  1:49:26  
+Negative one.
+
+Speaker 1  1:49:29  
+Now another thing you must have noticed, if you provide a single number, then it returns a series. If you provide a range of numbers, then it returns a full on data frame. That is also important distinction to remember. Please comment there. You know, I actually missed on that when you use a single index, like, if you say, give me i log zero, it gives you one row, but that row is returned as a series. Is, if you say zero to two or zero to three like a range, then that range of rows is returned as a data frame, which you can see on based on how it prints right. If it's a series, it will print like this way. If it's a data frame, then it will print almost like a table, right, like an Excel table, okay?
+
+Speaker 3  1:50:22  
+And you make it so it goes across instead of going stack like that,
+
+Speaker 1  1:50:27  
+series will always print this way. Unfortunately, if you print a series, this is how it will print always. There is nothing you can do. Can you print a series? You can as a data frame. You can take the series and convert it into a data frame. Yes, you can transpose A series. But if you do want to print the series right away, then it will become it will print like this. Okay, what else? Okay, so if I do another one, so if I do people, data frame dot I lock instead of providing so if I put a one number, then it will give me one row, right? If I put two numbers, it will give you from here to here. What if? If I want to take all the rows, what do you provide? Like? If I say, Hey, give me everything from the beginning all the way to the end. Well, I mean, there is no particular reason to do that, because that essentially meaning, means giving me giving you the whole data frame, anyway. But just for the sake of the argument, what do you think the selector would be if I want to get everything all the rows
+
+Unknown Speaker  1:51:40  
+zero, colon minus one.
+
+Speaker 1  1:51:44  
+I don't know whether that is going to work. Let's see. But there is another way. This is a good idea. It actually does work nice. I don't know why it is giving 499 rows now, oh, because it goes to last but one. Yeah, so it works almost you see it is not giving me 500 rows. It is giving me 499, in order to get all of this, all you have to do, see, this just a colon, nothing else. And if you do just a colon, you will get all 500 rows
+
+Speaker 5  1:52:23  
+if you do nothing before the colon but a negative one after. Would that do 499 again,
+
+Speaker 1  1:52:30  
+let's see 499 Yes, okay.
+
+Speaker 1  1:52:39  
+Okay, so this is the selection of rows. Okay, another thing. So what if, if you have to select rows that are not sequential, let's say I want to select first row, fifth row, 10th row, 15th row, and so on. How do you do that?
+
+Unknown Speaker  1:53:03  
+Commas in between them,
+
+Speaker 1  1:53:09  
+but I as a list. You have to provide it as a list. Yes, yeah. So first row would be zero, and then fifth row would be what four. And then nine and so on. So let's just do this.
+
+Unknown Speaker  1:53:29  
+Oh, what happened?
+
+Unknown Speaker  1:53:34  
+Continue the comma. You have
+
+Unknown Speaker  1:53:36  
+to do the I lock.
+
+Speaker 1  1:53:38  
+Oh, I forgot to type I love my thinking, yeah. Okay, yeah. So now it gives me 049, so you basically cherry pick which one you want. Okay, so all of these we have done so far, we are selecting a subset of rows. Now the next thing is, how do you select a subset of columns? So all of these output that we have provided you see that it is including all 10 columns, subset of rows. Yes, but it is giving me all 10 columns. What if now I want to see only, let's say first two columns
+
+Unknown Speaker  1:54:28  
+using I lock
+
+Unknown Speaker  1:54:34  
+colon, any idea,
+
+Speaker 5  1:54:35  
+put a column and then a comma and then set the first two
+
+Speaker 1  1:54:40  
+correct. So basically, one thing you have to understand the standard syntax of I lock is it can take two things, either two indices or two ranges or two lists, something two of them, and when you provide two of them. Then they have to be separated with a comma. And if you put only one of these things instead of two, then it will only apply that to the rows, row dimension. And then if you do provide two things, and then in the second thing will apply across the column dimension. So if you want to select only column number zero and column number one. If you just say, Hey, give me zero through two, that is not going to work, because zero through two is one range, and if I only do one range that applies to the row dimension, not the column dimension. Now what you need to do, you have to say, Hey, give me all the rows, which basically means just a colon and then a comma. And the second part, which we have not done up until now, which is two selected to, I love the row selector and the column selector. If you provide one selector that is always treated by default as a row selector, so if you want column then you have to provide everything for rows, and then put a comma and then put a column selector. So when you do that now, you get all 500 rows, but only two columns, first name and last name,
+
+Speaker 4  1:56:16  
+and so zero. If you put zero and five, would it give you just the first and the fifth column, or would it give you
+
+Speaker 1  1:56:24  
+no so if, if you put zero colon five, it will give you zero through five in between. And if you do zero comma five, but you put that as a list, then it will give you first and fifth column. Okay, so just like how you did in the row selector, the same thing applies for the column selector as well, where a colon means everything, single number, meaning one, one row or one column, depending on which side you are putting it. And then if you want to cherry pick, then you have to do a list, comma separated list, right? These are basically the three option, and that applies to both. So now you can also apply row selected and column selector, right? So let's say, if I say hey, just give me first name and last name for first five rows. So then what you need to do is you can say zero through six, which basically means first five rows, and then in the column selector, you say zero through two, which means first two column, and it will give you a five by two table. That's
+
+Unknown Speaker  1:57:42  
+a That's six by two,
+
+Unknown Speaker  1:57:47  
+zero indexed,
+
+Speaker 1  1:57:49  
+oh, it is zero index, sorry, it is zero index. I keep making that mistake. Yeah, zero through five, yeah,
+
+Unknown Speaker  1:57:56  
+zero through five and zero through two. Awesome.
+
+Speaker 3  1:58:06  
+Hey, I'm a little bit confused with the syntax, because you have something prior to that where you have double square brackets. In
+
+Speaker 1  1:58:13  
+what double square bracket only comes if you do want to select rows or columns that are not like one after the another. So, so instead of zero through five, if you want to pick zero and five, let's say then you have to provide this as a list with a comma.
+
+Speaker 3  1:58:37  
+Oh, okay, so the comma is the one that requiring the double Correct. Yeah. Thank you, yeah.
+
+Speaker 1  1:58:46  
+So if you do that, then you will get only two rows, row number zero and row number five, and then in the column side, you have two columns, zero through two. Now here also, oops, sorry if you want to cherry pick your columns. So the list is only when you need to cherry pick right like not consequent columns. So let's say I want first name, company, name and email, which should be column zero, and then 1234, Column four and column nine. So then I have to do give me zero comma, four comma now, and that gives me first name, company name. So I'm now this time, I'm cherry picking on column and also cherry picking on row at the same time. So
+
+Unknown Speaker  1:59:53  
+Okay,
+
+Speaker 1  1:59:55  
+any other question, any other ideas coming to your mind? Anyone.
+
+Unknown Speaker  2:00:08  
+One. Okay, so now
+
+Speaker 1  2:00:24  
+let's do one other thing. So let's say I want to so let's say I don't. I'm looking for a certain particular value, and I don't know where that value is. So what if I want to find all the rows in here where
+
+Unknown Speaker  2:00:48  
+age is 54 let's say.
+
+Unknown Speaker  2:00:54  
+How do I do that?
+
+Speaker 8  2:00:59  
+I lock only allows you to use integers, right?
+
+Unknown Speaker  2:01:03  
+You have to
+
+Unknown Speaker  2:01:07  
+use lock.
+
+Unknown Speaker  2:01:10  
+You have to use lock, yeah.
+
+Speaker 1  2:01:15  
+One thing you can do is, so let's do this. So let's take is people, DF, and let's do columns. And then you can use something like, like, let's say you don't know where that thing is. So you can say, Get lock and get lock of, let's actually do on first name first so let's do i or last name. Let's say, if I want to say, Hey, give me the location of something that has last name equals people. DF, dot columns, dot.
+
+Unknown Speaker  2:02:07  
+Get lock, right?
+
+Speaker 1  2:02:12  
+Oh, then you have to also apply that with the I lock. So you have to say, oops, sorry, not here. I have to say, people, DF, dot I lock. And then, let's take the let's make it full on here, meaning the rows. And then, as a column selector, I can say this and then say equal. Let's call it r, u, F, E, let's see what I get. Oh, that didn't return anything. It gave me zero. Why? Because the equals is outside of the square bracket.
+
+Unknown Speaker  2:03:09  
+Oh, right, right, right, yeah,
+
+Unknown Speaker  2:03:13  
+that's why. Okay, so,
+
+Speaker 8  2:03:17  
+I mean, aren't you looking for first name? I think you got a last name in there for years and roof,
+
+Speaker 1  2:03:24  
+yeah, but no, I You are right. So I am doing some mistake here. So what do I need to do is people?
+
+Speaker 1  2:03:42  
+I and let's do it this way. So if I do people, TF dot lock, just do this, and let's see what we get. Oops, here. Oh,
+
+Speaker 1  2:04:08  
+oh, sorry, I cannot do this with the roof.
+
+Speaker 4  2:04:14  
+So when it shows key error in the red like that, is there a place where the error is in that that it just printed out
+
+Speaker 1  2:04:21  
+at the very bottom. Yeah. Sorry, yeah. So I have to do, then people DF, and then I have to provide the name of the column, which is first name, and that has to be inside a single or double code, and then that equals roof, right? Yep, that's out. So what do I need to do is, if I want to find all the rows from this frame where the first name is roof, I have to use. Is a lock function, instead of I lock or lock selector, and then inside the lock selector, I can provide the condition that I want. And the condition in this case is where this column name value, people, DF, first name is equals roof, which is this and if I want to do that on age, so I can say age and age is, I suppose it's an integer, even though I haven't checked the data type, but let's see, yep. So this gives me everyone who are aged 54 in that data frame, everywhere, and these are all the people who that are 54 years old.
+
+Unknown Speaker  2:05:51  
+Is everybody's last name, Ruth.
+
+Unknown Speaker  2:05:54  
+It's a big family.
+
+Speaker 5  2:05:59  
+That was from the assignment that you did before, yeah, the first kid's poor name is,
+
+Speaker 1  2:06:04  
+oh, that is, that is from the assignment that I did before. Yes, yeah. So let's reset that. Yeah, that was from the assignment that I was doing by mistake. Yes. So we have to now I will get it, yep,
+
+Speaker 3  2:06:26  
+yep. We also do like, a like, I don't know, in SQL, you can do like, like, you know the percentage sign, like, maybe that sounds like habit, maybe ABB, and then percentage, is that something that we can do as well? Um, that's
+
+Speaker 1  2:06:40  
+a good question. I don't exactly right way. I think you can let me do actually one thing first. Let me do something like a range here. So if I do greater than 54
+
+Unknown Speaker  2:06:58  
+it will give me everyone greater than 54
+
+Speaker 1  2:07:02  
+let's first see if we can put a Boolean, sorry and condition there. So if I say, Hey, give me everyone between 54 and let's say 60
+
+Unknown Speaker  2:07:15  
+less than 60.
+
+Unknown Speaker  2:07:21  
+Oh,
+
+Unknown Speaker  2:07:28  
+and is not working this way. I
+
+Speaker 1  2:07:55  
+Okay, yeah, so it's this, no, okay, so how about this? This, yeah, that. So if you want to put two condition, you have to put each condition within a parenthesis and put ampersand symbol for and so greater than 54 and less than 60, and that gives me everyone in between. Yep,
+
+Unknown Speaker  2:08:34  
+that's good. And then what was the other question? Like,
+
+Unknown Speaker  2:08:40  
+you could do a contains,
+
+Speaker 1  2:08:45  
+you can do contains. Yeah, that's true. So for that, we have to do so let's say
+
+Unknown Speaker  2:08:59  
+people. DF,
+
+Unknown Speaker  2:09:03  
+dot
+
+Speaker 1  2:09:06  
+I lock, and then I want all the rows where the column name is selected by a lock. Right people? TF, actually, I can just do a lock like this, yeah, so let's copy this here. Yeah, people, DF, dot, lock and then first name, dot. Then tains. It has to be str, STR dot contains, yeah, it has to be str, dot contents.
+
+Speaker 5  2:09:54  
+It's a dot str, after the after the series,
+
+Unknown Speaker  2:09:59  
+after. The series, yeah.
+
+Speaker 1  2:10:04  
+So you have to basically convert it to a string, because otherwise it doesn't know. It thinks it's a general, generic object. And then you have to do contains. And then if I say, Hey, give me everyone who's first name contains, I don't know whether there's any J O, let's call it jail, and let's see how many we get. Yeah, we get Josie, Josiah, Jonathan, Joshua. Yeah, jail.
+
+Unknown Speaker  2:10:37  
+Yep, that does it.
+
+Unknown Speaker  2:10:38  
+That's cool. That's really cool. Thank you.
+
+Speaker 3  2:10:42  
+Yeah, how many conditions that you can do and play around with the data to manipulate the result? Yeah,
+
+Speaker 1  2:10:50  
+there are many, many different this manipulation that you can do actually.
+
+Speaker 4  2:10:56  
+What does lock actually stand for? So there's the I lock and the lock. What is the abbreviation
+
+Speaker 1  2:11:03  
+So, lock is location I lock is index based location, okay, yeah,
+
+Unknown Speaker  2:11:14  
+okay, what else do?
+
+Speaker 1  2:11:26  
+Okay, so let's try to do some modification. So I forgot what the first fuel rows were, so let's say this now, let's say I want to change the age of this guy. So they say this is last year's data, and this year the guy has been agent one year. So I want to change this age from 54 to 55 so how do I do that? So you can actually use the I lock not just to read data, but also modify data. So you can do dot I lock. And then when you do dot I lock, if I want to get the first row, the row selector will be zero. And for the second selector, which is the column selector, I can actually select. I can actually select First Name column or no, not first name actually age column, right? So people, DF, dot columns, dot, get location of this particular column, which is age. So if I just do this, it gives me 54 because this is basically the age column of the first row. Now if I take this and say, Hey, change this 54 to 55 and that's it. And now if I run this cell again, you will see this line will be printed as 55 there. So essentially what I did is we used a selector, I lock and then whatever the return value is, I took that and say, equals 55 it basically now works as an assignment operator. It basically goes to that particular row column location, and assign a value 55 to it.
+
+Speaker 1  2:13:31  
+Okay, so that way we can basically use this for writing as well.
+
+Speaker 1  2:13:42  
+Okay, anything? Any other question ideas coming to your mind? Yes,
+
+Speaker 2  2:13:49  
+Benoit, what if we want to change the age for everyone, like in the bundle,
+
+Unknown Speaker  2:14:00  
+in a bundle. How do you do that?
+
+Speaker 2  2:14:04  
+Something plus one plus one or
+
+Speaker 1  2:14:09  
+so for that, you have to apply that lambda function. So remember what I showed you here? I think that would be a better way, unless someone else have any ideas, but whenever you apply something across the board, I think lambda is a better way, which is what I did. Why did I do the do the lambda?
+
+Speaker 1  2:14:41  
+I showed you the lambda function as part of
+
+Unknown Speaker  2:14:48  
+student data from here, right?
+
+Unknown Speaker  2:14:55  
+Yeah, so let's take that
+
+Speaker 1  2:14:59  
+so. So let's see what we can do. Well, we have people DF here, so we say people DF.
+
+Unknown Speaker  2:15:12  
+Age
+
+Unknown Speaker  2:15:18  
+is equal to
+
+Speaker 1  2:15:21  
+take people DF, oops, people DF, age again and say, dot apply. And then lambda x. And here you just say x plus one, and that, I believe will work. So now let's see we have 5520 2929 57 let's apply this, and now I'm going to run this. Yep, everything increased by one. So whenever you want to apply something, it is better to take that particular column and use this apply function, and then in apply function, then you can pass any anonymous function using the lambda operator, and that's how you can apply. I think you can also do it with I love if you want to apply for everyone. So let's try this with I lock. I believe that will work. Let's see I
+
+Unknown Speaker  2:16:28  
+No, hang on if I
+
+Unknown Speaker  2:16:38  
+if that, yeah, if that zero that work?
+
+Speaker 1  2:16:43  
+No, but I look assignment will only basically specifically be applied to specific element, specific row, column, position, Oh,
+
+Unknown Speaker  2:16:56  
+yeah.
+
+Speaker 1  2:17:20  
+Let's see whether that is possible. I mean, with the lambda, we know that it is possible.
+
+Unknown Speaker  2:17:30  
+But how do I do that with I love?
+
+Speaker 1  2:17:36  
+Well, the thing is, if I, let's say if I take this and put a colon here, and then do this. What it will do is it will take this value, 55 and apply it to all rows. But that's not what I am trying to do. What I'm trying to do is I'm trying to take the respective values of age and increasing those by plus one relative to what they were before. I am not sure whether I can do that with dialog, at least not now, but we do have a solution for that question, which is using the apply function with the lambda. Yeah, good question. Keep them coming. If someone else have something in mind.
+
+Speaker 1  2:18:32  
+Okay, if not. Now I'm going to show you one more thing. So sometime what happens is you see how these default index comes in, 01234,
+
+Unknown Speaker  2:18:42  
+and so on.
+
+Speaker 1  2:18:45  
+So what if? If I don't want that default index, instead, I know that I have something in my data that is unique in itself, and I want to use that as an index. So let's say in this data set, maybe my email is a unique value, and I want to change this data frame to make the email as the index, so I don't need this numeric index anymore.
+
+Unknown Speaker  2:19:18  
+So how do I do that?
+
+Speaker 1  2:19:22  
+So what I can do is use a function called set index, and then in the set index as a parameter, I have to provide which series I'm using as an index series, meeting, which column? Now, if I take just email, that's not going to work, because email is a stream. Email is not a series. What is a series is people, DFS, email. So basically what I have to do is people df and then. An email, because just people DF email gives me a series. Let's show you what people DF email gives me, it gives me a series with all the email. Now what I'm saying is, hey, take this series, which is this, and use this series as an index. And when you are doing this, do not bother returning a value. Instead, apply this in place, so what you can say in place equal to true, and then it is done. Now to confirm that it is done, let's print people DF again, and now you see suddenly the output looks different. So now we don't have Unlike before, where we had this 012346, now we don't have that. Instead, we have email as an index, and these are the indexes, and we also have an email column. So what we did is we took this email column and turned this as index.
+
+Unknown Speaker  2:21:09  
+Is that, like a mouse indexing
+
+Speaker 5  2:21:11  
+where, like, it makes it more it makes it faster to search on it. Yeah,
+
+Unknown Speaker  2:21:15  
+yeah.
+
+Speaker 1  2:21:18  
+And then, since I have used this column now I don't have a use of that email column there, so now I can say people, TF, dot Rob
+
+Speaker 1  2:21:36  
+email, but I believe I have to pass it as a list and provide in place proof.
+
+Unknown Speaker  2:21:49  
+Oh, it gets cases. Email,
+
+Speaker 1  2:21:57  
+no. So what is happening is if things that I am trying to drop a row. So that's why it's saying that email is not found in access. So what I have to do is I have to provide an access good and everything,
+
+Unknown Speaker  2:22:19  
+I have to say access equals one. Oh,
+
+Unknown Speaker  2:22:27  
+why it is not taking
+
+Speaker 5  2:22:32  
+if you turn that email into a lowercase email, what would that do?
+
+Speaker 1  2:22:38  
+Oh, did, Ah, damn, okay, yes, but you still need access equal to one, by the way. Yep. So now it worked. Now if I print people, DF again, let's print it using this one. So now you see this email column is not repeated here. So essentially what we did is we plug that email column as being a traditional column and elevated its status to as an index column. So this be now becomes the primary key of the table, right for those of you who are more like accustomed to the SQL terms, so index is basically kind of your primary key. So essentially, now you have a table with email as a primary key, instead of just a sequential number as a primary key.
+
+Speaker 5  2:23:36  
+Sorry I missed what access equals one meant. What did that do?
+
+Speaker 1  2:23:41  
+So axis equal to zero is the row and access equal to one means the column like x axis versus Y axis.
+
+Unknown Speaker  2:23:48  
+Oh, gotcha. Thank you.
+
+Speaker 1  2:23:57  
+And now, why did I Why is that important? Now you can actually apply dot lock, and you can basically apply, let's say, dot lock, and if you want to find the guy whose email is so and so, which you should be able to do, yes,
+
+Speaker 1  2:24:33  
+and another thing I can do is Now, since this is an index, I can say, How about providing a range? Well, index is probably email. Index is probably a bad example to show like I'm trying to say like hey, you can actually probably do a range based on a alphanumeric. Index as well.
+
+Speaker 5  2:25:16  
+How does, how does greater than work does greater than to do alpha numeric ordering, or do you need, like a sort function or order function to do that? If you said something greater than that value, would it give you after that? Alphabetically?
+
+Speaker 1  2:25:39  
+I have to check. So for that, well, I have to then go back here. So let's do this thing. So we did first name equals roof. No, I don't think this greater than will work for that. Let's see. No, it actually does work. So I said first name greater than roof. So basically it gives me all the first name that alphabetically comes after roof, r, u, f, if I do a less than then first name. Oops, sorry, this one, yeah, it says Berkey, everything is less than roof, yeah, that does work
+
+Unknown Speaker  2:26:25  
+with the lock.
+
+Unknown Speaker  2:26:38  
+Yep, it will work.
+
+Speaker 1  2:26:43  
+Okay, what else we are missing? No, I think we covered everything basically.
+
+Speaker 1  2:26:56  
+Okay, cool, so we are almost at the end of the class timing, and we didn't do this last exercise. So last exercise, if you see here, which is this one, essentially, what they are asking you to do is basically some of this selection. And the reason, I'll tell you why I chose to not go in there, but I'm going to give you some other material. You can do this in your own time. But I'm going to give you some Kaggle material that if you want to try this selection problems yourself. So in this exercise, basically they give you a data set, and the first one is remove some columns, which is basically you create a new column, sorry, new data frame with a subset of columns, as we have done before, and then they ask you to rename some of the columns which we have done using Rename. And then columns, you provide old column name and new column name as key value pairs. And then couple of these conditional for example, the first one, this is probably interesting. It says, Hey, find me all the rows where the publication here is between 1960 and 1970 which is what we did. Also remember, when we have a particular column, we take this column as a series and provide a Boolean condition. And if we have to put multiple Boolean condition, you put them in a pair of parentheses and then put an end operator using the ampersand sign, and that's how you basically apply these conditional operator the second one, they are basically saying how many Batman comics are listed. This is, I think someone was asking, like, hey, how I can do a match. And this is that STR dot contents, which we have done as well, where we are saying, Hey, give me all the books where the title contains this string, Batman, and you'll get that. And then the last man, last one is kind of the same. It says, how many of these contain Superman? So it's kind of essentially the same thing. So it is very easy. You can look through these, and there are only a handful of these here given. But one other thing I want to show you is this particular website, and I think someone was mentioning the other day, Hey, have you heard about Kaggle? So Kaggle is basically where people go and look for different machine learning. What is called competition, like they will. There is basically a lot of data set where you can go and get data set for trading your model. There are also competition that happen, where they will give you a problem and you actually have to train a machine learning model up to a certain level of accuracy to win competition. And then there are also some of these, additional code section, if you go these are like different people who basically. Time to time, kind of create this kind of a tutorial, exercises and that kind of thing. And this particular one caught my attention the other day when I was looking which is the indexing practice problem. And then this is basically exactly the kind of thing that we are doing. But here you can probably see some of the additional advanced thing. And when you look into here and there is, you can try to do this yourself, or if you are stuck you there is a link that says these reference kernel. It basically opens another Jupiter notebook. And this is where you will actually see the solved code for this kind of just like, similarly, how we give you the problem and then the solved code. You can get this thing from here. So this is one active one good example I found, which I'm going to post into our Slack channel. Let's put it into the resources channel for some additional practice. And then another
+
+Unknown Speaker  2:31:06  
+thing, I found
+
+Unknown Speaker  2:31:09  
+this guy
+
+Unknown Speaker  2:31:13  
+on his GitHub.
+
+Speaker 1  2:31:18  
+He basically put a link to just this one, not this one. But then there are multiple different Kaggle notebooks you can see, and he has basically consolidated all of these links here. So try these as well, and these are the different pandas exercises that you will see. So there are total of six Kaggle notebook that he has linked from this website, and in each one of these will basically give you a exercise, and then you can say, open in Kaggle, and it will actually take you to Kaggle. So this is another exercise, very similar to the previous one, but as different set of problems. So this one, I am also going to post in your select Chad, and that should give you enough material to practice and get familiar with all these different indexing, grouping, all this kind of thing that you can do with pandas. But believe me, that is not all like these, pandas library. This thing has so many features, like, if you don't use it for even maybe couple of weeks, you kind of tend to forget which you probably are seeing too. When I am trying this lot of thing, I have to look up, and that is totally okay. No one remembers everything. You just need to know what you are trying to do and where to look up. So practice these. Because since you are starting this journey, we are, you are kind of at the beginning phase when the things will start ramping up from here on. For your purpose, for next four or five months, you should probably be on top of all of these different features that you can use on the pandas data frame. So this is going to be your best friend, basically, this scale.
+
+Unknown Speaker  2:33:13  
+Yeah, so then that will be all
+
+Speaker 1  2:33:16  
+any last question, comments. Addition, could you put that repository address in the I did slack? Oh, you did awesome, perfect, yeah, in the resources channel. Perfect, thanks, yeah, thank you. Yeah. Thanks. Benoy,
+
+Unknown Speaker  2:33:41  
+yeah. Thank you all.
+
+Unknown Speaker  2:33:44  
+Thank you guys, bye.
+
+Unknown Speaker  2:33:59  
+So question,
+
+Speaker 4  2:34:06  
+with this being an AI class, can't the majority of this be done by AI outside of, I mean, what is the purpose of code, as far as what we need to know, other than being able to prompt AI,
+
+Speaker 1  2:34:29  
+I am not sure I'm understanding the question. So you, are you saying, If AI can do everything, why are we learning these in the in the first place?
+
+Speaker 4  2:34:38  
+Yeah, like, aren't you worried about your profession, like AI is slowly starting to know how to do all of this. So what I
+
+Speaker 1  2:34:49  
+think Karen has something I see smile on her face. Karen, do you want to add your thoughts?
+
+Speaker 7  2:34:59  
+I'll. Make my little my little two cents on that, as if all we learn is how to manipulate libraries and stuff like that. You know, just do the rope, use libraries, do this or that task and so on. Yes, it will eventually take our place. We need to have the higher conceptual understanding of problem solving and creating new ways of approaching problems and things like that, which it can't do.
+
+Speaker 4  2:35:32  
+Yeah, and so are we going to dive into some of those things too? Because that's ultimately I want to stay ahead of, or get ahead of the curve. So I want to be going in the right direction. And not wasting my time on stuff that here in six months is I spend six months learning, and then all of a sudden it's not needed anymore. It's still good.
+
+Speaker 7  2:35:53  
+If you are six months, it's it's none of it's that good. Now you can have Chad GPT say, do the write this program? And if it's a program, program, program, it's seen as trained on millions of pages of program of coding, right? Then it could do really well. So for example, I've taken a program like that, fed it a problem from lead code, and it did beautifully. But of course, we cut those weak problems are part of its training. Step outside of that training a little bit this way or that way, it gets lost.
+
+Speaker 5  2:36:30  
+Yeah, I have two things I'd like to add. Oh, sorry, but I'll go,
+
+Speaker 1  2:36:34  
+yeah, no, I was just going to add to Gary. If you were thinking that, hey, within this six months, would I be able to create Gemini or Chad GPT or copilot. Can I recreate those type of intelligence? The answer is no, but what we are going to be dealing is is a different kind of AI problem that companies still do not use Chad GPT or Google Gemini to solve, and these are real industrial problem. For example, let's say you have set off, let's say weather pattern, or set up a financial pattern from previously, and you want to train a model and to be able to predict what your next few days will look like, the weather wise, or financial market wise, or that kind of thing. So these are the type of things you actually have to create and train your model with your data. So if two companies are trying to do this, they have to each train their own model with their own data. There is no one single Gen AI model that can solve it, because all of these Gen AI these are a general class of model that is called large language model. All it does is it is basically fed billions and billions of pages of text data from all over the internet, encyclopedia, all of this library website, and it basically reproduces what you have seen. It makes you think that it is intelligent, but ultimately, what Karen was saying, it is actually not intelligent, essentially. I will call this gnai, just a better Google searching tool. Like Google became Google because 2030, years back, they came up with a very smart algorithm that people, that lets people allow to search these millions or hundreds of millions of web pages all over the internet. Now it is basically just a better searching algorithm where they simply don't give you a list of all the URLs on your search. They actually go into those website and basically try to summarize in a way that makes you think that it is actually thinking and talking to you, just like a human would otherwise do. But that make no mistake, that's kind of a, kind of a, I'd say, like a, like a false. Well, not a false, it's basically a image that it creates in people's mind and marketers and like, if you go to blogs and YouTube and all, they will see talks like, oh my god, AI is going to come and take over our job. It's actually not. It really cannot do what you and I can do. It really cannot. All it is doing is it has seen millions of billions of pages of text, and when you are asking a question, it basically relates back to everything that has seen before. And it's basically simply repeating those answers. That's all it is doing. So think about a student like I don't know whether you have seen there are some kids, even from the very early age, they are very good at memorizing. And then there are some kids who cannot memorize, but they can figure out a problem. They can think through. They can probably not memorize right away. They will probably need a little bit more time, but they can come up with a solution. And often time the second type of students actually succeed better in their academies, right? So think about you and me, are the second type of student, and this gen AI, what we see that's the first kind of student, which is basically just very good at memorizing what you have it has read before. So
+
+Speaker 4  2:39:57  
+yeah, well, I feel like I'm only allowed. To pull so much data or so much information to learn it. However, it's able to go places that I can't go or don't know where to go to find the information. So it's able to come up with a lot better information than I am.
+
+Unknown Speaker  2:40:10  
+Yeah, very useful.
+
+Speaker 7  2:40:11  
+It is very useful, but it can also be wrong.
+
+Speaker 4  2:40:16  
+Yeah, you know, I've actually used it a lot and had so many mistakes. Yeah,
+
+Speaker 7  2:40:21  
+well, just think about if, if it's based on everything that people have written on the internet well enough people written on the internet are totally wrong.
+
+Speaker 4  2:40:30  
+Whatever everything Google says is true, it doesn't
+
+Speaker 7  2:40:33  
+know that. Everything you know doesn't know which things are right and which things are wrong. It just has that text and legible, nice text. And that's why there's a lot of what they call hallucinations, where it can just kind of make stuff up there. There's even a large language model for scientific research, but they quickly turn it off because it's sort of fabricating citations for scientific information using, sometimes the actual name, names of actual scientists, but who never published that particular thing that it would cite. It starts creating. Yeah, I'll get it. I have fun with creativity. Okay, now that's a whole side you want to give me something. There's one of my fun little projects. Okay, there's this surrealist game from way back in the 40s where you can kind of like, maybe write a couple of lines of a poem. You fold it so it only shows the last line. The next person continues a little bit, holds it the same way, so you the next person only sees the last line, and then when you're done, you unfold it. And it's really interesting sometimes, what happens. Well, I wrote a program to do that with Chad, G, P, T, so I can write some a poem, but it only sees the last line and it starts to continue. Well, when I continue some I only see its last line at the end. I say, Oh, I think it's done, and it prints the whole thing. I think that there's a whole area that people don't even think about with these things, of their creative possibilities. And actually, I was really into, just to make this story quick and short. It really flattered me a lot. A year later, after I put that on my GitHub, on an open source kind of thing, museum in Germany that was doing a program on the possibility of AI having unconscious they actually adapted my application as for some of their workshops. Oh, that's really cool. That was super cool because that's what and they saw what I was doing. Yeah, that's that afterwards, when the person who had made some interesting modifications pushed them back to my repository.
+
+Speaker 1  2:42:48  
+Hey, Karen, could you post your report on on our stuff? Chad,
+
+Speaker 7  2:42:54  
+oh, yeah, well, actually better. I will give you, I will put a I wrote an article on Medium about, okay, but that's the idea of, like, using in that article, I would say, you know, people complain about AI hallucinating. I was like, I wanted to, in this case, hallucinate. Yeah, well, so
+
+Unknown Speaker  2:43:18  
+I really want
+
+Unknown Speaker  2:43:19  
+hallucinations. So, you know,
+
+Speaker 4  2:43:22  
+I I really want to use AI for marketing and sales and for like, content creation. Are we going to learn some stuff about that in here,
+
+Unknown Speaker  2:43:33  
+not in this? Course
+
+Speaker 7  2:43:35  
+on that right now is using what's called rag or or retrieval augmented generative models, yeah. So you actually have, like, a lot of documentation, for example, that is fed into a big database that uses vector searches to find so you make a query, it finds a bunch of parts of its body of text, this data base basically that are related to your query, then gives that and the query to the LLM, and it kind of makes something out of that, but it has then you get to be grounded in actual information,
+
+Speaker 1  2:44:09  
+okay, yeah, but that that's not within the scope of this bootcamp. Unfortunately, no,
+
+Speaker 7  2:44:14  
+I didn't a personal project like that where I did that with, you know, people hearing all about project, 2025, this whole, you know, neoconservative thing and stuff. And so I actually took that 900 page document and put it into a vector database and created an app that you could ask questions about that what is in it, and it would give you summaries. Wow. Instead of having to read all 900 pages, would give you an idea of, you know, so what does it really say about this? And it would give you a nice kind of page full. So, yeah, they've
+
+Speaker 4  2:44:50  
+got a lot of that out there now, like headway, there's a lot of different ones that will read books and textbooks and give you a summary
+
+Speaker 7  2:44:56  
+of the thing as a project. So I could see how I could make one my. Though, so, but there are certainly plenty of apps like that.
+
+Speaker 4  2:45:04  
+So where would be a good place to go to really start diving into that kind of AI?
+
+Speaker 1  2:45:10  
+I would second go to YouTube. Oh, I'm sorry. Oh,
+
+Speaker 9  2:45:14  
+YouTube, like you have a lot of resources. Just search and you'll find people
+
+Speaker 7  2:45:18  
+really good resource for that, is there a lot of small courses by learning, by deep learning.ai? They have a bunch of free short courses on topics related to that.
+
+Speaker 9  2:45:33  
+But I think if you are more interested in content creation, I think there are some companies look into companies that do that. Like,
+
+Speaker 7  2:45:41  
+sure, yeah, but they're just have a lot of good short courses on generative AI stuff. It's deep learning.ai was founded by Andrew Ng, the researcher, and he helped create Coursera and all that stuff. Okay,
+
+Unknown Speaker  2:46:00  
+yeah, Coursera is pretty good, yeah,
+
+Speaker 7  2:46:03  
+he did a separate thing. He deep learning.ai. And I have big paid courses on Coursera. But he, his organization, has lots of short free courses, all kinds of topics related generative. Ai, okay,
+
+Unknown Speaker  2:46:21  
+introductions, you know,
+
+Speaker 9  2:46:26  
+yeah, we want to say, if you, if you care, like, just if you want to understand the theory, what is behind llms? I think, yeah, yeah, things Karen mentioned is as the best place to start. But if you are more focused, no, you want to learn how to use LMS or AI in terms of content creation, how you can voice cloning. What are the tools that you can use to do these type of things? You can just hit YouTube. There are plenty of people
+
+Speaker 7  2:46:54  
+towards the end of this, this bootcamp, I think there is after doing some about NLP, I think there is a bit about transformers,
+
+Unknown Speaker  2:47:02  
+which is the basis of that?
+
+Speaker 9  2:47:06  
+Yeah, the basis for Chad, GBT, or that's kind of one type of llms. There are different types,
+
+Speaker 7  2:47:13  
+primary one now, yeah, there is some, but I did notice there are some about transformer models. That's the beginning. What
+
+Speaker 4  2:47:22  
+is the dip like, I'm I'm really stupid to this. I apologize. I've always been in business, not the computer side of things, or the what is the difference between like, what you guys, each one of you guys, does something a little bit different, as far as programming or developing or data science. What are the differences of those like, why
+
+Unknown Speaker  2:47:47  
+go one route versus the other?
+
+Speaker 9  2:47:50  
+The focus is different. What do you focus like, data science is more you are more interested how you can put a put a problem and kind of storyline you explain it, you try to use why this is happening, to try to predict what is going to happen in the future. And it is more related. It's more related to anything in life. You can apply that in engineering. You can apply that in Financials, different things. But for example, if you are talking about developer, a developer, build the bold software, build programs that can do tasks or help you implement things and run things. So that's the different scope. If you want to have a user interface, that's a developer rule. That's not going to be a data scientist. The knowledge necessary or the tools to learn how you can put something like that is a bit different.
+
+Speaker 7  2:48:57  
+But I think the general thing maybe Ryan or Gary more questions, why do we decide to do be in this kind of area rather than another area of it? And I think ideally, the real idea is like, we get into the area that it's like, we can't wait to get back to it in the morning. Yeah, we're really passionate about and fascinated with, oh, ideally, but doesn't always work that way. Sometimes it's just like, Who will pay me to do something? You know? Well,
+
+Speaker 4  2:49:26  
+I'm trying to see what like I don't I, since I know so little about it, I'm trying to make the best decision of something that I really Yeah, because it all fascinates me, but it makes me feel really dumb because I, man, this is a different language, but I really want to learn to something that's really not a lot of people are really good at, and I want to get really good at it. I
+
+Speaker 9  2:49:49  
+think, to be honest, like in terms of where I'm with the company I'm working for sales, like people who are able to sell our products make most of the money. You can also think about there is product development. So like, if you are a product manager, basically it's more interactive. You try to connect with clients, see their needs and give that what give the client's needs, transfer that to the true developers that you are, that you are to are working for you. So that basically implements something that is, that is, this is what is needed in the market. You have some sort of insight about what's going to happen, so what would be the features needed? So you have some sort of product plan, and that's something you can work on. You don't need to be a great developer. Just need to understand what's going on kind of thing. If that's something you can can interest you, you can always jump into that. But regarding the AI and the AI takeover, I don't believe AI is going to replace human even after 200 300 years,
+
+Unknown Speaker  2:51:06  
+that's that
+
+Speaker 1  2:51:08  
+worked through, and We would all have lost our jobs by now.
+
+Speaker 9  2:51:22  
+Humans, are irreplaceable. We are more complicated than what we think we are. We have emotions. You have a day where you are performing super, super high, and then you have a day where you are down, you don't do a shit, and you keep moving on and and you don't understand why you feel you wake up this morning and, yeah, let's hit the gym, work two hours and get back to work, finish everything, and you feel like you're fine. And then another day, Oh, you don't feel like it just happens. Yeah, that that really impacts your performance. And basically also understanding things like, you'll find people, they are super, super great. And with numbers, they calculate like, sometimes they are faster than the calculator. Like, if you want to find people are faster than calculators, you can find that they can give you like numbers. Like, in terms of the calculator, the number, this the number of decimals that comes after the integer. You can give you that, and more than the calculator and in just seconds. And these are anomalies, but yeah, there are few people like that. And then your people are like, they can't do it, and they are exceeding something else. And, yeah, this type of thing is basically cannot be we cannot. I don't think we will be able to replicate something like that. It's a bit more complicated. Like the basic problems will always reach a limit, and then we can go beyond that. Like, for example, you can talk about cars. Cars have been around since, I think, 200 years. And I can tell you, for example, like the internal combustion engines, they hit their limit around maybe 50 years ago or 60 years ago. So in the 1950s if you're the knowledge that is there in terms of the thermal size, not maybe the material and stuff like that. They make it a bit to make it a bit better. But in terms of the engine efficiency, didn't exceed 25% that was the maximum. And it has been like that for 4050, years. Yeah. So I don't think, and the i right now, I think people started to hit, like, the saturation or the limit, oh, okay, otherwise, whatever we're going to do just we need to have more computational power, more energy. And it's not really the cost is not worth it in terms of and,
+
+Unknown Speaker  2:54:01  
+oh, I put your
+
+Speaker 9  2:54:02  
+voice is very far. Benoit, if you want to say
+
+Unknown Speaker  2:54:06  
+something, oh, yeah, okay,
+
+Speaker 1  2:54:12  
+yeah, what I was saying is, I was just watching a video earlier today, exactly like what you're saying. And then they're basically saying that the face of the growth in AI is kind of now getting saturated, especially the latest version of the language model that Chad, G, B, T, open AI has come up the amount of increase in performance that they were hoping to get. They're saying that it is nowhere even close to that. They're only seeing a very incremental, like, slight little improvement, even after trading with so much more data, right? So eventually it will flatten off, right? So if there is a concept called universal limit of technological development, right? So like, like, what you said moment, right? I mean, there is only so much you can do. But then after that, there's a limit that you will repeat very soon, right? And very soon, I mean, maybe 1500 years, but that limit will hit, right? So, so,
+
+Speaker 7  2:55:14  
+you know, Benoit, there's good, there's a whole aspect, a whole lot of aspects of AI. They're not at all being touched on here, and yet they are going to become important again and then a symbolic AI, as reading article from Fort and fortune that the next thing is going to be neuro symbolic models combine combining, like large language models, neural networks, with symbolic or they also call it gold, good old fashioned. Ai, in other words, like
+
+Speaker 4  2:55:45  
+solving, yeah, so what is the the conscious? Like you posted an article about something about the conscious, some kind of conscious creation type? AI,
+
+Speaker 7  2:55:57  
+oh, that I posted an article. Yeah, it's really interesting, and it's kind of on the edge that is a particular new startup, sorry, by a woman, Suzanne Gilder. She is originally a physicist, worked on on quantum computing, and she moved into the area of AI and robotics. And she's really kind of an edge thinker. I think about it. She now is starting a startup which is to develop conscious AI using quantum computing. It's not going to happen immediately, I don't think, but I love that she's so like, ready to be out there with ideas. Yeah, and I think so. I think she needs to get more attention. She did a company, she after she left quantum computing, she did a company that did robotics. They were the first people to train robots using using tele operation. What was it called? Was the name of it. Can't think of the name of that company. But then she found a company later called sanctuary AI that originally was set was to create hyper realistic humanoid robots, what she calls sense. Then they kind of pivoted some and started doing more like they less looking like people, but more able to do all the manipulation of things and stuff and to be more general purpose robots. But then she since left us inside this new company.
+
+Unknown Speaker  2:57:32  
+Well, what is it?
+
+Speaker 7  2:57:35  
+I forget, what's in that article, and I just thought people might find it interesting, yeah, but I think, I think she doesn't get the attention she should. And I think that's kind of partially sexism.
+
+Unknown Speaker  2:57:49  
+And her company up in Vancouver,
+
+Speaker 7  2:57:52  
+they just don't get the attention. Yeah, gotcha. I think she's a company's like pub spot. I think she's a pretty brilliant person, but you know,
+
+Unknown Speaker  2:58:02  
+now, what about companies like
+
+Speaker 1  2:58:04  
+spot or, Hey guys, I will need to drop off now it's really late for me. Now we'll see you guys back here on Thursday. Sounds good, actually, Good night, everyone.
+
+Speaker 4  2:58:21  
+So companies like HubSpot or high level, they create CRMs and different things like that that are
+
+Unknown Speaker  2:58:30  
+that have aI intelligence in them,
+
+Speaker 9  2:58:35  
+don't, don't take them seriously. It's just something that they want to charge you more so that you can
+
+Speaker 7  2:58:41  
+there's, there's a lot of hype, and there's a lot of we can sell it by saying it has AI in it.
+
+Speaker 9  2:58:48  
+Exactly, yeah, Salesforce does it as well. Like, oh,
+
+Speaker 7  2:58:53  
+you know, here's a new flashlight powered by AI. Anything
+
+Speaker 9  2:58:56  
+AI, just about marketing and just the want to charge you more so that they can sell here's
+
+Unknown Speaker  2:59:03  
+a new toaster powered by AI. I
+
+Speaker 4  2:59:09  
+was just curious, like, I'm just so I've been in the business game for years and years and years, and I what do you do? Like toxicology labs? So I started in. Have built and sold several drug and alcohol treatment centers, and then I just switched over to toxicology labs
+
+Unknown Speaker  2:59:28  
+itself. Or, like,
+
+Speaker 7  2:59:30  
+there, what's that like? What
+
+Speaker 9  2:59:33  
+do you do exactly with like, the labs? Or you, like, get the equipments for the labs, or
+
+Speaker 4  2:59:41  
+we? Do we test the labs? So I work with all drug and alcohol treatment centers all over the country. Yeah, do we bring in their samples and test them in our lab? So I'm no longer doing that. I sold that four years ago. Went through nasty to. Worse. And now I'm trying to just, I want to create a new business doing something. And so this is an area that I don't know anything about, so I'm trying to get into AI and the sales and marketing part
+
+Speaker 7  3:00:11  
+of it science area, though, there'll be a lot of possibilities of AI and generally in bio medicine and stuff like that. In general, yeah, an awful lot of possibilities.
+
+Unknown Speaker  3:00:27  
+Well, I tell you, what big pharmas there's, there's a lot of money in pharmacology
+
+Speaker 7  3:00:30  
+is using AI to for drug discovery.
+
+Unknown Speaker  3:00:35  
+Oh, I'm sure.
+
+Speaker 4  3:00:38  
+I'm sure. And the testing, like, if I can find ways to enter, introduce it into the machines and the LC, Ms process, yeah, there's, that's a big money business.
+
+Speaker 7  3:00:52  
+There's areas we will be touching on that can be used that way, because what is a lot of machine learning is about finding patterns and data. So that way you can have it be able to recognize possible toxins and samples, let's say, yeah, having seen examples before of those patterns and like in the in the substances well, and
+
+Speaker 4  3:01:14  
+I think you can get, there's a lot of errors that happen with toxicology. I mean, it's a real, dialed in process. But there's still it. The slightest thing can cause an error, and an error can cause huge problems in someone's life. So it's finding ways to be able to track that and see when something's starting to go off.
+
+Speaker 7  3:01:37  
+Well, we're doing stuff in that, for example, is not going to involve things like large language models. It's not going to it's kind of more like the kind of machine learning we will be doing. Okay,
+
+Speaker 9  3:01:50  
+so that can, you can take that knowledge and build something,
+
+Speaker 7  3:01:54  
+yeah, you could maybe, you know, I think one thing is, think about like, something you'd really like to apply and maybe do some research on, maybe some of it's been done. Maybe at some point you'll find a company starting, you know, doing some of that stuff. And maybe you can reach out to somebody there and say, hey, you know, I'd like to be a part of this. Yeah, and I'm doing this course work. I'm learning, you know what, what should I you might even contact someone like that, and I'm so bad at I'm talking what I should do. But, you know, you could even reach out to someone in a company doing that kind of work and say, gee, you know, I'm a student right now. Where should I How should I proceed if I want to be involved in this kind of work?
+
+Unknown Speaker  3:02:33  
+What what we need to do? What should I best do?
+
+Speaker 4  3:02:39  
+Right? I like that. Okay. Well, thank you guys for your time. I'm
+
+Speaker 7  3:02:42  
+so shy to do it, but the idea of, like, an, you know, ask for an informational interview, basically, you know, not to get the job, but you just want to say, hey, you know, we're going to get to where I could be working with you, working on your stuff.
+
+Speaker 4  3:02:58  
+Yeah, and that's my goal. I'm going to get in as much as I can, and I want to learn everything I can out of this, but I want to make sure that I'm not I want to take the right information out that's going to help me in the paths that I want to go down.
+
+Speaker 7  3:03:10  
+Now, if I talk about the person I was talking about doing that work, or not just up of sanctuary, AI, there was a time when I was just amazed with what they were doing there. The problem is I get too afraid. So I mean, I literally sat looking at her profile on LinkedIn and saying, just contact them and say, How could I be a part of what your guys are doing all the
+
+Speaker 4  3:03:37  
+way through that? You coach me through this, AI, and I'll coach you through that.
+
+Speaker 7  3:03:42  
+Well, actually, sometimes you can ask, have Chad G P T to help you write letters like that and stuff. Oh, yeah. And then you cannot use slide, but it might give you a good idea where to
+
+Speaker 4  3:03:51  
+start. You know, I use G P T for so much stuff as far as business goes, yeah, it makes me look really smart.
+
+Speaker 7  3:04:01  
+Yeah, um, a lot of people. I mean, unfortunately, some recruits, you write through people using it. But, you know, people write rewrite resumes and write cover letters and stuff. I've had to write cover letters, then I maybe tweak a little bit, try and make more
+
+Speaker 4  3:04:13  
+and more. Yeah, I usually will write it. I'll have GPT write it, and then I'll tweak it after they write it.
+
+Speaker 7  3:04:18  
+Yeah, I've done that. Writing cover that. It hasn't got me anywhere, but at least it's I want to get started on something
+
+Speaker 4  3:04:25  
+well. And one thing like, I've talked to several people that are really good with the AI in kind of in the fields that I want you, and they've said the ultimate thing is learning how to talk to how to prompt it so you get the specific questions that you need and the best answers you're going to get.
+
+Speaker 7  3:04:39  
+Enough about that on the deep learning.ai and their courses about prompting and stuff
+
+Speaker 4  3:04:44  
+there is, yeah, okay, awesome. I'll look into that. All right. Well, thank you for last night. Tonight was probably the best class I've had so far. I was able to take a lot out of it, so,
+
+Speaker 7  3:04:55  
+oh, good. You'll, you'll get more in a swing of it. You. It
+
+Speaker 4  3:05:00  
+just freaks me out. Like I feel like I'm getting behind because I can't comprehend some of this stuff. It's just, but the more I see it, the better I get at it, that
+
+Speaker 7  3:05:08  
+it takes time, that just, there's no way around it, yeah,
+
+Unknown Speaker  3:05:15  
+okay, well, you have a good night.
+
+Speaker 7  3:05:16  
+You don't have any shortcuts. You know? It's just at Mays, it was like, in a slide right at the beginning, right? It's like, there's no shortcuts.
+
+Speaker 4  3:05:25  
+Yeah, I wish it would just there was a way to plug into it.
+
+Speaker 7  3:05:30  
+I've programmed on and off for, you know, 4050, years, holy smokes, you know, from when I was a kid. But, you know, so a lot of things come natural, and I don't even think about stuff. Yeah, it's like riding a bicycle, but, you know, we'll see. And
+
+Speaker 4  3:05:49  
+that's kind of where I'm at right now. Like, I've done so much, I've chased business, and I've raised all my kids, and,
+
+Speaker 7  3:05:56  
+yeah, probably lousy at business. You probably know way more about business than I would,
+
+Speaker 4  3:06:00  
+yeah, well, it's and I've, that's what I've done. But now I just want to find a job that I can really do a lot remotely and just work when I want not have to punch in on a time clock, because that's just not my style. So
+
+Speaker 7  3:06:17  
+we'll see. Yeah, just keep plugging away. You'll, you'll make it. Yeah, want to do it, you will well.
+
+Speaker 4  3:06:24  
+And that's another question I have for you. Like you said, you are just kind of doing this as a side gig right now. Do you ever
+
+Speaker 7  3:06:30  
+this? This is only a, this is a part time job. I mean, yeah, and I'm doing some school stuff too. Do
+
+Speaker 4  3:06:38  
+you do much freelance work? No,
+
+Speaker 7  3:06:42  
+and that's something I need to figure out. Maybe hadn't do better. I've done some,
+
+Unknown Speaker  3:06:47  
+are you on Upwork? No,
+
+Speaker 7  3:06:51  
+but I've done some freelance work, I guess some work I did recent and by 10 years ago here in Utah for a company was, I guess, in a kind of freelance basis. I wasn't a regular employee, but they would just like, they would have money and want a project, and they would contact me, I guess that's kind of freelance in a way. Well, Upwork site development for a couple of local people. And
+
+Speaker 4  3:07:16  
+get on upwork.com and set up, it's a free you set up a free profile, and you can kind of type in what you do, and people will pay you big bucks if you can, even especially if you can post, like some of your projects on there, and they can see what you can do.
+
+Speaker 7  3:07:30  
+We're getting there better. I did a bunch of freelance website stuff, just online anymore. Yeah, for example, I did a, actually, I did work for a online science fiction magazine. So that was kind of a more regular thing, yeah, kind of freelance basis. But you know, which is good though, like, refused to pay me anything less than $40 an hour.
+
+Speaker 4  3:08:02  
+Well, and that's it. If I can get things going with my company, I I will probably, I mean, I want to have a general knowledge of it, I will probably hire out freelance stuff from people who really know what they're doing to build, build stuff for me and implement so because when I'm running the business. It's nice to know it, but I don't have the time to actually sit down and no,
+
+Speaker 7  3:08:25  
+I realized I understood that there was a time when I was trying to be able to do like WordPress, WordPress, and I was thinking, Well, anyone can readily use WordPress to create a website if you use just a bunch of canned, you know, components that have written. But then I realized, no, you know, even though anyone could do it like you're saying, a person is running a business, they can't take the time to develop their website. No, done, and it could use, use canned, you know, themes and stuff for WordPress. But they just don't have the time to figure out how to do even that. So at first, I think I have to make add this added value after do these, you know, do custom themes or plugins and stuff, and when they realize, not necessarily, because it's simply that a business person like you're saying they don't want to spend the time doing that. They they've got their other stuff to do. They'd rather just rare someone to do that particular task
+
+Speaker 4  3:09:30  
+well, and that's I want to see where AI can be in content creation, because that's kind of my next direction I'm heading is to open a coaching business and do, oh, cool, um, kind of like a mindset coaching, and get people through physical, emotional, mental health stuff, and then help them create and develop their own businesses. But in that coaching, I want to be able to create a ton of content using like cinema, photography. But I want to see how I can implement software and AI to make it as efficient as possible, so I can spend, like, a day recording videos, and it covers three months worth of content. Because
+
+Speaker 7  3:10:15  
+increasingly, where you can generate a lot of video with generative AI,
+
+Unknown Speaker  3:10:19  
+yeah, and that's what I'm hoping to do, because
+
+Speaker 7  3:10:22  
+I'm gonna give it some, you know, some stuff takes a lot of time storyboard, but then it does all and it creates the people and everything. So you don't have to, like, get people to act and stuff, yeah, generates the characters and stuff and voices. And
+
+Speaker 4  3:10:39  
+so where would I look into that kind of stuff? And that's an area I'm curious
+
+Speaker 7  3:10:42  
+about, and I've not really explored enough myself,
+
+Speaker 4  3:10:48  
+because that's if you can help people with their content. That's where marketing is today, is digital marketing and content creation. And so if you can get into that arena, and because if I can go create content that's going to be put out there and get me out in the public's eye for the next three months, and I only have to spend a day doing it, that buys me three months of time.
+
+Speaker 7  3:11:10  
+Yeah? I mean, yeah, to create, like, a short promotional video, you no longer necessarily have to get actors in a production company and film and edit it and everything.
+
+Unknown Speaker  3:11:23  
+Being able to create webinars
+
+Unknown Speaker  3:11:27  
+with an AI,
+
+Unknown Speaker  3:11:30  
+there's a guy named not
+
+Speaker 7  3:11:31  
+having to pay for talent in it, not to have to have a filmmaker, you know film, you know photographers and editors. You don't have to have any of that. Yeah, yeah.
+
+Speaker 4  3:11:43  
+Well, there's a guy named Billy Jean that does a lot of, I mean, he's like, a AI marketing, big shot as far as the media goes. And he does, he he does webinars, he does all these YouTube and he's not even there, like, he's they, it's cloned his voice. He programs it in, and people are able to it's they do question and answer type stuff, and it's just AI talking to him, but it's shows a picture of him answering the questions with AI's knowledge.
+
+Speaker 7  3:12:13  
+There's a lot going on in that area, in that kind of area, yeah, just look around. Just see searches on Google. There's companies that do that actually at this point, content production, generation, and
+
+Speaker 4  3:12:26  
+that's what I want to do, is I don't want to pay somebody else to do it. I want to do it myself.
+
+Speaker 7  3:12:30  
+Yeah, that's I understand that. What fun is it if somebody else can do it? Yeah? Yeah,
+
+Unknown Speaker  3:12:38  
+I don't get to have any fun then, yeah,
+
+Speaker 4  3:12:42  
+I want to make, well, I'm gonna go hit the sack. I gotta be up before in the morning. So, okay, nice Chad, thank you and and have a great night. Yeah, see you can.
+

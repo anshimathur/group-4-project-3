@@ -1,0 +1,1743 @@
+Unknown Speaker  0:50  
+to work on unsupervised learning. Okay, this is week 11, and this next week 12, we will do regression.
+
+Unknown Speaker  0:59  
+Week 13 would be classification,
+
+Unknown Speaker  1:04  
+and then we will work on some optimization techniques that applies across the board in week 14. And then week 15 actually gives you a little bit of breather, because week 15 is not going to be any new technical
+
+Unknown Speaker  1:22  
+work. It's mostly about kind of taking a step back and thinking about what are the ethical standard that you need to follow, so that things like Cambridge Analytics does not happen, right? So that's what your week 15 is, and then you will have another exciting two weeks working with your group, which is your project, too. Okay?
+
+Unknown Speaker  1:47  
+Now during that time, I will not be here. I am going on a vacation, so I'll be out of country for almost three weeks during that time, but, and, but the other teaching staff members would be there, right? The TS will be there. Kian is not going to be here. I'm not going to be here, but obviously there will be someone available to serve us. Just a heads up. And this is something that have been planned even before I started this teaching, this boot camp. So
+
+Unknown Speaker  2:18  
+and then I'll be back after the project again, when we basically go into the neural networks and deep learning, like even more exciting stuff, right? So essentially, the second portion of the boot camp, first portion, we basically spend a lot of time understanding Python, pandas, all of these foundation and then at the end, we did a little bit of machine learning with one kind of machine learning, which is time series forecasting. The second section of the boot camp, we are basically doing traditional machine learning, the statistical based machine learning, which is your supervised and unsupervised learning, and two kinds of supervised learning, which is your classification and regression, right? So if I let me actually share my screen with the slides here, and this should be familiar to you by now, because we talked about this
+
+Unknown Speaker  3:16  
+so different types of ML, right? So we talked about primarily two types of ML, unsupervised and supervised. Unsupervised learning is where we are using an algorithm to try to make sense of data set that is not leveled like where there is no human input we can gather that can tell the machine what each of the data point. Mean, that's what unsupervised learning comes in. And supervised learning is if you do have a data where
+
+Unknown Speaker  3:51  
+good chunk of data set is leveled by previous observation or by human input or whatever it is. So that's why we are we do supervised learning, right?
+
+Unknown Speaker  4:04  
+And then these are some of the features we talked about, right? So supervised learning, input data is labeled. You use your training data set, and then you predict a class or a value depending on whether it is a continuous variable or whether it is a discrete variable. Unsupervised Learning. On the other hand, your data set input data is unleveled, and your goal is to determine patterns or group of data within your bunch of unlevel data, or what we call as cluster. So a quick visual representation of this is on the left hand side. What it is shown here is you have a whole bunch of data. You don't know which data belongs to which group, because if you knew that, then it would be supervised learning. But if you don't know that, and that's why on the left hand side, all the data points are kind of shown using the same kind of
+
+Unknown Speaker  4:58  
+pattern, which is blue.
+
+Unknown Speaker  5:00  
+Circle. So that basically shows that there is no information in the data that tells you how one data point is different from other data point, because all the data point like randomly spread around in the space, in the two dimensional space, or n dimensional space, for that matter, right? So that's where you use supervised learning to kind of see which kind of which one of these data points or which group of these data point are more similar to each other than the other group of data points. And that's where you basically draw some boundary. And the boundary could be a simple circle or a weird shape or surface. So basically, however, the algorithm decides that these group of data points kind of comes together, and there is some similarity between these groups supervised learning. On the other hand, you see that the data points are there, but here we are showing that there are two kinds of data point which is kind of indicated by using two different icons for the data point. One is a circle, one is a cross. So what that means is, when the data came to us, there was already some information contained within the data
+
+Unknown Speaker  6:12  
+that we humans looking into it, we can say, Oh yes, these 10 data points belong to the Circle class. These other 10 data points belongs to the cross class. Now we can use supervised learning to let machine understand that the which of the which features of the data
+
+Unknown Speaker  6:31  
+contributes to a particular data point belonging to Class A versus Class B, meaning one class or the either. So that's where supervised learning will come in, which we will do next two weeks. But this week, our focus is going to be this one where we don't have any training, any level that are present in the data. Therefore we have no way to know which of these can be grouped together. This is kind of similar to when I look at this picture, what I think is like when people, when I, personally, I should not say people when I look up in the night sky, right? And then, you know, okay, there are constellation but to me like, Hey, I don't see any constellation all. It looks like, like random dots strewn all across. But hey, maybe the scientists did find that these groups of star probably belong to one galaxy, or maybe they have some kind of commonality. Maybe they have a similar kind of relative angular velocity with respect to the Earth. Therefore they kind of move together. So that kind of, in my mind, is a very good analogy to what unsupervised learning does, right, but once you do that, so which is probably the astronomers have done right since last 1000s of years, and they have decided, okay, these are these. These stars belong to one constellation, and these other stars belong to another constellation. That is exactly what we are trying to do here with our bunch a bunch of data point with the algorithm that we are going to use for unsupervised learning. So basically, trying to find constellation that have some similarity with the neighboring data points or neighboring stars in the sky, right?
+
+Unknown Speaker  8:11  
+Yeah. So then I'm not going to go too much details into auto all of these. We have already actually covered these in the very first week of the boot camp, right? So this is just you can think of, just a refresher to your memory. And these are the different libraries. And by now, we have used many of these libraries,
+
+Unknown Speaker  8:31  
+except here the for this TensorFlow. This is something we haven't used, which we will use later when we go to neural network and deep learning, but we have used pandas, we have used SCI pi, matplot, Scikit, learn and NumPy, right? So these are the most commonly used libraries in machine learning,
+
+Unknown Speaker  8:53  
+okay, so talking about unsupervised right? So Unsupervised Learning algorithm. These are used for what to test data to construct model that categorize the relationship among data points, right? So this is another visual. So basically, learning can be used to identify cluster or related groups of clients. Well, I don't know why this client related groups of clients or of data points to target with. So this is basically a specific example. So basically what this is showing is like, hey, maybe you have, you are a business, let's say, and you have this customer database, and you have maybe hundreds of 1000s of customer now you are trying to come up with a product, and you are trying to identify, Okay, which one would be the target audience for your product, the new product that your company is trying to launch. And in order to do that, you are trying to find out how many different groups of customers are there, right like, and this could be using various dimension, like race, age, ethnicity, gender, economic status, right there.
+
+Unknown Speaker  10:00  
+Lot of things. Now, how do you actually or also, they are buying pattern, their past behavior, like what kind of product they tend to
+
+Unknown Speaker  10:09  
+buy more, or what is their engagement, let's say in a social media and stuff, right? So there are a lot of things you can look at and based on those attributes as a business you might want to see, okay, what are the unique groups of customers that I see, that I can possibly target product for them, right? So once you do that using unsupervised learning, then obviously unsupervised learning is not going to give you exactly like why there are five groups of customer. It will just say, simply, if you ask it to five groups, it will say, okay, these are the five groups of customer. Then you can take that as a like input to your following, follow on analysis, subsequent analysis to basically figure out, okay, so out of this 1000 customer, I see the algorithm group these 200 customer into group one, these other 200 customers into group two. Therefore let me look do some exploratory data analysis and that point, and then try to understand, what is the reason these 100 or 200 customers were grouped together? Are they kind of similar in the age, or kind of similar in a socio economic status, or a combination of many different factors? Right? So most of the time, unsupervised learning is kind of used as a precursor to further follow on data exploration and supervised learning, right? So unsupervised learning is very rarely used on its own. Most of the time it is the input to other data science tasks that the teams usually, if you will, take up on.
+
+Unknown Speaker  11:35  
+Now, obviously, since the data is not labeled,
+
+Unknown Speaker  11:39  
+there are challenges. Obviously the data is not level, so we don't even know that whether the output is correct, right. So algorithm will create its own category of data, and this is what I was saying earlier. Then an expert, or a person who knows in that domain, a subject matter expert, then has to explore the outcome and then determine whether these categories are meaningful or not. Because what will happen is most of the Unsupervised Learning algorithm, if you have 100 data points, and if you ask the algorithm to Hey, group these 100 data points into four different categories, it will give you four different categories. If you say hey, group these 100 data points into 10 different categories, it will do 10 different categories. So these algorithms are not intelligent in that sense, right? It will basically simply follow what you instruct it to. So then the question is, which one is correct? In reality, if you have, let's say, two sets of data points and you ask to do categorize into two groups, that's fine, but if you also ask it to do four groups, it will also blindly do four groups. But maybe the four groups is not meaningful, and that's where that expert opinion comes in. Then and human must come in. Look at the output of your algorithm and then determine which one of these groupings, whether grouping into two categories, three categories, four categories, of 10 categories, which one actually makes sense, right? So that's where that's that's when you basically then go into more into the supervised classification type domain, right? But this is often a very good first start, to start with the unsupervised
+
+Unknown Speaker  13:19  
+Okay,
+
+Unknown Speaker  13:21  
+so some of the examples how might business use this kind of unsupervised clustering algorithm, some of the things I think I already kind of touched upon, right? So companies might what want to use the clustering algorithm to group customers by spending habits to create customized offer via email, right? Like high spender, medium spender, that kind of thing, right? And based on that, so can you also another thing would be, example would be, let's say you are a bank or a credit card company, right? And you are looking into all of these transaction that happens, and you want to find out whether some of the transaction transaction looks out of the ordinary. So you might want to use an unsupervised learning to basically say, Hey, these are the past 100,000 transaction that happened yesterday. Tell me so divided into two groups, for example, and between the two groups, see whether any one of the groups, which might be a smaller group looks kind of different than the other group, if it is then that might tell the bank or the financial institution that there is some anomaly with within those data, right? So that's also another example,
+
+Unknown Speaker  14:35  
+which is what it is talking about, right? So detect potential customer who might differ on the loan by grouping transaction based on a variety of feature.
+
+Unknown Speaker  14:43  
+Okay? So that's kind of the some of the use cases that could be. Now let's look into, in a more from a more technical viewpoint, what clustering is, right? So clustering is basically you have whole bunch.
+
+Unknown Speaker  15:00  
+Data and you are applying
+
+Unknown Speaker  15:02  
+like a different group numbers. This is group one, this is group two, this is group three, and so on. Now how do you do that? Well, you have to find these data points and some measure of distance between the data points, and then see which one of these data points are tightly clustered together. So the some of the distances from the center of the cluster is minimized. And this is something I have, I think I have included a slide from, yeah, this slide. So this is the slide that, if you go back to your week one, I assume, when we first talked about the introduction to machine learning. This is a slide I created which basically I tried to give a very high level overview of what is the process steps in this type of unsupervised clustering. And this is one of the many, many different algorithm, which is called K means algorithm has to be an S. K means clustering. So k means is one of the algorithm out of many different algorithms available, but this is the simplest and easiest to understand, and therefore we are going to mostly use k means clustering within this boot camp. So I included this slide back then. So now let's take a look at what are the process steps? So the left hand side, I basically put some overview why it is used that to teach the machine to use unlevered data with no training input. The goal is to divide the data set into multiple groups based on how similar or how different they are. And in order to do that, we use a measure of Euclidean distance in an n dimensional space to measure the similarity between the different data points, right? We talked about that. And I think someone asked at that time, Hey, what is Euclidean distance? And I remember I simply say, hey, it's basically just a Pythagorean
+
+Unknown Speaker  16:55  
+Theorem, right? Like, if you have a two dimensional space, and if you have a two point, x1 y1, and x2 y2 the straight line distance between this is square root of x1, minus x2 whole square plus y1, minus y2 whole square. And that's basically your Pythagorean straight line distance, which a fancy term scientist still, is called Euclidean distance, right? So it's just in two dimension, but you can extend the same concept into any arbitrary n dimensional data space. And then in this algorithm, in basically the algorithm, not you, the algorithm basically measures this Euclidean distance as a measure of similarity, like if the two data points have a lower Euclidean distance, that's then the algorithm treats them more alike than another data point, which is a further distance away in that n dimensional hyperspace.
+
+Unknown Speaker  17:48  
+Now the process step here is so basically what happens is, when you start the algorithm, it assigns the data points to one of the K cluster depending on the center from the cluster. So essentially, what it does is it, if you say, like, these are my 100 data point and Hello, Mr. Algorithm divided into four different categories. So when the algorithm first gets the data and your input, where you are saying, k equal to four, meaning I need four categories to be group, the algorithm has no clue whatsoever where these clusters are located. So what the algorithm do? Does? It randomly assigns four point randomly, completely randomly. It will say, Hey, this is the center of one cluster. This is the center of one cluster. This is the center of another cluster, this is the center of another cluster,
+
+Unknown Speaker  18:39  
+which may or may not be true,
+
+Unknown Speaker  18:42  
+right? I mean, which actually most of the time it will not be true. But what the way that algorithm works is it basically then iterates over it internally when the training process happens. So then what it does is, after you get all these center or centroids, then you take the Euclidean distance from the centroids to each of the 100 data points that you have, and you pick the one that are closest to centroid one, and you do the same thing for centroid two, same thing for centroid three and centroid four, right? So that's how you will basically get four different cluster right now. That is not the end. That is just one iteration. So after that iteration is done, then what will happen is, after the first iteration, then it will have a kind of idea, okay, these these points are Cluster One, these points are cluster two, these points are cluster three, these points are cluster four, but that may or may not be correct. So then what it will do, it will basically create the cluster center, taking the average distance of these points, and then these new cluster center will basically be treated as.
+
+Unknown Speaker  20:00  
+A new centroid, and then it will run iteratively again this process calculating the lowest Euclidean distance and see whether in the second iteration there is any deviation from the decision that it came up in the first iteration. And if there is any deviation, then it will keep the second output from the second iteration and then repeat the process again for the third iteration, and it will keep on doing until a time comes when there is no, not no change, or not much change between one iteration from them to the next iteration. So that's when the algorithm will decide, okay, so now I have converged on the correct cluster center, therefore I must stop now. And that's the four different cluster center that the algorithm will assign. And based on their the near
+
+Unknown Speaker  20:51  
+proximity to the these cluster center, then the algorithm will say, hey, this, this, this, these points are group one, these points are group two, these points are group three, and this was a group four. So algorithm will now apply this level on your data points, because your data points did not have any level to begin with, right? So that's how the whole process work.
+
+Unknown Speaker  21:12  
+So here, if you look at this, are you actually seeing the animation working on your screen? Yes, yes. So this is basically what I said it is trying to do, that you see what it did. So first it created this, and in a second iteration it moved dates. So why the centroid are moving? Because after one iteration is complete, if you get, let's say, 10 data point assigned to one, then you need to see, okay, what is the exact center of this 10 data point. So then you move the centroid to the exact concept, a logical center of those 10 data point, and then you repeat that again. So then, as you probably have noticed, after it did this for few times, then the algorithm decided to notice that there is no other change, and that's when this stopped. Why? Because at this position, as you can see in the figure, now these little centroids here this one, two and three, four. So these centroids are chosen in a way such that the root mean square distance from this centroid to each of the data points assigned to this cluster is the minimum, because machine learning is nothing but an optimization problem where you are trying to minimize the root mean square distance. And that is true for no matter whether you are doing clustering, whether you are doing classification and regression. So in this case, what it is trying to optimize is the root mean square distance from all the data points belonging to a cluster, from the center of the cluster.
+
+Unknown Speaker  22:42  
+And after doing this few iteration, when it came up with these four cluster center, it found that it has reached the optimal of the root mean square distance. Therefore I must stop, and that's how you get the four data points. Sorry, four cluster groups.
+
+Unknown Speaker  22:59  
+Okay,
+
+Unknown Speaker  23:01  
+any question.
+
+Unknown Speaker  23:06  
+Chad had a great question, does so when you go through this, does it always form the exact same cluster, or there was a variability? You should care. There is a variability. There is a variability. So in fact, that's why. So when you first seed this algorithm, if you want to change this, so you can basically provide a randomizer, right? So, based on So, the thing is, if you don't give an initial seed, like a random seed, the algorithm will basically start with that exact same four random points over and over again, right?
+
+Unknown Speaker  23:38  
+So, if, so, if, sorry, no, I think I said that the other way. If you do provide a seat, if you do provide a seat, let's say my randomizer seed is any number, any integer, number, let's say 510, or whatever. Then it will make sure that no matter how many times you are running the algorithm, your initial random seed of the cluster center is the same.
+
+Unknown Speaker  24:02  
+If you are not providing a randomizer seed, then it might happen. There is no guarantee, but it might be that if you run the algorithm five different times, it will randomly choose five different cluster center, and based off that, based on that, based on the initial positioning, the final converged data or cluster points might also be slightly different, but don't expect to be able to actually recreate that, because
+
+Unknown Speaker  24:30  
+it may or may not. The reason you probably won't see it in your little toy experiments that you will be doing, you will when you will do the toy experiments, and you can try this yourself, you will see that even if you don't provide a random seed, we even without a random seed, you run the algorithm five times, it probably gives you the same answer. The reason is that because your toy data problem, the data high space is not high dimensional enough, and the inter relationship between the clusters are not complex.
+
+Unknown Speaker  25:00  
+It's enough. So therefore, even without anything your point, your model will probably converge on the same data, same decision over and over and over and over again. But that kind of changes when you have a more complex structure and your hyperspace is much higher dimension,
+
+Unknown Speaker  25:17  
+right, which we probably won't come across in our exercise that we do in this academic setting.
+
+Unknown Speaker  25:30  
+Okay? And this is basically another kind of step by step view of what we just saw in the animation, right? So randomly select the K cluster. Each object is assigned to these randomly centered
+
+Unknown Speaker  25:45  
+to similar centroid randomly. And then cluster centers are updated depending on the new cluster mean, and then reassign the data points. And then you basically keep repeating it. So is the centroid actually a data point, or is it just some space in
+
+Unknown Speaker  26:02  
+just some space. Yeah, centroid is. Centroid is not guaranteed to over overlap with any of the given data point it may, but most of the time it won't.
+
+Unknown Speaker  26:14  
+Yeah,
+
+Unknown Speaker  26:18  
+cool. So now we are going to jump into some of the
+
+Unknown Speaker  26:24  
+code to basically try this out
+
+Unknown Speaker  26:27  
+any question before we do that.
+
+Unknown Speaker  26:37  
+Okay, so if there are no question, let's jump right in. So what we are going to look here now is this one. Let me first clear all outputs here.
+
+Unknown Speaker  26:56  
+There is my current.
+
+Unknown Speaker  26:59  
+Okay. So here what we are going to do. We are first going to create one of the toy data set. Okay, so these toy data sets are very it comes in handy to kind of when, when we basically decide to demonstrate some of these concept using an easily understandable data set, like if you directly go and take a real data set, let's say your housing data, your or whatever, different data set that we have worked on, sometimes, what is going on underneath it might be little difficult to understand. So what these toy data set do? These toy data sets basically gives us a very easy way to visualize these algorithm and how they are performing. It is not useful, that's why this is toy. But you will see what the concept means, right? So in order to make this toy data set, what we do is we use a library called SK learn dot data sets. So these SK learn dot Data Set Library has many different functions, so I'll show you one. So first times doing make blobs. But what is make blobs really, right? So if you do a if you are curious, right? Which when I am curious, which is what I do? And I'm sure these days everyone do I do this, I say, Hey, make blobs. So what does make blobs do? Well,
+
+Unknown Speaker  28:28  
+it creates.
+
+Unknown Speaker  28:32  
+These are gallery examples, yeah. So basically, it will create blobs of data in space,
+
+Unknown Speaker  28:40  
+right, with different in a two dimensional space, right? So now, make blobs is not the only game in the town. There are many different data set, toy data set you can use, for example, if I do from s k learn dot
+
+Unknown Speaker  29:00  
+data set import.
+
+Unknown Speaker  29:08  
+Why is the suggestion not coming up?
+
+Unknown Speaker  29:11  
+Yeah, here. So you see there are a lot of different thing, make blobs, make by cluster, make checker board, make circle, make classification, make moons. There are a lot of these different data set, which what it basically does is it basically creates a bunch of data points in a two dimensional or three dimensional space, basically in a lower dimensional space with certain geometric pattern that you then put it through your machine learning algorithm that you are trying to analyze, and then you can easily visually compare that what, because, since these toy data sets are so simple, you know, what is the structure of the data set is? So now you can easily compare the structure that is given in this generated data set from the s, k, r and data set, and compare the what your output of your model is.
+
+Unknown Speaker  30:00  
+Is and see how well your model is performing in the toy data set. Right now, obviously these models are going to be much simplistic models, so these models are not going to be of any real use, but it is very useful for us to understand what the model is doing and how the model is what Okay, so for this first activity out of these, all of these different Mac methods, right? We are going to use the make blobs method. Now one when you are doing make blobs, you can actually specify so blob basically mean just blobs of data, like bunch of data cluster together, bunch of data cluster together, bunch of data clustered together, right?
+
+Unknown Speaker  30:43  
+So you can say, Okay, how many blobs you want to generate. So here, let's say we are saying centers equal to three. So that means we want to generate three blobs of data. And I can also specify what is the dimension, how many dimensional data set we want, since it is easy for us to visualize in a two dimensional space, so therefore we are saying n features equal to two. So that tells it, that tells the mid block function that I want two dimension and then a level, of course. And this random state is basically the random answer. So with the if you do provide a random state here in any of the statistical function, you will see that there is a random state. So by doing random state, you basically make sure that the function basically operates in a predictable way every time you run it, okay? So now, if I run this, it will basically create the data set.
+
+Unknown Speaker  31:41  
+Now we don't know how what is there, so let's look into it. What is there? So here, if you look into the return value, so what do you see the return value? What is it we have done,
+
+Unknown Speaker  31:55  
+x, comma, y.
+
+Unknown Speaker  31:57  
+Can anyone guess? Why?
+
+Unknown Speaker  32:00  
+Why do we have two return values here? Because you have two features,
+
+Unknown Speaker  32:06  
+no,
+
+Unknown Speaker  32:09  
+because I have features and I have levels, not because I have two features. No matter whether I have two features or 10 features, all of the features will be inside x, because that's basically my data set, and y is basically my level, which will say, Hey, this is Cluster One, this is cluster two, this is cluster three. So that's what the y is in this center. The centers have anything to do with the k value at this point, or they are just a different terminology. Hang on. Hang on a second. We are not doing K at this here. We are just trying to understand what make blocks done. We will come to the k in the next activity. So hold on to that thought for a moment. Okay, it's very interesting, actually, when you will see this. Okay, so now I'm just printing out x. So this is what I meant, that I don't have x and y2 things because I have two features. No x itself contain two columns. So x is basically a multi dimensional array, right where each item in the array is an array itself of two features. So it basically generated a whole bunch of numbers, but in pairs of two. So why you have these two numbers in every row, because I have N features equal to two. If I had n features equal to three, let me just show it to you. Then if you see the x, then x will basically have three things. Because now I'm saying, hey, create me a bunch of blobs in three dimensional space.
+
+Unknown Speaker  33:40  
+Now three dimensional problem you can also do if you happen to use any three dB, 3d plotting algorithm. But here we are just going to stick to our plain old matplotlib, which with only 2d so therefore I'm going to revert back to feature equal to two.
+
+Unknown Speaker  34:00  
+Okay. So now my x looks like this.
+
+Unknown Speaker  34:05  
+If you want to see how many printed, it didn't 100, because by default, as make blobs, creates 100 points. You can override that too. I think there is a there is a parameter, probably, if you look into this,
+
+Unknown Speaker  34:21  
+n samples. So you see n samples equal to 100. This is in the documentation. So we did not use any n samples in when we called it right you see here, we said, how many centers, how many features, and what is the random state. We did not say how many samples we need. Therefore, it took the default value, which is 100. In fact, if you see here, m features is also default value is two. So even if we didn't do n features, it will still have created a data set in two dimension, because two is the default value, okay?
+
+Unknown Speaker  34:52  
+And you can play around with this. So there is, this is this is nothing to memorize or anything, right? If you need this, you can easily look up the documentation and see, okay.
+
+Unknown Speaker  35:00  
+So that's my x. Now what about y? So now if you look y, so y also gives me an array of 100 numbers, and you see there are only three numbers, 01, and two. Why? Because here I said, Make me these blobs with three distinct centers. So that's why make blobs is giving you these 100 data points. Some of the data points belong to group zero, some of the data points belong to group one, some of the data point belong to group two,
+
+Unknown Speaker  35:37  
+and which you will see the and the and the the way that the make make blocks will generate this, that all the groups one will be closer together. When you plot it in a XY space play, all the group ones will be closer tighten, kind of grouped together into another area in the space, and so for group two and so on, which you will see very soon when we plot this. Now, one thing is, you see how
+
+Unknown Speaker  36:07  
+this x is 100, comma two, and then y is just 100. So y is basically currently array with one dimension. Now what we are going to do, we are basically going to create a data set out of it, or, sorry, data frame out of it, using our old frame, which is PD dot data frame, because that way we can easily plot it using the pandas plotting function, right? But in order to do that, so what I need to do is for the columns. So currently the shape is 100, comma zero, but what we need to do is we need to convert it to a shape which is similar to the shape of x. So to do that, what we did it, we did a wider V shape, and we do
+
+Unknown Speaker  36:56  
+negative one and one. So the reason we do that is after you do that. So now you see, initially the shape was, shape was 100 only, and now the shape is 100 comma one
+
+Unknown Speaker  37:09  
+because we want the shape of x to be similar to the shape of y, not similar in value, but similar in structure,
+
+Unknown Speaker  37:19  
+the way that make blobs created this why was simply a single dimensional array, but we need it to be a two dimensional array, even though the second dimension is only length one, and that's what this reset function does, so that the both x and Y are dimensionally similar.
+
+Unknown Speaker  37:38  
+Okay,
+
+Unknown Speaker  37:41  
+then we take these and we create a data frame
+
+Unknown Speaker  37:46  
+where we are adding feature one and feature two as columns,
+
+Unknown Speaker  37:52  
+and we are taking that same data frame and we are adding another column onto it, which is target and the target column would be all these y values. So essentially all of these x values, which is basically the first element of each of these array, this will go into my feature one column. All of the second element in the these array will go into my feature two column, and all of these zeros, one and two will go into my target column, or Y column. So that's what the data frame that we are going to create out of this, and this is what it is now going to look like, which now we have 100 rows and three column feature one, two and target. So we really didn't do any processing, which all we did is just took the output, which is a simple array, and we convert it into a nice looking pandas data frame. So that's why we can easily plot it. That's all. That's all, nothing else.
+
+Unknown Speaker  38:46  
+Now what we are going to do is,
+
+Unknown Speaker  38:52  
+so first of all, I'm just going to do a scatter plot.
+
+Unknown Speaker  38:58  
+So when I'm doing the scatter plot, I'm saying, hey, take this feature one column, plot it in y x axis and text the take this feature two column and plot it in Y axis, and then I am going to do a scatter plot. So let us see what happens.
+
+Unknown Speaker  39:16  
+So you see what happened. So here, just by looking at it, you can clearly see that these columns are sorry, these data points are kind of clustered together in one region in the space, and these ones at the bottom, they are clustered together in another region. And these ones at the top right, they are clustered together in another region.
+
+Unknown Speaker  39:39  
+But then here, all of them look similar. They're all same color. But we do have another feature column here, Target, which is zeros, ones and twos. But this is not K. Means clustering. This is no algorithm, nothing. It's just a synthetic dataset we are generating. So now what we can do?
+
+Unknown Speaker  40:00  
+We can basically add a coloring to this. We don't need even the color map.
+
+Unknown Speaker  40:07  
+Let's just do the default color map. So Color Map is basically the coloring scheme. So what we can do is we can take this target color, color, sorry, target column, and we can add a parameter See, see in the scatter plot, X, Y, and the C parameter basically means color. So basically it says, what is the value that you are going to use to colorize your data points in your scatter plot? So you can say, hey, since I have three different distinct values in my target column, why don't use our target column to uniquely color these three different groups. And if you do that and rerun this,
+
+Unknown Speaker  40:49  
+so without any color map, it is basically using a gray scale value. Okay, so no, so looks like then you do have to,
+
+Unknown Speaker  40:59  
+I didn't realize that.
+
+Unknown Speaker  41:04  
+Whoa, what? What is happening
+
+Unknown Speaker  41:08  
+anyway?
+
+Unknown Speaker  41:09  
+Color Map jet, there are a lot of different color maps, which I don't really care much about. Let's take a random color, yep, whatever. So any three color is fine. So whatever co pilot generated for me, it says synap equal to j i don't know why it loves.
+
+Unknown Speaker  41:28  
+So, anyway, so, so basically, what I'm saying is doing the same plotting, except I'm using these zeros and ones and twos to mark these in three different colors, and now in the same plot, you can clearly see which one is which group
+
+Unknown Speaker  41:45  
+got it.
+
+Unknown Speaker  41:49  
+So similarly, here we did three groups, right? So now, if you want to do 30 groups, or 10 groups, or whatever, many, right? So let's do another one. So here we are doing another make blobs. This time I'm saying centers equal to five. So instead of three, I'm saying, hey, I want to do five. So let's do that, and then run the same set of steps, which is converting to pandas data frame.
+
+Unknown Speaker  42:14  
+And now you see 12345,
+
+Unknown Speaker  42:18  
+with different color. So
+
+Unknown Speaker  42:23  
+hey, I actually like
+
+Unknown Speaker  42:25  
+the jet theme better. I think it gives them more,
+
+Unknown Speaker  42:30  
+wider color palette. Yep,
+
+Unknown Speaker  42:33  
+I like the jet color palette better than the winter color palette. Yeah. So, yeah, blue, green, orange.
+
+Unknown Speaker  42:42  
+What is the other one? Is that purple and maroon?
+
+Unknown Speaker  42:46  
+Yeah, maybe
+
+Unknown Speaker  42:48  
+I'm not that good at remembering colors names, but yeah. So anyway, so this is how we can generate what is called different kinds of data, right? And if you are thinking like, what about make blocks? What about, we know I showed the other ones, make moons, make circles. What about those
+
+Unknown Speaker  43:12  
+I do actually have for the next class I do have, we'll see whether we do next class or the class after I'm actually, I have reserved actually something that I'm going to show you how these different other shapes look like. But anyway,
+
+Unknown Speaker  43:27  
+so that's that's how we are getting a
+
+Unknown Speaker  43:30  
+synthetic toy data set clear.
+
+Unknown Speaker  43:33  
+So now, can you guys figure out what am I going to do in the next activity?
+
+Unknown Speaker  43:38  
+Try to think logically. Where can we go from here?
+
+Unknown Speaker  43:48  
+We are trying to learn clustering. So what we did is, so what we did is we basically artificially generated a bunch of clustered objects, but we actually haven't applied any algorithm on top of this. So now in the next activity, we are going to take one of these blobs and apply the k means clustering algorithm on this and then we are going to compare the labels that K means generate versus the levels that make blobs is giving which is these ones,
+
+Unknown Speaker  44:25  
+right?
+
+Unknown Speaker  44:27  
+The idea is, if our k map is working, sorry, k map, not k map, what am I saying? If our K means is working perfectly, then the zeros and ones and tools that K means generates should match more or less with the zeros and ones and twos that make blocks is making for us in our artificial toy dataset. So that is the goal,
+
+Unknown Speaker  44:53  
+right? So that's why we are going to see how that works or how that does not work.
+
+Unknown Speaker  44:59  
+So let's do.
+
+Unknown Speaker  45:03  
+That. So for that, we are going to look into the next activity, which is this. So let me clear all output First, select my carnal
+
+Unknown Speaker  45:21  
+or i Oh,
+
+Unknown Speaker  45:24  
+I don't have that actually.
+
+Unknown Speaker  45:36  
+I don't have that code here. This is different.
+
+Unknown Speaker  45:42  
+This is a clustering with the actual data set. Sorry, guys, my bad. I thought it will be there, but it is not there. Hang on.
+
+Unknown Speaker  45:55  
+Let me do that then as a stretch activity in the first one itself, let me go and pick up some code from elsewhere, so I don't have to reinvent the wheel. I
+
+Unknown Speaker  46:42  
+The so what am I going to do is I'm going to go back to here in this notebook itself. So let's do instead of going to the second activity right now, let's take these blobs that we have just created and let's do some k means clustering using these blobs right here. Okay,
+
+Unknown Speaker  47:02  
+so now we are going to do clustering using the k means clustering algorithm. So how do we do that? Well, in order to do that, we need to import
+
+Unknown Speaker  47:14  
+this thing,
+
+Unknown Speaker  47:16  
+K means so basically we will say,
+
+Unknown Speaker  47:21  
+from SK learn dot cluster import. K means so this is our algorithm that we are going to import. And now the K means algorithm is important.
+
+Unknown Speaker  47:32  
+Now,
+
+Unknown Speaker  47:34  
+if you look into it, the way that you initialize a K means model is this way. So if you say model, this is my variable that I'm going to store. So basically these k means is the new model creation function, right? Or the constructor. The K means constructor. So here you can specify how many cluster you really want to create.
+
+Unknown Speaker  48:01  
+So since I know that I'm going to apply this to these variable, these data set here, this DF, which I know that there are five cluster. Why? Because this is a artificial data set that I just created.
+
+Unknown Speaker  48:17  
+So therefore, in the K means I can say, I want five cluster. This is where I am providing an input to the K means algorithm
+
+Unknown Speaker  48:28  
+that how many cluster it should look for, meaning how many clusters centroid it should start now, obviously I can take this block data and I can say, hey, find me two cluster. It will basically take all of these and find two clusters. But here, in this case, I, since I know that there are five cluster I'm going to use five, and then we are going to come back and experiment with different cluster number and see how the algorithm kind of adjust, right?
+
+Unknown Speaker  48:55  
+So initialization is auto. So basically it means is that automatic initial initialization of the centroid, let it decide how it wants to initialize, but I'm providing a randomizer state as one. By doing providing a random state equal to one, I'm basically expecting that anytime I run this, it will start with the same random state, so the output would be predictable. So that is what my model is, and let's print what the model looks like. So this is what the model is. So this is my Kevin's algorithm model created. Okay, this model is not trained with the data at all. We just created the model.
+
+Unknown Speaker  49:37  
+Now,
+
+Unknown Speaker  49:39  
+when we were doing time series forecasting, remember the two steps that I mentioned about in any machine learning? After you create a model, you basically do two steps. What were those two steps called fit?
+
+Unknown Speaker  49:58  
+So what does fit do?
+
+Unknown Speaker  50:00  
+Two
+
+Unknown Speaker  50:05  
+so fit function basically does the training,
+
+Unknown Speaker  50:09  
+and then what is the next step?
+
+Unknown Speaker  50:13  
+Predict, right? So what predict does? It basically does the prediction fit and predict. So similarly here also we will do model dot fit, and then we will do model dot predict. So let's do a model dot fit. So what do I going to we are going to do we are going to take this model and then do model dot fit.
+
+Unknown Speaker  50:36  
+Now what am I going to fit this model to?
+
+Unknown Speaker  50:40  
+We cannot fit it with DF, because this DF. What I did is I took the feature one, I took the feature two, and I also took the target variable, y. Everything is in my DF data frame,
+
+Unknown Speaker  50:55  
+but here I'm trying to create a trainer unsupervised clustering algorithm. So therefore I should not be giving this target y column to the algorithm. I should withhold that from the algorithm.
+
+Unknown Speaker  51:10  
+So I should only give it the features, so the algorithm will be completely blind on what the actual y values are.
+
+Unknown Speaker  51:19  
+So essentially, what I'm going to do is I'm only going to give this x to the algorithm, not the X and Y combined data frame,
+
+Unknown Speaker  51:28  
+right? So essentially, what I'm going to do is I'm say, going to say model dot x fit.
+
+Unknown Speaker  51:36  
+So think about what is happening here. Remember that
+
+Unknown Speaker  51:41  
+this thing that we looked at, these,
+
+Unknown Speaker  51:44  
+these animation. So as soon as I start do model dot fit, essentially internally, the model will basically do this. It will create a randomly create five centroid, and it will iterate as many times as required to minimize the Euclidean total sum of Euclidean distance from the centroid to the data point that are identified to be that group, and then that is the fit, that is the model training.
+
+Unknown Speaker  52:16  
+So that's what the fit is going to do. So let's run the fit,
+
+Unknown Speaker  52:22  
+and that's it. So now k means is fitted,
+
+Unknown Speaker  52:27  
+okay,
+
+Unknown Speaker  52:29  
+so what is the next step? Then?
+
+Unknown Speaker  52:36  
+Now we have to do predict. So how do we do predict? I right?
+
+Unknown Speaker  52:43  
+So we basically do model, dot
+
+Unknown Speaker  52:49  
+predict.
+
+Unknown Speaker  52:52  
+Now, what do I need to pass to predict
+
+Unknown Speaker  52:58  
+the same x because
+
+Unknown Speaker  53:00  
+there is no concept of training data and test data here,
+
+Unknown Speaker  53:04  
+right? So I'm going to say model dot predict x, and the output of this would be bunch of Y values. So let's call it Y, underscore red, meaning prediction.
+
+Unknown Speaker  53:20  
+So our The idea is that these Y values that I have, which is the original y values created by make blobs.
+
+Unknown Speaker  53:30  
+It has to be
+
+Unknown Speaker  53:32  
+almost the same as the predicted Y values from the model.
+
+Unknown Speaker  53:37  
+And I hope you see that once I run this, these white bread array that I'm going to get would be generated by this guy, this k means model who has no clue what original y values were in this data set.
+
+Unknown Speaker  53:54  
+And if the machine learning works, then these values will be almost similar to these values, hence, the Coronavirus scatter plot should look almost the same. Now you gave it five clusters. So does that mean that we're going to get five different y values? Yeah, 03, because I told you, yeah. I told it to create five cluster for me, it is simply going, it is a simple order taker at that point. It is not going to apply any jnai, no smartness. It's is simply going to obey what I asked it to do. So now let's do that. So that's my white bread. Actually, let's also print white bread right here,
+
+Unknown Speaker  54:39  
+here,
+
+Unknown Speaker  54:42  
+right? And if I go back up here,
+
+Unknown Speaker  54:47  
+here, I had my y, if I just print my y here,
+
+Unknown Speaker  54:53  
+okay, well, the format is different.
+
+Unknown Speaker  54:56  
+Oh, because I reshaped here, right? But if you see four.
+
+Unknown Speaker  55:00  
+42310031,
+
+Unknown Speaker  55:02  
+something, 440321,
+
+Unknown Speaker  55:06  
+yeah, it's not exactly the same, but what we can do is we can take these X, Y and predicted outcome, and we can create a new, what is called
+
+Unknown Speaker  55:19  
+new data frame, right? So let's do that. So what I'm going to do is I'm going to copy this
+
+Unknown Speaker  55:28  
+here,
+
+Unknown Speaker  55:30  
+except DF target. Instead of using Y, I'm going to create use y thread.
+
+Unknown Speaker  55:37  
+So and then also, let's call it
+
+Unknown Speaker  55:42  
+red, underscore, DF. This is a new data set I'm creating, which is basically the prediction data set.
+
+Unknown Speaker  55:58  
+Does it look similar? More or less,
+
+Unknown Speaker  56:02  
+yeah.
+
+Unknown Speaker  56:10  
+Well, there is little difference. I can see here. Look at these data points here. This is light blue. Light blue, orange, green.
+
+Unknown Speaker  56:18  
+You see these data point this. These are the way that made blocks created it. But if you look at those four data points, our model has classified all these four data points belonging to this dark blue group, rather than to this group or this group.
+
+Unknown Speaker  56:37  
+So yes, there is some difference, which is obviously we don't expect the model to exactly reproduce what is there, because machine learning is not to be 100% accurate, but overall, looks like the model have been, more or less been able to capture the basically the block pattern that was present in the data originally, even though it did not see what the original y is aware, so it still created a set of predicted wise which, from this colored scatter plot looks like very, very closely matching to the original one, as you can see.
+
+Unknown Speaker  57:15  
+Well, I can see another difference these two data points here,
+
+Unknown Speaker  57:20  
+between these two data point, originally, this was belonging to the this one and the bottom one was belonging to this brown group.
+
+Unknown Speaker  57:28  
+Here, these two data point, they both belong to this brown group.
+
+Unknown Speaker  57:33  
+Yeah, that's fine.
+
+Unknown Speaker  57:38  
+Okay, so I hope this helps you see what K means. Clustering Algorithm actually does
+
+Unknown Speaker  57:51  
+question,
+
+Unknown Speaker  57:58  
+oh, let's actually do one thing. Now I'm going to try doing this, let's say with n cluster two, even though I know that there are five cluster but I'm going to create a model, and I'm going to ask the model to find me two clusters instead of five. So let's see what the model does, what I'm hoping that model, what model will do, it will probably group majority of this green orange and these blue cluster one, and then this light blue and brown cluster will probably be another. But let's see what the model actually does, right? So how do you do that? Well, all you have to do is this model where we had n cluster five, we basically change it to N cluster two, and then redone the model, the fit and prediction. Now you see in prediction, I have only one two things, zeros and ones, not five things. And then you basically run this. Yep, that's exactly what I expected. It basically combined all these three groups at the bottom into one group, because that's what I asked it to do, and it basically did the best it could, which kind of makes a common sense.
+
+Unknown Speaker  59:13  
+On the other hand, if I ask it to find more groups, even though I know that there are five groups I have generated, hey, I can ask it to find 10 groups,
+
+Unknown Speaker  59:25  
+and it will blindly follow my order, because the poor algorithm does not know that I am playing with it, right? So it will basically faithfully try to generate 10 groups where you will see the output would be 0123, all different numbers, and this time, these output cluster plot will look pretty bad because we don't have enough information.
+
+Unknown Speaker  59:51  
+So you see now the model kind of
+
+Unknown Speaker  59:56  
+behaved very poorly
+
+Unknown Speaker  59:59  
+because look at these.
+
+Unknown Speaker  1:00:00  
+These two red points, right?
+
+Unknown Speaker  1:00:03  
+There is not enough even data to basically find a statistically significant centroid and the mean Euclidean distance from there, because we only have 100 data points. Well, if we did the same,
+
+Unknown Speaker  1:00:17  
+repeated the same thing, but with a data set that contains 10,000 data point, then probably the model have done better. But in this case, the model basically do not even have enough information in this limited set of data point to even do the clustering properly. But hey, the model doesn't know that. It is basically simply just following my order and creating 10 groups, even though it is failing.
+
+Unknown Speaker  1:00:44  
+Now this is where your human intelligence comes into play. As a analyst or as a data scientist. You then have to use your judgment call with a few other techniques that the like exploration, exploratory techniques that we will see later, like little bit later today, and combined with your judgment call and your domain knowledge about whatever that problem you are solving, it is your job to find what is the optimal number of cluster that you should ask for this algorithm depending on the actual data that you are working, because the data that you will be working, they do or those are not going to Be make moons or make circles or make blobs data, because this is artificial data, whether it's what you will be getting is something like a real data, which was basically something that we were going to do in the next one, which is, hey, this is the servings rating data set, right? So like a mobile app and personal something like from your real world. So then, based on that, then you have to figure out how many clusters looks optimal to you.
+
+Unknown Speaker  1:01:51  
+Okay, so in this second one, then what we have is
+
+Unknown Speaker  1:01:57  
+we basically have a service rating data set
+
+Unknown Speaker  1:02:01  
+that basically is a survey output of a survey conducted by a bank
+
+Unknown Speaker  1:02:07  
+from among its customer base. It basically asked the customer to rank different service that the bank provides
+
+Unknown Speaker  1:02:16  
+different attribute, like, like, what is the how do they like their mobile app? How do they land like their branching, branch services and so on. And then it basically in these limited data set, we only have two columns, which is, what is the rating for the bankers who serve the customer, and what is the rating for the people who people who rated the mobile app that the bank provides? So two different dimension. The goal is looking into these two patterns to try to find whether we can find some cluster of customers. There might be some plus customers who like mobile app better, but they hate personal banking. There could be some people, may be older people. They hate the mobile app, but they like the personal banking. So looking into this cluster, you might actually have some insight into what your customer base consists of, and that is the purpose of doing this. So in reality, also, you will basically looking be working with a data set like this, where you have no idea what is the optimal number of cluster, but you have a common guess. You start with that, and then you apply some exploratory technique, and then you basically come up with an optimal k, and then you take it to your to your stakeholders, like the business that you are working with, and then, based on that, you basically say, okay, yeah, that makes sense, or maybe this does not make sense. So go back and then do some more experimentation with your data. So let's, let's do this for now. So now we have these two so what we are going to do is we are going to do a scatter plot. So now, when we are doing a scatter plot here, unlike those nicely spread around blobs that we saw in the previous example, here you see in the scatter plot. Since this is a real data and there is no guarantee that data would be clearly separated in space, and this is how the real data will most look like. Most of the time, there will be noisy, there will be overlap. It will be very hard to even for humans, to even draw a clean boundary line, to separate them into two, two or more different groups, it is going to be very, very hard, and that is why we are going to rely on the algorithm, the machine learning algorithm, to do that for us, because the data set is hard to cluster.
+
+Unknown Speaker  1:04:33  
+So now this is So now looking at these, how many clusters do you think we should find out of this,
+
+Unknown Speaker  1:04:42  
+like when we looked at the blog data, right? Because we know that how we are creating those blog we could easily know we do. We do really know that, hey, five cluster is optimal. But looking at this, is there some intuition you can develop how many clusters are going to be optimal for these
+
+Unknown Speaker  1:04:59  
+probably two.
+
+Unknown Speaker  1:05:00  
+Two right in the three, I was going to say I am seeing two. I'm probably seeing these groups in the lower bottom right. And probably this is one group in the upper top, top left, right, top left and bottom right. And if you look into the axis, also right the x and y axis, right? So this is basically a group of people who likes mobile app but does not like personal banking, probably the more younger population, younger demographics, and then this is probably the older demographic, right? Something like that. So yeah, so let's do that. So now, with that understanding our first attempt what we are going to do, we are going to take that Kevin's model and create the model with a two cluster.
+
+Unknown Speaker  1:05:42  
+So same concept as before. K means n cluster, two initialization of the centroid, auto and with a random state, which is any integer, number. So we do that, and then we do a model dot fit using this data frame, this service rating data frame.
+
+Unknown Speaker  1:06:00  
+So let's do that,
+
+Unknown Speaker  1:06:03  
+and then we take that data frame and use the same data frame to do the prediction. And this will give you my zeros and ones, because I only said, Hey, give me two cluster, right? So I'm only going to get zero and one. And then you take that, you basically put it into a data frame, right? So you basically create a new data frame, copy your original two columns from there, and then you add a third column for customer ratings, which is basically this prediction that you generated. So essentially, now you have a three column database, the two feature column plus one target column, which is customer rating, and they will do the same thing the scatter plot.
+
+Unknown Speaker  1:06:46  
+Let me do check. I like check better with customer rating used as a color code, and then let's plot it
+
+Unknown Speaker  1:06:54  
+so see exactly what you said in grid. It kind of created the two.
+
+Unknown Speaker  1:06:59  
+But again,
+
+Unknown Speaker  1:07:01  
+the algorithm doesn't know. If you ask it to create three, it will blindly create three or four or five, right? And you can play around with it and see how the algorithm does. So let's say, if I say, Hey,
+
+Unknown Speaker  1:07:13  
+give me four. Let's say, so. Let's just run through and see how four looks like. This is how four looks like now, whether these four cluster makes sense for you or not, that depends on what business problem you are trying to analyze.
+
+Unknown Speaker  1:07:35  
+Clear, quick
+
+Unknown Speaker  1:07:37  
+question, is it wise to say when we start grouping, you know, the clusters, right? Like, in this particular case, we see roughly, kind of like two, just because you can see the the trip bonus, kind of like the divider for me, yeah. Would it be wise to say that we can look at that first and then decide how many clusters will go for, like, you know the guessing that is that okay or not? No, no. Because even even this is a gross oversimplification, right? Like, think about in real life, where would be the case that you are working with the data set with two features,
+
+Unknown Speaker  1:08:16  
+not many. Our data set with two features will almost always be useless, right? Your Data Scientist will throw it out like, Hey, that's not going to work. So you really cannot rely on your visual intuition. Okay, here you can, because we are just learning how the technique actually works. So you have to basically rely on other exploratory techniques to do that, which we will see as we go through right throughout this week,
+
+Unknown Speaker  1:08:44  
+but visualization is not going to be your friend For most part.
+
+Unknown Speaker  1:08:49  
+Yeah, unfortunately, right?
+
+Unknown Speaker  1:08:57  
+Any other question i
+
+Unknown Speaker  1:09:04  
+Uh, okay,
+
+Unknown Speaker  1:09:06  
+so the next one is basically the same thing, but here
+
+Unknown Speaker  1:09:13  
+it's a student activities,
+
+Unknown Speaker  1:09:17  
+which is basically take another one, a customer shopping data and do the this type of clustering.
+
+Unknown Speaker  1:09:25  
+Is this something you guys probably would work little bit, maybe 15 minutes or so, with your groups?
+
+Unknown Speaker  1:09:34  
+I know some people hate doing the group work, but since we are starting and I think this might not be such a bad idea,
+
+Unknown Speaker  1:09:47  
+at least, to get your hands like, you know,
+
+Unknown Speaker  1:09:52  
+a little bit accustomed to this. And maybe you can even play with different cluster,
+
+Unknown Speaker  1:09:59  
+number of cluster.
+
+Unknown Speaker  1:10:00  
+And kind of play around and see what you get.
+
+Unknown Speaker  1:10:07  
+Can I take that silence as a yes? Okay, sure. Which activity is,
+
+Unknown Speaker  1:10:13  
+huh? Which activity?
+
+Unknown Speaker  1:10:16  
+This would be activity three, yes, the one that I have I had on my screen right? Oh, did I stop my screen? Yeah? Activity three.
+
+Unknown Speaker  1:10:25  
+So
+
+Unknown Speaker  1:10:27  
+then, would it be okay for you guys to actually, because you know which group you work within your project? One, would it be okay to basically go back to the same group? Or do you want random groups? Random, same, let's go back. Let's go back. Yeah,
+
+Unknown Speaker  1:10:45  
+tell me what you want, because I created random one. No, no, no, let me. Let me see how the result. Come on. I'm good doing the voting. Yeah. And then Jesse said random. Someone else said, let's go back.
+
+Unknown Speaker  1:10:58  
+Who actually like their groups? I guess
+
+Unknown Speaker  1:11:02  
+I love my group. I just don't like closing
+
+Unknown Speaker  1:11:07  
+group, same group,
+
+Unknown Speaker  1:11:09  
+same
+
+Unknown Speaker  1:11:12  
+group, same group. Okay, same group. So, so Karen, let's, let's just, just open five breakout rooms. And you know which groups you are, so just go into your breakout rooms. And it's eight, sorry, 1040 my time. So it is specific. What? 740 everyone. So let's go till the top of the hour before we leave, I heard that group four actually said they didn't like group one. Sorry.
+
+Unknown Speaker  1:11:38  
+I'm sorry there were two people speaking, can can you come again, please? For how long?
+
+Unknown Speaker  1:11:44  
+Oh, 20 minutes. I said, right, let's go to the top of the hour. Yeah.
+
+Unknown Speaker  1:11:50  
+So whenever you're ready, I'll open them up.
+
+Unknown Speaker  1:11:55  
+Ready?
+
+Unknown Speaker  1:11:57  
+Yep.
+
+Unknown Speaker  1:11:59  
+And these people will just go to join them for this time they have to go find their own way. You
+
+Unknown Speaker  1:12:24  
+so how did you feel?
+
+Unknown Speaker  1:12:27  
+Get got a test of what a real data might be. I mean, how messy it could be. Oh, yes. So we were trying to understand the like, what the nature of the data was it? So, is this like shopping habits of like customers? Is that, okay?
+
+Unknown Speaker  1:12:49  
+Yeah, it's basically so the looking at the data set, right, you will see that these are all decimal numbers, right? So that basically tells you this is not the raw data you are looking at. So someone took a normal shopping data, right? So this is basically a data set that basically tells for different customer what is the like, basically looking at the what is called like a checkout receipt, right? And how much of each category of product the person bought in a particular shopping trip. Right now, obviously these will be dollar figures, but then someone took this data set and normalized it, scaled it and normalized it. So that's why you see all these funny decimal numbers, right?
+
+Unknown Speaker  1:13:37  
+Because the thing is, before you do these learnings, you have to normalize the data anyway, right scale and normalize the data, which we will see in some of the next section that we will do right this week and then week after right. So, so this is already a ready to use data, so that's why that this thing looks like the numbers look funny. But then I hope you guys notice there is also a non numeric column, which was method, right? Which is basically how the particular thing was purchased, like whether it was retail or whatever.
+
+Unknown Speaker  1:14:14  
+So that one actually it had only two values, retail or hotel, restaurant, cafe, right? So that is what we call categorical variable, meaning that a variable that only has certain categories and not a numeric number, right? Not a continuously varying number. So when you use any of these psychic learn, machine learning methods, like if you when you will go and do deep, narrow learning later using neural network, you don't need to convert any categorical variable, but when you are using the basic statistical based, psychic line learn, machine learning methods, all of your variable needs to be numeric, right? Either integer or decimal point, right? So that's why here.
+
+Unknown Speaker  1:15:00  
+Probably have noticed that there is a method that have been specified, given for you, which is encoded method, actually, why am I not sharing my screen? You should have told me, reminded me that, oh, I'm not sharing my screen. Okay? So, yeah. So this, so this, this column here, I'm talking about, right? This is categorical, so you have to have some way to convert it to a number. There is just, this is just one way that have been given to you, which is a simple handwritten method that takes loops into that column, and if it is one value, it will say, put a one or two, which basically turns the two string values to two different numeric values. Now whether that is the right way to convert from string to numeric, that's a discussion for another day. So we are not going to go there right now, but the learning to take from here is basically to learning up until here is that if your data is not scaled and normalized, so you better do that. And number two is, if you have any string variable, you need to somehow be able to convert it to numeric variable. So that's your data,
+
+Unknown Speaker  1:16:08  
+and then you are basically supposed to run k, means clustering algorithm with k equal to two. So actually,
+
+Unknown Speaker  1:16:17  
+let me open the solved file right away.
+
+Unknown Speaker  1:16:22  
+It and Benoit in the case of converting it to a numeric column, would you then, if I were in a database mentality, I might create like a table that had those numbers as keys? Is that how you would find your way back to that data? Or do you just have to know that it's one or two? No So here, in this case, you are using this method called encoded method, right? And you have this method as as a reusable method. That's why we have a method. So then at any later point in time, let's say tomorrow, after your model is trained, meaning fitted, tomorrow, some new data points come in. You can just apply the same data point, same method there, and you will arrive at the same numeric value if your input is the same. Yeah, right. I'm just trying to go backwards now and go back to saying, like, what was two and what was one? You probably just assign it to a different column. Like, here we overrided that method column, like, by assigning it back to the method column. But you could just do like, Oh, you were saying, how you trace it back,
+
+Unknown Speaker  1:17:25  
+right? And I was thinking like, you know, yeah, so normalize it to a different data frame. But I think Donald was is right, like, just Chad that. Or if you are reading it from a database, the database will probably have a serial number or something with each column, and that will be your unique identifier. So then when you are going to train your model, you are going to strip off that serial number column, because you don't need that. And then you train your model, and then you are, when you are trying to refer back to your database, you bring the serial number column back in, and that would be your reference key, or primary key in your database, right? So you that's what you reference, okay? So basically this is your data set that you had here, and just a quick info showed that your last column was an object, which basically is a string. Then you used this method to convert that to one or two, and then you did an dot apply to basically apply that method across all the rows. So now all of your this thing are numeric, all of your column types are numeric. And then the first task was to train with a k equal to two, which basically means n clusters equal to two, just like how I did in the previous example.
+
+Unknown Speaker  1:18:40  
+And then you do a fit, and then you take that fitted model, and then you do a predict, and you will get a zeros and ones and twos like that, right? So then, since you can run it with any number of k, so you can then run it with n equal to three, and that will give you
+
+Unknown Speaker  1:19:01  
+zeros, ones and twos, right? Three different. So now what you can do is you can take these twos and threes, the two different output. And first, what we are doing is we are taking the original data frame, and instead of destroying the original data frame, touching it, we are creating a copy of that into a prediction data frame, and then whatever the outcome was for my first model, which is k equal to two model, so I put that in a one column, which call which, which is basically segment k equal to two, and the output for k equal to three, we basically put it into another column so that we can basically pick and choose either of these columns to do the apply the different color map on our output, plot the prediction output scatter plot to see how the two models are performing. So that's basically it. But obviously, as you have probably seen that, because this is a real data, right? And also this is a.
+
+Unknown Speaker  1:20:00  
+Dimensional data, right? So it's not always possible for you to not, like almost never, you will get a case that you take any two variables out of, let's say, 10 dimensional data space, and you plot those two and you will get a clear separation in space. That's never going to happen, almost right, unless in some very rare cases where you are lucky, because what is happening is this looks wrong, because it looks like you're using fresh instead of grocery, and maybe that's you're doing that on purpose for some reason. But the what so your WHY SHOULD BE YOUR Why should be grocery?
+
+Unknown Speaker  1:20:40  
+Oh, okay, yeah. Why should we go, sorry, yeah. Is
+
+Unknown Speaker  1:20:45  
+there any way to like graph multiple columns along the x axis?
+
+Unknown Speaker  1:20:53  
+Not? No. You cannot graph multiple columns. So that's what I'm saying. So whenever you have a multi dimensional right? So you can pick any two dimension which you can do. Or if you want to use a 3d plotting library, you can choose up to three, but that's the limit, right? There is no way you can choose more than three anyway, right? So you can plot this, but most of the time, these plots are not going to give you any real good visual visual intuition on how good your model is performing.
+
+Unknown Speaker  1:21:28  
+So
+
+Unknown Speaker  1:21:32  
+and then you can keep choosing the different combination of column, and you will get different graphs. Now some graphs will probably look little bit
+
+Unknown Speaker  1:21:44  
+clearly separated out in space, but you will almost never get very good clean separation like we got in our toy data set, right? So whatever you got from that make loves, that is just for learning purpose, just for academic interest, you are almost never going to get that kind of clean separation. But that does not mean your algorithm is not working. Algorithm is working, and there are ways to test that, which we will see as we move forward, right throughout this week. So there is way to check how good your algorithm is actually working, right? There are different measurements, measures, matrices that you can use to basically what I
+
+Unknown Speaker  1:22:26  
+will say, like judge the effectiveness of your clustering algorithm, and we will see a few of those.
+
+Unknown Speaker  1:22:35  
+But that's pretty much it. Basically. That's what k means clustering is.
+
+Unknown Speaker  1:22:40  
+Now we will take a break. So let's take maybe a 15 minutes break
+
+Unknown Speaker  1:22:46  
+after break. We will see how. So these question about whether K equal to two is the right value, three is the right value, four or five or six, what K value you should use? Right so we will look at one technique after break that will help us kind of narrow down what is a better value for a
+
+Unknown Speaker  1:23:07  
+even that is not really hard science, so it is more like some exploration combined with your judgment call. But we will see one method of doing that after we come back from the break.
+
+Unknown Speaker  1:23:18  
+Okay, so let's take a 15 Well, actually, let's take a break. So 15 minutes from now is what?
+
+Unknown Speaker  1:23:28  
+20 no. Hang on, 2727
+
+Unknown Speaker  1:23:33  
+Okay, so let's go all the way to 830 so let's come back right at 830
+
+Unknown Speaker  1:23:39  
+I hope everybody is back.
+
+Unknown Speaker  1:23:47  
+Okay, oh, so let's get started.
+
+Unknown Speaker  1:23:51  
+So
+
+Unknown Speaker  1:23:54  
+this time, we are going to take a look back at our blobs clustering the first one that we did okay,
+
+Unknown Speaker  1:24:03  
+and remember how we did different clustering, like cluster two, cluster five, cluster 10, stain and so on. And we knew that in that toy data set, cluster five is our best option if you do a make blobs five, right? But how do you actually analyze which cluster is better, right? So that's what we are going to think of right now.
+
+Unknown Speaker  1:24:30  
+So let me show you one way we can possibly do that.
+
+Unknown Speaker  1:24:37  
+So you're seeing my screen, right? That
+
+Unknown Speaker  1:24:42  
+Okay?
+
+Unknown Speaker  1:24:43  
+Cool. So this is the cluster. This is the blocks that we generated with number of cluster five. So this is the center five. So we know for these data set a k value of five is optimum. So.
+
+Unknown Speaker  1:25:00  
+So hence we when we do our model. So let's when we do our model with cluster five, and we expect to see
+
+Unknown Speaker  1:25:11  
+a clustering which is a true representation of what original clustering value was.
+
+Unknown Speaker  1:25:18  
+Now how do we know whether this is better, or whether
+
+Unknown Speaker  1:25:23  
+cluster four is better, three is better, two is better, or anything, right? So we can try different values, but how we can objectively analyze which one is better?
+
+Unknown Speaker  1:25:34  
+So one way of doing is this is basically look into each of the clusters and try to identify, try to figure out, what is the spread of the point across the different cluster centers.
+
+Unknown Speaker  1:25:52  
+I'm going to show you one slide here.
+
+Unknown Speaker  1:25:56  
+So in this slide,
+
+Unknown Speaker  1:25:59  
+if you look into the left and right, two different clustering.
+
+Unknown Speaker  1:26:03  
+What is it that you can observe between these two kind of clusters?
+
+Unknown Speaker  1:26:10  
+What is different?
+
+Unknown Speaker  1:26:13  
+The radius size of each cluster, correct. So the one on the right, you will see the points are more spread out around the centroid the cluster center
+
+Unknown Speaker  1:26:27  
+on the left hand, they are more tightly grouped together.
+
+Unknown Speaker  1:26:32  
+So if you think of what is the definition of standard deviation,
+
+Unknown Speaker  1:26:38  
+so if statistically, if you plot this inner distribution, plot density distribution, so which one of these clusters will give you higher standard deviation and which one will give you lower standard deviation,
+
+Unknown Speaker  1:26:54  
+the rate is higher. The right is higher correct, which is pretty straightforward to figure out now the idea is that we should try to achieve a distribution where the standard deviation is not too high,
+
+Unknown Speaker  1:27:14  
+which kind of is come makes common sense, because if the standard deviation is too high, that means your data points are not tightly clustered in reality,
+
+Unknown Speaker  1:27:24  
+and when the deviation be high. So now going back to this example here, if we redo this training with number of clusters two,
+
+Unknown Speaker  1:27:39  
+then
+
+Unknown Speaker  1:27:41  
+we plot it, you will see all of these blue cluster, how widespread the points are, and all of these brown cluster, they are also pretty widespread. So now we have two cluster, but each of these clusters have higher standard deviation than what we obtained when we did number of clusters five.
+
+Unknown Speaker  1:28:03  
+So
+
+Unknown Speaker  1:28:06  
+that tells us five is probably a better value than two.
+
+Unknown Speaker  1:28:13  
+But how about if we do 678, 10 or something? So how do you think the standard deviation will change if we keep increasing the k values even further, would the standard deviation go down or the standard deviation go up?
+
+Unknown Speaker  1:28:32  
+Should go down the more clusters you have correct, because if you have more cluster then essentially you are basically having more and more of these tighter circles focused on specific regions in the space.
+
+Unknown Speaker  1:28:50  
+Is that a good thing?
+
+Unknown Speaker  1:28:59  
+I think so. It seems like you have, like, more you want to achieve a certain level of granularity without having it be for a data point, right,
+
+Unknown Speaker  1:29:08  
+right? So, but the true answer, I think, if you think about it, Jesse,
+
+Unknown Speaker  1:29:14  
+I would say the answer would be, it depends,
+
+Unknown Speaker  1:29:19  
+right? Because I know that if I go k5 to 10 to 15 to 20, the circles will be tighter and tighter and tighter. But at that point, essentially what is happening you are almost like overfitting. Like if you what will happen if you do cluster k equal to 100, we know that we have 100 data point no now we will basically have no standard deviation at all.
+
+Unknown Speaker  1:29:45  
+But that's not really a good thing, because essentially you are nit picking and being basically too picky, and that's not the goal also.
+
+Unknown Speaker  1:29:55  
+So the thing is, there is basically no hard science behind it.
+
+Unknown Speaker  1:30:00  
+So, but the idea is that you have to kind of strike a right balance between high standard deviation and low standard deviation in your clusters.
+
+Unknown Speaker  1:30:11  
+Now, how can you measure that standard deviation?
+
+Unknown Speaker  1:30:16  
+Well,
+
+Unknown Speaker  1:30:18  
+there is a more complicated mathematical method you have to do because you are not going to measure standard deviation of one cluster. You basically have to average it out across all the different cluster you have. So without going into the details of exact what mathematical calculation is, let us try to find one main metrics of the model, which is called inertia.
+
+Unknown Speaker  1:30:46  
+And this is the inertia with the underscore at the end. And there are several such parameter that you can extract from a model after the training is done, like a fitted model, basically. And if you print the inertia. So these inertia just keep in mind it is a measure of
+
+Unknown Speaker  1:31:06  
+the average standard deviation of all the clusters.
+
+Unknown Speaker  1:31:10  
+Now we don't really need to worry ourselves with exact math behind calculating all of this that, because scikit learn already calculates that for us. So these inertia value is already calculated when you fit the model. So when we are doing a cluster two, we are getting an inertia value of 700 something, 707,
+
+Unknown Speaker  1:31:34  
+now if I repeat this with k equal to five
+
+Unknown Speaker  1:31:42  
+and then we do model dot fit.
+
+Unknown Speaker  1:31:46  
+Now, if you run model dot inertia, you see how it came down to 154, from seven or seven,
+
+Unknown Speaker  1:31:58  
+if you go further, higher up. So instead of five, let's go to 10,
+
+Unknown Speaker  1:32:03  
+which is much, much higher. Now what do you expect the inertia to be?
+
+Unknown Speaker  1:32:11  
+Lower or higher? Is this?
+
+Unknown Speaker  1:32:14  
+Just like taking an average over the distance between the centroid and like any value in that group,
+
+Unknown Speaker  1:32:21  
+it is basically measuring the standard deviation of each of the groups. Oh, yeah, then standard deviation of it. So now it will be lower, like 103
+
+Unknown Speaker  1:32:33  
+now see, when we went from two to five, it went down from 707 to 154
+
+Unknown Speaker  1:32:41  
+but when we went five to 10, 154 it went down to only to 103
+
+Unknown Speaker  1:32:48  
+so continuing this pattern, if I do from 10 to 20,
+
+Unknown Speaker  1:32:58  
+it will go down to 43 like eventually, it is basically going down asymptotically. So if you plot this, so the idea is to repeat this experiment with different k values and plot these on a curve.
+
+Unknown Speaker  1:33:15  
+And when you do this, it will basically look like a curve similar to this.
+
+Unknown Speaker  1:33:22  
+So it will keep going down very sharply when you go from Cluster One to two to three to four, and then it will slowly approach a limiting value, which is an asymptotic curve. So these long arm of the curve is basically approaching a asymptotic value, whatever that is, depending on the size, depending on the your data.
+
+Unknown Speaker  1:33:43  
+The idea is to find an optimal point which is best for your model.
+
+Unknown Speaker  1:33:52  
+And again, there is no hard science, and sometimes your car will not even be so clear, so that you can pinpoint what is the optimal value. But the idea is to try the best you can to find that point in the curve where there is a clear elbow. So basically where the slope changes
+
+Unknown Speaker  1:34:14  
+radically, like from a very high slope to a lower slope. So in this example, that value seems to be three, because after three, then it is a more gradual decrease. So three is where the most rapid decrease happened, which basically creates this impression of an elbow.
+
+Unknown Speaker  1:34:36  
+That's why this is called the elbow curve.
+
+Unknown Speaker  1:34:40  
+And the idea here is, again, this is a heuristic. Run these
+
+Unknown Speaker  1:34:46  
+k means clustering with different values of k and calculate the inertia of these different models. Plot this inertia and find the elbow in the curve and that you should take the optimal value for k.
+
+Unknown Speaker  1:35:03  
+Two. Okay.
+
+Unknown Speaker  1:35:05  
+Now we are going to apply that in actual, real data set.
+
+Unknown Speaker  1:35:09  
+But this is the idea. You basically run the model, maybe from n equal to two to up to, let's say, n equal to 10.
+
+Unknown Speaker  1:35:19  
+Plot all the inertias, find where the cart is bending the most.
+
+Unknown Speaker  1:35:29  
+So let's now look at some code samples to do that.
+
+Unknown Speaker  1:35:38  
+This one, okay,
+
+Unknown Speaker  1:35:41  
+so Okay,
+
+Unknown Speaker  1:35:44  
+so to do this, we are going to take that scaled shopping data set,
+
+Unknown Speaker  1:35:51  
+which is this thing, and this is the same data set that you already worked on before the break.
+
+Unknown Speaker  1:35:59  
+Now there we played with 2k values, k equal to two and k equal to three in that group activity that you did
+
+Unknown Speaker  1:36:07  
+this time. We are going to take that data set. We will also need our encoded method, of course, because we have a string column,
+
+Unknown Speaker  1:36:14  
+and then we convert that string column to an integer column. And now what we are going to do is we are going to basically implement this elbow curve.
+
+Unknown Speaker  1:36:25  
+So how do we do that?
+
+Unknown Speaker  1:36:28  
+Well, what we are going to do is we are going to take a list of numbers from one to 11,
+
+Unknown Speaker  1:36:37  
+okay, and then we are going to create an empty list of values, which we are calling inertia,
+
+Unknown Speaker  1:36:46  
+then what we will do is, for each of these k values,
+
+Unknown Speaker  1:36:51  
+we are going to train the model with that k value. So for i in K, we are creating a new, fresh model with n clusters equal to i. So basically, I'm repeating this experiment with 10 different values of i,
+
+Unknown Speaker  1:37:07  
+and then we are doing model dot fit, and then we are calculating the model inertia and appending that to this list, which is called inertia.
+
+Unknown Speaker  1:37:20  
+So this way we will have a list of inertia. So if you print this, you will see that now this is populated, so you see how it was very high, and then it kept going down.
+
+Unknown Speaker  1:37:36  
+It obviously will keep going down, but at some point it will go down more slowly than before. So our idea is to find out that optimal point, which may or may not be that obvious, sometimes it is also kind of a subjective decision.
+
+Unknown Speaker  1:37:53  
+So how do we plot this? Well, we take these k values, the different k values that we used, and all these different inertia that we created, generated or stored in this list, and basically created data frame out of it, which is basically just creating a JSON dictionary with K and inertia two columns, and each column will have the list, the K list and inertia list. And then you take that JSON dictionary and pass it to a data frame class, and then there you go, you will have your
+
+Unknown Speaker  1:38:28  
+A to inertia mapping in a pandas data frame.
+
+Unknown Speaker  1:38:34  
+Now, since this is a pandas data frame, you can simply use the plot function of pandas,
+
+Unknown Speaker  1:38:40  
+and we are going to plot a line with x being k and y being inertia,
+
+Unknown Speaker  1:38:48  
+then we get a curve like this. Can I say quick question on random state?
+
+Unknown Speaker  1:38:53  
+It seems that random state is like, if it's not set, it begins at zero. If it is set, it begins at the random state number, because I accidentally put it in during the student exit exercise and I wasn't seeing any zeros. So is the idea that you want to have it be one, two? What you want to want to have two possible values and one or two in those predictions, and then one or one, two or three in the next run, 123, or four. So you never, you're never having zero in there.
+
+Unknown Speaker  1:39:23  
+I actually don't know that. I have to try that out to see that is, let's go back here. So you are saying that. So let's try this with, let's say number of cluster five, with random state one, and these will generate 01234,
+
+Unknown Speaker  1:39:47  
+you are saying, If I omit the random state altogether, we don't get the zeros.
+
+Unknown Speaker  1:39:53  
+Actually, I was saying the up, the opposite, but I maybe I'm just wrong. I don't understand what is doing. I.
+
+Unknown Speaker  1:40:00  
+Well, you see that now I'm running it without the
+
+Unknown Speaker  1:40:04  
+random state, you will still get 01234,
+
+Unknown Speaker  1:40:09  
+but you see you get the different values, but you still get zeros and ones and twos and threes and fours,
+
+Unknown Speaker  1:40:15  
+but this time without random state,
+
+Unknown Speaker  1:40:18  
+and it's still kind of have the same outcome.
+
+Unknown Speaker  1:40:24  
+Now, if you run it again without random state,
+
+Unknown Speaker  1:40:30  
+you see your output changed. Okay, it is not the same, and if you run the plot again,
+
+Unknown Speaker  1:40:38  
+it's still the same,
+
+Unknown Speaker  1:40:41  
+but maybe the levels change. Whereas, if you run this with a random state some number, it doesn't have to be one, it can be any XYZ number,
+
+Unknown Speaker  1:40:53  
+and you run this, it generates a certain distribution, and then you rerun it again, and
+
+Unknown Speaker  1:41:03  
+and you see the output didn't change because we use a random state, yes. So that way, the output of the model is predictable. It will not change from one execution to the next. Thank you.
+
+Unknown Speaker  1:41:18  
+Okay, so where we were before
+
+Unknown Speaker  1:41:23  
+on the elbow.
+
+Unknown Speaker  1:41:25  
+Elbow, yeah, so now we have this elbow. So now you see here. How do you even know which one is your right elbow? Someone can say, help. Maybe k equal to three is the elbow. Someone might say k equal to five is the elbow.
+
+Unknown Speaker  1:41:42  
+I can see two possible candidates, three and five.
+
+Unknown Speaker  1:41:46  
+One thing you can do is you can possibly take a differential between these values and take the one that has the lowest differential between one to the next. That's one way of doing it. Or you can just do a visual inspection and say, Ah, yeah, maybe k equal to five is a better value.
+
+Unknown Speaker  1:42:07  
+So if you want to find the percentage change, what you can do is you can basically compute the percentage change as
+
+Unknown Speaker  1:42:18  
+basically one inertia minus the previous one divided by the previous inertia multiplied by 100. So if you do that, it will actually show you what is the percentage decrease from k equal to one going to two, two going to three, three going to four, and so on.
+
+Unknown Speaker  1:42:39  
+That's another way of looking at it,
+
+Unknown Speaker  1:42:43  
+and then looking at it. What does it mean? What is the value?
+
+Unknown Speaker  1:42:56  
+Yeah, so
+
+Unknown Speaker  1:43:00  
+the way that the notebook was written, it says the rate of decrease slows down between k equal to three to four. But that's not really true, because here I see it slows down here from k equal to five to six,
+
+Unknown Speaker  1:43:20  
+and then it does it again from seven to eight. So is it the first slowdown that they're trying to say
+
+Unknown Speaker  1:43:27  
+12 to 28 to 17 to 21 I'd say k equal to five is the best value, because 21 to eight, this is the largest drop that I am seeing after that, even though it is increasing a little bit, not that much, like nothing comes close to these 13 point drop that is happening between k equal to five and six.
+
+Unknown Speaker  1:43:55  
+And that kind of makes sense here, also, like, this is the last sharp turn that I see after that, this little increase, you don't even see that in graph, because this increase is so small here.
+
+Unknown Speaker  1:44:09  
+So this is the last large drop that I'm seeing. Well, you know, I think, I think you're right, because in the next bit of code, they have a comment saying, Make four clusters. And then they, in the code, they say, Make five monsters, yeah. So basically, the thing is that basically
+
+Unknown Speaker  1:44:28  
+highlights what I said earlier, that this could be subjective as well.
+
+Unknown Speaker  1:44:33  
+Now some data set, it would be very easy, very clear, k value, sorry, elbow, but in this one, I, if I have to use my judgment, I'll say I'll go with cluster five.
+
+Unknown Speaker  1:44:45  
+So in fact, I did run it before, and based on this observation, I actually ran it with n clusters five.
+
+Unknown Speaker  1:44:57  
+Well, that's also what they played to.
+
+Unknown Speaker  1:45:00  
+Us in the solution. So I think the comments are just wrong.
+
+Unknown Speaker  1:45:04  
+Yeah, maybe,
+
+Unknown Speaker  1:45:14  
+yeah. I will go with k equal to five on this one, and then I will do a scatter plot. Well, scatter plot is obviously not going to show me clear separation, because we know that this is a high dimensional space which which doesn't make any sense, right? So,
+
+Unknown Speaker  1:45:31  
+but that's the best you could do at this point.
+
+Unknown Speaker  1:45:41  
+Okay, where is the activity
+
+Unknown Speaker  1:45:48  
+that you had? One of these plots showed clear separation.
+
+Unknown Speaker  1:46:00  
+Let's try milk and frozen.
+
+Unknown Speaker  1:46:07  
+Frozen versus milk,
+
+Unknown Speaker  1:46:09  
+if I tried that here,
+
+Unknown Speaker  1:46:22  
+yeah, it doesn't really show very good clustering, because there is a blue point here and there is a blue point all the way here, but that's because you are only looking at a two dimension from a two dimensional perspective, where the data set is 10 dimensional. So yeah, so basically, this scatter plot could not even make sense at all, so for a high dimensional data.
+
+Unknown Speaker  1:46:49  
+But the only key takeaway is from this activity is, what is inertia and why should we use it?
+
+Unknown Speaker  1:46:57  
+So inertia, to recap, is basically a measure of the average standard deviation across all the clusters that you have,
+
+Unknown Speaker  1:47:04  
+and we don't want our cluster to have a very high inertia, because that tells me that the clusters are very loosely grouped,
+
+Unknown Speaker  1:47:16  
+and they should be tightened. But at the same time, we don't want something to be very low inertia, because that tells me the clusters are too tight. Therefore it is nitpicking on tiny details here and there, and probably even getting latched on some of the noise in the data. So that's why too tight is not good either. So that's why we are trying to find a middle ground where hopefully there is a inflection point in the curve where the car basically changes the from a very steep to shallow.
+
+Unknown Speaker  1:47:49  
+So, yeah,
+
+Unknown Speaker  1:47:56  
+any question on the Elbow Method? Yeah, I do, because it feels like they were trying to give us some percentage change as a way to help us understand that the appropriate K value was so looking at this,
+
+Unknown Speaker  1:48:12  
+I'm trying to figure out how best to use the percentage change method that they're saying instead of just inspecting A graph and looking for an elbow point where it starts to flatten out,
+
+Unknown Speaker  1:48:25  
+and the best thing I can think of is the largest percentage change.
+
+Unknown Speaker  1:48:35  
+Yeah, maybe what you can do is percentage change is basically the first order derivative of the curve, right? So essentially percentage changes, giving you what is the instant slope of each right. Going back to your calculus class that you probably did in high school, if you want to do even more, like a number driven, you might want to take a second order derivative, which is basically you take the percentage changes and compute a percentage change on that again and see where that changes sign,
+
+Unknown Speaker  1:49:06  
+yeah,
+
+Unknown Speaker  1:49:09  
+except it seems simpler, because between each k value have kind of one line. You're not looking at a curve. So you could just calculate the slope between each point and find the where the ratio between
+
+Unknown Speaker  1:49:25  
+two slopes has become smallest, smaller, because which is what it is doing here. This code is doing that exact same thing. Yeah, yeah,
+
+Unknown Speaker  1:49:36  
+yeah, no. But Jessie's question is, which one of these k points should we latch on to? Because here,
+
+Unknown Speaker  1:49:46  
+k equal to five to six, there is a large drop, and then it increases again. So should we latch onto here, or should we latch onto something like here, between seven to eight, right? So that's the question, hey. But on I'd say I don't have.
+
+Unknown Speaker  1:50:00  
+Good answer to that isn't, this doesn't have a what's
+
+Unknown Speaker  1:50:05  
+important, steady, i Isn't this kind of like, where your real, like, your experience with the real life data kind of comes into play, because, like, the k values is basically your labels of like, how to group the data set. So if you only have, like, you know, six values, or six labels, or even five labels. But the thing is here that when in the the scenario where you are going to apply this technique on supervised learning are the ones where you won't have levels. Oh, right, yeah.
+
+Unknown Speaker  1:50:40  
+So then what you have to complement this analysis with is your like expert judgment from the people who knows that domain better, like going back to that marketing segmentation example, right? So let's say someone is trying to use this shopping data set and this clustering output to figure out, okay, what could be the different groups of customers like, are there groups of customers who like frozen food better, versus who like fresh food better, versus who like milk or egg better, versus who like vegetarian better, or any combination thereof? Right? So ideally, what happens is people take this and analysts basically, then go to the marketing people, or the business folks, basically, and say, Hey, what do you think makes sense for you?
+
+Unknown Speaker  1:51:33  
+And this is the kind of, oh, another very common scenario where companies use this all the time, is like your recommendation, like when you go to YouTube or Netflix or any any of the streaming video, right, you see different. Have you noticed how, depending on your past dreaming habit, it kind of recommend some selected shows and movies for you that basically is whenever you are watching something they are analyzing the different rating, different attributes for that movie, right? So each movie or show is probably tagged with different attributes which they are using as a feature, right? Which is your popularity rating, your maturity rating, viewership
+
+Unknown Speaker  1:52:19  
+preference, or whatever right genre, and so on. And based on that, when you do that enough number of times, they have this clustering algorithm running that basically groups customers into some unknown number of unnamed clusters, and then you will belong to one of these unknown number of clusters, and then they know, okay, what are the movies that are in that cluster, and whichever of this cluster view that you end up have being in, they will actually show you more and more recommendation from other shows and movies from that cluster,
+
+Unknown Speaker  1:52:59  
+with the assumption that, since these other 100 other people kind of tend to like that, these kind of shows more most likely you will probably also like the same.
+
+Unknown Speaker  1:53:10  
+So that is one example of unsupervised learning, actually,
+
+Unknown Speaker  1:53:19  
+when I look at when I look at those percentages. So
+
+Unknown Speaker  1:53:23  
+what I'm seeing is the delta between each between like 12.89 and 28.65
+
+Unknown Speaker  1:53:31  
+versus maybe at the lower part of that list, where they're all about three or four. So to certain point, the delta becomes drops down to a pretty small difference amongst them, yeah. So that would maybe where I would might look at it. Maybe you could maybe do your kind of, yeah, yeah, your point slope along that this is and find the point where it kind of kind of starts to level out that way, and the delta between them
+
+Unknown Speaker  1:54:05  
+say, Well, maybe so which would which would say four or five, which I think we'd visually kind of agree on. So, well, you just have to take the change between each of these values, and that's becomes your second derivative, and you have to figure out where that value is closest to zero at right. I mean, instead of multiplying, instead of dividing this by inertia minus one, which is basically the relative change, what you could do is like not divide this
+
+Unknown Speaker  1:54:33  
+right, and then it will look like
+
+Unknown Speaker  1:54:39  
+that. And then, if you do a second derivative,
+
+Unknown Speaker  1:54:44  
+then what will that happen? Then it will be,
+
+Unknown Speaker  1:54:49  
+yeah, 300 ish. Then from here to here, 300
+
+Unknown Speaker  1:54:56  
+and now it drops down to.
+
+Unknown Speaker  1:55:00  
+100 something,
+
+Unknown Speaker  1:55:03  
+and here to here? Oh, my God, again, 200
+
+Unknown Speaker  1:55:07  
+Yeah, I didn't know. Yeah, I play around with it. I've long wondered about how to kind of automate that process, rather than just, you know, eyeballing a graph
+
+Unknown Speaker  1:55:18  
+make a decision, but to actually have what, what you're talking about, what this is trying to do. It's always interest me, the best way to do, yeah, yep.
+
+Unknown Speaker  1:55:29  
+Have you? Have you had any success in automating this decision making? Karen, what's that? Have you had any success in automating this decision making? No, I haven't. I've just
+
+Unknown Speaker  1:55:42  
+thought about and Me neither, me neither.
+
+Unknown Speaker  1:55:45  
+But I think that's, I think you might be on the right track with the first second during the second derivative, yeah, it might be the way to do because you're finding where the slope became and comes more, yeah, even you know, closer to level
+
+Unknown Speaker  1:56:00  
+or somewhere where there's a radical change and no longer any rad, yeah, for, for a curve like that. It's like, the second derivative will tell you when the concavity changes. So when that becomes zero, it'll switch concavity. That's like, comes like. So it goes to that part calculus. Unfortunately, I still kind of just come along. I wish I knew it better.
+
+Unknown Speaker  1:56:21  
+Okay, so let's take another one example, which is the next activity. This is supposed to be a student activity, but I'm choosing it not to be okay, and I'll tell you in a moment, why. Okay, so let's first run through this, and we'll have some discussion around this. Okay, so this database, not database data set. It basically has stock, stock movement data kind of similar to what we did when we did the forecasting, right, the time series forecasting,
+
+Unknown Speaker  1:56:55  
+so you have these different closing value of a stock with this is a OHL CV data, right your open high is low, Open, High, Low, Close, volume
+
+Unknown Speaker  1:57:05  
+and the returns.
+
+Unknown Speaker  1:57:11  
+In this example, what we are going to do is we are going to treat this data as what, 1234567,
+
+Unknown Speaker  1:57:19  
+dimensional data point, and we are going to try to do a clustering of this. We are not going to do time series forecasting. So basically, we are not going to look into the date column and predict into the future. No, we are trying to group all of these different daily closes into a bunch of clusters.
+
+Unknown Speaker  1:57:41  
+So now, in doing so, we are first going to use the album method
+
+Unknown Speaker  1:57:47  
+to basically find 10 try with 10 different k values from one through 10,
+
+Unknown Speaker  1:57:53  
+and then with these 10k values, we are going to fit the model and calculate the inertia for each k
+
+Unknown Speaker  1:58:03  
+and then create our elbow,
+
+Unknown Speaker  1:58:07  
+and then draw the elbow.
+
+Unknown Speaker  1:58:11  
+Now looking at this elbow curve,
+
+Unknown Speaker  1:58:15  
+what are you guys thinking which K value you should latch on to?
+
+Unknown Speaker  1:58:23  
+2333,
+
+Unknown Speaker  1:58:29  
+yeah.
+
+Unknown Speaker  1:58:31  
+Ayudargu, maybe three or four, one of these two, right?
+
+Unknown Speaker  1:58:42  
+So let's try with three. So you can do then with three,
+
+Unknown Speaker  1:58:48  
+and this will be your prediction.
+
+Unknown Speaker  1:58:55  
+And then you cluster,
+
+Unknown Speaker  1:58:57  
+which doesn't tell you much. What is it going to tell you? Right? Because it is about seven dimensional data set, and you are only looking it through a two dimensional Looking Glass, so obviously you are not going to see that clear separation no matter which K you try. So that's your k equal to three, or if you want, you can try k equal to four, and then you plot it, and then it will show, hey, k equal to four.
+
+Unknown Speaker  1:59:29  
+Now looking at this, is there any decision that you can make out of these two? I
+
+Unknown Speaker  1:59:46  
+or should you be making any decision based on that?
+
+Unknown Speaker  1:59:58  
+I'd say, No, I.
+
+Unknown Speaker  2:00:07  
+Even though here there is a question that they're suggesting that, yeah, it is kind of little hard, but it appears the optimal value for k is three,
+
+Unknown Speaker  2:00:18  
+because just I include this k equal to three plot and k equal to four plot. What they're probably suggesting is, well, k equal to four shows little more overlap than k equal to three, but my opinion is you should not be taking any decision, because essentially, you are only looking at a 2d projection of a 7d data set, and that does not tell you. Them
+
+Unknown Speaker  2:00:43  
+so you should not be making any decision based on the tables at all.
+
+Unknown Speaker  2:00:53  
+Okay,
+
+Unknown Speaker  2:00:56  
+but I personally have even more fundamental question about doing this particular exercise, this activity, with this stock movement data.
+
+Unknown Speaker  2:01:07  
+Does anyone have any question on this, whether a clustering is even a method that should be applied on a stock movement data?
+
+Unknown Speaker  2:01:17  
+Any thought,
+
+Unknown Speaker  2:01:21  
+where would you cluster on?
+
+Unknown Speaker  2:01:25  
+Like? Exactly, right? So when you have, let's say, a one year worth of data, we know that every day, the stock will move randomly.
+
+Unknown Speaker  2:01:38  
+So it really doesn't matter whether you want to put it in a three cluster or 30 cluster or 300 cluster. Why does it even matter?
+
+Unknown Speaker  2:01:46  
+It's not going to help you answer any single meaningful question, unless you include the the date, the time series, right?
+
+Unknown Speaker  2:02:00  
+Oh, you are saying, if you want to
+
+Unknown Speaker  2:02:03  
+figure out what was the kind of the period throughout last year when the stocks experienced higher volatility than the others, right? Yeah. Or you can, you can cluster on any one of those columns for like, a date period, yeah, like, instead of taking all seven column, take two column and cluster. That's a one idea, but I would say you are absolutely right, Matt. But if you want to take my opinion, I would say these activities should not be performed on a stock market data in any way,
+
+Unknown Speaker  2:02:34  
+because stock price movement is a random walk. You should not be trying to cluster this way, there is really no insight you are going to get. But there is one other application of clustering that you can apply, and people do apply in analyzing stock market data, and that is little different from this example here. So here, in this example that have been given to you, it is showing you take a data for one single stock and day by day movement, and you do try to cluster the days.
+
+Unknown Speaker  2:03:12  
+Instead of doing that, imagine you are, let's say, a portfolio manager,
+
+Unknown Speaker  2:03:18  
+and you are trying to come up with the investment hypothesis for your customers. Let's say you are a hedge fund manager, right? And you have all these millionaire, billionaire customers, and you are trying to come up with a investment hypothesis right now. You cannot simply go on your gut feeling like, Hey, this is my hunch. I think these would be the right stock picks, right? You have to, you have to support that with concrete evidence and data and basically tell you why, why you are booking picking the right stock right
+
+Unknown Speaker  2:03:48  
+now. In order to do that, there are obviously lot of things that you have to take care of, but one thing you should also consider that when you are picking stock, you are diversifying. Well,
+
+Unknown Speaker  2:04:01  
+you are not ending up picking five stocks because they are the highest performing stocks, because it might happen that all these five stocks are in the same industry,
+
+Unknown Speaker  2:04:12  
+like you'll probably be. You have to be very naive to pick Amazon and Tesla and Facebook and Microsoft in your portfolio and say, Yep, I got a winning portfolio,
+
+Unknown Speaker  2:04:24  
+right? You know where I'm going with this? Because that would be a disaster. There is no diversification at all.
+
+Unknown Speaker  2:04:31  
+So what you could do? Well, one thing you could do as a non quantitative, like a very like a common sense approach, you can say, hey, you know what? I'm going to pick the best stock from tech, best stock from energy, based stock from manufacturing and so on.
+
+Unknown Speaker  2:04:49  
+That's one thing you can do. The other thing you can do, if you want to be little bit more objective, is you can take the different return and volatility pattern for the.
+
+Unknown Speaker  2:05:00  
+Stocks. Let's say you look at all the S, p5, 100 stock
+
+Unknown Speaker  2:05:04  
+and you look at how the volatility and return show behaves for all of these 500 stocks. So the idea is that
+
+Unknown Speaker  2:05:14  
+the higher risk is highest higher return, right? So basically, at a very high level, on an average, at least the stocks that will have a high volatility will end up providing higher return, because the market kind of will automatically demand higher return as a way to penalize the high volatility of a stock. That's how rational stock market works. But we all know that stock market does not really work on a very rational way, on a day to day basis. So then if you want to be little bit more data centric, data oriented in your decision making, one thing you could do, you can take all of these volatility and percentage daily percentage return for these candidate stock let's say S and p5, 100 stocks, and then do a clustering and see how many clusters do you see, and whether the stocks that are within a cluster, whether there is any similar pattern you see, are they belonging from the same market segment? Are they belonging to the same company size? Are they belonging to? The same,
+
+Unknown Speaker  2:06:25  
+I don't know, same, same country of origin, or something like that, right? So then you can go back and do that kind of additional analysis, supporting analysis based on the outcome of your clustering.
+
+Unknown Speaker  2:06:38  
+Okay? In fact, if you, I don't know whether you guys have bookmarked few weeks back, like towards the beginning of the boot camp, I shared one of the GitHub repository when I work in Amazon. So I took some German stock market data from a Deutsche Boer banking website, a banking data set, and I basically did the same thing. So I basically in that exercise, I did a time series forecasting. But before doing time series forecasting, I used this clustering technique to find the groups of stock that kind of moves together. And then I did a multivariate time series
+
+Unknown Speaker  2:07:18  
+because we saw before the project week, right when we are doing the time series forecasting. We saw, if you do a univariate time series forecasting where, which means you are trying to forecast the out,
+
+Unknown Speaker  2:07:32  
+not outcome, future stock price of a stock based on the previous return of that stock, you will have a limited success. So you can try to have multiple supporting data set. So that means, if you are trying to predict the stock of Microsoft, maybe you can use the past performance of Amazon, Facebook and Tesla as a your supporting variables.
+
+Unknown Speaker  2:07:58  
+So that is also one scenario. You might also want to do a clustering of the stocks based on their volatility versus return pattern, and then pick the stocks within the same cluster,
+
+Unknown Speaker  2:08:14  
+because what will happen is those stocks will have some kind of
+
+Unknown Speaker  2:08:19  
+it's a correlation between one on the other movement,
+
+Unknown Speaker  2:08:24  
+right as a subsequent use. So here, what I did is I actually created another so that notebook, if you go there, that is like lot of things there, and that's even using the libraries that we haven't learned yet here in this bootcamp. So what I tried to do here, and this is a
+
+Unknown Speaker  2:08:46  
+notebook that I'm going to publish in your GitLab. So here, what I did is I basically tried to recreate that with SNP, 500 companies with this Elbow Method, and k means clustering. And I'll show you, walk you through quickly what I did here. Okay,
+
+Unknown Speaker  2:09:05  
+so follow here.
+
+Unknown Speaker  2:09:07  
+So what I am doing here is, so these are all my library that I need, and the stock market data is basically coming from simple Wikipedia. So if you go to this link in Wikipedia, I so this is all the S, p5, 100 companies.
+
+Unknown Speaker  2:09:27  
+Okay, so what I'm doing is, first, I'm reading these HTML file using Pandas, read it HTML function from these URL and that way. Oops, what happened?
+
+Unknown Speaker  2:09:49  
+Now, it worked
+
+Unknown Speaker  2:09:51  
+anyway, so now I have all of these stock tickers. I.
+
+Unknown Speaker  2:10:01  
+Yeah, so this is basically all of my tickers that I have for all the S, p5, 100 companies.
+
+Unknown Speaker  2:10:10  
+And then what I did do is I use this library called Yahoo Finance. This is just one of the other libraries earlier I showed you how to use the alpaca to get the stock market data. So you can do the same in Yahoo Finance as well. And I'm not going into the nitty gritty of these codes. I'm going to make this notebook available so you can play with it if you want to.
+
+Unknown Speaker  2:10:33  
+Then I use these.
+
+Unknown Speaker  2:10:38  
+So this is where you are saying. I'm just saying D, A, T, which is all these stickers dot history. So I'm saying, Give me one year data with one day. And it is basically doing this call for all of these. So this is a call that went to Yahoo Finance, and it basically downloaded, and it also showed a nice progress over here. And now it is 100% complete. So it basically downloaded all the one year stock data for all these 500 or so stock of S and p5 100,
+
+Unknown Speaker  2:11:08  
+and then that's what my data set is. So I have so for each of these 500 or so. Oh,
+
+Unknown Speaker  2:11:16  
+why do I have 3000 Oh, okay, right. So basically, for each of these stocks I had,
+
+Unknown Speaker  2:11:36  
+why do I have 3500
+
+Unknown Speaker  2:11:38  
+Oh, okay, sorry, Sorry about that. Yeah. So each of these stocks, I have closed data. So this is the closed data for a APL, ABB, so these, all of these, are basically the tickers, and then I have volume data for each of these, and then I have a high data for each of these, and low data for each of these. So that's why, yes, sorry, yes. So that's why I end up having 3521
+
+Unknown Speaker  2:12:05  
+columns
+
+Unknown Speaker  2:12:07  
+now out of these.
+
+Unknown Speaker  2:12:11  
+So if you look at the column, so column is basically two level index. So the first level says close volume and so on, and the second level is basically telling me the stock tickers.
+
+Unknown Speaker  2:12:23  
+So first I wanted to see, okay, how many zero level, zero values do I have? And I see that I have these ones, close, dividend, high, low, open stock split and volume.
+
+Unknown Speaker  2:12:38  
+Then I wanted to see
+
+Unknown Speaker  2:12:45  
+take one value, which is, which is Apple's closing value,
+
+Unknown Speaker  2:12:50  
+and that will give me the close column for Apple.
+
+Unknown Speaker  2:12:57  
+And this is, I just tried it, and then I can do a percentage change, mean percentage change of Apple over last 252 days, which is one year's worth of data, because 365 is calendar days. But if you take out all the weekends when holidays, it comes down to 252 days. So if I run this for Apple, it will give me 0.2311
+
+Unknown Speaker  2:13:22  
+is the mean of percentage change of Apple stock data over the last one year period.
+
+Unknown Speaker  2:13:29  
+You said 252 but you have 250 rows,
+
+Unknown Speaker  2:13:36  
+so I assume that the 250 rows or 250 days,
+
+Unknown Speaker  2:13:40  
+maybe, okay, holidays,
+
+Unknown Speaker  2:13:43  
+yeah, yeah. Maybe I should have just done it with 250
+
+Unknown Speaker  2:13:48  
+although that wouldn't change much, but yeah.
+
+Unknown Speaker  2:13:51  
+So usually, I don't know why for that, you're usually, for most of this financial finance library, if you, if you run this with a period of one year, you end up getting 252 sometimes 253 if it's a leap year, this one, I don't know. Maybe on that year, maybe stock market was, I don't know. Maybe there was a, there was a snow day, snow day or something. Maybe they were it snowed as so much in New York. Maybe the stock market was closed. So anyway, that's a good catch, by the way. So anyway, so this is how I can calculate the mean percentage change of any stock. So now what I'm going to do is, so this is my little quick tryout, and then I basically did that in a loop, so for all the tickers that I have, so I basically took the percentage change mean value of the percentage change,
+
+Unknown Speaker  2:14:42  
+and that is my returns. And then I also took the standard deviation of percentage change, but for standard deviation, you have to divide that by square root of the length of stock history, right? So that will give me my volatility. So just from the closing price, from one.
+
+Unknown Speaker  2:15:00  
+Year, I basically calculated two different statistical values, which is returns and volatility, and that's what I run,
+
+Unknown Speaker  2:15:09  
+and this is what I end up getting. So for all these 503 oh, by the way, S and p5 100, for some reason, has 503 stocks right now,
+
+Unknown Speaker  2:15:19  
+even though the index is S and p5 100. So I think they keep adding and dropping companies. So sometimes it can be little bit less or more than 500 even though the overall it's called SMB 500 so anyway, so this is all of these 503
+
+Unknown Speaker  2:15:33  
+stocks, and last one year period, these are the average return and average volatility that these stocks exhibited based on the real market data as of today, because I just ran it through the API right now, right?
+
+Unknown Speaker  2:15:47  
+So now, with these return and valid volatility, now we can try to cluster these with some k values and see what we get.
+
+Unknown Speaker  2:15:57  
+Now, if we plot this plus scatter plot with the actual stock symbols, with with a mouse over or something, then we can even play around with see. Well, let's look at some of the cluster and see whether the companies kind of somehow make sense. Are they closer to each other, right in kind of their nature of business, and so on. So that's what I ended up doing here. So then I took these data, and then I did the same thing, which is running the inertia test, but I ran that from one to 20,
+
+Unknown Speaker  2:16:28  
+and then I created a elbow.
+
+Unknown Speaker  2:16:32  
+Okay,
+
+Unknown Speaker  2:16:34  
+now I'm plotting the elbow. Now
+
+Unknown Speaker  2:16:38  
+the hard question, what K value you want to use from here?
+
+Unknown Speaker  2:16:48  
+Would you use six?
+
+Unknown Speaker  2:16:51  
+So, 466,
+
+Unknown Speaker  2:16:55  
+yeah, well, I did. So I thought so too. So then I ran this with six
+
+Unknown Speaker  2:17:04  
+and then this is my outcome,
+
+Unknown Speaker  2:17:08  
+and then I did a scatter plot. And where I did the scatter plot, obviously average return and volatility are your x and y axis, and this cluster is your coloring. And then I added the stock symbol as a hover data, so that way, when I hover over this point, it will basically show which company stock it is, and this is what I ended up getting.
+
+Unknown Speaker  2:17:37  
+Okay, now I don't want to spend time to actually look into these and basically figure out, because I'm not in a business of money management for a hedge fund, but I thought this might be something interesting you might find useful in some of your
+
+Unknown Speaker  2:17:52  
+forward going
+
+Unknown Speaker  2:17:55  
+endeavor, maybe future projects or something, right? So just maybe refer to these and keep it in your back pocket and pull out if you feel the need to at any time in the future.
+
+Unknown Speaker  2:18:07  
+But this is actually a real, valid use case of applying unsupervised clustering for stock market data. What's that? One outlier at the very top, that orange one
+
+Unknown Speaker  2:18:20  
+smci, is that? Is that, that semiconductor company,
+
+Unknown Speaker  2:18:28  
+look it up quickly. What is smci?
+
+Unknown Speaker  2:18:31  
+Super micro computer corporate? Ah, says super micro computer Incorporated, yeah, they blew up like crazy with the AI, uh,
+
+Unknown Speaker  2:18:39  
+bubble. Ah, see.
+
+Unknown Speaker  2:18:44  
+Yeah, high high volatility,
+
+Unknown Speaker  2:18:47  
+but average return, high volatility but not high return.
+
+Unknown Speaker  2:18:53  
+Yeah,
+
+Unknown Speaker  2:18:56  
+that's why Warren Buffett stays clear of this type of companies. Warren Buffett will probably
+
+Unknown Speaker  2:19:04  
+operate, maybe here
+
+Unknown Speaker  2:19:06  
+the safety zone, kind of in the middle.
+
+Unknown Speaker  2:19:11  
+But some hedge fund manager might like love these ones more, or these ones more?
+
+Unknown Speaker  2:19:18  
+Yeah.
+
+Unknown Speaker  2:19:21  
+Oh.
+
+Unknown Speaker  2:19:24  
+Okay, so that's about it today.
+
+Unknown Speaker  2:19:28  
+About our first
+
+Unknown Speaker  2:19:30  
+introduction to clustering.
+
+Unknown Speaker  2:19:39  
+Any question, thoughts, insights,
+
+Unknown Speaker  2:19:48  
+what's like, the delay rate on the why finance, labor like,
+
+Unknown Speaker  2:19:52  
+is it like a 15 minute, 30 minute like, like, for like, getting a current I don't know. Well, see here when you.
+
+Unknown Speaker  2:20:00  
+To look at my code. I said one day, and now in the middle of the night, I really don't care about delay rate anyway, right? So delay it you have to care about if you are trying to basically pull this throughout the trading day, and yeah, that's fine. Probably have to pay up. That's why I was asking, yeah, okay, so
+
+Unknown Speaker  2:20:20  
+yeah, because otherwise you will be throttled. You will be probably throttled shipping with alpaca and alpaca, I think there's like a 15 minute delay. Yeah,
+
+Unknown Speaker  2:20:31  
+yeah. Well, obviously I didn't look into those because I all I just wanted is last one year data with one day interval and in the middle of the night. So I don't care about delay. I that
+
+Unknown Speaker  2:20:44  
+if anyone is having a hard time sleeping later, I put a couple of papers about K means and and the elbow curve that might serve for the purpose. That's just what I need to dream about. I
+
+Unknown Speaker  2:21:00  
+He,
+
+Unknown Speaker  2:21:03  
+but they're, but they are talking, one of them, especially, talking about trying to find methods to to determine the proper out point mathematically, rather than where. Where did you share that? Um, Karen, well, they're in the in the live, live chat live section, okay, but this kind of papers, yeah, if you need to sleep, go fall asleep. They can.
+
+Unknown Speaker  2:21:27  
+Yeah,
+
+Unknown Speaker  2:21:30  
+they can. They can have a soporific quality.
+
+Unknown Speaker  2:21:39  
+The Free Code Camp article that I posted also has its own elbow elbow function.
+
+Unknown Speaker  2:21:52  
+The these do prove that, no doubt, some people have done their PhD dissertations on the topic. So
+

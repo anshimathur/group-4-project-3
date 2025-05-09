@@ -1,0 +1,1422 @@
+Unknown Speaker  0:12  
+Thing
+
+Unknown Speaker  0:13  
+regarding your project idea,
+
+Unknown Speaker  0:16  
+have you started thinking about it at all?
+
+Unknown Speaker  0:22  
+Yeah, we met as a group and realized that our initial idea probably was going to pan out because historical data wasn't quite we needed for a data time series. So we're shifting some some other ideas we raised.
+
+Unknown Speaker  0:38  
+Do we have Slack channels for each of the groups that we have,
+
+Unknown Speaker  0:46  
+most of them, I think or not, if not all of them, they did it already.
+
+Unknown Speaker  0:52  
+They have done it.
+
+Unknown Speaker  0:55  
+So do we have four groups of five? I forgot. I think we'll have five,
+
+Unknown Speaker  1:00  
+five. Okay, I see one for group four. Group three.
+
+Unknown Speaker  1:07  
+How about the others? Group two? Has it already?
+
+Unknown Speaker  1:13  
+Yeah, I remember seeing messages from you.
+
+Unknown Speaker  1:21  
+What is it called? Why am I only saying group three and four
+
+Unknown Speaker  1:27  
+are just called Death Star?
+
+Unknown Speaker  1:30  
+Yes, our group is number one.
+
+Unknown Speaker  1:39  
+Can you check if I'm added to all of your groups in the Slack channel, Simon,
+
+Unknown Speaker  1:54  
+yes, you're in our group as well. Looks like in the group one either.
+
+Unknown Speaker  2:03  
+So when you say our group, which group is that you said,
+
+Unknown Speaker  2:09  
+Jesse power group names. So there's
+
+Unknown Speaker  2:14  
+two groups that I'm not in. I'm not in group one or group two, or I'm not in group which, whichever is not one of the, yeah, if, if, if we remember, like, the last time when everybody's forming the groups, we're trying to add all the TAs, but the license doesn't allow us to add more than a certain number of folks to the groups, so you can only Add a subset of the TAs.
+
+Unknown Speaker  2:41  
+Oh, is it? So, what's the maximum number they allow?
+
+Unknown Speaker  2:49  
+I think it was nine. Actually, actually, Karen is in our group as well. Yeah, I can see group is yours?
+
+Unknown Speaker  2:58  
+Death Star. Yeah, I do see Death Star. I do see death star now,
+
+Unknown Speaker  3:06  
+yeah, we couldn't add Mohamed,
+
+Unknown Speaker  3:11  
+okay,
+
+Unknown Speaker  3:13  
+and Benoit. I just ping you in our group too. If you be a Slack, you should see it. Now,
+
+Unknown Speaker  3:21  
+I'm still not seeing it weird. Oh, so I think what happened is you guys started a private chat and not a channel, I think is what I'm seeing, or
+
+Unknown Speaker  3:35  
+it just doesn't have a name. I'm not sure which. No, I think you're right about that. I'm looking here and it looks like it's just a direct message.
+
+Unknown Speaker  3:46  
+Can we convert that to a channel? Ah, okay, yes, that is basically now I see, I see
+
+Unknown Speaker  3:55  
+group chat with whole bunch of people, yeah, I think it will actually help if you actually create a channel with your group name, so that way it will be easy for us to keep track who is who
+
+Unknown Speaker  4:09  
+Ingrid. The short answer is yes, you can create a channel from a chat. Slack allows you to do that if you but you could also just create a channel,
+
+Unknown Speaker  4:19  
+yeah, I'll find a way to convert it, thanks
+
+Unknown Speaker  4:25  
+a current.
+
+Unknown Speaker  4:30  
+Okay, so then which group is left? So Ingrid, you are going to create one channel, and that will be group number what
+
+Unknown Speaker  4:38  
+our system? Group two, group two. So that would be group 234,
+
+Unknown Speaker  4:46  
+and then what happened? What happened to Death Star? Which group number you were?
+
+Unknown Speaker  4:54  
+That was one, wasn't it? Whatever one, whatever group I'm in. I thought it was two, but I don't know.
+
+Unknown Speaker  5:00  
+I think it's number one. It's number one, number one. Okay, so what about group five? Then who else is there?
+
+Unknown Speaker  5:09  
+Um, Karen, do you mind pulling that list up? Yeah,
+
+Unknown Speaker  5:15  
+it was in 01, live,
+
+Unknown Speaker  5:19  
+I think, can you check for me the group right here. It's right captain, live, live, 01, live, and it's been okay, the original list of groups.
+
+Unknown Speaker  5:40  
+Sorry, I didn't quite catch what you said, Karen, it's on a 01, live channel, and it's pinned
+
+Unknown Speaker  5:48  
+Oh, it's pinned there. Okay, yeah,
+
+Unknown Speaker  5:52  
+I see I can see it now. Okay, so group five, I see Tiffany Sam, Matthew, Jason Spencer.
+
+Unknown Speaker  6:02  
+Do you did you guys create a channel, Slack channel?
+
+Unknown Speaker  6:08  
+Are we there? Because I don't see the Slack channel on my side. I
+
+Unknown Speaker  6:16  
+don't think, do you know the group?
+
+Unknown Speaker  6:18  
+Which group is mine, too? Well, yeah,
+
+Unknown Speaker  6:25  
+you should be in
+
+Unknown Speaker  6:30  
+name. I think he wasn't there. Maybe when, when we first organized so, oh, so you missed the class. Okay, 123, yes. Thanks.
+
+Unknown Speaker  6:42  
+Who all six? That's five. Most are five.
+
+Unknown Speaker  6:47  
+That one's five. Yeah. So you can go to any of the groups other than group one, because group one already have six people.
+
+Unknown Speaker  6:56  
+Benoit,
+
+Unknown Speaker  6:58  
+yep, I just added you to our group.
+
+Unknown Speaker  7:02  
+Is there anybody else? Do you want me to add all of the
+
+Unknown Speaker  7:06  
+now? Which group ideally? Ideally? Yes. Okay, so I see group two now.
+
+Unknown Speaker  7:14  
+So okay, group 234, is done, and group one is Death Star. So that is also done. Who is group five? Then
+
+Unknown Speaker  7:23  
+I was four or four? Is that 404? Not Found? Yes, because so you guys have to speak up. We just created it. Just now.
+
+Unknown Speaker  7:35  
+Sorry, we were having communication in the in the Slack channel, the slack private messages that we had put together, and then we, we came up with the name really quick, and Matthew created the channel. So,
+
+Unknown Speaker  7:49  
+okay, yeah, so I'll tell you why I'm I'm emphasizing on this, right? So ideally, either towards the end of the today's class, or maybe sometime after, I would expect all five groups to create one repo each. So you need to create one repo for the group, which is where everyone will commit their work. And when you create that README file for that repo, in that README file, I'd like you to do provide an outline of what you are supposed to do and commit that to your GitHub repo, and pin the repo link to your respective Slack channels. So that way, it will be easy for us instructional staff to go in and check each of the five repositories at any point, if you want to see how you guys are making progress. So have the Slack channel created, have the Git repo created, pin the Git repo URL into the Slack channel, and then drop us a note that we are all set, so we'll take a look. Okay,
+
+Unknown Speaker  8:52  
+that is a funny name, though. I have to say that's
+
+Unknown Speaker  8:56  
+like
+
+Unknown Speaker  8:59  
+nothing here to work nothing here to say you made a mistake.
+
+Unknown Speaker  9:07  
+This is not the team you're looking for. Yeah, right.
+
+Unknown Speaker  9:11  
+We're going to call our group general. I don't see my group.
+
+Unknown Speaker  9:16  
+You said which group is that you you are not included in any of the group. You probably missed the class that day when we were doing the grouping. So that's why your name kind of fell through the cracks.
+
+Unknown Speaker  9:33  
+So if you can do one thing, if you look into the live channel where Karen has posted the group members name and the group numbers. You can basically choose to be any of the group, 234, or five. It's just pick a number between two, two and five.
+
+Unknown Speaker  9:56  
+Just pick a number.
+
+Unknown Speaker  9:58  
+Okay, one second. Okay.
+
+Unknown Speaker  10:00  
+This is whatever number you want.
+
+Unknown Speaker  10:03  
+Okay, the second one, it's fine. Number two,
+
+Unknown Speaker  10:08  
+okay,
+
+Unknown Speaker  10:13  
+the group two. You guys name your Slack channel as AI bootcamp, foreign exchange. Something is that? You guys, yeah, for now, until we figure out our name,
+
+Unknown Speaker  10:24  
+we're boring. Just group two,
+
+Unknown Speaker  10:27  
+yeah, that's fine.
+
+Unknown Speaker  10:30  
+Okay, so we are just adding one more member to your group. Then you guys,
+
+Unknown Speaker  10:35  
+thank you for sure. Sorry, who's who's adding to our group two? Yeah, I just added the best
+
+Unknown Speaker  10:44  
+copy that this was not present that day, I suppose.
+
+Unknown Speaker  10:50  
+So we are just adding him to one.
+
+Unknown Speaker  10:52  
+It's not like we changed the list. That's weird.
+
+Unknown Speaker  10:58  
+Doesn't do anything when I go to Edit message. It doesn't do anything.
+
+Unknown Speaker  11:12  
+Okay,
+
+Unknown Speaker  11:17  
+okay, so looks like this part. We are all set. We have all the five Slack channels, and I am looking forward to see your GitHub repo link, as I said, either towards the end of this class or maybe sometime between today's class and before Thursday's class.
+
+Unknown Speaker  11:36  
+Okay, cool.
+
+Unknown Speaker  11:37  
+Okay, so coming back to the topic that we are going to do today. So remember, as I said, we have covered everything all the way up to week eight, session three. So we have formally covered that. And I wanted to give you some more examples of time series forecasting, and that's what we are going to do. So I have basically three notebooks, some of these, some of the concepts that I'm doing well, concepts will probably be like you have already learned.
+
+Unknown Speaker  12:13  
+Some of this thing that I have done might seem, Oh, wow. We haven't done this before. It might seem at first, but if you look through, you will see that you actually have learned everything that I'm going to show. But anytime, if you have any question or anything, feel free to stop me. The reason I did this is this will actually basically show when you are taking some data and doing time series forecasting, what is you are getting right, which we basically kind of played around with some of the toy dataset in some of the in the activities that we have done in the class. So sometimes it doesn't give the full end to end view, right, like what really is going on. So I try to do something. So let's get started. I will walk you through.
+
+Unknown Speaker  12:56  
+You don't need to code, although if you want to can
+
+Unknown Speaker  13:02  
+alongside, but I would suggest just sit back, watch through what I'm showing you,
+
+Unknown Speaker  13:10  
+look at the code, and right after I'm going to push the code into your
+
+Unknown Speaker  13:16  
+GitLab, so you will have access to the code right away After we finish. Right so I basically plan to use maybe about half of the time today to walk you through and then leave you for the rest of to basically get with your group members and start brainstorming your ideas and get your repo started for the second half of the class. And noi, could you have, could you or one of the TAs post, what you want us to put in read me so that we're all on the same page?
+
+Unknown Speaker  13:49  
+Repo? You said that you wanted us to put something into the repo.
+
+Unknown Speaker  13:56  
+Oh, it's basically just your proposal. Like, what? What is your project idea is just basically, think about a proposal, write up like, this is the idea, and this is how you plan to execute the project. What is it you are going to do? What data you are going to use? Where do you think that you are going to face the data, and what is the outcome that you are trying to accomplish? That's all great. Yeah, somebody could just write that up and post it so everybody's on the same page. I see it in the chat anyway. Thanks.
+
+Unknown Speaker  14:24  
+Okay, can I ask someone to do that? Karen Kia and anybody?
+
+Unknown Speaker  14:32  
+Yeah, sure.
+
+Unknown Speaker  14:35  
+Okay,
+
+Unknown Speaker  14:40  
+so let's get started. Here.
+
+Unknown Speaker  14:49  
+You see my screen now,
+
+Unknown Speaker  14:53  
+yes,
+
+Unknown Speaker  14:56  
+okay, so let's get started. So the first.
+
+Unknown Speaker  15:00  
+First exercise that we are going to be doing that we will be fetching some real stock data
+
+Unknown Speaker  15:08  
+from an API.
+
+Unknown Speaker  15:10  
+And when we do fetch stock data, it basically gives us that open, high, low, close that data, right? So what we are going to do, we are going to take the closing price of the stock that we are chosen, and we are going to train a profit model to see how well the profit model is able to forecast the stock prices going forward.
+
+Unknown Speaker  15:35  
+Okay, we have done this before, but there are some additional thing that you will see that I have done that basically makes it a full end to end, complete example.
+
+Unknown Speaker  15:47  
+So here are all the imports that you need. Now, one thing you will see that I have used here is that alpaca data request, and I believe we actually did cover alpaca in one of the example that I have shown in the class.
+
+Unknown Speaker  16:04  
+So alpaca is the is the API through which you can basically, yeah, the paper trading API. Now I remember, we did talk about this, through which you can basically get the historical prices for any stock that you want. And in order to do that, you need to have your alpaca API and secret key saved in your environment, which is what you are going to load and initiate an alpaca client, which through which we are going to then will
+
+Unknown Speaker  16:33  
+the stock data.
+
+Unknown Speaker  16:35  
+Okay, this part is good.
+
+Unknown Speaker  16:38  
+So now for this example, I chose to pick up any stock, so MSFT, which is Microsoft. So we are going to query alpaca with the stock ticker, which is MSFT, Microsoft symbol, and I'm going to choose 1500 as a period. So basically going back 1500 days from now. Now, now that does not mean you will actually get 1500 days worth of data, because you will say, see here what I'm doing. I am using these time delta function to say my start date has to be today's date, time minus period number of days, meaning 1500 days.
+
+Unknown Speaker  17:23  
+So what that means is 1500 calendar days, and then end time would be today, and it will be today. But when you are going to face send a request to alpaca, it will give you the data only for the days where stock market was open, and that excludes your weekends and holidays. So you will get less than 1500 days, but there's 1500 days meaning what more than four, five years, almost five years worth of data is what we are going to get.
+
+Unknown Speaker  17:53  
+Now, I'm not going to go through each of the lines of the codes, because all of these we have covered, and you will have access to this code. In case you want to reuse this code in any shape or form, in your own project or for your own learning, you are free to use the code. It's very simple, just sending the request through the API using the stock bars request, and you get the response. And this is your response, which basically is a gigantic JSON structure dictionary, basically. Then we take the response, we use the JSON dot loads function, and we basically, well, actually, sorry, one thing so these stock bars response. It is a JSON, but it is wrapped around with the alpaca object, which is bar set. So then the next thing we do is, with that response object, we dump the JSON first into an actual JSON so these stock bars variable becomes your actual JSON data. This is the pure Python dictionary, basically. Then we take these Python dictionary and then create the pandas data frame with this, and that gives us mine raw stock data, which is the Open, High, Low, Close volume and red cam for Microsoft on a day by day basis. And you will see this one will only have, as I said, the data for when the market is open.
+
+Unknown Speaker  19:20  
+So we did get the data here
+
+Unknown Speaker  19:24  
+and now, what we are going to do is we are going to take only two columns,
+
+Unknown Speaker  19:30  
+timestamp and close, because time stamp is basically our x axis or independent variable, and close is our target, which is what we are going to predict. So from this raw stock data frame, we are going to pick two columns, and then we are getting our stock data frame, which is this, only two columns.
+
+Unknown Speaker  19:53  
+Now here we have like, 1500 well close, not 1500 total, exactly.
+
+Unknown Speaker  20:00  
+But some like about four years worth of data.
+
+Unknown Speaker  20:03  
+So now what we are going to do is, when we are going to train the model, we are not going to train the model on all of the data, because what we want to do is we want to set aside a part of data for future testing, and we don't want the model to see that data right. So we are going to split out the training data and the test data.
+
+Unknown Speaker  20:25  
+So the logic that I'm applying here, and this is by no means the only way you can split train or test it in any of whichever way you want. The way that I have done it, I basically defined a horizon to be 5% of the overall length of the stock data frame. So if the stock data frame has 1000 record my horizon will be basically last 50 records. So these horizon basically means, like, the number of days that I don't want the present want to use the data for training,
+
+Unknown Speaker  20:58  
+and then I am basically taking two subsets of data in these two lines. So what I'm doing is for the training data. I'm saying take everything from the beginning up to horizon, so if your horizon comes out to 50. So this will give you everything from beginning up to
+
+Unknown Speaker  21:19  
+the 51st so basically last 50 will be not included in your training data. And then test data is basically just the opposite. It will give you last 50. And that's what these two selections are doing,
+
+Unknown Speaker  21:35  
+and that's where we have training and test data. And then I basically did some printing that total of 978
+
+Unknown Speaker  21:41  
+days of data will be used for training, and 51 days of data will be used for testing. And from these, I have also printed the forecast horizon, starts from November 4 to 2024
+
+Unknown Speaker  21:56  
+and goes up to January one,
+
+Unknown Speaker  22:00  
+sorry, January 17, 2025,
+
+Unknown Speaker  22:05  
+okay, yeah, January 17 was last Friday because three days market was closed, right? MLK was also a closing day for market. So that's why we are getting up to January 17. So our total forecast horizon is last 74 days worth of data. Is our test data, which is also our forecast horizon that we are not presenting to the model.
+
+Unknown Speaker  22:31  
+The concept is clear up to this point. So for your horizon,
+
+Unknown Speaker  22:37  
+I think you're trying to, you're
+
+Unknown Speaker  22:40  
+you're doing 5%
+
+Unknown Speaker  22:42  
+of the data for your horizon of the total length of data. Yep. Okay.
+
+Unknown Speaker  22:49  
+And so is there a reason? Is there a reason for that one, for that no, just, just pick it out of blue. Just, yeah, yeah. Because the thing is, Well, ideally so people, you will see people sometimes do 1090, split, 28, split. You will see sometimes even 3070, split. So, but here I didn't want to go back too far back in time, so that's why I initially said 1500 calendar day. And when you do 1500 calendar day, if you take out the weekends and the holidays, you get about 1000 days worth of data. And that's why I'm I figured that I'll pick last 50 days or so for test data, so just loosely. So that's why I put 5% and as you can see, last 51 days came out to be separated at test data. And that leaves us 978, days worth of data to train the model, and then just something I use today. I appreciate you walking that through, because that was a little fuzzy for me. And then remind me, I haven't had time to look this up, but the way that you've done the split on the on the arrays, will that include the same piece of data on the horizon day, or will that will they shift off? Or do you care? I really do not care. I haven't actually checked the boundary condition, but here, even if there is an overlap of a day, that's fine, so I don't really bother to care. Okay, thank you very much. Okay,
+
+Unknown Speaker  24:19  
+cool. So now we have two data set, training and test now, as we know, as is customary for any data that you are going to feed to profit model, that you need to name the columns, ds and y, which is what we are doing here. So now this is the DS and Y column for our training data, and this is our DS and Y column for the test data.
+
+Unknown Speaker  24:42  
+Okay, actually, let me do one thing, Jesse, that will probably help us answer your question. Yeah, so it is actually mutually, not including both. So you see the trading DFT goes up to November 1, and the test DF starts from November 4.
+
+Unknown Speaker  25:00  
+Supports an overlap, actually. Thank you.
+
+Unknown Speaker  25:05  
+So that part is good. We have done this before. Many, many times should be very simple. So now what we are going to do, we will create the model and train it. So let's train it, and it's tiny bit of data, only about 1000 records. So 0.5 second training is complete. So we have our model, then we create the future data frame. So for future data frame, I basically go, when I say periods, I put this period prediction period length plus one, and that will give you these data frame, and these will go all the so this will start from
+
+Unknown Speaker  25:46  
+December
+
+Unknown Speaker  25:50  
+14, which is basically what our original data also started from, I suppose, yep, December 14. So our future starts from December 14, and it goes all the way up to January 15. The reason I said plus one is basically my idea was that if you just do prediction length, that will give up to like yesterday, and you also, if you also want to include, let's say, today's price as a forecast. So that's why I use plus one for no particular reason. But here, in this case, you cannot really get the actual data for 15 because 15th market was closed. But that's fine. We are going to see the overall trend how closely the prediction follows the actual so little bit plus one days are here and there. I'm not too much worried about that. So this is my future data frame, which is empty at this point,
+
+Unknown Speaker  26:46  
+and now we are going to actually do the prediction. And in order to do the prediction, we passed that future data template, and this is what our future looks like, sorry, prediction looks like, right? And you see that since we have passed the whole time length, all the way from 2020 December 14, up to 20, 25/5 january 15. It basically gave me everything here,
+
+Unknown Speaker  27:12  
+right, and all of the usual colors, so that that our prediction is done. So now we have to, kind of try to analyze how our model is performing.
+
+Unknown Speaker  27:25  
+So the first thing you do is plot so I plot it now, as expected, for all of these 978, days period, you can see the model has kind of very well followed the general trend of the dots. So remember, the black dots here are the actual data point, and the deep blue line is basically the wild hat, which is kind of your medium of your like most likely forecast. And then the light blue band is upper and lower range. Now obviously it is not exact, because you have you will see that in some of the days, actually, in lot of places, the actual price movements were way higher or lower than even the highest and lowest that or lowest that the profit model forecasted. So looks like overall, it is a good freight. It got the trend. But it might not be that accurate.
+
+Unknown Speaker  28:25  
+So then we do the plot components. So in the plot components, this is the overall trend year over year, which is kind of an abstraction of these, where Microsoft stock starting from when, when we started to look at towards the end of 2020, it initially rose, then it lost that, and kind of came around at the same level, little bit more, and then it kept rising. So that is the general trend. Here you are seeing that profit has figured out. That's the general overall trend within this four or five year period. And then traditionally, like, what happens your weekly,
+
+Unknown Speaker  29:03  
+yearly trend? And there is no daily trend here, because the day is the minimum interval that it goes right. It doesn't go more fun or interval than day. So it basically stops at yearly it does not give you the daily or weekly trend.
+
+Unknown Speaker  29:18  
+So that is good. So overall, what do you think is this model kind of trained well, like, what's your
+
+Unknown Speaker  29:27  
+gut feeling at this point? Says, Do you think this is a good model or not?
+
+Unknown Speaker  29:33  
+Just looking at this plot,
+
+Unknown Speaker  29:39  
+my thought is, when it comes to stocks and other things, it's hard to predict based just off of past performance. My thought was, is, is there a way to maybe combine two different sets of data to
+
+Unknown Speaker  29:54  
+make it more accurate, or something like that? Come to that? Yeah, okay, we'll come to that. We'll come to that.
+
+Unknown Speaker  30:00  
+Okay, so for now, it seems like overall it model the trend, but you are absolutely right in case of stock even though people use the stock market data to show time series forecasting all the time, but this is probably without any other additional data. This probably is not a very good exercise, which we will see in a second.
+
+Unknown Speaker  30:22  
+So now what we are going to do so these prediction that we have from this one, right? So this prediction data frame, this has all the output, like all the statistical output from
+
+Unknown Speaker  30:38  
+the profit model. But what we would like to do is we just need to pick the three columns from here, the Y hat, y hat, upper, y hat, lower, and then take the actual value of the stock from the initial data that we loaded. And then we could create a data frame just with those four columns, as you see here. So in order to do that, what we are doing is we are creating a result data frame, and we are taking the time stamp, and then y hat, and then lower and upper, and that's our
+
+Unknown Speaker  31:12  
+result data frame, which is just a subset of the whole prediction data from minus all those additional components. And then I'm doing a pandas March. What I'm doing is I'm basically merging it with the actual stock DF, and that adds this actual column here. So by doing so, now I have the predictions like the main prediction and the upper and lower bound prediction and the actual everything, side by side in one single data frame.
+
+Unknown Speaker  31:44  
+The benefit of doing that is now you can just do a plot on this data frame, and it will basically plot all four things in one plot,
+
+Unknown Speaker  31:56  
+which is what this output is.
+
+Unknown Speaker  31:59  
+So here, if you look into the actual data, that is the red line, which is very squiggly, and the three line blue, green and orange, these are the three sets of prediction. So what's your thought by looking at this, what do you think the prediction has done well or not done well, looking at this picture,
+
+Unknown Speaker  32:25  
+for the most part, the
+
+Unknown Speaker  32:28  
+Y hat upper and lower seem to encompass the actual values, with a handful of exceptions. On the right hand side towards 724,
+
+Unknown Speaker  32:39  
+when the markets, for some reason, but more volatile, probably right, which, which profit couldn't predict obviously.
+
+Unknown Speaker  32:50  
+Yeah, any other observation, it doesn't seem like the prediction is maybe a viable way. I mean, it seems like more of an average of the actual Exactly. So it doesn't actually seem like a pragmatic use to like, predict, you know, for like, what the next day would be, or to format, that's right. So basically, what the model has done, the model has done kind of a good prediction. If you say, Hey, if you, if you want to interpret this model and say, Hey, give me what is the average weekly price is going to be for the next five day basis, Monday to Friday? Like a smoothened out price average. If you interpret the result that way, then you will see that model has kind of done a okay job.
+
+Unknown Speaker  33:40  
+So this is almost same as just smoothening and taking out the rolling window average of the prices, right?
+
+Unknown Speaker  33:48  
+So now in the next plot, what I have done is I have taken the same data frame, but instead of plotting the whole data frame, I only took the last 50 days, 50 or 51 days, which is basically our, basically our actual time horizon was so I basically zoomed in into the last 50 days or so of that whole timeline that we have. And here also you kind of see the same thing. The blue line is the median of the prediction, which is kind of smooth. So it did not, it was not able to predict that individual ups and downs that the stock demonstrated during that period so smoothened out right?
+
+Unknown Speaker  34:30  
+So now one thing you could do,
+
+Unknown Speaker  34:33  
+you could actually calculate the root mean square error and mean square error and all of that, and you will see that mean square error is 249 and RMSE value for this is 15.78
+
+Unknown Speaker  34:47  
+so where did my code go here? So in order to do that, I have used this function called mean squared error and mean absolute error and.
+
+Unknown Speaker  35:00  
+These functions are probably something that we didn't talk about.
+
+Unknown Speaker  35:07  
+Is the import of these functions.
+
+Unknown Speaker  35:11  
+Why is it not taking me all the way up? Okay, let me scroll up here. I
+
+Unknown Speaker  35:48  
+where I did the input. That is weird.
+
+Unknown Speaker  35:57  
+That is very weird. Where Did the import go? I
+
+Unknown Speaker  36:23  
+This is from a library, and I cannot find the input from the library anyway. I'll come to that later, a little bit later, anyway. So what we are seeing is is our mean square error is 249, root mean square is 15, absolute error is 13, and so on. So essentially, these numbers are not absurdly high, but a good model would basically tend to lower this number as much close to zero as possible, specifically the RMSE, if you can, in the ideal case, if RMSE is almost zero, so that means your model is perfectly forecasting. Now, obviously we don't need the exact zero, because then you will say that, Oh, your model might be over fitting to the data that you have, right. But having something like 15.78
+
+Unknown Speaker  37:11  
+tells me like the model is kind of an okay model, which we kind of see also from from these observation up here.
+
+Unknown Speaker  37:21  
+Now another thing I did afterward, in the same result data frame that I have, where I had prediction and actual and lower and upper prediction. So what I did here is I created another column in the prediction in the result data frame. In that column, I took the actual values, the closing prices, and I applied this function called rolling, which basically continues grouping the data 20 day at a time on a rolling window basis. And for each of these 20 day rolling window, I calculated the mean price, the mean average closing price, and I added that as another column called rolling in the same data frame. And this time, I plotted this rolling price rolling window average of the prices along with the prediction upper and lower. And now when I plot this, so do you see any anything now,
+
+Unknown Speaker  38:24  
+like, do you see what we were kind of talking about before that, the prediction that the model did, it kind of is better to find the overall, like a two, three or four week average of the prices, but it is Not really good in finding the actual daily prices. Do you kind of see that coming out from this plot, when you plot the upper and lower prediction boundary with the rolling window average?
+
+Unknown Speaker  38:52  
+Do you see how the rolling window average, which is the blue that is a smoothened out version of the real closing closing price, which kind of aligns very well with the smoothened out
+
+Unknown Speaker  39:04  
+forecast that the model generated.
+
+Unknown Speaker  39:11  
+Could you redo that plot with actual included in it? So just add in the actual column so that we can see it next to the rolling. Yeah, they've done my next door illustrative. Yeah. Yeah.
+
+Unknown Speaker  39:27  
+There
+
+Unknown Speaker  39:34  
+another thing you can also do. Instead of doing prediction upper and prediction lower, let's just add the prediction. So let's do rolling actual and prediction. That's another way of looking at it,
+
+Unknown Speaker  39:48  
+right?
+
+Unknown Speaker  39:52  
+So now just compare the blue and green,
+
+Unknown Speaker  39:56  
+and you see how they are moving along. So.
+
+Unknown Speaker  40:03  
+So what conclusion would you draw from this?
+
+Unknown Speaker  40:10  
+Models aren't good necessarily for predictions that are pinpoint or precise, but they're good for approximations
+
+Unknown Speaker  40:21  
+this model, not all models, this particular model, yeah. And does that mean that this could have been trained better? Yeah. So someone was saying, like, Hey, can we use something else? So the other thing you one thing you could have done,
+
+Unknown Speaker  40:41  
+I mean, you should do for any time series prediction, I would say these approach that we have been doing so far. It's a naive approach. Why? Because you are trying to predict the output like a future movement of one variable based on the past movements of the same variable,
+
+Unknown Speaker  41:00  
+and that does not tell you anything about how that variable is affected by other variable, although, in reality, whenever you are trying to predict something, there are certainly a behavior of something is certainly influenced by behavior of the others. Now how hard it is to find the other variables that are influencing the thing that you are observing that's a different thing. It might be hard to find. It might be easy to find, but if you do happen to find that, then obviously, if you add those additional variable in your model, then your prediction would be much better.
+
+Unknown Speaker  41:37  
+So in case of a prediction of stock, what are the variables you could think of that you can use alongside?
+
+Unknown Speaker  41:46  
+What about those financial indicators like crypto or political stability or will, whatever? Well, you have to be somehow be able to quantify whatever political stability, like, if you can get a data set that gives you some numeric value of a political stability, then, by all means, go for it, right? Another thing people sometimes use is the Google search trend data. You can use that. And there are, there are many things people do sometimes, like, you can basically have a bot that will process all the, let's say all, like all the mention in the tweet, right? Like, how many times a particular company or its product have been mentioned in Twitter, and how many of those mentions have positive versus negative sentiment, right? So there are sentiment analysis tool that can actually scrape all these different Twitter or Facebook post or follow certain channels and analyze the overall market sentiment, right? So if you do that, then yes, and in fact, that's what the the quant firms do. They actually have a lot of these data scraping tool that are sitting there, scraping all sorts of data from different places, right? News media, social media, government data set and all of these, and even climate, maybe for some stock, right? Maybe not Microsoft. But let's say, if you are trying to credit something like, let's say, I don't know, like, even for Home Depot stock, I think Home Depot stock would also kind of depend on climate, right? So something like that. So those are those. That's basically one option, the Oh. Other things you can also use is use the stock price of similar companies in the similar industry, like you when you are trying to predict Microsoft, how about you? Take Amazon, Apple, Facebook, like four or five other companies stock also alongside or maybe you take an index value, right? Maybe you get NASDAQ, and you can use that as a supporting variable. So there are a lot of these different techniques that you could use, which I could have showed you here, but I did not show that in this particular example. But I'm going to show you another example where I'm doing something like that. But you guys are all right, we could have used some other additional variable here. So overall, this model, what do you think the use of this model would be? Would you use this model for day trading?
+
+Unknown Speaker  44:18  
+No, would you? Would you use this model for maybe medium to long term planning,
+
+Unknown Speaker  44:26  
+maybe, maybe, but not with high confidence, right? So I am with you.
+
+Unknown Speaker  44:33  
+Okay, so that's that.
+
+Unknown Speaker  44:37  
+So that is one attempt, or naive attempt, to forecast stock market using profit, which I would say, didn't go very well, right? Because, obviously we didn't do a lot of things that we could have done. And the reason I'm telling all of this to you, like, hey, maybe some of you guys can actually maybe want to take this idea and Move along, move forward with eating your project that you are tracking. Maybe.
+
+Unknown Speaker  45:00  
+You already have an idea of what other additional data set that you are going to bring in, right? And try to try to do a better forecasting of a stock, right? Or maybe better forecasting of a crypto, or maybe forecast, try to forecast an index in general, right? So there are a lot of different things that you can try.
+
+Unknown Speaker  45:18  
+So that's one.
+
+Unknown Speaker  45:20  
+Now I'm going to show you a different approach of doing this, but before that, any question on this one so far?
+
+Unknown Speaker  45:34  
+Okay, so now I'm going to show you slightly different approach of doing the same thing. So in this activity, what we are going to do is we are going to do get the exact same data
+
+Unknown Speaker  45:48  
+from exact same API, which is alpaca
+
+Unknown Speaker  45:52  
+and for Microsoft, 1500 days, everything is same,
+
+Unknown Speaker  45:58  
+loading the data and
+
+Unknown Speaker  46:02  
+uh, getting the time stamp and close,
+
+Unknown Speaker  46:05  
+and then defining the forecast horizon and doing splitting the train and test. So everything is same up until this point.
+
+Unknown Speaker  46:14  
+So now from here, I'm going to take a slightly different approach. What I'm going to do is I'm going to create a column called percentage change,
+
+Unknown Speaker  46:26  
+and in that column I am going to
+
+Unknown Speaker  46:32  
+calculate the percentage change of the daily data, daily closing price, and drop the actual closing price. So
+
+Unknown Speaker  46:42  
+you guys see what I'm doing here, right? So I'm doing a close dot PCT change, which is a pandas function, and then I'm calling that PCT change. And then after I'm done, I get rid of the close color. So now essentially I am as my target variable. I have what are the price jumps each day that are happening compared to the price on the day before?
+
+Unknown Speaker  47:07  
+So any negative value here means the price on the very same day dropped compared to the previous day, and a positive value means the price jumped. And this is our these are the percentage number, so point 024, basically means 2.4%
+
+Unknown Speaker  47:27  
+so essentially, what I did is I changed the data set into something called A
+
+Unknown Speaker  47:33  
+stationary data set.
+
+Unknown Speaker  47:37  
+Now, since people say that the daily price changes in the stock market is a random walk. Basically all of these price changes that happen. These price changes, not the prices actually, but the changes that happen. These are truly random variable. So if something is truly random variable, then it should follow a Gaussian distribution or a normal distribution.
+
+Unknown Speaker  48:06  
+So before I attempt any forecasting, I want to prove whether that is truly the case. So in order to do that, what I do is I take this percentage change column and I plot a histogram of this and then on top of that, I also plot the density distribution the KDE to try to see how our price changes look like.
+
+Unknown Speaker  48:29  
+And this is what the plot produces,
+
+Unknown Speaker  48:34  
+right? So this is a normal distribution.
+
+Unknown Speaker  48:41  
+So what does that mean? Really?
+
+Unknown Speaker  48:50  
+Is it a good news, or is it a bad news that the prices are randomly distributed, and this is actually really good, because you see the mean, the mean is basically at zero. So it's a it's a very well balanced normal distribution with mean at zero. So it doesn't even need to be scaled.
+
+Unknown Speaker  49:14  
+So
+
+Unknown Speaker  49:16  
+what this means is, if you really want to do, let's say, a linear curve fit. This is like the perfect example
+
+Unknown Speaker  49:25  
+for do your regression curve fitting.
+
+Unknown Speaker  49:29  
+Except here, this is also a special case of regression where the x variable happens to be the timeline.
+
+Unknown Speaker  49:37  
+But this tells me that gives me hope that the trend line that profit will be able to find would be a very true representation of the underlying probability distribution, because it is a very well balanced, non skewed normal distribution with zero mean.
+
+Unknown Speaker  49:57  
+That is a perfect data to do a linear regression.
+
+Unknown Speaker  50:00  
+In upon
+
+Unknown Speaker  50:06  
+and if you clean the mean and standard deviation, you see the mean just like it shows here. Also the mean is almost like zero. When I'm doing mean, it's basically showing 0.000, and then seven, nine. So basically it's a zero mean, and
+
+Unknown Speaker  50:23  
+standard deviation is also pretty low, 0.016
+
+Unknown Speaker  50:28  
+which is on the low side.
+
+Unknown Speaker  50:32  
+So what do you think the outcome would be if we try to use this model to train is use this data to train the model? So
+
+Unknown Speaker  50:43  
+anything that you want to hypothesize before seeing output, because
+
+Unknown Speaker  50:56  
+we are going to train the model soon. So
+
+Unknown Speaker  51:05  
+or do you guys prefer to rather see what happens?
+
+Unknown Speaker  51:10  
+Okay, so let's train the model. So before training the model, we basically take the train and test TF separately, rename the column to DS and y, and then do the same thing, which is training the model, which also is fast. And then we create the future data frame,
+
+Unknown Speaker  51:29  
+and then we do a model dot predict,
+
+Unknown Speaker  51:32  
+and this is our prediction.
+
+Unknown Speaker  51:36  
+Now we have another problem.
+
+Unknown Speaker  51:38  
+What is the problem
+
+Unknown Speaker  51:41  
+up to? This part was easy, all we did is change the close to percentage, a percentage change instead of closing price. And then did it the exact same thing. But now what happens when you do model dot prediction? So this is what you get,
+
+Unknown Speaker  51:57  
+which is expected, because you see the here it is this graph that you are seeing. It is centered at zero, because, as we saw in our histogram, all that random changes that we saw, those are all normally distributed with a zero mean. So essentially, what you are seeing is what
+
+Unknown Speaker  52:18  
+profit is predicting that this is how your daily changes are going to be, up down. Up down. Someday, up some down, where most of these price changes would be very close, least centered around zero,
+
+Unknown Speaker  52:31  
+with some little daily ups and downs.
+
+Unknown Speaker  52:36  
+Now the question is, from this output, how do we actually predict,
+
+Unknown Speaker  52:43  
+let's say, sitting today. What is the model telling five days or 10 days, looking forward, what the price is going to be?
+
+Unknown Speaker  52:50  
+I cannot say that directly from this, because all it is saying is, like, if you look at some of these data, so let's say this one, right? So it basically said, well, actually not this one. Let's, let's make our result data frame which we have Y hat and lower and upper. So basically what model is saying is, from December 15 to 16th,
+
+Unknown Speaker  53:13  
+the price is going to change, go down by point zero, 4% point 00, 4% and the next day the price is going to go up by point zero, 1% and the next day the price is going to go up by another point 00, 5% and so on.
+
+Unknown Speaker  53:30  
+But looking at these, you cannot exactly say what the price will be at the end of each day,
+
+Unknown Speaker  53:39  
+because in order to do that, what you need to do is you need to do a cumulative calculation of the price to convert all of these percentage changes back into the actual closing prices.
+
+Unknown Speaker  53:55  
+So what that means is, if, let's say the price is, let's say $100 on this day, in order to get the price for next day, you have to do 100 times one plus whatever the predicted value is, and that will give you the price for next day.
+
+Unknown Speaker  54:12  
+And you have to keep doing that for each of the day subsequently. So you take one day as a starting and then you take that price, and you take the prediction times one, multiply that by price, and that will be your next day's forecasted price. And you have to keep doing that day after day
+
+Unknown Speaker  54:29  
+to kind of see how the price is actually going to go, because these are not prices. When multiplied by previous days price, then it will yield the actual forecasted price.
+
+Unknown Speaker  54:43  
+So
+
+Unknown Speaker  54:45  
+for that, we need to do some
+
+Unknown Speaker  54:49  
+additional work here to basically be able to plot, unlike in the previous case where we had y hat and actual and we could easily plot y hand versus actual.
+
+Unknown Speaker  55:00  
+Here we can, could not, because my actual prices are prices, and the forecasts are the just the percentage change of those prices.
+
+Unknown Speaker  55:09  
+So now we are going to do some calculation to convert the forecast into predicted prices. That is some additional work that we have to do.
+
+Unknown Speaker  55:21  
+So let's see how we can do that.
+
+Unknown Speaker  55:25  
+So when we do that, let's start small. Let's say I'm going to try to predict two days ahead. Let's say I take any arbitrary day, and I'm going to take that this price as the starting price. Then I'm going to
+
+Unknown Speaker  55:44  
+predict two days ahead.
+
+Unknown Speaker  55:47  
+So what I'm going to do is
+
+Unknown Speaker  55:50  
+I'm going to create a new list that will contain a one and then two zeros,
+
+Unknown Speaker  55:59  
+and then I'm going to repeat this list multiple times and append the list with my result.
+
+Unknown Speaker  56:05  
+And when I run this, you will see the output, and I'm going to tell you why I have done this. So essentially, what I did is I basically created this new column that I'm going to use to do the forecasting calculation. Did
+
+Unknown Speaker  56:22  
+that extend? Now I'm trying to do here with a prediction window of two. So what that means is I'm going to take up any days price, let's say this one, wherever I have a one, and then I'm going to take this price, and then for the next two days that I'm going to forecast the price, I have marked it with a zero. So basically, for these rows, what I'm going to do I'm going to find that forecasted price by taking the previous day's actual price and then multiplying that by one plus forecast or one plus Y hat, and then I'm going to repeat the same thing for the next row with zero and so on until I hit the next one.
+
+Unknown Speaker  57:06  
+At that point, I'm going to restart that again. So basically, instead of doing all these 50 or or 100 days of price prediction at one shot, I'm going to do two day, five day or 10 day at a time, and see for that period how the stock is moving, how the forecast is moving alongside the actual prices.
+
+Unknown Speaker  57:27  
+So you're using the window column, sort of like a check, a checkbox, the same checkpoint Exactly. Like, hey, look, if it's a zero, do the math. If it's take the action, then just take the actual Exactly. So that you're not, you're not just running through the whole list and saying, like, keep on multiplying y hat plus one times the price that I calculated from the day before. That's right. And the reason is, if you do that, and if you go, let's say, beyond 1015, 20 days, it is going to deviate wildly, which we will see in a second. So and then after this, now I'm going to use this window as a checkpoint column, and then I'm going to do something pretty interesting. So what I'm going to do is I'm going to create a new column called Seed actual where I'm going to bring the value of the actual column if my window variable is one, which is what this is,
+
+Unknown Speaker  58:27  
+and then remaining values I'm going to fill with Na,
+
+Unknown Speaker  58:33  
+and then I'm going to shift the sheet seed actual by one. Because, why am I shifting down one? Because in order to do the calculate the price, I need the closing price, price from the previous day. So that's why, after doing this, I'm going to move the seed and window down by one. And when I run these, you will see what I'm producing here.
+
+Unknown Speaker  58:56  
+So this is what I'm producing.
+
+Unknown Speaker  58:59  
+So now see what happens for the first one, I am getting 214
+
+Unknown Speaker  59:06  
+and that basically came from the day before, which I have shifted so you don't see it now. So basically 100, so these first three rows is one group of forecast, and for all of these 214.13
+
+Unknown Speaker  59:20  
+came from the day before.
+
+Unknown Speaker  59:23  
+Then the next group, which is these three rows, this one, this one, and this one. So here I for the seat. Actual, I'm taking the previous groups. Last price, which is 218.59
+
+Unknown Speaker  59:37  
+so this came down to this one, and then all the zeros afterwards goes there, and then the actual price here, 221, 02 I take that and fill the next group with 221, 02 and so on.
+
+Unknown Speaker  59:54  
+So that way I basically have kind of another seat value. So using this.
+
+Unknown Speaker  1:00:00  
+Value, then I'm going to do the prediction. So I haven't generated the prediction
+
+Unknown Speaker  1:00:06  
+yet. See, I thought maybe you're doing it that you would have taken the actual from that row and not shifted it down. Or when you Well, if you take the actual from that row, so that basically means you are taking the closing price for today and taking the price change prediction for today. But that's not what it is if, if profit is saying on December 10, your price change prediction is 1% so that means to find the price, you need to take the price from December 9 and then multiply that by 1% and see what prediction value you get right to change. I just, okay, I keep watching. Yeah, just bear with me. Everything will come together later. Okay, so now I have that. So now what I need to do is I'm going to have to generate multiple forecast so first forecast is forecast one which is basically forecast for the first group, which is basically very simple. You take the seed actual and then do a one plus result of Y hat, and then you create a new forecast column. So this is your new forecast column looks like,
+
+Unknown Speaker  1:01:15  
+see, we are forecasting just for the first day of each group,
+
+Unknown Speaker  1:01:19  
+which is just take that price and then multiply by one plus Y hat, and this is your new price. So you do that.
+
+Unknown Speaker  1:01:28  
+But then what about the two other days that I have within the same group? We haven't done that yet. So for that, we have to add additional column for that. And the way I do that
+
+Unknown Speaker  1:01:41  
+is, basically I look from zero to prediction window, and for each days in the remaining days in the prediction window, I create a new forecast column by using the previous forecast shifted down one and then applying that same formula, which is basically one multiplied by result y hat.
+
+Unknown Speaker  1:02:05  
+And then when you do that, you basically get something like this.
+
+Unknown Speaker  1:02:10  
+You see how, if or within each group, there is a diagonal pattern that has created. So essentially, the forecast, basically is, on this day the price will be 214
+
+Unknown Speaker  1:02:21  
+which is point 01, plus 0.0014.
+
+Unknown Speaker  1:02:25  
+Times whatever the actual price before. And then for next day, this value is basically coming as one plus this multiplied by this value and so on. And that is how the forecast is generating.
+
+Unknown Speaker  1:02:41  
+But then here this way I can create the forecast for three days, like the first seed, and then two more days, but then we need to somehow consolidate this thing to be able to plot because if I do for three days or five days or 10 days, this will create so many forecast columns,
+
+Unknown Speaker  1:03:01  
+but that way it is harder for me to plot. So then what I'm doing is I'm basically taking all of these forecast columns, all of these, sorry, all of these forecast 123, columns, and I am basically merging everything into this one prediction column. And then I'm dropping these diagonal looking columns. And when you do that, you will see that this line, this column here, you will actually see the predicted values.
+
+Unknown Speaker  1:03:33  
+Now, I'm not going to go into the details of all of this code, if you want. You can look into it later, but the next thing then, what I did is, once I found that, okay, this is a good way to do it, then I took all of this previous step for generating the forecast, and I put it into a function called Generate prediction.
+
+Unknown Speaker  1:03:53  
+And in generate prediction, I'm going to pass the prediction data frame, which is what profit provides, profit generates, and then I'm going to pass the original stock data frame and a prediction window, and I'm going to save the boundary, whether it is for the mean or for upper or lower boundary. So then basically all of this code that you have seen before is basically packaged into one function,
+
+Unknown Speaker  1:04:18  
+and then I'm going to use this function generate prediction. Function three times to generate a median forecast, upper forecast and lower forecast. And I'm going to take these three function call and put it in another function called generate all prediction. So then, in order to generate all prediction, I have to pass the prediction output from the profit model, the original stock DF, and just a prediction window, which is how many days you want to predict at a time with a five day, 10, day, 15, day, whatever.
+
+Unknown Speaker  1:04:50  
+So now with this single function, I can just generate however many days product prediction that I want.
+
+Unknown Speaker  1:04:57  
+So essentially, now my code looks comes down.
+
+Unknown Speaker  1:05:00  
+Just this one line. So this prediction is the output from the profit model. This stock DF is the original data frame, and this prediction window is just a number. So now I'm going to try to predict 10 days of stock movement at a time, meaning two weeks, basically.
+
+Unknown Speaker  1:05:17  
+So now we will see how our data looks like.
+
+Unknown Speaker  1:05:21  
+So now this is the stock price prediction for 10 days at a time, and I have done prediction, and then upper and lower bound of prediction using the function that I showed you before.
+
+Unknown Speaker  1:05:36  
+So now I'm going to plot so now this is come to see how all of these. How well that works.
+
+Unknown Speaker  1:05:42  
+So I'm going to do a plot.
+
+Unknown Speaker  1:05:46  
+And what do you see in this plot?
+
+Unknown Speaker  1:05:52  
+What do you see? These spikes are all about the red and green.
+
+Unknown Speaker  1:06:01  
+Those are your upper and lower bounds of the basically, that's basically since I'm doing 10 days at a time. So if you see the beginning and end of each spike, they are 10 days apart. So after 10 days, I'm basically resetting back to that day stock value, because otherwise the upper and lower values will deviate too far, because we are doing a cumulative product right, and that's why I wanted to use the time window in the first place, because if I do it for the whole thing, the upper and lower will deviate so much, it will basically go out of bounds of the plot. So that's when they come to come back together
+
+Unknown Speaker  1:06:42  
+is that the 10 at the 10 day when you reset, it's a 10 day that I reset, yes, yeah, that's that's why it has this, this saw tooth pattern where it's like the upper lower bounds become much tighter, much closer together when you reset. Yes.
+
+Unknown Speaker  1:06:59  
+Now obviously, instead of 10 days, now I can do, let's say, 20 days, and I don't have to worry about all of these, all of those nasty code, because I have put everything in a function, and then I can just see, hey, how the 20 day looks like. This is how 20 days. So you will see the same spike, but now I'm resetting after a longer time interval.
+
+Unknown Speaker  1:07:22  
+So
+
+Unknown Speaker  1:07:27  
+and then, if you just want to see the actual and prediction, this is how the actual and prediction look like. And this is the actual and prediction for last 51 days prediction started.
+
+Unknown Speaker  1:07:39  
+So now you will see the prediction is maybe a somewhat closer approximation. It's still not a very good but it's not as smooth as it was before. And in fact, the 10 days we would have more. Yes, that's what I was going to do now. So now I'm going to 10 days, and then I'm going to generate this. You
+
+Unknown Speaker  1:08:03  
+is, well, not that much, yeah. You can probably see, like, sitting here, yeah, this period, it basically forecasted wrong.
+
+Unknown Speaker  1:08:14  
+And then starting from here to next 10 days, it forecasted kind of, yeah, I'd say, and then if you plot this, let's say, let's plot this,
+
+Unknown Speaker  1:08:27  
+yeah.
+
+Unknown Speaker  1:08:30  
+But overall, if you see the orange line in the blue line and their interplay, as opposed to what we saw before, where not this one, this one. So the blue line at the red line in this case. So my main, main problem was like the blue line. Blue Line is so smooth, it is totally not able to capture all the daily ups and downs. But by doing it this way, you will see like that the forecast will kind of follow that pattern, provided if you do the forecasting like within 1015, or 20 day, if you go wider than that, than that, then this thing will fail.
+
+Unknown Speaker  1:09:11  
+And now, if you want to calculate these RMSE,
+
+Unknown Speaker  1:09:15  
+let's see what it comes to. It's coming to 13.51
+
+Unknown Speaker  1:09:19  
+for the root mean square error, as opposed to
+
+Unknown Speaker  1:09:24  
+15.78
+
+Unknown Speaker  1:09:25  
+I did say marginal improvement. Mean Square was 249 before, and now we have 182 so yeah, we have improved a bit, not too much. Now obviously, instead of 10 days, if we want to do let's say five days,
+
+Unknown Speaker  1:09:41  
+the accuracy will be much higher, I suppose,
+
+Unknown Speaker  1:09:46  
+yeah. And then let's do for this a five day, yeah. So now you can see this is a much closer approximation. And now if we calculate these, the errors are coming down to 79 and then RMSE coming down to eight.
+
+Unknown Speaker  1:10:00  
+Point nine, so at least with this, as opposed to 15.7 in the previous approach. So at least this is better than nothing right now, obviously this is not a substitute for getting more additional time series data to support this forecast. Maybe, as I said, maybe getting some other stock prices, other index prices, or sentiment about that company, Twitter mention or whatnot. So there is no substitute of doing that, but at least if you do stationarize the time series and do the forecasting on a on a piecewise basis, that piecewise forecasting on a stationary time series will provide you with a much higher accuracy than you try, then, if you try to predict, do a forecasting on a non stationary time series, which is what stock market data is typically.
+
+Unknown Speaker  1:10:51  
+So essentially, the point of these two is basically saying that unless and until you have a good amount of data, not not just stock data, good amount of supporting data, then any attempt to effectively predicting stock market is basically not going to be worth your while.
+
+Unknown Speaker  1:11:13  
+That's what I wanted to showcase here. And I wanted to leave you with these, all these code, even if you are not using this for stock market, like, for example, these, these complex piece of code that I wrote here for generating prediction, you can use this function as is for any other piece wise forecasting that you might want, you might want to do anytime in future, and not just using profit model, any Other like LSTM or any recurrent neural network based model, if you want to do any prediction in future, you can still use this general prediction, because these function here basically does all of this thing, right? It does this checkpoint, and it does this diagonal wise, and then it merges this whole the all of this production, sorry, all of this forecast into one prediction column and so on. So all of these, it does by itself. So I'm hoping that you will find this use function useful sometime down the line, going forward, right, depending on what you're trying to so could this help train your model to be more accurate? Or you just, I, it feels like you're, you're sort of showing us some, some ways to to reproduce in smaller intervals
+
+Unknown Speaker  1:12:26  
+to that's that's what it is, yeah. What I'm saying is, since this prediction is not perfect, take the baby step, stationarize your data, and do piecewise forecasting, you will get a much better result. And so that means that your predictions will will be on a better trained model.
+
+Unknown Speaker  1:12:47  
+I would not say the model is better trained, though. Actually, let me, let me. Let's do one thing. Let's go down to prediction window. Let's say two days. Okay, so basically, one day seed and then two days looking in advance. Let's say I'm a day trader, right? And I'm trying to bid the market on a daily basis, right? So this, then this, you might actually find this helpful. So I'm doing on a day by day basis. Obviously, my spikes are much narrower now. And now I'm looking into this. Now look at this.
+
+Unknown Speaker  1:13:17  
+So this is two days piecewise forecast, two days at a time, and you see that now my prediction is very, very close to a real value. And now if you calculate this, you see now the mean square error comes down to 39 from 79
+
+Unknown Speaker  1:13:36  
+just by narrowing down my prediction window.
+
+Unknown Speaker  1:13:42  
+But does that mean this model will actually help you to beat the stock market? Absolutely not. Because, guess what? You still, as I said, there is no substitute from having additional predictor, additional regressor, as they call it. There is no substitute from doing that. So professional investors will always, always, always use those kind of data, they will scrape the world all over the place and then try those to find those data and train their model to predict,
+
+Unknown Speaker  1:14:09  
+like all of these algorithmic trading that goes on, right? They don't just predict based on one time service.
+
+Unknown Speaker  1:14:15  
+So the bottom line is, never do this at home, meaning, never do this with your own money, without your money, you can do whatever you want. Don't put your money behind this.
+
+Unknown Speaker  1:14:32  
+Okay? The next thing I wanted to show you is actually multivariate forecasting technique, and this is something that we haven't covered within the PCs content that was provided. And this time I said, Remember last class I was saying? I was saying, like, Hey, I'm trying to find some real time weather data that I can get from some API, just like through alpaca, I got real time stock data. Well, not real time, near real time.
+
+Unknown Speaker  1:15:00  
+Meaning current stock data, I could say, but I couldn't say any free way to get the real weather data like I wanted to say, Hey, give me the weather of Detroit, Michigan for the last five years. And I didn't find a way to do that without paying
+
+Unknown Speaker  1:15:16  
+but what I did get is I basically get this data set, which is, oops, sorry.
+
+Unknown Speaker  1:15:26  
+So these Jenna climate data set, this is basically a data set that is available on cargo. And these data set is basically the time series data set recorded at a certain weather station in a town called Jenna, Germany. And this gives you 2009 to 2016
+
+Unknown Speaker  1:15:43  
+So seven years worth of data recorded with a 10 minute interval.
+
+Unknown Speaker  1:15:49  
+And this data set is going to be very, very useful in doing, in us trying to do what we are trying to do.
+
+Unknown Speaker  1:15:56  
+Okay? So here you will see I have done a few things. I found that the data set actually is a CSV zip file, which is like almost 45 or 50 megabytes in size. So instead of downloading and putting it in the repository, which will unnecessarily inflate your repository, so what I did is I found an Amazon s3 URL. This is a public URL where this file is sitting actually. So I looked through that Kaggle document, and I found that this is where this is. And then what I did is I am actually retrieving the file right here using this URL lead dot request library, and the this basically pulls the file from the web from this location. And then I'm using our library called zip file to unzip this. And there were a couple of extra folders, like hidden folders, so I removed all of these, and then I basically use the pandas dot read the read CSV to load the data right here, instead of saving unnecessarily 50 megabyte of data in your repository. And this is what the data set is,
+
+Unknown Speaker  1:17:03  
+okay. So in this data set, as you can see in the Date Time column, so the difference between each reading is 10 minutes. And the good thing is, there is no null values in this whole data set. So very, very complete, very well curated data set, which is very hard to come by, actually, without paying. If you pay, then yes, you can obviously get anything, but anyway. But this is old data, 2009 to 2016
+
+Unknown Speaker  1:17:28  
+but it will serve our purpose very well.
+
+Unknown Speaker  1:17:32  
+And here I have put kind of this is basically this table that you are seeing. This is a markdown, actually. This is a read only, like, this is basically not a pole. So here I basically said, and this is something I graphed from the Kaggle portal itself. You can read there or here. So what are these? Right? So, p, t, d, part, t, d, U, and all of these, what basically is. So essentially there are 40 feature column that you have instead of one. But our target column would be this one number two, which is T in degree Celsius, meaning temperature in Celsius. So this is what we are going to try to predict using our traditional time series forecasting model, using profit.
+
+Unknown Speaker  1:18:13  
+So what do I do first? Well, I do a plot of the data, and I see, obviously this is seven years worth of data, and it very clearly shows January to December and January to July to December, January to July to December. So you can basically clearly see the all the seven years that you have here, which is the temperature data, right? So that's what is expected.
+
+Unknown Speaker  1:18:36  
+You can even look into just one day's worth, which is 26 sorry, not one day, one year's worth, and this is any one year's worth of data looks like, right? Which is fine.
+
+Unknown Speaker  1:18:48  
+Now here for the training and test.
+
+Unknown Speaker  1:18:54  
+I thought I'm going to split it this way, since we have enough data so we don't have to be very
+
+Unknown Speaker  1:19:01  
+rationing our test data, we have seven years worth of data, and that too lot of data, right? 10 minutes. So I became generous. I said, Okay, fine. Out of this seven years, I'm going to take first six year, 2009 to 2015
+
+Unknown Speaker  1:19:14  
+I will take that as my training data, and that still gives me one full year, which is 2016 the last whole year as my test data. So I have a generous amount of training data and generous amount of test data, which is a very good situation to have.
+
+Unknown Speaker  1:19:32  
+And now there is a profit model that you will train
+
+Unknown Speaker  1:19:36  
+now, if I run this now, it will take about five minutes for this to train,
+
+Unknown Speaker  1:19:43  
+because this is a large model,
+
+Unknown Speaker  1:19:46  
+meaning not large model, large amount of data, I should say.
+
+Unknown Speaker  1:19:52  
+Now, after your model is trained,
+
+Unknown Speaker  1:19:55  
+you could actually save the model as a file. This is the saved model.
+
+Unknown Speaker  1:20:00  
+So not the actual data. So where, what I did is, when I was preparing these, I ran this model, waited five minutes, and then immediately after I ran this, which is basically, I am creating a file handler in Python to open a file called this, dot JSON, whatever file name dot JSON, and then with that file you handle, I'm using this model to JSON function, which you will see that I have imported up top. So I'm doing that on this train model variable, and that basically creates this file, this JSON file. And if you look into this JSON file,
+
+Unknown Speaker  1:20:40  
+you will see the file size, 56 megabytes. This is the size of the train model.
+
+Unknown Speaker  1:20:47  
+It will take about five minutes, and it will train this model. To save this model. It's about 56 megabytes. So I save this. So now what I'm going to do is, instead of doing this, I'm going to skip that. I'm going to run this cell instead, which is where now I'm reading the model from what I have saved.
+
+Unknown Speaker  1:21:08  
+You just have to trust my word, trust me for now and take my word that this model that I'm reading is essentially the same model that I trained here. I just don't want to train it now, because it is going to take a non trivial amount of time to train because of the huge amount of data.
+
+Unknown Speaker  1:21:27  
+So now this is the model that I have. Now I'm going to create a future frame fine. And for future here, I have to provide the frequency, which is 10 minute. It has to match the frequency that you have in your training data, and you have to provide how many periods. So why did I say 24 times six times 365,
+
+Unknown Speaker  1:21:48  
+well, because I'm taking data and 10 minutes interval. So that means for every hour, I have six data, six reading, and then 24 hours in a day, and then 365, days in a year.
+
+Unknown Speaker  1:22:00  
+So that's how many period I'm going to be looking forward with the frequency of 10 minutes each.
+
+Unknown Speaker  1:22:07  
+So that is my future.
+
+Unknown Speaker  1:22:11  
+And now I'm going to do the prediction, which is what it's going to do. Even you will see the prediction will take non trivial amount of time, as it is doing right now,
+
+Unknown Speaker  1:22:21  
+because of the amount of data that we have, and the model is also large, right, Almost 50 megs the same size of the model. So
+
+Unknown Speaker  1:22:49  
+I forgot how long is I think it will take about two minutes to generate the prediction. It was about four to five minutes to train the model, and it takes about two minutes to generate predictions. I
+
+Unknown Speaker  1:23:30  
+so what do you think the RMSE values from this thing would be compared to the stock exercise, just on top of your head, like, Do you think we'll get a lower RMSC value
+
+Unknown Speaker  1:23:44  
+or higher?
+
+Unknown Speaker  1:23:51  
+Just looking at the data, what we have,
+
+Unknown Speaker  1:23:59  
+we certainly have more data to trade on, so I would hope that would mean lead to more accuracy,
+
+Unknown Speaker  1:24:06  
+probably right. And then also, the other is we know. We know that the temperature going up and down is not, as I'd say, influenced hopeless, not as hopeless as a stock price movement, right, right, right? Because it's not gonna be influenced by, you know, FOMO and in psychology, it's, it's really comes down to climate science, correct, even though, even though we are not actually employing any climate prediction model, but at least knowing that the daily ups and downs in the data, daily temperature. If a model has seen last six years, it should be pretty easy to forecast what the next coming year look like, right?
+
+Unknown Speaker  1:24:51  
+I mean, if you tell me,
+
+Unknown Speaker  1:24:54  
+I can basically fake an AI, and I say, You know what? I'm going to take that.
+
+Unknown Speaker  1:25:00  
+Previous six years on a day by day basis, and do a mean, and that will be my forecast, and that will actually be a pretty good forecast, right? Yeah. If I take last six years, January 21 data, and take an average, and I'm going to say, hey, this year my January 21 the temperature is going to be so and so is going to be pretty accurate, right? And that's how they find the climate normals in the first place. And then you can predict snow. And,
+
+Unknown Speaker  1:25:27  
+yeah, that's, that's, those are the event that our model would probably not be able to forecast, at least not with univariate
+
+Unknown Speaker  1:25:36  
+but that's where the other things will come in, which is where, if you look at some of these columns, right? You have temperature, atmospheric pressure, you have dew point, you have relative humidity, saturation, vapor pressure, vapor pressure deficit. Like not all of these, I don't even understand specific humidity, water vapor concentration, wind speed, these that. But overall, just looking at the description of the column. And since we are doing this 10 minute interval, I would say, if we have a way to integrate all of these 14 variables, we probably stand a pretty good chance to actually predict every 10 minute temperature movement on the dot,
+
+Unknown Speaker  1:26:17  
+which we are going to do soon. But first, I think our prediction is done here.
+
+Unknown Speaker  1:26:26  
+Yeah, so the prediction is done. It took two hour, two minute, 39 seconds. So now we are going to
+
+Unknown Speaker  1:26:33  
+plot it
+
+Unknown Speaker  1:26:35  
+and see overall from the first plot. It looks pretty good. This is the native plot from Prophet.
+
+Unknown Speaker  1:26:43  
+So up until here is basically the first six years, and then this is the last years.
+
+Unknown Speaker  1:26:50  
+And then we trained all the components. So in the components, you can see the overall trend throughout the seven years, kind of staying flat. There is no sign of global warming guys, at least not for that city in Germany. So overall, the temperature state kind of flat,
+
+Unknown Speaker  1:27:08  
+the weekly trend, I am not going to look into it, because profit, even whenever it it has data, it will basically find all of these weekly, daily trend. But when it comes to temperature, weekly trend doesn't really matter, but profit will try to find it anyway. And then it will find the yearly trend, which is where you clearly see that February being the coldest month, month, and July or August is the warmest month in the year that you can clearly see. And in the daily trend, also you can see like early morning is the coolest part of the day, and then mid to late afternoon is basically the warmest part of the day, which is pretty good. And then we simply take our result, which is prediction, and lower, upper and with the along with actual, and we do our plot, and that's what we get.
+
+Unknown Speaker  1:27:59  
+So you see how very overlapping this is.
+
+Unknown Speaker  1:28:03  
+So now this is all seven years worth of data, so you can zoom in on last one year, which is 24 times six, times 365,
+
+Unknown Speaker  1:28:13  
+and this is what it looks like. So these blue thing, it looks like a band, but that's actually your prediction.
+
+Unknown Speaker  1:28:21  
+But here it seems like the prediction is much more going up and down, and even though it kind of follows the general trend, but it is not able to capture all these nuances, like where it basically thinks that every day the temperature will go up and down within a band. So it's basically did a very simplistic looking forecast, and now this one is just last
+
+Unknown Speaker  1:28:46  
+one, not last one month. This is basically the last January. So 2016 January is this one?
+
+Unknown Speaker  1:28:53  
+Yeah, January 2016 This is just one month. So basically zooming in much further, and here you can clearly see the prediction is so very simplistic. It basically shows you daily ups and downs, ups and downs, ups and downs. And overall, since this is January, you will see from the beginning of the month toward the ends of the month, there is a slight downward trend. But during the month you see how the real one, which is the red curve, like all of these bumps and like here, there is a sudden cold spell that happened that month. The model is not able to predict that.
+
+Unknown Speaker  1:29:29  
+Obviously. What else do you expect from a univariate model? Right? So in a sense, this model is similar to our stock prediction model, even with six year worth worth of data and spending all those minutes training, it really didn't do anything much better for us.
+
+Unknown Speaker  1:29:47  
+If you look at the RMSE, the RMSE is much lower than what we had for stock, right? So there we had the MSC was like around what? Even after our last attempt, it was 80, 7982
+
+Unknown Speaker  1:30:00  
+Here we got 20.79 in the in our first shot, which is predictable, understandable, but still, I'm not happy with the performance of this model.
+
+Unknown Speaker  1:30:10  
+So then what I do is,
+
+Unknown Speaker  1:30:14  
+now I'm going to do a multivariate forecasting. So multivariate basically means that I am going to take the training data along with all of these. So now my Trend DF is not just DS and Y, Yes, I have a DS, yes, I have a y, but I have also written all of the other 13 columns that we have.
+
+Unknown Speaker  1:30:40  
+So this is where we are going to deviate from our previous approaches. So similarly for test data, also, I'll have everything right
+
+Unknown Speaker  1:30:52  
+now.
+
+Unknown Speaker  1:30:54  
+Here is this little difference. So here you create a profit model,
+
+Unknown Speaker  1:31:01  
+and then what do you do is you basically
+
+Unknown Speaker  1:31:07  
+add each of the columns to the model using Add regressor
+
+Unknown Speaker  1:31:14  
+so what does this mean? So these add regressor function is a method of the model, which is the profit model. And in the ad regressor, you are giving a particular column name. What is this column name? The column name is coming from this for loop. So basically say, I'm saying from all these columns that we have, like all this column if the column name is not DS or y, then you add the column as a regressor to the model.
+
+Unknown Speaker  1:31:49  
+So that way, this is basically, in a way, you are passing the metadata about your data frame to the profit model. Could you just go up for just a second to look at the actual data frame?
+
+Unknown Speaker  1:32:00  
+Yeah. Okay, thank you,
+
+Unknown Speaker  1:32:04  
+yeah. So essentially, what I'm doing is, so let's let me actually quickly do one thing here. Just print it. So let's say if I do print,
+
+Unknown Speaker  1:32:16  
+right? So what it is going to print?
+
+Unknown Speaker  1:32:19  
+Oh, sorry, I didn't run these two cells.
+
+Unknown Speaker  1:32:25  
+So train and test, yes, yeah. So now, if I run this,
+
+Unknown Speaker  1:32:30  
+it is going to print all the column names, except for my timestamp column and except for my degree Celsius column, T degree Celsius column. So remaining all the 12 columns they are going to be added in here to this ad regressor method.
+
+Unknown Speaker  1:32:47  
+I mean, I just put it in a for loop. If you just want to write 1210, or 12 Stephans, depending on which column that you want to add as a regressor, that's totally fine too. Like if you don't want to use all of these as a regressor. Let's say you are a climate scientist, and you know that certain one, let's say relative humidity and wind pressure, direction was are more valuable in your predicting. You can always select and add choose to whichever column that you want to add as a regressor. But since I am not a climate scientist, I blindly took everything that is there and added them as a regressor.
+
+Unknown Speaker  1:33:22  
+Whoops. And I made the mistake.
+
+Unknown Speaker  1:33:25  
+I clicked on this fit. But the problem there is it is going to take almost half an hour for this model to fit, like 25 minutes to half an hour,
+
+Unknown Speaker  1:33:37  
+because now we have now it's not going to take four to five minutes. It's going to take almost five, six times more than that. So I'm going to stop this.
+
+Unknown Speaker  1:33:47  
+So I interrupted this,
+
+Unknown Speaker  1:33:50  
+and here also I already had the model saved, which is this one, the multivariate JSON, which if you see here, this is almost 200 megabyte model size.
+
+Unknown Speaker  1:34:02  
+So what I'm going to do is I'm going to read the model instead the pre trained model that I have saved in the file, and not have to wait 25 minutes to train the model over again.
+
+Unknown Speaker  1:34:15  
+And then I'm going to have to do the prediction.
+
+Unknown Speaker  1:34:19  
+Now, in order to do the prediction. There is a problem here.
+
+Unknown Speaker  1:34:24  
+So if you do this, what happens? If you create a future data frame, it will create the future data frame, right? But future data frame does what it only has. DS.
+
+Unknown Speaker  1:34:36  
+Now the problem is, with this model, the multivariate model, you cannot really use the feature data frame to make a prediction.
+
+Unknown Speaker  1:34:44  
+Guess why?
+
+Unknown Speaker  1:34:49  
+Because the model was trained not not with ds, and why it was trained with 12 other additional columns.
+
+Unknown Speaker  1:34:57  
+So when you are passing a few.
+
+Unknown Speaker  1:35:00  
+Your data frame for the prediction, the model will expect that all of those 12 columns will be present in this future data frame.
+
+Unknown Speaker  1:35:09  
+But if you create a feature data frame like this, you have no way to generate that
+
+Unknown Speaker  1:35:16  
+so
+
+Unknown Speaker  1:35:19  
+how do you handle that situation like think about it. Let's say you are sitting today and you are trying to predict 10 days or maybe a month worth of temperature in advance, looking forward, if you do it today, and you know that you have used all other that, humidity, air pressure, wind direction and all of those data. So how are you going to get future data for those variables? If you are sitting today,
+
+Unknown Speaker  1:35:44  
+could you do separate predictions on each of the variables and then Exactly? Very good answer. Jesse, so ideally, what people do is, in this scenario, if you have 10 different column that you have added, you create basically 10 different univariate model to do a prediction on those each of your columns, and then you take the prediction outcome for those univariate model, and then you merge with your feature data frame here. Then only can you use this feature data frame for your prediction.
+
+Unknown Speaker  1:36:20  
+Now that means each of these model will take another five to six minutes to train and run, so more than and what almost two hours worth of effort, which I could have done, but I was feeling lazy, and I didn't do that. Or maybe I should say, Okay, I left that for you guys to do if you want to do it. What I did instead, I took a shortcut, a very nasty shortcut, a sneaky one. So what I did, I said, Hey, I have my test DF, which is that last one year worth of data.
+
+Unknown Speaker  1:36:55  
+So I decided to use my test DF as my future data film. So ideally you basically, when you do model dot predict, this is where you pass the future data frame. So I created the future data frame. I didn't use it instead. I cheated. I use the test DF.
+
+Unknown Speaker  1:37:12  
+Now test DF, since this is a test of the accuracy of the model in the test DF, even though it is future forward looking, but that forward looking starting from one year back. So I do have all the data in advance in all these 12 columns.
+
+Unknown Speaker  1:37:29  
+Ideally, in real scenario, you wouldn't have all of this data, and that's why you have to train 12 separate model to get this data. But here I have all of this data, and just to save time, I just wanted to run a prediction with this test DF anyway, and let's see what happens now. Again, in the interest of time, I'm not going to run them actually. You know what? It's not going to take that much longer. Let me run the prediction anyway,
+
+Unknown Speaker  1:37:53  
+and let's see how it goes. Because otherwise, if we have to play with some of the plot, we cannot. So let's do the prediction.
+
+Unknown Speaker  1:38:01  
+Okay. Well, this is actually quick. Because why it was so quick?
+
+Unknown Speaker  1:38:10  
+I'm still giving one year's worth of data,
+
+Unknown Speaker  1:38:14  
+I don't know why it was much quicker than to predict than a univariate. Yes,
+
+Unknown Speaker  1:38:19  
+maybe something for you guys to think of anyway. So then with this, when you plot. So now the plot looks little different. So here you don't have this blue thing all the way here, but you only have here. But you notice something here.
+
+Unknown Speaker  1:38:37  
+Do you see any upper or lower bounds at all? I up.
+
+Unknown Speaker  1:38:43  
+So what happened to our dark blue and the light blue?
+
+Unknown Speaker  1:38:52  
+Can you guess why we are not seeing that in the prediction?
+
+Unknown Speaker  1:39:02  
+Are you plotting using only one variable? Or no, no, I'm still doing the plot of the whole prediction. You don't see this blue thing here for the first six years because I didn't give it the feature data frame. I gave it the test data frame. That's why it is plotting only on the last one year, and that's why these blue lines are not extended all the way from the beginning. That is fine. But even here, I'm not seeing that light yellow band surrounding it for the upper and lower
+
+Unknown Speaker  1:39:35  
+and my hypothesis is, looking at this, I think the upper and lower band are so close to the actual y hat, you probably don't see it here. Maybe they are too close.
+
+Unknown Speaker  1:39:49  
+So let's zoom in and try to see what really is going on. So this is our component plot, which is not relevant at this point.
+
+Unknown Speaker  1:40:00  
+Right now in the component plot. Also, one thing you will see that is extra here. So other than your daily, yearly, weekly trend and so on here, profit has added another plot, and this says extra regressors additive. So basically what this is, is all of those 12 additional regressor that we provided. So this is basically the cumulative influence of what that 12, those 12 additional regressor will actually provide for this time period.
+
+Unknown Speaker  1:40:31  
+So this is the extra regressor additive.
+
+Unknown Speaker  1:40:35  
+Now look at these nature of these regressor additive.
+
+Unknown Speaker  1:40:40  
+And now if you go back up, look at the actual data for last one year.
+
+Unknown Speaker  1:40:47  
+Where is that here? So this is the actual data for 2016
+
+Unknown Speaker  1:40:55  
+look at it. And now we are comparing this chart with the extra regressor additive from here,
+
+Unknown Speaker  1:41:04  
+which is this one.
+
+Unknown Speaker  1:41:08  
+And this clearly tells me, when you add these influence on top of these general trend,
+
+Unknown Speaker  1:41:17  
+you will basically going to see a very, very close prediction, almost accurate, near perfect prediction.
+
+Unknown Speaker  1:41:25  
+So let's see that now we are going to do same thing that we do. We basically pull in the DS, y, hat, upper, lower and the actual in a separate data frame,
+
+Unknown Speaker  1:41:36  
+and now we plot the data frame.
+
+Unknown Speaker  1:41:40  
+And what do we see here?
+
+Unknown Speaker  1:41:43  
+We only see one color, actual
+
+Unknown Speaker  1:41:47  
+why, even though the legend says everything else is because everything is so overlapping. So your actual prediction, lower, upper, everything is very, very, very, very close because of the cumulative effect of these additional regressors that you have here.
+
+Unknown Speaker  1:42:08  
+So this is everything. If you want to zoom into the last one year, it's kind of the repeat of the same thing. If you look closely, you will probably see little bit of other green color picking out somewhere, but overall
+
+Unknown Speaker  1:42:24  
+there is not much deviation.
+
+Unknown Speaker  1:42:27  
+And now you zoom in to just one month,
+
+Unknown Speaker  1:42:31  
+and now you can probably see these different colored lines here.
+
+Unknown Speaker  1:42:37  
+So basically, what it shows is
+
+Unknown Speaker  1:42:41  
+it almost looks like your model over fitted, even though it is not.
+
+Unknown Speaker  1:42:47  
+The difference here is all of those cumulative effect of those 12 additional regressor you provided.
+
+Unknown Speaker  1:42:53  
+And since, since this is a climatic model, which we kind of imagine, that with all those dew point relative humidity and wind pressure and direction and all of those, they will probably a very good predictor of the temperature within the next 10 minutes. And that is what we are seeing here.
+
+Unknown Speaker  1:43:14  
+And here, I basically chose just last one day, negative 24 just last one day, and I did only prediction and actual, just two colors, blue and orange, and you will see they are almost in perfect sync.
+
+Unknown Speaker  1:43:32  
+And then finally you calculate this,
+
+Unknown Speaker  1:43:37  
+you see these values,
+
+Unknown Speaker  1:43:39  
+they are essentially zero.
+
+Unknown Speaker  1:43:42  
+So look at the MSE 8.24 times 10 to the power negative five, which essentially is zero,
+
+Unknown Speaker  1:43:52  
+right?
+
+Unknown Speaker  1:43:53  
+So that shows how powerful additional regressor could be for the right use case.
+
+Unknown Speaker  1:44:01  
+Now, obviously, when you are trying to do something like this with a stock market, let's say you are trying to use Microsoft predictor, Microsoft stock, and you take, let's say, Apple, Amazon, Facebook, Twitter, as an additional regressors, you would not see these kind of complete total agreement never,
+
+Unknown Speaker  1:44:21  
+because the domain is different.
+
+Unknown Speaker  1:44:25  
+Also, another thing keep in mind that here for the shortcut I cheated, I use the Preview upcoming one years known value of those 12 variable for prediction
+
+Unknown Speaker  1:44:37  
+in real life, though you will have 12 different mini model, and they will have their own 12 different sets of product prediction, and they will all have their own margin of error, and all of those marginal error will creep in. So your final error will be not near perfect, unlike what you were just seeing here.
+
+Unknown Speaker  1:44:56  
+What you can do is you can probably try this on your own.
+
+Unknown Speaker  1:45:00  
+You can take the same data, do these 12 other model, merge all of those output in your prediction, data frame, future data frame, and see what you get. I
+
+Unknown Speaker  1:45:09  
+think that would be a nice exercise to play around with in your own time, or maybe make it part of your project, either that or something similar to that right using that multivariate approach.
+
+Unknown Speaker  1:45:22  
+So that's all for today. That's all I wanted to share with you guys.
+
+Unknown Speaker  1:45:33  
+Question, comments, thoughts. I
+
+Unknown Speaker  1:45:48  
+It's, it's,
+
+Unknown Speaker  1:45:50  
+we kind of had talked about this before, but it's kind of like magic, you know? It's, it's incredibly impressive, but also very overwhelming.
+
+Unknown Speaker  1:46:00  
+Yeah, that's why I if you look into So, do a git pull right now on your GitLab, you will see all these three notebooks there, and I have interjected my code with as much commentary as possible using the markdown.
+
+Unknown Speaker  1:46:15  
+There are two reason I did it. They did this. I know that this will be at the first brush. And especially this was a very quick tour of this. It will feel overwhelming, especially for people who are not used to do these day in and day out. So I wanted to add this commentary to make these as much explanatory as possible. And number two, is another goal I wanted to serve, is to serve as an example how, when you are writing your code a Jupyter Notebook, how you should interject your code with good storytelling, right? So interpersons, Intersperse your code with storytelling.
+
+Unknown Speaker  1:46:52  
+Put additional graphs picture like in that example, I showed how I can put a table there. Some of the cases you have seen that I have put external link there, like, if you are taking data from somewhere, it is obviously always expected that you will basically acknowledge the source, right and possibly put the link there. So some of those thing I try to also demonstrate
+
+Unknown Speaker  1:47:16  
+in the three examples that I just shared. Okay,
+
+Unknown Speaker  1:47:22  
+yeah, and thank you for doing that. If any one of you are not going to, I mean, any one of you are probably feeling overwhelmed, I would suggest maybe talk to your peers, talk to your group nets and collectively, if you take any random four or five people here, like this is like your kind of, your multivariate for forecasting, right? If you take one person versus if you take five person and you brainstorm together, you will understand it much better. So turn this into multivariate forecasting, instead of univariate in your own time within your groups. So,
+
+Unknown Speaker  1:47:59  
+okay, so that leaves us okay? So what we can do is we can take about 1012, minutes back, break and come up, come back at 830
+
+Unknown Speaker  1:48:09  
+and that time you can then go to your breakout rooms and start brainstorming and ask the instructional stuff. We will basically come and visit your room. And if you want to run some ideas by us. You can do that right. Last one more of the class.
+
+Unknown Speaker  1:48:25  
+Okay,
+
+Unknown Speaker  1:48:27  
+so let's take a break. I'll be back at 830 Okay.
+

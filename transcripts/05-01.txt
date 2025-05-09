@@ -1,0 +1,2205 @@
+Unknown Speaker  0:05  
+Sort of way that you could maybe just do a one minute synopsis of the difference between using apply and lambda.
+
+Unknown Speaker  0:16  
+Okay, so these are not mutually exclusive, right? So you do apply when you want to apply some sort of business logic across all the elements or all the rows
+
+Unknown Speaker  0:33  
+involving one or more column of your data frame. So just keep this in mind, right? So when we use apply, apply is a function that we use when we want to do some data processing or data transformation using somewhat complicated logic
+
+Unknown Speaker  0:49  
+that should apply across all the roles without writing a for loop ourselves. That is the use case,
+
+Unknown Speaker  0:57  
+right? So now, what do we pass to the apply function. Well, we pass another function to the apply function
+
+Unknown Speaker  1:08  
+in a way such that these another function is something that we wrote that models the business logic, the data transformation logic that we want to do. This is the other function that we then hand it over to apply, and then apply, then goes ahead and applies across the all the all the rows in the data frame,
+
+Unknown Speaker  1:29  
+right? So that part is clear. So now lambda is a different concept. So lambda is basically what it means is sometimes you want to write a function on the fly, and do not want to have it saved somewhere with a specific name,
+
+Unknown Speaker  1:47  
+like if, if something is not super trivial, but not super complex either, something that you can probably write just maybe one or two lines of code. So lambda is just a shorthand that allows you to write the code in line on the fly and pass to the apply function as a no name function or anonymous function. So whatever you saying after lambda, that function, that function doesn't have a name, because you are not creating this function with a deaf keyword, right? So whenever you have a def and then a function name. There is a separate entity created, which is a function, but whatever you are writing after the lambda keyword those that function doesn't have a separate, what I would say separate place in memory for it. Instead, what it does is Python creates it on the fly and passes to the apply just in time without storing it in a separate area of the memory, which, even if you don't understand how lambda syntax really works, although I think it's not rocket science, it's pretty easy. So, like, you basically have one parameter and then refer everything after, like lambda x or something that we are saying, and then refer everything after that colon sign based on that parameter. But some people I have seen in some of my other classes, they kind of cannot really get their head around, wrap their head around what the lambda syntax is. And if that is the case with any one of you, no big deal. I mean, you really don't need to use lambda. You can always use a plain vanilla old function using a dev keyword and take the function name and give it to apply, and that will apply to across all the rows. So got it. Thanks. Appreciate that definition from you. And Jesse.
+
+Unknown Speaker  3:41  
+Oh, JC already provided his take on it. I just said that. You know, lambda is great if you're going to never use that function again, if you're going to reuse it. Yes, you know, like, that's the best part of like, reuse is that, yep, dry, dry coding principles say exactly, don't repeat yourself. Exactly. Yep, perfect. Like, if you have to when you think, like there are couple of play way. I mean, reason you might want to use lambda or not use lambda, like, if you think that your code is complex enough that is that you cannot write in writing two to three lines of code, and then if you want to take write that using a lambda that's going to be little messy, hard for you to write a debug that is one reason you should not use lambda also, as Jesse said, if you want to use that same functionality in multiple applied block, applied methods throughout the code, throughout your coding file, then that is another reason you should not use lambda and use A plain dev function instead.
+
+Unknown Speaker  4:38  
+Yeah.
+
+Unknown Speaker  4:41  
+Okay, so let's get started for Week Five content which might seem a little bit more involved to begin with.
+
+Unknown Speaker  4:52  
+Okay, am I sharing my screen? Yes, you see the slide.
+
+Unknown Speaker  4:58  
+Yes. Do I am sharing.
+
+Unknown Speaker  5:00  
+The right one. Okay. So in this week, we are going to start with basically, how do we combine the data frames? There are different ways. So often time, when it happens is you get your data from multiple different sources, multiple API, multiple website, multiple CSV file that you don't have to download, and you have to combine these data in different ways.
+
+Unknown Speaker  5:28  
+So that's what we are going to learn in today's class. And then in the following class, we are going to learn about like, how to do some aggregating or grouping and so on. Right? In fact, one thing I realized later yesterday, remember on that last question that we worked on, that abstract question, answering the version that I provided using the group by the reason the provided solution file did not use that way and used used a for loop instead, is because that particular group by feature is, I think, part of the next class, I think either Monday or Tuesday class. So formally, you will learn that, but I already showed you how to do that. Yeah. So, but this week, the three classes that we have, I'd say today's class is the one that you need to pay most attention, because there are three things that we are going to learn three main function, concatenation, joining and merging. And lot of time they will, it will seem like they are kind of overlapping, and you might get confused. Hey, why am I? When am I doing what? So I tried my best to add some additional content on the slide deck that was provided. And I also have three little
+
+Unknown Speaker  6:44  
+Python file, I mean Jupyter Notebook, that I have created to kind of show the concept before we jump into the actual activity files. Okay, hopefully that will make this little clear. But let's get started. So,
+
+Unknown Speaker  7:00  
+so, yeah, so, so this is something that I mentioned, right? Understand the difference between merging, joining and concatenating, all these three function, merging, joining and concatenating. If you think about it, like, like, forget about Python, just the English language meaning, right?
+
+Unknown Speaker  7:16  
+Don't they sound kind of like synonymous to each other. You are merging two thing. Versus you are concatenating two things, versus you are joining two things. And if you think that, wait a minute, what's really the difference? I don't understand. And you are not alone. Lot of people have this problem, including myself. I do get confused all the time. Okay,
+
+Unknown Speaker  7:37  
+so, so what? What I'd like to do is, so there is you will see in your slide deck that was provided, I think, key and already provided a new slide deck. So we will basically first take a quick look and try to understand, what are the the key differences, and then we are going to take a look at some of the example code to see that difference. So first with concatenation. So what does it? What is it? So it is basically the act of combining data frames across rows or columns. So think of concatenating, meaning you basically take two blocks. Let's say you take two blocks of wood, right? You put some glue, and then it paste the two blocks.
+
+Unknown Speaker  8:19  
+Conceptually, that's your concatenation. And when you do that, let's say you have two rectangular block of foods. You can either glue them side by side, or you can glue them one on top of another, and that's basically your column wise concatenation versus your row wise concatenation.
+
+Unknown Speaker  8:37  
+Okay, so that's what concatenation is.
+
+Unknown Speaker  8:41  
+Then if you go down to joining, so I added this statement, what is joining? So joining is also combining, but this is combining data on a key column or an index. So when you are doing joining, you are not simply blindly gluing the data. Instead, you are pivoting on one column or one index and using that as a key. So let's say you have two set of data, the and lot of you, if I use the word primary key, I think many of you will understand, like in database, we use the call word called primary key, or unique key. So whenever you have a table structure of data, there is a one column, one or more column, which are treated as the uniquely identifying column for that data. So in pandas, we also saw that right? So we have an index, or we can use any particular column as an index. So when you want to join the two data frame and pivot it based on a key column on index, that is the act that you will use with the join function.
+
+Unknown Speaker  9:45  
+And finally, margin merging, also kind of thing, same thing, but in margin, what you do is you combine the data on common column or common indices. So in order to do margin.
+
+Unknown Speaker  10:00  
+You need to have similarly named column or index on the both data frame.
+
+Unknown Speaker  10:07  
+Another thing you should know is many times something that you do with, let's say concatenation and margin that same thing can also probably be done using joining. So just like most other things in pandas, their library is so rich, there are so many features, lot of times there are multiple ways that you can achieve the result that you are looking for. So there may not be a single right answer, which is the case here too. So essentially, to recap, concatenation is you are blindly joining the rows and columns.
+
+Unknown Speaker  10:41  
+Joining is when you are joining the rows and columns, but you are using some column or index that you are identifying as a key. And merging is also kind of similar, but you need to have some common name columns or indices. So these are the three things that are at a high level
+
+Unknown Speaker  10:59  
+then in the next slide. So what I did is there was kind of a definition, and I tried to expand upon the definition. So, what is concatenation? So this is basically a one liner. What is concatenation? Well, it's a process of combining data frames across rows and columns. That's just a one liner. Now, if you want to provide a like a complete sentence, what is concatenation? In your mind? You did to think that it is the process of combining an arbitrary amount of series or data frames. So pay attention to this thing, arbitrary amount. So you can have 1234,
+
+Unknown Speaker  11:35  
+10, 100 series of data frame combined, and you can combine both series and data frames, or any combination thereof,
+
+Unknown Speaker  11:47  
+so combining an arbitrary amount of series or data frames along an axis. Now this is also another thing you need to pay attention along an axis, meaning you can do it either on the row axis or on the column axis.
+
+Unknown Speaker  12:04  
+There is no limitation on which side you can use. You have to just say x is equal to row or x is equal to column, which is also you can say x is equal to zero or one, which is basically row or column. The same thing. X is zero, meaning row wise. X is one, meaning column wise. So you can
+
+Unknown Speaker  12:21  
+join one or more data frame and or series, and you can join either row wise, or you can join column wise. But while you are at it, you can also perform optional union or intersection on the other axis. So basically what it is saying is, when you are joining, let's say column wise, you have five column in your first data set, five column on your second data set, you can you are joining the column, but at the same time, looking at the rows, you can perform the set operation, which is union or intersection on the row side. So it's very, very versatile operation, and we are going to see
+
+Unknown Speaker  13:04  
+what, like, what is the effect? We are going to apply it in a some toy data frame, like not real data, because if you start at taking, like, a large data set, kind of what you probably have seen in the activities file, the the key concept might become little blurry, like what is happening under, underneath. So what I wanted to do is, and then I also have a key consideration for concat. So what I am going to do now, I'm going to go back and forth between this slide, and then I also have prepared
+
+Unknown Speaker  13:39  
+three files for you.
+
+Unknown Speaker  13:43  
+So first one is our concatenation. So I have concatenation features file.
+
+Unknown Speaker  13:49  
+So here we are going to take some dummy data set and try to understand what is the effect on concatenation, and what are the different options that you can use when you are concatenating the two data frames, two or more data frame.
+
+Unknown Speaker  14:02  
+Okay, so in here. So what we are doing is we have a data frame.
+
+Unknown Speaker  14:09  
+We are just creating it on the fly, as you can see,
+
+Unknown Speaker  14:14  
+yeah. So we just created a data frame like this, so where I have three, sorry, four columns, A, B, C, D, and four rows and the values I'm just artificially doing it, a, zero, B, zero, C, zero, D, zero, right? Just, just very easy conceptual level to understand. So this is my data frame, one, right? Then I'm going to create another data frame with the same set of columns, A, B, C, D, but the rows have different values now. So here the rows were zeros, ones, twos and threes. In the second data frame, I have rows fours, five, six and seven. Right
+
+Unknown Speaker  14:55  
+now, we are going to try to join this and see what happens, or well, concatenate this actually.
+
+Unknown Speaker  15:00  
+Say join, because this exercise, I'm going to this demo, I'm going to show you how to join, right? Actually, let's take another data frame also, which is a third data frame, again, A, B, C, D, and the column I have eights, all eights, all nines, all 10s and all elevens, right? So basically, I have three tiny tables.
+
+Unknown Speaker  15:21  
+Now how do you concatenate? So let's say I want to concatenate. I also do have a fourth data frame, which I'm going to use a little bit later. But let's first try to take these three. My DF one, as you can see here, DF two and df three. So if I want to concatenate all these data,
+
+Unknown Speaker  15:46  
+what makes sense? Should we concatenate row wise, or should we concatenate column wise?
+
+Unknown Speaker  15:55  
+You can provide that by them. Yeah. So in this case, it makes sense because they are same column. So what is the operation that you are going to do? Well, concat is a function that you are going to use. And concat is a top level function, right, like pandas level function that you don't do any data frame, dot contact. Concat you do pandas, dot contact. So it's a top level function. And then when you are passing data frame, whatever data frame you are passing, those two or more data frames have to be passed as a list of data frames. So that's why I have d f 1d, F 2d, f3 as a list which I am calling frames. And that is my parameter, the first argument, or if you are if I wanted to do inline. I could have also provided it. Here is the same thing.
+
+Unknown Speaker  16:45  
+So essentially, what concat does is it takes an arbitrary amount of series and data frame provided as a list as the first argument,
+
+Unknown Speaker  16:58  
+and then you basically, let's, let's do this without any anything.
+
+Unknown Speaker  17:04  
+Just say that.
+
+Unknown Speaker  17:07  
+So you see, if you don't do anything, it, by default, it does a robot concatenation, which is what it did,
+
+Unknown Speaker  17:14  
+right? So you get the first four rows, second, four rows, third, four rows.
+
+Unknown Speaker  17:22  
+Now,
+
+Unknown Speaker  17:25  
+you can change that
+
+Unknown Speaker  17:30  
+to different access. So if you say access equal to zero, so what is access equal to zero? So it says it produces the same result. Why? Because access equal to zero is the default, which is basically by rows,
+
+Unknown Speaker  17:47  
+you can also say access equal to row. Oh, no, actually, no, not row. I think the word is rows.
+
+Unknown Speaker  17:58  
+Yeah, so access equal to rows is same as saying access equal to zero, it
+
+Unknown Speaker  18:07  
+will produce the same result. And for concat function, the default is rows, so even if you do not provide that, the result will still be the same.
+
+Unknown Speaker  18:17  
+So that's how concat works. Now
+
+Unknown Speaker  18:21  
+it is the default, but that does not mean you always have to stick to it. If you look at my definition, going back here, I said along an axis, rows or columns. So right now we just saw how we do it by rows. Now if you want to do it by column, so forget about whether that is that is something that makes sense for a while, but let's say if you do want to do by column.
+
+Unknown Speaker  18:50  
+So now you have done it by column.
+
+Unknown Speaker  18:55  
+Now when you are doing by column,
+
+Unknown Speaker  18:59  
+you see something odd happening. You see lot of null values,
+
+Unknown Speaker  19:05  
+right? And why that is happening? Because now what we are trying to do think about our data frame one. So I have
+
+Unknown Speaker  19:15  
+0123, as index, and then I have a, b, c, d, well, in the second one, my index values are different. I have 4567, as an index. So that means, even if I have the same name columns, but I don't have anything that goes with 0123,
+
+Unknown Speaker  19:32  
+and similarly the third one, it has eight, 910, 11 as else index. So that's why, since there are a total of 12 index indices from zero through 11, but only the first data frame has data for zero to three. So if you look into this this section, you can almost see that this is the first data frame and everything else the second and third data frame and now have null values for the.
+
+Unknown Speaker  20:00  
+Four indices. Similarly in the middle here. This is basically your second data frame, because for indices 4567,
+
+Unknown Speaker  20:07  
+everything else is now value and so on. This is the third right.
+
+Unknown Speaker  20:14  
+Now, what we did not do
+
+Unknown Speaker  20:19  
+is
+
+Unknown Speaker  20:21  
+we didn't provide
+
+Unknown Speaker  20:26  
+what is called like how we are going to join. So now when we say join, so let's do access equal to one, and I say
+
+Unknown Speaker  20:38  
+join equal to outer. So basically what this does is it is basically creating an outer join where it basically will not drop anything and everything. It will return everything from everywhere. That is what the OUTER JOIN does.
+
+Unknown Speaker  20:54  
+Now, if you do change it to inner
+
+Unknown Speaker  20:59  
+let's see what happens.
+
+Unknown Speaker  21:01  
+Now you see, you don't get anything. Why? Because these three things, these three data frames, have nothing in common, because the index row wise, index is zero to three. Here is four through seven, and here it's eight through 11. So if you take these three sets, and if you try to do a set intersection, your intersection would be nothing, because these things have nothing in common. That's why, when you are trying to concatenate with a joint type of inner you are not getting anything. Tabina, can I ask you a favor? Yep, um, my big monitor is not working right now, and my eyeglasses is chewed by my dog. Can you just maximize your
+
+Unknown Speaker  21:49  
+text? And this is already maximized? I am not sure
+
+Unknown Speaker  21:54  
+how on a Mac. I think it's command plus, yeah,
+
+Unknown Speaker  22:00  
+me,
+
+Unknown Speaker  22:03  
+oh, are you saying how you can maximize
+
+Unknown Speaker  22:06  
+your Zoom video, zoom in the screen a little bit. Yeah, now it's better. Thank you so much. Yeah, okay,
+
+Unknown Speaker  22:13  
+okay, so we basically saw how we can do axis zero versus axis one joining, and how we can do inner or outer Well, while we are concatenating, right? And this is why I'm what I meant here, that you are joining in one axis while performing optional union or intersection on the other axis. So this is the example that we saw here.
+
+Unknown Speaker  22:36  
+Okay,
+
+Unknown Speaker  22:38  
+so now I'm going to take another data frame,
+
+Unknown Speaker  22:41  
+DF four,
+
+Unknown Speaker  22:45  
+and in DF four. So what I'm doing is I am I do not have A, B, C, D, S column. Instead, I have B, D and F, S column. So you see here, column wise, I have some commonality. So b and d are kind of overlapping, whereas this one has F, but others do not have an F, but other has a and c, which this doesn't have. Because now I've tried, I'm trying to show how the unionary intersection happens when you do column wise, right? So that's why I created this little data frame.
+
+Unknown Speaker  23:20  
+So now I'm going to try to concat DF one and df four on axis one.
+
+Unknown Speaker  23:27  
+And if you do not specify any join by default, it does outer join.
+
+Unknown Speaker  23:34  
+So think about it. Now I'm joining, concatenating column wise with outer.
+
+Unknown Speaker  23:41  
+So let's see what happens,
+
+Unknown Speaker  23:45  
+right? So what happened? It basically gave me a, b, c, d from D f1 and it also gave me B, D, F from D f2 but if you see here for column, A, B, C, D, these two rows are none, because first data frame only had a, b, c, d here, and 0123, here. Now, since I'm doing column wise, but doing an outer join, I'm getting these columns and these columns, but for these columns, I do not have any data from the second data frame, so I'm getting a bunch of null values here and here on the top right, it's just the opposite way, right? BDF are the columns from the second data frame. But second data frame doesn't have the zero and one as indices, because I created 236, and seven and indices, I did not create 0123, purposefully, right? So that's why you see you I'm only getting data on 2367, but not on zero or one.
+
+Unknown Speaker  24:42  
+So that is how the
+
+Unknown Speaker  24:45  
+OUTER JOIN work.
+
+Unknown Speaker  24:47  
+The Outer Join Now rose right
+
+Unknown Speaker  24:51  
+on the rows
+
+Unknown Speaker  24:54  
+OUTER JOIN on. Well here the column is joining is can.
+
+Unknown Speaker  25:00  
+Attenuation is happening. Problem was problem wise, but the
+
+Unknown Speaker  25:05  
+union is happening robots,
+
+Unknown Speaker  25:09  
+because if you see here, so what I clearly said combining arbitrary amount of series data frames along an axis while performing optional union or intersection on the other axis. So, yes,
+
+Unknown Speaker  25:25  
+so now I'm going to perform the same operation with the inner join.
+
+Unknown Speaker  25:33  
+Now you can see very clearly, unlike in the previous example, where the inner join gave me nothing, here, my inner join actually does give me something. What does it give me? Well, I have two and three here. Why? Because if you look here the way I created this, DF, four, you only have two and three. That is common, and then you have six seven. But DF, one does not have six seven. DF, one has 0123,
+
+Unknown Speaker  26:01  
+so what is common between this set, 0123,
+
+Unknown Speaker  26:05  
+and this other set, which is 2367,
+
+Unknown Speaker  26:08  
+if you do an intersection, then two and three are the only common ones, right? And that's what you are essentially getting here two and three, which is the inner join. So INNER JOIN basically means intersection. Outer Join means union.
+
+Unknown Speaker  26:24  
+If you change the axis to zero
+
+Unknown Speaker  26:27  
+on that on that command, yeah, would it then create an intersection on the columns, on the common columns?
+
+Unknown Speaker  26:37  
+Uh, exactly. So let's do that. So let's do zero.
+
+Unknown Speaker  26:45  
+Sorry, I forgot to put the
+
+Unknown Speaker  26:48  
+print here, yes. So now here I'm doing axis zero with DF one and df four, but with outer join. Remember, for join, if you don't specify anything in concat outer is the default. So it's doing outer join. So I'm getting a, b, c, d from the first one and CDF from the second one. And then, since the first one does not have an F for these first four rows, all the F's and nulls, and the second one, since it only has B, D and F for the second frame, all the A's and season now,
+
+Unknown Speaker  27:22  
+kind of what you expected.
+
+Unknown Speaker  27:25  
+Now you can also do a inner when you are doing row wise join. In that case, these inner will apply on the column side, because it always applies on the non primary side, and you will get B and D because V and D are the only columns that are common to be both. When you are looking in the row wise two and three are the only rows that are common to both. Column wise b and d are the only column that are common to both. So I hope with this example, it is very clear how the row and access wise concatenation and union and intersection works.
+
+Unknown Speaker  28:09  
+Okay? I like the way that you walk through this, because it's really clear that when you did the column join and the indices, you can see that two and three repeat, yeah, zero and one are by themselves. And even though they they didn't both exist in d1, and d f, you're still seeing them, because the commonality is in the columns.
+
+Unknown Speaker  28:34  
+So showing everything in those columns, it's, it's interesting,
+
+Unknown Speaker  28:38  
+yeah. Another thing is, even if you are doing, let's say access equal to one. So let's say here, when I'm doing access equal to one, right, I'm getting 0123, which are the indices from the first one, and 2367, which were the row indices from the second
+
+Unknown Speaker  28:55  
+one. If your index does not have a special, special meaning, what you can do is, when you are doing the contact, you can actually do a re index with any of the ones index. So what I'm saying is, hey, do the job concatenation, but forget about the difference of 0123, versus 2367,
+
+Unknown Speaker  29:15  
+because those are probably just, let's say, some serial number often. So I don't care about serial number. If I know that my real data is on A, B, C, D, and then indexes does not have any value, then why do I need to care about the index? So what I can do is I can reflow the index of any one of these. So in this example, I'm showing, hey, I'm doing a re index using the DF ones index. So I'm basically taking any one of the data frames index, which in this case, DF, one, and repainting that index on the other one.
+
+Unknown Speaker  29:49  
+So then I am only joining based on the values,
+
+Unknown Speaker  29:55  
+which is these, a, zero, B, zero and a, one, b1, and not based on the index. So.
+
+Unknown Speaker  30:00  
+So when I do that way, you see the only place that I'm getting now are basically where you have a, zero, B, zero, C, zero. But in here on this side the BDF, there is no a zero, B, zero value right on all we have on this one, the DF four that I created is the twos and threes and six and seven. So I don't have any zeros and ones. So that's why I have zeros and one as none. But unlike before, I don't get a whole bunch of none here, and I don't get a whole bunch of none here, because what I did is, instead of using this bogus index
+
+Unknown Speaker  30:36  
+here, I try to repaint index from one data frame to another data frame to make sure the index really doesn't matter. It doesn't play a role in concatenating
+
+Unknown Speaker  30:51  
+it. So another way of actually change that to x is zero. We should only do A, B, C, D, columns, right? We'll do F,
+
+Unknown Speaker  31:01  
+well, well, when you are doing index, that's basically row wise. It's Oh, it's always row Okay, right, yeah, because the index on the top, those are called columns, those are not index, right? So columns are basically index on the other side, yeah, got it,
+
+Unknown Speaker  31:18  
+yeah. So another way of doing this is there is a property called ignore index, so you can do an ignore index.
+
+Unknown Speaker  31:28  
+And this is here I am showing axis zero. Let's actually do these on axis one. So
+
+Unknown Speaker  31:49  
+it is not really ignoring index.
+
+Unknown Speaker  31:54  
+It still has 0123, and six, seven,
+
+Unknown Speaker  31:58  
+but it also has a top it changed it from the letters to the indexes
+
+Unknown Speaker  32:04  
+so you see,
+
+Unknown Speaker  32:07  
+yep,
+
+Unknown Speaker  32:09  
+yeah, this probably is not a right operation that you would want to use on this one. Yeah, this, this particular one, is not adding any value here,
+
+Unknown Speaker  32:18  
+yeah, but I think you got the idea. And then, if you have to play with it, and I, what I have done is I have basically included the links to basically the pandas documentation for these. So take a look. There are so many different options there, right? And then these are some of the key consideration you should take a look. For example, concat. It makes a full copy of data, so therefore use it responsibly, otherwise, you are going to waste lot of memory, right? Also when frames and series of common names along the index column axis that concatenation is happening, common names apply in result, if the names are mismatching, then the resultant column or row will be unnamed.
+
+Unknown Speaker  32:58  
+And then you can use optional join argument and basically specify the set operation which we already saw join equal to outer is the default, and Joel equal to inner is the other one, right?
+
+Unknown Speaker  33:12  
+The other thing is, you can pass a list of keys that can be provided to override the column names of the target resultant data frame, which we are going to see, not in this particular demonstration, but when you are actually going to do the activity. So I didn't want to show, or I could not even show, even if I wanted to all the features there, because there are so many features, but I wanted to try to shortlist as much as I can, just so that the core concept becomes clear. So I do really, really hope that I was helpful for concat.
+
+Unknown Speaker  33:50  
+Okay, now we are going to look at join. Actually, let's do the merge. First
+
+Unknown Speaker  33:58  
+one thing, keep in mind, using the concat and March, you can do everything like even if you, even if you, let's say, choose, I don't want to understand join, and you are totally good. Anything and everything that you can join do with join can be done using concat and or March. So there are a lot of overlapping functionalities in this case. So me, personally, I like to stick with concat and march because sometimes the join thing gets little bit too complicated, even for me. So that is my personal opinion. But hey, as part of this class today, you have to go through everything, but just keep in mind that concat and march basically gives you everything that you would like to do, so and when you try, or when you are trying, try to use different approach.
+
+Unknown Speaker  34:44  
+Yeah, so margin, basically, what it does is it, you can use it to perform relational database style joining on two data frames, and you can actually do these modeling of relationships, such as one to one, many to one, many to many, this kind of relationship, right?
+
+Unknown Speaker  35:00  
+Right? Just like what you do in a SQL I think someone was asking, I think Ingrid you were asking one day, like, Hey, can we do SQL type thing here? So this is basically one example where you will see that you can actually do SQL style join between two relational database table using this mod operation. That what we are going to do now.
+
+Unknown Speaker  35:24  
+And you can hear there is an argument called how, and you can actually use left, right, outer, inner and cross. So you can use five different values. And these are the corresponding SQL equivalent that I put in here. So in SQL, when you are joining the two table, if you are doing a left outer join. So that's essentially what the left does. Right is right right outer join. Outer is FULL OUTER JOIN, where you are taking everything from here and everything from there, right and left and inner is basically inner join, which is kind of similar to our intersection operation in our concatenation and cross is basically Cartesian product from of rows from both tables, and we are going to see all of these through my little tiny
+
+Unknown Speaker  36:07  
+instructor demo here
+
+Unknown Speaker  36:10  
+with the toy data set.
+
+Unknown Speaker  36:14  
+Okay, so let's take some of our toy data set. So the first one, I have a data with three columns, key A and B. This key, by the way, is not actually an index, right? So think about these as a primary key in your database. So if it is a database table, that key is your primary key and that k 0k, one, k2 k3 these are uniquely identifying fine feature of all the rows that you have in your database, right? So think about you have this mini database table,
+
+Unknown Speaker  36:43  
+and then I have another one. I'm calling it right? So this one is my left table and this one is my right table. So this one also has a key column, which is the primary key, but then actual columns are different. So here I have C and D. Here I had a and b,
+
+Unknown Speaker  37:00  
+right, and then I have four rows here and four rows there, which is zeros, ones and twos and threes for all three, all four, right?
+
+Unknown Speaker  37:08  
+Now what we are going to do is I'm going to say, do the march? So March works little differently. So unlike in concat, you see you can, you have to pass a list containing multiple data frames, and this could be two or more, however many you would like. March works little differently. In March, you have to pass two specific tables. The first one is considered the table to the left, the second one is considered the table to the right, not a list of data frames, two separate data frames. So that's an important distinction between the syntax of the concat function and the merge function.
+
+Unknown Speaker  37:52  
+Now let's do that and see what we got. So what I said is merge these two using a primary key column. So you have to say on
+
+Unknown Speaker  38:06  
+key. So this key being the primary key column. So now what the merge function did? It said it saw that k 0k, one, k2 k3 are there in both tables, so therefore it merged. So now I have a, zero, B, zero, C, zero, D, zero, and all of this. So now, because see, this is very simple, right? K zero has two item from here, a zero and B zero and two items for here. So against that same key, k zero, I should have four items, which is what I got layer here.
+
+Unknown Speaker  38:38  
+So, but now you don't have to use the access equals, I think Sierra, because it's Rose, you don't have to use access when you do the merge. No, because, unlike concat, concat is a much more versatile function, but merge is much more strict in what you can or cannot do. Merge is basically designed more to mimic the relational database, SQL type functionality,
+
+Unknown Speaker  39:06  
+so you don't have as much elbow room to play around with, much
+
+Unknown Speaker  39:13  
+that's good to know. Make it more simple again,
+
+Unknown Speaker  39:19  
+one thing, look at this so see when you are saying on so on. Is the parameter that you have to provide to mention to pandas, what is the key column you want to use? But now, if you look at this one,
+
+Unknown Speaker  39:34  
+do you see the beauty of this? So here I provided it to table, and I didn't even tell pandas which one is the key, key column. So pandas actually decided, based on the content that, well, this key has the common name, so therefore that must be the common column. So even though I did not say on equal to Column Name, oops, which is the key, it actually did that it deduce that look.
+
+Unknown Speaker  40:00  
+In the names of the columns and did the right thing for me anyway,
+
+Unknown Speaker  40:05  
+right? These are some of the pandas magic, or Python magic in general. I should say that you will come across from time to time.
+
+Unknown Speaker  40:13  
+Some people like it. Some people hate it. Some people think that, oh, the language is too opinionated. And some people love the short end.
+
+Unknown Speaker  40:24  
+Okay, so you know the merge, how it works now, right now we are going to do merge with slightly different tip.
+
+Unknown Speaker  40:34  
+So this time, I have two primary key columns, key one and key two, which is also very common in relational database world, right? Sometimes you have a single key that column that you are using as a primary key. Sometimes you have a combination primary key, right, which is two or more column together used as a unique key for the table. So in this case, I'm going to use these data frame and try to use key one and key two as my combined primary,
+
+Unknown Speaker  41:03  
+and we'll see how that join works. Sorry, merge works, not join, merge. Okay. And then this is my left table, and the right table. I'm also creating key one and key two, but now purposefully, I have done different combination. So if you see my left hand table, I have k 0k, 0k, 0k, 1k, 1k, zero, and k2 k1 right. So four unique combination here, I have k 0k, zero, which is common as the first one, then I have k 1k, zero, which is common as the third one, and then I have k 2k zero, which is not here,
+
+Unknown Speaker  41:47  
+right, and a 1k zero is so. I have two of the same key, second and third row here has the same key as the second third row here. And then k2 k1 is only on the left one, but not here. And again, k 2k zero is only on the right one, but not on the left. So again, the idea is to basically show how the left right and outer and inner join works right. And that's why I created the data reference this way.
+
+Unknown Speaker  42:17  
+So now what I'm going to do March the left and right. And now I'm going to use this parameter for how. So if you refer back here, so using how argument, you can use this five option, right, left, right, outer, inner, cross.
+
+Unknown Speaker  42:34  
+So now I'm going to do that with how equal to left. And for the combination, I'm going to provide key one and key two, because I'm going to do it with a combined primary key, not a single primary key.
+
+Unknown Speaker  42:46  
+So now let's see what happens.
+
+Unknown Speaker  42:53  
+Now see carefully what happens. So I said how equals to left, so that means only the unique combination that appears on the left side of the table should appear in the result.
+
+Unknown Speaker  43:08  
+So what do we have on the left side? So I have k 0k, zero. Yep, I have k 0k, one. So here I got k 0k, one. I got k 1k, zero. So I got k 1k zero, but I got k 1k zero twice, because here also so k 1k 01, in the left, but matching that 1k 1k zero, I have two rows coming from the right, and then I have k2 k1 which is what my last row. But I do not have k 2k zero here, because this is only in the right hand side, and I Yeah, that's the only one missing, because k 2k, zero is not present on the right hand side, because I said left join. So LEFT JOIN basically means takes, take all the unique combination from the left hand table, and then put all the columns from the left hand table, and for those matching columns, pulling anything that you see on the right hand,
+
+Unknown Speaker  44:05  
+if some of these cases, the right hand table does not have anything for that matching key combination, then those will be now. Now why these two are now in the second row? Why these two are now? Because if you see here, k, 0k one has a one and b1 on the left hand side, but here I don't have any k 0k one.
+
+Unknown Speaker  44:28  
+I have k 1k, zero, but I do not have any k 0k one. So since I'm doing a Left Outer Join, so that's why k 0k one came as a row from the second from the left table, but the right table does not have anything. Therefore I have a null for the right table.
+
+Unknown Speaker  44:44  
+And same thing goes for the last row as well. K2, k1 combination is only present in the second left table, but not on the right table. Therefore I have a novel here.
+
+Unknown Speaker  44:57  
+Now I'm going to flip the table. I'm.
+
+Unknown Speaker  45:00  
+Same March I'm just going to do how equals right? And you will see the complete switch of the behavior.
+
+Unknown Speaker  45:09  
+So now my right table, first one is k 0k, zero. Fine. So k 0k, zero, but it happens that k 0k, zero, also have data in the first table, so I have no now, here all good. Then my next key combination is k 1k zero from the right table. So I have k 1k zero, but I have two of them, so I'm getting two of them, and then I have k 2k zero. So k 2k zero, I have data on the right hand side, but left hand side do not have a k 2k zero combination. So therefore k 2k zero combination has two Nan for the left hand table, because this is a Right Outer Join.
+
+Unknown Speaker  45:54  
+Does the left table have a cable and k zero? Can I just see? Can you scroll to the left table? To the left one, yeah,
+
+Unknown Speaker  46:04  
+left one has k 1k, zero, yeah, yep.
+
+Unknown Speaker  46:11  
+I have a quick question. So I think when you have the syntax, you know, merge left, right the left, right on the first,
+
+Unknown Speaker  46:20  
+you know two right there that refers to your data set above, right? So if you have, I don't know, apple and banana for example. So those are just variable names. Yeah, don't worry about that. Okay. So now we are going to do the outer join, so with the keyword outer on the how argument. And now you see I have some Nans here, some Nans here, because now I'm getting all the key combination from both side, k zero, from the left hand side, from the right hand side, and wherever there is data missing in on either of the left table or the right table, those data is basically being filled with now.
+
+Unknown Speaker  46:58  
+So which is your full outer join right? Because that's what I said in the slide. Yep, full outer join.
+
+Unknown Speaker  47:06  
+And then if you do inner join, you will get no null values at all, because INNER JOIN only brings the E combination that are present on both sides, and that happens to be only full key combination, which is k 0k, zero and k 1k, zero, these are the two combinations that are there on the both side. But k 1k, zero happens to have two entries, so there are two entries for this and one entry for this. So you basically get an intersection. So is it mean, like, when you're going to be using the inner I, you will, you can lost a lot of data, right?
+
+Unknown Speaker  47:42  
+Not let's not go there. It's not a data loss. It's basically you. The question is, what is, what is it that you are looking to do? Okay, so this is not about data loss. So think about from the SQL perspective, if you do have two entities and you are trying to combine the two entities based on their common attribute,
+
+Unknown Speaker  48:02  
+okay? And then the last one is the cross join. So if you see her CROSS JOIN, basically, does a Cartesian product of rows? Does anyone know what Cartesian product mean?
+
+Unknown Speaker  48:17  
+Anyone has any idea? Yeah, each row, I want to say each row is getting multiplied with all the, all the, all the
+
+Unknown Speaker  48:25  
+it's basically I want everything from rows to and I want everything from columns to and I don't want to miss anything. And that creates, often time creates a massive data set, which, most of the time is not useful at all. But this is just a feature that they have. I have not seen, seen, anyhow, how this feature would be useful, but essentially, you are going to get this massive thing.
+
+Unknown Speaker  48:52  
+So what it is doing is it is taking each of the unique combination of rows and getting each of the unique combination of columns, and then it's basically doing a so if you have let's say m, sorry, no. So let's say you have m1, and m2 unique keys on the two tables, and n1, and n2 unique columns on two tables. So then you will basically get m1 plus m2 multiplied by n1 plus n2 items in your resulting table, and that would be the shape of your resulting table.
+
+Unknown Speaker  49:29  
+And this basically completely messes up any relational semantics between the two data.
+
+Unknown Speaker  49:36  
+But maybe, for some reason, it will be useful. But I haven't seen people using this feature at all. It's just there.
+
+Unknown Speaker  49:49  
+Okay,
+
+Unknown Speaker  49:51  
+so now couple of things. So here one thing I have said that margin on duplicate keys.
+
+Unknown Speaker  50:00  
+Significantly increase the dimensions of the result and can cause a memory overflow, so if you have duplicate keys. So therefore, what the designers of pandas do, they provide you an argument called validate. So with validate argument, you can use it to check the uniqueness of the keys before executing the actual operation to protect against any memory overflow or unexpected key duplication.
+
+Unknown Speaker  50:26  
+So this is the one thing that we are going to see here.
+
+Unknown Speaker  50:31  
+So we did these operations before right march on outer key one and key two. So let's say I'm doing margin out there, just like I did before, and you get a OUTER JOIN,
+
+Unknown Speaker  50:44  
+right?
+
+Unknown Speaker  50:46  
+But
+
+Unknown Speaker  50:48  
+you basically have key duplication. You have k 1k, zero, multiple times, even though I am saying, hey, it should be only one, but you do have key duplication. So what you can do is, if you don't want anything, if you always want to enforce that your left table and right table must have one to one relation. I don't want one too many. I need to make sure that wherever I get the data from
+
+Unknown Speaker  51:14  
+that database, original database did not screw up, and the data that I got must always follow one to one constraint, the relational constraint.
+
+Unknown Speaker  51:23  
+So if you want to do that, you can apply a validate parameter and provide this value one to one. And now if you try to run it, you are going to get an error.
+
+Unknown Speaker  51:35  
+It is not going to run why? It clearly says March keys are not unique in the right data set. Therefore it is not a one to one March,
+
+Unknown Speaker  51:48  
+because if you think about my right data set,
+
+Unknown Speaker  51:52  
+intentionally, I have k 1k zero duplicated, even though different values, but my this k 1k zero is duplicated on the key column. So that does violate a one to many condo, sorry, one to one constraint.
+
+Unknown Speaker  52:06  
+So therefore this validation is stopping me from going ahead.
+
+Unknown Speaker  52:11  
+If you change that to an inner and still did the work. No, hang on to your thought for a minute. For a second. What I'm going to show here is if I do this one to many. Now I'm trying to make sure my left hand side has unique, but my right hand side table maybe, for whatever reason, it can have one to many. Now this will go through perfectly fine
+
+Unknown Speaker  52:40  
+if you do
+
+Unknown Speaker  52:42  
+many too many, that will also go through perfectly fine.
+
+Unknown Speaker  52:47  
+But whenever you have one on the right side, that's when it is going to stop you.
+
+Unknown Speaker  52:53  
+Many to one also stops you. So either one to one or many to one stop you, because on the right hand side table, you know that you have a one instance of key duplication.
+
+Unknown Speaker  53:04  
+Okay, so now tell me what your question was.
+
+Unknown Speaker  53:10  
+It was, if you change it to a how enter and still did the validation step,
+
+Unknown Speaker  53:18  
+would it? Oh, yes, yeah, no. So, okay, okay, got it so it, I think it will still prevent it. Yeah, if you do a one to one,
+
+Unknown Speaker  53:29  
+inner, inner one to one, it will still prevent it.
+
+Unknown Speaker  53:37  
+So these, how has nothing to do with validate. Validate is not, does not care about what is your inner, outer or cross join you are doing. All it does is basically, basically applies the relational constraint and sees that whether that constraints constraint is violated, given the data we have or not.
+
+Unknown Speaker  54:00  
+And it does that because when you do violate that, the cost is huge.
+
+Unknown Speaker  54:07  
+So just to confirm again, validate is only to validate your data, but it will not do any
+
+Unknown Speaker  54:13  
+data changes Correct. No, it will throw an error. It will obviously not do any changes. And then you have to catch the exception and then take any remedial, remedial action that you have to Okay, thank you. Okay.
+
+Unknown Speaker  54:28  
+Now,
+
+Unknown Speaker  54:30  
+finally, there is a cool thing. So here you see key one, key two, and then it says A, B, C, D, all of these kind of don't know which column or, sorry, which item is coming from where, right? So for example here, when we did a OUTER JOIN, I know that the first column, which has the key, k 0k, zero, kind of came from the both the table, but the second row, k 0k, one, it only came from the left hand table, and then right hand did not have any
+
+Unknown Speaker  54:58  
+so you can actually.
+
+Unknown Speaker  55:00  
+Visualize that just by adding one other option called indicator equal to true, and now look at the magic. So it basically creates a categorical column called underscore merge, and it basically tells you which row came from which table, whether it came from both or left only or right only.
+
+Unknown Speaker  55:21  
+That's a really cool feature to visualize and understand where it's coming what is coming from, where?
+
+Unknown Speaker  55:34  
+Okay,
+
+Unknown Speaker  55:37  
+so that's all about March.
+
+Unknown Speaker  55:41  
+Now, let's go back to join and I'm sorry if I'm not giving you enough time to question, because I know we have a lot of grounds to cover, so feel free to hang around in the office hours. Maybe note down your question if you have any. But we have to finish the whole thing. So there's a lot of content today, and I think I made the thing worse because I added my own thought process and own content.
+
+Unknown Speaker  56:04  
+We haven't started the activities yet. Okay, so now joining, so joining is combining data on a key column or key index. So it is used to combine columns of multiple potentially differently indexed data frames into a single result data frame.
+
+Unknown Speaker  56:22  
+That's what join does.
+
+Unknown Speaker  56:25  
+So join is also an instance method. So join is actually an instance method. So join is very different from the two others. So for concat, so we did PD dot, concat, for March, we did PD dot, merge. Join really doesn't work that way. Actually, join is an instance method. So now for join, you have to do take one data frame, let's say df one, and now you have to do DF one, dot join, and then pass the second data frame as a parameter. You don't do PD, dot join, and then pass DF one and DFT, because it's an instant method. It's not a top level pandas method. So that's the first distinction. So let's look at our toy file.
+
+Unknown Speaker  57:10  
+Okay, so we have a left data frame,
+
+Unknown Speaker  57:13  
+three column, two rows and indexes are k 0k, one and k2
+
+Unknown Speaker  57:18  
+we have the right
+
+Unknown Speaker  57:20  
+k 0k, two and k 3k, zero and k2 is common, but k3 is only for the right, and here k1 is only for the left. And then we have different columns. Also here I have a and b. Here I have C and D. What happens if I just do left or join right?
+
+Unknown Speaker  57:41  
+So what did it do?
+
+Unknown Speaker  57:45  
+Is it an inner join?
+
+Unknown Speaker  57:48  
+Yeah, good question. So let's write,
+
+Unknown Speaker  57:53  
+how equal to write. So if you do how equal to write, you see what it is doing. It is taking everything from the right hand side, which is k 0k, two, k3 and wherever it is getting a match on the left hand table, it is putting that, if not, it is putting a none
+
+Unknown Speaker  58:11  
+this for the right
+
+Unknown Speaker  58:14  
+if you do inner on the other hand, you will only get k Zero and k2 because that's the only common thing.
+
+Unknown Speaker  58:23  
+And then if you get outer
+
+Unknown Speaker  58:27  
+you get k, 0k, one, k2 k3
+
+Unknown Speaker  58:30  
+so all four. And then you will get wherever there is none, not missing. You will get a missing.
+
+Unknown Speaker  58:40  
+So hang on. So which one this one is coming at.
+
+Unknown Speaker  58:47  
+This is for the join, right? So you have,
+
+Unknown Speaker  58:51  
+this is join. So left, outer, right, outer, full, inner, join and cross, join. So
+
+Unknown Speaker  59:05  
+outer and if you do a cross join, you get the Cartesian product of everything.
+
+Unknown Speaker  59:11  
+So left, right, outer, inner, cross. So what did we not use?
+
+Unknown Speaker  59:19  
+So by default, yes, so by default, it is actually taking left. And why? Because the table, this left table, is what we are applying it on. So therefore, now let me do this. So I'm going to rewrite this with how equal to left, and you will see that it will produce the same result as when you don't provide any help.
+
+Unknown Speaker  59:45  
+Yeah.
+
+Unknown Speaker  59:48  
+So the reason it default is left join is because look at the syntax. You are taking a instance of a data frame, and then you are applying join on.
+
+Unknown Speaker  1:00:00  
+On top of it. So therefore this data frame here is considered your primary data frame.
+
+Unknown Speaker  1:00:06  
+That's your guiding data frame. And then if you don't specify how you want to do the join, the default thing is it will take everything that it sees on this data frame on which you are applying the join, which becomes your primary data frame,
+
+Unknown Speaker  1:00:21  
+and then it will basically get whatever it can find from the right hand side, which is the argument that you are passing, and then bring it here. So it's kind of a you can think of. It's like a different way of doing the march, because you can do the exact same thing with March. And that is why I said earlier, even if you don't learn join you are totally fine. You can just do everything with March.
+
+Unknown Speaker  1:00:46  
+It's just a different syntax, but it the effect is the same. So here, by default, is left, and just like your March, you can do how equal to right, you can do how equal to inner, you can do how equal to outer and cross. So exact five options that you have there.
+
+Unknown Speaker  1:01:12  
+Yeah, so here, basically, that's why I wrote in the first bullet point here, that it's an instance method
+
+Unknown Speaker  1:01:19  
+and of data frame class and the data frame instance it is applied is by default, treated as left side of the two joining candidate tables. So the first bullet point, if you read through it, then you will kind of understand why the default is left,
+
+Unknown Speaker  1:01:35  
+because it is basically the primary candidate. Then,
+
+Unknown Speaker  1:01:41  
+okay, now here also you can optionally provide the on argument to either provide a single column on multiple columns on which you want to join. So for example, let's do let's do
+
+Unknown Speaker  1:01:59  
+left data frame,
+
+Unknown Speaker  1:02:02  
+but this time without any index. So earlier, when I had the left data frame here, so I actually provided an index here, right? So my k 0k, one, k2 these are indices, not a column. Same thing for my right data frame, also it had index, but this time I'm going to create a data frame without any index, which is this one like this is kind of same thing. When you do PT, dot, read the CSV, you can choose to read the data with index or without index, right? You can say, hey, ignore index. Or you can provide a particular column as index. So this is the other case when your data does not have an index and you are trying to join, do this joining, specifically mentioning what are the key columns that you want the join function to consider. So therefore key is just a plain column. It's not an index or anything. So this is my left data, and now I have my right data.
+
+Unknown Speaker  1:02:56  
+So the right data frame, I have an index.
+
+Unknown Speaker  1:03:01  
+So now if I do left, dot join right.
+
+Unknown Speaker  1:03:07  
+Now this left does not have an index, so if I just do left, dot join, right, I think it will probably fail.
+
+Unknown Speaker  1:03:19  
+Oh, no, it did not fail. Actually. What did it do that? Did an outer join.
+
+Unknown Speaker  1:03:26  
+It did an outer join, right, right. No way. It did a left. It did a Left Outer Join, yeah, left join.
+
+Unknown Speaker  1:03:35  
+And if you do on equal to key now it is actually going to take this so now that's why we don't have those bogus null values coming in.
+
+Unknown Speaker  1:03:46  
+So basically, the thing is, if you're one of your data frame does not have an index, you can specify a particular column to act as an index during the join operation.
+
+Unknown Speaker  1:03:58  
+And there is another way of also doing this, which you will see when we do the activities.
+
+Unknown Speaker  1:04:07  
+Now, if you look into this operation, so here I'm doing left or join right.
+
+Unknown Speaker  1:04:15  
+So other way of doing this, and this is what I mentioned earlier, so here, that's why I wrote this comment, this produces the same result as the March operation below, which is this, and here I said, this produces the same result as a joint operation above. So see what I'm doing is just a different kind of syntax. So when I'm doing March, instead of doing left dot merge here, I'm doing left dot join right. Here you are. I'm doing PD dot merge, and then I'm providing left and right. And then for the left, I'm saying left on key, but right is using the index, so right is using the index and left is using a key. And then how is equal to left? Because LEFT OUTER JOIN is here, happening by default. And then.
+
+Unknown Speaker  1:05:00  
+And I'm not sorting.
+
+Unknown Speaker  1:05:02  
+So then if you run this, you will see that this and this provides exactly same result, two different function, but provides exactly same result.
+
+Unknown Speaker  1:05:12  
+So I want you to pause a moment and look into the code and the output and satisfy yourself that why should this should be the case. So I
+
+Unknown Speaker  1:05:28  
+think the part that's getting me is a left on key and the right index equals true. I'm still not quite I don't quite understand what that's doing.
+
+Unknown Speaker  1:05:39  
+So basically, it is you, it you are mentioning this because you know that your left data set does not have a column,
+
+Unknown Speaker  1:05:47  
+so you cannot use a left index. Yeah, because the left doesn't have an index better, but the right as an index says, Use the if you, if you don't put any one of these, then it will try to use the index for both. But
+
+Unknown Speaker  1:06:02  
+left one doesn't have an index. But in this case, if you do that, then the left one doesn't have an index. It basically has this bogus 0123, index, not the K, 0k, well, actually left does not have index. Is a wrong thing to say. Let left does not have the index on the column that I want it to have an index, does that basically think that 0123, are my index and it will basically produce a wrong result. So if the right, if it's the default behaviors to use the index, if you got rid of right index equals true. Would that still work?
+
+Unknown Speaker  1:06:35  
+Let's see. It might actually work. I haven't tried that good thinking, oh no, no, you have to Yeah, so we have to, At
+
+Unknown Speaker  1:06:52  
+least to give you a hint, yeah,
+
+Unknown Speaker  1:06:56  
+yeah. I
+
+Unknown Speaker  1:07:12  
+Yeah, so we have done this.
+
+Unknown Speaker  1:07:16  
+So using optional argument, single column or multiple columns can be specified. So we have seen how we can do using the on right,
+
+Unknown Speaker  1:07:26  
+left, on No, we haven't seen
+
+Unknown Speaker  1:07:30  
+the case where we are
+
+Unknown Speaker  1:07:34  
+doing multiple column, have we? Oh, here we are now going to see it here. So here what we are doing is I'm now creating a slightly different data set. So here I'm creating a left data set with two keys, key one and key two, and I am not using any of these key as a index, so index is just a default numeric index right but key one and key two are my two key columns on my left data frame.
+
+Unknown Speaker  1:08:00  
+Now on the right data frame,
+
+Unknown Speaker  1:08:03  
+what I'm doing is, instead of saying, hey, index is equal to a list of things, I am creating a multi index. So in pandas, there are single level index and there could be multiple level index, and the multiple level index, there is basically no limit how many level that it could have. So essentially, when you do index is equal to PD dot multi index, and then I'm using from tuples. So basically what I'm this index will have, it will have four different unique placeholder values with k 0k, 0k, 1k, zero, and this combination. So essentially, kind of the similar kind of thing, but instead of having those as columns, I am creating those as a multi index, and then I'm creating a data frame with column C and Column D, and applying these multi index as our index. So essentially, kind of like before, I have two data frame the left one does have, does have no index or the default index, but the right one actually does have an index that I want to use.
+
+Unknown Speaker  1:09:15  
+So now, if I want to do left, dot join right
+
+Unknown Speaker  1:09:22  
+and if I want to use key one and key two these two columns, which is what I mentioned earlier, you can provide one or more columns.
+
+Unknown Speaker  1:09:34  
+I can do that because the left hand side had key one and key to as columns, but on the right hand side, even though it didn't have the key one and key to as columns, but it has that matching values, sort of matching values as the multi index. So in this demonstration, what it is showing is, out of your two things that you are joining, if you have the equal.
+
+Unknown Speaker  1:10:00  
+Columns on the one side and the other side. You have this data in an index. You can also do the join using the column for the one and the index for the other so. So in your first example, when you did the multi index, your output the last row, I would have expected to see k2, k1,
+
+Unknown Speaker  1:10:18  
+at the beginning, and then see through Why is it only? Why does have a blank and then k1
+
+Unknown Speaker  1:10:29  
+is it because k2 is implicitly there, because it's above k2 is implicitly there? Yes, because k2 because it basically so the way that multi index is displayed, if you have a k2 like multiple k2 one after another, you will have only one k2 at the top. And so basically, that's how you will see this. When we do some activities, you will see an example of these, like how multi index displays, yeah, I just would, I guess I was not expecting, yeah,
+
+Unknown Speaker  1:10:59  
+yeah. And that's it. And this is what I was writing, something else, just for my thing. So that's basically all of the toy example that I wanted to show you. And I think I covered every all the talking point I captured here. So using hard to join multiple keys the past write data frame must have a multi index. So if you want to join multiple keys, the right data frame must have on multi index, which we saw in the last example, and strings passed as on or left on or right on parameters may refer to either column values or index level names, which we haven't done in our toy example, but we will see in the activators and then a list or tuple of data frames can also be passed to join them together on their indexes. Oh.
+
+Unknown Speaker  1:11:50  
+Lister, topple of data frames can also be passed, okay, so in the last point, yes. So I do not have that example here, but you will see later when we do the activity, you even though join I'm saying that. Hey, this is a
+
+Unknown Speaker  1:12:12  
+what just happened to my PS code.
+
+Unknown Speaker  1:12:19  
+Decided to hide. Okay,
+
+Unknown Speaker  1:12:23  
+sorry, I kind of lost my train of thought because of that.
+
+Unknown Speaker  1:12:28  
+Now this thing tried to hide, yeah. So what I'm going to say here is, even though I am saying that these join, essentially is a instance level function. You can also do PD dot join and pass it,
+
+Unknown Speaker  1:12:51  
+pass a list or tuple of data frames to them, to join them together on their indexes, kind of the same way you can do for concat. That, I think is probably a new feature that they added originally the join was I was actually caught little off guard when I was doing some reading today to prepare for the class. So this is something I didn't know, because this makes it then very similar to concat. Then the question might be like, Hey, why do I use join? You? Can I have the concat and I can do the same thing for me. So, but anyway, so you see how there is kind of lot of overlap of functionality between the two, and there is no right or wrong answers on which one. So what I try to do is I try to look through and in these slides, you will see that I have provided some link to Kaggle and link to Stack Overflows, link to medium.com that will probably provide you some food for thought on when to use these three approaches.
+
+Unknown Speaker  1:13:50  
+Okay, so that's all for this part of the lecture. Now, we have to do lot of activities today, but since we are almost halfway through the class, let's do one thing. Let's take a quick 10 minutes prep and come back and start the activities with a fresh mind.
+
+Unknown Speaker  1:14:08  
+Make sense? So now it is 844, so let's come back at 55 then 855
+
+Unknown Speaker  1:14:15  
+sorry, not eight, 755,
+
+Unknown Speaker  1:14:18  
+specific,
+
+Unknown Speaker  1:14:20  
+yep. Sounds good. Thanks. Yep.
+
+Unknown Speaker  1:14:25  
+Towards the end,
+
+Unknown Speaker  1:14:27  
+rather than switching back and forth, okay,
+
+Unknown Speaker  1:14:31  
+okay, so the first activity, what we are going to do is we will see how we use the concatenate function.
+
+Unknown Speaker  1:14:40  
+So the data we have here are three different data set, and these are all stock related data for Apple, Google and meta, for the three companies. And the three data is loaded, and you see, when we are doing the read CSV, we are using the date as the.
+
+Unknown Speaker  1:15:00  
+Index column.
+
+Unknown Speaker  1:15:01  
+And then when you visualize the data, you will see each of the data set have data as a index and the same columns, Open, High, Low, Close, adjusters, close and volume. This is basically a very standard stock market data that you can get from any trading system, trading platform.
+
+Unknown Speaker  1:15:23  
+So we basically have trading data for so and so date for these three stocks.
+
+Unknown Speaker  1:15:32  
+Now the first thing we are going to do is we are trying to join this by rows.
+
+Unknown Speaker  1:15:40  
+So this is where I would like to make this activity collaborative. Because if you can do that with me here, you should be able to do the student activity yourself as well, because it's just exactly the same step, just with different sets of data. So how do we join these three roles, or concatenate these three rows three, not three rows. Three data frame by rows.
+
+Unknown Speaker  1:16:05  
+What is the
+
+Unknown Speaker  1:16:07  
+function that we use?
+
+Unknown Speaker  1:16:16  
+Functions is concatenation, yeah, concat, yeah. So it's a pandas dot
+
+Unknown Speaker  1:16:24  
+concat. And how do we pass the data frame to concat
+
+Unknown Speaker  1:16:32  
+as a list, as a list? So you have to pass this as a list, and the list will basically have my Apple,
+
+Unknown Speaker  1:16:42  
+Google
+
+Unknown Speaker  1:16:43  
+and meta,
+
+Unknown Speaker  1:16:49  
+and then,
+
+Unknown Speaker  1:16:52  
+what else do we have to pass?
+
+Unknown Speaker  1:16:56  
+It? Said by rows?
+
+Unknown Speaker  1:16:59  
+Is it zero? Yep, so axis equals zero. Or this is same as saying axis equals rows.
+
+Unknown Speaker  1:17:13  
+That's it, right?
+
+Unknown Speaker  1:17:16  
+And if you do that, you will
+
+Unknown Speaker  1:17:20  
+get a data frame like this,
+
+Unknown Speaker  1:17:23  
+and if you want to save it in a data frame, you just have to provide a variable name and assign it to a variable name.
+
+Unknown Speaker  1:17:36  
+And let's actually do
+
+Unknown Speaker  1:17:42  
+print. Of this dot shape, and let's also do a display of this.
+
+Unknown Speaker  1:17:55  
+That's it. So I have 63 rows and six columns, and these are all the data I have, because if you actually do shape on this, you will see each of these data frame has 21 rows each, so total is 21 times three, which is 63 rows that you are seeing here, and six columns, because they all have the same column,
+
+Unknown Speaker  1:18:21  
+if you had looked rose, wouldn't that be default? And so you don't need to put in rows explicitly, yes, exactly. So even if you don't specify this, you will get the exact same because axis Rose is default.
+
+Unknown Speaker  1:18:41  
+Now the next one we are going to do is join this by column.
+
+Unknown Speaker  1:18:47  
+So what change do we need?
+
+Unknown Speaker  1:18:55  
+Let's change the variable name joined by calls in columns. But in here, what? What else do we need to provide
+
+Unknown Speaker  1:19:03  
+inside the function?
+
+Unknown Speaker  1:19:08  
+That's right, so we need to provide access equals one or x equal colors.
+
+Unknown Speaker  1:19:16  
+And when you do that,
+
+Unknown Speaker  1:19:19  
+you will get 21 rows, because each of them has 21 rows. But now, instead of having six columns, you have 18 columns, because you are joining sideways,
+
+Unknown Speaker  1:19:34  
+and you see the column names are repeating, right, Open, High, Low, Close, adjusted volume, and then the same thing is repeating here
+
+Unknown Speaker  1:19:41  
+and so on for all three, right.
+
+Unknown Speaker  1:19:49  
+Okay,
+
+Unknown Speaker  1:19:51  
+so now the next thing we are going to do is we are going to join, join by rows, but we are going to use this.
+
+Unknown Speaker  1:20:00  
+Talk ticker as the key.
+
+Unknown Speaker  1:20:02  
+So here,
+
+Unknown Speaker  1:20:04  
+I have no way to know when I'm doing this way. I have no way to know which one is for or or even this one, right? I have this 63 rows of data, but looking at this, how do I find out which one is Apple, which one is Google, which one is meta?
+
+Unknown Speaker  1:20:21  
+Because I have the whole bunch of 63 rows stack against each other, there is no way I know.
+
+Unknown Speaker  1:20:29  
+So what is it that we need to change?
+
+Unknown Speaker  1:20:39  
+So we have to do something right?
+
+Unknown Speaker  1:20:43  
+Is it indicator equals true?
+
+Unknown Speaker  1:20:47  
+It's not an indicator. You can actually say what keys that you want to use. So you do have your PD contacts exactly same way. You can provide access equal to rows or not provided. But then you can provide what keys that you want.
+
+Unknown Speaker  1:21:05  
+Sorry, it will be inside
+
+Unknown Speaker  1:21:09  
+list, actually. And the first one I'm using is Apple, so you have to specify the keys that way. And the second one I'm doing Google, and the third one I'm doing is meta,
+
+Unknown Speaker  1:21:25  
+okay, and let's have it in a different variable name joined by rows with keys.
+
+Unknown Speaker  1:21:36  
+And when I do this,
+
+Unknown Speaker  1:21:39  
+now look at the magic on the rows.
+
+Unknown Speaker  1:21:43  
+So earlier,
+
+Unknown Speaker  1:21:45  
+I had only date as an index.
+
+Unknown Speaker  1:21:49  
+Here I have that multi level index. So, Jesse, what you noted in the last demonstration that I did that's you saw that? Oh, why this is missing. It's not really missing. It basically says, Hey, for all of these first 21 the multi level key is Apple, and then followed by a unit date value. But Apple is common across all of these, and that's why you are seeing this. So you need to repeat it. Thank you. Yeah, so just sort some into huh?
+
+Unknown Speaker  1:22:22  
+Sorry,
+
+Unknown Speaker  1:22:24  
+never mind.
+
+Unknown Speaker  1:22:25  
+I think that's a good point. Dom That it's like it seems to be sorting it into, like, Apple than Google meta. But yeah, because this is the, this is, this is how I am providing, right? I'm providing in this order, Apple, Google meta. So the order that I'm providing here in the in the first list that has to match the order that I'm providing in the Keys list.
+
+Unknown Speaker  1:22:50  
+And so here you see Apple and meta, because it's basically showing just the head. But if you do the let's say no, not the head. I'm doing display. So it is showing first five and last five. If I do, let's say, let's do a Oh, so it's not sorting them. It's just like giving it a label. Yeah. So I'm doing a tail. So if you do a tail of 30, so here you will get 21 rows at the end that are meta, and then you also have nine rows that are Google, but, but it's, I do think it still needs to be neat. Seems to be sorted by the date column and because, like, Yeah, but, but I am not doing that sorting because the data originally came in that order, right, right? Yeah, that data set came in,
+
+Unknown Speaker  1:23:38  
+right? Yeah.
+
+Unknown Speaker  1:23:46  
+Ah, okay, so
+
+Unknown Speaker  1:23:49  
+that's that now,
+
+Unknown Speaker  1:23:54  
+just crawling up to that format I thought
+
+Unknown Speaker  1:23:59  
+just joined. Okay,
+
+Unknown Speaker  1:24:03  
+okay, thank
+
+Unknown Speaker  1:24:05  
+you. Yep. So now we are going to apply the same thing, but we are going to do a column wise join, and then we will see how I can apply this additional key to column. And then how does that look like. So instead of saying join by rows with key I'm going to say join by column with key DF. I'm just changing the variable name here,
+
+Unknown Speaker  1:24:32  
+and then only thing I'm going to add here is I'm going to say access equals one. This time I'm just using one,
+
+Unknown Speaker  1:24:40  
+and just like before, I'm applying Apple, Google and meta in that order, because that is the same order. Now, if you run this now on the column, you are going to have multi level just like in the previous example, you had multi level index on a row here, I have.
+
+Unknown Speaker  1:25:00  
+Level index on the column because the operation is happy happening on axis y.
+
+Unknown Speaker  1:25:06  
+So you still have that same data is just presented in two different ways.
+
+Unknown Speaker  1:25:12  
+Here I have 21 rows and 18 column. But for all of these 18 column, I don't have to keep scratching my head. Unlike the previous one here, I had these six columns repeating over and over again. Now, instead of doing that, it clearly shows me that first six column is well, open, high, low, these. But then all of these applies to Apple and the next thing, all of these applies to Google and so on,
+
+Unknown Speaker  1:25:40  
+and the last set will be same thing applied to meta.
+
+Unknown Speaker  1:25:52  
+Make sense?
+
+Unknown Speaker  1:25:55  
+Okay, so now, remember I said the indexes are different, so you can actually see that. So let's say you take this data frame that we did, joined by rows right? If I try to see an index of these,
+
+Unknown Speaker  1:26:14  
+what index Do you see?
+
+Unknown Speaker  1:26:17  
+You see an index that has all the dates,
+
+Unknown Speaker  1:26:22  
+63 dates, to be exact, repeat so they're not they're not unique,
+
+Unknown Speaker  1:26:27  
+correct? Now, if you take that multi level one, which is joined by Rose with keys, and try to print the index.
+
+Unknown Speaker  1:26:37  
+Now look how the index so this is that multi index that I showed in my other demonstration, where I was actually programmatically creating a multi index and supplying it with a list of tuples. But here, the multi index is created as a byproduct of my concatenation operation, and if you do specify display the index, it actually shows you the structure of the index
+
+Unknown Speaker  1:27:01  
+in database, where we call that a composite, composite, yes, exactly.
+
+Unknown Speaker  1:27:10  
+On the column side, if you take join by calls.df
+
+Unknown Speaker  1:27:15  
+and try to print the columns for this,
+
+Unknown Speaker  1:27:20  
+the columns are also an index, but this is a column level index. And here the the plane one, it shows the repetition of a single level index, but repeating three times. If you take the other join where we applied our multi level on the on the column header, and if you do columns for that.
+
+Unknown Speaker  1:27:43  
+Now you see Apple, open Apple, high Apple, low. So the same thing. Here you are seeing apple and date combination, Google and date combination. Here you see Apple and open apple and high apple and low on the column level and so on for Google and meta.
+
+Unknown Speaker  1:28:01  
+So that's how you can have multi level index both on the row or on the column access.
+
+Unknown Speaker  1:28:13  
+So clear everything here and concatenation, yeah,
+
+Unknown Speaker  1:28:17  
+could you just scroll up to the other multi index list?
+
+Unknown Speaker  1:28:22  
+That was it, yep, just want to see that. Thank you. Okay,
+
+Unknown Speaker  1:28:31  
+okay, so that was for the concatenation. Now let's do the join.
+
+Unknown Speaker  1:28:42  
+So for the join.
+
+Unknown Speaker  1:28:50  
+So here the data that we have
+
+Unknown Speaker  1:28:56  
+are basically wheat production data from three different years. So let's see how that data looked like.
+
+Unknown Speaker  1:29:03  
+So let's display the wheat 2018 DF,
+
+Unknown Speaker  1:29:13  
+so basically list of countries with year and value, and
+
+Unknown Speaker  1:29:21  
+that's all it had. Actually let me quickly do a shape on this.
+
+Unknown Speaker  1:29:27  
+16 by three. Okay,
+
+Unknown Speaker  1:29:31  
+oops,
+
+Unknown Speaker  1:29:34  
+16 by three.
+
+Unknown Speaker  1:29:37  
+So let's do that for 2019,
+
+Unknown Speaker  1:29:42  
+same thing, 16 by three, and when you display,
+
+Unknown Speaker  1:29:48  
+I think, the same
+
+Unknown Speaker  1:29:51  
+set of countries, Australia, Canada, Japan, Korea, yep. So basically, the indexes are the same, and so are the columns. So.
+
+Unknown Speaker  1:30:00  
+Is just the value of the year is different,
+
+Unknown Speaker  1:30:04  
+and the same thing will happen, I assume for 2020,
+
+Unknown Speaker  1:30:10  
+doing a ship first, yep, 16 over three. And then display the data frame,
+
+Unknown Speaker  1:30:17  
+same countries, just the year is different.
+
+Unknown Speaker  1:30:21  
+So this is the data set we have.
+
+Unknown Speaker  1:30:24  
+Now in this one, we are going to do a join
+
+Unknown Speaker  1:30:30  
+between 2018 and 2019 with data.
+
+Unknown Speaker  1:30:36  
+So forget about this left and right suffix for now, first time saying you have to join the 2018 data, with the 2019 data, what is the basic syntax of the join?
+
+Unknown Speaker  1:30:53  
+Try to recall how we did the join in our toy exercise.
+
+Unknown Speaker  1:30:59  
+Data Frame, dot join the right data frame, yep. So here it says, join 2018 and 2019 right? So let's take 2018 as my
+
+Unknown Speaker  1:31:10  
+left data frame
+
+Unknown Speaker  1:31:14  
+and then do a join,
+
+Unknown Speaker  1:31:18  
+and then provide 2019 as my right data,
+
+Unknown Speaker  1:31:28  
+you see that returned an error. Why?
+
+Unknown Speaker  1:31:32  
+So I want you to read the error message and try to figure out what it is saying.
+
+Unknown Speaker  1:31:42  
+This is not concat. So when we did concat and we had exactly same column name, the column name was repeating. Here we are trying to do kind of similar type of combination, but using join.
+
+Unknown Speaker  1:31:54  
+But here, column names are also repeating,
+
+Unknown Speaker  1:31:57  
+but concat was kind of little forgiving
+
+Unknown Speaker  1:32:01  
+it let you run with it. Join is not
+
+Unknown Speaker  1:32:06  
+so what join is saying is, columns are basically overlapping, and you have not specified any suffix. So essentially, what join is saying, Hey, you have to make the column unique.
+
+Unknown Speaker  1:32:20  
+So for the left, you have to provide some unique suffix to the column. And so for the right, so to do that, you have to add
+
+Unknown Speaker  1:32:34  
+a parameter called L suffix, and what is my left data frame,
+
+Unknown Speaker  1:32:40  
+2018, right. So let's add a suffix that will say hyphen, 2018 so whatever the column name, and it will add a hyphen, 2018 and on top of that. So that way, now you don't have the name collision for the column.
+
+Unknown Speaker  1:32:56  
+Remember, if name collision happens, concat doesn't mind. It makes the data kind of unreadable, and that's why we added that Multi Level column. But when the name collision happened, join actually does might. So we have to provide left and right suffix to add to that column to differentiate between the similarly name columns, between the two data set
+
+Unknown Speaker  1:33:22  
+right so then that's what it is going to work and then we are going to save it in a variable,
+
+Unknown Speaker  1:33:31  
+and we are going to display the variable the data frame,
+
+Unknown Speaker  1:33:37  
+and now See what happened.
+
+Unknown Speaker  1:33:40  
+So now I have crop year value, but first set of columns have hyphen, 2018 appended to it,
+
+Unknown Speaker  1:33:48  
+and I have the same set of value, hyphen, 2019 append to it.
+
+Unknown Speaker  1:33:54  
+If you look into the actual item in the cell,
+
+Unknown Speaker  1:33:59  
+you are basically getting the same result if you done the concat,
+
+Unknown Speaker  1:34:05  
+but you are just doing it in a joint.
+
+Unknown Speaker  1:34:15  
+Then the next thing they are asking here is join the 2018 and 2019 with data, with the 2020 with data, and add a suffix 2020 for the 2020 data,
+
+Unknown Speaker  1:34:31  
+right? So one thing we could do,
+
+Unknown Speaker  1:34:36  
+we could take these
+
+Unknown Speaker  1:34:38  
+joined data frame already, because you have to do left, dot join outer. So now if you have to add 2018 2019 2023, together, you already have 2018, and 19 already joined. You can take that data
+
+Unknown Speaker  1:34:55  
+and then you can do a join in.
+
+Unknown Speaker  1:35:00  
+On
+
+Unknown Speaker  1:35:03  
+2020, data,
+
+Unknown Speaker  1:35:09  
+right?
+
+Unknown Speaker  1:35:10  
+So this should work.
+
+Unknown Speaker  1:35:15  
+I don't forget in the suffix,
+
+Unknown Speaker  1:35:18  
+yeah, so it does work, but here I have not added any suffix for 2020, so 2018, and 19 suffix are coming from here, but here it's not coming. So what you can do is we can do so when you are taking, oh, sorry, I actually made a mistake on the right hand side. I wanted to do 2020 actually with 2020
+
+Unknown Speaker  1:35:47  
+but even if you do that, you will get the last set of columns without any suffix. So when you have to just apply suffix to only one, you can also apply a function called add suffix. Instead of providing l suffix and R suffix as a para as an option to your join, when you are passing that particular data frame, you can say, hey, add this particular suffix, which in this case would be hyphen, 2020,
+
+Unknown Speaker  1:36:19  
+and let's call these all data, all all week data.
+
+Unknown Speaker  1:36:31  
+And there we go. So we have three column for 2018, three for 2019, and three for 2020,
+
+Unknown Speaker  1:36:40  
+with disambiguated column names,
+
+Unknown Speaker  1:36:52  
+I want to join on the country it
+
+Unknown Speaker  1:36:58  
+did or it did already. Okay, it did already, because country was the index for all of these.
+
+Unknown Speaker  1:37:16  
+Is there an equivalent add suffix functionality for using concatenate.
+
+Unknown Speaker  1:37:25  
+I don't think so you can check, but I don't think there is one. So this so using join in this instance, hasn't Oh, so sorry, sorry. Hang on a second add suffix, you can do because add suffix has nothing to do with concatenated join, because you see how I'm adding add suffix. Add suffix. Yes, when you are doing concatenate, you can do that. But what I said not available is this L suffix or R suffix attributes. These are not these parameters are not available for concat. That's join function parameter, okay, these, add suffix. You can definitely do so what add suffix does it basically adds these even doing the actual join. So that way it already disambiguates by the time the join receives the data frame. And you can do the same thing for concat. You can do the same thing for barge, because this is a data frame method, so you can apply in anywhere.
+
+Unknown Speaker  1:38:17  
+Okay, thank you. Okay. Now the other thing is, there is an alternate So here what we did is we joined 2018 and 2019 and took the joint data frame and did a join on that one and 2020 right? So you join one and two, and then take the joint one, and then add the third one and so on. So that's one way of doing it, but another way you should know is, there is another way of doing it. You can take, let's say,
+
+Unknown Speaker  1:38:50  
+let's start with 2018
+
+Unknown Speaker  1:38:55  
+you can do 2018 dot join
+
+Unknown Speaker  1:39:01  
+and in here you can actually pass so earlier, we did 2018 dot join 2019 Right? Or
+
+Unknown Speaker  1:39:11  
+this is what I did earlier, and then we take that and did a join of that on 2020,
+
+Unknown Speaker  1:39:16  
+so another thing you should know, instead of passing one table for the right hand side. It actually allows you to pass multiple tables here as a list, which makes it very similar to how you pass multiple table as a list to concat function.
+
+Unknown Speaker  1:39:33  
+But unlike concat here, you are not doing PD dot something. You are still doing a data frame dot join, but on the right hand side. Instead of passing one table, you can actually pass two tables,
+
+Unknown Speaker  1:39:46  
+but if you run it this way Exactly, this is not going to work because of the column name clash,
+
+Unknown Speaker  1:39:54  
+right? It's not going to work because it says overlapping values. But what you can do is.
+
+Unknown Speaker  1:40:00  
+So when you are passing these three, what is called three data frame, you can do an ad suffix on each one of them. So instead of doing week in passing week 2018
+
+Unknown Speaker  1:40:12  
+you can do a add suffix. Or you can even do an ad prefix, if you would like. Let's do an ad prefix. It. It's the same thing. The purpose is to disambiguate.
+
+Unknown Speaker  1:40:25  
+So you can do an add prefix here, and then for each one of these, you can do either add prefix or add suffix,
+
+Unknown Speaker  1:40:33  
+2019 so I'm going to add a prefix of 2019
+
+Unknown Speaker  1:40:38  
+and then 2018 sorry, 2020
+
+Unknown Speaker  1:40:41  
+I'm going to do a add a prefix of
+
+Unknown Speaker  1:40:46  
+2020, and then a half.
+
+Unknown Speaker  1:40:52  
+And there you go. So now, since I have added this as a prefix, it is giving me year hyphen then. And now you see, first I have 2018 and then 2019, and 2020 because my left hand side is 2020, 2018 so that is the primary candidate. And based on that pivoting on that, I'm doing a join on the two things together in one shot, instead of doing in two different shots. So
+
+Unknown Speaker  1:41:35  
+okay,
+
+Unknown Speaker  1:41:37  
+clear, join, example,
+
+Unknown Speaker  1:41:41  
+okay, so now
+
+Unknown Speaker  1:41:44  
+if you go back up and take a look at how we were reading the files here, so we said index call equal to country when reading the file.
+
+Unknown Speaker  1:41:56  
+And because of that, when we did get the data set, we got country as an index.
+
+Unknown Speaker  1:42:02  
+So what we are going to see now, if our data set does not have an index,
+
+Unknown Speaker  1:42:09  
+what can we do?
+
+Unknown Speaker  1:42:11  
+How can we join so in order to do that, we are going to read that same data set over again, but this time without the index property. So
+
+Unknown Speaker  1:42:24  
+it. So if you do it without the index property,
+
+Unknown Speaker  1:42:31  
+actually, just go ahead.
+
+Unknown Speaker  1:42:38  
+Now you have no index. Well, you just have a numeric index, the range index, they call it. But country is not an index anymore. It's just any other column. It's not a special index column.
+
+Unknown Speaker  1:42:51  
+And same thing you will see for 2019, and 2020, all of these, they would not have a index because now I have re read the rewrite the data without an index column.
+
+Unknown Speaker  1:43:12  
+So now our task is to do the concatenation just like we did before, but this time, knowing that there is no index.
+
+Unknown Speaker  1:43:24  
+So now let's say, if I want to do let's say join 2018 and 2019 right? So I'm going to take earlier what I was doing with 20 eighteen.df,
+
+Unknown Speaker  1:43:36  
+dot, join
+
+Unknown Speaker  1:43:40  
+with 2019, and df. This is what I was doing before when the data frame did have an index. Now, let's see whether that works. Now,
+
+Unknown Speaker  1:43:51  
+well, it did not work because the suffix problem. Okay, so let's make this guy happy. Let's, let's put an L suffix.
+
+Unknown Speaker  1:44:04  
+The first one is
+
+Unknown Speaker  1:44:08  
+2018
+
+Unknown Speaker  1:44:10  
+which is the left suffix, and right suffix is
+
+Unknown Speaker  1:44:16  
+2019
+
+Unknown Speaker  1:44:18  
+now let's see whether that works. I Okay? So that actually did work with one caveat,
+
+Unknown Speaker  1:44:34  
+since the country was not an index, so it basically used the range index, which is zero to 15, and now I have a Country column here, and I have another country column here. But guess what? The all the country values are the same.
+
+Unknown Speaker  1:44:52  
+So essentially what I ended up having a duplicate Country column.
+
+Unknown Speaker  1:44:56  
+Why? Because
+
+Unknown Speaker  1:44:59  
+the country.
+
+Unknown Speaker  1:45:00  
+Tree was not an index in the original data frame here.
+
+Unknown Speaker  1:45:05  
+So now the question is, how can we avoid that? I'm
+
+Unknown Speaker  1:45:21  
+going to say the obvious thing and just make the index country, but we already did that.
+
+Unknown Speaker  1:45:27  
+No. So here, no. So in earlier, we already had that index. This time, we don't, so the data set that we read didn't have an index. But that does not mean all is lost. We can do this right here on the fly, while we are issuing this command, we can actually say,
+
+Unknown Speaker  1:45:46  
+dot set index.
+
+Unknown Speaker  1:45:51  
+And when you do the set index, you can actually specify a list of columns that you want to set it as an index. Here I want to do country as an index.
+
+Unknown Speaker  1:46:07  
+But then when you are doing that, then your right hand side does not have an index. So what you need to do is, then you have to specify another parameter called on
+
+Unknown Speaker  1:46:19  
+and in on you have to specify. So left hand side, I'm saying, Okay, for the left hand side, I am using the, actually, no, not a left hand side right. This is I'm doing the index on the right hand side. So then on the left hand side, I want to specify which column that I want to join on, which would need to be the same thing as country,
+
+Unknown Speaker  1:46:53  
+right? So now, if I take this,
+
+Unknown Speaker  1:46:58  
+it should work.
+
+Unknown Speaker  1:47:02  
+Oops, yeah, so let's put this in a variable.
+
+Unknown Speaker  1:47:12  
+Where did my output go?
+
+Unknown Speaker  1:47:15  
+Oh, no. It says I have forgotten something. What did I forget in a comma after a comma? Okay,
+
+Unknown Speaker  1:47:25  
+okay, cool.
+
+Unknown Speaker  1:47:28  
+So now I have country appearing only once and not repeating.
+
+Unknown Speaker  1:47:36  
+Now there is no reason I should stop at country. You see the prop column is also the same, so there is no point having the prop column repeated twice. So what I can do I can apply two columns as an index, country and prop
+
+Unknown Speaker  1:47:56  
+and then when I'm joining on the right hand side, I have to also correspondingly provide two columns, and that way there would be no duplication. I'm saying country and crop and then just year and value these. These are the ones that are different. So I already have disambiguated column name because of the suffix that I have added, which is 2018 and 2019
+
+Unknown Speaker  1:48:22  
+so
+
+Unknown Speaker  1:48:31  
+so now you have to do the same thing, and take this data and join the 2020 data, knowing that this time, the 2020, data also does not have an index. So how am I going to do that?
+
+Unknown Speaker  1:48:54  
+So I can take this data right, and I can say set index,
+
+Unknown Speaker  1:49:01  
+and for set index, I'm going to pass the same two column names, country and prop.
+
+Unknown Speaker  1:49:10  
+So now this is my on the fly index applied joint, 2018, 2019, data.
+
+Unknown Speaker  1:49:19  
+And then on top of that, I can say,
+
+Unknown Speaker  1:49:24  
+dot join.
+
+Unknown Speaker  1:49:29  
+Right? Dot join.
+
+Unknown Speaker  1:49:32  
+And here I can pass
+
+Unknown Speaker  1:49:37  
+what was the name of the other one? Wait, 2020. So. With 2020
+
+Unknown Speaker  1:49:47  
+and I can say on equals
+
+Unknown Speaker  1:49:52  
+country and crop.
+
+Unknown Speaker  1:49:56  
+And I.
+
+Unknown Speaker  1:50:03  
+I put that in a new variable,
+
+Unknown Speaker  1:50:10  
+and this should work, I suppose.
+
+Unknown Speaker  1:50:17  
+No, it didn't work. Why?
+
+Unknown Speaker  1:50:20  
+It says left on must equal to the number of levels on the right.
+
+Unknown Speaker  1:50:30  
+Okay,
+
+Unknown Speaker  1:50:35  
+okay, because this weight index guy does not have an index
+
+Unknown Speaker  1:50:41  
+right. So I think I made a mistake here.
+
+Unknown Speaker  1:50:45  
+So I have to take these and apply on the 2020,
+
+Unknown Speaker  1:50:52  
+yep,
+
+Unknown Speaker  1:50:54  
+so now that produces the same.
+
+Unknown Speaker  1:50:58  
+Hang on, where is my
+
+Unknown Speaker  1:51:01  
+Oh, I forgot to add the suffix for this one. Okay, that's why. So then you can, how can you add a suffix? Here?
+
+Unknown Speaker  1:51:19  
+I have done this. Okay, I can actually change probably. I can do a add suffix here, and then add a 2020, here, yep. So now I have 1819, 20 concatenated, all on country and crop using two columns. So therefore these two columns are not repeating, and then just the two unique columns are repeating with the corresponding suffixes. So essentially, I kind of got the same result as before. The only difference is, in this second part, we just learned how we can do the join even when the original data frame does not have an index, that you can actually apply the index on the fly. So
+
+Unknown Speaker  1:52:12  
+could you just scroll to the left of that joined,
+
+Unknown Speaker  1:52:17  
+I just want to see
+
+Unknown Speaker  1:52:21  
+scroll to the left, scroll right. I'm sorry you did it. Yeah, okay, do
+
+Unknown Speaker  1:52:52  
+okay, clear any question.
+
+Unknown Speaker  1:52:57  
+Just, I'm just still seeing, uh,
+
+Unknown Speaker  1:53:00  
+it's a years of year 2020,
+
+Unknown Speaker  1:53:04  
+I'll have to figure out what
+
+Unknown Speaker  1:53:34  
+Okay, now we are going to do some activity to learn about merging.
+
+Unknown Speaker  1:53:40  
+Any question on this before we go on The margin activity?
+
+Unknown Speaker  1:54:01  
+Okay, I will take that as a no.
+
+Unknown Speaker  1:54:04  
+In case some of these thing, it's still not clear, I will give you some time to do some work yourself. So we will do some breakout room. We do have four activities, but we'll probably do just one or maybe two. Okay, so you will get some time to practice yourself.
+
+Unknown Speaker  1:54:21  
+Okay, then
+
+Unknown Speaker  1:54:25  
+on the margin, moving on.
+
+Unknown Speaker  1:54:28  
+So now we are going to do some merging example. So we have some data here, and this is just a data that is created on the fly. So let's say we have this customer ID, name and email.
+
+Unknown Speaker  1:54:45  
+And then we have another data frame that has customer ID,
+
+Unknown Speaker  1:54:52  
+which you will see that there are some overlap and some different right. Actually, let's see 112, 40.
+
+Unknown Speaker  1:55:00  
+3999543,
+
+Unknown Speaker  1:55:04  
+ah, 123, is different here. So 123, is here, but not here. And then 654, is here, but not the first one, okay, so there is some overlap. Well, four out of five overlaps. And then one unique on the left hand side, one unique on the right hand side, but the attributes are different, right? The first one is a data base that gives me customers name and email, and the right one is a database that gives me for that customer ID as a primary key, what is the item that the customer has bought at and at what cost? Right? Maybe from a retail store. So that is the tiny little data frame that we have.
+
+Unknown Speaker  1:55:46  
+So the first thing we want to do is we want to merge these two data frame as an inner join, which is by default.
+
+Unknown Speaker  1:55:55  
+So how do we do the march? This is basically that SQL type thing, right? Where you have basically similar concept as left, join, right, join, inner, join, outer, join, cross, join, and all of that stuff. So first we are going to do a march
+
+Unknown Speaker  1:56:12  
+using the default join, which is inner. So how do we do the march?
+
+Unknown Speaker  1:56:19  
+What is the function, PD dot merge. Yep, it's a top level function, so PD dot merge. And how do we pass the data frames as
+
+Unknown Speaker  1:56:35  
+variables, as variables, not as a list, as individual variables? So info and items, the two data frame
+
+Unknown Speaker  1:56:46  
+and that should be it, right?
+
+Unknown Speaker  1:56:55  
+You have to give it a key dimension. So this is what remember I said, even I should have given it on equals customer ID. But if you look at the data frame, since customer ID is the common name, it automatically details that that must be it. So if you want to be grammatically correct, you are right. You actually have to provide the name of the column or key that you are going to merge on. But even if you don't do that,
+
+Unknown Speaker  1:57:25  
+you will still get the same result as you see here, right? No matter whether I provide that or not, because that is a common column name
+
+Unknown Speaker  1:57:33  
+you, it will still work.
+
+Unknown Speaker  1:57:36  
+Yeah?
+
+Unknown Speaker  1:57:41  
+So now we are going to do a merge, and this time we are going to do an outer join. So here, so first of all, how do you know that this is an inner join? Let me ask the question to you, how do you satisfy yourself that this indeed is an inner join? What tells you that
+
+Unknown Speaker  1:58:01  
+is it because you have customer ID where you can join the two?
+
+Unknown Speaker  1:58:08  
+No, you are always going to use customer ID. But what makes you think that this is an inner join because values that don't exist in the Customer ID both tables aren't displayed default is rooted in a join.
+
+Unknown Speaker  1:58:22  
+That's right. And do you remember the additional attribute that we can pass that will actually show me where the data came from?
+
+Unknown Speaker  1:58:33  
+Yeah.
+
+Unknown Speaker  1:58:35  
+Is that indicator equals true?
+
+Unknown Speaker  1:58:40  
+Yes. Indicator equals true. You are right. So if you do apply that additional parameter here,
+
+Unknown Speaker  1:58:54  
+oops.
+
+Unknown Speaker  1:58:58  
+So since this is inner join, so obviously this is what we expected, that all of the rows data will come from both side, because if it is not present in one or the either, then it will not be coming in here. And remember, here we saw, when we manually looked through these, we saw four out of five customer IDs common across both and here we happen to have only four rows, and these are the only four common customer ID that we have in both data frames, and that's why in the indicator column, it says all of these rows came from both sides of the table.
+
+Unknown Speaker  1:59:38  
+The next example is to turn this inner join to an outer join. By the way, here we did not specify inner, because inner is default. But if you do want to change this to outer, what is it you need to change?
+
+Unknown Speaker  1:59:57  
+We need to add the how argument.
+
+Unknown Speaker  2:00:00  
+Equals louder.
+
+Unknown Speaker  2:00:03  
+And how many rows we are expecting this time when I run this
+
+Unknown Speaker  2:00:08  
+to be all of them. Now, five, how many?
+
+Unknown Speaker  2:00:12  
+Six? Sorry, yeah.
+
+Unknown Speaker  2:00:17  
+And now you have one that is left only, one that is right only, and then the four other is basically both.
+
+Unknown Speaker  2:00:27  
+Now you see the one that is left only for those ones, the right columns are null value, and the ones that are right only, they are the left columns are non valid.
+
+Unknown Speaker  2:00:39  
+So, pretty clear. So,
+
+Unknown Speaker  2:00:48  
+so sorry. Good question is the indicator equals through only work for the merge,
+
+Unknown Speaker  2:00:54  
+can you do the same thing for
+
+Unknown Speaker  2:00:58  
+the other the job? I don't think so. I don't think so. I have the link to the pandas documentation added to the slide, so there are like ton of different options, so I cannot remember everything on top of my head. Go check yourself, or just try it out. And it wouldn't work for concat, because concat just mushes them together. There's concat. It would not definitely work, because the purpose of concat is very different. Yes,
+
+Unknown Speaker  2:01:27  
+join. It may or may not work. I'm not very sure.
+
+Unknown Speaker  2:01:31  
+Okay, so the next one is left, join, which is simple at this point, what am I going to do?
+
+Unknown Speaker  2:01:39  
+Are we going to note just left. That's it. So now I have four rows coming as both and one row coming as left on the which happen to be the same rows here, which is customer ID, 123, which is left only,
+
+Unknown Speaker  2:01:54  
+and then the same thing. If we want to do right, I'm not going to have this row. I'm still going to have five rows, but I will have these 654, rows, because that is right only right. So let's validate that by changing these, how parameter to right.
+
+Unknown Speaker  2:02:11  
+And yep, 654, which is right only and then now on the left.
+
+Unknown Speaker  2:02:21  
+Okay. So so
+
+Unknown Speaker  2:02:26  
+now look at one thing. So when you do the inner join, you are not going to get any nows, right? Um, because you only have the common but what happen if you take a outer join? So now you will have some hold or some gaps, either on the right hand side or on the left hand side. So let's do the outer join here again.
+
+Unknown Speaker  2:02:52  
+Now we have now,
+
+Unknown Speaker  2:02:54  
+but what if I don't like the now? What do we do? Usually, like any data set, forget about this thing, anything that I want to drop. Now, what do we do?
+
+Unknown Speaker  2:03:04  
+Place the nose or get rid
+
+Unknown Speaker  2:03:07  
+Well, or, like, simple drop in a, right? Yeah, that will be the GET RID OF part, yeah. So now you see what happens when you take a union, which is the outer join, and do a drop an A essentially what you end up getting an inner join. You basically get an inner join, right, which kind of makes sense.
+
+Unknown Speaker  2:03:29  
+So you are doing an union, and then in that union, whatever element has gaps, you are dropping those. So effectively you were left, left with an intersection. You
+
+Unknown Speaker  2:03:51  
+so that was pretty simple, huh?
+
+Unknown Speaker  2:03:59  
+Any question on join, I'm sorry, on March.
+
+Unknown Speaker  2:04:06  
+Well, it was pretty simple, because in this particular demonstration,
+
+Unknown Speaker  2:04:12  
+the column names were not duplicate. The two data set said that we were merging had very different column name, right? And that's why the merging turns out to be very simple. Now we are going to look at a slightly complicated use case where we are going to have duplicate column in the data frame,
+
+Unknown Speaker  2:04:31  
+and now we are going to merge.
+
+Unknown Speaker  2:04:35  
+So this time, we are going to use that same stock data. Oops.
+
+Unknown Speaker  2:04:43  
+Up, select the kernel, same stock data for Apple, Google and meta.
+
+Unknown Speaker  2:04:50  
+What is happening here? So.
+
+Unknown Speaker  2:05:00  
+Oh,
+
+Unknown Speaker  2:05:02  
+I did not run this. Sorry. Okay, okay, so now I have the same data, basically Apple data,
+
+Unknown Speaker  2:05:12  
+Google data
+
+Unknown Speaker  2:05:14  
+and meta data.
+
+Unknown Speaker  2:05:17  
+So metadata has a different meaning. But anyway, so we have three stock market data.
+
+Unknown Speaker  2:05:25  
+So what we are going to do now is we are going to try to merge the Apple and Google data on the date column.
+
+Unknown Speaker  2:05:36  
+So how do we do that much? And by the way, date is not an index right? As you can see here, because we did not use the index option while we were reading the CSV files. So just plain, simple data set with sequential range, index, 0123, for each one of them, right now, if what we are going to do, if we want to merge two of these data set that has exact same set of columns on a date column, what our command is going to be,
+
+Unknown Speaker  2:06:13  
+PD, dot merge. Yeah, it's same thing, just like what we did in the previous example. So pretty. PD, dot March, and we provide Apple data and we provide Google data right
+
+Unknown Speaker  2:06:29  
+when we also
+
+Unknown Speaker  2:06:31  
+on date, yeah, and we know that even if we don't provide that, it will still work. But just for the sake of completeness, let's provide things, right,
+
+Unknown Speaker  2:06:41  
+and let's say,
+
+Unknown Speaker  2:06:43  
+let's call it a, ppl, Google DF, which is a merged one.
+
+Unknown Speaker  2:06:58  
+I had one extra P in Apple stock sigma. Okay, so when you do that,
+
+Unknown Speaker  2:07:06  
+what we are getting,
+
+Unknown Speaker  2:07:09  
+does it make sense what we are getting?
+
+Unknown Speaker  2:07:13  
+I noticed it gave us the suffix of x and y. Yeah. Why?
+
+Unknown Speaker  2:07:21  
+Because, unlike join, so join would actually stop you from doing this operation if you have overlapping name.
+
+Unknown Speaker  2:07:29  
+So March almost works like the same way, but in March, if you do have overlapping name, it will make some automatic guess for you.
+
+Unknown Speaker  2:07:42  
+Right?
+
+Unknown Speaker  2:07:44  
+Do you like this guest, though
+
+Unknown Speaker  2:07:48  
+it's not very descriptive,
+
+Unknown Speaker  2:07:51  
+yeah.
+
+Unknown Speaker  2:07:54  
+So then, what do you think we can do?
+
+Unknown Speaker  2:08:01  
+Oh, by the way, another way of using March. So here we did PD dot, margin, then Apple and Google. Another way you can also do this is the one that I said that I kind of got little off guard. So you can also use the march using a similar syntax that you use the join, which is one data frame dot, another data frame with on attribute,
+
+Unknown Speaker  2:08:28  
+and that will also give you the same result, exact same result. So you can either say Apple, dot merge Google, or you can say PD, dot March and then Apple, come on Google. So both gives you the same exact result.
+
+Unknown Speaker  2:08:46  
+Now, if we take these Apple, Google merged DF,
+
+Unknown Speaker  2:08:52  
+and we print the column names, only, we get this ugly looking column name,
+
+Unknown Speaker  2:09:01  
+right?
+
+Unknown Speaker  2:09:03  
+So we have to basically live with it.
+
+Unknown Speaker  2:09:09  
+If we don't want to live with it, what we need to do, we have to go it in very painful old fashioned way, which is renaming the column using the syntax that we have learned
+
+Unknown Speaker  2:09:29  
+before, which is you provide a key value pair and provide the column name and the new column name and so on.
+
+Unknown Speaker  2:09:39  
+In when you are doing the join, you could actually provide an additional level on top right using keys. But here, when you are doing a march, you unfortunately cannot do that. So you basically have to do it this old fashioned way, and where you are basically providing this so.
+
+Unknown Speaker  2:10:00  
+And you cannot provide l suffix or suffix here either.
+
+Unknown Speaker  2:10:06  
+So that is the hard way.
+
+Unknown Speaker  2:10:20  
+Okay,
+
+Unknown Speaker  2:10:21  
+the next one is merging all three data frame.
+
+Unknown Speaker  2:10:27  
+So how do we merge all three data frame?
+
+Unknown Speaker  2:10:33  
+We already have two merged. So we can take the Apple, Google merged, and do take that and do a march with meta, right?
+
+Unknown Speaker  2:10:51  
+With meta, right? Or we can do vice versa. It doesn't matter, and we can say on equals
+
+Unknown Speaker  2:11:01  
+date.
+
+Unknown Speaker  2:11:03  
+Oops, sorry, not that.
+
+Unknown Speaker  2:11:18  
+So then it will give you the merged.
+
+Unknown Speaker  2:11:21  
+But here the last one is meta that we merged since we didn't change the volume column name and this column name we already changed before, so there is no conflict. So now the original column name from meta has gotten carried over, so you can either live with it, or you can do another column, rename and change those column names also,
+
+Unknown Speaker  2:11:41  
+right? You can basically write
+
+Unknown Speaker  2:11:45  
+something like this. So let's
+
+Unknown Speaker  2:11:49  
+call it
+
+Unknown Speaker  2:11:51  
+white is not scrolling to the left. What is going on? Okay?
+
+Unknown Speaker  2:11:59  
+So let's call it
+
+Unknown Speaker  2:12:04  
+Apple,
+
+Unknown Speaker  2:12:06  
+Google,
+
+Unknown Speaker  2:12:08  
+meta,
+
+Unknown Speaker  2:12:10  
+DF,
+
+Unknown Speaker  2:12:12  
+and now we know that these
+
+Unknown Speaker  2:12:17  
+last six columns
+
+Unknown Speaker  2:12:21  
+basically are just open high and all. So therefore I'm just going to do that Rename, and now we will have Apple, Google and meta, all of the columns renamed to their corresponding, um, meaningful column name.
+
+Unknown Speaker  2:12:39  
+So again, we did basically, kind of what we did in the previous activity as well. We took the merger of two and then merged it to the three. Did you have chained that merge onto your join?
+
+Unknown Speaker  2:12:53  
+Yeah, the Rename.
+
+Unknown Speaker  2:12:56  
+Sorry. Could you have chained the Rename onto it?
+
+Unknown Speaker  2:13:01  
+Rename? Of what off of the merge. So
+
+Unknown Speaker  2:13:05  
+instead of having two lines do it in the one, I see what you mean? Yeah, I think it is possible.
+
+Unknown Speaker  2:13:12  
+That's a good observation. Let's try that, because this one is returning a data frame, so there is no reason you shouldn't be able to let's try that.
+
+Unknown Speaker  2:13:23  
+Yeah, I think it worked.
+
+Unknown Speaker  2:13:26  
+Yeah, you can do the Rena on the fly as well,
+
+Unknown Speaker  2:13:32  
+because most of these functions you can change.
+
+Unknown Speaker  2:13:39  
+Okay,
+
+Unknown Speaker  2:13:41  
+so, and then we did all of these, and that's basically everything, because last three things are, it's not really related to the today's class. So this is, this is, so let's actually think about this way. So how am I going to find the best opening for each stock, meaning the maximum opening value for Apple stock, maximum opening value for Google stock, and maximum opening value for meta stock.
+
+Unknown Speaker  2:14:10  
+This has nothing to do with March. Can you go back to the data frame and max values?
+
+Unknown Speaker  2:14:18  
+Yeah, so you can basically use these data frame only,
+
+Unknown Speaker  2:14:23  
+Apple Google metadata, right? And you can just take apple, open, Google Open and meta open from here and do the max values as you correctly said, Vijay,
+
+Unknown Speaker  2:14:35  
+so we can basically say this data frame.
+
+Unknown Speaker  2:14:42  
+And let's take
+
+Unknown Speaker  2:14:45  
+apple open,
+
+Unknown Speaker  2:14:48  
+dot max,
+
+Unknown Speaker  2:14:52  
+right? And let's call it
+
+Unknown Speaker  2:14:56  
+best, Apple open.
+
+Unknown Speaker  2:15:04  
+Two and print best apple open. So that's your best apple open.
+
+Unknown Speaker  2:15:10  
+And then you can do the same thing the other way and for the other
+
+Unknown Speaker  2:15:15  
+if you want to do the best closing, I'm not doing everything right. Best closing value. It's the same thing. You can basically take the corresponding columns max. So instead of Apple open, you can say Apple close, and that way, oops. Not
+
+Unknown Speaker  2:15:33  
+that this, you will get the Best closing value for Apple. So
+
+Unknown Speaker  2:16:00  
+Okay,
+
+Unknown Speaker  2:16:02  
+the next one is saying, this is again, going back to last week's class. How do you create a new column which will have the total value for each stock and to the millions, meaning you have to do a sum and then divide by a million and then round it to two decimal places and create a new column. Or actually not create, it just says, calculate. So how do you calculate? Let's do just for one
+
+Unknown Speaker  2:16:32  
+How am I going to take the total of all stock trading that has happened, which is the volume column, right total volume, and then do a sum and then divide by 10,000 and round it to two decimal plus.
+
+Unknown Speaker  2:16:58  
+Come on, guys, this should be easy.
+
+Unknown Speaker  2:17:01  
+This is kind of a easy recap for the previous lambda plus,
+
+Unknown Speaker  2:17:07  
+but we are not applying this to anywhere. All we are doing is, I see this is an aggregate function. I have to believe there are like, 100 rows I want to take. So this is a stock trading data, right? So I have a stock trading that has happened, let's say, December 1, December 2, December 3, and so on. And every day the stock market is telling me this much volume of the share has exchanged hands on that given day. What I'm trying to do here is I'm looking into the whole month, let's say, and I'm totaling all the stock trading that has happened, and I'm trying to print, what is the total volume of the stock
+
+Unknown Speaker  2:17:45  
+that has been since brought and sold over the whole period of time.
+
+Unknown Speaker  2:17:52  
+I think you want this would be to sum the whole column, right? So if you have Apple, Google and meta, you'll have to column and then, right? So you basically have to take whatever the column is. Let's take the apple volume, and you can do the same with anything, and then what we do on that a sum, right? Yeah. So if you just do that,
+
+Unknown Speaker  2:18:20  
+what just happened here?
+
+Unknown Speaker  2:18:23  
+Apple,
+
+Unknown Speaker  2:18:25  
+oh, sorry, not best. Apple, close, wow.
+
+Unknown Speaker  2:18:30  
+This is not even a data frame, my bad. So Apple, Google, March data, so yeah. So you take the volume or any column and you do a song.
+
+Unknown Speaker  2:18:40  
+Now it says you have to show it in millions. So how do you show it in millions?
+
+Unknown Speaker  2:18:46  
+Just like we did with that utility data yesterday, right? You divide by a million,
+
+Unknown Speaker  2:18:53  
+and you will get like this. And then it says, round it up to two decimal places. So you take that and round to two decimal places, and you get that. That's it.
+
+Unknown Speaker  2:19:09  
+And then the last prompt is just an example. How do you take all of this data and create a summary data frame which is
+
+Unknown Speaker  2:19:16  
+which is pretty easy. You just take the these four or eight values, and
+
+Unknown Speaker  2:19:22  
+basically create a JSON structure and do a PD dot data frame, and it will get this. It's just like how you create any on the fly data frame with some synthetic value.
+
+Unknown Speaker  2:19:33  
+So that's basically pretty much all the
+
+Unknown Speaker  2:19:39  
+demonstration that I had to do for the today's class, which should, in theory, make you well prepared to apply some of the activity yourself.
+
+Unknown Speaker  2:19:53  
+Okay, so let's see which ones of which ones of these are kind of worth doing.
+
+Unknown Speaker  2:20:00  
+And how much time we have. We have about half an hour.
+
+Unknown Speaker  2:20:04  
+Okay,
+
+Unknown Speaker  2:20:10  
+we are in this week
+
+Unknown Speaker  2:20:13  
+active. It is the first one I know. It is basically just exactly repeat. I
+
+Unknown Speaker  2:20:24  
+alternative energy. Joy, so
+
+Unknown Speaker  2:20:47  
+yeah, so I think this would be fun to do. So let's get into our breakout rooms and do these activity number four, and we will give you 15 minutes to tackle that.
+
+Unknown Speaker  2:21:02  
+I hope that should be enough time there.
+
+Unknown Speaker  2:21:08  
+Activity number four, yep, student joining alternative energy.
+
+Unknown Speaker  2:21:14  
+Five, CSVs,
+
+Unknown Speaker  2:21:17  
+yeah,
+
+Unknown Speaker  2:21:22  
+but hey, all the CSVs are already red for you. I think that part of code is already provided. Student, we
+
+Unknown Speaker  2:21:31  
+have to enter the file. Pants,
+
+Unknown Speaker  2:21:36  
+Oh, you do have to enter the file.
+
+Unknown Speaker  2:21:39  
+That's a little bit of film, yeah,
+
+Unknown Speaker  2:21:48  
+yeah,
+
+Unknown Speaker  2:21:50  
+let me do one thing. This is that right?
+
+Unknown Speaker  2:21:57  
+Okay, so just to make your life easy, I'm going to post these
+
+Unknown Speaker  2:22:05  
+reading part, basically the code for this, here on the slack so you don't have to read the file first. Sorry, five different CSV files. So let me put that in.
+
+Unknown Speaker  2:22:19  
+In which channel do we use? Live Channel? I'm going to put that on the live Slack channel.
+
+Unknown Speaker  2:22:33  
+There you go.
+
+Unknown Speaker  2:22:38  
+So essentially, I just provided you with this.
+
+Unknown Speaker  2:22:43  
+Okay,
+
+Unknown Speaker  2:22:47  
+okay, so are the breakout rooms open? Karen,
+
+Unknown Speaker  2:22:52  
+whenever you're ready. 15 minutes,
+
+Unknown Speaker  2:22:56  
+15 minutes, yes to 15
+
+Unknown Speaker  2:23:22  
+I'm here. And one more thing, those three files that I showed in the little using the toy data set,
+
+Unknown Speaker  2:23:31  
+can I send those to you on staff chat, and just like the last class, you can basically maybe push it onto GitLab, yeah.
+
+Unknown Speaker  2:23:41  
+Okay, let me do that. Then I
+
+Unknown Speaker  2:23:56  
+have to admit I'm just kind of fading. I
+
+Unknown Speaker  2:24:08  
+Yeah, actually, I'm just going to send you In DM there. Okay, yeah, I see
+
+Unknown Speaker  2:24:14  
+attach, upload.
+
+Unknown Speaker  2:24:18  
+Okay.
+
+Unknown Speaker  2:25:01  
+Okay, there you go. You should have it now.
+
+Unknown Speaker  2:25:27  
+We are not recording now, are we?
+
+Unknown Speaker  2:25:30  
+We are.
+

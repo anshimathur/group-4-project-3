@@ -1,0 +1,1128 @@
+Speaker 1  0:02  
+To learn today is not earth shattering, if anything, it will produce some bring in some improvement. But when it comes to identifying things in image, any any picture, what we saw in the last class, which I like to refer to as hello world of image recognition, which is the MNIST and written digits, even if you don't learn anything else, if you just learn that technique, and if you take that network that we created in that last activity in the last class and apply it to, actually, Hannah. Let me share my screen while I talk, and apply to, am I sharing my VS code? Do you see it okay and apply to any most problems right of image, object classification within image, you will get pretty good result, because here, as you have seen, what we did is we had a whole bunch of dense layer, followed by activation and dense activation, and then we had these dropouts. Right now, if your network is not producing good enough accuracy. What is it, without thinking about anything that we are going to learn today in today's class, if I ask you guys, like, Hey, you build a network like this, and maybe the training data set that you have is little bit more complex than just handwritten digits, maybe, let's say it's more like a handwritten I don't know Japanese character, right, which is arguably more complicated, complex than handwritten English digits, not only because the character itself are more complex, but also there is a lot more of them, right? So if I ask you to do that, and let's say you take these network, similar structure, and you struggle to get anywhere more than 60 to 70% of accuracy. Let's say so what other what approach would you like, or what improvement would you think in your mind that you can do to push your accuracy up?
+
+Unknown Speaker  2:26  
+Hit more nodes or more layers,
+
+Speaker 1  2:28  
+get more more nodes, more layers, correct? And that
+
+Unknown Speaker  2:36  
+will
+
+Speaker 1  2:38  
+move up, push up the cost of your computation for sure, right? But then it is kind of given that if the data set that you are trying to identify is more complex, then your cost of computation is going to be higher. So that will work for the most part, right? Except when it wouldn't. Now we are going to talk about today that why that might fail in practice. What I would say, if you keep adding, just like Jesse said, if you add more layers and then more nodes in layers, the accuracy will increase up to a certain point, but then it will plot you again, which is actually happened in the early days when this neural network people got very excited. There was a lot of research, a lot of money, lot of investment, and then there is basically a trough of disillusionment came when people said, Nah, it's not as good as we thought, because all they were doing is they were basically just doing this and applying the stochastic gradient based descent for any problem. So basically, they just had a hammer. And whether you have a square hole or a round hole, you just have one hammer and one thing, and you are trying to fit it. And yes, if you bear it hard enough, it will probably still go through, but not as well as you thought it would be. So now consider one thing. Let's go down to the example that we displayed here where the classification was not correct, so wrong prediction. What happened? Right? So think about these ones. Let's take the first one look at this image. What is the original image? The actual value? Two, number two. Yeah. Why do you think the machine is thinking it's number nine?
+
+Speaker 2  4:37  
+Because if you rotate it approximately, like 30 degrees clockwise. I know right nine, right, yes,
+
+Speaker 1  4:45  
+right. But if you think about it like these distinct curves that it is coming from here, if you just think of this part and then this tail kind of going in here, if your model. Are smart enough to recognize like, Hey, I have kind of a reverse C coming in from the top of the image, towards the bottom of the image, and then I have a tail going in. If you think of it this way, then would you agree with me? Then you can more easily
+
+Unknown Speaker  5:18  
+predict it to be a two rather than a nine.
+
+Speaker 1  5:22  
+Right? So if you think about it, each of the characters, they have certain like different people can write it different way. But when we are thinking looking at this character, and we are actually predicting the right thing, what is it we are our decision is based on, isn't there some unique stroke right?
+
+Speaker 3  5:45  
+The curves in the lines like straight line curves, correct,
+
+Speaker 1  5:49  
+right? So, for example, look at, look at this one the top right one, right. The actual is four. And when we look at the actual, and even not looking at the actual just looking at this very pixelated image, it's kind of easy to see it is a four, even though this tail here does not make any sense. But if you see this little opening, kind of this U shaped opening, and then there is something coming up that is something I think gives it away, right? And especially given the context, like, if it were a Greek alphabet, you could have argued like, Hey, that looks like a mu to me. Yeah, you are not wrong. But given the context that it is not Greek alphabet, it's rather zero through nine English language digits, just that gives it away. That is the four,
+
+Unknown Speaker  6:37  
+right? So
+
+Speaker 1  6:41  
+what I'm trying to get at here is if, instead of just letters or digits written by some people, if the image is more complex, like what we saw in the last class, where you have this whole bunch of like, 600 or so people, their faces. Some are looking sideways. Some are looking upwards. And different emotions. Some are happy, sad, angry, right? And some wearing a sunglass. Some does not wear a sunglass.
+
+Unknown Speaker  7:14  
+So if you have to identify each of these things,
+
+Speaker 1  7:19  
+what is it? Think through what is it you need in addition to what we are just doing? Because currently, what our machine is doing is, no matter which image you throw it, it will treat it as a two by two matrix, which you flatten. So essentially, all you have is a very flattened out list of numbers. Each image is a flattened out list of hundreds or maybe few 1000, or maybe for larger image, few million numbers or 100 million numbers, which is pixel now, when I am looking at somebody's face and trying to do a very complex decision making, like, whether the person is sad or angry or happy. How do you codify that? What is it in a person's face that gives it away? Like, what kind of emotion the person is having?
+
+Speaker 4  8:20  
+Is it like I or the 3d part of the face? Maybe, yeah.
+
+Speaker 1  8:26  
+I mean, I mean, forget about emotion, even just looking at the face, people who we know, like in this room, all of us, we kind of know I have seen each other like even forget about the emotion just looking at the face like I I see all of you guys, and I'm sure if I any of your social media and someone blocks the name of the user just by looking at your picture, even though you might look very different, maybe you are like, surfing in a beach or something in a completely different outfit, but I'll probably be able to identify most of you, and so would you as well. So yes, someone said eyes. So yes, eyes is one feature that gives you away, right eyes, shape of nose, even your shape of mouth, hair, hair style, lot of things right now. This is not something that a neural net can decipher if you don't provide additional help in doing so, because it is an extremely hard thing to do for a neural network. And that is why I said, if you just go brute force, if you don't do anything, if you take image of a person or image of an animal, cat, dog or whatever, right? And if you have enough number of training data with the appropriate level, and you make a big and wide network so. It not going to be a complete failure, but you are not really providing in that extra not providing the machine, the extra notch that will be very helpful, right, not only to move up accuracy, but also to bring the compute cost down considerably. So there is lot of smart people who have come up with this technology, and there is lot of math behind it, right? But all of these details math is not obviously within the scope of this boot camp, and that's why I'm spending so much time to have you help you guys get that intuitive feeling like, why this current method that we have seen in the last activity might fall short. Now, if any of you guys disagree with what I am saying, right now, this is the time to speak up. If you think that any of this thing, you have some other suggestion or other idea or something, some reason you think what I'm saying is not valid. Maybe, maybe you have some other brilliant idea. So let me go.
+
+Speaker 5  11:03  
+It kind of sounds like you're, you're talking about the difference between generalizations and nuance. If, if I, if I can make a good meta, if I make a metaphor out of it. So it's like you're saying, hey, look, this is really good for generalizing the shape, but you have to teach it nuance, like you have to teach it the eyebrow shapes of a smile. You have to teach it the exactly the eye shapes and so forth. So is there a way to do that with some sort of ensemble technique?
+
+Unknown Speaker  11:34  
+Like, we're just engineering
+
+Unknown Speaker  11:36  
+features for, like, certain things, like,
+
+Speaker 1  11:42  
+Yeah, but yeah. But you can think, think about doing a feature feature engineering in real world images. Theoretically, maybe what you were saying is true. But who would want to like? Who has the brave? Who is the brave here? Who would want to do feature engineering on hundreds of 1000s of images collected from wherever, and try to feature engineer to give the machine that extra, extra boost to be able to identify eyebrows and nose and shape of mouth and crease in your face like cheekbone, To be basically able to identify the emotions like, I
+
+Speaker 6  12:22  
+guess I would just imagine with that. I guess I was just imagining like biometric like feature engineering, like, maybe like ratios of like eye width and like mouth, yeah,
+
+Speaker 1  12:31  
+and people have tried that. People have tried that in like before, before the current breed of machine learning techniques were perfected. It's not that people haven't tried that. People have tried that. I mean, using a combination of things like expert systems, right, which is basically trying to add these additional human input to provide the machine with some context of what it is looking at. But those things can only take you so far, and that is the reason, like around 80s, we basically got what they call AI winter, right? All of these initial exuberance around what AI could be kind of died down around 80s, and it was not going anywhere, right? 80s and maybe even early 90s, that is the reason. But it's not that people haven't tried that people did try that
+
+Speaker 7  13:26  
+great example, Benoit being the Jones Viola method for classification, where they hand wrote tons of filters, but they made filters by hand, directly. Yeah, different components of faces, yeah, it worked, but it was crazy.
+
+Speaker 1  13:48  
+Okay, so now we have to think of, what else can we do to actually make that happen without requiring any human intervention? Okay? Without requiring any human intervention. So that is the challenge. So now with that in mind, let's go back and look at something that might seem completely irrelevant, but we will see how these two things come together. So we are going to learn about a very simple mathematical function. Don't get scared by the name convolution, like, I don't know convolution. That doesn't even sound like an English language word that to me. What is convolution? Well, convolution is nothing but multiplication of two functions
+
+Unknown Speaker  14:45  
+on a
+
+Speaker 1  14:48  
+matrix of data or on a tensor. Right, remember, matrix is just a two dimensional tensor, vector is just a one dimensional tensor. So convolution is a mathematical function, if you. Have a tensor A, and if you have a tensor B, if you convolute them, you are basically taking like for like element of each tensor, multiplying them together, piece wise, and then adding the result together. That's all that means by convolution. Okay, so now, when you do that, you have one initial set of data, which in this image is basically, let's say you have a nine by nine array, a numpy array, a 2d numpy array, nine by nine. Dimension shape is nine by nine. Okay. And now if you have another array, let's say of this size, let's say, I mean this, this array, the second array could also be the same size. So if your nine by nine is your overall data, the one that you are multiplying it by. There is no reason it needs to be smaller. I mean, the mathematical definition of convolution would work if you have two, nine by nine array, even then it will work. But if you have one, three by three array, let's say you can put these on anywhere on the original array, right because now we have a smaller lens, smaller array. You can basically move it at different place in the original array, but wherever you move it, let's say you put it in the top left corner. So your original array has this number, right, point nine, 2.6, 3.21, and all of this number and those numbers are being highlighted here, right? So now, if you take this small array with some integer numbers, in this case, 01, negative, one, two. So these arrays basically having very simple, small integer numbers, and it could have any number, it doesn't matter, but the mathematical operation of convolution that I was talking about is this. So these highlighted area, look at this number, right point nine, 2.6 3.21 and so on. And if you look at the comparing, comparing, if you compare that with the actual numbers, and the filter which is one, zero, negative one. So essentially, what you are doing is you are taking this one from here, multiplying it by 0.92 because they are at the corresponding matching position. And then you're taking this zero from here, multiplying this by 0.63 you're taking a negative one, negative one from here. You multiply this by 0.21 and you keep doing that for each and every element, for all rows and columns, and you add them up, all these multiplication and you get something like 2.47 so essentially, what you are doing is you are multiplying two tensor and coming up with a single scalar value
+
+Unknown Speaker  18:03  
+that is convolution.
+
+Speaker 1  18:07  
+If your second matrix, which is, in this case, three by three instead of three by three, if these were also nine by nine, then there is only one way you could have overlapped it, which is overlapping two completely, because then there way that you cannot really move around. There is no decision to make, and then you basically apply the same operation for all 81 elements, right nine by nine. You can do that, but doing it this way gives you something additional, something more meaningful, more useful.
+
+Unknown Speaker  18:45  
+And then, if you do this, once,
+
+Speaker 1  18:49  
+placing it here, you will get one value, which is 2.47 right? So now let's say you create a separate array to hold the results. So then the first number that you will put in that resulting array would be 2.47 here.
+
+Unknown Speaker  19:08  
+Now
+
+Speaker 1  19:11  
+this is not the only position that you can put this small three by three filter. You can move this here along, like from left to right, and then you can drop it by one row, and then again, move it, move it from left to right. Again, drop it by one row, and then again, move it from left to right. So you can keep doing this right. So when you do this, let's say in the next position, you move it one row to the side, and then you take the corresponding numbers from the first array that is overlap, and you multiply that by similar weights from the filter, and you come up with a different number, which is negative 0.43 so that means the first number from your convolution was 2.47 the next comes negative 0.43 and so on. So you will keep getting different numbers as you keep. Sliding it throughout the original array that you have. So then if on the right hand side, it is showing like as I said, let's say you create a separate empty array, and you basically keep doing this convolution, starting from the top left, and then move one to the side, and then do the convolution again. And every time the result of convolution, you keep putting them in the empty array, which is the placeholder for your result. So essentially, you will have a resulting array something similar to this. Now, your original array was nine by nine dimension. Your filter was three by three dimension. What do you think the dimension of your resulting array is going to be seven by
+
+Speaker 5  20:49  
+seven, because you have to have that border right? So you're taking away 111, border
+
+Speaker 1  20:54  
+that side, so that the restriction here is you cannot. Like if you see this here, this is the top most and left most you could go. You cannot go further left or for the top, because you have to cover all of the filter elements with something from the original array. If you go further left, then you are basically dangling, dangling around in the space in the in, like outside right? And that's not allowed. So essentially, what that means is your dimension would be original dimension minus two,
+
+Unknown Speaker  21:31  
+right? So that's why you will have a seven by seven edit.
+
+Unknown Speaker  21:37  
+Then I need to do it again and again until you get to three
+
+Speaker 1  21:43  
+Yes, yeah, that's right. If you apply again and again, you will so if you take this seven by seven and apply a convolution again, you will get a five by five array. If you apply a convolution again, you will get a three by three array and so
+
+Unknown Speaker  21:56  
+on. Then you get one.
+
+Speaker 1  21:59  
+Well, you don't go that far, but you do something else. No, now, but think about it. Now, let's say your nine by nine by nine array that you have here, let's say those were the pixel values of a nine by nine image. So what is it you are actually doing by sliding this filter across and convoluting for every every position
+
+Speaker 5  22:25  
+feels like cropping, huh? It feels similar to the idea of cropping an image taking away the
+
+Speaker 1  22:34  
+idea of cropping an image, exactly. So now think about it this way. So let's say your image has a face of a person, right? And the face is pretty pale and white. But then there are certain areas in this face that are darker than the others, like your eyebrows, your eyeballs, if you have a mustache, maybe your mustache, if you have a black here, so in the original array, that will be prevalent. But now, when you are doing this convolution, you are basically doing a local aggregation of certain
+
+Unknown Speaker  23:18  
+pixels around it.
+
+Speaker 1  23:21  
+So now what will happen is you will basically a higher order regions being apparent in your resulting array that was not apparent in here. So basically, essentially you are going at a one level higher abstraction. You are kind of blurring your image on purpose. You are basically taking a look like, Okay, this is the face of a person, but if I zoom out little bit, what do I see? Well, I see two curves, I see two balls, and I see a C, and that abstract shape will be more prevalent in your output of your convolution, because this aggregation that you are doing essentially, you are basically filtering. But then purposefully when, when you are applying this filter, you are doing this aggregation of the pixel around it. But then the question is, how do you know these numbers, like one, zero, negative, one, these kind of sounds, looks very random. How do you know that these are the right kind of weightages that you have to apply to this filter? What makes you think so? We do not know. I mean, we might as well take one zero negative one negative one negative one positive one zero positive, one negative two, some other combination, and that will, if you apply that filter throughout the image, then it will give it. Different perspective of an aggregation, so which is kind of in effect, equivalent to so let's say you have the image, this image, you are looking at it vertically, but from a distance, and then you are basically coming up with some abstract feature from the image. Then you are looking at the same image, but maybe you are looking at from a different angle, or maybe from a different lighting condition, right? And some other kind of features from the image becomes apparent when you kind of abstract it out one level. So by varying the numbers in your filter,
+
+Unknown Speaker  25:41  
+you can then control
+
+Speaker 1  25:45  
+what part of the images, whether the curves or edges or dark areas or light areas or gray areas, which part will become apparent In which resulting convolution
+
+Unknown Speaker  25:57  
+just by varying these numbers.
+
+Speaker 1  26:02  
+Okay? Now, this idea of convolution is not something, by the way, that came from the domain of machine learning or artificial intelligence. It actually do come from the domain of image processing. So in image processing, let's say, You know how in any image processing software, you have these filters, like you can blur an image out, you can sharpen an image. So what does all of those things do? I so it basically applies the convolution with specific filter pattern that allows you to either blur the edges or sharpen the edges or apply kind of a glossy effect on the image, or apply a hand sketch, hand drawn sketch effect on the image. All of these things that we keep doing, like in the either in Photoshop or any any other image processing software, is nothing but taking a particular mathematical matrix or to read, to read tensor, which is the filter, and then apply the filter all over the image. That's all they do in image processing. But in that domain of application, though, people actually have figured out over the year with trial and error, and there is like industry expertise, they know what those numbers of filters should be, which is proprietary, by the way, right? Like no software vendor will tell you what their filters are specifically, because that is their IP that they have done lot of trial and error and they have come up with this particular filter, right? So you take that filter, so when you click a button to apply an effect on your image, so essentially, behind the scene, you are taking a particular filter, not knowing what exactly values are, but it is just that, and you apply that, and you will get a different what is called effect on The image, okay?
+
+Unknown Speaker  28:16  
+So,
+
+Speaker 1  28:19  
+so that's about filtering, right? And in here, basically in these graphics, you can see that in filter is being applied, right? The whole convolution is being applied over the whole image. So that's about convolution. So now you do realize that convolution probably will give me something meaningful right now, there is something else you could also do. Oh, by the way, talking about these filters, which are also called kernels, these are some of the common kernels that you can use, not related to your machine learning model. Like, if you take an image, like, think about this, right? So I do not have a code ready for this. So these, these operation where you take a kernel, let's say three by three, four by four, whatever kernel, and t you take an image of any files, and it is a pretty simple Python program you can anyone can write, given what you know now, to basically loop over the entire pixels of the image and keep applying that operation of convolution, which is basically these mathematical operation, right, and capture all of the output in a separate Pixel, or, sorry, separate array. Anyone can do that right now, if you do do that, and if you choose hand, choose your kernel, if you choose a kernel that is like this, and if you apply that, you will see that in your resulting. Image, any horizontal edges will be more like standing up compared to the others. If you have a kernel like that, all of the vertical edges will stand out. If you use a kernel like that, it will create a inverse 3d effect on your image. Now, yes, your resulting image will be little bit smaller, but not much smaller. It will be two pixel less wide and two pixel less height. If your filter is three by three, which is not a terrible loss, it for two naked eye, you don't even feel the loss right for a large enough image. So essentially, these are the different kernels. Now we are going to borrow this concept of filter and applying the filter over the thing, over the whole image. But since we are smarter than image processing industry, we are not going to actually spend any time to figure out what exact number arrangement should we have to create a sharpening effect or blurring effect, or embossing effect or ly effect or sketch effect. We don't need that. What we are trying to the our key takeaway from this exercise should be that if we could apply a filter, potentially that will help us bring out some abstract view from the image, which will have potentially have more information, more predictive power for our model. Okay, now we could stop here, and then we can do this, and then take this outcome of this. So let's say this is our original image. We take a filter, we apply the convolution, so instead of nine by nine, now we have a seven by seven image, and you take this event by seven image, and then you pass it to your dense layer. You could definitely do that just one layer of convolution, and you could do that that will probably give your model a slight edge over not doing this, but the difference would not be that dramatic. Now, what you could do is you could take this, as Jesse was saying, Before you can take this and apply another round of convolution on top of it, and that will give you another level of higher level abstraction, and then you can fit that to your dense layer, or the fully connected layer right where you have this traditional neural network the layer perceptrons, so you could do that as well. Now, which is what people actually do. So since you are applying this convolution on top of your neural network, this type of neural network are called convolutional neural network, or CNN. So a typical architecture is, you have a picture, you get a bunch of kernels, and you apply the convolution, and that creates a higher level abstraction, which are called feature maps. Now you can do little bit a smart trick here. Instead of doing these ones, you can have multiple of these in this same layer, like as we saw here, if you take different kernel, it will create a different effect, right? Well, what if, instead of taking one kernel, what if we take 10 such kernel and apply each of these 10 kernel on the same image, so now you will have a 10 different resulting conval, resulting
+
+Unknown Speaker  34:00  
+feature maps.
+
+Speaker 1  34:04  
+So now that means this is what it is showing here by having multiple of this feature maps. Like, if you can do that, why do only one do multiple? 1020, 30, or since we are digital nerds, we could say 816, 3264, like, pars of two, right? And that will give you even more feature maps. So basically, essentially, what you are doing is you are taking looking at a picture with a different camera angle, with a different room lighting condition, and you are do 32 of these setups. And you are taking this abstraction from 32 different setups, but all of these setups are giving you a slightly different, abstracted feature view of your same underlying image. So that would be the outcome of your convolution layer. And then if you want to be even more power. Pool. If you want to make your model even more powerful, you can repeat that step again. So what you can do is, for each of these, let's say 32 feature map, you can take another two or another four feature map out of these again and come up with a 64 or 128 28 feature maps in your Let's next level. But every time you go your net, neural net will see higher and higher level of abstraction in your convolutions, in your feature maps.
+
+Unknown Speaker  35:38  
+But there is just one problem in this whole thing.
+
+Unknown Speaker  35:42  
+Can anyone guess what that problem is?
+
+Unknown Speaker  35:48  
+You guys are getting the strategy right, what we are trying to do.
+
+Speaker 1  35:53  
+So feel free to stop and ask any question if you if you don't understand it.
+
+Unknown Speaker  35:58  
+Now, what is the problem? I you
+
+Speaker 4  36:06  
+referring to the output that the three outputs the hip or the lion and the elephant, and
+
+Speaker 1  36:13  
+we are not going to the output. Let's say we are doing convolution. Let's say we are doing convolution with 32 different filter that will create 32 feature map. And we are taking each of these 32 feature map and applying another four or eight filter for our second layer. So it's computationally heavy, exactly. So think about how so the image, original image, was, in any way, a very high dimensional space, feature space, because image can have million pixels. Now if you apply these 32 feature maps, now suddenly you have 32 million pixels. Now if you take each one of these and you apply two or four, now you are talking about hundreds of millions of pixel so it basically can make your computation very heavy. So maybe you should do something to take bring it under control a little bit. And it happens that by doing so, we can actually provide even further boost to our model by abstracting some of the features, and that particular feature is called pooling. So what pooling does, so pulling is much simpler than convolution. So for pooling, what it will do is so let's say you have a pixel like this, and you want to say, hey, I want to do a two dimensional pulling with a two by two size. So essentially, what you will be doing is you will take a two by two, so these two and these two, let's say these four pixel and you are going to do some average of this four pixel, some kind of aggregation function. And that aggregation function could be simple average, which is basically you add this four pixel and divide by four, and then you do the same thing for next four pixels, and you do the same thing for next four pixel. So by doing this pulling, now you see that how you will be able to reduce the dimension. Because you are taking each of the four pixel and reducing to one. So basically you are cutting down the number pixel to 1/4 by doing a two by two pulling. Now this pooling can have various strategy. One other strategy could be, instead of doing the average, you take a look at these two by two little thing areas, and take the maximum out of it and call that the representation represented pixel. So if you do that strategy, then the outcome of these would be 0.93 and here you don't overlap. So if you do these two, these four, your next snapshot would not be this four. Instead, it will be this four. And the max of these would be 0.88 and then you took this four, max of these would be 0.88 again, and so on. So essentially, you are further abstracting. You are purposefully blurring the image. Essentially, this is a blurring effect,
+
+Unknown Speaker  39:29  
+but it will help in your computation.
+
+Speaker 1  39:34  
+And think about that discussion that we had in the other day when we initially did that network, and then we saw it is over fitting. And then we say, Okay, we're going to purposefully drop 20% of weight, right? So by purposefully forgetting something, we were actually helping our network, not hindering the learning. It was actually helping the learning. So similarly here, when you are doing this, two by two, pulling. So you are purposefully blurring out some of the images, and when you do this on by different layers, this purposeful to blurring actually helps reinforce the learning even better, and also helps control the overfitting at the same time, while reducing the computational cost. So that is the beauty of this strategy. So then, to summarize, what people do for any complex image classification is they will take the image and they will add a convolution layer, and then they will add a pooling layer, which is basically dimension reduction, and then they will convolute again, and then they'll pull again, and they'll do it for a few times. And then finally, the output of this thing needs to be then flatten out, meaning you have to turn this into a simple one dimensional array, just like what we did in our previous classes, example. So then you put a layer called flattening layer, so convolution pooling, convolution pooling, convolution pooling, and then a flattening layer. Now these output of your flattening layer is what now you are going to put into your traditional neural network, which is your sequential model, your dense layer and your ReLU. So basically, instead of sending this pixel as is, you are doing all of this processing, and then you are flattening the doubt, and that's where your traditional network starts. So this is the traditional architecture of any, any image recognition neural network. So research is general cow convolution on the internet. Yeah,
+
+Speaker 5  41:42  
+the the metaphor, the image seems to indicate that when you do a convolution, you might get three layers, and pooling will be three, and then the next run convolution, it's is multiple layers more, and then multiple layers. So you are you effectively you're doing a convolution on the original image, and then you're pooling on the convolution, and then you're doing a convolution on the pooling, and then you're pulling on the convolutions correct.
+
+Speaker 1  42:08  
+But each successive convolution, you are actually creating more feature maps and very common strategies to like, basically going by power of two again, like use 32 convolutional layers in your first convolution, like 32 filters in your first first convolution, and then you do a pooling with a two by two with a max value. And then in the next convolution, instead of 32 you go 64 filter, you double it, so you will get double the feature maps. And then you do a pooling again, again, two by two, max pooling. And then, if you want to throw more firepower, throw in another convolution with 128 feature maps in this time.
+
+Unknown Speaker  42:53  
+And that's how it goes. So
+
+Speaker 1  43:04  
+so that's all the concept, mostly, most, all the hard concept that you have to learn. And
+
+Speaker 5  43:08  
+then, and then again, pooling is some sort of an aggregate function, not necessarily kernel pulling.
+
+Speaker 1  43:14  
+Now pulling is exactly pulling is pulling doesn't have a kernel called the convolution. Is basically using these kernels, but pooling is simply aggregation. Yes, you are right. So you are basically taking two by two or three by three, whatever it is, and you finding a aggregation function and then going doing the same, doing the same. So essentially you are cutting the number of pixel to a quarter for a two by two pooling. If you want to do a three by three pooling, then you are cutting the number of pixel to a 1/9 right? And so on. What
+
+Speaker 5  43:46  
+I'm not understanding with your metaphor of like, okay, you're not going to do an overlap a nine by nine grid is that you leave off the last column effectively from analysis, right? You're not doing any aggregation on You're Doing aggregation on grid, 01, and then aggregation on
+
+Speaker 1  44:06  
+you are saying, if you, if you are doing two by two, two by two, you basically leave out this. That's what you're saying. Yes. Is that correct? Yeah, but that is if you apply that, and if you're, let's say, if you are doing a two by two pulling and your image shape, the dimension is an odd number, not an even number. So it will basically leave the last row out. But if you have a large enough image, again, that would not really matter. Just leaving a one slim, tiny level of pixel out. It's not You're not going to notice anything.
+
+Unknown Speaker  44:42  
+Okay?
+
+Speaker 1  44:44  
+So now let me ask you one question. So we are talking about applying, let's say 32 of different of these things, different kernels. These are the kernels that we don't use. This is something image processing guys use, right? We don't use this. So what we are. Going to do is we are saying, Hey, we have a picture, and we are going to need 32 of those filters to create 32 different feature maps. How the heck do I know what those 32 filters filter should be? Who gives me that i
+
+Unknown Speaker  45:23  
+Any idea where our filters come from.
+
+Speaker 5  45:28  
+I assume it's your data scientist, but I don't know. It feels use case driven, yeah, just like learning an image would be use case material, correct,
+
+Speaker 1  45:41  
+and if you can ask a data scientist do it, but then that will take lot of trial and effort, and what your data scientists come up with, a one image may not apply for the next image, even though both of the images are in images of elephant. One is probably elephant sitting in its cage, and another is an elephant in a bamboo or Chad trying to break a bamboo tree. Are very two very different elephants. So whatever your data scientist come up with the effective filter for one type of images with a specific lighting condition and all would not apply, unfortunately, to the next image. And if you are training your neural network to find elephants. In general, some of your elephants are in the wild. Some of those elephants are in the captivity, in a very different condition. So what's your what your design is going to do?
+
+Speaker 3  46:34  
+Okay? Is it that where you look at like the input image and then determine like what features makes up what your target value is. So you look at the skin color, you look at the shapes you know of, in this case, the elephant and those become like your your edges that you're trying to filter for.
+
+Unknown Speaker  46:56  
+Yeah, you could be
+
+Speaker 1  47:00  
+but can we not be smarter, like how? How did our these neural net, without any convolution or anything, think about our basic neural net that we had like this? So each of these connections had certain weights and biases. Who decided what, what those weights and biases would be?
+
+Unknown Speaker  47:25  
+What are we doing here in this whole good game?
+
+Speaker 3  47:27  
+I mean, those are random, until you use the cost function to like correct, minimize like correct.
+
+Speaker 1  47:33  
+So now that probably what is stopping us, what is stopping us from choosing all of these 32 kernel but randomly, completely random. And do the same thing for all the 64 kernels here, completely random. And then you basically feed the whole thing through your layer anyway, which is kind of the like a two layer or three layer neural network we have seen. And then it will have a cost function right. And then we will take that, and then we will do a back propagate, and then we will do this over and over with different batch, over different batches on epoch to try to do a gradient descent to find the lowest cost function. And while doing so, every time we do that, the machine automatically will come and initially it will have, let's say, What is my filter, it will have something like these values for your feature map one, another set of values for feature map two. But this doesn't work, and it will go and nudge these values towards in a way so that your cost function is little less in the next iteration compared to the previous iteration. So essentially it will do the same thing as it was doing in a non convolutional neural network. So that makes our job extremely easy. All we had to do so all of these lines of code we were writing anyway, we just have to add two by two plus two plus one, let's say five lines of code if you want to add convolution pooling, convolution pooling and flatten. And then after that, all of the rest of the code will be basically just this. What we have written like this. All we do is, before our dance, before our dance, we write a convolution layer, at convolution at pooling, at convolution at pooling, and then add a flatten, and then after that, do everything else, just like the same,
+
+Unknown Speaker  49:37  
+like all of these, discussion
+
+Speaker 1  49:41  
+boils down to writing just a few line of extra code and using Keras library, where you really don't have to worry about connecting the code or doing any optimization, because when you are doing the training, the model will do that for you.
+
+Unknown Speaker  49:58  
+In that the beauty of this technique.
+
+Unknown Speaker  50:07  
+Okay, put it in a nutshell.
+
+Unknown Speaker  50:11  
+Are trained? Yes?
+
+Speaker 1  50:12  
+So you are basically your neural network is training the Cardinals also, in addition to, in addition to the weights and biases of your dense layers, or fully connected layer, as they call it. Your model itself is also coming up with these filters, the kernels, the kernels are trained, and these fully connected layer is trained, all within the same training epoch. So
+
+Speaker 1  50:50  
+okay, so that's what we are now going to look into the code and to see the implementation of it. So
+
+Unknown Speaker  51:03  
+ready to start
+
+Unknown Speaker  51:05  
+any question so far.
+
+Unknown Speaker  51:13  
+Okay, so let's start then.
+
+Speaker 1  51:17  
+So we are going to use that same the CMU faces image dataset, which this case, we are not going to pick, like a download the whole thing, because the compacted pickled version is available in a server in the BCS server is already available. So what we are going to do is we are going to take all of these image from this server, 600 something of them. And the wise, which is basically says, what is the level of the image? So that's in another pickle file. So essentially, we are going to take two pickle files and we are going to do pickle dot load. But since here, in this case, the pickle files are not in my local machine, instead, it's in a remote server, we have to wrap that with the io.by bites IO. So first we have to get it through a request dot get, and then wrap it through on a with a bytes IO that will give it a turn it into a binary stream of data. And that's why we are going to do pickles dot load, and then we will see what we load. And since the whole thing is pickled in only just take, like, what 1.6 seconds. So we have len of x is 624 so that means we have 624 images. Length of y is also 624 that means we have 624
+
+Unknown Speaker  52:49  
+levels,
+
+Speaker 1  52:52  
+and we have the shape. So out of this 624 we take the first one and see what the shape is. So it's a 60 by 64 pixel image. So essentially we have 624, images, each of size, 60 by 64 pixel and when we do a unique function on our y, we basically see two values. Sunglasses are open. So it basically tells me whether the person in the picture has his or her eyes open or covered by sunnyvas.
+
+Unknown Speaker  53:30  
+Now
+
+Speaker 1  53:33  
+this is something that I wrote. It was not in your original notebook. I wanted to just display all of these 624, images on this notebook itself to see whether I can so what I did is I basically made a subplot and basically looked through all of the images for i in range now, images where now images is basically your length of x. And I basically took each of the images xi, and plotted the image with the function, which is matplotlib, I am show function. Why I had to use I am so function because these are pre processed images. And the images are not pixels themselves, but they are basically standardized format of num NumPy 2d NumPy arrays. So if you have a 2d array and you have to display a 2d numpy array, you have to use the I Am, so function, I am, show function. And then we are putting a title. Title is basically the corresponding y values, which is sunglass are open, and I made 39 row and 16 columns. So it is going to render the whole thing and like a huge palette of images. So let's see how it plots. This has nothing to do with your convolution. This was just a fun thing I was trying to do. I was basically trying to see whether Jupyter Notebook is even able to handle plotting six, 24/7, A plot in one shot,
+
+Unknown Speaker  55:03  
+and it appeared that it actually did.
+
+Unknown Speaker  55:10  
+Okay, there you go.
+
+Speaker 1  55:14  
+So image and the level, sunglass open. So sunglasses are open. These are your training levels, and these are your images?
+
+Unknown Speaker  55:30  
+Cool?
+
+Speaker 1  55:32  
+So now what we are going to do is we are going to make a neural net, a conventional neural net using the strategy we described, but we are going to add only one level of convolution, one level of pooling, and then followed by your flattening and your one layer of your dense that basically We are going to make a mini network. And let's we will see how it works. But first thing we have to do. Our Y values are categorical, open or sunglass, so that means we have to do some encoding on the y values. Now these are binary values, like two values, so do we really need to do one hot encoding for this.
+
+Unknown Speaker  56:23  
+What encoding strategy do you think will be suitable?
+
+Speaker 1  56:35  
+You have open and sunglass? So basically two class. It's a binary classification. What encoding strategy you choose
+
+Unknown Speaker  56:41  
+that logistic,
+
+Unknown Speaker  56:43  
+huh? Is that logistic? No, no.
+
+Speaker 1  56:47  
+Encoding. I'm not talking about I'm just talking about encoding strategy. You have encoding. Say that again, Ingrid, are you referring to the one heart? Encoding one heart. But we really don't need one heart. I mean, one thing we could do, we can take, do a one card, one part encoding, and take the first column of one heart encoding that will do it. Remember, I actually did that strategy in one of the previous notebook. What
+
+Speaker 5  57:12  
+is the what is the other strategy there? That's That's
+
+Speaker 1  57:15  
+Level, Level encoding, level like, which will, if so, level encoding will basically, if you have five different classes, it will basically represent one class with a 01, plus with a one, one plus with the 234, and so on. But it will not blow it up into five columns. So Since here we have two classes, I mean, you can do one hot encoding also, but you can do it this way also, but when you do one hot encoding, then your output sorry, activation function from your output layer have to be a soft max instead of sigmoid. So that's the only difference if you do a level encoding. So then you can basically go with the traditional output function, which is a sigmoid, basically the logistic curve. So anyway, so here let's just do a level encoding. So we do a level encoder dot feed, and then do a level encoder dot transform, and that will give me the level encoded version of y. Actually, why don't we do that separately? So that way we'll be able to look into so level encoding is done. So now if I look into y, so y would be a bunch of zeros and ones. So instead of sunglass and open now we have a bunch of zeros and ones. We know that okay, and then x. So what we are going to do is, so first, let's see what our first x is. So what is X currently?
+
+Speaker 8  58:44  
+So, x is this thing. So if you do type of x,
+
+Speaker 1  58:56  
+so type of x is a list. Why? If you go up here, you will see the length of x was 624 but each X was a 60 by 64 array. So it's a 624 item list, each item containing 60 by 64 pixels, or 60 by 64 array, 2d array. Now it will be much simpler to provide it to our network if we turn it into a three dimensional array of shape, six, 624, by 60 by 64 currently it's not a three dimensional array. It's a multiple two dimensional arrays put together as a single list which kind of is the same jitter structure. All we are trying to do is take that and convert it into one single numpy array of three dimensions. So let's see, when I do that, what happens.
+
+Unknown Speaker  59:56  
+So I'm going to do it in a separate cell. So.
+
+Speaker 1  1:00:01  
+So I'm going to do, take the array and convert the whole list as a numpy array. And now if we do type of x, now it becomes x is not a list anymore. It itself is a numpy array, or in the array. Now if you do X, dot shape,
+
+Unknown Speaker  1:00:19  
+you see now it has become a three dimensional array,
+
+Speaker 1  1:00:22  
+so it just become easier to handle it with deal with it. I mean, even without this, it will be fine, but it's just a little bit more convenient coding wise. Okay, so that's your x. Now let's split the x. So we are going to take the x and y both and do our regular train test split, because that's what we have to do for validation anyway, no matter which training algorithm you do. Now, this is where we are creating the framework, sorry, the network. So these are the two layers that we have seen before, where we start with a dense layer, and in the dense layer, the first dense layer, we provide an input shape and then provide some kind of activation function, either rail, ReLU or tan h, and then we add a output layer. I mean, we can add multiple dense layer if we need to, but in this case, we will just add one output layer, and the output layer will have two perceptron because it's a binary classification with the activation of sigmoid. But we are not just doing this. In addition to that, we are just writing three lines of code, which is what I was referring to. So all of the discussion that we had here comes down to these three lines of code. That's it. So what we are doing, if you look in the first line, we are adding a Cond. So this I'm saying, hey, add a two dimensional convolution layer with some parameters. What are the parameters? The first parameter, 32 you see here that tells you how many filters to use. So these 32 would result in that many feature maps as a result of your convolution. So I'm saying, Hey, I'm going to create 32 different feature maps.
+
+Speaker 3  1:02:18  
+Is 32 just an arbitrary number that you chose, or is that yeah?
+
+Speaker 1  1:02:22  
+Okay, it's Yeah. It's just common practice in the industry. And then the size of the filters are three by three. People usually use three by three, five by five and seven by seven. In since this case, the pixel, sorry, images are not that much. Three by three is fine. For larger image, you could probably use five by five or seven by seven, but for this one, anything more than three by three, it will basically blur the image way too much. So three by three is fine, and we have to provide an activation for convolution layer also, because what will happen is after convolution, because without this activation, network would not be able to learn what are the right filter configuration. Remember each of these 32 filters of three by three shape when the network initially start, it will all have random values, but it has to learn eventually what those values have to be. Now in order to learn, it has to have an activation function. So that's your activation function. And then, since this is our first layer, now remember, this is something that you have to provide to the first layer. So this is what we are providing to the first layer, 60 by 64, by one, a three dimension. Okay. We are not providing input shape here, because this is not our even though this is our first dense layer. But this is not the first layer of the network anymore. This is the first layer. So we provide the input shape here. So these implements your this layer. Okay,
+
+Unknown Speaker  1:04:16  
+then we have to do that pulling to reduce the dimension.
+
+Speaker 1  1:04:20  
+So we are doing a pulling. Now here we are using called Max pulling to D. If you look into Chad layers, they will see Max pulling, average pulling. There are a couple of different pooling functions available. So when I'm saying Max pulling, meaning it will basically apply a pulling on a two by two basis, so each two by two quick cell will be averaged out, and it will only take the max value. If you used average pulling 2d then it will take the average value, which you can try. We just wrote it this way, but that does not mean you cannot try other pooling function you can Okay, and. Oops. What happened? Yeah. And then once your convolution and pooling is done, then you flatten it out, obviously you have to. And then you decide, Okay, how many perceptron you will have in the node? So just an arbitrary number. Again, let's add 64 going into two. We don't want to get too fancy here, just a tiny little network.
+
+Unknown Speaker  1:05:24  
+So our network looks like this.
+
+Speaker 2  1:05:27  
+Can you remind me, if I missed it, the strategy of increasing those layers from 32 to 64 why wouldn't you reduce it like we've seen in other functions? I So
+
+Speaker 1  1:05:41  
+you were talking about this, this,
+
+Speaker 2  1:05:48  
+yes, why does it get increased there, and what's the significance?
+
+Speaker 1  1:05:53  
+So these two numbers are not related at all. You can easily do you do 32 here as well.
+
+Unknown Speaker  1:06:01  
+There is really, really no relation to this.
+
+Speaker 1  1:06:06  
+So what I meant is earlier. So what I earlier meant is, let's say in order, instead of doing one convolution, one one pair of convolution and pooling, if you do another layer, pair of convolutional pooling, the suggestion is that from the first convolution going to second convolution, you double the number of filters. That what, what I meant. And if you want to add another convolution layer, then you double the oops. What happened? Huh? If you are want to add another one, then you double it again and make it 128 and so on. That's the general solution. But here we are not doing that. Here we are doing starting with a very simple, basic network with one layer of convolution and one level layer of cooling. This is the dense layer. I
+
+Speaker 2  1:06:54  
+was confused about that because of the previous graphic had the two convolution errors.
+
+Speaker 1  1:07:01  
+But we are not doing that here. So here we are not doing that. We are just doing one pair convolution and pulling That's it. Okay. Copy that. Okay, and if you want. So let's run through this, and then it's just matter of writing two more lines of code, right? I mean, we can easily come and add two more lines of code anyway. So this is what our model is. Now we are going to train it. We are going to train for 20 epoch with a batch size of 32 again, batch size is also completely arbitrary, but providing a batch size that is smaller than your kind of let's say 10 times smaller or 20 times smaller than your data size, it actually helps the stochastic gradient isn't better because it basically chunks it up. And the calculation of the slope the gradient, it becomes more efficient. That's why you do in a batch. So let me add time magic command here to see how much time it will take, not much.
+
+Unknown Speaker  1:08:06  
+It's very small. I
+
+Unknown Speaker  1:08:31  
+Okay, so
+
+Speaker 1  1:08:35  
+our accuracy on the test set started from 64% went up to 96% just with this network. So think of what the network is doing. It is looking into 600 or so such images with the level, whether it is sunglass eye with the sunglass, or eye with the open somehow, the model have been able to figure out what is sunglass and eye open mean looking at the eye. So basically, because of our convolution, it was able to figure out that whenever there is a sunglass, probably there is like big blob of, like a black spot somewhere. And probably that's what the model picked up with sunglass, with the training level, of course, right?
+
+Unknown Speaker  1:09:32  
+So that's what, essentially, it did,
+
+Unknown Speaker  1:09:35  
+and it
+
+Unknown Speaker  1:09:38  
+is pretty Correct,
+
+Unknown Speaker  1:09:41  
+right? Right. So if you
+
+Unknown Speaker  1:09:45  
+plot this,
+
+Speaker 1  1:09:48  
+so the test accuracy is not too much less than validation, sorry, train accuracy, and it doesn't look like the model is overfitting either, because these two graphs are not diverging. So. And same thing you will see if you do the last curve. So it's a pretty good healthy training history,
+
+Unknown Speaker  1:10:13  
+right?
+
+Unknown Speaker  1:10:17  
+Okay, so that's good, good enough, right?
+
+Speaker 8  1:10:22  
+Now, do you wish you could actually see what the model is saying?
+
+Unknown Speaker  1:10:31  
+So think about this, this diagram
+
+Speaker 1  1:10:36  
+in the model. Now, let's compare this diagram and with this here, right? So where does this set of pixel exist? Which nodes actually see this set of pixel, as you and I are seeing, is that the first layer, the input, the first layer, yeah, right, where we had the input dimension added. This guy, input shape added. So this one before the convolution. But what happens once the convolution is done?
+
+Speaker 8  1:11:12  
+The outcome of this thing? What does that even look like?
+
+Speaker 1  1:11:19  
+What if we can pick in and see what kind of abstraction the convolution comes up with? So what I did is I tried to write a piece of code that will allow you a peak in science. Okay, so first, let's run these and see what are the layers and what are the shape. So all I did is, so the model has different layers, right? Which is what I added. So I said, Hey, look into all the model layers and tell me what these model layers are. Print me the index, which is 0123, and what is the layer name and what is the output shape. So my convolution to the basically has these thing, right?
+
+Unknown Speaker  1:12:07  
+And max pooling has something. Flatten has something, and now.
+
+Speaker 1  1:12:12  
+So now what we are going to do is this con to the underscore two. This is the layer, which is our convolutional layer. So we want to see what is the activation from this convolution layer. If we can see how this convolution layers or the feature maps are activating, we will be able to actually peek inside there, inside that layer, and see what the model is seeing with the filters on. Now, I would not suggest you try to make sense of this code. It's not very simple code, except I just have to so you need a few more import, no peep install needed because these are, oh, no, actually, it does need a peep install. What I'm saying. So you actually need to do peep install. Of this guy,
+
+Unknown Speaker  1:13:10  
+peep install, I think it was this,
+
+Speaker 1  1:13:15  
+yeah. So in my case, it says requirement already satisfied, right? So you need to have a peep install. So it's a TensorFlow Keras visualizer, so that's the library that you need. So it will allow you to visualize the convolution layer. And then you need to do a whole bunch of import which I'm not going to go into details. And this is all extra, by the way. This was not part of your original activity, so I just added this proponent. And then what you need to do is you need to provide the layer name. So you first print the layers here, like this, and let's say, okay, which layer I'm trying to print this layer so you take the layer name and copy it here, okay. And then every and here this variable model, this has to basically your model variable, like, whatever the variable you have chosen chosen, right? It has to be the same variable name.
+
+Unknown Speaker  1:14:08  
+Where did I go
+
+Speaker 1  1:14:13  
+here? So this is that. So then you run this, and it gives you something called an activation maximization, and you can run all these three in a same, same Jupiter cell also, by the way.
+
+Unknown Speaker  1:14:28  
+Now
+
+Speaker 1  1:14:31  
+what I'm trying to do is, since I have 32 layers, right? So if you look into my structure of my network, the first one has 32 I added 32 layers. Sorry, 32 filters, not 32 layers. 32 filter. So that means, in that contour layer, I have 32 different filters. I want to visualize each one of them with the activation function of theirs. So now what am I doing is I am. Am. So after I do this, then I'm look basically having the filter numbers, which is basically I from range zero to 32 and that gives me basically a range, and then I basically come up with something like a categorical score. And then, again, I'm not getting into all of these, but what I'm trying to show here is you need to make sure these filter numbers, these array, these basically matches with whatever number that you have up there, which is 32 so it has to match. And then in this line, when you are providing the seed input, so inside seed input, input, you have to provide a random numpy array first. And the first element of that numpy array has to be same as your number of filters, which is lane of number of filters, which will come to 32 in this case. And then the next two parameter needs to be the shape of your images, 60 by 64 and the third one needs to be the channel, which is one for RGB and three, sorry, one for grayscale and three for color. Okay, that's the only thing. These are the only things that you need to tweak if you want to reuse this code, a code and when you, when you Yes,
+
+Speaker 5  1:16:23  
+go ahead, when you're saying the word filter, you You mean the word do you mean kernel? Is that? Is that the same thing as kernel? Yes, yes, yeah. So, so when you say 32 is 32 different kernels, or 32 different filters, 32
+
+Speaker 1  1:16:35  
+different filters. Yeah. And here in this line, see it is taking some time. So essentially, what it is doing is, when you run an prediction through the model, it basically takes any data that you are going to predict, and it basically runs through the whole network, all the layers, and it gives you an activation from the last layer. So here, by this code, what we are doing, we are basically intercepting that, and we are as if putting a camera lens after just the convolution layer that is of interest, and looking at what activation is coming out from that convolution layer and putting it into this variable called convolution activation, and it is those activation, then I'm going to plot here using matplotlib, and that will give me that glimpse into the world of neural net, what the neural net is seeing. Okay, so conceptually, this is pretty simple, but don't even try to remember, like memorize everything we have I have done here, if you like this code starting from here to here, just copy this and adopt it in your own way. Okay, so that's that. So now I know that I have 32 filters. Now I can decide to plot it in any way. So I decided to plot it in a four by eight array, right? Like a subplot, and then that's what my subplot will look like when I plot it. Okay? So you see none of these are actually seeing anything from the image. It has applied some random filter, and these filters are not sharpening, not blurring, not Lydia embossing, not glossifying, nothing. So this is looks like, almost like an extra vision. So if you think about it, it's like a very smart extra machine that is basically going through each of the image and coming out different extra vision and these abstract representation is what is going to go to your actual fully connected layer, so not the original images. So that's why I wanted to show you this. So this
+
+Speaker 3  1:18:56  
+is before, the dot product of that kernel, right? This is, like the this
+
+Speaker 1  1:19:01  
+is after. No, this is after. This is after. Okay, yeah, because this is the output from convolution. I see,
+
+Speaker 3  1:19:06  
+Okay, gotcha. So this is the actual convolution. Got
+
+Speaker 5  1:19:11  
+it. This is the actual convolution, the third the 32 layers of different, different 32 and 32
+
+Speaker 1  1:19:17  
+filters, 32 filters in the convolution layer, creating 32 feature maps, right? So if you compare this here, here we are calling feature maps. So these are your feature maps, which doesn't make any sense to us humans, but it doesn't have to be as long as machine is understanding it. Right. Now, you can use the same code for any layer. It's not just for convolution. So what is the layer that we have added after the convolution? Again, remember, what is the following layer? Pulling, pulling, pulling, pulling. So we can take the same code and app. Light to the pulling layer and see what is coming out of the pooling layer. This is, this code is very reusable, actually. I mean, I didn't really write it in a reusable way, because I was just writing it yesterday, like, quickly put it together. But you can put that in a function and then, like, you know, do all kind of cool stuff with it. Okay, so my pooling layer was max pooling 2d underscore two. Okay. So now we are going to take the max pooling 2d underscore two. Everything else remains the same. I don't have to do any changes. Just change the layer name.
+
+Unknown Speaker  1:20:37  
+No change here at all.
+
+Unknown Speaker  1:20:42  
+And uh, everything else is the same.
+
+Speaker 1  1:20:47  
+It's just copy, paste, reuse, by now, for, for now, right? I mean, if you want to do it, you want to probably put it into a function, put it in a utility file, and you can just use that. But I didn't want to do all of that stuff. Just copy, paste and see. So when, when this happens, and when we do this, you will see that you will find look at a very similar output. But I would ask you to figure out what is the difference from the output of the convolution and output of pulling if, if anything that you can say that looks different. Okay? So I'd let you decide for yourself once it renders Okay, so the calculation of the activation is done. Now the rendering,
+
+Speaker 1  1:21:33  
+okay, look into these outputs. This is from convolution.
+
+Unknown Speaker  1:21:39  
+This is from pulling.
+
+Unknown Speaker  1:21:46  
+Kind of evolution,
+
+Unknown Speaker  1:21:49  
+pulling, I mean,
+
+Unknown Speaker  1:21:54  
+yes, yeah, like, this is more it
+
+Unknown Speaker  1:21:57  
+has less resolution,
+
+Speaker 1  1:21:58  
+less resolution. Exactly. That's that because, why? Because, remember the smaller fully, yeah, because each of these images are 1/4 have 1/4 pixel as corresponding these images. So these are bloodier,
+
+Unknown Speaker  1:22:14  
+and we want it to be this way. Okay,
+
+Speaker 1  1:22:19  
+so that basically shows you all the internals of a convolutional network. Now it's only the matter of scaling it up depending the complexity of the problem at hand.
+
+Unknown Speaker  1:22:33  
+That's all we need to do, because
+
+Speaker 1  1:22:40  
+cool. Now, after this, we could actually skip all of the other activities and then just do the last one. But what I suggest is just to get little hands on feeling. So let me do one thing. I'm going to post this right now. This solved file. What I would like you to do is building a CNN. This is with the this is for the fungi image, I believe. So this is for the fungi image. So remember, we had, we were looking at two different data set. One is the face, and one is this fungi thing, and both of those are available as pickle file on the BCS server. So what I would like you to do is take the fungi data set exactly the same way I did here, and come up with this exact same kind of network, which is one convolution, one pooling, flattened, followed by a one dense and one output layer with sigmoid. Apply that on a fungi data set and see what kind of accuracy you can have. Okay, so let's do it in a group. Would you like random group or your regular group?
+
+Unknown Speaker  1:23:58  
+What's the preference? Guys? Regular groups. Yeah, I'm
+
+Speaker 1  1:24:08  
+sorry say that. I know you said you were gonna post it if you can, as you go into the room, I'll post it right away.
+
+Unknown Speaker  1:24:14  
+Thank you.
+
+Unknown Speaker  1:24:15  
+Yeah, and what do you want us to do in the groups? So
+
+Speaker 1  1:24:18  
+you basically do the activity two, okay, which is the student activity, right,
+
+Speaker 5  1:24:24  
+right? But, I mean, that's you want us to do more than it says in that activity, because that activity is pretty small,
+
+Unknown Speaker  1:24:31  
+is it? Hang on, it's basically
+
+Speaker 5  1:24:33  
+redoing, like everything except for what you did at the end.
+
+Speaker 1  1:24:38  
+Haha, exactly that. That's all I need you guys to do. Alright, cool. That's all I need you guys to do. If you want to do the last thing, that's fine. That's up to you, but that's not something that I would expect. I mean, I'm
+
+Speaker 5  1:24:51  
+okay. Just be pasting it. Yes, it'll be
+
+Speaker 7  1:24:55  
+just a copy. Yeah. So if it's real short, Jesse recap it for seven men. Minutes.
+
+Unknown Speaker  1:25:02  
+I can copy and paste in less than seven minutes.
+
+Speaker 1  1:25:04  
+Let's do it 15 let's do it 15 minutes. Yeah,
+
+Speaker 7  1:25:11  
+open the room. Actually, I'm gonna make it. I'm gonna make it
+
+Unknown Speaker  1:25:16  
+17 minutes. So people can organize.
+
+Speaker 1  1:25:19  
+Will you post the code, which you give us extra one? That's what I said. I'm going to post the whole book and that will have the extra code as well. Yes.
+
+Speaker 7  1:25:31  
+Okay, so I've made 17 minutes of people with a couple minutes to sort themselves into their groups,
+
+Unknown Speaker  1:25:38  
+and so have 15 minutes. How's that?
+
+Unknown Speaker  1:25:42  
+So, whenever, ready, ready,
+
+Unknown Speaker  1:25:50  
+yeah, go ahead. Okay, so
+
+Unknown Speaker  1:25:53  
+how did it go? Guys?
+
+Speaker 1  1:25:58  
+Did the copy paste work for most part, without, for the most part, it
+
+Speaker 5  1:26:03  
+was the dimensionality in the size of the of the input. So like printing out the shape of the X sub zero was, was the important bit that I remembered. But I couldn't get it to even after adding another layer of convolution, I couldn't get it to go above in a value accuracy of 7%
+
+Speaker 2  1:26:21  
+Yeah. Added layer, because at seven, six, for what it's worth, but, yeah,
+
+Speaker 1  1:26:29  
+yeah. Well, one reason could be those fungi images, they're not super like. I mean, it's a hard one, right? I mean, looking into like and anyway, so What? What? What kind of accuracy you guys would get. Finally, 80% 80%
+
+Speaker 3  1:26:48  
+okay, it kind of goes up and it goes down and then goes up and goes down.
+
+Unknown Speaker  1:26:53  
+Yeah.
+
+Unknown Speaker  1:26:57  
+Okay, so these are all of your fungi images.
+
+Speaker 1  1:27:02  
+So you did one layer with 32 filters, and did you do an input shape of 252, 50 and then three, yes, okay, and then dense layer with 64 followed by a dense layer of two with sigmoid, yes, because it's a binary classification. Go, okay, I actually haven't run this, so let me run and see what mine gets.
+
+Speaker 1  1:27:38  
+Yeah, so we'll take a break now, and after that, we are going to go back to our what is called the phase data set, and we are going to build the most key cast network that we have ever tried out. Okay? And this time, we are going to actually try to do a 20 class classification, because in that set of 600 or so images. There are 20 different people there. If you look into the data that they give you, they give you the people's name, they give you the the position of the face, like sideways or front facing or something. Then they also give you the sunglass and open and then they also give you the emotion, right? I think emotion is probably be the hardest one to predict. But even predicting people is also pretty hard. So what we did in my previous activity, like predicting whether the sunglasses there or whether the eyes is open, that would, I would say, probably the easiest classification to do. But you can use that same data set and do quite a few different classification. So after we come back from break, we are going to try to attempt to identify who the person is in the picture, and see how much we can push the network. Okay. Oh, and then these one, how many epochs did you guys run? The current one? I ran 1010,
+
+Unknown Speaker  1:29:02  
+okay, I am running for 20. We
+
+Speaker 9  1:29:05  
+went to 25 and had worse results than 20.
+
+Unknown Speaker  1:29:10  
+Okay, yeah, that might happen sometimes, yeah,
+
+Unknown Speaker  1:29:14  
+and what was your end accuracy
+
+Speaker 8  1:29:19  
+after 25 I Liam,
+
+Unknown Speaker  1:29:25  
+do you still have it? Hold up.
+
+Speaker 1  1:29:35  
+Sorry, what's that? What was your accuracy after doing 25 epochs?
+
+Speaker 9  1:29:40  
+Oh, I didn't quite finish it. Oh, I thought it was, I thought you were the one that ran the 25 was it? Um, wasn't dawn. So
+
+Unknown Speaker  1:29:51  
+who is our third?
+
+Speaker 9  1:29:53  
+Well, we had worse. I remember it was worse. I don't remember the exact number. We had better results with 20. Oh.
+
+Unknown Speaker  1:30:00  
+Loss looks pretty good.
+
+Speaker 1  1:30:03  
+Yeah, okay, yeah, my loss looks pretty good. But I don't know why my accuracy looks wonky.
+
+Speaker 7  1:30:10  
+You know, I still thinking looking at those images. If I were to do that, I would probably want to do some process, pre pro image processing, first of those, like maybe some sharpening and contrast enhancement, maybe. And then I would, yeah, to see if that would improve the situation.
+
+Unknown Speaker  1:30:29  
+These images are not particularly good. Are
+
+Speaker 7  1:30:31  
+those? Those are your microscope? Ah, yeah.
+
+Speaker 1  1:30:35  
+Like it looks like from microscope, yep.
+
+Speaker 7  1:30:39  
+And whether they how they did the microscope, if they how they if they caught dyed things well and stuff like that to make good contrast and stuff. Yeah.
+
+Speaker 1  1:30:48  
+Okay, cool. Um, so let's take what 15 ish minute break. So let's come back at 35 that will give you what 14 minutes or so. Yeah, 35 okay. Oh,
+
+Unknown Speaker  1:31:07  
+so let's get started. So
+
+Speaker 7  1:31:10  
+I just want to interject when I first learned that stuff, just for everyone to know how that worked, with the filters and how they were trained, it took a while for me to wrap my brain around it, yeah, how that was coming up, but yeah, it's amazing that how it works.
+
+Speaker 1  1:31:30  
+Yeah, cool. So let's get started. So we are now going to learn one other nifty little trick that will help us as a quick question.
+
+Speaker 4  1:31:41  
+Sorry, I probably want to ask you before, but I know you already walk out. So between the accuracy, the loss, the value accuracy and value loss, if you have to pick the best indicator, would that be the accuracy and the loss, then the higher the accuracy, the better, the smaller the losses, the better. That's right?
+
+Speaker 1  1:32:01  
+And that is not value accuracy, by the way. That is validation, sorry, yes, yeah.
+
+Speaker 4  1:32:07  
+Do we care about the the validation accuracy number at all?
+
+Unknown Speaker  1:32:14  
+I know that you know the higher validation
+
+Speaker 1  1:32:16  
+accuracy is the number that you are interested in Yes, okay,
+
+Speaker 4  1:32:21  
+so all four are very important to basically decide if the model works or not.
+
+Speaker 1  1:32:28  
+That's right. Okay, yeah. So like if your accuracy is high, meaning the model is doing well with training data, but if your validation accuracy is telling you what the model is, how the model is performing with the test data, meaning the data that the model has not been trained upon. Okay, that is the real test of your model. Yeah,
+
+Speaker 7  1:32:52  
+I don't know a place to add. You can look at all the same kind of metrics as you did before with classification, yeah, you can, you can definitely do that. You can look at, you can look at balanced accuracy. You can look at, look at f1, any of that, whatever works best for what you're doing. So you know, just the accuracy. You can use those same metrics on the validation, okay,
+
+Speaker 4  1:33:19  
+same concept, yeah, okay, thank you appreciate it, yeah.
+
+Speaker 1  1:33:27  
+Okay, cool. So one other trick that we are going to learn now is, so let's say you have some training data, but if you think that the amount of training data is not enough, like thinking about our face database, we had, what, 600 or so faces. Now, if you are trying to train the model, 600 data, 600 number of records may might not be nearly enough for your model to understand the pattern properly, right? And this is where, remember, we are talking about feature engineering. We were talking about over sampling to basically create more training data when we are doing our traditional machine learning. Well, that applies to here as well. But in when you are working with the image data, there is actually some cool thing you can do, which is, let's say, if you have a image like this, right, you can augment your training data by adding more images on your training set by randomly moving the image, like move it sidewise, left, right, up, down, or flip it upside down, or rotate it, twist it either clockwise or anti clockwise by a random percentage, right? Like a 10 degree or 20 degree, right? And that way you can create lot more training data, right? So, that way, and then, so let's say you have the. This image with a level called Elephant, right, along with lot of other images with other animals, right? So now, if you take all of these images, and if you take this image, and then you create nine, the nine of the sample, or 10 of the samples, right? And then, now you know that this is an image with a level of elephant. When you are doing this augmentation, you are basically generating 10 times more data on elephant. And since now, it's not just only creating more training data, but you are actually by doing this, you are helping your model get more robust, because now your model cannot be thrown off if the image is not perfectly centered, right? Because now you're providing, love, some random snapshot of images, and you're telling your model like, hey, all of these images are, by the way, an elephant image.
+
+Speaker 5  1:35:53  
+You saw this last class about when we were doing the rotations that we could get more training data by just rotating an image for like, three times, we get back.
+
+Speaker 1  1:36:03  
+That's what it is, correct? That's what I'm saying here.
+
+Speaker 5  1:36:07  
+So you're also saying that you could skew it, like, to different, different places, so that if it's off center, because this is kind of a centering model, because the board keeps reducing, right? Yeah,
+
+Speaker 1  1:36:18  
+you can basically do a random translation, random rotation, random flipping upside down. You can do all sorts of funny things. The more you do, the more variation the model will see in your training data. So therefore, when it goes through those convolutional layer and tries to abstract those higher order edges and curves and so on, it will have more training sample to learn from. Okay, so we are going to now see how to do that in code. So what we are going to do is, from those list of faces, we are just going to import only one face, just to see how this works in this activity, we are just going to fetch one image only. Okay, so this is our image of this one guy. So we just fetched so. So so this is our example image. So we are going to see what the size is, and then we are going to change it to the target size of 64 by 60. So original was 32 by 30. We change it to 6460 because that's what we have been doing in all of our our trading, other training also, right? So this is our example image, 64 by 60. Now, other transformation we did is we took the raw image. So this is the raw image. You can convert that raw image to a numpy array. Convert this array, each of these array element to a floating point number, and scale it by dividing it with 255 and that gives you your float image. Now, your float image is now a numpy array. It's not a pure image anymore, but it is a numpy representation of the image, right? So that's your float image 60 by 64 Okay, so now we are going to take these data and try to do the augmentation, meaning we are going to move it or rotate it and see how we can generate a new image from this. So in order to do that first, you need to do two operations. The two operation meaning so if you look into the shape of the image, it is 60 by 64 so you need to add two more dimensions to it. The first dimension will be the batch size, which is basically here, like if you have a 64 by 60, you need to add one more dimension here, which will be the batch size, and one more dimension here, which is which will be the number of channels in the image.
+
+Unknown Speaker  1:39:14  
+So to do that,
+
+Speaker 1  1:39:18  
+if you use this NumPy function called expand dimensions and say, axis equals zero. That will basically add
+
+Unknown Speaker  1:39:28  
+this number here.
+
+Speaker 1  1:39:31  
+And then you do the same thing, expand dimensions again, with the first one for output of the first one, and then do and do these with access equal to negative one, that will basically add this last number here. So this is the prerequisite before you do any rotation. So when we run this code, so this is the out. Output after the first expand dimension, which basically adds this little one at the in the front. And then we take these and do another expand dimension, this time in the axis is equal to negative one, so basically it adds one at the end. So now this reshaped image array is what we are going to pass to a Keras sequential layer that will then do some random manipulation of the image. The cool thing about this is you can actually apply these as a Keras layer. You don't have to do this outside. So what you do is you create a Kera sequential model with just one layer, and that layer is called random rotation in this case.
+
+Unknown Speaker  1:40:59  
+And by saying 0.2
+
+Speaker 1  1:41:01  
+What I mean is the rotation would be a maximum of 20% of the total amount of rotation possible, which is two Pi or 360 degree. So it will be 20% maximum, meaning it will be a maximum of 7.2 degrees of rotation, like not too much rotation, right? And then you take these data augmentation layer, which is this, and you invoke the data augmentation with the image you have, which is the reshaped image array, and you provide this parameter called Training equal to true, and then take the first output of that and then convert it to NumPy, and that will give you your augmented image, okay, which is 60 by 64, by one, because there is one channel, because it's a only grayscale image. It's not a color image. Now you can take this and just do a plt.im show, and that will show how the image is.
+
+Unknown Speaker  1:42:14  
+So it is rotated by a random percentage.
+
+Speaker 1  1:42:20  
+If you change this random rotation percentage to, let's say, 50%
+
+Unknown Speaker  1:42:27  
+and run it again,
+
+Speaker 1  1:42:30  
+you see there is more rotation now, so it rotated almost 180 degree, okay. But then if you run it one more time, you hmm, you will get a different rotation because the whole thing is random. And you want that because when you apply this repeatedly in a batch, you want this different augmented sample to be created with a random orientation. So this is just example with one image, and that's why I ran it couple of times, to see that every time I invoke it, it will create a completely random orientation of the image.
+
+Speaker 5  1:43:15  
+I'm trying to then same thing, and I'm not getting it randomly
+
+Unknown Speaker  1:43:21  
+rotated. You will actually
+
+Speaker 1  1:43:25  
+maybe. So yours is probably 0.2 and 0.2 is 20% so you are probably not seeing the difference very much. But it actually is random. You probably are not seeing it with your naked eye, if, if the difference is very small, and that's why you change it to 0.5 yeah, now I change it to 0.5 so, so I can see it magnified, right? Thank you. And then this is the original image, of course, original image, and this is the randomly rotated image. Okay? Now the other thing you could do is, instead of adding just one layer of rotation, you can add multiple layers. You can add a random rotation. You can add a random translation of 10% in each direction. So when you say random translation, you have to provide two parameter. One is your horizontal shift and another one is your vertical shift. And this number here tells it what is the maximum percentage you want to shift the image by? So random rotation, random translation. There is also another function called random zoom. So it will zoom in randomly up to 20% so these numbers are up to, by the way, all of these are up to. So when you say 0.2 that does not mean every time it happens. It will do this by 20% it will do a random percentage with the limit. Being 20% and then there is also another function called random flip that you can provide horizontal and that it will basically, you can say either horizontal or vertical. So it will either flip on a horizontal axis or on a vertical axis. So now, if you have that, let's say now I have four different random augmentation function that I have added in this sequential model. And now let's say I want to create many copies of this, not just one. So in the previous example, I did only one here. I'm going to take that same image and I'm going to run a for loop with range of 24 so basically, I'm going to create 24 copies of these image. But you see, inside the for loop, I'm calling this, this same sequential model, data augmentation, and I'm providing the same reshaped image, but the output of these, when I'm appending the output to this list, every time it does that, it will choose, randomly choose one of these four movement, and for each of The movement, the amount of rotation or translation or zoom or flip, whatever it will be that is also randomized. So then the original image plus 24 more image, so I will end up having a total of 25 image. Now in here, I'm basically plotting this 25 image in a five by five grid, with the first one, zero at one being the original image,
+
+Unknown Speaker  1:46:49  
+and rest of the 25
+
+Speaker 1  1:46:52  
+being the i th augmented image.
+
+Unknown Speaker  1:46:59  
+Okay, so let's see how that works.
+
+Speaker 1  1:47:07  
+Okay, so the first one, as I said, the original image, and these are all randomly rotated, shifted or flipped or zoomed in version of the original image, if the if I run this one more time, I will see another palette.
+
+Unknown Speaker  1:47:31  
+Just know that all of these are randomized.
+
+Speaker 1  1:47:35  
+So by doing this, I suddenly increased my training data 25 times.
+
+Unknown Speaker  1:47:45  
+So imagine how good that will be for your model.
+
+Unknown Speaker  1:47:50  
+So you have that much more training data.
+
+Speaker 10  1:47:56  
+It's kind of like when you're doing when you're like setting up your facial recognition on your smartphone, and it has you take Yes, pictures all over. It's kind of like that, right,
+
+Speaker 1  1:48:06  
+correct? Or also, let's say, when you are trying to do a fingerprinting, right? Yeah, you are adding a fingerprint to your phone or your computer, it will say, hey, touch that sensor, but lift a finger and then touch again in a different angle, right? So it's kind of essentially doing the same thing.
+
+Speaker 5  1:48:26  
+Could you scroll up to the cell before you generate revenue sources
+
+Unknown Speaker  1:48:31  
+this one? Yeah.
+
+Unknown Speaker  1:48:35  
+Thank you. Yeah.
+
+Speaker 1  1:48:45  
+Okay. So now, if you want to do these on the whole image array, which remember, we had 624
+
+Unknown Speaker  1:48:53  
+or so images, right?
+
+Speaker 1  1:48:56  
+So now, if I want to do load that, we know that we have all of these 624, images available as a pickle file here, which you can load using the bytes IO and request dot get, and that will give your x and y. And then before you feed it, you take your y data and you do a level encoding, and that will give you zeros and ones and X, you convert it to a overall NP array, which is 624, by 64, by 60 at that time. And then one thing, keep in mind, one, whenever you are doing this data augmentation operation, do not do that on the original training data. Because what will happen is, if you take these all, let's say if you have 600 training data, and if you are doing five copies of each so you will have 3000 training data. But then if you do the train test split afterwards, then some of your test data. Will have augmented images, not the original images, but that's not really what you want. You want your test data to be pristine, untouched, original data that came in. But you can make your training process more robust by augmenting the training part of the data, not the test part. You can do that, but that will be cheating kind of way, right? Because now your validation accuracy will be higher than it ideally should be, what it should be ideally, because now some of your validation data that it is doing. It is not really real data validation it's doing. It's basically taking copies of it. We don't want that. So that's why keep in mind, before you do anything, first do your train test split here. So after you do the train test split, you see, I have only 499 available for training out of 624 the total was 624 My training is little less, right? It's about 70% or so. And then I have my data augmentation layers. And here what I'm doing is I am going looping over the train data. And for each loop, I am taking the image, which is my i th training image. And I also need to keep track of what was the corresponding level for the i th image, which is this thing, because I need to slap on this level on all copies of augmented image of that same image. If my first image is a cat, and if I create 20 other cat images, I need to remember the level for the first image was cat, and slap on that same level to all of the 20 augmented copies of that same image. So that's why we are getting hold of image, and then also getting hold of level. And then you basically add those two dimensions, the first and last dimensions, and then you do another loop. This time I'm choosing to add only five copies of each image. In the previous example up there, I did a 20 sorry, 24 here I did 24 you could do 24 not a big deal. But here I'm just shooting choosing to do five so that means, out of so your 500 or so training data now will become 2500 training data. And for each of these, iteration of the loop, I'm calling a data augmentation layer with these IMG, which is the i th image, and it will create five of these, which I'm these, then appending to this list, and then this list, finally, I'm printing the length. How many are there? And that would be my amount of training data that I will have available, which will increase five fold.
+
+Unknown Speaker  1:53:19  
+As you will see
+
+Speaker 1  1:53:21  
+now, it is taking long time because it is applying this five data augmentation operation for each of those 500 images. So that's why it is taking time.
+
+Speaker 1  1:53:38  
+And I'm not going to display all of this, because there is basically just no point. But you know what's going on behind the scene, right? So,
+
+Speaker 5  1:53:53  
+so would it be the original extra count plus five times the original extra account? Yes.
+
+Speaker 1  1:54:09  
+Yeah, so 499, went up to 2495
+
+Unknown Speaker  1:54:14  
+five times more.
+
+Speaker 4  1:54:18  
+Okay, can we see the images, then the images that you just create,
+
+Unknown Speaker  1:54:23  
+you can, but I just didn't write the code,
+
+Unknown Speaker  1:54:27  
+you definitely can.
+
+Unknown Speaker  1:54:31  
+All you have to do is take this copy, right,
+
+Unknown Speaker  1:54:38  
+and if you want, really,
+
+Speaker 1  1:54:41  
+you can put this here, and if you want to check, let's say for i in this. So this would be x train. Og then hang on.
+
+Unknown Speaker  1:55:00  
+X train, org, dot shape.
+
+Speaker 1  1:55:06  
+Oh, no, sorry. Extreme arc is a list, so you have to do this.
+
+Unknown Speaker  1:55:13  
+So that gives you this.
+
+Speaker 1  1:55:17  
+So now that means you have to take x train. Arg, oh, no, another thing you have to do. Remember, before we do that, we convert this whole thing into a numpy array.
+
+Unknown Speaker  1:55:32  
+Where is that piece of code? I
+
+Speaker 1  1:55:52  
+Where did we convert that 624, images, the whole thing into an array? I think it's on the third cell from the top card from the top, you think, I think, no, this is converting this thing into this.
+
+Speaker 1  1:56:23  
+Here we are doing this, but, ah, here. Oh, no, x.np, array, x. Now this is X train. I think what we can do is I
+
+Speaker 1  1:56:55  
+Yeah. So now you have a 2495, by 60 by 64, by one. Okay, and now you can take this x train of shape and
+
+Unknown Speaker  1:57:10  
+you can,
+
+Unknown Speaker  1:57:13  
+you don't really need that.
+
+Unknown Speaker  1:57:16  
+What you can do is
+
+Unknown Speaker  1:57:21  
+that I,
+
+Speaker 1  1:57:33  
+nope, not that comma, right? Something like that. Let's see. Yep, there. Wow. So first image five copies, second image five copies and so on,
+
+Unknown Speaker  1:57:48  
+randomly moved. Yeah, wow,
+
+Unknown Speaker  1:57:51  
+interesting, yep.
+
+Unknown Speaker  1:57:56  
+So that's your data augmentation. Okay,
+
+Speaker 1  1:58:03  
+okay, so the next two activities, I'm just keeping this because you will see that they will ask you to do the exact same thing, but using your fungi image the first one, they are asking you to load one random fungi image and then do the augmentation on that image, which is not super interesting, like you wouldn't even probably really notice when it is flipped or twisted, the image is so abstract. And then the activity number five is basically do the same thing, but this time, take the pickle file of the fungi image and do this thing in a loop and create five copies of each of the fungi image in your train set, which is the exact same. So I'm just leaving it up, leaving that for now. Instead, what we are going to do is we are going to go to the last activity where we are trying to build a key Cast model using our face data and try to identify people in the face data. Okay, so here the code is written. Basically, hey, you get these files, and then you basically go from the very beginning, where you basically copy each of these files from the remote server, and that is going to take a whole lot of time, and then you save the image into a pickle file locally, and then you load the pickle file. But I have ran through all of this, so I'm going to skip all of these. I'm simply going to open the pickle file that is in my local and that gives me 624, images right away. And I just chose to randomly display one image. So if you run this one more time, you will see another random. Image. Okay, so all my images are there in these images variable. So now we are going to do the pre processing. So if you remember the steps, the first one was to check the sizes and resize everything you actually don't need this length, Z, o, s, that is default. So to check the sizes, which, as you remember, we had three different sizes of images available, and we are going to resize everything to the middle size, which is 64, by 60. And that's our resizing. And this is one of the random decides demand image. Then the next step is to take all of these images and convert to a 2d floating point numpy array so that and then just the print pixel value of one of the image, which is basically the images. Remember, I'm not scaling it yet, meaning I'm not dividing it by 255 these are the actual pixel value. Now, to normalize or scale the image, you can take each of these values basically take the whole array and divide by 255 but I'm choosing to not do that for now. And I will show you in a bit why there is actually another nifty trick that you can use and not do this normalization outside, which is actually even better. And I'll show you in a moment. How am I going to do that when we build the model? Okay, so that's all the images. Now, remember, these images do not have any levels associated, but the levels come in form of those file names, right? So these were the file names which we pre processed before. So we cut the file name into four pieces. The first piece is basically the user ID, the second piece is the pose, third piece is the expression, and the fourth piece is the sunglass or open. So we are going to take in this example. We are going to be attacking a much harder problem of identifying the actual users here. And there are 20 users here, by the way. So what we are going to do, we are going to take these file names, DF, data frame, and we are going to basically convert it in a way, so that, oh, actually, hang on. File names, DF, oh, okay, so I already did that before. That's why it is showing but anyway, so, yeah, so I already ran this one before. So file names, DF, already had these four things, yeah. So, yeah. So if you run this fresh, you will see, when you first print file names, GF, you it will have only one column, and then you run these, which is where you are taking these files column, and then splitting it into four column and adding these as four different column names, which you will go, we're going to get this. So now, as my Y variable, I'm going to take the user ID column, which is this guy, user ID. So that is my y, and x is all the images, the floating point array of all the images. Remember at this point we have not done split yet, train test split and we have not done any data augmentation yet.
+
+Unknown Speaker  2:03:50  
+So that's my x and y, ready.
+
+Speaker 1  2:03:54  
+Now let's check how many unique user ID are there in this column, meaning your y. So if you do y dot n unique, that will give you number of unique variable, which is 20. So even though there are 624, entries in this file, there are only 20 unique people that are
+
+Unknown Speaker  2:04:16  
+represented there.
+
+Speaker 1  2:04:19  
+So my Y has 20 values. So we take both of these and convert into overall numpy array,
+
+Unknown Speaker  2:04:29  
+and then we do the split.
+
+Speaker 1  2:04:32  
+So this is where the split. So we do this split, and we get our usual X, train, X test, y, train and y test.
+
+Unknown Speaker  2:04:43  
+Then what is the next step?
+
+Unknown Speaker  2:04:48  
+What we just did, augmentation,
+
+Speaker 1  2:04:52  
+augmentation. We are going to do only on the X train, not on the test part of it, not on X test. Yes. So for augmentation, we are going to use that same random layers, rotation, translation, zoom and flip. And we are going to run through all the training images. We are going to take the IMG and level. We are going to do the Expand teams operation to add the batch and channel, and then we are going to get five copies of each exactly like what I showed in the previous example. And these, again, will take some time, but we were going to get 2495
+
+Unknown Speaker  2:05:34  
+images.
+
+Speaker 1  2:05:36  
+And the levels of this thing will be the corresponding the usernames, meaning these ones this column. Okay, so let's wait for The augmentation to complete.
+
+Unknown Speaker  2:05:56  
+So I
+
+Unknown Speaker  2:06:26  
+Okay, so our augmentation is complete.
+
+Speaker 1  2:06:30  
+So now let me show you something. What is my x train, org, so if you do
+
+Unknown Speaker  2:06:41  
+a type of this.
+
+Unknown Speaker  2:06:44  
+It's a list, right?
+
+Speaker 1  2:06:47  
+So now, if you take the first item of the list, let's say this and do a shape. We have a 60 by 64, by one. What is this one? It basically shows there is one channel. Now, if you compare this with one of our X test, what is X test? X test is a numpy array, and there are 156 elements, 6064, but you see this last parameter, which is the number of channels that is not present here. So now there is a mismatch between the x train and X test, X train data. Since we had to do the augmentation, we had to add this channel parameter, because without adding the channel parameter, you cannot do the augmentation. But since we didn't do augmentation on the test data, so the test data is lacking that channel parameter. Now these would cause a problem, because we are going to train the model with the test train data. Now that model expect, expect each image to be this 3d array, but your test data now cannot be run through that model because the test data does not have that last parameter.
+
+Unknown Speaker  2:08:16  
+So to
+
+Speaker 1  2:08:19  
+correct that problem the test data. What we are going to do is we are going to look through all of the text images, and we are simply going to do one expect the Expand deems operation to basically add that thing, that channel number at the end, to make sure that both my train data and test data are dimensionally similar. If you forget this step, then your prediction will fail or evaluation will fail. In fact, the training will fail, because even during the training also it will run the test data through the validation cycle, right? So you cannot do that without adding this extra step. So now, after doing all of these now, my data is finally ready for modeling. Oh, no, actually, one more thing we haven't done yet, which is encoding all of these user IDs,
+
+Unknown Speaker  2:09:23  
+and there are 20 of them, right.
+
+Unknown Speaker  2:09:28  
+So what we are going to do is
+
+Unknown Speaker  2:09:33  
+we are going to create a one hot encoder
+
+Unknown Speaker  2:09:38  
+with white trend org
+
+Speaker 1  2:09:42  
+and a and then do a encoder, dot transform,
+
+Unknown Speaker  2:09:47  
+and then convert everything to a numpy array.
+
+Unknown Speaker  2:09:54  
+And then we are going to do a train test split.
+
+Unknown Speaker  2:09:58  
+So that's my. Y train look like now.
+
+Speaker 1  2:10:05  
+Okay, so now y train has 20 columns. Why 20 columns? Because I have done a one hot encoding on the user ID, which has 20 different
+
+Unknown Speaker  2:10:20  
+unique values,
+
+Speaker 1  2:10:28  
+then we are finally ready to build the model. So while building the model this time, I chose to cut no corners and go very, very deep and broad. But if you look into these in the sequential model,
+
+Unknown Speaker  2:10:51  
+the first layer I am adding
+
+Speaker 1  2:10:55  
+is actually a Keras layer for rescaling, and this is why I omitted the manual rescaling step up there where I took the numpy array and divided all the element by 255 I didn't need to do that because I can actually apply a rescaling layer with the scaling factor, which I'm providing as one over 255 so that means when you input a non scaled numpy array and it goes to the first layer of the model, this first layer will do the rescaling. So I basically internalize the rescaling test step within the model. So rescaling will be done on the fly as you are running the training epochs. You don't have to do that outside.
+
+Unknown Speaker  2:11:50  
+Now come back. Comes my real convolutional layer.
+
+Speaker 1  2:11:55  
+So I'm choosing my first layer with 32 filters with the input shape 6064 and one, and then a max pooling with a two by two. Then I'm adding another convolutional layer with 64 filters,
+
+Unknown Speaker  2:12:14  
+then a max pooling,
+
+Unknown Speaker  2:12:17  
+and then another convolution with 128
+
+Speaker 1  2:12:23  
+and then a max pooling. So I did this three times. And then finally I decide, okay, it's enough. Let's flatten.
+
+Unknown Speaker  2:12:35  
+So now we are flattening it up.
+
+Speaker 1  2:12:39  
+Then our fully connected layers. And I chose to have two hidden layers before I go to the final one. The hidden layers are dense, with 128
+
+Unknown Speaker  2:12:52  
+going to 164,
+
+Unknown Speaker  2:12:55  
+and finally to 20.
+
+Speaker 5  2:12:57  
+So for the input shape, how come you didn't change the dimensions to match what you already been augmented in one two. You had to change y train to 118, 72, by 20. What's x train at this point is that 6060, by 64
+
+Speaker 1  2:13:13  
+so that is 60 by 64 we didn't change that. So only thing we had to do is see this, this third dimension, which is the number of channels it was not originally present in the training data. We had to inject that in the training data because it is required as part of the augmentation, but since we did not augment the test data, so that's why we had to also then artificially inject that third dimension in the test data to make sure they're dimensionally similar. So
+
+Speaker 5  2:13:43  
+you don't have to match, match the dimensionality on the X train
+
+Speaker 1  2:13:48  
+this. So here, do you see any extra in here? There is no extra
+
+Speaker 5  2:13:51  
+I do below. That's why That's That's why I'm I'm trying to figure out, like, how that matches up when you have, when you model, when you fit the model on the that history variable for extreme high train, yeah, I thought that's what you're using for your input. Maybe I'm missing it. So these
+
+Speaker 1  2:14:10  
+x train is coming from here, and these x train is basically coming after you are doing the train state test split on X train, augmentation, augmentation, augmented data. So these one already has this target dimension, already there.
+
+Speaker 5  2:14:27  
+Okay, I'm pretty lost. I'm not gonna, I'm not gonna lie.
+
+Speaker 1  2:14:31  
+I know, I know this code is complex. I mean, I think
+
+Speaker 7  2:14:35  
+what Jesse is not wondering about is that doesn't it has 6064, by one. It doesn't have the number of images. 6064, one. It doesn't have four dimensions. Is three, and that's because you don't provide that with the model
+
+Speaker 1  2:14:50  
+that Right, right? So the first dimension, if you're thinking about what was the first dimension, that was like the basically the batch size or number of images, you don't need that. Here because you need except for the first one. First one is the batch size, one image, meaning one batch 100 image, meaning 100 batch size. You don't need that. So your input shape need to fit with the height and width and number of channels in the image, which is one in our case, that's why we have here.
+
+Speaker 7  2:15:19  
+Yeah, you don't specify how many samples, because that could vary, right? And, in fact, actually, when you okay? So while we talk this, running the model, you'll see it again say none for the for that dimension, it will say that, yeah, I
+
+Speaker 1  2:15:45  
+now look at the validation accuracy on the after the first epoch, 9% so you see in others training, it was starting all the way, like, up like right away that like 60, 70% or 80% This one started with the validation accuracy of 9%
+
+Unknown Speaker  2:16:03  
+second depart, put it up, pulled it up to 21%
+
+Speaker 1  2:16:07  
+and Oh, another thing I forgot to mention to make sure that the training is robust, I also added dropout layer. So basically I added everything that we have learned up until this point. So no holes. Bar, okay, everything. And now look at the accuracy how they are going up steadily. There is no flip flopping. Nothing steadily going up. After a while there will be, probably be some flip flop. But look at how beautiful it looks like first nine or 10 epochs, and
+
+Speaker 5  2:16:41  
+the dropout layer just tells it to forget a certain amount of what it's done, right? I think you put it 20% so forget 20% of what you've done. Correct?
+
+Unknown Speaker  2:16:49  
+0.2, yeah.
+
+Speaker 5  2:16:53  
+But then you, then you do it again after that dense layer, yep.
+
+Speaker 1  2:16:57  
+So after every dense layer, I'm forgetting 20% so it's
+
+Speaker 5  2:17:09  
+just this is going for a bit. Can you remind us what's, what the what the purpose of that dense layer is supposed to be for? That's it. The neural network.
+
+Unknown Speaker  2:17:17  
+The dense layer this,
+
+Unknown Speaker  2:17:24  
+could you just remind me what, what that's doing?
+
+Speaker 1  2:17:29  
+Oh, that is where your actual like, the connections, the weights and biases are being adjusted using the stochastic gradient descent. That is, that is the core of your neural network. Got it like everything that we are doing from here to here. This is for your convolutional setup, where I don't want to input the exact images to the first dense layer, because my concern is that if you just do the pure 60 by 64 pixels directly to your neural network. The neural network will not be able to very effectively find out the meaningful, abstract features in your image. But after that, this part, this is what we have done since the beginning of the neural network week, right, which is you have a bunch of neurons with an activation function,
+
+Speaker 4  2:18:28  
+the dropout always 20% annoy. No. You can
+
+Unknown Speaker  2:18:33  
+change. Okay, okay,
+
+Speaker 1  2:18:37  
+okay, that's cool. Let's see how the plot looks like. It went from almost 0% accuracy almost steadily going up with a little flip here, and then it keeps steadily going up to above 70% the validation accuracy. And they are both going in sync. So beautiful. More training with no overfitting. Now I suggest you try this without any change. Just remove this drop out layer, and you will see your model training will not be this beautiful. It will if you do that, then you will see that the yellow line will rise close to 200% very quickly, but then after a while, this orange line will start to fall apart. It will deviate without the dropout layer. By adding the dropout layer, you are making sure that the blue line does not rise too fast. It rise more gradually, and it takes the orange line along with it. And then if you plot the last, you will see the repeat of the same thing, except the mirror image. And then finally, you. If you evaluate the model on your test data, and these test data is not augmented, because if you remember this X test, these had only 156 images, which is 30% of original 624, images. So we did all this circus, but we still have 156 copies of pristine images. So this is the moment of truth when we run this cell.
+
+Unknown Speaker  2:20:36  
+Let's go.
+
+Unknown Speaker  2:20:38  
+What do you see now?
+
+Unknown Speaker  2:20:41  
+87% 87% accuracy
+
+Speaker 1  2:20:46  
+in identifying one of those 20 people out of only 600 images that are very bloody and pixelated.
+
+Speaker 1  2:21:02  
+So stop a moment and think about it, the power of this network, and it is big, but computationally, it's not that expensive, only two minute 10 seconds. So imagine what you could do with a 10 times bigger network, right? They should give you a glimpse of how powerful these things could be,
+
+Speaker 5  2:21:27  
+and it's bigger better. I mean, like, what's, what are the real parameters that are going to, like, get get you the most bang for the buck? Is it the breadth of the of the nodes in your dense layer, starting big and then going progressively smaller?
+
+Speaker 1  2:21:41  
+Yeah, you will have much more dense layer. So industry standard model, it is not uncommon to see like 1015, 20 hidden layers. Okay, the other thing people do when they do the image classification is they don't even do it this way. So even with all this sophistication, this is a very, very naive approach of doing an image classification. Because if you are going to do a real classification for a real problem, you don't even start with an empty model and start building your layers here. Instead, what you do is there are all of these ResNet, VGG, all of these different models that are available in the industry that are already pre trained to identify image or process image. So these are Jenna in general, trained with millions of images of random things from all over the place on the internet, and they have trained this model. There is no classification layer on those models. They basically do the convolution and then do a whole bunch of training using the fully connected layers. And they just give you the model which you have all the weights and biases. So what you do is you take one of these pre trained model, and then you slap on an input layer, and then you slap on an output layer that suits your data set, and then you start training from there. So by doing so, the beauty is that the model that you are starting with, instead of building from scratch, that model already has training that allows you to effectively find areas of dark and light, patches, different curves, edges, corners in image, in general, No matter what thing is in the image. So these is called transfer learning. So you basically take a model that has already done a ton of learning and you transfer that learning to your specific use case. That's how they do it in the industry, going to that level of sophistication is not within the scope of this boot camp, but for those of you who are curious enough and adventurous enough, feel free to use these in your project. If you want to do a real industry scale image classifier you
+
+Speaker 3  2:24:23  
+Okay, so those models that exist, some of them are proprietary, like people own them, and then they're also like open source too, right?
+
+Speaker 1  2:24:30  
+Yeah, there are open source models as well. There are proprietary models as well, yeah, so just make sure you basically attribute wherever you got the model from right in your work when you submit
+
+Speaker 7  2:24:45  
+a lot of the common ones are in Keras or TensorFlow in their model. Yeah, and you and it, usually it will have a complete classifier. But you cannot use the top part to do what you want, or you can use the whole. Classifier if you just want to classify images, they're generally trained on ImageNet with over a million images, and they're about 1000 classes of things. And if that's all you want to do is detect those things, you can use it directly, just and send your pictures through and identify them. Or you can take the top classifier, often write your own classifier top to train to just do your specific task. It's called a downstream task.
+
+Speaker 3  2:25:32  
+So the file that you would download, it's essentially like the like, the array of like weights and biases, like the values, yeah, weights and biases for that particular model,
+
+Speaker 1  2:25:42  
+yeah, you'd probably get an h5 five, h5 file, like the one that we have been saving, right? And you load that file, and then you start from there.
+
+Speaker 7  2:25:54  
+Yeah, they're usually in the libraries areas, kind of functions, and you'd call the function to create out of them, stuff. But basically, usually it's, it's the complete architecture, not just the weights. Actually it'll be the architecture. And then the weights are separate. So you have a separate set of weights specifically for image net. So you'll have the architecture of, let's say, ResNet, and then you'll have the you apply the weights for the image net weights to it. It's usually how it actually works. And then in that, you'll specify, do you want to have the top layers, the classifier layer, or not? And you also have the option to train or not train layers of the model, because sometimes you want to fine tune it, you want to tweak those weights for something, but a lot of times you don't. So you can not you can make it all fixed so none of it will train, or you can train some upper layer, sometimes things like that. There's all these little variations, and you can do, I
+
+Speaker 1  2:27:05  
+Yeah. I mean, Karen has way more expertise than I do, so feel free to use her expertise if any of you guys are planning to do something like that in your project.
+
+Speaker 7  2:27:15  
+Oh, yeah, I'm glad to as as much as I know or then I define, yeah, no, I hope I don't know. I help you find I help you find out together the information as far as the process of journey,
+
+Speaker 1  2:27:36  
+cool, so that it would be all for today. And we did pretty good in time, too, right in time. So.
+

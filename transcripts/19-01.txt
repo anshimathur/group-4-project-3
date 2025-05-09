@@ -1,0 +1,792 @@
+Speaker 1  0:01  
+Good, who is basically one of the CO inventors, in addition to Jeffrey Hinton right, one of
+
+Speaker 2  0:10  
+the three terrain prizes him and correct,
+
+Speaker 1  0:13  
+yeah. And so I think that will, that will help, but
+
+Speaker 2  0:18  
+both Benji and Benji and and hidden of all kind of almost reg regretted and even even denounced their own work, as opposed to young la COVID saying, okay, large language models won't create AGI, but here's how we'll do it.
+
+Unknown Speaker  0:38  
+This is the roadway for it. He's much more positive. Yeah,
+
+Speaker 1  0:46  
+let me. Let me share one of his interview. Okay, interesting, where he talks about that. AI actually needs physics to evolve, kind of going back to what you were saying, but the same video, you will notice that he's basically talking down any any of this so called fear of existential threat that simply is not going to happen,
+
+Unknown Speaker  1:13  
+won't be there. I mean, that's
+
+Speaker 2  1:17  
+from that Where did my last assumption that there can only be one sentient species on a planet, which is not necessarily the case. But, I mean, we have more intelligent species risk
+
+Speaker 1  1:30  
+in our planet. I think there are two actually. The only thing is the other one lives in the water. I
+
+Speaker 2  1:35  
+was going to say that exactly, satishia, yeah. Are sentient, very intelligent. But they, yeah, they went to living in the water. Actually, they went, at one point, evolutionary going to the water. Whales and their fins still have remnants of legs in the in the skeletal structure. So they were on land and they went into the water.
+
+Speaker 1  1:57  
+So I just posted Jan le COVID interview there, I'd strongly suggest you guys watch it, especially after all these conversations that have been going
+
+Speaker 2  2:10  
+on, I have some definitely opinions and strange ideas.
+
+Speaker 1  2:15  
+Okay, cool, okay, so I actually have a good news for you guys, is this even though we are in the middle of deep into the deep neural network, right? But today's class is probably going to provide some breather. In fact, I don't know whether you have gotten a chance to look into the material ahead of time today, we are not basically going to focus on actually building a neural net at all. So what we are going to do as part of this week, which is week 19, we are going to switch our focus from building a neural net for general classification task, which we have been doing. I mean, if you recall, in not in the yesterday's class, the class last week Thursday, where we got a data set and we did a classification using neural net, and we were also able to produce similar or better result using traditional machine learning, using Scikit line learn, right? And at that point, I basically mentioned that hang on, for some reason my screen sharing is not working. Okay, yeah, so at that point I made a statement that for many of the traditional problem, like, for example, when, like, let's say a bank is trying to risk score it cuts customers right or or you are trying to do some anomaly detection, detection based on the data coming from your sensors, like major a vast majority of the problems actually do still have classical solution. And when I say classical, I'm meaning I mean using statistical methods such as your such as your support vector machines, such as your k nearest neighbor and obviously the tree based methods, right? And we also notice that tree based methods, in many cases, actually perform better than neural network methods, and it is way cheaper to run because it does not take as much training time. Now, when it comes to other form of learning, such as learning what is there in an image, or listening to human voice or looking at human text and learning what has been said, being said or written, and making a summary out of those like these are the advanced form of learning. Where the traditional, statistical based methods do not do very well, and that is where the neural nets, that neural network, best method, starts to shine. So our focus of this week is the first kind of these application, which is recognizing things and objects inside an image, which is what we are going to do in the next three classes. As part of today's class, we are just going to focus on what an image is built off, like how we can digitize the image and prepare the image to be fed into a neural network, because one thing that does not change, no matter what kind of problem we are trying to solve, is that all of our input that is coming to the machine learning model, whether it is a random forest or a logistic regression or whether it is a neural network, one thing that Is that does not change that all of your input data needs to be numeric. In nature is just zeros and ones right and and it has to be numeric, even if you have category, categorical data right. We have seen that we have to convert the categorical data in some form of numeric data in the upcoming week we will, when we go into the natural language processing section, we will see even more ways of converting the textual data into some kind of a vectorized numeric form when we talk about things like tokenization and all. But in this week, we are going to think about, given an image, how we can convert the image into something that machine will recognize as series of numbers, like floating point numbers, that is the core of this class. So in order to do that, we are going to learn about a library called pillow, which allows us to basically load data, save data, and present data. And you will see that we can actually render image, which is basically some binary data, very, very easily, using these libraries in our Python code. And we can save this image for later, and we can load this image later and then prepare in a form that we can feed into a machine learning model or neural network in this case, okay, so we are going to do that now, given the content of the class, I'm hoping we will probably be able to cover everything almost half the time allotted for the class. So what I'm going to do is, then we are going to take a break, and what I'm going to do is I have prepared another notebook that I would like to run you guys through, which if you remember where we what I said at one point, the kind of a Hello World of machine learning is recognizing those handwritten digits from a data set called M NIST, M, N, i, s, t. So we are going to take another stab at it. We're going to take this MNIST data set, and we are we will see how these MNIST data set is basically can be represented as a series of numbers, and how we can build deep network using the techniques that we have learned in week 18, and how We can actually identify what is written in those handwritten scribbles, meaning it will be a 10 class classification, because there are 10 digits only right, which makes it a rather simple task, and we have been talking about it, but what I figured is we actually haven't done an end to end solution, so since we have some time, I plan to do that in the second half of the class, that even after that, we will probably still be finishing already. And I hope everyone is okay, that probably is a welcome news for everyone.
+
+Speaker 2  9:13  
+Awesome. Okay, no, no, I don't think we've done anything beyond binary classification in Module 18. That's
+
+Unknown Speaker  9:21  
+right, that's right. Actually, that's a good one.
+
+Speaker 2  9:23  
+So well doing multi, multi class, multi cells, and the use of
+
+Speaker 1  9:28  
+Max, correct? So today, what we are going to do is we are actually going to do that's a very good point. So that that last activity that we are going to do, and that activity is not there, so don't even look into your GitLab. So in that activity, we are not only going to classify an images, but we are going to do multi class classification, which is something that we have not done, and you will see it basically from a coding perspective. It needs very little change, but we'll see how our model performs.
+
+Unknown Speaker  9:57  
+So to begin with, I.
+
+Speaker 1  10:02  
+Um, what kind of data we have, have we used to train and validate? We all know we used tabular numeric data, right? Okay, what challenges might we face in processing image data that we didn't face in the data in the traditional row and columns. I guess the answer to this is probably kind of you can guess. The challenge will be, if we cannot present this in a tabular row and column form, then the neural network cannot process it, so we need to convert it. So then the question is, how can we convert an image data? Right? Well, the good news is, all digital images are basically made out of so when we look at an image in today's high resolution, high definition images, right? HD, Ultra HD, no matter how how high you go at the end of the day, if you zoom in enough, you will see your image is basically made out of dots, which is pixels. So your 10 ATP TV is basically made out of what how many million dots? I even forgot the calculation. So there is a number right? So anyway, so there is basically how many pixel across and how many pixel top to bottom, right. So that's your number of pixel. So no matter how how high definition an image is, it is basically a number of pixels. So when you have a number of pixel, these are what these are basically numeric, numeric number. Why? Because, if you have, let's say single color image, right, a single color image has different shades of gray, right? So the when we say different shades of gray, if you, let's say, is there a color picker here?
+
+Unknown Speaker  12:03  
+Where is my color picker here?
+
+Speaker 1  12:10  
+Oh, so this Google color picker does not even give me that whole thing with the RGB thing. So I'm sure all of you guys have probably done used office suit. And if you try to do these in, let's say your Word or Excel or PowerPoint, you will see that there is a color palette comes up, and it actually shows the whole gamut of palette, right? And so if you have noticed this, if, let's say your color red, let me just type it. Here. Is it going to let me type it? No. Probably here. So you will see, you will have something like this, something like this, right? You have seen so what essentially, is this. So if you look into this standard RGB format of representation in a color, you will see it has got six digits. Now I'm saying digits, but you will see it's a mix of digits and some letters, but those letters are not actually read letter, because this is a hexadecimal way of representing the number where, unlike decimal, where digits are only 10, zero through nine, in hexadecimal, you have 16 digits, so it goes from zero to 15. But since in our traditional decimal world, there is no numeric symbol for 1011, 12, 1314, because those are written using multiple digits in a hexadecimal world, 10 is expressed as a, 11 is expressed in B, 12 is expressed in C, and so on. And the highest digit there is 15, which is F. So essentially, if you see F, F, A, B, C, zero, which basically means you have a group of three numbers here. First two, sorry, second two and the last two. So essentially, the way to read is that this color is basically a combination of this much redness, this much greenness and this much blueness. So that's the RGB format. Now, when you have two digits of hexadecimal number, what is the minimum and maximum that you can represent using two digits of x,
+
+Unknown Speaker  14:36  
+FF and 00,
+
+Speaker 1  14:38  
+yep. And what does FF stand for in decimal system, one,
+
+Unknown Speaker  14:44  
+no, FF, oh,
+
+Unknown Speaker  14:48  
+30, no, it's
+
+Speaker 3  14:50  
+the highest, or it is white. It's white, basically
+
+Speaker 1  14:55  
+200 huh? But what? What numeric value? What decimal value? So. So it is 255 because the it is basically two to the power eight minus one, right? Because the thing is, why? Why two digits? Because each of these two will take eight bit to store, right? So that's what two hexadecimal digit is needed to express a number which is eight bit white,
+
+Unknown Speaker  15:22  
+so FF is 255
+
+Speaker 1  15:28  
+so the idea is basically you take the first number, and you multiply that by 16 to the power zero. And you take the second number, second, meaning the left word, and you multiply that by 16 to the power one, meaning 16, and then you add these, and that gives you the value, okay. But anyway, let's not go too deep into the representation of the numbers. Just know that each pixel can have different values, ranging from zero through to 55 okay. So another way of writing these would be so if someone doesn't like these hexadecimal num format. So another way of writing, this is also this 68 to 55, 137, right? But each of these can also be written in a two digit hexadecimal format. So essentially, any any pixel, if you take any single pixel here, so basically that means that single pixel has three colors embedded in it at the different level of redness, greenness and blueness, and when they overlap with each other, it creates a unique hue. And that's why we see this rich color palette. But deep down, it is basically just three numbers. So now let's say if you have this simple image with 10 pixel wide and 10 pixel deep, so essentially you have 10 by 10, meaning 100 numbers, but you have three channels, red channel, green channel and blue channel. So essentially, these image can be represented with 300 different floating point numbers, and that's it. If the image is not color, if the image is gray scale, then it's even easier. Then all you have is only one single channel for each and that gives you just the brightness value, and that brightened brightness value, you can also think in the same scale, like zero to 255, with zero meaning dark, meaning totally black. 255 meaning totally white, and anything in between gives you all different shades of gray. So, so that's why storing and processing monochrome images are much faster and also takes much less storage and compute time compared to a color image, but the underlying representation does not change, right? So now, if you want to build a neural network to recognize or read an image, right? So if you face a task where you have to recognize what is an object in an image, what is the first thing that you have to think of? How big is it? The size? Well, yeah, so let's say it is, it is somewhat size. What I'm saying is, how, how do you even get started? Let's say you have a picture, and there is a cat in the picture, and you want to train a model so that the model is able to look at a picture. And if there is a cat, it will output the word cat. What is your first thing? First problem that you have to
+
+Speaker 3  18:44  
+resolve the input layer, like the number of inputs so the value, Yeah,
+
+Speaker 1  18:50  
+correct. That's what I was getting at. So basically, you still have to create that same neural network architecture where your first dense layer will have number of input nodes, right, or Input Connections. So you have to think of, okay, in my first node, how many input connection I provide, and that input connection you can calculate by looking at the shape of the picture, right, how much wide and how much deep you multiply that. And if it is monochrome, that is your value. If it is a it's a color, you basically multiply that by three. So that means you need that many input connection for your first dense layer. That's what I was getting at. Now, that is in the neural net side. But you also have to be able to provide these, all these 300 numbers, let's say, in this case, provide this in some form of array, which should be pretty simple. We can basically take a look at take the image as a binary file, right? And with that binary file, we will convert it into a numpy array that will give me a 2d array, 10 by 10. And then we flatten it up. When we flatten we basically get 100 It number array, if it is a if it is a multi color, then there will be 300 100 length arrays, one after another. So there will be 300 array, and that's the one that you pass to your neural net. Okay, so that is it, basically. Now, as I said, we are going to look into some activity, but in the activities provided in here, we are actually not going to create a neural net just yet. We are just going to start getting comfortable in learning about these image handling libraries and how we can use this library to represent image, save image and load image. That's all Okay, so let's do that. So when we do that one particular library, you will see that we are going to make use of heavy use of it's called pill or pillow, which is Python imaging library, p, i, L, now in earlier versions of Python, and I'm talking about like 10 years back, 1015, years back. I think python two point something, this image library was a real pain for people, because not only did not come with the image handling library, like I have spent, wasted lot of hours. Tried to import, sorry, install this image library. And sometimes, depending on which machine you are working on, sometimes it works, sometimes it does not. But in new versions of Python, like python three, dot x, I think it comes in build. So if you open this notebook, you all should be able to run this import from Pil, import image. So the PIL should be built in with your python three dot x environment, and no matter which system you are running, whether your Mac m2 Intel windows, whatever, it should work. Okay. Now, if you want to load an image from space, save in the for from a disk space, which in your local computer, you can just say image dot open and provide a what is called the file name. In this case, however, the image that we are going to load, this is the HTTP URL. So the image file is not sitting locally in your computer. It is in some remote server. So when you do that, when you when you have that. So then what you need to do is you need to have this request library. So with these requests library. It allows you to send HTTP, GET and POST request over the Internet to any remote service endpoint. Okay, so that's what the request library do. So when I said, GET and POST. So in HTTP world, these are the two different what they call verb. So the get is the type of method that you will use when you are going to fetch something that some data from a server, like read only mode. And if you want to write something to the server through some kind of API, you do something called a post request. So GET and POST. So in this case, we are just reading an image. So therefore, we take the request library and we call the get method from the liquid request library, and we prove the first parameter is basically your web URL, which is our image URL here. And then the second parameter is optional if you provide stream equal to true, so stream equal true means the image will come streaming. So that means if the image is really, really large, it will not create a sudden spike in your net network, and hence, it will not create a block, blocker in your traffic. It will stream continuously, and let's say if the image is really large. So let's say you are trying to load, you know, one of those images that you can get from NASA, right? Like NASA rover creates all these huge, multi terabyte image of like martian surface, or, or, or even, like, a image of art taken from Space Station, right? So there are like, like, really, really large images available there. If you try to load using your home internet connection, it will probably take minutes, and sometimes it may be hours, right? So if you run this without streaming, then you have to wait a long time before that image becomes available. If you put it stream equal to true, then the return value that you have, you can immediately start working on it and processing it, and you don't have to wait for the whole thing to come. It will stream as the data gets available. So it will basically flow like water through a tap, and you can immediately start using the water. You don't need to have the whole water coming down to your cup, so that's what the streaming does. So you do that, and then on top of that, you say dot raw, which is an attribute that basically gives you access to the underlying raw data stream. So now you take these raw data stream and you take the pillow libraries, image function, Image class, and you say, image dot, open with that, and that basically becomes your img and in a Jupiter notebook environment, if you just try to display that variable, since this is not a text data, this is actually image data, it actually prints your image right here you see there is a little image that popped up, a tiny image. This is a very small image, but it just popped up. Now if you want to see, hey, that is the image that has popped up, but what is the type of that img variable? So let's see what is the type of the variable. So the type is, you see PIL the library, and then PNG image plugin, and then PNG image file. So basically, since we loaded this through a PIL method called image, the return data type is not any of your traditional data type that we know. It is not your dictionary or string or anything or JSON or anything like that. It basically is a PIL construct, and that PIL construct, like all of these new, new age Python tools, which VS code, is one of those, it's already has built in capability to natively display a PIL image directly here. And this was not the case 1015, years back, believe me, so it has become much, much easier to actually load and display images right here in the Jupyter Notebook. Okay, so that's your image loading, single image loading. Now, if you want to see what is the size of the image, like, how many pixel by how many pixel? Very simple, you call a attribute or access an attribute, I should not say call, because this is not a function. This is an attribute you are accessing. So IMG, image dot size, and it gives you 30 to 30. That means this image is 32 pixel by 30 pixel, and that's why it is so tiny, right? You see that? Now let's do one interesting thing. Let's try to search for some good image.
+
+Unknown Speaker  27:49  
+Let me search art image. Okay,
+
+Unknown Speaker  27:55  
+let's go to images.
+
+Speaker 1  28:01  
+Let's see copy, copy, copy image address. So let me put it here.
+
+Unknown Speaker  28:13  
+Um, some of these address might not actually work.
+
+Speaker 1  28:22  
+So uh, like, I'm trying to find basically a address that gives me just the image, yeah. I think this will work, yeah. So this, yeah, so this is the image, right? So I'm just going to show you that no matter what your URL is, so, oh, actually, why am I doing this? I already had one. I already did this exercise. So I basically did the same thing before a couple days back when I was going through this, and I basically found a art image taken from space, which is the kind of image I love to load. And I just switched the image that was given with this notebook with my own fancy image URLs. And if I run this, bingo, the dark image comes here. So just trying to show that it does not have to be any specific image coming from a specific server from boot camp spot. You can basically, this is a general purpose library. You can use this to load any image from anywhere over the internet. Okay, okay, but oh, so hang on. Before switching that, let me try to do a size of this. So you see 784, by 800 because obviously this is a much larger image, as we can see right now. Let me switch back to our older tiny image, and that image size is 32 by 30 so.
+
+Unknown Speaker  30:00  
+Now what is img dot mode?
+
+Speaker 1  30:04  
+It says L, so l, I suppose mean gray scale. And if I do img dot format, it said, PNG. Let's do one thing. Let's do that with our Earth image.
+
+Unknown Speaker  30:22  
+Let's see what is the mode of this image.
+
+Unknown Speaker  30:26  
+You see it says RGB.
+
+Speaker 1  30:29  
+This is the art image that we look that I just loaded. And when I do img dot mode, it gives me RGB. So that means this image has, image has three channel and the size of these image is 784 by 800 so that means if you want to feed this image to a neural net, you will need how many input connection, 784, multiplied by 800 multiplied by three, because this is an RGB Type, and the image format is this one is JPEG. So it just says, JPEG. Okay. Now sometimes it happens, let's say you are trying to load a collection of images and trying to feed all of them to your neural net. Now there is no guarantee that, like, if you have 1000 image that you have collected from somewhere over the internet, that all of them will be themselves. No, there is no guarantee, right? But that really does not work for you as a designer of the neural net, because you have to fix the number of input nodes coming through your first layer of your network. So that means if the image does not follow that same size, you need to be able to resize it, which we do all the time, using the images that we take with our cameras, digital cameras or phones, right? So in here, using the pin library method, you can simply do img dot resize and see my art. Image now became, instead of 784, by 800 it became 128 by 120 so I just resize this. So if I have a whole bunch of images taken at a different point of time by different space observatory cameras, and if my neural net is I'm going to design it within a certain way, or let's say even 128 by 128 like a square image. I can easily do that. So now I have a very nice 128 by 128 multiplied by three. So that gives me a good way to kind of start designing my first layer of my net network. So
+
+Speaker 1  32:45  
+and there are ways that you can rotate, although this is a really bad example. So if you wrote, well, yes, I guess you can see how this is rotated. You see the Africa is kind of going this way now, yeah, you can also do transpose, which basically transport is flipped up bottom right, so you can basically play with this. Some of these are not just for playing. It might actually come in handy. So imagine, for example, you have a limited data set available, and you want to create more data set. Now this ability of flipping an image, rotating an image, kind of actually be come in handy if you want to train your network in a more robust way. So let's say there is an image and there is a cat in the image. If the image is vertical, then your network, after training, would probably be able to accurately find a cat. But in real life, when the images come in, the cat might be sideway, or the cat might be hanging from a tree branch upside so if you want to make your network more robust to such kind of deviations from a regular pose, and if you don't have the enough training image available, you can use these techniques to basically create artificial training data by flipping it at a certain percentage. Let's say I flip it by 20 degree, and flip it by another 20 degree, another 20 degree, and I create a whole set of images. So I can use this to increase the amount of training data available to me. So these functions are not just for fun, they will actually come in handy also during the course. Make sense. Okay? So the next activity is just a student activity, but it's kind of the same. So I'm just going to run through this. So there is another image here that we are going to bring in from another service URL. This is the image. Now you might see what the heck is this image? Well, if you look into it, you see the URL. It says, fungi images. So this probably came from some medical laboratory data set where they were basically putting different sample of different fungi collected and put it under microscope, like some kind of electron microscope that, like, does a million time magnification of those samples. And this is basically the image that looks like collected from there, which is not fancy to look at, but I think probably that's the point. Like, hey, what with something that does not let you play with it too much. But anyway, so you see the same exact same thing. You take the URL, you do a request dot get. You provide the URL with the streaming true, and you get the raw data stream from under it. And then you do a image dot response, and you get your image. And then if you want to see the size, you do img dot size. This is a 500 by 500 img dot format.
+
+Unknown Speaker  36:04  
+Why is this not working?
+
+Speaker 1  36:08  
+Oh, my computer was thinking for a moment. Okay, so im dig your size, IMG dot format. What was the other one we used? Oh, IMG dot mode. So remember, IMG dot mode will give you RGB if it's a color image, and if it's a monochrome, it will just say L so let's see more mode. So this is an RGB so your fungi image is a color image, three color image, RGB, and then you can take and resize that will make it smaller, and you can rotate, although, oh, yeah, in this case, since it's a square, if you rotate by 45 degree, you can see how the thing has turned 45 degree, right. So this 45 is in degree, right? You can take, get, take any number, let's say 20. It rotates 20 degree, right. So one thing notice, though, when I'm saying saying img dot rotate, it's actually not changing the original IMG, like original image, it's actually created a new copy of image, and it is returning you. And that's why, even after if you do img dot rotate, if you just display the original IMG, there is no change, because the the Rotate function, or any of these function, for that matter, resize, rotate, all of these, it does not really change the original image. It does the transformation and returns a new copy of the image. If you want the change to be permanent, you need to do img called IMG, dot rotate to make it permanent, right, which I'm not doing right now, but if you wanted to, that's how you will do
+
+Speaker 4  37:45  
+passionate about this, yeah, in the rotated version, there's the negative space where, like, the corners are have gone off the black square. If you saved that, would those corners be lost data, and then you would
+
+Speaker 1  38:03  
+just have fewer pixels. I have not tried good question. Let me try it then. Okay, so now it is not displaying anything because I'm saving it. Now I'm going to do img so yes, so those will basically be, since there was no data. All of these are basically filled in with pixel values 255,
+
+Speaker 4  38:25  
+and and all the all the quarters, all the pixels that were there are all gone. Now we don't get them back.
+
+Unknown Speaker  38:30  
+You don't get them back. There's black pixels,
+
+Unknown Speaker  38:33  
+right,
+
+Speaker 1  38:33  
+right? So like, if you do so, you are saying, If I do image dot rotate. Negative 20. Is that? What you are thinking processing will get them back, yeah, you won't get them back. Okay,
+
+Unknown Speaker  38:46  
+yeah, thank you.
+
+Speaker 1  38:50  
+Cool. And then all other things that we can do in most of our application, you can, if you want to do, you can crop the images, which is basically, you are basically providing in the crop method, you are basically providing which area you want to crop to right so you are providing basically upper left corner and lower right corner, 150 and 404 100. So you are basically providing drawing a little box here in the middle of the image, and it's basically cropping to just that portion, right effect spread. So these are different effects that you can apply. So this is one effect spread, basically make this image ad, as if someone is basically done, what is called the paint can spray a paint can, so it can apply this kind of image, that kind of effect. Also there are different filters available. So if you do img dot filter and you will see that there are different filter available. So image. Dot blur, contour, detail, Edge enhance. So let's do an edge enhance. So you will see that these edges are actually have gotten enhanced. It probably would be better to maybe see in this one. Hang on in our art image. So let's try edge enhancing the earth image here. Yeah, now look at the original image. Look at this original image, and look at this image. Look at the edges. You see how enhanced they are, right? There are many such Well, let's do a blur. It will probably have a kind of have a opposite effect. It will make it more blurry, not as advanced, right? What else do we have? There was something, something sharpen, yeah, sharpen, which is kind of similar to age enhanced, but it enhances not just the ages, but it enhances every everything. The opposite effect will be smoothening, which will make it more smooth, softer, overall, right? So all of these different filters are available. Okay, not something that will be terribly useful for you right now, but just to know that you can play with images like this before. Okay,
+
+Unknown Speaker  41:38  
+any questions so far, I
+
+Speaker 1  41:44  
+there is no machine learning care, by the way. We are just thinking of how we can. Could possibly fit this to a machine learning model? Okay, so now the next thing we are going to see is, so let's say you have set of images that are available somewhere, and you downloaded all these images, you probably have sharpened those images, done some tweaking, so basically prepared the images in Some way for your training. And then you don't want to repeat this procedure over and over again, because, in machine learning model development, right? You will take the data and you will run training various different time, right? Sometimes you will shut down your computer and you will come back, restart the kernel, and you will do it again. So you don't want to go through the costly step of downloading a whole bunch of files from internet and going through all this transformation, because that's just waste of time. So what you might want to do, you might want to do these processing once, and save the images somehow, almost like, you know how we do a zip like, if you have a whole bunch of file, you basically zip a file and save a zip file, and that becomes much more portable, like you can send it as an attachment much more easily, or you can upload somewhere in a cloud drive much more easily, because the size gets gets much compact, and then when you need it, you just unzip it. So similar concept here available in Python, also it's called pickling, so that's what we are going to use. So pickle is a dot pkl file format which kind of works, very similar to zip file. So we'll see how we can do that. And you can apply that, not just for images, by the way, you can have like 10 Excel file, and you can take the 10 Excel file and convert into a pkl and you have a one pkl file, exactly like how your zip or zar file format works exactly the same. Okay. So here what we are going to do is, so first we are going to get a simple CSD file. So this one is just a simple csv, if you see here, not an image file, and we are not loading an image either. We are simply doing a pandas read CSV.
+
+Unknown Speaker  44:08  
+So these CSV file
+
+Speaker 1  44:11  
+basically gives me the names of 624, files, like something dot png, something dot PNG, and so on right now, if you look into the file name, you will see the file name kind of has a format, but we are going to come to that format in a bit. But all of this file name kind of have like four, four word with underscore in between and dot png. But these are not the images itself. So the way these, these data set, is available is all of these files are basically sitting under this folder. And that's why this URL ends with a slash. This is not a file. So the idea is this, if you go to this folder and. You are not going to get anything because Access denied. But then, if you take any of the image file name
+
+Unknown Speaker  45:08  
+and if you append it there,
+
+Unknown Speaker  45:12  
+then you will get an image.
+
+Speaker 1  45:15  
+So all of these 600 plus images are stored in this folder, you don't have access to the folder itself, but if you take the folder name and append each one of these 624 file names, and then you basically loop through these 624 times and issue a basically a fetch command, you will get all the 624 images. So that's what we are doing here. We are taking the base URL, and we are looping through all these file names, and basically we are creating these image URLs. So these image URLs are, if you click on any one of these, randomly, you will see that it will give you a tiny image. So there are 624, images hiding behind each of these 624, URLs. Why we are taking this example? Because this example helps us serve that use case where we are getting a whole bunch of training data from Internet, and we want to save our hard work of pre processing so that we can easily access that work anytime that we want, without having to go back to the server again. So that's what the use case here is. Okay? So we have 624, URLs. Fine. Now we are going to use that same thing. We are going to do a open data stream, and we are going to take that raw data and we are going to do a image dot open, but this time, I'm going to have all of these saved in a simple list, which is images. So if you run this now, it is basically getting all these images. But here I said Nam images five, just to see whether it is works. So it basically went there and downloaded five images, and then finally, just to make sure that it it has worked, I just chose to decide to display the first images, which is the first image that we appended in this array here, which is the zero at image. So that's that. So simply, this works. Now, instead of restricting these two five, you can go up to length of that list, which will give you all 64 and you basically go, and it will go and get all 64 images,
+
+Unknown Speaker  47:40  
+which is going to take some time.
+
+Speaker 1  47:43  
+Now, while that happens, let's see what the next thing we are going to do. So once all of these images are available to us, we want to be able to save it as a single compressed file or a pickle file. So what we do? So we have these list of images which is basically nothing but a list. And remember, each image is of type, pill, pillow image or something, right when we what did we get when we do the type? Yeah. So this type, each image is a PNG image file type, so we basically have a list of 624 items where each item is a PNG image file. So what we can do is we can take the this list, which gives me a handle to all the 624 images, and we basically say we open a file. This is your traditional like, how you open any file in Python. So there is no difference in that. And we have done this type of file open and file read before in the very first part of our workshop, right of our bootcamp. So we do this, we open a file in a writeable format, WB. And why B? Because it's a binary format. W means write, open the file for writing in a binary mode. That's what WB means. Now with that file open, then I'm going to use one other library, which is called pickle. So then we say pickle dot dump, and the first parameter is whichever Python data structure that you want to save in the file. It doesn't have to be list of images. It could even be a pandas data frame. Any Python data structure you provide this it will capture this whole data and save the data as is in a binary file. So that means, after you do this, anytime, if you open the file again, but this time in a read binary mode, and if you do a pickle dot load, you will get the exact same data structure as it as you said.
+
+Unknown Speaker  49:56  
+So since here we are setting a list of uh.
+
+Speaker 1  50:00  
+Uh, 624, PNG image files. When we are doing the load, we are going to get a list of 624 image files back, which we are going to do in a second once our these import thing stops. Yep. Now the import has stopped, good. So now look in here, in my solved folder, there is no file here right now, other than the Jupiter notebook. Right now, I'm going to run this code, and you see this file appeared, IMG, dot pkl, because this is the file name I chose here. IMG, dot pkl, and this file, and you can choose anything. It doesn't even have to be dot, pkl format. It could be anything, ABC, XYZ, it doesn't matter. So now if you reveal it, I'm just trying to see how big the file is. So you see there is this 4.2 megabyte file sitting in here. So these 4.2 megabyte file basically contains all of those tiny, 624, images as a single file. Now you it is, it is much more portable. You can save it with your code, it doesn't matter that much, or send it to your colleagues or friends and so on. Now, with when you open this file, let's open it and put it in a new variable called recalled images, just to see that the images are readable. Yep, the images are readable. So this rendering is coming from the one that we just loaded from our local file, not directly from the server. Now if you want to see the data type of this so if you see a type of recalled images, it should say a list. Oops, sorry, I missed a typo. So it should say a list. What is the length of this list? It should say 624, right? What is the type of any one element of the list? It should be that PNG image, right? Because I'm trying to find the type of the first item in the list, and it is a PNG image file. So basically, I'm trying to see is all the data structure that was there before we did this dump command, as if this whole Python data structure got frozen in time and saved in your dumped in your disk as is, in binary mode. So think about the beauty of this. Anything you can save as is,
+
+Speaker 1  52:41  
+okay, so that's about storing the files. Now, the way that this thing goes is, after each of the instructor activity, you will have a similar activity, but this time, using the fungi file, and there is no difference, really, in the step, you basically do the same thing. Here also you have the list of files, not the actual files itself. You have a dot CSV file that give you this whole bunch of 250
+
+Unknown Speaker  53:14  
+image file names.
+
+Speaker 1  53:17  
+And then you take a base URL, which is this guy. And then you append the individual file name in a loop and create this whole bunch of 250 URLs. And you check how many URLs are there? 250 and then you run a loop to load all these 250 images from your server.
+
+Unknown Speaker  53:43  
+So basically the exact same thing.
+
+Speaker 1  53:50  
+Okay, oh, here it only did 20, because just to save time, here we are doing only 20, not all 250 which is fine. It doesn't matter. And then you do with open whatever file name, you basically do a pickle dot dump. And what you provide, which data structure you provide this data structure. So basically the data structure that you are using to hold all of these images, the placeholder, so you provide these images. And then, as a second parameter, you basically provide the handle to the file, and then it will save it. Now, I said the name does not matter, so let's remove this pkl, just to see whether that I think the name dot pkl Does not matter, but let's try to see I'm trying to save it without a dot pkl, yep. Now I have a file name that says only fungi. Now if I try to open fungi, dot, pkl, I'm going to get an error, because I took the pkl off, even though it is a pkl file format. So let's see when I do not have it a dot. Care whether I can still read it back. I'm hoping that I would be
+
+Unknown Speaker  55:05  
+and I am correct.
+
+Speaker 1  55:09  
+So the file name dot p now file name extension does not matter, okay,
+
+Unknown Speaker  55:19  
+so that's about sending and loading a file,
+
+Unknown Speaker  55:23  
+any question,
+
+Unknown Speaker  55:26  
+pretty easy up until this point, I suppose.
+
+Speaker 1  55:33  
+So essentially, we just learned two different libraries. One is spill, one is Pico. We really didn't do anything remotely related to machine learning at all.
+
+Unknown Speaker  55:44  
+Just learn two new libraries. That's all okay.
+
+Unknown Speaker  55:49  
+So now
+
+Speaker 1  55:52  
+we are going to look into some of the possible pre processing that you might want to do at different point of time, point in time as you are trying to load, sorry, prepare this data set, the image data set for your training. So in this example, we are going to load a pickle file. But unlike in the previous example, where my pickle file is sitting right here in my hard drive. Here the whole pickle file, not just the individual images, the whole dot pickle file is sitting in a remote server. So that means, unlike here, where I where I did pickle dot load file, where file being a local file, we really cannot do that. We still have to do pickle. Dot load, but these stream of data has to come from a remote server, because the pickle file is here at a URL. So what do you need to do is you basically do something like this. You still do a request dot get, and provide a path to it. And then you basically, instead of getting the raw data stream, you basically get the content, and this gives you a bite representation of the underlying binary file. And then this whole thing is basically your binary file content in basically a native binary format. And then you take this and convert it into a byte stream using this library method, io, dot bytes, IO. So when you do this, at this point, these highlighted piece becomes logically similar to having a local file handle, because when you are opening a local file in binary mode, what you are getting is a byte stream of binary data. So since here, your file is not local, you have to do jump a little bit of couple of hoops and do these two things, which is getting a bytes IO on top of a request. Dot get content by wrapping these two around you basically mimic reading from a local file. So you do that, and you basically get images. So now you see you load all these 624, images, but you few compare that to how much longer it took here. It took almost two minute, 40 seconds here, because all of these files we were reading one by one here in the server, they saved all of the same 624, images as a one pickle file, 1.3 second. All 64 images are have been load because my length of images is 624,
+
+Unknown Speaker  59:01  
+and that shows how fast it is,
+
+Unknown Speaker  59:05  
+right? Like 100 times faster.
+
+Speaker 1  59:08  
+And that's why this is a much better way of storing large data set for training. Now, if you check a size of an image, you will see 32 by 30. If you check a size of another different image, any random image, let's say this is 64 by 60. So what that means is all the images in this data set have different sizes. Now that would pose a problem if you try to design your neural net architecture, which is what I mentioned earlier, right? So what do you need to do? You need to resize those images, but how? What would be your ideal size? Well, you can choose anything you can do, 32 by 3264 by 64 whatever. Right? It's totally up to you. Yeah, but the idea is that you should want to avoid resizing too much, because when you take a large image and you resize it into a very small or vice versa, lot of your detail kind of get distorted. So if possible, it is a better idea to try avoiding resizing dramatically up and down. So what we can do is we can look at all the image sizes that are that image sizes that are present today in all of these 624 images, and try to find what are the unique sizes available.
+
+Unknown Speaker  1:00:39  
+So how do we do that?
+
+Speaker 1  1:00:41  
+So I'd like to think about a specific Python data structure that we learned before, which is called Set.
+
+Unknown Speaker  1:00:49  
+Does anyone remember what a set does?
+
+Speaker 1  1:00:56  
+And this is just how the mathematical definition of set is, by the way. What does it set? Say that again, like a list of unique values, unique values. So list of unique values, right? So set, essentially, is a list with one slight difference. So let's say, if you take a list, if you append list, dot append one, List dot append two, list, dot and three, fine. But then you do list, dot, append one again. So now your list will have four elements, 123, and one. But instead of list, if you do this with set, you add one, you add two, you add three, and then you add one again. So since that one is repeated, your set will not retain the repetition. It will only have only one unique copy of any item.
+
+Unknown Speaker  1:01:48  
+So that's the difference of set and list.
+
+Speaker 1  1:01:53  
+So what we can do is we can look through all of the images that I have, and we can calculate the size of each of these. And remember the size is a tuple right your height and width. So now, if we add those tuple in a set, so that means the set itself, by definition, it will deduce this. When you have multiple different sizes, it will only retain one unique size, which is what we are doing here using this list comprehension method, we are basically creating a set, but inside the set constructor function, we are basically providing this list comprehension which is to calculate img dot size for img in IMGs. So basically, I'm saying go through list of all of your images, compute the size for each one of these, and take all of this image sizes and create a set. So when you do that, even though there are 624 images each, which is own size, you will only get a handful of unique sizes which here, as you can see, you are, you are getting only three sizes, 3230 6460 and 128, 120
+
+Unknown Speaker  1:03:08  
+so basically small, medium, large. You can say,
+
+Speaker 1  1:03:13  
+now why I did that. Because, remember how I said, if possible, I would like to try to avoid dramatic resizing of the of the images. So now that I have a range of sizes, I can easily look at, okay, what is kind of the median of these sizes? In this case, fortunately, there are only three sizes, so it is very easy for us to pick up like, okay, 6460, kind of gives me a good middle ground. So that way, not very small images are going to be resized to very large images, or vice versa. We are going to adopt a middle ground which is 6460 right? So that's why I am now deducing my target size would be 6460 now we have to use this method called resize on any of the images, and you provide the target size, and then you have to provide a resampling method, so which is kind of a kernel that you provide, which it is going to use to compute the size? Now I don't know what other kernels are available. I have not seen it like if you do a dot, you will basically get the different kernels. Let's see so the kernels would be if you go through this where
+
+Speaker 1  1:04:47  
+why is it not even showing so this Lang zOS. This is one kernel. So if you do that, so all the images will be now converted to a 6460,
+
+Unknown Speaker  1:04:59  
+but. I don't know what other Okay, let's do a bilinear,
+
+Speaker 1  1:05:05  
+yeah, if you so, depending on the kernel. So bilinear, you see the image is kind of getting little smaller. So there are different kernels that you can use, but just stick to using these, this thing, these Lang zOS, if you have to resize your image. So essentially, you do an image, dot resize, provide a target size and provide a resembling method. I suppose you can probably do this without this. There must be some default method. Yeah, actually, you can totally forget about providing a Carnot. It will. If you don't provide anything, it will choose a default kernel that does not do any transformation of the image. You just do a IMG, dot resize, and that's it. So by doing this now, you can resize all of these images, but this cell here, you see I'm not saving the resized images to anything. This is just a little test. But in order to apply this resizing, to make it permanent, what you need to do is you need to basically have another list where we are basically, again using list comprehension, we are saying for img in IMGs, you basically apply this img dot resize and forget about this resample thing. The default should be fine, and that's your resize images. And we are only showing one of those which is one which is fine. Now if you look into the pixel values of these. So let's see, what do we get for pixel values? So you see this pixel values. What I did now is I took any one of the images, a random image, which is image number one, in this case, which is a what kind of file, a PNG file. Now the beauty is, here you see a very simple method, method which is numpy array method, which we have used in many places before, the numpy array. So I'm now creating a numpy array. But this thing that I'm passing, which is a PNG image file. So if you take this image file, whether it is a PNG image file or JPEG image file, it doesn't matter, any image file you take, you create a numpy dot array, and it will basically, you will get a 2d numpy array like this. And that's why it is so easy these days to take any image and convert it to its underlying numeric presentation representation. You simply convert it to in np dot array, and that gives you the array. And here we are just printing the pixel values, which is like this, and the shape of the array 60 by 64 so now, since we can do this to one image, that means we can do this to all of the resized images as well by simply creating a new list of images. And we call it float images, because these are not really real images. These are actually floating point numbers. So basically each item in this float images would be a 2d array. And then we basically do a np dot array and make sure that the type is a floating point, because here you see the type, all of these were integer. If you do as type np dot float that makes all of these type as floating point numbers. Now, when you are going to feed this number to neural net, floating point numbers would work better, because that way you can easily normalize it, scale it, so it just works better in the calculation. So you simply add that as type method on top of the array conversion. And you provide the numpy dot float 32 and you basically get the floating point array for all of these. So this is just float images one. So there are two, 624, items in this float images list. And the first element in the list is a 60 by 64 array. And so is the second element, and so are all the elements. So you basically get a 624, list each containing a 60 by 64 floating point array. Now that now we are getting closer to a representation that we can possibly input into a first layer of your neural net. So okay. Now one thing you might want to do is normalizing. Since we know all of these values are between zero to 255, we can take us adopt a very simple normalization technique, which is taking all these values and divide this by 250, Five for all of the items in the float images. So you see, every time we are doing this, we are applying this list comprehension that that makes our computation really efficient and really fast, right? So now, if you do that now, you will have these pixel densities converted into floating point number ranging from
+
+Unknown Speaker  1:10:28  
+zero to one.
+
+Speaker 1  1:10:31  
+So basically, any original pixel that had a value of 255, would now have a value of 1.00 any original pixel that had a value of let's say 127 would have a value of 0.5 and any original pixel that had a value of zero will have a value of zero. So basically, we scale the data within zero to one range. Now this step is optional, as I keep saying all the time without scaling also your neural network. But one thing is true, if you do scale it, the convergence of your learning will be faster. So I leave it up to you whether you want to scale it or not, but there would be not much difference in the outcomes. It just would be little bit faster to converge, like you will need less training epoch, or you would probably be can get away with less, little less deeper network and so on. If you do scale it, but without scaling would also work. And I have actually tried both ways.
+
+Speaker 1  1:11:40  
+And then, as I said before, in the previous activity, when it comes to pickling, you can pickle anything. So now these normalized images. Now think about how cool this is. So now these normalized images are not even real images. They are just floating point representation numpy array of images. So if I take these normalized images, and I convert it into a pickle file, I will basically get a, what is called pickle file that I can just load and not bother about doing any image oriented processing, because I know that these img pre processed has been already pre processed. I can as load the file, and then I know I'm going to get a two by, sorry, 2d NumPy arrays, list of 2d NumPy arrays, and I can immediately supply that to our network, right? So when you are actually going to be doing any image processing work, this probably is a good point to have your work checkpointed, like you do all of these hard work. You scratch your head, you find the best way to resize, reset, rotate your image, and all of that. And you convert this to a numeric format and you scale it at that point is a good point to checkpoint so you take that format, form of data, save it in a pickle file, and if you are going to be repeating training over and over again, and then maybe you are not getting ahead. And then you go wrap up for the day, come back the next day and change your the structure of your neural network layers, and restart the training again. You don't have to worry about all of these pre processing you simply reload that one pickle file and you will have your numpy array ready to be processed.
+
+Speaker 5  1:13:31  
+The step where you're converting like the image into like an array, is that called serializing? Right?
+
+Speaker 1  1:13:39  
+Yes. But like, when you are saying, when we are doing NP, dot array like this, yeah, or just like, this is the only step we are converting, yeah, you can call it that. But, like, you don't have to provide a name, okay, yeah. I mean the in text serializing actually had a specific meaning, like, let's say, if you want to basically send these data over the wire, right? So basically, when you try to convert it into a stream, so then you serialize this data, right, and send it over the wires to the stream of data. Okay? So this is not really that. It's basically simply grabbing the underlying binary representation and saving it in a floating point form instead of a binary form. That's all. And if you see the size of this, let me see the original file was, what, 4.2 meg, ah, so you see this one is 9.6 Meg, so these actually will take longer larger, because now what we have done is the binary format was much compact. We took heat of the pixel and they converted into a individual floating point number, which obviously take much more storage space than a compacted binary format. But the benefit of this is we can, I can directly load this in. To memory again and use it for my training.
+
+Unknown Speaker  1:15:11  
+Okay?
+
+Speaker 1  1:15:15  
+And for the same reason I'm skipping over the next activity because then activity number six is the same thing you were just doing the exact same thing with the with the fungi files, which is not big of a deal. Okay, so how are we doing time wise? Ah, we are good. So we would be able to finish everything before we take a break. Okay? Any questions so far, guys, I know I've been going rather quick, but that's only because there is not much depth we are going in today. But please stop me and ask any question you might have. At any point
+
+Speaker 6  1:15:53  
+I have a question, yes, in some file types like PNG, it's actually taking RGB and alpha, so it's like eight decimal, like a hexadecimal. Does this take that into account as well the Alpha?
+
+Speaker 1  1:16:14  
+Well, in this one, there was, What do you mean by alpha? I think these were just so, when we so if you see here, right? Transparency,
+
+Speaker 6  1:16:21  
+yes, yeah, the transparency Alpha
+
+Speaker 2  1:16:25  
+Channel, fourth channel, which would be sometimes transparency of an image, but no, that's
+
+Speaker 1  1:16:30  
+No, I don't think it does, because when we are doing NP, dot array, all we are getting is a 60 by 64 size 2d array. Usually they call that RGBA, don't they? Yes,
+
+Unknown Speaker  1:16:42  
+RGBA, if
+
+Speaker 2  1:16:44  
+you're doing like web design or something, you probably will use that scheme so you can have transparency. Now you could, that's not really a file type. You could have PNGs that would have alpha channel. I've not seen it used, but I don't, I believe you. I see why don't see why I couldn't use that in your images and have that farther, Okay, the next room, but I've not seen it in practice.
+
+Unknown Speaker  1:17:12  
+Okay, all right, thank Thank you.
+
+Speaker 1  1:17:17  
+So I'm just looking into that fungi thing
+
+Unknown Speaker  1:17:22  
+which is RGB image, by the way. So
+
+Speaker 1  1:17:45  
+yeah, oh, actually, it's scrollable. Ah, where is my scroll bar? Out here?
+
+Unknown Speaker  1:18:00  
+No, it's still not showing the whole thing. What's going on.
+
+Unknown Speaker  1:18:07  
+Let me do this first.
+
+Speaker 1  1:18:10  
+Yeah, so this is what I wanted to show you. So in the fungi example, which is activity six, which I'm not running through in details, but if you take a RGB image instead of a single color image, right which the previous cases were. So here, when you do the np dot array, you see you are not going to have to do anything differently. You simply do an NP dot array just like you did for a monochrome image, but the resulting array would be a three dimensional array, which is pixel by pixel, and there will be three channels, which is what you are seeing here. So basically each pixel unit now represented by three different values, R, G and B. Okay, now when you are talking about alpha transparency and all of that that's not looking into the underlying so even if you, let's say, if you are looking into, let's say, like any image processing suit, right, like Adobe Photoshop, or any, any gazillions of suit there, right? And you change all of these saturation, alpha, these, that of an image, and all of that. But think about what happens when you are actually saving the file. You can increase the brightness, you can make it image dimar. You can make the color pop out, or do whatever you do at the end of the day, you you will still have a three dimensional array of numbers that you are saving, which is R, G and B, what you are saying, alpha, and all those are at an image processing level, like when you have a image software that you are using to change the appearance of an image, but when the image is saved in the file, it's all the same. The value of this number will differ, but this structure is going to be all the. Time.
+
+Speaker 1  1:20:06  
+Okay, so that's that. Now for our last piece, we are going to basically see that these list of files that we had right where they had these weird naming conventions. Here you see it starts with something looks like a random set of characters, ch, 4f, T, A, M, M, O, something, and then followed by an underscore and then a word called straight, or some of these have a word called up, actually, let me do not just ahead. Let me look at the whole thing. And let's look at, let's say, 50 of this. So you see the first part of the file name varies. The second part of the file name basically provides some kind of a direction, straight up, left, something right, and then the third part of the file name provides expression, happy, sad, neutral. And then the fourth and final part of the file name provides either sunglasses or open
+
+Unknown Speaker  1:21:29  
+so can you try to think why
+
+Speaker 1  1:21:37  
+This is why? Because the source of the data, which is the UCI ml repository. So this is basically the database where the file name convention basically gives you four pieces of information. The first piece is basically a social media handle of people. That's what those random characters coming in. And the second part basically says the pose, whether straight face or facing up, left, right or up. The third part is saying the expression in the person's face, neutral, happy, sad, angry. And then the last part is saying whether the person is wearing sunglass or the eyes are open. So you can actually take this data set and do some classification with four different classes, which we are going to do just not today. We are just preparing the data for today. So that's why you have these type of file names?
+
+Unknown Speaker  1:22:44  
+Because this is where the source of the data is,
+
+Speaker 1  1:22:48  
+and the link, I don't need to put it into Slack, because the link is actually embedded in the notebook. So now, now that we have this insight, what we can do is we can actually take these file names and split the file names with the underscore. First we can, we have to get rid of this dot png, right? So we take the file name and do a replace dot png with a empty string. So that means this dot png will be gone. So now extension is gone, you will only have the actual file name with a with this underscore in between. Then you split it STR dot, split with an underscore, and that will give you four things, right? And you take these four things, convert it into a data frame, and with that data frame, you basically apply these four as column names, user ID, pose expression and eyes, and that's for how you will get this attribute about the files. User ID, pose expression and eyes, just by splitting the file names so
+
+Unknown Speaker  1:24:08  
+that's all.
+
+Unknown Speaker  1:24:11  
+And then, if you want, you can take these file names
+
+Unknown Speaker  1:24:16  
+and you can save it in a pickle file.
+
+Speaker 1  1:24:22  
+You can here it is showing you are taking one column of the data frame, which is eyes, and saving these eyes as a pickle file only. And then let's see what has gotten saved.
+
+Unknown Speaker  1:24:37  
+If I
+
+Speaker 1  1:24:40  
+do that, then I'm going to get just the Y back, which is basically your I sunglass open and all because I only saved one column, which is ice column, I can save any other columns. So let's say if I want to save the X. Expression column, and then I open the file again, so you see all the expression column I'm getting back. Or if I want to save the whole data frame, file names, DF, I can save the whole data frame. And if i unpickle it, I'm going to get the whole data frame back, which again, starts to prove my point that with pickling, you can save anything that is a Python variable,
+
+Unknown Speaker  1:25:35  
+no matter what is inside it.
+
+Speaker 1  1:25:42  
+And the last and final activity is basically you do the same for your fungi files also. So if you look into the fungi files, you will see similar to your those user expression, facial expression data set. I think this is also probably some one of those UCI ml report. So this fungi file also have three part the first part is basically the class of fungi. Second part is the sample ID in the lab, and the third part is the numeric sequence of the image. So probably in the lab they got for each sample, they got a multiple different reading, probably by different observers in the lab. So Image one, Image two, are collected at various different days or points in time. So that's what that is. And you do that, you will basically get a similar you can split it, and then you can save the whole thing as a pickup file, and then load it as your training parameter, right like a zero y variable, because these are essentially your classifier, right? This is what you are going to train on, which we are going to do in the next class. Okay, so that's it for today's class. Just enough to keep you guys all excited and hyped up to actually roll up your sleeves and actually do this training and see whether our model can look at a random image of the face and predict whether the person is having a sunglass on or not, whether the person is sad or angry, or whether the person is looking up or down or sideways, Right? So that's what we are going to do. We are just not going to do that today, because in order to be able to do that, just applying what we have learned so far in neural network, which is, you have a dense layer followed by an activation layer, and you can have as many layers of these as you want, if your data set is large and complex, so don't worry about how large or how complex. You just keep expanding your network until you get a good enough accuracy. This simple approach is not going to work for this type of classification, because here, in order to find whether, not just whether there is a face, but whether the face is looking upward or sidewise, left or right. There is it is lot more nuanced than simply looking at 100 or 1000 columns of floating point number, because you have your model, have to understand what are the underlying pattern like, for example, looking at many different images, has to first identify, Okay, what constitutes a human face? Like it has, it will, it will basically have to identify, Okay, these are the ages, and some of the ages, like, there are two dark edges towards the top, those are called eyebrows, right? And then there is a oval type shape at the bottom. That's like a chin of the person. So it has to basically, as it goes through the different layers progressively, it has to be able to find all of these abstract notion that defines the human face, or for anything that matter, in the image that is looking at right now. In order to do that, we need a slightly different architecture of the neural net, and that's why that is not part of the class today. But as I said, we are going to take, let's say, 15 minutes break and come back at 815 and then I'm going to run you through the handwritten digit data set, because those are much simpler picture, not as nuanced as looking at any human face. So those classification you can do using the techniques that you have already learned, and which I think is a good notebook to keep in your repository for future reference purposes. Okay, so we will do that. Let's take a 15 minute break, and we will run that through. I will probably not take more than half an hour, and I can probably give you 4045, minutes back today. You.
+
+Speaker 1  1:30:08  
+Okay, so for this activity, we are going to load these data, which is the famous MNIST handwritten digit state effect, and the way that we are going to load this data is, let me start sharing My screen. Okay. Is using this library called MNIST. So with this library, you basically, so this is like, you don't even have to go and load this data from any external URL. This is available as part of Keras data sets, only just like, remember when we were doing scikit learn, there was a library called SQL learn dot data sets. And there were many data sets that were available within scikit learn that people mostly commonly use when they are learning machine learning. So similarly, within Keras, there is a library called Keras dot data sets. And there is, there is a function called MNIST, which is what we are importing here. And then with that import, we can simply do a MNIST dot load data. And here I have written some comments to basically describe what this data set is. So if you read through these comments, you will see that this is a data set of 70,000 images of handwritten digits, zero through nine. So each of the digits is a zero through nine. Out of these, 60,000 are training, and 10,000 are test. So the data set is already split into training and test, so you don't have to do a train test split. It's already split for you. And each of this file is a tiny 28 by 28 pixel image. And along with and these are all grayscale image, so zero through 255,
+
+Unknown Speaker  1:32:25  
+so there is no RGB channel here,
+
+Speaker 1  1:32:28  
+and there is also a y. So x will basically give you the pixel values, and the y will give you, like the actual digits, like if an image is that something looks like a zero, someone has written a zero like a scribble, then the corresponding y value will say the digit, number, zero, and so on. So when you run this and then these load data basically returns two tuples. The first tuple is an x and y for the training, and the second tuple is x and y for the test. So it basically returns all four of these pieces of data in one single function call, which is MNIST dot load data. So after you do that, you can print the shape of each of these. And by looking at the output, you can clearly see that for the X train, I have 60,000 items each, 28 by 28 so basically a numpy array you can get from here. This is not binary presentation of digits, because that pre processing has already been done by someone like similar to what we had done in the activities that we did before the break, where we took a list of 624, face images and we converted each one of them into 64 by 60 pixel images and saved into a pickle file. So here someone has already done that hard work for us, and instead of saving it in a generic web library, they have wrapped it with a Data Loader within the Keras dot MNIST library, or sorry, Keras dot datasets library.
+
+Unknown Speaker  1:34:24  
+So you don't have to really do anything,
+
+Speaker 1  1:34:28  
+but what you might want to do is you might want to actually take a look like just peek into the dataset and see how it looks like. So now there are 60,000 of these. So I don't need to display all 60,000 because that is going to fill in pages after pages. So what I'm going to do is I'm just going to take first nine of these, for i in range nine, and for each I'm. I'm going to get the x train I and I'm going to use a matplotlib function called I Am show. So PLT, dot, I am show. And with this function, if I pass this array, which is a 2d numpy array with a color map of gray, because these are all grayscale images with no interpolation, nothing. So that will basically display the image. And I'm also going to use the this matplotlib function called PLT, dot, title. And as a title, I'm going to show what is the digit, and the value of the digit is going to come from the corresponding white trend list. So x trend list has all the images, and white trend list has actual numbers. So basically, this line here is going to draw the image, and this line here is going to put a title on the image. And when you do this plot, usually there is a access marker on x and y axis that will that is something that is not needed in our case. So I'm going to say PLT dot x takes, which is basically an empty PLT dot y ticks is empty to make the image look cleaner. And I'm going to do all of these as subplots. So when I run this, you will see the first nine digits from that data set. So as you can see here, someone has scribbled five, and that level of these image is actually the number five. This is a zero, which you can see here. This is a four and one. And as you can see, this is a handwritten scribble. So some of these are not really oriented vertically, like this. One is is like sideways, because people have been purposefully asked to just scribble free hand, not very perfectly aligned. Now, since these are 28 by 28 pixel only, that's why when you display it, it looks very pixelated. But this is a very simple image data set that makes it easier for us to run it through a neural network for a classification without using any of the advanced techniques.
+
+Unknown Speaker  1:37:32  
+So that's our image data set. Okay.
+
+Speaker 1  1:37:41  
+Now if you want to see what is the distribution of the pixel values. So what I'm going to do here is I'm taking any one particular image, let's say x train zero, which is the first image. So I am showing the image right here, and then here I am taking the pixel values, which is 28 by 28 two dimensional array, and I'm converting these into a single, one dimensional array of length, 784,
+
+Unknown Speaker  1:38:22  
+because 28 multiplied by 28 is 784
+
+Speaker 1  1:38:26  
+so this function here dot reshape, converts it into a single linear array, 784 right, and I am basically doing a histogram plot of this array, just to show how this looks like. So you see most of this pixel are on the lower side, because most of these images dark meaning zero, there are very few white pixel which has the value close to 255, and then some pixel in between, which are basically kind of this transitional pixel, which is some shade of gray. So this is just a histogram of the pixel densities for one image, only just for our understanding purposes. Machine do not need this. This is for our understanding. This also helps us reestablish the fact that the range of this pixel values are from zero to 255 why is that important? Because we are going to scale it by dividing it by 255 to make sure that our neural network converges easily so now it comes to the preparation. So the preparation step here is rather simple, because the pixel to image, sorry, pixel to floating point conversion has already been done. We don't need to worry about that. All we need. To do is the actual image data, which is the X train and X test. We are going to take those and reshape this so see original shape was 60,000 by 28 by 28 we want to take this 28 by 28 and convert into 784, so instead of a three dimensional array, now we are going to have a two dimensional array of 60,007 84 and for the test, we had 10,000 by 28 by 28 I'm going to flatten the 28 by 28 part and making it 784 so my X test will be 10,000 by 784
+
+Unknown Speaker  1:40:46  
+and we are also converting this to floating point.
+
+Speaker 1  1:40:50  
+And then after we convert this to floating point, then we take the value corresponding pixel values and divide this by 255, so that way now we get 784 length linear array for each of the images with values ranging from zero to one, where one meanings completely white, zero meaning completely black. So that's what my training and test matrix looks like 60,007 84 and 10,007 84 Okay, so that's my x. Now what about my Y? So Y values are basically these values, right? Like this, 504192,
+
+Unknown Speaker  1:41:45  
+so these are my y values.
+
+Speaker 1  1:41:48  
+So first what I'm going to do here is I'm going to do a count how many unique values are there, using this NumPy method called NP, dot unique, and I'm going to apply that on white train, and I'm going to say return counts equal to true. So when you run this, it will basically give you what are the unique values, 0123456789, and it will also give you what is the number of occurrences of each different classes. So you see each class of digits has somewhere around 6000
+
+Unknown Speaker  1:42:30  
+data point. So total of 60,000
+
+Speaker 1  1:42:34  
+they are not exactly 6000 age each, but on an average, they are about 6000 some are little less, couple of 100 less, some or couple of 100 more. The good thing is, what this means is the data set is pretty balanced, so that is also for our understanding. So that is good, but now these values are zero through nine. Now the way that we are going to do our network is that in the final layer of the network, we are going to have 10 perceptron in the final layer. And this out of these 10 perceptron, if for any particular digit. Let's say that digit has to be classified, to be classified to digit five. So that means there would be 10 neurons. Neuron Number 01234, is not going to fire only. Neuron number five is going to fire. So that will give them, give me a high value, and then again, 6789, is not going to fire, so that's how my output structure would be. So essentially, what that means is we have to do similar to what we have done for our categorical data, which is one hot encoding. Okay, now we could do psycho psychic learn method as well, but this here, I chose to use this method called two categorical so if you look into the input, sorry, import. So two categorical is actually a one hot encoding method which is available under Keras utils library. So I don't even have to go and get a scikit learn library. Within Keras itself, there is a two categorical method that actually does one hot encoding for me. So since I'm doing everything using Keras, I didn't want to borrow something from scikit learn if you wanted to, you could have but I just wanted to show that this is also possible as well. Now, with these two categorical method, I am saying, convert the Y train to two categorical with number of classes 10, n classes is 10, and I'm doing the same thing for white test also. And after we do that, the original variable, I said y, underscore train, with y lower case, after the conversion to categorical like after the one hot encoding. I am calling it uppercase Y, underscore train. And same thing, lower case y test, I am resetting that into a new variable, upper case white test. Now when I run this and look at the shape before encoding the shape of lower case white train was 60,000 by one because we had a series of zeros or ones or 012, thing. Now for each of these, I have 10 binary fields, each having zero or one. That's why now my Y shape has become 60,000 by 10.
+
+Speaker 1  1:46:01  
+If you just print white train,
+
+Unknown Speaker  1:46:06  
+you will see that fact.
+
+Speaker 1  1:46:10  
+So each one of these is a combination of one and zeros, where only one, any one of these field would be one, everything else will be zero, depending on which digit, digit it is, because these arrangement matches very well with what I just said about the output layer of our neural network. That's why this conversion is useful.
+
+Unknown Speaker  1:46:34  
+So why is it only 01
+
+Speaker 1  1:46:39  
+because you have so think of these digit, 01234, as if they are string categorical data. So if you have any categorical data with 10 unique values, and when you want to encode it, what does that do? It gives you 10 columns, and one of them is all. One of them is one, everything else is zero. That's why. So it's just nothing but one hot encoding. I just use a Keras method instead of a scikit learn method. That's all
+
+Unknown Speaker  1:47:15  
+so that's our data preparation.
+
+Unknown Speaker  1:47:21  
+Clear so far.
+
+Unknown Speaker  1:47:25  
+Okay, now we are going to build a model.
+
+Speaker 1  1:47:30  
+So what we are going to do same as what we have done before. We start with a sequential model. We add the first dense layer with 512 perceptrons. And since this is the first layer, we have to provide an input shape which is 784 by one. So 784 comma nothing, basically means 784 by one, because here I have flattened it to 784 so 28 by 24 828, by 28 square has been straightened out to a 784 length array. So that's why, in my first layer I have an input shape of 784 then I add an activation layer with a function ReLU. And since this is going to be a more complex classification task, I decide to add another dense layer. The second dense layer had 256 perceptrons with, again, a ReLU activation. And I chose to add a third layer with 128 perceptron
+
+Unknown Speaker  1:48:49  
+with a ReLU activation.
+
+Speaker 1  1:48:52  
+And I think that's enough. I mean, you could keep adding more, but I think this is good enough. Now I decided to add a final dense layer of 10 perceptrons. And this time, I am using an activation function called soft max. So this soft max is basically an activation function that you use for multi class classification, so if you have multiple classes, so for example, 10 here. So this softmax will make sure that out of these 10 neurons from the output layer, only one will fire corresponding to which class the network is trying to classify your item. So that's what the softmax function does. And then we do a model summary. Now you will probably see that there are some lines for dropout that I have added, but I commented them out. I'm going to explain why, what the why that is needed in a bit, and I'm going to comment. Retrain those with dropout, but forget that.
+
+Unknown Speaker  1:50:04  
+Imagine that you haven't seen those line yet.
+
+Speaker 1  1:50:08  
+So dense activation, dense activation, dense activation, and then finally, a density softmax, very similar to what we have done before, except there are more number of neurons. Now, when you look at the model summary, it basically just like what we saw before. It basically gives you all the dense layer. And how many parameters are there in the dense layer? So way more parameters because all of these weightage and the corresponding activation, sorry, biases. So that's my gigantic deep neural net, well, gigantic in our standard. This is nothing in the industry standard, right?
+
+Speaker 1  1:50:53  
+And then you can compile with same thing, categorical. So instead of binary cross entropy here, our loss function is categorical cross entropy. Because we are trying to do a multi class earlier, we had used binary cross entropy, so the loss function changes, your metric stays the same accuracy and optimizer still Adam. So that's our model compilation, but that's not the training yet. We are yet to train the model. Now, before we train the model, I wanted to show you couple of alternative way to visualize the structure of the neural net. So up until now, last week, all we had done is model dot summary that prints this table, which is pretty good, but let's say you want to wow your audience and try to do something little bit more fancier. So there are a couple of different other ways, alternate ways that you can try to visualize the model. None of these are very good, by the way, like none of these actually gives you all the neural, sorry, all the layers and all the perceptron that you can play around. No, it is all some kind of a representation. But let me show you a couple of other ways. So this function plot underscore model, so if you look in here, so this is a function which is again already available under TensorFlow, dot Keras, dot utils. This is one of the function natively available with Keras. So if you do a plot model, you provide these model variable, and you can actually provide a file where to save. And this would actually save a PNG picture file in your disk that you can then, let's say you want to create a PowerPoint presentation. At the end of your project, you might want to take the PNG file and drop it into your PPT, right? So it's, it's same representation, but it's kind of a nice png. So when I do this,
+
+Unknown Speaker  1:53:00  
+it basically creates a picture such as this,
+
+Speaker 1  1:53:05  
+so you see the same information, but presented like a picture. And this picture is also saved in the file name that I provided, which is model dot png, which is this file. So you can even open this model dot png. And this is your PNG file. Now you can put it in your report or wherever, right? PowerPoint or any word doc report wherever you want to put. You can put it or on your blog post wherever. So that's one way to kind of show your audience how your neural net architecture looks like.
+
+Unknown Speaker  1:53:53  
+There is another way of doing this.
+
+Unknown Speaker  1:53:56  
+Why did you go to 512 office? Because
+
+Unknown Speaker  1:54:01  
+I'm sorry, repeat that again. I
+
+Speaker 7  1:54:03  
+get why you started with 784, but why did you go to an output of 512 just because it's an output, just because it's a multiple of 256,
+
+Unknown Speaker  1:54:16  
+I'm not sure what the question is.
+
+Unknown Speaker  1:54:17  
+Why did you pick 512
+
+Speaker 1  1:54:20  
+oh, like, Why did I pick this number? No particular reason.
+
+Speaker 7  1:54:25  
+I just assume it's a multiple 256, and that's why. Yeah. So that's
+
+Speaker 1  1:54:29  
+kind of a, kind of a heuristics people apply, like always, people use, like a powers of two, but you don't have to. You can start with, like a 300 going into 200 going into 100 or you can even have all layers of the same weight, like you can have 200 200 200 there is, again, going back to the discussion that we are having the other day. There is really no rule guiding this, nothing absolutely whatsoever. But it's just a nice city. It's. Kind of a convention that people tend to use something in the powers of two. It's probably because it folks likes the binary numbers better,
+
+Unknown Speaker  1:55:11  
+so powers of two, that's all,
+
+Speaker 2  1:55:16  
+okay, I just go right in the Chad because we're computer nerves. Yes, exactly. So we like powers of two. We like binary
+
+Unknown Speaker  1:55:26  
+bars of two. Yes, okay.
+
+Unknown Speaker  1:55:29  
+Now
+
+Speaker 1  1:55:31  
+another way to display this model is using a different library called Visual Keras. So this visual Keras is not something that comes with your Keras installation. You have to do a pip install Visual Keras. But once you do have visual Keras installed, you can do visual Keras dot graph view and very similar to how we did model plot here, you basically provide the model and the file name. So you do it here with visual Keras. And this one, I'm using a different file name, model graph, dot, PNG,
+
+Unknown Speaker  1:56:15  
+and this is how the model will look like
+
+Speaker 1  1:56:19  
+now, obviously, since I have used two feet 512 it is showing dot, dot, dot. But this will basically make more sense. If you have a less node, like if you have a like a 10 node, five node, and stuff like that, then it will probably make more sense. Again, as I said, I just wanted to show you different way of do doing this, but none of these are foolproof. But the thing is, model architecture is kind of a inherently hard thing to display. So if you want, you can basically have this that will show in a quantitative way what your exact sizes are. And then you can show this kind of as a, as a, like a rough, abstract idea, like, Hey, you have one layer, your first dense layer, and then activation layer, and dense activation, dense activation, and so on,
+
+Speaker 7  1:57:09  
+right? And what did dense and activation do is that just the BI directionality that you've gone through the neural networks before? Or is that something different?
+
+Speaker 1  1:57:18  
+So your dense layer is where your neurons are, and activation layer is basically where you are putting the firing function
+
+Unknown Speaker  1:57:26  
+like ReLU or softmax or sigmoid or whatever.
+
+Speaker 1  1:57:35  
+Okay, so now, so these, these visualization is just vanity. I just wanted to show a couple of different options. Now the real thing where the rubber hits the road is the training. So model dot fit, and as we are doing model dot fit, we would like to capture the history of all the accuracy and loss function in a separate variable that will make it easy for us to do the plotting. So I'm going to do model dot fit with a batch size of 128 because we have 60,000 if you don't provide a batch size, then the what is called the divergence. Sorry, convergence would be slower. It is better to do a smaller batch size, let's say 128, again, because we are computer nerd, we would like to choose a number that is part of two for no particular reason. You can choose any number, and we want to run it for 20 epochs. And we are also going to provide the validation set, which is our X test and y test. So now I'm going to run it. It will take about a minute in my machine. So let's see how it goes.
+
+Speaker 1  1:58:51  
+Right off the bat, it started with a validation accuracy of 96% just after one epoch. I mean, looking at these, you might say, hey, we might stop there. What else do we need? 96% is very good, okay,
+
+Unknown Speaker  1:59:11  
+but let's see. Let's have it run for 20. I
+
+Speaker 1  1:59:26  
+You see validation accuracy is going higher, little bit, not too much, and it is fluctuating little bit, but I think it's still better than 96.65, which we will see after the training ends,
+
+Unknown Speaker  1:59:41  
+18, 919.
+
+Speaker 1  1:59:45  
+And 20. Okay, one minute for second. Not bad. So now we can take the accuracy and validation accuracy and plot them side by side. And we are also going to take loss and validation loss, we are also going to plot them side by side. So let's do all the plotting. So that plot on the top is the accuracy plot. The blue one is on the training set, the orange one is on the test set. So as expected, the test set accuracy is little less than the training set accuracy, which is fine, and it is not that bad, right? It's not it does not show over fitting. But you see here it seems like, after some time, like after about 17 epoch or so, somehow validation accuracy is dropping little bit where the test training accuracy is going up, just looking into this small part, it seems like that overfitting phenomenon is just about to start to happen here. Nothing too bad to worry about. You also see the similar trend in the loss curve. Also the loss on the training set, obviously is much lower than the loss on the validation set, but after about 17 or 18, EPAC, seems like the validation loss is about to start to creep up, which is kind of similar phenomenon, as we are seeing in the accuracy plot also. So maybe after training 17 plus epoch model is probably trying to trying to develop little more bias towards the training set compared to the validation set.
+
+Unknown Speaker  2:01:49  
+So we will see in a second what we can do about it, if anything.
+
+Speaker 1  2:01:55  
+So for now, we are just going to simple do a model value evaluate, which is using the Keras evaluate function just to see what the final numbers are. So the final numbers are a test accuracy of over 98% and test accuracy, meaning this is accuracy over the data set that has not been used to train the model. So this is the accuracy over that 10,000 set that we set out separately. So those 10,000 images, we haven't presented the mod to the model, and it still were able to accurately classify 98% of those. And then I also wanted to show, so the in these notebook, I wanted to show lot of things in one shot, actually, lot of different concepts. So I also wanted to show, if you want to save this model, how are you going to do this is something we have done in last week. Also you basically provide a path where you are going to save, and you simply do a model dot save and provide the model path, which I am choosing to save the model under a folder called model. And inside that model folder, I am choosing this file name called Keras, underscore, MNIST, dot, h5 so this is my binary model, if I reveal it in the Finder to see what the size is, about 6.8 megabyte. So this is a binary file that contains all of the different weights and biases saved in one single binary file.
+
+Unknown Speaker  2:03:35  
+So now my trading is done. I
+
+Speaker 1  2:03:43  
+uh, another thing there is a library called netron, if you want to use that library. So netron is basically, it kinds of starts a web server on your local computer, like on a local host. Now there is a so netron is basically, if you look up in here, you see how I have said, import netron. So you also have to do a peep. Netron. Peep. Install netron If you want to use this functionality. This is again, one of those vanity thing, not absolutely important, but something to know, some cool thing.
+
+Unknown Speaker  2:04:22  
+Now with this, see what happens.
+
+Speaker 1  2:04:27  
+So this is yet another representation of the model. So now look what happened. As soon as I click that cell, it opened my browser and took me to localhost, Port 8080, so it's basically running a tiny, teeny, tiny web server in my localhost, under port 8080, behind port 8080, and there it is, basically displaying my model structure, again, as I said, Nothing super useful, but something cool to know. Okay, so.
+
+Unknown Speaker  2:05:03  
+So that's that
+
+Speaker 1  2:05:06  
+now that I have my model saved before I actually do the prediction, so let us load the model from the saved version. So our model was called model when I'm loading the model from this file in my local drive, I'm choosing a different variable name called MNIST model, and I'm going to take this MNIST model and then then do the prediction. Now, when I'm doing the prediction, I'm going to use the Keras predict method, so model dot predict and I'm going to pass the test data set. But since this is a multi class classification with a soft max of the output function, simply doing model dot predict is not going to be enough, and I'm going to tell you why in a second. Actually, let me do one thing, let me comment this out and do something, try to do something really stupid, which is this, what I'm doing is I'm taking the model that I just trained, and I'm saying, Hey, Mr. Model, do the prediction on our test data set and show me the predicted classes. The model doesn't know what you ask you to do, the model will do the prediction. But is this predicted classes going to be valuable for us. So let's see what happens and what the problem is.
+
+Unknown Speaker  2:06:47  
+So if I do predicted classes,
+
+Speaker 1  2:06:53  
+you see what I get, I get a whole bunch of floating point number. So how do I know what the prediction is? Right? Let's do a dot shape to see what I get. So I got a 10,000 by 10. Why? Because I have 10,000 items in the test data set. That's why there are 10,000 rows. But then I have a 10 columns for each each of these items, right? Why 10 columns, including Uh huh? Because these 10 columns, why there are 10 columns? Because there are 10 different values. Correct? Now, if you want to take the first row, let's see what the values are,
+
+Unknown Speaker  2:07:41  
+just for the first row.
+
+Speaker 1  2:07:47  
+So these are the 10 values. So you see, most of these are very, very small numbers, 10 to the power negative 1210, to the power negative nine, and so on.
+
+Unknown Speaker  2:07:58  
+So which one do you think is a large number in here.
+
+Unknown Speaker  2:08:07  
+Can you spot easily,
+
+Unknown Speaker  2:08:11  
+one that is to the power of
+
+Speaker 1  2:08:13  
+one, this one. So what is this number?
+
+Unknown Speaker  2:08:20  
+Isn't it 0.9999994
+
+Unknown Speaker  2:08:26  
+so essentially, this is actually your one.
+
+Unknown Speaker  2:08:29  
+Everything else is zero.
+
+Speaker 1  2:08:33  
+Now you have to read it back. So basically the interpretation of this is, if the first number was high, then the prediction would have been a prediction of a digit zero. If the second number were high, then the prediction would have been a prediction for digit one and so on.
+
+Unknown Speaker  2:08:55  
+So here, 01234567,
+
+Speaker 1  2:09:00  
+so looks like this is a prediction for digit seven, but that is not apparent just by looking at these numbers. So that's why we don't just use the predict. We apply a function called numpy.org max. So what it does is it basically takes the maximum of these. So now let me do that and get rid of these stupid prediction and do a really good prediction. Now if you see predicted classes zero, you see how it says seven, which is what I predicted. So this is how I am decoding the one hot encoded output back to what the real output should be. By doing. Is np dot arg max. So np dot arg max basically gives me at which index position of this 10 item list. Does the maximum item occur? Which is at position seven? So that means this particular item must be a seven.
+
+Speaker 7  2:10:18  
+Well, that's very convenient, because the list is zero based, yeah, so
+
+Speaker 1  2:10:23  
+and my digits are also zero based, so no further transformation needed, exactly, yeah. So now that we have all my predicted classes, and we have 10,000 of them, now what I can do is, now I have to calculate how many of these 10,000 the model were able to predict correctly versus how many incorrectly? And there is a nifty trick to do that by using another NumPy method called NumPy dot non zero. Now with this so my number of correct index, indices I can calculate by doing this comparison, NP, dot, non zero count where predicted classes are equal to the y test, meaning the Y level. So that means those are your correct prediction, and the incorrect predictions will be where the predicted classes are not equal to your white test. So now you have a whole bunch of indices here out of your 10,000 item array, and a whole bunch of indices here out of your 10,000 array. Now if you simply count how many items are there, that will give you the number of items that the model has classified correctly, because for all of these correct indices, we know that the predicted class is equal to the white test level that have been provided.
+
+Unknown Speaker  2:11:57  
+So now, if you run this
+
+Unknown Speaker  2:12:01  
+very impressive 9808
+
+Speaker 1  2:12:04  
+classes classified correctly out of 10,000 it only made a mistake about 192 classes, which kind of goes well with these evaluation report that we created earlier, that test accuracy is 0.98079%
+
+Unknown Speaker  2:12:21  
+which is basically these two numbers, suggests,
+
+Unknown Speaker  2:12:27  
+right? So almost 98% accurate.
+
+Speaker 1  2:12:34  
+Now, aren't you curious to see like, Hey, show me the one that it actually correctly classified, and even more so show me the one that it failed to classify correctly. So to do that, I can do the similar plotting as we have done before here with the training data, right? So like this. So here we plotted some random, not random, first nine digits of the training data and provided the level that was provided as white white train. So we can do something similar here by plotting some characters from the test data set. So first we are going to plot nine correct predictions. So we are going to enumerate through correct indices and take only nine of them, and I'm going to use the I am show to show how the image looks like. And as a plot title, I'm going to display both the predicted title, which is predicted a number which is in the predicted classes list and the actual number which is in the Y test list. So now when you run this, so these are some of the image in the test class test set, where the model has correctly identified what the scribble is so pretty impressive. Like look at these two nine you see how different they are, but it still has classified both of them, them to be actual nines. Now let's do the same thing, but this time taking the incorrect indices. And these are one of those less than 200 cases where the model failed. And you will see that you cannot really blame the model. Like some of these, even humans, we will have a hard time identifying. Look at the first one, what is this? The model has predicted it to be a six. If it was me, I would read it as a six. The author of the data set said, well, it is five. So whoever it is, basically just wrote a five. Five, but it almost looks like a fixed to me. Similarly, here, the model predicted eight, but actual nine. Here, the model predicted three, actual five. Well, it doesn't look like anything to me. So some of these are very bad handwriting, actually,
+
+Unknown Speaker  2:15:16  
+so you cannot really blame the model. So
+
+Unknown Speaker  2:15:24  
+the eight seemed like it should have predicted correctly.
+
+Speaker 1  2:15:27  
+Yes, well, some of these are obvious, like this should have been, but it did not. Now, don't forget that these are the date pictures that we the model did not see during the training time. These are unseen to the model. Now the fact that here these made a very obvious mistake could be attributed to that little over fitting case that we saw towards the end of the training so now we have to think of, well, if that happens, how we can handle it possibly. So one way to handle overfitting is kind of think about what happens. So let's say you are starting very hard for a test and studying hard, meaning there are different kind of studying hard. Some people just don't study throughout the semester, and then just a couple of nights before the test, they try to cram everything that they can. And if they are lucky, they get the same question, they will do very well. If there is some variation, they'll fail. So you should not be doing that. Ideally, you should be learning, and then go out and go party, enjoy. And while you do that, you will probably forget some of the thing, and then you go and study again. So by the fact of forgetting and then learning again, the concept will get more reinforced in your mind. So it so happens that when it comes to training a neural net, it's not unlike the biological way of learning. So that particular mechanism like go chill out, have fun and then come back is basically can be achieved by these additional layers called dropout. So here what we are saying is, hey, do your first layer, and after that you basically forget 20% of weights that you adjusted, 20% drop out, and then run to the second layer again and forget 20% of what you had learned and do the same thing after third layer again. But 20% forgetting is not that bad, considering we will run another epoch through again. So essentially, we are purposefully resetting 20% of the weights between these layers and resetting it to random value.
+
+Unknown Speaker  2:18:02  
+Purposeful. Purposefully injecting that behavior.
+
+Speaker 1  2:18:06  
+Now we are going to rerun this model training again with the dropouts added, and I'm not going to worry about visualization and all of that. Actually, maybe we can do that. Yeah, so it's basically showing these gaps in between, which is the dropout. And now I'm going to do a training. No other change needed. So just taking a look at these accuracy so it's got from nine six and ends at nine eight. So we will keep a look at these accuracies and see whether we can spot any changes. What happened? Oh, I forgot to do the compile part. Sorry, compile and then visualization. Don't worry about it. Let's just go trace straight to the training so
+
+Unknown Speaker  2:19:16  
+it will take another minute again. I
+
+Unknown Speaker  2:19:35  
+about the same validation accuracy. It
+
+Speaker 1  2:19:39  
+doesn't seem like any art shattering change here. Let's see how it finishes. I.
+
+Speaker 1  2:20:27  
+Okay, so looks like not much difference. Now we are going to do the plotting again and see whether this, this little thing that we saw here, and here, this little bump, whether there is any change to that.
+
+Unknown Speaker  2:20:43  
+So let's run the plot.
+
+Unknown Speaker  2:20:49  
+What do you guys think the difference is?
+
+Speaker 1  2:20:57  
+Do you see any difference between the blue plot? Now you see how the blue plot is rising little slowly, because earlier this tail was much shorter. It rose very quickly and approach almost one the training accuracy this time it is taking longer for the training to converge. And here it looks like it was about to get over fit, but then it's changed course at the very end,
+
+Unknown Speaker  2:21:30  
+same thing for the loss.
+
+Speaker 1  2:21:34  
+It was about to go up, but then it came down, and then it was starting to go up, and then at the last iteration, we are saying little downward trend again, and the convergence of the training is much gentler. So essentially, the model before was much more greedier than the model now, because of the addition of the dropout, that's why converging the training is taking much longer now, since this graph, the blue graph, whether the accuracy or loss, whichever way you look at it, since this is much more gentler, so that tells me, with this validation, we should have continued the training for further more epochs, which is very Clear,
+
+Unknown Speaker  2:22:20  
+we should have been continuing for like, 40 ebooks or something,
+
+Speaker 1  2:22:25  
+which you feel free to run it. The Notebook is available for the interest in time. I'm just skipping that. I'm going to do with this model with dropout. Let's do an accuracy so earlier, it was 0.986
+
+Unknown Speaker  2:22:41  
+loss. Sorry, 0.0986
+
+Speaker 1  2:22:45  
+and 0.98 is the test accuracy. Let's see 0.984
+
+Unknown Speaker  2:22:58  
+so let's set the model again
+
+Unknown Speaker  2:23:02  
+and load this new model.
+
+Speaker 1  2:23:06  
+So now look at this number earlier, there were 192 incorrect. This time there is 158 incorrect. Same 20 buck, but with some purposeful for on purpose, deliberate forgetting. Now when you are forgetting, that means you have to rinse and repeat for much longer. But even if we haven't done that, we were able to bring down, down the occurrence of error from 192 to 158 which is what about 20% improvement, I'd say, or 20% reduction in the incorrect cases. And this thing would not change. But let's see the output for this. You see that obvious case, oh no, that was still here. That is still here, but some other thing is gone, but some new other thing has popped up here, like this one is really hard for even for us as a human, to understand, and so is this right? But overall, whatever it is, I think I have been able to prove the point that how dropout actually helps the neural network to be little less less greedy and be more patient, but that also means we also have to be more patient and give it more time, meaning more epochs to learn the right behavior and not latch on to something that it sees right in front of it, right
+
+Unknown Speaker  2:24:40  
+So we should not be like we should be careful
+
+Speaker 1  2:24:44  
+in a way that our not letting our model to pick up any bad behavior. So adding the Dropout is a way to do that.
+
+Speaker 1  2:24:56  
+Okay, lastly, very end. It. I'm going to show you another trick. This is not something that you will need when you are running your machine learning in your local machine. But let's say you are working for a company, and you are basically going to run this model on some VM running on Cloud, looking at not just the loss and accuracy, but also looking at what is the CPU like, resource uses and all of that, it is very, very valuable. So for that, there is this thing called wand B. So this wand B is also another import that you have to do. First you have to do peep installs wand B, and then you have to do import 1b and then from wand B, dot integration, dot Keras, you basically import these matrix logger and model checkpoint and so on. And then what you do is you basically start a 1b project. And you can put any name of the project, and you do when we.in it, and this is where your project is starting. And you basically do, do your model building and compilation and training everything inside that.
+
+Unknown Speaker  2:26:18  
+And then you do a finish.
+
+Speaker 1  2:26:22  
+And this time, let me run it for a little longer. Now, when this thing is going to run, in order for this to run, you need to go to a website called I
+
+Unknown Speaker  2:26:46  
+wait when b.ai
+
+Speaker 1  2:26:49  
+so you have to go to when b.ai and you have to sign up. And it's a free sign up, and then you will get an API key. So this is your API key. You need to copy this API key from wand b.ai and when you run this for the first time in your Jupiter notebook, in the Jupyter Notebook itself, it will prompt you to enter that API key that you have captured from the wand b.ai website. In my case, it probably won't, because I already ran this once, and this probably has already written, but I'm not sure load, so let me run it. Okay, and this is where it is basically creating all of this thing. Okay, so it did not ask me for the API key, but if you run it, it will first time ask for the API key. And now, while the model training is running, if you look here, it says, view the project at this URL and view the run like this particular run that is happening at this URL.
+
+Unknown Speaker  2:27:58  
+Now if I click on this URL.
+
+Speaker 1  2:28:03  
+This is where you are going to see, in real time, the operational statistic of the model that is running real time dashboard, and not just machine learning steps. These are the machine learning matrixes, matrices, right, epochal loss, epoch value, accuracy, value, loss, learning rate is straight and all of that, but it will also show you underlying CPU, disk utilization, memory, network traffic, all of these. And you see how these things change. Now, obviously this does not really have a much importance because you are running it in your own machine, but in an industrial scale, when you are running large model training, this is of extreme importance to see what the resource footprint is for a particular model training, because this is real money your company is spending. Okay? So try this out and and the other thing is that graph that we were plotting right using like these graphs. I'm talking about these graphs right. So here we basically had to wait for the training to finish, and then we came here, and then we did this match plot, lift graph. Here you are seeing the graph rendered and being updated in real time as the training goes on
+
+Unknown Speaker  2:29:28  
+real time.
+
+Unknown Speaker  2:29:32  
+And that is super cool.
+
+Speaker 1  2:29:35  
+So imagine if you have a large model and you are running, let's say, 1500 epoch, and each epoch is going to take 1015 minutes, or maybe even hour. So you can go and do something. You don't even have to sit there. You just have to come time to time and hit this URL and you can see how your model is doing. Okay,
+
+Unknown Speaker  2:29:58  
+so that's about it.
+
+Speaker 3  2:30:08  
+Yeah, so in an industry setting, would you theoretically be using TensorFlow, and then you would use that 1b to like monitor. That's really cool. That's yeah,
+
+Speaker 1  2:30:21  
+I mean, in industry setting, you are not going to use TensorFlow in the way that we are doing. You are going to be installing an additional library on TensorFlow called CUDA core, which is basically the library that gives you access to the underlying GPUs, which in our machine, we don't even have an Nvidia GPU, so CUDA is basically just for Nvidia GPU. For other GPUs, I'm sure they have a corresponding lower level library that allows your TensorFlow to talk to the underlying GPU. The CUDA is just the NVIDIA one. That is the one that most people uses. Yeah. So I tried to run this in my laptop, in my Mac, I couldn't even because my Mac doesn't have a CUDA, but I actually have run these on a cloud machine on AWS, and I have been able to actually successfully install CUDA. And then basically there is also a CUDA dashboard that you that will show you like, hey, if your machine has 100 GPU, how many of these GPUs are actually actively being used and so on. So you can do very cool, nifty, low level stuff with CUDA.
+
+Speaker 2  2:31:27  
+CUDA stuff built to some level, built into TensorFlow,
+
+Speaker 1  2:31:33  
+yeah. So CUDA is basically, they are underneath, underneath TensorFlow, yeah.
+
+Speaker 2  2:31:38  
+If you're going you're going to sell coup d'etat yourself. You're going to do much more complex and custom kind of right, optimizing things and stuff, much more complex models. Yes,
+
+Unknown Speaker  2:31:48  
+yes.
+
+Speaker 1  2:31:52  
+Now that I have run this 40 times, sorry, 40 epoch, let me actually quickly see what the accuracy is. I
+
+Unknown Speaker  2:32:03  
+Yes, yeah, it went from 089842,
+
+Unknown Speaker  2:32:07  
+to little bit up to 9843,
+
+Unknown Speaker  2:32:10  
+little bit in the fourth decimal place.
+
+Speaker 1  2:32:14  
+So now if I have want to save this and do a prediction on these model. Let's see these 158 if it goes down little bit 157 so one. But I'm telling you this little bit of improvement matters. Little bit of improvement matters. Oh, look, that obvious aid that it was misclassified. Now it is gone. So that is the only one that got fixed, that that eight, I mean, it should not have like everything else, like now, if you look at this like, Come on, give it a break. It's a machine. After all, even humans, we cannot, we cannot do that
+
+Speaker 3  2:33:02  
+each one of these, huh? That was really bothering me, and now we did not, right,
+
+Speaker 2  2:33:10  
+yeah, but still. But no, I mean, you gotta write to the love of your life, and you're really nervous you make the zip code numbers badly. It's still not going to route your mail to them, and I'll never know.
+
+Speaker 1  2:33:23  
+Yeah, no, I'm actually so happy to see, like all of these cases. I mean, as a human, most of us are going to make error to figure out what these are.
+
+Unknown Speaker  2:33:38  
+So I'm really happy. Cool.
+
+Speaker 1  2:33:43  
+So that is everything today. I hope you like this last part. So go play around with it. I made this available already on your GitLab. Play with it.
+
+Unknown Speaker  2:33:58  
+Thank you, vinoy, thank you guys,
+
+Unknown Speaker  2:34:01  
+well, thanks,
+
+Unknown Speaker  2:34:04  
+cool. Have a great night. Pretty good. Thanks. Bye.
+

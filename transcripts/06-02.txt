@@ -1,0 +1,1557 @@
+Unknown Speaker  0:03  
+Thank you.
+
+Unknown Speaker  0:05  
+Okay, another reason companies do use API key is to control the traffic flow. And what I mean by control the traffic flow is so let's say it's easy for anyone to write a Python program, or any program, for that matter, and run a loop and then keep sending requests right,
+
+Unknown Speaker  0:25  
+one after another. So when that happens, sometimes people do that intentionally, just to break the server, just for the fun of it. Sometimes people might do that unintentionally. Maybe your code is stuck into some kind of an infinite loop and it just keeps sending requests. Or maybe you are trying to get lot of data within a very short period of time with no bad intention, but the effect on the server is still the same that the server is getting bombarded with lot of requests within a very short period of time right now, imagine one thing, whenever you are getting this data from somewhere on The Cloud, somewhere over there, right? There is a machine or a group of machines sitting there waiting to intercept your request, and as soon as it gets the request that you are sending, through your request dot get method,
+
+Unknown Speaker  1:14  
+the server immediately has to respond. And in order to do that, server has to have some kind some amount of CPU, memory and so on, right? Some resource now, obviously, server capacity is not unlimited. It can scale up in the cloud, but it costs money, right? So all the companies who set up their API, they obviously have a certain budget that how much money I want to spend, and based on that, how much server capacity that I want to provide to serve my API users. Now, obviously they don't want one person to basically
+
+Unknown Speaker  1:48  
+use up all the server capacity that they have. So that's why they want to limit your requesting, which is also one term that is used, called throttling. So what they do is, if you are sending your API key with your request based on that they can identify, Okay, Mr. XYZ has sent 20 requests already within the past minute, one minute, and then they set up a limit, let's say, okay, maximum of 20 requests per minute. So if you do send more than 20 requests after 20th request, your request will get throttled by the server, and you will get a response saying that too many requests try after some time, something like that, right? So you need to be aware of such limits, and you need to have handling to handle these gracefully, right? You need to have conditional logic within your code to basically make sure that you don't cross the limit in the first place, and if you do cross the limit, then you need to check that error condition that it is returning, and then have some kind of a waiting logic in your code, and then try after some time, right? So that is one reason. That is another reason companies do use API key, right? In fact, as part of these course activity in the boot camp, we are not going to use, going to be using any API that requires us to pay, but we will still see there are some API key that does require some API that does require API key. And the reason for that is like we will get data from Census website, we will get data from our weather website, and all of these data are freely available, but because of the reason I just mentioned, they still require you to use an API key.
+
+Unknown Speaker  3:30  
+Okay, so that's what we will be doing today.
+
+Unknown Speaker  3:34  
+So what I'd like to do is, before starting any activity, I'd like you guys to go on to two websites, actually three, and I'm going to do that on my screen, and I'd like you to follow, if you haven't already done so, and go and generate keys for yourself. Okay, so let me share my screen first. Give me a moment
+
+Unknown Speaker  3:57  
+my my key work perfectly, immediately. Oh, so then there is something wrong with mine. Okay, that's fine. I'll try with another email. Well, you know, maybe, maybe because you do a, you know, virtual part of it now, VPN and something, no, I'm kidding, no, no. One thing I'm thinking, I use my instructor email address at to you.com
+
+Unknown Speaker  4:20  
+so maybe they saw that it is not a personal email. It is a
+
+Unknown Speaker  4:26  
+that's what I did. Oh, that's what you did to organizations, edX, and I put my to you, yeah, that's what I did. Okay, so then that theory doesn't hold up. So maybe that was just a one time error. I'll just use my personal email engine or another one. It's true that, you know, they like to make systems be reliable 99.9%
+
+Unknown Speaker  4:47  
+of the time, but it's that point 1% of the time when they're down. Yeah,
+
+Unknown Speaker  4:52  
+you hit that time.
+
+Unknown Speaker  4:57  
+You can always go, there's a website. Is it me or.
+
+Unknown Speaker  5:00  
+Or is it down? And you could put in like,
+
+Unknown Speaker  5:04  
+IP address and Italia, yeah, no, that's down. Yeah,
+
+Unknown Speaker  5:09  
+I was in the wrong slide, guys, that was a slide for tomorrow's class.
+
+Unknown Speaker  5:14  
+Okay, so basically, this is what we are going to do. We are going to create API keys, and as I talked about why it is needed, and then we will see how we will use this so that the API key doesn't show up in our code for a soon, but for now, let me actually look through which APIs I did.
+
+Unknown Speaker  5:35  
+I did open weather and I did api.data.gov,
+
+Unknown Speaker  5:41  
+right? So,
+
+Unknown Speaker  5:58  
+okay, so you have to go to this page called Open weather map.org
+
+Unknown Speaker  6:05  
+and
+
+Unknown Speaker  6:07  
+let me see, yeah, so my API keys are already here, so what you need to do is
+
+Unknown Speaker  6:15  
+you need to go and create an account. So let me send this link in Slack.
+
+Unknown Speaker  6:21  
+So, that
+
+Unknown Speaker  6:26  
+which one
+
+Unknown Speaker  6:27  
+is our call. Okay, so let me put it into the resources. Chad, so this is the link that you have to go to.
+
+Unknown Speaker  6:36  
+And here you create a username, you put your email, a password of your choice, repeat the password of your choice, agree to these things,
+
+Unknown Speaker  6:50  
+these last three check boxes you don't have to. This is, if you do want to receive further communication, click on this, I am not a robot, and say, Create Account.
+
+Unknown Speaker  7:01  
+So that will create an open weather map account for you.
+
+Unknown Speaker  7:06  
+And I believe you will okay. So these one, I don't think they do,
+
+Unknown Speaker  7:14  
+no, actually they do account confirmation, yeah. So then one you, when you do that in your email that you have provided, you will get an email like this that will ask you to verify your email by clicking on this button, which is basically a link. So you go find that email in your inbox and click on Verify. In my case, it was already confirmed. So it says already confirmed. When you do this for the first time, it will say something like, Hey, congratulations. Your email is confirmed.
+
+Unknown Speaker  7:47  
+And once that is done, then from this menu, you can actually go to your sign in and use that username and password to sign in
+
+Unknown Speaker  7:58  
+to the open weather API. Oh.
+
+Unknown Speaker  8:04  
+And now it is not allowing me to sign in.
+
+Unknown Speaker  8:08  
+Anyway. This thing is crazy. Anyway, I don't need to sign in, actually. No, I do because otherwise I cannot show you
+
+Unknown Speaker  8:18  
+why it is not I just did this,
+
+Unknown Speaker  8:23  
+or maybe I have to
+
+Unknown Speaker  8:26  
+the whole email, maybe
+
+Unknown Speaker  8:32  
+almost logged in right now.
+
+Unknown Speaker  8:40  
+Just out of curiosity, if you, if you repeat the process, does the first API key get
+
+Unknown Speaker  8:47  
+essentially invalidated?
+
+Unknown Speaker  8:51  
+Repeat which process? I'm sorry if you, if you go through the process of requesting an API key using the same email address and whatever credentials and it sends you a second. Yeah, so it okay. I got your question. It depends case by case basis on open weather API, open weather map website, you are not requesting an API key by your email address. Essentially, what you are doing is just like how you sign up for any service, online service, you are signing up with your email ID and password. And then if you look at my screen, now, once you sign in, you can click onto your sign signed in username and go to my API keys. And this is where you will see the API key.
+
+Unknown Speaker  9:35  
+So now, obviously your email is a unique identifier, so obviously you cannot have a use the same email to have to account, right? So that's why, if you forget your password, just like you do anywhere else, you forget your recover your password, or if you do not have access to that email, then just create a new user account. But this is where, when you go to the API This is where you will get the API key and.
+
+Unknown Speaker  10:00  
+So grab these API key from here, and if you don't want to use another, going back to your question, Chad, if you want to create another API key. So you basically create another API key here. You can say, let's say my to you API key. And then you can say, hey, generate. And then it will generate another one. So you see the first one is default, which was already created for you when you first signed on. If you do want another API key, for whatever reason, you can generate another one and another one and so on, right? So I'm sure there will be a limit. Maybe they'll make you, let you make up to five or something like that, right? But you can use multiple Okay, thank you. Like, let's say, if you are an organization and you want to have multiple keys for different employees to use, you can do that here,
+
+Unknown Speaker  10:51  
+okay, so now you grab this key, okay? And then if you go into your
+
+Unknown Speaker  10:59  
+folder for today,
+
+Unknown Speaker  11:01  
+you will see like, for example, if you go to
+
+Unknown Speaker  11:09  
+any of this activity, so,
+
+Unknown Speaker  11:17  
+yeah, So unsolved ones do not have
+
+Unknown Speaker  11:22  
+any of the API keys here? Where did I have the API keys there?
+
+Unknown Speaker  11:29  
+Yeah. So basically, what I asked you to do is you create so
+
+Unknown Speaker  11:42  
+So you basically create a empty file like this, and we are going to be using two different API key, NASA API key and weather API key. So you basically create a new file and name it, dot env, and save it wherever your Python Jupyter Notebook is sitting. And then I'm also going to put this little blurb here on the slack so you can just copy this. And then inside these weather API key, inside the double quote, what you'd have to do is you need to go here, grab your API key from here, and then paste it here.
+
+Unknown Speaker  12:19  
+Okay, so that's one and then you will save it as a dot env file, which, in my case, is already saved.
+
+Unknown Speaker  12:26  
+So that's one thing.
+
+Unknown Speaker  12:30  
+Well,
+
+Unknown Speaker  12:34  
+since we are going to be using two different APIs, so instead of just grabbing this that what I chose to do is I basically grab both in the EMB file anyway, so you can have 210, 20, it doesn't matter. So instead of having different files, all I'm doing is just using that dot EMB file in wherever I need to.
+
+Unknown Speaker  12:54  
+When I was running my previous class, at one point, I ended up having like, 10 or 15 API key when I was doing the FinTech class, which is fine, because this file is local to you, so there is no security risk or anything there. Yeah, it kind of makes sense, because I was trying to do this the other day, and there's a cash problem with the IDE, so I had to restart Visual Studio
+
+Unknown Speaker  13:15  
+just to get it to recognize the new the new dot EMV values. Oh, okay,
+
+Unknown Speaker  13:23  
+yeah, but I that probably is due to something else, like, I don't imagine having 20 API keys here will cause an issue, not that I have seen though, binai, one question. Binai, whenever you are saying this file as E, dot, env, right? So I need to choose that dot, txt, and on top of it, like, while renaming, I need to just choose dot EMV there, or, yeah, your file name needs to be dot env, no txt, nothing. Even though it first got created with the txt, you need to change that, and the file name should be dot env, that's it. Okay,
+
+Unknown Speaker  13:58  
+no txt, nothing. Okay, let's use new file and on top of it, okay, that's right.
+
+Unknown Speaker  14:07  
+Okay, so that is the open weather API, and then another API I created was
+
+Unknown Speaker  14:19  
+it's called data.gov, and did I not use NASA API? Yeah. Api.nasa.gov,
+
+Unknown Speaker  14:40  
+okay, so then go to this URL, which is api.nasa.gov,
+
+Unknown Speaker  14:46  
+and this is also, I'm going to ping it in Slack channel.
+
+Unknown Speaker  14:55  
+Oh, yeah, I see Kian posted a link there how to create env files in Python.
+
+Unknown Speaker  15:00  
+Thank you, Kiel.
+
+Unknown Speaker  15:02  
+Okay, so now here in nasa.gov,
+
+Unknown Speaker  15:07  
+you basically provide your first name, last name, you provide your email. And how you do that? How do you use this and say, sign up,
+
+Unknown Speaker  15:18  
+and then when you sign up,
+
+Unknown Speaker  15:21  
+it will basically send you an email. Oh, looks like in this case,
+
+Unknown Speaker  15:27  
+it
+
+Unknown Speaker  15:29  
+has been emailed to you. You can use your API key to begin. Okay, so for api.nasa.gov, I think the process was much simpler, if I remember correctly. And then if you go to email, you will get something like this in your email, and they will actually email you your API key, unlike the weather map, where they will send you a confirmation email. You confirm the email, and then go to your profile, sign in, and then you go to the API page, and then grab the API key. So for api.data.gov,
+
+Unknown Speaker  16:00  
+it will basically email you the key directly on your email. And all you have to do is just grab this from there and go to your this file and save it under the key, NASA API key,
+
+Unknown Speaker  16:17  
+and save both of these, as I have done here, as a dot env file, and we are going to reuse that in many different activities.
+
+Unknown Speaker  16:30  
+Okay, so let me know when you guys have done it, and then we will proceed.
+
+Unknown Speaker  16:38  
+When I would you mind just letting us know. How did you generate that NASA API key, whether API key, I was able to do but,
+
+Unknown Speaker  16:46  
+oh, click on the link. That's what I showed. Okay, so click on that link, that link that I sent on the slack, the second one that I just sent. Now, api.nasa.gov
+
+Unknown Speaker  16:59  
+and if you see my screen. This is where you will come in when you click that link.
+
+Unknown Speaker  17:11  
+And all you have to do is generate API key. Well, in my case, it's I have already generated, but you will see a form here where it will ask you for your name, email and so on, and it will send You the API key and email.
+
+Unknown Speaker  17:28  
+Sure. Thank you.
+
+Unknown Speaker  17:38  
+Okay? You
+
+Unknown Speaker  17:45  
+okay? So you guys are done with this step,
+
+Unknown Speaker  18:01  
+waiting for the confirmation guys,
+
+Unknown Speaker  18:04  
+because this is
+
+Unknown Speaker  18:07  
+one to be left behind. Okay, thank you. Well done. Okay, cool.
+
+Unknown Speaker  18:13  
+Okay, so
+
+Unknown Speaker  18:16  
+the first activity here today, you can think of this almost like a recap of what we did last class. So what we are going to do is we are going to basically create a mini quiz game type thing where we will get random quiz question on different topics from
+
+Unknown Speaker  18:40  
+website called Open trivia database, and I'm going to show you what that website is.
+
+Unknown Speaker  18:47  
+Did my browser window go? Hang on some
+
+Unknown Speaker  18:59  
+browser window? It's hiding for some reason.
+
+Unknown Speaker  19:04  
+Okay, here.
+
+Unknown Speaker  19:08  
+So essentially, this is the website
+
+Unknown Speaker  19:12  
+open trivia database. Okay, so what this website does is this gives you random questions
+
+Unknown Speaker  19:21  
+on different topics. So if you go here on Browse,
+
+Unknown Speaker  19:29  
+so these are the different questions that you have, okay? And this is the question Id animals. Is category general knowledge. So there are, these are the different categories. A question can be either multiple choice or true, false and with different difficulty level, easy, medium or hard, and this is a question and so on. So it's basically just that question bank.
+
+Unknown Speaker  19:51  
+Now, what this website also does, if someone wants to create a quiz game, they allow people.
+
+Unknown Speaker  20:00  
+To pull random questions from here using the API. So if you click on this little API button here, it will show you the API documentation.
+
+Unknown Speaker  20:12  
+And when you are sending, going to send the request to create to fetch questions,
+
+Unknown Speaker  20:19  
+you can actually, let's say if you want to send fetch 10 questions, or, let's say one question for that matter, and you can select which category you want to fetch from. Let's say I want to fetch from science and nature and difficulty level, easy, medium, hard. Let's say I want medium, and select type. Let's leave it as any type, and then if you do generate API URL, it actually shows you what URL that you need to
+
+Unknown Speaker  20:51  
+send the request to to get the questions. So this is basically programmatically browsing your
+
+Unknown Speaker  20:59  
+question bank when you are doing it here, you are basically looking into it and a browser, which is a very manual but doing it via API, by say, by sending a request like I showed this way, you are basically sending a programmatic request to the API and asking them to give some question on certain topic. So this is what we are going to do in our
+
+Unknown Speaker  21:22  
+little activity here.
+
+Unknown Speaker  21:25  
+So what we will do first
+
+Unknown Speaker  21:29  
+is
+
+Unknown Speaker  21:31  
+we are going to get all these categories right now. Another thing note here, what happens? So let's say I am
+
+Unknown Speaker  21:40  
+so instead of saying API config, dot php, if I type API category, dot php,
+
+Unknown Speaker  21:47  
+and look what happens. So when I send this request to API underscore category. So what this request does is it actually gives me all the different categories. What is the ID and what is the category name. And the reason this is important is because when finally you are going to select a particular category, that request goes to API dot php, and it doesn't know the name of the category, it needs the corresponding ID. So how can you get the ID. Well, you can either know somehow, or you can send another API request first to the API category endpoint, and that will give you a key value pair, which is the ID and
+
+Unknown Speaker  22:35  
+category name combination. So what I want to do is I want to first
+
+Unknown Speaker  22:43  
+retrieve these, all these different categories. So how am I going to do that? So
+
+Unknown Speaker  22:52  
+let's see what is happening with my Windows today. I do not know.
+
+Unknown Speaker  23:00  
+Okay. Here.
+
+Unknown Speaker  23:02  
+Okay, so what I'm going to do is I am going to
+
+Unknown Speaker  23:08  
+write a URL that will be my category URL.
+
+Unknown Speaker  23:16  
+So with this category URL, then I'm going to
+
+Unknown Speaker  23:24  
+grab the response, and I'm going to call it category response, which is this response, and then I'm going to apply a JSON on top of it,
+
+Unknown Speaker  23:37  
+and this is my category response. And then I'm also going to print how this looks like. So now you will see what will happen.
+
+Unknown Speaker  23:47  
+What I showed you on the browser,
+
+Unknown Speaker  23:51  
+you will be able to see that as output from the cell when you do the JSON, dot down, sprint.
+
+Unknown Speaker  23:59  
+There you go. So what we saw there in the browser. Now we are getting that here in our Python program, which is a list of trivia categories, starting from category ID 910, 1112, and so on. So there are a total of from nine up to 32 so what 24 categories? I guess. Yeah. So that's all my category URL, sorry, category IDs.
+
+Unknown Speaker  24:25  
+Okay. So then another thing I can do, I will need to get this instead of ID name, I'm going to make these more in like
+
+Unknown Speaker  24:38  
+I want to say,
+
+Unknown Speaker  24:41  
+create a new dictionary that will give me nine general knowledge, 10 entertainment books and so on. So what, essentially, what I want to do is I want to create a new
+
+Unknown Speaker  24:56  
+dictionary, which I'm going to call search options.
+
+Unknown Speaker  25:00  
+And I'm going to say for category in category response, trivia categories, because this is trivia categories. So I want to do oops,
+
+Unknown Speaker  25:11  
+yeah, so I want to do category name
+
+Unknown Speaker  25:20  
+would be equal to category name, and you will see some category name has colon inside this thing. So I don't need the first part. So I just want to retain the last part. So for that, what I want to do is, if there is a colon
+
+Unknown Speaker  25:37  
+in the category name,
+
+Unknown Speaker  25:41  
+I want to split it and take the part from after the colon, so that will be my new category name. And with that new category name,
+
+Unknown Speaker  25:52  
+I want to create a key value pair in the search options dictionary that I'm print creating with the category name and category ID. Oh, category ID is a number, right? So I need to also convert that to a string,
+
+Unknown Speaker  26:08  
+and with that, I have the newly formatted categories. So now, if you do
+
+Unknown Speaker  26:18  
+what, why did you need to convert the ID to a string,
+
+Unknown Speaker  26:22  
+because here,
+
+Unknown Speaker  26:27  
+for some reason, my browser is not coming up, because I'll show you why. So here, when you are going to do this, when we are concatenating this, well, I guess stream will also work if you do a F string, sure. Well, yeah, it will work. Never mind. You don't actually need to do that. You don't need to do in a string, but it doesn't matter.
+
+Unknown Speaker  26:54  
+So, yeah. So now I'm going to print it, and now I have a nicely formatted category and the corresponding ID as a key value pair. So these are my search option.
+
+Unknown Speaker  27:08  
+Now, with that out of the way, now we need to have a base URL to retreat the fact now this base URL is API dot php, not API category dot php, the first one that I did to collect all these metadata is a different URL. Now we are going to use another URL, which is the one that we saw on the website, which is the slash API, dot, PHP,
+
+Unknown Speaker  27:33  
+okay,
+
+Unknown Speaker  27:35  
+and now
+
+Unknown Speaker  27:37  
+create a dictionary of the search choice option. So this was what is prompted. But I don't need that because I already have created the dictionary. So this is my dictionary.
+
+Unknown Speaker  27:47  
+So that part I can skip, or just to show you essentially what I'm doing here, is
+
+Unknown Speaker  27:56  
+I am basically, instead of creating a list statically. I'm creating a dynamic list, which is this list here?
+
+Unknown Speaker  28:06  
+Okay, so now, with any of these categories, I can send a request, and it will give me some result, right? So let's make our test request here,
+
+Unknown Speaker  28:29  
+here. So let's do a request, start get
+
+Unknown Speaker  28:35  
+and we are going to provide.
+
+Unknown Speaker  28:41  
+Let's actually do uh, F string here. This is going to be better.
+
+Unknown Speaker  28:47  
+So F string will be
+
+Unknown Speaker  28:50  
+first your URL, whatever the URL is, and then after the URL, you need to provide your amount, which will be
+
+Unknown Speaker  29:12  
+this thing knows everything. Amount equal to one category, or it randomly took the first category nine, which is fine. We are saying type equal to multiple whatever, right? So all I need to do is just need to send a quick request to see how the response look like. Huh? Did you put a question mark in the URL? Or do you go, you are a question mark? I already put that in the URL. Yeah, got it?
+
+Unknown Speaker  29:41  
+Yes. And then I'm going to print a JSON dance of response, and it will get one question, general knowledge category. If you run this one more time, it will give you a different question, maybe, oh, I.
+
+Unknown Speaker  30:00  
+Look what happened. I ran it very quickly another time, and this time it didn't give me anything.
+
+Unknown Speaker  30:06  
+I guess it's it throttling me, okay? And now it gave me again. So, so basically, whatever, whenever you run it, every time you will get a random question, right?
+
+Unknown Speaker  30:20  
+So then you can write a code to basically ask the user what kind of data that they would like to search for, right? So you can write question like this,
+
+Unknown Speaker  30:34  
+which is basically using that input.
+
+Unknown Speaker  30:39  
+So you can say
+
+Unknown Speaker  30:47  
+search, let's say what kind of search you want, right?
+
+Unknown Speaker  30:52  
+You can say
+
+Unknown Speaker  30:55  
+nice, it actually which category would you like to search for, and it is going to ask you things out of one of these keys. I'm sorry, what is that this can say is going to display 24 options.
+
+Unknown Speaker  31:12  
+I think it will right because it says Search option dot keys. So let me run it and see what it says. Yeah, which category would you like to search for? O, but you see it says dict keys. Because here I'm passing the dict keys itself, so in the option also it basically says Dick keys. So we can make it little better.
+
+Unknown Speaker  31:34  
+What we can do, probably, is we can convert this, this thing
+
+Unknown Speaker  31:45  
+into a nicely formatted string.
+
+Unknown Speaker  31:50  
+What it will do is it will take all the strings and then basically show them with a comma. So if you do that now, it basically will say which category you search for and it shows and you can format it any way you like, right? So it doesn't matter. So then let's say I write
+
+Unknown Speaker  32:12  
+music,
+
+Unknown Speaker  32:17  
+and that's it. Now my kind of search is done, so it is music.
+
+Unknown Speaker  32:22  
+And then you can create, you know, that difficulty level are. There are three kind. So you can create another question
+
+Unknown Speaker  32:30  
+that will ask, what is the difficulty level out of easy, medium and hard? And it is going to
+
+Unknown Speaker  32:42  
+Okay. Sorry. See, this is difficulty level question, huh? And then you can basically ask that question to the user when they run this cell. And here it is prompting me which level you want. Let me call it easy. So now I have difficulty which is easy and kind of search which is music or whatever I put it.
+
+Unknown Speaker  33:04  
+Now with this, we can basically
+
+Unknown Speaker  33:08  
+check
+
+Unknown Speaker  33:10  
+which one of the,
+
+Unknown Speaker  33:13  
+sorry, which one of the category that user has chosen, and which difficulty type user have chosen. And then you can basically write a loop to basically get and get a question and then look through, right? So essentially, there is, there is nothing special to this, because this is just a simple Python code,
+
+Unknown Speaker  33:34  
+okay, search, option, text,
+
+Unknown Speaker  33:38  
+okay. This is a variable, which what I did is, I think I inlined this there, okay,
+
+Unknown Speaker  33:48  
+yeah, that's why it is showing me the squidly line,
+
+Unknown Speaker  33:53  
+yeah,
+
+Unknown Speaker  33:57  
+um, the solution wasn't uploaded prior to class, was it?
+
+Unknown Speaker  34:04  
+No, it will be
+
+Unknown Speaker  34:05  
+it will be uploaded. Okay, and then finally, you run this.
+
+Unknown Speaker  34:11  
+And let's do music,
+
+Unknown Speaker  34:15  
+easy.
+
+Unknown Speaker  34:20  
+And there you go. So you have a easy and then you can make it like a game. You can add scoring logic or whatever. But that is not the point of the class today, because we are not here in the business of making a quiz game. The whole purpose of this demonstration is just to do a quick practice to get data from a different API that we have not used before. That was all so the learning that I want you guys to take from here is, whenever you have an API, get into the habit of looking into the API documentation. And most of the APIs will have documentation some API.
+
+Unknown Speaker  35:00  
+Documentation will be much easier to understand than the others. And also keep in mind, sometimes the documentation can be incomplete. Some API, for example, this is a very, very simple API, and they have this kind of thing, like you have these different drop down and they generate the API URL. Don't expect these type of custom URL generation for all API documentation. Sometimes you might have to read through
+
+Unknown Speaker  35:26  
+several paragraphs or pages to kind of get an understanding of the different search option, different parameter that you can specify to the API right. So that's, that's all I want you to take as a key tech take away from this activity,
+
+Unknown Speaker  35:40  
+like even, and sometimes even for here, for example, right? So if you look into your solution file
+
+Unknown Speaker  35:47  
+or or even the unsolved file, you will see that there is no hint of what I showed in the beginning, which is getting the category dynamically right. So when I was running through this, I saw that in the solved file there are basically four or five category hard coded, right? And that got me thinking, like, why that? I mean, when you are doing that, there must be something that the API providers are providing for the users to get the sort of metadata. So I played around with it. And what I did is I came up with that
+
+Unknown Speaker  36:22  
+API category, which I found by doing trial and error, and that gave me all the category. And then I wrote that first piece of code, which allows you to dynamically face the metadata, so that is also something that you have to keep your eyes open. Sometimes, not everything might be
+
+Unknown Speaker  36:41  
+documented. Sometimes there could be a separate GitHub repository with some read me. The thing is, lot of times, especially when it comes to data API, these things are basically created and maintained by techie folks who are not basically creating a polished, user friendly product, unlike people who create a full web application right when you are signing up for, let's say any social media email app or anything, those are usually polished product. The API behind is not always as polished or as complete as you would like to be. So sometimes you need to basically be ready to be able to do this kind of exploration, looking into their GitHub documentation, do some trial and error, or maybe just looking into the different blogs, what other people are using to get certain data from that API, right? So that's all. I just wanted you to keep in your mind, right?
+
+Unknown Speaker  37:37  
+Cool. So that was that activity.
+
+Unknown Speaker  37:42  
+The next one I already talked about creating the environment variables. And the way that we are going to be creating environment variable is we will basically have a text file, and the text file will have some kind of a key value pair with the equal sign. And these key could be anything. In our case, we are using NASA API key and weather map API key. Therefore these are the API keys that I have. And the other thing we will do is, and this is only required for the APIs that does need any key. So these open trivia database, if you remember, it did not ask us to have any API key, therefore we don't need this. But whenever we are going to get data from weather map or nest NASA or census, Gov, census database or stuff like that, you will see that they do require you to sign up and obtain an API key, which is what we did at the beginning of the class. Now why we? We need this? The reason is this, if you have this API key hard coded in your Jupiter notebook, then that is a big security risk, because now you are checking in this Jupiter notebook into your GitHub, and then other people are taking a look at it. Right? If it is a public API, a public repository in GitHub, then everyone can look at it, even if it's a private then your other team members are looking at it right. The whole point of having API key is that it is for your own personalities. You don't want your key to get compromised right, because otherwise other people will use up your quota, and then when you need to get the data, you will not get the data right, because they have been throttled right. And sometimes, if they want to, do if they get the data and do something bad, and if there's an investigation happen, and then it might come to you. So you really don't want to do that. I'm sorry. Was there something else I'm I'm in class.
+
+Unknown Speaker  39:35  
+Okay, so you really don't want to do that, and that's why, what usually you should do is you should keep these environment variables. And there are many different way to maintain environment variables, and this is just only one way which makes it very portable. So here what we are doing is we are creating a file called dot env, and we are keeping the file alongside our.
+
+Unknown Speaker  40:00  
+Jupiter notebook file, what we have so that in the Jupyter Notebook, then we can easily read this. So now let's try to understand how we need this read this, right? So what we need to do is we need to have this library called load dot env.
+
+Unknown Speaker  40:21  
+So with this load dot env, you have to import a function. Sorry, the library name is dot env, and from the dot env library, you need to import a function called load.in V
+
+Unknown Speaker  40:34  
+at the beginning. And when you are done with that,
+
+Unknown Speaker  40:41  
+it will then
+
+Unknown Speaker  40:43  
+be able to and then you will basically call this load dot env function, and it will load all the environment variable that are visible to your Jupiter kernel at this given point.
+
+Unknown Speaker  40:58  
+Now, when I say all the environment variable becoming available. This could be something that you set in the system level and which I'm not going to get into because setting the system level variable, you can do it. There are a lot of different ways. And depending on whether you are using a Mac or a Windows or a Linux, there are multiple different ways of doing that. So that's why I don't want to get into that discussion. That's why we are using a very portable way to maintain the ENV variables, which is in a dot env files. So now, when you do load.en dot env, what this will do is it will basically get all the APIs that are there inside your corresponding dot TLV file. Now here I have two API keys, NASA API key and weather API key. And then I did load dot, dot env. Now, since I know that there is a NASA API key there, then I can do OS, dot, get env. So this OS is also another library that you have to import, but this is a built in Python library, all you have to do is just import it. Now, using that OS library, you will then have to do, dot get env. Basically, you are asking the operating system to get the environment variable for you, and you are asking which environment variable it needs to get that for you, which is NASA API key.
+
+Unknown Speaker  42:26  
+And if you do that, then the API key will be loaded.
+
+Unknown Speaker  42:30  
+Now how do you know the API key is loaded? Well, one thing you can do is you can immediately get excited and say, Hey, let me just type this, print this key, and if you do this, then, yeah, it indeed prints. But this is actually a very risky practice, and my suggestion would be, never do it, because what happens is, for your eyes, it is fine, but what happens you forget to delete this cell and then you commit your notebook to your repository, and then suddenly, the whole world will see your API key.
+
+Unknown Speaker  43:07  
+So that's why the idea is to never do it. Instead, if you really want to get sure that the key has been loaded,
+
+Unknown Speaker  43:15  
+what you could do is you can print the type of the API key, and that is str.
+
+Unknown Speaker  43:21  
+Now let's see what happens if I try to load a key that is not there. So I have a NASA API key. Let's say I am trying to load NASA API key one, something.
+
+Unknown Speaker  43:32  
+Now NASA API key one is not present in my environment at all. And now if I try to load that, and then try to try to print the API key, you will see it says, None type.
+
+Unknown Speaker  43:46  
+Why none type? Because there is no such key in my environment with this exact string.
+
+Unknown Speaker  43:55  
+So that's why, if you really want to be sure that your API key is indeed being loaded, feel free to use a print type of API key, but do not print the API key itself, even if you do, make sure you delete the cell before you commit your work, okay, like when you will do this as part of your work, your as your weekly assignment or your project work, please do not submit any file that has your API key created.
+
+Unknown Speaker  44:26  
+And then when I correct this
+
+Unknown Speaker  44:30  
+and run it again, and then print the type API key, it is back to str, so I know that my problem was fixed.
+
+Unknown Speaker  44:40  
+Now, since this is the NASA API key, now I can go and use this API key to get whole bunch of data from NASA API. So the NASA API is this one, and what we are doing here is
+
+Unknown Speaker  44:56  
+we are trying to get some data on geomagnetic storms.
+
+Unknown Speaker  45:00  
+Now,
+
+Unknown Speaker  45:02  
+if you look into this, so, this is the soft file of the student activity that I was showing. But if you look into the read me, right, you will see in the read me, there is actually a link to the NASA API and the open weather API, which is already what we already did, right? We already have done this step at the beginning of the class.
+
+Unknown Speaker  45:26  
+Now,
+
+Unknown Speaker  45:33  
+let me see what is this documentation? Yeah, so now point number seven here is very important, and this is what I was going to tell you, which I emphasized earlier, also never blindly take
+
+Unknown Speaker  45:46  
+anyone's word, or even if someone says, Hey, go get this data, and this is your URL to get the data. Personally, I never do that. I always what I do is I backtrack from there, and I try to find out what is the like? What are the documentation available for that particular API so for this, if I want to do that, first, I'd like to do is, I'd like to come here in the NASA API page. And this is the Generate API key, which we did earlier. We don't need to do that again. But you see this last tab here, menu item that says, browse APIs. So this is what we would like to do. And we need to understand. We need to make sure that we do understand what are the different APIs that are available. You
+
+Unknown Speaker  46:32  
+don't need to understand everything, but you need to, overall, have a very rough idea at a high level, what kind of is the structure and what's available there or not right later, when you are actually going to source some data for your own machine learning project, right then, you will be making the decision, Okay, which one of these millions of API that there are available? You have to do your own research, and you need to figure out, where do you get the data that is required for your project
+
+Unknown Speaker  47:03  
+that you are going to use for your training of your model, right? So anyway, so looking here, it looks like it has this whole bunch of maybe 15 or 20 different kind of API that they have, astronomic picture of day, asteroid news so do and Ki, which is space weather database of notification knowledge of info and information, and this is the one that we are going to use. So in this one, under this donkey API, then there are under this group, then there are multiple different API.
+
+Unknown Speaker  47:38  
+So there is one API to get the Coronavirus injection. NASA records everything one for geomagnetic stroke, Storm, interplanetary shock, solar flare and so on. So now, if you go back to what this prompt is asking,
+
+Unknown Speaker  47:56  
+review the documentation to create your request URL. So
+
+Unknown Speaker  48:03  
+does it actually say which request you need to get?
+
+Unknown Speaker  48:09  
+It does not, right.
+
+Unknown Speaker  48:19  
+Okay, so in here, in the prompt here, actually it says, search the NASA API URL for geomagnetic storms over North America, over for a certain month. Okay. So in the preview file, the readme file, the document prompt was not there. But if you look into the unsold file, the prompt is there. So now looking into this prompt, NASA API for geomagnetic storms. Now, since we know that it is under donkey API, it was very easy for us to go there, oops.
+
+Unknown Speaker  48:55  
+Yeah, so that's why we directly open this. But if we didn't know, maybe we have to look through each one of these and see which one gives us the required object that we want. And we would find that this is under this donkey group, and it says geomagnetic storm over North America for a certain month. So now I have to connect, okay, geomagnetic storm. So this looks like this, and then the URL is up to where, up to the question mark, which is api.nasa.gov/don,
+
+Unknown Speaker  49:28  
+key, slash, GST. And then you have to provide a start date and end date, which is this,
+
+Unknown Speaker  49:38  
+and you may be able to
+
+Unknown Speaker  49:44  
+provide a latitude and longitude, but that is not given here,
+
+Unknown Speaker  49:50  
+so I think the documentation only allows like Earth,
+
+Unknown Speaker  49:57  
+yeah, doesn't really let you narrow it down.
+
+Unknown Speaker  50:00  
+Let's see whether there are any further documentation available here.
+
+Unknown Speaker  50:10  
+If I click this, then it will give me a sample response, but it does not give me there is a location variable. If you click the API link,
+
+Unknown Speaker  50:21  
+not not the example, but the left link, yeah,
+
+Unknown Speaker  50:31  
+this is also not giving me
+
+Unknown Speaker  50:36  
+any specific to these. Could it be that there is some general latitude longitude that you can apply to everything.
+
+Unknown Speaker  50:55  
+Yeah, the coordinates for Knoll, Island,
+
+Unknown Speaker  50:59  
+yeah, for some of these, for interplanetary shock, there is a location.
+
+Unknown Speaker  51:06  
+This one doesn't even have a location here, anywhere mentioned.
+
+Unknown Speaker  51:19  
+Yes, I
+
+Unknown Speaker  51:39  
+Yes, yeah, so it is not complaining. So in the solved file, you will see that we are not only appending the start date and end date, as the API documentation says, but we are also appending a location with the latitude comma longitude format here,
+
+Unknown Speaker  51:57  
+but the API does not complain. And if I send this request, it does indeed give me some data,
+
+Unknown Speaker  52:10  
+but I am not sure whether
+
+Unknown Speaker  52:14  
+this data actually honored our location and location information. So let me do one thing. Let me try doing this without the location. So I'm going to create a new query URL where we would not have location information. We will just have the start date and end it, and, of course, the API key.
+
+Unknown Speaker  52:42  
+Then we are going to execute this, and then we are going to run it, but before running it, I'm going to copy the previous response
+
+Unknown Speaker  52:54  
+in a empty file
+
+Unknown Speaker  52:57  
+so that I can compare the two side by side, and then I'm going to run it, And then I got the new response.
+
+Unknown Speaker  53:12  
+So,
+
+Unknown Speaker  53:15  
+okay, I'm
+
+Unknown Speaker  53:23  
+Yeah, exactly as I thought. You see, there is basically no difference between the 253
+
+Unknown Speaker  53:31  
+lines of data. Exactly the same, yeah.
+
+Unknown Speaker  53:36  
+So as we saw here, some other API does take location in a latitude comma longitude format. But if you think about it, right, I think it's kind of common sense. This particular one is a data on geomagnetic storm. I don't think that is actually dependent on the location, right? Like this is not an event, because it's a global scale event, right? When there is a geomagnetic storm happening because of the solar flare reduction, or whatever it is, it will affect the whole earth. It's not locational independent. So maybe that's why this particular API does not honor that, and that's why in the documentation, also, there is no mention of it. But location is allowed in some other APIs. So I think the way that they have designed their API is if you supply extra parameter, they don't complain. They simply choose to ignore it, which is what we are seeing in our observation here.
+
+Unknown Speaker  54:36  
+Okay, but essentially what we did is exactly the same on what we did in the last class, except the only difference is in our request here,
+
+Unknown Speaker  54:47  
+the key piece here is this lot last part in the URL where we are appending an API key, which we obtained earlier by registering an account and or requesting a key to be set.
+
+Unknown Speaker  55:00  
+It to an email directly, and we save that key in an external environment, not as part of the Python notebook. And then we used a load dot env function from the dot env library to load it into the our runtime, the current rock kernel. And then we use a os dot get env function, read that off of the loaded environment variable and then plug it in into the URL. So that's essentially the difference from what we did earlier, versus the new thing that we have to have to do For a secured NASA API. So
+
+Unknown Speaker  55:52  
+Okay,
+
+Unknown Speaker  55:54  
+any questions.
+
+Unknown Speaker  56:02  
+Uh, uh, the next two activities, I'm going to be honest with you, they do not add further value. This is basically some museum API where you are basically fetching some artwork.
+
+Unknown Speaker  56:17  
+There is no API key required for this one even. So this is just to open public API. All you need to do is just send a request. Dot get to that artwork. And then there would be one request that will allow you to get a list of ids. And then then you can provide one of this list of ID to get data for particular artwork in the library. And there is a student activity for that, but I don't think that's going to be a very good use of our time, so we will skip that. And the reason is that on the last activity, I'd actually ask you to do something else. I hope you guys are okay with that,
+
+Unknown Speaker  56:57  
+in case, on the other hand, if some of you have tried these activity number six, which is retrieving the artwork from the
+
+Unknown Speaker  57:05  
+museum website. And if you do have some question, feel free to ask me if you are stuck in anywhere, then I will answer it. Or you can also use the office hours time if you are stuck, if you do want to really do that activity number six, but my personal opinion is that does not add any additional value at this point.
+
+Unknown Speaker  57:31  
+Okay, so if you guys are good, we will skip that and move to the next activity, which is getting the weather data.
+
+Unknown Speaker  57:41  
+Good. Everyone agrees. Sounds good. Okay, perfect. So let's move on. So I'm going to do a demo now and then we will take a break, and after the break, we will come back, and then I'll ask you to do activity number eight, which is the only activity that you will be doing today. And I'll give you about half an hour time to do that, because I'm going to add some additional work on top of what is given there, okay? And we'll talk about all of that after the break there when we come in. Okay, so let's first take a quick look on how you get data from the weather API, right? So
+
+Unknown Speaker  58:22  
+what is the weather API
+
+Unknown Speaker  58:27  
+website? I think this is the one, right.
+
+Unknown Speaker  58:32  
+So,
+
+Unknown Speaker  58:34  
+yeah,
+
+Unknown Speaker  58:35  
+so this is the weather API that we will be using in this activity. And when you go to these open weather maps API page, there is one API here, one call API, 3.0
+
+Unknown Speaker  58:48  
+but we are not actually going to be using these API. So they have couple of different types of API. I think this 3.01 call API is one of the newest standard, so we are not going to be using that instead, what we are going to be using is,
+
+Unknown Speaker  59:07  
+I think it is
+
+Unknown Speaker  59:10  
+current weather data, I believe.
+
+Unknown Speaker  59:14  
+So if you look into Yep, so we are going to be using, so what you need to do is, you need to scroll past the one call API, and then in the current and forecast weather data collection. Then inside here you have this current weather data.
+
+Unknown Speaker  59:32  
+And here is a documentation for API. That's the API that we will be using in the demonstration that I'll be doing now. And then, you will also be then following up on this in your activity that we'll be doing after the break.
+
+Unknown Speaker  59:47  
+So here,
+
+Unknown Speaker  59:50  
+yeah, open, open weather map.org/data/two.five/weather,
+
+Unknown Speaker  59:59  
+and.
+
+Unknown Speaker  1:00:00  
+Here definitely you have to provide the latitude and longitude, because this is weather which is very latitude and longitude dependent, right? So, unlike in NASA API, where they chose to call it location, and they were you taking the location as a latitude comma longitude, these weather open weather map guys, they chose to design their API with two parameters, lat and long, which is the first three letters of latitude and longitude. And these are two separate parameters, right lat and long. And then obviously you have to provide your app ID, which is your API key.
+
+Unknown Speaker  1:00:34  
+So,
+
+Unknown Speaker  1:00:39  
+so we do have our open weather API key here, which I have already generated before. In case you haven't saved it already, please do save it and put it in your dot env file, which should be residing next to your Jupiter notebook file where you are running this.
+
+Unknown Speaker  1:00:58  
+And then we have this weather right. And then you can provide latitude, longitude, app ID. These are the required field, as you can see. And then mode is optional, so it says the response format. Possible values are XML and HTML. If you don't use the mode, then the JSON is the by default. In our case, we are more comfortable reading JSON because we haven't even learned how to read XML or HTML in pandas, although you can. I mean, one thing is, you can do PD dot read HTML, and it will read the HTML for you, but it may not be as nice, right? So reading from JSON into the pandas data frame is much better. So we don't need to use the mode, because JSON is by default, which is good news for us. And then units are optional. The default is
+
+Unknown Speaker  1:01:52  
+standards. Units will be applied by default.
+
+Unknown Speaker  1:01:56  
+I don't know what standard mean, but we'll have to see whether the standard mean Imperial or what I don't know. So we'll see for standard metric, Imperial, I don't know what standard is. Anyway, we'll see and then language, you can actually specify the output language, right? So these are basically the parameter
+
+Unknown Speaker  1:02:17  
+now here we have
+
+Unknown Speaker  1:02:20  
+URL, of course, we have the app ID that we are loading, and we are using these units of metric, and let's see what we get, right?
+
+Unknown Speaker  1:02:30  
+But this is, this is not everything. This is the URL API key and units. But then we need to have the weather data also. So now, in the weather data. You see there are multiple different ways to do that. So here I am in Detroit. So I didn't know the latitude and longitude of Detroit, but one other thing we could I could also do at the end of the URL, I added a parameter called Q
+
+Unknown Speaker  1:02:58  
+to and then said Q equal to Detroit. So if you do know, know the city name, you could actually use the city name with a q parameter, and that way it will give you the data for Detroit. Now, how do we know this is Detroit? Actually? Let me do it.
+
+Unknown Speaker  1:03:25  
+This is a JSON, right? So, let me do a JSON, dot terms, do
+
+Unknown Speaker  1:03:47  
+I forgot to import JSON here. Do need the JSON library do a nice Okay, so this is Yep, so it is actually in the response. It tells me what is the location. It also tells me the latitude and longitude. Now, once we know this latitude to longitude, I can go back and run this query with lat and long. But even if we, even if I don't know this, we can still run it with the location name, if we know the location name.
+
+Unknown Speaker  1:04:17  
+Now sometimes you might want to run this for multiple location name, right? So let's say I want to have the location for four cities. Let's say New York, San Francisco, Seattle and Miami, right? So I have the four cities. So then what I need to do is I need to run this request in a loop. So I will do for city in cities and for each cities, I'm going to guess that, get the best query URL, which is up to here, up to this q equals. And then I'm going to append whatever the city that I have, which is one of these, and then I'm going to get the JSON. And let's say I want to just see what is the latitude and temporary.
+
+Unknown Speaker  1:05:00  
+Sure.
+
+Unknown Speaker  1:05:01  
+Why? Because think about, let's say you are trying to make a machine learning model, and you are trying to predict whether the current temperature of a city
+
+Unknown Speaker  1:05:13  
+is related correlated with the location. And when we say location, we know that longitude probably doesn't matter that much, because longitude is going from east to west, but going from north to south in the northern hemisphere matters, because the higher you go in latitude, the temperature will be cooler. So let's say you are trying to see whether, out of just out of curiosity, you are trying to see, hey, these are my four or five or 10 or 20 different cities, and I want to see whether their latitude and temperature is somehow correlated well. So I run this and for each JSON response that I get, I can get this latitude from here, and I can also get the current temperature from here, which is what I'm going to do here, I'll look into the response, and inside the response, there is a structure called coordinate, or chord for short, short. And inside chord, there is another key called lat, so I'm going to grab that and put it in a list. And similarly,
+
+Unknown Speaker  1:06:19  
+in main, there is a structure called Main, and inside there, there is a key called 10. So I'm going to grab that and put it in another list, and then that way, I will have the latitude and temperature for for these four cities that I have. And then if you want to convert it to a data frame and just see visually,
+
+Unknown Speaker  1:06:43  
+then you can basically take these two key and then turn it into a dictionary, so which is basically a dictionary of list, which we have learned before that, how we take these and turn it, convert it into pandas data frame? So we do that, and we have a latitude and temperature listed,
+
+Unknown Speaker  1:07:00  
+right?
+
+Unknown Speaker  1:07:02  
+So that's pretty much it basically.
+
+Unknown Speaker  1:07:07  
+So let's take a break, actually, before break, any question on this?
+
+Unknown Speaker  1:07:21  
+Yeah, okay, so we did that good. Any question on this weather data?
+
+Unknown Speaker  1:07:35  
+Okay, so if there are no question, I would
+
+Unknown Speaker  1:07:40  
+take a break.
+
+Unknown Speaker  1:07:43  
+Um, yeah. So I was trying to, I was trying to add my system variable to like my environment variables, just to see, does Anaconda maintain its own copy of the environment variable somewhere? So I feel like you're using a
+
+Unknown Speaker  1:07:56  
+copy. Yeah,
+
+Unknown Speaker  1:07:58  
+there is a way that within Anaconda, you can maintain a system, sorry, environment variable as well. So there are multiple different levels that you can do right. You can do at a OS level, and then you can do at a condo level, or you can just have it in a portable environment variable with wherever your file is right. So we are doing the third way. But yes, there is a way that you can have maintain these variables, either in your conda environment or even at the root system environment, right, like in your whatever shell that you are running.
+
+Unknown Speaker  1:08:32  
+Okay, cool. I was just wondering that question about kind of conduct, because I think that was causing issues.
+
+Unknown Speaker  1:08:41  
+So thank you. If you want to do it that way, feel free to do some Google search. It's not that hard to set up that variable. I just don't do that,
+
+Unknown Speaker  1:08:52  
+probably because this is kind of like, this is not my work machine. I use it for academic purposes, and I don't just want to
+
+Unknown Speaker  1:09:00  
+have all these environment variable lying all around in my in my system, so I find it it's actually better to have a EMB file here. But if you choose to do the other way, you should be able to file the documentation rather easily. Yeah, that that makes a lot more sense. I might start doing that instead in my like, personal stuff out. Like, I have an open AI key, I keep storing, like, all of my API keys in my system environment, yeah, where do you store it? Where do you store your open API key, just like in the environment variables in environment? Yeah, you can do the same thing for this one too. Yeah, yeah. The dot AMD is way cleaner, so I might restrict, yeah, and what? What OS Do you run? Are you in a Mac on Windows? Just on a Windows? You are in a Windows, okay, yeah.
+
+Unknown Speaker  1:09:51  
+Luckily, with Windows, it's a lot easier. You don't have to do Windows is a lot easier. Yeah, I was gonna say that, yeah, it
+
+Unknown Speaker  1:09:58  
+is a little bit harder for Twitter.
+
+Unknown Speaker  1:10:00  
+Mac, yeah, like Echo path and then append, like the string at the end.
+
+Unknown Speaker  1:10:06  
+And my experience signing up new software is a lot easier on Mac, because it handles the environment variables a lot better, but on Windows, if you got to edit manually, that's a lot easier, yeah,
+
+Unknown Speaker  1:10:20  
+yeah, yeah. Let's, let's take a break. I mean, yeah. I mean, if you have a question, we can continue. But for others, feel free to take a break, and we'll meet here back at eight o'clock, right at the top of power.
+
+Unknown Speaker  1:10:34  
+I'm sorry, one question regarding the
+
+Unknown Speaker  1:10:39  
+the last previous class record?
+
+Unknown Speaker  1:10:42  
+Do we have it? Because when I open it, I saw the black screen.
+
+Unknown Speaker  1:10:49  
+Oh,
+
+Unknown Speaker  1:10:51  
+guys, did you find the previous question? It's not recorded. Hasn't been recorded. Thank you. I just want to make sure, thanks. You.
+
+Unknown Speaker  1:11:07  
+Something I missed about, about Max and like UNIX systems in general, is like the like, the pre processing scripts that kind of run and depending on like, like, which session you're opening for, like, badge or bash like, like a dot profiles, or like the dot, yeah,
+
+Unknown Speaker  1:11:29  
+it's nice being able to, like, kind of, like set different, like variables and stuff depending on, like, what you're doing, like, if you're opening up a new session or if you're restarting I
+
+Unknown Speaker  1:11:58  
+Okay, I will be Back at Eight o'clock. You
+
+Unknown Speaker  1:19:10  
+Cool. So I see people are back.
+
+Unknown Speaker  1:19:13  
+Okay, so now we are going to do that one activity, which I'm going to extend further for you guys, right as I mentioned. So let me show you what is there and what additional work that I would like you guys to do. And what we can do is we can break it up into two parts, so I can give you, like, 15 to 20 minutes for the first iteration, which is to do whatever is given on your prompt. And then we can come back and we can discuss and then we'll go back into the room again to do the stretch activities, right?
+
+Unknown Speaker  1:19:46  
+So I'm going to share my screen quickly here to just talk through
+
+Unknown Speaker  1:19:52  
+the read me here.
+
+Unknown Speaker  1:19:56  
+Do you see my screen?
+
+Unknown Speaker  1:19:59  
+Okay?
+
+Unknown Speaker  1:20:03  
+Can I not move this hang on a second.
+
+Unknown Speaker  1:20:06  
+I have this thing, okay?
+
+Unknown Speaker  1:20:08  
+So just like what I showed here
+
+Unknown Speaker  1:20:13  
+in this activity, right? So what we are doing here is we had a whole bunch of cities, four cities, and then we send a request to the weather API, and then grab the latitude and temperature and the city name, of course, and then converted that into a pandas data frame. So that's what we already did now in this activity, which is activity number eight. So what you are going to do is, using the starter file, you are going to basically grab latitude, longitude, temperature, humidity and wind speed. So instead of three data set, three column, you are going to grab, like this, five or six columns with
+
+Unknown Speaker  1:20:58  
+for a list of cities, and then print out the list and then convert it to a pandas data frame, which is basically very similar thing that I just already showed you before the print. It's just that you are grabbing a few more extra fields and converting into a data frame, right? So if you look into the unsolved file that is given for you, so the issue URL is given a unit. You are going to take a metrics, and then you are going to go through List of cities. In this example, they are using Paris, London, Oslo basing, as you can see from the output,
+
+Unknown Speaker  1:21:39  
+oh no, no, hang on, I am showing you the wrong one.
+
+Unknown Speaker  1:21:45  
+Sorry. My bad. This. The file that you have is this one, weather info under activity number eight. Yeah. So here the cities are. There is a there are a little bit more cities here, like I think about 10 or so, and you are basically reading latitude, longitude, temperature, humidity and wind speed information from that same JSON response that you are getting, and you are converting into a data frame like this. So this is what I would like you to do in the first phase.
+
+Unknown Speaker  1:22:16  
+Then we'll come back and I'll give you 15 minutes just to do this work, and then I'm going to tell you ahead what the next step would be. The next step would be for you to do this dynamically, not providing a list of cities.
+
+Unknown Speaker  1:22:35  
+I'm not going to tell you how you going to get the list of cities, but looking at the API documentation. Somehow you need to figure out a way to get the list of cities. And I would like you to get the list of cities for a certain geographic areas. Let's say, Okay, give me all the cities of us. Or if you think that is too much, because yes, there are actually hundreds of cities in the US that they collect weather data for if you want to do just for your state, whichever states you live in, right, like Bucha, Washington, wherever you are, you can do that for your state also. And then the idea would be to grab that dynamically, a list of cities within a given geography. And that could be either a state or the whole country, and you need to convert that data into pandas data frame. That would be the second stretch activity, and then the third, if you really want to do which is looking little bit ahead for the next week plus. But in case some of you are brave at heart and you really want to do that, I'd like you to plot this temperature data
+
+Unknown Speaker  1:23:44  
+on a latitude longitude graph, like using a x and y axis as latitude and longitude, and using the different color coding for different temperature. Like the cooler the temperature would be, it will be more bluish, and the warmer would be more reddish. So that would be the third stretch activity, right? So if you don't get everything done, that's fine, but the idea is to kind of go through that struggle when you are trying to find out something new, completely new on your own, right? So that's the practice that I would like you guys to have. So let's take first 15 minutes, and then we'll come back and we'll discuss, and then we'll break into room for another 15 minutes, or maybe half an hour. Okay, so let's do that.
+
+Unknown Speaker  1:24:31  
+We're gonna
+
+Unknown Speaker  1:24:37  
+So all good. So far. You
+
+Unknown Speaker  1:24:45  
+so you guys got those, whatever 10 or so series you got the data for everything, right? Yep,
+
+Unknown Speaker  1:24:53  
+okay,
+
+Unknown Speaker  1:24:56  
+so let's see what.
+
+Unknown Speaker  1:25:07  
+So essentially, you did this correct so you so your query is going up to queue, so you have your URL for the area.
+
+Unknown Speaker  1:25:19  
+Oh, I'm not sharing. Oh, I'm sorry.
+
+Unknown Speaker  1:25:24  
+I'm sorry.
+
+Unknown Speaker  1:25:27  
+Can you see now?
+
+Unknown Speaker  1:25:29  
+Okay, so we had our, let me try to zoom it little bit.
+
+Unknown Speaker  1:25:37  
+Okay,
+
+Unknown Speaker  1:25:39  
+so this is our URL, the core URL, and then we added API key, and we added units, which is metric, and we added a queue. And then after queue equals, then whatever will come after queue is going to be coming from a for loop, where you are iterating through all the cities that you have there.
+
+Unknown Speaker  1:26:01  
+And then you will be basically creating five different lists to capture the five different weather parameters, latitude, longitude, temperature, humidity and wind. And you will basically get that from the corresponding location in the JSON under the correct nested dictionary structure. And then you will print it, and it will print you, like 10 of each
+
+Unknown Speaker  1:26:27  
+right. And then, in order to convert this into a data frame, what you will do is you will create a dictionary of list where the key would be your column names and the value would be whichever list is holding the values, and you will have this six key value pair, and then you call a data frame constructor and pass in that dictionary,
+
+Unknown Speaker  1:26:52  
+and that way it will basically create this dictionary.
+
+Unknown Speaker  1:26:58  
+Oh, forgot to run this. It was not even running. So that that,
+
+Unknown Speaker  1:27:06  
+and then this should create your dictionary, so you got up to that part done.
+
+Unknown Speaker  1:27:12  
+Okay,
+
+Unknown Speaker  1:27:13  
+so the next is for you to figure out how to get all the cities within a given state. Let's say do it in a state, because if you go it do by country, there is a whole bunch of cities in the country. So do it by state.
+
+Unknown Speaker  1:27:31  
+So I don't know whether you guys have already put some thought into it, like you have to do your own research. So what your preference would be? Do you want to go into your breakout room and brainstorm with your peers to find out how to get the list of cities. Or do you want me to give you a hint?
+
+Unknown Speaker  1:27:48  
+Hint please.
+
+Unknown Speaker  1:27:51  
+Is it using this US census, or is it the Geo coding? I thought I got pointed to the Geo coding, so that was kind of what we were looking at. Yeah. So when I when this idea came to my mind? So first I did is I searched on the open weather API, the API that we are using. I basically did a Google search, open weather API, list of cities.
+
+Unknown Speaker  1:28:16  
+What I was hoping that, just like remember how we did the open tree here dB, the first activity, there was a separate API, a path that gives us all the category of question. So I was hoping to get something like that so that I can send a GET request and get a list of cities.
+
+Unknown Speaker  1:28:36  
+Unfortunately, I didn't get that. But what I got is something else, and that's something else actually turned out to be even better, because that helps, allows us to learn yet another technique to get data from a remote machine, which is basically just a FTP file server sitting somewhere, and inside there, there is a compressed file, a gz file, like gzipped file, yeah, inside that gzipped file, there is a JSON file, and that JSON file gives you all the cities in the world, the whole world, like hundreds of 1000s of cities.
+
+Unknown Speaker  1:29:16  
+So that means what you can do is you can go read that URL. From that URL, load the data directly into pandas, and then you can apply your DF dot lock with whether it's a country or a state, or whatever combination of selector that you want to use. And then you get a maybe, let's say, for a one state. You'll probably get 345, 100 cities, because when they say cities, not just big cities, right? It's like all zip code basically, like all the different like, even the small towns and villages. So I tried with Michigan. I got like almost 500 cities in Michigan. I didn't even know Michigan has these cities, but it's like taking everything, so it's.
+
+Unknown Speaker  1:30:00  
+Anyway, so that's how you will do it. Now, is this much hint enough? Can you take it from here?
+
+Unknown Speaker  1:30:06  
+Yeah, but ooh,
+
+Unknown Speaker  1:30:11  
+I saw the G zip, and I'm like, that can't be it, because we want to.
+
+Unknown Speaker  1:30:15  
+Anyway, okay, yeah, I know it is not ideal, and that's why I said it is not ideal, but that helps us to learn yet another way. Because sometimes, like, you don't know how these like, lot of time we will see this researcher, they basically, I mean, it's becoming less and less common, but once, every once in a while, you will come across people who have this giant FTP server that are running in some back room in university. People don't even know about it, and there is some treasure trove of data sitting there, and researcher do come across this type of data. So what do you do? You do this and not even, not even a machine in the back room, like even, lot of people actually take this file and put it on a like a object storage, like s3 bucket, right? Or what is that Azure Blob Storage, something like that, right? So it is not uncommon for people to come across these large blob of files, whether CSV in JSON format, that are sitting just like a large, several 100 gigabyte file, a single file somewhere, or maybe a group of files, right? So it is actually important for you to be able to read from those files. These are not API. These are just files sitting on a remote machine and you were just grabbing it from there.
+
+Unknown Speaker  1:31:27  
+And the pandas read CSV, pandas read JSON, they work just fine,
+
+Unknown Speaker  1:31:33  
+just like if it were your local file. So pandas does all the hard work of finding that machine provided you just provide you just give it the right HTTP or FTP address, right? So,
+
+Unknown Speaker  1:31:48  
+and then what you'd like to do is you will do that. And you don't even have to do all these temperature, humidity, wind, just do latitude, longitude and temperature,
+
+Unknown Speaker  1:31:58  
+and, of course, the city name, right? Just take the four column. Wait,
+
+Unknown Speaker  1:32:03  
+so is there any benefit to making separate lists and then doing it like this? Because I just appended everything to like, one list, and then pandas convert it to a data frame, and that worked fine. That's fine. That's fine. It doesn't matter. There are obviously multiple different way too. Yeah, from JSON into pandas, yeah. I just trying to see whichever way, whichever way you can naturally think of whichever comes to you naturally given your style of coding.
+
+Unknown Speaker  1:32:37  
+So has anybody found that gzip link?
+
+Unknown Speaker  1:32:42  
+So someone did already.
+
+Unknown Speaker  1:32:45  
+Jesse is not in his head. Yeah, I definitely,
+
+Unknown Speaker  1:32:51  
+you did. Definitely find it okay.
+
+Unknown Speaker  1:32:55  
+Let me slack it.
+
+Unknown Speaker  1:32:58  
+So one
+
+Unknown Speaker  1:33:00  
+unknown result.
+
+Unknown Speaker  1:33:03  
+Go get it from here.
+
+Unknown Speaker  1:33:06  
+Jesse, is that the same one you found there.
+
+Unknown Speaker  1:33:10  
+There were two. There was one that was like 260,000
+
+Unknown Speaker  1:33:13  
+and then there was another one that was like the I think there was the world one, and then it was there was a more isolated one. No,
+
+Unknown Speaker  1:33:23  
+well, I use this one, and I got all the cities in my state and in the country, so you can just go this one. And the function that you will use for pandas is read JSON,
+
+Unknown Speaker  1:33:35  
+okay?
+
+Unknown Speaker  1:33:36  
+And since it's a compressed file, you have to specify to pandas. You have to tell pandas that you are actually reading from a compressed file.
+
+Unknown Speaker  1:33:46  
+Can you uncompress it and then just look at the JSON? Or no. You
+
+Unknown Speaker  1:33:52  
+just need to provide a compression parameter when you do the read JSON, just like we used to do read CSV. Here you will do read hyphen JSON. You will provide this URL, and you need to pass a compression parameter. And the compression parameter will text what type of compression it is, which is GZ in this case,
+
+Unknown Speaker  1:34:16  
+okay, I should not be saying much more, because I'm revealing everything now. So let's break into the breakout rooms. Let's take
+
+Unknown Speaker  1:34:26  
+let's take another 20 minutes maybe, and then we'll see how much we can get done.
+
+Unknown Speaker  1:34:35  
+So, Karen, let's recreate the rooms, please.
+
+Unknown Speaker  1:34:41  
+20 minutes. Yeah,
+
+Unknown Speaker  1:34:56  
+and I cannot even demonstrate that to you, because they throttled me.
+
+Unknown Speaker  1:35:02  
+Uh, no, when I tried to rerun that, they're saying, Oh, you need to pay up.
+
+Unknown Speaker  1:35:09  
+What I did is I downloaded the file and then had it manually in, yeah, in there. And then I wrote in an extra piece that, if it doesn't exist, go to the source via the API, but I didn't want to get throttled,
+
+Unknown Speaker  1:35:24  
+yeah.
+
+Unknown Speaker  1:35:26  
+So essentially, let me show my screen quickly and you can compare your work to what I did and what you did. Probably it could be different than what I did, but as long as it gets the job done right. So,
+
+Unknown Speaker  1:35:40  
+okay,
+
+Unknown Speaker  1:35:42  
+share.
+
+Unknown Speaker  1:35:46  
+Do you see my screen?
+
+Unknown Speaker  1:35:51  
+Actually? No. The thing is, the problem is not with loading the file. So you see this line here. This is where I'm loading the file,
+
+Unknown Speaker  1:36:00  
+and you can download the file. In fact, I did download the file here, as you can see here, the city needs dot JSON, that humongous JSON file that is sitting here. So I did download that first just to see what is inside it. But here, instead of reading the file locally, as you can see, that I am giving the direct, remote URL of the gzipped file. And I'm just doing a read JSON, and I added a compression equal to gzip. But Kian told me that pandas is probably smart enough, even without this, it figures out that it is compressed and it does the needful. Yeah, I did that too. I looked it up, and because I saw, like, some of these other like tutorials, you're like, saying to use the compression type, I guess in the pandas newest like are one of the new versions of panda. It's able to do that. Yeah.
+
+Unknown Speaker  1:36:53  
+So anyway, so you read the JSON file, and then what I did is, this is my all cities, and then I, if you want to get all the cities for the US, I applied a country us, and that gives me 19,972
+
+Unknown Speaker  1:37:09  
+rows, which is all US cities. And then I did mi cities, which is all Michigan State cities, where I applied to condition right, all country equal to us and state equal to MI. And that gives me 575, rows. So 575, rows from Michigan.
+
+Unknown Speaker  1:37:30  
+And then this is the loop I did. So one thing is in the query URL, what you are guys were doing before you were providing queue equal to that city name. You can do that. But you can also use these ID column that you have here, like these ones. And if you want to do use the ID column, you just have to change this query from being q equals something to ID equal to something as one of the parameters. And then I am getting all the IDs from this ID column of my city list, and then I am appending the ID column to the query, and then I am sending the query, and then from the response, I am getting the name, coordination, latitude, longitude, just like what you did before as well. So that part still stays the same.
+
+Unknown Speaker  1:38:25  
+So everything else in the code is just like the same that you as you did before.
+
+Unknown Speaker  1:38:34  
+Okay? And then you convert that, you will get like, five or 600
+
+Unknown Speaker  1:38:40  
+rows of pandas data frame, or if you do us, you will have 19,000 or so rows.
+
+Unknown Speaker  1:38:48  
+Got it?
+
+Unknown Speaker  1:38:53  
+Any question? I
+
+Unknown Speaker  1:39:03  
+Okay, so I hope everyone got that so. And then my this case, wouldn't you want to abstract the the previous city list to a function, and then you just to show that you're able to call it the different city list, you just call it with that same function.
+
+Unknown Speaker  1:39:22  
+I'm sorry. Come again, please. So you said you wanted to be able to say that I wanted to get a dynamic list of cities, right? Uh huh, so why wouldn't you, why wouldn't you define a function above so that you could prove that you can feed it in this list of cities? Sure. I mean, obviously, if you are trying to turn into a production class quality code, then definitely that's what you do. But this was just a quick show of concept. Sure, yeah.
+
+Unknown Speaker  1:39:55  
+The response Jason for the all the country and the city.
+
+Unknown Speaker  1:40:00  
+How did you index that for the US cities?
+
+Unknown Speaker  1:40:04  
+Again,
+
+Unknown Speaker  1:40:06  
+I didn't do any indexing. So essentially, you will get a numeric index, like a range index like that. Because if you are not you see here, after I do my
+
+Unknown Speaker  1:40:18  
+PD dot data frame, I'm not setting an index. So if you create this, it is just like what you were having before. You will have a numeric range index here.
+
+Unknown Speaker  1:40:30  
+I'm not worried about the index at this point because I'm not doing any further pre processing. But if you do something else, like if you are using this for some other further downstream processing. And for that, if you need to change the index, you could change the index, but that's, that's not the focus of this particular activity. That's what I'm trying to say.
+
+Unknown Speaker  1:40:53  
+Oh, real quick. Can I see the Can I see the URL that you're using for the gz file? Sure.
+
+Unknown Speaker  1:41:00  
+Yeah. Here.
+
+Unknown Speaker  1:41:03  
+Okay, that's the same one that I have.
+
+Unknown Speaker  1:41:07  
+But for some reason, when I print out the data frame, I'm not seeing the state in there.
+
+Unknown Speaker  1:41:15  
+Wow, really, yep. Let me run this again. This one I can run as many times as I need. There is no throttling here, yeah, and then I'm getting the cities.
+
+Unknown Speaker  1:41:28  
+Oh, hold on. My URL is a little bit different. It's current dot city list, not City DOT list, dot JSON, got it. Yeah, there are a bunch of other files there too. I, yeah, I
+
+Unknown Speaker  1:41:44  
+Oh, that looks much better. Okay, cool. Thank you.
+
+Unknown Speaker  1:41:49  
+Yeah. So, if you look into this,
+
+Unknown Speaker  1:41:53  
+so there are a whole bunch of maybe you use something else from here.
+
+Unknown Speaker  1:41:57  
+Yeah, it was the current dot city list. Oh, it was that okay. I didn't look into that. I just looked into the first one, and I got what I needed. So maybe that one is different. Yeah. Okay,
+
+Unknown Speaker  1:42:11  
+cool. And then my last stretch goal was to display the data, something like this,
+
+Unknown Speaker  1:42:19  
+where you have latitude and longitude, and you show the data as a scatter plot. This particular type of plotting is called scatter plot, where the data points are all scattered in a two dimensional graph, and the color coding is, the higher the temperature is, it will be red ish, and the cooler would be blue ish. And this is the graph I produced using the hard coded List of cities, which is Paris, London, Oslo, this thing. And here you can see the ones further north are blue, are in color, and one further south is red, ish in color.
+
+Unknown Speaker  1:43:01  
+Okay, did anyone do that? Well, I'm showing the code now anyway, but I
+
+Unknown Speaker  1:43:09  
+assume you're going to share this code, right? I have already you'll see the code. So essentially, the code here is, so the weather data, which is my data frame. So in pandas data frame, there is a function called plot which internally uses the matplotlib library, which is another library that we will use next week, that are used to plot different kinds of charts and graphs. Now you can actually take a pandas data frame and apply a plot function. And this particular plot couple of things to keep in mind. So here I'm saying kind equals scatter, which basically creates this scattered data points on a grid.
+
+Unknown Speaker  1:43:57  
+And then I am saying, What is my x axis? What is my Y axis? So x axis, as you see that I have taken longitude as an x axis and latitude as an y axis. And these long and lat these are basically the they have to be present in as columns in your data frame. So in our data frame, we do have latitude and longitude column, and those are the ones that I'm taking as x and y.
+
+Unknown Speaker  1:44:24  
+And then you can use a attribute called C, which means color. And you need to specify a numeric column that will basically create the different shade, which in this case is temp, which we already have. So tempt is the column that we are using, and then there is whole bunch of color maps that are available.
+
+Unknown Speaker  1:44:47  
+And the particular color map that is that seems suitable to me is called Cool, warm. And you can basically look into the matplotlib documentation, you can find different kind of color map, but.
+
+Unknown Speaker  1:45:00  
+Since here, as you can see, I'm just trying to show how cold or how warm the climate is in a particular city, so that the default color map that are already available in matplotlib, which is cool, warm, that basically serves our purpose just right. So I'm using the cool, warm color map, and then you can basically add a title, which is optional, and then that's it.
+
+Unknown Speaker  1:45:25  
+So you run these and it will create a plot. Now, if you do this with your new data that have four or 500
+
+Unknown Speaker  1:45:31  
+list cities from your state, you will see all these plots here. The plot will look much busy, which I cannot show you here just yet, because my API is throttled, so I cannot grab this. But in case you have done that, you have already created your new statewide
+
+Unknown Speaker  1:45:50  
+city data, feel free to apply this code on your final data frame, and you will see the how the plot looks like.
+
+Unknown Speaker  1:45:59  
+But I have the code here for your reference and this so, yeah, the last line you will see I have added that, but I cannot just run this code now because of the blocking throttling.
+
+Unknown Speaker  1:46:11  
+Feel free to run and see how it looks. Yes, go ahead. Sorry. Quick question. Do we need to do the import for the matplotlib? Like you said earlier, or not,
+
+Unknown Speaker  1:46:21  
+I don't believe you do. No, oh, okay, but yeah, because there are different ways of creating the plot. If you start writing the plot, like saying, hey, create a plot with so and so details, then you will need to do a explicit import. But here, I'm not doing that. I'm simply taking a data from and data frame and doing a plot apply using the plot function of the pandas data frame. So for that, just importing pandas is enough, but you need to make sure that matplotlib is installed in the environment that you have in the virtual environment, which in my case is df, that has to have the matplotlib available.
+
+Unknown Speaker  1:47:05  
+Okay, so is that the pip install, the pip install. Comment, right? Matplotlib. Also in the time. I don't remember. I think, like conda's environment, maybe it comes by default, but you have to run it and check I totally forgot. I'm sorry I totally forgot whether I actually did a peep install or whether it came with it. But if it doesn't, then all you have to do is just run a peep install on your environment. Okay, we'll do thanks. Yeah.
+
+Unknown Speaker  1:47:40  
+Okay,
+
+Unknown Speaker  1:47:43  
+so that will actually be all for the Oh, actually, no, forgot about it. So there are a couple of other things, which is exception handling.
+
+Unknown Speaker  1:47:52  
+Now exception handling, let me actually quickly show you there is a student activity, and I don't think that's a very good use of time, but exception handling basically means whenever, let's say, you know that something in your code is going to go wrong,
+
+Unknown Speaker  1:48:08  
+and that will throw an error, right? So let's say, if I try to do something like hey, do five divided by zero, if you run to run, try to run this code, it actually creates an exception. It throws an exception. Says zero division error, which is division by zero. Now the exception handling is a one way of checking whether your code is doing something wrong, like one very trivial way of checking. Let's say you have, I'm just trying to run this code this way. Let's say I have two variable let's say let's say numerator equal to 10, and denominator equals let's say five. Now let's say I want to type, I want to compute ratio, which would be numerator slash denominator, and I want to print the ratio. So if I run the code with this, it will be just fine, and it will print the ratio, as you can see.
+
+Unknown Speaker  1:49:07  
+Now if, for some reason, let's say this denominator value is being calculated by some other piece of code, and somehow a zero got into this denominator. And now, if I run the same code, it will result in a error, and the error, it says zero division error. Now how do you handle this? So one,
+
+Unknown Speaker  1:49:32  
+a trivial way of handling this is say, hey, if Dena in denominator equal to zero, then you can probably print something, error cannot divide by zero. If not, then you do this. So if you do this, it says, error cannot divide by 00. And then I forgot to add an L statement. And then else you you.
+
+Unknown Speaker  1:50:00  
+Basically print it. And now, if I run the code, it will say, cannot divide by zero, which works for the most part. But the problem is, when you have lot of this condition and you cannot always think of what error condition might happen during different time in code, then it is not possible for you to think through all the evils condition that you have to put, and even if you do that, will make your code very, very clumsy. So a better way of doing this is let Python figure out what can go wrong. And the way to do that is, if you think that you are doing something that is error prone, under certain condition, you basically put this inside a try block. And inside the try you can basically write one or more lines of code. So even if you have 100 lines of code, you can put the whole thing inside a try block, and then you have to say, do this whole thing, except if there is an error, and
+
+Unknown Speaker  1:51:03  
+I accept error, and you can say
+
+Unknown Speaker  1:51:09  
+as E,
+
+Unknown Speaker  1:51:13  
+print E, and then You say you cannot divide by 00.
+
+Unknown Speaker  1:51:19  
+Hang on.
+
+Unknown Speaker  1:51:22  
+Why is this?
+
+Unknown Speaker  1:51:27  
+I think you have to type in the zero division error instead of that. I know that, but that's I should be able to just type an error also. So there are different ways that you can do that, but
+
+Unknown Speaker  1:51:46  
+except,
+
+Unknown Speaker  1:51:48  
+or is it?
+
+Unknown Speaker  1:51:52  
+What is the general error look like? Is it
+
+Unknown Speaker  1:51:59  
+so all of these extra name errors. These are oh yes,
+
+Unknown Speaker  1:52:07  
+except exception as Sorry, my bad, yeah. So if you do this, then what will happen is any error that comes out from this piece of code that will be caught by this catcher or this except block. And here I'm saying, what is the exception? And I'm also assigning it to a temporary variable, which is E, which is a local variable. And if I print E, it will actually give me what is the actual message coming in. And then, if you want, you can add your additional custom error message as well.
+
+Unknown Speaker  1:52:42  
+Okay, so that's one way of putting it. Now there is a one benefit of this. So let's say there are many different lines of code here, and some will result in key error, some will result in name error, some will result in zero division error. So if you want to do specific exception blocks, then you have to say, hey, if there is a zero division error, then do this right, and then it will still work. But then you have to know beforehand what kind of error you are expecting.
+
+Unknown Speaker  1:53:15  
+But if you don't know what kind of error you are expecting, and there are multiple lines of code inside your try block, you can just say exception, and then that will be a catch all of everything,
+
+Unknown Speaker  1:53:27  
+because there are different kinds of error. Let's say if I do key error,
+
+Unknown Speaker  1:53:33  
+and if I do key error, now here there is no key error happening, you will see that it will not be able to catch it, and the error will still bubble up and blow up on your face anyway.
+
+Unknown Speaker  1:53:45  
+So depending on and it, you have to use this like on a case by case basis. If you know specifically what error can come in can occur, you basically use key error, sorry, then that named error, key error, zero division error, or whatever error that might be, if you don't know, you basically use this catch all exception class, which catches everything.
+
+Unknown Speaker  1:54:10  
+Okay. Now
+
+Unknown Speaker  1:54:13  
+in your student activity here,
+
+Unknown Speaker  1:54:20  
+if you look into
+
+Unknown Speaker  1:54:24  
+this
+
+Unknown Speaker  1:54:26  
+actually, let me just open the solved file here.
+
+Unknown Speaker  1:54:32  
+So these are the different types of error that can happen. So the first one is just what I showed. If you have a number that you are trying to divide by zero, it will result in a zero division error.
+
+Unknown Speaker  1:54:44  
+If you are trying to refer to a variable that is not even declared at all, like, for example, name, you are trying to print something with a name, the variable name is name and the name is not even defined. You have to use that specific except.
+
+Unknown Speaker  1:55:00  
+Called name error.
+
+Unknown Speaker  1:55:02  
+If you want to convert something to integer, but that is not actually an integer, that is some string, it will result in something called value error. So then you will use value error and so on.
+
+Unknown Speaker  1:55:15  
+Similarly, if you have a dictionary, let's say, let's say call it my dictionary, and I just created a my dictionary. Now if I want to have I want to print my dict A, it will print one,
+
+Unknown Speaker  1:55:34  
+my did, B will print two, and so on. But what if I want to print my dict D, which does not exist, it will result in something called key error, which is another kind of error, right? So whenever you are trying to do that, all you have to do is,
+
+Unknown Speaker  1:55:52  
+just like what I showed before.
+
+Unknown Speaker  1:55:57  
+You have to wrap it with a try, catch block, and if you don't want to use the catch all exception class, then that way you will have to use this key error class,
+
+Unknown Speaker  1:56:09  
+and then it will catch that error and will say, key dot found, right? So that's it, basically. Now, why knowing this is important? Because, for example, let's say when you are getting data from API, there are many different things can go wrong. First of all, your API key might be wrong. Second, even if your API key is right, maybe your data network connection is wrong. Maybe you have a interruption in network connectivity.
+
+Unknown Speaker  1:56:40  
+Then the third thing could be your network connection is right? You are providing the API key, but maybe you have used the key so much that, due to overuse, now you are being throttled. So that is also another exception that you might get. So the point is that make sure that when you are doing your fetch from like not just that, but specifically, when you are fetching from an API from a remote machine, think through what are the things that can go wrong. And when you are writing the code for the first time, it is okay to get some error, but from that error you should learn. And when you are trying to put the code into a more production ready package for your final submission,
+
+Unknown Speaker  1:57:22  
+try to catch all the possible error that the code can have. And if you know what kind of error that will that it will give, you can use that specific exception type. If not, you can just use a catch all exception type so that your code does not blow up on the face of your user. So that's essentially it, right? So, for example, if you look into my
+
+Unknown Speaker  1:57:45  
+whether this thing right, so you will see that if I try to run this now,
+
+Unknown Speaker  1:57:55  
+oh,
+
+Unknown Speaker  1:57:57  
+yeah, so you see it says error name. So what? What just happened? So this is the same code that was running before. But the problem is that now my request that I am thinking that it is returning these nicely formatted dictionary it is actually not returning this. Why? Because if I print it here, you will see
+
+Unknown Speaker  1:58:24  
+it will actually the response itself will tell me what is wrong,
+
+Unknown Speaker  1:58:31  
+because the response message says, cod, 429, and messages your account is temporarily blocked due to exceeding request limitation of your subscription page. So I know that this might happen. So now, in a better way of doing this, what I will do is I will put these things in a try cache block.
+
+Unknown Speaker  1:58:55  
+I'll put this in a try and then I will put a except
+
+Unknown Speaker  1:59:03  
+exception as E,
+
+Unknown Speaker  1:59:06  
+and I will say, print E, and Then I can print
+
+Unknown Speaker  1:59:16  
+some possibly, let's say, possible,
+
+Unknown Speaker  1:59:22  
+error response from API.
+
+Unknown Speaker  1:59:28  
+Now if I run this,
+
+Unknown Speaker  1:59:33  
+instead of blowing up with an ugly error message, it will actually tell me that, hey, there must be something. And since I'm also printing my response. I know what the issue is, which is my account is temporarily blocked, right? So this is one example that shows why you should always keep in mind that things can and then they do go wrong, and be prepared for that to avoid any nasty surprises when you are.
+
+Unknown Speaker  2:00:00  
+Running the code, or when your users are running the code,
+
+Unknown Speaker  2:00:13  
+any question, on exception, I
+
+Unknown Speaker  2:00:25  
+No
+
+Unknown Speaker  2:00:27  
+so if there is no question, I'd say we can wrap up this class 10 minutes early today. Actually, I
+
+Unknown Speaker  2:00:44  
+Oh, another thing if you can do for tomorrow's class, we have to get data from census.gov
+
+Unknown Speaker  2:00:53  
+have you guys actually registered for that and requested API key? All of them,
+
+Unknown Speaker  2:00:59  
+all of you. Okay, so please do so, Margarita, you are saying no,
+
+Unknown Speaker  2:01:06  
+no, I'm sorry. Could you please provide the link? I will do that. Sure. Yeah, so let me actually share my screen. And so basically, that one was, um, are you seeing my email here?
+
+Unknown Speaker  2:01:27  
+Right? Am I sharing the right screen? No emails. It's not email, huh? Oh, hang on. Oh, I was sharing the wrong screen. How about now?
+
+Unknown Speaker  2:01:41  
+Yep, yep. Yeah, yeah. So census API case, okay. So this is the request. This is the API that you they will send you. So what you need to do is you need to go to this
+
+Unknown Speaker  2:01:57  
+census.gov/data,
+
+Unknown Speaker  2:02:01  
+I believe. Gotcha,
+
+Unknown Speaker  2:02:09  
+we'll register for sure. Thank you.
+
+Unknown Speaker  2:02:13  
+No, hang on. I'm trying to find which one is the
+
+Unknown Speaker  2:02:18  
+which one is the link page to request the key.
+
+Unknown Speaker  2:02:27  
+Was it slash data? Is this it? I sent it
+
+Unknown Speaker  2:02:33  
+in the chat.
+
+Unknown Speaker  2:02:38  
+What is it this? I these
+
+Unknown Speaker  2:02:42  
+things, I think Don on the on the chat, he put the link, oh, Santa's gov.
+
+Unknown Speaker  2:02:52  
+Is that the right one
+
+Unknown Speaker  2:02:55  
+I'm trying to find. I did press the key on the REST request a key picture. I
+
+Unknown Speaker  2:03:02  
+think that was that. Do you see request the keys here?
+
+Unknown Speaker  2:03:06  
+It's
+
+Unknown Speaker  2:03:09  
+on the
+
+Unknown Speaker  2:03:11  
+picture on the left side. It's like an image. Matt, almost.
+
+Unknown Speaker  2:03:16  
+Oh, is it this one? Yeah.
+
+Unknown Speaker  2:03:19  
+Oh, right, right, right, right, right, right, right. It's so big you missed it. Yes, it is so big. Yep, that's right. Okay, so I'm going to put this key on the Slack channel,
+
+Unknown Speaker  2:03:30  
+and then here you have to provide your organization name and then email address, and then request a key.
+
+Unknown Speaker  2:03:40  
+I don't know why they even need organization name. Let me actually so I try to do that using my to you username, but that key, for some reason, it's not working. It is working for other people, but it's just not working for me. So I'm just going to request a new key, and for those of you who haven't done do the same. So put some organization name and put your email and say, request key. And it says, Please check your email. And hopefully, if everything goes right, you should be able to receive a key in your email. And in that email there will be a link that is going to ask you to validate your key, like, if you see here, it send us this key, and then there was a link that you have to click that will activate your key. So you need to do this before you can use this key.
+
+Unknown Speaker  2:04:32  
+So do this and save this key in your environment. Dot env file, like, call it census API key or something, and save this key there, which we are going to use in the activities tomorrow.
+
+Unknown Speaker  2:04:46  
+But now may just verify if I understood in your correctly so that env file should be in the buff of every class, right? Not just like in one folder, okay, like wherever one.
+
+Unknown Speaker  2:05:00  
+Wherever you are going to use data from an API that needs a key. Thank you, sir.
+
+Unknown Speaker  2:05:26  
+Okay,
+
+Unknown Speaker  2:05:32  
+okay, so that's all I had for today. I.
+

@@ -1,0 +1,567 @@
+Speaker 1  0:01  
+13. So we just officially completed the halfway mark yesterday.
+
+Unknown Speaker  0:10  
+Yes, cool.
+
+Speaker 1  0:15  
+Okay, so last week, I mean, yesterday's class, we completed one type of supervised learning, which is your regression. So regression basically where is applied when the outcome that we are trying to predict is supposed to be a continuous value. Now the other type of supervised learning we touched upon is called classification, where we are trying to predict an outcome that has a set number of values, but discrete values. It could be 235, 10. It doesn't matter, but you can actually count the how many outcome that you are trying to predict with probably fingers in your two hands, right? That's where the classification is. Lot of time, an algorithm with slight twist can be used for both regression and classification. So for example, when we talk about the linear regression, so we can change one function there, and that becomes a classification algorithm. Similarly, many of the classification algorithm that we are going to use, those can also be used as a regression algorithm, although, as you will see, the more common custom thing, customary thing, thing to do in the industry is to use specific algorithm for classification, and then the linear regression that you learned like use those for linear regression, but it can be done vice versa, but we are not going to go there. Instead, what we are first going to learn in this week is what are the different types of classification model that are available and how do they work at a high level, like, if you want to understand at the deep level how these models work, you have to go very deep into math and statistics, because most of these are statistical based basically probability estimation of probabilities. So without going into super deep into how this model works, we are trying going to basically have a high level discussion on the basically how these different types of model work, and kind of try to develop an intention intuition, when to use which model. So this week, sorry, today's class, we are going to talk about two specific classification model. One is the logistic regression model, and the other is SVM, which is also known as support vector machine. And then next class, on Thursday, we are going to learn a couple of other techniques. One is k nearest new neighbor algorithm, and another is basically decision tree based technique. And there are a couple of different techniques that you can do on decision tree. So today's class, the first thing that we are going to learn is basically what classification is. Well, we all know basically if you have a binary outcome, or even even not only binary like discrete outcome, your problem is basically classification problem. For example, if as a bank, a loan applicant submits some data, and if as a bank, you are trying to predict based on the application, whether these application applicant is credit worthy or is the is your credit risk? That's a classification problem, and that's where we basically apply the classification algorithm. And as I said, the two algorithm that we are going to apply is logistic regression and support vector machine. Now, what these does these two pictures mean? I'm going to come there in a second when we talk about that, right? So we will basically try to understand what any any classification algorithm, essentially what it does, right? So no matter which classification algorithm you are using. What is your goal when you are applying this algorithm? So think about any of this picture. Let's take the one on the left hand side, which is pretty clean, simple, easy to understand. You have two different classes right the yellow class and the blue class. And let's say this is a two dimensional data set, and you are able to plot this data with two dimension with your level being the color right. Now, looking at this, if you want your model to understand which data point belongs to which class, you are going to want to try to draw some kind of a bound. Between the two. So that when it comes the prediction, you would be able to just quickly say, Okay, if a model is lower than this boundary, then I'll say, this is class A. If it is higher than this boundary, then it is Class B. So essentially, you are trying to draw a boundary between the two different classes of data, or even multiple different classes of data that is our goal, no matter which algorithm we are using. Now, the thing gets interesting when your data is not as cleanly separated as in this very simplistic case is shown here, because if this is the case your model, if you apply any model, it will basically able to find the decision boundary rather quickly. But sometimes what happens is your data is not linearly separable. So the left hand side, the example that we are seeing here, it is called linearly separable, which basically means that you can come up with a hyper plane of a dimension n minus 1n, being the total number of features, right? So in hyper plane of n minus one dimension, basically mean your linear boundary at a dimension which is one lower than your decision. And why n minus one? Because if you think about in this example, you have two number two features, x1 and x2 that's why we can plot these in a two dimensional space, which basically is on a piece of paper or on the on your computer screen. So therefore the decision boundary is one dimension, because it's a line. But if you happen to have a three dimensional feature, which we can still plot and visualize to some extent that I think there was a visual there somewhere of a three dimensional plot, yeah, like here, right? So this is an example of a data that is three dimensional, X, Y and Z. So when you plot that, it's basically in a Cartesian coordinate, it basically looks like a bunch of clouds. But in that case, when you are trying to do the decision boundary, that will be a surface which is basically two dimensional. And that's why I said, if you your data set is of n dimension your boundary, decision boundary is of n minus one decision, right? Using this analogy extending to any arbitrary number of higher dimension feature space. So essentially, whatever you do in the classification, you are trying to come up with a boundary between the two classes. Now boundary. That boundary could be different. It could be the linear, it could be polynomial, it could be some exponential looking curve. It could be whatever right now that is where the different algorithm, a different parameter, comes into play when you are trying to do the regression, because depending on your how your actual data is, one boundary technique will probably not probably definitely work better than the other. So for example, if your data is really linearly separable, and if you are doing a classification with a linear boundary, this algorithm will give you a 100% score. So your accuracy score would be one out of one. But imagine whatever algorithm you have used to draw this straight line. What happens if your data actually looks like this, and you are applying this algorithm, and that algorithm will have a very low accuracy score, right? Because all these algorithm will be able to do is be try to draw a straight line. Now, when this algorithm is trying to draw a straight line, and your data is actually circular, least separable, then obviously no straight line would be able to fit right. So what? Whatever you do, you are not never going to get a high accuracy in your model. So similarly, decision boundaries could be any different, weird shape or form, and that is why we need to be aware of different classification algorithm that we have that are available there, so that when we do have a data set in hand, so that we can try out the different algorithm and see which one performs better.
+
+Speaker 1  9:18  
+And the reason I'm saying that you have to try out is because, with a real data set, unlike these simple toy data set, right in a real data set, there is no way you can actually plot the data on a graph and kind of develop a intuition, like how the decision boundary is going to look like, because it is a high dimensional data. Anything beyond three dimension, you are out of luck. So that's why, since you don't know how the decision boundary is, that's why you need to try different algorithm with different boundary drawing technique to figure out which one gives you your highest score. And that is what makes classification challenging. Now in order to do that. That the actual tools and machinery that you are going to use, they look exactly similar as what you have done in linear regression class or in unsupervised learning, not unsupervised linear regression class. Let's say where you basically take the data, you transform, scale the data if needed, and then when it comes to the machine learning part, think about all of those three like a pipeline steps that we are working on so that doesn't change. All the changes is, instead of a linear regression cloud, you are basically using some kind of a classifier mechanism, which is some other scikit learn library method. So the execution of this is going to be very simple, actually, okay, and that's what I met meant earlier. So once we are done, we basically understand the concept of how classification is done when it comes to act doing the actual demo or hands on activity, that that should be pretty quick. Because the thing is, majority of the time you will actually spend when on the third day of the class this week you do a similar mini project like you did yesterday, right? That's where you are basically going to come together with everything that we are going to discussing in the first two days and try to apply these and figure out which one is giving you better results that will be on the third day of class.
+
+Speaker 1  11:21  
+Okay? There are some activities. I mean, we can just quickly skip through this. It's basically given a particular problem. You have to say, hey, whether it's a binary problem or a multi class problem, because classification can be either binary or a multi class. So if you have a spam versus non spam classifier, what kind of classification it is, binary or multi class, binary, right? The next one is, if you have an image data set, and from the image data set, you are going to just predict whether it is a cat or a dog, just that binary. That's binary. But if your image data set is does have many different kinds of objects, and if you have to uh classify multiple objects, then that becomes a multi class problem, right? Uh, classifying out customer reviews and a social media positive and negative. So this is basically a sentiment analysis problem, which is also a binary binary classification, identifying uh, letters and maybe numbers from handwritten text. Okay, class that is multi class, right? I mean, key thing to understand here, I mean, like in the early days when AI was just maturing, like not in the on in last few years, when by AI, we all mean Chad AI, right? But prior to that, I'm talking about 1015, years back when the models were getting started, to get useful, having this handwriting recognition was a big deal right and right now, given the state we are in the machine learning AI industry, this is something that it's kind of given, like we all scribble on our touch screen, on Your tablet, on our tablet and phone, and it captures that and trans translate into the type text. But at the end of the day, this is nothing but a multi class classification. But since the classification boundary here is more complex, people are the teams who are going to be applying classification in this case, would probably not use any of the traditional psychic learn library. Instead, they would use a neural network to do this classification. But the type of problem is still a multi class classification problem. That's it, nothing else. And here your multiple classes would be the 26 letters in the English alphabet, or maybe 52 letters, considering uppercase and lowercase. So that's a multi class problem. Categorizing e commerce product as furniture, kitchen, outdoor items, obviously multi class the way it is worded, predicting customer churn. This is also a very common use case of machine learning that lot of companies actually use, because customer retention is a big problem in today's economy, right? Because there is so many competition no matter which business you are in, so you can basically load your customer in, giving them like a maybe one month free, or all of those introductory goodies and all but then once those things up, then how do you make sure that the customer doesn't quit? So for that reason, what companies often use machine learning to look at the different behavior that the customer has engaged. With the company, like the buying pattern, habit frequency, how much money they're spending, and so on so forth. And based on that, they're basically trying to predict whether a customer is kind of a safe or he's about to exit the company, which becomes a
+
+Unknown Speaker  15:17  
+what kind of problem?
+
+Speaker 1  15:20  
+Then the binary, binary, binary, binary classification problem, right? And why would company do that? Well, if company identifies me as a as a risky customer who might churn, sometimes, they will start sending like, additional communication, like, Hey, if you extend another three months, we will give you a 50% discount on your next three months membership. Price, right? Something like that. So that that's why companies use this so anyway, so those are some of the common use cases, and now we are going to look into the first type of classification, which is logistic regression. So what is logistic regression, actually? So remember how I said towards the beginning of the class that it is kind of linear regression, except you are changing the predictor function, right? So in linear regression, what we are doing, essentially in linear regression. We are trying to come up with a mathematical curve, whether a linear curve or a polynomial curve that basically touches the data points as closely as possible, not touches, but as close as possible to the data points. That is our linear regression class. Sorry, linear regression algorithm. Now let's say that linear regression algorithm gives a certain value x. The output of that would be Y equal to A plus Bx. Remember the simple linear formula right for a given value x, linear regression regressor tries to predict the outcome as y equal to a plus Bx. Now why is that a linear regressor? Because if I type a function y equal to a plus b x, and it says, add a slider. Okay, so let's say I add a slider. So basically now changing the values of A and B, I can basically fit a line in any shape and form that we want. And the algorithm that we have used there, the algorithm basically just does this. It basically starts with a random values of a and b. That's why we use that random state, right? Because depending on that random state, it will first, basically first draw a random line. Now, if you do provide a random State as an integer, it will basically use a random seed, and the first random line that it draws will still be same no matter how many times you are running the algorithm. But after it draws the first random line, then it basically keeps changing the intercept, keeps changing the slope until the point where the root mean square distance distance is minimized. That is what the linear regression function does. Okay? Now, if I type another form of mathematical function, which I'm saying y equal to one divided by one plus exponential of negative x.
+
+Unknown Speaker  18:32  
+And I'm going to
+
+Unknown Speaker  18:35  
+turn off this function
+
+Speaker 1  18:38  
+so now you see what the shape of this curve is, does it look like an S? Are you seeing this kind of a kind of a s, which is elongated and kind of a sidewise, right? So this is called the sigmoid curve. Sigmoid basically means something that looks like an x. So here, also, when I am trying to fit this, I can add parameters. So here, for example, I can say a, here, I can say B, here, I can add another parameter. Let's say F, here, m, here, and so on. And with all of these, now I can change Hang on, why didn't it? Oh, so a and b is this so now, with changing A and B, I can basically change the height of this thing and the shape and all of this thing. Now let's say let's put a as one and B as one. Now look at this. By changing the value of m, I can basically change how that function shape is going to be. So when m is one, we are basically getting a S shaped curve. If m is less than one, it is still S shaped but the difference between the lower. And lower value and higher value is gradually increasing, but look what happens if m becomes very high. Now you see how the graph is turning. And if you zoom in at a very high value of m, it almost will look like the graph actually jumped instantly. And now, if my output that my regressor is finding looks like this, then it can easily be used for a classification problem, because now I can say, Okay, if the value of this is zero point less than 0.5 so everything here, I'm going to say this belongs to Class A, and everything above 0.55 will belong to Class B, with a clear, linear boundary between the two, right? In fact, if instead of M equal to 10, if you go higher, it will, oops, sorry. So when you go higher, you see it almost looks like a very steep jump. So basically providing a very clear delineation between your two classes. Now, when you are going to take a set of data and you are going to apply these classification algorithm where the algorithm will basically try to derive this mathematical function if the two classes that you are trying to identify are very clearly separate, you will probably your mathematical function will basically be look like this, which is a very strict curve. If they are not very clearly separable, then you will not get a clear separation. You will probably get something like this, but it's still you will get some accuracy because with this, with the threshold, you will see that you can actually separate the two classes, no matter whether they are very clearly separable or whether they are very close to each other. It's just the difference being, if they are clearly separable, really in space, then your accuracy score will be much higher than if they are not. So essentially, that's what your logistic regression classifier does. It basically creates these curve of predicted values. And take a threshold value, which mostly 0.5, is the mostly used value, and you say, hey, if this is greater than 0.5 then you take that as a good class, less than 0.5 meaning bad class, right? And whatever the good and bad mean, or zero or one mean, so that is your logistic regression classifier. And this is the mathematical function, and which is the reason I did draw it on decimals is basically so that you can play around and see how exactly it looks like when you change these values, right? So any question on understanding logistic regression and what it does,
+
+Speaker 2  23:00  
+so, will 0.5 always be the separator, or is that something that can change?
+
+Speaker 1  23:07  
+I think you can probably change that by default when you are doing logistic regression. I think it does take 0.5 but I'm not sure whether in psychic learn logistic regression, you can change that or not. When you are build, rolling out your own, then you can definitely change but for scikit learn, I have to look up in the API.
+
+Speaker 3  23:34  
+Well, in second learn, you could have, you could have your output not just be zero or one, it could be actually a probability so that, yeah, a different threshold, if you want.
+
+Speaker 1  23:47  
+No, I think the question here is, how do you change that threshold here? Oh,
+
+Speaker 3  23:51  
+well, you just make it. Well, if you make it as like, what is it? Instead of just predict in most like, learn functions. You do predict underscore prob do a probability distribution, rather than just a zero or one, and then you can make your own use whatever threshold you like to decide which you decide are A or B, you know in which class case or class so
+
+Speaker 1  24:19  
+you are saying during the prediction time, not during the training time,
+
+Speaker 3  24:23  
+right during, yeah, there's a predict. There's a predict function on X's where you also usually have a predict underscore, prob, which is your probability distribution, instead of just zero. Ah, okay, okay, I see, yeah. Then you say, Well, I'm only really interested anything it's above point seven. So I really want to, you know, consider anything above point seven as being the class I'm looking for. So that's right, that way. Yeah,
+
+Speaker 1  24:55  
+yep. So it's called credit proba. This. One,
+
+Unknown Speaker  25:03  
+right? This is what you meant.
+
+Speaker 1  25:06  
+So with the classifier, if you do predict, then it will just predict, or you can predict the probabilities, and then look into the probability values and then basically apply whatever filter that you want or threshold condition that you want to specify which one you will call as a good class versus which one you will call as a bad class.
+
+Unknown Speaker  25:26  
+Thank you. Yeah.
+
+Speaker 1  25:30  
+Cool. So now that is logistic regression. Now we are going to look at a very quick demo for logistic regression. And in this demo, we will take a data set that looks like a real data set, but it actually is not, and I'll show you in a minute why. So this data set that is given it basically the financial performance as observed on some scale. Don't worry too much about what is the what is the scale of this thing, financial performance of the companies and the health of the industry that the company belongs to overall. So these data set then basically predicts whether the firm is going to succeed, or whether the farm is going to fail. Okay, so with one being a success, zero being a fail, based on only two parameters, the financial performance of the firm itself and the health of the industry overall that the firm belongs to. So if you think of it this way, it seems like it is a real data set. But now if you do a scatter plot of this data frame with industry health and financial performance being x and y, and the target column here is form category which is zero or one, zero and or one. So you can use that as a color marker for your scatter plot. And then you can do color map, market style, all of that, which I'm not going into the details. But if you do that, you will get a plot that is like machine learning practitioners dream problem. So you basically get the two classes that is completely separated in space with no overlap whatsoever. And that's why I said, even though this data set looks like a very clean, I mean, very realistic data set, but it is actually artificially cleaned up data set, right? So it's kind of one of those toy data set that we do using the like scikit learn create blob those kind of data set essentially. So the idea here is that to take a data set that is completely separable is so that if we now apply logistic regression on this to do the classification, to see whether we can produce, as I mentioned before, it should produce a accuracy code score of 100% meaning score of one right? So that is what we are going to see. How we can apply classification on this using the logistic regression method, and what score we can achieve, because this is a cleanly separable data set. And if you just are curious, like, hey, how many of how many data are there of category one, and how many data are there, but of category zero, you can do a value counts, and you can see there are 978 forms that basically failed, and only 346 forms that succeeded. Now looking into this is important, because sometimes your data set could be very skewed, and then you have other problem. For example, if you have, let's say, 1000 data out of that 990 data point belong to one class, and only 10 data point belong to other class, that means your data set is very heavily skewed. Now, if you do have that kind of very skewed data set, none of the classification algorithm would actually work very well. So next week, we are going to talk about those scenarios and how we can optimize our model. If that is the case, here, it seems that it is kind of skewed, but not super skewed. It's like, looks like one category has about 2/3 of the data, or maybe 3/4 of the data, no 2/3 and 1/3 maybe something like that. But it is not, it is still in the same order of magnitude, right? It is not like one has 99% another has 1% that is like extreme case of skewness. So 300 something and 900 something, it is still imbalanced, but it's not very skewed. So that means we can apply classification without any special pre processing to be done. And what are those special pre processing that you could do if your data set is very skewed, we will talk about those next week. So this one looks like a good data set, so therefore we will do what we always do. We take the y column out, the target column out, and call it y, which is form category, and we take the everything else out and call it as x, and then we do our train and test split, which we are doing here through these lines.
+
+Speaker 2  30:32  
+So So yesterday, we talked about this problem. At the end of class, should we be giving that train test split a random state,
+
+Speaker 1  30:42  
+yes. So if you want to, if you want to repeat it over and over again, then giving a random state will ensure that your,
+
+Unknown Speaker  30:52  
+what is called output, will be
+
+Unknown Speaker  30:56  
+the same, consistent across different run. Yes. So
+
+Speaker 1  31:04  
+okay, so train test split. Now we have train and test data x and y. Now this is where it is one little difference, which is, instead of importing linear regression and creating a linear regression model, we simply are importing a logistic regression model and creating a logistic regression model instance in the exact same way that we did before. And then we take that model and we fit it with the x and y data, the training data,
+
+Unknown Speaker  31:35  
+and we fit it, and the fitting is done.
+
+Unknown Speaker  31:39  
+So now if you want to score the model,
+
+Speaker 1  31:43  
+remember, there are two different ways you can score a model. If model is any psychic learn model, which in this case it is, then the model class itself has a score method. Dot score. If you apply that score method and then you can pass any x and y, it could be your training x and y, it could be your test, test X and Y, or it could be any future x and y data combination that will come to your model if you pass any train and corresponding y data. So then that score method will basically internally do the prediction on the training and compare the predicted output with the with the given output and calculate the accuracy score, which is what we are going to do now, given what we have seen in the data set here, what value of train and test accuracy? Do you think it will be printed once I run this cell? So uh, one for both, or just for training, both both. Let's see, for both, there'll be one because there is no other way to put it. Everything is clearly separable. The other way to do the same thing is, well, if you want to do the prediction first, which you can always do, you can do that, and that gives you your predictor and actual, and then you can basically. So here what we are doing is we are basically prediction and actual we are doing on the training data. So this is the predicted value and actual value based on the training data. Similarly, we can also do the same thing on the test data, and this is the predicted and actual value on the test data. This is your test data, testing prediction and testing actual now there is another method that we also used before, which is the accuracy score method that is not part of the model class, but that is part of the SK learn dot matrix, a separate class. Now in order to use this method, you have to actually provide the predicted values and the actual values. So why test is my actual value, and testing prediction is my predicted value, and it should also print the same accuracy score as you saw above, which should be one, and that's what we are getting. And the reason it is one is because the data is clearly separable in space. That's why we are getting a one.
+
+Speaker 4  34:22  
+So one's the highest value that you can get. Yes,
+
+Speaker 1  34:27  
+zero and one basically means 100% accurate. You cannot get more than 100% right. So basically, the model predicted all the zero class as being zero and all the one class as being one. So that is actually even here. So here you see where we are creating the prediction and actual side by side in a data frame, or in here, if the when, when I'm printing results.df, right? It is basically showing me first five and last five. Okay, but even in that display, you will see that there is not a single miss. So everything that is one in prediction is also one in actual. Everything that is zero in prediction is also zero in actual. So this so and this accuracy score is basically the number of mismatches divided by total number. That's all that is in accuracy score, like if you have a total of 100, and if there are how many are matches? So match divided by total number. So in this case, all 100 are matched, therefore you are getting a value of one. And the worst case scenario, you will get a zero when nothing matches. Okay, so
+
+Unknown Speaker  35:47  
+any question.
+
+Speaker 1  35:56  
+Let me try that other one that Karen showed us. So let's do a predict probability of X test.
+
+Speaker 1  36:15  
+Okay, so basically, what it is telling you here, in this case, that if you are doing prediction, it is going to tell you for so let's actually do two side by side. Okay, so I'm going to do logistic regression model. Dot predict X test. If I just do predict X test, it will basically say, hey, the first data point belongs to class zero, the second data point belongs to class 0/3, data point belongs to class 0/4, data point belongs to class one. So this the model is doing based on the threshold value of 0.5 and it is calculating the probability using that sigmoid function that has two level and anything below 0.5 it is calculating that as zero. Anything above 0.5 it is calculating that as one. That's what this is doing. Now back to Jesse's question when he said, Hey, how can I control that? Myself? And Karen, thank you for pointing that out. So if you use this function called predict, underscore proba, meaning predicting probability. So for each of the data point here, see, model is not making a decision itself. Instead, it is saying the probability of the first point belonging to this class is nine point 0.99, belonging to zero class and the probability of the point belonging to class one is five to the power negative five, which is way, way less. Now, based on that which class then would you say this point belongs to, obviously class zero, because this has a much higher probability. And same for the second one, same for the third one. Now for the fourth one, you see that flips for the fourth one, class one has a very high probability, very high probability, 0.99 which is very high, and class Zero has a very low probability, which is 10 to the power, negative three. So therefore fourth one should be predicted as 10 to the power, sorry, predicted as one, which is what you are seeing here, 000, followed by a one at the fourth position. So your predict probability is just that. Now for this particular data set, since the zero and one plus are so far away, no matter what threshold you choose, you will still get the same outcome. But in a more realistic data set, you might get a probability value of one one of the classes being, let's say, 0.39 and the probability of the other class would probably be 0.49 now, based on where you are doing this threshold, your output decision might vary, right? So that is one way you can control if you need to, not that you have to. But since Jesse asked the question, I just wanted to show this out that it is possible. But then if you want to do that, then you have to write a custom function that will look at all of these probability values and basically do this decision yourself based on whether, whether these probabilities are above or below the threshold that you want in your custom function. Yes, that's another way of doing it,
+
+Speaker 3  39:34  
+and each of those rows theoretically should sum up to one. Of course, you might have a little bit of floating point errors
+
+Unknown Speaker  39:41  
+Correct, yes, each of these, yeah, yeah,
+
+Speaker 1  39:45  
+because the total probability of all the possible events happening is one, right? And if you have a multi class, then instead of having, let's say, if it's a handwritten digit classification problem, right, where you have 10 different values zero through nine. So if you apply. This regression for a multi class. Then for each of the data point, you will see 10 probabilities values, and all of the 10 will sum up to one. And then you will basically take the one with highest probability and predict that, okay, that particular data point belong to that class that has the highest probability.
+
+Speaker 3  40:18  
+But it could get interesting, like you said, where they're kind of closer together, kind of like, ran almost point five for each or something, yeah, a little more on one side than the other, but you kind of like, well, what? What's going on? Yeah, that might be where those points are.
+
+Speaker 1  40:35  
+Like, you can get one, you can get one that is 0.51 another is 0.49 or even less, like 0.499
+
+Unknown Speaker  40:43  
+and you get one, 0.5001 right?
+
+Speaker 3  40:48  
+Whether that's kind of like less, you know, even though the model say one or zero normally, you know, it's really close together, you might want to look at that in a different way. Yeah, and when we do with classification of neural networks, later, you'll see this is what you'll be looking at. And then you'll be applying your own threshold.
+
+Speaker 1  41:09  
+You reapply Exactly, yep. Because when you are doing a neural network, there is no built in classification of classifier we are using. There you are the boss. So you can choose whatever threshold you want. It's
+
+Speaker 3  41:23  
+like this thing. I was in the class, and we did this contest, and it had to do wells, all these aspects of these wells in the desert. How many you know which likelihood of of them failing? So it could have a binary thing, give you the wheel well, work will fail. Yeah, as the instructor pointed out to us, that for policy the government, they might have limited resources, so they're not going to look at point five. They're going to maybe look at point seven. So they're going to look for everything with a higher than 70% chance of failing, because they can only set out so many teams to go and repair the wells.
+
+Speaker 1  42:03  
+Mm, hmm. Same thing is. Another example could be in the band
+
+Speaker 3  42:07  
+you're talking about having, you know, setting a different threshold for a reason. Yeah,
+
+Speaker 1  42:11  
+yeah. Like banks credit worthiness problem, right? The customer's credit worthiness problem, right? If the bank want to play on the safer side, then bank might want to say, You know what? The probability being the customer, being safe, being more than point five is not good enough. I want the probability to be more like point eight or better, to be on the safer side, right?
+
+Speaker 3  42:33  
+That's what Jesse is talking about. Where you can Yep, the threshold for for your particular use case, Yep, yeah.
+
+Speaker 1  42:45  
+Okay, so the next one is supposed to be a student activity. Do you guys want to do it in the group? Or shall we just run this through here?
+
+Unknown Speaker  42:57  
+We should just run it through,
+
+Speaker 1  43:00  
+okay, yeah, it's pretty straightforward, actually. So I don't think in today's class there is no real need for doing any group work. I mean, there is no real value at in doing any actual group work in today's class. So, so probably just do everything here. So it's basically the second one is exactly same set of steps, but here your data is more realistic looking data, the data you will see in a second. So this is one of the another of the famous data set in the UCI machine learning repository, which is basically where we were getting the data yesterday during our mini project. So this is basically a data set that looks into the different android permission that your apps that you deploy install on your Android phone. You know how the apps require this permission, that permission, permission to manage account, permission to receive SMS, permission to change wireless setting and so on, right, all of these different permission now, if an app is kind of, I'd say, like, has some bad intention, like, kind of a spammy app. Now there could be probably some pattern of these permission that the app is asking for the user to provide, using which we can categorize the app to basically be a like a malware app. So malware detection, so that's what the original data set is. So some people did this work before, and that's where, like all of these UCI data set, you can actually read the corresponding paper when with the author who basically have done this work. So you know that someone actually has applied this data set to this problem and gotten some results right, which is a one good thing, like you are not shooting in complete dark, like you are not the first one applying these data set to this particular problem. Because someone before has already done this, and they have already published their work in a paper. So anyway, that's the data set here. The data set, obviously, in this case, just like many other data set, is hosted on the boot camp server. So we are not directly downloading from here, although, if you want, you can, like you can download from here or many of the data set in UCI and machine learning library. If you see this button there, import in Python, which is present in many data set, not all, but if you click in here, it basically tells you how you can actually directly download the data into your Python, directly into a Python data frame. Not like manually downloading and doing a pandas dot read CSV, not any of this thing. But if you do install this UCI ml repo as a package install, then you can use that package to directly fetch the data set and load it into a data frame like this. And this is available for many of these UCI machine learning repo, which could be very handy, actually. So look into this and some of your own work. You might want to get these data directly from here, rather than getting from here or something that is supplied with your coordinator resource folder. You can if you want, but this kind of just sounds cool to me to be able to read directly from the source into a data frame. Okay, so now this is our data set. So data set has 87 columns because all of this permission. And the weird thing about this data set is, any of the feature, none of the features are continuous. Because think about these, all of these, 87 column, well, 86 feature column. Each one of this is this is saying whether this particular app is requesting this permission or this permission, or this permission, yes or no question. So that's why all of my 86 feature columns are zero or one, and then obviously I have one output column which is the result, which basically says whether the app is really a malware or not. So that's the data set. And if you do a value count, you will see that the data set is very well balanced, so almost equal number of malware versus good apps. I don't know whether this is true, but if this is really true, then I'm going to be very scared, because it kind of tells me about half of the apps that I come across on the Android store are probably malware. So anyway, that's a different question, but this is the data set that we have. So what are the steps that we are going to do? Well, the same set of steps, we split out the result column as Y, take everything else as x, and then do a train test split, okay, and we did that. Now, before we go to the regression part, let me ask you a question, given what you saw the feature, do you think there is any need to do any standardization or any scaling, or anything any normalization here?
+
+Unknown Speaker  48:18  
+Do we need to do that or not?
+
+Speaker 2  48:21  
+Doesn't seem like it. Yeah, I think the only thing you want to do is check for Mills, right? Take the what check for. No. I mean, if this has already been transformed, probably doesn't already knows,
+
+Speaker 1  48:32  
+yeah, it well, I don't think it is actually transformed. I think the data set basically probably comes just like that. So it's basically given the nature of this data. It's just zero and one, right? So essentially, what my point is, there is no other pre processing needed to be done in this data set. And I think we all agree that just doing the train test split is good enough, and then we can now go into logistic regression. So let's create our logistic regression model, and then we are doing the same thing. Model dot fit, and the data set will be fitted. Now if I want to predict, do you think we are going to get a score of 0.1 probably not right, but let's see whether we get a high enough score. We are actually getting a 96% accuracy on train, almost the same 95.9% in test. So this looks like also very linearly separable data. But since this is a high dimensional data, there is no way we can visually confirm that, unlike we were able to see in the previous case, the toy sample case with two dimension, but here you have many, many dimension, 80, whatever dimension, so we cannot see that visually. But this output kind of tells you. And since we got a very good result using your what is called very linear classification algorithm, which is your logistic regression, that basically means there is a clean, linearly separable line or boundary between the two classes. And that's why we are getting this so high accuracy. There are some overlap, but that that's how it should be in any real data set. So that's it, basically. And then the other way you can do this is just like I showed other you can use the escalans accuracy score method if you want to do the prediction yourself. First save the prediction in a separate variable or separate list, and then pass the two list, the testing and prediction list, and you will get the same value, which is point 9594,
+
+Unknown Speaker  50:52  
+on the test data.
+
+Speaker 1  50:54  
+Right? So bottom line that this data set looks to be of extremely good and accurate data set and be able to predict whether an app is malware for 96% of cases. So
+
+Unknown Speaker  51:11  
+that's the final conclusion from this.
+
+Speaker 2  51:20  
+Any questions, yeah, in the comments, when we, when I was saying to declare the model, you know, logistic regression model, yeah, in the unsolved section, it talked about doing a max ITER, Max iterations of 120 as an argument. What does that do?
+
+Speaker 1  51:37  
+Oh, okay, so it basically so all of these models. So hang on, in the unsolved you are saying,
+
+Speaker 2  51:45  
+yeah, there's, there's a comment that says, in the model and fit to logistic regression, it says to do a range data seven and a maximum 120, yeah,
+
+Speaker 1  51:55  
+basically, huh? So it will basically apply this training. So maximum iteration basically means you see, let me actually take you back here in the decimals. Let's say right, and let's go to the linear case. So what does it actually do? So let's say you have a whole bunch of data point here and you don't know exactly how your line should be. So you start with a random value of your A and B. Then what you do? You basically from this, given this is your first line, first guess, then you take all the individual data point and you find the distance from line to those point. You square them up, add them up, and if that gives you a root mean square. And then how do you know that that is, that is optimal? Then what you will do is you will change the A and B little bit and then repeat this again, and then change a and b little bit. So when you do change a and b and repeat this, if you get a higher value, then you know that, no, no, no, I'm going in the wrong direction, so therefore I'm going to go to the opposite side and see whether I'm getting the lower value. So you will do that, and then you will keep repeating. So every time you do your slope and intercept of the line will change. So it will keep changing. So the question is, how many times you are going to do this? Right if you don't do anything there. I think all of these models are written in a way that once the Delta, the incremental change between one iteration to another, is low enough, then it automatically stops. Otherwise, this will keep going on, because in a real data set, the minimum value will never be zero, right? RMSE will never be zero, so it will keep going on. But even if you don't provide how much, how many times it should do these iteration, it will also always stop. Sometimes, when you have a large enough data set, it can take a while before the results converges to a value to a stationary value. Now, if that is the case, sometimes, at least for your initial testing, and when you are doing the Exploration and Analysis, you are testing the pros and cons of different approaches. Sometimes you might want to just for save time, you might want to control your max iteration to a specific value. That's what that Max iteration is used for, to let the model not run forever. But the thing is, even if you don't do this, it will eventually stop. And these models, these data sets, are so simple, there is no reason for you to provide Max iteration value at all. Now, if you want, since I didn't see the unsolved file, if you do want to provide it, you can always provide it, but that way. Sorry, not here. Here, you are not going to get any difference, though, right? So if you do max iteration 200 because that's what it said. And I'm running this and I'm doing the score, I'm getting the exact same score, whereas if I do a max iteration of less, let's say I do max iteration of, I don't know, five, I might get a lower accuracy score. I might so let's see what happens. I
+
+Speaker 1  55:25  
+Yes, ah, so see what it says. It says, So, lb, FGS. So this is basically the classifier function. It says convergence. Warning it failed to converge. So basically what the model is saying, like, Hey, Mr. User, you only allowed me to run run five trial. And sorry, I am nowhere close to the minimum value of that error that you are looking for. And hence I fitted your model, but with a disclaimer that your result might not be accurate. So that's what this is. This means. So now, now if you try this, you see that you get a much lower accuracy. I mean, it's still pretty high, right, but it's not near what it needs to be like when you run like up to the convergence. So now, if you do 10, by doing this, you will kind of develop it into so see, even at 10, it is not converging, because I'm still getting this warning, and the accuracy would be higher,
+
+Unknown Speaker  56:28  
+but still less than 0.96
+
+Speaker 1  56:31  
+now if you do 20, probably it will converge. So let's see 20. Oh, even 20 did not converge. But you see how these as doing more and more iteration, how this score approaching the perfect score that we already know, which is 0.9694 that we are supposed to have. So similarly, huh? So basically asymptotically approaching the the ideal score, yeah, so see when I did 50. Now that warning is gone. So basically, in less than 50 iteration, this particular training will converge. Now how many iteration will it will need that can widely vary for for a very good data set, it can convert converge even within five or 10 iteration. For a very complex data set. It can take upward of hundreds of 100 iteration like 200 300 400 is not uncommon, so it totally depends on how complex your feature spaces. That was a good, good catch, though I didn't notice that that thing is given there, but in this case, I think, I hope you see that Max sitter 200 is an overkill and for any of these model, and that is the reason I said that this thing simply doesn't have any meaning at all, because even if you don't provide, it will do its thing, and when It converges, it will stop.
+
+Unknown Speaker  57:58  
+That was great. Thank you.
+
+Unknown Speaker  58:08  
+Okay, any other question?
+
+Speaker 1  58:19  
+No, okay, okay, cool. So we are going to take one do one more activity, and then we'll take a break. But this activity is something that you have already done many, many times. I don't even, I'm not even sure what is the purpose of doing this thing again. So essentially, what we are saying here is, like all other machine learning steps, you have to do some pre processing, then you have to train, and then you have to validate, and then you have to predict, oh, and by the way, when you are doing the pre processing, you might have to scale and normalize your data. So that's all, that's all we are saying. And when it comes to scaling and normalization, remember we talked about two different kinds of scaling. One is the standard scalar. Can someone verbalize what standard killer does? I mean, it is there in the slide. But Can one of you verbalize what you think standard scalar does? In your own words,
+
+Speaker 2  59:20  
+zooms in on the data so that you don't have so much you don't have values that are skewing the results. Is it like it sets the mean to zero? Yeah,
+
+Speaker 1  59:34  
+it basically assumes standard killer assumes that the data distribution is following a Gaussian distribution, or normal distribution, but that distribution, given the data, when you get the raw data, that distribution will have some mean and some standard deviation, like, in this case, your original data, if you look at the mean, the mean would probably be the on the x side, the mean will probably be around three. 1000. And on the Y side, the mean is probably going to be around 1200 or 1300 something like that. So that's your population mean and some standard deviation, right? You can calculate easily. So if it is a normal distribution, then without any loss of generality, it is possible to change this population so that in the space, in the vector space, all of these points kind of move along, around together, so that the mod the basically the population kind of gets realigned with your axis, so that your mean becomes at the center. So if you take this, let's say, look at this cloud, and here, what it is showing is, I'm taking this cloud and moving it around so that both on the X and Y side, this middle point will be at the origin. And that's what it means by setting the mean to zero. If you think of that bell shaped curve. It is basically share moving the bell shaped curve to the left or right, depending on which side it was to begin with, to bring it to center at zero. So your mean of the population is zero. That's what it does. And the other thing it does is is also squeezes or flattens the curve in a way so that the standard deviation is always, always one. Those are the two thing it does. Now, this is a heuristic that people apply in many cases, but that does not mean that it is always going to bring in some improvement in accuracy. So the point is there, just like with many other things that we have to try when we do our actual project right, we will try different algorithm, we will try maybe different iteration, we will try different function to use as a classifier, and so on. Similarly, this is also another thing that you could try like, Hey, I will try this without scaling. I will try this with a standard scaling, and then we will see which one gives me better score. And on a case by case basis, in some cases, maybe without scaling, you might be able to get a better score. If that is the case, then so be it. I'll pick the one that that gives me better score, because, by any way whatsoever, as long as we don't cheat, if we get a better score from a model, that is always a big win, right? So we will do that. So that's one type of scaling, and the other type of scaling is called min max scaling. So here, the difference between standard and min, max is what? What are we doing here?
+
+Speaker 1  1:02:51  
+So this is basically simply stretching or squeezing the data like a rubber band. So think about this, this plane as basically, let's say a stretched rubber, and you have all of these dots. Now imagine if you can squeeze or stretch the plane and any shape, any any to any extent that you want. Then it is always possible for you to bring the lowest point to zero and then squeeze the plane so that the highest point becomes one on both x and y side. So if you do that, then for each feature, the lowest value would be zero and the highest value would be one. That's called the min max scaling between zero and one. So that's another way you can kind of bring all of these features kind of in the same scale. And the reason both of these scaling are done because they are mostly useful in cases where your features have widely varying dimension. So let's say, for example, when you are talking about housing data, right? So if you are looking at the number of rooms. They are, what, 2345, maximum, 10 in a house. But if you are plotting, if you your Another feature is price of the house. If you are really putting the price, then it will be 200 300k even if you take the k out, it will still be in 100. Like if you say 300k is 300 it will still be in hundreds. So that means different features sometimes could have a very different scale, and that tends to get them, get the model confused. And those are the cases when either one of these scaling technique, whether the min, max or standard scaling, might actually help get better accuracy right, which is something that we already discussed before. And then here
+
+Unknown Speaker  1:04:49  
+we are going to quickly see
+
+Speaker 1  1:04:55  
+what is called an example of where we are doing that. So. Okay, so in here we are basically taking one data set, whatever the data set is. And I'm not going to even get into the details what the data set is. So we have a data set. So what we want to see is how the outcome of scaling of this data set would be. So the right most column is 01, binary, so that's my y, so I'm taking that out and calling everything else as my x. So this is my x, and then that y is basically the outcome. And then you will do train, test split, and so on and so forth. But here you see that there seems to be a need for scaling, because country staff picks spotlight category, these are very low in value. Days active is intense. Backers count is in hundreds. Pledged is in 1000s, and so is goal. So my point in saying here is this is a data set where the unit of different feature are varying by order of magnitude. So this means that this is a data set that will probably be benefited from a scaling prior to it being applied to any machine learning model. So then, how do you do the scaling? Now, one thing you have to keep in mind that, when you are doing this scaling the three sorry, the two steps are, basically do the fit and then do the Transform. But then the question is, which data do you use to fit it to the scalar, and which data do you use to transform? Now you can use the whole data even before splitting, and then fit your transformer to this whole data, but it is not advisable, because what happens is, if you do that, then when you are doing that scaling, like squishing the data or stretching the data, then your the information contained in your test data kind of sneaks indirectly into your training data as Well, by the fact of squeezing and stretching the data by the scalar. And we don't want that to happen because in order to have a very unbiased model, we don't want during the training phase, we don't want the model to have any effect whatsoever from the testing part of the data. So yeah, so that's why it is always advisable to do the split first, then take the training part of the splitted data and then use that training part to fit the scalar. So now this is your fitted scalar, and then take the fitted scalar and then separately apply transform method on the train and test to get your scaled train for scaled train data and scaled test data never apply the fit on the full data. Always apply it on the training data after the split is done. So that is the only real thing I would like you guys to keep in mind and take as a learning from this activity, because everything else we you already know, but just make sure that you have this thing set in your mind, that fit of the scalar has to be done after the splitting, and it has to be done only on the train portion of the data. Okay. Does that make sense the logic that I said, why you should not be fitting the whole data set. No, no, okay, I was expecting that there would be some question. I would appreciate a reiteration of that as well. Yes, okay, so basically, what will happen is, so let's say, if your whole data is this right, this is everything before your train test split, and when you are trying to fit, let's talk about the min max scalar. What is the fit process do for min max scaling? When you are doing the fit, it will basically take what is the lowest, and it will draw that down to zero, and it will see what is the highest and it will squeeze the space in between so that the highest value becomes instead of 15 104,000 it will squeeze, squeeze, squeeze, squeeze, squeeze, so the highest value becomes one and one on both side, so it is going to squeeze the space so. Right? Think about how in Einstein's theory, right, where he proposes that space time can be changed, right, in presence of, let's say, our dark matter or black hole, right? So similarly here, what is happening is the fabric of space is getting squished because of the scaling. Now, when you are doing the fit, the space is already being squeezed based on all the data that it sees. Exists there. Now, if this whole thing is your data, so then the highest, absolute, highest data point that it will see, it will call that one, because it is a min, max scaling and that absolute highest data point could happen to be within your training data, or it could happen to be within your testing data. But if you are taking that absolute highest data point and calling it one and absolute lowest data point and calling it zero. So then you are kind of cheating. You are basically even for the test data. What you are doing is you are making so that all the test data comes between zero to one exactly. All the trend data also comes between zero to one exactly. So essentially, you are over populating or overcrowded overcrowding that squished data space or squeezed feature space between zero to one, and when you are doing that, so that means many of your test data will kind of tend to look very close to like many of your training data, because overall you are squeezing if in the original data space, feature space, if the two data set were, let's say, 10 units apart, after squeezing, they could be one unit apart or less. Now, if you do this squishing before you are taking the test data out. So that means all of these test data also gets squeezed. And there that increases the chance that many of these test data becomes look like, becomes to look like, very, very similar to your training data. So that means, when you do that, and then you are trying to create measure accuracy on your test data set, you might get an artificially high accuracy score. I mean, it is not going to be too high. It will probably be high in the second or third decimal place, but there would still be a slight chance that the accuracy score on the test data will be pushed up, because your test data was also scaled
+
+Unknown Speaker  1:12:37  
+along with everything else.
+
+Speaker 1  1:12:40  
+Now, if you take 70% of this data as a training data and 30% of data as a test data, it could so happen that the highest point now is not 4000 maybe your high highest point now is 3900 so now you do that. So then you do the when you do the transformation on the test data, now you will not going to get a absolute value of one at the highest you will, you might get a value that is slightly higher than one or slightly lower than zero, either. And that is totally fine, because you are basically doing less overcrowding between that squished feature space that you are doing due to your scaling. So let's take a look at an example there, and you will be able to see so I'm going to run two way, and by looking at the value, you will be able to see what I'm talking about. Okay, so let's do this. So first we are going to do standard scaling. So standard scaling, I'm getting this x train, and then I'm taking the fitted scalar and transforming the X test also, and that gives me, gives me X test. So then we are printing like, hey, between your train and test set, what are the minimum and maximum values? So let's print the minimum and maximum values for standard scaling. And if you look into it, since this is not a min max scaling, this is a standard scaling. So the minimum and maximum could may not be between zero and one. In fact, they won't be between zero and one. So for the training data, I'm getting a minimum of negative 1.68 and a maximum of 5.19 and for testing 1.62 and maximum of 5.94
+
+Unknown Speaker  1:14:30  
+very close, but not exactly the same.
+
+Speaker 1  1:14:36  
+Now, how do we know that this is actually what it is supposed to be. Meaning. How do we know that all of these feature columns that got transformed that they actually are zero mean and one standard deviation? So we need to see that. So in order to see that, you can simply take the scale data and convert so scale data by default. A numpy array. So when you do this transform, the return value is not a pandas data frame, it's a numpy array, as you can see from the output here. So you cannot directly use the pandas describe, which gives you the column wise statistics. So what I did is I applied a pandas data frame on top of the scale data and did a describe. And when you do a describe, it will show you for column 01234567, for all of this column, what is the mean? And if you look into the mean across all of this column, they are all around negative 10 to the power negative 17. So essentially zero mean. And if you look at the next one standard deviation, you see that they are all the same, and which is very, very close to one, even though it is 1.00592 it's almost one. So this is the effect of standard scaling.
+
+Speaker 1  1:16:02  
+Now, when I'm going to do this for min max scaling, we will expect different output. So let's see what how that output looks like. So the method is exactly the same, except this line, instead of standard scalar, we are using min max scalar, so we are doing the fit on the training data in this line and then transforming the training data, and that is our scaled training data. And then we are taking the same scalar and transforming the test data, and that gives our test data. Now, if I want to compute the mean and max of train and test let's see what we get.
+
+Unknown Speaker  1:16:47  
+So for training data, the min is zero,
+
+Speaker 1  1:16:51  
+Max is one, which is exactly what the min, max scalar is supposed to do. Now look what happened for the test data, and this will answer the question that you guys were asking. So for test data, the mean happened to be zero. It could not be it could have been different. But now look at the test data Max, even though the scaling is supposed to transform everything between zero to one, how come there is a one test data that is above one. How come it is 1.12 it is because we excluded the test portion while we fitted the scalar. And that's why, when we are taking the space and squeezing into between zero through one, we are not considering the test data at all. So that's why some of the test data could fall outside of that, and that is intentionally, that is good. We actually do want to have that, because that will give the model a chance to basically try out this prediction on a range that it is not very familiar with. And same thing applies for standard scaling as well. But if I now want to run this slightly differently, you will be able to appreciate Look what I'm going to do now. Now in this line where I am fitting the min, max scalar with X train, I'm going to change that, and I'm going to say, well, I'm going to fit that only with X, meaning the whole data, not just the train data, and then I'm going to take that fitted scalar and do the transformation as usual. Now let's see what happens. Okay? And this is the wrong thing to do, but I'm doing the wrong thing because you guys asked me to, so don't blame me. That would
+
+Unknown Speaker  1:18:42  
+mean that the test Max would be one way.
+
+Speaker 1  1:18:45  
+That's what I'm hoping. So let's see what that happens. Okay, so that's my now, two new scale.
+
+Unknown Speaker  1:18:55  
+Look at that.
+
+Unknown Speaker  1:18:57  
+So this is what we are trying to avoid.
+
+Speaker 1  1:19:01  
+We don't want both of them to be squeezed to the exact same tiny space,
+
+Unknown Speaker  1:19:05  
+because I'd be overfitting right
+
+Speaker 1  1:19:09  
+overcrowding, overcrowding and the chances that more and more of the test data will start to look like closer to some of the training data. So that's why I said earlier that some of your training information might inadvertently be sneaking into your test domain. This is what I meant, unintentionally, you are basically leaking some information from train to test,
+
+Unknown Speaker  1:19:39  
+and that's why you should never do it
+
+Speaker 1  1:19:43  
+now, let me revert it back before I forget, and save the file. And I think there is a slide about that I think I didn't go through. Yeah, so basically, slide basically says the same thing that we feed our pre. Processor to trading data. The pre processor can be used to transform training data, testing data, or data to be predicted by a trained model, meaning any feature data. So here it's basically a very simple looking statement that we feed our pre processor to training data. But I'm really happy that you guys asked the difficult question, and that gives me a chance to actually explain and show what the impact could be if you don't follow this instruction.
+
+Speaker 2  1:20:32  
+Are we good? Yeah, that makes a lot more sense to me, because you're trying to say in this min max limit. You want the training data to stay within this min max limit, but the test data might exceed that min max limit. The same thing in the standard, same
+
+Speaker 1  1:20:47  
+thing in the standard. Yeah, the standard one would be hard to see, like the way that I showed you, but you can take the concept and mentally, you can think extend that into the standard scaling as well, and you will see what I'm talking about. The squishing should be done only using trading data. That way you make sure that there is no leakage from training in from trading data into test.
+
+Speaker 1  1:21:16  
+Okay, so I think it's better to take a break now and then we just have a couple of more activities then. And then we will call it early today. So how about taking maybe a 15 minute break and come back five after eight or five?
+
+Unknown Speaker  1:21:33  
+Awesome. Cool.
+
+Unknown Speaker  1:21:37  
+Everyone back?
+
+Unknown Speaker  1:21:41  
+Almost, yes. Okay,
+
+Speaker 1  1:21:45  
+cool. So what we'll do now first is we are going to do another demonstration. This is, again, it is supposed to be student demonstration, but I think it is just better to run it here, plus. So here we are going to see, we will take a data set and we are going to do two model, one without any scaling and one with scaling, and see whether that makes any difference in the prediction accuracy. Okay, so that's what we are going to do. And then we'll talk about another different method of doing classification, which is not logistic regression. But let's first do this activity quickly to see what effect the scaling might have on our logistic regression. Okay, so this is a customer churn data set, right? Remember, we talked about the customer churn as one of the very popular application, very widely used application of classification, binary classification. So this is our data set. This is basically the different behavior about the customer during the time that customer was a subscriber to our company's product or services. And then the churn column basically tells whether the customer did actually Chad out, or whether they choose to stay with the company. So this is our data set. Let us also do value counts. So let's do DF, dot,
+
+Unknown Speaker  1:23:35  
+churn,
+
+Speaker 1  1:23:38  
+dot value counts. This will remember. This will give us an idea whether the data set is very skewed or not, or more or less balanced.
+
+Unknown Speaker  1:23:50  
+This is looks like
+
+Speaker 1  1:23:54  
+it's kind of skewed so but again, we are not going to talk about if your data set is skewed, what you should do to fix that skewness, because here you can see less than 500 in one class and another class is 2600 so one is to five ratio.
+
+Speaker 2  1:24:11  
+You kind of want this, you want this to be less right? Because I think one, one is true, that the churn
+
+Speaker 1  1:24:18  
+one is true, yeah, yeah. So one basically means that customer did churn out. The customer no longer stayed with the company, and zero means it did not. They did not churn that means they did stay with the company. But the point here is the data set is imbalanced. But again, we are not going to do anything to fix that imbalance today. That's for the next week. So that's, I just wanted to show that like how the data set looks like. But anyway, the point here is to basically do the scaling and then see what the effect is. So we take our x, which is everything else, except for churn, so that's our x, and then. Charn is our y, which is this. And then, based on what we just discussed before the break, the first thing we are going to do is do the splitting. So we do the split here, and then we are going to do the scaling. Now, when we are going to do the scaling we are, remember, we have to always sit on the train portion of the data and then take the scalar and then do the transform to get the scaled output of train data. So this is our scaled train data, and then use that same scalar and then do the Transform again on the test part of the data, and that will give you your scaled test data.
+
+Unknown Speaker  1:25:48  
+So we got that.
+
+Speaker 1  1:25:52  
+Now we are going to fit the logistic regression model with the scaled train data,
+
+Unknown Speaker  1:25:59  
+X train scaled
+
+Unknown Speaker  1:26:02  
+so this is our regression we fitted,
+
+Speaker 1  1:26:05  
+and now we are going to do the scoring. So let's see what score we get.
+
+Unknown Speaker  1:26:13  
+Not bad, 89.6%
+
+Unknown Speaker  1:26:16  
+on training and 89.3% on
+
+Speaker 1  1:26:21  
+test, which still is not a bad score by any means. Now we are going to do another form of scaling, which is that min max scaling, that zero to one scaling. So let's do the min max scaling. Now, again, we are fitting the data with the training and then transforming the data separately for train and then for test. So that gives us min max scaled data. Now we are going to run logistic regression using the newly scaled data, which in this case, is your min, max scale data, not the standard scale. So this gives us our second version of the model,
+
+Unknown Speaker  1:27:09  
+and let's see what the output of this is, 89.2
+
+Speaker 1  1:27:16  
+and just by chance here, the test accuracy is higher than the training, and that might happen occasionally, which in this case, it did happen. So between the standard scaling and min max scaling. So standard scaling give us 89.6 and 89.3
+
+Unknown Speaker  1:27:41  
+and this is 89.2 and 89.7
+
+Unknown Speaker  1:27:45  
+so looks like the
+
+Speaker 1  1:27:49  
+min max scaling produced a higher accuracy on your test data. Now another thing which is not present here, which we are going to do now. We are going to do this logistic model again one more time, but this time, we are going to use just X train, not the scaled version, the original data set, without any scaling.
+
+Unknown Speaker  1:28:18  
+So this is our third version of model we are doing.
+
+Speaker 1  1:28:26  
+Oh, it actually even fails to converge with this. So what happens is, even though, even we have not provided actually let me do one thing. Let me first put a random state one, oops. Why did I put double equals? And let's see if it converges. No, it's still not converge. Now let's increase the max iteration, let's say 1000. Let's see whether that causes it to converge, probably it would not exactly what I said thought. So sometimes it might happen. This is actually good that we did. So in this case, without scaling, the model is completely failing to converge. And this is a problem that did not happen up here in the two other cases where we used a train, sorry, a scale data to train the model. Non scale data is actually causing the model to fail to converge at all. And that probably tells us that if I do a scoring on this model, the score would probably be, oops, sorry, I clicked on something else, the score will probably be lower, not there. I wanted to do it here. So here, when I'm doing the scoring again, I have to use the non scaled. Data, because that's how the model was trained for,
+
+Unknown Speaker  1:30:06  
+895, and 893,
+
+Speaker 1  1:30:10  
+huh? The training data score, even though the model did not converge, the training data score is still higher, but the test data is lower, 8934, here, 8972, here,
+
+Unknown Speaker  1:30:26  
+and 8934, here.
+
+Speaker 1  1:30:30  
+So looks like in this case, even without scaling, we got about the same accuracy score on the test data, with the warning that the model did not converge. So what you see here that is not something that you will see on a realistic data set. If the model does not converge, you will most likely get a lower accuracy score because the model did not get enough time to converge. It is not converging because, because your scales of these different columns are different. So even though we did get a high accuracy score without scaling, but just the fact that the model did not converge, even with 1000 iteration. Kind of should give you a hint that it is always a good idea to scale the data, especially when the dimension units are basically widely varying between one feature column to the other.
+
+Speaker 2  1:31:34  
+But no, I was able to get it to work without giving a max iteration, and the scores were vastly,
+
+Unknown Speaker  1:31:44  
+point eight, 5.89,
+
+Unknown Speaker  1:31:47  
+I'm sorry, how much score did you
+
+Speaker 2  1:31:50  
+get by not having a max fitter I was able to get it to still work, but the scores were Like, point 850,
+
+Speaker 1  1:32:00  
+okay, so, but did your converge? No, ah, okay, yes. So see when I'm not doing the max iteration, the score is coming down substantially. This is what you got, right? Yes, yeah, yeah. So basically, what I'm saying is, so the model is basically telling you, like, Hey, Mr. User, I have tried my best. I don't know what heuristics they the algorithm applies internally, but I think it probably looks at successive changes in the improvement, and if maybe for five or 10 iteration the improvement is not that much, then it gives up and it prints this warning, you can still force it to continue, but it is not going to converge, but it will still probably increase the accuracy score a little bit. That's what you are saying. But again, as I said, Whatever you see, the behavior in all of these data set that you are using in this class demonstration is not something that you will expect always when you are working with real world data set, which is what we saw even with the max iteration, where I can change the max iteration to even higher, let's call it 5000 and the model will still not converge. It will take longer. Yeah, it did take longer, but it still didn't converge. This time you will get a higher accuracy score, but that does not mean anything.
+
+Unknown Speaker  1:33:30  
+Huh, 892892,
+
+Speaker 1  1:33:38  
+yeah, it is lower than this, because what happens is see what does not converging mean, meaning as the values go closer or closer and closer to that stationary value which is supposed to be at the minimum of the curve, since it is not converging. So if you keep repeating the training, what it will do is it will keep shooting back and forth flip flop between the either side of the minimum. So now, depending on how many iteration you are doing, it might latch on to a point which is closer to the stand as closer to the stationary point, or it might end up being a point that at that is at a much higher in the in the curve. So that's why there is no guarantee whether you can run it as long as you want, but there is no guarantee your score is going to be uniformly moving to a certain direction, because your model is flip flopping. The model is not converging. And the reason the model is not converging is because your scale of your column is different. That's why it is hard time having a hard time to converge.
+
+Unknown Speaker  1:34:52  
+Yeah, that was actually good. I ran this.
+
+Unknown Speaker  1:34:56  
+This is an eye opener. I.
+
+Speaker 1  1:35:02  
+Okay. So the bottom line is, keep it in mind, especially if you see when the the units are widely varying, always, always do a scaling. Okay? And then if you ask, Hey, which scaling should I do? Min, Max or standard? The answer is, I don't know, you try the both, and whichever gives you better accuracy on a given data set.
+
+Speaker 5  1:35:29  
+Hey, but now just a quick question. So just the last provider where you're trying to show the model didn't do perform perfectly, is because it was not, I don't know. Is it? Is it because it's not trained, or is it because it's not
+
+Unknown Speaker  1:35:47  
+standardized,
+
+Speaker 1  1:35:50  
+so the model is trained, but what is happening is, Hang on. Let me see if I can draw something here. Hang on a second. I
+
+Speaker 1  1:36:05  
+draw line. Okay, so let me try to draw something as best as I could. Okay, so let's say
+
+Unknown Speaker  1:36:15  
+this is a graph
+
+Speaker 1  1:36:18  
+of your residual error. Residual error, meaning that RMSE score that we calculate, right? So when you start with any random state, it starts with an arbitrary function, mathematical function. And let's say if this is the value that you are trying to reach. So this is your target value that you are trying to reach. The model will initially start here, let's say somewhere, based on what random value you choose. And then it will change the model parameters in one iteration. And then if it sees that it has gone up, then it will say, No, no, no, which way that my slope is going down this way. So then from here, it will basically draw like a tangent like that, and wherever the tangent meets the curve again, then it will try to do the next iteration sitting here, and then it will do that thing again. And it is basically going to draw another tangent here, let's say and based on where this tangent with the curve, then this is your second part point. And then it is going to try here. So similarly, it will go on and it will probably, you will probably see said, this is your first point, this is your second point, this is your third point. Then maybe this is your fourth point, this is your fifth point. And then successively, these points will basically come closer and closer and closer to the ideal stationary point that you are trying to achieve. And training will stop when the model sees that maybe for few, maybe three or four successive iteration, the gap is so less than then then it will decide like, okay, so I have probably reached that minimum point, the stationary value that I'm looking to achieve. That's what convergence mean. Now, when the model cannot converge with basically means the graph is so that when it draws a tangent line from here, it goes here and then it draws a tangent line from here now based it will not see that in this curve, maybe it will come up with a different curve. But from here it will shoot to this point. From here it will shoot to this point. From here it will shoot to this point. From here it will shoot to this point. So it will basically keep going back and flip flopping between the either side of the stationary point. So what will happen is the delta, incremental improvement that it is getting between each successive trial is always a large number and not closing in or not zeroing in around the stationary point. That's what not converging means. So these, these convergence warning that you are seeing whenever you see this, think about in your mind, is basically flip flopping right and left, right and left. It's basically having a very high, hard time to latch on to that absolute minimum point. And that's why, even if you force Max iteration to be higher, it will keep flat, keep flip flopping back and forth much longer, but of no use. It will never, never, never, ever converge,
+
+Speaker 5  1:39:24  
+okay? And then to get it to converse is to do the scale. Is that correct?
+
+Speaker 1  1:39:30  
+How you the Scaling? Scaling helps it get converged better. Oh, because what happens is, this is a simple, two dimensional, one dimensional case, but in your case, you have a model that has like, how many features, let's say 10 or 20 feature. Now think about this car drawn in 20 dimension. Now if one of the dimension is much steeper than the others, because one dimension has values in hundreds or 1000, and in other dimension, the value is on. D, between one to 10. Now what happens is the landscape loops very distorted, and that's why, when the algorithm keeps doing flat and flopping, flip flopping back and forth, it basically calculates the slope at one point of the carbon goes to the other, so it might end up at a point because of the distortion of the shape of the curve, it basically misguide some model, and it goes to the other side and it never latches on to the absolute minimum value that it is you are looking for. So to try to understand this, so this is slightly deep mathematical concept, so that's why I try to best my best to draw this. But think in mind not converging. Mean the model is flip flopping. It cannot make up its mind which one is the minimum value of the error. That's what it's doing. Okay,
+
+Speaker 5  1:40:55  
+thank you. That drawing actually helps a lot. Yeah, okay.
+
+Speaker 1  1:41:06  
+Now, how do I erase this drawing? Hang on,
+
+Unknown Speaker  1:41:11  
+there's, there's a trash bin on the Annotate.
+
+Speaker 1  1:41:13  
+Haha. We are all drawings. We have found it cool.
+
+Unknown Speaker  1:41:19  
+Okay, any other question?
+
+Speaker 1  1:41:27  
+Nope. Okay, so let's move on to the next and last topic for today, which is another way of doing the classification. So up until now, this method of doing the classification, which is basically same as the curve fitting like we did in the linear regression, except the curve is a sigmoid curve, or logistic curve. So this word logistic is basically in mathematical literature. Think of it as a synonym to sigmoid. Sigmoid logistic meant the same thing, but essentially, in this way of doing classification, we are basically using the statistical behavior of the data and trying to fit a mathematical curve that fits the statistical distribution of the data. That's the algorithm that we just learned, which is not different from linear regression that we learned last week. Now these works for the most part, especially when your data set is something like this, which is linearly separable in space, but these will fail or perform poorly. If your data set has some exotic curve and shape like this, that method will not work very well. So that's why another alternative method people apply is to use the geometric nature of the curve, not the curve, geometric nature of the feature space, and try to draw a line between the two class that clearly separates the two out, even though here you are saying you are drawing a line. But the way that algorithm is working, it's not actually drawing a straight line. It is basically trying to fit a sigmoid curve, and then based on a threshold, threshold value of probability, it is predicting what is the highest probability of a particular data point belonging to one class or the other. It's still a probabilistic calculation. But the next method that we are going to see there, the algorithm actually literally draw the line or a surface, or whatever dimensional plane it might be like, n minus one dimensional surface within an n dimensional space, physically it will draw that surface, okay, and then, based On which side of the surface the point belongs to it will then do the prediction whether the point belongs to class zero or class one. So in that way of doing the classification, let's say you have a one class here and one class here, and you are trying to predict another point. Let's say this was not part of your train set. This is, let's say, test point. So you train the model with this and this point the light blue and dark blue points. And now you came up with this, another test point, and you are asking the model, hey, which class does the model belong to? Not model. Sorry, this data belong to. This data point belong to. Now, in order to do this, then what the model will do, it will try to actually physically draw a straight line. I actually like that annotated feature. Let me use that again. Okay, so it will basically draw a line between the two, and it will try to draw the line. So. The line is equidistance from both sides. My line drawing is not perfect, so don't worry about that, because this is not equidistance. I just draw a free form. But based on this now, it will try to predict whether these any other data set that comes in the in its way in future, which side it belongs to. If the data set is this side, it will say, okay, it is the zero class. If the data set in here, it will say okay, it is belongs to class one. Now the question is, which way do you draw the line? Do you draw the line this way, or do you draw the line this way? So if you draw the second line, then you see your prediction outcome will be different. Now, according to the second line, this test point will belong to the dark blue class, but if your boundary was the first line, then according to that boundary, this data point belongs to the light blue class,
+
+Unknown Speaker  1:45:58  
+which is what is being shown
+
+Speaker 1  1:46:03  
+in the next slide that there are many, many different ways to draw the line. Now the question is, what is the algorithm? How would you draw the line? So the algorithm goes like this, so it will basically create this hyper plane. Right? The hyper plane basically mean n minus one dimensional surface. Now, in doing this hyper plane, what it will want to see is, what is the point of the width? What is one point belonging to any one of the class that is farthest enough from the population center and closest, as close as possible to the boundary
+
+Unknown Speaker  1:46:52  
+on both side, this side and this side.
+
+Speaker 1  1:46:56  
+And then, based on that, it will try to draw the boundary so that these farthest point, far, well, farthest from the population center, but nearest to the boundary. So this point, and this point, as you can see, for the light blue class, this is the closest for the dark blue class, this is the closest to the boundary. Now, what it is going to try to do is maximize the distance between let me go to the Annotate mode again. It will try to maximize the distance between vertical distance between this and vertical distance between this. So basically, it is going to trying to reorient the line so that this division becomes as wide as possible. Now think, why the wider your so let's say this is the wall that you are trying to put up between US and Mexico, let's say right, to keep the so called drug dealers out. So you are basically trying to build a wall and trying to create sort of like a no man's zone, zone on the two sides of the wall. Now, as a border control officer, you'd like to design the wall through our land area so that you can widen this no man zone as much as possible on the both side to get the most safety barrier to your boundary. Now for this domain, for the classification domain, the explanation is that the wider your boundary is, the higher confidence that you will have in the classification with a wider boundary. So that's what this algorithm is going to do, and this is called support vector machine. Now why it is called support vector because these point, the single data point that it is going to find, which is closest to the boundary line, that is called the support like think about you have all this population and you are trying to draw a boundary. So what is the point that is closest to our boundary that is providing some support or some resistance? I think resistance is probably a better word, that beyond which you cannot push. So you have a support point on this side and you have a support point on the other side. And based on these two support points, think of these two support point as your constraint. So within these two constraints now you are trying to draw these border wall with the no man zone as wide as possible to have as clear separation as possible between the two classes, and that's why it's called a support vector machine. Now why vector? Because in an n dimensional space, you are basically presenting each of the data points as a vector, right in a n dimension. So that's why this algorithm is called support vector machine. And. And it is not based on probabilistic nature of the distribution. It is simply based on the geometric nature of geometric distribution of the point in the n dimensional hyperspace, so that you can create a n minus one dimensional hyper plane that is as wide as possible from the support vectors of the of the participating classes. And that's what the support vector algorithm works. Support Vector Machine algorithm works.
+
+Unknown Speaker  1:50:32  
+So when, when you say
+
+Speaker 4  1:50:33  
+there it's a vector that that means it's a it has a magnitude and a direction. So the magnitude is, is that line trying to be minimized? And
+
+Speaker 1  1:50:46  
+then, no. So these, each of these points in mathematical literature, if you have a, let's say, three dimensional data point, right, a three dimensional XYZ, Cartesian space, right, your position is a vector. So we call it like, what do we call let's say you have a XYZ three dimension, and then let me take a different color, yeah, so let's say now you have a point here. Why does the color not take effect?
+
+Speaker 1  1:51:20  
+Okay, so let's see if it works. And let's say you have a point like here. Now your This point is called a vector, because this has a magnitude which is square root of x, square plus y, square plus z, square if it is a three dimensional and it also has a direction. So these arrow it is at a particular direction, theta from this, and also azimuthal direction, phi from this. So this theta and phi together basically specifies which direction this arrow is in. This is like a purely simple geometrical concept. Now, in machine learning literature, all of the data points, when you have they are treated as one of these vectors with a specific direction that it is pointing to from the coordinate and with a specific value based on the Cartesian distance. So that's why we call these vectors. Now, based on this vector in this three dimensional space, you have a vector. Here you have a vector. Here, you have a vector. Here, all of these are vectors. And if you take another color, let's say, let's take another color, so then you have a vector here. You have a vector here, or you have a vector here, in a 3d space. Now what you are trying to do, you are basically trying to draw a surface between the two. So since this is a 3d plane, the surface would be in a 2d so this is basically the surface. So think about these blue dots are below the surface. Purple dots are above the surface. So you are going to basically orient the surface so that the distance from the surface to the point from the purple class which is closest to the surface is maximized. And similarly, distance from the surface to the point from the light blue class that is closest to the surface is also maximized. Which are these two lines here in this 2d projection? So is
+
+Speaker 4  1:53:21  
+wouldn't it be minimized? Or why is it maximized? Sorry,
+
+Speaker 1  1:53:26  
+so, because when you maximize, you are having a very clearly defined decision boundary, the no man's zone. The wider it is, the less chance of overlap. Actually, you will see that in the next here, for example, in the next slide. So ideally, what will happen, not ideally in a in a real data point, data set. So what you are seeing here that is probably unreal. So likely you are never going to get two data set that are completely separate. There will be some overlap. So now in this example, as you can see that there is some overlap. Now what you want to do, you want to basically see, even with this overlap, how you can most clearly identify that which point it belongs to. So that's mean you need to have a very clearly defined zone between these dotted lines and the solid lines. That will hopefully be the no man's zone. Now that is not always possible, for example, something like this, it is never possible, but your model will try to reduce that chance of that overlap. So your plane will be something like this, which is kind of what I try to draw with my very bad drawing skill. But this is essentially what you are going to have. So if you can draw the plane, that blue line as. Blue dots light blue and dark blue dots are as far away from the plane as much as possible. That means your classification accuracy will be higher, because you can now clearly separate in space the two different classes that you are trying to classify. So
+
+Unknown Speaker  1:55:32  
+it makes sense
+
+Unknown Speaker  1:55:36  
+getting there.
+
+Speaker 1  1:55:38  
+Yeah. So now another beauty of this method is when your data set happens to be like that, when there is no linear boundary between the two,
+
+Unknown Speaker  1:55:51  
+but instead the boundary is supposed to be curve.
+
+Speaker 1  1:55:55  
+Well, you can still apply the same technique, except now your border wall. Instead of becoming a straight function, straight line, which is a linear function, you can use a polynomial function, and then it will carve and text and twist and turn to make a clear boundary. Now what that also means is it also increases the chance of overfitting. But if you control the over fitting, then these will essentially give you a better model and better predictive capability than a simple linear model, and which mathematical function you are going to use to draw this boundary is called kernel. So you can use the same SDN method, SVM method. But you can switch the kernel, and you will get different prediction accuracy, because one kernel will give you a plane linear, another kernel will give you maybe a sigmoid curve. Another kernel will give you a Gaussian distribution type curve. Another kernel will give you maybe an n degree polynomial and so on. So there are many different kernels that scikit learn provides that you can choose from. Now, again, in a high dimensional data set, there is no way for male model like you and me to know which kernel would be better, but what you can do as part of the model selection, which is one of the one of the important step in machine learning. When you are doing selecting the model, you can try out different kernels and see which one provides better accuracy. Because you have no knowledge beforehand whether your data is separated by a linear plane, or whether it is separated by a degree two, degree three polynomial or whether it is separated by exponential curve. You have no way to know, but if you know just the fact that there are kernels that you can change, and you know that what are the kernels that psychic learn provides just that knowledge is enough, because now you can do trial and error and switch out different kernels and try your regression with different kernels. So
+
+Unknown Speaker  1:58:03  
+which we are going to see in a moment, in the last activity we will do.
+
+Unknown Speaker  1:58:21  
+Okay, hang on. Let me
+
+Unknown Speaker  1:58:24  
+clear the annotations first.
+
+Speaker 1  1:58:32  
+Okay, so another thing I wanted to show you is this, actually, let's do SQL, learn SVC kernel. So if you go into the SVC documentation, SVC is basically the method or function that you are going to use to do the support vector machine. And there you will see that there is a parameter that you can specify, which is called kernel. So these kernel parameter can be these values, linear, polynomial, RDF, sigmoid and pre computed. Now I'm not going to go into the details of all of these and what that means, pre computed is basically something where you are. You are basically providing a user defined function, which is a callable function, and you are giving it which is a super advanced technique. And we are not going to that extent, like if you have any prior knowledge through your other analysis, which I cannot even explain to you, what that analysis would be, but if you happen to have found a way or have some insight, like hey, curve that will be like a x cube plus b x square plus c x like a degree three polynomial would be a better divider between the two. Between these two data points, you can actually provide a custom function. Function, which is a callable function inside which you will basically implement that method, the polynomial, or whatever that curve you think you'd look like. And then you can do that, which is very, very advanced stuff. Even I don't know how to actually come up. I know how to use the pre computed kernel, but I don't know how to come up with that mathematical definition of a kernel in the first place. But for your purpose, we can use these four kernels and try out our classification and see what each produces. So there is another, this thing. This is also in their documentation, and I'm going to send post this link. So this is a good discussion that shows the classification boundaries of SVM with different kernels using toy data set, of course. So what it does is, and there is whole all the code and everything is provided here. So here you will see that this is the data set that we are taking, zero plus and one class. And then you basically plot these different what is called kernel, so linear kernel. So you can also see, when you go through this, you can see how, what is the mathematical function of linear kernel. And with this function, you can actually plot the decision boundary between the kernel. And this is what the linear boundary will look like with a kernel value of linear polynomial kernel. It basically tells you what that polynomial is, which is this, and then you plot the polynomial kernel. Sorry, you do the classification using polynomial kernel. And this is what the decision boundary will be looking like with polynomial kernel with the same data set. By the way, the data set is not changing. So in this example, they are using just switching the kernel and seeing how the decision boundary looks like. And obviously, because of the decision boundary, your accuracy score will also going to change. So that's your polynomial kernel, then RBF kernel, which is called the radial basis function, which is also known on the Gaussian kernel. And this by default. But this is, by the way, the default kernel which uses the exponential distance, which is this e to the power some constant time, x1 minus x2 distance. So this is basically vectorized distance between the two. So how that kernel looks like? So this is the output from the RBF kernel. And then finally, there is a sigmoid kernel, which basically uses a tan hyperbolic function to create a sigmoid surface between the two. So this is a pretty cool this method to look at and learn how they're actually using it. So let me put that in our live channel. And is that you can
+
+Speaker 2  2:02:55  
+the no man's land part of the colonel. Was it just the boundary? Huh? Is the is the solid line the kernel? Or is the dotted line no man's land?
+
+Speaker 1  2:03:08  
+So basically, the distance between solid line and dotted line is the no man's land. But for some reason, this RBF kernel, you see the solid line for this thing. So here the basically the classes are disjoint with RDF. So what is happening is the yellow class has two island between ocean of PARP and class. So the decision boundary is basically two separate kind of what is called two separate closed paths. So this is a decision boundary, both of these combined. So now this dotted line, which is the no man's land, it will exist, one on the blue side, one on the purple side. So since the blue side is kind of disjointed into two separate group, so that's why you will see one dotted line here and one dotted line here. But both of these dotted line belong to, logically to the same side of the car of the boundary, and then for the purple side, this is the dotted line. Okay. Now don't ask me exactly how this is plotted, because I don't comprehend the math behind this and how this is computed. But you can try this. You can go through this code yourself and see if you can make some sense out of it. But for our purposes, it is, I think, enough to know here that there is basically four different kernel that are readily available. If you don't specify a kernel, then RBF become your default kernel, which is this thing, and it basically will probably give you a very high score. But as you can probably see, when your model is nitpicking so much, the risk of overfitting is also higher, right? So now, does that mean it will always perform worse than the other? There is. No guarantee, because every data set is different. So that's why you can try all these four different kernel when you are doing SVM type of classification.
+
+Speaker 1  2:05:21  
+Okay, now we will see this quickly in action. So this is our data set, and oh, so here look what we are. We are not importing from SK learn dot linear, because in the other ones, we always import it from SK learn dot linear like library. SK, learn dot linear model. But here we are exporting from oops here SK, learn dot SVM. So from SK, dot learn dot SVM library, we are importing a class called SVC, which is the support vector classifier. Okay, so that's our classifier that we are going to fit and predict. So this is our data set. This is, again, that same data set that we saw earlier, that malware detection based on the android permission. So this is that same data set. So let's take the y, which is the result, and the x, which is everything else, split the data and these data sets, remember, we already discussed. There is no need to standardize or scale or anything, because this is simply zeros and ones. So we are not going to do that. Now, we are going to try this with SVC and linear kernel, so let's see what we get fit,
+
+Unknown Speaker  2:06:51  
+and
+
+Speaker 1  2:06:54  
+it is going to take little longer. Support Vector Machine, by the way, will always, almost always, take longer to fit then your logistic regression. So see, it took 11 seconds to fit,
+
+Unknown Speaker  2:07:07  
+and then we are going to do the prediction,
+
+Unknown Speaker  2:07:11  
+0.956 and 0.960
+
+Speaker 1  2:07:16  
+so testing accuracy, by the way, is higher in this case, switch is nothing to be too concerned about, because that might happen with small amount of data. Now I'm going to do another model, but this time I'm just going to switch out the kernel. So instead of linear, I'm going to do polynomial.
+
+Unknown Speaker  2:07:41  
+So let's see what happens.
+
+Speaker 1  2:07:51  
+It will probably take even longer. Oh, no. Oh, about the same, 10.9 Okay, so you see polynomial gave us better accuracy, both for training and test. And I would argue this is probably a better model to do, because unlike in the linear one here, my test accuracy is slightly lower than the train accuracy. So just between these two, we can conclude that polynomial kernel is a better which is almost always the case for a high dimensional data set. Now we are going to do the same thing, but sigmoid kernel.
+
+Unknown Speaker  2:08:35  
+So let's do sigmoid. So
+
+Speaker 1  2:08:55  
+oh, we broke the 11 second mark, 15.8 second so Sigmar, it is performing much, much worse. So for this data set, at least we cannot use sigmoid. And then finally, the default one. Do you guys remember which one is the default? I mentioned,
+
+Speaker 1  2:09:18  
+RBF, RDF. So if I don't specify anything, you see it says kernel equal to RBF. The GNA is saying because the default, default is RBF. So I'm not specifying anything which is basically same as specifying RBF. So let's see what the default does. So
+
+Speaker 1  2:09:55  
+okay, this is taking the longest. Who. 2969966,
+
+Unknown Speaker  2:10:05  
+so which one would you go with? Guys
+
+Unknown Speaker  2:10:09  
+between your linear
+
+Unknown Speaker  2:10:13  
+polynomial
+
+Unknown Speaker  2:10:15  
+sigmoid and RBF.
+
+Speaker 5  2:10:21  
+RBF is the highest one, right? That will be the best.
+
+Speaker 1  2:10:26  
+See RBF, RBS, is this right? So think about it, RBF is going to be most nit picky of the models. Now, in this case, it did not overfit, as you can see from the training score. It's not that the test score is drastically below the training it did not overfit, and it can probably give rise to disjointed boundaries, which, as you can see, is apparent in these so that means your model is going to try to do the best to understand the contours of the plane, and depending on the contours of the plane, it might be able to come up with a very, very, very, very accurate boundary with the risk of overfitting. So this is a really powerful tool, but keep an eye out for the overfitting. So use it with caution,
+
+Speaker 1  2:11:29  
+and that would be all the material that I had to cover for the today's class question. I
+
+Unknown Speaker  2:11:43  
+or at least, I think I have covered everything.
+
+Unknown Speaker  2:11:46  
+Yep, that is everything
+
+Unknown Speaker  2:11:55  
+cool. I
+
+Speaker 1  2:12:08  
+in the next class, we are going to do KNN and then the decision tree based methods.
+
+Speaker 1  2:12:21  
+Thank you. Okay, so if there are no other question, we can call it a day and give you more than half an hour back, actually, of your valuable time. Thank you. Thank you for.
+

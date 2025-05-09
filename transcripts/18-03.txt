@@ -1,0 +1,864 @@
+Unknown Speaker  0:20  
+Okay
+
+Speaker 1  0:22  
+so today we, as I promised in the last class, we are going to make recommender systems. Okay, so talking about recommendation right? Recommender system. So let me ask you a question first. So where can you think of in your daily day to day life, where do you think or offer all of us actually, we actually come across something that you think that there is an algorithm making some recommendation or decision for us. Can you think through some some scenarios or some from your daily experience, TV, streaming services, the streaming services, yes, what else Twitter? Can you elaborate Twitter, like how
+
+Speaker 2  1:18  
+the posts you get from, like the people you follow, or like even like posts you don't get from like you get from people you don't follow.
+
+Speaker 1  1:27  
+Yeah? So basically, I think Facebook also, right? I mean, any social media, probably, yeah. So streaming service, social media, anything else, shopping at Amazon? Yes, that's that's a big 1e. Commerce, right? So, so you, you basically shop something, and then they basically try to find the trend and basically try to help you. I mean, all of us like, Hey, these are some of the other things you might like.
+
+Unknown Speaker  1:59  
+Anything else comes into mind?
+
+Unknown Speaker  2:03  
+Google recommendations.
+
+Unknown Speaker  2:06  
+Google's recommendation? Yes, yep.
+
+Speaker 3  2:10  
+You know, I get a lot of emails from Amazon, what I what they think I'd like to buy next?
+
+Unknown Speaker  2:17  
+Yeah, I think that's what Ingrid said, right? The shopping Oh,
+
+Speaker 3  2:19  
+I'm sorry, I just joined in LinkedIn, okay, yeah,
+
+Speaker 1  2:24  
+LinkedIn, also, same thing social media. You call it Facebook, Twitter, LinkedIn, all of this, right? So, yeah, so these whole thing basically started. Do you know which company actually started this whole thing, is it? Facebook, Netflix, actually, okay, yeah, yeah, so, because they are the first streaming service, right? I mean, I think YouTube also existed, but back then, they were not doing anything remotely like close to what we are doing, right? Like a rank search, yeah, but Netflix, I mean, even before, so think I don't know how many of you, probably a lot of you used to like rent DVDs from Netflix that were the they used to mail the physical DVDs. So if you think back, even during that time when you log into the Netflix portal to order DVDs, there was no streaming, but they were still recommending other movies based on your past watch history,
+
+Unknown Speaker  3:33  
+so they were the first to start this.
+
+Speaker 1  3:38  
+So anyway, so what we are going to do today is basically try to understand, I mean, obviously the activities that we are going to do in the class, it's not going to go to the scale of a state of the art recommendation engine model that industry is using, because that will be way beyond the scope of this. But what we're going to do is we are going to spend some time trying to get at least a high level theoretical idea of what goes on under the hood, what what makes these things be able to recommend things right? And these systems are not always perfect. I mean, a lot of time, I'm sure, for most of you, like I get annoyed by the recommendation that they provide, right? And because these things are not perfect, they cannot be right. But so cool. So that's setting that context. So obviously we are during the week where we are learning neural network, right? So the recommendation engine that we are going to be building is basically based on the same concept of a perception, right? So if you recall what a perception was, it's basically a mathematical function which is this, right? So it's a very, very simple mathematical function which can have. N number of outputs, right? No limit. So for each of the n outputs, then it is associated a weightage, which is basically a factor that multiplies whatever value comes in through that input, n number of input, each with a weightage. And then the mathematical function is simply multiply, multiply each input by the corresponding weight, and then add them up. So that is the simple, simplest perception. And then later, people figured, well, in order to be able to tweak the behavior of this, there is a additional lever that they wanted to add, which is the bias. So basically, the mathematical equation that will come out of this function would be, if your bias is, let's say W zero in this example. So it will be w zero plus w 1x well, w1 should be x1 anyway. So I had actually like to call it
+
+Speaker 4  6:05  
+B. So if you call it B, and then if you change this, oh, you cannot even,
+
+Speaker 1  6:15  
+huh. So, so by doing this way, you would say, well, oops, B plus w1, x1 plus w2, x2 and so on, right? Well, I still have to do this, but for some reason it's not allowing me to Yeah, yeah. So x1, w1, so basically the idea is each of the index indexes of the input correspond to correspond with the corresponding weightages match. So it will be basically wi, X, i, where i goes from this in the summation the i goes from one to n, so that plus an additional bias, so that essentially is what a perceptron is, right? And in the last two classes, we have organized this perception in two ways. So first we created a layer of these perceptrons where the layer could be as wide as we want, like 510, 1520, wide. And then we also added multiple such layers, making sure that output from the previous layers feed into the input to the perceptrons in the next layers and so on. And then in the final layer, we will have either one perceptron of its or if it is a multi class classification, let's say 10 class. Then we will have 10 perceptron and based on that, it will basically provide us the output, so that basic structure kind of remains same, even for your recommendation engine. In fact, it actually the structure of the network is much simpler. So what we learned is, for any kind of classification or even regression problem, generally, if you make your network bigger meaning wider and deeper, for most part, we have seen that there is an increase in predictable, predictive performance of the system. In recommendation engine, we are going to use something called restricted Boltzmann machine. And in order to do that, you will see that we don't need as many layer layers. All we need is just two layers, and those layers are called the first layer is the visible layer and the second layer is the hidden layer. So essentially that we will build in neural network, which is similar to what we have built, but here, except the only difference would be we will only have two layers. That's it.
+
+Unknown Speaker  8:56  
+So one visible layer and a
+
+Speaker 1  9:00  
+hidden there. But before we go to the structure of the network, so let's talk about what are the different kinds of recommendation system there could be, right? So we discussed a little bit about, like, our daily life experience, from social media to streaming to e commerce, like, Hey, these are the places that we think are using recommendation system to provide us with this recommendation. If you think through deeply, you will see that there are two broad classes of recommendation that happens. So the first one is called collaborative filtering, and this is something you notice in social media. So collaborative filtering. The idea behind this is
+
+Unknown Speaker  9:52  
+the system will look at
+
+Speaker 1  9:56  
+the different users, and it will try. Find which other users are similar to you as a user. So basically, other users having similar profile, and what those users tend to do or tend to like or tend to dislike. Based on that, it will try to predict what you are going to be liking or disliking or interested in seeing, and that is why it's called collaborative filtering, meaning, here, the filtering happens based on the collaboration of the different users or agents different people. And that's what happens in social media like Facebook, Instagram and so on. It looks into your friend circle. And based on your friend circle, it deduces like, well, if these guys are friends, so there must be some mutual likings that they're sharing between themselves. So based on that, those social media does the recommendation. So that's one way, another way of filtering is called content based filtering, and this is something that is more prevalent in, let's say, streaming media or E commerce, where the engine, the recommendation engine, looks into not to other users, but for that user, like you or me as a user, it will look into our past preferences, like what kind of purchases we made, what kind of product ratings we provided, what kind of movies or videos we watched, whether we put a thumbs up or thumbs down as a rating to those movies. So it will basically look at one user's previous behavior, what kind of content the user tends to like or dislike, and based on that, it will try to predict for some other content that are going to come in future, whether this particular user is going to like it or not. So that's why today, if 10 Netflix shows come on today based on who you are, whether it's me or any one of you, we will not see all 10 recommendation in the top bar. We will probably see 2345, but that which one of them, which one of those, they will shortlist is based on what content we have interacted with before. So this is content based filtering, right? So to recap, collaborative filtering is looking into other users preference which whose profile the engine deemed to be similar and contest, but contents bits. Content based filtering is where the engine looks into a single user's past interaction with the content, and based on that, it tries to predict what the user is going to like in future. Now, obviously the world is not black and white when it comes to these things. There is nothing stopping
+
+Unknown Speaker  13:01  
+someone to build a machine that will look into both,
+
+Speaker 1  13:06  
+right? So that will look into what you have done as an individual before and also interject that that with what your friends tend to like. And then they will do a combination of that. So that is basically context based filtering, right? And then context based filtering it. It is more broad and general. In a sense, the context can be many things. So context can be so for example, let's say, when I am going on to Netflix and I'm sitting in us, Netflix is providing me some recommendation, right? Couple of weeks back when I was in Japan, so my context changes, right? No. So now I manage different geography. So when I logged into Netflix, I started seeing different recommendation and same happened in YouTube too, and same happened in Google recommendation engine, right? So suddenly, lot of these US political news, and all they did coming, they did still come, but it was much less. They started showing more Asia Pacific region, like how the Asia Pacific economy is doing different countries and not necessarily Japan. And I was surprised to see, like, lot of news from Singapore or other places, right? It started popping up in my in my contextual like a Google page. So, so basically they are doing both, which is basically bringing in additional context, not just focusing on just collaboration or just content. So context based is a more broader general class of classification, which I mean there is no way for any one of us to predict which companies using which algorithm, but I think most of the companies these day actually do more sophisticated model that way. Can pull in as many contexts as possible, depending on like users location or time of the day, or maybe time of year, their friend circle and location could also be and could be like, hey, whether this person whether it's a weekday, right, whether this person is at work, or whether it's a weekend or a holiday, whether this person is chilling out at home, right? So let us lot of different way that context can be injected in addition to your past choices and your friend groups, friend groups behavior. So that's kind of what they do. Now, for our purposes, we are not going to go that deep, right? So just a disclaimer, why what we are going to do is we are going to build a recommendation engine that will basically do this strategy, which is content based filtering, to be specific, right? Where the recommendation engine will be provided with different users and their activities on something, and then, based on that, the machine, the engine will try to predict, for a given user, what is the likelihood of that user liking or disliking certain other content or activity on a scale of, let's say, zero to five. So that's what we are going to be building throughout the class today. Okay, now before I dive into the specifics of how to build the machine, any questions so far?
+
+Unknown Speaker  16:42  
+So okay,
+
+Speaker 1  16:43  
+I will take the silence as a no, so let's move on then. Okay, so in general, to build all these machines, a particular technique is used, and that technique is called restricted Boltzmann machine. So let's try to understand what restricted Boltzmann machine means. Okay, so the idea comes from the realm of physics, actually, to be more specific, it comes from the realm of thermodynamics within physics. So Boltzmann was the physicist who was behind the modeling of like, how the different molecules are atoms, I should say atoms of a system, natural systems, such as, let's say gas or a liquid, right? How the molecules behave? I don't know how many of you actually have taken some physics, but if you think of like the natural gas law, right? Like all of these that we know, like, hey, pressure and volume. What is the difference between pressure and volume? Like, the pressure and volume of a gas is constant. That means, if you take certain amount of gas, if you expand it, increase the volume, the pressure will go down, which is kind of common sense, right? If you squeeze it, meaning the volume is squeezed, and then pressure will go up, right? So essentially, in order to do this, Boltzmann created some theoretical construct that is used to calculate the total energy of this statistical system, and this particular field in physics, is also called statistical mechanics, for that reason, because the thing is, unlike your Newtonian classical mechanics, right, where you have a ball coming at a certain speed, hitting another ball and reflecting, deflecting in another direction, so where you are basically thinking of in a very classical sense, like how the motions of equation, Newton's motions equation will play. But when you are talking about these microscopic particles, and there are so many of them, right? And they are all running around randomly in all different direction and colliding with each other, colliding with the wall of the container, and doing all of this thing, you cannot really use Newton's classical mechanics in that sense, because now you are looking at a stochastic system, or statistical system. So you have to look at, think about, what is the collective behavior of that population is going to be, even though each individual atom is following Newtonian mechanics. But in order to find the collective behavior, you have to find that the overall population behavior, right? So in order to do that, Boltzmann basically came up with this construct of Boltzmann machine, where these atoms behavior were basically modeled as nodes, and where all the nodes are interconnected. Because what happens in a natural system when you have a when you have, let's say a like a gas with, let's say, a couple of billion molecules inside. They are all running around each other. They are all interacting with each other. And anybody can collide with anybody, right? And when the collision happens, there are certain way the inherent energy of those particles change, right? Now, there is a way to statistically model this. And. Come up with something called an energy equation of the system. So that's where this Boltzmann machine comes in. So Boltzmann created this theoretical construct to model these behavior of these atomic particles. And through this, using some statistical modeling, he was able to find out what is the total energy of the system going to be, and also how the system will tend to behave, which, like any system in nature, always try to be in the lowest energy state. If, because nature is lazy, no matter which natural system we are talking about, the tendency of that natural system is to go to the lowest energy state possible. Now everything like, for example, let's say I have a room here full of air. Now here suddenly, if I burn something and some smoke comes out, what is going to happen to that smoke? Is the smoke going to be concentrated in one place? No, very soon it will spread all across. Right? Why does that happen? So Boltzmann using Boltzmann machine, he modeled those idea that by spreading out so those particular molecules, by spreading out as far apart from each other as possible, it basically minimizes the total energy of the system. And the Boltzmann machine is used to calculate that. Now you might be thinking, why am I talking about so much about physics, apart from the fact that I am actually a physics major, I love to talk about physics. The matter of fact is, when it comes to recommendation engine, people figured that we could use a variation of Boltzmann machine, which is called restricted Boltzmann machine, whereby what we will do is we will basically have, instead of having all nodes connected to each other, we will basically have two kinds of nodes. One kinds of node will basically model the atomic particle, or in this case, your movies or your item that you shopped. So these are your atomic particles, and then other kind of node with model their behavioral outcome. Or in this case, these other kind of particle will model your likingness of that movie or that product or that activity. Then the only restriction we have to put in there in order to use that same energy based concept and actually apply energy based learning, only one restriction we have to put is we have to make sure that no nodes within the layer, within one type of layer, because there are two types of layer right? One type of layer models the all the atomic particle, and one type of layer models all the behavior of the atomic particle, so the particle layer nodes should not be interconnected between each one of them, and then behavioral net level node also should not be interconnected between each one of them, but between these two groups, the particle group and the behavior group. Each of the particle group should be connected to each of the behavior group, and each of the behavior group should also be connected to each of the particle group. Why? Because we don't know which particles behavior will collectively culminate into the overall collective behavior of the population. We don't know so the machine will find that us, find that for us using certain algorithm that we are going to apply. But what we do know for this case is these particles are not supposed to interact with each other, because if you do let them interact with each other, then this system, it still is a valid system, but it becomes very, very hard for it to train. Because now what will happen is something, what is called the information leakage, because now one particle will be aware of the internal state of the other particle. And that basically goes against the assumption in a machine learning model where you are going to train something, you cannot let that information from one state leak to another state. So that's why think about we take a model like we take a network like this, and we retain all the connection between each blue to each green ones, but we cut all the intermediate connection between Green to Green, or between blue to blue, because this whole thing left hand is the original Boltzmann machine used in physics. When you cut all the connection between the like nodes, you basically get something similar to this, and that is why it is called restricted Boltzmann machine, or RBM, with the word restriction, meaning that no like notes can be connected. So that is the restriction in restricted Boltzmann machine.
+
+Unknown Speaker  24:56  
+Isn't this what we've just been doing with the.
+
+Unknown Speaker  24:59  
+With all of the
+
+Speaker 1  25:03  
+that's right in all the neural network stuff? Yes, I was actually expecting that someone will ask this question. So yes, that is we have been doing. But this is a different way of thinking through it, right? And you will see when we go to the learning algorithm, the learning algorithm that we will be doing this case is completely different, because here what we are trying to do, essentially this machine is nothing but a probability calculator machine whereby we are trying to find Bayesian probability of certain events happening given some of the other events happened before. So in probability terminology, this is called ulterior probability and posterior probability. So given a set of events that are independent of each other, which basically mean me looking the movie, watching the movie, Forrest Gump and liking it, me watching the movie Matrix and disliking it, right? So these are all of the events that has happened before. Based on all of these, what is the posterior probability of me liking another movie? Let's say Independence Day. What is the probability of me liking that movie? But that me my association with that movie has not happened before. My association with other movies has happened before. Given those prior probability, what is the posterior probability that I am going to be liking that other movie? So essentially, what it does is this machine comes up with a probability distribution of each of these independent events and smooshes this them together and try to find a cumulative probability, district probability distribution for some future event that has not happened in the past. Now, this behavior is very different from what we have been doing so far
+
+Unknown Speaker  27:00  
+in our neural network.
+
+Speaker 1  27:04  
+Okay, now you don't really need to understand all of these, and what I have done is there in this slide, I have put some link here
+
+Unknown Speaker  27:20  
+to help you, but
+
+Speaker 1  27:23  
+the slide that you have would probably not have these links. So what I'm going to do is, actually, because there are a lot of additional, what is called reading, you can do, not everything, like everything that I'm talking about, not everything is part of even the slide, right? So that's why to basically, for those of you who want to understand a little bit more how this works, I basically have put these links in to the speaker notes. Now, since in your copy of slide, you don't have the speaker node, I'm going to put this into our
+
+Unknown Speaker  28:01  
+live channel.
+
+Speaker 1  28:04  
+So this one, if you go here, so this is you will. This basically talks about this approach, and in this particular case, the author actually even implement this network using pytorch. So you don't have to go all the way, because we are not using pytorch, we are using TensorFlow. So our implementation will be TensorFlow. But if you look through this, you will probably be able to get an idea of how this machine actually works. And there is also another very cool video. I mean that video is, in fact, I like that video the most. Let me see if I can find that video. Hang on.
+
+Speaker 4  28:52  
+I saved it somewhere here. Give me a moment. I
+
+Unknown Speaker  29:16  
+Okay,
+
+Speaker 1  29:18  
+so this is the video that I was referring to. So here the so instead of reading through, I think it might actually be better for you to and this is not much longer, right? 17 minutes long video, right? So after you listen through what I was talking about, I would strongly suggest watch this video. And here you will see the author, when he's talking about he's actually showing how these nodes are firing with your movie and the category, and how, when you are basically running it through the different user, how these firings are going happening. Actually, he basically shows it in a very good visual way. So let me. Put the link to that video there as well.
+
+Unknown Speaker  30:04  
+Okay, and then
+
+Unknown Speaker  30:08  
+going back to our slide. Yeah.
+
+Speaker 1  30:16  
+Now you will look into the video later, but for now, I can even just use this slide to try to help you understand what basically happens here. So the two sets of nodes we talked about right, the visible node and hidden node, drawing basically example from physics, which is what I was referring to, your atom node and their behavior node. So in this case, we are basically calling this the visible node and the hidden node. So what happens is, in all of these recommendation engine system, the restricted Boltzmann machine, there is two step the first step is given the occurrence of certain events. Try to find the probability of the posterior events happening. So how? So let's say in a particular network, these are the different movies. Okay, that or movies or song or whatever you say. Now this snapshot is showing how a particular user has reacted to these items, with one being liking negative, one being not liking and zero meaning have no interaction, meaning that particular user had not watched that music video or that movie. So now, based on this, the first pass of your RBM machine would be to find what is the probability of these events happening? Now you have to think, when I say this event and point to this blue circle, what does that even mean? What is the definition of this event? When we later, you will see that when we are going to construct a Boltzmann machine, we are going to create two layers of perceptrons. In the first layer, which is the visible node layer, we have to put as many perceptrons as many items there are in our data set, meaning as many movies there are that is something that you cannot control
+
+Unknown Speaker  32:44  
+in the second layer or the hidden layer.
+
+Speaker 1  32:51  
+The idea is to basically put the different attributes of the movies. So let's say a movie has can have different attributes. So let's say genre is one attribute. It could be drama, it could be comedy, it could be action, and so on. Genre is one attribute. Another attribute could be let's say, let's say the language of the movie, whether it's an English language movie, German language movie, French language movie, or so on. So language is another attribute the movie which production house made the movie that could be another attribute, right? Because maybe some people will like the movies made by 20th Century Fox more. Some people will tend to like the Netflix original movies more. So a production house could be another attribute, also the lead actor could be another attribute, like some people will, like anyone who the any movie that has Julia Roberts as a leading actress, right? Something like that. So think of your hidden note perceptrons, representing each of the characteristic of the items that you have in your that are coming through your visible node. Now what it means is, so let's say if the first node in the hidden layer is basically showing a particular attribute, let's say what is called let's say genre is equal to action right? So now each of the movies that you have, some of these are action movies. Some of these are not, so that whether it's an action movie or not, will basically come in through the input that it is coming in now by adjusting the weightages of these arrows, because think about each of the arrow, which is the connection, each are basically tied with a weight edge, like which is a decimal number that it gets multiplied by. So now these arrows can be tweaked during the training process, so that if the user happened to like this movie, this movie and this and does not does not like this movie. And if it so happens that this movie is also an action movie, and this movie is also an action movie, so that mean, and then if your first hidden note captures action movies, so that means the weight between this guy to this guy, which is basically this line, and weight between this to this which is basically this line, these two will fire up, meaning the weightage of these two lines will be more than the weight age of let's say this line. Let's say this is a rom com, a romantic comedy. And maybe the user does not like rom com. He is an action movie kind of guy. So the weightage of this arrow would be much less compared to the weightage of this arrow and weightage of this arrow, right? So essentially, by calculating these probabilities, so these probabilities are then given these, these, these events happening, what is the probability that this particular user will like a movie with this genre, or whether these user will like a movie that is made by so and so production house, or whether this person will like a movie that features so and so actor or actress. So think about it this way. Now you might say, well, in order to do that, so that means the data that I'm having in my initial layer, that the data set is coming in, that means that that data set then needs to have all of these information. So just by having the names of the movies is not enough. So then we need to have all of these additional metadata for the movies. You might think, Well, the answer to that is you actually don't, because when we are talking about genre or production company or leading actor, these are our interpretation as a human. We understand the physical world. These are our interpretation. Machine, however, is blind. It's a mathematical model for machine. It does not know what is the significance of that. All it needs, needs to know is, well, the user has asked me to put use three hidden layer. Therefore I am going to try to find looking into the underlying pattern of the data, what are the three main characteristic, and this characteristic does not have any name. These names we are saying, because we are human, when the machine, you can ask machine to come up with three different characteristics of the movies based on the number of hidden nodes that you are specifying, and based on that user will find the probabilities of those characteristics lighting up based on the user interaction with the visible node, but it does not know what that characteristic is, and no one needs to know, because recommendation engine, if you think through in Netflix, let's say it does not even tell you, like, Hey, Mr. Benoit, based on your past experience, I think you are a guy who really like a romantic movie, which is shot in France, where the director is so and so. No, it does not do that because the machine itself does not know what it does is based on what I have done. It thinks that these are the other things that I would like. So essentially, what Netflix has done, so Netflix has made this recommendation engine and these, by the way, is content based filtering. We are talking about this is not collaborative filtering. So the here we are not looking into what other people, who are my friends have done. We are talking about an example what, based on what I have done in the past, and based on that, what my preferences are going to be. And now, if Netflix has made this network, and it is totally their choice to think about, to not think about, is totally their choice to decide how many hidden nodes that they want. The more hidden nodes you have, the more predictive power the model will have. But let's say they do it with three, three of these hidden node so based on that, now the model knows that the probability of Mr. Benoit liking these movies different these different movies can be put into three different buckets, so each of these hidden nodes will basically have a complete probability distribution, right, like a one normal distribution. So essentially, in the forward pass, after the training is done, the model has calculated three different probability distribution based on those three hidden notes, instead of three. If they design this model with 30 hidden nodes, then it will come up with a 30 probability distribution based on everything else I have done. And this visible node, this thing could be very wide, because I probably have done 1000 movies, right? So your visible note could be very, very wide. So. But your hidden node is something that is totally under your control. You You will be crazy to go that wide, because then your model will be more compute intensive. So it is okay to have like 1015, 20 perceptron in your hidden nodes, but visible node you cannot control. So now, after these three probability distribution is done, then it is time to turn the table around. And now it is time to figure out, well, given the probability these three probability distribution now, if a new movie comes in, or even for that exact same movies. What is the probability that Mr. User will like this movie? And the system might think, well, the user's probability of liking this movie is 0.98 the user's probability of liking this movie is probably 0.17 and so on. So essentially, what he is trying to do this is where the Bayesian probability it comes in, right? So based on this event, now it came up with the probability of these categories, these, these, these categories, probability distributions, most likelihood, most likely, value. Now it is going to turn back and say, Well, given that these probabilities happen, now, what is the probability that user will actually like this movie? If it has to predict? Now, if you look into here, in this case, it is showing that user has like this movie by putting a number one there. But now using this, we have trained the model. And now when we are asking to prove the model, to predict the model, might say, well, the probability of this user liking this movie is 0.985 even though, in real life, it was one. So if the model does a good job, so most, for the most part, you will see that these probabilities will be somewhat closer approximation of what the user actually has done. So if you take that same training data, which is, let's say, this set of six movies, and if you try to predict on these, then you will probably see the where the user like this movie, which is one, you will probably get a high probability, like 0.8 0.9 or something, whereas something that is zero, you will get 0.1 0.2 something like that. So that's how the model will predict. Now if you put a threshold value of, let's say, 0.5 right, and then if you interpret the model prediction as anything above 0.5 being one, and anything below 0.5 being zero, and anything less than negative 0.5 being negative one, or something like that. Now you will have a prediction.
+
+Speaker 1  42:52  
+Now, during the prediction, there is no restriction that now your visible node need to be fed in the same data. Now you can have a completely separate movie set coming in and based on since all of these weightages are already calculated, all the weights and biases, right? So now, when you are doing the prediction, even though you present with a new set of movie, a new set of items, the machine will try to predict the probability of your likingness of this new movie that you have not interacted with before you have not seen before, because that is the whole purpose behind this recommendation engine, right? So that's how it will work. In theory, yes, Jesse,
+
+Speaker 3  43:32  
+so the ones and the zeros and the negative one visible nodes, those are one, I guess is a up vote, and negative one is a down vote, like, I don't like,
+
+Speaker 1  43:43  
+yep. And zero meaning you haven't interacted something like that, yeah?
+
+Speaker 3  43:47  
+So, so not that you viewed it, but that you just reacted to it, yeah. And so
+
+Speaker 1  43:52  
+either you put in a neutral rating, or you haven't viewed it, got it,
+
+Speaker 3  43:57  
+and then the negative one corresponding to a probability of liking getting 91% it's just a bad Yes,
+
+Speaker 1  44:04  
+yes. So don't now. Don't look into these numbers, though. So whoever made this slide, it is so these numbers, you shouldn't be looking into why this negative one does not have a 0.1 or something. Don't look into this. So, because we don't even know how the probabilities are going to be calculated. But you what you are saying, it could be right, because negative one, meaning the user has a strong dislike of that movie. That's why it is getting a value of 0.9 which is even though it is on the negative side, it's a strong negative. Got it like? Strong opinion. Yes, strong opinion. And very soon we are actually going to talk about what this algorithm, learning algorithm, is going to be. Any other questions so far? So before we go into the algorithm, what does the
+
+Unknown Speaker  44:58  
+visible node of. Um,
+
+Speaker 5  45:01  
+like, like graphic look like for the entire predictive model, then, does it? Is it kind of the same thing where it has like a one with a probability, even though somebody hasn't like, liked that, or disliked it or interacted with it?
+
+Speaker 1  45:18  
+So the visible node, I think you are talking asking about, what is the size of visible layer going to be?
+
+Speaker 5  45:24  
+Yeah, because obviously there's, like, 3000 movies or whatever, and it's trained on six. So, like, what does that look like? If the, you know, it's the predictive side of things, not the, like, historical side of interactions.
+
+Speaker 1  45:38  
+So, so basically the number of visible layer would be basically same as what is called the number of
+
+Unknown Speaker  45:48  
+number of columns that you have in your training data,
+
+Speaker 1  45:52  
+which you will see in a moment. So in this example, for the right. So this is one of the link that I said send right? So these are the movies. So basically, the user has interacted with so and so movies. So think about a data set where you have a user and there are, let's say, six columns. Each column is a title of a movie Matrix, Fight Club, forest, Gump and so on. And for each of the cell there is a value that is a zero or one or negative one based on whether this user like the movie, dislike the movie, or not watch the movie. Okay? And then you have multiple of these rows for multiple users. So then, if there are six such columns in your training data, meaning there are six movies in the universe. So then your visible node will be six node white. If you have 600 movies, then it will be 600 node white, and so on.
+
+Speaker 5  46:52  
+And so in that graphic, what are Fight Club and the departed representing things that they have not interacted with? Right? Oh,
+
+Speaker 1  46:59  
+ah, yes, yeah. So in this case, yeah. So basically the one that does not have a color meaning they have not interacted. So in this particular post, what the blogger has done is one meaning liking zero meaning not liking and empty meaning not interacting, because these are just way of how we are interpreting right. What you are seeing in the slide, they used a different convention, but these are basically the weight that we are interpreting these as a human. So basically talk think about three different things, liking, not liking and no interaction. Okay, thank you. And and this, this is something like all of these you are seeing, right? Like how these nodes are lighting up at all. If you watch that YouTube video, you will see that the the presenter there, he is basically showing this, taking a specific example in the forward pass and backward pass, which nodes are lighting up and which weights are contributing to those nodes being lighted up or not, right? So that's why I said those that's a good 17 minute video. Watch through it. Sometime after the class, things will be much more clearer.
+
+Speaker 1  48:17  
+Okay, so then we talked about two steps, right? So during learning, also two steps happen, and same thing happens in the product, in the prediction time too. So essentially what happens is, when you are doing the forward pass, so you are basically all the visible layer is presented with some x values, and these are the liking this values, and then all of these connection between each of the green node to the each of the blue nodes. These connections are having a weight. Initially, when we strain the model, we will initiate all of these weights to zero. But at any given time, let's say, in the middle of the training, think of this w1 through w n as different decimal number,
+
+Unknown Speaker  49:07  
+right? And then
+
+Speaker 1  49:11  
+each of the hidden layer will also have biases. So when we start coding, we will initiate all of these weights to zero and all of these biases to zero. And then, just like what we saw as an activation function, we will have a ReLU or sigmoid, or some other activation function that will basically say, hey, these nodes output is a yes or no or zero or one, based on that step function that we are going to use as an activation so that is your forward pass. Then what we will do is we are going to take a backward pass where it's basically almost the mirror image of the steps, except all of these activation that happened in the hidden layer. Now those activation values we. Are going to treat these as input to the hidden layer. Now these activations, if these are, let's say a, one, a, two, A, three. Now, instead of multiplying W's by x's here in the backward pass, we are going to multiply w is by A, is W by A, and then we are going to add a new set of biases for the visible layer. Now keep in mind, though, the bias for the hidden layer is going to be a different set of number than the bias for the visible layer, because each perceptron has a bias. So green set of perceptron will have a different set of bias than the blue set of perceptrons. But when it comes to the w if between the i th, I th, visible layer node and Chad, hidden layer node, the weight will be w, i, j, and that will be constant no matter which direction that information is flowing, but the B's will be different. B is will be different than B J's for the two layers. So what we are going to do is, when we code this by hand, we are going to create these many perceptron in the first layer, which will be dictated by the number of columns that we have in our training set, and we will create an arbitrary number of perceptron for the hidden layer.
+
+Unknown Speaker  51:26  
+And then we are going to
+
+Speaker 1  51:30  
+create three other groups of numbers. One is these weights. We are going to come initiate all of these weights to zeros. The second is all of the biases of the hidden layer, we are going to initiate all of these two zeros, and also all of these biases of the visible layer. We are also going to do all of these two zeros, so that will be our initial setup. Now the idea is, in every pass we are going to take this make the data go forward once, capture all of these activation values and then let the data come back with these activation values, and we will see what outcome comes from the visible layer. Now, obviously, if you do that once, then the outcome that will come up from the these green nodes after the two two way pass, these outcomes would be very different from the actual x values, because the error will be huge, because you just completed one set of training. Then what we will do is we will find what is the error. So these x's and the output that will come here will have a large error. So we will take that error and then we are going to do something like this. So what we are going to do is that error would be basically our delta of W's. So essentially, we are going to use that error to then in the next pass, when we go we will take the previous passes weight so w billing the weightage, and we will take the whatever the error that happened. We are going to multiply that with another arbitrary floating point number, alpha, which is the learning rate. This learning rate is similar to what we talked about in the gradient descent. So we are going to multiply that and then we are going to basically come up with a new weight. So that means, after the first two passes, going forward once and coming back once, we have now been able to come up with a delta, and that delta is multiplied by floating point number, which is the rate, and that is added to the previous set of weights to get the new set of weight. And that's why, even though at the beginning we are going to set all the weights to zero, after we do one pass or one epoch, then all of these W that where zero will not be zero anymore. They will have some have some other values. And while we are at it, we are also going to change all the biases for both the visible layer and the hidden layer by taking the previous set of bias and multiplying that by that same learning rate times the difference between the two sets of these, meaning the what was the input and what was the output difference. And same thing with H zero minus h1 now what is v zero minus V 1v? Zero minus v1 is basically so v zero is this set of variable going into the visible layer, and v1 meaning the set of variable that is coming out of the visible layer. So that's your v1 minus v zero. So that multiplied by alpha, added to all of these initial biases, will give you your new visible. Layer biases. And then you do the same thing for hidden layer, and that will make make you change the hidden layer biases, also from zero to some other non zero value. So that will be the one pass. Now, obviously, when you do the one pass, the network would not be very accurate. Now you need to keep repeating this like 510, 20 bucks, the more you do, the weights will slowly converge to a point where, going back to my physics terminology, the idea is that the more training we you do, the system is going to be more and more stable, meaning it will go to lower and lower energy state. So essentially, the lower energy state in this case, you can interpret it in a way where the further variation in the input do not make a ground shattering variation in the output. That is what your lowest energy state system is going to look like, which if you think about going back to the Boltzmann statistical mechanics case, right if, let's say there are two atoms both vibrating, if they are close to each other, then any vibration on the first atom will affect the second atom. But if you take the two atoms as far away in the space as possible, then the overall two atom systems become much more stable, so that any change in the first term do not make a ground shattering change in the second term. And that is what we are trying to achieve here, whereby we want to have a network where little change in behavior here does not drastically change the probabilities, probabilistic outcome. Because if that were the case, then every day, every hour, Netflix or YouTube will show us a completely different set of recommendation and that will be crazy. You will see that it does change over time, but not in a dramatic way, because what has happened is this restricted Boltzmann machine over the epochs of training, it has gone to a lowest energy state where the system is kind of happy in where they are. Now when, when you achieve that low energy state, we call this that the model is now trained. Now, how much energy is low energy? Well, no one can say one thing for sure when you apply this algorithm that I just mentioned here, which is basically this algorithm here, one thing is for sure, just know that for now, like not going into the mathematical rigorous proof or something, if you keep following this algorithm, the more epochs that you run, your total energy of these Boltzmann network would be lower and lower and lower. But obviously the speed that the that it goes down, the total energy goes down, will slowly approach a steady value. So first 510, epochs will give you drastic improvement, just like any other training, right? But as you go the further following further epochs, they will probably not give you any dramatic improvement, because they are slowly approaching a steady state or converging towards a steady state. And this algorithm is called contrastive divergence. So it's called, I don't know whether it was written anywhere, so it's called, I'm just writing it here, if you want to take note, it's called constructive divergence, which is this algorithm, the two step algorithm, and we are going to run as many epochs of these as our time, permits as our patients, permits as our computers can hold up right now in our case, we are probably not going to be able to run more than 10 or maybe 20 epochs. But in industry standard, they they basically run many, many epochs, many more nodes, right? So,
+
+Unknown Speaker  58:51  
+so that's, in a sense, what
+
+Speaker 1  58:55  
+recommendation system is. Oh, and then, before going into the code example, let's go through these exercise so let's say, look at this, this particular data example, right? We are trying to, trying to do something manually here, right? So here, these are basically different songs that different users have listened to and provided a rating. And here it's not just a 01 rating. The rating is basically in a scale of one through five. So these are the different users. So user John has not listened to this song, anti hero by Taylor Swift, therefore there is no rating. But John has listened to this song, wander all my voices, and his rating is three. Lulavis, he has not listened, in your eyes, by Kali minak, he did not like it. His rating is one and so on. So basically, six songs are there, and John's rating on these six songs with an. Where John has not listened to that song, similarly for Jen and Jim and Kim and team and Tom. So these individuals now looking into this, can you figure out and this is basically not a content based filtering. This is a collaborative filtering case. So this is something that we are not going to implement in the algorithm, right? Because implementing content and collaborative that the whole thing, it's a little bit involved. But if you understand the underlying algorithm, which is contrastive divergence, and understand how collaborative filtering work, at least that gives you a foundation that you can build on from there. So to understand the collaborative filtering, what we have to do is we have to understand, figure out, based on these activities, can you find out which groups of users can be similar?
+
+Unknown Speaker  1:01:00  
+I mean, Jane and Jim look very similar,
+
+Speaker 1  1:01:02  
+yeah, like you see four and four here, five and five, two and two, right? The difference being these ones here, Jane does not have a rating, but Jim does here. Jane does have a rating. When Jim do not, does not. But based on these three other we can probably say, hey, these two guys are probably very similar to each other, right? And then based on the other guy's preference, we can probably predict that this guy will also have a two for this song, because the other user, who is very similar to this user, had a rating of two for this sum. So when you think of it this way, then you are basically going from a content based filtering to collaborative filtering. So if you look at some of the examples here, just like you said, Jen and Gene, Jim and team, basically three of them, you can see that they are kind of similar based on these green highlighted cells, right? Similarly, Kim and Tom, you see three and three, five and five, five and five. There is one mismatch. Well, fine, but there are three matches, also, which you can see here. Well, actually three matches, and then where they don't have a data. Then, based on this, you can then fill in with data, like see, so this data was missing, but based on this, we can then fill in with the data. So that's how the collaborative filtering will work, which is a slightly different modeling strategy, but the underlying Boltzmann machine and the training algorithm, which is the Contrastive Divergence that remains the same, just your modeling of your layers and nodes will be little different, right? Which one you are interpreting in which way? So that's that. Now we are going to look into some actual demo hands on
+
+Unknown Speaker  1:03:08  
+any question. So far,
+
+Speaker 6  1:03:12  
+in that last example you showed that we we back filled one of the recommendations, I believe, for for Tim, for Tom,
+
+Unknown Speaker  1:03:25  
+yeah, this one, are we
+
+Speaker 6  1:03:27  
+just using the Kim's number because they're similar, and we just because they're
+
+Unknown Speaker  1:03:32  
+similar? Yeah, okay.
+
+Speaker 1  1:03:35  
+But again, this is, this is just a very simplistic conceptual thing, right? I mean, when you actually do a collaborative filtering, the machine will probably not just take that exact same number. They will actually also look at what Tom has done in his or her interactions and his rating in other thing, because it is not likely that you will get an exact match, right? So basically, what I'm saying is, in this very simplistic graphic, you are deciding then even Tom are essentially the same person. So they are, they are basically they are. Likeness is exactly 100% but that's not going to be the case, right? So the machine will decide that Kim and Tom are similar, but they are not exactly alike. Maybe they are 80% alike with each other. And based on that, then the machine will try to fill in for Tom in cases where the Tom has not seen that movie or some
+
+Speaker 6  1:04:34  
+so it's the machine that's filling in that value, not not the unit,
+
+Unknown Speaker  1:04:38  
+not the gotcha
+
+Unknown Speaker  1:04:45  
+and they also do that between slide 23
+
+Speaker 3  1:04:51  
+and the three and then 25 they show, ah,
+
+Speaker 1  1:04:54  
+right, right, yes, between 23 and 25 Yes, same thing. So. Since you have found Gen, Jim and team to be similar, you basically use that similarity to fill in other but again, as I said, Don't read into it too much, because in reality, the users will not be treated as exactly similar. So these values that the machine is going to predict will be close to the value by the other user, but it may not be exactly similar, exactly the same values, it will be close.
+
+Speaker 4  1:05:34  
+Okay, so now one other thing is,
+
+Speaker 1  1:05:41  
+can you guys remember in the last two classes what library we used to build our models,
+
+Unknown Speaker  1:05:51  
+TensorFlow?
+
+Speaker 1  1:05:53  
+Did we use TensorFlow directly though? Kiras. We use something called Keras, right? So if you look into some of the code from let's just open randomly, anything, right? So, when we said so, we wanted to make a network that will have five node in the first layer and then one node in the second layer. But if you see here, we were actually not adding each perceptron one by one, right? Yes, but what we did is we added these using these, not directly, using TensorFlow, but using TF dot Keras, and using this Keras class called sequential. And then on the sequential model, then we started adding different dense layer. Now, I think someone asked like, hey, what does dense layer meaning? Or what does sequential mean? If you are still thinking of that, I'd say, Hold on for one more class. When we go into the next week, or two more classes actually, then when you see other type of model and other types of layers, then it will become clearer. They like why we were calling those layers dense or sequential in the first place. But my point is to is that, to bring to your attention, we were not using an underlying TensorFlow, which is a lower level library Keras is a higher level wraparound that it's kind of a convenience library that makes it much easy to create these layers.
+
+Unknown Speaker  1:07:35  
+What we are going to do today instead
+
+Speaker 1  1:07:39  
+that we are not going to create a traditional neural network. So now we have to take the control in our hand. So we have to create this network of visible and hidden layer, and we have to create these algorithm that I just talked about, which is the Contrastive Divergence algorithm. Okay, so we are going to create that ourselves. There is no shortcut that we can do with Keras on this case, unfortunately, because this is not our Stochastic gradient descent what we did before. This is a different algorithm. So just we want that the code for today is going to be bit more involved to actually do compared to what we did in the last two classes. Now, before looking into the code, one concept, you will see that we are going to be using over and over again, actually two concept. So one concept is this thing called tensor so why tensor flow? Is called TensorFlow. The keyword here being tensor. So what is tensor, right? So think about it in in programming, in Python, when we have a list of numbers, what do we call it?
+
+Unknown Speaker  1:09:00  
+List? OR array,
+
+Unknown Speaker  1:09:02  
+right kind of synonymous?
+
+Unknown Speaker  1:09:06  
+Have you heard the term vector, either
+
+Speaker 1  1:09:11  
+within the context of programming or within the context of mathematics? Have you heard the term vector?
+
+Unknown Speaker  1:09:18  
+So what essentially is a vector
+
+Speaker 1  1:09:22  
+class? Uh, numbers, collection of numbers, right? So think about, let's say you have a three dimensional space, x, y and z, and you have a random number here at a coordinates of where x equal to three, let's say y equal to two and z equal to four, right? And now, if you take that point and connect that point from the origin of the coordinate system, meaning from the 00, point, you basically get an arrow. So that arrow, in mathematical sense, is called vector, like for those of you who have done vector algebra and stuff like that, that's called vector. But how do you define that vector? Do. If you think about the tip of the vector, if it is a three dimensional space, x, y, z, in order to uniquely identify this vector, you basically need three numbers, right? Let's say 243, which is the coordinates of this number. So these collection of numbers are array of numbers, 243, and stuff. It is in mathematics called a vector.
+
+Speaker 1  1:10:27  
+Now if you have multiple dimensions of this vector, so if you have things like 243, and then another three numbers, let's say 542, then this vector becomes so if you have a list of three numbers or one dimensional list like, let's say 123, so this is your vector. When this list becomes a two dimensional or a two by two array, what we think of in programming right a two by two array that is mathematically known as matrix, which is basically an array of two dimension and if you apply a Shape Method on this, The Shape Method will give you two values, the height and the width. Now, what happens if you have a three dimensional array? It is the same concept. You are just adding one more dimension. So you are basically taking this array, and then let's say, let's say this, in this picture, this blue layer is basically a two by two array, and the layer that you are taking on beneath it, which is the yellow layer, which is another two by two array, and the gray layer, which you are taking on beneath it, which is another two by two array. So essentially you get a tensor of shape three by two by five. So the tensor is basically a generic term that is used to describe an array of any dimension. So that's where the term tensor is. And even in mathematics too, it is called tensor in a higher dimension abstract mathematics. So that's where the term originates from, the tensor flow. Because what happens is, when we are talking about all of these neural networks and weights, it becomes very, very easy to model these as tensor and when we are multiplying something by something. So let's say, going back here, so we have all of these w's and we have all of these x's, and we are multiplying W's by x's, right in a regular programming someone has to write two nested for loops, like with I, going from zero to five, then for each i, with J, going from zero to four, you get a i j combination, and then you take that W, i j from a list, and you and that's going to be very inefficient when you have to do it in a large scale. So the TensorFlow does have built in libraries that basically makes multiplying these groups of tensor to each other very quick and fast. In fact, in the state of the art model in the industry, these underlying hardware that they run this multiplication is GPU. It is not even run on CPU, because it so happens when you offload all of these multiplication from your core CPU into GPU. The GPU architecture permits this multiplication to be done much, much more faster than what your main CPU can do. Okay, but the reason GPU is so important in machine learning is because of these matrix multiplication now, if you look into here, what is exactly we are doing when we are saying V, zero, t h, zero minus d, 1t, h1,
+
+Unknown Speaker  1:14:02  
+what is exactly we are doing?
+
+Speaker 1  1:14:07  
+So what we are doing is here, your V zero is basically a tensor, which is basically all the values coming into your input. You are taking a transpose of that and then multiplying that with another set of values. Okay, so that's what we will be doing in our code, as you will soon see when we actually go and apply and implement these Contrastive Divergence algorithm.
+
+Unknown Speaker  1:14:37  
+Is that a
+
+Speaker 2  1:14:39  
+linear kernel? I remember reading that, sorry, but like, like, we used to, like, represent, like the, like, the tensors without actually doing the calculation.
+
+Unknown Speaker  1:14:51  
+I'm not sure what you mean. What do you mean,
+
+Speaker 2  1:14:53  
+Colonel, sorry, never mind. I can look it up.
+
+Speaker 1  1:14:57  
+Yeah, we are not. Actually using any kernel here, we are basically going to code these, basically the basic TensorFlow operations ourselves from scratch,
+
+Unknown Speaker  1:15:14  
+gotcha, which you will see in a second. Okay.
+
+Speaker 1  1:15:19  
+And then, while doing so, we are going to use some functions, some of those you have not seen before. Actually, let's go to the code here, and in first few, where is my 18 three, this one. So before going into it, what I did here is, so first, I wanted to see how do you actually define a tensor? So a tensor you can define in two way. So tf is your TensorFlow library. If you do TF, dot constant, and then inside that function called constant, you are basically passing a one dimensional array like this, so that makes it a rank one tensor, or one dimensional tensor. Now, instead of constant, you could have also said variable, and which will be the same, but the only difference is, if you define a tensor with TF dot constant, then those the value of that tensor cannot change later. If you define it with TF dot variable, then that will that can be changed later. But if you then print it, it will basically give you the shape of this variable, which is one by three. So which is what this is? So it's a rank one tensor. If you do it with constant, it will say TF, dot tensor. And what the value of the content of the tensor is? 123, and shape one, comma, three. So basically, one, one, deep, three, white. That's what this is. So this is a rank, rank one tensor. Now, if you stack multiple of these, one after another, you basically something called a rank two tensor
+
+Unknown Speaker  1:17:15  
+with a shape, three, comma, three.
+
+Unknown Speaker  1:17:19  
+So two and then
+
+Speaker 1  1:17:24  
+going same way. Here I'm showing, this is just hard coding. So I'm showing I'm doing a rank three tensor, where the shape has three items, three by three by three. So it's a rank three tensor
+
+Speaker 1  1:17:42  
+in the next one, I am showing how you can take our tensor, transpose it, and then multiply it to itself. Okay, so how does that work? So first I'm creating a rank one tensor with three values, one, two and three, and then I'm going to print it, and it will print 123, then what I'm going to do is I'm going to use a function called transpose from the TensorFlow library. And so what these transpose will do, instead of one by three, it will convert it into a three by one, right? And then the matrix multiplication, or mat mode, it will then basically multiply each of the FAR, sorry, first element of the row with the first element of the column, second element of the row with the second element of the column and the third element of the row with the third element of the column, because essentially, by doing the transpose, you are converting a row tensor to a vector, a column tensor. So let's see what happens. So now the output from this first print statement is this thing here? As you can see, the dimension is one, comma, three, and the values are 123, so this is our t1, then when you do a transpose TF, dot transpose t1, and the output of that is this part. So here you see the shape is not one three anymore. The shape is three one because you flipped it, you change the rows to columns. So now the output you see these one, two and three. These three values are not in one row. Instead, you have three rows, but each row has one item, only one number,
+
+Unknown Speaker  1:19:41  
+and that's what the transpose does.
+
+Speaker 1  1:19:44  
+And now when you do a mat mall or matrix multiplication, it will basically take this first number, multiply it with this number, take the second column here, a second row here, multiply the second column, third. Row here, and then third column here, and then add these, all of these, together. So that means you will get you are going to get one multiplied by one, which is one, and then two multiplied by two, which is four. That means one plus four is five, and then three multiplied by three, which is nine. So five plus nine is 14. So that's why, in your final output, it is giving you again as a tensor, but this tensor is of dimension, one by one, and the single value that the tensor has is 14, which essentially is a scalar value, meaning scalar value, meaning single value. But since you are doing everything using a tensor, your output is printed as a tensor, even though it's a one by one tensor, which is a scalar. Okay, so I just wanted to show how the what the tensors look like, and how you can transpose the tensor and how you can multiply the two tensors. And we are going to use a lot of these in the code that we are going to write. Could
+
+Speaker 3  1:21:04  
+you scroll up to the first show so that's an
+
+Unknown Speaker  1:21:10  
+array? That's an array, yeah.
+
+Unknown Speaker  1:21:16  
+Or at least, I think
+
+Unknown Speaker  1:21:21  
+I think I was missing.
+
+Unknown Speaker  1:21:27  
+I'm sorry, what is missing? No,
+
+Speaker 3  1:21:29  
+I was I was missing that it was an array of an array. I was thinking,
+
+Unknown Speaker  1:21:33  
+okay, yeah,
+
+Speaker 2  1:21:36  
+yeah. So the tensor rank is, like, the number of numbers required for like, the shape to like, describe like, the multi dimensional, right?
+
+Speaker 1  1:21:46  
+So, tensor, yes, yeah. So tensor rank, meaning, when you do a tensor dot shape, what do you have? Like, how many numbers you have in the shape,
+
+Unknown Speaker  1:21:58  
+and that is the rank of the tensor. So, okay,
+
+Speaker 1  1:22:07  
+so let's see how we are doing time wise. Yeah, I think we can go a little bit. So let's go through this first one, because this is what that is going is most involved. And then we are going to take some break, right? Okay, so now what we are going to do, we are going to bring on our VM, a restricted Boltzmann machine, with this particular data set that we have. So what is our data set? So let's pull the data set first. So in this data we basically have a whole bunch of users, 5456
+
+Unknown Speaker  1:22:42  
+rows. So we have these users
+
+Speaker 1  1:22:46  
+and these ones the columns, it says, category one, Category Two, but you can think of as like a movie, one movie two, or song, one song two. It really doesn't matter. So basically, a whole bunch of users and their activities on or interaction with whole bunch of other items. It could be movie, it could be shopping item, it could be song, whatever it is. So users versus their interaction with a bunch of other categories. So that's what your data set is. Now this data set is mostly good, but if you look into the column, there is a one column that weirdly says unnamed 25 and all of the values there are missing. So first what we do is, let's drop this unnamed column, so unnamed column is gone. And then, and we wanted to see what is the data type for each of these? And you see now we have category 123, up to category 24 so total of 24 columns, and user also is a column. Now the user column itself is an object. Why? Because it actually contains a text. User, one, right? So that's an object that makes sense. Everything else is float, except this category 11.
+
+Unknown Speaker  1:24:08  
+Now, if you look into category 11,
+
+Speaker 1  1:24:13  
+looking at the data, it seems it should be float as well. So category 11 is no different from any other categories, which is basically a bunch of floating point numbers, yet we see the category 11 is object. So this is, again, nothing related to RBM or recommendation engine. Is basically just one another case of having some noisy data, which is kind of happens all the time. So let's see why category 11 is an object.
+
+Unknown Speaker  1:24:46  
+How do we find that?
+
+Speaker 1  1:24:51  
+Well, what we can try to do is, well, let's first do one thing. So user is an also an object, but user is not. Not a feature so what we can do is, currently, the data frames index is a default index, right? 0123, but we don't need the user as a feature column. We can turn this user column into index. So let's do that first. So then we are going to be done. So now user becomes an index. It is not actual column anymore. Now you have category 123, all of this column and out of these columns, category 11 is an object. Everything else is floating point. Now we have to do something about it, because we really cannot work with a string categorical column. Have to have everything in a numerical
+
+Unknown Speaker  1:25:43  
+so how do we find it?
+
+Speaker 1  1:25:47  
+Well, what you can do is you can take the Category column from our data frame and try to convert it to float by using the method as type. And now what we are suspecting is looking into these outputs, since this is an object that if we want to convert this into float, it will probably throw an error or exception. So if I do look into the exception by using a print statement in your exception block, it will likely give me why category 11 is an object in the first place.
+
+Unknown Speaker  1:26:26  
+So let's see what happens. When I run this,
+
+Speaker 1  1:26:33  
+you see what happened. It says could not convert SO and SO string to float. So that means somewhere in this category 11, instead of having 2.2 or something, someone has a backslash T character type team, which could be just a typo, and that's why that column is not being treated as a floating point. If you really want to find what that column is, so you can basically using a location selection, right, you try to find a rating data frame dot lock, and inside that lock, you basically put these as a filter criteria, and you will basically see that particular offending row, which is user number 2713, and if you look into the category column, you see here, you see what is showing when I'm hovering, it is showing two. Then there is a space and there is a two. So basically, someone put a tab on their keyboard, and that's what these weird backslash T is coming from. Like, in the naked eye, it may not be visible, but if you hover over this, you will see that right. And by the way, in my case, it is showing up this way, but because I have this data wrangler plugin installed in my VS, VS, to VS code. So, so that's the that's the problem, right? So this is the problem. Well, since we know that we can easily fix it, we can basically take that column and change it to 2.0 or, actually, we should change it to 2.2 because I think it was 2.2 someone by mistake, instead of pressing a decimal place, instead of that, someone ended up pressing a tab. So I'm going to take this and using that same lock, I can also change the values. So now I have changed the values, and then once I change the values, then I should be able to apply these as type, and this time it should be no exception. So let's see, yeah, there is no exception. And then finally, when I'm doing a D types. Now, all of my 24 category are floating point types, so now I have my data set claimed. So that's what my data set is, which again to print it again. Let's print the cleaned up data set again.
+
+Unknown Speaker  1:29:07  
+So this is my data set, 5456
+
+Speaker 1  1:29:11  
+user with their interaction with items across 24 different categories. So that is my data set. So now what we are going to do is we are going to create a RBM machine where the visible node will have 24 nodes, the visible layer will have 24 nodes, and the hidden layer will have as many nodes that as we want. It's totally up to us. Now, one thing also you could do to help the models converge faster is that you will, if you look into these, and if you find the values of all of these, you will see the rate all of these categories, basically are numbers between zero to five. So. So in order to standardize this, you can easily scale it, and the scaling can be done using our psychic learn standard scalar. Also, in this case, there is another way to do the scaling, much simpler. Is, instead of doing the feed transform and all of this, all you do is you basically take all of this number and divide the whole data frame by five, five linear normalization factor. So now when you do that, so each of these will now be scaled to numbers which are between zero to one. So you see here 3.63
+
+Unknown Speaker  1:30:37  
+It has now been scaled to 0.726
+
+Speaker 1  1:30:41  
+where we had five that have been scaled to one, where we had zero, that is zero. So essentially all these number that were between zero to five, we scaled it to between zero to one. Now even without this, the machine will work, but it will probably help the machine converge a little faster with a zero to one.
+
+Unknown Speaker  1:31:03  
+So now that's our normalized rating.
+
+Speaker 1  1:31:08  
+So that means, what are the values that we are going to train? Well, this is basically all of the values, which basically becomes a numpy array. So basically, all of these values is my training, and I'm not going to do a train test split at this time.
+
+Unknown Speaker  1:31:28  
+Just take the whole thing as train,
+
+Speaker 1  1:31:32  
+okay? And then later, in one activity, we will take a new set of data and we will validate that and to see how that works, whether the regular neural network concept of having a train test split that is not needed in this case. So we take the whole data, and you basically try to do this contrastive divergence, basically back and forth, back and forth, sampling as many times as you want,
+
+Unknown Speaker  1:31:58  
+and that's it.
+
+Unknown Speaker  1:32:00  
+Okay. So that's our training data.
+
+Speaker 1  1:32:04  
+Now this is where we are basically starting to define what our network architecture is going to be. Okay, so visible units, as I said. So visible units, we cannot do anything. It has to be however many columns are there in the data frame, which is your ratings? DF, DOT number of columns, which will be 24 hidden units. It's up to us. We can control how many hidden units we want. We are just using 15 for now, for no particular reason. It could be any arbitrary number. There is absolutely no reason to choose 15. Now, remember how I said we are going to set initialize all of these biases to zeros and all of these weights to zeros, which is what we are doing here. So for the visible layer bias, we are creating this tensor called visible layer bias, and we are using this tf dot variable, which we saw up there is a way to create a tensor. Now up here, when we did TF dot various? Sorry, TF dot constant, or TF dot variable. Just to learn how it creates a tensor, we basically put some hard coded value, 123456, and so on. But here we want to create that, but fill everything with zeros. So what we are doing, we are saying, create a variable, a tensor that is variable, because this cannot be constant, because all of these tensor need to be changing during each pass, back and forth, pass, right? So we cannot do a TF dot constant. We need to do a TF dot variable. And here we are saying, create these many zeros, how many zeros, these visible units, number of zeros, which is 24 and make sure that each of these zeros are basically floating point number, 32 bit floating point number. And that will be your visible layer bias, which should have a shape of 24 we are also going to do the same thing for hidden layer layer bias, except here the length is hidden units, which is 15. So essentially, hidden layer bias will be a list of 15 zeros. Visible Layer bias will be a list of 24 zeros. And what is the dimension of W going to be. So think about it, if you have 24 here, and if you have 15 here, how many of these weights you are going to have?
+
+Speaker 1  1:34:58  
+24 by 15? Right? So essentially our W. So these variable w is not just a single variable. It looks like a single variable, but it is actually a rank two tensor that contains all of these 15 by 24 weights, which we are now initializing to zeros and that is our foundation. So let's run this right. So now we have an empty network built. So I print, added the three print statement, just to make sure that the shapes are correct, and we can see visible layer is a shape of 24 hidden layer bias is a shape of 15, and the weights are 24 by 15, so rank one, rank one and rank two. Okay. So then, before we go further, let's do a little test and see whether the matrix product is working. So let's say we have this v zero. So v zero, we are going to basically taking TF dot zeros with visible units. So basically this this thing, right? So let's say we are taking this v zero as our visible layer bias. So v zero dot shape will basically give me 24 and we, if we print v zero, it will print all these 24 zeros. Now we are going to take these 24 zeros, and then we are going to try to multiply it with W, which is a 24 by 15 matrix. So if you take a tensor of size 24 multiply it with another tensor of size 24 by 15. What do you think the shape of the resulting tensor going to be?
+
+Unknown Speaker  1:37:07  
+Can someone try to guess before I run this?
+
+Unknown Speaker  1:37:12  
+Because this essentially is what we will be doing here.
+
+Unknown Speaker  1:37:21  
+I'm sorry,
+
+Speaker 1  1:37:24  
+one by 15, or basically 15. So right, yeah, because these will basically give you as many output as your hidden layer nodes are, which is 15. So that's what we are trying to just do a little test here. This has nothing to do with actual code. This is just a little test, like we are taking baby steps. This is first time we are coding. So let's see whether that works. Yeah, it worked. So essentially. So when you say 24 you can also think of these as 24 by one. So this is simple linear algebra. For those of you who have taken linear algebra in school, right? If you take a i cross j matrix and multiply it by a j cross k matrix, the resulting matrix will be i cross k right? Now, this matrix multiplication will only work whether the second shape of the first matrix would be equal to the first shape of the second matrix, which in this case is true, because my first matrix is what one by 24 and my second matrix is 24 by 15, therefore my resulting matrix is one by 15.
+
+Unknown Speaker  1:38:38  
+So everything matches up. So we are good.
+
+Unknown Speaker  1:38:46  
+Okay.
+
+Speaker 1  1:38:48  
+So now, ready, tighten your belt, guys, because this is where the algorithm actually starts. So in order to do the algorithm, we need to write two utility functions. First, actually three utility function which we are going to go through one by one. The first one is for input processing phase one. So what does the input processing Meaning? Meaning the forward pass it does when you go from left to right. So in order to do that, you need to provide that function with the V zero state, meaning all of these values going into your visible layer. That's your V zero. You also need to provide the weight tensor, which is all of these arrows, and you need to provide the hidden layer bias, meaning these biases, that's when you would be able to do V zero multiplied by weight plus bias, because that is our calculation, because that is the calculation that. We do in any perception such as this. So this calculation here, we are now going to do it in our code when we are doing our all of those fancy deep neural network with Keras. We didn't have to worry about this, because Kera does it for us. But here we have to take things in our own hand. Okay, so now this is how it goes. So this is your mat mat model where you are multiplying v zero state by W, right? So that's your V zero time W multi plus bias. So this little thing here is basically what happens at any perceptron, anywhere in any neural network, which is your v zero state. Here is basically all of your x's that are coming in. This w is basically all of these weightages. You multiply all of these so these wi by xi multiplied by xi is basically this matmul operation. And then you are adding a bias, which is this thing here, which in this case, we are calling it HB, meaning the bias for the hidden layer. So that's that mathematical output. And then we are passing it through our activation function, which is sigmoid, which is what we do, right? So in this code, we basically are doing this. So this is the activation function. So we are all doing all this multiplication, adding the bias, making it pass to the activation then we are going to get this set of number which is our activation. That whole thing is done in this one line without writing any for loop or anything, thanks to the matrix library provided by TensorFlow. Right
+
+Unknown Speaker  1:41:56  
+then you need to find the delta.
+
+Speaker 1  1:41:59  
+So this is then you are basically finding the Delta, and this is the delta you are getting back.
+
+Unknown Speaker  1:42:09  
+So that's our first pass, forward pass.
+
+Speaker 1  1:42:15  
+Now, just to test it, I wrote one line of code which is calling this hidden layer function with our initial v zero, which is all zeros, by the way, 24 zeros. So I'm calling this initial v zero and the initial W, which is 24 by 15 tensor of all zeros, again, and I'm passing hidden layer bias, which is, again, all zeros, and I'm trying to print the shape and content of what the outcome is, and let's see what we get. Okay, so see, even in the previous test, when we did the matrix multiplication of V, zero and w, we got a one by 15. This is also we are getting one by 15. And here, some of these are one some of these are zeros. Why? Because there is a randomizer here we are using. So what we are doing is we are basically creating these values randomly and then finding the difference between these random values and the H zero probabilities. So if you run this one time again, you will see the zeros and ones are going to change because we are basically doing a sample. So sample h given x. So this is the sampling we are doing. So that concludes our utility function for the forward pass. We actually haven't used the function yet. We just wrote the function and ran a little one line test to see whether the function is really working. That's all. Now we need to find a function for the backward pass, which is where you are going to take all of these output from the hidden layer, multiply these by weight, and then add the visible layer bias to get the output to the left hand side again. So the code will look very similar. So we are calling this function reconstructed output. In the first parameter, instead of v zero state, we are now passing the H zero state, meaning the hidden state, W is still the same, because W is the same. And then as a third parameter, instead of passing hidden bias, we are going to pass the visible bias, the VB. And then we do the two exact same steps as we did here, no difference at all. And then we finally pass this final state, which we are calling v1 state. So there is essentially no difference except for the interpretation. Of this, v zero state, H zero state, and H B and D,
+
+Unknown Speaker  1:45:02  
+B, that's all. And then
+
+Speaker 1  1:45:06  
+the transpose is, did here? You have to do a transpose because you are coming from the other way.
+
+Unknown Speaker  1:45:12  
+So now, if you run this,
+
+Speaker 1  1:45:15  
+your hidden state shape is one by 15, which is like from here, your V zero state shape is 24 by one, and your weight is your 24 by 15. So finally, you are getting a v1 shape which is 24 by one,
+
+Unknown Speaker  1:45:35  
+which is basically these things,
+
+Speaker 1  1:45:39  
+right? And then, for the random sampling, you will run this multiple time. You will see this one and zero will take random values. But that's fine. Here it is multiple it is taking random values, but when we are going to run it through the contrast, Contrastive Divergence algorithm, that's when these values will over epochs, it will converge to specific values. I so these are my two utility function, and we need one more. So that one more is simply to find the delta which we are calling the error function, which is basically so we started. So when we call this hidden layer, we basically input A v zero. So this v zero goes through the hidden layer and become h zero, and then then H zero comes back through the reconstruction phase, and it comes up, comes back as v1 so that means the difference is, whatever the difference between v zero and v1 that's your error. So your error function is pretty simple. Actually. It's basically a squared error between v zero and v1 basically, and a mean of that. So it is basically a root mean square error between v zero and v1 which is also known as the RMSE, right? So that's your error function, and that's it. So,
+
+Speaker 1  1:47:06  
+and then these error function will give you a tensor. Now you don't need the tensor, you need the actual value. So what do you do? You take this tensor and you apply this reduce, mean, so it will basically gives you the actual root mean square error, which is a single value, which is 0.375, and this value is basically going to be your delta.
+
+Unknown Speaker  1:47:37  
+Where did it go? That learning algorithm, the delta.
+
+Unknown Speaker  1:47:45  
+So that's my delta after one pass.
+
+Speaker 1  1:47:50  
+So these are all the raw materials that we needed to create to actually create that algorithm. Now, so algorithm is still not created. Now this is where we write the algorithm.
+
+Unknown Speaker  1:48:07  
+So don't get too
+
+Speaker 1  1:48:10  
+scared by the amount of code, because for your purpose, you can think of these as a utility code, and take this code and write it in some kind of a utility Python file somewhere, right? And then you can just use this over and over again. Let's just go through this code and try to understand at least once, and you will be good. You don't have to actually mastering this code or memorizing this code. So I'm going to try my best to explain the code once. Okay? And then you can watch the video later, or if you want to study the code, which is fine, but don't think about it too much in details. So let's go. So first we will need some what we know call as hyper parameters, right? So these are the model hyper parameters. So here there is no chaos library we are using. We are basically doing everything by hand. So we are saying, hey, how many epochs we are going to run? So since we are just taking baby step, I'm only going to run one epoch now, batch size. So batch size basically means when you are doing this Contrastive Divergence algorithm, if you have 1000s of records, and if you have to run the whole thing, then your thing can algorithm can get inefficient. So what you can do is, if you have, let's say, 1000 record, and if you take a batch size of 100, then it will basically chop up these 1000 records into 100, 100, 100, and run 10 batches. So essentially, given how many, 5456 rows we have. So I decided to chunk it into batch of size 248, to make each epoch somewhat manageable. And then my initial error is an array which is an empty initial weights is an array which is an empty K. Equal to one, basically means how many pair of these back and forth you are going to do in each epoch. So I am saying one now. You might say like, Hey, why is one that has to be one based on what you said before? Yes. But sometimes what people like to do, people have seen that even within each epoch, instead of doing one pass backward and one pass forward, if you do two of those, maybe your model diverges better, or accuracy is little better. So that's why the algorithm is written in a way that how many forward backward you are going to do within each epoch, that is also a configurable variable. So let's keep that variable one for now. And then alpha is our learning rate,
+
+Unknown Speaker  1:50:46  
+which we are called setting at 0.1
+
+Speaker 1  1:50:51  
+and then, in this algorithm, the first thing we are doing we are looking at this batch size, right? 248, so essentially, what we are doing is we are taking that x train, which is all of our training data, and we are using this function called from tensor slices. So then we are basically making a slice of batch size of 248, from total of
+
+Unknown Speaker  1:51:21  
+how much was it? 545456,
+
+Speaker 1  1:51:25  
+so if you do a little calculation, so if you have 5456, if you cut it by 248 then essentially you will have 22 batches, each of size 22 sorry, each of size 248 so that's what I'm doing here. So I'm taking these batch cutting this and putting it into trend, yes, so now that means my Trend DS has 22 different tensors in it. So now I'm going to go through each of these tensor for each batch number. And this whole thing is also happening, by the way, inside the outer for loop, which goes from zero to however number of epoch that you want. So that means for each epoch, these many batches, is batches are going to run for each epoch, then for inside this for each batch. Now what we are going to do is we are going to take a single sample for each batch. So if there are 248 samples in a batch, I'm going to now do another loop to take each sample, one at a time, and for each sample, we are going to do forward pass and backward pass. But how many times we are going to do it? Well, we are going to do it k times since here I said k equal to one, that means this most innermost for loop will only run once. But there is option, if you want, someone can just bump it up to two and it will run two. People usually don't run it more than twice. They either run it only once or twice. So then this is where your actual Contrastive Divergence algorithm is happening. If you cut through all of these noise, your algorithm is basically just these lines, which is where you are getting the V zero state, which is the batch, and then you are calculating the H zero state using that hidden layer function that we defined up here. So that's your forward pass. So this is your basically, if you put a comment, it will be easier. So this is your forward pass, and then you are taking the output for that forward pass and putting that as an input to the reconstruction phase. And then this is your backward pass,
+
+Unknown Speaker  1:54:00  
+right?
+
+Speaker 1  1:54:04  
+And then you take this v1 state, and then you reconstruct your hidden state again. And then you find the delta by doing this, which is v zero, H zero minus v1, h1, so if you look into this, this essentially is this equation right here, updating the weights. So these delta w is basically this delta w, and then you update the weights, which is this. And then you update the biases for the visible layer and the hidden layer, which is this line. This line is the visible layer bias update, and then the hidden layer bias update. So that completes your one epoch. And then after that, you basically whatever is your previous v zero state. Now you call it v1 state, and then you continue. And that's how it will be going once you reach at the end of the batch, which basically is when your value of i is 248 meaning equal to this batch size, then you will see, okay, now what is my RMSE error? And this is where you are using the error function to calculate the RMSE and once that done, you are reporting that RMSE error and then increasing the batch number by one. So that means this whole thing will now run for 22 times, and then each one of these is inside an epoch. So that means if your epoch is 10, then these 22 batch will run 10 times. But in my case, I have only epoch number one, just for the interest of time, because I'm dying to give you guys all a break, and I need a break too. So let's just run for one epoch and then go for a break.
+
+Unknown Speaker  1:56:13  
+So let's run this.
+
+Speaker 1  1:56:19  
+You see now the printout, epoch one batch zero, epoch one batch one. And each batch see 22 sample 247, reconstruction error. And then at the end of this, we are basically printing the reconstruction error.
+
+Speaker 1  1:56:39  
+And then we are taking all of these error and just doing a matplotlib plot. So this, obviously we don't expect the error to go down, because this is just one epoch. It's just that one epoch instead of running the whole thing. And once we chunked up the one a park into 22 small pieces of a size of 248, sample each, and run the walk one epoch, incrementally in 22 steps, and then the final error that I got, 0.22 that's your in here. So you can think of 0.22 as the final error or loss function, or loss value. So now at this point, my W's and this thing, what is called, I'm blanking one. Is this the tensor called W. Where did that go?
+
+Unknown Speaker  1:57:38  
+No, up here.
+
+Speaker 1  1:57:42  
+Um, where did I create my initial W's? Did I create it here, or actually here? So if you look into the weights, so we can actually print the weights here. So if I print the weights, so now you see the weights is a tensor of 24 by 15. But they are not all zeros anymore, because based on this training of by 22 batches, all of these weights have taken up some values, and these weights are basically establishing the connection between connection strength, between your previous events to your posterior probability distribution. That's that's the weights. So now you can say your model is trained, sort of although, by running one epoch, the model is far from being trained, but essentially it is the same. You just have to repeat it over and over again. Okay, so now let's see if you want to take this model and do a prediction, how that happened. So for doing a prediction, let's take one user, let's say user number 24
+
+Unknown Speaker  1:59:07  
+so user number 24
+
+Speaker 1  1:59:10  
+or 24 is probably not a good choice. Let's take user number 100. Let's say so these. User number 100 is basically one of those 5400 or however many users that we had, right? So that user has these categories, rating across different 24 categories. So this is my original data for the user. So basically that means, hey, user number 100 has like the movie one with a favorability rating of 0.25 this user has liked the second movie with a favorability rating of 0.26 and so on from the given data, not predicted by model from the given data.
+
+Unknown Speaker  1:59:55  
+So that is my input.
+
+Speaker 1  1:59:59  
+And then in. Order to do the prediction, we have to do the same, same thing, feed in the user and reconstruct the output. So we basically take this and multiply these v zero with W using the matmul, and then I add the hidden layer bias, and then I apply the sigmoid function, and that gives me my hidden layer output. And then I take my hidden layer output, multiply with W, transpose, and add the visible layer bias. So basically, I'm doing the same thing I did in the training phase here. I took one single value of a user's preferences. I make the value go through the network forward once, come back through the network once. And that's where we are printing. Hey, these are the probabilities of the user. 100 liking category, one, movie one, movie two, movie three, movie four, and so on. Now, if the model was well trained indeed, these two numbers, 0.252 and these would be very close. In this case, it is not because we only trained it once. So that's how so essentially, your prediction phase is exactly same as your training phase, except in training phase you do this with batches of user, and then in prediction you take any one user and then make it flow through forward, once, backward, once, using the two matrix multiplication. And there you go. You basically have your prediction. And then, obviously, if you want to see those side by side, you can take those and basically create a data frame with recommendation score and data frame for actual score that the user had. And then you basically merge them together, you will basically see two columns side by side, which, in this case is not, oh, another thing you have to do when you are doing this, you also have to normalize, because this is not normalized. So you have to normalize this and those now you have apples to apples comparison, which kind of we already saw there. This is just a more like a fancy way to see this, like as a data frame. But you see there for this user, which is user number 100 for Movie Number one, or category number one, the user put a rating of 0.252 the model is predicting the probability of user one like user 100 liking the movie number one is 0.69 for the second so for Movie Number 10, the original user rating was 0.316 model is predicting 0.14 is the probability of the user liking that movie. So you will see these numbers are off, but that is off because we know this model is not well trained yet, because the idea of this is to understand how to write this model. Okay, so just in the interest of time, I would say, if you have any question, hold on to this question. Let's take a quick Well, let's take a 12 minutes break and come back at 845, I think we all deserve that break. But majority of our work is done, guys, and there is no student activity here. We will just go through this in a basically in a different context, and we will basically see how we can train the model better, how we can save the model, retrieve the model, and do the prediction so on. But these essentially is, is basically everything that you have to learn from our for our recommendation machine. Okay, so see you in a bit. Okay, 845, let's come back.
+
+Speaker 3  2:03:52  
+So math perspective that we just went through, I mean, we went through quite a bit, pretty quick, obviously, you know, we're not going to retain a significant amount of what we just did. I assume that we're just going to reuse these functions, ad nauseum. For the more generally,
+
+Unknown Speaker  2:04:15  
+I'm sorry say that again,
+
+Speaker 3  2:04:17  
+I assume that we're going to now that these functions are written the first time. It's sort of like we built these aircraft. We're just going to fly them from that one. So I I'm having a hard time imagining me going back and
+
+Unknown Speaker  2:04:30  
+recreating these functions from
+
+Speaker 1  2:04:32  
+scratch, right? So that's what I said earlier. So what you should do this piece of code, along with the hidden layer, reconstructed output and the errors you should when going forward, you should take this code and put it in a separate Python file, like util file, and just use those functions from there. So. We do not expect you to actually memorize all of these and basically write it by hand. So when you get this file, the solved file, just take this piece of code and then put it in a utility function and just call it from there.
+
+Unknown Speaker  2:05:16  
+That's all.
+
+Speaker 1  2:05:20  
+But if you were thinking that, hey, can we do it in an easy way, like, is there any Keras layer that we can add unlike what we did for our sequential network, the answer is no. There is no Keras library for doing this. When people do this, they basically do the same thing. They either take the code from somewhere else and then adopt it, or just write it once, and then just save it in their toolbox, and then just use it whenever needed,
+
+Speaker 3  2:05:45  
+as well as the reconstruct the output hidden layer and error function.
+
+Unknown Speaker  2:05:50  
+Yes,
+
+Unknown Speaker  2:05:56  
+can, can you remind me what the benefit of
+
+Speaker 5  2:06:00  
+separating the run into batches is again,
+
+Speaker 1  2:06:06  
+oh, so it's basically kind of same as what we did in the gradient descent algorithm. Also the with the batch size, you basically make sure that your computation is more efficient if you can, you can take this code and make the batch size same as your input size and it will still work, I guess. I mean, if you want to see 5456, right? So let's see if I put a batch size of 5456, whether this works or not, I'm sharing my screen, right? Yes,
+
+Unknown Speaker  2:06:42  
+okay,
+
+Speaker 1  2:06:54  
+yeah, so now I run the whole thing as one single batch, and it is running earlier, you kept getting like an output at the end of each mini batch. Now, we don't have a mini batch, we have a one batch, and the reconstruction error is 0.26 which I guess is about the same as we got before. Now obviously, here we ran one batch, so you don't see that trend, but yes, it will work. It's just that. Now this is, again, a very simplistic data set, but when what happens is, when you do this for a large data set, it just is computationally more expensive to run the whole data set with one shot in one shot that's all
+
+Speaker 3  2:07:41  
+got it. Thanks. While we were on break, I did do 10 meat box. I didn't see it.
+
+Speaker 1  2:07:52  
+Yeah, I saw that too. There is not it's probably because maybe this data set is not that good, and we are going to run that in other cases too. You will see that at least the couple of examples dataset that we have, I also ran like 10 epochs or so in another one that we are going to show now, and the convergence is very slow, if anything you
+
+Unknown Speaker  2:08:23  
+Okay, so looking into the next one.
+
+Unknown Speaker  2:08:26  
+In that case, we
+
+Speaker 3  2:08:27  
+also want to invest around other hyperparams. I'm sorry.
+
+Unknown Speaker  2:08:36  
+Can you repeat that your voice was little choppy?
+
+Speaker 3  2:08:38  
+Sorry about that. My network's just trash in that case to optimize and show and show improvement. Would you play around with other hyper parameters like K, yeah, number of passes,
+
+Speaker 1  2:08:49  
+yeah, number of passes, change the learning rate and so on and so forth, yeah? Just like you do, like play around with hyper parameter with any other training, right? So you will basically do that.
+
+Speaker 1  2:09:09  
+Okay? So now we are going to take a look at a slightly different type of data well, similar kind of data set, but presented in a different format, and what kind of pre processing that you might need to do when you get a data set such as this. So in this data set, in the previous data set, we had all of these user in a in basically as row header, and we had all of these categories as column header. Sometimes you might get your data in a more flattened format such as this. So in this data set you have, you see that there are more than 35,000 rows, and each row basically tells this user for this movie has provided this rating. So user movie rating, so you really don't. Have a user in one column and the movie in one user in one axis and the movie in one axis, you don't have that this is more than a flattened data set. So what could you do when you have a flattened data set like this? Does anything come in mind something that we have learned at the very first, first few weeks of the boot camp Pivot. Pivot. Yeah, exactly. So that's what we are going to do, but first we will see if there are any duplicates, like, what if we pay user has done a particular movie rating multiple times? So if that is the case, we can basically do a drop duplicates where we are going to use a subset of user ID and movie ID. So basically, when you do drop duplicates with user ID and movie ID, what it will do if there are multiple user ID, movie ID repeating in any of these 35,497 rows, it will only keep the last one, because we are saying, Keep equal to last. This is just a intermediate cleansing step you might want to do in case you see that there are any duplicates. So when you do that from 497 it went to 494 so there was like three duplicates that it got rid of not much, but if there are any, it is good idea to get rid of those, and then, as you correctly said, you do a pivot. So when you do a pivot, you basically take your user ID as index and movie ideas columns, and you take these rating as your values, and that gives you your rating metrics. Now this is your rating matrix, so you have your users in here and your movie IDs in here. Now you will see, obviously, not all user have rated all movies. So that's why in this data frame, you will have lot of null values or missing values. So then you can basically fill them with zeros, meaning zero, meaning the user has not rated the movie or not seen the movie. So you can use this fill na function to basically fill all the missing values with zeros. So now this becomes exactly same as the data set that we saw in the previous activity, except that the here the data came in a flat in format. We converted into a pivot, then we filled all the null with zeros, and now we have a data set which is exactly similar to what we saw before, just something to keep in your back pocket, in case your data that you are working on, working with comes in a flattened out format. These are something that you can do. And then also, if you want to do the scaling, you can use the normalization factor like you actually have to look into what is the minimum and maximum value. In this case, we know that the minimum and maximum is zero and five. So the normalization factor, we can just use as a five, and take this whole data set and then divide by five, and that will become give you a normalized thing where you see the two is has now converted to 0.44 has now been converted to 0.8 and so on, because we have scaled it to be within zero and one.
+
+Speaker 1  2:13:35  
+So then your x train would be basically this numpy array, which is basically all of these values as a numpy array, which you are going to fit in with your to your visible layer. Okay, so that's that. Now the next thing we are going to look is, let's say you spend all these effort you train a model, and you don't want to be doing that again, so you need to have a way to save the model. Now think about it. What is the model? What is the saved model look like? Or what would constitute the saved model?
+
+Unknown Speaker  2:14:22  
+Let's go back here,
+
+Unknown Speaker  2:14:25  
+if you have a model
+
+Speaker 1  2:14:27  
+that is trained, and if you want to save the state of the trained model, what is it that you are going to be setting the weights, the weights, yep, oh, and then the biases, and these biases, two sets of biases, right the hidden layer biases and the visible layer biases. So basically, you are going to save three tensor as like CSV files in your drives, and that would basically constitute your saved model. Model, right? So that's what we are going to look into the next activity where we are going to be saving a train model.
+
+Unknown Speaker  2:15:13  
+So here
+
+Speaker 1  2:15:16  
+we have our movie rating data set, which is the flattened one, and we are basically repeating the same thing that I just did in the previous one, which is dropping the duplicates,
+
+Unknown Speaker  2:15:29  
+turning it into a pivot,
+
+Speaker 1  2:15:32  
+and then also filling it, filling all the nulls with zero in the same line. So pivot and then fill any all in one line, and then normalization factor five, and that gives you your scaled data frame with a zero to one scale rating. And you take the values, and it's your X values. Then to train the model, we start with a hidden units of 20, and visible units is equal to the columns, number of columns,
+
+Unknown Speaker  2:16:10  
+and you train the model.
+
+Speaker 1  2:16:15  
+And then you initialize v zero to zeros, and then you declare those three utility function, hidden, reconstructed and error. And then you basically put that big batch of code in here. I chose a batch size of 116 and the reason is I basically evened it out, so 1508 so I figured, if I have 1508 I divide by 116 I will get a 13 batch even. It doesn't have to be even. I mean, there is no reason it. It like if, if, if you put, let's say, a batch size of 100, then there would be 15 batches with 100 data set, sorry, 100 records each, and the 16th one will only have eight. And that is totally fine too. There is no problem. There is just I try. I was trying to see whether if I can make the batch sizes equal the for no particular reason. And I found two factors under 16 and 13. So that's why I chose a batch size of 116 so that means within each epoch there would be 13 batches that will run. And this code, it is that exact same code. We are just going to run this code this time with 10 epochs. Okay, so let's do that, and then these alpha rate, as Jesse was mentioning that he ran that other one, and after 10 epochs, the improvement, but not much. So let's increase it from 0.1 to 0.2 to see whether maybe the network converges little faster. So let's run it.
+
+Unknown Speaker  2:18:03  
+It's going to take a bit of time,
+
+Speaker 1  2:18:08  
+because I'm going to run 10 batches, but this is a smaller data set, so the batches are running faster. So
+
+Speaker 1  2:18:34  
+so you see right how epoch is growing, right? I'm having 10 epoch in this one. I
+
+Unknown Speaker  2:18:44  
+and then we'll see how our graph looks like.
+
+Speaker 1  2:18:53  
+Yeah, it doesn't look like much improvement in this one, either. I
+
+Speaker 1  2:19:15  
+uh, yeah, it kind of stayed horizontal. It really didn't make much difference. Some of the other things you can try, I haven't but other thing you can try is maybe increasing the, what is called, size of your hidden layer. So instead of having hidden units 20, what happens if you put, let's say, a 50 hidden units, right? That will make it more computationally intensive, though, but let's run through and see whether that makes any difference.
+
+Unknown Speaker  2:19:59  
+At. It's not that intensive.
+
+Speaker 1  2:20:05  
+Okay, I see point 007, it was the last one. It is point 006,
+
+Speaker 1  2:20:16  
+I changed the number of node in the hidden layer.
+
+Unknown Speaker  2:20:21  
+So I changed from 20, bumped it up to 50. I
+
+Speaker 1  2:20:52  
+Yeah, slight little change, not too much. It was around point 007, before from the last patch. Now it has gone down to point 005, on this one, but then this one is little higher again. So let's see it's back to point 007,
+
+Unknown Speaker  2:21:16  
+here,
+
+Speaker 1  2:21:18  
+not much change. It kind of stayed the same, yeah, so I guess we will see. We'll so in the next activity, we'll try to find what is the RMSE error, and we will see what the quantitative performance of the model is, right. Okay, so for this one, so now that we have all of our W's, meaning the weights in the hidden layer, bias and everything. So if you print them right, you will basically get a whole bunch of tensors, because we all know the weight is a tensor, in this case, 2170 times 50. The hidden layer is 50 by one, and visible layer is 2071 by one, right? So these are our tensors. Now, if you want to save it, it's very simple. You take any tensor, let's say we are saving W. First you convert this w to a numpy array, dot NumPy, and then you take that numpy array and feed it into a pandas data frame, and that can that converts that tensor into a data frame. And then you take that data frame and you convert to two CSV and write it in a file called RBM webs. So when you do that, the file is saved here. And then you do the same thing for your hidden layer bias and your visible layer bias. So essentially, you end up with three CSV files. So these three CSV file together constitutes what your model is. Now when you do that once, and now you want to use the model in at a later time. What you do is you simply, you don't do any setup of network or anything. You simply do a read CSV of your CSV files, and you take that CSV, sorry, take that pandas data frame, take the values out of it and create a TF dot constant, which is a tensor. But this time, instead of doing all zeros, I am supplying it the values that I read from the disk, which is from this file, RBM, words, and I'm making sure that these are float 32 so you do this, you get your weight tensor, which is back again, 2170 2071 by 50. You do the same thing for hidden layer bias, and you get a hidden layer tensor which is 50 by one, and then your visible bias, which will be 2071 by one here. So that's your train model loaded back from the disk, and now you basically do the same thing for recommendation. You take the user ID
+
+Unknown Speaker  2:24:18  
+and you do a forward pass and a backward pass,
+
+Speaker 1  2:24:22  
+and so here we are basically putting it as a utility function, and then later I'm going to take any particular user, and I'm simply calling this function with that particular users index value, and I'm getting the recommendation here. And then you can do the same thing. You can basically try to get the recommendation and the original one, and March the two together side by side. So then you will see for this movie, for this user ID, the user actually put 0.3 but the model is. Predicting the likelihood of the user liking the movie, 0.94 and so on. Okay,
+
+Unknown Speaker  2:25:10  
+so that's what that is.
+
+Speaker 1  2:25:13  
+So this is how you save and reload the model from disk. So
+
+Speaker 3  2:25:29  
+I can't wait for the solution. Huh. Said, I cannot wait for the solution.
+
+Unknown Speaker  2:25:37  
+Solution to what I
+
+Unknown Speaker  2:25:43  
+so how to save?
+
+Speaker 1  2:25:48  
+Oh, the solution files? Yes, yeah, so we will post this right away. Okay, and now in the next activity, all we are saying is, Hey. I mean, we don't even need to run through the whole thing. So basically what we are saying is, like I was saying before. I mean, ideally, a good practice would be to basically turn all of these into utility methods and run, put it into a separate file, which, let's say, utils.py and here, like, even everything, like whatever you can basically abstract you should, like even the getting the data, and the normalizing the data, doing the pivot, and then getting the normalized data from the pivot, defining the weights. Sorry, this is reading the weights from the saved file, reading the hidden bias from the saved file, reading the visible bias from the saved file to three different read methods, and then converting a user rating to tensor. And then these two are basically used for recommendation generation, which is forward pass hidden layer and reconstruction of output. And then you take these two and then in execute them, one after another, after converting the user rating to tensor. So these are the three steps for generating the recommendation. So then these, all of these together, becomes your utility. So now with this utility, your actual file will be much simpler looking now. Now all you need to do is do a utils dot get data.
+
+Unknown Speaker  2:27:34  
+Maybe I didn't run this.
+
+Speaker 1  2:27:41  
+Another thing I forgot to mention, if you remember, you guys were getting a warning or huh, not error, actually warning before, like, if you see any of our previous activity file right that we were doing when we are running this TensorFlow, we are getting this warning for CPU instruction and so on, remember in all of the activity. So I figured that you can actually provide a setting this OS dot environment, and then TF CPP, minimum log level to one. So if you change this log level, which basically acts to suppress these warnings. So if you add this line at the top of your file, then when you import this, there would be no warning, just a tiny little thing. I mean, the warning should not bother you anyway, but this is one way to suppress the warnings.
+
+Unknown Speaker  2:28:39  
+I was curious about that warning,
+
+Speaker 7  2:28:43  
+because at one point, yeah, to instructions, if your processor didn't support that, you could not run TensorFlow. But that's something on on your Apple that it just gives you a warning. Because on my machine processor, yeah, you can get a warning. But used to be that certain older machines that did not support the ABX two okay instructions that actually just couldn't run. And you would have to, you had to have to have a different machine, or you'd have to build no but these one that was sort of switch off, but you just get a warning. I just found that interesting.
+
+Speaker 1  2:29:27  
+Yeah, so that's saying, in this case, it is not telling me that it cannot run. Yeah, it's just saying that for performance critical operation, it might not be good enough. That's all it is saying. Yeah,
+
+Speaker 7  2:29:39  
+no, that's different because I remember, yeah, wouldn't run anything about ABX, yeah, instructions on the on the processor,
+
+Unknown Speaker  2:29:47  
+right?
+
+Speaker 1  2:29:51  
+So anyhow, so now, since in this one, we have everything wrapped up inside our utils file. So. So now we are just getting the data in one line, and then we are just doing get normalized data, and that gives me our these normalized pivoted file, sorry, data frame. And then with these three line, we are basically loading the saved model from the disk, and that gives you your weights and hidden bias and visible bias. And then here we are not actually training the model, because we just load a trained model from the disk. Then we basically take any user, a single user, and then we basically get the user rating from this. So this is our normal user rating as is from this data frame. And then we basically call this generate recommendation. That's it. And this generate recommendation will actually do three stuff, three steps, as we saw, which is converting the user data into tensor and then doing the forward pass, and then doing the backward pass. So all three is done here by doing a generate recommendation, and then you basically convert that recommendation into pandas data frame, and view the data frame as these ones. So these are your recommendation score. And then you take the original user, user done recommendation rating and as a different data frame, and then basically march them to see the results side by side. So essentially the same result that we saw before, but here we are just showing Hey, this is the best practice that you should follow.
+
+Unknown Speaker  2:31:38  
+In fact, what is not shown here is
+
+Speaker 1  2:31:42  
+that the actual training code, which is all of your three utility function for forward, backward error function and all of that big nested loop, right with all of your Contrastive Divergence coding, you should put that into utility function as well for your future purpose. So
+
+Speaker 3  2:32:04  
+yes. So if anybody's trying to run this, one depends on it won't work, because I think the activity is to actually create those
+
+Unknown Speaker  2:32:12  
+bodies of those functions.
+
+Speaker 1  2:32:13  
+Yeah, yeah. So if you just not, if not doing anything, if you just try to run it, it wouldn't work. So what you should do is you should take the the first place where you are saving, which is here, activity number three, and you can actually copy the three CSV files into other activity folder to make it load from there, which is what I did here, by the way,
+
+Speaker 3  2:32:39  
+I was saying The utils dot Python file. And the unsolved is not because it's it needs to be met with like C line six, it says, get the get the data, and then returns DF. But the F is never, there's no, there's no DF, just, oh,
+
+Speaker 1  2:32:56  
+okay, so you are saying that utils.pi is also not having all the code, yes, yeah. It's yeah, yeah. But I don't know why they are doing that, because the guidance here is that, since this, this class, today's class, is so much involved, and that's why you see none of these are student activity. All of these are supposed to be done everyone together in the class. So there is really no point having answer file anyway, because these are not student activities.
+
+Unknown Speaker  2:33:26  
+I can't defend them.
+
+Speaker 1  2:33:29  
+Yeah, so hang on. Let me just run through a couple more things that I have, and then I'm going to post all the files so you will get them right away.
+
+Unknown Speaker  2:33:41  
+Okay, so quickly,
+
+Speaker 1  2:33:45  
+if the one thing that we didn't do is we really didn't come up with a final evaluation of these. So essentially, what I'm saying is, I mean, even without running the code. So what you can do is when you are getting this March data frame right with the two column which is one column is basically rating done by the user, and one column is rating done by your recommendation engine. You can basically use these our plain old root mean squared error between the two. And these will give you the root mean square error for the prediction generated by the model. So obviously, as always, your goal would be to get a model with low RMSE. So essentially, if you just have to run through this, it's that exact same as the previous one. So you get the data. You load the weights.
+
+Unknown Speaker  2:34:47  
+Yeah, you load the weights,
+
+Unknown Speaker  2:34:50  
+you get all these users,
+
+Speaker 1  2:34:54  
+and then you get all these recommendation scores. Well, sorry, you basically. Create an empty recommendations, course, and now see you have, instead of, sorry, one differences in the previous one, we did recommendation for one user. Here we are getting all the user all 15 108, of them. And then for each of the users, we are getting the ratings done by the users themselves, and passing these ratings to the Generate recommendation function, which is basically giving it to the model to do the recommendation, and getting the model output, which is Rec. And then we are basically taking the user ratings and model output, and we are appending it to these empty data frame that we created up here, and that will give us the recommendation score for all the users that we have in the data set, all 1500 or so of them. Because if you want to evaluate the performance of the model, you need to see how it the model performed on the overall population. And that's that's what you are going to measure your RMSE score on. So that's what we are going to do. This is taking long time because instead of doing prediction on one user, now we are trying to do the prediction on all 1500 plus users. That's why it is the prediction is taking so long time, and this step, we are only doing it because we want to see, collectively on the whole population of user, what is the root mean square error that the model is getting Across all the 1500 plus recommendation that it does so
+
+Unknown Speaker  2:36:45  
+wow, it's taking much longer than I thought it will.
+
+Speaker 1  2:36:58  
+Question to Kian, have you posted anything onto GitLab yet or no? No, I was holding out waiting until I got your approval. Okay, let me actually post it from my side today, because there are little changes here and there I have done, yeah, so here it took a minute and 24 seconds. Okay, so now here we got all the recommendation, and then we are going to merge it with the users provided own ratings, and take the user provided rating divided by five to scale it so that we are doing apples to apples comparison. And then these two columns, this column and this column are the ones that I'm passing to the RMSE function, and that will give me the RMSE for the model as 0.39 I mean, looking into this, it's a 0.39 is probably not that bad, because a Perfect model will have an RMSE of zero. So I guess. JC, I'm thinking about it. I think this can be attributed to the fact, and this is like a common problem in any of the recommendation engine, no matter how sophisticated you become, is this problem of having sparse data? Right? Because, let's say Netflix, they might have 100,000 movie but if you take any particular user, that user probably has only watched a few 100 movies right over last year, and now you're trying to do the recommendation for that user, but for most of the movie, you don't even have any data, because the user have not watched that movie. So what I suspect is, remember how we are doing feel. Na, but if, before doing a fill in a to zero, if you do try, try to do a now count, you will probably see that the rating data frame that you are getting, it's probably a sparse data set where most of the for most of the movie user combination, the rating is not present, meaning the user has not watched that movie, and that's why the overall prediction seemed way off. But now, if you look into the 0.39
+
+Unknown Speaker  2:39:09  
+it's not that bad, actually.
+
+Unknown Speaker  2:39:11  
+Would they have to watch it or videos?
+
+Speaker 1  2:39:14  
+I mean, either way, right? So depending on how you are setting up the model, if you are creating a model where, basically when they watch it, you just by the fact that they have watched the movie, you take it as a one that is one way of interpreting it. So let's say if the if the user just browsed through the movie, you don't collect any telemetry data. If the user started the movie, but maybe stopped the movie before going halfway through, you get a rating of zero. If the user started to watch the movie and moves at least halfway mark. Pass the halfway mark, you capture the telemetry data and mark it as a one that is one way of doing it, so where you are basically assuming that since the user sat there. For an hour or more, maybe the user has like that movie. So okay, so therefore, so, so if you do it that way, then your user ratings will be only zero and one, right, a binary, as opposed to that. If, as a designer of the model, like in Netflix, if you force user to actually mark a movie with a rating from one through five, then you will get a data frame, data set like this. What we are working on, it kind of depends on how you are designing. Yeah,
+
+Speaker 3  2:40:29  
+you definitely see like, Netflix go, Hey, don't get to finish this series or what have you. Yeah, I was, yeah, I was, I was recovering this weekend and trying not to do anything on my arm. And I watched Craven, and I made a point of reading that very well, yeah.
+
+Speaker 1  2:40:51  
+Okay, so I guess that's about it today. What was the last activity when I think we have covered everything? Oh, so the last activity is basically okay. Now I remember, so in the last activity is basically now you are going to get a separate set of data. So so far, what we are doing is we got some user movie rating, and based on that, we generated, trying to generate model, model recommendation, and compare that with what user separated. So in the last one, you will see the case when you will basically have new data. So for the new data, so if you look into the corresponding utility file, so the original data is in here, the get data. Now the new data is basically a separate file, which is a new users dot CSV. So now you have your new data.
+
+Unknown Speaker  2:41:52  
+And the new data you see only had 300 rows. Okay,
+
+Speaker 1  2:41:58  
+when you normalize this data, you get pivot. Why? I'm just going to do a normalized ratings, so you get a pivot. And these one only six rows. Why? Because these are six different users. These six users did not exist in the original data frame, because originally they are about 1500 something. So you see here the user ID is 1600 something. So these are the new data that who just got subscription to our streaming service. Let's say so these set of users have not been run through during the training phase. I mean not that it makes a difference. Your mechanism is still the same. But the only difference is here to show that when you are generating the recommendation by the RBM, don't even think that you only have to take the data frame that you already used. In fact, you should not be because those are your training data. But in case of RBN, the concept of training and test doesn't really work that way, right? Because, unlike your other machine learning algorithm that we are doing, what we are trying to do is we are trying to train the machine with the one set of data and see whether it can predict the class or value, the continuous value, of something that it has not seen before. That necessarily is not the case for RBM here, your efficacy of your model will depend on even within the training data. Let's say these 1500 people that you have as your subscriber and you took their previous history as training data, but even within this 1500 population, your model is trying to see whether it can generate kind of close enough recommendation for that movie by that user, and if that model generated recommendation is kind of close enough To the human rating that the users themselves did, and also for the movies that the user have not rated, model should be generating a prediction for them anyway. That is the goal. That's why the concept of training and test separation does not really work.
+
+Unknown Speaker  2:44:19  
+In fact, I don't know whether you guys have noticed,
+
+Unknown Speaker  2:44:23  
+this is basically our first
+
+Speaker 1  2:44:28  
+experience with something that is broadly classified as generative models. Because what we are trying to do here is user number 1001 let's say some XYZ user. That user has only seen 100 movies out of our 10,000 movie catalog that we have. What we are trying to do on behalf of Mr. User, is we are trying to J. The rate, the rating for all other 99 so all other 9900 movies that the user has not seen, and trying to put the user's hat on us and trying to predict if the user did watch that movie, what the users rating would have been based on the probability distribution generated by those 100 movie that users have watched on. So this inherently, is actually a very hard problem, and that is why you are saying, even though we are running 10 epochs, is probably not budging very much, because most of these data is sparse. But at the same time, consider that what we are doing is actually called generative AI, because what happens is Gen AI. So let's say you ask a question to a LLM model, a Gen AI model, or, or, let's say if you are basically here, you know the code completion, right you have seen when I code, it is basically trying to type ahead and predict. What is it really doing?
+
+Unknown Speaker  2:46:13  
+It is looking at what I have typed so far
+
+Speaker 1  2:46:17  
+and based on my typing and the large body of code that other people have written, large corpora of text, it has already found the probability distribution that if I write the word if, and then after that, what is it I'm mostly going to write? What is what am I most likely going to write? And based on that, it is generating a probability like hey. Out of these other words, these 10 words are higher probability of occurring after what the user has just typed. That's essentially what a generative model does. So what we ended up doing here is basically that we looked into the 100 or so movie that the user has watched, and based on that, now I'm trying to predict how the user is going to like these other movies. So this essentially is our first experience with something called generative model, and that's why it is different from the other models that we have done. Now in this case, what we are doing is is basically not that much of a significance. We are taking five, six, another user, but hey, for the model, it really doesn't know whether these users were already present in the data set or not during the training time, because the idea is that would be the same. You will take each of these data, and you will do a forward pass. You will do it backward pass. And when you are doing the forward pass, you are basically going to feed all of these values to all of your visible layer node, right? Whatever your 22,071 nodes that you have, because there are 2071 columns, because in this particular streaming service, we have 2070 was movies, 2071 movies in our database. So that's why 2071 columns. So it really doesn't matter whether these user ID is 16 101 or 15 101 or 1001 it really doesn't matter. But this is just a way for you guys to understand that don't even think that you only have to restrict to the users that you have worked with, you can also work apply these model to the new user that are going to subscribe to your
+
+Unknown Speaker  2:48:29  
+streaming service going forward.
+
+Speaker 1  2:48:33  
+That's all but other than that, nothing changes really. You really get all these w's and H's and B's, and then you basically get the test user list. And then you do the Generate recommendation, which is basically a forward pass and backward pass, as you have, as I have shown you, in the YouTube file. And then you generate the recommendation and put it side by side in a march data frame. And then it basically shows you, these are the recommendation. Now, another thing you can do here is so fine. So these are the new users, and these are the recommendation. Now, let's say, if you want to take this and you want to see, okay, which are the ones that I'm actually going to recommend that the users watch, right? Right. So this is one way that you can interpret the results. So now let's say all these recommendations that the model has generated as a business decision. This is not a machine learning decision. This is a completely business decision. If you want to decide which one of the which are the ones that you are going to recommend to your user. You can simply take any cut off point, any threshold point. So in this example, it is shown as 0.5 so what it is doing is it is basically looking into for these new set of users that have signed up based on these prediction recommend, recommendation. Recommended score. If these are zero more than 0.5 then you basically take those movie numbers, like Movie Number nine, Movie Number 13, Movie Number 211 and so on, and you basically say, Hey, these are the movies that you may also like. Now, what this 0.5 should actually be? As I said, it's a business decision. I mean, if you make this score lower, you will end up with a larger set of recommendation which might actually annoy your user more than actually help them. If you make this score higher, like 0.8 or something, then you know that you are probably giving them some really useful recommendation, right? And you will basically continue to capture the telemetry data on how users move behavior is when they see this recommendation, and you will, over time, kind of change this threshold. So that's the only other last thing, right? I mean, like, if you were thinking like, how we are going to make use of this, this is, like, one way you can actually make use of this if you are designing an actual movie recommender system to show which one you are going to show.
+
+Unknown Speaker  2:51:11  
+Okay,
+
+Unknown Speaker  2:51:12  
+so that will be all for today.
+
+Unknown Speaker  2:51:18  
+Any question i
+
+Speaker 1  2:51:25  
+and before I forget, I'm going to upload all of these to your GitLab.
+
+Unknown Speaker  2:51:35  
+So
+
+Unknown Speaker  2:51:37  
+what was the what was the reading?
+
+Speaker 3  2:51:41  
+In this case, when we were saying, like those recommendations for Chad soon as coming back and waiting again,
+
+Speaker 1  2:51:51  
+I'm sorry, your voice is really feeble. Can you speak up little louder? I apologize the
+
+Speaker 3  2:51:59  
+the you have a merc, you have the recommendation score is greater than point five, and then you're saying is the rating is not No, what's the rating? Again? Is that user base score? Oh,
+
+Speaker 1  2:52:11  
+no. So these rating is basically what the user has rated the movie themselves,
+
+Speaker 3  2:52:17  
+themselves, yes, and you would recommend a movie to yourself.
+
+Speaker 1  2:52:24  
+No, this is the model recommending the movie to the user. What it is saying is, you see this function, pd.is, Na, right? So basically, what this means is, if the model is generating a recommendation score of more than 0.5 for a certain movie. And if the user has not seen this movie before, if the user has not seen this movie, then it will be na Right? Like look at this. Then you take this movie, which is 211 and you add that to your list of recommendation but it's not adding the first movie 215 even though the recommendation score is higher than your 0.5 but this movie has already rated, watched and rated by the user, so there is no point repeating that again. That's
+
+Speaker 3  2:53:13  
+saying the rating is no because you haven't watched it and it's a highly
+
+Unknown Speaker  2:53:19  
+Correct. That's right.
+
+Speaker 3  2:53:28  
+I like, I like. You used to the word feeble, there too. That was a good adjective. Your voice is very feeble. I know I'm so injured,
+
+Speaker 1  2:53:38  
+all right, I forgot about that. How is, how is your what is this hand or shoulder? Yeah, it was my, it was, it was my bicep tendon, bicep tendon.
+
+Speaker 3  2:53:49  
+But, but, but I did. I was like, oh, man, I really do feel feeble.
+
+Unknown Speaker  2:53:54  
+So, so how many weeks you cannot go to gym? Then
+
+Unknown Speaker  2:53:58  
+six months?
+
+Speaker 1  2:54:00  
+So, what are you going to do? Awesome cardio, lots of cardio. Yeah, yeah.
+
+Unknown Speaker  2:54:22  
+Noise. Annoying, yep, I bet you.
+

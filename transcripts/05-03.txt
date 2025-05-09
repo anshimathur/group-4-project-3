@@ -1,0 +1,1818 @@
+Unknown Speaker  0:01  
+A demo just to understand what are the pivoting functions that we can use, and how we can use different aggregation while we are doing the pivoting,
+
+Unknown Speaker  0:11  
+that's pretty much it. And then we have one other concept towards the end, which is basically kind of opposite of pivoting, which is like on pivoting, I can say like
+
+Unknown Speaker  0:21  
+unraveling the data. So but pivoting is kind of the
+
+Unknown Speaker  0:26  
+one concept that we are going to learn today before we break for the holidays. So it should be a pretty quick class. We might not even need full three hours. So I guess you guys all like that, all those long hours in other weeks. So,
+
+Unknown Speaker  0:44  
+okay, so looks like everyone is back here from the rooms or not.
+
+Unknown Speaker  0:50  
+No care.
+
+Unknown Speaker  0:53  
+Is Karen, yes, yeah, okay, I'm crying. Sounds good. Okay, so let's get started.
+
+Unknown Speaker  1:11  
+Okay,
+
+Unknown Speaker  1:12  
+is my screen visible?
+
+Unknown Speaker  1:15  
+Yeah, okay, cool.
+
+Unknown Speaker  1:18  
+So, yeah. So the main concept, as I said, is pivoting, which allows us aggregation and summarization of data that provides, like a high level overview of the data at a glance. This technique is particularly useful when you have a lot of data, and you can have you want to see the data basically across two dimensions, and you want to kind of do some aggregation across these two dimensions, so that, in a sense, is a reason that you will use pivoting. And the first activity that we will do today, which you will see in a moment, we are going to work with the data set where we have a different books and the sales numbers for the books on various different dates, and we are going to basically try to slice and dice the data based on the book and the date and apply the different aggregation function to basically see how the sales count varied. And we'll look at different aggregation functions such as pure count or total sales, or average of cells and so on. And we are going to do that using two functions, primarily, one is called pivot and another is called pivot table. So between these two functions, sometimes people get confused why there are two functions that kind of sounds the same. The answer is, pivot table is almost always a better choice because it has all the features that pivot has, but it gives you additional feature whereby you can actually customize your aggregation function, kind of using the similar strategy that we used our aggregation for group by function that we saw in the Last class. So we'll see pivot example of a pivot function quickly, but then most of the other activities, I think it will be better to use the pivot table function, which is a more full featured function, rather than just pivot.
+
+Unknown Speaker  3:18  
+Okay, any question, anything in particular before we get started.
+
+Unknown Speaker  3:27  
+Okay, so I will take that as a no, and we will get started. So the first activity that we are going to do is like I was telling you earlier that we are going to load this data set, which is book name and what are the sales that happened across very and different, various different days, right?
+
+Unknown Speaker  3:50  
+Actually, let me
+
+Unknown Speaker  3:52  
+open this unsolved one and then just walk through the different examples here. Why
+
+Unknown Speaker  4:04  
+Okay, so we are going to load the data set as usual as we load all other data set, and when we do load the data set, we see this, that our book, name, date, ending, total sales, right? And one thing so actually, before I proceed, what particularly that, if anything that catches your eye in the data set that you think might need to be fixed before we do any further processing.
+
+Unknown Speaker  4:44  
+There is some, I don't know, zeros, maybe. Yeah, well, no, that's fine. I think probably that particular book did not have any copies sold.
+
+Unknown Speaker  4:55  
+There's the you're selling the same book on different days, and you it's, it's hard to read.
+
+Unknown Speaker  5:00  
+Read, right? Yeah, like that is one thing that is four habits and
+
+Unknown Speaker  5:06  
+yeah. So that is why we are going to use pivot table to handle exactly that problem, so that we get a better view, a better understanding at an aggregate level,
+
+Unknown Speaker  5:17  
+where we are going to group the data in two dimensions, right, the book and the date, which is what pivot does know what I was mentioning to actually look at the date column. Actually, let's do one thing you should always do, not just for this activity anything, just do a D types to understand what are the different things that you have loaded, right? What are the data types of the different columns that you have loaded. So you have a book name, which is a string, which is good, right date, ending is this object. It's not really a debt, it's an object. So probably it got loaded as a string.
+
+Unknown Speaker  5:54  
+And then you have total cells, which is an integer, which is fine.
+
+Unknown Speaker  5:58  
+But one thing. It might not be that big of a thing, but it might be, and I'm just being nitpicky here, so you see how the format of date look at the month of August, it is 831, 23
+
+Unknown Speaker  6:14  
+same thing for September, but when it goes to October, it's 10. So now I have two digit month for October.
+
+Unknown Speaker  6:23  
+But wherever month number comes less than 10, I'm using only one digit, not I am, meaning the data set is using only one digit. So that means if you want to apply some computation, some transformation, across the date column, or, let's say, if you want to sort the date column, if you don't have mm, dd, yy, like whatever the same format, right? Whether mm, dd, yy or yy, dd, mm, it has to be the same across the board.
+
+Unknown Speaker  6:51  
+Currently, the one thing that I noted here, it is not using the same format.
+
+Unknown Speaker  6:57  
+Do you guys all agree? Because August, the month of August should be done coming as 08 not just eight. That's what I mean, because otherwise you are not comparing apples to apples, right? So, so that's first thing I noted. So we are going to make an attempt to solve this. Okay, so we know that date column, the date ending column, is actually a string, even though it looks like a date, but here pandas read it as a string. So what can we do to change it to a string that will always have two digits to begin with, and if the month is one digit, it will add a zero in the left.
+
+Unknown Speaker  7:45  
+Use as type
+
+Unknown Speaker  7:48  
+you might want to do as type when you have a date or if you want to do some conversion. Or are you saying, Are you suggesting that you convert it from a string to date, like do some kind of a pass parsing function, yeah, or Yeah?
+
+Unknown Speaker  8:04  
+I thought that's what as type did, is that you could, you can set it to, like a date time, I don't, yeah, you can do that. But for now, I have thought of one solution which is very
+
+Unknown Speaker  8:19  
+easy, naive solution, you can say, but what I'm saying is, instead of changing the data type, there is a way that you can add
+
+Unknown Speaker  8:28  
+zero padding, or any character padding, to the left of a string, which is like a ternary, and say, like is the if the length is
+
+Unknown Speaker  8:36  
+equal to what is it? If the length is less than eight, then you basically add a zero, right? But you don't even have to do that there is so you can use, then apply lambda,
+
+Unknown Speaker  8:52  
+and then in lambda,
+
+Unknown Speaker  8:56  
+so the function you can write is just one function, which is a function of the string class, and the function is called Z field,
+
+Unknown Speaker  9:05  
+z, f, i, L, L.
+
+Unknown Speaker  9:08  
+So now, if you do z field, and you have to say how many character width you need to fill it to, and if you say z fill eight, what it will do is, whenever the length is less than eight, it will add required number of zeros to the left.
+
+Unknown Speaker  9:27  
+So if you do that, then obviously you have to apply that back to the column itself
+
+Unknown Speaker  9:33  
+for the change to take effect permanently. So all I'm doing is I'm taking the date ending column and applying a lambda function. In the lambda function, I'm just saying z field to eight.
+
+Unknown Speaker  9:47  
+And then if you do book cells,
+
+Unknown Speaker  9:51  
+let's do head 20 again.
+
+Unknown Speaker  9:58  
+There you go. So.
+
+Unknown Speaker  10:00  
+All the eights and nines have now been 08 and 09 but whenever it is 10, it didn't touch it
+
+Unknown Speaker  10:07  
+because that is already eight characters,
+
+Unknown Speaker  10:10  
+which you might say, yeah, it's not foolproof. Maybe it's not elegant. What Jesse you said, I agree. I mean, maybe you should change it to date type. But yes, I agree, but that's not really the focus. I just wanted to do this because later, when I'm going to show you the sorting on this thing, that is going to mess up the order if you do not have all the months in the same format.
+
+Unknown Speaker  10:39  
+Okay, so that's just only one little tweak I did. And there are when, in reality, when you are going to work with the data, you might want to do lot of different tweaks depending on what you see, right, what the kind of gaps that you can catch?
+
+Unknown Speaker  10:53  
+Okay? So now we are going to do the pivoting. So when I going to I'm going to do the pivoting. We are going to use two axes. So the one variable in one axis could be, let's say, name of the books, and another variable could be or the other axis could be date and D. And when I say two axis, meaning one in the row wise, one in the column wise, which in pandas terminology, is your axis zero and Axis one, right. And you can plot anything on any axis. And then these are the two axes we are going to plot. And then we have to also think of, okay, what is the measure of value that we are going to show? In this case, total cells is basically the data point that we are going to show plotted against the two axes. So how do we do that?
+
+Unknown Speaker  11:39  
+We are going to do that using a function called divert. Now, before we do that, if you quickly run a unique function on the book name, these are the how many things you are going to get. So, 123456,
+
+Unknown Speaker  11:53  
+so if you do a lane of these, you will see there are six different books that are probably there. Let me quickly do a Len. Oh, no, nine. I was wrong. So there are nine different books, and if you do a unique on the date ending column, you will get 12345,
+
+Unknown Speaker  12:10  
+right? So we have nine books and five dates. So essentially, when we are going to do a pivot, what would the structure of the like the shape of the data frame would be,
+
+Unknown Speaker  12:25  
+it will be nine by five or five by nine, depending on which axis you are going to plot what right. So the two dimensions are five and nine. So now here we are going to see how we actually do that.
+
+Unknown Speaker  12:40  
+So to do that, we are going to use a function called pivot. And the pivot is a function that you can use either as a top level function, such as this, PD, dot pivot.
+
+Unknown Speaker  12:52  
+If you do use it as a top level function, then your first parameter would need to be the data frame that you are trying to generate, the pivot from, which, in this case, is our book sales data frame.
+
+Unknown Speaker  13:10  
+And then you have to provide two things, what is your index and what is your columns? So think about the columns as almost like your x axis, like horizontal axis and index is your vertical axis, which is your row and column header. Now, as I said, you can choose either book name or date, ending to be your index or columns, right? So let's take the AI generated suggestion here, which is index equal book name, fine, and columns would be dead ending, so we have to provide index. This is must, compulsory. You have to provide an index. You have to provide a columns, and also you have to provide a value, because otherwise Pivot will not know how to fill this thing in, right?
+
+Unknown Speaker  13:58  
+And then if you run this, you
+
+Unknown Speaker  14:03  
+Yes, it will generate these data frame and you don't have to reorder the columns because you did the Z code.
+
+Unknown Speaker  14:10  
+I'm sorry say that again, and then we won't have to reorder the columns because we don't have to reorder the column, because that is why we basically made them in the same order, so that we don't have to go through the nasty sorting process. I mean, we can sort instead of ascending. If we want to do descending, we can sort, but we don't have to go through that manual process in basically, you know, then that that setting all the mmdd in the same format, basically already took care of that for us.
+
+Unknown Speaker  14:40  
+Okay? So then ideally, I mean, well, you should actually save it to a data frame and then show the data frame. And this is what you are going to get, right, actually. Why don't I save it in a data frame in case we need to use it? Because here I'm just showing it on the fly.
+
+Unknown Speaker  14:59  
+So I.
+
+Unknown Speaker  15:00  
+Really we should do something like this right now. Another way of doing the same thing is, instead of you see here, how am I doing? PD, dot, pivot. Instead of that, I can also use it as
+
+Unknown Speaker  15:16  
+a instance method on the book, cells, DF, data frame. So if I use pivot on the data frame, not as the top level function, then the first parameter here, where I'm saying book cells, that is not needed anymore, all I need to provide are the three parameters with the which is, what is the index, what is the column, and what are the values, which, again, is generated by AI, and you will get the exact same output,
+
+Unknown Speaker  15:51  
+actually talking about this using the AI. Are you guys? Any one of you actually using these AI supported prompt on your VS code?
+
+Unknown Speaker  16:02  
+Sometimes? But, yeah, avoid it. Use it. I would say, my suggestion would be, use it, but be careful. I mean, use it like don't blindly use it. That's I'm saying, okay. Now, earlier, when we started this boot camp, remember I was using a one from Amazon called Amazon queue. Uh,
+
+Unknown Speaker  16:20  
+yesterday I changed that, and now I am using Microsoft copilot.
+
+Unknown Speaker  16:26  
+So you see this thing appeared here.
+
+Unknown Speaker  16:30  
+Do you see this icon? I don't know whether you see this on your GitHub, but I just saw this appeared. And here it says, open chat, open copilot. So initially it basically showed me a drop down to basically configure my GitHub account for copilot. So I had to sign in it where text you to a browser page and sign in, and you have to grant permission for VS code to use copilot, and that's what it does. So use it if you like, but please be careful. Don't blindly use it.
+
+Unknown Speaker  16:58  
+Okay, so,
+
+Unknown Speaker  17:01  
+so if we didn't do the 0809 thing, then you would have seen the columns would not be in like, August, September, October, November, would not come in this order. And then there would have been a need to actually
+
+Unknown Speaker  17:15  
+reorder the columns, which, in our case, we don't need to. But one thing we can do is, I'm going to show you one little technique, like, see by default, it is coming in the order of increasing month, right, starting from August, September, October. What if, if you want to revert this, like, what if you want to show the December 1 and then November and so on? What do you want to do?
+
+Unknown Speaker  17:42  
+I
+
+Unknown Speaker  17:44  
+sort by descending.
+
+Unknown Speaker  17:48  
+Can you tell me exactly what the code will be?
+
+Unknown Speaker  17:55  
+So, you know, this is our data frame that I have done. The pivot off of, right? So we want to take this data frame and revert it completely like so that the December comes first and then November and so on what. And there are multiple different ways of doing this, by the way,
+
+Unknown Speaker  18:17  
+do a dot sort by
+
+Unknown Speaker  18:21  
+so.on, what.on? The data frame? You mean on the data frame that you just made? Yeah, okay, and then dot
+
+Unknown Speaker  18:30  
+sort by,
+
+Unknown Speaker  18:32  
+well, there is no sort by, there is a sorry, ascending, ascending false,
+
+Unknown Speaker  18:39  
+is it the sort values that you're highlighting right now?
+
+Unknown Speaker  18:45  
+Sort values using the Sort values, Oh, you mean sort values, this all right, yeah, sort values, my bad. Okay, yeah. So you are saying, then you say, Buy equals
+
+Unknown Speaker  18:59  
+ending and then ascending. False, yeah, but the
+
+Unknown Speaker  19:05  
+So, so that way, if you do that, it will basically sort the rows in that order. But here what I'm saying is, I'm asking you to sort the columns in that order
+
+Unknown Speaker  19:22  
+by date, maybe index.
+
+Unknown Speaker  19:28  
+Actually, what we think, I think we can do is, do buy equals. Now, how about we so provide
+
+Unknown Speaker  19:39  
+the columns as the thing that needs to be sorted by. And then we say, access equal one. I don't know whether that's going to work, because this is a new thing. I'm just trying.
+
+Unknown Speaker  19:56  
+And then if I do ascending equals one.
+
+Unknown Speaker  20:00  
+False.
+
+Unknown Speaker  20:03  
+Let's see whether this will work.
+
+Unknown Speaker  20:06  
+No, it will not work, because when you are doing sort by, sorry, sort values you have to say by now with by, you have to provide a column name. But here I'm not sorting by any column name. Instead, I'm trying to sort the columns itself by the column name,
+
+Unknown Speaker  20:24  
+not sorting the data. So these approach would not work. What will work is something which is kind of similar. So let me show you what you can do. So
+
+Unknown Speaker  20:38  
+there is a function, pandas function called sort it.
+
+Unknown Speaker  20:44  
+So what you can do is you can do the sorted function and apply it on the columns. So what is columns? Columns is a list. If you do sorted columns, then it will sort the list of columns. And then if you do. So let me just run this. Okay, so if I do pivot table, dot columns and then do it sorted, I'm going to get a list like this, which is starting from 08 and 09 10 and so on. Now, in this sorted function, you can easily say reverse equals true. Now if you do that, that order is reversed. Now it goes from 12 down to eight.
+
+Unknown Speaker  21:27  
+Now this is a list, so what you can do is you can basically create a new data frame
+
+Unknown Speaker  21:36  
+with this list.
+
+Unknown Speaker  21:40  
+So what I'm doing is I'm saying, hey, create a new data frame from the original data frame with this list
+
+Unknown Speaker  21:47  
+which is sorted, and we have achieved our goal.
+
+Unknown Speaker  21:51  
+Now in this you'll see the column which was the last column here now becomes the first column. So
+
+Unknown Speaker  22:11  
+uh, there is also a slightly more elegant way, although that kind of subjective you might say, of writing this. So instead of start trying to create a new data frame like this, what you can do is you can take the original data frame and ask pandas to re index the original data frame using this re INDEX function. And why, when you are re indexing, you have to then provide which axis you are trying to re index for. So it will be re index and then sorted.
+
+Unknown Speaker  22:48  
+Hang on. Oh, I made a typo here, here,
+
+Unknown Speaker  22:54  
+re index. Why is this still complaining? I
+
+Unknown Speaker  23:06  
+Is that a bracket at the end as well, right after access equals one.
+
+Unknown Speaker  23:12  
+Oh, did I put a square bracket there?
+
+Unknown Speaker  23:16  
+Uh, hang on.
+
+Unknown Speaker  23:19  
+Huh? Okay, yeah. So this is also another way of writing the same thing here. What I'm saying is, instead of trying to create a brand new
+
+Unknown Speaker  23:28  
+data frame, we are saying, Take this data frame and re indexes these data frame based on this new list, which is the sorted and then do it on axis one, and that will also give you the same output.
+
+Unknown Speaker  23:54  
+Okay, so now go back to what I said earlier. I said these column and row axis. So here in this example, we are showing book on the on the as the indexes, and we are showing data as the column. And it is giving me some valuable insight. But we can also, if you want to, we can switch this order. So in order to switch this, all you have to do is we have to apply that same function. Is just you have to switch what you are calling index and what you are calling columns. So then your index would be
+
+Unknown Speaker  24:34  
+date ending, and your columns will be book name. And let's call this long form,
+
+Unknown Speaker  24:47  
+and when you do this, so now there would be five items in your index, but then there would be nine items in your column, and you will get a data frame like this. So.
+
+Unknown Speaker  25:00  
+So that's, in a sense, your puberty.
+
+Unknown Speaker  25:08  
+Okay. And here also, if you want, you can sort these by the dates here. But in this case, now you see one beautiful thing here. In the previous sorting example, we took the data frame and we did a re index, and while re indexing, I said, do it by axis one. Now, if I want to do the same kind of sorting based on date, I can apply the same function. All I have to do is just say
+
+Unknown Speaker  25:40  
+axis zero. So first of all, I have to take this from index, because now these are not column names anymore. Dates are indexes, but I'm re indexing on axis zero. And now if I do that, you will see these orders will change, and the top row will be December.
+
+Unknown Speaker  25:59  
+Oh, sorry, I applied it on a long form, sorry, short form.
+
+Unknown Speaker  26:05  
+I wanted to apply it in a long form. Yeah. So now you see original long form data pivot table that we created. It went from 08 up to 12. Now I applied that same re indexing technique, except I said re index on x is zero, and now it goes from December down to
+
+Unknown Speaker  26:27  
+August. So this is the RE indexing using the index. The previous example, we did re indexing based on Colin.
+
+Unknown Speaker  26:39  
+Okay.
+
+Unknown Speaker  26:41  
+Any question about the pivot function in general, before we look into the more full featured function, which is pivot table. Any question here?
+
+Unknown Speaker  27:02  
+Okay, so if there is no other question, we will move on. So pivot table. What does Pivot Table do? So pivot table, let me first start writing a pivot table function. So same thing here. You can either do PD, dot pivot table, or you can do data frame dot pivot table. So let's do the PD, dot, pivot table first.
+
+Unknown Speaker  27:23  
+So first parameter will be your would be your book sales director, right?
+
+Unknown Speaker  27:28  
+And here also one thing you have to two things you have to definitely provide, which is your values and your columns. So let's say values. So which one we are going to do values?
+
+Unknown Speaker  27:52  
+Actually, I'm going to do the values letter. Let's first do the index and columns. Fine. Index equal.
+
+Unknown Speaker  28:04  
+Index equal, what index did we use? Earlier
+
+Unknown Speaker  28:12  
+date ending right.
+
+Unknown Speaker  28:17  
+Column SQL, book name.
+
+Unknown Speaker  28:20  
+Column SQL to book name and value is total sales. Fine. And here I can also specify what is the aggregation function that I'm going to use. This is the main difference between the pivot and pivot table function. So here you can actually specify what aggregation Do you want to use
+
+Unknown Speaker  28:43  
+in case of Pivot Table? Sorry, only pivot what it did. It basically did the count,
+
+Unknown Speaker  28:53  
+but you cannot override it. Here, you can actually override so if I use a function called sum, now see what I'm getting is this.
+
+Unknown Speaker  29:07  
+You can change it to anything else. You can say, Hey, show me the count.
+
+Unknown Speaker  29:20  
+Why it is showing all one for count.
+
+Unknown Speaker  29:25  
+Oh,
+
+Unknown Speaker  29:27  
+because you're counting on the book name,
+
+Unknown Speaker  29:31  
+because I'm counting on the No, I'm actually counting. Oh, so this is so it is basically showing how many rows we have for this date ending and this book name.
+
+Unknown Speaker  29:47  
+So it is basically counting how many total sales data point does it have? It is not actually counting what is in there. That's why.
+
+Unknown Speaker  29:58  
+Okay, so.
+
+Unknown Speaker  30:00  
+If I want to
+
+Unknown Speaker  30:04  
+get rid of index, if I what happens if I get rid of index?
+
+Unknown Speaker  30:12  
+Hey, but no, is there any way you can blow your screen up a little bit? I'm having a heck of a time seeing it. Yeah, sorry about that.
+
+Unknown Speaker  30:20  
+Is it better? Now? Way better. Yeah. Okay.
+
+Unknown Speaker  30:27  
+I think the comment is asking for, like, the total sales of each book, regardless of month.
+
+Unknown Speaker  30:34  
+Get the total sales of each book. Well, if you want to do that, then some is the right way want to use right? Because what you are doing is total sales of each book, right? So from this prompt, you have to use the total sales column as values, and you have to use the book name as column. So if you do that, it will give you the total sale of each book, regardless of month that is true.
+
+Unknown Speaker  31:11  
+Yeah. And then in the next example, if you want to show the average of
+
+Unknown Speaker  31:21  
+each book. So what you can do is you can take that exact same function and in the aggregation function, instead of saying some, you can say mean, because mean is your average. So if you run that now, you see 410 I had the total cells now for this book called Foundation, now, average is 82 and you can see probably why, because there are only five data date we have. So 410 divided by five is actually 82
+
+Unknown Speaker  31:54  
+Similarly for the second book, total is 95 mean is 19, which is 95 divided by five. So you can actually quickly validate that these aggregation function is actually truly providing the average and the one before is actually providing the sum. So
+
+Unknown Speaker  32:24  
+okay,
+
+Unknown Speaker  32:25  
+so and then here it is saying total cells. Because the name of the column that you are using for values is total cells. If you don't like these kind of a total sales, like total underscore cells, you can always take that data frame and change the change the what is called the index, right? So you can just take that data frame and say, rename
+
+Unknown Speaker  32:53  
+this co pilot is amazing.
+
+Unknown Speaker  32:58  
+It basically suggested. It figured out that this guy probably is trying to change the these, this thing, except I don't want a VG underscore cells. I want let's say AVG cells. Let's say, Oh no, actually here, okay, I see what copilot is doing. It is reading this prompt where it actually did say AVG underscore cells. And it is generating the code from the prompt, yeah, so if you want to have a custom like your own kind of name for the role,
+
+Unknown Speaker  33:32  
+okay, so I hope you see the more flexibility that This pivot table function provides whereby you can actually apply any aggregation as you want, which is not possible in the pivot function.
+
+Unknown Speaker  33:50  
+Now, the other thing you can also do in pivot table, you can do two kind of or more, two or more any type of any number of aggregation in one shot. Let's say, if you want to show both the sum and average, well, all you have to do is, instead of act function equals mean, you have to pass it as a tuple, and then in the tuple you can provide as many as you would like, which in our case, is sum and mean. And if you do that, it will for each book, it will give you what is the average and what is the sum, which, in a sense, is kind of concatenation of this one here and this one here. Sorry, this one. So 410 was the total, like this thing, and this was the average. So here, in one shot, we can do some an average in one single puberty, so that gives you little more flexibility. Also.
+
+Unknown Speaker  34:58  
+Okay, so now.
+
+Unknown Speaker  35:00  
+We are going to do the next and this one, I would like you guys to kind of figure out what code to write. So look at the prompt here. It says, Use the pivot table function to get the average and total
+
+Unknown Speaker  35:15  
+of the book cell for each date.
+
+Unknown Speaker  35:22  
+And then round it to one decimal place. So take about take out the rounding one decimal place for a moment. But what pivot table function like in Pivot table function? What option do I need to use to get the aggregation of book sales by date? So you have to read it this way. What am I aggregating? I am aggregating sales.
+
+Unknown Speaker  35:48  
+What I am aggregating by? I'm aggregating by debt. So therefore, what are my parameters are going to be?
+
+Unknown Speaker  36:01  
+So your your columns would be,
+
+Unknown Speaker  36:06  
+I would use sales or columns, and then I would for the index, I would put date sold, no. So one thing is, so whenever you see what you are aggregating, you are saying average and the total of the book cells, right? So that means the column that I'm going to aggregate upon is book cells. So that means that will always go as a values parameter.
+
+Unknown Speaker  36:33  
+So values will be my book cells, which, in this case, the name of the column is total cells.
+
+Unknown Speaker  36:40  
+And then your index will be date ending, then your index will be date ending. Because, why? Because it says for each date, so therefore my index will be date ending.
+
+Unknown Speaker  36:56  
+I'm not hitting a tab because then this
+
+Unknown Speaker  37:00  
+co pilot is going to spoil all the fun. Okay, so now we got that right, and then we have to apply an aggregate function.
+
+Unknown Speaker  37:10  
+Now what will happen if you forget to apply aggregate function? Let's say you hit an end it, run it right this way. What do you think will happen? Would it work or not work? Do
+
+Unknown Speaker  37:25  
+it doesn't have an aggregator, so I
+
+Unknown Speaker  37:28  
+don't know it's going to show.
+
+Unknown Speaker  37:33  
+What did it show?
+
+Unknown Speaker  37:38  
+The reason I wanted to show you this is to show that pivot table actually has a default aggregation function, and that is mean. If you don't specify an aggregation function, it will actually print the mean.
+
+Unknown Speaker  37:53  
+Now see this, if I say aggregation function equals
+
+Unknown Speaker  38:00  
+mean,
+
+Unknown Speaker  38:02  
+you will get the exact same result,
+
+Unknown Speaker  38:07  
+because mean is default,
+
+Unknown Speaker  38:10  
+and then the prompt here is to show the average and total. So therefore you are going to use two mean and sum,
+
+Unknown Speaker  38:19  
+which will give you mean and sum.
+
+Unknown Speaker  38:22  
+And then they said, well rounded to one decimal place. So now you can chain it onto the round function and say, dot round one,
+
+Unknown Speaker  38:32  
+and that gives you this.
+
+Unknown Speaker  38:42  
+Okay,
+
+Unknown Speaker  38:44  
+again, here you don't need to re index. Okay. So now one stretch question. So here you see how when I'm doing this with pivot table, so I have all my date ending the date basically in coming as indexes and summon mean are two column names. What change you need to do to show it the other way, where all the date endings will come as a column name, and the two row be mean and some so basically, transpose it. What needs to change in this function so the output becomes a transpose of this output to the access
+
+Unknown Speaker  39:25  
+could you? Could you give it an access in your own
+
+Unknown Speaker  39:29  
+no so whenever Keeping this in mind, the two levers that you have at your disposal are the two parameters, index and columns.
+
+Unknown Speaker  39:39  
+So if you don't want date and date ending to become index, then you must be wanting date ending to be your columns.
+
+Unknown Speaker  39:49  
+That's it, and you will see that same result will be printed, but now in transposed manner,
+
+Unknown Speaker  39:58  
+just change the index.
+
+Unknown Speaker  40:00  
+Index field to columns field or vice versa.
+
+Unknown Speaker  40:15  
+Good, you.
+
+Unknown Speaker  40:36  
+Any question on Pivot Table. I
+
+Unknown Speaker  40:44  
+If not, then we will go into the next demo. So what I'm planning to do is I'm going to do
+
+Unknown Speaker  40:51  
+all the three section demoed one after another. One is the first we did pivot and pivot table, and then the next. We are going to see how we can do multi level indexing. And then next, we are also going to take a quick look at how we, instead of aggregation function being one of the inbuilt function, how we can pass a custom function, just like we did for the group by the other day, right? So I'm going to do these three demonstration, and then I'm going to ask you to do one activity, the activity that I think would be most interesting would be your activity number four, multi index on car sales. And then we will take a break. And then after break, we will do the remaining thing. Okay,
+
+Unknown Speaker  41:37  
+so I'm not going to ask you to do group activities for all of these and then the remaining activities. If you want, you can walk with me together, but I still like you guys to break, go into the breakout room and do one activity after I'm done on the demo of all three.
+
+Unknown Speaker  41:59  
+Okay, so let's take a look at the how we can do multiple level indexing. So in the previous example, we had index based on one thing, either book name or date ending, meaning the date of sale. Now here we are going to have our old friend that UFO data set. And in these data set there are a lot of different variables, right? We have city, state, country, shape, duration, so we can do indexing in different levels, and we can do multiple levels of pivoting here, just like how we use this in the group by exercise also.
+
+Unknown Speaker  42:39  
+So this is what we are going to try here on our
+
+Unknown Speaker  42:43  
+UFO data set.
+
+Unknown Speaker  42:47  
+So,
+
+Unknown Speaker  42:52  
+so we got our UFO data set loaded fine.
+
+Unknown Speaker  42:58  
+Now the first thing we have to do, we will do is just create a single index view. So let's take that as an activity. So read the prompt. It says, show the average seconds for each country, and round it to one decimal, plus. So how am I going to do that?
+
+Unknown Speaker  43:18  
+And we are going to use pivot panel function. So we are going to use this dot pivot table. Now your job is to figure out what are the columns, values and aggregation function you are going to use so that you can achieve this product, which is the average of seconds for Each country. So what am I going to do?
+
+Unknown Speaker  44:02  
+I
+
+Unknown Speaker  44:10  
+a column equal to duration,
+
+Unknown Speaker  44:13  
+column equal to duration. But what does it say? It says what I have highlighted? I say highlighted these words average seconds.
+
+Unknown Speaker  44:24  
+What is my aggregation function mean? Mean? What I have to aggregate upon?
+
+Unknown Speaker  44:31  
+It's on the duration, because duration on the duration, right? So that means duration cannot be your column.
+
+Unknown Speaker  44:38  
+Instead, duration has to be your index. Tell me what index values, no, no, no. Values, yeah. So,
+
+Unknown Speaker  44:50  
+okay, I'm going to delete everything else. It's stupid. Co pilot, autogenerated. So values is duration seconds. Now what else do?
+
+Unknown Speaker  45:00  
+I need to provide.
+
+Unknown Speaker  45:03  
+You need to put the data frame name, right? I think the very beginning I am applying this on the data frame itself. Therefore I don't need to provide. Remember, in grid, I said there are two different ways. If you do PD dot pivot table, then the first parameter will be the data frame name. The alternative is, you can do data frame dot pivot table. Then you don't need to have that parameters, because you are already applying this on the data frame itself. Oh, I see you have you around it, don't you
+
+Unknown Speaker  45:31  
+around this coming later at the end. But what other parameter I need to provide? The pivot
+
+Unknown Speaker  45:37  
+table, countries. Countries. Yeah, country as a what the columns? Columns, columns, you can do either way. You can do either columns equal country or index equal to country. And depending on which one you do, it will the thing will be like either columnar or sideways. The display would be difficult, right? So let's do columns. So now we are doing pivot tables, columns, country, value is your duration second?
+
+Unknown Speaker  46:06  
+What is this little squiggly line saying,
+
+Unknown Speaker  46:10  
+should we use comma between? Oh, yeah, good. I I forgot the comma, yeah. And then if we just do this, it'll be fine, right? Because remember how I said aggregation function? The default is mean,
+
+Unknown Speaker  46:26  
+meaning average. But let's be very specific here,
+
+Unknown Speaker  46:32  
+you have to provide aggregation function equals something. If you do not provide anything, it will automatically use mean. So in this case, we wanted to be have mean as our aggregation function, because the prompt says average, but you need to raise
+
+Unknown Speaker  46:49  
+and then the whole thing, he says, You have to round to one decimal plus, and that's it.
+
+Unknown Speaker  46:59  
+There you go,
+
+Unknown Speaker  47:04  
+Okay, now what will happen if I instead of saying columns equal to country, if I say index equal to country,
+
+Unknown Speaker  47:13  
+it will now become a vertical looking data frame. You
+
+Unknown Speaker  47:18  
+will have like this,
+
+Unknown Speaker  47:21  
+right? So that's the only difference. What
+
+Unknown Speaker  47:26  
+did you have in it? Before I had columns equal country, where all the country names were coming as columns. And let me do two side by side, actually. And these one, I'm saying index equal to country. And here the country names are coming one after another in the rows, but the same data you were saying just presented in two different ways.
+
+Unknown Speaker  47:50  
+Okay, but this is, again, we already saw that in the previous notebook, right? This is kind of a recap of the previous demo. Now we are going to actually get to, going to get to the meat of this, which is multi indexing. So now let's read the prompt. What it says
+
+Unknown Speaker  48:06  
+average seconds,
+
+Unknown Speaker  48:11  
+which means values will still be duration, and aggregation function will be mean. But here it says for each country
+
+Unknown Speaker  48:20  
+and state.
+
+Unknown Speaker  48:26  
+So I just copied whatever I had in the previous cell. Here. The question for you is, can you try to use your maybe common sense, even though we haven't discussed this, what do you think we should change? Just take a educated guess here,
+
+Unknown Speaker  48:43  
+and it is okay to be wrong. I think to have two indexes, one of country, the Roman is a state. So country, comma, state, yeah, okay, best,
+
+Unknown Speaker  48:54  
+yeah. So do you think this way will work? So pass as a tuple? Bradford, Yeah, makes sense. Let's see, pass as a tuple. I think you look the best. Yeah,
+
+Unknown Speaker  49:08  
+bingo. And by the way, you can, whenever you are passing something as a tuple, you can also pass it as a list, by the way,
+
+Unknown Speaker  49:18  
+but that was a very, very good guess. I'm really happy that you have figured it out right. And if, based on how you are responding, I think there's not just one person, most of you guys figured out that this should be the way.
+
+Unknown Speaker  49:35  
+Is a common sense. Yeah, go ahead. What if you were to put column
+
+Unknown Speaker  49:40  
+state same thing. It will basically just go across, but then you will have a really wide data frame, because now you are having two levels, country and state. Earlier, we are only doing country. So even when we went wide, we only had four columns. Now each country have multiple state. So now.
+
+Unknown Speaker  50:00  
+You will have a data file going to be 84 columns,
+
+Unknown Speaker  50:05  
+which is not very pretty to look at, right?
+
+Unknown Speaker  50:09  
+Yeah, but you can if you want to. No, I was just curious. I didn't know what it would look like. Yeah.
+
+Unknown Speaker  50:16  
+Okay,
+
+Unknown Speaker  50:19  
+how about the next one we do. So let's copy this thing here
+
+Unknown Speaker  50:25  
+and let's do the next one.
+
+Unknown Speaker  50:28  
+So we just have to use the same structure. But now look at the prompt and see how we need to change the parameter of the pivot table.
+
+Unknown Speaker  50:40  
+Index needs to be added with city as well. Yeah, country, state and city exactly, because there is no limit how many level you can go, right? Yeah. First we had one, then two, and now we have three.
+
+Unknown Speaker  50:55  
+Do you think anything will need to change on the values or aggregation function,
+
+Unknown Speaker  51:01  
+which needed to change the values from duration seconds to shape.
+
+Unknown Speaker  51:06  
+Why? Because it's asking for the number of UFOs
+
+Unknown Speaker  51:14  
+in each city, state,
+
+Unknown Speaker  51:17  
+duration Second. Okay, so we'll come to the values love after. So one thing we need to change in the aggregation function.
+
+Unknown Speaker  51:27  
+So
+
+Unknown Speaker  51:30  
+I think it'd be Count. Count will be count. Yeah, it'll be count. So when you're doing the count, the idea is basically as a values. So if you go back all the way to the top like what the original data frame is, right? So if you got counting shape, it will basically count, okay, how many occurrences of shape is there, right? But you can take even comment or date posted or latitude. You can basically take any column that has no null values.
+
+Unknown Speaker  52:00  
+So I know why you guys said shape,
+
+Unknown Speaker  52:04  
+because that's what was provided. Now I'm going to show to you that you can actually do that using anything. So here, looking at this, you got probably thinking like, okay, so I'm going to have to provide a shape. Yes, with shape, it will work. Let's see,
+
+Unknown Speaker  52:23  
+actually, let's put it in a
+
+Unknown Speaker  52:27  
+because, in a data frame, so that we can do a head or something like this,
+
+Unknown Speaker  52:34  
+yeah, and then do a head of query.
+
+Unknown Speaker  52:40  
+Okay? So now look how the how we are getting. So we are getting 112,
+
+Unknown Speaker  52:46  
+and then 11111,
+
+Unknown Speaker  52:48  
+and then 10, one, one. Just remember this pattern. Okay, now what I'm going to do is I'm going to use something else, other than shape. Let's call, let's use duration seconds. I'm
+
+Unknown Speaker  53:03  
+Yes. So if I do duration second here, you will see this column header will change. But this column header simply says, Hey, which column you are counting, but your actual counting result would not change. Look at this carefully. When I run it,
+
+Unknown Speaker  53:19  
+you see 112111111,
+
+Unknown Speaker  53:22  
+and then 10. So the pattern is still the same, except just the comment, sorry. Column Name change.
+
+Unknown Speaker  53:30  
+If you take any other column, let's say comments. So if you put comments in here, assuming there is no null value, you will get the same result, except the name of the column will change. Yeah, commons, we are getting the same result. So the thing is, when you are doing the counting, you can basically take any non null column, any column having no null values in any of the rows, as your values here.
+
+Unknown Speaker  54:12  
+Okay,
+
+Unknown Speaker  54:14  
+the next one is kind of a recap of previously learned skills. How do you show the number of UFO sightings.
+
+Unknown Speaker  54:24  
+No, actually, hang on, didn't we just do that show the number of UFOs for each country, state and city?
+
+Unknown Speaker  54:33  
+Yeah, we did that.
+
+Unknown Speaker  54:40  
+It's in descending order. Is what it's saying.
+
+Unknown Speaker  54:44  
+The order is getting changed. It's getting sorted in descending order. Descending order. Yeah, yeah, no. I think there was also another thing, UFO, UFO sightings, I think, show the number of UFO sightings. So basically, we need to change the.
+
+Unknown Speaker  55:00  
+Name of these columns, also this column right, and then sort it. So how do we do that?
+
+Unknown Speaker  55:17  
+The question more time
+
+Unknown Speaker  55:19  
+we have to redisplay this, changing the name of this column to something more meaningful, such as number of UFO sightings, and then also sort it from highest to lowest, I think, right.
+
+Unknown Speaker  55:36  
+What did it say, to false to sort in descending order? Yeah, so from highest to lowest. So how do we do that? Copy and Paste above
+
+Unknown Speaker  55:47  
+this one. We don't need to, because we already have this is not an application of pivot table at all. We already have the Pivot Table created. We have to do something on top of the pivot table that we already created. I
+
+Unknown Speaker  56:03  
+The first is renaming the column.
+
+Unknown Speaker  56:07  
+So done Rename. You can do a dot rename
+
+Unknown Speaker  56:17  
+and
+
+Unknown Speaker  56:21  
+comments. Colon, UFO sightings, yeah,
+
+Unknown Speaker  56:27  
+reading there, but I'm also thinking about it too, yeah, yeah,
+
+Unknown Speaker  56:33  
+yeah,
+
+Unknown Speaker  56:36  
+that's exactly what I was gonna write.
+
+Unknown Speaker  56:42  
+You can actually write it another way. Also
+
+Unknown Speaker  56:45  
+you can So here, if you are writing this, then you have to know what is the old name of the column is right? But now look at this. If you just take this and say columns, let's see what columns do we have?
+
+Unknown Speaker  56:58  
+We only have one column from our comments. So what if, if you just do a re index,
+
+Unknown Speaker  57:07  
+and in re index, you basically just provide what is the new column name that you want, which is UFO sightings, and just say
+
+Unknown Speaker  57:21  
+access equal to one.
+
+Unknown Speaker  57:25  
+I think that will also do it.
+
+Unknown Speaker  57:28  
+There you go.
+
+Unknown Speaker  57:30  
+But I don't know why it is showing me none in here.
+
+Unknown Speaker  57:38  
+I
+
+Unknown Speaker  57:53  
+Why do you showing none? Hang on. Let me run the previous cell again. So let's say this is the original cell that I ran, and then if I take this and do a re index, for some reason, I am
+
+Unknown Speaker  58:14  
+getting none values. Let me do
+
+Unknown Speaker  58:20  
+let me
+
+Unknown Speaker  58:24  
+hit 22 apples to apples comparison, no, actually, yeah.
+
+Unknown Speaker  58:30  
+So those are some null values, other in other rows that they were showing up. But if you do a hit 20, you will still get this, but then you have to apply it back here
+
+Unknown Speaker  58:45  
+to actually see, oh, now when you are applying this re index, it's all getting none
+
+Unknown Speaker  58:54  
+so
+
+Unknown Speaker  59:04  
+but we did do re index successfully before,
+
+Unknown Speaker  59:11  
+and that did not give us now. So
+
+Unknown Speaker  59:29  
+this one was re indexing on axis zero.
+
+Unknown Speaker  59:36  
+This one, we did re index on axis one,
+
+Unknown Speaker  59:41  
+but it did not give us now,
+
+Unknown Speaker  59:48  
+I don't know why this particular form of re index is actually setting the values to none.
+
+Unknown Speaker  59:56  
+Anyway, let's restore back the data frame, which is.
+
+Unknown Speaker  1:00:00  
+This, and then the other one that we did here, these will always going to work. So basically, what you have to do is
+
+Unknown Speaker  1:00:10  
+you have to use the Rename column, and that is not going to screw this up
+
+Unknown Speaker  1:00:17  
+index. I don't know why it is changing the values itself. So let's see,
+
+Unknown Speaker  1:00:33  
+did I not run this before? Beautiful city, country. Dot head. 20, yeah. I
+
+Unknown Speaker  1:00:53  
+All right, because here I'm doing in plus equal to true. If you want to do in plus equal to true, then you don't need to assign, yeah, okay.
+
+Unknown Speaker  1:01:04  
+Okay, so yes, so this is getting now changed successfully with the rename columns. So let's stick with that. Then the other task that we have is to sort it. So how do we apply the sort?
+
+Unknown Speaker  1:01:20  
+Apply a sorted function.
+
+Unknown Speaker  1:01:23  
+Apply sorted function. Yes, I actually like this suggestion.
+
+Unknown Speaker  1:01:29  
+Sort values.
+
+Unknown Speaker  1:01:33  
+Because sorted function you basically apply when you are trying to extract a particular series or column as a series, and then you basically apply the sorted function in there, and then you get a list back. So here what it's saying is take the data frame and apply the data frames sort values function, and you say which column you are trying to sort by, and then say ascending equal to false. And that's it. So
+
+Unknown Speaker  1:02:03  
+need to do head 20 here. I'm already going to do head 20 in the next line.
+
+Unknown Speaker  1:02:09  
+Yeah.
+
+Unknown Speaker  1:02:15  
+Oh.
+
+Unknown Speaker  1:02:24  
+Oh, right.
+
+Unknown Speaker  1:02:27  
+This one I haven't done in place, so I have to do in place.
+
+Unknown Speaker  1:02:34  
+Okay, so now they are sorted by values, so
+
+Unknown Speaker  1:02:38  
+I can't remember why we did the in place true and the ascending false, like those are parts in places. In Place has nothing to do with ascending if I do not do in class. So if you see, if you do not do in plus, then whatever, then work that you are doing with this function, it does not get saved. So now, if you run it this way, you will see, even if I'm running sort values after I print it, then it will not get sorted. Well, in this case, it is because I have already sorted it once. But look when I'm running this again, so I create the effort first, and then, if you apply the column Rename, and then do the sort values without in place and then try to print this, you see that the sorted copy is not printed because we haven't provided in place equal to true. And we have talked about this multiple times. So the alternative is you can take that output of this and save it in the data frame. That's one way. Or if you don't want to do this, which I suggest is a more elegant way you say, hey, whatever function that you are operating, do it right in place. So that way you don't have to do that. Do that assignment.
+
+Unknown Speaker  1:03:50  
+And ascending false is basically just saying whether you want to sort it in ascending order or descending order in places. In general, it applies to most of the pandas function.
+
+Unknown Speaker  1:04:01  
+All right, thank you.
+
+Unknown Speaker  1:04:04  
+Okay, so I think that's enough for the
+
+Unknown Speaker  1:04:09  
+multi index. Oh, the other thing, last thing, you can also do multi index with multi aggregations. So just like we are doing country, city, state, like, two or three or any number of these here, and we are basically finding either sum or count, like what we did here. There is nothing stopping us from actually applying multiple aggregation function while also applying multiple level of indexing, which is this last one. So it says show the minimum and maximum seconds for each country and state. So therefore what you need to do is you do country and state, and it clearly says maximum seconds. So therefore, as a value, you cannot use come.
+
+Unknown Speaker  1:05:00  
+Once, you actually have to use this one, which is
+
+Unknown Speaker  1:05:04  
+duration seconds.
+
+Unknown Speaker  1:05:10  
+Here, here, duration seconds, and then an aggregation function. It says, show two minimum and maximum. So we don't need the count anymore. Instead, we need to put minimum and
+
+Unknown Speaker  1:05:26  
+maximum.
+
+Unknown Speaker  1:05:31  
+And since we are doing minimum maximum, there is no need to round
+
+Unknown Speaker  1:05:36  
+and you will get this the minimum and maximum values. So
+
+Unknown Speaker  1:05:45  
+yes. Okay,
+
+Unknown Speaker  1:05:47  
+so this last example shows you can do as many aggregation function as you want, and then previously, we saw we can do as many level of grouping, either on the index side or on the column side as we want.
+
+Unknown Speaker  1:06:01  
+So that's your multi indexing.
+
+Unknown Speaker  1:06:05  
+Any question on multi indexing?
+
+Unknown Speaker  1:06:16  
+If not, we are going to take a very quick look on the custom aggregation and this one, I'm just going to run through the code, because this is exactly the same thing, and we already know how to pass our user defined function. So essentially, we are going to work with that same UFO data set.
+
+Unknown Speaker  1:06:39  
+Now one thing we are going to do. The only thing different is we are still going to use the pivot table function with whichever index level we want, in this case, country and by state, and we are trying to find the average duration of the UFO sightings. But except the only different here is as an act function. Instead of using any of the built in Act function, you can define a function somewhere else in your code, which in this case, we are saying our custom AVERAGE function, and you can pass any of your custom functions name in there as well. So that's the only difference, and it will give you the same result because you have already defined custom AVERAGE function to actually do what a built in mean aggregator would have done anyway.
+
+Unknown Speaker  1:07:34  
+This is not running because I forgot to actually run this.
+
+Unknown Speaker  1:07:40  
+Yeah, so custom AVERAGE function, and instead of So earlier, what we are doing here is here we were doing, mean,
+
+Unknown Speaker  1:07:49  
+this was our original way attempt, right, which is still a good attempt. But this is just to show that, instead of that, if you do happen to have a custom built function for anything more complicated that you want, you can pass that custom build function name here as well.
+
+Unknown Speaker  1:08:11  
+Okay, and then rest is basically a rename column and all of that that is not even relevant here. And this example what you can see here in cases where you have to do multiple aggregation, like we saw in the last example here in the previous notebook, where we did minimum and maximum two application in one shot, you can also do the same thing with your custom function. So here we have a custom sum, custom count and custom average. And in the aggregation function we can pass either a couple or list of multiple custom function as well, if you need to, and this is what you are going to get. I didn't run the cell before it will run. So we are getting, basically getting three different columns that comes from our three functions. And one thing you must have noticed that the name of the columns will be basically the name of the aggregator that you use when you are using built in one let's say if you do count,
+
+Unknown Speaker  1:09:18  
+if you do mean and if you do some
+
+Unknown Speaker  1:09:27  
+it will use count, mean sum, which is basically the name of the aggregator that you are passing. If any of these, if one or more of this is custom, it will basically do corresponding custom name here. And one thing also, you can see you can do a mix and match. When you have multiple aggregation, you can have built in and your custom defined both used also. So there is no such restriction that either all need to be custom defined or.
+
+Unknown Speaker  1:10:00  
+All need to be built in. There is no such difference here. Another thing you probably have just seen, when I'm passing custom average, it cannot be in string. It has to be without the double quote,
+
+Unknown Speaker  1:10:14  
+that way,
+
+Unknown Speaker  1:10:17  
+whereas when I'm passing any of the built in, one that goes in a string.
+
+Unknown Speaker  1:10:24  
+And that's the only difference, basically. And this part is basically just like what we saw in the group by part the custom defined function.
+
+Unknown Speaker  1:10:39  
+And that's all there is to know about pivoting. There is not a whole lot to it.
+
+Unknown Speaker  1:10:45  
+There's a very simple concept to understand, and I hope you got a good handle, which I strongly believe if you do one activity now within your group, spend maybe little bit more time, maybe 20 minutes, but try to get your hands dirty and answer some of this prompt yourself. So if you look into your activity number four,
+
+Unknown Speaker  1:11:10  
+let's open this
+
+Unknown Speaker  1:11:12  
+Yeah, so this is a car sales data. I really like this data frame very short, and it very clearly serves to show the concept of the different pivoting with the different indexing level.
+
+Unknown Speaker  1:11:28  
+So 1040 let's go all the way to 11. Well, 20 minutes from now on, right, whenever the
+
+Unknown Speaker  1:11:35  
+rooms closes, and that will take us to about our break time, right? Yeah, okay, so let's do that. Karen,
+
+Unknown Speaker  1:11:48  
+yeah, 20 minutes. 20 minutes. Yeah. Okay.
+
+Unknown Speaker  1:11:58  
+And this you guys are doing activity number four,
+
+Unknown Speaker  1:12:03  
+pivoting on the car sales data.
+
+Unknown Speaker  1:12:08  
+I did four rooms.
+
+Unknown Speaker  1:12:11  
+Four, Is there less attendance today? Yeah, hey, sorry, I'm still on I forgot we had a class today because of the break. But
+
+Unknown Speaker  1:12:21  
+okay, I'll just Yeah,
+
+Unknown Speaker  1:12:25  
+someone will be more than six.
+
+Unknown Speaker  1:12:30  
+So what is the what is the total attendance number today?
+
+Unknown Speaker  1:12:36  
+We have 28 students in the breakout rooms right now,
+
+Unknown Speaker  1:12:40  
+or minus? How many do we get other days? One? How many do we get other days? About the 3132
+
+Unknown Speaker  1:12:49  
+Oh, okay, so few people. I read four because it wasn't even six,
+
+Unknown Speaker  1:12:56  
+and now we have 177,
+
+Unknown Speaker  1:12:59  
+that's fine. That's fine.
+
+Unknown Speaker  1:13:10  
+I thought that we usually get, like, around the total with us at 3132
+
+Unknown Speaker  1:13:16  
+Oh, is that what it is? Yeah, I might be thinking of the total participants, but yeah, or down like an actual four or five students today
+
+Unknown Speaker  1:13:24  
+at least
+
+Unknown Speaker  1:13:26  
+going to do on their way to whatever they're doing.
+
+Unknown Speaker  1:13:38  
+Okay, let's give them some time to do that. I'll be back in few minutes. Okay, you
+
+Unknown Speaker  1:14:45  
+nobody in our breakout room knows how to do any of this,
+
+Unknown Speaker  1:14:51  
+so everybody's just sitting there
+
+Unknown Speaker  1:14:53  
+silently. I asked, and everybody's behind they don't know how to do it.
+
+Unknown Speaker  1:14:59  
+I.
+
+Unknown Speaker  1:15:01  
+I can come walk you guys through it, if you like.
+
+Unknown Speaker  1:15:05  
+Yeah, that'd be cool. I don't know even know what breakout room I was in now, but Number two,
+
+Unknown Speaker  1:15:11  
+I'll join you guys there. All Right. I
+
+Unknown Speaker  1:32:29  
+Is, is it done?
+
+Unknown Speaker  1:32:31  
+I think so. I think the rooms just got closed. Okay?
+
+Unknown Speaker  1:32:38  
+Everyone should be here now, right?
+
+Unknown Speaker  1:32:45  
+11 seconds,
+
+Unknown Speaker  1:32:48  
+oh, oh, no, even so soon.
+
+Unknown Speaker  1:32:53  
+How come you bopped out?
+
+Unknown Speaker  1:32:57  
+I
+
+Unknown Speaker  1:33:03  
+Hello.
+
+Unknown Speaker  1:33:04  
+It's been great. Hello, interesting. And in the middle of the everything, the brain processing, we've been kick out.
+
+Unknown Speaker  1:33:18  
+How much did you manage to get done?
+
+Unknown Speaker  1:33:22  
+Yeah, halfway through.
+
+Unknown Speaker  1:33:23  
+Halfway through, yeah, an epic fail. Okay, okay, I get all the way through doing the other stuff.
+
+Unknown Speaker  1:33:31  
+Okay, that's fine. We will, we will go through the all of it together enough to notice that the information is kind of backwards. They have the make as set as model, and the model says make, the information is backwards.
+
+Unknown Speaker  1:33:51  
+Information is backward. What do you mean? Because they're saying model is Toyota, and when that's actually the make?
+
+Unknown Speaker  1:33:58  
+Oh, okay, well, I don't know, let's see. So let's go through this. So we have these data frame, right? So we have
+
+Unknown Speaker  1:34:07  
+type of car, the category, and then make and model, and then how much units were sold in a given year, right? And we have a whole bunch of year values. So the first prompt, they are saying total number of vehicles for each model and make.
+
+Unknown Speaker  1:34:28  
+So what is the anchor point here?
+
+Unknown Speaker  1:34:38  
+Total number of vehicles, right? So that's the anchor point, because that tells me that I have to do a aggregation function of some
+
+Unknown Speaker  1:34:48  
+and my values column will be count. So this count column is what I'm counting, and I'm doing a sum of this thing based on my.
+
+Unknown Speaker  1:35:00  
+Model and make. So therefore I have to do multi indexing on two levels, model and make,
+
+Unknown Speaker  1:35:10  
+right.
+
+Unknown Speaker  1:35:12  
+It should be straightforward, and this is the output you will get for each model. There are um,
+
+Unknown Speaker  1:35:23  
+uh, okay, make, okay, I see
+
+Unknown Speaker  1:35:27  
+make and model is backward.
+
+Unknown Speaker  1:35:33  
+That's true.
+
+Unknown Speaker  1:35:35  
+What do we call make, right? Acura, these things are make,
+
+Unknown Speaker  1:35:40  
+and then model should be, this is that what you meant? Yeah, yeah. Now I see that I missed that too earlier, yes, but the way that data set came in, the data set itself, kind of MIS categorized the name of the team columns, but we understand, right? So what the thing is, okay, so make and model. So we got model and make, and then we do the aggregation of count using the sum function.
+
+Unknown Speaker  1:36:10  
+So that was the first one, but that's not that's just an alphabetical order, though, right? I mean 20 results, but that's not showing the top 20 results by No, by some or by No, no, because, but the way that it will work is, if you do not do a sort, explicit sort, it will, by default, sort by the first level column, uh, first level index, and then by second level index. So that's what it is, got it? Yeah, that's not what I would refer to as top 20. That's so I just kind of did a sorting on that. Yeah. So if you want to do that, then you have to sort it, which is basically the next one here. So if you really so, in the next prompt, you see that, what it says rename the count column. So this count column, if you want to rename, you can do a Rename, and instead of count, let's say you want total. Fine. And then you take these and do a sort values by total. And then when you do that, now it is not in the order of model, or not in the order of make. Now it is using the order of total. So with this view, you can clearly see which card sold the most overall,
+
+Unknown Speaker  1:37:22  
+throughout all these years, which is a Toyota Corolla, the most sold car.
+
+Unknown Speaker  1:37:32  
+Yeah, Toyota Corolla, Honda Civic, Toyota Camry, Honda Accord,
+
+Unknown Speaker  1:37:38  
+sport focus. Wow. What happened to f1 50?
+
+Unknown Speaker  1:37:43  
+Don't they have that? Because I know f1 50, I think is one of the highest sold car anywhere period. Maybe they didn't have that in the data set. But anyway, so that's that the next prompt says total number of vehicles for each model make year. So essentially the same thing, total number. Therefore we have to use some The only difference is now there is another level of indexing, which is year.
+
+Unknown Speaker  1:38:15  
+So exactly the same as before, you are just adding one more level after model and make you provide a year, and that tells you Acura MDX for will drive which year it sold, how many. So it seems like, for MDX for WD, there was only one record for 2007 that's why you were seeing one for these only 2010
+
+Unknown Speaker  1:38:41  
+RDX four, WD, we have record from four different years. So is 2000 789, 10, and so on.
+
+Unknown Speaker  1:38:51  
+Again. This is sorted by default, by model, and then Mac, and then by year. It is not sorted based on the count.
+
+Unknown Speaker  1:39:01  
+Now the next prompt here is to change the total column to name total, and then sort by year and total. So when you are doing sort values,
+
+Unknown Speaker  1:39:15  
+you can also sort by multiple levels.
+
+Unknown Speaker  1:39:19  
+So in the previous example, it said sort by total, only
+
+Unknown Speaker  1:39:25  
+by total. Column in this prompt, it says, sort the pivot table on the year and total.
+
+Unknown Speaker  1:39:35  
+So therefore
+
+Unknown Speaker  1:39:38  
+you provide year and total two things in your sort values.
+
+Unknown Speaker  1:39:44  
+And that's what it is showing. 2010 comes first, then 2010 which is little bit slower in total, and then again, 2010 which is little less in total, and so on. So.
+
+Unknown Speaker  1:40:10  
+The next one is also total number of vehicles. So your aggregation function does not change, but it just says the indexing level. It says by category, and here, so therefore we don't need make or model for this one. All you have to do is just change the indexing to say category. And here two things. And when you run this you will get this thing again. This is by category, sorted by category, 123,
+
+Unknown Speaker  1:40:43  
+and then P and so on. And then within each category, it is sorted by year in ascending order, because that is the default sort order.
+
+Unknown Speaker  1:40:54  
+And then the next prompt is again, change the sorting order of this data frame to sort by total. And when you do sort by total, you basically get what category of car was sold
+
+Unknown Speaker  1:41:10  
+in a given year and how much total.
+
+Unknown Speaker  1:41:14  
+As you can see, for 2009 passenger car was the most sold category 2009 category one truck was the most sold. 2010
+
+Unknown Speaker  1:41:25  
+most soldies, passenger car, again, or 2009 the two top sold are passenger car, then truck, and then category two truck. But 2010 also passenger car, and then category one truck, and then down here is category two truck, and so on. So I think the trend is kind of the same for any given year, passenger car was the top sold category and followed by category one truck and then category two truck, mostly. So
+
+Unknown Speaker  1:42:07  
+the next one builds up on this.
+
+Unknown Speaker  1:42:11  
+No, make model, but category here you take and it says, Oh no, it does. Says, actually model, so now it says, show the total by
+
+Unknown Speaker  1:42:21  
+category. Then model, then here. So you essentially, literally have to read these things and put your index list in that order. So category, model and year, and you do a count, sorry, sum of count,
+
+Unknown Speaker  1:42:37  
+and you will get this. So
+
+Unknown Speaker  1:42:43  
+and then you do the same thing here, also you change the total column and then sort in descending order,
+
+Unknown Speaker  1:42:52  
+and you will get this data frame.
+
+Unknown Speaker  1:43:02  
+And this one gives you within passenger car, Toyota was the most sold, and then the next year was Honda. Next year was Nissan and Chevy and Hyundai for Category One truck, Toyota again for 2009
+
+Unknown Speaker  1:43:17  
+and followed by Ford, Honda and Chevy and so on,
+
+Unknown Speaker  1:43:23  
+right? So, essentially, kind of the repetition of the same thing, just varying the index level. That's all this activity was about.
+
+Unknown Speaker  1:43:38  
+Okay,
+
+Unknown Speaker  1:43:41  
+so,
+
+Unknown Speaker  1:43:54  
+okay, so let's take a 10 minutes break now and come back at 825,
+
+Unknown Speaker  1:44:01  
+and then we will do one other demonstration on resampling and melting of a data frame. And then that will be the final unit of today.
+
+Unknown Speaker  1:44:13  
+Okay, so 10 minute break. I hope most of you are back.
+
+Unknown Speaker  1:44:19  
+Yeah, see people here.
+
+Unknown Speaker  1:44:25  
+Okay, so let's get started with the next topic, which is resampling.
+
+Unknown Speaker  1:44:33  
+This, in fact, is a
+
+Unknown Speaker  1:44:36  
+very important technique that you will have to probably use whenever you are dealing with a time series data. So time series data is a type of data where your index is basically some kind of a take time. For example, if you have a sequence of reading, let's say weather reading, hourly or daily weather reading, right? That would be a time series data. Or you.
+
+Unknown Speaker  1:45:00  
+You have reading for a stock market, right, how a stocks value is moving up and down, either on an hourly daily basis, or maybe even a more granular level, right, like a minute or second basis. So those are some of the examples of time series data. So
+
+Unknown Speaker  1:45:19  
+you will see later when you deal with time series data, often time you have to change the granularity of the data. If you have a data that is too granular, let's say, going by minutes, in order to achieve your objective of the model that you are training, maybe you are interested with only hourly interval, or only daily interval, or so on. So when these type of scenario happens, often time, you will see that you have to do what is called resampling. So what resampling does is you provide a time interval that you want to resample the data, and it looks into the original data set and finds all the records within that period, groups them together and applies an aggregation function that you specify. And that could be, again, your sum, mean, Max, have not average. Mean is average. So basically, your standard set of application function, so let's say, if you have stock market data that goes let's say by minute, and you are looking to model
+
+Unknown Speaker  1:46:33  
+trading system. And maybe in your trading system, you don't need the minute level granularity. You need the hourly level. So if you look into the raw data frame, you will have 60 record for every hour, one for every minute, and then another 60 record for the next hour, and so on. Now if that is too much data for you to deal with, more than you need, then what you might want to do is a resample to hourly interval, and that way, pandas will look into all the record, all the minute by minute record that comes in every hour. Group them together and apply an aggregation function that you provide, which could be minimum, maximum, average, some count standard functions, right? Which is what we are going to see,
+
+Unknown Speaker  1:47:23  
+actually, yeah. So this is one example where we have data for some visit. And in this example, you can see the data goes by. The original data was mean by, sorry, by day, and when we resample with the
+
+Unknown Speaker  1:47:42  
+interval level of weekly. It basically takes the first day of every week and then it provides an aggregate of data that falls within that week. That's essentially what resampling does, and when you do provide resampling interval, which in this case is a W. So W means weekly. This is where you can play around with different resampling interval to see how things work.
+
+Unknown Speaker  1:48:08  
+So we are going to take a quick look here. So the data set that we have,
+
+Unknown Speaker  1:48:15  
+we are going to basically, let's say, create some data set on the fly. So in order to do that, we are going to create a data set with random values that gives you daily level data for 90 days. And how do we do that? If you see that this is like, basically just creating cosmetic, not cosmetic, sorry, engineer data set, right? Like, basically a dummy data set. So the way it works is, I'm going to show you here there are a whole bunch of statement. I'm going to show you what the effect of each one of these is, right? So if you apply this date range function, so date range is a pandas function. When you call the date range function, it will give you a list of dates, but you have to provide what is the starting date that you want it from, what is the frequency that you want it, and how many period meaning how many items that you want. So if you start with January 1, 23 let's say, and if you do this for 90 days with the frequency of day, you will basically get
+
+Unknown Speaker  1:49:29  
+series or index that will give you each and every date from January 1 to march 31
+
+Unknown Speaker  1:49:38  
+this is what does. So this is basically we are creating the x axis of the data set.
+
+Unknown Speaker  1:49:44  
+Now the next one is getting 90 random values. And the way you can do that is basically do a list comprehension technique where you are basically defining a list using a for loop.
+
+Unknown Speaker  1:50:00  
+In line within a pair of square brackets. What you are doing is you are using the random function called Rand int and giving it a range within which you want the data to be, which in this case, is between 10 and 50,
+
+Unknown Speaker  1:50:16  
+and doing that for a dummy variable in a range of 90,
+
+Unknown Speaker  1:50:21  
+meaning it will give you 90 random integers. If you run it one more time, if you it will give you completely different set of integers, but always 90 integers is what you're going to get.
+
+Unknown Speaker  1:50:35  
+Then you take these two, you take the dates and take the random integers and create a dictionary with the column name, date and visits, and use that dictionary here to create a pandas data frame. So when you run all of these together, you get a data frame created on the fly with 90 days starting from January 1, up to March 31 with some random value for physics of each day.
+
+Unknown Speaker  1:51:07  
+Okay? I mean, you could apply it on any data set that you are grabbing from anywhere, as I said, from weather prediction, weather reporting data, from stock market data, but this is just a quick and dirty way to create a dummy time series data set
+
+Unknown Speaker  1:51:23  
+that we are showing here.
+
+Unknown Speaker  1:51:26  
+Now we are going to practice our resampling operation on these dummy time series data set that we have created here.
+
+Unknown Speaker  1:51:36  
+Okay,
+
+Unknown Speaker  1:51:37  
+is it clear up to this point how we are creating the data set.
+
+Unknown Speaker  1:51:47  
+Okay, I will take that silence as a yes.
+
+Unknown Speaker  1:51:52  
+Now we are going to apply the resampling technique.
+
+Unknown Speaker  1:51:58  
+Now, one thing is, if you look into this data frame, what is the index of the Data Frame?
+
+Unknown Speaker  1:52:19  
+The index is a range index, right? Because it goes from zero to 89 and if you do a cells TF, dot index, it clearly said that it is a range index that starts from zero stops at 90 with a step value of one.
+
+Unknown Speaker  1:52:36  
+There is nothing wrong with it. But the thing is, when you are going to apply the resample function on a data frame. That data frame needs to have a date actually used as an index of that data frame.
+
+Unknown Speaker  1:52:50  
+So first we need to do a little pre processing, which is, instead of having zero through 89 as the index, we have to take this date column and set that to be the index of the data frame,
+
+Unknown Speaker  1:53:03  
+so that we can apply all resampling techniques on this. So for that, we have to take the sales data and do a set index operation and provide the column date as an index, and then you print the sales data frame,
+
+Unknown Speaker  1:53:26  
+and you get
+
+Unknown Speaker  1:53:34  
+same, oops, what happened?
+
+Unknown Speaker  1:53:38  
+Oh,
+
+Unknown Speaker  1:53:44  
+yeah,
+
+Unknown Speaker  1:53:52  
+why is it saying there is no data quality
+
+Unknown Speaker  1:53:59  
+here? Okay, sorry, I must have run something out of order. Okay, so now you see, look into the difference between the this first data that we created, date and visits that they were two columns, and zero through 89 were the index. Now after we change the index using the set index function, so now the date column has become the index zero through 89 is no longer there, and now only visits column is your columns, single column, and then the date itself is the index. To validate that the index have been changed, you can take this new data frame and try to show the index of it, and it clearly now shows that now your end index is not range index anymore. Instead, it is the dead time index. So whenever you have your data frame with the dead time index, you are good to go to apply any re sampling operation on it. So that is one prerequisite.
+
+Unknown Speaker  1:55:00  
+Very important one keep in mind.
+
+Unknown Speaker  1:55:05  
+Okay, so now here we have data by date. So the first thing we are going to do, we are going to get these visits by week. So what do I do? I take my data frame and apply resample. And here we have to define what is mine
+
+Unknown Speaker  1:55:29  
+interval for resampling which is weak.
+
+Unknown Speaker  1:55:34  
+And it says, give me the total visits for each week. So total, so that means my aggregation function, which will come with
+
+Unknown Speaker  1:55:44  
+chain operator, chain operation, which will say, hey, now we need the sum. So now, if you do that, now, it says, starting from the day of the week, what is the sum?
+
+Unknown Speaker  1:56:01  
+Okay.
+
+Unknown Speaker  1:56:03  
+Now, do you think anything little odd in this output,
+
+Unknown Speaker  1:56:11  
+looking at the relative values, anything that catches your attention,
+
+Unknown Speaker  1:56:18  
+anything out of the ordinary? I
+
+Unknown Speaker  1:56:24  
+I mean, the first week is a quarter of what the rest of the values are.
+
+Unknown Speaker  1:56:31  
+Sorry, so that is one thing, yeah, but that's not that is because we took January 1 to march 31
+
+Unknown Speaker  1:56:42  
+Yeah.
+
+Unknown Speaker  1:56:53  
+So
+
+Unknown Speaker  1:56:55  
+out of business. Look at the first one. Look at the first value.
+
+Unknown Speaker  1:57:00  
+Look at the comparative value starting at the beginning of the day instead of the end. So would it make more sense to
+
+Unknown Speaker  1:57:11  
+for like the date to be at the end of that week?
+
+Unknown Speaker  1:57:15  
+So that is something that the resample does. So what resample does is it basically takes it knows what are the calendar weeks. And I think what it does is it takes the last day of the week. But why? My question is, why the first number is so low? Why is it only 50, where the rest are in around 200 range? Maybe because then you see started in the middle of the week, exactly, exactly. That's what I just wanted to share.
+
+Unknown Speaker  1:57:44  
+So what if, let's say, if I open a Google Calendar quickly,
+
+Unknown Speaker  1:57:49  
+it was, what? 2020, 23
+
+Unknown Speaker  1:57:53  
+and
+
+Unknown Speaker  1:57:56  
+hang on. How do I go to
+
+Unknown Speaker  1:58:00  
+where's the back arrow. What was the was the last value in that set also truncated then, yeah, yeah, that's what I think. Let me go to January. Yeah. What's up with that? Dude? You can program like a boss, but you can't work your Google Calendar.
+
+Unknown Speaker  1:58:18  
+So January, hang on. January 2023
+
+Unknown Speaker  1:58:22  
+is this right?
+
+Unknown Speaker  1:58:24  
+But january 23 is
+
+Unknown Speaker  1:58:29  
+23rd 23 first of January. Well now, does it use Sunday to Saturday as its range, or does it do Monday to Sunday?
+
+Unknown Speaker  1:58:42  
+Mm, but
+
+Unknown Speaker  1:58:45  
+then shouldn't it capture everything from here all the way to here?
+
+Unknown Speaker  1:58:52  
+What is this 50 coming from? No, I think that's what Matt was saying. I think that's just one day's Oh, okay, just one day instead of, like a whole week of it. So it basically takes Sunday as the end of the week, that's right, so it takes so that's why the first data is only one day's worth of data with this 50 and then from everything else, it is a total of seven days worth of data.
+
+Unknown Speaker  1:59:20  
+And then the last one was March 31 right? So March 31
+
+Unknown Speaker  1:59:25  
+Yeah, since we have one day less data, because it ends that Friday, well actually we have two days less data. We have five days worth of data rather than seven. That's why the last number is also little bit on the lower side.
+
+Unknown Speaker  1:59:39  
+So the insight I think we can derive from here is when you use week as your resampling boundary, it goes from Monday to the next week, Sunday, that's the boundary of the week. Now I don't know whether you can change that.
+
+Unknown Speaker  1:59:58  
+Look into the.
+
+Unknown Speaker  2:00:00  
+Sample function documentation and see whether you can find a
+
+Unknown Speaker  2:00:07  
+way or maybe, let's see here, do
+
+Unknown Speaker  2:00:10  
+frequency or time delta x is close, count
+
+Unknown Speaker  2:00:16  
+the error times 10.
+
+Unknown Speaker  2:00:22  
+Yeah, you actually have to do some searching to see whether you can change the
+
+Unknown Speaker  2:00:28  
+weak boundaries. But currently it seems like as is, it is going from Monday to Sunday.
+
+Unknown Speaker  2:00:38  
+Okay,
+
+Unknown Speaker  2:00:41  
+the next one. So this one, it was total visits for each week. How do I get the number of visits for each week?
+
+Unknown Speaker  2:00:55  
+So basically, this is kind of little misleading. The thing is not number of visits. It is basically you should treat it as
+
+Unknown Speaker  2:01:07  
+number of
+
+Unknown Speaker  2:01:09  
+records for each week rather.
+
+Unknown Speaker  2:01:14  
+So what I'm trying to get at is if you take these data frame and do a resample on week, but instead of dot sum, if you do dot count, it will give you one for the first week and then seven for all the remaining weeks, and then five for the last week.
+
+Unknown Speaker  2:01:35  
+Yeah, actually, I didn't have to go to Google Calendar. Looking at this, it is evident that there is only one day's worth of data in the first six first category. Can you are you
+
+Unknown Speaker  2:01:45  
+supposed to use like that start day, or the origin parameter
+
+Unknown Speaker  2:01:52  
+in recent change the start day? Yeah, to like get let's see.
+
+Unknown Speaker  2:01:58  
+Let's see.
+
+Unknown Speaker  2:02:00  
+Is there any start day? There? Where is start day? I was looking at the pandas resample documentation. Yeah, that is the, there's like, there's like, an origin parameter
+
+Unknown Speaker  2:02:13  
+needing, like, change the
+
+Unknown Speaker  2:02:17  
+if string must be one of the following and maybe start
+
+Unknown Speaker  2:02:23  
+today, I don't know, sorry,
+
+Unknown Speaker  2:02:27  
+yeah, but what you are doing is right. So if you come across something, a question like this, look into the documentation and see whether you can find anything.
+
+Unknown Speaker  2:02:40  
+Okay, so the next one is get the average number of visit, which is basically the same thing, except instead of sum or count, you basically do a mean.
+
+Unknown Speaker  2:02:56  
+So you do sells, TF, dot, resample with W and dot mean and since it said rounded to one decimal place, you do around one. And this gives you the average number of visit every week.
+
+Unknown Speaker  2:03:18  
+Okay, so
+
+Unknown Speaker  2:03:24  
+now this is we went from daily to weekly.
+
+Unknown Speaker  2:03:29  
+We can also go to monthly.
+
+Unknown Speaker  2:03:32  
+So if we do monthly, we are only going to get three out three rows in the output, because there is January, February, March, right? So the way to do that is the same function, except in the resample, you have to use not M, but M E,
+
+Unknown Speaker  2:03:49  
+and that will give you monthly
+
+Unknown Speaker  2:03:53  
+now, why me? Don't ask me, even though M makes more sense. In fact, copilot also suggested M, but I'm going to show you what happens if you do M, it will work, but it will yell at you, saying that, hey, future, in future, m will be deprecated, so please start using me. So this is a design decision that pandas designers have made for what reason? I do not know. Essentially, they are saying, Hey, we are letting you get away with using M for month for now, but in future, we are going to deprecate this so you better get used to use any for a month.
+
+Unknown Speaker  2:04:36  
+Okay,
+
+Unknown Speaker  2:04:37  
+so that's your total visit for month. So
+
+Unknown Speaker  2:04:47  
+okay, so now I'm going to ask you another question. So we saw by week, we saw month, however we want to do it in a two week basis,
+
+Unknown Speaker  2:04:59  
+like give.
+
+Unknown Speaker  2:05:00  
+Two weeks worth of data, like fortnightly data. How do you do that?
+
+Unknown Speaker  2:05:04  
+You like buy or buy weekly? No, just changing the resample attribute 2w.
+
+Unknown Speaker  2:05:13  
+Yeah, and let me it is 2w. Let me try one thing. Let me see whether copilot suggest that. So get the average number of visit for
+
+Unknown Speaker  2:05:25  
+every two weeks. I'm just trying to do some profit engineering here to see whether it actually catches on that and generate something for me.
+
+Unknown Speaker  2:05:36  
+Okay, so now let's see. Yeah, it did. It actually suggested to w.
+
+Unknown Speaker  2:05:44  
+So this is see one example. You can actually use some prompt engineering. Here. You can use your comments as a prompt to prompt Copilot to generate some code for you.
+
+Unknown Speaker  2:05:57  
+So yes, if you do 2w it will basically be two weeks. So similarly, you can do, if you are doing databases, you can do 2d 3d if you are doing hourly, you can do 2h 3h and so on. And all of these, like what you use for our versus minute versus day, you can just look up the documentation, just type pandas, for example, probably the first searches that comes up with the will be the pandas documentation, and you will see all these different variables, the possible variables that are available there.
+
+Unknown Speaker  2:06:34  
+Okay,
+
+Unknown Speaker  2:06:35  
+so that's all there was to know about resampling for now.
+
+Unknown Speaker  2:06:43  
+Any question on resampling?
+
+Unknown Speaker  2:06:56  
+Okay, so if not, let's learn the last pandas function that you are going to have to learn
+
+Unknown Speaker  2:07:05  
+in this boot camp. Formally, I mean, you'll probably learn more pandas function during your course of your work, because it is not possible for any boot camp, any course material, to give you everything that pandas have to offer. But formally, this is the last function that you are going to learn. And don't ask me why this is needed, because I do not even know this last function is something that allows you to blow up your data frame.
+
+Unknown Speaker  2:07:33  
+I have not seen a use of that, but maybe in some situation it is, learn it for now, and maybe think through which other which scenario you might have to put these into use when you actually do your other machine learning things. But for now, let's learn what melt does. So if you look into the slide
+
+Unknown Speaker  2:07:56  
+here, so what melt does is it reformats the data frame, leaving two non identifier columns, and those columns are named a variable and a value.
+
+Unknown Speaker  2:08:15  
+So essentially, what it does, it basically completely collapses the data frame structure, and it almost creates, what if, what is like a metadata for all the data that are there in the data.
+
+Unknown Speaker  2:08:28  
+So if you do apply it on something like this,
+
+Unknown Speaker  2:08:36  
+so where we have a data frame that we are reading here, where we have a bunch of students name and the score that they have obtained for different subject, which is a pretty good data frame, but if you want to put it into
+
+Unknown Speaker  2:08:53  
+let's say actually, let's better to just focus on here instead of going back to the slide. So let's say we have this now, one thing we you do, like, when I'm having this, I'm going to try to put it in a pivot table right where I'm going to see, hey, for each subject, which student got what in a more row versus column format, instead of having all notice or all catty or whatever In one after another. You can easily do that, as you have learned before, using our pivot table function where we say, hey, index is your subject. That means subject will be on the row heading columns would be student name. So student name would be the column heading, and the values would be exam score.
+
+Unknown Speaker  2:09:38  
+So that would be our exam score. So if you do that and rename the these axes to say
+
+Unknown Speaker  2:09:48  
+none. So basically what I'm doing here, come on.
+
+Unknown Speaker  2:10:02  
+Okay, so it basically, if you don't do anything, it will say subject on this subject and the students, and it will put this in. And if you take this, it will basically get rid of the student temp thing and just neatly give you this subject versus the student and who score what in which subject. So this is the standard application of pivot table that we all know
+
+Unknown Speaker  2:10:29  
+now
+
+Unknown Speaker  2:10:31  
+if you want to display it in a way that will flatten it out. So first thing you need to do is you need to reset the index so that the subject itself becomes a column. So currently, after because you have done pivot table and you have done index equal to subject, it gives you a x by y form, like a matrix form, but your subject becomes an index. So if you want to flatten it out and see how many subjects are there and what students are there. So first thing you have to do is you have to do a reset index operation, which is, you take the data frame exam score subject, and you basically do, dot reset index on this and I think you can do in plus two for this one.
+
+Unknown Speaker  2:11:28  
+And then if you print the exams for subject,
+
+Unknown Speaker  2:11:32  
+now the subject that was an index before, now it become a column, leaving just a range index as a index. So now this is our pivot table output.
+
+Unknown Speaker  2:11:44  
+Now we are going to see how we can melt it. So for melt, there is just one statement that you specify, one function which is
+
+Unknown Speaker  2:11:56  
+melt.
+
+Unknown Speaker  2:11:59  
+So what it will do is it will now give you
+
+Unknown Speaker  2:12:04  
+for variable column. It will say, hey, subject is a variable, and what are the different values we have for that variable, which in this case is biology, composition, math and speech. You will get those four as four different entries,
+
+Unknown Speaker  2:12:20  
+the next variable itself is the student name Alcina. And what are the different value? Values, these Alcina variable texts in these four rows, and it will do it this way. So essentially, it's kind of opposite to what pivot table does. It basically completely destroys the structure, and it gives you each column as a variable and the corresponding item that you have for that column in different rows as values, and it just prints them
+
+Unknown Speaker  2:12:54  
+one after another.
+
+Unknown Speaker  2:12:56  
+So it will do that, and it will give you basically just a two column
+
+Unknown Speaker  2:13:02  
+data frame with a variable and a value, that's all it does.
+
+Unknown Speaker  2:13:08  
+So I was like wondering, because, like, I was worried, like, would lose, kind of the information, so you wouldn't be able to know what grade each person got for each course. But it looks like I kind of kept it in order, like, like when it lists the subject, no, yeah,
+
+Unknown Speaker  2:13:24  
+it is not going to lose any information. The information is still retained, but it is not readable, human readable as it is from here,
+
+Unknown Speaker  2:13:35  
+right? Yeah, that's cool, yeah. Well, actually, I take that back. It does lose some information if, if, if you kind of disregard the order, it says, let's say Al Sida has a value of 85 but you really don't know immediately for which subject this value applies, yes, to biology, composition, map or speech, right? So then you have to see, okay, in order, what are the four subjects? And then in these are also in the same order.
+
+Unknown Speaker  2:14:09  
+I guess for more complicated data frames, when you do the melt, it would probably become more and more complicated to like try and extrapolate that info again, yeah.
+
+Unknown Speaker  2:14:19  
+Or, let's say if you have a high dimension data set and you are trying to go to a lower dimension. So maybe, let's say you are trying to do a linear regression model or classification model, right and you want so this, for example, is a two dimensional data set. But if you have a need to create a one dimensional learner, either a regression or classification. And you just want to provide these, this thing as your basically features. And these are the values for the features, like 8570 96 whatever, right? You don't care about the subject. So essentially, you have three variables here, three dimension, three.
+
+Unknown Speaker  2:15:00  
+Levels in a 2d surface, which is subject, student and score. If, for some reason, your model that you are trying to train, maybe you are not worried about subject so much, right? Now, all you want to see is the student and their score, and you are trying to find some correlation, for example, right? So if you just do this and then disregard just the four first four items, then you basically have a
+
+Unknown Speaker  2:15:28  
+one dimensional data set, which is only two area, right? So you basically go one dimension down from 3d to A 2d data set,
+
+Unknown Speaker  2:15:39  
+which maybe, I don't know. Maybe it might be useful. But the reason I don't know is because I thought about this, and this is the only explanation came to my mind. But what happens is, in machine language learning, you will see there is actually, this is called the dimensionality reduction. It is one of the techniques of machine learning, which I think you go back to one of the slide deck I shared with you in week one. So dimensionality reduction was one of the machine learning techniques that we do apply, and there are other techniques, such as principal component analysis or PCA that people use to go from any number of dimension down to any number of dimension. So these. That's why I probably haven't seen in any of the work that I have done so far. I have not seen anyone using this melt to kind of pick and choose the dimension that they want.
+
+Unknown Speaker  2:16:32  
+But I guess they might be, I don't know.
+
+Unknown Speaker  2:16:35  
+So I'm just being very open and honest to you. I haven't seen a use of these at all. It's the way I was learned about that at first was to move from a wide kind of data set into what's called a tidy data set. In other words, the tidy data set has one observation per row. Now it have made more columns than two. But the thing that has the important the important
+
+Unknown Speaker  2:17:05  
+information, the important value, is one observation per row. Then, yeah, yeah. So it's you can take something that you can't really plot because it has, like, it has all the names across, and then you turn in something you can plot the grids and the names, for example, yeah.
+
+Unknown Speaker  2:17:25  
+And then the other thing is, in case you do want to retain some dimension, for example, here if you just do apply melt, it basically reduces everything to just two dimension variable and value. But let's say you are also wanting to retain subject as an independent variable in itself. So what you can do is you can apply that melt function on the sorry. What was the name of our data set? Again,
+
+Unknown Speaker  2:17:55  
+exam score.
+
+Unknown Speaker  2:17:59  
+Subject, is it? Yeah, Excel score subject.
+
+Unknown Speaker  2:18:06  
+So while you are doing melt, you can actually specify like, Hey, these are the variables I want to retain and not get melted. And if you want to retain subject column as a separate dimension on its own. You basically say, I diverse subject, and then you get this. So what that means is show the four data points for these students as variable and value, but also show which subject those applies. So now the problem that we had here where we had the four exam sports for a student, but we cannot really see which subject that it applies to, because subject was also melted. But here what we did is by providing ID verse equal to subject, we prevented that subject column to be melted out, so we retain one extra dimension here. So
+
+Unknown Speaker  2:19:08  
+okay, and that's it. Now, if you want to
+
+Unknown Speaker  2:19:14  
+rename the columns and all you can always do that.
+
+Unknown Speaker  2:19:21  
+Actually, let's do it here. So in the next one, they're saying, melt the data frame and rename the columns. So if you want to do this, it will give you subject value and
+
+Unknown Speaker  2:19:35  
+variable. So what you can do is these variable instead of calling variable. So one thing you can do, you can take these and do rename and then provide all the columns. That is one way of doing it. But the another way of doing it is passing those as a parameter to your melt function. You can say what your variable name should be, and you want to say.
+
+Unknown Speaker  2:20:00  
+Okay,
+
+Unknown Speaker  2:20:01  
+make student underscore name as my variable name, and instead of calling value column as value make exam underscores
+
+Unknown Speaker  2:20:15  
+score as my value column, so you will get the exact same data set, except the generic name column, variable and value is now changed to something that you would like, which is student name and exam score.
+
+Unknown Speaker  2:20:41  
+And then lastly, if you want to, kind of now roll it up, kind of undo the effect of melt.
+
+Unknown Speaker  2:20:49  
+Let's say if you group these melted data frame now on the subject and get the average exam score. So now you see subject is a one variable here. So that means you can group by subject, and then you can apply an aggregate function on another numeric column, which in this case is exam score. So that way you can find for each subject, what is the average exam score across all the students who took the exam.
+
+Unknown Speaker  2:21:20  
+And the way to do that is basically, let's call this thing
+
+Unknown Speaker  2:21:26  
+melted DF. Let's say,
+
+Unknown Speaker  2:21:31  
+because we are going to take this melted DF in the next
+
+Unknown Speaker  2:21:36  
+statement here. So what I'm going to do is, I'm going to do a group by, and now I'm going to group by with sub group by on subject.
+
+Unknown Speaker  2:21:49  
+And then you have to take
+
+Unknown Speaker  2:21:53  
+mean of exam score, right? So the right way to do that is put exam score with
+
+Unknown Speaker  2:22:01  
+within a pair of double square bracket, and then put exam score there, and then apply your aggregation function, which is mean. And then if you want to round, that's fine, go ahead. It's
+
+Unknown Speaker  2:22:17  
+go ahead and do round, and you will get this
+
+Unknown Speaker  2:22:26  
+now the question is, why do you do all of this? So see what I ended up doing is I basically took my original data frame and grouped all the record by subject and found the average we really we did that through melted data frame, but we really didn't need to, because if you go back up to the original data frame that we have here,
+
+Unknown Speaker  2:22:50  
+if we wanted to do a group by one subject here, we could have easily done that right here. So why the heck would you even do a melt that's a mess. That's that's exactly what I'm saying. Yeah. So it is basically showing. The purpose of showing this is that even after melt, you are kind of not really losing information, only if, if you are retaining some of the information with your ID wears, of course, and then you can basically do the group by and bring this back. But let me show you one more, last statement to show that you can actually generate this same aggregation of exam score directly from the original data frame, which is the exam score, not the melted data frame. So you can do a group by on the original one, and you can do a group by on subject, just like what you did here, and then take the exam score, and then mean you will get the exam exact thing.
+
+Unknown Speaker  2:23:48  
+So this starts to show that melted data frame retains all these information as in the original data frame, and you can still achieve the same level of aggregation even from the melted data, from which probably would not, not, probably, which definitely would not have been possible if you, by the way, didn't do the retention of subject using the ID. Nurse, sorry, retention of subject, this grouping here is only possible on melted DF, because we actually retain the subject intact and didn't melt that away, but had we melted that away along with other columns, then we would never been able to get This aggregation back.
+
+Unknown Speaker  2:24:35  
+Okay,
+
+Unknown Speaker  2:24:37  
+that's all.
+
+Unknown Speaker  2:24:41  
+Okay. So now I'm going to leave it up to you. Do you want to use the last maybe 1015, minutes to do the final activity?
+
+Unknown Speaker  2:24:50  
+Or do you want to take early break?
+
+Unknown Speaker  2:24:52  
+I mean, early class off. It's totally up to you.
+
+Unknown Speaker  2:24:56  
+Tell me what you like to do. Happy holidays.
+
+Unknown Speaker  2:25:00  
+To you.
+
+Unknown Speaker  2:25:05  
+Yeah, seconded there, but I'll refer to the rest of the class. Yeah, I'm okay with leaving. I'm okay too. Yeah, okay, fine, yeah. And Ken is going to make available the solution files anyway. And as I said, I mean these mail function and everything. These are pretty straightforward. There is not a whole lot to it. Unlike our joints and margin and those things, those were pretty deep. These are rather straightforward, sure. So I'm sure you should be able to get okay. So I'd say, as I promised earlier, let's give you about 20 minutes of your time back to start celebration early, and then we'll see you guys in New Year. Hey, happy holidays. Thank you. Happy holidays. Yeah, thank you happy holidays. Happy holidays. Happy holidays. Thanks. Take care, everyone. You.
+

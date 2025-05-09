@@ -1,0 +1,1533 @@
+Speaker 1  0:15  
+Uh, are you seeing the slides? Am I sharing the right screen? Yeah? Yep, cool. Okay. So today's class will be short actually, because the activities that we are going to do, it's not going to take much time. And then, as I promised you guys, I'm going to take the next day, which is Tuesday. Next Monday is a holiday, so Tuesday, I'm going to do couple more activities, which I prepared about when one I prepared when I'm one. I'm still preparing to see some like end to end kind of project thing, right, right. So, but today, we are just going to learn about how to do a prediction using time series data, right? And that's why we have been doing this build up up until the last class, to see how we can load a time series data, how we can plot it, and in the past, up until the last class, we have tried to kind of figure out whether there could be any correlation between the different types of columns that we have, and based on that, we are manually where we are trying to manually make, sort of like, guesstimate whether a given series would be a good predictor of another data set. Right, like if, if trend in one data, can can predict another data. Now, today, we are going to switch gears a little bit. What we are going to do is we will assume that we have one time series data, and when I say one time series data, meaning a time series data with one variable only, okay, remember, I was talking about this n dimensional data set, whereby, in a regular regression model, you might have a data set with 10 feature or attribute, and based on that, you are trying to predict the another attribute like, think about that housing price example that we did right based on room size, square footage, median income and all we were trying to predict what the house price would be. So that's a traditional regression model, and we are going to do a lot more of those after our like in the second half of the boot camp. But in this particular week, what we are going to focus on is we are going to take a data with one column only that varies with time, and then we are going to use that column to predict what that data set what trend it will continue to dash show as you move forward in the time. So if you have a data, let's say one year's worth of data on something that varies with time. And it could be, let's say, price of a security like a stock or Bitcoin or a S, p5, 100 index, right? That varies over time. Or it could be things like your weather reading, like precipitation or temperature reading that you might have in the history, in for the past time, like in the historical data set, and you want to predict in the Forward, forward looking time. So now the question is, if we are saying that we need to have a n dimensional data set based on that, we are going to be able to predict the future or predict output of another variable, a value of another variable, which is our target variable or output. Then how can we predict the future using just one variable? Because here we are having just one variable. The reason is these algorithm uses a slightly different, different approach, so under the hood, these are still regression, but what it does is the model that our algorithm that we are going to use, which in this case is the profit, which is a time series forecasting framework that have been put out by Facebook, and it is free for everyone to use. So under the hood, when you feed one time series data having just one column, meaning one variable, and you ask profit to do a prediction internally. What it does is loosely speaking, of course, it basically takes all of these different data point that it has. Let's say you have past 100 days of data. It will take these 100 days of data as if, almost as if your 100 variables, and based on that, it is going to predict the outcome of the 101st variable, which is one day looking forward. And to do that, obviously the model internally need to change your data frame is. Need to go from one dimension to 100 dimension if you have 100 days worth of data. But the good news is we don't have to do any of that. All we have to do we need to grab the time series data on which we are trying to do predict the future, and we create an instance of this profit model. And then we do two things, which is common for any machine learning you do. One is called fit and another is called train. So fit and train is basically another way. Sorry, fit and predict, not trade fit and predict. So fit basically means train. That means when you are fitting a model to a data set. That is where all the mathematical calculation is happening under the hood, and that is where the model is learning the pattern, the regression line, or time series, time trends, or anything that has that are there that a model can mathematically learn using the probabilistic calculation. That's what happens under the hood when you issue that fit command. So once a model is fitted, that means, think about it internally, the model has already calculated that polynomial function that that algebraic function that will then give you the output if you put another set of input. So that's what the fit is, and you will see across the board, no matter which machine learning library you use, that fit and predict have become kind of a de facto standard in the industry. So you basically create a model, you grab the data, throw the data into model through a function called fit, and then it will take some time, few seconds to few minutes to few hours, depending on the size of the data, the complexity of the data that you are throwing in. And then once it is done, then you take that trained model, which is sitting there in a variable in your Python code, and then on that variable, then you apply the predict function, and then that will give you the prediction. So that is the general, I would say, steps that you will see over and over from today onwards, as we move forward. Okay, so today we are going to do that with the profit model. So as I said, it is a it is a simple peep install, right? And then actually, we don't need to go through these slides. So we are basically going to create a profit model. Fit the profit model, create a data frame to hold the prediction, and then the builder build a table of predictions, right? So now point number one and two I discussed, create a model, which basically means just create a new variable, feed the profit model, which is the using the Fit function. Now what is point number three? So point number three is create a data frame to hold prediction. So what you need to do is, after you feed the profit model. So let's say you have 100 days worth of data. So in your data frame, you will have 100 rows. That is your training data. Now you feed the training data. Now when you have to forecast, first, you have to decide how many days looking forward you want to forecast. Let's say you asked want to forecast 10 days looking forward. So now you have to create like a placeholder data frame that will have a total of 110 rows, 100 rows to as a placeholder for all the 100 previous historical data you have, and then 10 rows at the bottom for the prediction that the model is going to generate. So you're basically going to create a almost like an empty, like a template data frame, and use that data frame to do the prediction, so that once the prediction is completed, all of these 110 rows of data will be populated by the prediction function, and you will see all the prediction data in the different columns in that prediction data frame, which is what number three is. And then you can build a table from that, or you can do a plot. And you can do all sorts of different like a stuff to basically try or not try, I'd say, interpret the outcome of the prediction. So that is how it will go, generally. Okay, so now we will go and look into the code, and things will become more clearer when we do so what I'm planning to do is we are going to do two activities together, and then we will take a short break, and after the break, we are going to come and do two student activities, but if you guys don't like to go into the breakout room after the break, we will do two more activities, but at that time, I will open the unsolved file, and I'd like you guys to collaborate and drive it even staying in the main room. Okay, so. So let's get started with the first one, which is obviously time series forecasting solution.
+
+Unknown Speaker  10:10  
+And in this particular one,
+
+Speaker 1  10:14  
+what we are going to do, okay, so looking into the what is called the import, so pandas, we know matplotlib, we know date time we have used. I don't think we will probably need dead time for this one. We're not doing any calculation, or maybe that's fine. Let's just leave it for now. Now, the one other input that we will definitely need for the prediction is that profit, which is where you need to do pip install profit, which I believe all of you guys have done during the last class, and if you have done then these import would work just fine. So from profit, import profit, the first profit is the name of the library, which is a lowercase p, and then the profit class that we are going to create, use to create the model is a uppercase P, so from profit input product, okay, so that's all our imports. So next we are going to read our data. So in this case, the data is provided as a CSV file. Now in that CSV file. Let's first take a quick look at what the CSV file is. So this is the data set. As I was saying, the data set has only one column, well, except for the Time column, of course, because time column is your scale, because that is the dimension that you are forecasting against. So that's your scale. But when it comes to the data, that is just one column, which in this case is price. So it's basically the price of the electricity in the utility grid, right? So that's what that data frame is. So and it is, as you can see, it is hourly, because most utility companies these days do time of day pricing. So the utility grid price varies depending on the load on the grid, and that's what these data data set is showing. Okay. Now what we are trying to do is we are going to train the model on these and we the data set goes from October 31 all the way to now. Where is the bottom of this? October 30 Oh, this is not sorted, so we probably need to sort it, right? So, yeah, it's actually a good idea to know Hannah, October 31, 15, and then I have 2016 data, 2017 data, 2018 19, or is it sorted? Oh, it is sorted. So it Oh, wow. It has five years worth of data,
+
+Unknown Speaker  13:00  
+2015 to 2020,
+
+Speaker 1  13:04  
+wow. Okay, that's fine. So let's load the data frame now. One when we are loading the data frame, we are doing two things, three things, actually. So the first thing you see here, and this thing, even if you just do a read CSV, that is totally fine, as I showed you before, like conversion to date and all you can do, pt.to, date time and all of these. You can do those later, also after you read the database. But if you know what kind of data is there, and you know that these Date column, or whatever day our column, in this case, it is basically well formatted time, you might want to just parse the date while loading which is what this parameter does. It says parse dates, and then we are adding another parameter, infer date, time format equal to true. So what that means is we don't have to pass what data in format it is. It will automatically parse the format from the stream that it sees in that column. And then third thing we are doing is we are setting that day our column as the index of our data set. So that is the reason we do index is because when you display that in a plot, it basically, if you do not have the index, then your x axis will not show the date. If you have the date column as an index, then when you plot it, your x axis will clearly show the data in there. That's the only reason. But we, by the way, you will see little bit later in this notebook that we are actually going to have to drop the index, because when we are going to give the data to profit, profit really doesn't like the index. It doesn't work with the date time index. It works with a plain, simple data frame with sequential range index, right? So we'll drop that index later. So for now, we are loading this. Okay, so the data is loaded. And so we did a head and tail, and then head is showing 2015 just like we saw in the CSV file, and the tail is showing this going up to 2020 October 15 midnight. Well, october 14 midnight going into October 15. So that is our data set. So let's and we are calling it hourly prices. So if you plot it, you will see a plot like this, right? As you can see, the price is spiking up and down. Okay, so this is the loading of the data set. Now, as I said before, when we are going to feed it to the profit. Profit doesn't really work with index. So what we are doing is the hourly price index that we loaded. We are resetting the index and setting it to a new data frame called profit DF. And if you do that in the profit DF data frame, you see the day our has become a regular column, and the index is just a range index going from 01234, and so on. So this is the data frame that we are going to pass to profit but there is another important thing that we need to do. It's just because the way that profit designers have done it, have decided to do it, and we have 43,368 rows of data. So the way that profit works is it has a very specific column name that it needs in your data that you pass. So whatever is your time column, you need to name that DS, which is something that I already discussed in the last class, and the value that you have in that column, which in this case is price, that column needs to be renamed to y, right? So this is one way of renaming the column. You can do columns dot Rename. Also, there are multiple different ways we have seen that we can rename a column, but this is pretty straightforward, just DS and Y. Just pass these two as a list, and these two will be converted to DS and y. So it's basically the same, same data set, just the columns named DS and y, and if there are any non values, it is a good idea to do a drop na so that no null values are there. Now, here I just blindly did it, but you should actually look into first like describe the data set and find the info, or do whatever you want to to see whether there are any null valves, right? But if there are nulls, it's a good idea to drop the null bags. So that's simple loading data, and we are not going any further analysis of the data on our own. What we are going to do simply is we are going to fit this data into profit so in order to do that, you need to create this profit class object. This is how we create object of any class in Python, as you have seen there, and we are saving it in a variable which we are calling M. And don't really like the name N, let's call it model. So this is our model. Okay. Now, if you print model, you will see the class of the model, and that's what I have this model here. So it's a profit plus model now, right now, this model class doesn't know anything about your data. It's a brand new model, empty. Now what we are going to do, remember going back to the slide, creating the profit model, step one, which is what we just did. One line, model equals profit. Second step is fit, the profit model. This fit is basically the training. And in order to do that, what you need to do is model dot fit. And then as a parameter, you have to pass that data frame that you have created up here, which should have two columns, DSM, if you don't have this column, then profit will not work. So then you do a model dot fit. And then when you, when I run it, you will see that it is going to take a little bit of time see how the training is going, four second, five second. There are 43,000 ish roles. So it is going to take some time, because this line is exactly where the machine learning is happening. This is where the model is learning about the patterns in your data, and it took about 20 seconds on my machine. Your mileage could vary depending on how good a machine you. Have. So now the model is fitted print, so you should look for this output that says, done, processing. Okay, so we are good, so model is straight. Now we need to create a prediction data from which is our step number three here, create a data frame to hold predictions right. Why does it say hold prediction? Because this data frame would not have the prediction initially. It is just a template. So the way to do that is to use another function of model class, which is called make future data frame. That's the name of the function. And when you are doing this, the first parameter that you are passing that tells how many periods going forward you want to forecast. So here, when I say 720 hours, which basically means 30 days, meaning we are going to predict looking forward one month. So remember, in our model, in our training data, we had five years worth of data, so we train the model with five years worth of data, and then we are forecasting with one month. And the reason I'm highlighting this is because this is very important. So if you say, let's say one month worth of data, for example, let's say you don't have all this data. You don't have the luxury to get five years of data on something. You only have one month, you cannot really expect the model to learn all the trend from one month and then be able to predict one month going forward. So how much forward you can go, which is also called the forecast horizon, that usually is, should be much, much smaller, not more than about a 10th of the horizon that you are training upon, because if you do go further forward, it's fine, just your forecast would not be very accurate, which if you think it kind of makes common sense, isn't it like that? The model didn't even get an opportunity to look into lot of data, and now this week model, you are expecting it to do magic for you, like, look, learn from one month and go and predict 1234, months going forward, that's not going to happen. So if you have one month of worth of data, maybe you should forecast only one or two days looking at not more than that. Because if you do that, then your guess is as good as mine, right? I mean, model will predict something, but that that's not going to hold too much value.
+
+Speaker 1  22:49  
+Okay? So here, since we have four or five years worth of data, we can forecast one month. Totally fine. Now this frequency, you can use our day, quarter, different weeks, different frequency that you can use. The idea is you should, you should match this frequency with the frequency of your training data. So as we noticed before, our training data was coming with a frequency of one hour. So therefore, when I'm using the future data frame, when I'm creating the future data frame, I am saying, Hey, give me a feature data frame that has 720 slots at hourly interval. And now when you do that. So that's why here I did up here, I did a shape on our training data, which is 43,368 right? So what the future data frame will have? It will have all of these, plus it will have another 720, rows, because that's what we are instructing here. So let's do that and see what the data frame looks like. So now you see the data frame, the feature data frame that we created. As I said, it is just a template. It's a placeholder. So it only has one column, which is ds, no other column, just a one column, and it starts from 2015 October 31 at 10100 hours, which, if you go back up, that is where our data also started, right? So when you do future data frame, so model already knows what is the first data that it saw, so that's why, when it created this placeholder data frame, it started there and then in when it went ahead. Now you see here the our last data was to 2020 october 14, right, and it went one month ahead. So it created placeholder up to November 4. 18. And how many rows do we have here? 44,088,
+
+Unknown Speaker  25:06  
+so
+
+Speaker 1  25:11  
+we haven't done the prediction yet. We just created a placeholder. So,
+
+Speaker 2  25:16  
+so it was great. It was trained on the data from y, and then it's saying, go ahead and fit, and then that creates the date series.
+
+Speaker 1  25:25  
+No, the Fit did not create the series, though. Jesse, when we did the fit, that did not produce any output. Okay, the model after, after running this code, the model is now fitted with your data. Now only after your model is fitted, then you can do the prediction. But just for profit, there is one intermediate step, which is what we have to do, which is make a placeholder data frame where the predictions will eventually be injected when you do the predict. We haven't done the Predict yet. Okay, so now if you do a quick math, roughly in your mind, 43,368 plus we added 720 more, and we have a data frame with 44,088 right? So that is the data frame. Now we are going to add the prediction outcome. Now, what is the method to do the prediction. Wow. Very simple method, and the name is also very easy to remember, called predict. What else? So now we have model dot predict. Now, when you are doing the predict, you have to pass this feature data frame that you have created up here, and then it will do the prediction and insert the prediction in these 44,088 rows, and the data frame will now explode as we do the prediction. And it will not just have one column. There will be lot of columns which you will see. Okay, so let's go ahead and do the prediction. There you go. Since lot of data prediction is also going to take some time, and there it is. So now, when I do a head and tail, you can see that these has 22 columns. So DS was there, and now we have a whole bunch of other column that has come in. Now, understanding all of these column is not within the scope of our discussion here, because lot of this column, in order to understand and appreciate fully, you have to go and study the profit literature, and you have to fully understand very deeply the statistical technique that it uses. But for our purposes, if you are looking for that one column that is the prediction, there is a column called y hat, which is the very right most column. So this is what profit is saying, this is the predicted output of that variable. Now, one thing you will see, it did not only generate prediction for the future. The future data frame also has slot for the past, which is starting all the way back from 2015 so it will basically for each and every data point, each and each and every time slot that you've seen the data. It will generate a prediction for each of these. Now there are 44,088 of these, y hats, which is your output value. But you are probably only interested the last 720 of this because prior to that, it is basically saying, if you do happen to fit a car through all of those 43,000 or so past historical data, this is how the car will go. And then it will extrapolate further into the future, up to however period that we ask it to, which is 720 period in the future. But the curve that it is drawing, that mathematical function it is it has come up with, it basically extends all the way from your very beginning of the time, all the way to the end of your forecast horizon. So that's what Y hat is. Now two other column here we need to understand here is y hat lower and y hat upper. So what that means is this basically means, with 95% confidence level, model is predicting that it will be within these two bounds. So for each of these forecast, any, any row that is look at it basically is saying like, let's say, look at this one. So this one, it is saying the output would be 21.99 but that basically is the median. So essentially, for each of these time period, it is. Assuming that there is a normal distribution, because the output can be random, right? Profit is not falsely claiming that, Hey, I am the God, and I say this is exactly what the value it is going to be. No, it is saying this is the most likely value, or the central value. But there is a spread around this it could vary anywhere from 2.99 to 40.2 right? Because prediction itself is hard, and you see how wide the range is, where the value is 21.99 and the profit is saying it can vary anywhere from 2.9 to 40.2 because essentially it is capturing everything that goes from mu plus three sigma to mu minus three sigma in that probabilistic distribution.
+
+Unknown Speaker  30:53  
+Okay, so that's what these two columns are.
+
+Speaker 3  30:58  
+Sorry, I have a question, but I know Jesse raises first.
+
+Unknown Speaker  31:03  
+Go ahead. Jason, so should
+
+Speaker 2  31:04  
+the Y hat value? Should we expect it in older trained values to be equal to what we fed it to train it?
+
+Speaker 1  31:17  
+Let's take a look. No, not necessarily. So let's take a look. I know where when your question. So look at the first column, right? So we did head So, 16, four, 415, 3714 5214 33 and 1526, so now if we look in cap, compare this. Hang on. Where is my scroll bar?
+
+Speaker 4  31:41  
+I mean, this thing is, is using a normal distribution, right? So why? Why wouldn't it be in the middle for historical values?
+
+Speaker 1  31:49  
+The reason is, the reason is, when think about that car fitting problem that I showed you earlier, right? So you have, let's say, 20 data points. And looking at it, you can think as if, like, okay, it probably looks like they are almost at a straight line, but they are not quite in a straight line, because there is always noisy data, the stochastic noise that will always be in there. So when you are trying to draw the line of best fit through n data, whether it is a straight line or whether it is a polynomial curve. If your model is working, then you should not expect your curve to touch all the data points, because if your model actually touches all the data point, then you have another problem. That means your model is being blindsided by the limited amount of data it is seeing, and it is getting over fitted. And that is why, even for the past data, you should never predict, or you should never expect the even in the in the historical portion of the future data frame, that you will get an exact values. And that's what we are seeing here, right, 1820, 1917, and 17, something in the first five hours of the data. Whereas here, if you see,
+
+Unknown Speaker  33:12  
+we have 1615, 1414, and 15,
+
+Speaker 1  33:16  
+right, which you could say close enough, but it will not exactly match, never.
+
+Speaker 3  33:23  
+Yeah, I think I have the same question as Jesse like, why wouldn't you just maintain the actual past data as a part of your data set, whereas, right now, we just created a whole new data frame and repopulated all that data.
+
+Speaker 1  33:38  
+That is because that is what any machine learning does. Whenever you are doing a curve fitting any regression problem, you are not trying to fit the regression curve to exactly touch all the points. What you are trying to do is you are trying to reduce that root mean square error, right, which is that Euclidean distance from your curve to all the points. So what these values here you are saying, seeing this is basically it did fit, a create, a draw, a curve of best fit. And with these values at those time slots, will make the root mean square error to the minimum, because that is all the mathematical calculation it did when you do the fit, and that's why it will not pass through any of the training point.
+
+Unknown Speaker  34:38  
+This is crazy.
+
+Speaker 4  34:42  
+Yeah, I think, I think it makes sense the way that you explained it, though, because, like, it's not, you're trying to get a best fit line, and that's what the prediction is off of. It's it's not actually, because you wind up just overfitting it. And it would have no way to predict anything if you just use an. Over fitted data set, right, right,
+
+Speaker 5  35:05  
+exactly. Question. So, yep, go ahead, when, when you run the last part, right there with, you know, I think I have the same code as yours. Mine is different. You know, for the last five rows, the tail, the tail vibe. It's very small amount. It's not like, completely different. I was just curious, is it because every machine talk about it differently, or
+
+Speaker 1  35:30  
+what do you mean different? What, what is like? Are you talking about? These values are coming all different? Is that what you're saying? Yeah,
+
+Speaker 5  35:36  
+like you have, like, the first row, 40, 4083, the trend, 18.78 for example, I have like, 19 point 15.
+
+Speaker 3  35:47  
+That's a good question. So does do we get different results because we're running different machines, or are we, should we be technically getting all the same results?
+
+Speaker 1  35:57  
+Um, you, well, this is a probabilistic model, right? So you do not, would not expect the same results. But why don't you do one thing? Why don't you go, so are you, are you looking at the output of the forecast dot head or forecast dot tail, the tail,
+
+Speaker 3  36:13  
+tail for me, my the myself, also different as well.
+
+Speaker 1  36:17  
+Yeah. So what is your, what is your y hat values? There
+
+Speaker 5  36:22  
+for me? 22.5, for the first row, and then 20 point 19, second row, 17 point 15, nine for the third row. Yeah.
+
+Speaker 1  36:30  
+So you will see that these are close, but not exactly,
+
+Speaker 5  36:34  
+yeah, yeah. That's okay. That's normal.
+
+Speaker 4  36:38  
+That's normal. Okay. Mine came out exactly the same as what you're showing.
+
+Unknown Speaker  36:46  
+Something, Matt is saying something.
+
+Speaker 1  36:49  
+Did you guys do anything like not dropping Na, or anything differently than what I did?
+
+Speaker 5  36:57  
+I had the drop Na, I think I follow yours exactly the same, but,
+
+Speaker 6  37:01  
+yeah, just trying to solve it, I got slightly different ones too. Is it a hardware issue? Maybe, maybe, like, it's like different hardware, like it runs for lesser one. I
+
+Unknown Speaker  37:13  
+don't know that. I don't know. And
+
+Speaker 7  37:15  
+some machine learning models, you can do what's called setting a seed that basically controls the randomness of models. A lot of models will have, like, they'll have, like, a set starting point or something like that, and that will impact everything else going forward. And so that's probably what's going on here. Is your computer just randomly generated a number for you and plugged it into this algorithm, and that's why you're all getting different results.
+
+Unknown Speaker  37:37  
+That makes sense.
+
+Speaker 5  37:41  
+That's good to know. Kian, maybe you can share what you know the comment is on that.
+
+Unknown Speaker  37:47  
+Let me actually do one thing. From
+
+Speaker 8  37:49  
+my experience, that doesn't mean it will end up with the same results as well. Because I think there's the seat for the model, there's the seat for the numpy itself. So, yeah, necessarily, like, you will get that. It's not, like, if you work with R, it's a lot easier to set that up. But I think in Python, there are more moving players, and it's not really a problem, like, it's not something you should be concerned of generally,
+
+Unknown Speaker  38:25  
+yep, okay, thank you.
+
+Speaker 1  38:28  
+Let me do one thing. Let me run this one more time and see whether I get same values or not. Okay, let me take a screenshot of this thing so that I can compare so 2199 1968 and so on. Okay, so if I go back up and create
+
+Unknown Speaker  38:53  
+a new model,
+
+Speaker 1  38:57  
+and then do a fit and wait for 20 seconds again.
+
+Unknown Speaker  39:15  
+Are you running an M processor?
+
+Speaker 1  39:18  
+No, this is, this is not my apple processor. This is regular your intel.
+
+Unknown Speaker  39:29  
+Yeah, this is it.
+
+Unknown Speaker  39:38  
+And then I'm going to do the forecast again.
+
+Unknown Speaker  39:42  
+Let's see
+
+Speaker 1  39:46  
+it's the same values. It's the same, yeah, it looks the same, yeah, I don't know, yeah. Maybe it depends on the underlying CPU architecture. That probably affects the random. Of the seat. What do you guys think? Ian Mohammed,
+
+Speaker 8  40:05  
+I tried to do it before in Python. I find it very difficult to manage, so I think it is just, it's a bit more complicated than just sitting the seat number, for example, for the model itself,
+
+Unknown Speaker  40:20  
+especially on different machines,
+
+Speaker 7  40:25  
+I think, like the SK learn models, like the really simple ones, I bet you could reproduce results a lot with set scene, but the moment you do anything more complicated, does, like, a lot of NumPy calculations in the background. Yeah, I think Mohammed's right, you're probably going to get a lot more
+
+Speaker 3  40:41  
+randomness. Yeah, you're throwing around a term that I don't I haven't quite picked up. So you're saying seed. Like, is that like a constant?
+
+Speaker 8  40:49  
+What we mean by seed is basically, like, there are algorithms. When you these algorithms work by starting with a guessing values. So when you start that, that's going to end up with a bit different solution. That's basically the nature of numerical methods in general. So the what we mean by this, the seed is basically the like the algorithm itself that will create these random values. Will you can set it up with the seed number. It's a lot easier to set up in R compared to Python. Like in Python, if you want to do it, I think you need to read the code itself and see where are that like these probabilities distribution would be, and based on that, you can figure out how to basically fix the model. One thing you'll notice as well, if you, when you split the data to training and testing, even if you sit the seed number the same, the training and test basically split will be different every time you rerun your your code.
+
+Speaker 1  42:00  
+Like, it's like, like, think about this random number generator, right? If you take a random number generator and try to generate a number, let's say you want to generate a set of 10 number, random numbers between one to 10, every time you run this, it will generate a different set of numbers, right? So that's what Mohammed is saying. And based on that, then, from there on, then algorithm basically follows this technique for optimizing, and then it comes up, comes up with a mathematical function that it thinks is the most optimal. Now, based on that initial starting point of that random guesses that the machine did, the final point that it will arrive may be slightly different. But the thing is, if you have enough number of training data, even with slight difference overall, if you look at like statistically, if you look at the overall like a percentage of error or accuracy, you will see that they will be in the same ballpark, like you would not have one set of single set of data that you run multiple times, sometimes you get 5% accuracy and sometimes you get 1% accuracy, so the percentage will be around the same ballpark.
+
+Speaker 1  43:15  
+Okay, so and then finally, there is a function on profit. It's called model dot plot so what you can do is you take this whole data frame, and then you plus that, supply that to the model dot plot function, and it basically creates this. So what it is essentially doing is it basically shows all the different data points, and then it shows that y hat, upper, lower band, right? So these dark blue line in between is basically your Y, Y hat. And then you will see that it is basically there is a light blue band around it, which is basically the upper and lower, and it goes from all the way from beginning to the end. But you see all these dots, the black dots, which is basically the real data. They kind of stop around here, because from here to here, this is your forecast horizon. So based on this trend, then it is forecasting for these 720, hours, based on all of these 43,000
+
+Speaker 2  44:27  
+what we're seeing again with the blue line. The dots are again, because I thought you said the Y hats were the dark dots. But so
+
+Speaker 1  44:35  
+the dark blue line is y hat. And then these lighter blue band. The top of this lighter blue blue band is Y hat upper, and the bottom of this lighter blue band is Y hat lower.
+
+Unknown Speaker  44:49  
+And then the black dots are
+
+Speaker 1  44:52  
+black dots are data point, the data that the model observed, I believe actually hang on. I. I think I can do forecast. So let's do last 1000.
+
+Unknown Speaker  45:15  
+Is it showing last 1000? I
+
+Speaker 2  45:21  
+would have expected the Y hat to extend past the known dots. No,
+
+Speaker 1  45:26  
+no, why had will? Oh, you were saying, Why had to extend? No, it is not extending past. So see all of these points, the black dots. They are spread all over. Why is it giving you this you
+
+Speaker 3  45:43  
+may have to clear the plot field. Oh,
+
+Speaker 9  46:09  
+that's right, that's right. You have the blue part as Avenue the last 1000. Some reason you have all the other information. Oh, is that why? Yeah, you see the blue part that's here. Ah, right. Where's your 1000 and that most correct? Most of that's the 720 off of after the actual data.
+
+Speaker 1  46:28  
+So you are saying this should clear it? Yeah, I think
+
+Speaker 9  46:32  
+that's where you want to maybe, no, yeah, I'm not sure what you're why you're doing all that before what is forecast versus Do you have the other information plots?
+
+Speaker 1  46:46  
+No forecast is basically our data frame, right the forecast data frame? So let's see if I do a forecast, let's say minus 10. What do I get? I basically get the last 10 right, 087,
+
+Speaker 1  47:14  
+yeah, so if I do forecast minus 10 colon, I should get the last 10. And if I'm going to pass that last 10, yeah, yeah. It is, yeah. I think the way so this is not our regular pandas plot function. I think the way that the profits plot function works is, no matter what you do, it will always basically display all the data point that it has learned from, and then, based on how much forecast portion you need, it will basically do that at the end. But don't worry about it. We are going to take the Y hat and Y hat, upper and lower separately in a different data frame, and we can plot those separately based in our old platform. Yeah, that's what we are going to do in the next activity, actually. So
+
+Speaker 2  48:08  
+the black dots are data points, but where those data points coming from? I'm just a little bit confused. I would have expected that to be the y hat that we're plotting. I don't know what those black dots on there.
+
+Speaker 1  48:23  
+These black dots are
+
+Unknown Speaker  48:27  
+the actual data set. No,
+
+Speaker 1  48:29  
+but they training data. They you cannot actually, because you will see there are some of these that are going all the way negative.
+
+Speaker 3  48:37  
+It kind of correlates to the plot that we did at the very beginning, like it kind of goes up and down the how these outliers. So if you can kind of, let's,
+
+Speaker 1  48:47  
+let's compare with that go all the way up, you can kind of, Oh yes, yes, we actually do have negative data. Yeah. Thanks, man, um, what if I do? Kind equals scatter here.
+
+Unknown Speaker  49:11  
+Oh,
+
+Speaker 1  49:13  
+so if you want to do scatter, then you will need an X and Y column. But my X column is day hour. Now, I don't think we can do scatter here, because we don't have X and Y column.
+
+Speaker 1  49:32  
+How come this plot is now showing up here? That's odd, okay, but, yeah, if you look at this, Matt, you are right. So it's basically the range of prices are going around from below negative 100 all the way to almost close to 600 so that spread, yes, we're right. That spread is basically what you are seeing here. Yep, some of those are going below. Negative, below negative 100 just a few of those, but mostly around here. And then very few of those are going four, five, almost 600 so yes, those are the actual data points that the model has seen during the training.
+
+Speaker 4  50:15  
+Sorry if I missed this, but why does the default on the model dot plot a scatter.
+
+Unknown Speaker  50:24  
+Can we control that somewhere? Or no,
+
+Speaker 1  50:25  
+not, not on model dot plot. I believe that model dot plot function is designed to do just that. But what you will see soon is because this is just a pandas data frame, and we can take the data and plot it in anyhow we want. But this is model dot. Plus, think about this. What we are applying it on. We are applying it on a profit model. And profit mob authors, the publishers of the profit library, they just have made these available, like use it. And there are also couple of other plotting function profit provides to display the trend and all which we'll see soon. And then we can also take all these y hats and lowers and uppers, and we can put it into our own data frame, and then do our regular plotting anyway. And then we can zoom in like we can say, Hey, show me from here to here. We can give it a range and all, which is what I try to do here. But it still is plotting all of those 43,000, black dots anyway, so I guess that's that's just how it is
+
+Speaker 6  51:27  
+there, like, Is there, like, a temperature kind of thing, like neural nets, or like the language models have for data, like, because, like, you can kind of see that the that the the Y hats are kind of like skewing towards, like, where a lot of like, the data is like, trending upwards, right? But it's like, it's not that sensitive to like, the big like, like, lots of like, large values, I guess. Yeah, it is not like, is there a way to that? Is there a way to make it more sensitive to it? Or is it just the it's just going to use the mathematical formulas and just get what it gets?
+
+Speaker 1  51:58  
+Yeah, well, there are. So you are basically going further deeper into this thing. So there are different hyper parameters that you can tune. And just like any model profit, also has hyper parameters. And if you look into the profit documentation, so this is the documentation for profit, and if you look in here, you will see this section called hyper parameter tuning. So in this hyper parameter tuning, they have actually given you a certain parameters that you can cheat tune. I haven't played with it a lot, to be frank with you, but they basically say parameters that can be tuned, which is change point, scale, seasonality, prior, scale, holiday supplier, scale, seasonality mode and so on. And then they are also going to say, these are the parameters that likely should not be tuned. So these are all the different model parameters that you can specify when you are doing model equal to profit. We basically did everything with the default parameter. Now what you can do is, if you if you really want to do like maybe as part of your project or for your own curiosity, you can take a set of data and try training the model with varying these different parameters and see how that affects the performance of your model.
+
+Speaker 6  53:19  
+Okay, they call it like perturbations, right? Perturbations? I think, okay, sorry, thank you.
+
+Unknown Speaker  53:28  
+I'm sorry. I didn't get your last question. What'd you say? Oh,
+
+Speaker 6  53:30  
+one of my friends, he does, like AI research, and one of the things he was doing was, like, testing models by, like, changing parameters gradually, and then you'd like, pull it out the changes to the values, and they're called, like perturbations
+
+Speaker 1  53:46  
+that well, that is called hyper parameter tuning, or hyper parameter optimization. Oh, HPO. Yeah, that is the acronym you will probably come across. HPO, hyper parameter optimization. Thank you. Which basically means that even the machine learning practitioners, they are saying, Hey, man, I we don't know which one of these parameter or which combination, permutation or combination of these parameters will give us the best result. Therefore, we are going to do kind of a cast a wide net and try all sorts of different combination of these tunable parameters and see what sticks. That's essentially how it is done in the industry.
+
+Unknown Speaker  54:26  
+It sounds very crude, but that's how it is.
+
+Unknown Speaker  54:28  
+Yeah, that's why,
+
+Speaker 1  54:31  
+yeah, and I'll say why. I mean running this model, once a model is trained, and having this running up, and then doing the prediction, it costs lot of money, but guess what? Guess what? The most expensive part in developing an AI model is that hyper parameter optimization, because when you have a very large and very complex model, there are all these different kinds of parameters that you can tune, and you essentially have no idea which combination of parameters going to get. The best result, right? You can probably do some guesstimate, like with more experience, you will probably develop some intuition. Maybe, given the data, given the trend, these set of hyper parameters will probably be better. But still, there is no way that you will be able to zero in on the exact set of set of hyper parameter that will give your model the most accuracy in prediction,
+
+Unknown Speaker  55:24  
+awesome. Thank you.
+
+Speaker 1  55:32  
+Moving on. I am going to skip activity two, and then we'll go to activity three, which is kind of the same activity, except we are going to use a different data set, and we are going to at the end, once the forecasting is done, we will basically try to plot these parameters, not parameters, The outcomes in our way, and see whether we can provide a better picture to the user, to the audience, about the nature of the output or the prediction outcome that the model is providing. So what we are going to do for that is basically all the same thing. Am I in activity three? Activity three, right? Yes, oh, actually, this is for sorry. My bad. It is still using that grid price, so it is still the same set of data. Yep, it's still the same set of data. No difference. And then we are going to do all the same steps. So we'll just run through this, and then we are going to do that and create the model.
+
+Unknown Speaker  56:55  
+Fit the model.
+
+Speaker 1  57:01  
+Now imagine how time consuming is. It is going to be if you are creating a state of the art model, like all of these models are toy models, right? But even then, with 43,000 data point, it's taking 27 to do 20/22 or so to one feet. Now talking about that hyper parameter optimization, so every combination of those model parameter, you have to run this fit, and then you have to do the predict, and then you have to find the root mean square error right, or some other set of measure of accuracy, and you have to do this over and over again, right? And that that's what takes a lot of time, okay? And then we create the feature data frame, and then we do the prediction another 10 seconds or so it will take,
+
+Speaker 1  57:54  
+okay, and then first we do the profit native plot, which produces the same output.
+
+Unknown Speaker  58:05  
+Yeah. Okay.
+
+Speaker 1  58:06  
+So now what we are going to do is so these forecast data frame that we have where we have all of these different columns right now for machine learning scientist, all of these will make sense. But from for a business user perspective, all we are interested in, are interested are these three things, y hat, lower and upper. And, of course, the DS, which is the time stamp. So what we are going to do, we will create a new data frame with just these four columns that we want. So let's create the new data frame, and this is our new data frame. So now with this, we can plot either y hat or lower or upper, or all three together. Now, since now, we are going to use our pandas plotting function or matplotlib plotting function. Now we will need to set an index for this, because the way that profit works, it doesn't like the index. That's why DS was not an index. It is a regular column. So we took these four columns out of these 22 columns that we had in our forecasting data frame, and then we are going to set index, which is our ds. So now DS becomes an index and we have,
+
+Speaker 1  59:34  
+okay, so here we haven't actually added that into a data frame, sorry. So what we could do. Why did we even do that? We could have done this in a different way. We could have done forecast is this, and then we could do I.
+
+Speaker 1  1:00:00  
+We could do forecast equals this, and then we don't need the DS here anymore, because we have setting index here. But to run that, I have to reset the forecast. So let's reset the
+
+Unknown Speaker  1:00:13  
+where is
+
+Speaker 1  1:00:17  
+the forecast? Feature frame, feature data frame, so I have to do that, and then I have to reset the forecast.
+
+Speaker 1  1:00:34  
+Yes, okay, so now we have the forecast. Now what we are going to do first set DS as an index, and then we'll create a new, smaller forecast data frame with these three columns, and then ds will be index. So just this, and that is it. So that is our new forecast data frame with the dead time index and the three column that we need. So now we can plot
+
+Unknown Speaker  1:01:01  
+so let's first plot everything.
+
+Unknown Speaker  1:01:07  
+So what I'm going to do, I'm just going to do
+
+Unknown Speaker  1:01:12  
+forecast, dot plot. And that will plot everything.
+
+Unknown Speaker  1:01:19  
+And this is how everything looks like,
+
+Speaker 1  1:01:22  
+right? So now you kind of see these as, like, lots of paint, because the whole thing is so spiky, it moves up and down. And given the limited width we have, it's basically squeezing. But this is not like it this, this green thing, is not a band, actually. This is like one line, but the line is spiking so much up and down and getting squeezed, it almost seems like a band, but that's not what it is. So in order to see this better, what you can do is you can
+
+Unknown Speaker  1:01:58  
+take the
+
+Speaker 1  1:02:01  
+whatever portion that you need, which in this case, since we know that last 720 are our forecast, we can take the last 720 and just plot that. And that way we are basically zooming in into last 720 like this tiny bit. And now you will see that how Y hat and lower and upper is, which then, if you relate back to the values that we saw in the data frame right now, you can relate that these blue line it is basically saying, Excuse me, it's basically saying what your medium mean value is going to be. Most likely value is going to be. To be and the Y hat upper is saying the upper confidence level, and the Y hat lower is saying the lower confidence level. So by plotting it this way, you can clearly see the range of values for each forecasting period that profit things, this data, this output, will have
+
+Unknown Speaker  1:03:09  
+okay.
+
+Unknown Speaker  1:03:17  
+Any question on this one. I
+
+Speaker 2  1:03:23  
+So, so I didn't break it down that table as much as you did, and then just running it up, and you know what? And then I can see, I can see, I
+
+Speaker 1  1:03:53  
+Oh, actually, in order to run these, I will need the original forecast, because I don't think I can show the components in here, because I already got rid of the components. Yeah, it will fail. Sorry about that. I need to go back up and create the forecast again.
+
+Unknown Speaker  1:04:15  
+So
+
+Unknown Speaker  1:04:17  
+let's create the forecast fresh. I
+
+Speaker 1  1:04:25  
+Okay, so this is the all forecast, and then in here, forecast or set index this. Now this one, when I'm taking just the three column, let's call it a different data frame. Let's call it forecast results, so that we don't destroy the original forecast, because we will need that to plot the trend and other components. So that's our forecast results, and this plot will be on our forecast results plot, which we can then zoom on into the last. 120 time period. But now we also have the original forecast, as is, all we have to do is reset index, so the DS comes back as a column and not an index anymore. Now these another this what is called the profit model has another function called plot components. So the function that we used before is model dot plot now all of these other column that is had, that it has, like we basically shows the different trends and all. So instead of trying to understand all of what all of this value means. Value means that is mean, we can try to do a component plotting, and that will actually plot four things. The first one will basically show what is the overall trend that it sees in the underlying data. So think about it if it were a regression problem, and if you had all of these 44,000 data spread across in a two dimensional space. So this trend line is essentially showing like, Hey, this is the curve that if you draw through this data, this is the mathematical curve is going to look like. So essentially, this is the this is the soul of the prediction after the model has been trained or fitted with the data. This mathematical function is the relation that it captured from the data, ignoring all those noise and all those outliers and all of these so cutting through all the noise, this is the mathematical function, the trend function, that what is called the profit model, has come up with, which you can show using the plot components. Now what it also does, and this is where the profit model excels, and which basically the reason that it came to fame is that it does not only look at the overall trend. What it also does, since it knows that this is a time series data that looking into the what is called the timestamp in your DS column, it basically figures out what are the different other period trend that it has. So essentially, remember what we were doing a couple of classes back, we took a time series data, and we did a weekly average, and did a plot of the weekly average, right two classes back, and then we took a monthly average. So essentially, that's what profit is also doing. But it's not doing a simple weekly average. What it is doing is out of this optimized trend that it calculated, which is going from 2015, to 2020, all these five years worth of data. But then it also looks okay, fine, within these five words of worth of data on a week by week basis, how does the data vary? Or how does the out? Like the values vary from Sunday to Sunday, meaning in the one whole week. And this is the average weekly trend it sees. And this one looking at the second plot here, you can clearly see that the utility prices are much higher mid week than in the weekend, which kind of makes sense, because that's what the time of use pricing does, right all these utility companies. And then it also looks into the yearly trend. So yearly trend, yeah, I mean, it is not easy to interpret in this particular case, but I guess you understand, since it is saying five years worth of data, it is now showing you, on an average, in any given year,
+
+Unknown Speaker  1:09:01  
+how the prices vary from month to month,
+
+Speaker 1  1:09:06  
+which I have assumed, if I didn't look at it, I have assumed, probably December, January, February, will have higher prices because of all the heating that it will be used and so on. But guess not. Probably these data is from a place where it is not as cold as where we I am now. Because I'm sure if I get a Detroit Public Service data, public utility data, it will probably show higher price, because I know how much I am paying every December and January, I'm like paying through the roof. But when you go to a southern climate, the summer time will probably higher, because the ACS will run more, and that will shut up the prices, right? So it will kind of so but this is the yearly trend overall, and then it also shows the daily trend that on a given day, how it varies from hour to hour, because this is hourly and. Is how the daily trend we are seeing. And again, here you can see this is midnight, and around here is noon, so noon to afternoon, yeah, you see how the prices are high, starting from late in the day to early afternoon. Ish, the price is high, and then the price goes down in the evening and it stays low throughout the night. So you can see all of these in these four trend plots.
+
+Speaker 3  1:10:29  
+Sorry, just to clarify the nature the data, we're just we're looking at the grid, the grid prices. Basically means like the utility changing the price of the energy consumption based on you,
+
+Unknown Speaker  1:10:41  
+based on the demand. Okay,
+
+Speaker 1  1:10:45  
+so you can basically take these as a proxy of total energy consumption, almost so.
+
+Speaker 1  1:11:08  
+And then I tried to do this similar graph using a Plotly components. Let's see if this works. Yeah. So trend yearly, yeah. So then there is another library you can import, which is profit dot plot and they have these functions like plot components Plotly, or plot Plotly. So using these. So here we use plot components on the model. So that is one way which gives you these values, which, sorry, these graphs, which is fine, but instead of plot components, if you use plot components, Plotly from this profit dot plot library, and the syntax is slightly different. Here you don't do m dot function. Here you invoke the function and provide a model as the first parameter and the forecast data frame as a second parameter. And the output is the same, so you are essentially seeing the same data, but it makes it little bit more interactive, right? Like, you can zoom in, you can zoom in, you can pan out, you can, like, move around. And also, when you hover over these, it will basically show the xy coordinate for all of this. So it basically, kind of makes it a widget, and then you can take a screenshot, download, zoom in, out all of this thing, and auto scale basically
+
+Unknown Speaker  1:12:34  
+a tiny bit,
+
+Unknown Speaker  1:12:36  
+Yep, yeah, got it.
+
+Speaker 1  1:12:40  
+And then the other one I haven't actually applied here. Let me apply plot partly, plot Plotly. If you do plot Plotly, it will basically show that first graph. Oh, so do I have to provide forecast? I have to provide forecast here too.
+
+Unknown Speaker  1:13:14  
+Something is wrong.
+
+Speaker 1  1:13:16  
+Oh, this, I know you know what. Ah. Now it came so this thing is so demanding on the compute power my it is almost breaking my kernel. So this is the plot, Plotly version of that overall plot, which now you can zoom in. So let's try to zoom in. I don't know whether my computer is going to support No, it's kind of pain. Is behaving very erratic. So I'm clicking this, and now it is,
+
+Unknown Speaker  1:13:54  
+come on, it should expand.
+
+Speaker 1  1:13:58  
+So essentially, it's the interactive version of the first plot that I showed you. But I don't know about you guys, in my machine. I tried it yesterday also, and I had to restart.
+
+Speaker 3  1:14:09  
+Mine definitely struggled a little bit, huh? Mine definitely struggled just a tiny bit. So,
+
+Speaker 1  1:14:16  
+yeah, my computer is, I think, what, almost five years old now, and
+
+Unknown Speaker  1:14:23  
+it ran on my laptop, but like,
+
+Unknown Speaker  1:14:26  
+it is coming. Now it is coming now, slowly I
+
+Speaker 9  1:14:28  
+could, yeah, I could not even, I couldn't even train the first, yeah, first activity. I couldn't even train, yeah, my machine, yeah.
+
+Speaker 1  1:14:36  
+But now, if you, if you look in my screen, now, right? So what I was trying to do before, like showing the last 1000 points using a selection of the data frame instead of that, now I try to zoom in. Now you will see better right, like up until here, this is where those black dots end. And now you can see the trend line, which is the blue line, and that light. Blue band that spreads little bit above and beyond. That's your y hat upper and lower. And here in in here, it basically shows what portion you are zooming in here, which is this little bit, I think you probably need a computer with a good GPU, which I guess all the new laptops are like with what they call, they call aipc or something. I went to Best Buy a couple weeks back, and they have this aipc all over the place. So probably these days, the computers are equipped with better GPU to be able to do this type of stuff more better.
+
+Unknown Speaker  1:15:38  
+Yeah. Sorry, what was the
+
+Unknown Speaker  1:15:41  
+script that you ran to run that
+
+Unknown Speaker  1:15:44  
+this, oh,
+
+Unknown Speaker  1:15:48  
+I pasted in the Chad,
+
+Speaker 1  1:15:52  
+Sure, let me actually do that? No, I said I already
+
+Speaker 2  1:15:57  
+did that, huh? Said I pasted that in the chat. Oh, you did that already, yeah, but it would be good if you did it.
+
+Unknown Speaker  1:16:04  
+Okay, let me put that into live channel
+
+Speaker 6  1:16:07  
+Where to, like, ran that and get the same graph.
+
+Speaker 1  1:16:13  
+Yeah? So that's the import. And this the first one is the interactive plot for the whole result, and then this one is the interactive plot for the components.
+
+Speaker 9  1:16:29  
+Can I mention that on my computer, I couldn't even, I couldn't even train the model. In my machine,
+
+Unknown Speaker  1:16:38  
+you couldn't even train, no,
+
+Speaker 9  1:16:39  
+it gave an error, and the interpretation the error is stack over Stack Overflow
+
+Unknown Speaker  1:16:47  
+ran on colab. So yeah,
+
+Speaker 1  1:16:51  
+so they're in both. That's why. Okay, so now I realize why in the BCS material, they basically mentioned the use of colab. Because I was thinking my maybe the these type of toy data set that we have, at least our computers would be able to run that, no problem. But guess not.
+
+Speaker 9  1:17:10  
+Yeah, because I just ran on colab, yeah. I asked GitHub, cola business error, that number that it gave, and it translated as meaning that the stack load. So, okay, find out. Hard to believe. But anyway, so is there
+
+Speaker 1  1:17:30  
+anyone who is able to run these Plotly, plot easily, without any problem on your machine? Yeah, I was able to. It's pretty as well.
+
+Speaker 4  1:17:42  
+Okay, I'm I'm getting a no render could be found, but the import ran fine. It looks like but
+
+Unknown Speaker  1:17:49  
+I'm not entirely sure what I'm doing wrong here.
+
+Speaker 3  1:17:56  
+Our partner should just buy us all like M books with the processor, I have
+
+Speaker 6  1:18:02  
+one of those like you think that pink pads, and it ran fine for me. Yeah,
+
+Unknown Speaker  1:18:09  
+I had to go to colab.
+
+Speaker 1  1:18:13  
+You had to go to colab. Oh, yeah, yeah. How are these Plotly plots showing up in colab? Are they looking fine? Yeah, it's uh, zooming in, yeah, I know it runs in the browser, but what I'm saying when you zoom in and zoom out, are they pretty snappy, or are they kind of laggy there?
+
+Unknown Speaker  1:18:39  
+Um, definitely laggy.
+
+Unknown Speaker  1:18:41  
+Laggy. Yeah.
+
+Speaker 1  1:18:46  
+Yeah. But at least good thing is, if it happens in the browser, you just close the browser and you get good, yeah. Anyway, cool. So let's take about 15 minutes break, okay, and then one we when we come back, we will do two other activities. Both of these are student activities, four and five, which is essentially the same thing, but we are going to do it with the different data frame. And this time, I'm not going to have the solved code up here on the screen. I will stay in the unsolved version. And then you guys need to tell me what to do against each other. Prompt, okay. And then finally, if you look into your activity number six, it basically says, Hey, do something with the S, p5, 100 data. This is your data frame. And then it says, Add whatever analysis and prediction. You see fit and write your code here, so we are not going to do that. Instead, I'm going to do couple of other projects which I'm preparing. One is already here, which I have already where we are going to go end to end, and do some stock market forecasting, some weather prediction forecasting. With some real data set. The only challenge I'm having though, in the weather forecasting, I thought finding past climate data will be easy, but I'm learning the hard way, it is not easy, unless you are ready to pay up, like National Weather Service, the NOAA, they do have this API, the weather API. But guess what? The weather API is limited to only last 50 days, that's all. And you can only get the maximum temperature, minimum temperature, average temperature, and I think probably the total precipitation. That's it. Like, if you want the full blown weather data with atmospheric pressure, dew point, these that. And if you want, like, say, Hey, give me 510, years worth of climate data. No one is giving that data unless you go through some paid API. So that's where I'm kind of struggling to get some real life weather data set for you guys. But I guess I have to give up on that, because I'm not going to pay 3040, and these are expensive. These are expensive. Yeah,
+
+Speaker 5  1:21:07  
+quick, quick question on this. Also, I was talking to Kian earlier, module one and eight, two. Solution from Tuesday, we we couldn't get it posted for whatever reasons. I was wondering, can we after the end of the night? Can we get 81288,
+
+Unknown Speaker  1:21:25  
+sure we can post it, yeah,
+
+Speaker 1  1:21:28  
+yeah, yeah, we can surely do that. Okay, actually, let's hold on to that little bit, because we are still going to do the couple of student activities together tonight. Then after that, yeah, soon after we finish, Kia is going to post that
+
+Unknown Speaker  1:21:43  
+then, yeah,
+
+Unknown Speaker  1:21:44  
+okay, we're going to put publish everything
+
+Unknown Speaker  1:21:46  
+perfect. Thank you.
+
+Speaker 2  1:21:53  
+Okay, in December to do 607 we said we're going to do after the break.
+
+Speaker 1  1:22:00  
+Uh, not seven. You don't have all 707. Is something I created. Got it. So we are going to do four and five. Four and five. Thank you, yeah.
+
+Unknown Speaker  1:22:10  
+So let's get started.
+
+Speaker 1  1:22:17  
+Okay, so we are going to do the activity number four, first.
+
+Unknown Speaker  1:22:29  
+So I have the unsolved files in here.
+
+Unknown Speaker  1:22:33  
+So first we have to
+
+Unknown Speaker  1:22:38  
+load the data.
+
+Unknown Speaker  1:22:40  
+And let's load the data.
+
+Unknown Speaker  1:22:52  
+Oh, sorry
+
+Unknown Speaker  1:22:55  
+to do a dot. Dot slash resources. I
+
+Unknown Speaker  1:23:03  
+Okay,
+
+Unknown Speaker  1:23:05  
+so you guys all have the data loaded? Zoom in little
+
+Speaker 1  1:23:15  
+bit. Do you guys have the data loaded? Yes, yes. So take a look quickly and share your thoughts. What you feel about this data? What is this data about
+
+Speaker 2  1:23:38  
+the where alpacas in different countries come from the source scarves,
+
+Speaker 6  1:23:47  
+just like the Google trend results for like, searches for scarf, for
+
+Speaker 1  1:23:51  
+scarves, yeah, yeah. So it's basically some products Google trend and the data is at what interval here is weekly, every week, weekly, and how much data do we have?
+
+Speaker 4  1:24:15  
+There's like 260 rows. I think I just did a shape, yeah. Shape, yeah, yeah.
+
+Speaker 1  1:24:23  
+260 rows of data. Okay, so basically, 260 weeks, essentially, right? Because this goes 11, 811, 15, yep, it's weekly. You can also do a tail here, see where it goes up to. So it is 15 to 20, so about five years worth of data. So 52 weeks in each year. So yeah, 260
+
+Unknown Speaker  1:24:55  
+so it checks out
+
+Speaker 1  1:24:59  
+okay. So. So first I need to do the general trend just to see what trend do we see? So what am I going to do to plot the trends?
+
+Unknown Speaker  1:25:16  
+Meaning, just plot the database. Just do like PLT, dot.
+
+Speaker 1  1:25:20  
+Yeah, you can do PLT, dot plot, or you can do data frame, dot plot, either way, right? And then we have to do a PLT, dot show. I assume if you do it on Google colab, you don't have to do PLT, yeah,
+
+Unknown Speaker  1:25:37  
+I think you have to import it first, right, yeah,
+
+Speaker 1  1:25:41  
+right, so you need to have that line there, and then you can do that. And let's also do add this first, okay,
+
+Unknown Speaker  1:25:55  
+so what we are seeing here, then I
+
+Speaker 1  1:26:04  
+do you guys remember how to change the figure size? Like how to make it wider?
+
+Unknown Speaker  1:26:11  
+Big size equals bracket. Yeah.
+
+Unknown Speaker  1:26:21  
+Which one is height, which one is width.
+
+Unknown Speaker  1:26:26  
+That's the width the first number,
+
+Speaker 1  1:26:29  
+I think. So, yeah, let's do little wider. Let's do 18. There you go,
+
+Unknown Speaker  1:26:38  
+clearer to see.
+
+Speaker 1  1:26:41  
+So all I did is added a fixed size equals 18. Comma, six. Okay, so between the Canada and Uruguay, what like? What is the pattern you're you're seeing here?
+
+Speaker 5  1:27:02  
+Well, you Uruguay is low, Canada is high.
+
+Unknown Speaker  1:27:05  
+Why? Because they're
+
+Unknown Speaker  1:27:07  
+on the opposite of the whole different
+
+Speaker 1  1:27:10  
+hemispheres, northern and southern hemisphere, yeah, when we have winter here, they have summer over there, right? That's why. Okay, so looks like there is some seasonality in this.
+
+Unknown Speaker  1:27:24  
+So now we are going to prepare the data for
+
+Unknown Speaker  1:27:30  
+what is called
+
+Speaker 1  1:27:32  
+profit. Okay, so first we have to create a data frame from Canada,
+
+Unknown Speaker  1:27:40  
+and
+
+Speaker 1  1:27:43  
+to include the week and the Canada column. So here we have a week Canada and Uruguay. So what we are going to do, we are going to do two separate model, one for Canada and one for Uruguay. That's what the problem ask is here. So what are you going to do here? If we just want to do a column, sorry, a data frame for the Canada,
+
+Speaker 3  1:28:07  
+Canada, df equals DF alpaca and then select the week in Canada.
+
+Speaker 1  1:28:20  
+Yeah, no, no, this is not right. Yeah,
+
+Speaker 3  1:28:25  
+that should be. I'll have to Yeah.
+
+Speaker 1  1:28:29  
+So you know how I said the other day, my co pilot free tier expired, and like you see here, this is expired. So now I connected to Amazon queue, which is supposed to do the same thing, but what I'm experiencing is Amazon queue is not as accurate as co pilot when it comes to COVID generation.
+
+Unknown Speaker  1:28:49  
+So anyway, DF, alpaca, and then what?
+
+Speaker 3  1:28:53  
+Double bracket week and Canada?
+
+Speaker 1  1:28:57  
+Yep, double bracket bracket week and can so that's that. And then what else we need to do
+
+Speaker 5  1:29:08  
+for profit? Oh, the DS and the y column may, yeah, yep.
+
+Unknown Speaker  1:29:13  
+How do we do that?
+
+Unknown Speaker  1:29:20  
+DS, Canada, square brackets, equals
+
+Unknown Speaker  1:29:25  
+DF, underscore
+
+Unknown Speaker  1:29:29  
+in the square brackets,
+
+Speaker 1  1:29:32  
+well here it actually suggested one way. So these you can do. You can always do this. You can do dot Rename, and then columns. And then you can provide a key value pair of the columns.
+
+Unknown Speaker  1:29:50  
+That's one way, any other way you guys can think of
+
+Speaker 10  1:29:55  
+after def underscore, Canada, you can open the square brackets and. Input the column name,
+
+Speaker 1  1:30:03  
+yeah, you can No, you have to provide
+
+Unknown Speaker  1:30:08  
+DF, Canada,
+
+Unknown Speaker  1:30:12  
+dot columns equals,
+
+Speaker 1  1:30:16  
+and then you provide DS and y. So either one of these two lines will work, both will produce the same results. So let me just keep one and then just do a head
+
+Unknown Speaker  1:30:34  
+just to make sure that it worked.
+
+Speaker 1  1:30:40  
+Okay. Now we have to do the same thing for the other country.
+
+Unknown Speaker  1:30:46  
+Sorry, sorry.
+
+Speaker 10  1:30:47  
+Binoy found by mistake. I didn't add the column, I renamed the column. Thank you. Yeah, both,
+
+Unknown Speaker  1:30:56  
+both will work.
+
+Unknown Speaker  1:30:59  
+Okay, so now we are going to do a DF,
+
+Unknown Speaker  1:31:03  
+Uruguay
+
+Unknown Speaker  1:31:06  
+equals.
+
+Speaker 1  1:31:09  
+So we are going to take the same thing from here, except we can Canada. We have to take weekend.
+
+Speaker 1  1:31:32  
+Okay, and then let's rename and
+
+Unknown Speaker  1:31:45  
+that,
+
+Unknown Speaker  1:31:47  
+and then go ahead.
+
+Speaker 1  1:31:50  
+So now we have two separate data set for two different model that we are going to do. Okay, so how do we create a profit? Model,
+
+Unknown Speaker  1:32:10  
+DF?
+
+Speaker 1  1:32:12  
+No, not a DF. This is a model. So your variable name would be model, so you will basically do model equal to profit.
+
+Unknown Speaker  1:32:25  
+But since we are going to do
+
+Speaker 1  1:32:29  
+two different model, we can say one is model Canada, and then another one would be model so
+
+Speaker 1  1:32:46  
+I don't know why this Amazon queue keeps adding these imports here. Okay, so now we have the models created. Now, what is this step that fit. Yep, this is where the training will happen. So what we are going to do, model Canada, dot feet, and then we do DF Canada. Now, when we run this, you will see the training is going to be much, much faster because we only have a miniscule amount of data, only 260
+
+Unknown Speaker  1:33:24  
+so see this,
+
+Speaker 1  1:33:27  
+that's it done, 0.1 second, as opposed to 22nd it took for the last one, because we have had over 40,000 data, and here we have only 260 so our Canada model is fitted. Now we are going to fit our
+
+Unknown Speaker  1:33:49  
+way model two, you
+
+Unknown Speaker  1:34:10  
+and the model is fitted.
+
+Unknown Speaker  1:34:14  
+What comes next
+
+Speaker 1  1:34:17  
+is basically, think of is just this set of steps. Is just kind of a practicing couple of times what we have done in the two other activities, because you have to do these over and over again, no matter which what data set you are working right. So what is the next step after we fit the model,
+
+Speaker 4  1:34:37  
+you have to create a data frame for the future predictions.
+
+Speaker 1  1:34:41  
+Yes, so What? What? How do we do that?
+
+Speaker 4  1:34:45  
+You can call it like ca future equals
+
+Speaker 1  1:34:53  
+or whatever. Let's call it ca future equals
+
+Speaker 4  1:34:58  
+model. Dot make you. Your Data Frame. Model
+
+Unknown Speaker  1:35:01  
+Canada, oh, yeah,
+
+Speaker 1  1:35:05  
+make future data frame, yeah, and how many periods you want to do
+
+Unknown Speaker  1:35:13  
+one year. So simple frequency,
+
+Speaker 1  1:35:16  
+frequency would be a W week, and then period. So this time, Amazon queue actually predicted it correct. So periods 52 and frequency week is weak.
+
+Unknown Speaker  1:35:29  
+I bet you don't even miss co pilot,
+
+Unknown Speaker  1:35:33  
+huh? Said, I bet you don't even miss co pilot with Amazon.
+
+Unknown Speaker  1:35:35  
+No, I do actually,
+
+Speaker 1  1:35:38  
+and display the last five rows. So it is suggesting me to use the tail function. Yeah, it can do little things, but copilot was way better anyway. So that creates our empty data frame with only DS columns, right?
+
+Speaker 1  1:36:00  
+Okay, so we had 260 something. Now we are going up to 311
+
+Unknown Speaker  1:36:05  
+because we have added 52 more.
+
+Unknown Speaker  1:36:09  
+Wait, sorry, does tail do five by default?
+
+Unknown Speaker  1:36:13  
+Does tail do the last five rows by default? Yeah,
+
+Speaker 1  1:36:16  
+same with head. Oh, right. You don't provide anything. Was just five, yeah. Now what's the next step? Oh, next step is basically the same thing for Uruguay.
+
+Speaker 1  1:36:37  
+Actually, you know what? Let's just use the full country name, because we are using the full country name everywhere. So let's use the full country name. So that's our Canada future. And this would be not model Canada. It will be from model group, make feature data frame that, and then you tell so you basically have the same
+
+Unknown Speaker  1:37:09  
+data frame so far.
+
+Unknown Speaker  1:37:12  
+What comes next?
+
+Speaker 5  1:37:18  
+I think you have to use the model Uruguay, that predict,
+
+Unknown Speaker  1:37:22  
+well, Canada first,
+
+Unknown Speaker  1:37:25  
+oh, sorry, yeah, the Canada predict
+
+Unknown Speaker  1:37:29  
+model,
+
+Speaker 1  1:37:31  
+Canada dot predict. And what do you need to pass future Canada, right? And hang on, did we?
+
+Unknown Speaker  1:37:44  
+Did you call it Canada feature? Canada
+
+Unknown Speaker  1:37:47  
+feature? Yeah, that's sorry.
+
+Unknown Speaker  1:37:50  
+That is, that is Amazon queue messing up.
+
+Speaker 1  1:37:54  
+Okay, and let's we have to save it in a variable which we can we have to access later. So Canada forecast would be our resulting data frame, right? And then display the first five rows of the forecast Canada data frame. So see these two are different names data frame, though, right? So the data frame that we are creating for future and the data frame that we are creating for forecast are two different data frame. So when we are doing the predict, we are passing the empty data frame with just the DS, and as a result, we are getting something with 22 columns, which is the forecast data frame.
+
+Unknown Speaker  1:38:36  
+And that's it. Our forecasting for Canada is done.
+
+Speaker 1  1:38:42  
+Now we have to do the same thing for the other country.
+
+Unknown Speaker  1:38:47  
+We
+
+Unknown Speaker  1:38:50  
+forecast.
+
+Speaker 6  1:38:58  
+Wait so these forecasts, these forecast variables are they? So we're making predictions based on the the data that
+
+Speaker 1  1:39:08  
+these. In this case, we could have used the same forecast variable. You are right?
+
+Speaker 6  1:39:12  
+I was just, I'm just trying to understand. So, like, we use the futures to make predictions for like, the next year based on the actual data, and then we're using forecasts to make predictions based on the predicted data for the next year or sorry. Oh, never mind, sorry, sorry. It's completely different. Never mind. Sorry.
+
+Speaker 1  1:39:32  
+Okay, so future data frame is nothing but a template, and the forecast data frame is where the result resides in.
+
+Unknown Speaker  1:39:42  
+Oh, that's right, we talked about this. My bad.
+
+Speaker 1  1:39:46  
+Okay, and you do the same thing now you have a Uruguay forecast. So we have Canada and Uruguay forecast trading. Now, how are we going to plot the predictions? Do. Model. Plot the model. So our model was, what model Canada?
+
+Unknown Speaker  1:40:11  
+What do we do with this? Dot
+
+Unknown Speaker  1:40:13  
+plot dot
+
+Unknown Speaker  1:40:14  
+plot, forecast Canada,
+
+Unknown Speaker  1:40:16  
+or forecast Canada? Canada?
+
+Speaker 1  1:40:21  
+Forecasts, we said, Canada forecast. Okay, and that should create that plot. There you go. Now, here you see, since the number of points are not as many, the plot kind of looks very different. This is good in a way you can actually see throughout the whole five year, year period, all of our data points, and you see how well profit has captured the underlying trend. And this blue line is basically the line of best fit the best fit curve. And then it is also showing the confidence level, the higher and lower confidence level. And this is where our data ends. And from this point onward to this last curve is basically our 52 weeks looking forward in the future. So one thing you see, even though there is a seasonality overall, if you look into this data now that we see the data, you will see overall, doesn't it seem like the trend is kind of coming down little bit every year, like if you look at this, 12345, spikes that we have, every successive spike is little bit lower than the previous spike, global warming. Maybe? Yeah, that's, yes, that's, that's actually a very good, yeah, I didn't think about that. Very good. Thank you. But what I the point I was trying to make here is that profit actually caught up on that, and you see this forecasting spike. Forecasted spike is also, again, slightly lower than the previous spike. Yeah.
+
+Speaker 1  1:42:08  
+Uh, let's do the same thing for Uruguay and see what's happening in there. So did we say model Uruguay? Yeah, model Uruguay dot plot, and we had Uruguay forecast.
+
+Speaker 1  1:42:30  
+Oh, Uruguay forecast looks very different. Actually. There are lots of spikes and stuff, but here also you can see the trend is overall, coming down here, over here. This is cool looking at this, it's almost makes me feel like sine and cosine curve. Like if you plot sine and cosine, you will see the same curve, just one is opposite the other, doesn't. It kind of looks the same. Yeah,
+
+Unknown Speaker  1:43:00  
+it does,
+
+Speaker 1  1:43:03  
+yeah, almost, I mean, it is not sine and cosine, but the periodicity. Okay, cool.
+
+Speaker 6  1:43:10  
+So like, later are we gonna, like, learn how to, like, bring in other like, I guess, data frames to, like, kind of figure out where like trends are coming from. Like, like, this downward decline in search trends over time, like maybe could be attributed to like population decline that there's like less people needing scarves over the years. Yeah,
+
+Speaker 1  1:43:29  
+but that so see, that's what I said earlier, right? This is all univariate forecasting that we are doing, and you don't have to bring anything in. If there is an underlying trend, profit will discover that trend when you train and predict using the model. But the other thing I said, what I'm trying to do is, like taking a weather forecasting or some other example I'll think through over the weekend, I will show that if you have multiple other supporting variables that you can you have your access, you have access to, then there is a way you can bring in other supporting variables as well.
+
+Unknown Speaker  1:44:08  
+Okay, cool, thank you.
+
+Speaker 1  1:44:17  
+Okay, so next what we are going to do? Oh, now this time, we are going to bring in, sorry, take out just the Y hat, y hat upper and y hat lower, just those three. And we are going to plot the three right. And we are going to plot only the last 52 entries, so that we only see how the Y hat, y hat, upper and lower looks like for our forecasting time period.
+
+Unknown Speaker  1:44:49  
+So what are we going to do for that?
+
+Unknown Speaker  1:44:59  
+Since we are going to. Do plotting we have to do.
+
+Unknown Speaker  1:45:03  
+We have to set our index right.
+
+Speaker 1  1:45:06  
+So we have to do what Canada forecast equals. Canada forecast dot set index which will bring the index back. So DS is now our index,
+
+Unknown Speaker  1:45:28  
+and then we can plot
+
+Speaker 1  1:45:32  
+just y hat, y hat lower and y hat upper. So how do we do that? Canada, forecast and forecast and then double square brackets. Yep, double square bracket. And then y hat. Oops, stock,
+
+Unknown Speaker  1:46:01  
+y hat lower,
+
+Speaker 1  1:46:05  
+and then y at upper. And then, what are we going to do with this
+
+Speaker 1  1:46:17  
+plot? Yeah, dot plot. Let's do a dot plot first, and then we will use the i log to select a subset. Okay,
+
+Unknown Speaker  1:46:33  
+let's first see how it looks like overall.
+
+Speaker 1  1:46:41  
+Yeah, sometimes it does that you have to run second time to get the plot.
+
+Speaker 1  1:46:49  
+You can also do a fixed size. Let's do a 12 and four maybe like white aspect ratio, right? And then this is basically everything here, even if you don't do the just the forecasting, it's still not very cluttered, unlike our other example. But what they're saying is for show only for the last 52 period. And how am I going to zoom into last 52 period here,
+
+Unknown Speaker  1:47:32  
+someone,
+
+Speaker 1  1:47:35  
+because this one has 311 rows. Do I need the last 52
+
+Unknown Speaker  1:47:39  
+an I lock, yeah,
+
+Speaker 4  1:47:41  
+and then I lock, and then minus 52 can you use 52 is it already in weeks, right? Yeah,
+
+Unknown Speaker  1:47:51  
+yeah, you can
+
+Speaker 1  1:47:55  
+then minus 52 and then colon, and then all the columns, yeah. And that's now the graph is only showing the last 52 weeks, and this is how it looks like.
+
+Speaker 2  1:48:16  
+Okay, why did you put the comma colon after the first colon? Couldn't you just said 52 colon?
+
+Speaker 1  1:48:30  
+Just that. I believe you would have done this. It would have done the same thing. Yeah. Okay,
+
+Unknown Speaker  1:48:35  
+thanks. I just want to make sure I wasn't missing something.
+
+Speaker 11  1:48:41  
+Hey, Benue, can you? Can you scroll up to just one more cell, please,
+
+Unknown Speaker  1:48:47  
+this, or the one above, just
+
+Unknown Speaker  1:48:48  
+the one above.
+
+Unknown Speaker  1:48:53  
+Oh, this is just a set index.
+
+Unknown Speaker  1:48:56  
+Okay, got it. Thank you.
+
+Speaker 1  1:48:58  
+So we are doing set index so that on the x axis, we actually do see the timeline without set index. It will basically show 01234, here in the x axis, that's all, but you will still see the trend, but it not just show the time. Okay? So let's do the same for the Ruby forecast. Set the index forecast to Ruby data frame to the DS. Well,
+
+Unknown Speaker  1:49:33  
+we can copy that
+
+Unknown Speaker  1:49:38  
+and just say Ruby forecast
+
+Speaker 1  1:49:55  
+so we have the dead set, and now we are going to.
+
+Unknown Speaker  1:50:01  
+Plot this for our
+
+Unknown Speaker  1:50:07  
+Uruguay forecast,
+
+Speaker 1  1:50:15  
+kind of what we expected. So basically, the low time for Canada is high time for Uruguay and vice versa.
+
+Speaker 1  1:50:29  
+Got it now. The last thing we need to do is plot the components. So how do we plot the components, which basically shows your yearly trend and overall trend and all of that. Remember.
+
+Unknown Speaker  1:50:46  
+So how do we do that?
+
+Unknown Speaker  1:50:53  
+Is it the plot underscore components thing.
+
+Unknown Speaker  1:51:01  
+So model Canada dot.
+
+Unknown Speaker  1:51:06  
+Plot underscore components,
+
+Speaker 1  1:51:08  
+yep, plot underscore components, and we have to pass what Canada forecast, right? But in order to do that, you need to have that DS as a column to in order to do the previous plot, we set the DS as an index. But in order to do the plot components, since this is a what is called before getting the name profit function, it doesn't like the index. So what do you need to do? Reset? So which com, which data frame we are going to reset the index for
+
+Unknown Speaker  1:51:52  
+the Canada forecast.
+
+Unknown Speaker  1:51:53  
+Forecast, Canada forecast,
+
+Unknown Speaker  1:51:59  
+really? Forecast
+
+Speaker 2  1:52:02  
+said Q tip really wants, wants you to rename that. So forecast, yeah, yes,
+
+Unknown Speaker  1:52:07  
+yes, okay,
+
+Unknown Speaker  1:52:11  
+and there is your trend.
+
+Speaker 1  1:52:14  
+So now how? Remember how I saw? I said, like, hey, there is spike every year, but overall, the spike is coming down, because over the five years, there is a continuous downward trend in the Google search for these cards. And this is the overall trend that is capturing it. And you see this last little bit of part, how there is this blue shaded. So this is the forecast. So in this trend, what it is showing is it's saying, hey, for all of your historical data up until here, this is the trend I am seeing. Profit is saying, and then for your forecast horizon, this trend is going to continue this way, or in the best case, it will continue this upper boundary. Or in the worst case, it will follow the lower boundary. That is the interpretation. But whichever it takes, whether the upper or lower boundary, the downward trend will continue, nevertheless, because of the overall downward trend that it is seen, that's what the interpretation of the first plot is, and the next one is yearly. Now here you see, since we have weekly data only, that's why it stops here. We don't have daily and other things, right? Because the data we give the model is week by week basis. So it cannot have a weekly trend, because it only for each week. It only has one data point, so there is no trend to be spotted. So that's why it gives you the overall trend, and it gives you the next higher aggregation of time, higher than the week, because week is the aggregation that we are using. So what is the higher aggregation than week, which is year? That's why it gives year, but then it doesn't go weekly or daily trend, because we don't have that data.
+
+Unknown Speaker  1:54:15  
+Make sense.
+
+Unknown Speaker  1:54:19  
+And you're saying that you have to reset the index, because
+
+Speaker 2  1:54:23  
+profit doesn't like not having the having the date, time is index, or the date rather, is index, ds is index. Yeah.
+
+Speaker 1  1:54:31  
+So see, profit when it does that, it basically will do that even even when DS is not an index. DS is not an index. Oops, not modeled. So let me do that for Uruguay, and I'm going to try that
+
+Unknown Speaker  1:54:54  
+without this and see what happens.
+
+Speaker 1  1:54:59  
+And. Is going to fail because it doesn't see that DS is a column. So profit expects DS as a column, not as an index. So that's why you need to reset so that DS becomes a regular column, and then it will work. So
+
+Unknown Speaker  1:55:28  
+oh, so the flow is clear now,
+
+Speaker 1  1:55:33  
+so now you should be able to do forecasting on any time series data.
+
+Unknown Speaker  1:55:39  
+It's very simple, isn't it?
+
+Unknown Speaker  1:55:49  
+Okay? Shall we do one more?
+
+Speaker 1  1:55:53  
+The next one we have time. That's why I say today's is going to be a short class. We still have 45 minutes time, huh? I'm down for that. Let's do it. Yeah, let's, let's do it. So this is using Bitcoin hourly price. I forgot one import before. So, yep, it forgot this matplotlib import here. So let me put that in select.
+
+Speaker 1  1:56:32  
+So this one, the code that is given, it has a drop. DF, dot drop, because in these data, oh, I also have to do this, because in data, there is a price column and a volume column. Now we are going to forecast just the price in this activity, not the volume. So that's why we are dropping the volume, because we don't need it so close basically means the closing price is just like a stock price, except it is for Bitcoin. Okay, so what granularity level the data is
+
+Unknown Speaker  1:57:14  
+ours, right?
+
+Unknown Speaker  1:57:17  
+And how far the data go? So
+
+Unknown Speaker  1:57:29  
+four years.
+
+Speaker 1  1:57:35  
+Yeah, so how much data do we have? Let's do a shape.
+
+Speaker 1  1:57:46  
+30,000 Okay, so let's first do a visual inspection, which is basically what plotted, right? So,
+
+Unknown Speaker  1:58:15  
+wow, look at this. What happened here,
+
+Unknown Speaker  1:58:19  
+the Bitcoin prices,
+
+Speaker 1  1:58:22  
+and if you go all the way up until now, after Trump got re elected, we all know what happened.
+
+Unknown Speaker  1:58:28  
+For some reason, this thing shot through the roof.
+
+Unknown Speaker  1:58:32  
+Could you please scroll it over?
+
+Unknown Speaker  1:58:44  
+Okay, so then next step.
+
+Speaker 1  1:58:49  
+We don't need these index initially. When we did read the data, we said index college debt, so that our first graph actually shows the date in here. But now we are going to prepare this for profit. So what's our first step?
+
+Speaker 1  1:59:12  
+Come on, someone speak up. Someone who has not spoken up before.
+
+Unknown Speaker  1:59:18  
+What is our first step
+
+Unknown Speaker  1:59:20  
+to prepare the data for profit.
+
+Unknown Speaker  1:59:29  
+He says, index. So the data
+
+Speaker 1  1:59:34  
+I was expecting someone who hasn't spoken before. How about Margarita? Or
+
+Unknown Speaker  1:59:40  
+did you speak before? Yeah?
+
+Unknown Speaker  1:59:44  
+Something? Yes, I did.
+
+Unknown Speaker  1:59:49  
+Yeah, reset,
+
+Speaker 1  1:59:52  
+yeah, yeah, I'm doing in plus equals true. If we don't, then you have to assign it back to DF. Can do either way. Yeah. And then rename the columns.
+
+Unknown Speaker  2:00:15  
+What are the column names we use?
+
+Unknown Speaker  2:00:21  
+Yes and why, ds and y.
+
+Speaker 1  2:00:32  
+Okay, and then you can do DF, dot, head, DF, dot, tail, whatever. I'm not even bothering. Okay. So now if you look into it, the data frame was not actually sorted. You see we had 2017 data, and then we had 2012 data. So first we need to do here is to sort it.
+
+Unknown Speaker  2:01:03  
+So how do we sort the data frame?
+
+Speaker 1  2:01:08  
+This is new one. This one we didn't have to sort values in the previous exercise here. We just saw that the values are not sorted by time. So what is the sorting mechanism? Dot sort values
+
+Unknown Speaker  2:01:23  
+on DF, right on DS, yeah,
+
+Unknown Speaker  2:01:25  
+and then,
+
+Speaker 1  2:01:29  
+ah, there. This time, Amazon queue worked, DF, dot sort values, and you have to provide ds, and which is the column that you are sorting by, and ascending is true. And then you can either do in place, or you can assign it back. Do you need to reset the index too?
+
+Unknown Speaker  2:01:55  
+We already did up here, right here, so
+
+Speaker 1  2:02:05  
+let's display the head and tail just to make sure that the sorting has worked. Yep, the head five is showing 2017 the tail five is showing, sorry, 2017 and then 2021 yes, it worked.
+
+Unknown Speaker  2:02:28  
+Okay. If we plot now, do you think it will look different, though?
+
+Unknown Speaker  2:02:34  
+Hang on, how did
+
+Speaker 1  2:02:37  
+well, this one already was. So I'm little confused. Here it is showing 27 to 20 100.
+
+Speaker 1  2:02:52  
+Okay, so here we have to plot the data. And if you are plotting the data here, the date is going to show up as a straight line, because now the DS is not an index anymore, so that's why it is not showing up here. Instead, it is coming as a straight line. That's fine. That's not useful. Rather,
+
+Unknown Speaker  2:03:18  
+let's go create the model.
+
+Unknown Speaker  2:03:22  
+What do we do?
+
+Speaker 6  2:03:27  
+M equals Bitcoin or model equals or profit? Sorry, yeah, he's got Bitcoin.
+
+Speaker 1  2:03:36  
+You can say Bitcoin model, yeah, but let's just be concise. Sometimes you can profit,
+
+Unknown Speaker  2:03:45  
+sometimes you can profit.
+
+Speaker 1  2:03:48  
+Yeah, you can Okay. The next one is training. What is the training step?
+
+Unknown Speaker  2:03:59  
+Hold that fit. And then
+
+Unknown Speaker  2:04:04  
+how long do you think this will take training
+
+Speaker 1  2:04:10  
+action of a second or seconds? I think it will be seconds. Yeah,
+
+Unknown Speaker  2:04:29  
+mine took about a minute.
+
+Speaker 1  2:04:32  
+Okay, a minute. Let's see mine took about 33 seconds.
+
+Unknown Speaker  2:04:41  
+Mine is still going strong,
+
+Speaker 1  2:04:47  
+and I just lost the rest to you. I couldn't finish it in 33 seconds. It's still going
+
+Unknown Speaker  2:04:55  
+looks like time for me to buy a new laptop now
+
+Speaker 11  2:04:59  
+it gives. Extra breaks at work, right? Yeah, no, you gotta buy one of these, AI PCs,
+
+Speaker 1  2:05:08  
+48 seconds cool. Then next step is to do what?
+
+Unknown Speaker  2:05:19  
+Features, right?
+
+Unknown Speaker  2:05:24  
+Let's call it future DF. Future df equals
+
+Speaker 1  2:05:28  
+Amazon queue got it completely wrong this time. What are we doing? Make future data frame model dot make future data frame and it says 1000 hours, and frequency is ours, so this time, at least it got it right. So periods 1000 and then that's it.
+
+Speaker 6  2:05:52  
+That's weird, because it's normally the co pilot does like the previous like comment line, but like that was able to predict it based on like the next comment line, yeah,
+
+Speaker 1  2:06:01  
+these are two different AI, right? They have their own design thing philosophy, I think. Anyway, so that's our future model, sorry, future data frame. Now this is where we are finally going to do the prediction. So what do we do? We need a new data frame, forecast. Data Frame, where, where did it get? Model Canada from? Now,
+
+Unknown Speaker  2:06:33  
+that was the last
+
+Speaker 1  2:06:35  
+one. Yeah. Anyway, it's confused, yeah. Anyway, model dot predict
+
+Unknown Speaker  2:06:49  
+and display forecast head.
+
+Speaker 1  2:06:52  
+So now we'll have this gigantic 22 column data frame right, and it will take seconds, six seconds. Prediction, by the way, is much faster than training, though that's almost always the case.
+
+Speaker 1  2:07:12  
+By the way, talking about prediction, that day, I was listening to a show where they were talking in NPR, so they're talking about that impact of AI on like energy and everything, energy, water. So someone made a comment like, Do you guys know that every prompt to a Gen AI model, a large language model, it takes about two glass worth of water, two drinking glass pool of water. I don't know where they got the data from, but I guess they are thinking about how much pulling it needs in the data center. So anyway, that's why I said the other day, we need the green land. Okay, got it fine. So now what is the next step?
+
+Speaker 12  2:08:03  
+Model, dot plot, yeah.
+
+Speaker 1  2:08:08  
+Who was that? Oh, Ash, yes. I'm happy to hear another voice. Thank you. So we now need to do model dot plot, not forecast. We called it forecast DF, you 100% sure that this is going to work. Ash,
+
+Speaker 12  2:08:25  
+I ran it and it worked. I'm not sure if that's, yeah,
+
+Speaker 1  2:08:29  
+cool. So now you are running ahead of the class. Very cool. Did you get something similar? Yes, yeah. So here one, what immediately catches your attention here compared to, let's say, the first activity we did, or even the last one. What do you see here?
+
+Speaker 12  2:08:48  
+I see that it's plateaued in the initial and then it rises up drastically at the end first no that
+
+Unknown Speaker  2:08:55  
+we saw in the data also,
+
+Speaker 4  2:08:58  
+okay, the outliers are way less
+
+Unknown Speaker  2:09:02  
+that. And why is that so?
+
+Speaker 1  2:09:09  
+Because look at the spread in the data point itself. Look how the data points are typed, kind of hugging the actual trend line. Yeah. So basically, the dispersion is less. And what is the statistical term for that?
+
+Unknown Speaker  2:09:27  
+The dispersion of data,
+
+Speaker 1  2:09:33  
+variance or standard deviation. So it's a low variance or low standard deviation data. So okay. And then, how do we see the components?
+
+Speaker 3  2:09:53  
+Pretty much the model. Dot plot components. Parentheses. Or so.
+
+Speaker 1  2:10:00  
+Essentially, instead of for plot we just say plot components. And both of these, remember the other Plotly function that I showed you could use that too, but I'm not going to, because I don't want to have my machine crashed right now, and this is what we are seeing. Now, let's see this trend. So this is the overall underlying trend. Does it kind of make sense with this? Yeah, I guess it does. It's kind of going up down, up, down, and then it shoots off, right? But then the point here is the overall outcome that the profit is predicting is basically super imposition of all of these trends, the overall trend, and then the weekly trend is superimposed. On top of that, yearly trend is superimposed, and the daily trend is superimposed, and hence, but this one, this is a price of a security, so I'm not going to read too much into it, because overall, as they say, price movement of any stock or any securities, for that matter, it's a random walk. So unlike your scarf trend price and all where, or your energy, energy price, right where you can kind of relate it to something that you can you can relate to, like something makes sense. But when it comes to stock price or crypto prices, it's just a random walk. So so we should not be reading too much into this when it comes to forecasting these type of things. Okay, cool. And do you want to do the last bit to do the Y hat upper and lower?
+
+Unknown Speaker  2:11:58  
+Okay, so what is the first thing you need?
+
+Speaker 1  2:12:04  
+What is our data frame? I forgot what are we calling it, forecast DF, so now we have to extract this out. So first thing we need to do, what
+
+Unknown Speaker  2:12:15  
+written take time to
+
+Unknown Speaker  2:12:18  
+repeat the index.
+
+Speaker 1  2:12:20  
+Yeah, we have to do just a set index, first set index,
+
+Unknown Speaker  2:12:27  
+Ds
+
+Unknown Speaker  2:12:31  
+in plus equals true,
+
+Unknown Speaker  2:12:35  
+and then
+
+Unknown Speaker  2:12:39  
+we have to do those three things, right?
+
+Speaker 1  2:12:44  
+So let's do a PLT dot CLF. We are also going to need a PLT dot show and then here, what are we plotting
+
+Unknown Speaker  2:12:55  
+components?
+
+Speaker 1  2:12:58  
+Well, no, this is where we are plotting the three things. Oh, so I had an upper and lower.
+
+Unknown Speaker  2:13:08  
+So it's a double pack, yeah, forecast,
+
+Speaker 1  2:13:09  
+yeah, yeah, this is where I'm missing co pilot, it would have
+
+Unknown Speaker  2:13:18  
+already predicted. So, okay,
+
+Speaker 1  2:13:26  
+and then dot plot Right, no, last 10 days. So what am I going to do for last 10 days?
+
+Unknown Speaker  2:13:38  
+Doing I lock? 10?
+
+Unknown Speaker  2:13:39  
+I lock? Well, not 10, though
+
+Unknown Speaker  2:13:44  
+hourly data,
+
+Speaker 1  2:13:47  
+240 Yeah, it's actually there in the comments. If you see there I
+
+Speaker 1  2:14:04  
+see every data is different, different, right, like and this is kind of very common. You will see, whenever you are predicting stock data, you will see the Y hat will not show that much fluctuation. In fact, it will be much, much smoother than the original y that you have which is the which is the data that you are reading off of, and that is something that I have seen in most of the stock market, stock price forecasting that profit thinks that the fluctuations there are kind of it, it shows the fluctuation in the upper and lower, But the middle one kind of goes much smoother.
+
+Speaker 1  2:14:49  
+Okay, that we can skip the last one. It basically says, just repeat the same thing for another period, which is March 2021, so. That's fine.
+
+Unknown Speaker  2:15:02  
+Okay, so I guess we are kind of done for the day.
+
+Speaker 3  2:15:07  
+Can you scroll to the code for the last graph you Oh, it's just
+
+Speaker 1  2:15:16  
+hang on. Why is it showing too good? So my VS code has some problem now it says, Fine,
+
+Unknown Speaker  2:15:22  
+okay, thank you.
+
+Unknown Speaker  2:15:42  
+Okay, cool.
+
+Speaker 1  2:15:44  
+So what are some of the burning questions in your mind? Guys, at this point,
+
+Unknown Speaker  2:15:51  
+after learning your first forecasting,
+
+Speaker 2  2:15:55  
+you know the biggest thing for me that I'm trying nothing confused about when the date time has to be an index, and when it can't be, and I know that it's based on the profit, yeah,
+
+Speaker 1  2:16:07  
+so, but the thumb rule is anytime, anytime profit is touching something, when you are operating something on profit model, date time cannot be an index. Do? Yes. And if you want to take the data frame and then do your own plotting, you can do without dead time index, but it helps making the dead time as an index, because then the dead time will show nicely in your x column. That's all,
+
+Speaker 2  2:16:41  
+yeah, I think I just have to, like, do that a few times and get it wrong and then suffer, and then I don't remember, yeah, yeah.
+
+Speaker 11  2:16:54  
+I think I'm still struggling to understand why hat, just in general.
+
+Speaker 1  2:17:03  
+Why that is the most probable outcome, most probable that's not the only outcome, but that is the most likely value that that particular variable will take on any particular time period. That is why that
+
+Unknown Speaker  2:17:24  
+Gotcha. Okay, that clear. Thank you.
+
+Unknown Speaker  2:17:27  
+Most likely, and
+
+Speaker 6  2:17:30  
+is that that's determined by the model which, like, uses that like square mean error, and like the the square, yeah, and then the like, the probability distribution of the values and, like, where it lies some square team value, okay, that's right.
+
+Speaker 3  2:17:49  
+Is there like a is there like a limit, like, when we're predicting future trends? Is there like a limit of when the model is useful? Like, I know, we've been doing like, you know, a few days, or, like, a small fraction of our data set.
+
+Speaker 1  2:18:08  
+So there is no, no such technical limit. And that's what I was saying before. Also, Matt, if you can recall, there is no technical limit. I mean, let's say this one, right? We plot, we train the model for what five years. If you try to predict five years ahead, the model will probably just predict something. But then whether that is valuable or not, that's something, then you have to question yourself, right? How much you can predict? Yeah, sorry, to
+
+Speaker 4  2:18:39  
+pay you off. I would think the accuracy would continue to decrease as as far, yeah, as
+
+Speaker 1  2:18:45  
+farther you go, yeah, yeah, which is kind of, if you think I feel like go to your weather app, right? Yeah. The weather is a perfect example, like next 24 to 48 hours, very high confidence. But they also give a next two weeks. But how? How many times the two weeks forecaster accurate. They give it anyway.
+
+Unknown Speaker  2:19:04  
+It's the same thing.
+
+Speaker 6  2:19:06  
+This is like, support, like, is there a way like, because I know we're kind of working with whole data frames at once. Is there a way to, like, add data frames to like your model and, like, incrementally learn so, like, you don't have to do it all at once.
+
+Speaker 1  2:19:19  
+Yeah. So that is what so there is no way to add data frame to your model, but that is why people need to do is they have to retrain the model. And this particular scenario, the problem that you just talked about, it's called model drift, because if you train a model and the model then sits there, and then time passes, then the model is no longer accurate. It's not a good reflection of your reality anymore. And that is why it in why what, in ML terminology, is known as model drift. And in order to prevent the model drift, companies will have to keep retrain. In the model. Now, depending on the use case, some model need to be trained way more frequent than the others, for example, Bitcoin or stock markets forecasting model, probably these models need to train every day. And because models, probably lot of quants are losing their jobs these days. Well, I was like watching a news clip today, they are saying the business school hiring has gone way down. And the basically, the news reader is basically trying to put out a conjecture that this is probably happening because of AI, even though you think maybe people coming out with the MBA degree from Harvard, maybe their job is immune to AI, but maybe not so much, because lot of those, lot of those people actually go into finance, like investment banking and stuff like that, right? So now, when AI is doing all of these accurate prediction so I guess those people wielding their Excel spreadsheet and working 16, 1718, hours their ass off in the office, probably those days are gone. So
+
+Speaker 6  2:21:11  
+yeah, that was weird to me too. About like, the December job market data came back stronger than expected, even though, like, it seems like, colloquially and like, I guess anecdotally, like we're seeing that, like, feels like there's less positions available because of
+
+Speaker 1  2:21:24  
+automation. Yeah, now one thing, yeah, that's actually a trend that I am saying to the job market data is strong because the job like, like, I'm saying, like, white collar jobs. Those are and people who we mostly see around us, they are probably going after the white collar jobs, right? Like, I know many people who I used to work with Amazon before, and suddenly I see in LinkedIn they put a open to work symbol, right in their logo, and then they reach out to people like, Hey, I'm looking for a job. And and couple of these people, they were like, I was reporting to them. My managers and managers, managers, so they have lost jobs over last year or two. But I guess when it comes to the manual jobs, which is something you cannot automate or haven't automated, those are the job that are going very strong these days, because, probably because people have, probably, I don't know, more, times in their hands. So they are going out, eating out more, or doing work in their houses more, buying appliances more, or whatnot. So I
+
+Unknown Speaker  2:22:34  
+didn't think about that. Thanks.
+
+Unknown Speaker  2:22:38  
+Yeah, that's what I think it's
+
+Speaker 6  2:22:39  
+the it's the blue collar work. Yeah. No, that makes total sense, yeah.
+
+Speaker 1  2:22:47  
+And for blue collar work, it's actually good, because the minimum wage is increasing. And not only that, most companies these day pay far more than the minimum wage, which was not that. That not the case. Like, even if you go 10 years back, people companies, if they can get by paying minimum wage, they'll pay minimum wage. But these days, companies are paying way more than minimum wage without even asking. So,
+
+Unknown Speaker  2:23:11  
+so it's good, I think, in a sense,
+
+Speaker 3  2:23:14  
+so does does profit kind of also integrate, like a a stochastic approach to creating the model.
+
+Unknown Speaker  2:23:26  
+Does it
+
+Unknown Speaker  2:23:27  
+like, does it actually, does it kind of like,
+
+Speaker 3  2:23:31  
+account for, like, maybe random behavior, like, when it train, when it creates the model?
+
+Speaker 6  2:23:39  
+Yeah. Can you like, can you like, add a hyper Can you add a hyper parameter to like, account for like, random data or something? Or would you just add that to your data frame before you turn that
+
+Speaker 1  2:23:48  
+is so all that randomness is basically built into the data because all of these like, if you think about the Bayesian probability, right probability, posterior probability, which is probability of something happening afterwards is based on the normalized ulterior probability. So basically, anything that's going to happen from now onward is somehow related to something that has happened before, and something that has happened before is already captured in your data, no matter how noisy your data is. That is the stochastic modeling all of these models are doing. So you don't have to do anything for that. And this is not like the other thing that you guys are talking about, like, hey, is there a way to kind of introduce randomness that is a different philosophy, and as an industry, we tried that. So when I was in college, artificial intelligence was one of my majors. And you won't believe so one of the paper that I had to take was genetic algorithm. So genetic algorithm, at that time we did scientist was trying. They were drawing around this. So that was basically Inspired. By how you know how these when the genes cross over, like the chromosome, and as you go generation by generation, sometimes mutation happen. And by controlling the mutation, you kind of introduce a chance of randomness. Hopefully, if you do that for enough generation so that the model will not get short sighted on something, and randomly, it might actually throw the model off. But if you have many, many generation, at least in some generation, it will hopefully catch on to the right thing. So that was the I still have the book up there. So that was the idea, but we have, but those, those ideas, those philosophy, didn't stand that a test of time, so they kind of kind of fell sideward, sideways. Now the approach is mostly based on more formal Bayesian probabilistic approach, which is this, like, no matter whether you are using with the scikit learn profit or later, when you are going to do in actually deep learning and using Keras and TensorFlow, but the underlying thing is simple, Bayesian probability distribution, nothing else. So that's why we don't have to worry about those random chunks and stuff. Everything is rolled in already.
+
+Speaker 6  2:26:17  
+So I guess I'm still trying to understand, because I understand, like, the the square mean pair and like the like distribution of data and like, like, what, like, what would probably fit like it within the parameters that like the square mean value for like, the next like time event, and then they kind of like sample from that distribution to figure out what fits right. But like, Where does the AI come in? Because, like, those are already, like, statistical, like analyzes that we have that we could just, like, run, but like, yeah, so where does like the AI? That
+
+Speaker 1  2:26:50  
+is, why is it just this? What we have done here, this is not AI. This is machine learning. Oh, okay. Now if you think about it, it does become AI when it seems to be doing magical stuff, right? I guess that's what your question is meaning. When I ask a question, it gives me an answer. When I write a prompt, it generates the code like what copilot is trying to do, what Amazon queue is trying to do. Now, if you think of this, essentially, it's not doing anything different, in principle, than what we just did using profit. What it is trying to do is just simply scaling up. So the difference between a machine learning model and a true what we call an AI model, like Gen AI model, you think that the only difference is the scale. Why I say that? Because think about it. You write to type a few words in a Jupyter Notebook cell,
+
+Unknown Speaker  2:27:47  
+right? And then it is generating the code.
+
+Speaker 1  2:27:51  
+How do you think it is generating Do you think the model actually understands the code when copilot or Amazon queue is generating the code? Do you think they actually understand the Python syntax or what the person is supposed to do? No, well,
+
+Speaker 6  2:28:10  
+it's like Yes, sir.
+
+Speaker 1  2:28:14  
+So they are looking at probability of everything, all these gazillion of code that it has been fed through, and we when it sees certain words or tokens, and when a group of these token appear together, what is the most likelihood of other tokens to follow through, which is the same thing that our simple profit model is doing, but it is a much lower scale. It is not using deep neural net with millions of neural nodes connected. But if you scale this same concept up, you basically get Gen AI. You scale it even more, you might end up getting AGI, which is the artificial general intelligence. Like think about how we learn, how the babies learn, how your pet, how the dog learns. So dogs. Think about dogs, a good example, they respond to most of our verbal command. Do they know even a bit of the language, grammar, nothing. They are just pattern recognizer. They are really, really good at matching the pattern. And when they do that, they not only match the vague sound, because what we are talking in English or whatever language, it's all blur to them, but they hear different sounds, different tones, different body language, eye contact, and based on that, they find the likelihood of our emotion or what we are trying to convey to them. So and that's how you can make connect, how machine learning can basically scale. Scale up to AI if you just scale this model up immensely, massive scale.
+
+Speaker 6  2:30:08  
+Yeah, I thought it was more magical than just Bayesian statistics, I guess. But
+
+Speaker 1  2:30:13  
+it is Bayesian probability. There is no magic. It is Bayesian probability. Should
+
+Speaker 6  2:30:17  
+we just scaled out that simple idea that's crazy. Okay, yeah, this is, this is, like a secret sauce. This
+
+Speaker 3  2:30:27  
+is why we have, like, a term, neural networks to kind of describe, like, these multi layers of like, you know, probably the probabilistic models where, like, we can't map it one to one at that point, like it's going through so many neural networks that we It seems like magic to us, but it's probably still, you know, it's we just don't see the outcome from, you know, as a function Correct.
+
+Speaker 1  2:30:54  
+You won't see because as it goes through these different layers, every layer it goes it transform into a different set of representation, like if you see a picture with all the pixel by the time it goes through 10 layers of nodes, if you somehow look into the 10 layers, each of these layers are not seen pixel. It is basically seeing some abstract concept in form of a matrix of data. And it becomes more abstract as you go layer to layer to layer and close go closer to the output layer, right? So,
+
+Speaker 1  2:31:35  
+so I guess we can call it a day then. So to each day, as I said, we are going to do two exercise to to, like, extra thing that I'm going to prepare for you. And if we are done early, maybe before the break, then maybe starting from that day later, later part in the class you can, you guys can start probably thinking about your project work right early. And also I, as I said, if possible, create a repository and you have a Monday day off. Maybe you can use that time create a repository, and maybe you can start brainstorming. And if you create a repository, and then, let's say there are 456, people in your group, so you can use that report to kind of brainstorm and put some idea out, maybe write a couple of different version of project ideas, and then get together sometime, either outside of the class or maybe Monday, during the later half of the class, and then basically finalize on one idea, right? So at least you can get the idea part done by Tuesday class. So then from Thursday onward, you will go full on working on it.
+
+Unknown Speaker  2:32:41  
+Then when we have the idea, we have to rename a repo.
+
+Speaker 1  2:32:55  
+Okay, that so let's formally call it a day to hang it out and chat a bit, if you guys want i.
+

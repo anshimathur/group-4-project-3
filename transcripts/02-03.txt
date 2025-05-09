@@ -1,0 +1,828 @@
+Unknown Speaker  0:07  
+My Desktop.
+
+Unknown Speaker  0:16  
+Do you see my desktop?
+
+Unknown Speaker  0:20  
+You do, right?
+
+Unknown Speaker  0:22  
+Yes, LinkedIn, good, yep.
+
+Unknown Speaker  0:29  
+Okay, so let's get started.
+
+Unknown Speaker  0:33  
+So in today's class,
+
+Speaker 1  0:36  
+it's basically going to be slow build up from what we have done in the previous class, except this class, we are going to be doing little bit more involved conditional statement we have done if, Elif else, the trial of the conditional statement in the last class. So we'll start doing a refresher on that, and we will see then how we can write little complex conditional using something called a case structure, which is this match case? So we'll do a quick activity. We'll write a somewhat complicated conditional block of code, and then we'll see how, instead of if, Elif, how we can use a match case to probably improve on that and make your code a little bit more concise. So that is the first thing that we are going to do in today's class. Then through the remainder of the class, we will learn about different Python data structure and how we can make more complex data structure by nesting things like we have already learned about list. So we will see what dictionaries are and how you can have a nested structure, similar to what we have we saw before, how we can have nested loop or nested conditional. Similarly, we can also have nested data structure. So we will basically do a few hands on activities to basically understand how these different complex nested data structure works, and how we can navigate through the data that are saved in this data structure. Well, actually, how to create this data structure, how to navigate this data structure, meaning read the data from it, and how to display the data. So that's kind of at a high level the classes today. There is not much to do in the slide in the class today, because most of the learning today would be through hands on activities. Okay, now my question to you on here, on your GitLab repository, right? Some of you have done a pool, like I know, Jesse, you said you have done a pool. So if you do a pool, you will see these 11 folders, right. And inside these 11 folders, each one, you will see some unsolved files, and some of these we are going to work through together, meaning all of us together in this main room with me, and some of these activities that you will do in your breakout rooms. Okay, so my question to you is, Has everyone been able to obtain all these files?
+
+Unknown Speaker  3:11  
+Give me a thumbs up. If you have
+
+Speaker 1  3:17  
+Okay, I see one thumbs up. How about the rest. And these are the files that you can download as a zip file from boot camp spot as well. But it will be a much better idea if you download all these activity files beforehand by going to your Git repository and do a pool on these GitLab repo that you have and before a week starts, Kian uploads all of these here, he does a commit, so you should be able to get everything at once. So those of you who haven't done that, I'd strongly suggest please do and make sure that you have all these files in one place, and preferably add that to your VS code workspace, like I have done here. So you see here in aipt West, November. So this is the cloned copy in my local machine, which the folder of which I have added into my Visual Studio Code workspace. And here I see basically all the files at once, all the activity files that we'll be doing today. So if you have this ready, then it will be much easier to navigate through the different activity files and everything else during the during the class, right and throughout the week for that matter.
+
+Speaker 1  4:42  
+Okay? So that's just a suggestion. I hope you will do it. You will see that it is actually going to be very, very helpful when you do Okay, so the first activity we are going to do, in fact, most of the activities that you will see that we are going to be doing. In today's class is basically show will basically walk through some of the kind of interactive programming whereby a computer is asking you something, either through a menu or a question answer or something, and then you are providing some input as a user, and then your program will act upon that either get some more data, or read the data and show you some output. So all of these programming that we will be doing today, all these activities mostly, are around this theme, where you are creating some kind of interacting program, interactive program. And throughout while doing this, we will also learn how to save data in the data structure, how to do if else logic, how to do Case Logic, Match Case Logic and so on. And the reason the activities today are going to be very helpful today because the weekly challenge that you have for week two essentially asks you to do this. So please, please, please, pay very close attention to what we are doing in the class. This is exactly what you will need to complete this week's challenge assignment. Okay, so, so let's get started. So this is the first code you will see rock paper scissors. So essentially, what we are trying to do here is we are trying to recreate the famous rock paper scissor game played between human user and the computer.
+
+Unknown Speaker  6:24  
+Does everyone know? How does the game? How that game works?
+
+Speaker 1  6:30  
+Give me a thumbs up. If you don't know how rock scissor, rock paper scissor works, I believe that's easier. Okay, and I don't expect any thumbs up. Okay, good. So we all know how rock paper scissor works. Okay. So essentially, what we are doing is we are going to create a interactive game whereby computer will ask make a choice, either Rock Paper or scissor, and it will say, hey, press R for rock, P for papers, S for scissors, and then computer will make a random choice. Now you all know how the gameplay works. If both computer and human input matches, then it's a tie, right? And then if one is rock, one is paper, paper wins, paper and scissors, scissor wins, and so on, right and scissor and scissor and rock means rock wins, essentially, very simple game, which is makes it a very perfect candidate to basically use for E fills logic practice, right? So whatever we are doing in this first activity, consider this is just a refresher of all the skills that you have learned until the last week's class. There is no new skills to be learned here, but you will see we are going to put these skills in a code in a piece of program that will look little more involved. And that's because you now you are getting close to run a full bodied program, not just a bit of pieces of couple of lines of test code. So you are basically going to run a full program that will actually interact with the human user using the same techniques that all the same techniques that we have learned up until last week. So here you will see that in the file, initially, some of the things are prompted. So options is RPS. Now first thing you have to provide here is where they actually prompt you create a continuous loop so the user can play multiple rounds. Can someone tell me? How do we create continuous looping path, while true, while true. So let's do a while true. And I think you're in general, oh, sorry, yes, I misindented it. It has to be there while too. Okay, so
+
+Speaker 2  8:52  
+you know, could you please expand your screen?
+
+Unknown Speaker  8:57  
+I mean, move the left part.
+
+Speaker 1  8:59  
+Okay, like that, perfect, yes, okay, thank you. Actually, let me see if I can zoom in a little bit more. Stay away.
+
+Speaker 1  9:14  
+Where is that zoom control is my is the text visible? Do I need to zoom in further? And no,
+
+Unknown Speaker  9:20  
+no. Text is okay.
+
+Unknown Speaker  9:21  
+Text is okay, okay,
+
+Unknown Speaker  9:24  
+thank you, okay,
+
+Speaker 1  9:26  
+okay, then it's fine. Okay, so we wrote while true, and then there is an input statement. As you all know, we use the input statement to take a user from the user, and we save it in a variable. We call it user choice. Next what we have to do is it says create a variable called user full choice to hold the text or the full word of the user choice by using a conditional. So what does this mean? Do we
+
+Speaker 3  9:56  
+sorry? Do we skip a step up there check if the user selected a valid choice? This from the list.
+
+Speaker 1  10:03  
+Oh, sorry, yes, I missed a step. Sorry, yep, check if the user has selected a valid choice options from the list. Okay, so let's do this part first. So that means it is asking us to check whether the input belongs to within r, p or s. So how do I do this?
+
+Speaker 3  10:25  
+I would do if user choice in options or like, use the case statement.
+
+Speaker 1  10:33  
+Yeah, case statement, we can. But here we don't need to, because all the valid options are already there in the list. So I like that option when you said, use just an in statement. So what we are going to do is we'll just do if user choice in that list that we have, which is options. So now if user choice in options, then we are going to do something. So that means, obviously, if it is not in options, then we probably have to print some statement. Oh, that is already written. Print. I don't understand next time choose from Rp or s, okay, so the L statement for this is already written for you, so you don't have to write an example. So
+
+Speaker 4  11:21  
+that's where you've got options there. Where did you get come up with options? What does that go to?
+
+Speaker 1  11:25  
+So options list here, yeah, it's a list that consists of three characters, are P and S, okay, so here what I'm checking the character that user just typed, whether this character belong to this list. Okay, okay.
+
+Speaker 5  11:46  
+Question about the loop, the wild true. Why is it? How? I don't understand why we put the word true
+
+Speaker 1  11:55  
+meaning we need to run the loop forever, true meaning it's it is a condition, true. So true is the Boolean condition true. So that means anything you write inside the loop will execute once, and then it will go back up here, and it will check whether the condition is true or not. Now if you hard code the value true, which we are doing in this case, so that means this condition will always remain true, and the block of code inside the will, while statement will always keep getting executed over and over and over again. Now the question is, then, how would the program end? Which you will see a little bit later that we are going to provide some condition for the user to break out of this loop. The reason we do it this way is we want to make it interactive, and we need to have this game play session continue until the user wants to quit. Why wouldn't this is the loop.
+
+Unknown Speaker  12:53  
+I'm sorry. Why wouldn't
+
+Unknown Speaker  12:55  
+you just put loop right there?
+
+Speaker 6  12:56  
+This is a loop. This is the loop there.
+
+Unknown Speaker  13:01  
+What's the difference of typing that versus loop?
+
+Unknown Speaker  13:05  
+What do you mean loop?
+
+Unknown Speaker  13:07  
+In our others looked at what's that
+
+Speaker 1  13:12  
+so? So are you saying l, o, p, loop? Yeah, that is not a Python statement. We haven't discussed anything like loop. You either use a for statement or you use a while statement. These are the only two way you can run a loop. Okay, okay,
+
+Unknown Speaker  13:30  
+okay. So for user choice in option
+
+Speaker 1  13:34  
+check, the user selected a valid choice from the option list, okay. So here we said if user choice in options, then we are going to generate a computer choice. So computer choice is a random dot choice. So here we are saying using a library called random and with the live random variable, if I pass a list, it will automatically select a random item from the list that we have passed. So if you do random that choice options, first time, it might pick R or p or s at completely random order. Every time you execute this, it will give you a different item from the list. So basically, this is the line that computer is making it smooth. It is randomly choosing rock paper scissor from the list, okay? And then it says create a variable called user full choice to hold the text. So basically, what it is asking us to do, if it is our, make the user full choice rock, if user choice is P make it paper, else, make it scissors. So essentially, what it is asking you to do is a combination of our well known choice of condition, which is, if, else, if, Elif and else. So how do we write this? We say, if you. User choice. Double equals R meaning rock, then we will say user full choice. Oops,
+
+Unknown Speaker  15:14  
+user
+
+Speaker 1  15:17  
+full choice would be equal to rock. So basically I'm saying, hey, R means rock. Then what is the other condition? The other condition would be, well, instead of typing the whole thing, we can save some time by copy pasting. So it will be L, if user choice is p, we will call it paper, and else, like, if it is not r not p, then office, obviously the thing that is remaining is Your scissor. So user, full, choice, oops, what I test user full choice would be equal to scissor. Okay, rock paper scissors. So now I have converted the RPS into full word, meaningful word, which is rock paper and scissors. Now it is time to actually do the code logic for the game. And this is where these blocks are already giving you hints so that you can use this comment. This comment inside Python starts with the hashtag, right? So this line is for you to read. Computer would ignore. But with this line, you can see what it is the what is the prompt asking you to do? It basically says, check if there is a tie, and then you print this. So how do we check that it is a tie?
+
+Unknown Speaker  17:00  
+What is the condition for for a tie?
+
+Speaker 1  17:06  
+We have two moves in, one made by human, one made by computer. What makes it a tie? The
+
+Speaker 7  17:11  
+inputs are the same, yeah. Well, the user inputs and Yeah,
+
+Speaker 1  17:16  
+correct. So user input is user choice. So why did I type is that's a typo. If user choice Equals, which variable do I check computer choice, computer choice. So if user choice is compute equals to computer choice, then we know that there's a tie.
+
+Unknown Speaker  17:40  
+The next statement we have to print,
+
+Speaker 1  17:44  
+you choose rock, and then computer choose paper. So looking at these, you clearly know what condition that we have to write. So can someone help me? What condition do I write here? I
+
+Speaker 8  18:04  
+Well, if user choice equals R and computer choice equals P,
+
+Speaker 1  18:08  
+correct. So if user choice equals R and then we literally say, and because that's a keyword, and oops, computer choice equals P. And let me copy this, because we are going to have to repeat this statement over and over again. So in the next section is, you choose rock, computer choose scissors. So how do I write that?
+
+Unknown Speaker  18:53  
+R and S,
+
+Speaker 1  18:56  
+yeah, yeah. So essentially the same thing where user choices are, but computer choice will be different. Which is S, the next one is, so these are two, right? So when user choices are computer choice can be p or s, if computer choice is also R, that will be covered by this segment, when both choice are same. So when both choices, it does not match, then for any given user choice, there could be only two computer choice, which is PNS. So we have covered both. Now we are going to move to the second user choice case, which is paper. So in this case, we have to write, if user choice is p and computer choices, scissors, so meaning s and the next one, I think by now you get the idea. It's basically the reputation of same thing where the user choice is, oops, user choices, P and computer choices, right? Talk, and the next one is when user is choosing scissor and computer is choosing paper. So that will be,
+
+Speaker 2  20:18  
+you know, should we include all of the possibility for computer and
+
+Speaker 1  20:26  
+user that correct? And that is exactly what we are doing. And that's why we have this six set of conditions, because for each each of the user input, there are two different two different part, two possible computer input, right? So essentially, what we are doing is we are creating what is called decision tree, right? And that's all, basically, that's all the condition that we need. But now what if they are about the same? P and P, R and R, S and S, that's the first condition. You see how we wrote, because the choice is equal to computer choice, no matter whether they are both, are both P or both is we are having one statement that saying is the two variables same. If their values are the same, then that's it. Then it is not even going to check all of these. That's why we have L if in everything else, because if the first is true, then Python will not even evaluate any of these remaining condition. It will directly jump to the next section, which is here, what we are going to write. Now, okay, order. The order doesn't matter, right? You can put that equal equal of the the first one at the bottom, if you wanted to, yeah, yeah. So order of this thing versus this thing versus this thing does not matter. You can put them in any order that you want, but you have to see this is, like, very clear, right? Like, you have to see which condition excludes all of the other condition that you have to write as an if that's for sure, because when the two conditions are the same, which results into a tie, that has to be evaluated first, and then everything else, it doesn't matter which will already check.
+
+Speaker 1  22:18  
+Okay. So now, when the program comes here, apparently, here you already have the game played for one round, right? Because, you
+
+Speaker 9  22:27  
+know, I have one thing right in the line 62 it says, like computer picked rock. So in that case, the computer choice should be R, isn't it?
+
+Speaker 1  22:37  
+Oh, sorry, I forgot to make that change, yes, yeah. So, yeah. So then let's see R, P R, S P S, P R and S P S R, and these are those six combination, yeah. So thank you for pointing that out so real
+
+Speaker 4  22:57  
+quick when we just for my understanding the dark green where it's got the hashtags with it being in Python, those are not going to show up when you run it, because those are exactly comments, right?
+
+Unknown Speaker  23:08  
+That's right, okay.
+
+Speaker 1  23:13  
+Those have no effect on the execution of the program. Okay?
+
+Unknown Speaker  23:18  
+And is that considered pseudo code?
+
+Speaker 1  23:23  
+So when people do write pseudo code, if you want to write a pseudo code as a Python obviously, like whenever you want to write something that is not a valid Python statement, you will use that, but you don't call the comment as a pseudo code. But if you are writing pseudo code, and you choose to write the pseudo code inside your Python program, then you will use this kind of commenting mechanism. But the comment themselves are not pseudo code. Comments are just that. They are comments. They basically describe some way, in plain English, what the code is supposed to do. That's all, okay. Okay, so then, so our game is done, but remember, this whole thing is in a while true loop. So now, if we don't do anything else, then this program will keep going on and on and will never end. So this is where we need to provide a way for the user to break out of the loop when the user is bored of playing the game, right? So how do I do that? Well, first, I have to ask the user after, after I present the result of the gameplay. Then I have to ask the user, like, Hey, do you want to play again? And that's exactly what the prompt is saying. Ask the user if they would like to play again, and save the answer as a variable. So let's ask that. So
+
+Unknown Speaker  24:45  
+print,
+
+Unknown Speaker  24:48  
+let's call it.
+
+Speaker 1  24:51  
+Would you like to play again? Right? And then. So let's take a input. Let's call it play again. So we are now we are going to capture a yes or no input from the user, so play again would be equal to again using the input function, and we are going to type, let's say Y, oops. Let's call this type Y to continue, continue or anything. So we basically, instead of saying yes or no, we'll say, if user wants to continue, they have to press Y, anything else will be basically treated as a no so anything else to exit. So now we have the user input captured in a form of a character which will be either y or something else. Then we have to check whether the user have actually typed in y or not. So how do we do that?
+
+Unknown Speaker  26:09  
+If play again equals Y,
+
+Speaker 1  26:11  
+yeah, so I have to say if play again So equals y or not equal to y, not equal correct. So we have to break when this is not equal to y, then the statement to break out of this big while loop that we have is just a statement that says break. Now if you do it this way, this program will work only one glitch, if someone has the caps lock on and he or she types uppercase Y, then it will think that it's a no and it will exit. So to remedy that situation, what you can do is whatever the user has tied you can apply a function called lower on top of that, so that way you know that uppercase Y will also be converted to lowercase y, and then you can check it with the lowercase y,
+
+Unknown Speaker  27:09  
+and that's it. Hey, Benoit on the program you need.
+
+Speaker 3  27:12  
+Can Can you combine? I think you just had it. Can you combine, I think line 68 and 69 to be just the same question, or did you separate it out? Yeah, 68 and 69 on the same line? Yeah, you can.
+
+Speaker 1  27:33  
+Yeah, actually, that's not a bad idea. Let me just combine now. Do you think we should use the hint in the same line or in the next line. I put it this way, because that way it automatically creates a back new line here. If you want to do in same line, then you can put a backslash in here like that. Yeah. I was just curious
+
+Unknown Speaker  27:55  
+if you separated it for any reason.
+
+Speaker 1  27:58  
+The forward slash, n, okay. The other thing I am thinking now we should do just like here, we applied dot lower to make sure that uppercase Y is also treated as y. I think here, also when we are taking the user choice dot input, you can actually apply a dot lower right here, so that way, even if user hits uppercase R, p or s, they will be still treated as lower case, and by the same logic. What you can also do, instead of applying the dot lower here, you can apply the dot lower right where you are taking the input after the input. So that way you will make sure that no matter whether user is typing uppercase or Y or lowercase y, you are always saving it as a lowercase y. So that way we make it case insensitive. Makes sense. Now I'm going to do a collapse just to see that these codes are aligned. This is a test that I do because sometimes it Python with lot of indentation, sometimes you kind of make, might make a typo or some space here and there. So I always try to kind of make double check when I'm writing a large program to make sure all my alignments are okay, so they look okay, and there is no red Quigley squiggly lying anywhere. So now we can run the program, and that's it. So we run the program, yep, make your choice, Rock Paper or scissor. Let me tie upper case R Oh, the computer chose rock. So it's a chai now it's saying, Would you like to play again? I hit a yes, and then same question again. Let me choose rock again. This time I won't do the computer chore, scissors right last, first time with the rock, it was a tie. This time with a rock, it was a it was my will because remember, that ran. Dumb function that I have used, and that's what making the computer choose random, and then if you do the same thing again, you might lose, yeah, see, oh, these actually, this one. This is not intentional, by the way. I mean, ideal, it should be random. I mean, there could be several wins or several losses or ties, but the way that this time it worked, it basically came just like in that order, a tie and a win and a lose, right? So I think I'm done. I'm bored with playing with this game right now. Now I'm going to hit No, because now I'm saying, Would you like to play again? I'm going to hit No. And now the program ended. It came back to the prompt. So we are done. And this proves that this while true, that was loopy. It looped three times, and on the fourth time I hit a no, and then it broke out of the loop.
+
+Unknown Speaker  30:47  
+Can you go up to line 22 line 22
+
+Unknown Speaker  30:54  
+Yeah, that's what I did wrong.
+
+Unknown Speaker  30:57  
+Oh, okay, so you are okay. I was getting
+
+Speaker 10  30:59  
+an error and I didn't realize that I didn't put a colon at them.
+
+Speaker 7  31:04  
+Yeah, thank you. Okay, so
+
+Speaker 1  31:08  
+that's good. I am going to switch now. Anyone else has any question on this program?
+
+Speaker 1  31:20  
+Okay? If not, that's always a good sign. So we can move on. Okay, so we completed these activities, simple game of rock paper scissor.
+
+Unknown Speaker  31:34  
+Okay,
+
+Speaker 1  31:37  
+so now the next activity is we are going to refactor this code and basically use a match statement instead of if Elif else statement. And this, I believe, is supposed to be no so that is supposed to be a student activity, yeah. But before we do that,
+
+Unknown Speaker  32:08  
+let's take a quick look at what
+
+Speaker 1  32:12  
+match statement really is okay, and then I'm going to ask you to rewrite this code with a match statement. So just give me a moment here.
+
+Speaker 1  32:32  
+So so for this one, we are just going to run this code and and basically study this code and see how this is going to work. I'm not going to type in, because, in the interest of time, I want to give you guys more time to type. So this is basically an example where this is, again, similar kind of an interactive program as the previous one. So let's look through this and see what the program is supposed to do, right? So, essentially, this is a program where you are placing an order of 10 different kind of items, or 10 different points from a list of mens and whatever order you are inputting, we are going to save the order in a list of 10 numbers. Why 10 numbers? Because my menu item contains 10 items. So these are the 10 items. And let's say you put an order for pecan. So pecan is in first position. That means in the purchase order, we are going to change this zero to one, and then you order an apple, we will change it to one. If you order a pecan again, we will change it from one to two and so on. So essentially, the way this data strike data structure is going to be used is to list 10 items each. The PI list is providing the menu option to the user, and then we are going to use the input function to take them user input and then go and increase the corresponding purchase item by one depending on what the user is choosing to buy. Now in order to do that, we are going to use some conditional statement, of course, and that's what this program is about. So first we display a welcome message, blah, blah, blah, and then this is where the program actually execution starts. So here we start with a while loop. But instead of writing true, here we are basically saying Place Order equal to true into a variable. This is just another way of writing. This no different from the previous one. But here what we are doing is Place Order true. And then we are doing while Place Order, which essentially means while true. And then you will see further down the line, based on the user input, we will ask them, Are you done with your order? If the user says, Yes, I'm done, then we are simply going to make this variable to false, and that will make the program come out of that loop. So then we are basically printing the menu, which as you. Remember, probably this print statement with a asterisk, sign 50 basically mean it will print this character 50 times, which will basically draw a line just to make the output little bit more like user friendly, kind of a beautification, right? And then we are going to start a loop. We will say for pi in PI list. Pi list is this basically pecan apple, lemon Marengo. On all of this, it is basically printing the menu item. It will say pi, number one, pecan pie, number two, Apple and so on. So this, these few lines together, is basically printing the menu item on the screen.
+
+Speaker 5  35:43  
+Why is it a one? Sorry, why is it a one? If, if lists start with zero,
+
+Speaker 1  35:48  
+yeah. Because, in order to make it more user friendly, see you as a human, we are more accustomed to thinking of one being the first item. So that's why, since Python does not do that. So that's why it is creating a separate number one, and it is input in, sorry, outputting the number one for the first item and then increasing the number by one and then outputting two for the second item and so on. Now keep in mind, though, one thing that I showed you guys, I think, last class of the previous class, one of those classes that you can actually use, something called enumerate, and that will give you, oops, why do I have my caps lock on? Sorry. So when you do enumerate, it gives you two things. It gives you an index, and it also gives you a the actual value of the at the list. So what I can do is, instead of saying pi number separately, we can say pi number and pi, and that way we don't even need to have a separate variable. And here, instead of in outputting pi number, we can output pi number plus one. So that way, for each item of this list, this pi number will start from 0123, and so on. But while actually outputting it to the screen, it will add one to it to make the output artificially look good to the user and make it more closer to what humans humans are accustomed to see. And when we do in this way, we don't need to increment the PI number also manually, because this enumerate function does it for us.
+
+Unknown Speaker  37:29  
+Question about that.
+
+Speaker 5  37:32  
+So because you commented out the PI number line, yeah, where that's assigning a value to a new variable that you that you're declaring, since that's commented out. The next line says for PI number, but it's no longer declared. So how does it know what to do with that it
+
+Speaker 1  37:51  
+is declaring here, right here. So whenever, whatever variable, so here, it doesn't matter. You can put any XYZ, anything, whatever variable name you put that is the variable that is declared, right there,
+
+Unknown Speaker  38:04  
+so you can,
+
+Speaker 5  38:06  
+oh, I thought declaring had to be like, variable equals, no, something, not
+
+Speaker 1  38:10  
+in Python, not in Python. That is one thing we discussed also, I think the first week of first class of this week, that in Python you, you do not need to declare a variable beforehand,
+
+Speaker 11  38:22  
+right? But I think what Liam's getting caught up on is just like, how pi number equals the index, and that's based on the fact that he's using enumerate, and enumerate returns a tuple of the index and the value, so he can numerically define, yeah,
+
+Speaker 1  38:40  
+yeah. You can basically, in my example, I called it an index. So here's just to match with this thing. I chose to call it pi number, but it's a variable name, right? Whatever the name is that is the variable that will be called, that will be declared and initiated by the for loop when it first runs, and it will be incremented every time that the loop continues iterates. And
+
+Speaker 9  39:06  
+I just suggest, for purpose of Python, I'd not really use the term declare, because that's really another language. Is where you declare variable, then you also assign it as a separate state, or maybe initialize it or assign it as a value. But we don't actually declare variables in Python, because that would be like, for example, making them have a certain type, declaring them. But we don't do that. So we didn't create us. What uh Jesse was getting, I think, was that the output of that enumerate is a tuple, so that when you have two comma variables like that, what you're doing is assigning each of the members of that tuple into one of those variable names.
+
+Speaker 1  39:47  
+Yeah. So, yeah. So let's, let's move on, guys in the interest of time. Okay, so, okay. So now we are basically saying, hey, which input you like, and then I'm getting the input, and then depending on the index of the input. Two. What I'm doing is I'm going to buy purchases. This is where I'm keeping track of all the order, and I'm going to the corresponding index, and then I'm incrementing by one, and then I'm printing another line. And then finally, in here, I'm saying, Would you like to keep ordering? Yes or No. If the keep ordering is yes, you basically make this variable true. If it is no, if you if you make this variable false, and then it will basically cause the outer loop to break out. And then finally, when everything is done, it basically shows a result that you purchased so and so, number of pies and so and so, type of pies and so and so, count of them. And how does it do that? It basically goes through these PI list, which is this thing, menu item. And for each of these PI list, it sees, it gets the index of the list, and then it says, Hey, what is the value of the corresponding count in the purchase list? Which is what we track the order, and then we it basically prints everything, one after another inside a for loop.
+
+Unknown Speaker  41:12  
+And that's it,
+
+Speaker 1  41:14  
+right? So here, one only thing that we have done differently is this part where, instead of saying, If keep ordering equal to yes, else keep ordering equal to no, instead what we are doing here is, if you look in here, so this is basically the only focus point in this program that is different from the previous. Is we are using a new type of conditional statement, which is called match case instead of if else. So what match case does if you have multiple different outcome that you are expecting of a program, let's say if you have 10 different outcome if you want to do if else, which you can but this often makes it kind of little bit nicer just to say match and then case. So that way you don't have to say if these equal to, if that equal to, instead of that, you can just say match these variable. And then the all the right side of the condition, you can just to guess one after another. And then anything that you do in the else part for if Elif else group, you can do that with a case but this is an underscore which basically means a catch all type. So catch all meaning if the value of your variable does not match any of the case statement that you provide, the default fallback value would be this, which is an underscore, which basically means everything else. So here what we are saying is match the value of keep ordering variable. And in case it matches, y, then do this. In case it matches and then do this. And if none of these two matches then do this, which is basically asking the user to type again. So that's the only difference. So I want you to keep note of these. Take note of these. How the match case work, because in your activity that I'm going to ask you to do, you are basically going to do the exact same thing, which would, by the way, be the next activity here, yes question.
+
+Speaker 10  43:26  
+So when would you use Match Case versus if? If
+
+Speaker 1  43:32  
+else, it's up to your choice, usually. So it's really
+
+Speaker 10  43:36  
+just a a preference. They, they're they do the same thing. Okay?
+
+Speaker 1  43:41  
+The same thing, yeah, usually when there are a lot of E file statement, it just makes your program looks little bit cleaner and little bit easier to write if you use match case instead of E files. But other than that, Functionality wise, performance wise, there is no difference
+
+Unknown Speaker  44:01  
+when I run this just as is,
+
+Unknown Speaker  44:05  
+I'm getting a syntax error on line 52
+
+Speaker 3  44:09  
+and I'm not too sure exactly why my 52 is the same as yours 52
+
+Speaker 1  44:15  
+so maybe there is some spacing or something. Do a git pull, and you should be able to run it as is,
+
+Unknown Speaker  44:22  
+okay, okay. If
+
+Speaker 1  44:25  
+not, if you cannot run the program, come to the officers. I can take a look, and it will take, like, literally, five seconds to debug, probably, so see whether you see any anything out of the ordinary. There will be some red squiggly line or something. Or you can also read that error output that you it is printing and try to debug yourself, if not ask any one of us during the office hours after class.
+
+Speaker 3  44:47  
+I think I got it. I think I'm in the wrong Python.
+
+Unknown Speaker  44:51  
+I'm not in three dot 10. There
+
+Speaker 1  44:54  
+you go. Yeah. So here, let me just order a few items and then. Me order one more apple and let me order one bean and that's it. I'm done memory. And here is the result that I ordered two pick and pi, one apple pie and one bean pie. So the program works perfectly fine. You okay, so that's it. So now your job is to get into the breakout room, and you will basically see this preview file. Sorry, this Read Me file, and the instruction is basically refactor the code. When we make changes to the code in order to reduce the complexity and readability without changing the functionality. Open the starter code, you will notice the same as the solution of the warm up activity with two of our if else statement removed. So instead of if else, you have to basically replace that with a with a corresponding match case statement. So it shouldn't take much longer. So the unsolved activity is RPS, so, yeah, most of these things have plumbing. Are all in place. You, all you have to do is just at the match case statement, and you should be fine.
+
+Speaker 1  46:29  
+So Karen, let's open the breakout rooms,
+
+Unknown Speaker  46:35  
+and I see we have 32
+
+Unknown Speaker  46:39  
+let's do it for 10
+
+Speaker 9  46:42  
+months, 10 minutes, 10 minutes, yeah, okay. He is taking away. Okay, anytime we're ready to go, we'll go.
+
+Speaker 1  46:59  
+Chicken. Keep it simple, chicken, onion, let's say garlic. So now our menu item actually has five fields, as you will see, like this. So the item name is chicken. Okay. So now let's say I want to change any one of the variable. Let's say this item name. I want to change it to, let's say chili chicken. So how do I do? Well, all I need to do, I have to issue the same statement with the key item, except I'm going to provide a new value to the variable, and that will be it. Now, if you print the dictionary again, you will see that the first key has changed. So now, how many keys do we have here at this particular point in this menu? Item dictionary, five, right. And what are those keys?
+
+Unknown Speaker  48:01  
+Item, calories type using item
+
+Speaker 1  48:02  
+calories type quizzing ingredients. Now, how can I get all keys in the dictionary? And the way to do that is use a function called keys. And this is a function, so we have to do this empty parenthesis thing. Now, what do you think this function will return if I run this statement, what am I going to get in return?
+
+Speaker 2  48:29  
+Only key only key items, calories, type, cuisine and ingredients,
+
+Unknown Speaker  48:35  
+and what kind of data type would that be?
+
+Unknown Speaker  48:42  
+I a string
+
+Unknown Speaker  48:45  
+that would actually be a list.
+
+Speaker 1  48:49  
+Well, it's actually a list of dict keys. So it basically says, you see how it says dict keys, and you see how it starts with a square bracket here and a square bracket here, and that basically list in a keys, and now look into this. If I if you want to print each of these keys, you can iterate over this just like you would iterate over a list. If I say, for k in menu item, dot keys, and then I say, print k, then you will see that iteration is happening just like you would iterate over a key over a list. Why? Because this is actually a list. Similarly, if I want to get all the values of this
+
+Unknown Speaker  49:32  
+dictionary, what am I going to use?
+
+Speaker 1  49:39  
+Menu item, dot dot values, dot values. And this is also a function, and this gives me dig values so and the same way, we can go through this using a for loop and print one value in each line, and that will print this. Now see when we are printing these five values, the last one is still printing as a string. Why? Because, well, it is a string, because it is a string used as a value of another against another key in a dictionary. Because, remember what in that slide We said earlier that here that keys are immutable objects, which is integer, decimal or string, but values could be anything, including list. So here my values is a list.
+
+Speaker 1  50:35  
+Okay? And then lastly, there is another function that you can use, which is, hey, give me all the items, and that will give you all the items as a key value pairs like this. And this is also in Python, it is called a tuple. So when you have two or more items within a pair of parenthesis, that's basically tuples. So now, if you do look through this for i in menu items, and if you do print I, you will see that in every line, it will print key and value as a tuple. So item, chili, chicken as a tuple, calories, 200 is tuple, similarly, ingredients, and then this whole list is a tuple. So keys, values and items basically gives you three lists, right, list of all keys, list of all values and list of all key, value pairs as tuples.
+
+Speaker 12  51:36  
+So with the tuple, that means it's immutable, right? Like you can't change that then. But you can write, you
+
+Speaker 1  51:43  
+can go and change the value in the items. But when you are getting as a return of these, when you are getting this, these local, temporary variable you cannot change. But as I showed here, initially I had item equal to chicken, and then later I went and change that to chili chicken, and that is perfectly fine. Got it another thing quickly, I want to show you, if you want to see whether some value is there in the keys, so you can actually use a print statement. So let's say, if I say, in fact, let me just write a conditional statement. I'm just going to write a statement that will say, if item is in menu, item, dot keys, what do you think the output of this line would be
+
+Unknown Speaker  52:36  
+an error? Because you need an if at the beginning, doing, let's say
+
+Speaker 12  52:41  
+true? Say true, because there are items, yeah,
+
+Speaker 1  52:46  
+I can use this in part, as part of an if statement. But remember, in an if statement, all I need is something that evaluates to a Boolean condition. So here I just wanted to extract that little Boolean condition and show you what it will print, and it is the true. But yes, you are right. You You can use it inside an if statement. In fact, that is the most common use of it. People do this all the time. Before they enter something in, they want to enter a new key. They often want to check, hey, is the key already available? Already present in the keys? And this is how you want to check it. So if you want to, if, let's say, if you give a key, let's say something like this, which is not part of their keys, then it will evaluate to false, because name is not any one of the five keys that we have, but item is one.
+
+Unknown Speaker  53:42  
+Okay? So I think that's about it.
+
+Speaker 1  53:46  
+Yeah, then everything else is kind of like you will figure that out as you go through these. I already talked about. Dictionaries can also contain other dictionaries, which basically is not very different from here. As I said, a dictionary can contain a list here. So instead of a list, you can provide another dictionary, and then key values and items we talked about, and then practice creating dictionaries and information, which is,
+
+Unknown Speaker  54:17  
+which is this activity number five,
+
+Speaker 1  54:21  
+where you have to print your name with key, name, age, list of hobbies, dictionary, key, the wake up function that includes this your name, age, yeah. And then in the unsolved
+
+Unknown Speaker  54:37  
+you will have
+
+Speaker 1  54:40  
+Yeah. So essentially, it is asking you to create a dictionary with a whole bunch of information and print out the results and then use a look to print out the key value pairs. Use another look to print out only the keys, and use another look to print out only the values. Essentially all the last three demonstration I just did. So that's all the. Is to this activity. And I think it says, What are the things that you are going to store? Yeah, they clearly say the things that you are going to store is your name with the key name, your age, your hobbies, which will be a list, and your wake up, would be another key, but that will be a dictionary, and that dictionary would contain multiple entries in this format, daytime, daytime, daytime. So you can say like, Monday, six o'clock, Tuesday, five o'clock and so on. So the idea is to create a dictionary that will have one string as a value, one integer as a value, one list as a value, and one dictionary as a value with four different keys, and then you basically print everything through a through these three different methods. One is printing the whole dictionary and then printing the items, and then printing the keys and then printing the values. That's all so it shouldn't take more than 10 minutes. They're suggesting, but I am leaning towards giving you 15 minutes. So let's create the breakout room from for 15 minutes then Karen, because this is the first activity in dictionary, so you might need a little bit more time to get accustomed to it. So let's do 15 minutes
+
+Unknown Speaker  56:17  
+whenever you're ready,
+
+Unknown Speaker  56:21  
+whenever Ready go?
+
+Speaker 1  56:25  
+Yep. So how did it go this time? Guys?
+
+Speaker 2  56:30  
+Not enough time again, we almost can, okay,
+
+Unknown Speaker  56:33  
+okay.
+
+Speaker 1  56:35  
+Again, all of these, we are going to make the solution files available. So if you couldn't get through the whole thing, at least you tried your best, I assume, and that is good enough for now. But as we said, in the very first class, in the first week, you got to put in the extra hours. You got to put in the effort. Okay? So those who are not getting enough time. Please go through these activities in your own time, as Kian posts them into GitLab to make sure you are comfortable with all the concept. Okay, now we will get into a break. You. We all deserve the break, but before the break, I'm going to quickly run through what you are supposed to do, and then we'll take a break. Okay, oh, sorry I'm not sharing yet again to share my screen.
+
+Unknown Speaker  57:35  
+Okay,
+
+Speaker 6  57:37  
+why is this thing in the middle hand? Yeah.
+
+Unknown Speaker  57:42  
+So this was
+
+Unknown Speaker  57:47  
+your day three.
+
+Speaker 1  57:50  
+Oh, sorry, I'm on the wrong one. Yes, day three. Day three. You did this one. Okay? Okay. So essentially, what you need to do is you need to create a dictionary that will have these fields like this. And I don't want to type the whole thing here, so whatever. I don't know whoever wrote this example code, probably a Zendaya fan. I don't even know whether she's 26 or not, but anyway, so the first key is value. Sorry, first key value is a string, as I mentioned before. The second key is value is an integer. The third key is hobbies. And as you can see, the value here is a list, because the person can have multiple hobbies, and the fourth keys, the value itself is another dictionary. So this is an example of where you are using a dictionary inside an outer dictionary here, right? And this is basically the Wake up, wake up time for the different days. So that's all we need to do. And then the first one is basically asking to print out the results stored in a dictionary. How do we do that?
+
+Unknown Speaker  59:13  
+In fact, why don't I
+
+Speaker 1  59:15  
+actually do it here in my Jupiter notebook? So that way I don't have to run the whole file, I can just run one at a time.
+
+Speaker 2  59:24  
+I'm sorry. So every so you have to finish the line with the comma. Am I correct? Because I've got the error from beginning. I'm like,
+
+Unknown Speaker  59:37  
+Yeah, at the end of the line multiple.
+
+Speaker 1  59:39  
+Well, not every line in Python needs to be ending with a comma, but when I mean, like,
+
+Speaker 2  59:46  
+exactly in a dictionary, am I correct? Correct? Yes, because I've got a lot of errors. Yeah, yeah.
+
+Speaker 1  59:53  
+So you like, it's not about a line. The idea is that after every pair of key. Value. If you want to add another key value, there needs to be a comma. It's not about a line like essentially, you can put this thing in the same line as well. And I think this will probably work the same way, okay. But for
+
+Unknown Speaker  1:00:13  
+instance, when you said Friday,
+
+Speaker 2  1:00:17  
+comma, I'm sorry, column five comma, it's going to be Oh, it's one line. I got you. Thank you. Yeah.
+
+Speaker 1  1:00:25  
+So my point is, the reason I concatenated these four lines into one line is to show that comma is necessarily necessary between one set of key value before you go on to the next set of key value. That's why the comma is needed. Comma is not really needed as a line ending character in Python, but comma is needed in a certain specific situation, and this is one of those situations where you need a comma you
+
+Speaker 1  1:01:03  
+Okay? And then what was the other thing? It says print out sentences that use the following information, your name and age. So obviously you can say, mine for name and mine for age, right? And then the next one, saying the first hobby in your list, and a time you wake up during the week. So let's try to do that. So first we are going to do name and age. How do I do that? And they say, well, print it in a sentence. So I'll put it instead of just saying my info, name and my info age, you can basically do a F statement, sorry, print statement with an F string. And you can have these two as two variable that you are replacing and that will print your name and age.
+
+Unknown Speaker  1:01:53  
+The second statement said
+
+Speaker 1  1:01:57  
+a list with the sorry, no. This one the first hobby in your list. So essentially, it will be
+
+Unknown Speaker  1:02:10  
+mindful
+
+Unknown Speaker  1:02:12  
+hobbies.
+
+Speaker 1  1:02:15  
+Oops, oh no. So this will be, have to be mine for hobbies. So if you do that, you will get all four hobbies, and then it says first hobby in your list, so that will be mine for hobbies list, and they say, print it in a sentence. So no problem. Will basically do a complete sentence and put that in a placeholder, put that as a placeholder here as a variable, and it will print the full sentence. And then the third one, it says a time you typically wake up during the week, which is like when I wake up? What on during the week? Well, let's, let's say when I wake up on Sunday. Okay, so if you want to print my info and just take that key called wake up, that will give you a whole dictionary. Now you want to have another key from here, which is, let's say Sunday, so you can put somebody here, and that will give you nine, right? And then, similarly, you can put it in another verb, dips in a whole sentence. I'm not going to go there, that's pretty easy. And then the next prompt was look through all the items and then print out the key value pairs,
+
+Unknown Speaker  1:03:40  
+which is basically
+
+Unknown Speaker  1:03:43  
+saying,
+
+Unknown Speaker  1:03:45  
+Remember here I said,
+
+Speaker 1  1:03:49  
+with dot items, you will get all the items as key value pair as tuples. So if you do my info dot items, you get all the items. What you can do is you can do for
+
+Unknown Speaker  1:04:06  
+for V,
+
+Speaker 1  1:04:10  
+in my value dot items, you can print B and that will oops. What did I do? I Oh, I forgot even Okay, so it prints all the items. But if you look here, it says, look through dictionary items method to print out the key value pairs. So this one actually prints the whole item as a tuple. But in the pro statement here in the prompt, it says, print them as key value pairs. How would you do that? Well, one thing is, when you do items, you can actually take a comma v in items where K is for key and. K, and then this is for values, and then you can format it in whichever way you want. Let's say you want to format it using something like
+
+Unknown Speaker  1:05:12  
+this. Let's say key. Hold on.
+
+Unknown Speaker  1:05:20  
+Wouldn't that need to be k in certain key? K?
+
+Speaker 1  1:05:22  
+Yeah. That's my typo. Yeah. So that way, instead of printing these as a topo, I am printing this as a key value pair with a colon in between, or any other format that I want to be. So the point here is, when you do dot items, you can if you catch only one variable that you give you the top if you catch two variable that will give you k, a key and value as two separate variables. So that is the little nuance here that I didn't show you before, which you know now and then your next prompt was look through the nested wake up dictionary and print out the days. How do you do that? So this one you guys tell I'm going to write, print out, look through the wake up dictionaries and print out the keys. So here it says, don't print the keys on the in outer dictionary. Print the keys for the inner dictionary. So how do I look through i
+
+Speaker 11  1:06:24  
+or K in my info. So,
+
+Speaker 1  1:06:28  
+yep, so for K in my info. So wait then we have to do wake up. We have to retrieve whatever the value in Wake up, and we know that mine for Wake Up is also a dictionary. So then we can do our Dart keys on top.
+
+Unknown Speaker  1:06:45  
+Oops. Why did I print two pairs then?
+
+Speaker 1  1:06:49  
+And that's that. And then just say, print K, and it prints the four keys there from here.
+
+Speaker 6  1:06:59  
+And that's all I so 1133
+
+Speaker 11  1:07:04  
+then you have to print out the values, right? That's the last assignment. The last part of that assignment to print out the values.
+
+Speaker 1  1:07:16  
+Oh, hang on. Did I miss one from sorry about that. I uh, all right, so last was look through the nested wake up dictionary and print out the times, which basically means values. So how do I do that? We just have to change the keys into values, and let's also change the variable name, even though it doesn't matter. So then it will print just the values, which is five, 510, and nine from here. What? One thing
+
+Speaker 11  1:07:49  
+that we got caught up on that I think is really cool to point out is, if you scroll up and look at how you printed out the the F strings, how you use the single quote because my info has hobbies and that, that that, oh,
+
+Speaker 1  1:08:06  
+right, right, yeah. So here you are talking about this double quote and this single quote here, right,
+
+Speaker 11  1:08:12  
+yeah. And if you, if you use double quotes on both, it'll cause an error,
+
+Speaker 1  1:08:18  
+yeah, of course. So let me actually should. That's a good point you brought up. So one thing keep in mind, so whenever you have need to have a double quote inside your substitution, the outer has to be single quote, but it is totally your personal preference. Some people always try want to use double quote on the other side, and if you as you said, this will give you an Oh, hang on.
+
+Unknown Speaker  1:08:45  
+How come this is not giving me an error?
+
+Unknown Speaker  1:08:47  
+That's really interesting. I don't get an
+
+Unknown Speaker  1:08:48  
+error either. Oh,
+
+Speaker 1  1:08:52  
+I think python 311 onward, they changed that because Earlier it used to be, if you are using a double quote outside, then you have to use a single quote inside, and that will still work. But look how I I didn't know this just before now, so I was hoping that this will result in an error, but since I'm using python three dot 12, it's not giving me an error. So I was
+
+Unknown Speaker  1:09:18  
+using 310 it makes sense.
+
+Speaker 12  1:09:20  
+I'm also on 312 and it wasn't giving me Yeah, same.
+
+Speaker 1  1:09:23  
+So let me try using three nine, actually. So with three nine, let me first play this one with three nine, and then hang on, where is my this thing here? Right? Yep, see the same, same statement when you have a double quote inside and outside three nine giving me an error. So if that is the case, then you have to put either a double quote outside, single code inside, or vice versa, and the error will be resolved. Wow. Yeah, I think all. Our content that is super cool. What Python did? I
+
+Speaker 11  1:10:03  
+think our cond dev environments are set up for 310 so that'll be sneaky. Okay, yeah,
+
+Speaker 1  1:10:10  
+yeah, I would say it probably is a good idea to try and upgrade to the latest. Just do a peep, update Python. And I think that should do the trick.
+
+Speaker 11  1:10:20  
+I think the problem was, is that certain, certain libraries that we're eventually going to use, we need 310 and that's why they were asking us to go back. But I don't know.
+
+Speaker 1  1:10:34  
+Yeah, I don't know. I mean, I haven't run through all the machine learning libraries in this course, but I don't think there would be any library that you cannot run in in the newer version. If anything, there would probably need to be just a conda update or people update of of that library. And that should do it, because we are not using any ops card library that no one uses, or anything like that, right? Anything and everything will be using this. This, course, are pretty well known, popular library, and usually they do a very good job in keeping the PEEP or conda or both package manager updated with the latest version, actually, so that it doesn't break with the newer version of Python. So I think you should be fine. But just like you see here in my computer, I have three different version. So there is no point having multiple different version. I mean, no problem in having different multiple different version, and you can just switch the kernel on the fly. So keep your tools ready on your panel. So anyway, it's 838 right now. Let's take a 12 minute break and come back right at 850 sounds good,
+
+Unknown Speaker  1:11:44  
+okay,
+
+Unknown Speaker  1:11:48  
+for some reason I'm not showing the
+
+Speaker 1  1:11:52  
+seeing the attendees here when I go into screen share mode,
+
+Unknown Speaker  1:11:57  
+okay, I hope everybody's back.
+
+Speaker 1  1:12:01  
+Can we get started? Give me a verbal yes,
+
+Unknown Speaker  1:12:04  
+yes,
+
+Speaker 1  1:12:06  
+yes, yes, yeah, okay. Okay. So we do have the room full. Okay. So for the next few activities, what I'd like to do, in the interest of time, I'm going to go through some of the demonstration instead of looking through the slide, because we kind of have already talked through this. Essentially the nested nesting. You can have a dictionary inside a list, list inside a dictionary, and vice versa, and so on and so forth. So I'm just going to quickly show you some of the example code that have been provided here, and then we'll quickly go into the breakout room for our next activity, because this time, I would like to give you little bit more time, and we have only about what 40 minutes left, and we have still have two activities. Let's see how we can handle it. The best way possible,
+
+Unknown Speaker  1:13:06  
+nested data structure,
+
+Speaker 1  1:13:09  
+yeah, so in here, if you look into the example, right? So this first example, it says there is a list, table, data, as you can see from these two brackets, and in this list, there are multiple other list. So this is an example of a nesting where you have a list inside a list, and if you want to access a particular data, you access table data to, for example, that will give you this whole list. If you want to access a data which is inside a nested list, you have to provide two indexes, like here, table data two will give you this list, and table data two one will give you this value. So that's one example. And then also you can look through the table data as you do in any other list. The next example here is an example where you have bunch of dictionaries inside a list. So if you see here, it's kind of the same data, but structured in a different way. Here, instead of having ticker open close and then apple and then open close value, what you have is you have a ticker which is Apple and then open and close value for the day. Similarly for Amazon, you have open and close value. So you have three different items in the list, but each of the three items are dictionaries in themselves. And then if you look through the table data, each of these item will basically print one of these things each.
+
+Unknown Speaker  1:14:51  
+And that's basically there is to it.
+
+Speaker 1  1:14:55  
+Do you want me to run or show these in any way before you proceed to the next activity? Sure, or are we good? Okay, so let's run this then. So I'm just going to take this table data. I really love to do this little demo on Jupiter notebook. So we have my table data, which is this, and then if you do item table data. So item in table data, meaning each of the item will now be a dictionary in each as you can see, each dictionary is now printed in one of the one line, each with key value pairs. If you want to print only the ticker symbol from this list, you look through the table data, but then, instead of printing the item, you just take the ticker and then print the ticker, and then that prints you all the three ticker symbols. If you instead of ticker symbol, if you want to just clean the open, it will print the open values. If you just do the close, it will create the close values and so on. So that's all there is now to going to the next activity here. How did it?
+
+Speaker 6  1:16:24  
+Oh, sorry, yeah, but two, three activities,
+
+Speaker 1  1:16:33  
+okay, no, hang on, am I in the right one? Programming two? No, no, I am in the wrong one. I have to do 02 and then activity three. Sorry, class three and activities Okay, so your next activity is
+
+Speaker 1  1:16:58  
+exploring the nested data structure. So activity number 07, student exploding the nest.
+
+Unknown Speaker  1:17:06  
+So you are given a file
+
+Speaker 1  1:17:10  
+where the dictionary, and sorry, nested dictionary is nested list is already given, and then there is another variable given, which is a nested dictionaries inside our outer list,
+
+Unknown Speaker  1:17:24  
+and then you just have to do this print statement.
+
+Speaker 1  1:17:29  
+Okay, so let's break into the rooms again. And I wanted to give you 20 minutes, but looking at the time left, I don't think we can afford to have 20 minutes. Let's go with 15 minutes. Karen,
+
+Unknown Speaker  1:17:49  
+okay, here we go.
+
+Speaker 1  1:17:52  
+Yeah, I'm back, guys, sorry you were discussing something else in preparation for the coming weeks. Okay, cool. So how do you guys do,
+
+Unknown Speaker  1:18:10  
+like, just barely finishing up?
+
+Speaker 1  1:18:13  
+Okay, so let's quickly review. How do you print out the data about the fourth bird in the list? I
+
+Unknown Speaker  1:18:25  
+uh print birds dictionaries,
+
+Unknown Speaker  1:18:29  
+uh three. This is, this is from birds list. Oh,
+
+Unknown Speaker  1:18:35  
+birds list, three, uh huh.
+
+Speaker 1  1:18:39  
+Well, let's do this bird's list three. But what is it going to print if I run this
+
+Unknown Speaker  1:18:48  
+the third list,
+
+Unknown Speaker  1:18:52  
+fourth list, I guess.
+
+Speaker 1  1:18:53  
+Okay, you know what? Let me. Let me put this in my Jupiter notebook so we can run this through. Okay, so you guys said birds list, but birds list will print everything. Oh, no, sorry. Someone says birds list three. Yes, is that what you said? Okay, print birds list, but, but that doesn't make the card, because what you see here, birds list is basically a list that has four list. So it is basically printing this one.
+
+Speaker 10  1:19:25  
+So we did print birds dictionary three, and it gave us the list for ostrich, like in everything that went with it.
+
+Speaker 1  1:19:35  
+But that was not the prompt. The prompt is print out the data about the fourth bird in birds list, using the first variable here, not the dictionaries. We
+
+Speaker 12  1:19:45  
+did a for loop. So for Okay, birds and birds list. Print, okay.
+
+Unknown Speaker  1:19:52  
+So you are saying you did for
+
+Speaker 12  1:19:54  
+for bird and bird list,
+
+Speaker 1  1:19:58  
+bird in bird. List, colon, colon,
+
+Unknown Speaker  1:20:01  
+print
+
+Unknown Speaker  1:20:05  
+bird value three.
+
+Unknown Speaker  1:20:11  
+Print bird three.
+
+Speaker 1  1:20:14  
+There you go. Very good. So basically, what it is doing is, when you are doing this way it is looking at the birds list, and that when you do for bird in birds list, sorry, I scroll it way up. So when you do for bird in birds list, so first you get this list, then next iteration of the loop you get this list, and the next iteration you get this list and so on. So for each of this list, it is printing item at index three, so that will be this, and then ostrich, 271, 36000, and 40. So that is the right solution. Okay, next one, calculate the total weight of all the birds in the birds list. So again, you have to use the birds list object, not the birds dictionary. How did you do it?
+
+Speaker 1  1:21:20  
+Calculate the total weight of all the birds in the birds list. How do we do?
+
+Unknown Speaker  1:21:29  
+Oh, and by the way, the weights are, I think,
+
+Speaker 1  1:21:33  
+if you compare with this. So waste weights of birds are in list, number two inside birds list. So essentially, what it is asking is, how do you find the sum of all these wastes from list number two in the birds list,
+
+Unknown Speaker  1:21:50  
+has anyone done it?
+
+Unknown Speaker  1:21:55  
+Yeah. Oh,
+
+Unknown Speaker  1:21:58  
+so you're going to sum up
+
+Unknown Speaker  1:22:03  
+the second or the third rather,
+
+Unknown Speaker  1:22:08  
+hooray. That's it. That's it.
+
+Unknown Speaker  1:22:12  
+But, but it's in kilograms.
+
+Speaker 1  1:22:19  
+This is basically the whole weights. But hey, this is a number, so you can just do a divided by 1000
+
+Unknown Speaker  1:22:28  
+No, you have to divide the sum by 1000
+
+Speaker 1  1:22:31  
+Oh, sorry, I I made it typed in the wrong place. Yeah, you have to divide the sum by 1000, of course. Yeah. And that's 315, and nine and five kg, you got the same answer
+
+Speaker 13  1:22:44  
+as you could do it both ways. It's just, I guess it's just you run into more floating point like summation issues, maybe, if you do it the other way,
+
+Speaker 11  1:22:53  
+the the the other, the other thing that's in the readme that's not apparent, is that it needs to be to three decimal places,
+
+Speaker 1  1:23:02  
+yeah. So for that, how do you do this?
+
+Unknown Speaker  1:23:06  
+You print that with colon, dot, 3f
+
+Speaker 1  1:23:09  
+colon.cf, yeah, exactly. I know I didn't. I'm not going through all the details, because many of these you have already done. Okay, so the next one is, look, let's get this in Jupiter. Okay, so it says, look through the birds dictionaries list.
+
+Unknown Speaker  1:23:32  
+So how do I look through the bird dictionaries list?
+
+Speaker 1  1:23:38  
+So let's, I hope you have done this for bird in birds dictionaries. Yeah, so then print the name of the birds and their lifespan from the birds dictionary. So basically, you are going to have to print bird. So now bird is a single dictionary, right? So you have to, if you want to print the name of the bird, you have to put print bird name, and if you want to print and you can put it in one single statement. That doesn't matter. I am just showing you how to get the specific fields which will be life span, right?
+
+Unknown Speaker  1:24:28  
+So that's how you get all the birds and the lifespans.
+
+Speaker 1  1:24:33  
+And then it also says, calculate and print out the size to weight ratio, which is basically printing bird size to wet, right? So bird size divided by Bird what are the keys? Oh, you have to not size. Is you have to use this whole size, size centimeter, so basically, essentially, whatever the key that is provided, and then divide this by weight.
+
+Speaker 6  1:25:20  
+This divide by birth weight.
+
+Speaker 1  1:25:26  
+And now it is printing the ratio. And then you can format it using whatever. It doesn't matter was that everything, oh, and then highest size to weight ratio. So how do you do the last piece?
+
+Speaker 11  1:25:42  
+So So there's a question here, do you use the word list or the dictionary to do that?
+
+Unknown Speaker  1:25:49  
+You can use either.
+
+Unknown Speaker  1:25:53  
+I think dictionary would be better. I
+
+Unknown Speaker  1:26:11  
+has anyone attempted this?
+
+Speaker 1  1:26:17  
+I just highest and lowest size to weight ratio.
+
+Speaker 13  1:26:20  
+I just did smallest equals zero, highest equals zero outside the for loop, and then just used some if statements inside of it to check to see if it's found the smallest or the highest. Yet
+
+Speaker 1  1:26:31  
+I think that probably is the right solution. I cannot think about anything else but highest. How are you going to put as take as a highest?
+
+Unknown Speaker  1:26:47  
+I just put zero, okay.
+
+Speaker 13  1:26:51  
+And then inside of it, instead the for loop, you just do, like, if smallest is zero, set the smallest to a just like the first calculation you did, and then after that, you just check to see if, if the current ratio is less than the smallest or greater than the highest, and then reset the values.
+
+Speaker 1  1:27:15  
+I think that's the probable way I'm trying to think whether there is a better way. We
+
+Speaker 12  1:27:22  
+put the size and weight ratio list into a list, and as we're iterating over it, we appended to that list, and then we use max and min to find the highest and lowest.
+
+Unknown Speaker  1:27:32  
+So you could just do that sort on the list and get the
+
+Speaker 11  1:27:35  
+last yeah, there's, there's a wrinkle in the read me, though that's not, not in the comments.
+
+Unknown Speaker  1:27:43  
+To print out the name of the bird. There's
+
+Speaker 9  1:27:46  
+a very there's a very effective way. And now you have the smallest and the highest, highest is not going to be, I guess it could be zero, yeah. Highest could be zero. Actually, at a smallest be the biggest number you would ever see. And highest the lowest number c is initially, and then when you get to like, let's say x is you want to see if it's where it fits in that scheme, you can say smallest equals minimum, and then parentheses zero where that number or smallest in that number, smallest equals man, parentheses.
+
+Unknown Speaker  1:28:27  
+Oh, you don't need math.
+
+Unknown Speaker  1:28:30  
+You can do math.
+
+Speaker 9  1:28:31  
+Yeah, that's, I was gonna say, that's the best way, but I'm not. I don't want to confuse people here. But no, I so
+
+Speaker 11  1:28:37  
+keeping it simple. So I just have to, I have to really nail in on this point in the read me the specification is which bird has the highest weight, but you have to get the name, not the weight ratio. You have to get the names, not the value the name of the bird,
+
+Speaker 1  1:28:57  
+correct. So in order to do that, you can basically get so if you want to do that, I think the best way to do is, let's use these ratios in our list. Okay, so what you can do is for bird in bird dictionaries. Yeah. So actually, Hang on. Let me take a look at the dictionary structure one more time, so you have name and then size and weight, right? So if you choose that, yep. Okay. So what you can do?
+
+Speaker 6  1:29:39  
+What? So I so
+
+Speaker 12  1:29:56  
+that's what we ended. Yeah, we appended each i. Entry into that list of ratios.
+

@@ -1,0 +1,1590 @@
+Unknown Speaker  0:01  
+Also another thing,
+
+Unknown Speaker  0:05  
+like this winter season is like pretty bad here, so we are expecting a big snow storm to hit our region starting tomorrow.
+
+Unknown Speaker  0:16  
+So usually the February snow storms are the one that causes most of the power cut in this region, because the snow at this time is heavy and often mixed with like ice. That's kind of a Midwest climate at this time. So just so you know, in case I lose power on Thursday,
+
+Unknown Speaker  0:35  
+I may or may not be able to join the class,
+
+Unknown Speaker  0:39  
+or you might see me sitting in myself in a dark room with a tiny battery operated lamp,
+
+Unknown Speaker  0:48  
+and there could be some disruption, depending on so what happens is, when there is a power cut, everyone tries to use their cell phone data like the tether, and sometimes that also gets pretty jammed up the network. So that does not mean it is going to happen, but since there is a big storm forecasted tomorrow, Wednesday, so there might be some disruption on Thursday, just so you know,
+
+Unknown Speaker  1:16  
+coding by candle, coding by candlelight, yeah, I might have to end up doing that provided. Well, sometimes what happens is like Thursday this time. I mean, if we lose power, let's say Wednesday night even. And if I'm without power for more than 24 hours, the house might be too cold anyway, so I might have to go to a hotel or something. So
+
+Unknown Speaker  1:39  
+it did happen couple of years back, last year, tattooed. It was not that bad. We did lose power one day, but it came like back, maybe in around less than a day,
+
+Unknown Speaker  1:53  
+but earlier it happened. We had no power for three days in the middle of the winter. So
+
+Unknown Speaker  2:00  
+anyway, it's always, every winter, we are due at least one of these biggies. This winter, we were very lucky. Up until now, seems like our luck just ran out. So,
+
+Unknown Speaker  2:17  
+okay, so the in today's class, we are going to start basically doing a quick recap of what we learned yesterday, which is not much, and then we'll talk briefly about some of the pre processing technique that we need to do. And I'm sure lot of you guys have already used it like for example, I'm not going to take the name which group use it, but when I was visiting some of these your groups, I see at least, I saw at least one group were actually using some data pre processing during the project work. So, and I was very happy to see that people are already kind of learning ahead of the class. So, so, and that's why I said, I mean, the topic today is not, not that
+
+Unknown Speaker  3:05  
+art shattering. It's kind of more most common sense, and most of you probably already know and recognize that process, right? And as always, towards the end of the class, I not as always, as I do sometimes I try to give you a little bit extra than what is provided by bootcamp, just some fun stuff that you might want to play with later. So
+
+Unknown Speaker  3:27  
+okay, so let's get started
+
+Unknown Speaker  3:32  
+here.
+
+Unknown Speaker  3:37  
+Do you see my screen?
+
+Unknown Speaker  3:41  
+Cool? Okay, so just a quick recap in the last class, or even before, we learned the supervised and unsupervised learning, the differences when to use what, and we also learned how to do clustering, when to do clustering, and how to do clustering. And we used one clustering algorithm, which is K means algorithm.
+
+Unknown Speaker  4:07  
+And then we ended the class by starting a kind of a heuristic method to find the optimal number of cluster, which is by calculating the inertia of the different models with different cluster centers and finding where the guard graph kind of switches the steepness, the steepness of the slope kind of gets low enough, or goes from steep to low,
+
+Unknown Speaker  4:37  
+steep to steep slope to not so steep slope, basically, and
+
+Unknown Speaker  4:43  
+that is the basically the optimal number of cluster. But at the same time, we also saw or learned that this is not really a hard science. Often time, this Elbow Method, or whatever you do this kind of gives you a good starting point.
+
+Unknown Speaker  5:00  
+It. But at the end of the day, there is no right or wrong answer as to how many clusters are optimal.
+
+Unknown Speaker  5:07  
+There are some other clustering algorithm that can actually find out the optimal number of clusters that the algorithm thinks is optimal without the user even telling how many clusters to find.
+
+Unknown Speaker  5:21  
+But k means clustering by itself. You have to tell it how many clusters to find, and there is no sure fire way to see exactly what that should be, because, as you have seen when we did the Elbow Method, we sometimes get different point that you can interpret maybe k equal to three or k equal to four or k equal to five, because there is like little
+
+Unknown Speaker  5:46  
+elbow looking corner at more than one point. So that asymptotic curve may not always be well behaved. So therefore, finding the right value for that elbow may be subjective in some cases, right? So, so what I'm going to do today, first is I'm going to
+
+Unknown Speaker  6:13  
+just run through
+
+Unknown Speaker  6:16  
+the activity number
+
+Unknown Speaker  6:19  
+two, let's say
+
+Unknown Speaker  6:21  
+so activity number two is, oops, it's happening. Okay,
+
+Unknown Speaker  6:27  
+am I on the right one? Yes. Okay,
+
+Unknown Speaker  6:31  
+so we'll basically see this is just one data set that we are going to use, just like what we did in the last class. Just a quick recap to see whether on this data set we can find the right value for k from the Elbow Method.
+
+Unknown Speaker  6:47  
+So after we import pandas and the K means library from Escalon dot cluster, we load a data set, which is a used car sale data set. So the data set basically tells us average car sell data for different year with this following attribute, which is average selling price in kilometers driven. Well, it says one or two. I'm assuming it's probably the original data set was probably gasoline or diesel or electric, and someone category encoded it using numeric value seller type. Also, like all of these are already pre encoded and with a mileage information. So that's our data set. So in order to find the optimal value for k, we basically run
+
+Unknown Speaker  7:44  
+set of K means model with range from one through 10. So this is where we are getting one through 10. And for each of these k values, here, we are going to run these k means clustering with defined random steps so that the result is repeatable. And then we fit and
+
+Unknown Speaker  8:08  
+fit the model, and we don't need to do predict. Instead, we are going to calculate the inertia of the model, which is what we did, and that inertia is appended to this list of inertia.
+
+Unknown Speaker  8:19  
+Then we take that list of inertia and the value of k, and these two together combined, we turn it into a data frame. And we do that so that it becomes easy for us to use these data frame in the next step to draw a plot, which is the elbow curve.
+
+Unknown Speaker  8:40  
+And this is how the elbow curve look like.
+
+Unknown Speaker  8:43  
+So now this is where we have to now decide, Okay, which one we are going to take as the optimal point. So if you ask me, I will say point two, three and four, any one of these you can probably take as the optimal k point, right?
+
+Unknown Speaker  9:03  
+Which one you would think?
+
+Unknown Speaker  9:07  
+Four, four, yeah, three or four, yeah, three or four, yeah. I
+
+Unknown Speaker  9:14  
+so no one. No one likes to Yeah. I think so because it's still too steep. I think it will be either three or four, but nothing after four, because it kind of gets smoothened out. Right? This curve actually is much more well behaved than the ones that we got yesterday. At least here, there is no weird going up and down, that kind of thing, right. At least it is showing me a nice asymptotic approaching to zero, right. But even then three and four, you kind of have to guess, like, hey, which one? But anyway, so you can try both. I mean, since this is a small data set, right, when it is a large data set, then you have to think of the cost, right, compute cost and time. But for a small data set, you can run both.
+
+Unknown Speaker  9:59  
+So.
+
+Unknown Speaker  10:00  
+If you run it with cluster three,
+
+Unknown Speaker  10:04  
+sorry, k value of three in clusters three. And then you fit the model, and then you do the prediction, and then you append the prediction to the feature columns and create a new prediction data set.
+
+Unknown Speaker  10:19  
+And then you basically do a scatter plot. Now, obviously, here we have a multi dimensional data set. So when we are doing a 2d scatter plot, there is no way we can use all of these. So we have to choose any two of these, column pair as our X and Y column x and x and y axis, right?
+
+Unknown Speaker  10:42  
+So
+
+Unknown Speaker  10:44  
+so basically it will give us a different view to look at different angle from different viewpoint, to look at from different angle, basically. So if we plot selling price versus kilometer driven, we can actually see looks like it is kind of a good pattern. It is showing because there is not much overlap, or almost no overlap, actually no overlap, we are seeing. So at least within this when you look from these two dimension, kilometer driven and selling price, looks like the clustering was not bad, actually, right? That does not mean that K means algorithm has overnight become smarter. All just it just means is we just are lucky to get a data set that is number one, where we have and number two, we happen to stumble upon two column that kind of clearly show the separation in a 2d space. That's all.
+
+Unknown Speaker  11:38  
+Then you can repeat the same experiment, exactly same thing, but this time using a four, because we saw from our elbow card that three and four both are possible values. So this is the cluster four, right? So here also we can see that clear separation, like, almost like a someone draw like three vertical lines to separate these into four pack, four groups, and this is like three vertical lines. So which one of these you would think that is a better clustering?
+
+Unknown Speaker  12:10  
+I don't know. I mean, you can answer many different way. For example, one answer I can say, hey, looks like k equal to three is better. Because here
+
+Unknown Speaker  12:22  
+the points in one class is not like, basically just breathing on the points from other class. So, like, inter cluster distance is probably more with k equal to three than with k equal to four. That is one interpretation. What do you guys think
+
+Unknown Speaker  12:41  
+between these and this,
+
+Unknown Speaker  12:46  
+this is k equal to three, and this is k equal to four.
+
+Unknown Speaker  12:51  
+Like four better.
+
+Unknown Speaker  12:53  
+You like four better. Why? Well, there's the three. Seems a little bit too busy on the first in the first column, like there's just too much going on there, and it feels like there's the blue one. Yeah, it feels like there's a clear deline, a clear delineation between
+
+Unknown Speaker  13:12  
+the left most and the next column of information. Okay,
+
+Unknown Speaker  13:18  
+sure. I
+
+Unknown Speaker  13:24  
+Yeah. Well, I was thinking maybe when you are going from k equal to three to k equal to four, so you see this group and this group, the right two, right group, they almost remained untouched, but looks like the first group kind of got split into two groups now,
+
+Unknown Speaker  13:42  
+so that maybe there is a real boundary, or it may be the model is kind of being too nitpicky,
+
+Unknown Speaker  13:51  
+you know, no so further analysis and exploration is needed, right? And which is not within the scope of machine learning itself. So when I say further analysis and exploration, meaning basically talking to your to your customers, to business subject matter experts and so on. Like, hey, what do you think? Do you think this makes more sense for the use case that you are trying to apply to? Right? So that kind of exploration,
+
+Unknown Speaker  14:18  
+the answer that is given here officially from BCS kind of agrees with you, Jesse, probably the keyword being probably
+
+Unknown Speaker  14:27  
+four is the better the lower kilometer driven. So this is kilometer driven versus sales price. So lower kilometer driven matters more as the price of the used vehicle increases, whereas if the price is low, the number of limited driven does not matter,
+
+Unknown Speaker  14:45  
+selling price.
+
+Unknown Speaker  14:50  
+Well, I don't know about that. How we get to this conclusion?
+
+Unknown Speaker  14:59  
+Yeah.
+
+Unknown Speaker  15:01  
+I don't know. I don't read too much into it.
+
+Unknown Speaker  15:05  
+As I said, this is not really exact science. So
+
+Unknown Speaker  15:10  
+okay, so that was a quick recap. Okay.
+
+Unknown Speaker  15:14  
+Now I don't know whether all of you have noticed. I know some of you have noticed, probably that we took these data set and not just this activity, even all the activities that we did yesterday, we got a data set and we took the data sets and started applying a machine learning model to applying the data to a machine learning model.
+
+Unknown Speaker  15:37  
+Yes, we probably did something like encoding the string values to an integer value, in some cases, even in the week before the project we did, dropping the null now, values and so on. But there is something we didn't do,
+
+Unknown Speaker  15:55  
+something that was missing.
+
+Unknown Speaker  15:58  
+Can someone tell me or tell us, what is it that we ought to have done before we take this data set and blindly throw it into came in clustering
+
+Unknown Speaker  16:11  
+normal, convert the data types,
+
+Unknown Speaker  16:14  
+convert the data type. Sorry, I I think I had to answer one was, convert the data types and maybe
+
+Unknown Speaker  16:24  
+normalization. Okay, so who said normalization? Is that mapped? Yeah,
+
+Unknown Speaker  16:29  
+yeah. Okay, can you, can you explain a little bit what in your mind you mean by normalization? So you want the selling price, kilometers driven and mileage to kind of be on the same scale,
+
+Unknown Speaker  16:41  
+like the same range of so you can understand the relationship better, as far as like their ratio may be. So that is called Scaling, basically. So that's not normalization. So yes, but you are right. So one thing probably would have helped, especially if you have two different column with a completely different scale of unit. For example, here you see that kilometer driven is in
+
+Unknown Speaker  17:09  
+1000s, right or 10s of 1000s, right? So it's the order of magnitude different selling price. This is in hundreds of 1000. So it doesn't look like USD, some other currency, because this unit is also kilometers. So that also tells me this is not us data. But anyway, some currency where the currency value is much less than USD. So anyway, so you see the order of magnitude difference, right? 10s of 1000 versus 100 of 1000, hundreds of 1000 versus a single digit Well, or maybe we can ignore the single digit for now, because those looks like encoding of string variable to put one or two or three as a flag, and then the mileage is again, only intense. So at least these three columns selling price, kilometer driven mileage, we have three columns of data, and they are completely very different scale, like think about if you, even if you want to plot any of these right side, two of these columns side by side, you really cannot, because one data that is much higher in unit than other will completely overshadow the other, right So, and we will have a Hard time plotting those
+
+Unknown Speaker  18:21  
+two or more of these columns. Side by side on a single plot. And it's not only plotting difficulty when you try to fit a model with it, the model also gets a very skewed space. Because, think about it, how I always talk about these n dimensional hyperspace, right? So whenever you have a 10 dimensional data, so mathematically, the algorithm is thinking your data as a data point that is basically a vector in a 10 dimensional space. So now if you have a column that is only intense and another column which is in 1000s or millions, so essentially, you are creating a n dimensional hyperspace, where one axis is very, very stretched compared to the other, right, others that other other axes are very, very squeezed. So that's what it will look like.
+
+Unknown Speaker  19:12  
+So in order to fix that well, you can scale it right. You can look at like, Hey, what is the highest and the lowest value for each each of the column, and then for that particular column, you maybe, let's say assign a value, I'm just taking something, let's say assign a value zero to the lowest data, and assign a value of 100 to the highest data, and anything else in between, you basically see What percentile in the population that they belongs to, and use that number instead of the real value. So that way, no matter how many, what are the real values? Your scale data set will always the value have value 02, 100. So that way, if you apply that to these three different column, so they will basically have all have.
+
+Unknown Speaker  20:00  
+Have been scaled into the same kind of a range, numeric range, which is 02, 100, right? So that's what scaling does to you.
+
+Unknown Speaker  20:09  
+So that's one, but I think you said another word, which I liked. You said normalization.
+
+Unknown Speaker  20:18  
+Does anyone understand the difference between scaling and normalization.
+
+Unknown Speaker  20:28  
+And if you don't, that's fine, because we are going to talk about that in a moment. I guess. I guess normalizing would be like scaling relative to, like, a single value, right? Like, when you normalize vectors, it's like to like all like a shared value, but like scaling is
+
+Unknown Speaker  20:47  
+so the normalization has nothing to do with the vector, by the way. So when I talk about normalization, it's basically, you take the
+
+Unknown Speaker  20:59  
+you basically treat the data set as you assume that it's a Gaussian distribution, and if you find the mean and standard deviation of the data set, you will find some number for mean, some number for standard deviation, right? So let's say, if you go here,
+
+Unknown Speaker  21:19  
+and if I do this thing and I do describe, right? So this describe easily gives me my stats of the data set, right? So if you look into these, selling price, right? So selling price, the mean is 9.36 times 10 to the power five, right? So, basically, the mean is about 930, 6k That's the mean
+
+Unknown Speaker  21:47  
+for the kilometer driven. The mean is 47,249
+
+Unknown Speaker  21:52  
+and then the standard deviation is for this one, it is 10 to the power six. And this one is a 10 to the power. Sorry, this is 34,710
+
+Unknown Speaker  22:03  
+so you see the columns have different means and different standard deviation, right? So by normalizing it, what we are doing is we are taking this distribution, and basically we are shapes, if kept shifting this distribution to make it such that the distribution still remains a standard distribution, except the mean becomes zero and the standard deviation becomes one. So that's what the normalization is. And the other scaling that I did say talked about, which is basically just take 02, 100, or whatever the two limits, and then basically fit all of those data to be proportionate according to where in the range they lies. So that is your regular standardization, right? And this one, this technique, will basically give you your normalization.
+
+Unknown Speaker  22:56  
+So if your actual data look like this, if you are scaling, just scaling it might basically, let's say, Okay, I'm going to scale it between zero to one on x and y axis. So that's what the scaling does. And after you standardize or normalize the word that you mentioned, Matt, I think normalize, so that will make sure that your data is spread evenly around the center point, and that center point will be zero, which is basically the zero mean, and the standard deviation will be one, so the standard so the probability distribution card will be well behaved and not skewed
+
+Unknown Speaker  23:36  
+to the best possible values. That does not mean that all data set, if you even if you do the normalization, you would be able to get exactly what standard deviation of one you may or may not, right, because that will depend on the your underlying data. But what we will do is we will try to use some built in function that will try to convert the data set in this way to the extent possible. Okay, yes, Tiffany, you have a question, yeah, can you hear me? Yeah, yeah, I can hear you. Okay. I just wanted to make sure my mic was working appropriately. So in your PowerPoint right here, it shows that scaling and standardization are two separate things. I I'm confused on that, because my understanding was that normalization and standardization are two separate things, but standardization and scaling are essentially interchangeable. They're just the same thing in a different word. I understand, yep. So here. So basically I the standardization the way that the it is shown in the data set.
+
+Unknown Speaker  24:45  
+I'm not sure whether that is the right use of the word. Probably it is used these ways, because, as you will see when we jump into the code, that we are going to use a function called standard scalar. So that standard scalar basically.
+
+Unknown Speaker  25:00  
+Scare of the whole thing, so standardization and scaling, but I like the term normalization better when you are actually doing this. So you are basically, let's say these are the three probability distribution of the three different columns right the blue, red and black. So let's say these are three different columns. So after you normalize all of this probability distribution will become a zero mean with a standard deviation of one.
+
+Unknown Speaker  25:28  
+So okay, and you said zero and one, but can it ever be a different number, like a negative one and a one?
+
+Unknown Speaker  25:37  
+Well, standard deviation is one. Standard deviation cannot be negative, right? Standard deviation is always a positive number. Okay, so always has to be in that there's a positive number. So it basically measures the spread of the data, okay, around your median point.
+
+Unknown Speaker  25:58  
+Okay, right? Thank you. I think let's actually see if this helps
+
+Unknown Speaker  26:06  
+in this visual. So we have before and after.
+
+Unknown Speaker  26:20  
+I don't actually see any much difference between these two.
+
+Unknown Speaker  26:26  
+Yeah,
+
+Unknown Speaker  26:28  
+yeah. I think it's basically just better to go into the code and then see for ourselves how we can actually do that.
+
+Unknown Speaker  26:37  
+It's much better to actually do it in a COVID.
+
+Unknown Speaker  26:44  
+Okay, so let's take our one data set, one random data set, which is basically, I think we did work with this data before shopping data
+
+Unknown Speaker  26:56  
+what kind of item a person is buying, right fresh food versus milk versus grocery frozen food and so on. And then there is also one column that is a categorical method, sorry, categorical column or string column, so which will be apparent if you just apply the D types on it, and it will show you that all of these columns are integer, except the last one, which is an object. Basically it's a string.
+
+Unknown Speaker  27:26  
+And these are all my column names.
+
+Unknown Speaker  27:29  
+So now the way you standardize and scale at the same time is basically using this function called standard scalar. And this is from SK learn dot pre processing. Now, one good way to learn about what are the different scaling function available, or anything for that matter, is to basically take that variable or take that library name and go here and then go into
+
+Unknown Speaker  27:57  
+scikit learn documentation. And this is where you can basically learn about what are the different function available there in that library, and what do they actually do? Okay, so standardization or mean removal, mean removal and variant scaling. So what mean removal means is basically, if the data has a mean that is any number other than zero mean removal mean, it will basically shift that
+
+Unknown Speaker  28:26  
+bell curve to center it right around zero.
+
+Unknown Speaker  28:31  
+That and variance scaling. So, as you probably remember, standard deviation and variance are basically the same thing. Square root of variance is your standard deviation, right? So when you have a population with any XYZ number as a standard deviation, you basically scale this, meaning you squeeze it sideway to make sure that your data set follows within standard deviation of one, so which basically means 99.9%
+
+Unknown Speaker  29:02  
+of your data set should follow between mean plus three to mean minus three,
+
+Unknown Speaker  29:07  
+meaning plus minus three. Standard deviation should contain 99.9 of your data set, right? So that will also help you to kind of easily without any outlier, right? So after you scale this, you can easily see, okay, so these are the data points that goes below plus minus three standard deviation points. And now, depending on what algorithm you are using, if you think your algorithm is not really going to do well with outliers, you can then quickly drop the outliers after you do the scaling.
+
+Unknown Speaker  29:39  
+There are some algorithms, by the way, that don't mind outliers being there, whereas there are some algorithms that work better when the outlier is sorry, works better when there is no outlier. So anyway, so you can basically read through these, and there is, like lot of example here for most of the cases you will see.
+
+Unknown Speaker  30:00  
+Three that you will find a very good description of all of these and the different users, right? So this is what I do, typically, because there are so many different methods, it's not possible for anyone to basically remember what each of these method does. All you have to do is just keep in mind where to go and how to read through this documentation when you need right. You don't need to remember all the all the things at any point at given point in time.
+
+Unknown Speaker  30:32  
+So anyway, so if you go there, you will see there are normalization standard scalar, and then there is encoder. So we are going to use some of these functions from this library. So here, what we are going to do is we are going to use this scalar, called standard scalar. So standard scalar, if you read here, so what does standard scaler do? So utility class, which is a quick and easy way to perform the following operation on an array like data set.
+
+Unknown Speaker  31:10  
+It says, scale the data that has zero mean and unit variance. This class implements the transformer API and blah, blah, blah. You don't need to know with that. So basically here, the only key thing is to look into this sentence.
+
+Unknown Speaker  31:27  
+This pre processing module provides standard scalar utility class, which is quick and easy way to go. Oh, no, sorry, not that. So basically, this scale data has zero unit zero mean and unit variance. So now we don't have to take the their word for it, so which is what we are going to see now in our data set. Now, how does does this work? So first, we create a instance of standard scalar as a variable, and the way these scaling functions are defined is that they work almost like the other machine learning function that we have used, which is a fit and transform method. So you take
+
+Unknown Speaker  32:10  
+algorithm, then you fit it with the data, and then after your algorithm is fitted with the data, then you transform that that basically produces the output.
+
+Unknown Speaker  32:21  
+Now all of these libraries, or most of these libraries, at least, you will see they also provide a handy utility method called fit, underscore transform. So in the cases where you don't need two steps, like in case of machine learning, like actual model training, you will probably take a bunch of data to train your model,
+
+Unknown Speaker  32:43  
+and that you will do by using the Fit method, and then you will bring some other set of data to generate the prediction. So you will basically take a different set of data to do the prediction fit and predict, but when you are doing the scaling or encoding, so you are basically throwing the same set of data, which is your original data set, into the scalar function, which is the standard scalar, and then you are also going to use the same data to actually do the transformation and get the scaled or normalized data set, or whichever way that you want to transform right the transform data set. So that's why scikit learn provides this single utility method called fit, underscore transform. So with this single utility method, you can pass any array like structure. It could be a simple array, like a Python array, it could be a numpy array, it could be a pandas series, or it could be a pandas data friendly, anything that is basically a collection you can pass to fit draft to standard scalar, and then it will basically scale it. So I create this, and I say, scalar dot fit, transform this, and then I basically get the customer scaled as the output. So now if you look into this, these are the columns that we passed, fresh milk, grocery, frozen detergent, paper and delicacy. So, 123456,
+
+Unknown Speaker  34:13  
+so now what we am getting, I'm getting, since this is a pandas data frame, which is basically a two dimensional array with six columns. So as an output, I'm getting basically a array of array where each array or list basically does have six item which are basically the scaled and transformed value for those six columns.
+
+Unknown Speaker  34:36  
+And then we can take this and convert this into a pandas data frame again, and this is what it will look like. So now we have that these values instead of the real values. Now we have all of these decimal values, which doesn't really make sense, because now we are kind of lost the what the original data is, well, not lost. We basically transformed it.
+
+Unknown Speaker  35:01  
+But now you might want to see
+
+Unknown Speaker  35:05  
+whether it really changed it to a zero mean and a standard deviation of one. So let's see whether it did that.
+
+Unknown Speaker  35:14  
+So to do that, so one thing you can do is, let's actually take the original data set first. Let's say customer DF, right? So on customer DF here, if I do a describe
+
+Unknown Speaker  35:30  
+to get the statistics, so I see all of this column. You see the means? These are all non zero, right? 12,000 5796
+
+Unknown Speaker  35:38  
+or whatever. And then standard deviation is also very high. Obviously, this is not standard deviation of one,
+
+Unknown Speaker  35:47  
+right?
+
+Unknown Speaker  35:49  
+And then we took this data and we fitted this scalar with this data.
+
+Unknown Speaker  35:55  
+So after you fit it, you can also use from this fitted scalar, there are certain attributes there that you can print. For example, the mean is one attribute that I can print from the fitted scalar. And when I do that, it gives me the same set of values that I got from the data frame described. You see this 12,005 7967941,
+
+Unknown Speaker  36:18  
+so these are the five values for mean that I am also getting from my fitted scalar. And that basically shows me that scalar has understood what your input data is, and the underlying statistical nature of the input data has been correctly captured by the standard scalar here,
+
+Unknown Speaker  36:39  
+similarly, if you want to see the standard deviation, you can do scalar.is
+
+Unknown Speaker  36:50  
+There a STD?
+
+Unknown Speaker  36:55  
+Std is not.
+
+Unknown Speaker  36:58  
+Oh, very
+
+Unknown Speaker  37:02  
+so this will basically give me
+
+Unknown Speaker  37:06  
+the, what is called the variance of all these five, six columns. And they are 10 to the power 810, to the power seven, and so on. But that also tracks very well to the standard deviation here, because standard deviation is basically nothing but square root of variance. So let me actually do one thing if I do NP, dot,
+
+Unknown Speaker  37:48  
+yeah, so I'm basically trying to print the standard deviation.
+
+Unknown Speaker  37:52  
+Oh, sorry
+
+Unknown Speaker  37:57  
+to see whether the standard deviation from the scalar matches the original standard deviation and looks like they almost match. So the first column fresh had our original standard deviation of 12,647
+
+Unknown Speaker  38:13  
+our scalar captured that as 12,632
+
+Unknown Speaker  38:17  
+the second column had 7380
+
+Unknown Speaker  38:20  
+our scalar captured that as 7371
+
+Unknown Speaker  38:24  
+so when it comes to capturing the standard deviation, it is not exact, unlike this mean capture, but it's almost in the right ballpark. And the reason is that, as I said before, when it comes to shifting the population to zero mean, that is very easy to do. But when it comes to squeezing the population to make it a unit standard deviation that it will do on a best effort basis, so it will be almost one. It may or may not be exact one, because how much squeezing is possible, that kind of also depends on like kind of what is called the entropy of the underlying data.
+
+Unknown Speaker  38:59  
+But we know that our
+
+Unknown Speaker  39:03  
+transformer has been fitted well, and now we have these transformed data set. Which is this one here? Now you can try to print the summary statistics on our transform data set, and there we go. Now look at all the means. What do you see in all these mean values?
+
+Unknown Speaker  39:25  
+It is supposed to be zero, mean. Looking at this, do they look like mean? Zero?
+
+Unknown Speaker  39:32  
+Yes, definitely. Yep. One for milk, it is exactly zero. The others are not zero, but very, very, very close to zero. So this is basically a scientific number format, right? So it basically says 10 to the power negative 17, which basically is zero. So anything below, anything lower than, I would say 10 to the power four or five, you can almost take that as a zero, right? Numerically. So these are like 10 to.
+
+Unknown Speaker  40:00  
+Was 17 or 18. So yes, that tells me that our scalar actually did its job as it is supposed to be. And now if you look at the standard deviation again, they are not exactly one, but they are very, very close to one, which is 1.001138
+
+Unknown Speaker  40:21  
+Okay, so that is the result of your scaling.
+
+Unknown Speaker  40:26  
+So most statistical machine learning model will work better if you do the standard scaling
+
+Unknown Speaker  40:39  
+and also look at this minimum and maximum.
+
+Unknown Speaker  40:43  
+So minimum and maximum, okay, so here it is, basically minimum and maximum might still be different, not a whole order of magnitude different, but it still be
+
+Unknown Speaker  40:56  
+for the milk and on milk, what is the original data? Okay, so milk was 9656, to 5410, so around 10s of 1000.
+
+Unknown Speaker  41:09  
+And these are and then frozen was little lower in value, fresh was little higher in value.
+
+Unknown Speaker  41:16  
+So here
+
+Unknown Speaker  41:20  
+mean and max of frozen.
+
+Unknown Speaker  41:24  
+Well, actually, we should not be comparing that with this, because that is just a head that is not giving me the whole data set.
+
+Unknown Speaker  41:32  
+Yeah, but overall looks like the mean and max of each of these are kind of within plus minus 10 region.
+
+Unknown Speaker  41:42  
+So
+
+Unknown Speaker  41:44  
+So question, yeah, when we're reading like the values, like, say the maximum, for example, oh, like 7.9 is that? Does that mean? 7.9 standard deviations for the mean?
+
+Unknown Speaker  41:58  
+Or no, no. It basically says, what is the maximum value in that column that we see? So these transformed column, if you basically take just that column and apply the max function on this, you will get 7.9277
+
+Unknown Speaker  42:13  
+as the value which is a one of the maximum value present there.
+
+Unknown Speaker  42:20  
+Actually. Let's do one thing. Let's do customer transport. TF, dot tail.
+
+Unknown Speaker  42:28  
+Let's do the tail ending one. Okay, so these are kind of randomly distributed. What if I do sample?
+
+Unknown Speaker  42:39  
+Okay,
+
+Unknown Speaker  42:49  
+I guess I was just trying to understand the value itself, like, I know, like, once it's normalized, like, like, how do you, how do we interpret those actual numbers?
+
+Unknown Speaker  43:00  
+You don't need to, you don't need to interpret those actual numbers ever, if that's what we're thinking. Because what will happen is if you train your model with this transform data frame instead of the original data frame. So then what you need to do is you the set of steps that you applied to this data frame to train your model, you will need to apply the same set of steps in the new data that will be coming into your model eventually when you are making the prediction, so you will never need to transform back to the original.
+
+Unknown Speaker  43:34  
+And we will see that later in this week, that we will do this using something called a pipeline, machine learning pipeline, whereby, if we do, let's say, four or five steps, like a fixed number of steps, before we feed our data into the model, we will create something called pipeline, so that in future, any new data coming in, we simply make that data flow through that same pipeline, And the pipeline will have its same steps already coded. You will probably do lot of exploration and tuning and fine tuning, and after that, the optimal set of steps that you arrive, we will put that into a pipeline, and then you basically just apply the same pipeline to any data that you see in future, or your model sees in future,
+
+Unknown Speaker  44:21  
+so you don't have to worry about translating back to the original fog.
+
+Unknown Speaker  44:29  
+Okay?
+
+Unknown Speaker  44:31  
+In fact, not this week. Next week. We are going to learn pipeline.
+
+Unknown Speaker  44:37  
+Okay, so that is one kind of transformation that if you do, your model will perform better for most cases. Another kind of transformation we could do is when we have this type of string column.
+
+Unknown Speaker  44:52  
+So earlier in the examples that we have seen, we basically created a handwritten function
+
+Unknown Speaker  44:58  
+to encode this where we said, hey.
+
+Unknown Speaker  45:00  
+If is if it is this value, then make it one. If this is the other value, make it zero, or something like that. So you can randomly choose some values, not randomly, sorry, you can programmatically choose some values and create a custom function to do that, which is what we did in yesterday's class.
+
+Unknown Speaker  45:17  
+Another way you can do this is using a pandas function called Get dummies. So what the get dummies does is this.
+
+Unknown Speaker  45:30  
+So we know that this column method here
+
+Unknown Speaker  45:35  
+this column. So this column is a problematic column, because this is not a number. So if we can convert that into zero and one, then our life would be easy. Then our model will have no problem at all. So this is where we used the function, the custom function before. Another way of doing that same thing, achieving that same outcome, is using a pandas. Get done is function, and when you do pass data frames column to this function that is string in nature, what it will do is
+
+Unknown Speaker  46:11  
+it will basically blow that up into as many columns, as many unique values are there in the original column.
+
+Unknown Speaker  46:21  
+So what happened here is the column named method, which was the original column in the data frame. It had two unique values, one was retail and one was hotel, restaurant, cafe.
+
+Unknown Speaker  46:36  
+So what it did it took that column and blew it up into two different column,
+
+Unknown Speaker  46:45  
+the one column being retail, one column being hotel rest, restaurant cafe. And if you compare this outcome so the first one retail is true, second one retail is true, third one retail is true and another one is false, and in the fourth one, hotel restaurant Cafe is true, and then the fifth one, again, retail is true. Why? Because if you compare that with the original data set, you will see that the value of the method column was retail, retail, retail, hotel, hotel restaurant cafe and retail, as you will see if we go up here,
+
+Unknown Speaker  47:24  
+right? So now what it did it it took the get damage function, took all of the unique values, split it into two columns, and for any particular row, whichever the original value is, it marked that column only with true everything else as false. So that's why you get these first three as a true for retail, the fourth one is a true for hotel, restaurant, cafe, and then fifth one is a true for retail, and so on.
+
+Unknown Speaker  47:55  
+Now this is one way of doing it,
+
+Unknown Speaker  47:58  
+even now you might see like, Wait a minute. Ben said, this needs to be all zeros and ones. Why is it true and false? And the reason is because this true and false is not really string. It's actually a Boolean. And even though I said that all of these models, they need all the columns that you feed in to be numbers, Boolean internal is also treated as number. So here, these true and false are not actually strict. They're boolean variable which are treated as numbers.
+
+Unknown Speaker  48:29  
+Now this is fine, but if you really don't like to see true, dot true and false and you would rather have zeros and ones instead, you can take this, get dummies output, and apply this S type function with a data type of integer. And then when you do that, instead of zeros and trues and false, you will have zeros and ones. If that makes you happy
+
+Unknown Speaker  48:56  
+for the algorithm, it doesn't matter, because Boolean true is treated in the exactly same way as an integer one, and Boolean false is treated the same way as an integer zero. But if you want to see zeros and ones, you can do an S type integer, and that's what you are going to get.
+
+Unknown Speaker  49:14  
+So essentially, what we ended up doing is we had these seven columns in our original data frame. First six columns were numeric, but they were not standardized. So we took those six columns separately and we applied standard scalar and we converted them into a standardized data frame, which is this. And then the last column was a string column. We applied a get damage method, and this particular type of encoding is called one hot encoding, which basically means you blow up your categorical column into as many unique values are there, and out of all of these columns, you make.
+
+Unknown Speaker  50:00  
+Only one column as hot meaning value of one. Everything else is called meaning value of zero. So that's why this technique is called one part encoding.
+
+Unknown Speaker  50:10  
+So now we have these two columns, which is from the retail column, and then we have these six other columns here. So then if we concatenate these two, the transformed normalized data frame and these one hot and one hot encoded data frame, so then our transport data frame will look like this, which is perfect. Now you can take this data frame and throw it into your machine learning, and
+
+Unknown Speaker  50:41  
+if you remember some of the data set that we were working on in yesterday, where we when we loaded the data set, the data set looks like this, which was basically not any meaningful value. And I told like, hey, these data set looks like they are already pre processed and ready to be consumed. And that is the reason these are the different steps that was already done by someone in the data set, and now you can take these transform data set, and if you don't want to repeat this thing over and over again, you can do a pandas.to
+
+Unknown Speaker  51:10  
+CSV and save this transform data from as a CSV file, so that anytime your friends or colleagues or your users can just read off of that transform file and not have to waste their time doing this transformation over and over again.
+
+Unknown Speaker  51:33  
+Okay,
+
+Unknown Speaker  51:34  
+question, I have a quick question. Binoy, so on the zero and one approach through false. You know,
+
+Unknown Speaker  51:42  
+I think the value is like, right now, for that column is Chad rascal and Rita, right? But if there are more than two unique values, then there would be, if there are 20 unique values, there would be 20 columns created, okay, so for each of them, you'll have that false, okay, wow,
+
+Unknown Speaker  52:01  
+and that dummies function will do that by very much, Yeah, makes sense, okay,
+
+Unknown Speaker  52:14  
+when I want request, when I could just go back to that scalar Main, the way you used.
+
+Unknown Speaker  52:20  
+Oh, okay, this one, yeah, actually, this is something which is not coming to like, I was not able to do. Is it like having,
+
+Unknown Speaker  52:30  
+yeah, that is because you probably had not saved this scalar as a different variable. Like, see, look at this. I can just do, instead of saving the scalar in a different variable, I can just do standard scalar dot fit transform, and that will give me this but if I do is this way, then I don't have a variable that I can go to and ask to show me what the mean is. And that's why what I did is, instead of doing is right here in line, I put it, take it out in a separate variable. So later, even after my transformation is done, I still have an access to the original transformer variable, and that is the variable that does have a mean underscore attribute, which is what you can get used to get the mean or variance of of the original data
+
+Unknown Speaker  53:22  
+frame. Sure. I tried that, but some of it is not coming. Yeah, maybe I'll check it later. Yeah, thanks, yeah, check it will come.
+
+Unknown Speaker  53:36  
+So let's move on to the next one. So this one is
+
+Unknown Speaker  53:43  
+basically same as K means algorithm that we did.
+
+Unknown Speaker  53:49  
+And then in here we are going to load these credit card info data set. Credit card info, default data set. Okay, so the data set basically is giving me some data of individual obviously, there is no personal information here, no personally identifiable information. It basically says, Hey, for this particular one customer, whoever that customer is, this was their limit balance. These were education, this is their medical status, this was the age. This was the bill amount of their card, and this is the payment amount, and whether they have defaulted in their payment or not, right? One being, they have defaulted, zero being meaning they have not defaulted, something like that.
+
+Unknown Speaker  54:33  
+So now what we are going to do is we are going to take this list of credit card customer and we are trying to do, we will try to do some unsupervised clustering to see whether we can meaningfully find some different segments of customer right,
+
+Unknown Speaker  54:50  
+which is kind of what the goal of this whole week is.
+
+Unknown Speaker  54:54  
+Now to do that we are this time not going to do go blindly. Instead, we.
+
+Unknown Speaker  55:00  
+Are going to see, hey, the columns that are integer column, we are going to take those and we are going to scale them in the columns that are not integer column, which in this case is education and marriage. We are going to one hot, encode them,
+
+Unknown Speaker  55:13  
+and then we are going to take this, and then we will do our usual thing, which is do the Elbow Method, find the right value of k and then apply the k means clustering and
+
+Unknown Speaker  55:27  
+see what what we get, right?
+
+Unknown Speaker  55:31  
+So going back to your question and grid. So if you take this column here, right? So let's say education. So education and marriage, these are the two columns.
+
+Unknown Speaker  55:41  
+If you do education column and see the value counts, you will see that secondary, primary, post, grad and other so there are four unique values in there.
+
+Unknown Speaker  55:53  
+So what that means is, if I take this column, education column of CC, info, data frame, and we convert this with PD. Dot get dummies. We are going to expect four columns out of that one column,
+
+Unknown Speaker  56:07  
+and then that four column, I'm saving it a new data frame, and then I'm just showing the data frame so you see how these four unique values turned into four columns.
+
+Unknown Speaker  56:19  
+Okay, so it blow up in size. Number of columns increase.
+
+Unknown Speaker  56:27  
+And then you take this and you these encoded four columns. Now you can concatenate with the original column, sorry, original data frame, which is the CC info. And now we don't need the education column anymore, because we already have converted this so we take this encoded, one hot, encoded education column, concatenate with the original data frame, and then drop the education column from the original data frame. So that way, now we have got rid of the education column, and now we are left with only one other column to do this, which is marriage.
+
+Unknown Speaker  57:03  
+So for marriage, we are going to do the same thing, or if you don't want to do marriage, yes, marriage, no, you can. You can basically use your encode marriage like kind of what we did in our previous case anyway, right? And which way you would do that is totally up to your choice. You can either do it this way, or you can use the get dummies way. But sometimes people will say, Hey, if you know that there are only two values, not more than two, it probably makes sense. Instead of blowing it up into two different column, keep it in the same column. Just change the value to zero and one.
+
+Unknown Speaker  57:41  
+But you should not be doing this kind of encoding when your number of unique values is more than two.
+
+Unknown Speaker  57:49  
+If you have more than two unique values, you should almost always use one hot encoding to blow it up sideways. But if you have two values, whether you want to blow it up sideways or whether you want to keep it in one column and just change this to zeros and ones, that's up to you,
+
+Unknown Speaker  58:08  
+right? Or you can trial an error and see which one is giving you better, optimal outcome, and then you can do it that way. But the problem with these zeros and ones here is for two things, it is fine because zero and one, you can treat it like as a black and white. But if you do this for, let's say education, for example, now what will happen is, so you will put some 0123,
+
+Unknown Speaker  58:32  
+so if we wanted to do this zero, this kind of encoding for education, then I have to put what, let's say, zero for primary, one for secondary, two for post grad and three for other, right?
+
+Unknown Speaker  58:44  
+But the problem there is the moment you are doing that you are kind of implying that some level of education are probably better than the other because of the numbers that you are choosing. So there is a higher chance that your model will be biased. And this is where people get really mad when they say, like, Oh, these AI models are basically racially biased, and these that all of this kind of thing, right? So you should always strive to make your model as neutral as possible. So when you are taking this primary secondary post grad and blowing it up sideway and putting this 001, or 010, or 100, depending on what value it is your number that you are using here, it's always zeros and ones, so there is no numeric bias that is developing in your model. So that is why people almost always for more than one unique values, they almost always use one hot encoding
+
+Unknown Speaker  59:43  
+for this particular reason, because you don't need unwanted bias to developing a model.
+
+Unknown Speaker  59:53  
+Okay?
+
+Unknown Speaker  59:54  
+So that basically gives get rids of all of the.
+
+Unknown Speaker  1:00:01  
+Uh, categorical column
+
+Unknown Speaker  1:00:03  
+from our CC info data frame.
+
+Unknown Speaker  1:00:06  
+Now our next thing is to look into these three columns, which is limit, balance, bill amount and pay amount,
+
+Unknown Speaker  1:00:13  
+and then convert this to so basically scale them. So scaling is simple, standard scalar, and you do fit transform, and you get the standard scale data.
+
+Unknown Speaker  1:00:25  
+Now you take the scale data
+
+Unknown Speaker  1:00:29  
+and you convert it into a data frame,
+
+Unknown Speaker  1:00:33  
+and then
+
+Unknown Speaker  1:00:35  
+you basically take that data frame columns and concatenate that, sorry, replace that with the or in the original data frame. So now your data is scaled.
+
+Unknown Speaker  1:00:48  
+Now, when we did this, you see we really didn't do that for the age column.
+
+Unknown Speaker  1:00:55  
+We took the balance bill amount and Payment Amount column, we really did not do that to the edge. Why
+
+Unknown Speaker  1:01:12  
+could we have done that to the age column as well?
+
+Unknown Speaker  1:01:18  
+Would that make the data kind of weird. You wouldn't want to scale age, right?
+
+Unknown Speaker  1:01:25  
+Yeah, because age can't be like, a decimal.
+
+Unknown Speaker  1:01:29  
+Yeah. Well, that, that is one. The other thing is, I mean, these are the things that are kind of open to interpretation, and just like, like, in a practitioners in the field, right? The data scientist, they will some people will have these opinions. Some people will have other different opinion. And it also almost like, in many times, it is kind of a handle on a case by case basis. So one school of thought is like, Hey, if you think the actual value of a column is meaningful, for example, here you are talking about the demography right, like your balance and payment amount. Those are like continuous variable, and there are a lot of unique values that it can take, right, starting from zero to, let's say, 10,000 and then all the decimal numbers in between. It's like almost always, a continuous vary, continuous variable, whereas age, not only it has a special meaning, but also it has a limited number of discrete values, which can only go from what from, let's say 18, all the way up to what 100, maybe.
+
+Unknown Speaker  1:02:31  
+So very limited number of discrete values. So when that is the case, and if you take that column and you normalize this, you basically try to put it in a in a
+
+Unknown Speaker  1:02:42  
+bell curve,
+
+Unknown Speaker  1:02:44  
+that probably means that you are not taking the retaining the underlying significance or meaning of that column.
+
+Unknown Speaker  1:02:53  
+So that's why, according to this school of thought, any special value that are unique in nature, sorry, not unique, discrete in nature. You should leave that out from your Skelly,
+
+Unknown Speaker  1:03:06  
+and which is why age in this example, have been kept out of the scaling.
+
+Unknown Speaker  1:03:13  
+Okay. Now, does that mean that you should never include age in scaling? No problem. I mean, you can. I mean, you should, in fact, try out all of these different permutation and combination when you are in actual project to see which one gives you better accuracy, or which one gives you better inertia value, in this case, for your cluster right. Or even later, when you do classification and regression right, which one gives you better accuracy, better recall, better f1 score, right? And that's why 80% of time in a machine learning project goes into this kind of analysis and exploration,
+
+Unknown Speaker  1:03:51  
+not just analysis of your underlying patterns and your data, but also experimentation with these different types of transformation technique. And then later, you will see, even when we choose a particular model, we will also have to experiment of different so called hyper parameters of the model. Because the thing is, there is no hard and fast rules written anywhere, or no one knows which particular combination will work best for which scenario.
+
+Unknown Speaker  1:04:18  
+So if you go into Kaggle, if you look into some of the competition that's going into Kaggle, you will see that people will be given a data set, and then people will compete with each other to try to get as high accuracy and recall score as possible in their models. And these are the kind of things that they do. That's what the competition in Kaggle is all about, right? Whoever, whoever is lucky or or experienced enough ends up winning the competition right by achieving the highest score possible.
+
+Unknown Speaker  1:04:51  
+So anyway, so in this case, we are basically just going to take these transformed, scaled, encoded data frame.
+
+Unknown Speaker  1:05:00  
+And we run this through one through 10, and we draw the elbow curve. And that elbow curve gives me
+
+Unknown Speaker  1:05:10  
+a, what, a value of three or four, maybe, right? So then you take three, and then you do the scatter plot. Looks like pretty strided like, very well defined right limit balance and age. It is well defined because, as you can see, in this case, the y axis, we are using an age right, which has only a limited number of discrete values. Right? That's why we expect to see a linear separation. But if you draw this graph, let's say
+
+Unknown Speaker  1:05:44  
+with another value in Y axis. So let's see, instead of age, what other values do we have? Age Limit, balance, let's call payment amount.
+
+Unknown Speaker  1:06:00  
+Payment amount.
+
+Unknown Speaker  1:06:04  
+So then you see the clustering is not as obvious, right? When you plot anything with age, the clustering would be obvious, because age is that demography, right? Demography wise, you can clearly see, okay, these are the discrete values under 30 discrete value. These are the set between 30 to 50 and so on. That's why you will see clear separation there.
+
+Unknown Speaker  1:06:24  
+Now the question is, when we did this, all of the previous transformation work that we did, all of the scaling and one hot encoding and all of that, do you think that really helped in this model, being a better better, finding a better cluster?
+
+Unknown Speaker  1:06:41  
+If you ask me, I'd say, who knows? I don't have the answer
+
+Unknown Speaker  1:06:46  
+why, because I have no way to measure objectively
+
+Unknown Speaker  1:06:51  
+out of the two models, one that is scale one that is trained with a scale data, versus one that is trained with a non scale data, which one produces higher accuracy, because this is unsupervised clustering, right? There is no concept of accuracy as such.
+
+Unknown Speaker  1:07:09  
+On the other hand, in the next week and the week after, when we do supervised clustering there, we would be able to objectively evaluate the output or performance of the two model with different parameters, different transformation of data, different scaling technique and so on, which is what we will do. But for now here, we really have no way to objectively identify whether, whether it really helped or not. But for now, just keep in mind that one hot encoding and standard scaling, these are the two techniques that you are almost always going to have to use, that is just considered the best practice in this field. So let's just keep it at that.
+
+Unknown Speaker  1:07:53  
+Okay,
+
+Unknown Speaker  1:07:58  
+okay, so the next activity is basically the same,
+
+Unknown Speaker  1:08:05  
+but this is a student activity.
+
+Unknown Speaker  1:08:10  
+Here you are asked to load that stock data
+
+Unknown Speaker  1:08:15  
+and then do the k means clustering using that stock data, but instead of just doing k means clustering, you have to basically do a fit transform and encoding where needed,
+
+Unknown Speaker  1:08:27  
+like using the get dummies, you will do the encoding and using the standard scalar, you will do a normalization of the data set. Right?
+
+Unknown Speaker  1:08:39  
+Do you guys want to do it in your group? Or do you just want to just walk through this year in the class?
+
+Unknown Speaker  1:08:50  
+What's the preference class? You said that? Yeah.
+
+Unknown Speaker  1:08:56  
+Was the first one. Margarita.
+
+Unknown Speaker  1:09:00  
+No,
+
+Unknown Speaker  1:09:05  
+I always hear
+
+Unknown Speaker  1:09:07  
+I really appreciate it. Thank you.
+
+Unknown Speaker  1:09:10  
+Okay, that's fine. There is not much anyway, it's basically that exact same thing, and that's why I'm just not even free coding here. It's just go through so anyway, so this is, this is basically the exact same thing with a different data set. This data set gives me what
+
+Unknown Speaker  1:09:30  
+so let's actually try to understand what this data set is.
+
+Unknown Speaker  1:09:40  
+Everything else.
+
+Unknown Speaker  1:09:44  
+Okay, so what is this data set that we are looking at?
+
+Unknown Speaker  1:09:56  
+Is it the daily stock price movement or.
+
+Unknown Speaker  1:10:02  
+Maybe no. Look at the name of the columns. Read the column names. What does it say?
+
+Unknown Speaker  1:10:11  
+It's just this is average.
+
+Unknown Speaker  1:10:15  
+So this is more like
+
+Unknown Speaker  1:10:17  
+correct. This is probably more like
+
+Unknown Speaker  1:10:21  
+the other notebook that I gave you yesterday, where I was reading the all of these talk data from Yahoo Finance live right? And then I took the average price movement and standard deviation. This is not exactly the same, but the idea is the same, um.
+
+Unknown Speaker  1:10:40  
+So the idea is you basically get this data for this whole bunch of different stock,
+
+Unknown Speaker  1:10:45  
+and then instead of looking at daily, giving daily mean, high, low, close, you basically look at the average of these values over a certain period of time,
+
+Unknown Speaker  1:10:55  
+over how much period of time, I don't know. This is just a data set that was made available, right? But this is something, I would argue. This probably something worthwhile to do some clustering. Remember yesterday I said, when in one of these activity, I think activity five or something, right? When in the BCS provided this thing a notebook.
+
+Unknown Speaker  1:11:15  
+It was basically asking you guys to take the daily High, Low, Close and do a clustering. And I said, Hey, that doesn't make sense. Come on, it's not valid. But here, that's not the case. Here you are given mean values of these now,
+
+Unknown Speaker  1:11:31  
+trusting that whoever the author of the data set actually took the mean value of these observation over a period of time and they also have a percentage return, then I'll say, okay, maybe it is worthwhile to do a clustering on this.
+
+Unknown Speaker  1:11:48  
+Then if you look into the data set, obviously there are two string column, company, name and sector. Everything else is number and continuous number. None of these are discrete, like in our previous example, we had age, which is a discrete set of numbers. Here, everything looks like continuous number.
+
+Unknown Speaker  1:12:10  
+So therefore we can create a scalar and fit transform it with all of these columns. Mean, Open, High, Low, Close volume and percent return.
+
+Unknown Speaker  1:12:23  
+And we do that, and we get our scaled data scaled columns, and then we take the scaled data columns and pop it back into our original data set, removing the real values. So now we have this six
+
+Unknown Speaker  1:12:41  
+so the scaled,
+
+Unknown Speaker  1:12:45  
+then you have the sector, and the sector is industrial, financials and so on. So you take the sector column
+
+Unknown Speaker  1:12:57  
+and you
+
+Unknown Speaker  1:12:59  
+do a encoding using get dummies, and you end up getting 12345678,
+
+Unknown Speaker  1:13:07  
+columns, because there were eight values in there.
+
+Unknown Speaker  1:13:13  
+So we ended up getting eight columns, and for each of the stock, only one of these eight column would be true and the rest will be false.
+
+Unknown Speaker  1:13:23  
+And if you don't want to see true and false, as I mentioned before, you can do
+
+Unknown Speaker  1:13:30  
+as type of int, and that will give you the same thing, except with zeros and ones.
+
+Unknown Speaker  1:13:37  
+Then we take this and concatenate with our previous scaled data frame,
+
+Unknown Speaker  1:13:43  
+and then that is our final normalized encoded data frame.
+
+Unknown Speaker  1:13:53  
+And you run it with the clustering with three
+
+Unknown Speaker  1:14:01  
+and
+
+Unknown Speaker  1:14:05  
+you basically get some prediction, right? So when you do that, you will basically get some prediction, 012, basically three category. And that's it. Basically here it is, not even asking you to do the Elbow Method, although you can if you want to. But basically the idea is to cluster these stocks based on the milk values of their stock market behavior. So that's basically the example. Now, if you plot this stock like I did in my example that I showed yesterday,
+
+Unknown Speaker  1:14:39  
+which is in
+
+Unknown Speaker  1:14:44  
+Hang on, where was that?
+
+Unknown Speaker  1:14:46  
+Ah, this one. So if you now plot this, you will probably see,
+
+Unknown Speaker  1:14:54  
+oops, go down something like this, right? So this.
+
+Unknown Speaker  1:15:00  
+Last activity that we just walked through conceptually is very similar to this activity, except in my example, I only took two variables, average volatility and average return, and did a clustering based on return and volatility, whereas in this example, it's asking you to take average values of open, opening, price, high price, low price, close, price, volume and return, everything together, but no volatility in here, right? So whether this is the right approach to do a stock clustering, or whether this is the right approach that is again open to interpretation, right? But these are just two different approach if you ever want to do clustering of stock depending on their behavior over like a long term behavior over a certain period of time, not just every day is instantaneous behavior. You can use either these approach or this approach that we just saw here in activity number five.
+
+Unknown Speaker  1:16:01  
+Okay,
+
+Unknown Speaker  1:16:03  
+that's about it,
+
+Unknown Speaker  1:16:08  
+and that was that there is not much else to it,
+
+Unknown Speaker  1:16:12  
+any question on what we have learned so far? I
+
+Unknown Speaker  1:16:24  
+No. Okay, I will take that silence as a No, and I got a real No. Okay, cool. So let's do one thing. Let's take a 15 minutes break and come back at the top of the hour. Then we will take probably another 15 minutes to maximum and half an hour, and then we'll wrap up the class already. Okay, so touch upon
+
+Unknown Speaker  1:16:46  
+couple of other clustering algorithm that are available. Remember, I mentioned earlier in the class today that came in is not the only game in the town. There are other algorithms available as well. So there are two other algorithm, actually, I'm not sharing it, right? No
+
+Unknown Speaker  1:17:08  
+two other algorithm that you will also see in the slide deck. One is called birch, and the full form is balanced, iterative, reducing and clustering using hierarchies.
+
+Unknown Speaker  1:17:24  
+Okay? And I do understand that's a mouthful.
+
+Unknown Speaker  1:17:28  
+So
+
+Unknown Speaker  1:17:32  
+my screen is shared, right? Is it?
+
+Unknown Speaker  1:17:35  
+Yep,
+
+Unknown Speaker  1:17:37  
+okay, okay.
+
+Unknown Speaker  1:17:39  
+Something happened here? It's showing me something weird here. Give me a
+
+Unknown Speaker  1:17:45  
+moment. Okay,
+
+Unknown Speaker  1:17:47  
+yeah, so, yeah, it is a mouthful.
+
+Unknown Speaker  1:17:51  
+And then there is another approach, which is called agglomerative clustering.
+
+Unknown Speaker  1:17:57  
+So what are the these two approaches? So Benoit, are we supposed to be seeing a slide that says momentum week five,
+
+Unknown Speaker  1:18:04  
+just making sure,
+
+Unknown Speaker  1:18:07  
+oh, I am sharing a wrong screen. That is, I'm sorry. It's like, yes, we can't see your screen. Nice, nice bank account.
+
+Unknown Speaker  1:18:18  
+That was from a physics class that I teach for a group of high school kids that are competing Physics Olympiad. And the first exam is actually happens to be tomorrow, right in the middle of the snowstorm, when it is just about to pick up, so I don't know.
+
+Unknown Speaker  1:18:36  
+So that was the slides for my physics class. So no harm done, no bank account information there, and it's all academics, so we are good there
+
+Unknown Speaker  1:18:48  
+anyway, so now you see the correct slides.
+
+Unknown Speaker  1:18:52  
+Cool.
+
+Unknown Speaker  1:18:54  
+Okay, so birch and aglow, narrative clustering. So what is it? So you will get some idea here, but I'm going to show you a good medium.com article that is probably a better read. So both of these are kind of hierarchical clustering, in a sense, unlike K means, if you think about remember that animation that we saw yesterday, right where you have all these hundreds of 1000s of data points. And if you want to find five cluster in K Means you basically attack all of the data points in one shot, and you randomly put these five random cluster center in the vector space. And then you start finding the sum of Euclidean distance, and you minimize and then you update the cluster center, and then you keep repeating.
+
+Unknown Speaker  1:19:47  
+The problem there is this approach doesn't really scale very well for a very large data set.
+
+Unknown Speaker  1:19:55  
+Also, another problem is, let's say you.
+
+Unknown Speaker  1:20:00  
+Have a region in space, right? So think about whatever you are seeing in your screen. Let's say on the top left corner, this is basically where all of your training data existed that you trained your Kevin's clustering model.
+
+Unknown Speaker  1:20:16  
+Now, as time keeps changing your nature of data that is coming through your data ingestion pipeline that also keeps changing. And over time, you see that there is a shift. So the general population, instead of being over here in the top left corner, kind of coming in the bottom right corner here.
+
+Unknown Speaker  1:20:38  
+So what that means is that model that you trained, when with the historical data that you have is no longer fit to the new vector space, because your space has kind of shifted in dimension. And that is very, very common in machine learning, because most of the time in any business like either customer data or any technical data, or anything over time, there is usually a shift of the general trend in the data. And when that happens these type of models where basically it looks into the data at one point in time and tries to find
+
+Unknown Speaker  1:21:16  
+basically a fitted model and then uses that knowledge to do the prediction or classification, or in this case, clustering, identification on previous on future data.
+
+Unknown Speaker  1:21:28  
+That's why they fail, and that's why I said it really doesn't scale very well.
+
+Unknown Speaker  1:21:34  
+So the alternative is, and also the compute requirement is also very high when you have tons of data. So that's where these other data classification algorithm. Sorry, not classification clustering algorithm comes into play.
+
+Unknown Speaker  1:21:51  
+Another reason
+
+Unknown Speaker  1:21:54  
+people also sometimes use other clustering algorithm is if your data has lot of outliers. So what happens is, if you have lot of outliers in your data, and that kind of throws your K means algorithm off, then it keeps, basically goes and check, keeps Chad down the outliers, which are basically at the fringe of your population, so your cluster center become did not get become as tightly packed as they should otherwise be, and the standard deviation of each cluster becomes higher if you have lot of outliers that are the periphery of your data. So that is one of the weakness of Kevin's clustering.
+
+Unknown Speaker  1:22:32  
+So in these approaches, what they do instead, they do hierarchical clustering. So in these hierarchical clustering, so the approach is to, Hey, start out with many different clusters and create some kind of a decision tree. And over the process, you basically learn how some of these cluster may be combined to form bigger cluster, but smaller number of general cluster overall.
+
+Unknown Speaker  1:23:04  
+And it so happens that these approach it, you can tune it to handle the outliers better, and these decision trees, and since these are
+
+Unknown Speaker  1:23:16  
+calculated on a dynamic way, when your new data comes in future, it basically at that point is just a new branch in your decision tree, so you can apply the cell same fitted model, and it will still be able to do a better prediction or better clustering on the future data, even though the overall trend of data has kind of shifted from one region of the space to another region, because the Tree kind of dynamically adapts by growing branches. So that is the kind of the general, very high level. You don't have to worry too much about, in details, how it works. But in general, these are all both of these are tree based methods. Now, if you look into these medium.com article here, this is a very good discussion about these hierarchical clustering. So when it comes to hierarchical clustering, there are two different hierarchical clustering is used. One is agglomerative, which is where you start with small cluster. And then as you go through the iteration, which is this diagram here on the top, as you go through the iteration, you basically keep combining these smaller clusters into larger and larger clusters.
+
+Unknown Speaker  1:24:27  
+The divisive is just opposite. In the divisive clustering, you basically start with a one large cluster and then keep chopping it up into smaller and smaller and smaller and plus smaller cluster
+
+Unknown Speaker  1:24:41  
+until the time there is no further chopping to be done. So these are basically the two different hierarchical clustering methods. And the first one here, agglomerative is what in your slide, referred to as agglomerative clustering,
+
+Unknown Speaker  1:24:58  
+and the second one, the.
+
+Unknown Speaker  1:25:00  
+Hierarchical clustering is basically what in your slide is referred to as
+
+Unknown Speaker  1:25:07  
+Bucha, balanced alternative reducing and clustering using hierarchies.
+
+Unknown Speaker  1:25:12  
+Okay, so I'm not going to go into the details of these, but this I have read through, is, this is a very nice read and very light, also, right? It doesn't read like one of those peer reviewed research papers. It's not that heavy. It should be easy for anyone to read and kind of understand at a high level what it does, just like intuitive filling. Okay, so I'm going to put these into slack
+
+Unknown Speaker  1:25:39  
+in the live channel. Oh, did you already do that?
+
+Unknown Speaker  1:25:45  
+Yeah, I found it. Okay, got it, okay, so then I don't need to do that. Okay, cool. So these, these are the basically two different um clustering algorithms. But then these are not the only ones. There are even more clustering algorithms. So in general, if you look into
+
+Unknown Speaker  1:26:09  
+if you say, scikit learn clustering.
+
+Unknown Speaker  1:26:15  
+So here
+
+Unknown Speaker  1:26:21  
+you will see all of these different clustering right? Mini batch. K means affinity propagation, mean shift, spectral Ward, agglomerative, DB, scan, HDb, scan, optics, barge, Gaussian mixture. So there is a whole bunch of clustering algorithm out there,
+
+Unknown Speaker  1:26:37  
+right? And what this is doing is, in this example, it is basically showing, remember, we did the make blobs, which was basically this, and we talked about make moons. So this is the Mac Moon story data set. This is the Mac circle story data set. So in this example, is basically taking these different kind of story data set, and you see how the boundary is different between the toy, between, between these groups. So for example, if you look into blob, for example, the boundary is probably easy. You just draw two straight line at different slope, and you basically have a cluster boundary. Whereas something like this, like make moons, where you have like a 2c kind of trying to eat each other, your decision boundary is a very complex, high degree polynomial curve,
+
+Unknown Speaker  1:27:25  
+whereas for make moons, your decision boundary has to be a complete circle.
+
+Unknown Speaker  1:27:32  
+So basically, the point here is your
+
+Unknown Speaker  1:27:35  
+boundary between your clusters may not be linear. It could be a higher dimensional polynomial surface, higher degree surface,
+
+Unknown Speaker  1:27:47  
+and that's where some of these other algorithm also works better compared to your plane, vanilla cave inspo strength,
+
+Unknown Speaker  1:27:58  
+the AI in my phone suddenly started responding anyway, so that's that. So now if you look into these,
+
+Unknown Speaker  1:28:09  
+these example
+
+Unknown Speaker  1:28:11  
+here,
+
+Unknown Speaker  1:28:13  
+this is basically one of the make data set from here, which is Scikit, learn, make moves, right? So this is in you will see in your activity for activity six, basically.
+
+Unknown Speaker  1:28:25  
+So here what we are doing is we are using these SK, learn, make moons function to create the moon data set, which will basically create something like this.
+
+Unknown Speaker  1:28:39  
+And then we take this data set
+
+Unknown Speaker  1:28:42  
+and we create a K means model and fit this data to this model.
+
+Unknown Speaker  1:29:00  
+Actually,
+
+Unknown Speaker  1:29:02  
+let me do one thing.
+
+Unknown Speaker  1:29:06  
+This is not fully
+
+Unknown Speaker  1:29:11  
+so I'm going to do this plotting multiple times. Uh,
+
+Unknown Speaker  1:29:27  
+missing.
+
+Unknown Speaker  1:29:35  
+Okay, so I'm missing this hang on,
+
+Unknown Speaker  1:29:38  
+because in this example, they are only showing the output after the last method, but I want to do it for each method. So
+
+Unknown Speaker  1:29:48  
+if I do
+
+Unknown Speaker  1:29:50  
+prediction DF, which would be x and prediction DF
+
+Unknown Speaker  1:29:58  
+levels would be.
+
+Unknown Speaker  1:30:03  
+Uh, predictions,
+
+Unknown Speaker  1:30:06  
+and then I have x as feature zero, y as feature one, and then color would be levels and color map I like Chad, okay.
+
+Unknown Speaker  1:30:22  
+Oh, what happened?
+
+Unknown Speaker  1:30:26  
+Probably didn't run this or what
+
+Unknown Speaker  1:30:29  
+I did.
+
+Unknown Speaker  1:30:39  
+Oh,
+
+Unknown Speaker  1:30:41  
+okay, I see what I see. I
+
+Unknown Speaker  1:31:06  
+Okay, here.
+
+Unknown Speaker  1:31:09  
+Okay. So what we did is we took our moons data frame, and we tried to do a K, means clustering with k equal to three.
+
+Unknown Speaker  1:31:19  
+Now, because this is an artificial data set, artificially generated data set, we kind of know that these upward C and downward C, they should be grouped into one cluster. But hey, poor caves algorithm does not know. And on top of that, we asked this poor guy to do cluster with three so it basically did the best it could. It basically what it did. It it basically dropped three, two vertical lines so and then basically think about, there is like a line here, and everything to the left is one cluster. From here to here is one cluster, the blue and then everything to the right is one cluster, because k means most of the time it is good at doing linear clustering. Sorry, linear boundary between the cluster, which is what you can see here.
+
+Unknown Speaker  1:32:05  
+Now, if you
+
+Unknown Speaker  1:32:07  
+repeat this with n cluster two, you will see a repeat of the same behavior. And you will see it basically creates one vertical line and then splits the data into half. And that is a complete failure for gay means to understand the nuanced nature of these moon shaped data set.
+
+Unknown Speaker  1:32:30  
+So it basically took a very simplistic approach and simply draw a straight line and say, Hey, everything to the left is brown, everything to the right is blue, which it should not be doing, right? So this is why now we are going to try other approaches on the moon's data set to see what are our other algorithms are able to provide. Okay?
+
+Unknown Speaker  1:32:54  
+So first, we are going to use this birch, birch and agglomerative, right? Two other algorithms we talked about. So we are going to do this with birch and step is the same. Just only difference is, instead of K means you are saying birch. After that, your model and prediction does not change at all.
+
+Unknown Speaker  1:33:16  
+So you do this with birch model.
+
+Unknown Speaker  1:33:20  
+Now I'm going to do the same plotting, but with the outcome of the batch models prediction. So let's do that.
+
+Unknown Speaker  1:33:32  
+So except my prediction would be now batch predictions
+
+Unknown Speaker  1:33:40  
+and everything else remains the same, right?
+
+Unknown Speaker  1:33:44  
+Yep,
+
+Unknown Speaker  1:33:50  
+it didn't do much better either
+
+Unknown Speaker  1:33:53  
+it still draw a vertical line,
+
+Unknown Speaker  1:33:57  
+except the vertical line being in the middle, it kind of shifted left little bit. That's all,
+
+Unknown Speaker  1:34:04  
+no other changes.
+
+Unknown Speaker  1:34:07  
+So if you look into this and this, all you see is that vertical boundary little bit shifted to the left.
+
+Unknown Speaker  1:34:18  
+And now let's do that for our agglomerative clustering, which is the third one.
+
+Unknown Speaker  1:34:31  
+So we are going to take this Ablo predictions here
+
+Unknown Speaker  1:34:37  
+and see how it looks like.
+
+Unknown Speaker  1:34:41  
+Oh,
+
+Unknown Speaker  1:34:43  
+we did this with clusters three. Let's do this with clusters two. Actually,
+
+Unknown Speaker  1:34:53  
+this time looks like
+
+Unknown Speaker  1:34:56  
+it is slightly different. So here looks like it.
+
+Unknown Speaker  1:35:00  
+Kind of tried to do a horizontal line through here, or maybe looks like something resembling an upward curve. So looks like this. Agglomerative clustering did not do a vertical plane. Vertical line as a cluster boundary. It did something different.
+
+Unknown Speaker  1:35:15  
+And I'd say, still, it failed, because this part here on this curve, it should be part of the brown group and not the blue group. So in here, all of these algorithm kind of failed when presented with a complex data set like this.
+
+Unknown Speaker  1:35:37  
+Okay,
+
+Unknown Speaker  1:35:40  
+so how can you actually objectively analyze the output of outcome of this performance? Like, here we have a toy data set which looks like the two half moons, and we can easily see like, Okay, which one is performing better versus which one is performing worse. But if you want to kind of little bit objective in analyzing how these three models are performing,
+
+Unknown Speaker  1:36:05  
+you can use some scoring, even though, earlier I said there is no real sure fire way to find the accuracy of the prediction, but you can get some level of understanding using something called Kalinsky harbor score. And don't ask me how that score is calculated, because I have no clue.
+
+Unknown Speaker  1:36:25  
+All I know is this, using this method from SQL and metrics, if you put in the X and levels, it will give you some kind of score that probably is very similar to kind of how we did the inertia, like how tightly fitted the data point in a cluster are something similar, but I would be open and honest in you with you. I haven't done enough reading to look into this particular scoring method and to see exactly how they do the scoring.
+
+Unknown Speaker  1:36:56  
+But what you can do, if you want to do some objective analysis, you can take your different models, and you can fit this through score to see which one is giving you better score.
+
+Unknown Speaker  1:37:09  
+So here, for example,
+
+Unknown Speaker  1:37:13  
+if I take a batch model, let's say with two cluster and cluster equal to two, and we take another batch model with three clusters and clusters equal to three, right? And here I take the two clusters levels, which would be zeros and ones, and then I feed the x and the prediction levels to these calend harbor score method, and it gives me a score, of 588
+
+Unknown Speaker  1:37:45  
+so if I do it for a three cost cluster, it gives me a score of 654
+
+Unknown Speaker  1:37:53  
+now what does the three cluster outcome look like? Actually? Let's try to see. Do we have a three cluster outcome here? So
+
+Unknown Speaker  1:38:05  
+here, or we can just do it.
+
+Unknown Speaker  1:38:08  
+So feature 01,
+
+Unknown Speaker  1:38:20  
+yeah, you know what? Let me just copy this and do a plotting for two cluster and three cluster next to each other.
+
+Unknown Speaker  1:38:31  
+So
+
+Unknown Speaker  1:38:35  
+this would be batch predictions three,
+
+Unknown Speaker  1:38:39  
+so three cluster prediction for birch looks like this, and
+
+Unknown Speaker  1:38:45  
+two clusters prediction for birch
+
+Unknown Speaker  1:38:50  
+will
+
+Unknown Speaker  1:38:55  
+look like this, and we do know that in both cases, it will just draw two straight lines, so therefore the score would be very similar. And you can similarly calculate the score for other models as well, and try to get a somewhat kind of analysis of, okay, which model is better, which is something you will actually see in your next activity, which I'm going to run through here, instead of asking you guys to solve it. I mean, do it in group, because you hate it anyway. So here, what we are going to do is we are going to take that credit card, default data set that we use before the break, and we are going to do all the good stuff, which is your
+
+Unknown Speaker  1:39:43  
+one hot encoding using dummies method, and then your one hot encoding of and then encoding of your marriage method using zero marriage column with zeros and ones, and then scaling your numeric.
+
+Unknown Speaker  1:40:00  
+Variables using the fit and transform, leaving out the age, of course, because age had discrete values, even though it is numeric.
+
+Unknown Speaker  1:40:10  
+And then finding the Elbow Method, which at this point we know that our good point was three, because after three, basically there is no elbow. And then we do a k means clustering. So up until here, everything we did with that this data frame before it's the same thing. So this is my prediction from K means model with n cluster three.
+
+Unknown Speaker  1:40:38  
+Now what we are going to do, we are going to take this real data set, instead of the toy data sets, and we are going to run this through these two other algorithms. And as you will see, the steps are exactly the same. You just change the name of the algorithm, instead of K, means you use a glomerular clustering. I'm still keeping N cluster three, and I'm using the Fit predict method, because I'm going to do the whole thing in one shot, and this is what my prediction is. So this gives my k means prediction, then this gives my agglomerative prediction. And then I'm going to do the same thing with birch, and then this will give me my birch predictions. So now I have three sets of prediction
+
+Unknown Speaker  1:41:29  
+using three different algorithm applied on the same data frame.
+
+Unknown Speaker  1:41:35  
+So now what we are going to do is we are going to compare the results
+
+Unknown Speaker  1:41:41  
+well. So what, in order to do that, what we are doing is we are basically creating an empty prediction data frame, and we are basically pulling in all these three predictions from from three different model into one. And why stop at head three? Let's do head 20. Let's say,
+
+Unknown Speaker  1:42:01  
+okay, so you see that these models are not in agreement at all. Right? The first row, for example, Kevin's and agglomerative says it is group zero, but says 100010200,
+
+Unknown Speaker  1:42:17  
+yeah. So then again, according to agglomerative, the second and third point belongs to the same cluster, so according to barge, but K means thinks it is different. So basically, the point is, you don't have to look into this manually with the point here is that the three algorithms perform differently.
+
+Unknown Speaker  1:42:38  
+So now to kind of get an intuition, remember, in this particular data set, fortunately, we had this age column, and we know that if we use the age as a Y column, we will get, like a good, nice straight line boundaries between the between the classes. So we are going to, therefore do the scatter plot with age as in Y axis, the H column plotted in Y axis, and limit balance of the customers in x axis. And we are going to do that with the K means output. The K means segments here.
+
+Unknown Speaker  1:43:13  
+So this is the output for K means so as we saw before, this is the exact same output as we got from the previous activity.
+
+Unknown Speaker  1:43:23  
+Then we basically run the same code, except using came in segment to colorize. We can run the same code with aglow segments or bird segment to have a different colorization, which is what we are doing in the next one.
+
+Unknown Speaker  1:43:39  
+And you see that we are getting the similar straight line,
+
+Unknown Speaker  1:43:45  
+what is called boundary between the clusters, but the position of the cluster boundaries are slightly different, right?
+
+Unknown Speaker  1:43:54  
+And then we can do the same thing with batch output. And again, you will get that, get that similar kind of cluster boundary, but the position and the of the boundaries and the width of the classes will be different.
+
+Unknown Speaker  1:44:08  
+Now the question is, hey, which one of these three performed better? And this is where I kept telling you there is no objective way to figure that out. You have to go to your business and basically do further downstream analysis to figure out which one fits your your problem domain better, which one actually is a more realistic representation of the things that you are trying to segment in the first place, whether it is a customer segment, product segment, whatever segment, or stock segmentation, whatever. Right
+
+Unknown Speaker  1:44:38  
+now here, what we talked about is there could be
+
+Unknown Speaker  1:44:43  
+ways to display the different scores using these metrics called kalinske Harbaugh score.
+
+Unknown Speaker  1:44:51  
+And if you run this score, I'm not going to get into the details of this score. Basically here, what we are doing is we are running it through from one.
+
+Unknown Speaker  1:45:00  
+20 and we are basically for each model. We are
+
+Unknown Speaker  1:45:05  
+what is happening? Oh, looks like I missed to run something. Okay. So basically we have three array where we are holding the score for the K means aglow and birch, and we are running each of these 10 times and basically calculating all these kalinske Harbor score for all three different algorithm with 10 different k values. So you said 10 different performance? Did that say a range of two to 11?
+
+Unknown Speaker  1:45:36  
+Oh, right. So nine different k values? Yeah, we didn't do basically clustered equal to one. I mean, you can do that, but, yeah.
+
+Unknown Speaker  1:45:46  
+But here also again, you see that overall, the values are slightly different. But if you look at the values for k equal to 23456,
+
+Unknown Speaker  1:45:56  
+and the first one, for example, is the K means output, right? This one, and this is the Ag law output, and this is the birch output. So overall, I don't see any Earth chadding improvement in any of these models.
+
+Unknown Speaker  1:46:10  
+So how do these values get like, what's the scale of these values?
+
+Unknown Speaker  1:46:16  
+Again, I don't know. I mean, the higher is probably better,
+
+Unknown Speaker  1:46:22  
+but I don't know exactly the scale is. In fact, there is no scale. In fact, not only I don't know, like, if you run this with another data set, you might get much smaller values. If you run this code with another data set, you might get much bigger values. So, yeah,
+
+Unknown Speaker  1:46:38  
+anyone knows here among the Ts. Um, how you should interpret these values in any way. Karen, anybody. If you have any idea, feel free to pitch in.
+
+Unknown Speaker  1:46:51  
+I, if I remember right, you just simply want the highest score. Um, that's, that's all. I remember you. You want the highest Yeah, I don't believe in that way, like intrinsic meaning, other than you just simply want the highest one,
+
+Unknown Speaker  1:47:06  
+yeah. So if you go by that, then I would see the I would say that Kevin's algorithm, if I have to go, then I'll go. The highest score I'm seeing at k equals five, right? So when you do five cluster with K, means I get the highest score. In fact, that is kind of the same across for ad low, I'm also getting the highest score at k equal to five, yep. And for birch, I'm getting the highest score at k equal to three, actually. So Birch is a bit different than the others. No, go down. Two, three, rather. Oh, here. Okay. So 23456, okay, yeah, k equals six,
+
+Unknown Speaker  1:47:52  
+so around five or six. But then between these three algorithms, you will see there is not much difference in the code score. They are like almost in the same ballpark, more or less so.
+
+Unknown Speaker  1:48:04  
+So just know that there are different algorithms that can be had. Okay,
+
+Unknown Speaker  1:48:10  
+now, remember, when we were looking into this, we saw these, right? So I wanted to actually create a notebook to actually do this, and I'm going to now show you that notebook that I wrote up,
+
+Unknown Speaker  1:48:26  
+which is this one,
+
+Unknown Speaker  1:48:30  
+comparative clustering with six different algorithms,
+
+Unknown Speaker  1:48:35  
+with the toy data Set, of course.
+
+Unknown Speaker  1:48:38  
+So what do we have here?
+
+Unknown Speaker  1:48:43  
+So here we are creating the different data sets. Okay, so make circles will create those circular looking data set. So that's my circles data frame, and this one here, I'm this is not classification here. This is just
+
+Unknown Speaker  1:48:57  
+displaying the data frame with the target level that is created by this function. This is not classification yet, right? Not clustering yet. So, this is my circles.
+
+Unknown Speaker  1:49:11  
+This is my moons.
+
+Unknown Speaker  1:49:15  
+This is my blobs,
+
+Unknown Speaker  1:49:17  
+three blobs. Okay,
+
+Unknown Speaker  1:49:22  
+this is my blobs with some transformation. So basically, I tried to make these blobs which is kind of elongated instead of spread out blobs,
+
+Unknown Speaker  1:49:36  
+right?
+
+Unknown Speaker  1:49:39  
+This is another blobs, set of blobs, which has you see that you can actually provide the different standard deviation for the different cluster. So here, but purposefully, I am choosing one cluster to have a standard deviation one, but the two other cluster I'm choosing with higher standard deviation so that the points are not.
+
+Unknown Speaker  1:50:00  
+Are tight. They are intentionally kind of overlapping one another,
+
+Unknown Speaker  1:50:04  
+right? So I basically made these different kind of toy data frames.
+
+Unknown Speaker  1:50:09  
+And then finally I have one data frame that basically has everything is one. So there is basically really no, no two different classes. So I did that by using an NP dot random dot RAND function, which randomly creates 100 data points with no labels at all.
+
+Unknown Speaker  1:50:33  
+Okay, completely random, like random noise.
+
+Unknown Speaker  1:50:38  
+This is like a true Gaussian distribution, no no concentration of data point anywhere in this whole space. So these are all the six different kind of toy data set that I created,
+
+Unknown Speaker  1:50:53  
+and now I have all of these different values that I have. Like, don't, don't read too much into this. So essentially here, what I'm doing now is I'm taking each of these data sets, circle moons, varied and all of these things, and I am providing different preferences, quantile and clusters and so on.
+
+Unknown Speaker  1:51:17  
+And then I will run through this data set. I will take each of these data set here and do a standard scalar fit transform, and then I'm going to take 123456,
+
+Unknown Speaker  1:51:33  
+I'm going to run six algorithm, which are mini batch. K means birch, agglomerative spectral optics and DB scan. So essentially, in this loop, I am running through all these six data set, and for each data set, I am training six different clustering model on each of these six data set, and then I am collecting the output
+
+Unknown Speaker  1:52:00  
+into I'm basically showing that into one single plot, and that basically creates a plot that you kind of showed saw there.
+
+Unknown Speaker  1:52:10  
+Now here you see what happens.
+
+Unknown Speaker  1:52:15  
+The K means
+
+Unknown Speaker  1:52:18  
+is basically keep drawing a straight line no matter what the real structure of your data is. So even when you are giving it two circle, it is drawing a straight line, which basically is completely missing the point. Birch, as we also saw in the other example, it also draw a straight line, but not exactly at the middle, maybe little sideways, but it still misses the point.
+
+Unknown Speaker  1:52:41  
+Agglomerative. Try to try to do a non linear boundary, some kind of quadratic polynomial, probably, but it still is very naive in its classification.
+
+Unknown Speaker  1:52:55  
+But all of these k means batch agglomerative, you see that they actually have done well when you look into the their outcome with the different block type data set, they have performed very well,
+
+Unknown Speaker  1:53:08  
+but they have failed when they came across with this complex data set that looks like circle or half circle.
+
+Unknown Speaker  1:53:16  
+Now if you look into these guys spectral, now you see the spectral not only did well in here, it also perfectly captured the circle and the moon with no misses at all,
+
+Unknown Speaker  1:53:32  
+which, by the way, is this, this thing here, spectral clustering. It is coming from the same family, same library, psychic learn that cluster, but these spectral clustering did perfect job there. But hey, look at all these four. When you look into the final data set where I basically created random noise, it kind of hallucinated. Even in there, it still found three different clusters because I asked you to find three different cluster
+
+Unknown Speaker  1:54:07  
+now, if you look into these two optics and DB scan,
+
+Unknown Speaker  1:54:12  
+you will see that not only especially the DB scan, not only they performed Well in our moons and circles, but it also performed very well in here, where it only ended up creating one cluster and not hallucinating at all.
+
+Unknown Speaker  1:54:32  
+Okay,
+
+Unknown Speaker  1:54:34  
+now these optics and DB scan what it also did it in some cases, it basically gave up. It says, Hey, by the way, there are certain points which I cannot determine which cluster it belongs to, so I give up. And those are the points that I marked with black color here.
+
+Unknown Speaker  1:54:53  
+So these algorithms, what they will do is, if you give them 100 point and try to fit it into three cluster, it will do three cluster.
+
+Unknown Speaker  1:55:00  
+Cluster. But then it will say like, Hey, these 10 or 20 or 30 points does not even fit close to any of these cluster. So go do whatever you want to with it, whereas all of these other algorithm they will basically include everything in their cluster,
+
+Unknown Speaker  1:55:16  
+right? So this is a
+
+Unknown Speaker  1:55:19  
+notebook that you will probably find online, also somewhere, but play around with it if you if you are interested in basically understanding the nuances of these different algorithm. But again, don't get too excited, because whatever you learn here may or may not apply with the real, real world data set.
+
+Unknown Speaker  1:55:41  
+Okay, but at least here, since these are toy data set, you'll kind of in
+
+Unknown Speaker  1:55:47  
+develop a good intuition on the underlying strength of these data sets. Right?
+
+Unknown Speaker  1:55:53  
+Any I'm asking, there is tears here and Karen Mohammed, anything you like to add from your past experience on with these different algorithm, if in any way, any real world example, you can share with any of your projects.
+
+Unknown Speaker  1:56:13  
+Before, it was more of a fun project, but one time, I was building a recommendation system, and I wanted to see if clustering would help. And the reason for it is, when you're building a recommendation system, you essentially need to assign, we all call like new users, some we don't have information yet, on to a group. And so with clustering, just using like basic demographic information, like name occupation or not, sorry, not name age occupation, and some other information like that. It automatically assigned people to a group, and then it would pop out movies for them as like an initial user type of deal.
+
+Unknown Speaker  1:56:56  
+I used King means for that one.
+
+Unknown Speaker  1:56:59  
+I didn't do anything too fancy, but it seemed to work pretty well.
+
+Unknown Speaker  1:57:03  
+Any any example, working with DB scan or HDB scan or those type of algorithm,
+
+Unknown Speaker  1:57:11  
+not outside of school. Now, okay, no
+
+Unknown Speaker  1:57:18  
+can in terms of I used it for exploratory data analysis for a project that I was working on.
+
+Unknown Speaker  1:57:28  
+Okay, which, which algorithm you use? Other than Caymans, did you use? Anything else I came in. Oh, just came in. So, oh yeah, just came in. Okay,
+
+Unknown Speaker  1:57:38  
+think it's the most popular, yeah, yeah. Um, one thing about these other algorithms like barge or aglow or DB scan or all of these algorithm is that you can specify number of cluster if you want to, like we do for K means, but these algorithms, you can also run it without specifying any number of clusters, and they will actually try to automatically figure out for you how many clusters should be there, ideally.
+
+Unknown Speaker  1:58:08  
+So the stock forecasting method method example that I talked about yesterday, also during my Amazon time, where I basically did the time series forecasting. And before that, I basically looked into the volatility and
+
+Unknown Speaker  1:58:26  
+percentage return of the stocks to try to find the stocks that belonging to the same industry. Remember I said. So while doing that, I actually use this. Used an application called HDB scan, which is very similar to dB scan, and I use that without specifying any number of cluster center.
+
+Unknown Speaker  1:58:46  
+So essentially, I use that HDB scan algorithm. Like, remember, I was telling you, like, hey, look up in the night sky and try to find which other which constellation that kind of you feel like, hey, looks like, looks like a lion, looks like something shaped, right? It's kind of that, right, and that's what HDB scan they did. So when I plotted that, it actually basically showed in a diagram, like, hey, looks like these three or four stocks are kind of always moving unison, and then those three stocks over there moves in unison. So it only basically out of like 100 or so stock it only ended up finding two or three cluster, and that included only four or five stocks here and there, rest of the stocks, it just left out
+
+Unknown Speaker  1:59:32  
+like it did not hallucinate it. It says, hey, there is only strong cluster I can see between this group and this group and this group over there and forget about other things. So then I took one of these group when I did my multivariate time forecasting, time series forecasting on that one, right? So,
+
+Unknown Speaker  1:59:50  
+um, this just, I don't I might be off on this, but I could also see DV scan. I mean, just by judging the shape of the crescent moons.
+
+Unknown Speaker  2:00:00  
+Yes. Maybe this could be used for, like, maybe categorizing proteins
+
+Unknown Speaker  2:00:06  
+in the way that yeah, the way they Yeah, because they look like the protein structure, yeah, they remind you of, like, the tertiary confirmations of proteins fold in in each other. So that could be a way of, like,
+
+Unknown Speaker  2:00:19  
+understanding
+
+Unknown Speaker  2:00:21  
+different Yeah, you are not wrong. You are not wrong. But I think what people do use is way, way more advanced in protein classification. They actually use neural network these days, right, which is way more advanced, so,
+
+Unknown Speaker  2:00:36  
+but yes, AI is a like protein identification between different biological molecules. That is actually a one big application area for AI. But in those kind of state of the art area, I don't believe people use clustering like Not, not statistical clustering, in this, this sense at all. Even if they do clustering, they will use a neural network driven clustering. I was just wondering if, in relationship to DNA, though, that's kind of cluster, this kind of clustering might be useful when trying to cluster different population groups.
+
+Unknown Speaker  2:01:12  
+That's kind of
+
+Unknown Speaker  2:01:15  
+so sorry, it's population group of whom like, well, from DNA, uh huh. So in other words, you could find grouping different genome, genomes.
+
+Unknown Speaker  2:01:27  
+Oh, okay, yeah, might be, I bet there's some interesting work on it. Yeah,
+
+Unknown Speaker  2:01:33  
+the very large dimensional, mm hmm, space. But Mr. Lee could do that. I You know what I think thought about, and it probably is done in some form already,
+
+Unknown Speaker  2:01:45  
+is sometimes when doing a large amount of a large search space with for like k nearest neighbors, is to use K means to kind of break that space into a bunch of clusters. And so then when you go to search for a particular thing, the first thing you do is find it's which cluster it maybe could fall into. And then once you then you only do that search space. You kind of throw out a rest of the rest of the search space,
+
+Unknown Speaker  2:02:16  
+yeah, kind of, I mean, that is like a neighborhood before you. That is why I mentioned, I think, in yesterday's class. Yeah, that k means clustering, often used, and even, like any unsupervised learning, is often used as a precursor to other technique that you will apply downstream, right? Yeah, almost large, maintain your neighbors, of course, is really, you know, lazy learning. So it doesn't really learn until you actually going to look for something. But if you can narrow that search space down by having a bunch of clusters already made of that space, then you can throw away maybe, you know, maybe 80% 90% of that search space, just once you decide which, which centroid, that particular data point you're looking for is closest to Yep,
+
+Unknown Speaker  2:03:06  
+and these would also be a much better outlier predictor. Yeah,
+
+Unknown Speaker  2:03:15  
+it's neighbors, but it was very small, so it was fine. But as they came about, how to how does that could scale?
+
+Unknown Speaker  2:03:22  
+Yep,
+
+Unknown Speaker  2:03:27  
+cool. So, yeah, so that's what I said. See, that's all about today's class, and we can consider done like for today,
+
+Unknown Speaker  2:03:40  
+and give you, you 43 minutes back
+
+Unknown Speaker  2:03:46  
+then, I may ask you. So will you pause this kind of
+
+Unknown Speaker  2:03:51  
+files? These files? Yes. Thank you very much. I always do, right? Yeah? So, yes, any, any extra notebook file, if I demonstrate in any given class, you will always find that, and what I'm doing is I'm naming them, starting with the word instructor, so you will know these are the files that I provided on top of what it was provided by BCS. Thank you very much. Benoit, yeah, I will post that right after the plus.
+
+Unknown Speaker  2:04:23  
+Jesse, a side question, When should we expect project grades to be posted?
+
+Unknown Speaker  2:04:31  
+They are so I'm going to talk to Mohammed. I mean, we are almost done, so we'll be posting, if not today, by tomorrow, for sure. Awesome. Thank you. That helps. Don't worry, Jesse, we just flunked everyone. This is easier.
+
+Unknown Speaker  2:04:46  
+You know what? That's, that's we'll all be in the same cluster.
+
+Unknown Speaker  2:04:54  
+Yeah.
+

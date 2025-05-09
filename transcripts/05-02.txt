@@ -1,0 +1,2493 @@
+Unknown Speaker  0:02  
+My voice is little broken. I just came down with some symptom couple days back. So yeah,
+
+Unknown Speaker  0:12  
+it that took me out for almost two weeks. So good luck. Okay, it's been two days for me, so we'll see you.
+
+Unknown Speaker  0:23  
+Okay, so let's get started for today's class. So today's class have a single focus, and what is that single focus?
+
+Unknown Speaker  0:38  
+That single focus is grouping data.
+
+Unknown Speaker  0:42  
+So you have a whole bunch of data, how you can group. And this is something informally, I kind of introduced to you guys two classes back.
+
+Unknown Speaker  0:51  
+Remember, there was an activity where they did this grouping thing, but in a very non elegant way, writing a for loop. And I provided a notebook out there, and I said, Hey, instructor version. So today's class, you are basically going to learn that formally. So essentially, there are two other concept related concepts that we are going to talk about, aggregating and pinning.
+
+Unknown Speaker  1:15  
+So let me ask you, instead of trying to explain and also trying to save my voice a little bit what do you guys mean by grouping versus aggregating, like, how they are kind of related, or how, like, when would you use what?
+
+Unknown Speaker  1:34  
+Let's talk about the grouping first. What is grouping and why do you need to use it? Do?
+
+Unknown Speaker  1:45  
+Anybody would it be grouping like data together? That what we're talking about, grouping like data together? Yes,
+
+Unknown Speaker  1:54  
+grouping data that's related?
+
+Unknown Speaker  1:57  
+Yeah, so, so like, if, if it's like a bank's accounts.
+
+Unknown Speaker  2:05  
+So basically, can we say putting similar data, like categorizing data,
+
+Unknown Speaker  2:13  
+putting similar data into a bucket that looks like all other data, that's kind of what grouping is, right? So if you have, let's say, a list of,
+
+Unknown Speaker  2:26  
+let's think about some example, right? So, so let's say, think about your data about different countries and their GDP, right? Now, yes, that's the data. This is the country, this is GDP and so on and so forth, which tells you a lot, but sometimes you might want to derive more insight. Like, okay, we know countries by GDPs. How about we want to group by something else that will give provide you with more insight. For example, how do we what about we group this country's GDP by continent, so then I know which continent is producing most amount of goods or products or services.
+
+Unknown Speaker  3:10  
+Another one could be in within a country. Let's say if you have different states data and different states GDP, so or some other population data from the different states, you might want to group those by state to basically get a pictures
+
+Unknown Speaker  3:25  
+like individual state wise picture. So this is basically the act of grouping. Now, when you do grouping,
+
+Unknown Speaker  3:35  
+how does aggregating play in role there?
+
+Unknown Speaker  3:38  
+Why do you sometimes need to use aggregating in addition to grouping. How do you think that helps?
+
+Unknown Speaker  3:52  
+So in order to have the roll up, or like whenever we do the sum up or
+
+Unknown Speaker  3:59  
+of any of the specific columns or fields that would the grouping is something which are not getting rolled up. So that's where we group those columns. So and then after you collect similar data into into different categories, individual categories each then you might want to know collectively, all the data within that particular category, what behavior they present like, what is the total of all the data in a certain category, or what is the mean or medium or standard deviation of all the data in a certain category? So that's what vija is mentioning as rolling up, meaning going one level up and having a overall aggregating data, right? Another thing, think about it. Sometimes it also helps in reducing the, I'd say, reducing the detailing data, and sometimes it's actually helpful. So let's say you are collecting data that basically.
+
+Unknown Speaker  5:00  
+Like, you collect lot of data about different people earning like, different people in different profession earning different salaries, right? So you'll get lot of different salary data. But now sometimes you might want to see, like, Yes, I don't really need to see which person is earning which salary. But I want to see some trend, some
+
+Unknown Speaker  5:25  
+aggregate data to see, okay, what is people's earning by state, or what is people's earning by zip code, to get some further insight Right? Or what is people's earning by job code, like kind of job they're doing. What is people signing by
+
+Unknown Speaker  5:44  
+like education that they have right like, whether high school or graduate undergrad or graduate degree? So all of these you can do with a huge data set that collect individual data, but sometimes that individual data might not give you the insight. So essentially, you will do grouping and aggregating when you are trying to derive more insight from the data than the raw data gives you. Do
+
+Unknown Speaker  6:10  
+you guys agree?
+
+Unknown Speaker  6:14  
+Yeah,
+
+Unknown Speaker  6:16  
+and then binning is basically another form of grouping. But sometimes, when you are doing grouping, you might want to put multiple data points that are closely related into one category. That's where the concept of this billing comes in. So for example, let's say you have data on student and the percentage grade that they scored in certain exam, and then percentage growth grade could be very granular, right? Let's say 1% 2% 3% or even point, like a decimal of a percent, right? But if you want to find out the letter grade,
+
+Unknown Speaker  6:59  
+you might want to group these students scores such that anyone above 90% would be a given letter grade A, anyone between 80 to 90% would be letter grade B. So these type of grouping where you are basically putting data into a set of known buckets based on the boundary values of the data, that is what is called billing, right, which is another technique.
+
+Unknown Speaker  7:25  
+So you will see that when you will do machine learning, model feature engineering, sometimes it will actually help you to group and find aggregates of data and add those additional aggregate values that you have as kind of like a separate column that might, sometimes you will see, actually help improve the accuracy of the model that you are training. Because essentially, when you do this, you are generating more insight, and the more insight you can provide to your model, the better it will perform, right. And that is the reason we are going to have to learn about grouping and aggregation
+
+Unknown Speaker  8:03  
+make sense?
+
+Unknown Speaker  8:07  
+Yeah, thank you, yep. Okay, so there is nothing much to actually learn through the slide, because
+
+Unknown Speaker  8:17  
+these pandas thing is, there is basically not much theoretical grounding behind it. It's basically mostly learning by doing it. So that's why I just wanted to clear our understanding what grouping and aggregation mean, and when do we need to do those right. And now we are going to jump right into the actual doing activity like we have been doing in a first past few classes, and then we will just learn by actually doing it ourselves. Today's class we have,
+
+Unknown Speaker  8:45  
+I think, three or four student activities. I think
+
+Unknown Speaker  8:50  
+given the type of activities we have today, it will probably be useful for you guys to actually do those student activities in the
+
+Unknown Speaker  8:59  
+group I know last class, when we tried to do that some of these activities, they were so many prompts, so many things that they asked you to do 1015 minutes was probably not enough. I'm guessing today, if I give you 15 minutes to do an activity, you will probably be able to manage that within the time, and that should give you a good learning Okay, so I'm going to try to keep the instructor demo short, to provide you as much time as possible for your group activity today. I think in today's class, this is going to be helpful.
+
+Unknown Speaker  9:29  
+Okay,
+
+Unknown Speaker  9:31  
+I am sharing my screen, right? You can see my screen, yeah, yeah. Okay. I almost forgot whether I started sharing or not. Okay, so let's
+
+Unknown Speaker  9:42  
+do some demo here.
+
+Unknown Speaker  9:45  
+So first we are going to look into these data set. This is weird data set. So what the data set is giving you is it's basically a UFO sighting data set.
+
+Unknown Speaker  10:00  
+I don't know whether this is a real data set or someone made it up, but it basically tells him like, hey in so and so, date and time in so and so, location and give it gives city, state, country,
+
+Unknown Speaker  10:13  
+UFO was visible for so many seconds, which is so many minutes or hours. With some comments about this, and when that date was posted into this catalog, what was the exact latitude and longitude of that location?
+
+Unknown Speaker  10:31  
+Oh, and what was the shape of the object
+
+Unknown Speaker  10:35  
+that was cited? Huh, are these from New Jersey?
+
+Unknown Speaker  10:40  
+These are from everywhere. Actually, these are from everywhere. So this is, I think there are, I saw,
+
+Unknown Speaker  10:48  
+there is data from US, Canada, Australia and UK. I think there are data from four different countries, which we will see now. Okay, so we have these data. So now let's
+
+Unknown Speaker  11:07  
+move some now rows that we have, we might have. I mean, ideally you should first check whether knowledge there or not, but that's not the point of our class. So we'll just move through so we have over 66,000 records. That gives me
+
+Unknown Speaker  11:25  
+this data, right? So now we have to first see whether the data is any good. So what we are going to do is just quickly call it D types and just check whether it's same. Makes sense. So Date, Time column is an object. Yes, that's good. City is an object, state is an object. Country, shape, duration,
+
+Unknown Speaker  11:49  
+seconds is an object.
+
+Unknown Speaker  11:54  
+Duration, hours, minute, this is an object because there is like a text in it, and duration second does not seem to have anything, but it still is an object.
+
+Unknown Speaker  12:10  
+So that means if we want to do group by duration or something, we will have to convert this duration to a numeric value. Because this column, the duration column, should not be a string. It has to be numeric. So first thing we are going to do is we are going to convert these into a numeric value. So do you guys remember how to convert something to numeric value? Like from string to numeric? Just assign it to an as itself, but using as type of flow,
+
+Unknown Speaker  12:43  
+yeah, so, so you basically do the data frame, which is, hang on. Did I not run this? I did run this. Right? I
+
+Unknown Speaker  13:04  
+Okay, so I am so the variable is clean UFO data frame. Okay, so clean UFO data frame, and then the column that I'm going to
+
+Unknown Speaker  13:16  
+try to change is duration, seconds. So
+
+Unknown Speaker  13:23  
+So duration seconds,
+
+Unknown Speaker  13:27  
+and then we are going to do.as type float. Is that what you meant? Yeah, but whether I think you have to assign it, assign clean UFO data frame, duration seconds to that like you have to say, equal correct myself, correct. David, yes. And I'll tell you one way that you can check that right if you run this function, let's say without assigning it to anything, if it is going to return a series, because a column is a series, if it is going to return a series, so that means you have to apply that back to the series that you want to override this with. And here, if you run this, you will see that it is returning a series which is basically a single column data frame. So yes, if there is no option for you to provide in place equal to true, then your only other option is to take that output of these, and assign it to wherever you want to make the change happen, which is that column itself, and that way you it will become a series.
+
+Unknown Speaker  14:33  
+But it is giving me some worry. So for some reason, Python is not liking it. It says the value is trying to be set on a copy of a slice from a data frame, which will work for now. But what Python is saying is maybe this is not the right way.
+
+Unknown Speaker  14:53  
+So another thing you can do. I mean, let me try it the other way. I.
+
+Unknown Speaker  15:01  
+Uh, actually, before trying it. The other way, I want to see whether the change took effect.
+
+Unknown Speaker  15:10  
+Yes. So duration is now float, so it does take effect. So another way of doing it, you can think of that I don't know whether that is going to give warning or not, because this warning thing, whenever you see this, it basically what happens is, pandas keeps changing, and a new version, new feature comes up. Sometimes they deprecate old thing. And if you happen to stumble upon something, or happen to use something that was an older way of doing thing, and they are going to deprecating a future version. That's where you get this type of warning. So let me try it another way. So what if
+
+Unknown Speaker  15:47  
+I
+
+Unknown Speaker  15:49  
+take this one
+
+Unknown Speaker  15:54  
+and do it this way,
+
+Unknown Speaker  15:58  
+where I'm going to take the data frame, dot S type, and inside the S type, I'm going to pass the column name and the data type as a key value pair. So let's see whether that works.
+
+Unknown Speaker  16:11  
+That actually works much more clearly, and the result will still be the same. So, and this is something which was actually good that this happened. So you will come across these type of situation time to time. If you do, please do not panic. Most of the time these warnings will be harmless. They're basically saying, hey, in future, you cannot use this. So what it is working now. So all I want it is to work it now, right? But sometimes, if you are like me, I kind of feel that like, yeah. Can I get rid of that warning? If you are that kind of person, just do some Google search. You will always find some alternatives. There's a way to turn it off, but I think we there's a way to turn it off. What happened of yours? Benoit, actually, it's interesting, because we've been doing it before where they wanted to, which is we've done there, but with dot LLC,
+
+Unknown Speaker  17:03  
+you didn't. If you look at your what word gave you the warning, you see you have clean UFO and then brackets and that stuff. I think they wanted to do dot LLC, there.
+
+Unknown Speaker  17:15  
+Ah, I think so You mean, you mean, you mean here, here, yeah, it's where you're doing slices. They were used like that LLC for doing slicing instead of doing the way you did it. The Warning set an index. Yeah, I think
+
+Unknown Speaker  17:29  
+that's what it wants you to do. You could try it, but I think that's what they want, would want you to do, yeah, yeah.
+
+Unknown Speaker  17:36  
+But yeah, you usually there's a quick way. I always forget it, but I was looking at turn off those warnings so you just don't see them. Yeah, just like, okay.
+
+Unknown Speaker  17:46  
+So anyway, so I'm not going to go and change all other data type. So now I'm going to first try to see how many
+
+Unknown Speaker  17:56  
+countries data there are there, right? So I can take the column and do a quick value counts,
+
+Unknown Speaker  18:05  
+US, Canada, GB, they call it GB, not UK, and AU is Australia, right? So there are four countries worth of data. And now what we can do is we can basically either work with the whole data set, or we can probably take only one data set one country. Let's actually take filter the data so that only US citing are there? Yeah. So let's take
+
+Unknown Speaker  18:36  
+just the USA data. And if you look at these. Out of 65,000 data or so, US has 63,000 so us will have the most amount of data available anyway. So if you want to filter this, so how am I going to filter?
+
+Unknown Speaker  18:55  
+Right? So I'm going to take my data set and I'm going to do use lock. And inside lock, I'm going to say,
+
+Unknown Speaker  19:05  
+country
+
+Unknown Speaker  19:08  
+equals us.
+
+Unknown Speaker  19:13  
+Right, country equal to us. And then this is going to give me the column, and then I need all the rows for that, so row selected and column selector right? And then I'm going to call it USA UFO, DF,
+
+Unknown Speaker  19:35  
+and then just put
+
+Unknown Speaker  19:39  
+Yes, yeah, 63,553
+
+Unknown Speaker  19:43  
+rows. Which matches what we did in the value counts, which is 63,553
+
+Unknown Speaker  19:49  
+if you didn't have the colon at the end, would that still work for
+
+Unknown Speaker  19:53  
+the indexer?
+
+Unknown Speaker  19:58  
+Yeah? Do.
+
+Unknown Speaker  20:00  
+It will work.
+
+Unknown Speaker  20:04  
+It will work.
+
+Unknown Speaker  20:09  
+Okay. So now, if I ask you, now that we know that we have only one country, which is us. Now, how do we see how many sighting has occurred in each state.
+
+Unknown Speaker  20:23  
+How do we do that? Is basically same thing like I did before with the whole data set. This time, I'm going to do that with the state. I'm going to use the value counts, or just for the state column, right? And that will give me
+
+Unknown Speaker  20:40  
+what did I do here? Yeah, so basically it is, this is telling me, California has this many, Florida has this many, and so on, right? So now I know that there are certain amount of sighting that happened in different state, and why did we do all of this? So basically, try to figure out is this a good data set that we can use to practice our grouping, right? So now that, since we have data across multiple different state and quite healthy amount of data, we can probably try grouping now to see how that works, right? So what we are going to do is we are going to use group by to basically separate the data into
+
+Unknown Speaker  21:22  
+fields according to the state values. So what is that grouping look like? And this is something I already, as I said, couple of classes back. I already showed you this, which is group by. So if I do group by what column I'm going to pass here,
+
+Unknown Speaker  21:39  
+when my goal is to group it by the states. So what column I'm going to pass here? Okay, state, so that state will be passed. You can pass it either as a string or as a list. Both will work.
+
+Unknown Speaker  21:56  
+Can you guys figure out why both will work? I
+
+Unknown Speaker  22:06  
+You say confession, is a string, or is it? What
+
+Unknown Speaker  22:10  
+are a list of string? Is it because it's a series?
+
+Unknown Speaker  22:15  
+No, no, what I'm saying is this, you see where my cursor is, right? Actually, let me zoom in a little bit late.
+
+Unknown Speaker  22:22  
+So I can pass it
+
+Unknown Speaker  22:26  
+either like this. So if I pass like this, just one string, it will group by state. If I also try to pass it a list of string like this, way it will also work. Why? So?
+
+Unknown Speaker  22:43  
+Because you can,
+
+Unknown Speaker  22:46  
+because the way that the group by function is written,
+
+Unknown Speaker  22:51  
+they have already designed the function that, if you want to do multi level group by
+
+Unknown Speaker  22:56  
+like, what if you try to group by country and then by state and then by city, something like that. So that's why there is an option to pass multiple fields here. Okay,
+
+Unknown Speaker  23:10  
+so for now, we are just going to do one field, which is state,
+
+Unknown Speaker  23:14  
+and now we have to
+
+Unknown Speaker  23:17  
+take it and do something. So let's say
+
+Unknown Speaker  23:22  
+we put it in a data frame,
+
+Unknown Speaker  23:25  
+grouped,
+
+Unknown Speaker  23:29  
+grouped USA data frame. Let's say
+
+Unknown Speaker  23:32  
+now if I print group USA data frame,
+
+Unknown Speaker  23:37  
+what will happen? So
+
+Unknown Speaker  23:45  
+what do you think the output would be?
+
+Unknown Speaker  23:52  
+Didn't work.
+
+Unknown Speaker  23:55  
+Well, it will work, but the output will be not what you are expecting, right? The output is not a data frame. So basically, when you are assigning it to a variable and you are naming it hyphen, DF,
+
+Unknown Speaker  24:11  
+that is a conceptual mistake. So the group by function itself does not return a data frame.
+
+Unknown Speaker  24:20  
+What it returns is a group by object, which is another pandas object, and that object has certain methods that, when invoked, returns an actual data frame. But the output of group by is not a data frame.
+
+Unknown Speaker  24:39  
+Keep that in mind, output is of group by is always an object. Which is this object, object of this class.
+
+Unknown Speaker  24:48  
+So that means you really cannot use group by
+
+Unknown Speaker  24:53  
+this way. So let's
+
+Unknown Speaker  24:56  
+change the data with data, the variable net, let's call it.
+
+Unknown Speaker  25:00  
+Grouped USA. So we know that grouped USA. Why did I take the DFA? Because I know that it's not a DF, right? I just wanted to show you. So let's say grouped USA is just a variable, so the variable cannot print itself, but you can invoke some function on these variable, on these object, and those variable, those function will spit out something. So let's say if you try to print out the count. So now what it will do, since we grouped by state, it will add a column here which is state. So state is now used as a column index and all other columns. What it is telling you is, what is the count of date time, what is the count of city, what is the count of country, and so on. So basically, what it says, take all the data, group everything into different buckets by states like a, k, l, Arizona, these that all of these states, now there would be certain number of rows within each buckets. Now, with those number of rows, now I can apply different function
+
+Unknown Speaker  26:11  
+to get some aggregate data, which we just said, rolled up data, right. So now, if I do apply the count function, what it is telling me is, how many rows are there that has marked state as Arkansas, and among those many rows, how many dead time column is there? How many City column is there? How many Country column is there? And so on so
+
+Unknown Speaker  26:37  
+on. Now, the reason we are getting same value across each row is because we already did a drop in a up there. So obviously, if there are 300 rows with a state code of a k, then all the columns will have 300 values, and that's what you are saying.
+
+Unknown Speaker  27:00  
+Okay, so now if I try to find the total. So now let me show you one thing. So now I know that let's say my let's take the DC, because DC only has seven, right. So now, if I want to just manually See, I'm going to take the USA DFO,
+
+Unknown Speaker  27:22  
+dot lock. And I'm going to say
+
+Unknown Speaker  27:27  
+dot.
+
+Unknown Speaker  27:30  
+Oops, not stack state equal to DC.
+
+Unknown Speaker  27:34  
+So I'm
+
+Unknown Speaker  27:48  
+What did I do? Oh, bad syntax, sorry. I
+
+Unknown Speaker  28:05  
+hang on, what am I missing here? I think
+
+Unknown Speaker  28:10  
+it was looking for a double equals, and he only did a single one. Oh, did I do a single equal? Is that what it is saying? I think so. Ah, okay.
+
+Unknown Speaker  28:22  
+Thank you. Okay, so now I know that there should be seven, because earlier from the group by, I already found that there are seven that has a state of DC.
+
+Unknown Speaker  28:32  
+And now if I do a location filter, just to make sure that there are indeed seven, so yes, I do see that there are seven rows that have state DC in it, right? So now,
+
+Unknown Speaker  28:50  
+so count is once one aggregating aggregate function, right? What if, if I want to see the sum of everything, right? So what do you think will happen if I use a SUM function instead. For example, let's say if I want to do instead of count, if I want to do some. Do you think this is going to work? Is it going to give me some of all the times and so on?
+
+Unknown Speaker  29:19  
+Because I don't know that. Need the count. I need the total sum. Basically, I need to know
+
+Unknown Speaker  29:25  
+all of these seven sightings that has happened in Washington. What was the total duration that has happened? So can I just take my grouped object, which is grouped USA, and apply the sum function on it?
+
+Unknown Speaker  29:38  
+Yes or no,
+
+Unknown Speaker  29:40  
+it should be for the
+
+Unknown Speaker  29:44  
+particular state.
+
+Unknown Speaker  29:47  
+It should be for that party, not for particular state. It see group USA has information of all 50 states. All 50 groups are already there.
+
+Unknown Speaker  29:58  
+But when you are doing some.
+
+Unknown Speaker  30:00  
+You are doing some of every column, essentially. So it is now trying to going to do some of dead time, some of cities, some of states, some of country, each column will so now, obviously some of duration makes sense, but what is some of country? Or what is some of Chef? It is, these are not even numeric column, right? So that doesn't make sense. So when you do this, you will get something, but that is going to be jewel ish,
+
+Unknown Speaker  30:29  
+so you see what it is doing the sum, when applied to,
+
+Unknown Speaker  30:35  
+let's say city.
+
+Unknown Speaker  30:37  
+I don't know where this is even getting this from. Currently, it is getting us, us, us. Oh, right, right, yeah. So it's basically taking all the values that are there in the stream column, and it is concatenating so you will get something, but it will be extremely hard for you to basically get what you are looking for. It's not for sure I know, because some the same function that does a arithmetic sum for numeric columns, it also does a concatenation for the string column.
+
+Unknown Speaker  31:12  
+So essentially, that's what it is. But if you apply, let's say something like mean, that will probably actually result in an error, because mean for string does not make sense. I have not even trying this. Yeah, that will result in an error because the aggregation function that pandas internally uses to find the mean that failed, because you really cannot divide a string by a number. So count will work. Some will work for everything, but it will give give you nonsense values. So then, what is it you need to do if you want to see the total sum of duration for every state? So
+
+Unknown Speaker  32:04  
+so we know that this gives me bogus thing, right? But what we can do, instead of applying the sum on the whole data frame, I can take
+
+Unknown Speaker  32:17  
+a particular column and apply the sums specifically on that column, which happens to be this duration seconds, because that is the column of our interest. So instead of applying it on the whole data frame, I'm going to apply it on a series, and then this will give me another series that gives me shows me that for each and every state, what is the total amount of second that UFOs were visible across all the different events that happened?
+
+Unknown Speaker  32:50  
+So that's why you should always use this on numeric columns. Whenever you are using aggregate and aggregate function like this, make sure your column is integer or float. Otherwise, some function would probably give you something, but meaningless. But other aggregation functions, such as mean, it will probably not give you anything.
+
+Unknown Speaker  33:12  
+So always make sure that you are applying it on the right data. Data right column with the right data type.
+
+Unknown Speaker  33:22  
+Okay? So that part is done
+
+Unknown Speaker  33:26  
+that's essentially, is basically group by right. So, and then if you want to save it somewhere, you can basically take these and put it in a
+
+Unknown Speaker  33:41  
+new column, I guess. So since duration was converted to numeric, it can be now summed up per state well, which we already did here, which we already did?
+
+Unknown Speaker  33:57  
+Okay, so now if you save it, so let's say state wise duration. So now state wise duration is basically going to be a series. So now we can apply this letter and create a nice looking result data set, basically. So we can basically create a new data frame that will say, hey,
+
+Unknown Speaker  34:24  
+data frame, and
+
+Unknown Speaker  34:28  
+I can create a data frame. So let's do,
+
+Unknown Speaker  34:34  
+let's do,
+
+Unknown Speaker  34:40  
+actually, we can do two things, number of sightings, which we can get from count, and
+
+Unknown Speaker  34:48  
+it will be group USA, right? What did it got grouped USA? Yeah, so it will be a.
+
+Unknown Speaker  35:06  
+And this thing, I'm trying to create a data frame on the fly to create a result so it has to be passed as a dictionary. Another thing you will probably you have probably noticed that sometime I, instead of writing everything in a one long line, and sometimes write it like this way that makes your code much more human readable. So
+
+Unknown Speaker  35:29  
+if you want to put some in one and then
+
+Unknown Speaker  35:35  
+counting another, so total number of sighting would actually be count and then I total visit time, if you want to print it this way,
+
+Unknown Speaker  35:48  
+right? So this way, what we are doing is we are applying the two different aggregate function on the first and the second, sorry, on the same grouped
+
+Unknown Speaker  35:58  
+the object. We are applying a count to get the number of sightings, and we are applying a sum to get the total number of time. And then it will print like this.
+
+Unknown Speaker  36:09  
+Oh,
+
+Unknown Speaker  36:11  
+what did I do? Now? I forgot a comma. I think you're missing the comma.
+
+Unknown Speaker  36:16  
+Oh, here, yeah,
+
+Unknown Speaker  36:20  
+yeah. And then you'll get that data set. So that gives you a nice result that basically sums the whole thing up right now, this might sound like a lot, but if you think about it, all you did, you can actually do it in one line.
+
+Unknown Speaker  36:36  
+So essentially, you can take your USA UFO data frame, and then say group by and group by, you can say, hey, let's group by state. And you can do a sum, and that one sentence will give you everything. But obviously we don't need everything, so in that same sentence, you can provide the name of the column that you want to sum for which is your duration seconds.
+
+Unknown Speaker  37:07  
+And the reason I'm building it this way because we are going to use this syntax later also, so duration seconds, and this one statement will basically give you one series where you will have all the states and the total count.
+
+Unknown Speaker  37:22  
+If you want to find average number of sighting you can take the same sentence and change the sum to mean, and that will give you the average number of sightings that has happened per state. If you want to take
+
+Unknown Speaker  37:39  
+do any other aggregations, let's say, if you want to see which state had minimum amount of sighting, or minimum duration of sighting, you will get this way. So it basically says, for state, AK, the minimum citing duration was one second, or point five second, or point two second, like that. You can change it to Max, you can change it to my point is you can use any aggregation function that you know, which is some count, mean Max. I think STD also. You can use which is standard deviation, yeah, STD also. So you can basically apply any aggregation function on top of a group by object, and if you do want to apply that for a specific column, then you have to pass the column name here, and then it will give you just for that column name.
+
+Unknown Speaker  38:38  
+Now, in the next activity, what we are going to do. We are going to do multi group by thing, and then we will break into a breakout room, and then you will practice this on your own. So in the multi group by
+
+Unknown Speaker  38:56  
+we are going to take that same data frame,
+
+Unknown Speaker  39:02  
+UFO sighting,
+
+Unknown Speaker  39:07  
+sorry I did not Select my kernel yet.
+
+Unknown Speaker  39:21  
+This cell didn't run before. Okay, so we are going to get the same
+
+Unknown Speaker  39:27  
+and, yeah, I want, if you want to see the shape, it will show the shape. Okay, so this one is basically showing that same thing that I showed you before in a one line. If you want to see
+
+Unknown Speaker  39:42  
+the group by shape and see the average duration of seconds. So if you do this, then see how it is showing instead of grouping by country, here I am grouping by shape and then showing for each shape what was the average number of.
+
+Unknown Speaker  40:00  
+Relation that the UFO was visible so far, changing shape. There was this and so on. So this one line gives me this whole thing. Instead of saving the group by in a different object in the previous activity I showed you in a different way, sorry, a step by step, way broken down into steps, just to make sure that you don't make the mistake thinking that group by itself gives you a data frame because it does not. It gives you an object, and on top of that object, then you can do apply different aggregation function.
+
+Unknown Speaker  40:33  
+So that's what that is. Now what we are going to do here is,
+
+Unknown Speaker  40:40  
+yeah, this thing we know we have already done, what we are going to do here is we are going to do multiple aggregation. So how do we do multiple aggregation? So what if, instead of only finding the duration,
+
+Unknown Speaker  40:56  
+what is called the mean, or some or anything, what if? If I want to find something like this, let's say we want to find Mean, Median mode, some count everything. So what do I need to do?
+
+Unknown Speaker  41:13  
+So let's say if I take my data
+
+Unknown Speaker  41:18  
+group by with whichever column that I want to here, they're showing shape, which is fine. I can group by shape also. And now
+
+Unknown Speaker  41:28  
+I'm going to take what is the name of the column, duration seconds.
+
+Unknown Speaker  41:39  
+So let's say I'm going to take the column duration seconds, and then on this if I do dot sum, you know that it will give me the sum. If I do dot mean, it will give me the mean. But what if I want to create a data frame that will give me mean and some both? What function am I going to use? So that's the question here.
+
+Unknown Speaker  42:04  
+Comment says the Ag function, yes. So the general function to do this is called Act which is aggregation and then aggregation function, you can actually specify what type of application you want to do. So if you provide some here, so then this will actually give you a sum like this. But
+
+Unknown Speaker  42:29  
+these aggregation function, instead of providing a single aggregation type, you can provide a multiple aggregation type. So you can say some, you can say, mean.
+
+Unknown Speaker  42:44  
+Let's also do a count. First.
+
+Unknown Speaker  42:49  
+You can say count, sum, mean. Let's also do median.
+
+Unknown Speaker  42:56  
+And since we are at it, let's also do standard deviation to see whether all of them work,
+
+Unknown Speaker  43:04  
+and there you go.
+
+Unknown Speaker  43:05  
+So now you have, in one shot, what you did is you grouped by a certain column, which is shape, and for each group of data, you found all the statistics that you wanted to find, which is called some mean, median and standard deviation
+
+Unknown Speaker  43:23  
+in one shot.
+
+Unknown Speaker  43:36  
+Okay,
+
+Unknown Speaker  43:38  
+then the next thing we are going to do. So here we went from single aggregation to multiple aggregation.
+
+Unknown Speaker  43:46  
+But when I said earlier that in group by here, also you can pass a list. Why?
+
+Unknown Speaker  43:54  
+Because, what if, if you want to do multiple level of grouping,
+
+Unknown Speaker  43:58  
+so what if you want to do, let's say, state and country, or the other way, country and state. So what you can do is you can take your data frame
+
+Unknown Speaker  44:10  
+and do group by
+
+Unknown Speaker  44:14  
+and because the group by function does allow you to pass multiple things, you can pass multiple things, and we are going to pass country and state, and on top of that, then we are going to apply any aggregation function. So which will be,
+
+Unknown Speaker  44:35  
+well, first, we have to pass the name of the column first. Otherwise, it's going to use produce meaningless data.
+
+Unknown Speaker  44:46  
+So we'll pass duration seconds column, and on that duration second, you can do add, and let's say, do some
+
+Unknown Speaker  44:57  
+count mean, let's just.
+
+Unknown Speaker  45:00  
+230,
+
+Unknown Speaker  45:02  
+sorry,
+
+Unknown Speaker  45:06  
+I forgot this. And I also forgot to put the list overall.
+
+Unknown Speaker  45:12  
+Okay, so now, if you do that, now look at the left hand side. What do you see is displayed here? Does it look familiar how the column is displayed?
+
+Unknown Speaker  45:25  
+Multiple index,
+
+Unknown Speaker  45:27  
+multiple index, exactly. So now, on the column level, on your axis zero, you have a multi index. Why? Because I have multiple level of grouping. I have used with two columns, and to check on that, what you can do is, let's call it like
+
+Unknown Speaker  45:49  
+group
+
+Unknown Speaker  45:51  
+result, DF or something,
+
+Unknown Speaker  45:55  
+so that
+
+Unknown Speaker  45:58  
+I can actually check
+
+Unknown Speaker  46:02  
+what is the columns? So if you try to print the columns, you see the way that the columns is, sorry. Columns is some count of me. No, my bad. I want to see what is the index.
+
+Unknown Speaker  46:16  
+So now you will see that index is actually a multi index that has a tuple for each the first item of the tuple is the country. Second argument of the tuple is the state code. Why? Because we grouped first by country and then by state. Therefore, as a result, we are getting that data frame that has a
+
+Unknown Speaker  46:41  
+multi level index column.
+
+Unknown Speaker  46:54  
+Okay, now what about the top of this?
+
+Unknown Speaker  46:59  
+So here,
+
+Unknown Speaker  47:04  
+when I'm doing,
+
+Unknown Speaker  47:15  
+yeah, actually,
+
+Unknown Speaker  47:18  
+yeah, the top is a single because I'm only passing one column here,
+
+Unknown Speaker  47:25  
+yeah,
+
+Unknown Speaker  47:27  
+that's fine. If you pass it this way, then the top will not come like that. So one thing is, if you see the way that our result is printed, we have a multi level column, but our
+
+Unknown Speaker  47:39  
+sorry, multi level index, but our column header are not multi level, and that's why, when I said, Show me the columns, it did not show multi levels there.
+
+Unknown Speaker  47:52  
+It did show one level.
+
+Unknown Speaker  47:55  
+Where did it go? Here? Just one level, some count and mean. But if you look into the output here, you see there is a one way of doing it, where the column header, the column on which you are doing the duration, shows as a first level, and then in the second level, count, mean and sum comes in.
+
+Unknown Speaker  48:15  
+Do you see the difference between the output that I produced and the output that was already given?
+
+Unknown Speaker  48:22  
+Do you recognize the difference?
+
+Unknown Speaker  48:25  
+Look at the column header. I only have some count and mean
+
+Unknown Speaker  48:31  
+they had the name of the column at the first level, and then in the second level had count sum and me, why I
+
+Unknown Speaker  48:49  
+any guess,
+
+Unknown Speaker  48:53  
+because you aggregate in good duration, seconds.
+
+Unknown Speaker  48:57  
+Yeah, so basically, the idea is you can do these. If there are, let's say, multiple numeric columns. So there are different things you can there can be multiple so first here, there could be multiple grouping level. If multiple grouping level is there, you provide it like this. On the aggregation side, if there are multiple aggregation result you want. So you can pass this way similarly. If there are multiple numeric column like this, then you have to pass a list of a list. Why? So let's say you had one numeric column that says duration seconds, and let's assume there is another numeric column that, let's say was duration hours, or something like that.
+
+Unknown Speaker  49:44  
+So then, what if, if you want to apply this some counter mean aggregation for both of these columns, so obviously, then you have to pass this column with the square brackets, because that's why you pass and then you have to pass.
+
+Unknown Speaker  50:00  
+Us a list of these.
+
+Unknown Speaker  50:04  
+Actually, was there any other is that? Is that? Is that what you did? Because it looks like you're doing a list of
+
+Unknown Speaker  50:13  
+a list. Hang on one second. Let me check whether there are any, oh, longitude. Longitude is another one. We can try it with longitude. I was just trying to see what are the numeric columns are there?
+
+Unknown Speaker  50:25  
+Yeah, sorry, Jesse, go ahead. What your question was. So, so you said,
+
+Unknown Speaker  50:30  
+I think
+
+Unknown Speaker  50:33  
+it's trying to find
+
+Unknown Speaker  50:36  
+here. Yes, yeah. So, so you're passing in
+
+Unknown Speaker  50:42  
+a list, it looks like you're Why did, why are each of the columns in square brackets, rather than like just a list of columns? It
+
+Unknown Speaker  50:53  
+looks like a list of a list. Okay, all right. I think that's the right way. Yeah, I think I'm ready. Okay, so when I do that, actually, no
+
+Unknown Speaker  51:05  
+could not find a column longitude. What
+
+Unknown Speaker  51:09  
+wasn't longitude a column?
+
+Unknown Speaker  51:12  
+Was it in that data frame? I
+
+Unknown Speaker  51:31  
+Yeah,
+
+Unknown Speaker  51:34  
+if I do,
+
+Unknown Speaker  51:38  
+if I do this,
+
+Unknown Speaker  51:41  
+dot,
+
+Unknown Speaker  51:43  
+columns.
+
+Unknown Speaker  51:46  
+I Oh,
+
+Unknown Speaker  51:48  
+the data is so bad. You see that longitude column name actually has a space in it.
+
+Unknown Speaker  51:56  
+And this is again, another good learning. Never take anything for granted whenever you are getting data, especially from questionable search sources. I said no one knows what could happen. That was good,
+
+Unknown Speaker  52:10  
+yeah.
+
+Unknown Speaker  52:15  
+Okay, so that works. Now, let's when I print that,
+
+Unknown Speaker  52:21  
+see what is going to happen now. So now you have three things that you are doing multiple times. First, on the left hand side, you are doing grouping on multiple levels, country level and state level.
+
+Unknown Speaker  52:36  
+Then when it comes to do the aggregation, you are doing aggregation on multiple columns, the duration column and the longitude column.
+
+Unknown Speaker  52:48  
+And then for each of the column, you are doing multiple types of aggregation here. In this case, this example, I'm doing some count and min,
+
+Unknown Speaker  52:59  
+right? Wow. And that's, that's why. So this is very rich. So, so now if you, let's say you have only one column that you want to do. Let's say this.
+
+Unknown Speaker  53:11  
+So you are not using two columns, but you are passing one column with a pair of two nested square brackets. So then what you will happen? What will happen that you will get that same kind of structure, but now your column will also be multi level index. And the reason in for in our first case, the multi level index did not happen in the column is because we did not use the function. Use this feature to its fullest extent. We assume that, well, we are only going to do this for one any one kind of column, and when you do that, then pandas doesn't bother printing that column name on a different level, because the understanding is that you know what you are doing. You only want it for one column, and you know what the column name is, but the moment you add another pair of square brackets, you will get this right, and then you add another column, then you will get that and so on. So
+
+Unknown Speaker  54:11  
+then if you do a dot columns, we'll show it in there. Yeah, that's, that's what I'm going to do now. So now, obviously, you know, like you, it will now show that there is a multi level column index there, right? So columns?
+
+Unknown Speaker  54:28  
+Where did it go?
+
+Unknown Speaker  54:33  
+How about which one is I just printed last that
+
+Unknown Speaker  54:42  
+was right above. Where
+
+Unknown Speaker  54:44  
+is it? This one? Ah, yes, yep. So now you see in the column it is showing no, not this one. I didn't run this one or just above that. Yeah, there
+
+Unknown Speaker  54:56  
+this one, right?
+
+Unknown Speaker  54:58  
+Okay, yeah. So.
+
+Unknown Speaker  55:00  
+So let's see what it says, date, time,
+
+Unknown Speaker  55:04  
+city, state, country, ship, I think you want to do group result. Dot the RDF instead of converted UFO, DF.
+
+Unknown Speaker  55:17  
+Oh, right, yes. So I'm trying to see the column of group result. I was looking at the columns for wrong data frame. So if you look at the column for the group result, yes, this is what I was expecting. So now column is also just like your index here. The column is also a multi index, which has two levels, duration seconds, some duration seconds, count and so on. And same thing for longitude,
+
+Unknown Speaker  55:43  
+which kind of makes sense now, right?
+
+Unknown Speaker  55:48  
+So now the question is, what if you don't like this? Because this multi level column sometimes, to be frank, open and honest with you, this is really painful dealing with multi level columns. What if? If I want to combine these into flatten these out into a single level column. So I want to say something like duration second sum, duration seconds count, duration seconds mean, then longitude sum, longitude count, longitude mean, what did you do? I
+
+Unknown Speaker  56:34  
+any idea?
+
+Unknown Speaker  56:37  
+There are many, many different ways you can do this, by the way.
+
+Unknown Speaker  56:50  
+So my group result, DF has columns which we have seen that is a list of tuple, right? What I want to do? I want to take the first item of a taco and append the second item, maybe with a hyphen or underscore or something, and call that the new column name.
+
+Unknown Speaker  57:17  
+So how can I do that?
+
+Unknown Speaker  57:19  
+What is the most? I'd say intuitive thing that comes into your mind.
+
+Unknown Speaker  57:34  
+Blue present. DF, right, that was the name I used. Yeah. I
+
+Unknown Speaker  57:43  
+So what I can do is I can basically put these new column names using a list comprehension.
+
+Unknown Speaker  57:57  
+In one of the activity in last class, someone posted one solution right where the solution shown was inelegant, and someone posted using a list comprehension.
+
+Unknown Speaker  58:08  
+So can someone help me writing that list comprehension? There is it like brackets and then call like, call for call in group pf.com, yeah. Well, first you have to write the operation that you need to do, which in this case is I'm going to basically, for each one of these, I'm going to join these two using, let's say a hyphen, right? So you can do string, hyphen, dot join,
+
+Unknown Speaker  58:39  
+and you can say column,
+
+Unknown Speaker  58:42  
+oops, join column, yeah, that's fine for
+
+Unknown Speaker  58:50  
+column
+
+Unknown Speaker  58:52  
+in
+
+Unknown Speaker  58:56  
+group, result, DF, dot, columns.
+
+Unknown Speaker  59:04  
+And then you can display
+
+Unknown Speaker  59:10  
+and look what happened.
+
+Unknown Speaker  59:13  
+So now this column is not multi level anymore. We took the first value, appended that with the second value, and we got a flattened out column.
+
+Unknown Speaker  59:24  
+I didn't know you could do a full time.
+
+Unknown Speaker  59:27  
+Yeah, you can,
+
+Unknown Speaker  59:30  
+yeah, because when you are doing four column in columns, what are you getting? You are basically looping through these lists that we printed up there, right that multi index list, you are basically looking through this list. Now each item that you are getting from this list is a tuple. And then when you are doing hyphen, dot join and providing a column, you are basically providing a tuple, which basically is nothing but another list.
+
+Unknown Speaker  59:58  
+So in Python, you take.
+
+Unknown Speaker  1:00:00  
+Any random list, and you use a string, let's say hyphen, comma, underscore, something dot join, and you pass a list, it will basically print the list item separated by that character that you are doing join with. So essentially, here, each column is a topple, but topple is internally a list. Therefore it works. It's, it's hilarious that there is a mutable list of immutable items, and so you're getting, you're overriding the immutable item with a mutable item, yes, and then, and then that's just automatically converting it into, like a flatten call to it, yeah, yeah,
+
+Unknown Speaker  1:00:38  
+yeah. What got me was the like, you do the operation and then, like the for loop after that, instead of that is, that is what the syntax is. Yeah, I've seen that for the if statement, and I just thought of it as, you know, ternary, but I didn't think about it for like, four loops. Yeah.
+
+Unknown Speaker  1:01:02  
+I
+
+Unknown Speaker  1:01:03  
+there is actually another way of solving this.
+
+Unknown Speaker  1:01:07  
+So what you can do,
+
+Unknown Speaker  1:01:10  
+you can take that result columns
+
+Unknown Speaker  1:01:17  
+and
+
+Unknown Speaker  1:01:19  
+well you are going to assign something with the columns. So to assign something, you can take the original set of column, which is a multi index column,
+
+Unknown Speaker  1:01:31  
+which is this, and then apply a function called two flat index,
+
+Unknown Speaker  1:01:39  
+and look what happens. Oops, sorry.
+
+Unknown Speaker  1:01:49  
+Now here you are using a built in function using a instead of using list comprehension yourself. So this function is written in a way that does it using its own logic. And the logic for that function is basically
+
+Unknown Speaker  1:02:04  
+concatenate in a way, so that the concat concatenated version looks like a tuple. Even though it's not a tuple, it says list.
+
+Unknown Speaker  1:02:12  
+So it took the first item of the list, put a comma, then put the second item,
+
+Unknown Speaker  1:02:19  
+then put a pair of parentheses around it.
+
+Unknown Speaker  1:02:22  
+So that is something the flat index does by itself. I suppose you could probably do that to the actual index, right, like the index survey or index list.
+
+Unknown Speaker  1:02:33  
+I'm not sure what. So if you, if you change the word columns to index,
+
+Unknown Speaker  1:02:41  
+oh, yeah, yeah. You can also do that on the index, yes.
+
+Unknown Speaker  1:02:45  
+So because when you are dot columns and dot index both returns you and index, and if that index happened to be a multi level index, then you can apply to flat INDEX function on top of that, yes, you pass in like a hyphen deliminator to delimiter to get what we got before, like, here, yeah, is that possible? I
+
+Unknown Speaker  1:03:09  
+I don't know. Do you?
+
+Unknown Speaker  1:03:12  
+I don't know, function recognition doesn't seem to accept one,
+
+Unknown Speaker  1:03:17  
+yeah, just kind of curious. That'd be cool. Yeah, I know,
+
+Unknown Speaker  1:03:23  
+yeah.
+
+Unknown Speaker  1:03:32  
+Okay, so that was enough of demonstration, so let's do one thing.
+
+Unknown Speaker  1:03:39  
+Let's do one activity in your groups, and that activity. So the first one, that activity, number two, I'm just keeping that because this is more fun. The fourth one, which is where that this multi level thing will come in, right? So,
+
+Unknown Speaker  1:03:58  
+and the data here, you will see one thing that the
+
+Unknown Speaker  1:04:09  
+Yeah. So if you open the file, the Jupyter Notebook file, you will see that the data is actually not given. I saved the data just in case, but here they are actually reading the data directly from a web location where the data is not given as a CSV file.
+
+Unknown Speaker  1:04:30  
+So it's the same read CSV, but instead of providing a path to a file, you can actually pass a URL to the same read CSV function, and it will read that CSV file off of the web, on the fly. Does that do like a curl, like inside the function? That's crazy, essentially, it is exactly, essentially the implementation internally. If you look into it, I'm sure it's doing a curl there. But you don't have to do go that low level. You just eat, use, read CSV, as if nothing which.
+
+Unknown Speaker  1:05:00  
+Just like your local path, and it will magically work.
+
+Unknown Speaker  1:05:07  
+Okay? So get started. You will see that there are the prompt here, that there are there. It will be kind of basically the same thing, just multiple different question, which will allow you to do grouping and different aggregation, depending on these seven questions that there are that are being asked. So let's do for 15 minutes. I suppose I think that should be fair. 10 minutes might be little tight. Let's see what's the suggested time here. So
+
+Unknown Speaker  1:05:43  
+uh
+
+Unknown Speaker  1:05:46  
+so instructor, demonstration,
+
+Unknown Speaker  1:05:50  
+15 minutes, yeah.
+
+Unknown Speaker  1:05:54  
+Um So, Karen, can you open the room for 15 minutes?
+
+Unknown Speaker  1:05:59  
+The breakouts? Yeah, multi index, yeah. 15 minutes this one,
+
+Unknown Speaker  1:06:04  
+and then we'll do a review after you guys come back, and then we'll take a 10 minutes break again.
+
+Unknown Speaker  1:06:10  
+Here we go.
+
+Unknown Speaker  1:06:16  
+Hey, but no,
+
+Unknown Speaker  1:06:18  
+yes
+
+Unknown Speaker  1:06:21  
+on the aggregate aggregation solution, they were talking about the level zero and level one approach. I don't think we went over there. But can you go over that really quick? I think that's a second way to flatten the index. Just wanted to know, like,
+
+Unknown Speaker  1:06:37  
+you know how? Yeah. So there was a third, okay, so I'm going to go through everything. So I'm going to go through all of this thing anyway, right? So, okay, the first one was it pretty simple.
+
+Unknown Speaker  1:06:53  
+What did you do for this one?
+
+Unknown Speaker  1:06:59  
+Using the main
+
+Unknown Speaker  1:07:01  
+audio array or our delay? Yes, this is one. It depends on where you're going to be using me, because we've made some confusing
+
+Unknown Speaker  1:07:12  
+Okay, so let's see so you have delayed flies, right. Dot group by so first you have to see which column you are going to group by with. So which column Do you think you have to unique, carrier, unique carrier, carrier, right? And then you are asked to find arrivals delay. So what did you do? Here?
+
+Unknown Speaker  1:07:41  
+You put the bracket, bracket or delay bracket, bracket,
+
+Unknown Speaker  1:07:49  
+yeah,
+
+Unknown Speaker  1:07:51  
+and then, and then, dot mean. Dot mean yeah.is.
+
+Unknown Speaker  1:07:58  
+That? Oops, sorry, yeah, typo
+
+Unknown Speaker  1:08:02  
+that meet, is that how you guys did?
+
+Unknown Speaker  1:08:07  
+If you want it to display the way they have it in the example, you do the double square brackets. But yeah, that's about it exactly. So then you have to use the double square bracket, and that way,
+
+Unknown Speaker  1:08:22  
+yeah, it will print like this.
+
+Unknown Speaker  1:08:28  
+That's a sexy explanation. I like that.
+
+Unknown Speaker  1:08:32  
+Yeah.
+
+Unknown Speaker  1:08:33  
+Can you do this without using the mean as a function? Has anyone done that? I
+
+Unknown Speaker  1:08:43  
+so this is one way of doing it, right? So let me comment this out. I'm going to show you a couple of other way you can write the same thing.
+
+Unknown Speaker  1:08:53  
+Remember, we said this?
+
+Unknown Speaker  1:08:59  
+So you see this statement is same as the first one, where, instead of calling the mean as a function, you are calling and as a function and passing mean as a parameter, and
+
+Unknown Speaker  1:09:10  
+you will get the same result,
+
+Unknown Speaker  1:09:14  
+right.
+
+Unknown Speaker  1:09:16  
+There is another way of achieving the same result.
+
+Unknown Speaker  1:09:20  
+What you can do is, let's say here you are basically specifying which columns to apply on. If you don't specify these columns here, then you will get a mess, right, because now it pandas is going to try to apply mean on all columns.
+
+Unknown Speaker  1:09:37  
+So that's why we were specifying this before, but the other way of doing this is this. I don't know whether any of you have done this. So inside, AG, you can actually pass it as a key value pair. So you can if you want different statistics for different columns. So let's say for the first column, which is arrive.
+
+Unknown Speaker  1:10:00  
+Delay. I want this statistics called mean for some other column, I need a different statistics so you can inside the aggregation function, you can provide column name and the statistics that you want to derive as a key value pair as a dictionary,
+
+Unknown Speaker  1:10:17  
+and that will also produce the same result. So can you chain those aggregates? So could you do like another, AG, and then like a different column and a different like something else? No, you cannot. Well, if they see this aggregator is giving you a data frame, if you want to apply something on that data frame, yes, you can, I see, but that's not, I believe you are asking, yeah, I was trying to figure out how I do a mean of one column or some of another.
+
+Unknown Speaker  1:10:46  
+Yeah. So if you want to do another mean of one and some of other, you can actually do this here. So if you take, let's say, another column, okay, another key value character, and then you provide another aggregation function that you want to use, like that.
+
+Unknown Speaker  1:11:02  
+You don't need chaining for that. That is why this specific syntax exists, actually. So there are three ways right to do that.
+
+Unknown Speaker  1:11:12  
+Second one. How did you do it?
+
+Unknown Speaker  1:11:16  
+It's basically the same as the first one, only with another column called
+
+Unknown Speaker  1:11:24  
+like that, right? Yeah, yeah.
+
+Unknown Speaker  1:11:29  
+What would be the other way of writing the same thing
+
+Unknown Speaker  1:11:37  
+you could just do? Dot mean instead of
+
+Unknown Speaker  1:11:40  
+aggregating that, Yeah, but see when you do dot mean you have the list control. When you pass the column name as a list and then do a dot act, then you provide a mean sum, then you have more control. Instead of doing any of those, if you do it this way, which is using the key value pair, you actually have the most control of this. So let's say you want to pass this as key value pairs like a dictionary, so you can do arrival delay mean, and
+
+Unknown Speaker  1:12:15  
+you can do
+
+Unknown Speaker  1:12:18  
+what did I copy
+
+Unknown Speaker  1:12:21  
+this one, and you can do
+
+Unknown Speaker  1:12:25  
+next column, which is departure delay and whatever statistics you want, even though you didn't need to do this way, because both stats that you are doing for both column are the same. But this gives you an option like Jesse asked earlier, what if you want to do a mean for other media and for other for whatever reason. With this, it gives you the full control. And when you are passing the column name as a dictionary, you don't need to provide the column name here,
+
+Unknown Speaker  1:12:50  
+and that will give you the same result in this case, except with more control. Can you rename the columns when you do that, just so that we can keep track of like the operations you did on each of them,
+
+Unknown Speaker  1:13:03  
+can you read the work? Is there a way to, like, rename the columns when you're doing this? Because, wouldn't it be difficult to come Yeah, you can. You can just do a dot columns equal to you can provide, oh, just, just like, how you do column rename, right? Yeah. So what you are getting here is a data frame, and then you can change any data frame specific function tag on to the output of these and you can do whatever you want,
+
+Unknown Speaker  1:13:30  
+right? Yeah, thank you.
+
+Unknown Speaker  1:13:33  
+The other thing is, I have not tried that, but maybe try this way. What if? If I pass a key value pair,
+
+Unknown Speaker  1:13:43  
+but instead of value being a single string, what if, if I pass a list of the string, uh, sorry, a value that way, you will probably get a multi level, uh column,
+
+Unknown Speaker  1:13:55  
+hopefully. Let's see, yep,
+
+Unknown Speaker  1:13:59  
+you see what it did. So when you are passing only mean for, let's say, arrival delay. It's not printing that name of the operation. Mean here it was not because you are only passing one. The moment you turn that into a list, you are setting the expectation that, Hey, watch out, I'm passing you a list. There might be more than one in a list. So you better print what I just passed you, and then you can take that and then you can do dot columns and dot flatten index. Or you can use that list comprehension to basically combine the first level and second level if you want more clarity in your column names. So
+
+Unknown Speaker  1:14:39  
+we are good on the second prompt,
+
+Unknown Speaker  1:14:45  
+third prompt,
+
+Unknown Speaker  1:14:48  
+what is the third prompt, asking us to do?
+
+Unknown Speaker  1:14:59  
+Total.
+
+Unknown Speaker  1:15:00  
+Number of flights that were diverted for each career by the day of the week. Meaning, what,
+
+Unknown Speaker  1:15:10  
+some,
+
+Unknown Speaker  1:15:12  
+what kind of operation is this?
+
+Unknown Speaker  1:15:16  
+It's a group by, but what kind of group by?
+
+Unknown Speaker  1:15:22  
+In prompt one and prompt two, we did a group by with one column. What is the difference in third column? How did you guys do it?
+
+Unknown Speaker  1:15:30  
+Pass a list? Or
+
+Unknown Speaker  1:15:33  
+did you do that actually? Like I'm surprised. Why you guys are so surprised. The question was pretty simple, right?
+
+Unknown Speaker  1:15:43  
+So it's a group by where you are past using multiply multiple level.
+
+Unknown Speaker  1:15:55  
+So total number of flights. That means aggregation should be some on diverted so total number of flights. So this total basically tells me that I have to use some total number of flights that were diverted because of this diverted that means it tells me that I have to use the sum on the diverted column
+
+Unknown Speaker  1:16:18  
+right and then for each carrier, by for each carrier and by day of week. So there are two things for each carrier. That's why my first level of grouping is by carrier, and then by day of week. That's why my second level is day of week. So this is how you will read this, and then when you write it, run it, you will get a multi level index, with the carrier being the level one and the day of week being The level two.
+
+Unknown Speaker  1:16:51  
+Anyone did this any differently?
+
+Unknown Speaker  1:17:02  
+No, okay, how about from four,
+
+Unknown Speaker  1:17:11  
+total and average? What does this tell me? What is total and average mean?
+
+Unknown Speaker  1:17:21  
+So that means I have to do two aggregation right,
+
+Unknown Speaker  1:17:26  
+and then it says number of flights that were diverted and canceled. What does that mean?
+
+Unknown Speaker  1:17:39  
+That means I have to apply sum and mean for two columns, diverted column and cancel column.
+
+Unknown Speaker  1:17:48  
+And then it says for each carrier by day of week. That means I have to apply group by with two levels. So everything here is double.
+
+Unknown Speaker  1:18:02  
+Right? So,
+
+Unknown Speaker  1:18:08  
+so you will basically take your data frame
+
+Unknown Speaker  1:18:12  
+and do a group by on
+
+Unknown Speaker  1:18:21  
+two columns, right? Unique carrier
+
+Unknown Speaker  1:18:29  
+and
+
+Unknown Speaker  1:18:32  
+day of week,
+
+Unknown Speaker  1:18:35  
+which comes from the last part for each carrier by day of week.
+
+Unknown Speaker  1:18:40  
+And then we have to do the aggregation
+
+Unknown Speaker  1:18:45  
+on
+
+Unknown Speaker  1:18:47  
+two columns, because it says
+
+Unknown Speaker  1:18:51  
+canceled and diverted. So therefore I have to pass
+
+Unknown Speaker  1:18:57  
+canceled
+
+Unknown Speaker  1:19:00  
+comma diverted,
+
+Unknown Speaker  1:19:08  
+and then I have to do an aggregation. And these two, they asked us to do two aggregation. So I have to do a sum
+
+Unknown Speaker  1:19:21  
+and did
+
+Unknown Speaker  1:19:32  
+you guys have any problem understanding this?
+
+Unknown Speaker  1:19:36  
+This is all good. No, no. And then I did a head 25 just to give me 25 Yeah, I know I'm not doing that. I'm just let you get the idea. But above the last one I was trying to like do because I did a sum instead of the aggregate sum, and when I changed it to the way that you did it, Jupiter notebook yelled at me and said, That was a deprecated
+
+Unknown Speaker  1:19:59  
+which one?
+
+Unknown Speaker  1:20:00  
+There's the right there aggregate some like, I tried,
+
+Unknown Speaker  1:20:04  
+you know what?
+
+Unknown Speaker  1:20:06  
+Try?
+
+Unknown Speaker  1:20:07  
+I know this would, oh, you probably didn't put a double square bracket here.
+
+Unknown Speaker  1:20:15  
+No, I did. I think what I did, though, is I put an aggregate of
+
+Unknown Speaker  1:20:21  
+and then I put a sum in a square brace instead
+
+Unknown Speaker  1:20:26  
+around curly brace. Then, yeah, that was fine. I think what I did was put it in a curly brace.
+
+Unknown Speaker  1:20:35  
+Thank you. Yeah, it should be Yeah.
+
+Unknown Speaker  1:20:39  
+Okay, so that was number four, right? We were down to four, and then what's the fifth one?
+
+Unknown Speaker  1:20:52  
+This is kind of the same
+
+Unknown Speaker  1:20:55  
+total and average number. That means two aggregation for flights that were canceled and diverted. That means two different column you have to apply it and for each flight, origin and destination. So basically the exact same thing, except your group by is going to be on two different columns. The previous one group by was unique career and day of week. It is the exact same thing, except you are grouping by on origin and destination, everything else, the
+
+Unknown Speaker  1:21:24  
+same, cancel diverted remains the same, same, and sum and mean also remains The same.
+
+Unknown Speaker  1:21:39  
+How about the next one, number six.
+
+Unknown Speaker  1:21:44  
+Tell me what's the structure of this one.
+
+Unknown Speaker  1:21:52  
+Meaning how many levels were.
+
+Unknown Speaker  1:22:00  
+It looks like we have three indexes, unique carrier, origin and destination,
+
+Unknown Speaker  1:22:08  
+yeah, and then two columns or two levels of columns,
+
+Unknown Speaker  1:22:14  
+actually, it says total number of flights
+
+Unknown Speaker  1:22:19  
+that were diverted. So that means your aggregation will be some because it says total, and that sum will be applied on the diverted column. But then it says for each carrier, flight, origin, destination by day of week. So the output, sample output that is printed is not doing a justice to what the prompt is.
+
+Unknown Speaker  1:22:45  
+Which is kind of thing Jessica keeps complaining about all the time.
+
+Unknown Speaker  1:22:50  
+I know, I know. Yeah. So here what you have to do is you have to do four levels of group by not two. I
+
+Unknown Speaker  1:23:03  
+and this is what you are going to get. Aggregation would be single aggregation on one column, but the group by has to be on four levels,
+
+Unknown Speaker  1:23:13  
+that's all. And your output will also now have a day of week, because otherwise yet they're saying day of week, but output was not showing their feet at all.
+
+Unknown Speaker  1:23:24  
+Now, some of them are zero, but that's fine.
+
+Unknown Speaker  1:23:29  
+Actually, let me do a random sampling here,
+
+Unknown Speaker  1:23:32  
+just to see
+
+Unknown Speaker  1:23:35  
+whether this is
+
+Unknown Speaker  1:23:39  
+getting
+
+Unknown Speaker  1:23:41  
+some data, yep, not all are zero.
+
+Unknown Speaker  1:23:46  
+Yeah, because, since we are grouping by so granularly using four levels, many of these groups are basically having a total count of zero. That's why. But otherwise, this is this function. Is what I mean. This structure is working, and that is the right structure. So that is number six. Do we have one more number seven?
+
+Unknown Speaker  1:24:06  
+Huh? So this is where Ingrid you had question,
+
+Unknown Speaker  1:24:11  
+yeah.
+
+Unknown Speaker  1:24:14  
+Okay, so, so let's take any of these. Uh. Uh.
+
+Unknown Speaker  1:24:30  
+So so far I'm I was not saving it somewhere, but now let's say it somewhere.
+
+Unknown Speaker  1:24:39  
+So that's the data frame that we have from question number six. Now what they are saying is remove the multi index column by doing something. This is probably something that I did not talk about. So essentially, what they are saying is first you retrieve the first level. And the way to retrieve the first level.
+
+Unknown Speaker  1:25:00  
+Is, you know how, when you do columns, it gives you the columns, right? If it's a column is a multi level column, it will give you a multi, multi index, like here, diverted and some
+
+Unknown Speaker  1:25:14  
+so here, what they are saying is
+
+Unknown Speaker  1:25:18  
+get the column for the first level which there, you can do that using a function called get level values. And when you do that,
+
+Unknown Speaker  1:25:28  
+you will get only diverted, which is the top level of the column.
+
+Unknown Speaker  1:25:33  
+And similarly, if you want to get the second level, you just have to pass a one here, and that way it will give you the second level.
+
+Unknown Speaker  1:25:46  
+And then you take these two and actually, let's call it L zero. Let's call it L zero, and this is l1
+
+Unknown Speaker  1:25:59  
+and if you want to satisfy yourself just to make sure that it is actually getting the two levels, you can print L zero and l1 and you will see that both are giving now, even though it is a multi index, but since I'm only getting one level out of multiple level, it is actually giving me a single index for both diverted and some Now all you need to do is you need to do
+
+Unknown Speaker  1:26:25  
+L zero. Oops,
+
+Unknown Speaker  1:26:27  
+L zero plus l1
+
+Unknown Speaker  1:26:30  
+and that would be your new
+
+Unknown Speaker  1:26:33  
+what is called column name. Now if you want to add
+
+Unknown Speaker  1:26:37  
+any delimiter between it, like a hyphen or something you can do like L zero plus a hyphen, and then plus l1 and then you basically take this and slap it back onto the data frames columns,
+
+Unknown Speaker  1:26:55  
+and that's it. Your job is done. Now after you do that, you just have to clean the data frame, and you will get the two levels now concatenated using a hyphen side.
+
+Unknown Speaker  1:27:10  
+I think this one is a little bit easier to digest, because this one is yes version, because the flat index is a little bit confusing for me, but I like this way better. I don't know, yeah, sure. Whichever you like I if you ask me, I liked, actually, the list, this thing, that thing, because that seems like it gives you a little bit more control. But yes, I agree with you. This one, conceptually, it is simpler.
+
+Unknown Speaker  1:27:39  
+Thank you so much.
+
+Unknown Speaker  1:27:46  
+Okay, so that's all. Let's take a 10 minute break and come right at the bottom of the hour. Actually 12 minute. That will make it 12 minutes. So 830 will be back.
+
+Unknown Speaker  1:27:59  
+You just go up just a little bit to the output of what we just did.
+
+Unknown Speaker  1:28:04  
+I'm sorry say that again. You just scroll up just a bit so I can see all of the output that you just did. Oh, okay, on which one, this one?
+
+Unknown Speaker  1:28:13  
+Oh, the last one. Yeah, I just got nervous because it didn't look like the sample output. But then remember that we put the Day weekend, because the day of week is not there, and I added day of week there.
+
+Unknown Speaker  1:28:27  
+I thought you could do it by getting the index, like just doing a square bracket, 011, for the multiple levels. But I'm glad you showed the get level.
+
+Unknown Speaker  1:28:39  
+I didn't get you, I'm sorry. I was saying I thought you could do just
+
+Unknown Speaker  1:28:45  
+instead of doing the get level 00. Okay,
+
+Unknown Speaker  1:28:49  
+sub zero and column sub one. And I was like,
+
+Unknown Speaker  1:28:54  
+so I'll tell you, I think there is a difference what you are saying. So let's look at this. If you just get columns, right? Yeah, you can do sub zero, Sub Zero to get the first so you are saying this, and then, and then another one, like sub zero, so, like a multi dimensional array,
+
+Unknown Speaker  1:29:15  
+so square, like you did, square bracket zero, that should give you both, that should give you the top array. Oh, okay, you are saying this, yeah, but that will give you one, one value, one item, only, right?
+
+Unknown Speaker  1:29:28  
+Oh, got
+
+Unknown Speaker  1:29:30  
+it, actually. Now it would not first. You have run this the first letter, no, no, not first. Later, it will just give you one string. It will give you a scalar. That's what I'm saying. Yeah. So when you do this, you are getting a scalar then, but then, if you do this way, then you have to run the loop yourself, as opposed to that when you are getting L zero. So let's say, when you are doing this, if you print just L zero, what is it printing? You are getting this diverted.
+
+Unknown Speaker  1:30:00  
+It as a list, not just a single value.
+
+Unknown Speaker  1:30:03  
+So similarly, your l1 is also now a list.
+
+Unknown Speaker  1:30:09  
+Now what you said doing this way, it will work in this particular case, because you have only one column to deal with. What if you have multiple columns? So when you do L zero plus l1 you are basically side by side, parallely adding two list that have the same length.
+
+Unknown Speaker  1:30:28  
+So therefore you don't have to write a follow, yeah?
+
+Unknown Speaker  1:30:32  
+But then I would, I would have an incorrect pattern that will Yeah.
+
+Unknown Speaker  1:30:38  
+So that's why using this way that gives you a list is better.
+
+Unknown Speaker  1:30:47  
+Okay, we'll see you in nine minutes.
+
+Unknown Speaker  1:30:53  
+Okay, so let's think about another problem.
+
+Unknown Speaker  1:30:58  
+So with this aggregation function the built in one, right? We could do the standard one, like mean, median, mode, standard deviation,
+
+Unknown Speaker  1:31:09  
+or some
+
+Unknown Speaker  1:31:11  
+What if someone asks you, like, Hey, um, find the second highest value within each category. I
+
+Unknown Speaker  1:31:27  
+can you define custom
+
+Unknown Speaker  1:31:30  
+like, then just point out the function, yes. So that's what we are going to look into today, not today. I mean now, like, how you can actually pass your own custom defined function as a parameter to the aggregator function.
+
+Unknown Speaker  1:31:50  
+And there are two different ways of doing it, so we are going to focus on like how to apply that. So therefore we are when it comes to actually doing the custom function, we are not going to come up with some actually really complicated aggregation logic, but it could be there. One is this. Another example you can think of is if, let's say you want to find a weighted average,
+
+Unknown Speaker  1:32:16  
+right? So let's say you have a category and then different things have another column that has a different value, and based on that, you want to do a weighted average,
+
+Unknown Speaker  1:32:28  
+where you basically do a sum of value times weight, and then divide the whole thing by total count. So these are the things that you cannot do with any of the built in aggregated function, but you can still do it by writing a custom function or your own or
+
+Unknown Speaker  1:32:48  
+so what we are going to show now
+
+Unknown Speaker  1:32:52  
+is how you write a custom aggregator function.
+
+Unknown Speaker  1:32:57  
+So let's look into our data set. So the data set is basically the
+
+Unknown Speaker  1:33:02  
+same data set again, which is your UFO, like we had before. And if you want to do, let's say, a mean so you group by shape, and you want to find a total, like an average, of seconds for each shape, you can easily do that using a mean function, which is a built in aggregation function.
+
+Unknown Speaker  1:33:25  
+But if you want to do this, I mean, there is no reason for you to reinvent the wheel. But let's say, assume for a moment that your
+
+Unknown Speaker  1:33:37  
+mean is something that is not available as a built in aggregator, and you have to write that yourself. So how do you do it?
+
+Unknown Speaker  1:33:48  
+So what you can do is, let's say you are creating a new function you can and let's call it
+
+Unknown Speaker  1:33:56  
+average. I'm just using some name that is not the same name as the function itself, just to avoid any confusion.
+
+Unknown Speaker  1:34:06  
+Now, inside this average you can pass a parameter when you are declaring the function, and then parameter would be, let's call it a series.
+
+Unknown Speaker  1:34:21  
+So essentially, what you are doing it, you are passing a series or a list to the average function, and then you have to return the mean of that. Now, in order to do that, I am actually going to use a mean function here. But the point here is, even though I could write implement this custom logic in one line, but that is not the point. Let's say, instead of average, if these were weighted average, then you cannot just do series. Dot mean then you have to do some little bit more complicated algebra here. But instead of going.
+
+Unknown Speaker  1:35:00  
+Into there, we assume that, as if average is something that is more complicated, and we want to see how we can apply our custom AVERAGE function to our grouping functions, sorry, to our aggregation function, to see how whether we can pass this now, in order to do this, what we are going to do. We are going to take that same group by from here,
+
+Unknown Speaker  1:35:28  
+but we are just not going to do a dot mean here and see here very carefully what I'm going to do.
+
+Unknown Speaker  1:35:36  
+So this is my group by and this is the column that I'm going to apply it on.
+
+Unknown Speaker  1:35:42  
+So one way of doing it is you can do a dot apply.
+
+Unknown Speaker  1:35:49  
+So when I do dot apply, what is the first thing it comes to your mind. Whenever I do apply, what do
+
+Unknown Speaker  1:35:58  
+I do?
+
+Unknown Speaker  1:36:00  
+Yes. So now you can do a lambda
+
+Unknown Speaker  1:36:04  
+of, let's say
+
+Unknown Speaker  1:36:10  
+x, or let's say call, just a little bit more meaningful. So this is a column, basically,
+
+Unknown Speaker  1:36:17  
+and this column is going to be what?
+
+Unknown Speaker  1:36:22  
+So this column we are going to take these average duration, no, actually, duration seconds is going to be my column that I'm going to pass it.
+
+Unknown Speaker  1:36:39  
+But when I'm doing this apply, where did it go here?
+
+Unknown Speaker  1:36:44  
+So in here, I have to basically say, hey, what my column is going to look like. And for that, I'm going to create a series, PT, dot, series. And inside that series now I'm going to pass a key value pair, the key will be and I'm going to write it in a new line so that the syntax is clear. So to the lambda,
+
+Unknown Speaker  1:37:11  
+what I am doing is, inside lambda create a series with a key and a value,
+
+Unknown Speaker  1:37:16  
+where the key will be the name of
+
+Unknown Speaker  1:37:22  
+the column, or the header of the column that you want to see in your final output. So let's call it average duration, like a good, meaningful, human readable name, so that will be your key,
+
+Unknown Speaker  1:37:38  
+and then as a value, this is where you are going to pass your average function that you defined.
+
+Unknown Speaker  1:37:47  
+And in here I have to pass a series. So that series would be,
+
+Unknown Speaker  1:37:56  
+actually, this call is not a right, so I'm going to pass, yeah, let's call it frame that is more meaningful. So the series will be, you take that frame that you are passing to lambda, and then you take that particular column out of each which is the column that you are trying to apply it on.
+
+Unknown Speaker  1:38:18  
+So if you do that, you will get the essentially the same output as you are getting up here, directly using me.
+
+Unknown Speaker  1:38:27  
+Now it might seem to you like a that's a really,
+
+Unknown Speaker  1:38:32  
+like a elaborate, way, more complicated way of doing this. So let's first run it.
+
+Unknown Speaker  1:38:39  
+Did I make some mistake? What did I do? Oh, I did not run the PSL. It says average is not defined. Okay, you have, like, the double quotes and single quotes in there for average. Oh, right. I do have a typo here too.
+
+Unknown Speaker  1:38:56  
+Thanks for pointing that out. Yeah.
+
+Unknown Speaker  1:39:00  
+So now it works. So now, even though it achieves the same result as this one, your plane vanilla mean function. But the beauty of this is here I am not using an aggregation function instead of passing these average function of hours with a lambda where the lambda is basically getting whatever the frame you are getting from here, and then take that duration seconds column, and then passing that as a series to your custom function, and that would be the column that you are using here. So
+
+Unknown Speaker  1:39:47  
+it's so intuitive,
+
+Unknown Speaker  1:39:50  
+it's looks very convoluted, right?
+
+Unknown Speaker  1:39:56  
+Let's try to do this little better.
+
+Unknown Speaker  1:40:01  
+So,
+
+Unknown Speaker  1:40:04  
+so another way you can do it, and it's actually not shown here, by the way, but I'm going to show you yet another way where you can do this without even creating
+
+Unknown Speaker  1:40:17  
+a custom function yourself and not even using your apply directly, using your aggregator function.
+
+Unknown Speaker  1:40:26  
+So look at this carefully, what I'm going to do. So I take that same data frame,
+
+Unknown Speaker  1:40:32  
+I do a group by
+
+Unknown Speaker  1:40:35  
+and now I am going to do a
+
+Unknown Speaker  1:40:44  
+uh, dot aggregation.
+
+Unknown Speaker  1:40:51  
+And
+
+Unknown Speaker  1:40:53  
+inside this aggregation, I am going to say, well, inside this aggregation I have to pass
+
+Unknown Speaker  1:41:04  
+key value pair actually?
+
+Unknown Speaker  1:41:12  
+Or do I need to pass a key value pair? Hang on a second. Let me think I
+
+Unknown Speaker  1:41:30  
+if I am passing the duration seconds here,
+
+Unknown Speaker  1:41:34  
+then inside here, yeah, all you have to do is pass it the function name, because the function name will act on that series. So
+
+Unknown Speaker  1:41:44  
+what did you call average? So if you just type, so I can, no, you can do that. You can do to the defined function that you did above.
+
+Unknown Speaker  1:41:54  
+You can do that too, I suppose. Yeah. So if I do that, let's see, yeah, is that? That
+
+Unknown Speaker  1:42:07  
+was what I was wondering. If you could do a custom operation on it? Yeah, that's it. So instead of doing all of these,
+
+Unknown Speaker  1:42:17  
+you can apply and do all of these. You can just use an aggregated function, because an aggregated function already does the Apply internally, and you basically get the result. The only difference here is using this way you can have an opportunity to actually pass a custom column name here, which is a nice, human readable column name here,
+
+Unknown Speaker  1:42:44  
+whereas here you are getting these as a column name, but you could just do a dot rename and chain that onto the end of it
+
+Unknown Speaker  1:42:52  
+exactly. So another way of doing this, instead of dot rename,
+
+Unknown Speaker  1:42:58  
+let me show you yet another way of doing a column need rename, you can do a set axis.
+
+Unknown Speaker  1:43:04  
+So in set axis, however many columns are there that you want to set, you can pass that many a list of that many items. So here there is only one column. So I'm going to pass a list of one item, and that one item would be whatever custom name I want to provide. But then, since it's a set axis function, I have to provide which axis I'm going to try to set it on, which, in this case, would be axis one,
+
+Unknown Speaker  1:43:34  
+and that way,
+
+Unknown Speaker  1:43:37  
+now with this, I also get a custom name
+
+Unknown Speaker  1:43:41  
+like here.
+
+Unknown Speaker  1:43:46  
+Now the other thing I was going to show you, Jesse, when you said this to basically just show if you do not have a separate function written, you can actually pass it here too. You can pass a lambda x and call x dot mean,
+
+Unknown Speaker  1:44:07  
+which is kind of lame, like, why would you call lambda x? X dot mean when you can just write me, Yes, true. But when you are doing lambda x, then on the other side of the colon, you can do a little bit complicated, convoluted processing. Or if that is too complicated, then do what I just did before, which is, define the function somewhere else and then pass the function name here.
+
+Unknown Speaker  1:44:34  
+So there are many different ways of this, so just use the technique, whichever seems more appropriate, given what you are trying to do at what point of time.
+
+Unknown Speaker  1:44:48  
+Okay, so that's it. And there are other examples here, but it's all the same thing kind of it's just repeating. Oh no, actually, I think this one we should look at, where we.
+
+Unknown Speaker  1:45:00  
+We are basically going to do three custom function.
+
+Unknown Speaker  1:45:05  
+So what now we will see, instead of one custom function, if I have to do multiple custom function, then what do I do? This one is worth trying out. So let's say I have two custom function,
+
+Unknown Speaker  1:45:23  
+custom count and custom sum.
+
+Unknown Speaker  1:45:26  
+Right now, how do I do that? And it says, get the average and total duration for each country and each state. So essentially, I have to do a group by on two things,
+
+Unknown Speaker  1:45:40  
+and then I'm going to do this on duration seconds, right? So I'm going to do this on duration seconds, so
+
+Unknown Speaker  1:45:51  
+my group by would be that.
+
+Unknown Speaker  1:45:56  
+And then on top of that, I am going to do
+
+Unknown Speaker  1:46:01  
+duration seconds. I have to pass that column name
+
+Unknown Speaker  1:46:08  
+with double, double square brackets,
+
+Unknown Speaker  1:46:13  
+and then I can do a aggregation. Now this is where things get really, really interesting.
+
+Unknown Speaker  1:46:21  
+So inside one aggregation function, remember, earlier I we showed that we can pass, mean some count, any number of aggregate built in, aggregated that you want. So here also you can pass any number of custom aggregated that you want. So if you pass two custom aggregator as a list, which one would be your custom count and another would be your custom sum.
+
+Unknown Speaker  1:46:57  
+So now you see exactly like where you would have passed count or sum, instead of that, you are passing your own function.
+
+Unknown Speaker  1:47:06  
+But then again, here the output that you are getting is the kind of output that is auto generated. Now let's say
+
+Unknown Speaker  1:47:17  
+you want to have a control on the output. So in the previous example, what I did, I can also do that. So I can take this and I can do dot set axis. Or you can also do the flattening what we saw in the previous activity. Or here you can do
+
+Unknown Speaker  1:47:36  
+a custom column, let's say
+
+Unknown Speaker  1:47:42  
+citing scam. Count,
+
+Unknown Speaker  1:47:47  
+and what is the other column you're doing?
+
+Unknown Speaker  1:47:53  
+Let's say citing average. So
+
+Unknown Speaker  1:48:04  
+Oh, I forgot the
+
+Unknown Speaker  1:48:07  
+axis value. I think that's what it is complaining about, right?
+
+Unknown Speaker  1:48:14  
+Yes, because it's things 84 element, which is by default, x is zero, so I have to provide axis one,
+
+Unknown Speaker  1:48:26  
+and there you go, sighting, Scout and siting average.
+
+Unknown Speaker  1:48:30  
+Now,
+
+Unknown Speaker  1:48:32  
+yet another way of doing this thing. I am showing this thing. I know this might seem like, Hey, why are there so many things, so many ways things can be done, but I guess that's because the pandas designer wanted the library to be very, very flexible. So now I'm going to do it in a slightly different way, where I don't need to provide that set axis at all. Instead of doing the set axis you see here where I'm passing the multiple
+
+Unknown Speaker  1:49:03  
+function names
+
+Unknown Speaker  1:49:07  
+this way, so I'm going to add something here. So what you can do is, instead of passing the function name, you can pass a tuple for each where in the tuple The first item would be your column name, and the second item would be whatever aggregation function you want to use. And these applies whether the second item is any of the built in aggregation function, or whether the second item is any of your custom built aggregation function.
+
+Unknown Speaker  1:49:38  
+So instead of just passing the function. You can pass a tap off.
+
+Unknown Speaker  1:49:44  
+I have one extra,
+
+Unknown Speaker  1:49:48  
+yeah. So now, if you do that, then you can totally forget about all this set access thing. So now I think this one is actually a little bit more cleaner. So what I'm doing is I'm taking.
+
+Unknown Speaker  1:50:00  
+In the group by with whatever column I want, and applying an ad and inside an ag, if I have to pass multiple, if I have to do multiple aggregation, I'll do multiple. But for each aggregation, I'm not just passing that function name. I'm passing a column name, column function name as a toggle.
+
+Unknown Speaker  1:50:20  
+And when you do that, you get the exact same result when you what you got by set axis. But this one now does not require you to actually do a set axis, because that,
+
+Unknown Speaker  1:50:33  
+oh no, actually, I take my word back. This one will still give you the top level. So, so you still have to flatten out, yes, but the idea here is at least the second level
+
+Unknown Speaker  1:50:47  
+thing you can control, like sightings count and siting average.
+
+Unknown Speaker  1:50:53  
+Now look at another thing. So it is giving you the right top level, which is the name of the column, and second level, which is the sightings count on average. But what you can do is, if you only have to do this, only one column, which is duration seconds, if you take one pair of square bracket away from this, then magically, that means that top level column is gone. So now your output would not have multi level column. It will have a single level of column, because that Multi Level column only comes when you provide this with a pair of double square brackets. If you provide a single square bracket, then pandas assume that you are not going to apply this on multiple columns, so therefore the level zero is gone anyway. So whatever you are passing here in tacos that becomes your own economy.
+
+Unknown Speaker  1:51:46  
+So again, as I said, just many, many different way of achieving something that you want to achieve. It is enough for you to just appreciate the fact that pandas does provide you so many different way, different ways of doing things, but it is at no way. It will be required for you to memorize any of this, because this will automatically come you. If not, you will try something. It's not working. Look at the error message, look into the search, into the blog post, and go to a Google search, and you will eventually get, and also look into the documentation when needed. But just appreciate that then pandas, in pandas library, there are multiple ways that you can do to achieve the result that you are getting. And here, also, lastly, instead of custom count here, also, you can definitely provide a anonymous um.
+
+Unknown Speaker  1:52:43  
+A function,
+
+Unknown Speaker  1:52:44  
+and it could also be a mix and match of anonymous function like lambda plus a predefined function. It could also be a mix and match of a lambda function or a custom defined function and regular built in function,
+
+Unknown Speaker  1:53:02  
+which is this.
+
+Unknown Speaker  1:53:06  
+But the difference is, when you are using a built in function, you cannot just pass the function name, because this sum does not mean anything. It is not in the namespace of this Python program. So we if you want to use the built in function, you have to pass the function name as a string. Whereas, if you are passing your custom build function, since you have already defined the function in the same Python program itself, you can just pass the function name as an option. You don't need to pass it in a string. In fact, it will not work. If you pass it in a string by Mr. Like this would not work. This will fail
+
+Unknown Speaker  1:53:43  
+because this custom sum have no special meaning,
+
+Unknown Speaker  1:53:48  
+see.
+
+Unknown Speaker  1:53:51  
+So this is also important distinction you should keep in mind.
+
+Unknown Speaker  1:53:55  
+So, so if you just passed in some would then, would we that use the built in sum function if you just do that, yeah, I think I tried this, yeah, gave me that warning, but it worked.
+
+Unknown Speaker  1:54:09  
+Ah,
+
+Unknown Speaker  1:54:12  
+because it's provided callable, built in function sum is currently using sys group by dot sum in a future version of pandas, the provided column level will be used directly to keep current behavior past the string sum instead. Okay,
+
+Unknown Speaker  1:54:33  
+so they are going to change the behavior. So they are saying, pass the string to use the current behavior. Can I can ask a dumb question, why are you putting some in the average color and not mean, oh, that's just a type of that.
+
+Unknown Speaker  1:54:48  
+I just forgot the odd i.
+
+Unknown Speaker  1:55:04  
+Okay. And then lastly, we are going to look at one other example, which is the binning.
+
+Unknown Speaker  1:55:13  
+So the way binning works is so let's say you have a bunch of data
+
+Unknown Speaker  1:55:19  
+with a numerical column,
+
+Unknown Speaker  1:55:23  
+either integer or floating point, that can take on some continuous value on a scale, like in this tiny, mini toy data set.
+
+Unknown Speaker  1:55:32  
+So you take this so you see that here there are students, name and the test score,
+
+Unknown Speaker  1:55:39  
+and then you have to assign a letter grade to it. So essentially, and here there are only six, but let's say there are 6000 students,
+
+Unknown Speaker  1:55:48  
+and everyone got a scale, a score in the scale of zero to 100 different percentage number. And now, as an as an a test administrator, you will say, hey, 90 200% is a, 80 to 90% is be and so on and so forth. So how do you do that?
+
+Unknown Speaker  1:56:06  
+So two way to do that is you have to have basically a def defined your categories, or the bins. Bin is basically synonymous to bucket or group or category, whatever you call it. But in this context, the bin. Word bin is more widely used, but you can think of anything else kind of a I prefer the word bucket for whatever reason. People most use bin. So anyway, so you basically have to pass the boundaries of the different groups and then group names.
+
+Unknown Speaker  1:56:45  
+So these group names have to be a list in the same order as your boundaries are.
+
+Unknown Speaker  1:56:51  
+So first item here is f so that first item basically goes from zero to just one before the next item,
+
+Unknown Speaker  1:57:04  
+and second item goes from second item to just one before the third item and so on.
+
+Unknown Speaker  1:57:12  
+So then you have these bins and the group name defined, and then the work is very, very simple. All you need to do is you have to apply this function called cut. But this cut is a top level pandas function, so you don't apply cut on a data frame.
+
+Unknown Speaker  1:57:31  
+So you do a PD dot cut. And when you are cutting this, you basically do,
+
+Unknown Speaker  1:57:39  
+you basically passed the column that you are going to cut it on, which is the test score column.
+
+Unknown Speaker  1:57:47  
+This column here, and then you pass the list that contains your boundary values. And then you pass the levels.
+
+Unknown Speaker  1:57:58  
+And when you do that, you will let me actually do this first separately, just to see what is the output.
+
+Unknown Speaker  1:58:09  
+So this will give you a series.
+
+Unknown Speaker  1:58:15  
+Okay, now this is a series, so therefore you can apply this series to any data frame. And the way to apply a series to a data frame is you provide the data frame, provide the name of the new column that you want to create with the series, and then assign the series to it, which, in this case, we are doing test score summary. Or
+
+Unknown Speaker  1:58:38  
+actually, that's a bad name. It should just be great,
+
+Unknown Speaker  1:58:45  
+and it will basically print the letter to it.
+
+Unknown Speaker  1:58:50  
+So one, that's an interesting order. I mean the categories where it says like f is less than d is less than c, that makes sense. Well, why would it print it? Why would it do with like, index zero is a index one is F
+
+Unknown Speaker  1:59:05  
+on a cut output,
+
+Unknown Speaker  1:59:09  
+no, no, no. It's because just the way that the data is given. So this, so what? Who? What is our first row here, the first guy here, the first student, Cindy, got a 90. That's why the first is a the next student's slogan is 59 which is below 60. That's why he got an F, yeah. Yeah. Totally got it. Yeah. Thank you for pointing that out.
+
+Unknown Speaker  1:59:40  
+Yeah.
+
+Unknown Speaker  1:59:46  
+Okay? And then that's it. And then with this, then, if you want to do a group by, you can do a group by right. So earlier, we have done group by using a numerical column. But if you want to do a group by, or use.
+
+Unknown Speaker  2:00:00  
+In this great column. Let's say you can take these new data frame which has this great column added, which, by the way, I change the name of the column to group by,
+
+Unknown Speaker  2:00:10  
+and then
+
+Unknown Speaker  2:00:14  
+you can do group by. And after this group by, you can apply any aggregation function that you want. So here what I wanted to do is,
+
+Unknown Speaker  2:00:23  
+with this command, I'm grouping by the letter grade, and for each letter grade, I'm trying to see who is the student that goes the highest. So now this is a tiny little data set, but at least one group have two people. Group A so there is this guy having 90 and then this person having 98 so therefore, when you are doing a max for group A you are getting Only this 198,
+
+Unknown Speaker  2:00:51  
+but hang on,
+
+Unknown Speaker  2:01:00  
+98 Yeah, so 98
+
+Unknown Speaker  2:01:04  
+Wow. What happened?
+
+Unknown Speaker  2:01:15  
+Your index is going by grade, and you also have a column called grade, so it doesn't know which one to do. Oh,
+
+Unknown Speaker  2:01:21  
+yes, yes, okay, so that's why they did that. Okay,
+
+Unknown Speaker  2:01:27  
+okay,
+
+Unknown Speaker  2:01:39  
+hang on, but where is the index grid coming from?
+
+Unknown Speaker  2:01:50  
+Here?
+
+Unknown Speaker  2:01:53  
+I am saying
+
+Unknown Speaker  2:02:00  
+P dot car test score bins.
+
+Unknown Speaker  2:02:08  
+What's going on here?
+
+Unknown Speaker  2:02:10  
+Why are there two?
+
+Unknown Speaker  2:02:16  
+This is giving me only one sales.
+
+Unknown Speaker  2:02:21  
+Let's just print test score DF at the very beginning.
+
+Unknown Speaker  2:02:26  
+So test score DF Currently it has a numeric index, 012345,
+
+Unknown Speaker  2:02:33  
+there's another attribute on cut called include lowest equals true, which would not have that become your English.
+
+Unknown Speaker  2:02:50  
+I'm sorry. What to say?
+
+Unknown Speaker  2:02:53  
+Sorry I was, I was messing around, and I
+
+Unknown Speaker  2:02:57  
+don't
+
+Unknown Speaker  2:03:06  
+Okay, so let's say, if I do something else, let's call it letter bread. You
+
+Unknown Speaker  2:03:13  
+know what? I think I ran something out of the order somehow. Yeah, so let's run it fresh again. So create this,
+
+Unknown Speaker  2:03:25  
+define the beans and the group names, make sure the data frame is good,
+
+Unknown Speaker  2:03:31  
+and then just create one column called Red,
+
+Unknown Speaker  2:03:38  
+yep. And then you do a group by grid, and then do a max of that.
+
+Unknown Speaker  2:03:53  
+Oh, this is where the new thing is coming, because we were adding that back to here.
+
+Unknown Speaker  2:04:02  
+So
+
+Unknown Speaker  2:04:05  
+yeah, the code is written in a weird way. That's why. Yeah, so if you just do a group by,
+
+Unknown Speaker  2:04:18  
+that group by basically says, Since grouping by is by grade, that's why it does add a grade As a index here. That's why. Okay,
+
+Unknown Speaker  2:04:38  
+so
+
+Unknown Speaker  2:04:42  
+wait
+
+Unknown Speaker  2:04:58  
+and then if you.
+
+Unknown Speaker  2:05:00  
+Do this. That gives me that, but why? So then it, all we need to do is just put it in a different variable, sorry, different data frame or different variable name. Let's call this test grade, start DF, and we should be fine, because otherwise, when I'm applying these are the same, it's creating a problem. Yeah. So now we'll be good. So now let's see,
+
+Unknown Speaker  2:05:28  
+yeah. So in the original data frame, there are two students got a Cindy 90 crystal 98 and when we are doing the group by for a why am I still getting Cindy as 98
+
+Unknown Speaker  2:05:48  
+it should be this one.
+
+Unknown Speaker  2:05:52  
+What is happening here
+
+Unknown Speaker  2:05:57  
+in the original data set? Cindy 90 crystal, 98
+
+Unknown Speaker  2:06:03  
+in here, Cindy, 90 Grade A, Crystal, 98 grade A. And now I am doing a group by grade.
+
+Unknown Speaker  2:06:16  
+So these observed equal to true is because I am doing it with a non numeric thing. Otherwise it will yell that it is deprecated. So just to make it quiet.
+
+Unknown Speaker  2:06:27  
+But then when I'm doing this,
+
+Unknown Speaker  2:06:32  
+for some reason,
+
+Unknown Speaker  2:06:35  
+it is i
+
+Unknown Speaker  2:06:48  
+Ah, yes, it makes sense.
+
+Unknown Speaker  2:06:53  
+Okay. So this
+
+Unknown Speaker  2:06:58  
+you see what, why it is happening, because what we are doing is we are doing a group by grade fine. So for Grade A, I'm getting, going to get two rows, which is row number zero and row number four, because both falls in Grade A bucket, and then I'm applying a max. So basically, what I'm doing here is I'm taking only the value out of 90 and 98 whichever is the max that is printed here,
+
+Unknown Speaker  2:07:27  
+but I am grouping by on great. I am not grouping by your name or anything. So what it does is it retains the first row that you have for that class, which is October Cindy, so that's what you get here. And then it basically prints the category, sorry, the grouping column, which is a, and then it prints whatever the maximum value of that A, which is 98 here. So this basically creates an illusion, as if this person has the highest grade, even though that is not true. But if you think about it, that is actually how things work, because when you are doing a group by if you print the result of the max next to next to the original data, it's not going to basically go and do the reverse lookup and find out, Okay, which one, if this person got a got the max value, that's not what it does. So it's actually a very, very wrong
+
+Unknown Speaker  2:08:30  
+output. You should not actually be doing it this way.
+
+Unknown Speaker  2:08:42  
+And got the same thing if I replaced Max with min at the end. Yeah, huh?
+
+Unknown Speaker  2:08:49  
+I got the exact same table.
+
+Unknown Speaker  2:08:55  
+If you do max, replace Max with me, yeah. I
+
+Unknown Speaker  2:09:05  
+Ah, no, see, see the last, last item got changed.
+
+Unknown Speaker  2:09:09  
+So now for this, you are seeing October crisp.
+
+Unknown Speaker  2:09:18  
+It's actually showing October, then it shows crystal, and then it shows 90.
+
+Unknown Speaker  2:09:25  
+So now it is basically giving you the last item of that group and then providing you the minimum value.
+
+Unknown Speaker  2:09:35  
+Um,
+
+Unknown Speaker  2:09:42  
+uh, it's because you're grouped by there.
+
+Unknown Speaker  2:09:47  
+It's getting the minimum of each column.
+
+Unknown Speaker  2:09:57  
+It looks, it appears to be, unless I'm 18.
+
+Unknown Speaker  2:10:00  
+Getting them which column, yes,
+
+Unknown Speaker  2:10:05  
+so
+
+Unknown Speaker  2:10:10  
+Oh, but hang on,
+
+Unknown Speaker  2:10:15  
+yeah,
+
+Unknown Speaker  2:10:17  
+you are right. Oh, I see
+
+Unknown Speaker  2:10:20  
+test scores shouldn't be a thing, right? Or no, it is, isn't it? The thing? Test score is a thing. Yeah,
+
+Unknown Speaker  2:10:27  
+yeah. In fact, this is what it should be.
+
+Unknown Speaker  2:10:31  
+You should be getting that. Because if you don't provide a test score, what it is trying to do is it is basically trying to apply that aggregation function on everything. And since you are using max or min, even for these alpha numeric things, there is a dictionary order it goes by, and that's why so when you are doing Max, so between these two a graders, Cindy and Cindy and crystal. I think Crystal comes before. So when you are doing a mean, you are getting crystal. When you are doing a max, you are getting Cindy, because Cy comes after CR.
+
+Unknown Speaker  2:11:14  
+But hey, believe me, guys, that is how the salute, like this last one. I just wanted to go by the folder, sorry, the file that was given so that is not giving you the what you want. And it gives a wrong impression that it is automatically, magically getting the lowest or highest, whichever grade and corresponding students name. But that's not what it does. You cannot do that that way,
+
+Unknown Speaker  2:11:40  
+because these max or mean will only give you what it gave us just now, which is after
+
+Unknown Speaker  2:11:50  
+applying it on a specific column, then only you will get this.
+
+Unknown Speaker  2:11:56  
+Now, if you really want to create a new data frame. Then you can say hey. You can say, just like what we did in the very first activity we did today, you can do our test summary, DF equal to PD dot data frame. And there you can pass a key value pair
+
+Unknown Speaker  2:12:23  
+which is,
+
+Unknown Speaker  2:12:31  
+which is actually, yeah, you cannot even relate that back to
+
+Unknown Speaker  2:12:37  
+the particular student, because that way you then have to go and do a lookup, which is not
+
+Unknown Speaker  2:12:44  
+in this like you cannot do a lookup using any of these functions. That's a completely different thing.
+
+Unknown Speaker  2:12:52  
+Yeah. So here, if you want to figure out what the purpose of what, what are we trying to do? We're trying to create a group based on the bins. So what? What should that look like?
+
+Unknown Speaker  2:13:04  
+That should basically look like, what it looks like here.
+
+Unknown Speaker  2:13:11  
+So basically, after you do the binning, so now you basically have, so think about, imagine for a second, there are 500 students. This 500 student all have different letter grades, sorry, numeric grades, and then you are applying these bin method, sorry, cut method, with the bins and levels. So what you are getting is you are generating an additional data point for each student that tells you which grade that student belongs based on the numeric score, which is a way of categorizing this now for from machine learning perspective, this basically adds another feature set
+
+Unknown Speaker  2:13:52  
+in the data that you are training, whether you will need that feature or not. That's completely different discussion that depends on the classification or regression algorithm that you are using, and how, what kind of accuracy you are getting, and what your goal is, whether you try to increase and on your analysis and based on your experience, do you think adding an another function like this will provide any value or not? So that's a completely different question. But with this, all you have to know, so forget about everything else below this. All you have to know is, by applying a cut method, you can actually put this data into different buckets with a specific levels that you can apply to the different buckets based on the boundary condition of a numeric value. So essentially, one liner statement is if you want to create a categorical feature from a numeric feature, that's the only time you will use this.
+
+Unknown Speaker  2:14:49  
+Let me repeat that again, if you want to create a categorical feature from numeric feature. So what does categorical feature mean? Categorical feature?
+
+Unknown Speaker  2:15:00  
+Meaning something that has only a fixed number of values, like a, b, c, d, e, f. These are categorical feature. A numeric feature is something that can take a continuous value in the number line, which is either integer or float. Now, depending on the kind of model you are training and the kind of algorithm you are using, you will see that we treat the numerical feature and categorical feature different ways, and both has their own use in the right setting. So this is a way for you to derive a categorical feature from a numeric feature, and that's
+
+Unknown Speaker  2:15:37  
+it. I have a quick question,
+
+Unknown Speaker  2:15:40  
+if we were to use the if else, I don't know is to simplify, right? Let's say, if you know grade 9200 is a, 80 to 90 is B, and so forth. Wouldn't that be a lot more easier, though, or maybe more accurate to get to that
+
+Unknown Speaker  2:15:58  
+I don't know the grade even. Are you talking about these values? Yeah. So instead of, I mean, yeah, that's, that's one way to the debates. I'm still a little bit confused on it. But what if you were saying, Why? Why it is showing 59.9 and not 60? Is
+
+Unknown Speaker  2:16:15  
+that what your question is, like this, yeah. And then also, maybe, if, if we were to use an if else statement, like, you know, if 9200 is a, 80 to 90 is B, and so forth. You know, it's kind of like using a an if else function. You can see, again, indeed, think about it, you can do anything in any number of different ways. You can write an E fill function and pass that to the data frame with the lambda, okay, but yeah, this, if you have to derive this kind of category, the categorical data, categorical column based on another numeric column. This is the best way, so that you don't have to write this on yourself. That's all. And talking about why they are using 59.9 and not 60. This is just a boundary value. So whether you like what your logic is, do you want to take zero to 59.9 as F, or zero to 60 as a f? So I guess it is fair to say, hey, the guy who got 60 must not be F. Instead, the guy should wear D or E or something. So that's just that number is actually included, as you were saying. So the 59.9 is up to that number. That's the preset. Okay, yes, okay, yeah, thank you. I think in the cut method, there is probably
+
+Unknown Speaker  2:17:39  
+Yeah, include lowest, yes. So there is something called include lowest, which you can do true or false. So, which basically
+
+Unknown Speaker  2:17:48  
+what it does is like using the math terminology, right? Like if you how to say, Hey, what is the range? Is it x less than 10 or x less or equal to 10? Right? So if you do include lowest equal to 10, you are basically doing a x less or equal to 10. So that's what it is. So based on that, your boundary condition will change. You could say include lowest equal to true or false. So
+
+Unknown Speaker  2:18:28  
+okay, so you guys did activity number four, right?
+
+Unknown Speaker  2:18:38  
+Do you guys want to spend some time doing activity six, which is, again the same airline data set. All you have to do is write some custom function. If you want to practice those custom, average custom something.
+
+Unknown Speaker  2:18:51  
+I can probably give you 10 minutes to try those and then come back and review quickly before we break for the day.
+
+Unknown Speaker  2:19:01  
+Yeah. So then that's yes and no, or anyone thinks that it's not worth it.
+
+Unknown Speaker  2:19:09  
+No, please, let's go together. Yes,
+
+Unknown Speaker  2:19:14  
+well, I don't think we can. There is no need to go together. But if you want, I can. It's
+
+Unknown Speaker  2:19:20  
+okay. What? What are others thinking? Group or no group,
+
+Unknown Speaker  2:19:27  
+let's do it together. Do it together. Okay, fine, so see, you have to, because I'm only seeing in the video of few folks who are nodding yes, but people who think you don't agree with me. You have to speak up or come on video, right? Otherwise, I have no way to know. Okay, that's fine. We have only 10 minutes. Okay, let's just go through it together. So this is your same
+
+Unknown Speaker  2:19:53  
+data set that airlines departure. So.
+
+Unknown Speaker  2:20:00  
+Is going to take a little bit of time to load because the data is coming over the wire.
+
+Unknown Speaker  2:20:06  
+Okay,
+
+Unknown Speaker  2:20:09  
+yep, so the data is loaded. I have all the column,
+
+Unknown Speaker  2:20:18  
+yeah.
+
+Unknown Speaker  2:20:20  
+So then here, if you have to answer the question, this that what is the average time for delayed arrival grouped by each airline Carrier.
+
+Unknown Speaker  2:20:32  
+This is the activity that you already did. So what did you do?
+
+Unknown Speaker  2:20:37  
+You will read the question grouped by each airline carrier. So therefore you will take your data frame and do a group by on unique carrier, because that is the airline carrier,
+
+Unknown Speaker  2:20:49  
+and then it says the average time for delayed arrival. So essentially, you will write,
+
+Unknown Speaker  2:21:02  
+I'm going to first write in a way that you will write without using custom function.
+
+Unknown Speaker  2:21:07  
+So you will take the data frame, do a group by and then
+
+Unknown Speaker  2:21:14  
+you will take the arrival delay column,
+
+Unknown Speaker  2:21:20  
+and on that arrival delay,
+
+Unknown Speaker  2:21:24  
+you can do aggregate
+
+Unknown Speaker  2:21:29  
+and pass on me,
+
+Unknown Speaker  2:21:33  
+and I forgot to put a pair of quotes here, so that is your way of doing it that you have already practice in your previous activity,
+
+Unknown Speaker  2:21:43  
+except what happened here? What did I do wrong?
+
+Unknown Speaker  2:21:49  
+Oh,
+
+Unknown Speaker  2:21:52  
+typo.
+
+Unknown Speaker  2:21:55  
+Okay, so that gives you, for each carrier, what is the average arrival delay that is observed.
+
+Unknown Speaker  2:22:03  
+Now, the only thing that in this activity, they are asking you to do differently is,
+
+Unknown Speaker  2:22:10  
+instead of using the mean
+
+Unknown Speaker  2:22:13  
+built in mean function, you use a custom AVERAGE function, and you can use the built in mean function there, which is fine, but you have to pass this custom AVERAGE function somehow to your aggregator.
+
+Unknown Speaker  2:22:27  
+And this is one way of doing it, but I really don't like this way. I would rather do it the other way, which is
+
+Unknown Speaker  2:22:40  
+I'm going to take these
+
+Unknown Speaker  2:22:44  
+and then actually, I'm also going to
+
+Unknown Speaker  2:22:50  
+take the column
+
+Unknown Speaker  2:22:54  
+and Do our dot
+
+Unknown Speaker  2:22:58  
+ADG,
+
+Unknown Speaker  2:23:00  
+and there I'm just going to pass the custom average,
+
+Unknown Speaker  2:23:06  
+and it will give me the same result,
+
+Unknown Speaker  2:23:13  
+except looks like i custom average is not defined. Oh,
+
+Unknown Speaker  2:23:17  
+did I not run that cell? Oh, I did not.
+
+Unknown Speaker  2:23:21  
+Okay,
+
+Unknown Speaker  2:23:23  
+so that's it. So I'm just going to
+
+Unknown Speaker  2:23:27  
+do and I'm going to get the same result. So essentially, all I'm doing is I'm knocking off this built in, mean, with
+
+Unknown Speaker  2:23:37  
+my own function, which is custom average.
+
+Unknown Speaker  2:23:43  
+Now, when you are doing this way, you are not getting a
+
+Unknown Speaker  2:23:49  
+custom column name. So for that,
+
+Unknown Speaker  2:23:54  
+there are a couple of different way to do that. One way which is shown your solution file, is using a apply and then lambda, and then providing a creating a panda series with a custom column name. You can do all of these, or
+
+Unknown Speaker  2:24:09  
+you can do just what I did, and then you can do a set axis,
+
+Unknown Speaker  2:24:16  
+and then you provide whatever column name that you want your heart's content, and you set it on axis equal to one, and that way, now you have
+
+Unknown Speaker  2:24:31  
+your own favorite column name, except I did something wrong again.
+
+Unknown Speaker  2:24:37  
+What is it? I did put down brackets.
+
+Unknown Speaker  2:24:42  
+Must be called
+
+Unknown Speaker  2:24:45  
+with the collection of some kind. Oh, right,
+
+Unknown Speaker  2:24:50  
+that's right, because it has to be a list.
+
+Unknown Speaker  2:24:59  
+And I got the same.
+
+Unknown Speaker  2:25:00  
+Okay.
+
+Unknown Speaker  2:25:01  
+Now we might want to try figure out what this warning is. It says, Apply operated.
+
+Unknown Speaker  2:25:10  
+Oh, it's actually is coming from this one.
+
+Unknown Speaker  2:25:14  
+The way that original solution is written. I don't even need that one.
+
+Unknown Speaker  2:25:19  
+I was actually double executing that, yeah,
+
+Unknown Speaker  2:25:25  
+as soon as you identified the column name after the group by that was the right way to do it, yeah.
+
+Unknown Speaker  2:25:37  
+And then the next prompt is use this custom function that you created to calculate the average for a data frame column and show the average time for the delayed ally, arrival
+
+Unknown Speaker  2:25:51  
+and departure for each column. So now in this one,
+
+Unknown Speaker  2:25:57  
+the ask is, use that same custom function, but apply it on multiple different columns.
+
+Unknown Speaker  2:26:04  
+So for that, what I'd suggest you use, you use this format, so the format that it is shown in your solution file. It does not even use the ADG function. It actually doesn't apply lambda, and
+
+Unknown Speaker  2:26:21  
+then provides a series and all of that
+
+Unknown Speaker  2:26:24  
+which you can do, you will get it, but here is a much easier way of doing it. So what do you do? You take your data frame,
+
+Unknown Speaker  2:26:39  
+do a group by on whatever column you want to, single column, multiple column, that doesn't matter. So you are doing your group by.
+
+Unknown Speaker  2:26:53  
+Hang on. What did I do? Oh, put it in the wrong place.
+
+Unknown Speaker  2:26:57  
+Your group by
+
+Unknown Speaker  2:27:00  
+and then
+
+Unknown Speaker  2:27:04  
+you have to apply this will arrival delay and
+
+Unknown Speaker  2:27:10  
+this right, so on, two things. So
+
+Unknown Speaker  2:27:31  
+on two different columns actually have to apply right,
+
+Unknown Speaker  2:27:41  
+which is your arrival delay here, let's do
+
+Unknown Speaker  2:27:48  
+arrival, delay
+
+Unknown Speaker  2:27:52  
+and departure, delay.
+
+Unknown Speaker  2:27:58  
+Arrival, delay and departure, delay and this has to be inside a pair of two square brackets,
+
+Unknown Speaker  2:28:07  
+and then you are going to do an aggregation.
+
+Unknown Speaker  2:28:12  
+But here,
+
+Unknown Speaker  2:28:20  
+now there could be a problem. How you are going to provide
+
+Unknown Speaker  2:28:26  
+multiple column here? So
+
+Unknown Speaker  2:28:53  
+oh, you can provide a multiple column. So what you have to do is, so, this is a list, because I'm doing two things,
+
+Unknown Speaker  2:29:08  
+but
+
+Unknown Speaker  2:29:21  
+revival, delay, let me try building it here this way. So then I have to pass it as A e value pair, where the key would be your column name and the value would be your
+
+Unknown Speaker  2:29:37  
+custom
+
+Unknown Speaker  2:29:41  
+and then there would be multiple of this.
+
+Unknown Speaker  2:29:46  
+So then you will do this
+
+Unknown Speaker  2:29:51  
+P, and then also the value would be the same custom average.
+
+Unknown Speaker  2:29:58  
+And then, instead.
+
+Unknown Speaker  2:30:00  
+Of
+
+Unknown Speaker  2:30:02  
+custom average actually, let's just do it that way. All we have to do is, finally, we have to do a set axis. So let's just do this first.
+
+Unknown Speaker  2:30:14  
+What just happened here now
+
+Unknown Speaker  2:30:18  
+on hashable type dictionary, so
+
+Unknown Speaker  2:30:24  
+me, okay, so I do not need this thing now.
+
+Unknown Speaker  2:30:32  
+Yeah, that's it. So if you have to pass multiple, sorry, same function to multiple column in aggregation, you can actually do it using a key value pair, where the key would be name of the function, column and value would be either your custom function or your lambda function, or any of the best built in function.
+
+Unknown Speaker  2:30:55  
+So that's it. And then if you have to save that column names, then you can just do a set axis, which is what we did here,
+
+Unknown Speaker  2:31:08  
+except now here there are two columns, so we have to pass two things to The set axis.
+
+Unknown Speaker  2:31:15  
+Now, where did I go
+
+Unknown Speaker  2:31:21  
+here?
+
+Unknown Speaker  2:31:23  
+You have to pass two things, which is average arrival delay and
+
+Unknown Speaker  2:31:29  
+average departure delay.
+
+Unknown Speaker  2:31:39  
+Average
+
+Unknown Speaker  2:31:41  
+departure delay.
+
+Unknown Speaker  2:31:43  
+So that way you will have this custom column name.
+
+Unknown Speaker  2:31:51  
+So now, whether you want to this way or whether you want to use this way, that's, again, totally up to you, but you will have both here, and I can send you my version of the files as well,
+
+Unknown Speaker  2:32:05  
+so that you can have both approaches side by side.
+
+Unknown Speaker  2:32:13  
+Okay? And then let's skip the rest. It's basically just the same thing using a different custom function, which is custom sum, but the questions are exactly the same. So I think at this point you basically got the idea. I know it will probably take a little bit of time for all of this to sink in. So go do that practice afterwards, and then I'm going to send these files that are that I worked on, in addition to whatever the solution file that is provided by boot camp. Okay,
+
+Unknown Speaker  2:32:40  
+so you can do compare the different approaches side by side,
+
+Unknown Speaker  2:32:46  
+hopefully that will help you little bit better to understanding the nuances of these things.
+
+Unknown Speaker  2:32:56  
+Thank you for explaining all that. Have a good night. Yep. Thank you, yeah. Thank you Benoy. Thank you Benoy. Have a good night so and we're going to see each other on Monday, but then we're done for winter break until it's like January, right? That's right. We have one other pandas class left on Monday, which we are going to conclude and then break for the holidays. Okay, Alright, sounds good. I'll see you guys all Monday. Then have a great night. Weekend, guys. Uh, hey, Kian, if you can stay on,
+
+Unknown Speaker  2:33:28  
+I'm good.
+

@@ -1,0 +1,591 @@
+Speaker 1  0:01  
+In today's class, I think I did mention before, there is no net new thing that we'll be doing kind of similar to what we did on the third class of last week, where the majority of things that we kind of learned in the first two days and then similar here. So we are going to do some recap on some of the regression technique that we learned and how we can optimize, or try to optimize our model score by tuning some feature or feature selection and so on. And then one new thing that we are going to learn today is let me first share my screen. Yeah. So one new thing that we are going to learn today is this concept called pipeline. So pipeline is basically kind of in the in the towards the first initial few weeks of class. Remember how when you guys learned Python programming and then you understood the value of writing something that is repeatable, and that's where the concept of function came in. So we where we learned that? Well, if we are writing something that we are going to use over and over again, it's a better idea to put them into a function. So so we don't have to repeat ourselves, right? We just call the function that we define. So we are going to use some of those same philosophy and then build something called machine learning pipeline, which, by the way, is an actual scikit learn construct. It's called pipeline, where you basically can put together multiple steps of processing, such as your one hot encoding, your splitting of training and training and test data, and your model selection, your validation, like lot of these things, you can basically put together in a repeatable construct if you have to repeat them over and over again, right? So we are going to look into that. And then most of the time in today's class you guys will be spending within your groups to practice some of these things and that you learn with with within a mini project setting, right? So we are going to give you three data set to choose from. But that does not mean that's the only thing that you have to look for. I mean, you have to work on, work within the mini project today, if any of you guys do have some other data set, you are always open to use those data set, right? I mean, applying those technique is the main key. And we do understand that within the within the limit of three hours, well, you are also not going to get full three hours. You'll probably get maybe an hour and half, or maybe two hours max. So it's not enough time to do a full fledged project. So if some of you are like some of the groups, cannot really get to the finish line of the project, that's totally fine, because the idea here is to kind of try your things out and then come back to this room and then just discuss, and then just share the ideas, like what you learned from that, right? So that's what we are going to do. So the first thing I'd like to do is there is a warm up activity, and in that warm up activity, we are going to just look at quickly some of the steps that we have done in the first two days, and we will see how all of these can come together right now, in any given problem, you may or may not have to use all of the steps, but we are just going to take one example data set, which is your that housing data, and within the context of this housing data, we are going to apply all of the techniques that we have learned before. Okay, so very quick demonstration here. So this is our housing data, and in these housing data, we have 42 columns, as you can see, and close to 10,000 rows right, which I would still call a small size data set, like not trivial sized, but it's still a small data set. So the reason I'm emphasizing on the fact that it is small is that your experience on how the performance changes when you apply all of those p test or VIV testing, and all the experience that you are going to get is probably not what you will be expecting from a like a real, like a medium to large size data set, because when you apply it in a small data set, sometimes you don't see, get to see the effect in the way that you intend to all the time. Sometimes you do, sometimes you don't. Okay, so it is a small data set. The idea here is to basically just recap, what are the things that we typically do when we do regression, what are the things that we typically do so we get a data set. So first thing we need to figure out is, well, someone told me, Hey, this is a data set that we can do regression. But we have to figure out, what is it that we are predicting, meaning, what is our prediction or target column? So this one is a housing price data set, and as we can see quickly, we have all these columns, and there are 42 columns. So when you do a head, not everything is value visible here, but if you want to see all what all the columns are there, you can just apply a columns, and that will give you all the columns. And this is all the columns that we have in this data set. Now the thing that we are trying to predict is this one price. So that's the first thing you need to like. This is basically part of your problem formulation. What is it you are trying to predict and based on what so here we are trying to predict the price of a house based on certain features, such as category of the house, like whether it's a single family, multi family, condo, town home, or whatever, the number of bedroom, bathroom, square footage, which city state the house is located, which, what feature does it have, like pool, refrigerator, basketball code and all of these things, gym, clubhouse and all of this thing. So basically, all of these are basically from, like a real estate listing, and based on these features of the listing of the houses, there are also prices that are given in the part of this listing, and these are the prices. So essentially, what we need to do is we need to take all of this column except for the price, and call that our x. So that's what we are going to do here. We are going to take the DF, drop the price column, and then take everything else, and we are going to call it x full. And why we are calling x for because this is basically the set of all the features, right? 41 features. So we are going to do one set of regression with this full all of these columns. And then we are going to filter this column based on co linearity, based on your p test and so on. And based on that, we will have a selected subset of the columns. And then we are basically going to compare the performance of these two models, that these two regression models that we do, one is using the full set of columns, and one is using a selected subset of the columns. So that's what we are going to do here, which is something that we have done in many, many examples before. But consider these as a warm up, and then what another thing I did is, remember when we discussed about Viv, the way that you calculate the variance inflation factor. So I mentioned that if you have, let's say, 40 columns, if you calculate the variance inflation factor for all the columns, you will get certain values. And let's say for the VIV, our goal is to basically drop the ones that have very high value. So let's say you, let's say you drop the drop a column that have a very high view value, or the highest value, and then the remaining columns. Ideally you should run the VIV test again to recompute all these V values, which is something you should do in theory. But for the interest of time in the previous class, we actually didn't do it, if you remember that. What we did instead is we ran vif once, and we basically dropped five or so columns with very high values of vif and then ran with the rest of it. So in this activity, we are not going to do that. We are actually going to do vif one by one. So I'm going to show you how I wrote a loop, and inside the loop, I'm basically recalculating VIP and dropping that one with highest VIB, and keep doing it until my high highest value comes down to within a reasonable range, right? Remember, I said around 10 to 15 is kind of the reasonable range. So that's what I'm going to do here. So we got the full feature x columns here, and then the surprise that we dropped from the feature columns, we now grab that as our y, which is our feature target variable.
+
+Unknown Speaker  9:17  
+And then
+
+Speaker 1  9:19  
+the first thing we will do is try to do a p test, right so quickly recall, what does p test tell us?
+
+Speaker 1  9:35  
+Remember the discussion we had about null hypothesis and alternative hypothesis. So what does a p test tell us out of these columns?
+
+Speaker 1  9:51  
+So p test will tell us whether a particular feature does, in fact, contribute to the outcome the target variable. So your. Null hypothesis basically means your this particular feature, this so and so feature, does not have any effect on your observed output. That is your null hypothesis. Now, if you can prove that null hypothesis is false, so then the alternative hypothesis must be true, which means your feature does have some statistical significance of the on the observed outcome. So essentially, what we are going to do, we are going to run the p test on all the different columns and see which one meets the threshold value. So now, if you remember, in order to do that, we used a package from stats model API. It's called Zero LS, so using that package, it's almost similar to doing the fitting of data with scikit learn linear regression, except here, as JC mentioned the other day, you basically first parameter is your y value, and then second parameter is all of your feature columns together, which is x full, in our case, which is basically all of these columns.
+
+Unknown Speaker  11:05  
+And what was the import they used to get that.
+
+Speaker 1  11:08  
+The import is stats, model, dot API. It was, yeah, so import, stats, model, dot API, this one as SN. So particular library is dot API, stats, model, dot API, so we run the fit, and after these stats model, model is fitted, which is this variable right here, then there is an attribute for that that's called P values. So we can grab those p values and we can sort them in order, so that we get from lowest to highest p values. So as you can see, some of these are very, very low p values. And when it comes to p values, which one is good, the higher low?
+
+Speaker 1  11:59  
+Do you remember? Hi? No, yeah, I remember we talked about P value being less than 0.05 and then someone asked why? And I said, I have no idea why statisticians take 0.05 as a threshold value, but that's kind of the standard that everyone uses across this in the board, right? So, so we have this now here. Also what I'm going to do is, instead of actually manually checking, Okay, which one of these are less than 0.5 instead of that, I'm actually going to apply a selection here. So these p values, basically I am applying this pandas lock selector. And I'm saying, out of all these p values, give me all the P values that are less than 0.05 and then that will be my select columns. And these are the columns that we are going to retain. And if you look into this, the first one is square feet and longitude and state. So it basically goes this way in this order. And the last one is latitude, which is this one, which is 0.0408 and then we are going to ignore everything else after this that, because these are greater than 0.05 so we are not going to so like, just from a quick look, right? Looks like basketball court, storage clubhouse, water dryer probably has higher P values, so therefore they have lower impact. Now you might question, like, really their category of house do not have any effect on the price. It sounds very what it say, like a, not a, not a very good decision to make. But again, here we are. So maybe the data set is imperfect, or maybe it is what it is. So as our first attempt, we are going to drop everything blindly that are over 0.05 in a real project, though, you should not blindly use anything that we have taught you, you should not blindly drop something with a high view. If you should not blindly drop anything with a low p value or so on, or high P value or so on, right? You should not be but these are the heuristics that people mostly apply, given on your particular use case, you may or may not get better mileage when you apply these heuristics. Okay? Or you might also want to try to change this threshold value from 0.505 to something else. But if we do apply this, then these are the columns that we are going to retain. So therefore, what I'm going to do is I'm going to create another data frame, which I'm called X, selective X underscore SEL, so this x selective is basically taking these subset of columns, which is this subset select calls, and then just returning those columns. And now we see from 42 we are down to 19 columns only because every. Else came with a P value higher than 0.05,
+
+Unknown Speaker  15:03  
+so now we have only these columns.
+
+Speaker 1  15:07  
+Okay? Now obviously this data set does not look like a perfect data set, because for some reason, the column TV seems to have a higher importance or higher influence on the price of the house, than house type that really doesn't make any sense to me. And that is why you should not blindly be using these data set right as you get it. You should always question the data, question the validity of the data or or in in actually here, in the assignment, or not assignment, in the examples of demonstration that we do, we basically take the data and do not ask as much as much question, because in this context, we're just trying to line learn the different steps. But when you are going to do your own work, either within a class project or outside, you should first think about where the data come from. Often time the data publisher will have some supporting documentation. You should read through that and then try to ascertain that whether the data is something that that is really trustworthy and something that you can really use right, which is something that we are not doing here, and that's why we are getting what we are saying. But anyway, this is basically the mechanism to get the ones with with where the null hypothesis can be disproven. Basically means where the alternative hypothesis is true. So this is our set of feature. Then the next thing we did learned is that we have to calculate the variance inflation factor. And in order to calculate the various inflation factor, we had to write a little utility function, which is basically this function, which is copy pasted here in this notebook from the from the last week's work. So here what we do is we are basically use this function again, from Start step, stats model library called various inflation, variance, inflation factor, and basically we create a data frame that gives us the v for all the columns that are present in the data frame. So now, after I define this function, and then, let's say if I'm computing FIPS on the data frame that we have. Now these are the different columns that we have, and they are now sorted in the ascending order of fifth. So as you can see, the highest one is time, and then lowest one is state. Now the idea here is to drop the highest view and recompute unless, unless and until you get a v value within a reasonable range. So now, instead of just dropping a few and then taking the data, taking the remaining column, so So here what I have done. I have written a little for loop. So what I'm saying is, if, after you do this, if you see that highest vif is greater than 20. So highest if mean, what? Highest if is basically the last 1/5 dot I lock negative one, which is basically this guy. So this is your highest wave. So then you are checking if your highest waves is greater than 20, which is this. Then you print the value of the highest wave, and then you basically take that corresponding column and drop it from your data frame, and then recalculate the VF again, and then see which one is the highest view. And then repeat the procedure and keep doing it until the time your highest view comes down to below 20. Now, if I run this, you see first time when I ran it, the highest VP is the top for the Time column, 92.700 which is this thing? Now I'm going to run this loop, and you will see the output is so then after this, 92.700 and after I dropped it, I recalculated my view again inside this loop, and then give a highest V for latitude, and that is 30.02 now, if you look into here first time, when I did the latitude has a V of 1.05 and this is why we mentioned at that time that after you drop a column, and then you recalculate the V for the remaining, remaining column, your V value can completely changed. So that's why, with all the selected columns, after p test, we got time as the highest, but latitude is was much lower. But after we dropped the Time column and ran this again, then latitude become the highest, with 30.02 so. And then we took that off, and then ran it again. And then bathroom becomes the highest view with 17.97 and then after that, there was nothing else with greater than 20 value. So therefore the loop stopped.
+
+Unknown Speaker  20:14  
+So that means the final
+
+Speaker 1  20:17  
+column will have two columns less than p test. So after p test, we retain 19 column, and now we are retaining 17 column, because these two were gone. Sorry, bathroom, we did not drop actually, because here I use 20 as my threshold, right? So bathroom was 17.97 therefore we didn't drop that anymore.
+
+Speaker 2  20:37  
+Was there any particular reason why you landed on the number 20 or nah.
+
+Speaker 1  20:41  
+Just from experience, just Yeah. I mean, you can, you can try with different numbers, yeah. So I basically noticed that when I was using a lower number, let's say 10, then lot of the columns were getting dropped, and then we are left with almost nothing to do the training. So that's why I chose a higher threshold value. That's it. Like people usually choose 510, maybe 1520, is kind of oddball. But in this case, just to ensure that we still have a sizable amount of columns, I choose a higher cutoff value for the fifth drop off. Okay, so now we have this final column. So essentially Now what that means is my x full data set contains 42 feature columns, which is everything that came with and my x final contains a subset, which is only 17 columns after the p test and V test. The hope is that the adjusted R square value with the X final data set would be higher than the X full data set, that is the claim. Now, again, as I said, given the limited amount of data, that may or may not be the case. So then what we are going to do, since we are we have basically two pairs of things, two pair of train test that we need. So we use the same train test split function, but we pass both of the different features that the full and final, and then I get full training, full test, final training, final test. And then for the Y, I have y training and y test, right? So we basically have two, two groups of data, two groups of training data. Now with these two and test data too, of course. Now, then what we do is same thing that we have been done in many other demonstration last class. So we take two completely separate regression model and feed them with the one with the full data, one with a subset of data, which is the final data. So let's do the training. Oh, sorry, I forgot to run the this column, this cell.
+
+Unknown Speaker  22:52  
+Okay,
+
+Speaker 1  22:55  
+okay. So now I have two models fitted, and then what we are going to do is we are basically the same thing again. We are going to do two separate prediction, one for model one, one for model two, and then we are going to find the mean square error r2 score for both of these models, and then just print them to see how the models fared.
+
+Unknown Speaker  23:20  
+So here look what happened.
+
+Speaker 1  23:25  
+Selected features actually give us a lower R square value, even though we were thinking that select, after doing this feature selection, we are going to get a higher R square value.
+
+Unknown Speaker  23:41  
+In reality, we got a lower R square value.
+
+Speaker 1  23:45  
+But wait a second, remember we also said this is R square value. So R square value is a good measure, but when you are doing a comparison between model same model, but created with two different number of feature sets. It does not take into account how many feature sets are there in the model. That's why a better measure for these would be adjusted R square value, which, if you remember from the last class that there is no built in function for that. So therefore, we wrote a custom function to find the R square adjusted so this is our custom function. Now we take these results and basically calculate the adjusted R square for the two so let's see what we get. Ah, now we are talking now the adjusted R square for the selected features is better, although marginally better, but it's still little better 35.4%
+
+Unknown Speaker  24:52  
+compared to 35.04%
+
+Speaker 1  24:55  
+right? So this is something that we were expecting. So. Now I would still not say, even after we see the marginal increase, I would still not say this is a good model, because just our common sense tells up tells us when we saw up above that some of the columns are getting dropped, which doesn't make much sense, right? So my point is, don't just do these steps blindly when you are actually using a data set in your project. Always do your due diligence, assuming that some of you guys will probably be doing something similar in your project too. So feel free to come to us brainstorm, first within your group, and then also with us instructional stuff to basically see what you are doing, whether that kind of fits the common sense test first, right? Because for that, there is no, no matter how much, how many in the mathematical, numerical, statistical test you employ, there is just no replacement for plain old common sense. So please always, always make use of that common sense. Because when you do the common and common sense does not mean that you just have to do your hunch, right? I mean, in this case, for example, remember the TV column we saw? One thing you might want to see, hey, let's see, what are the unique values? How many unique values do you even have in the TV columns? Right? That would be the first thing like, try to understand what that column TV actually means to you. And then the other column that we retained, that we dropped in the p test, which was the house type or property type. So what are the values? Was there? Maybe that was a problem because someone used a level encoding there when they should not have. Because remember, if there are, let's say five types of houses, right, like your, let's say single family, multi family, townhouse, condo and whatever, right an apartment. And if you do a level encoding, you will get 01234, and that is the totally wrong that will completely screw up your p test. That's probably what happened before. Ideally you should have done one hot encoding there. So these are the kind of thing that you should think of right when you are actually working on the data. So the problem here is I can tell you right away, if you look into the data, looks like some people have done some pre processing, and that's why category is numeric. Bathroom. Well, bathroom is supposed to be numeric, but looking at the category, looking at the thing, things like TV, hot tub, there is all of these are numeric columns, and none of these look like one hot encoded. So I would say that's probably the first problem in this data set, because it was a data set that someone erroneously pre processed and used, used sub optimal encoding strategy. So that's what my common sense tells me, looking at this data like, right? Like,
+
+Speaker 2  27:37  
+get let me like, do you think that there's data there?
+
+Speaker 1  27:41  
+Right? No. I mean, you should have done get dummies, either get dummies or or psychic learns, one hot encoding, which is, again, you can use within pipeline. But here, whoever pre process this data, because think about it, when you get this data in a raw form from a real estate database, right, realtor.com or whatever, right? You are not going to get numeric values for these. These will be text values. And then someone took this data and converted into numeric values. And in order to do that, they used a simple level of encoding, like using zero for 11401234, different values. And that is almost never a good idea to do. So
+
+Speaker 1  28:27  
+okay, so that was a very quick warm up and recap of what we all did last couple of classes. So I was
+
+Speaker 2  28:34  
+trying to follow along and like code code, because I realized that the examples that we have were set up the way that you yours was, and I was frantically trying to code along with you. Is there a version of this that you can upload? Because I
+
+Speaker 1  28:46  
+will, sorry, I will. So what I will do is, so Kian, what he does after the class, he posts all the, all the solved files as posted by as given by BCS. So what I'm going to do, and I knew that someone is going to ask this, because I have done some tweaks here and there, like in this case. So what I'm going to do at the end of the week, or maybe going forward, if I end up doing this, maybe at the end of every class I can do that. So I'll basically up overwrite everything with my version of solution, and then the ones you will see that where my version of it, like, basically, you can go and see whose commit kind of came in the name of the file, and you will see, okay, this is something that binary committed, right? So you will see that. Thank
+
+Speaker 1  29:35  
+you, yeah. But if you want to take a look at that code again, the code for automatically calculating highest view and dropping one. So this is basically the code. So what I did is, first I apply calc vif on everything, and then take the last of vivs, and obviously that is sorted, right? I apply a sort value, and then when you take the last one of the. Is, which is basically this row. So this is your highest view, and this row, then again, comes as panda series, where the zero element is the column name and element number one, which is the second element, is the actual value of this. And then from there on, I basically write a while loop, and I keep running this while loop until the time when the second element of your last row, which is your highest wave row, is greater than whatever threshold you choose. And if it is greater than 20 or your threshold, then you basically drop that particular column, which is the 08, position of your this thing, which is time, in this case, you drop that column and take the everything else in the same data frame, and then you pass that through CALP again, and then use the New highest view here from from that sorted value, sorted waves, and then keep doing it.
+
+Speaker 2  31:05  
+And the code frame above is where you define the highest vif by calling the vif function. Is that? Right? Yeah, okay, yeah. And then, and then you're looking for colinearity, right? That's what you're trying to do, is you're eliminating any possible colinearity.
+
+Unknown Speaker  31:17  
+Yes.
+
+Speaker 2  31:21  
+I'm just trying to remember things I totally forgot what r squared does. So like, I'm trying to, like, go relearn that.
+
+Speaker 1  31:28  
+So if you compare the where we did the VIV test last week, last class, you will see that in that example, we basically hand dropped, like us last five or six columns, like basically hard coded, and then drop those columns and then take the remaining that's how it was. So here we are not doing that. Here we are dynamically calculating this and taking the last one and dropping them and then calculating that again.
+
+Speaker 1  31:59  
+You know what? What I'll do is, let's, let me do one more demonstration, and I'm going to upload these two before like, like, as you start the mini group within your projects. Okay, so that way, even during your project, if you want to use this, you can use it. So I'm not going to wait till the end of the class. So Kian, can you post the solution for today's class? Then, yeah, you want me to do the whole thing, including the group project. Including the group project is fine, that's okay, okay, yeah, okay, so that's that any other question on this warm up?
+
+Speaker 1  32:49  
+Because if not, then I want to take some more time to talk about the pipelines.
+
+Unknown Speaker  32:58  
+Actually, let me see whether there are any.
+
+Speaker 1  33:02  
+Yeah. So the basically you pipelines are used when you want to build, like a machine learning workflow where you define how the each how each phase would be, and then you have basically data set that is kind of related to each other, and those same logical steps in the flow where you want to apply that on different data set and not have to rewrite those again. It is kind of same kind of a philosophy, why we write define function in the first place, right? So then you have to think of, okay, what are the steps that we commonly I am going to commonly repeat, such as, for example, removing now, running the get dummies, splitting the data into training and test set for doing the feature selection training and scoring the model, or trying multiple model and comparing them, whatever it is you are doing, right? So the idea is that you basically do this once by hand, and once you are satisfied, like, Okay, this is what you are going to apply for this particular project, then try to codify it into a pipeline, and then just use the pipeline from there onwards, right? So we are going to see an application for that. Okay? So here to show the like the benefit of a pipeline, we are going to take two data set which are similar data set, but with slight difference. So these two data sets, these are basically the rent data, but for two different states. One is for Texas, one is for California, right? So, similar kind of housing data, and then price? Does it have a price? I think it does, right? Do?
+
+Unknown Speaker  35:09  
+What did I take as? Why
+
+Speaker 1  35:14  
+price? Yes, so this one also does have a price actually. Why don't I print what column it has. So if I do rent Texas, dot columns, yeah, so Id, category, title, body and this, bedrooms, currency, and then price, okay, and then if you also take a look at the other data, which should have the same columns, yep, they have the same set of columns. So essentially we have two similar data set but belongs to two different state or two different groups of things. So this is typically a scenario where people would see that they have to kind of apply this fixed set of step repetitively. And imagine if you are doing this for doing this for all 50 states, right? So you're going to basically create 50 different models, but all of the models essentially will be using the same set of steps, and that's where why you need to build something that is repeatable, almost like a function, which is what we will be doing here. So first, what we are going to think of is, okay, now we have this data set. What are the common things we do we are going to do now here you see that I have written a function pre processed data. But even before that, when you are starting out with a fresh data set, you might actually want to try some of these manually first, before putting them inside a function, such as, okay, let's find what is the length, what is the then do a drop in a and then find what is the new length, and that will tell you whether there is some null data. And then you basically see, okay, how many we dropped, and so on, right? And then after you drop the null, then you basically do a train test split, and that will basically return your x's and y's and also split it, right? So you basically takes x y. So essentially, in this whole function, you are dropping all the null values, you are extracting x and y separately, and then you are taking x and y and doing a train test split, which is kind of the very basic steps that you do all across the like, no matter which data that you have. So I decided to put that into one single function, which I'm calling pre process data. And then all I have to do is I have to run the pre process data for, let's say, for the Texas data we are working on. So I just run this and it basically so these output is coming from here, like how much rows are dropped? So it dropped about 73.58% of rows not a good position to be in, right? If you blindly do drop any and it drops about three fourths of your data, that's never a good thing. So ideally, you should probably not be doing this blindly. You should kind of see like, okay, what are the nulls? Is there any other strategy that we can do use to fill those nulls with some dummy values and stuff like that. But anyway, if you don't do that, so let's say this is what you get. So you drop some rows, now you have a clean data set split into train and test. Now comes the actual psychic learn pipeline. So here you have to think like, Okay, now that we have the data, which is got rid of null, we have the train test split. What is it we try to do now? So in the data set, if you look into it, there are a lot of categorical data that we have. So all these categorical column need to be one hot encoded, which we can do using Pandas. Dot get dummies. But as I mentioned earlier, we can also use that with using a one hot encoder method, which is basically a scikit learn transformer. And the beauty of doing that is these transformers, or scalars, in scikit learn they work like any other machine learning algorithm as well. So essentially, you could treat all of this, these almost interchangeable steps that you can put into a pipeline in any order or sequence that you see fit. So the beauty of this is I have three things. The first one is one hot encoding. Second one is standard scalar, but third one is the actual linear regression. So these are three different steps, but they all follow kind of the same programming interface, so that when you are creating this construct called pipeline, then you can pass on a list of things where each of the things in your steps basically follows. A certain interface or certain signature. So that's where we are passing the one hot encoding, standard scaling and linear regression all three as three steps into this pipeline object. Therefore, once it is written, I can just do a pipeline dot fit, and that will sequentially apply the one hot encoder dot fit and then transform. It will do standard scalar dot fit and then transform. And it will it will do linear regression fit the whole thing. So it will be applying everything one by one, just by doing a pipeline dot fit. So I don't have to individually one hot encode and then grab the 100 encoded column and then append that, and then standard scale and replace that. We don't have to do all any of these, just three simple lines. Does all of these steps for me when I apply pipeline. Dot fit on that. So that is the beauty of creating a pipeline with the different transformer, scalar scaling and actual machine learning algorithm steps. So I hope you actually see the beauty of this. And please let me know if you have any question. I know I'm pretty going pretty fast. And then if you see, when I do pipeline dot fit, it shows a little tiny, nice, graphical picture that shows what are the three different elements in the pipeline, right? So each of the things in a pipeline is basically and if you click it, it will basically show you how you declared it, right? So these things, so that is a pipeline, and by doing this, I achieved all three steps in with just this one line of code, which is pipeline dot fit. And there is no reason that there would be only three. There could be more steps, however many you need in your pipeline, right as long as you are using something that is conforming to Scikit learns interface for transformers and scalers and machine learning algorithm. You can fit any of those in your pipeline. There could be 3456, depending on how complex your data is and how many steps is needed to kind of pre process the data. You can use all of them in your pipeline. Is there
+
+Speaker 3  42:19  
+a way to control the execution in each of the steps in the pipeline. Like, if you only want to run all the steps after the second step, can you do that? Because it just seems like running all of them at once every time you want to run that, like anything you need to change, like one part of the pipeline.
+
+Speaker 1  42:36  
+Yeah, that is, I don't think that the purpose of the life pipeline is to run anything selectively. So that's why, ideally you will run this pipeline after you figure out what those steps are. So you basically would typically run these steps manually and then put these things in a pipeline and then run it.
+
+Speaker 4  42:55  
+There is a way you can isolate them. I have to remember the exact things, but it's kind of like an array. Okay, like you say, I want 01 I want the one, one. Okay, okay, I just have to remember the details. But there is a way to do it. Yeah,
+
+Unknown Speaker  43:10  
+I just, I will look it up. Yeah, sorry,
+
+Speaker 2  43:14  
+What? What? What is the, what is the benefit of using multiple transformers before your estimator?
+
+Speaker 1  43:22  
+Uh, well, here we have used multiple transformers, right? One hot encoding and standard scalar. Both of these are transformer
+
+Unknown Speaker  43:29  
+well, but so what? Why would I do that?
+
+Speaker 1  43:33  
+Because you have a categorical column which needs to be one hot encoded, and you also seem to have numerical column might be that are not scaled. So that's why you are looking to have standard scalar to fit that into normal distribution with a mean of zero and a standard deviation of
+
+Speaker 2  43:56  
+one. So the one hot encoder is for non numerical data and standard scalars for numerical Correct.
+
+Speaker 1  44:05  
+That's why we are doing one hot encoding before the standard scaling, right? Yeah. Okay. And then once you have that, then for our adjusted r2 you have your own custom function. If you want to check the matrices, you can write a custom function where you are going to do model dot predict, and then you check the RMSE value and R square value and so on. That is also another function. And then with this function, then you can calculate your adjusted R square value, which happens to be so and so and then. So that's something that you do, right? And now let's say you want to turn the whole thing into one single, what is called a function. So, so here, when we did a pre. Process data. The pre process DATA step was that, well, I am dropping all the null values, and then I'm doing X and Y split, and then I'm taking x and y and then I do trend test split. But by doing that, I notice that I'm dropping almost three quarter of the rows. So I might I'm not happy about that right now, so I might want to do pre processing in a different way, whereby I'm not going to do drop any so I decided to write another function which says pre process data but keeping any value. So with this function, I'm only going to do the X and Y separation and then the train test split. So this is my other version of pre process. With that I can try to do another set of x and y train, test split, and then I'm going to apply the same pipeline that I have defined above with the same steps. So this is called, I'm calling it pipeline to but with the same steps, and I'm going to apply a pipeline to dot fit with this new set of training and test data which does contain null values, which is not ideal, but since we saw that dropping null values is causing me to lose three quarter of the data, so I choose to do another version of the model with the exact three steps, but this time, keeping the null values actually, and then I'm going to calculate the adjusted R square value. And that adjusted R square value comes as 0.32 as opposed to 0.27 we got earlier when we did after dropping the NA. So it means that probably, in this case, maybe not dropping any is a better, safer bet. So then, if I want to do this for different steps, let's say for California, when I run this, maybe I'm going going to get some output. If Texas, I run this, either, depending on how many null values are there, I probably going to get different behavior. So if I now want to abstract the whole thing so that I can run this in future for 50 different states data. So what I chose to do is I basically wrote one catch all function that I called get best pipeline. So in this case, get best pipeline is basically I'm going to give it two pipelines, pipeline one and pipeline two, let's say, and I'm going to give it a data frame. And what it will do is it will basically use the two pipelines to do the same thing and calculate the adjusted score from the two pipeline from pipeline one and pipeline two, and depending on whichever is higher, it will return me that corresponding pipeline. So essentially, what I'm trying to do is what I did before in the cells above. I'm trying to codify it so that it becomes a reusable tool that I can leverage when I'm running this across 50 different states, data, which is basically just your functional packaging, right? Like what you do in any programming, for example, nothing else, nothing specific to machine learning here. So now I have this get best pipeline, and then I choose to go one level higher up, and then put another level of functional abstraction. I'm calling a function called best model generator. So here I only give the data frame. Let's say, hey, here is the DF, which could be your Texas DF, which could be your California DF, or whatever DF. And then inside this here, since I have already kind of a hand coded all of these, and I see how this is going to work. So here I'm going to put everything in one this is basically to make the code kind of production ready, right? So what I do is I basically define all of the steps in the pipeline, then I create the two pipeline with the steps, and then with this pipeline one and pipeline two, I'm basically calling this function here, which is to get the best pipeline, and then it will return this function will return the one with a higher adjusted r2 score. And that is the pipeline I'm going to ultimately use. And the benefit of doing that is, when I'm applying this for Texas data, maybe for Texas data, the better pipeline is the one where we do drop the null values. Maybe for the California data. Maybe the best pipeline would be the one that does not have the null values, right? That we do not drop the null values. So depending on that, I can now apply these best model generator function across the board without having to repeat all of these things that we did for one state. I don't have to repeat that 50 times. Now, with this, all I see, okay, rent TX dot data, rent Texas data. So what is my model? So I just run this, and it shows me that returning the no drop data pipeline. So for Texas data, when I dropped, it was 73.58% and. I tested my adjusted score was 0.29 then I did a test with no drop data. I got adjusted score of 0.33 therefore I'm basically taking the pipeline that has no dropped null value, because this is a better model.
+
+Speaker 2  50:20  
+And and when you're you're doing your evaluation of the best model above, yeah, you're just comparing the adjusted square or squared, and you're taking,
+
+Speaker 1  50:28  
+in this particular case, yeah, yeah. But this is, again, this is just a demo. That does not mean, in your case, you have to do that. So now let's say if I do that for CA model. So ca model also kind of here it is behaving similarly, 82% drop, with adjusted value of negative 0.59 and then with a no drop, I'm getting adjusted value of 0.31 therefore I'm keeping this one and
+
+Speaker 2  50:53  
+then adjusted R square is telling you that the higher value means that there's less variance, or is that
+
+Speaker 1  51:03  
+R squared value higher value of R so adjusted R square is same as r square, except it is weighted for the number of features that it that your data set has, and
+
+Speaker 2  51:14  
+it's and the good value is telling you that there's less variance. Or what does it really tell you know,
+
+Speaker 1  51:21  
+the good value is telling you that more of the variance of your target is being explained by the combination of the features that you have in your hand, like you can explain more like 92% or indeed not 92 in this case, let's say 31% of your variance in your target is explained by whatever number of features that you have in your in your training column, training data set,
+
+Speaker 3  51:55  
+and we wanted any number under point 05 right? Or was it point 5.0
+
+Unknown Speaker  52:04  
+I'm sorry, say that again. Oh, sorry,
+
+Speaker 3  52:06  
+I'm kidding, p values, right? Yeah, yeah, this
+
+Speaker 1  52:09  
+is not p value. This is r squared, right? Sorry, yeah,
+
+Speaker 2  52:12  
+yeah. I'm trying to keep it all straight too, right? So I think, I think Benoit, what you just said, that both r squared and adjusted R squared have to do with variance and controlling variance based on the number of features
+
+Unknown Speaker  52:28  
+or relevant features both
+
+Speaker 1  52:30  
+of these. So our square value, the definition of R square is it basically tells you what percentage of variance in your target is explained by the features that you have in hand. That is the definition of R square. Now the reason adjusted R square is considered sometimes a better measure is, if you have two model with different set of different number of features, then your R squared does not take into account. So let's say, let's let's take a definitive example. So let's say you train a model and you get a adjusted R square value of, let's say 0.9 which is 90% right? And assuming that you have, let's say 10 feature, right? So then each feature you can think of as contributing to like
+
+Unknown Speaker  53:24  
+9% to a total of 90%
+
+Speaker 1  53:29  
+as opposed to that, if you get that same 90% but this time with five feature columns, right? So that means now each of the feature column, even though they are lower less number of feature, but each of the feature column is able to explain a greater percentage of the variance. So that means that five feature each contributes to about explaining 18% of the variance, totaling to 90% now if you do the weightage calculation, if you take that into account, you will then conclude that even though both models have same 0.9 r square, but since the second model did it with less number of columns, so therefore the second model has more predictive power over the first model, because it is doing that with less number of columns. So that means those columns must be more statistically significant, because what you are having is that means, with the 10 columns you are predicting something and the five columns you are predicting something, that should kind of indicate that maybe those other five columns doesn't have that much statistical significance anyway, so if you calculate the adjusted R square value that will take this fact into account and give you a higher adjusted score for the model that everything else remaining the same, but just have less feature columns in the database, in your data frame,
+
+Speaker 2  54:49  
+which which makes it easier to process? Okay, correct? But you can't assume that that each one of those columns is equally weighted, right, like it could be. Well. No,
+
+Speaker 1  55:00  
+no. That was just to explain, yes, yeah, yeah.
+
+Speaker 2  55:04  
+And a negative value, that's, that's creep, that's crazy, then, yeah, that's like,
+
+Speaker 1  55:11  
+that, like, completely, like, inverse, uh, relation, yeah. Anyway, um, so last thing I'm going to just show you one quickly, so you see there is a Python file sitting here right next to the Jupiter notebook. So what you guys might want to do, so after you do all of these, like what I said, like how I, step by step, did all of this thing and kept composing them into progressively higher level of abstraction using this functional composition, you before you put your code into production, you might want to put everything into actual a Python class where you have all of these written as a Python function, and then in your Jupyter Notebook. Then, instead of doing all of these, your Jupiter notebook could be very clean. All you are doing is you are importing your own pipeline utilities. This is not any of the built in library. This is something that is sitting right here. And then you are basically using the model generator, where, in this case, I call it a rent model generator, which is basically same as your what we have done here, right? So the idea is that after everything is done, you can clean up your Jupiter notebook, put everything, package everything inside a tidy Python library, and just use it on your notebook to keep things clean and simple, right? I mean, that is how typically, you go from a test development stage to a production stage for any software development
+
+Unknown Speaker  56:42  
+what? Karen, you're showing your thumbs up.
+
+Speaker 1  56:47  
+You are on mute, by the way, in case you want to add something, you
+
+Speaker 4  56:51  
+say, This is making me happy, because how I want to see things. My favorite thing, I put the information on one on the live channel, on Slack about what to do, accessing individual steps in a pipeline. Okay. Always that I thought you can do is by index, and you can do it. What I usually do is using the the name step.
+
+Unknown Speaker  57:18  
+Ah, okay.
+
+Unknown Speaker  57:19  
+You can also just do with the name, ah. So
+
+Speaker 1  57:22  
+just like, you, okay, that's good. I didn't
+
+Speaker 4  57:26  
+know that you can do. You can do just the last two or the first two. So you can take the first two and then to put that, see how it works with a different model, maybe I Well, yeah, okay, a lot. Oh, it's like,
+
+Unknown Speaker  57:44  
+it's like, as good as sliced bread, yeah,
+
+Unknown Speaker  57:46  
+yeah.
+
+Speaker 1  57:48  
+It's like, any any other slicing that you do, like, with any other Python list, right? It's the same kind of like you
+
+Speaker 4  57:54  
+slice pipelines are as good as the invention of slice spread. Yeah, I don't know. I generally a big fan of SK learn they did such a good job on on designing their interface and everything. Yeah, yeah.
+
+Speaker 1  58:11  
+Okay, so, so let's move on to the final part of the class, which is, I hope that you are going to spend rest of the time doing that with your group. So this is a mini project, and here, if you look into it, that there are three different data set that are given, but these are just suggestion. So the first data set is basically the productivity of what happened. Oh, it actually ended up downloading that thing anyway. So basically, garment worker productivity, I think if you
+
+Speaker 4  58:48  
+might have missed it when I was looking for that information. I don't know if you mentioned the one of the beauty, if he beauties of pipeline, is you can pipeline up fit okay. And when you do that if, for example, on your training data, it will do fit on the scaler, it will do fit on the transformers, right, right tests and you do predict instead on the pipeline, it doesn't fit on them. It just does transform on
+
+Speaker 1  59:19  
+so it's not, sorry. Hang on. Say that again. What you said when you do the feet on the pipeline transformer, right pipeline,
+
+Speaker 4  59:29  
+it only gets fit on the training data. When you do fit, when you write on test data, it does not fit it on the test data. It only does transform. That is what it is supposed to be, yeah, yeah, exactly. I don't know if you mentioned that correct emphasize it, because that's one of the beauties of it. It makes it yeah, nice, consistent pattern. Then you later you go to use it in production. There it's ready. You can get new. Data coming in and running through the pipeline the same way, and you'll have a consistency. And that's why I love when, when you then make it into a nice Python class, like you did. That's like them like, that's how you can put that into production, you know. Yeah,
+
+Speaker 1  1:00:17  
+okay, sorry. I was actually looking to look, going to look into this. So in this one, if you look into the file, the project overview, right? So basically, what they are asking you to do consider these three data set. And if you click on one of these, I was clicking on these, and it was just downloading those. Someone already made these files readily available for you on the BCS server, and that's what it was downloading. But essentially these three data set, what are these data set are kind of linked here. So the all of these come from UCR wine machine learning data set. So there is one data set that basically gives you these hourly data set US Embassy in Beijing. This is meteorological data recorded in one weather station in Beijing. And this basically gives you all of these meteorological data based on Oh. And then this data set is split into four different groups. One is when the wind is flowing northeast. One is when the wind is flowing Northwest, and so on. And then the idea is that you are supposed to do a project where you are going to take any one of these files, which are all derived from one single data set, by the way, and then you basically see what are the transformation, scaling, encoding and machine learning steps that you are going to do, and then combine that into a pipeline and use that pipeline across all these four different subsets of data depending on the four wins, four different wing direction. So that's your first data set. If you want to choose to work with that data set, your second data set is basically news popularity in social media platforms. So if you click into that, that will take you to the original UC Irvine data set. Now going back here, these data set is also further Chad in across the five different news media houses, the ABC, Bloomberg, New York Times writers and The Guardian. And this is basically popularity of those media houses, but one for each particular media outlets, right? So the same concept as here, you basically, if you choose to do this, you basically do all of your thing on any one of these data set, put the whole thing into pipeline and see whether you can use the pipeline in a repeated manner across the other subsets of data. And then the garment worker productivity, which is this one. This is the productivity of workers in a garment factory. And this data set is basically Chad up along the days of week, like productivity on Sunday, productivity on Monday, Tuesday, Wednesday, Thursday and Saturday, right for six different days of a week. Now notice here there is no data for Friday, but there is data for Sunday and Monday. So that should tell you that this is probably from a country which is a primarily Islamic country, right? Maybe somewhere in the middle east. Like, I remember when I went to Dubai, our plane landed and it was Friday, and I go out of from the airport, and it was not COVID or anything like that, but it was like, everything is empty and like, what's going on? Like, oh, this is Friday. Friday is a holiday, right? So when I looked into this data set, that's the first thing that came in mind, where the factory workers are working Sunday or Monday, but not on Friday. But anyway, the idea is the same. You basically take one of these data set, you perfect your steps, and then apply across through a pipeline, okay? And then if any of you guys have any other data set in mind, you can always use it. It doesn't have to be splitable into different subset, but it is better to have something like that. So that way you can showcase that like, Hey, I perfect my steps on one set, and then I can apply that without any change on these other subset as well, right? But one thing it's actually very hard to do, let's say, if you want to create a pipeline for, let's say news popularity project, you cannot possibly use that pipeline buying blindly for basing pollution project, because these are two different data set, and the actual kind of steps that you will need is also be very different, right? So what when the scenario where pipeline mechanism will come into handy is something that you either you are going to apply on the same data set repeatedly over time, for example, remember one of these days that we were talking about model? Drift. When you have a trained model, you put the model deployed into production, and then, let's say, after a day or a week or a month, your data set kind of changes, then you need to get your new data, and then you run through the training again. So that is one area pipeline would be helpful, because you are repeating the same set of steps over and over again. And the other area is when the training steps are same, but depending on certain parameter, your data set has multiple different child data set, which all of these are examples right? Or in the case of the rent housing debt rent data, where we saw different state might have different real estate data. So try to find either one of something outside or use one of the three work maybe about 10 minutes within your group to do a quick brainstorming to figure out which one of these data that you are going to use. And then after that, you can take maybe a 1015, minute break, and then you can come back from the break and continue to work on the project, trying to apply some of these techniques that we have learned, and in
+
+Speaker 2  1:06:03  
+the meantime, are you going to be uploading the code sample that you showed? Yes.
+
+Speaker 1  1:06:07  
+So as soon as you guys go into the breakout rooms, I'm going to upload all of these solved files from my end, so you will see that they're within next couple of minutes, I Okay, so are the rooms open? Karen, what? How many?
+
+Unknown Speaker  1:06:27  
+How long do you want?
+
+Unknown Speaker  1:06:30  
+Let's do
+
+Speaker 1  1:06:32  
+15 minutes for now. And then, after 15 minutes, let the room close. Everyone come back, and then we will take a break, and then we will open the rooms again. So let's do for 15 minutes, for now, 15
+
+Speaker 4  1:06:43  
+seconds. Actually, I give them 15 seconds. Yeah, no, 15 minutes. So you shouldn't be traumatized. Are we are we going to our project, one, rooms,
+
+Unknown Speaker  1:06:57  
+once? Do we want that? What do we want? Haha,
+
+Speaker 1  1:06:59  
+no, no, no, sorry, sorry. I My bad. I meant to say, just create the five rooms and let people pick and choose their rooms, like, like, depending on how the how everyone has done their project, right? Like, you guys all know which, which group of people that you work and which room you were, so you basically just go and choose your respective rooms, as you did in the first project. Give me a moment here. Yeah, sorry, sorry for confusion. I should have probably mentioned it clearly. Yeah,
+
+Unknown Speaker  1:07:29  
+wow.
+
+Speaker 4  1:07:33  
+Instead, automatically, it will still be 15 minutes they choose the room now the first time, for this first time around, they can choose it as they remember. And then after that time, I'll just, you know, abduct them into them once they've Sure,
+
+Speaker 1  1:07:46  
+yeah, yeah, that's good. Actually, I
+
+Speaker 4  1:07:49  
+think I have a right making sure that up properly.
+
+Unknown Speaker  1:07:57  
+And so now open the rooms, and then you guys can go, I
+
+Speaker 4  1:08:04  
+Okay, so, yeah, go, go for it. Everyone rooms are there.
+
+Unknown Speaker  1:08:11  
+The clock is running. Yep, I
+
+Speaker 1  1:08:26  
+uh, okay. So while that goes on, I'm going to upload this code. There
+
+Speaker 4  1:08:35  
+additional thing with, with doing that with pipelines, is what I've sometimes have done it. Let's say you do. You figure out all your process of data cleaning and everything. So you know you're gonna give it the same way you can clean it the same way. You then make a Python class of all your tray of all your cleaning, and you inherit base classes. Yeah,
+
+Speaker 1  1:09:02  
+yeah. I know. I didn't want to go that far, because, see, I come from, it's so cool, because I come from a C Plus Plus Java background. So that is the first thing that we learned there. Like, it was so cool, like when I first learned Java, like 25 years back, I'm talking about, like, anything and everything I'll do, I'll basically create my own interface, and I will basically so very early on, after my first couple of projects in the industry, I fortunately become a team lead, and basically I had some power to yield over a group of developers working across the company. And those are the some of the things that I started like, like, Nope, you for this department, if you are working here, these are the kind of your interfaces and whatever you are doing, yeah, you basically have to extend the interface. SK,
+
+Speaker 4  1:09:50  
+learn. So yeah, my own custom transformer, right, right. Make my own custom transformer. One of the. Forget to both small, both baseball classes. One is transformer mix in. And if you Okay, yeah, and you do fall and left of a fit, you have to have a transform method. It will men make a fit. Transform method for you,
+
+Speaker 1  1:10:21  
+I haven't done the Python mixing too much because, as I said, when I was a full time programmer. During that time, I was mostly a Java guy, so Python mixings, I mix in I know what they are, but by the time I basically started doing Python, my day job did not require me to write a production quality code every day. So I lot of Python thing, I know, but I have never used all of them to the extent that I have done the Java thing, yeah, yeah,
+
+Speaker 4  1:10:52  
+I've done it. And, like, with all the cleaning just watching, it's like, yeah, I did that. I learned that long ago. Was Java, Java, you know, I had really learned Java, like, a couple of semesters ago. Okay, I had not gotten around to learning it. I always meant to. I finally, two semesters ago, had no choice. But, you know, that was one of the required courses.
+
+Unknown Speaker  1:11:18  
+So I did it then.
+
+Speaker 4  1:11:20  
+And now I'm doing Kotlin, which is so much like it's based on Java, so, you know, it's it all
+
+Speaker 1  1:11:30  
+today's 12 three, right? Week 12 class three. Yeah, that's right. 12.3
+
+Unknown Speaker  1:11:37  
+12.3 okay.
+
+Unknown Speaker  1:11:40  
+But yeah, I get excited well, so you know, okay,
+
+Speaker 4  1:11:59  
+I just love any kinds of pipelines, because pipelines make consistent results.
+
+Speaker 1  1:12:08  
+Okay, cool, so the updated codes are in. I
+
+Speaker 1  1:13:01  
+um, Do you guys think we should visit them during this 15 minutes, or just let them brainstorm which data set they want to use?
+
+Unknown Speaker  1:13:15  
+Have fun, huh? Let them, let them
+
+Speaker 4  1:13:19  
+hurt themselves, and then we can help them later. Okay, you gotta let kids play, you know, and fall down and scrape their name, yeah, I
+
+Speaker 1  1:14:06  
+a garment worker data set, yeah. So then if you look into the additional variable information, you're still not sharing a binary, am I not? Oh, sorry, there we go. Now. Okay, yeah. So this is for the garment worker productivity, and just from a quick look at that, and this is something that we are also discussing while you guys are in the room. So looks like the
+
+Unknown Speaker  1:14:36  
+targeted productivity, right? Is that what you guys said?
+
+Speaker 1  1:14:41  
+No, no, no, no, not actually, actual, actual, yeah, target productivity, that is said by the authority, okay, so actual productivity, what the workers actually achieve between a scale of zero to one. So looks like this probably would be the right, yeah. And. Then there is a paper here where three gentlemen here who basically did some work, which may or may not be simple regression, because these might be a paper of more academic interest. If you want, you can try to read through the abstract of the papers, but you don't have to, because, again, as I said, this is a mini project. You actually don't have to get some meaningful answer, as long as you could basically use this time to try your hands on some of the techniques. Now we learned that's fine. Okay, so that's group one and two. How about group three? Oh, go ahead.
+
+Unknown Speaker  1:15:37  
+No, you got it. Thanks.
+
+Speaker 3  1:15:40  
+Oh yeah. We were really interested in the news story popularity one.
+
+Speaker 1  1:15:46  
+Okay, so new story popularity is this. But there is a one issue with this, because if you see here, most of the data, they are basically long text, like title, headlines. So these are basically news stories. So if you take a quick look these data, basically we were
+
+Speaker 3  1:16:04  
+talking about taking the topics string and then breaking it into a list and then doing like a one hot encoding on that, that string broken up as a list, okay, and then try to cluster based on that. And like the time data, I think there was a time, the publisher timestamp.
+
+Speaker 1  1:16:23  
+Oh, so you wanted to unsupervised, like a clustering you were saying,
+
+Unknown Speaker  1:16:29  
+Yeah, I Yeah. Do
+
+Unknown Speaker  1:16:33  
+you have any suggestions?
+
+Speaker 1  1:16:35  
+I don't actually have much suggestion. That's what I was actually going to suggest. Maybe you can skip this for now, because this is the kind of thing where you take these and tokenize these and then run it through some kind of NLP algorithm to do some sentiment analysis and that kind of stuff, which is something that we will be learning in a later week. We haven't learned this, so it doesn't look like for today's project. This probably is a good thing to choose. Well, there is
+
+Speaker 4  1:17:05  
+look at the actual data sets. There's only one data set that has text, the others are just numeric values.
+
+Speaker 5  1:17:12  
+And there's a sentiment score for the title and the headline. I don't know if I
+
+Speaker 1  1:17:17  
+go, okay, okay, okay, okay. There is a sentiment score already given. Okay, yes,
+
+Speaker 4  1:17:23  
+they're so they just come on, PS One through whatever. So, okay,
+
+Speaker 1  1:17:27  
+so then maybe you can do this ignoring, like dropping the actual title and headline, just use their sentiment score instead.
+
+Speaker 4  1:17:36  
+Or if all the other data set, all the other XLS files,
+
+Unknown Speaker  1:17:42  
+numeric value,
+
+Speaker 4  1:17:45  
+yeah, it's the second set. If you look at the data dictionary, if you look at that, you see variables news days where you're looking at but variables with social feedback, data or those are all numeric,
+
+Speaker 1  1:17:58  
+huh? Those are all numeric. I saw that, yeah. But then you have to figure out what's your target column is going to be,
+
+Speaker 4  1:18:06  
+yeah. But then, as I was saying, because it says repository says it's a regression problem, so that
+
+Speaker 1  1:18:16  
+I'm not saying I'm not seeing some
+
+Speaker 4  1:18:19  
+numeric stuff, well, look at something other than the news board. There's some numbers at the end. But looking, look at any other other data sets, also, it's worth
+
+Speaker 5  1:18:31  
+the Bloomberg CSV has a typo in it. News popularity is written twice in the URL in
+
+Speaker 2  1:18:39  
+the readme. I posted the fixed URL in this in the chat,
+
+Speaker 1  1:18:44  
+yeah, if you take the if you go into your BCS, you'll probably see those fixed I think I saw that too in the readme file, at least for the government productivity. I remember I saw the URL was broken, and then I fixed that. Yep.
+
+Speaker 1  1:19:09  
+Anyway, so I don't know what to advise you guys like, what is the target column going to be? What do you guys are thinking group three? I
+
+Speaker 1  1:19:23  
+or if you want to do clustering, you can do a clustering. That's fine, but hang on here, it does say regression, right? No. It says associated task, regression, multivariate time series, text,
+
+Speaker 4  1:19:42  
+features, Ts. There are 144
+
+Unknown Speaker  1:19:48  
+there's an ID link and 144
+
+Speaker 4  1:19:51  
+columns of they're all integers,
+
+Unknown Speaker  1:19:56  
+and I'm not sure what, what the target would be of that i.
+
+Speaker 4  1:20:00  
+And this was like some kind of clustering, I don't know,
+
+Unknown Speaker  1:20:06  
+let me actually download this directly from UCI.
+
+Unknown Speaker  1:20:11  
+Yeah, that's what I did. I'm just looking through
+
+Speaker 1  1:20:13  
+them. Are you downloaded directly from there? Not from BCS? Okay? Yeah.
+
+Unknown Speaker  1:20:22  
+I Okay, how about group four?
+
+Speaker 1  1:20:26  
+Gonna dive into the garment industry? Okay? And five,
+
+Unknown Speaker  1:20:40  
+we are doing the weather,
+
+Speaker 1  1:20:44  
+the weather, okay, so for the weather data, which is this one? So what you are thinking of as a target column that you are going to predict on, we hadn't gotten that far yet.
+
+Unknown Speaker  1:20:59  
+Well, you guys are going to do some regression problem, right?
+
+Speaker 1  1:21:04  
+So if you guys are going to do regression, then there is a some, something that you are trying to predict, which is your target. So now looking into this, so you have this columns, maybe the first column, first column you can probably ignore, because that's just an ID. Then you have your month, day, and then hour, and then PM, 2.5 is, is basically concentration, or particle matter concentration, which are basically 2.5 micron or above. That's what that is. And then you have a dew point, you have a temperature, you have a pressure, and you have a cbwd, which is combined wind direction, and then you have, what else do you have? Or you have cumulated wind speed, which is LW, S and then cumulated hours of snow and cumulated hours of rain. And you have these on a hour by hour basis. Yeah,
+
+Unknown Speaker  1:22:05  
+anyone else thinking about using this data set,
+
+Unknown Speaker  1:22:11  
+any other group,
+
+Speaker 1  1:22:15  
+I would say, from a quick look, looks like probably temperature is a better thing to predict. Now, I don't know how much it will hold up to the p test, like how much the effect of other column will have on temperature, but if you want to keep those nitty gritty details aside, like if you just want to go at it completely blindly and just want to mechanically try this pipeline concept, you can certainly do that, like take the temperature column as your target column, and then everything else as a feature column. Maybe if you want, you might want to drop the first column, because that looks like just the idea of the reading that doesn't look like would have any statistical significance in out predicting the temperature. So drop that column, take the temperature as your a, y, and everything else as your x. I think that would be a good idea.
+
+Speaker 2  1:23:10  
+Why would they use their particular model matter? I mean, that's listed as a target feature.
+
+Speaker 1  1:23:15  
+Oh, does it say? Oh, okay, I didn't notice that it actually says Target. Sorry, I take my word back, yes. So it actually says to use the particulate matter. So basically this particulate matter is kind of showing the level of pollution that you have. So I think what this data set, basically, Dan, is saying, is the amount of particulate matter in the wind will depend on these other things, such as your dew point, temperature, pressure, wind speed, wind direction, and so on. So there you go. Okay, I missed that. I totally missed that, that they already have this hang on Now that being said, do they have the same type of information for the others?
+
+Unknown Speaker  1:24:03  
+Variables, table, yeah, they are.
+
+Unknown Speaker  1:24:09  
+The garment is productivity.
+
+Speaker 1  1:24:13  
+How about this one? Why is nothing showing up here? For the for the news data. Are you seeing anything?
+
+Speaker 1  1:24:31  
+This is coming empty. For me, I don't know why you guys are saying the same thing. This is for the news popularity data set.
+
+Unknown Speaker  1:24:39  
+I see what you're seeing.
+
+Speaker 1  1:24:41  
+So it's all empty, right, yeah, so it doesn't say which one is supposed to be target.
+
+Speaker 1  1:24:54  
+I don't know what to tell you guys. So group three, or whichever group said you were going to use it, you. Maybe you are will be better off not to use it. He has to be able to because it's not clear to me which one is the target column here. It
+
+Unknown Speaker  1:25:07  
+seems like it's supposed to be social feedback,
+
+Speaker 2  1:25:12  
+because the description is large data set and shows news items and their respective social feedback on multiple platforms, Facebook, Google and Google Plus. It must
+
+Speaker 4  1:25:24  
+be, this must be all have all those latter ones have just lots of integers, but they're all like, TS one, TS two, whatever. And I don't know where, I don't see where. There's a obvious target for regression. I could see maybe it's fine.
+
+Speaker 3  1:25:41  
+We could just use the garment thing. I don't want to keep spending too much time. Yeah, let's just,
+
+Speaker 1  1:25:46  
+let's just keep one of the other, unless you have something completely else you already have handy from your prior work, or something, you can use that. Or, I'd say, use either the garment or the bathing population, okay, I
+
+Speaker 4  1:25:59  
+mean, if they figure out how to do it and tell us they
+
+Unknown Speaker  1:26:07  
+were not seeing it, yeah,
+
+Speaker 1  1:26:11  
+anyway. So do you guys want to take a break before you start with actual work? Okay, so now it's 807. So let's take a break until, uh, maybe eight minutes. Or would that be too short? Eight minutes, fine, so we will come back at 815 then, okay.
+
+Unknown Speaker  1:26:33  
+How did your mini project go?
+
+Speaker 2  1:26:38  
+Well, it was, it was odd because we had, we were doing the whole data set for the garments and analyzing that, and then we looked at the solution. The solution analyzed each day. And so our assumption is that it did that so that it could figure out which day was the optimal day. And then we ran it, re ran it, and then we reran it, and then we reran it, and we were getting different results every time, just by rerun, drastically different results. So probably
+
+Speaker 1  1:27:09  
+you forgot to include the random step.
+
+Speaker 2  1:27:15  
+If, by the solution, didn't have it, then yes, you're ready.
+
+Unknown Speaker  1:27:22  
+Let's let me check,
+
+Speaker 1  1:27:26  
+yeah, because in the solution file that is provided, you see the linear regression that is you are doing. There is no random state there. That's why,
+
+Unknown Speaker  1:27:38  
+awesome. I love this class.
+
+Speaker 1  1:27:42  
+Yeah? So see if I personally go through some of the notebook. If I see something like that, I try to fix it. But in this one, the project one, the goal was for you guys to kind of a walk through and maybe face some difficulties, and then, then discuss within your group and learn. The idea here is to not to get the right answer or correct answer, or any answer, for that matter, right? The idea was to so that you can kind of get used to using some of these tools that you have learned over the last couple of weeks. So, so from that perspective, anything that you have done, like, for example, what you just said, right? These. Consider these as a learning like, hey, what happens if I am trying to repeat something and I cannot reproduce my results? So you need to be careful from now on, knowing that these are stochastic models, right? So the stochastic behavior, like, every time you rerun, it will change, right? So, yeah.
+
+Unknown Speaker  1:28:54  
+Cool. Anything else, anyone like to share
+
+Speaker 1  1:28:59  
+any new learning, any new insight that you came across while doing this. Jason, I see you are nodding. You'd like to add something. I just not, because I'm actually starting to catch on to it. Oh, okay. Okay, cool. So I already posted all the solved files in the salt folder for activity number three, you will see the file that is posted is basically the one with the garment data set. Now you may or may not have done the exact same way, but it is fine, as long as you basically kind of got the main point behind these reusable writing this reusable code, and this idea of getting these, what is called the scikit learn pipeline, where you can combine one or more of transformers and then pre processor and the machine learning algorithm all into one pipeline, and you. And execute that pipeline with one single fit method that was basically the core learning that you were supposed to have out of these activity. The other thing Karen brought up, which is very interesting, that she mentioned, that there is actually a way for the something that you are not doing using transformer. Let's say the feature selection that you are using with p values test right, or with the VIV test. Those are something that we did in the first activity that we did today, which is something you cannot use any of the standard transformer, because there is no transformer, so to speak, to do those and that's why we hand coded those method. But there is actually a way that you can extend that transformer interface and actually implement your own custom transformer. So Karen, do you have any any example or anything handy that you'd like to share, maybe before we break for today. Today. I haven't done it for a long time. Yeah, I was after you, after you talked about that, I was doing some quick search. And obviously one of the first result that came up with the is a blog in the Towards Data Science forum. So I'm just going to post that link
+
+Unknown Speaker  1:31:21  
+here. Which one is that I'm
+
+Unknown Speaker  1:31:25  
+going to post that in the live channel?
+
+Speaker 1  1:31:30  
+It's actually super easy. It's not that hard. When I read through it, it's this one. So customizing Scikit line pipeline. Scikit learn pipelines, writing your own transformer. So maybe you can, if one of those of you who are interested do a quick read, and you will see how to build your own transformer, like write your own transformer. And if you go down, so this is the transformer mix in which is the class that you have to inherit from. So for example here, this is an example where someone is creating a new transformer, which is a custom transformer, and you see that you have to extend two classes, the base estimator and the transformer mix in. If you have your class that extend from these two class, then scikit learn treats your class as one of the native transformer. And then these are the three methods that you have to implement yourself the init method, the Fit method and the transform method, and then you might you can do whatever you want to with your data inside these three method as long as the method signature remains like this. So do a quick read and maybe try to build something and keep it handy in your back pocket if you want to use something like these in your project too. Okay, thank you.
+
+Speaker 2  1:33:10  
+Cool. So, so you're just basically extending a known function or known class, and you're just saying, like, add in, I missed what you're so
+
+Speaker 1  1:33:21  
+it's basically you are extending, extending a defined class, or interface, or whatever you call it, right? So in Java world, you basically, the way that you do it is interface is kind of a contract.
+
+Unknown Speaker  1:33:35  
+So you are basically at
+
+Speaker 1  1:33:38  
+signing a contract that your class is going to implement so and so method with so and so method signature, and once you do that, then the framework treats your class just like any other built in class, that it's a plus, right?
+
+Unknown Speaker  1:33:55  
+You're just That's, yeah,
+
+Speaker 3  1:34:03  
+and that lets you use that class as, like, part of the pipeline, right? You can,
+
+Speaker 1  1:34:10  
+yeah, so see here, this edge in future class. So they had defining is here, and once it is defined, you can, I don't know whether they have it in here, so they didn't show that in the code, but once you do this, then you basically can use this edge inputter class as one of the elements in your pipeline that you are using. I don't know why. So here actually the pipeline, yeah, so in pipeline, you see they have used edge computer along with other transformer and classifier. But these edge computer is not something that is supplied by default, and that's where the edge imputer is actually defined here separately in a custom code. Yeah.
+
+Speaker 1  1:35:02  
+Okay, so that will be all from my side for today's class, so we can wrap up for the day and come recharged, re energized tomorrow to start doing some classification problem, which is the other side of the supervised learning. Okay? Thank you.
+
