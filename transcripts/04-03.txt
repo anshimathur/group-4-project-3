@@ -1,0 +1,1680 @@
+Speaker 1  0:05  
+So today's class, one thing you will see, guys, most of these is going to be kind of a recap of what we did last couple of classes, especially that apply function. I kind of already showed that to you today. We are going to learn that formally. But even that is not going to be totally new to you, because I already kind of showed that to you as part of one of the activity that we are doing, right? I think the previous class of the one before. So the highlight of today's class I'm going to tell you is the last activity that we are going to do. And I don't know how many of you have done it, but that is really you will see that where the rubber starts to hit the road. Okay, so we're going to have a lot of fun on that one and that is one activity there are like, you will see that there. We are not going to be concerned about how to do one specific thing, like, we're not going to think about, okay, can we write a pandas function? Because the assumption is that you guys have all learned pandas. Now we are going to one level up in the value chain, and now you're going to answer some question about the data. And there is no single way of doing that. There are multiple ways of doing that, and we are going to see couple of ways of doing that, and hopefully, some of you from the class, you will probably come up with yet another way, maybe a third or fourth or a fifth way of doing the same thing, right? I have two ways in my mind that I'm going to show you, but that's where the fun will begin. Okay, so any question on any of the topics that we have learned so far before I get started with today's all good then, okay, so let's get started. So if you look at the agenda today, as I said, Before creating new columns in data frame. We have done that using apply to transform a column in pandas. We have done that, maybe not formally, but this clearing data with pandas. We have done that also like dropping null values and stuff. And then the last one is using Pandas to answer abstract questions. So this is where we are going to see how you can basically apply your skills that you have learned so far to basically understand what story the data is telling you. It's basically storytelling using data that is the last activity. So there is not much to go through the slide, like creating new columns. We kind of know why we need to create new columns. So let's say you have, let's say first name and last name in your data, and you don't need two names. All you need is just one name. So that is one reason you might want to concatenate the two names to get one column, which is a new column. Sometimes you might have data in one unit and you want to convert that into another unit without losing the first column, right? So let's say you have some weather data that you are getting, and you are probably getting the thing in maybe a British system measured, and you want to convert it to metric system. So that is another example where you would like to create new column. Sometimes it could also be that you have maybe one or two numeric column and you are trying to find the difference between the two columns, or you are trying to find how one column is increasing from row to row, like kind of a try to find a trend between the numerical value that you have. So that is also another reason that you would like to create new column in your data, and all of these are in the machine learning terminology. There is a one common task that you can call it, which is called Feature engineering. So what feature engineering means is in within the context of machine learning, everything that we are seeing here in column. So these are basically features. So some people call it features, some people call it attributes. So basically, these are the things that you have about the entity that you are reading data from for right. And it could be customer data, it could be weather data, it could be utility data, it could be traffic data, it could be crime data, it could be housing data, lots of different variables, sorry, data set that we will be working with, and all these columns that we have, these are the features and when you will see that when we feed these into a machine learning model, these are the features that your machine learning model will then get trained On. Now, if you recall a couple of weeks back, what I said is data as it is available, is not always usable for machine learning, so you have to transform the data. There will be noisy data you need to clean up. There is some data you have to convert from string to numeric value. If there are numeric data. You probably need to find some trend pattern or difference or percentage increase between the data. All of these will basically add more and more training feature to your machine learning model. And all of these are very kind of like a case by case basis. There is no one single way that say, Hey, if you have a data on whether these are the steps you should do. No, it all depends on what is the model that you are training, how much, how good is your data? And based on that, you have to kind of determine what kind of processing you need to do. And once I'm done with the course material today, I'm going to show you a couple of notebook sample on Kaggle. And Kaggle is basically kind of a treasure trove when it comes to learning these things. So you can all go into Kaggle, and basically there is a search word there. You can basically search, Hey, show me some. Not show me like, you can just do some keyword search, like data pre processing. You know, you'll get a whole bunch of example notebooks there. I'm going to show a few to you. We are not going to run those within the class time today. But this is something good to know, that these are some of the valid ways you can kind of expand your learning even beyond what we are discussing in the classes here in the boot camp. Okay, so now we are going to first start with a rather simplistic exercise. And much of these, as I said is kind of what we have already learned here. So first we are going to load the data,
+
+Unknown Speaker  6:28  
+data set.
+
+Speaker 1  6:33  
+Oh, it's still running, yep, okay. And then we are going to basically load these data from Resources folder, and the file is called car purchases. So let's put this back in there. Resources car purchases, yeah. So resources car purchases, yeah. And then we are going to read the data. So let's read the data and display the first five rows, which is using the head function, and you get this out output. Now, this is where after this. These are the cell that I have cleared out. Well, these are the this is the unsolved file. So what I'd like to do, just like the previous class, I'd like all of you guys to contribute, and basically, let's do a refresher on how we do these things. So first one is display a statistical overview of the data frame. So what function do we use to get this display which gives me all the statistical, statistical measure of the numeric column, describe, what? Describe, okay, so we take the data frame. Oops, sorry. What happened here?
+
+Unknown Speaker  7:57  
+Click the wrong button. Describe.
+
+Speaker 1  8:01  
+So can you help yourself remind why the describe is having these two columns, ID and amount,
+
+Speaker 2  8:14  
+because those are the only columns that have integers or floats correct.
+
+Speaker 1  8:20  
+So those are the only columns that have numeric data types. Now, if I ask you, how do you find which column has which data type? What function do you use?
+
+Unknown Speaker  8:36  
+Type as as Type or Type?
+
+Speaker 1  8:40  
+No, it's actually not a function, my bad. It's actually a property. It's called D types. So if you do D types, it basically says your ID is an integer. Full name, gender, amount, sorry, full name, gender and car. These are objects. So pandas basically treats anything that is not integer and float as objects. So object could be editing, but in this case, this is all string, and then the amount is float. So the only two pneumatic data types are ID and amount
+
+Unknown Speaker  9:17  
+Boolean as well. It'll treat Boolean as logic.
+
+Unknown Speaker  9:21  
+I don't know that.
+
+Unknown Speaker  9:25  
+I don't know I have to check.
+
+Speaker 3  9:28  
+I just would wonder, because it's primitive, but I also don't know
+
+Speaker 1  9:33  
+if, yeah, supports moving. I don't know either. Usually what happens is the when we do get the data. So think about it. So when you are doing a machine learning project, you are loading your data from where either reading the data from an API or loading the data from a text file right or a CSV file. So in the file, you will never actually see something as Boolean. You will probably say yes, no or true, false or 01, so usually what happens is, when pandas load the data, if it is a yes, no, it treats as a string. If it's a 01, it treats as an integer. Now, if you do want to convert something to Boolean, then you have to apply ash type to convert something to Boolean yourself. But that is not very common thing that people do, because the idea is, at the end of the day, when everything is said and done, and when you're ready to feed your data to your model that you are trading, you will need everything in integer format or floating point format anyway, right? So what people do is, usually they do one of the two things. If the data is already in zero or one or some numeric format, they just leave it as is. On the other hand, if the data is in true, false or yes, no, some kind of a text that comes in, they apply a lambda function to convert that to zeros and ones, basically making it integer. I have, I don't recall where I have come across a guess where someone would try to convert it into a bully, and maybe there is a valid case, but it's just not right now on top of but that's a good thing to try. So who said that? Ask that question? Is that Jason?
+
+Speaker 3  11:12  
+Yeah, it was, it was me, and I asked Chad GPT, and it came up with about about 10 different distinct types, one of which is string, I guess, because you can make it more explicitly a string, but bool is definitely one of them.
+
+Speaker 1  11:27  
+Oh, okay, okay, yeah. So if you, I think if you do apply some formatting and convert into a string, it might, but don't count my word on it. So, yeah,
+
+Speaker 4  11:42  
+okay, for Python, if you have a Boolean type which is true or false, Python treats them as one zero anyway, internally. So, right? So give you a Boolean, you don't have to change the ones and zeros, because the model will see them as ones and zeros anyway.
+
+Speaker 1  12:02  
+Yeah. Sorry. I think there was a question someone was trying to ask that. So why does it say int or integer, 64 and float, 64 what's the 64 about? So it basically uses 64 bit of computer memory. So 64 bit integer, okay, yeah. Because these operating system, all these modern operating system, these are 64 bit operating system, as opposed to older version of operating system, like Windows, 95 windows, 98 those were like 32 bit operating systems. So if you go back, like 20 years back, 32 bit was the standard, and then for quite some time in the middle, there were like 32 bit and 64 bit both were in play, and now 64 is bit operating system is kind of a de facto standard. So, okay, so why is, what's the reason for them putting it in this though, like, why would that? Why would we need to know that? You have to ask them. It's just an any convex convention that they just wanted to stick to.
+
+Speaker 3  12:58  
+Okay, yeah. To make it more complicated. There's a complex 128,
+
+Speaker 1  13:05  
+very Yeah, you can have a higher precision numbers. Yes, it gives you
+
+Speaker 4  13:10  
+an idea. It just gives you an idea how much your data is, how much space is taking the store your data, I guess. Yeah.
+
+Unknown Speaker  13:16  
+So obviously, I don't need it anymore complex. Bigger than,
+
+Speaker 4  13:20  
+you know, the eight bit value doesn't break around 256, where you could, I guess, make it to 88
+
+Unknown Speaker  13:27  
+but I don't see people do that too often. Okay,
+
+Speaker 1  13:32  
+yeah, so, okay. So now we understand this describe. Now one thing you have to keep in mind, guys, describe, if you just apply it on a plain data set, like in this case, it may or may not always be useful for all columns. For example, here, if you see the ID column when we are reading it from the file, the Id had 1234, and so on. And it thinks that ID is a numeric column, and it is giving me account and mean and standard deviation. But we know that when something is a sequential value, the statistical distribution on that really doesn't matter. So these are some of the things that you need to keep in mind when you are trying to find statistical distribution or statistical properties of numeric columns, pay close attention to what column you have. Another A common mistake that people do if, let's say there is a ZIP Code column. So zip code, if it's a five digit ZIP Code, pandas, almost always, by mistake, treat it as an integer, whether it should not be. So there are two kind of column that could be right. One is a numeric column, and other is a text column. So in machine learning language, the text column is also called categorical column, where, basically there is only a set of values it can take, but it cannot take any value in a continuous like integer or floating point number line. So sometimes, even if there is a textual column or categorical column, by default, when you read the file, tandas will make a mistake and pre. Those as integer column or floating point column, even though that is not true. So don't just go ahead and apply D types blindly, or even if you do when you are interpreting the result, make sure you are only looking at the distribution that makes sense, which in this case, is amount, right? So here, this is a database, data set of different car sell. Who bought the car? What is that person's gender, what was the amount he or she paid, and what is the brand, right? So now, if you want to understand, hey, what was the mean price or across all the car and what are the standard deviation and the minimum, and then 25th 50th and 75 percentile values, all of those make sense for the amount, but for the ID, it doesn't make sense, because Id just a record number. You might as well drop the ID, or even turn that into index, right? So these are some of the things that you should keep in mind when you are doing this data processing. Another thing I wanted to show you, and it applies to any data frame, there is a operator that you can use. It's called Dot T, actually uppercase T. Does anyone know what dot t? Does the train haven't taught it, by the way? Huh? Is it transpose? It is transpose. So it basically converts the all the rows to columns and vice versa. So I'm going to show you an example if I want to run this describe, but apply a transpose on it. You see now the describe comes in this way, which some might argue in some scenario, this is probably a better, more user friendly representation. So this is another thing that we should know. It might be valuable in your toolbox to be able to transpose the data frame, which is interchanging rows and columns. Okay,
+
+Speaker 1  16:56  
+there is another function, I don't know whether we talked about it's called info.
+
+Speaker 1  17:07  
+So this is another way of visualization. So when you say info, it kind of does a bunch of things, right? So first of all, it provides the data types which your D types gives you anyway, but it also gives you how many, what is called, how many non null values are there? So these info function gives you the data type, and it also tells you how many values in a column are now versus how many are non now. So in this particular case, there are no null values. There are total of 1000 rows there, I believe. So let's do a shape here. Data file, DF, dot shape. So, yep, 1000. So there are total 1000 rows. And what is this? Info function is telling me that all of these are non now, 1000 non now. So these column here, it says non now count. And for each of these five column, it says 1000 non now. So basically there is a data. This is a data set with no no blank, no hold in between, no null values. Everything is not now. So you get that information, and you also get D type information, so it's kind of a to you basically have two goals in one function using the info.
+
+Speaker 1  18:34  
+Okay, so the next one is looking at this output. So the prompt is reference a single column within a data frame. So now we know what the data frame columns are. Now looking at these five columns. What command Do you think we can write here that will provide this output? So
+
+Speaker 2  19:05  
+the data file, they'll data underscore, file, underscore via
+
+Unknown Speaker  19:13  
+brackets and
+
+Unknown Speaker  19:17  
+quotes, amount, yeah,
+
+Speaker 1  19:21  
+because amount is the only one that kind of matches this format, which is the numeric, right? Yeah. So that will give this now, obviously I just said amount, so that's why it gave me first five and last five. If I just want first five, I'll just do a head and it will only print first five. Okay, another thing I'm asking you, instead of saying data, files, DF and then brackets, and then codes and all of these, what if I do this way? No brackets, no codes, just a.do you think this will work? It will. Uh,
+
+Speaker 5  20:01  
+but this actually leads to something I wanted to ask about. So you can only use that method when the column doesn't have a space in it, right? Otherwise, you have to use brackets and quotes. That's right, good observation.
+
+Speaker 1  20:15  
+So if the column does not have a space, you can use the column norm name, almost like a property of a class, right? Remember when we did the object oriented programming if you have a class object, let's say data file DF is object of a class, and if that class has a property called amount, this is the syntax we use. So you can use that same type of syntax to reference a pandas data frame column as well, provided the column does not have a space, if it does have a space, then the only format you have to use is this, right? Because that way, within the double quote, if there is a space, you will put a press space here, like that, and that will take care of it. So very good question. Okay, how do we reference multiple columns, such as a mountain gender here,
+
+Unknown Speaker  21:07  
+double brackets,
+
+Speaker 1  21:10  
+double brackets, right, so data file, DF, and then we have to provide a list of columns as this. So, then the head, yeah, then the if you do the head, then it will give you. Does anyone remember? How do we show random five rows? Same or random 10 rows? Yeah, sample, okay. If you do do just sample, it will give one in random. If you do five, it will give five and so on. Okay. How do you find the average? Well, the prompt kind of gives it away. It says the main method averages the data, averages the series. So how would we find the average of, well, of which column amount right? Because that's the only one. So how do you apply that?
+
+Speaker 6  22:21  
+Now you would call the column with the brackets or this or amount,
+
+Unknown Speaker  22:29  
+yeah, and then
+
+Unknown Speaker  22:32  
+dot mean. Dot mean,
+
+Unknown Speaker  22:37  
+and that will give it
+
+Speaker 1  22:40  
+and the sum is the same way. So some is basically adding up everything, instead of just oops, sorry, make sure you type that dot sum,
+
+Unknown Speaker  22:56  
+and that will basically add up everything.
+
+Speaker 1  23:00  
+Okay? The unique method. What is the unique method does
+
+Unknown Speaker  23:08  
+every unique value in a column
+
+Speaker 1  23:12  
+in particular? So do you apply unique method on the data frame as a whole or on a particular column?
+
+Unknown Speaker  23:22  
+So my question is, can you use this,
+
+Unknown Speaker  23:27  
+gosh, and try that? I tried it on a column.
+
+Speaker 1  23:31  
+What will happen if you try it on the database as a whole, no, data frame as a whole?
+
+Unknown Speaker  23:39  
+Yeah, it's applied to a column,
+
+Speaker 1  23:42  
+yeah, so you cannot apply that, so you have to apply it on a column. So in this case, the column is car, so you can apply it on a car, and that will give you all the unique values in a car. Okay? And then remember what a value count method does.
+
+Speaker 2  24:06  
+Yeah, it gives you the theme, the number of instances for each you know, for each thing that you're looking for. So, for like,
+
+Speaker 1  24:14  
+correct. So if i So, if I do, let's take the same column or dot car and what if? If I say value counts, what would that give me
+
+Unknown Speaker  24:30  
+how many times each one of those brands appears
+
+Speaker 1  24:33  
+correct? Now, if I run these value counts, how many rows of data, we will get
+
+Speaker 2  24:38  
+all of them right? How many? Maybe 1000
+
+Unknown Speaker  24:44  
+Well, no.
+
+Speaker 3  24:45  
+Well, you mean, how many will show? Because Won't it be like 10, like the first five or the last five
+
+Speaker 1  24:51  
+be the number of cars? So what I'm trying to say is this, look at this. So if you do a Len on unique, so what does unique give you unique? Give you all the unique items listed. If you do a Len, you get 62 here you see that. So that means, if you do value counts you expect there to has to be 62 rows. Yep. So you see it says length 62 so it is not showing the whole thing because it is more than 10, but you are basically going to get a series that will have 62 rows, because your number of unique item for that specific column is 62 if you take another column, let's say that has lower number of unique values. Let's apply that on gender. So gender has only three unique values. So now, if you apply value counts on gender, you are getting all three, which is male, female and non binary, which is what, by the way, the next cell prompted you to come up with,
+
+Unknown Speaker  26:02  
+which is the value counts.
+
+Speaker 1  26:10  
+Okay. So now in the next example, is where we will see how we can create a new column. So the task here is look at this data frame, and you see the amount is always in 1000s, like 15,484 13,000 so what if we express it in 1000s of dollars, like, instead of 15,484
+
+Unknown Speaker  26:35  
+if I do 15.48k
+
+Speaker 1  26:38  
+so essentially, What if, if I want to take the amount column and put it into the unit of 1000s, what code I'm going to write here, and also, by the way, I want to add this new column, which is in the unit of K and in 1000, as a new column, new like sixth column in the database. Keep saying, database, no data frame. So how do we do that?
+
+Speaker 3  27:10  
+You would say data file, then bracket or dot, I guess. But bracket would be better because you're using spaces,
+
+Speaker 1  27:21  
+yeah.is, fine. So you take this amount, and what is the mathematical operation you need to do on the amount, divided by 1000 divided by 1000. So if you do this, if you just do this, huh? Well,
+
+Unknown Speaker  27:36  
+okay, go ahead. I'm sorry I knew what to do.
+
+Unknown Speaker  27:40  
+No, but if you just do this, what will happen
+
+Speaker 1  27:43  
+series? You will get a series right. So let's do it in a separate cell. Just to confirm that, yep, we are going to add get a series. Now our goal here is to take this series and add it as a new column called 1000s of dollars.
+
+Speaker 3  27:59  
+So if you before that, say, data, file, DF, bracket, quote,
+
+Unknown Speaker  28:09  
+1000s of dollars.
+
+Speaker 1  28:13  
+And this time, we cannot use a dot notation, because here the new column that we are have going to have to ask, add, does have space in them, then an equal sign, then an equal sign,
+
+Speaker 3  28:25  
+then it display it. You you put in the next line data file, DF, dot, head,
+
+Speaker 1  28:30  
+correct. So one thing is, if I just do this, it's not going to display right, because this thing is supposed to display something, but we are not throwing that up to the user. Instead, we are capturing these and putting it as another column in there. Therefore it is not going to display anything. Then what you need to do is you need to take the whole data frame and do a hair or sample or whatever, right? I actually love sample.
+
+Unknown Speaker  29:01  
+Yeah. So here,
+
+Speaker 1  29:06  
+so we took that column and added as a column permanently in the data frame.
+
+Unknown Speaker  29:18  
+Okay, any questions so far.
+
+Speaker 3  29:23  
+You know what I what I like about this is, you know, using Excel for so long, this is a lot like going into a cell and just saying equal sign, some other cell divided by 100 Yeah, yeah. That
+
+Speaker 1  29:37  
+is, essentially, it is, yeah. So in Excel, exactly what you do in the cell function. This is the same thing you were doing. The difference here is, if you think about it right, in an Excel file, you have a file that contains all of your data, and now you have all these manipulation commands within the file itself. So essentially, the whole file becomes a huge blob of your code. And. Data all mixed in. And this is what I was basically remember the first class when I started pandas, I was trying to sell pandas to you guys, showing that why pandas is so much better than doing the same calculation on Excel, because here, your data is separate. Your pandas is separate, right? You don't have to have the whole thing loaded in memory at once and run into problem. So, yeah, so Excel, I guess, is good for I don't know, business people, managers, even finance people, like bankers, but if you are a data analyst, no, Excel is not your friend. So well talking about finance people. I mean, they are also now realizing that that Excel is maybe investment bankers still do. But anyone who is like in a serious portfolio management practice in bank finance, they all have started to learn Python, or are one of these two. Yeah. Okay, cool. So the next one. So this one is done. Let me close this next one here is given as a student activity. But I was thinking, if you guys want we can probably do this activity here as well. What do you guys think do I do it here. Sounds good to me. Sure everyone together. Okay, okay, so let's see which one was that. Oh, there's so many things opened here.
+
+Speaker 1  31:42  
+Okay, so let's keep this open so it basically is a data frame containing 200 rows, and analyze it with data function and then add a new column to it. First, provide a simple analytical overview of numeric columns, collect all the names of the trainers within the data set. Figure out how many student each trainer has, find the average weight of the students at the gym, and find the combined weight of all students in the gym, and then come convert the membership days columns into weeks and add this new column at this new series into the data frame. So essentially, we are going to do basically the same kind of thing that we did in the first activity, except with another data set here,
+
+Unknown Speaker  32:24  
+so training grounds.
+
+Speaker 1  32:35  
+Okay, so in this one, let me first select my kernel dev so the data set here, here is not loaded from a file. It is basically all in line here in the code, and the data set basically has, how many data do we have?
+
+Unknown Speaker  32:57  
+Training? DS,
+
+Speaker 1  33:01  
+dot shit. Oh, two. Oh, right. It actually says in the read me, I forgot it has 200 rows. Yeah. So 200 rows is basically name of a person coming to the gym. The trainer that the person is assigned to the web, I guess, is the body weight of the person and how many days this person has been member in the gym. Okay, so that's the data set we have. So first thing, collect all numerical data. How do you do that?
+
+Unknown Speaker  33:37  
+Describe. Yeah,
+
+Speaker 1  33:39  
+just described, and that gives you this and remember, the other way to do is this way, which, if you ask me, I like the transpose view much better.
+
+Unknown Speaker  33:54  
+So that is just a personal preference.
+
+Speaker 1  33:59  
+Okay, names of all the trainers. How do we get that
+
+Unknown Speaker  34:08  
+apply the unique function to trainer?
+
+Speaker 1  34:12  
+Yeah, so training, DF, dot. What is the name of the column trainer? So we can use a dot notation. I just wanted to make sure that there is no space in between and dot unique. That gives you all the trainer. And if you do a length, then it will okay. So the next one is how many student each trainer has. So
+
+Unknown Speaker  34:45  
+what are we going to use?
+
+Unknown Speaker  34:51  
+Value counts? Yeah,
+
+Speaker 1  34:54  
+just value counts, and that will give me how many student each trainer has, or. Now, in this case, how many rows each trainer? How many rows have this trainer, right? But since we know each row is one student, you can interpret this as saying how many student each trainer has. But essentially this, like if you think about it, technically, this is not quite correct, because value count is not giving you how many students are assigned to how many trainers. What value count is giving you is how many rows are there in the data frame that has Bateman servery as a trainer, and Aldo Byler as a trainer, and so on. That's all it's saying. Okay, find the average of all students. How do we do that
+
+Unknown Speaker  35:43  
+training? Underscore, df.weight.me, weight.me,
+
+Unknown Speaker  35:52  
+right? Yeah, yep.
+
+Speaker 1  35:57  
+So 180 pounds, average weight. What is the combined weight of all students? It should be around 180 times something right, which is around 36,000 ish we should get when we use the sum function, yes, the answer is some,
+
+Unknown Speaker  36:20  
+yep. 36,001 64
+
+Speaker 1  36:24  
+No wonder and convert the membership days into membership weeks. How do we do that?
+
+Speaker 2  36:33  
+You have to use the brackets because there's spaces in the column name.
+
+Speaker 1  36:39  
+So here for both, like when you are creating the new column name there, also you have to use the brackets and when, when you are taking the existing column name that also has a bracket, sorry, space. So you also have to use this bracket and quotation notation there as well. Bracket and quote, single quote or double quote, also words so that, and then, what is the mathematical operation here? Divided by seven, divided by seven, simple,
+
+Speaker 1  37:14  
+hang on. Oh, sorry I forgot to print it. Of course. Yeah,
+
+Speaker 1  37:29  
+if I wanted to put these membership weeks as a whole number, what did you use like instead of saying 7.4 to 21.14 I just want to see a whole number like seven weeks or 21 weeks, or something like that. What change would you do
+
+Speaker 2  37:44  
+a floor division instead of just a division, right?
+
+Unknown Speaker  37:49  
+So you were saying this,
+
+Unknown Speaker  37:52  
+yeah, I would try that.
+
+Unknown Speaker  37:55  
+Just use the round function, COVID
+
+Speaker 1  37:58  
+you can Yeah, but see, this is a much better way. All I did is, instead of one division sign, like one slash, I just use double slash, and that's it. But round will use this give the same effect. But why Type R, o, u, n, d, and then a pair of brackets when you can just get done with one slash adding a one slash, right? So, okay, that's all in this one. Now the next one, we have to go back to the slide and now formally learn about the apply method. Okay, so Okay, before we go any question. So up until now, what we did is kind of the recap you can say. And the reason we are taking things very slow here guys, if some of you guys thinking like, Hey, why are we doing this all over again? The answer is, these are super important, like getting solid foundation on pandas is like a prerequisite to do anything in machine learning, because machine learning is all about data. If you do not see what did, what data you have, what story that your data is telling if you cannot interpret your data, then you cannot really create a good machine learning model, and that's why we are spending an inordinate amount of time going through all these pandas and doing a recap. So please bear with us, right for maybe couple more classes or one more week, actually. Okay, so the apply function. So what do we? Why do we need apply? So if I ask you this, so let's say here, going back to this example. So I took a membership days like a column, and I. Basically did an apply I basically did something and use the result in a new column. So if something is that this simple, you really don't need to do the apply method.
+
+Unknown Speaker  40:13  
+But when would you need the apply method?
+
+Speaker 1  40:16  
+Can someone tell me what? What really the advantage of using the apply method, as opposed to doing something like take a column name and do whatever operation, like, even if it's a it's a complex operation, you can probably do this. Is that? Is that not true?
+
+Speaker 3  40:34  
+If you get some complicated data logic or conditional logic, like, if something you know, like if something's odd, and just do this if something's even
+
+Speaker 1  40:43  
+so, if you have something that cannot be expressed in a single Python statement, like in this one, this is a single Python division statement. So if it is something like that, you can just apply that on the column, and then the result, you can add in as a new column, or you can even so this one, for example, if you wanted to use the same column, you could have done these membership days here, and it will basically give you the membership days. I mean, I'm not saying that's the right thing to do, but what I'm saying is, so let's say you have a column and you want to do some transformation in the column and override the old values. All you have to do is they use the same column on the left hand side of your equal right and get done with it. But when the Apply thing comes is when you have something little bit more complicated, which is like conditional thing, then you really do not have a direct way of writing that conditional function on the right hand side of the equal so that's where you have to put your logic, whatever transformation logic you are going to write. You have to put your logic as a function like go back to the days when we learn first time what is a function in Python. So you have to write a function using that def keyword, if you remember def function name, and then you write a function. So you have to write a function, and inside that function you can encapsulate complex business logic, and then you have to have a way to apply that function across the data frame, so that all the rows will automatically get that same function applied on them without you having to write a for loop. You can do the whole thing without apply. But then you will be very naive pandas programmer, because then you will basically go and write a for loop and say, Hey, run a for loop from the first row to the last row, and for each iteration in the loop, you basically do this. That is possible, but that is not advisable at all, because that is one of the reason people use pandas, because it gives you immense power. It makes your code more concise and more efficient to run with. So that's why we will have to use the apply function, which is very essential for any complex data manipulation needs that you have. So for example, if you look at these here, well, this probably is not, this is a very naive example. So in this example, but you will get the idea. So here you see there is a function that you are writing which is cube, right? I mean, cube is a rather simple operation. You can just use a mathematical function to raise to power three, but assume that the math library is not there, and this is the way that you want to use q. So what you can do is you can write cube as a function, and inside the function you basically provide the logic, which is given a value, what is the function going to return? Which is the value times value times value, in this case. And now let's say you have a data frame like this, and what you can do is you can take the data frame and you can do a data frame dot apply cube, so when you do that, you will see all the values in the data frame will be cubed in the resulting data frame that you have right now. One thing you have to look here very carefully, this apply function is applied on what is it applied on a data frame? Or is it applied on a particular column Yeah, I was
+
+Speaker 7  44:22  
+getting ready. Asked that it looks like it would apply that to any integer or float and the entire data frame, right?
+
+Speaker 1  44:27  
+Well, it Yeah. So it will, actually, if you write it this way, it will apply to anything, it will and then it would only apply
+
+Speaker 8  44:35  
+to that column, huh, okay, um, and media
+
+Speaker 1  44:40  
+functions exactly. So in this example, in this screenshot, that you are saying that these apply function is applied to the overall data frame, and when you do that, apply applies. Apply applies across all the column and all the rows in the data frame. If you wanted to do it the other way, let's say if you want to apply. Apply the apply function only to one column, let's say only to the beta column. Then you could also write it this way, right? So apply can be applied to both the whole data frame and also to specific series or column. Keep in mind that every column in the data frame is a series, right? So apply can be applied across either and then the other thing is you can also do an anonymous function. So in this example, when we are doing apply, you see, what is the parameter to apply? It's this word called cube, C, U, B, E, but what is cube? Cube is basically name of this function that we have defined here using the dev statement. But unlike a regular function call like earlier, you have learned if you have a function like this, and if you have to invoke a function, you have to do the function name and then provide whatever parameter that you want to pass, right? So this is the traditional way of invoking a function. But if you are, if you notice very closely here how we are applying the function. Here we are not following a function with a pair of parenthesis, No, instead, we are passing the function as an object to another function which is applied and what apply does internally. It basically looks into the definition of the cube function, and then internally, it does something like this across all the data elements that it has in the pandas frame or series. Now, when you are passing anytime, you can pass a function to another function, which is possible, by the way, because in Python, functions are first class objects. So that's why you can pass a function just like you would pass any other variable. So anytime this is possible, always know in your mind that it is also possible to supply an anonymous function, which in Python, just happens to be known as lambda function.
+
+Unknown Speaker  47:21  
+And what is that?
+
+Speaker 1  47:24  
+Just look at this here. So what you are doing is you are taking our data frame or a series dot apply, and here you are not passing the name of the function. Instead you are saying using a keyword lambda, and then whatever the input variable lambda should expect. And this could be any name, a, b, c, x, doesn't matter, and this is where your math condition is. Now, if you really want to compare this slide to the previous slide, like if you want to do an apples to apples comparison, you have to write x, star x, star x. So writing this has the exact same effect of writing this statement in a cube and passing a cube to apply. The only difference is it basically saves you a few lines of code.
+
+Unknown Speaker  48:14  
+Now, which one should you do?
+
+Speaker 1  48:17  
+Can anyone answer the question, should we use this way, or should you use this way?
+
+Unknown Speaker  48:27  
+What do you guys think
+
+Speaker 6  48:31  
+the lambda function is more concise? So I would imagine we would use that.
+
+Speaker 1  48:38  
+Yes, but would you always use that? Probably not. Yeah, it's kind of a it's a question of maintainability and readability of your code, right? I mean, sometimes the function can be so complex that you actually want it to have a name and have it separately and maybe even add some documentation to it so that people can actually refer to it. So that is a case where you would actually want to write the function separately as a function and use that function with your apply. But if something is on the fly which is not as simple that you can do with a simple arithmetic operation like we saw in the previous one, where you are doing divided by seven or divided by 1000, those are like just a simple arithmetic statement. You shouldn't even use any apply if it is more complicated than that, but not as complicated, or not as useful that you need to actually have it separately and document it as a function, then I would say using the lambda is a much better way. But again, like many other things in programming, this happens to be a personal comes down to a personal choice as well.
+
+Speaker 1  49:53  
+Okay, that's all about lambda that we have to learn so. Okay, so let's do this actually. Let me, instead of typing this one, let's just clear all the outputs here. So we are going to just study the code
+
+Unknown Speaker  50:18  
+and
+
+Speaker 1  50:21  
+apply these methods, right the transformation. So here we have the data set. And this happens to be a data set for donor. It is saying, Okay, how many donation that someone is doing? Okay, fine. So the name of the person who is donating, the employer, city, state, zip code, amount, and some kind of a memo city. So let me ask you a general question. Let's take a step back, zoom out little bit. Forget about what all the prompts are in this file. If you happen to come across this data set, what are some of the things that are going through your mind? Let's brainstorm a little bit. What would you like to do with this data set?
+
+Speaker 9  51:20  
+Do you want to separate the name, first name, last name down, rather than combining it?
+
+Speaker 1  51:25  
+Okay, that is one way. We want to see who's giving us money. You want to see who is giving us money? Yeah, who's employed
+
+Speaker 8  51:36  
+and how much do they make? Yeah, how much? Right?
+
+Speaker 1  51:40  
+Often. Well, those are all the those are all the actual question, the basically, the stories that data tells you, right? The fact that data tells you, but that is the next level, which we will do. But what I'm saying is just purely from data cleansing perspective, like, what ways do you think the data needs to be cleaned?
+
+Speaker 3  52:00  
+I'd like to change amount, to be more descriptive and say donation amount or something like that.
+
+Unknown Speaker  52:07  
+Really bad.
+
+Speaker 2  52:09  
+Yeah, I don't like to get rid of memo. See memo, CD.
+
+Unknown Speaker  52:17  
+I like that zero amounts.
+
+Speaker 4  52:20  
+Have the have the first time and last name streamlined, because a couple of them have added and in between and and have the employer feels, to be precise, to few values, instead of having like spread across. What's wrong with the employer field again? No, what I'm saying is like, maybe, like, it'll keep it to some three or four values. Maybe we haven't analyzed the entire data, right? Like, if that goes like anything, then, yeah, yeah. Like, zip is other one? Yeah, zip
+
+Speaker 2  53:01  
+is a flow of value, so you probably want to convert that to an int or something,
+
+Speaker 1  53:06  
+yeah, burst. And why do you think some of these zip are having five characters and a dot zero, and then some have nine characters and a dot zero. Some
+
+Speaker 2  53:18  
+zips have, like, a sub zip code. So that's, you know, or like a PO box to it, or
+
+Speaker 1  53:23  
+something, is the zip extension, basically. So zip extension is five and then a hyphen and then four, right? So basically, this is one example where the data can be noisy, noisy. So wherever this data came from, someone along the line, some stupid data engineer screwed it up, and they basically made a complete mess of that zip and then that memo, CD, probably it was some kind of a free form text entry or something. But maybe somewhere along the data pipeline, someone totally screwed it up, and some program tried to read that from the source, and they ended up getting all now, probably.
+
+Speaker 5  54:04  
+So that wouldn't you want to do, like value counts on that column to make sure there's no data in there,
+
+Speaker 1  54:12  
+exactly. So first thing I would like to do, if I were you, I will take the data frame and do an info on this.
+
+Unknown Speaker  54:25  
+Oops. Why did I do twice? Hang on. Okay.
+
+Unknown Speaker  54:32  
+So what is it telling me?
+
+Unknown Speaker  54:39  
+CDs all now
+
+Speaker 1  54:40  
+how many not null values? Yeah, so look at the last one, memo CD. How many non null values are there? Zero? So that means that basically kind of confirms our suspicion that memo city is just a bogus column with all null values. So what is. The first thing I'd like to do,
+
+Speaker 8  55:02  
+eliminate it. How do I do that drop? Well, yeah, we'll exclude.
+
+Speaker 1  55:10  
+So I take this and then do a what drop,
+
+Unknown Speaker  55:16  
+and what do we drop?
+
+Unknown Speaker  55:22  
+Name of underscore city, right?
+
+Unknown Speaker  55:25  
+That good?
+
+Unknown Speaker  55:34  
+Is that good guys? Do you want to do it in place? Or,
+
+Unknown Speaker  55:40  
+yeah, probably
+
+Unknown Speaker  55:44  
+that's what I was expecting, that someone will tell
+
+Unknown Speaker  55:49  
+that good now
+
+Speaker 1  55:52  
+and then after that, let's do another donor's head just to make sure whether it has worked right.
+
+Speaker 2  56:00  
+Is there any particular reason why that would be more advantageous than using Dell?
+
+Speaker 1  56:04  
+No, oh, that then using Dell, yeah, that is also another way of doing it. You can do that too. I cannot answer right now, though, which one would be more advantageous? I think it's probably the same. Let's see whether this works. All right, so when I said drop I did not say, where do I want to drop it from? So since I'm trying to drop it from the columns, I have to say access equals one.
+
+Unknown Speaker  56:41  
+And it did drop.
+
+Speaker 1  56:44  
+Now, the other way of dropping it is, you can use this keyword called Dell. So I loaded these again, and I did this again, and then there is and that, as I said, All of many of these things, sorry, Dell, what was the syntax again? Dell
+
+Unknown Speaker  57:06  
+donors, TF, dot, memo, CD, I suppose, right.
+
+Unknown Speaker  57:14  
+No,
+
+Unknown Speaker  57:18  
+because you already get
+
+Speaker 3  57:21  
+rid of it. You'd have to reread it. You have to go, No,
+
+Unknown Speaker  57:26  
+I think I did run it. I did run it
+
+Speaker 3  57:31  
+because it said there was no column. Then the CD was the error
+
+Unknown Speaker  57:36  
+or no attribute. All right, maybe that's what it is.
+
+Unknown Speaker  57:42  
+Hang on, hang on.
+
+Unknown Speaker  57:45  
+Or do I need to do it this way?
+
+Speaker 1  57:51  
+Ah, I need to do actually this way. So looks like for the Dell, that dark thing does not work. And then I if I do the info again now that memo city is gone, so yeah, so this and this will both use have the same effect. You can do either one way, and I really cannot tell you which one is going to be more performant. I have no way of knowing that if someone of you, or maybe someone from the TA Karen, or anyone, if you guys know the answer, or if you can research, feel free to contribute here. But for all practical purposes, both the Dell and the drop will essentially have the same effect. Can you remind me
+
+Unknown Speaker  58:34  
+why there's that access argument in there?
+
+Speaker 1  58:36  
+So the axis one basically says, so when you say drop, right memo city, now the drop function doesn't have a way to know whether you are trying to drop a row or whether you are trying to drop a column. So access one is column, access zero is row. So if you are trying to, let's say if Mammo city was one of your indices in the row. You could have used that same syntax to delete a particular row from 100 rows. So that axis basically tells clearly to the drop function which axis you are going to delete it from.
+
+Unknown Speaker  59:14  
+Got it Okay. Thank you. Yeah.
+
+Speaker 7  59:17  
+So if you, if you gave the index of one and an axis designator of zero, then it would drop that road Correct.
+
+Speaker 1  59:30  
+Okay, so that's that. What other data manipulation you will do? Have we checked the data types yet?
+
+Speaker 1  59:50  
+Yeah, see the zip is float, so that need to be fixed. Definitely. Everything else looks good. Name is a string, and plot is a string. City is a string. Is a string. Hey, z is a flow that concrete, right? So how do you do convert the zip to a string?
+
+Speaker 5  1:00:15  
+So if you want it to be a string, would you actually want to convert it to an int integer first to get rid of that trailing zero,
+
+Unknown Speaker  1:00:27  
+you can Yeah.
+
+Unknown Speaker  1:00:30  
+What else you can do?
+
+Unknown Speaker  1:00:34  
+What about the S type?
+
+Unknown Speaker  1:00:38  
+Yeah. So what does the S type do?
+
+Speaker 9  1:00:40  
+Is changing it to, like, a different data type. So, like, if it is upload, maybe we can change it to string. I just don't know. Okay, so,
+
+Speaker 1  1:00:47  
+yeah, so and see. But the thought process is, you come up with something and you don't exist right away, apply that to that, and follow the kind of discovery process that I'm doing. And this is exactly what you guys will be doing also. So you have a couple of ideas in your mind that you are playing with, and one like Ingrid said, like, Hey, how about we do an S type? So let's try it out, right? And when you are trying it out, by trying it out, I what I mean to say is, don't apply it back to a column, right? So don't touch the data frame. Just try it out and see what output you get so you can take the data frame and so you really help me out here. How do you apply that as type,
+
+Speaker 9  1:01:27  
+um, I would do the donors there, and then in bracket, new zip, maybe, yeah, or zip, yeah, but that, that would be the new the new name, right? So it would be a new zip, or if you want to
+
+Speaker 1  1:01:43  
+put, forget about new name. No, we are not. We are not applying that. We are just seeing what function we are trying to build. The function our satisfaction before we apply.
+
+Speaker 9  1:01:53  
+Yeah, dot S type, okay. Dot S
+
+Unknown Speaker  1:01:59  
+type, bracket, yeah.
+
+Speaker 9  1:02:02  
+Single quote, I guess. And then our object,
+
+Speaker 1  1:02:07  
+object or str, or str, yeah, I guess,
+
+Unknown Speaker  1:02:11  
+yeah. So let's see what happens.
+
+Speaker 1  1:02:15  
+Yeah. So you see, it gives you a series where this thing is an object. There you go. Now what we can do is, what if, if we only take the first five character of this? Aren't we all done then? Because I don't care about dot zero or whatever, for the zip code that has nine character, I'm going to keep only five, and for the zip code that have five characters followed by a dot zero, I'm also going to take first five. So if I blindly take first five character of each of these, then I should be good,
+
+Unknown Speaker  1:02:53  
+right? So how do we do that?
+
+Unknown Speaker  1:02:59  
+Use a slice.
+
+Unknown Speaker  1:03:02  
+How do you do? You apply slice
+
+Speaker 3  1:03:04  
+the with a array where you do array, colon five, or like Bradford, colon five,
+
+Speaker 1  1:03:14  
+right? But that you can do when you have a single stream, but here you have a whole column, which you are just converting to S type. And then what do you do?
+
+Speaker 3  1:03:23  
+Then you then you build a function, and then you do apply.
+
+Speaker 1  1:03:28  
+Yeah, exactly. And then you can do an apply. And then you can either build the function outside, do a lambda, or you can build the function right here. So you do like lambda, oh, and lambda, let's say call it x and then call it Z for found z for z code, you know. So now you know, by the time this lambda will get a z, it will already be a string type, because I'm already applying an S type STR before that. So now you can write this function assuming that you already have a string,
+
+Speaker 3  1:04:07  
+yeah. So, so then it would be z, bracket, colon five, and bracket
+
+Speaker 1  1:04:11  
+exactly, Z. That's your slicing right. And if you do that, bingo, right. And then, if you want to make it permanent, all you have to do is assign it back to that same column again,
+
+Unknown Speaker  1:04:30  
+and then do a hit, and
+
+Unknown Speaker  1:04:32  
+we are back in business.
+
+Unknown Speaker  1:04:35  
+Look the magic. We just fix the zip code so
+
+Speaker 9  1:04:43  
+uh, probably a little bit more complex, though, but what if we want to keep the zip code with the four extension?
+
+Speaker 1  1:04:51  
+So then you will basically go to that lambda function, and then you will basically take zero to five, and then you will take what is called six to nine. And then concatenate with the high fan and all of that you will do. You can do whatever you want. You
+
+Speaker 3  1:05:05  
+can do like a ternary and say, like, if the length is greater than if the length
+
+Speaker 1  1:05:09  
+so then you have to do a conditional statement there. Then you have to check, Hey, what is my length is? Is my length 11? Or is that is my length seven? If my length is only seven, then you only take zero to five, if my length is 11, then you take zero to five, then concatenate with the hyphen sign, and then you take six to nine, right? That's how you will do. But I'm not going into that details, because that's not the objective of this. The objective is to help you understand that when you get a data frame, most of the time the data frame will be noisy, there will be imperfection in the data frame. And as a data scientist, it's your job, it's your role, to understand what are the deficiencies you have in the data frame and try to fix those before you attempt to even answer any question you
+
+Speaker 1  1:06:03  
+Okay, cool, then we have the much cleaner donors data frame now and then coming back down to what in the activity prompt, it was like, hey, what if there is a rule that company is going to do a 10% match when you donate, right? So then what you can do is donors DF match amount. And you say, donors DF amount, which is this and multiplied by 0.1 and you apply that as a new column, and bingo, you will have a new column. But I'm not going to run this. I'm going to ask you, looking at the data frame that we have, should we run this all across? Is that going to be a right thing given the particular data we have? Because it says if 10% of every donation was fully matched by an or No, I think we can, because it says fully matched by an anonymous philanthropist, then we can but if it says, hey, if every donation will be matched 10% by the employer, then you should not be applying this function, because you have some people who are not employed. Then this thing cannot be done this way. Then what would be the alternate way? If the rule said for all the employed people, 10% would be matched by the employer, how would that change what you need to do in this cell so
+
+Speaker 1  1:07:40  
+do you understand my question, right? Instead of applying 10% blindly, if it is blind application, then we can just run this cell and we have this, right? If there is a 500 this, then 5250, then I have 25 and so on. But what if, if I say the rule says, if a person is not employed, then there is no matching, otherwise there would be 10% matching. How do you do
+
+Speaker 2  1:08:09  
+that? So use an apply function with a lambda Yes, to apply that logic.
+
+Speaker 1  1:08:15  
+Exactly. So you basically do, um, so you will not do that. Instead, you will do apply, right. So now the reason I wanted to do this is, now, can I do donors? DF, amount, dot apply. Think about it. So what happens? Go back up here, what happens when I do apply on a series? So here the series is zip, and I'm doing the Apply on a series which is the zip, therefore the variable that I'm getting in the lambda is z, which is the zip. But in this new situation that I just created for you guys, I have to check two columns. I have to check the employer column, and based on a condition on the employer column, I have to do something with another column. So now you see the difference here. I had only one column, and on that column, I'm applying certain operation, which is slicing. In that case here, I have two column that I have to look for. So if I do donors, DF, amount, dot apply. And then if I do lambda x, how am I going to get employer column and the amount column from these X can I do? Nine. So basically, think about it, right? So let's say, if I want to write something like this that if, sorry, not this, so I would say one. Do it this way. What is the internally way of doing it? So let's say we are going to do X. You do? You
+
+Speaker 3  1:10:05  
+do the true value, amount, and conditional. And then, yeah, else,
+
+Speaker 1  1:10:09  
+amount multiplied by 0.1, right?
+
+Unknown Speaker  1:10:15  
+And then question mark,
+
+Speaker 3  1:10:17  
+no, no. That's, that's, uh, that's, that's like, C and,
+
+Unknown Speaker  1:10:20  
+right, I forgot what was this. It's going to be
+
+Unknown Speaker  1:10:23  
+just the if statement. It's going to be if the conditioner.
+
+Unknown Speaker  1:10:27  
+It literally gets space, if, yeah,
+
+Speaker 1  1:10:29  
+if, so. Then I have to say if, x, not c, x, oops, X. Employer
+
+Unknown Speaker  1:10:42  
+is not important.
+
+Speaker 1  1:10:44  
+Not equal to,
+
+Speaker 9  1:10:49  
+I think, not employed. They're not employed, yeah, what about the retired, though, that's the same thing, right? They're not working,
+
+Speaker 1  1:10:58  
+yeah, one at a time, good. Question. So not employed, else we will return. Let's say zero. Now, if I run this, and if you want to add another condition, you can basically say, if x this is not equal to employed, and you can add anything that you want to this, and you can say, hey, if it is not employed or not retired, right?
+
+Unknown Speaker  1:11:26  
+Do you have to specify the access? No.
+
+Speaker 1  1:11:33  
+Hang on a second. Let me put the retired in here. Retired right now. If I run this, this will give me an error. It will say, Hey, I don't know what is employer? What is error? Sorry, what is employer? Because when you are applying these on amount, that amount column does not have anything called employer,
+
+Unknown Speaker  1:12:00  
+so it will give me an error.
+
+Unknown Speaker  1:12:03  
+Let's see what the error message gives.
+
+Speaker 1  1:12:07  
+So the error message says int object is not subscript double. Why? Because here I am saying x and then subscript amount, but I am applying these on amount itself. So amount itself is an IMT, meaning integer. So the lambda x, x is coming as an integer, and then I'm trying to apply a subscript on an integer, and that's what the error message is saying. IMT object is not subscriptable.
+
+Unknown Speaker  1:12:38  
+What is the way to fix this?
+
+Speaker 3  1:12:41  
+It didn't. Matt already say it? You're going to use the access sequence one at the
+
+Speaker 1  1:12:45  
+end? No, that's not the way you see. The problem is, here I am applying these on amount, and this is the question I asked compared to the previous example, where I applied these on a series. Here in the lambda, I have to use two different colors. So all you do is basically apply this on the whole data frame. Remember, when I was talking about the in the slide, I said you can apply these both on the whole data frame or on a specific series. So this is one case where you have to apply the lambda on the whole data frame. So now when you do donors, DF, dot apply. So then this x that you get, it basically not a single row, a single column. It's basically all the columns, and for on that, you can apply a subscript to get the specific column.
+
+Unknown Speaker  1:13:36  
+So let's try this,
+
+Speaker 1  1:13:39  
+and if it does work, we would also like to check whether it works. So let's, we'll do a head statement there, and let's give it a shot.
+
+Unknown Speaker  1:13:50  
+Oh, it still didn't work. Why this
+
+Unknown Speaker  1:13:53  
+is, I think you need
+
+Unknown Speaker  1:13:56  
+access equals one, yep.
+
+Unknown Speaker  1:14:00  
+No, it shouldn't be but
+
+Speaker 3  1:14:02  
+well, if you try it and it doesn't work, I wonder if we'll be wrong
+
+Unknown Speaker  1:14:14  
+here. Employer, employer,
+
+Unknown Speaker  1:14:20  
+Oh, you are saying, since we have not
+
+Speaker 2  1:14:24  
+done know where you're looking for those headers,
+
+Speaker 1  1:14:29  
+okay, yeah, maybe, okay, so let's see, yes, you are right. So you do need to provide access when you are applying it on the whole data frame, so that way it knows this amount employed. These are not in this side. This is on the top side and the column, yep. So now for the not employed, we got a major match amount of zero. For retired, we also got a match imply amount of zero. So indeed, should be happy. And for everyone else, we got a match amount, which is 10% of the donation amount. So.
+
+Speaker 9  1:15:06  
+Actually, I have one good question. So if he is not employed and retired, so that means he has to fill out those two conditions. Shouldn't that be an order statement, though? Because somebody could be not employed
+
+Speaker 1  1:15:19  
+or No, I said not equals. Oh, you're right. You're right. Never mind you got I'm saying not equal to these and not equal to that. Didn't pay attention to that. It's so small, okay, so I'm negating it there, right? Yeah, yeah. Okay. So then, after this example, the next thing should be cake walk. So essentially, what this is saying is, hey, what if, if you want to do a match amount, and if the person's donation amount is less than 500 the amount, match amount would be 10% if it is more than $500 then the match amount will be 20% Well, wow. So here, in this example, you are basically defining this whole thing as a different function using a depth and doing a match amount on that. But if you wanted, if you wanted to, you could do that with a lambda x and then run write this whole thing using a single e file statement, like I did here, and provided an access equal to one, and it would have worked. And I'm not even running this, because you already get the thing. Oh, so in this example, yeah, so this is where they're showing if, if this is a case where, this is another example where you have to access two different column within your function. So here it says, hey, if the donor is only matching the donation from Delaware. So if the state is de not equal to d, then it will return zero. Else, it will if it is less than 500 then 10% Else, if not, then 20% so you basically add another function condition. But here you have two different thing, two different columns that you are looking at, state and amount. Therefore now you have to do the apply on the donors DF overall, not just on the Amount column. And since you are doing that, then you have to provide x is equal to one, and it will basically do that again. I'm not running that. And then the final thing is that same condition written as a lambda.
+
+Speaker 1  1:17:35  
+Okay, so you can run it yourself, and you will get the result. But I think what we showed we have done here, which is, I think, in a more in a real life, what happens, right, that employers Try, try to match the donation, right, instead of random philanthropic organization matching the donation. So, so in reality, probably, this is probably closer to a real life use case, what you need to
+
+Unknown Speaker  1:18:06  
+Yep, okay,
+
+Speaker 1  1:18:10  
+so if you have to feed it to a machine learning model after doing this data manipulation, are we good Like, can we just now fill the fit it do?
+
+Unknown Speaker  1:18:24  
+So let's do another donor start info. Are
+
+Unknown Speaker  1:18:27  
+we good now?
+
+Speaker 1  1:18:38  
+Do you see any problem why we may not be able to or we should not be fitting it into a machine learning model. Anything that these output from info catches your eye. The
+
+Speaker 2  1:18:49  
+non null count is in all 2000
+
+Speaker 1  1:18:54  
+correct. So basically it says that, hey, employer has about 180 now values, city has a one null value and so on. So, as I said, most machine learning model, they don't like the now values. So how many novels are there? Not too much, right? About 10% or less. And we have 2000 data, so it will be okay to get rid of everything that doesn't have a value, or all row that has a null value. So how do we do that?
+
+Unknown Speaker  1:19:33  
+That's a drop and drop. Na,
+
+Speaker 1  1:19:37  
+correct. So you have to do donors.
+
+Unknown Speaker  1:19:42  
+DF, dot
+
+Speaker 1  1:19:45  
+drop Na, is that it
+
+Speaker 3  1:19:48  
+would this be a case where you'd want to rename because you want to keep track of the donor information that you do have?
+
+Unknown Speaker  1:19:57  
+I'm sorry say that again. So would
+
+Speaker 3  1:19:58  
+this be a case? Where you might not want to drop them, but you'd want to rename them to something safe so that you could reserve the donor information that you do have.
+
+Speaker 1  1:20:08  
+That's what another question, that's what I would do. Or
+
+Speaker 3  1:20:12  
+would you or would it be too dangerous to keep where you don't know? I mean, you know the state of Delaware, but because you don't know all the employer information, you might accidentally transform your data in the wrong way, and therefore make a mistake that that could cost you.
+
+Speaker 1  1:20:30  
+Yeah, either that or the other thing you could also do, you can take all the null case, right? And instead of having a now, like, put a text there, like, N, O, N, E, none, because the value now that is something that might actually cause problem, not that might that will definitely cause problem. So if you do this, then you are getting rid of all null values. So what JC said is true, and also not just, not just keeping all the donors, but if you don't want to lose the fidelity in the data, right? So here we have less than 10% of data having null values. What if even more data, let's say, what if about 30% of your data had null values? Now, if you do a drop, na now you lose 30% of valuable data right, and less data meaning you're when you train your model, your accuracy will be less right. So it might be worthwhile again, there is no single right or wrong answer. It all depends on what algorithm that you are using to train your model, because keeping these null values and converting them to none also can have other repercussions, because your now your model can start to hallucinate and actually think none is actually a real world thing. So there are a lot of different things that you have to take care of, which we will discuss during the course of the boot camp, right? But these are just some of the things that you have to be aware and keep in your mind. There is no single right or wrong answer what you should or you should not do, right? Okay? So that's a very good suggestion. JCU provided that whatever we want to keep these values. So let's say instead we know that if we run this drop in a and if we do an n plus equal to true, we will probably have 18 120 rows right which will have all non null items. But what if we want to convert those into something that says none? How do you do that? No, yeah, so what is that command, fill, Na, and then what
+
+Unknown Speaker  1:22:47  
+value equal? None,
+
+Speaker 1  1:22:52  
+yeah. So one thing you have to keep in mind, though, let's see where the null values are apply are coming. If there is an integer and it is a null value, then we really cannot do this blindly. But thankfully, the only two decimal point value that we have, column that we have is amount, and match amount, and all of these are valid. So the nulls that we have are city, state and employer, and all of these are string. So it is okay to do that right, and then obviously we have to do in place.
+
+Speaker 1  1:23:39  
+And bingo. Now obviously we don't know whether that worked, because the null values are only less than 10% right. If you do a sample couple of times, you might be lucky, and you might be able to catch some of those. But instead of doing that to make sure whether your function this field and a function actually worked, you can go back and run this info again, and now you see all 2000 and none now. So that means work. So now this donors DF is probably looking in a good shape that we can start thinking about actually doing that final set of transformation to actually apply to the data frame out to the machine learning model. Well, there are a couple of other transformation you also have to do, but that is not the topic for today, right? Because when you do a statistical machine learning all of these character values, you have to somehow encode that and convert into decimal values or integer values, some some numeric values. But that's a topic for much later in the course, when we are actually feeding the data into a model, but hope this gave you kind of some food for thought and help you kind of understand the kind of data manipulation that is often needed and see why learning pandas well is necessary. In order to do machine learning,
+
+Unknown Speaker  1:25:05  
+you guys all agree,
+
+Speaker 9  1:25:08  
+yes, agree, good data with good result, carbon, zero,
+
+Speaker 4  1:25:13  
+yes, curious, though, check and see what if, if employers none, if you have match amounts other than zero,
+
+Unknown Speaker  1:25:25  
+yeah. That's also another thing again, as I said, we are not
+
+Speaker 4  1:25:27  
+in which you maybe do those operations, yeah,
+
+Speaker 1  1:25:32  
+yeah. So ideally, you should have probably done the feeling a none before, and then when you applied the lambda function where we had, where you checked only for not employed and retired. You should have also checked, hey, employer is if none, then also it should be zero, right? So you should have done that actually, yeah. Okay, the next one is an activity applied taxes. Ah. Uh, apply taxes. Let's see what this activity prompt is.
+
+Speaker 1  1:26:16  
+Okay, so let's do one thing. This is a quick exercise, so let's get into the breakout room and not more than 10 minute guys. Okay, because you, I think you guys probably have gotten tired hearing me for more than an hour now, so probably be a nice, welcome break for you to, you know, kind of relax, chill out and go to the breakout rooms just for 10 minutes and do this very quick activity, which should be easy enough now and then come back and then we'll continue.
+
+Unknown Speaker  1:26:52  
+Darren, whenever you're ready. Yeah,
+
+Unknown Speaker  1:26:58  
+was it easy enough?
+
+Unknown Speaker  1:27:02  
+Actually, really. It was good practice.
+
+Unknown Speaker  1:27:05  
+It was a good practice.
+
+Speaker 1  1:27:10  
+Okay, you will, you will get it. I mean, you just have to probably run through these examples in your own time a couple times, and you should be able to get it. Okay, so let me quickly run you through the solved files here, and then you will get the salt files. I think salt files are already there. Kian, did you post the salt files already?
+
+Unknown Speaker  1:27:30  
+I can post them right now if you want, for what we've covered today,
+
+Speaker 1  1:27:33  
+maybe after the class. Yeah, that's fine. Okay, you don't have to do it. Try again. Okay, cool. So let's quickly run through this thing, this activity that you have done. So here what you have is, hang on, am I on the right one? Yeah. Activity number four, apply taxes. So this is data about utility consumption. Okay, and the data has some passenger where the unit is number of passengers flowing through, and then gas consumption, electricity consumption and so on. So that is the data. The first prompt is add a column that tracks the tax rate. Assume every year and type of utility had a tax rate of 5% except for 2019 when the tax was raised to 5.5% so essentially, what it is asking you to do is add a new column called tax rate. And that value of that column you have to apply conditionally based on the year column. If your year is 2019, or more, then you will apply a 5.5% tax if it is prior to 2019 then you will apply a 5% tax. Again, you can do it using a lambda, but in this particular file, solution file that you will get the code that is written here, you will see that it says, Hey, let's write a separate function which we are calling tax rate with a parameter that we are passing, which is here, and then, based on that year, we are returning point 055, if year is greater or equal to 29 else we are returning point 05
+
+Speaker 6  1:29:40  
+May I ask you, just for fun and for our practice with lambda, would we please create it together? Lambda?
+
+Speaker 1  1:29:48  
+Sure we can. Thank you. Thank you very much so and then you run the take this lambda. Sorry, take this function and use the apply function to apply. It on a specific column, which is here because your conditional statement only takes years, so you don't need to apply it on multiple column. So therefore, you are doing an apply on a specific column, not on the whole data frame. So that's what you will get. Now if you want, you can also do that in one line with an lambda function. So you can say lambda x, where x would be your tax rate. Sorry, x would be your year. So then you basically do this return statement in here. You can even call it here. Doesn't have to be x,
+
+Unknown Speaker  1:30:55  
+and that's it,
+
+Speaker 1  1:30:58  
+and dot add and we are applying it on a specific year, so I don't think we have to do a access,
+
+Unknown Speaker  1:31:09  
+and it will provide the same output.
+
+Speaker 1  1:31:12  
+So these one line code I wrote this basically in lieu of apply creating a function first and then apply a function, just like what you asked. So what I did is I did add lambda, and then whatever I was writing in a function, I basically wrote after the colon in lambda, and that makes it a anonymous function, and you get the same effect. Thank you. Applause. The next prompt is recalculate the tax rate, assuming that the Commission owned units were taxed and additional 1% on electricity. So now you have to
+
+Unknown Speaker  1:32:02  
+look into
+
+Speaker 1  1:32:05  
+two columns. You have to look look into the year column, and you also have to look into the owner column. And the logic that is given prompted here is you still apply the year based calculation, which is, if row is to an year is 2019 then you do 5% if not, sorry, you do 5% all across and if it is a 2019 and then you add another 5.5% on top of that, if the order is Commission, or if the utilities electricity. So three different column that you are basically using. Here you are using year, you are using owner, and you are using utility. So this is a complex business logic that is requiring you to do the conditional statement using three different column values. So therefore, when you do apply this function, you have to apply this on the utilities DF, the whole data frame, not just one single column. And since you are applying this on the whole data frame, you have to specify that it is on the axis one, and then you will get the new test. So
+
+Speaker 3  1:33:17  
+So I read the instructions as like it was only raised in 2019 and not afterwards, which doesn't make a lot of sense, because why would it go down the next year? However, this solution uses the same mistake that I made and not so changed it
+
+Speaker 1  1:33:34  
+before correct. So basically, you basically have to say, let's see. When was the tax raised 2019 afterwards, right? So basically you have to say greater or equal to 2019 and that error will be dissolved. So essentially, what you are doing is, first, blindly, you are adding a 5% and then on top of that, if the year is greater than 2019 then you are adding another 0.5% and then on top of this, if owner is commission or utilities electricity, then you are adding another 1% and then you run this, then you will get this. Now you might think, hey, is there a way to use this, write this using lambda? The answer is absolutely yes, you can. But you see, given the way that this thing is so you have multiple ifs, it is probably better to write it as a separate function and not in a lambda. I mean, you can definitely write it, but then your code, the lambda code will be too long in one line, and it is not going to be very readable. So for that purpose, you might want to stick to this separate function, but you can apply it on a using a lambda as well. So.
+
+Speaker 1  1:35:03  
+And then the final prompt was that this one specifically says you have to apply with a lambda. And the logic here is existing tax rate column to zero if the utility was passengers. Yeah. So basically, if it is a gas or electricity or water consumption, there is a tax rate. But if it is just measuring how many passenger is flowing through, then there is no tax rate. So what you can do is you can, and there is, in this particular prompt, there is no addition of 5% or five for 5.5% different on depending on different year, all it is saying is, oh no. It is actually sorry, my bad. So in this one, what is saying is take whatever tax rate that you calculated in the previous step and then selectively set some of those to zero, specifically when your own when your units, is a pats or when your utilities passenger, you can do it either way. You can either say when utilities equal to passengers, or you can also say units equal to pass. So if you you could have done it, units equal to pass, both will have the same effect, because everywhere where utilities, passenger units, is passed so that will also give you the same output. And then you run this so you basically see that where the passenger packs, rows are there, the util the tax rate has been turned down to zero. Everywhere else it is 5% or 5.5% or 6% depending on all other condition that we have already applied in the previous step,
+
+Speaker 7  1:36:49  
+okay, in a in a real world situation when you only have the head of the data frame, can you make that assumption, though, that passengers or packs is always equals passengers.
+
+Speaker 1  1:37:05  
+No, you cannot, that's so you have to do some more digging in, right? So what you can do is you can basically use the lock function to get all the rows where the value of the utilities passenger and see what are the value of the units, and then apply a unique function on top of that to see how that works. Like, what is that giving you? So actually, that's a good question. Why don't we do that here? So think about it, if we want to reassure ourselves that wherever the utilities passenger units in SPACs. How do we do that?
+
+Unknown Speaker  1:38:01  
+Are you going to use lock or I Lock?
+
+Speaker 1  1:38:12  
+Lock? Okay, so let's try writing this. So utility, DF, dot,
+
+Unknown Speaker  1:38:21  
+location and what we are going to pass for location.
+
+Unknown Speaker  1:38:38  
+Utilities, DF,
+
+Speaker 3  1:38:41  
+utility Yeah,
+
+Unknown Speaker  1:38:52  
+that
+
+Speaker 1  1:38:58  
+and we get 80 rows here, right? So now, how do you make sure that, so you know that all of these utilities passengers, how do you make sure that all the units are packed?
+
+Speaker 3  1:39:17  
+Then you would if, I mean, if you want to manually do it, you could also do another one that says
+
+Unknown Speaker  1:39:25  
+utility equals passengers and
+
+Unknown Speaker  1:39:29  
+units equal packs,
+
+Speaker 1  1:39:31  
+yeah. Or you can also do so take these right. How about we take only the units column of it, and this gives me all units. How about we apply a unique on this? And it's the result should be only one there pass. So now we have just. Proof to ourselves that anywhere where the utility column is passenger, there is only one value in Unit column, which is specs, and there is your proof right there.
+
+Unknown Speaker  1:40:21  
+That was a good question, actually,
+
+Speaker 1  1:40:25  
+Okay, what else any other question on this one? I
+
+Speaker 1  1:40:40  
+uh, okay, so the next activity is, again, kind of some of like putting some of these together to do some cleaning on a data set. They call it a spring cleaning, right? So let's look into the unsolved file. Not that one, this one, spring cleaning.
+
+Unknown Speaker  1:41:14  
+Okay, do we have time for 10 minute break?
+
+Speaker 1  1:41:19  
+How about we take a 10 minute break right after this. Okay, yeah, okay. So in this we are basically going to kind of do some recap, right? So first we are going to load the data. So we loaded the data, and then we are going to do a shape, because it says, find the number of rows and columns. So I have 504 rows and 14 columns. Then let's generate a sample of the data, which is our CSV data. Dot, let's say sample 10,
+
+Unknown Speaker  1:42:02  
+and that will generate a sample of the data.
+
+Speaker 1  1:42:07  
+So now the next question is, identify the number of records in the data frame and compare it with the rows in the original file. So basically, what it says is, you simply take these data frame and do a count on the whole thing and see what you get. Because here, when you did a shape, you know that there are total of 504 now when you do a count, it gives you 504 rows. Is total data frame, fine, but how many symbols are there? How many names are there? How many sectors are there? How many price and there are so on. So you see that some of these are less than 504 that basically means there are some null records there. Right now, the question is, how do you identify the null record
+
+Speaker 1  1:43:10  
+info? You can do a info. There are different ways of doing it. You can do info for sure, and that tells me how many are non now, so anything that are less than 504 non. Now, for example, name has 502 that means there are two null records. How do you drop all the null records? We already talked about this before. Here we are not any Yeah, so here we are not going to think about whether it is a right or wrong to drop. We are simply going to just follow the prompt and just say drop. And after doing it, drop, you can do info again. And now you have 478, all across. So all the null records are gone.
+
+Speaker 1  1:44:13  
+Well, actually, in the next cell, they said, validate null record now have been dropped. So you can actually say, Hey, you can even do this to see whether the all the null records are dropped. There is another way of doing this. There is a function called is now. If you apply is now, you see it says, false, false, false, false, false, all of this. It basically says whether it is now or not now. If you take this output and you do a sum, it will basically tell you, for each of the column how many records are now. And here we see that all are zero, which basically goes well with this, because here we see non nulls are all 478, so obviously the nulls. Be all zero. So that's how we validate that all the nulls are gone. And the next one is saying, hey, if there is a there is a column called EBITDA. So there is a column called EViD. And then that evident column, it's saying, hey, if it is a now, then fill it with value zero. So how do we do that?
+
+Speaker 1  1:45:31  
+We basically do a fill na with zero, and then you apply that to the column itself. So you take the column, apply a fill in a function, and assign the output to a to the what is called the column again, and then you will get that. But right now, this function will not do anything, because we have already dropped all the nulls. So if you run this function now and then, if you do is null, it's sum, you will basically get the same output. Or if you do dot info here, let's say you will get that 478, because we have already dropped all the null before, before we wanted to fill some of the null with zero. So that means if you really want to see the outcome of this, you have to go back up and load the data again. Now we know that it will have some now. So if you do, let's say info, it will show that not all of these are same. And if you look into the EBITDA, there are 492 non null values. Now, without doing anything else, if you now come down and just do this, fill na zero and then run this now you see that all other columns still have now, but EBITDA column now we have 504 non nulls, which initially it was 478 non nulls. So basically that shows me that field and a function actually worked. So now at least the EBITDA column doesn't have any null value. So if you have to selectively fill some of the null with other values. You have to do that before you do the drop any otherwise, all the nulls have gone anyway.
+
+Unknown Speaker  1:47:35  
+Okay,
+
+Speaker 1  1:47:37  
+so now the next thing is, how do you do drop duplicates?
+
+Speaker 1  1:47:46  
+So first you have to find out whether there are any duplicates or not. So how do you find if some of these rows are duplicates of each other? Could
+
+Speaker 3  1:47:58  
+you just scroll up just a small amount? Because I Yeah, are you calling Phil na or Phil No?
+
+Unknown Speaker  1:48:06  
+Bill Na,
+
+Speaker 3  1:48:08  
+I'm not getting the same behavior like I'm still getting no values a bit there. But
+
+Speaker 1  1:48:17  
+so if you just load the column, load the data frame first, and then come down here and then do this. It will replace all the fill all the EBITDA column with no null. Yeah,
+
+Speaker 3  1:48:29  
+I understand that, and I'm telling you that within I can figure it out memory.
+
+Speaker 1  1:48:38  
+Yeah, maybe some of the rows, probably you have run out of the order some of these cells, but it should actually work.
+
+Speaker 1  1:48:55  
+Okay, so that the next thing is drop duplicates. How did you guys drop the duplicates.
+
+Unknown Speaker  1:49:18  
+Dot drop duplicates.
+
+Speaker 1  1:49:20  
+Dot drop duplicates. Yes, that's right. But now my question is, how do you even know whether there were duplicate rows? It's not prompted here, and that's why I'm specifically asking you, How do you know? So we have to, just like how first, we have to see whether there are any now values, we have to see whether there are any duplicated rows. So what you can do is there is a function called duplicated you can apply the function. Now, let's see what this function returns. But this function is returning is some false and some true. So. So here you see false, false, false, false, false, but there might be some true, because let's see how many 504 actually, there doesn't seem to be any duplicates. That's probably no actually, we can do another thing. We can apply that to the data frame itself and put this like this, yeah. So now you see there are no duplicates here. So if you if there were duplicates, there would be some duplicated row here. So that probably because we have run some other operations. So let's go back up and take a fresh data set as it is loaded from the CSV file, and then if you run these duplicated, oh,
+
+Unknown Speaker  1:50:57  
+there is no duplicate actually here. So so that
+
+Speaker 1  1:51:04  
+drop duplicates would not really do anything. But I'll tell you what you should have written. It's not going to produce any effect in here. But the prompt that it says, drop the duplicates, you basically just do drop duplicates. And if you want to do in Plus, you can do in plus equals true, and that will basically drop all the duplicates. But in this case, it will not really matter, because your data frame did not have any duplicates at all, so the shape will still be 504 if your data print happen to have at least two rows that have exact same data all across, then that will be duplicates. But here there are no duplicates, so your drop duplicates, yes, you can apply the impact of that would be zero, no impact at all. So
+
+Speaker 1  1:52:08  
+Okay, the next one is saying clean the price series by replacing the dollar with the empty string. So let's see how the dollar looks. Price looks like. So price, so heaven.
+
+Unknown Speaker  1:52:28  
+Price doesn't even have $1
+
+Unknown Speaker  1:52:34  
+in the CSV, huh?
+
+Speaker 1  1:52:39  
+Oh, hang on, I am doing a sample. Let me do a head, yeah, some price does have $1 some price does not have $1 so that means, so this is, again, the example of a non ideal data set. So basically that means, if I do a D types, so price is probably come, going to come as an object. Yeah, price does have an object, because in the CSV files, some of the Price column did have $1 sign, and just having a non numeric character made pandas decide that this must be what is called an alphanumeric, not a numeric field. So that's why
+
+Unknown Speaker  1:53:26  
+this is coming as
+
+Speaker 1  1:53:30  
+a object and not as a integer or float. So therefore we can then do that, which is replace the dollar by sign dollar by an empty string. So then, how do I do that? So I take the price data,
+
+Unknown Speaker  1:53:50  
+and then how do I replace
+
+Unknown Speaker  1:53:53  
+what did you guys do here?
+
+Unknown Speaker  1:53:56  
+How do you replace $1 by an empty string?
+
+Unknown Speaker  1:54:02  
+It's just call Python replace.
+
+Speaker 1  1:54:05  
+Yeah, you can do Python replace. But since this Price column in a is a pandas column, which is, in general, an object, you have to apply a dot STR on top of that, and then that makes it, converts it to a string. And then you can apply string replace, and then the first parameter to the replace function is the character you want to replace, and the second parameter is the character you want to replace with. So then, if you do that, and then you also have to apply it back to that column, and that will replace everything. So now if you do head to make sure, because I remember the first column had $1 sign, yep, this 222, $8,900 sign. And now this is gone because I have replaced all the dollar with an empty string. So. And confirm data type of price, which we already did. Right when we did a D types, we already saw that. We already noticed that the price is an object. So now that we have it was object, because some of these had $1 sign. So now if I want to cast the price as a float, how do we do that? This is something we have done before. So what is the function to cast from one type to another type as type? Yep. So I take CSV data, dot, column name, and then apply as type, and then convert it to a flow, and then apply that back to that column itself. And then after that, you can do a D types to make sure that it worked.
+
+Unknown Speaker  1:56:06  
+Oh, sorry, I made a typo.
+
+Unknown Speaker  1:56:10  
+So now you see all my price has become floor 64
+
+Speaker 1  1:56:19  
+Okay, so this was nothing, but just some more practice on some of the concepts that we have already discussed. Okay, so let's take it's 838 right now. So let's take a 12 minutes break and come at 850 and then we will tackle that last thing, which is answering abstract question. So I serve this class, which is going to be the most fun one, at least, to me, it is. So let's see how you best feel.
+
+Unknown Speaker  1:56:52  
+Okay. So
+
+Speaker 1  1:56:57  
+let's look into the Read Me First. Actually, let me close. Okay,
+
+Unknown Speaker  1:57:09  
+you see my screen.
+
+Speaker 1  1:57:12  
+Okay, so there is a one question to answer here, which is this is the that utility data set from that airport where you have that gas, electricity, water and passenger flow. So essentially, the question you have to answer is, which utility uses change the most from 2013 to 2019 so and what they are saying here is there are two files that are given. One is a completely blank file, and one is a starter file.
+
+Unknown Speaker  1:57:55  
+So if you look into the blank file,
+
+Speaker 1  1:57:59  
+it does not give you any starter code, and then you have to figure out the strategy on how you are going to answer this question. The starter file, on the other hand, it provides you with some props. The recommendation here is to use the blank file so that you get an opportunity to think through what is the best course of action rather than simply following the instruction?
+
+Unknown Speaker  1:58:26  
+So if you look into the blank file,
+
+Unknown Speaker  1:58:34  
+all you get is the data set loaded. So
+
+Unknown Speaker  1:58:44  
+okay,
+
+Speaker 1  1:58:46  
+so this is the data set loaded. And then there is just one question, which utility users change the most from 2013 to 2018
+
+Unknown Speaker  1:58:57  
+so how would you do it? I
+
+Unknown Speaker  1:59:04  
+Let's think through.
+
+Speaker 7  1:59:10  
+Seems like you mentioned a couple times that it's best to clean up the data, so maybe just an info at first, just to understand
+
+Unknown Speaker  1:59:18  
+what kind of data set we're dealing with.
+
+Speaker 1  1:59:20  
+Sure that sounds like a good idea. Let's do an info.
+
+Unknown Speaker  1:59:33  
+Okay, so what do we see in the info?
+
+Unknown Speaker  1:59:38  
+560 total entries
+
+Speaker 1  1:59:42  
+and all are non now, so there is no null values we have to deal with, at least this particular file is cleaned up and there is no null values we have to deal with.
+
+Unknown Speaker  1:59:53  
+What else do?
+
+Speaker 3  2:00:06  
+We only care from 2013 to 2018 right?
+
+Speaker 1  2:00:11  
+We only care for 2013 and 2018 That's correct. So
+
+Speaker 3  2:00:15  
+we'll, we'll reduce the data to only those years
+
+Speaker 1  2:00:20  
+we need to check for the data in between 2013 and 2018 right? Most from 2013 to 2018 is, what if the statement is no, so. So what they're asking is just compare the two years. What is the total of 2013 and what is the total of 2018
+
+Speaker 4  2:00:40  
+change the most from 2013 to 2018 Yeah,
+
+Speaker 3  2:00:44  
+you just need 2013 and 2018 so I guess, figure out if there's even values of the year that are there besides 2013 and 2018 and then isolated 2013 and
+
+Speaker 5  2:00:58  
+20 Take a sample, like a sample of, say, 30 or 40, and see if there's other years in there.
+
+Speaker 1  2:01:10  
+What do you mean? So, so, so first, so Well, one thing we can do, we can see how many records are there in 2013 and how many records are there in 2018 Can we do that?
+
+Unknown Speaker  2:01:24  
+Okay, so how do you get that?
+
+Unknown Speaker  2:01:28  
+So year is year.
+
+Unknown Speaker  2:01:32  
+So what is the way to see that?
+
+Unknown Speaker  2:01:37  
+Dot year, dot values, count.
+
+Speaker 5  2:01:42  
+Uh, or unique dot
+
+Unknown Speaker  2:01:47  
+year dot value counts, sure.
+
+Speaker 1  2:01:54  
+So you have 84 for 2013 and 84 for 2018 Yeah.
+
+Unknown Speaker  2:02:10  
+What else can you think of
+
+Speaker 3  2:02:13  
+reduce the number of columns because you only care about you don't care about the month. You don't care about the day. You don't care about the year, the utility
+
+Unknown Speaker  2:02:25  
+and the usage,
+
+Speaker 1  2:02:27  
+um, you can do that. But if we are going to just extract those numbers, I don't care about those extraneous column. Let them be I mean, you can drop if you want. But is that going to basically be of much benefit
+
+Speaker 3  2:02:44  
+here? I guess, create a data frame of just those elements.
+
+Speaker 1  2:02:51  
+Like you want to have a smaller data frame with just those elements.
+
+Speaker 3  2:02:56  
+Wait If, if we're doing like, like someone said, I think James said, clean up the data. Uh huh. I only care about the year. I only care about this question in terms of the utility. Yeah, only care about the utility and I only care about the usage.
+
+Unknown Speaker  2:03:14  
+You will also need to care about the units. No,
+
+Unknown Speaker  2:03:21  
+okay, sure,
+
+Speaker 1  2:03:25  
+yeah, because the units are different, right? So how about we create a new data frame,
+
+Unknown Speaker  2:03:33  
+just with this? I
+
+Unknown Speaker  2:03:45  
+Okay, so that's your smaller data frame.
+
+Speaker 1  2:03:49  
+I could have used drop. But this is also another way where you just take the columns you want and assign that to either the same variable or a different variable. Here I just assigned it to a same variable.
+
+Speaker 1  2:04:08  
+Okay, so now when I print it this way, one thing I am seeing here electricity is 1.17 times 10 to the power seven passengers is 10 to the power six, but water is this times 10 to the power one. So do you see that water uses is much less actually?
+
+Speaker 1  2:04:39  
+So what I'm saying is this, if you now want to do apply a location, right? And if you apply a location with utility water, so let's say utilities, DF, dot, utility.
+
+Unknown Speaker  2:05:02  
+Equals
+
+Unknown Speaker  2:05:05  
+water.
+
+Speaker 1  2:05:12  
+So do you see the values here? 1514, 13, right now, if you do that for other types of utilities,
+
+Unknown Speaker  2:05:24  
+which is,
+
+Speaker 1  2:05:28  
+what are the types of utilities? Are there gas? Let's apply this to gas.
+
+Unknown Speaker  2:05:36  
+And you see they're in a different scale. Um,
+
+Speaker 1  2:05:43  
+if you applied that to electricity,
+
+Unknown Speaker  2:05:49  
+they are also much larger scale.
+
+Speaker 1  2:05:56  
+So how many different types of utilities are there? I here. So you might also want to find out how many utilities. Type are there? You can say utilities, DF, dot, utility dot. Value counts, and it gives me there are gas, electricity, water and passenger. So there are four different kinds of utilities now, water is all in the unit of like between 10 to 20. Gas is like in millions or maybe hundreds of 1000s. Electricity is also the same way, and then the other one was passengers. So let's see how the passenger looks like
+
+Unknown Speaker  2:06:50  
+passengers.
+
+Speaker 1  2:06:55  
+So because passenger is also in million. So what I'm seeing here looking at this, the scale is different. The water probably, I don't know whether they are measuring in gallon or in some larger unit or something, but you see, this is a airport data, and when everything else is kind of in the scale of millions. And oh, right here you see water is million gallons, as opposed to that, the other one are not in million. They are in terms or in kilowatt hour, right? Or in packs. So this is one common thing that you should pay attention to. Whenever you have a column that has where the scale is all over the place, you need to kind of normalize the scale so that you bring them everything down to kind of in the same scale. So
+
+Speaker 2  2:07:47  
+this is where we're gonna use standard deviations. And,
+
+Speaker 1  2:07:52  
+well, no, not standard deviation. Not that normalization. What I'm saying is it's, it's called scaling of the units. So if you, let's say, if you plot these four different kinds of utility, you will see that passenger electricity, this thing will be so higher, and then water is so low, you would almost not even see the graph. That water graph will basically be almost hugging your x axis, like almost be zero compared to the other, because everything else is like in order of millions, and order is just in between 10 to 20. Are you
+
+Unknown Speaker  2:08:27  
+looking for percentage difference? Yeah?
+
+Speaker 2  2:08:29  
+When Yeah? Variance on it, because variance doesn't have units on it, right, isn't it? Just relative to the yeah and you're you could use the the Z score of each one to find out which is the most deviating from the mean, right,
+
+Speaker 9  2:08:47  
+by 1 million. So they're all within a million.
+
+Speaker 1  2:08:50  
+That's That's exactly very good. So what I want to so all of everything else you said, like you find the Z score, you find the standard deviation, and you normalize. So those are something that is not within the scope of this class, right? So when you have a normal distribution, it is often a good idea to kind of a scale it with a median of with a mean of one, and with, sorry, with the mean of mean of zero and a standard deviation of one. So that is another type of scaling. But here what Ingrid said that actually has some value, because we know that water is in million gallons, and everything else does not have millions. So what we can do is we can simply divide everything by a million, except for water, and that way, we will make sure that all of the units are in the same scale.
+
+Unknown Speaker  2:09:42  
+You guys all agree
+
+Unknown Speaker  2:09:44  
+that sounds way? Huh?
+
+Speaker 2  2:09:49  
+That sounds way easier than calculating Z scores. Yeah,
+
+Speaker 1  2:09:52  
+that sounds obviously because, see, the thing is, you have to apply the technique, where, where, which were way, whichever. Applies to which condition, which scenario. In this scenario, you really don't need to scale in, because all you need to do is look at the total in 2013 look at the total in 2018 and find a percentage difference. But if you do have some in millions and some not in millions, that probably will basically require you to do some other processing when you do the percentage calculation. So what I'm saying is, what I'm proposing is, let's create a new unit that will basically convert everything to millions, so that way we know that we are basically comparing apples to apples. So how do we do that?
+
+Speaker 2  2:10:46  
+So add a new column and divide the usage by by mailing
+
+Speaker 1  2:10:53  
+it. Yes, we can do that. So how would you do that? What technique we have learned that will allow us to do that.
+
+Speaker 9  2:11:02  
+Is it using the lambda? Then you just use the lambda, and then divide by, you know, a million for each of the utility type.
+
+Speaker 1  2:11:11  
+Yeah, right. So you can say utilities DF, dot apply. And then you want to do it in a lambda way, not writing a writing a function outside, right?
+
+Speaker 9  2:11:29  
+I think so. Yeah, it's probably more straightforward, um, you'll just find the column name there and then divide by a million,
+
+Speaker 1  2:11:38  
+correct. So how do you do that?
+
+Unknown Speaker  2:11:43  
+I'm not good with this index. I'm sorry.
+
+Speaker 1  2:11:47  
+Well, it's simple. You have x right instead of x, let's, let's call it a row, because you have one row each right, and you have to check whether the utility column is anything other than water, if it is anything other than water, then divide by a million, if it is water, then return it as is.
+
+Speaker 9  2:12:17  
+So do we? Essentially, it's our statement. Then if water,
+
+Speaker 1  2:12:21  
+yeah, so you are basically going to return row and then usage,
+
+Unknown Speaker  2:12:35  
+if Row,
+
+Unknown Speaker  2:12:40  
+Row utility
+
+Speaker 9  2:12:41  
+equals water times one else times by a million, yeah,
+
+Speaker 1  2:12:49  
+yeah, something like that. If row utility equal water was it? Was it water Exactly. I'm just trying to see, okay, yeah, water, yeah,
+
+Unknown Speaker  2:13:00  
+times one or yeah,
+
+Unknown Speaker  2:13:02  
+just water, yeah, just that.
+
+Unknown Speaker  2:13:07  
+If row uses, if else,
+
+Unknown Speaker  2:13:11  
+else you will return row uses
+
+Unknown Speaker  2:13:16  
+divide by,
+
+Speaker 9  2:13:21  
+when you do that, you don't have to thumb someone, and I see what you're saying, because it's the same, the same amount. Anyway, you don't have to do any calculation on the water. I see
+
+Speaker 1  2:13:29  
+Correct. Yeah. So this is basically same as doing multiplied by one, but you don't have to. And here we are using multiple columns, so therefore we are doing the apply function on the whole data frame here. So that means you have to specify access axis equals to one, and then let's do a sample.
+
+Unknown Speaker  2:14:02  
+Hmm, what happened now?
+
+Speaker 1  2:14:10  
+Oh, I forgot. I forgot to apply that. So you have to apply that to utilities. DF, right,
+
+Unknown Speaker  2:14:21  
+oops, sorry, you have to,
+
+Unknown Speaker  2:14:28  
+you have to apply that to utilities, DF,
+
+Speaker 1  2:14:32  
+usage, I forgot to do this part on the equals, yeah. So now, if you run this, yep, now everything is good. Now these units, thing is probably misleading. So, Jesse, I'm with you here. Maybe now we could probably get rid of units, because I really don't need units. I mean, if you want, you can even change the units so you can. And you can, if you really want to be like, let's say you are going to present it to some audience, not just doing it for machine understanding, but also doing for unit, sorry, human understanding. You can basically add a million terms or million kilowatt hour for everything else, if it is not water. Is you see what I mean. So what I'm saying is we are going to apply another lambda, and in this lambda I'm going to change the units, and I'm going to say, if row, um, if row utility is water, then you return Row units as is, if not, then return row units, but you append something on top of it, which is,
+
+Unknown Speaker  2:16:09  
+let's call it
+
+Unknown Speaker  2:16:13  
+million
+
+Unknown Speaker  2:16:16  
+space plus row units.
+
+Speaker 1  2:16:20  
+And now if you do that, the units column is not going to be an eyesore anymore, because everything will have the word million embedded in it. So this is what I mean,
+
+Speaker 3  2:16:32  
+yeah, and I was talking about getting rid of the years you don't need so, and I figured out how to do
+
+Speaker 1  2:16:38  
+that, no, but now you will need the years, right? Why do I 2013
+
+Speaker 3  2:16:45  
+and rather, why do I need anything besides 2013 and 2018
+
+Speaker 1  2:16:52  
+Why do I need beside? Yeah, so you can, you can get rid of that, yes. But what I'm saying is you can do that now, after all of this done, now you can say, hey, now let's look into the just the 2013 and 2018
+
+Unknown Speaker  2:17:09  
+and then get the sum of all of those.
+
+Speaker 1  2:17:14  
+Now this is something that you will do. So forget about that. Everything else is there. Now think through how you are going to get only 2013 and 2018 values out of these and find The sum of these. How do you do that? You
+
+Unknown Speaker  2:17:44  
+with lambda as well.
+
+Speaker 1  2:17:51  
+Can you use lambda here? Here what you have to do? Let's say you have 100 rows or clay 13. You have to take all of these 100 rows and look at the users and do a sum, and then you have to look into all the rows that has 2018,
+
+Unknown Speaker  2:18:08  
+get the users and do a sum.
+
+Speaker 1  2:18:11  
+Is that something that you can do apply, we using apply. So
+
+Unknown Speaker  2:18:20  
+I do a unique function and
+
+Speaker 2  2:18:37  
+do a sum of i don't know If that's
+
+Unknown Speaker  2:18:56  
+you repeat the question.
+
+Speaker 1  2:19:02  
+So what I'm saying is you have to find everything that is 2013 or or, let's say, Forget about 2013 or 2018 let's say there are, how many years are there? So let's, let's, let's do, how many years are there? If you want to do utilities, DF, dot, year. Dot value counts, right? So you have 1314, 1516, 1718, 1917, years. Each has 84 rows. So take out your 2013, and 18 for a moment. What if, if I ask you to find all the years total sum and then group by utility,
+
+Unknown Speaker  2:19:48  
+because that's essentially what you are looking to do. So.
+
+Speaker 3  2:20:13  
+So you would, you would do the data frame, dot group by and then you pass like the year as a string, because that's, that's the row you want. Yeah, you would do the usage, yeah, bracket and then a dot, yeah, some Yep,
+
+Unknown Speaker  2:20:33  
+you are getting there.
+
+Unknown Speaker  2:20:36  
+And are you trying to separate it by utility?
+
+Unknown Speaker  2:20:40  
+I think you have to separate it by utility. Now,
+
+Speaker 3  2:20:47  
+I think you're probably right. I just want to ask the question,
+
+Speaker 1  2:20:52  
+yeah, so let's think through what is the question that they asked? Let's actually, let's look at the preview here which utilities uses. So yes, you have to do by utility also, because you have to do see how much water consumption has changed between 2013 to 2018 sorry, 2019 how much electricity consumption has changed between these two years, so you have to do a Group by with that as Well. You are right. You
+
+Speaker 3  2:22:20  
+I hoping you could change. So I was hoping you could change the group, group
+
+Unknown Speaker  2:22:38  
+Chad, with what I have,
+
+Unknown Speaker  2:22:43  
+I have just root by utility. Okay,
+
+Speaker 1  2:23:01  
+so let's do one thing, actually, we know that we are concerned about only two years now, right, where I was here, right? So what you can do is you can take all the data that belongs to 2013 and you can take all the data that belongs to 2019 right, and then do a group by separately on both,
+
+Unknown Speaker  2:23:35  
+isn't it a range from 2013 to 2019
+
+Speaker 1  2:23:40  
+that's No It says you have to kind of read it carefully. It says, change the most it even though it even though it says from 2013 to 2019 you only are concerned about two values, the 2013 values and the 2019 values. Do you really need anything in between?
+
+Speaker 1  2:24:14  
+So what I'm proposing is you have your utilities. DF, right if you take utilities DF, dot, lock, comma, lock, if you do a lock and then in the location, if you do utilities DF, dot, year
+
+Unknown Speaker  2:24:43  
+equals 2013
+
+Speaker 1  2:24:47  
+and this time, I am going to go with what Jesse said, because all I need is the utility and usage. I don't even need the units. And since I'm already filtering out. For 2013 I didn't even need the year, right? So what I can do is, if I just do this, for example, this will give me everything for 2013 all four columns, but only 2013 84 rows. But what we can do is we can only take two columns out of it, which is my utility and usage. So that way I only get utility and uses for all utilities for 2013, only, and we can save it in a separate data frame. We call it utilities 2013 DF.
+
+Speaker 1  2:25:53  
+So that way I have all 2013 data here we know that these utilities 2013 has all the 2013 data. So it similarly, I can also do 2019
+
+Unknown Speaker  2:26:11  
+change the filtering condition to say 2019
+
+Unknown Speaker  2:26:16  
+and I have all the data here.
+
+Speaker 10  2:26:18  
+I have a quick question. So when you did the count of each group by year, for each year, all of the other rows had like 86 but 2019 only had like 50 something. Wouldn't that indicate Wouldn't that indicate that 2019 data set isn't complete, and we should instead be using 2018
+
+Speaker 1  2:26:42  
+probably you are right. Maybe it is not complete. We can stick to 2019 this thing is asking you to use 2019 you can do that, but that's the observation.
+
+Speaker 10  2:26:51  
+The Jupiter file is saying 2018 at the very so the readme file says 2019 but the Jupiter File at the top says 2018
+
+Unknown Speaker  2:27:02  
+oh, is it
+
+Speaker 6  2:27:07  
+yes for that we were about 2018 and then,
+
+Speaker 1  2:27:11  
+sure, okay, so there is a Yeah, I agree. So, yeah, but that's a really good observation that 2019 data was probably 2019 data was probably truncated, and we don't have the whole data, so that would not be so let's do that for 2018 and Now you have 2080 data.
+
+Speaker 1  2:27:41  
+So now the question is, how do we get grouper utility and find what is the total sum of each of the utility consumption?
+
+Unknown Speaker  2:27:51  
+Essentially, that is our task. I
+
+Speaker 1  2:28:06  
+so there is actually a function called group by. So you can take any of these, let's say 2013 DF, and you can actually apply a function called group by. And inside the group by, you can specify which column you are grouping by, which I believe would be
+
+Unknown Speaker  2:28:30  
+this.
+
+Speaker 1  2:28:35  
+And then when you group by, and then you get only the uses out of this, or I think I can only do also do a dot usage, and then you do a sum. Let's see what I get. Bingo. So now what I'm getting is for 2013 I am getting, what is the total electricity consumption, what is the total gas consumption, what is the total passenger flow, and what is the total water consumption for the same period? And I can save it in a new data frame or new series, in this case, which I'm calling it totals 2013,
+
+Speaker 1  2:29:33  
+and I'm going to add it as a display statement here. So now I have the electricity, gas, passenger, water, total for all four utilities for 2030 so now, since I did that, I should be able to do the same thing for 2018 as well.
+
+Unknown Speaker  2:29:58  
+Just have to change F. 2018
+
+Speaker 1  2:30:06  
+and yes, we get different numbers. So I see between 2013 to 2018 electricity consumption went down, gas consumption also went down. Passenger, passenger flow went up and water consumption went up.
+
+Speaker 1  2:30:33  
+So now we have two series. Now, if we want to show this side by side, you can take the two series. So this group by what is giving me just series, meaning single column. What you can do is you can do a concat. So you can there is a function called concat on pandas. It's called PD, dot, concat. And in the this concatenation function, you can basically provide these two series, which is totals, 2013
+
+Unknown Speaker  2:31:07  
+and totals, 2018
+
+Speaker 1  2:31:11  
+and since You are doing that
+
+Unknown Speaker  2:31:17  
+by axis one, like column you
+
+Speaker 6  2:31:20  
+so let's
+
+Speaker 1  2:31:23  
+see what that gives me. Yeah, so now I'm seeing these two side by side as a data frame, but you see how this column name is both usage. Why? Because this thing is a sum of users. This thing is a sum of usage. We need to have some meaningful column name. So in order to do that meaningful column name, what we can do is we can do a concat
+
+Unknown Speaker  2:31:55  
+dot this,
+
+Speaker 1  2:32:00  
+and then let's do a set axis. So now what I'm saying is take these two specific values and set as the column name for axis one, which is 2013 and 2018 and do that in access equals to one and save that in a
+
+Unknown Speaker  2:32:31  
+data frame. Let's call it totals DF,
+
+Unknown Speaker  2:32:36  
+and then just
+
+Speaker 1  2:32:41  
+display you can use display, or you can use print, or you can just put the data frame name. So now this is our final result. So now we have nicely formatted total consumption data for all four different utility classes between the two years that we are considering 2013 and 2018
+
+Speaker 1  2:33:11  
+now, all I need to do, if you now go back to The Preview, which utility has changed the most. So essentially, what we need to do is, what is the difference between the two and what is the percentage change like, what percentage of that? So we basically need to take 2018 minus 2013 and that will be the difference. And if we take the difference and divide by 2013 that will be my percentage change. So essentially, we can do this by adding two more different two more lambda functions and creating two different columns on these totals, DF, data frame. And how do I do that? I take my totals df and do an apply
+
+Unknown Speaker  2:34:04  
+let's do with a lambda.
+
+Speaker 1  2:34:09  
+And with this lambda, I'm going to do
+
+Unknown Speaker  2:34:16  
+X,
+
+Unknown Speaker  2:34:21  
+X, dot 2018
+
+Unknown Speaker  2:34:25  
+minus
+
+Unknown Speaker  2:34:27  
+x dot 2013
+
+Speaker 1  2:34:35  
+and then I have to Do Hang on, why is this showing me this thing? Is it expecting me to do the other syntax? Let's see whether it complains and we have to do that. Yeah, so in. And I cannot use this syntax. I have to use the other syntax with a port and a bracket, the square bracket, yeah, so this will give me the difference. So now I can save that as a new column that we are going to call total DF, and we'll call it
+
+Unknown Speaker  2:35:27  
+difference.
+
+Speaker 1  2:35:32  
+And then we are going to create another column called, let's call it PCT change, meaning percentage change, and it will be this minus this
+
+Unknown Speaker  2:35:51  
+divided by
+
+Unknown Speaker  2:35:54  
+2013 value.
+
+Speaker 1  2:35:59  
+And this will give you in percentage. So let's multiply it by 100 to get a nice percentage number, and then we are going to display total DS bingo. So now we have electricity consumption that has changed negative 5.77% meaning it went down. Gas consumption that has also went down. Water consumption went up, and passenger flow went up a lot. So then you have to write your summary here. And this is something that we are not going to doing in this class. This is something it is up to you to interpret. How you want to see this data, like how you want to interpret this. I mean, one way you can probably interpret is, hey, between these five years in this five year period, passenger flow has gone up through the airport, yet my utility consumption has gone down, mostly, except for the water, because more people means more water, but you see electricity as gas consumption went down. That probably means that airport has probably installing more energy efficient lighting, their heating has probably become more energy efficient, or something like that. So that's kind of the story that you can kind of derive from these activity.
+
+Speaker 1  2:37:36  
+The another thing is, since you see, I don't know whether you have noticed, if you do it with a print, it printed in a like a basic format. If you do it with a display, then it displays in a nicer format, with a little shading and all like in a rich format, versus this is like in a like a bare text format. Just a slightly difference. Some people like display because it kind of looks good. If you want to export the whole thing in a PDF and generate a report out of this file, the display kind of looks good print. Okay, so that will be all for this class,
+
+Unknown Speaker  2:38:22  
+and we are about two minutes question.
+
+Speaker 1  2:38:38  
+One thing, though, if you look into when you get the solved file, I'm going to show you the solved file quickly. The solved file, they actually have done it in a way that I did not like. So what they have done, and again, with the disclaimer that there are, there could be multiple ways of doing it in the south file, what they did here is the scaling to millions is fine, and then changing the unit
+
+Unknown Speaker  2:39:14  
+that is good.
+
+Speaker 1  2:39:17  
+And then they are doing some concatenation of row utility row units which has doesn't have much value, and cutting these up into two different data frame for 2013 and 2018 so
+
+Speaker 1  2:39:43  
+and then in here, they are not using the group by instead, what they are doing is they are doing a for loop. So this is the part I actually did not like. I pretty. Much disliked. So they did almost everything kind of the way that I demonstrated, but except when they got only the 2013 data set. Instead of applying a group by what they chose to do is they basically chose to go over the four different unique utilities do you have, that you have, which you are getting with the unique function, and then for each utility, they have applied a log function to get the usage for that utility and doing a sum. But this is exactly what you can accomplish by doing a group by and then sum, which is what I showed you here. So that way you can eliminate writing any for loop in the whole activity. And this is the style that you should strive for. Now I understand coming from, like for those of you who have come for a more more of a procedural programming background, it probably is kind of a natural tendency to kind of think of, hey, let's do a loop, and let's count all of this. But over time you will see you will kind of come to appreciate gradually the power that you have in this pandas function, and it is almost never that you have to write any loop whatsoever. So
+
+Unknown Speaker  2:41:25  
+okay, so I hope you will see that.
+
+Speaker 1  2:41:29  
+And if you want, what I can do is this particular file that we worked on, which is the blank file I can save, give, send you a copy of these. I don't know whether I can commit it into GitHub,
+
+Unknown Speaker  2:41:47  
+probably not.
+
+Speaker 1  2:41:50  
+I am going to just send this file separately. I'm going to talk to Kian and figure out a way how we can best make this available. So essentially, I took this blank file and I just worked on this with you guys here, and I think this gives a much better flow, rather than the solution file that was posted, where it's kind of little clumsy with different things.
+
+Unknown Speaker  2:42:14  
+So I'll make sure to do that.
+
+Unknown Speaker  2:42:17  
+Any question you
+
+Speaker 9  2:42:24  
+I think for me, the challenge is, you know, to get the best strategy from top to bottom. I can follow what you're saying with, you know, when you mentioned the word million so many times, you know, I felt like, okay, that's probably the strategy you're looking for. But as you know, we have to go through from that level right and then starting to do the group body, the sum and all those things, it's a little bit hard to pinpoint what is the right strategy to get that data clean.
+
+Speaker 1  2:42:53  
+Yeah, so that's what I said earlier in Greek. There is no right on wrong or wrong strategy. Some strategy will make your code look more compact, and probably when you if you are doing these on, let's say, millions or billions of data frame, then if you use the pandas built in function that will almost always be faster than using a for loop. But that is something that will come to you eventually, so you don't have to worry about getting things the most optimal way in day one that will come to you by practice. So that's what I'm saying. You will check the solution file provided by BCS, and then I'm going to send you this solution file that I just worked with you guys here, so that you can make side by side comparison and see how this strategy makes your code much more compact. And just know that whenever you are avoiding for loop and using built in pandas function, your code will always be more efficient than if you are running the loop yourself,
+
+Speaker 3  2:44:02  
+I'm still struggling to understand why it even mattered to give birth to millions. I just commented I followed along with what you did, like commented out the part where you converted it to millions, and I got the same percentage at the very end
+
+Speaker 1  2:44:19  
+that someone would ask that question. So the answer to that is, since we are not feeding it to a machine learning model, then scaling to same unit for this particular example, probably didn't make much difference. Actually, hang on, what if the difference so percentage number would not change, but the difference number would change, right? Yeah, the difference number would change. So for this one, I would say it's kind of has a cosmetic value at best. Even if you don't scale the utility units, your percentage number would still come the same. Okay, but your difference number would not be on the same scale. They will like difference for electricity, gas and passenger will also be in the order of millions, or at least hundreds of case, as opposed to that, your difference in water would be much lower. So that's kind of a cosmetic thing, but here, when you have everything, kind of the similar scale, you can easily eye through and say, Oh yeah, and 19 unit down. This is point two unit down. This is 12.7 unit up, and this is 19 unit up. So for purpose of this, it's just for you to very easily see what is kind of the order of magnitude. But then you can also argue like, hey, we can also say that looking at the percentage change number, and I totally agree with you,
+
+Speaker 3  2:45:45  
+yeah. I mean, what is kilowatt hours, right? Yeah.
+
+Speaker 1  2:45:51  
+Like, when you do that, multiply that by million, it should. It's basically gig gigawatt hour, right? Because kilo times million is gigawatt hour, right? Yes. So yeah,
+
+Speaker 3  2:46:02  
+I do get your point of like, okay, if we're gonna looking at the difference is a little bit easier to like rock in similar units, but percentage change was our evaluation. That's right. Got it? Thank you. Yeah,
+
+Speaker 1  2:46:22  
+cool. So with that, let's conclude the class for today.
+
+Unknown Speaker  2:46:37  
+Thank you. Everyone. Have a great night.
+
+Speaker 1  2:46:39  
+Good night, good night. And Kian, I have a question for you now, yeah. So what do you think is the best way to make this file available? Should I just attach the file in Slack? Or can you think of any better way?
+
+Speaker 8  2:46:57  
+If you want, you can put it in Slack and then I can download it on my end and push it up to the GitLab as well so they can have, like, multiple locations.
+
+Speaker 1  2:47:05  
+Okay? So then maybe, when you do that, maybe create a separate folder, like, like our or maybe rename the file in a way that makes it clear that this is the version of the file that we worked on to get the constructor in the class,
+
+Unknown Speaker  2:47:19  
+the noise best version. There you go.
+
+Speaker 9  2:47:25  
+The right person, the best version, for sure. Yeah, correct the correct version. The correct version. Okay,
+
+Unknown Speaker  2:47:37  
+okay, so let me do that, then do
+
+Speaker 3  2:47:43  
+I'm almost through challenge four, and so much of this is extremely relevant, so I'm glad that I saw this before I took this,
+
+Unknown Speaker  2:47:52  
+before you started that. Yeah, yeah, before
+
+Speaker 3  2:47:55  
+I before because I, because I had it pretty much done. I'm like, you know, I bet you there's some tricks. I
+
+Speaker 1  2:48:10  
+x so I am renaming the file, can saying instructor version, and I'm going to put the file, I hope it will allow me to attach the file. No, hang on. How do I attach a file? Attach, attach, upload from your computer. Yeah,
+
+Unknown Speaker  2:48:34  
+I think slack supports drop and drag too. Oh, does it? Yeah. Anyway,
+
+Speaker 1  2:48:41  
+I'm already there in the browser, like a file chooser window, so just talk that way. Yeah.
+
+Unknown Speaker  2:48:55  
+Instructor version,
+
+Speaker 1  2:48:58  
+okay, so sending it in our staff, Chad, can see if you can Get it and have it Uploaded to GitLab.
+
+Unknown Speaker  2:49:20  
+Okay, um,
+
+Unknown Speaker  2:49:59  
+you Okay? Should. Be up.
+
+Unknown Speaker  2:50:02  
+Okay, cool,
+
+Speaker 1  2:50:07  
+so it should be up on GitLab now, yeah,
+
+Unknown Speaker  2:50:11  
+and confirm,
+
+Speaker 1  2:50:14  
+confirm, yeah, I was just going to check that, so you already see that. Okay, cool. I
+
+Speaker 1  2:50:30  
+uh oh, you put it inside the solved folder. Okay, perfect, yeah. Instructor, okay,
+
+Unknown Speaker  2:50:35  
+the comments aren't as good, but
+
+Speaker 1  2:50:39  
+the comments, yeah, I didn't get any comments. We just worked, right? I mean, if we, if I, if I am asked to actually turn it down as an assignment, then obviously I would use the markdown sale and then, like you saw my work right in that that AWS GitHub right now. Well, tell them,
+
+Speaker 3  2:50:57  
+if they want, they want the bestest and commented version, they can pay you for it. Yeah,
+
+Unknown Speaker  2:51:06  
+great. Thank you very much. I learned a lot. This is great. Thank
+
+Speaker 9  2:51:08  
+you, but now this is really good, very beautiful. Thank you.
+
+Speaker 1  2:51:12  
+Hey, Jesse, oh, he dropped Thank you.
+
+Unknown Speaker  2:51:17  
+Yeah, thank you. You.
+
+Unknown Speaker  2:51:24  
+Everybody, okay, then
+
+Unknown Speaker  2:51:29  
+you guys tomorrow. Thank you Good night. All
+
+Unknown Speaker  2:51:32  
+right, yeah, have a good night everyone. Bye.
+

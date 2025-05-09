@@ -1,0 +1,924 @@
+Speaker 1  0:01  
+I have planned to cover the third class of week seven because the class first and second class we already covered. But before I go there, let me know if anyone has any question on any material related to the week seven class two, which I kind of rushed through during the last class. So if you guys have any question, feel free to ask. If not, then we'll move on. And another thing I'm also going to do is I'm going to interject some of the material that are given with additional thing, but then I'm also going to cut down on some of the activities that I feel is not relevant. Okay, so, so I would selectively do four or five activities, like we are not going to do all eight nine activities, but within these activities, I'm going to give you some additional food for thought that will actually help you connect this material better with what we will be doing soon when it comes to the properly learning, the linear regression and those kind of thing, right? So, okay, so let me know if you have any question on the last like day twos class. If not, then we will jump on to the day threes class, which is where we are going to start with. A little bit of statistics, not too much. I promise. I know someone was asked probably, I think in the first week, like, Hey, do we have to learn status stats? The answer is no, but you need to understand, is it just a little bit okay? Okay. So if there are no question, I think I can take the liberty to start. So let's get my start, my screen sharing, and we'll get started.
+
+Unknown Speaker  1:52  
+Desktop, one, two.
+
+Unknown Speaker  1:54  
+Actually, let me do it from there. It's a bigger screen.
+
+Unknown Speaker  1:59  
+Okay. My screen visible. Okay, yep.
+
+Speaker 1  2:05  
+Now I just put this thing on a bigger screen, but that also means I'm probably going to be looking away from the camera, so it might feel weird, but because my MacBook screen is what I'm using the camera, and then I have the bigger monitor here on this side, so I'm using so Anyway, okay, cool. So this week, just a very quick glance through the slide. I do not need to follow the slide, but essentially, just to beginning what we are trying to understand today, we will basically do a quick review of the different summary statistics that we have done using the Python module, like describe and all, and we will see how we can get the statistics using some other way, like using NumPy or sci fi functions. And then we will try to understand how to analyze a data set or population of data, assuming that it is normally distributed. How do we find the different quartiles or quantile ranges for that data? How do you find which data points are potentially outliers? And then from there on, we will go, move on, understand what is, what is, what is it we mean by correlation between the two data set and how we can find the correlation within a between a bunch of different data set, and then how we can use a very simplistic linear regression to make a very, very crude prediction about data now, point number five. So the disclaimer is, this is, by no means, is actually training a machine learning model today, yet, not yet, but this will create that first theoretical understanding in your mind. What is it that we are eventually going to do when we do create that model? Okay, so that's, in a sense, the summary of the class today. Okay, and the other thing you will see that we talk about is a normal distribution, which is this, which I think we I have kind of informally touched upon this. So this is also called Gaussian distribution, or normal distribution. This, by no means is the only distribution of probabilities out there. There could be many, many different kinds of probability distribution, but this is the one that is mostly common in most naturally occurring phenomenon, either in a socio economic phenomenon, or natural phenomenon, or whatever you call it. And the other thing you should keep in mind whenever we are trying to do machine learning, even though, always, we don't realize, essentially, we are basically trying to find the reverse probability. So it's basically nothing but statistical analysis, like given the possibility, given that these 100 events has happened before, what is the probability for this particular event to happen in future? Which is essentially your Bayesian probability, right? Which is what we do, and that only works when. And your underlying distribution that you are pulling from is more or less normal distribution, or Gaussian distribution, which basically looks like this bell shaped curve where you have a central tendency, which is also called mean, or In layman terms, it's also called average, which, in mathematically, it is known using this symbol, Greek letter called mu, which is basically the median, not median, the middle of your data set, which is the mean. And then if the distribution is very well behaved, well mannered, then it basically falls off equally on two side and 34 plus 34 so 68% of all data will come within one standard deviation of the mean. So what do we mean by standard deviation? Standard deviation, which is denoted by this Greek alphabet called sigma, is basically a measure of how distributed the data is, like how wide this hill or this bell shaped curve is, the wider the curve is, the higher the standard distribution would be, the narrower the curve is. If the peak is narrow but tall, then your standard distribution will be lower. Now, obviously there are functions that you will use to derive the standard distribution, and you don't need to know the exact mathematical formula for that. You just need to know like, hey, there's a standard distribution function that we use that gives me my standard distribution of a population of data, right? And then what you need to know is that, if data set is indeed normally distributed, then about 68% of data will come within the mean plus minus one standard deviation, and 95% will come within the mean plus minus two standard deviation. And 97 9.7% which is like almost everything, will come within them three standard deviation plus minus within the mean, right? So that's what is called 6895 99.7 rule, right? In fact, one thing I'll I'll show you when we do the first activity, this can be actually a good test that you can use to determine whether a data is indeed normally distributed or not. And this is something, this is some additional input that I'm going to provide, because I looked into the data set that was given by the boot camp and that data set that we are going to use for first activity, when I ran this test, I actually found, to my surprise, that it's actually not normally distributed. Maybe it will be normally distributed if you have lot more data points, but there is some stochastical noise, right? Stochastic noise in the data set that is making it actually not stochastic, systemic noise in the data set that is making it not complete distribution, and I'll tell you why. Okay, so that's kind of that, what is called, very quick like a statistical theory. Oh, another thing we will talk about is this thing, which is the how do you find the outliers? So the idea is, we consider a point outlier if it basically is 1.5 times the standard distribution, more than 1.5 times the standard distribution away from the upper quartile and or 1.5 times the standard distribution below the lower quartile. So what do I mean by upper quartile? Upper quartile is basically pointing to here, going back here, 75% of data is your upper quartile, and 25% of data is your lower quartile. So now what you need to do is you need to find what is the medium of the data set, and this, what is the upper quartile, what is the lower quartile? And then it has to be 1.5 times this difference between these two. So I QR code, interquartile range. So if, let's say for a data set, let's say you find the median is at 50, okay, and you see the upper quartile is at 70, the value wise, and the lower quartile is at 30. So that means your interquartile range will become 20, because each quartile is now 20 wide. So that means now if any data set is to more or less than 20 times 1.5 meaning 30. If it is 30 above the upper quartile or 30 below the lower quartile, then it will be considered as an outlier. So why that is important? That is important because, well, it's not super important, depending on what algorithm you use, but in a traditional statistical algorithm, machine learning algorithm, if you do have
+
+Speaker 1  9:46  
+what is called lot of outlier data points, and if you have a lot of them that might actually give your problem a false positive or false negative and resulting in low accuracy score. Now, later in the more modern algorithm, mostly the ones that where we are using neural network and stuff, people don't worry about that quartile range or outliers anymore, because the prevalent thinking in the modern machine learning is like, don't try to over engineer your data. Let the data to whatever, and let the model figure out what to even do with the outliers. So, so in machine learning, there is different schools of thought. Um, so all of these outlier and removing the outlier and all of these this comes from become these kind of thing comes becomes relevant with classical school of machine learning, which is where you need to have a very well defined normal distribution with not much data beyond above your quartile range and so on. So that's your traditional machine learning, which basically was the prevalent form of machine learning up until 90s or even till 2000s right? But since last 1015, years, as the neural network is becoming more and more de facto approach of doing anything from not just llms, not just the large language models, right, even like your classification problem, regression problem, people are increasingly using neural network based techniques, so the importance of many of these statistics and then making sure your data is normally distributed, well behaved. And all these things are basically less important these days with these more advanced machine learning model because with large number of neural network nodes, the model can basically figure out all of these dirtiness of the data and still learn the underlying pattern somehow. Okay, so anyway, that was I just got little bit sidetracked, which I often do when I talk about these things. So let's get started with their our demonstration today, which the first distribution demonstration would be. How do we find some of these statistical measures that we talked about. And what we are going to do is the first activity here, which is the instructor led activity. And I don't think we need to do any group activity today. Maybe if we have time, we will do one at the very end, activity number nine. But before that, I'm going to do three, four activities, but we are all going to do in here with me. Okay. Okay, so here we are going to use our pandas. We are going to use PI plot and then to for some of the statistical function. We are also going to use this library called SCI pi, which is basically scientific Python library. So from sci fi, there are also different sub modules I'm going to particularly use for this demonstration, the library called sci fi dot stats, which is this one which I'm importing as St. Okay, so that's all the import you need. Okay, so about the data set. The data set we have here is basically a temperature data set. And I think we have seen this data set in one of the classes before. So this is basically temperature recorded on a
+
+Unknown Speaker  13:14  
+hourly basis, I believe, right, 2019
+
+Speaker 1  13:18  
+Yeah, it's an hourly recording of temperature at one particular weather location station, which is LAX airport. Okay, and how many data we have? So we have this data, as you can see, but we don't have to worry about the station or report type, because today we are only going to talk Think about if we have a random numeric variable, which, in this case, your hourly temperature. What are the different statistical pattern that we can find from one series of data? Which the this demo we are going to do with the temperature. So one thing I just want to check so this is temperature, dot head, and it is giving me data starting from 2019 January 1. Now, if I do a tale of this, I just want to see up to where the data go. Okay, so when I'm doing a tail, it is going up to April 18. So keep this in mind. So the data is hourly. That's why we have a lot of data points. In fact, if you see how many data points are there, you will see that there are 3529 data points. But even with this, within four month of time, which is what, 90, little over 100 days, right about 100 days. So even within 100 days, we have got so much data, because it is an hourly interval, right? That gives me a lot of data. But the thing is, maybe this is the reason that we don't have a fully, normally distributed data set. Because think about it, what are the chances that data. Yeah, not data temperature collected at a particular weather station within four months of a year will be randomly distributed. It's not really a random distribution. So that's something that came to my observation as I was working through this data set. That's why I'd say this data set is probably not something I'm going to try to use in my machine learning model, at least if I'm doing any using any classical machine learning model, I would basically go back to the originator of the data and I'll say, Hey, Mr. Data Scientist, I cannot really train a machine learning model with this data because your data set does have systemic incompleteness. Your data set is incomplete January to April. It doesn't tell me anything So, but anyway, that's a different discussion. Yes, Jesse, I see your hands up.
+
+Speaker 2  15:48  
+Yeah. I just also, I'm noticing from this data that the form type seems to matter too, because FM 15 seems to be hourly, but FM 16 has some other time delta,
+
+Unknown Speaker  16:02  
+yeah, could be
+
+Speaker 2  16:04  
+anyway, it's probably not germane to what you're trying to get
+
+Speaker 1  16:07  
+to. Yeah. Exactly. Yeah. Okay. So the first thing is, and this is something we had done before, that you can use a built in pandas function called describe, and if you do describe it, will give you total how many records you have. What is the mean? What is the standard deviation? So this mean here basically corresponds to this mu here. Okay, so this mu is the mean. So the mean of this data set is 57.65 so basically that is the average of all these 3529 readings of temperature that we have. The average of that is 57 degrees, 57.65 right. And the standard deviation, which, if you recall, is the measure of how widespread this distribution is. That standard deviation is 5.686 with a minimum temperature record of 40, maximum temperature record of 80. And then these are the three quartiles, 2550, and 70. If you refer back to this chart, not Chad this slide here see how we have lower quartile, median and upper quartile. So basically, lower quartile is your 25% which is at 54 median is 50% which is at 57 and that's why you see this 50% value also almost matches the mean, which is 56 7.65 and then the upper quartile, which is about 75th percentile, is 60 degree Fahrenheit and above. So 5457 60 are basically the three quartile ranges, lower median and upper quartile for this particular data set. Okay, so basically, what that means is, if you have a temperature reading which is 54 it will be at the 25th percentile. If you have a reading on the other hand, which is 60 degree Fahrenheit, it will be at 75th percentile out of all of these 3529
+
+Unknown Speaker  18:17  
+readings, right?
+
+Speaker 1  18:20  
+So that's a quick way to get some descriptive statistics, but you should know that there are other ways of doing this as well. We are going to quickly take a look at some of those, which is so let's so this one we basically add applied directly on the pandas data frame. So now what we are going to do is we are just going to extract this last column, which is that hourly, dry, bulk temperature, or whatever, basically the temperature column. And we are going to extract that single column as a series, which is this temperature. Now we will see some of the these previous stats that we saw, and some more could be calculated using the numpy function of similar name, which is Mean, Median and Mode. And I believe we already discussed what these mean. So mean is basically the average. Median is basically the value that comes it at 50th percentile, and mode is basically the value where most of the data set that most of the points of the data set as so if you do that, you will see the mean is 57.65
+
+Unknown Speaker  19:27  
+median is 57.0
+
+Speaker 1  19:30  
+and the mode is 57 and it also says 327, data point is there. Now one thing note here please, that NumPy does have mean and median, but NumPy, for some reason, does not have a mode function. And it is because of this mode function that up there, I had to import that sci fi stats library, because the SCI pi stats library gives me the mode function as an input. You can. Either pass a panda series, which is basically column of a data frame, or a simple Python list works as well, right? Like anything that that is a list, or that looks and feels like a list is a fair game, okay? And it will find the main media and mode for these that population that you are supplying. And this is what the printout is. And if you compare these readings, 57.65 and 57 with our describe output, you will see, yes, they also exactly match, because our describe also gave a mean of 57.65 and a 50 percentile at 57 which matches with what we are getting by doing it this way, which is NumPy dot mean, or NumPy dot media, right? So just two different ways of doing things, and there could be other different ways, like when it comes to Python, like, you never know how many different types of libraries are out there, right? So, so it's always keeps an eyes on your open right? Tomorrow, let's say, if you are, let's say going through a code that you got from Kaggle, right? You will probably come across someone did the same thing in a completely different way. Yeah. So there is always learning. Okay, so we are good with Mean, Median mode so far, and we also know how to get the 25th 50th and 75th percentile of data. Okay, now what we are going to do, we are going to see how the data is distributed. So to do that, first, we are going to do a histogram. Histogram is something that we learned in the previous class. So one way of doing histogram is doing taking a matplotlib handle, which is PLT, and then do a PLT dot histogram and provide a data set as a parameter, which is a series or a column of A pandas data frame. And then you provide the X level, y level, and you do that, it basically gives you this histogram. So this histogram, as you see that it kind of tells me that it might be normal distribution. But do you kind of feel like it is not equally balanced on both side, like right side is basically probably more elongated than the left side right doesn't it? Like left side kind of looks steeper, which I think if you want to do, get a little better idea. You can change the bins. So by default, the bin size was 2010, right? So you can do this with 20 bins, and that will provide a little bit more granular view, or maybe not. Maybe I was being too picky, picky. Maybe it is almost equivalent to size. Who knows, right? We'll see. Okay, so that's one way of doing this histogram. Now, do you guys remember there is another way we talked about doing histogram, or any chart, for that matter, whether it is a line, bar, histogram, scatter, we can do it either using PLT, dot bar, PLT, dot histogram, PLT, dot scatter. That's one way. What is the other way of doing it? String.
+
+Unknown Speaker  23:27  
+Anybody
+
+Speaker 3  23:30  
+is it like PLT, dot, and then like, you can set a keyword equal to like, the string for like
+
+Speaker 1  23:37  
+the Yeah, no. What I was trying to get at is, instead of doing a PLT dot, you can also take the data frame and data frame these on the pan the pandas, yeah, so basically, use the corresponding pandas plot function, which is what I'm going to do here. So I'm going to you do the same output, but in a slightly different way. Okay, now I'm going to comment out this line for now, and I'll show you a little bit later what that produces. So you see this line here, I'm so saying, PLT, dot, haste and then passing temperatures. I can also take the temperatures data frame and hourly dry bulb temperature column from there and apply a hist function on top of that with my required bin size and that, in order to set a level for that, I have to save this plot in a variable, and then I have to do that variable, dot, set x level, set y level, And I can also basically change the x and y axis limits like from what to what value the x axis and y axis plots. And then, if I plot that, it will show me the exact same graph. The output will look exactly the same. Well here it looks a little bit different because the previous one in my second run, I ran with Bill. 20. So I can do that for this one too. It will run with 20, and you see it creates that same exact same data frame. Sorry, plot. Now what we can do is we can super impose what the actual probability density function look like. So if you refer to this graph here, this graph, so if I have a data point, and if I have to plot a single bar line, a single not bar, sorry, single line that shows how the probability of the data being within a certain range varies, that will basically look a graph similar to this. So what we can do is we can draw this histogram, and we can also overlay probability density function on top of this. And again, there are many different ways of doing that. One quick way I can show you is using this line. So in order to do that. What I'm doing is I'm taking that same data frame, same temperature column. Here, I'm doing a dot plot, and as a kind I'm saying k, d, e, so it probably means something like distribution, although the exact reason for this particular abbreviation elude me at for this point, but whenever you see a plot, you can say kind equal to bar, kind equal to scatter. You can similarly say kind equal to k, d, e, and that actually creates a plot of a probability density function. And now I want to overlay that on top of this histogram plot that we have done. So that's why I have this histogram variable. Now I have to provide this variable called A x equal to histogram. So basically that means is, use the same x axis as the histogram here, and then secondary y equal to true. That means, you will it will add a secondary y axis on the right hand side for the second plot that it will overlay. Now if you do that, as soon as I run that, you will see that two plot overlaid on the single diagram, single image which looks like that. So now look at how beautiful that orange line is. So what does that orange line mean. So you will see that orange line is somehow somewhat following my histogram, but not quite, because there are a lot of gaps. Why? Because the interpretation of the Orange Line, which is the density function, is that your histogram will be exactly looking at Orange Line as your number of data points approaches infinity. So basically what that means is if I, instead of for four months, if I collect this data for four years or 40 years, and then we have all of this data, draw a histogram, and they overlay this orange line, they will be almost in total agreement. So that's what that orange line shows me. Now, looking at the orange line, you will see probably what I suspected is kind of correct, because you see here, the right hand side is more elongated, because my median is 60, and here I have 70. Here I have 50, so plus 10 and minus 10. Now you see, here when I'm in 70, I have already come down to below 100. Here at 70, meaning, but here, when I'm at 50, I am all the way up to 200 so that means the graph is not very symmetric, and that is my first into intuition tells me that this may be a Gaussian distribution, but it is a skewed On one side, skewed to the right hand side, so site. That does not mean the data is not usable. But just keep in mind that data is Gaussian distribution, but it not be balanced. It might be skewed. Any question.
+
+Speaker 4  29:17  
+Actually, I have a question binary. So this one is using Pandas. You know histogram, right? But earlier, you're using the matplotlib. How do you bring that orange line the curve?
+
+Speaker 1  29:32  
+Find that. Do some search and find that, I am not going to get into these, all of these nitty gritty technical details from here on out, because, as I said, there might be 10 different ways of doing these things, but if we get into these questions over and over again, that will actually take out valuable time from what we are actually here to learn, which is machine learning. So yes, of course, there are multiple different libraries. There are multiple different ways of doing things. It's just when I was doing this, I thought. Okay, let me just do this KD plot using this way. That's the first thing that came in my mind. But obviously using PLT dot hast. Probably there would be PLT dot plot kind equal to KD, something like that. But I don't want to spend time trying to find another way of doing the same thing. Okay? And these will be probably the kind of the pattern that you will see going forward, that we are going to go, like, take these little technical things, kind of almost like given, even if something is different the way that I am doing it versus you guys are doing it, that's totally fine, because now we know that we all understand and appreciate that when it comes to the actual technical implementation level, there are certain different cells between libraries, and sometimes there are multiple libraries that allows you to do the same thing. So as long as you understand the concept, that's fine. Let's move on. Okay,
+
+Speaker 4  30:49  
+yeah, no worries. I think that that helps. Yeah, the the matplotlib seems to be a lot easier to understand, but just at this at this level, I guess. Yeah,
+
+Speaker 1  31:00  
+no problem. Okay, cool, so that's that now, two other things that we can do using this NumPy thing, actually standard deviation. I think we already did before. Right now here we did mean median and mode, and then two other very important statistical measure is your variance and your standard deviation. So standard deviation, I already told you, in a very empirical manner, like what standard deviation means, which is obviously not a rigorous definition of standard deviation, but for your purpose, just know that standard deviation gives a measure of how wide the curve is, the curve meaning the density function is, the distribution is and variance is basically square of standard deviation. So in statistics, standard deviation is defined as a square root of variance. And I'm not going to go into the mathematical formula for measuring the variance, so either variance or standard deviation. You can think of both of these as a measure of how spread the data is versus how concentrated just that one is the square root of the other. So standard deviation is square root of variance. So that this is these are the two measures that you can also do it using the corresponding named function in NumPy, which is where for variance and STD for standard deviation. And if you take that same temperature distribution and you compute the where you will see 32.33
+
+Unknown Speaker  32:35  
+and if you do a square root of that, which is 5.686
+
+Unknown Speaker  32:39  
+and now if you do np dot standard deviation, you will get 5.686
+
+Speaker 1  32:43  
+which, if you have a calculator, you can check quickly that this is indeed the square root of the one before, okay, so standard deviation is a square root of variance. Okay. And then here I also included that picture that shows the 6895 99.7 rule. So here I know My mean is basically what we have printed out here, right? Which is, where did it go here? My mean is 57.65 we have already calculated that here and then down below, we have calculated our standard deviation to be 5.68 so 57 point something and five point something, right? So now you can say that between mean minus standard deviation, which is this to mean plus standard deviation, you will have 68% of data, which is here to here. And that's what this formula here is doing. Is basically just doing mean minus SD and mean plus SD, and you will get 51.969 and 63.341
+
+Unknown Speaker  33:59  
+so according to this, according to 6895
+
+Speaker 1  34:03  
+99 rule your 68% of data should come between 550, 1.96967 51.969 degrees Fahrenheit, and 63.341 degrees Fahrenheit. And then 95% of data should come between mean minus two standard deviation and mean plus two standard deviation, right? Which basically means mu minus two sigma and mu plus two sigma. And when you calculate that, it comes to between 46.28 Fahrenheit and 69.02 Fahrenheit. So within these range, you should have 95% of data. And then lastly, mu minus three sigma and mu plus three sigma, which translate to 45.59 and 74.71
+
+Unknown Speaker  34:52  
+so within these range, you should have 99.7% of data. So.
+
+Speaker 1  35:00  
+Provided your distribution is truly a normal distribution, right? This, this rule will only apply if your distribution is truly a normal distribution, and this is where I'm going to show you some additional thing that I did to satisfy myself that whether it is a standard distribution or normal distribution or not. So what I did is Now look here. This is the code that I wrote. Look what I'm doing here. So according to this prediction, I am saying between mean minus mu minus sigma, and mu plus sigma, I need to have 68% so here I am testing that hypothesis, whether that is true or not. So how I'm doing it.
+
+Unknown Speaker  35:53  
+I am taking
+
+Speaker 1  35:57  
+the this subset from temperatures. So what does this subset give me? So basically, I'm applying the log function from temperature, and in the log function, I'm using two condition with the and operator in between. My first condition is where temperature is greater than mean minus SD, and temperature is less than mean plus ST, essentially the condition for here to here. So I'm using that as a log function and whatever data set it selects. Then I'm applying a shape on that. And you know, the shape basically gives you a tuple, row and column. I'm interested in knowing what is a row. So I'm getting the shape zero. So these first part here basically tells me exactly how many data points are there, between 51.969, and 63.341, how many? Right? I can even run this in a separate cell, and you can actually see the count how many, and that is 2637 and to see what percentage that is, I am dividing that with the total count of all the temperatures I have, which is a temperatures dot shape, which basically gives me 3000 something. Sorry. Ah. Paste in the same I wanted to say temperature 3529 so basically, here, what I'm doing is I'm dividing these by this and I'm getting 74% whereas I'm supposed to get, according to this rule, I am supposed to get 68% only between mu minus sigma and mu plus sigma. Instead, I'm getting 74% then for mu minus two sigma and mu plus two sigma, I'm supposed to get 95% ish here in this test, I rerun the same test, but this time using two time, times standard deviation for both condition, and I'm getting 94.5%
+
+Unknown Speaker  38:08  
+which is not too far from 95.44
+
+Speaker 1  38:12  
+which is kind of close enough, I would say so mu minus two sigma range is kind of very close to normal. But mu minus mu plus minus sigma is not and then finally, for mu minus three sigma, I am getting 99.06%
+
+Unknown Speaker  38:29  
+which is also kind of very close to 99.72
+
+Speaker 1  38:33  
+so, which basically tells us this is almost normal, but there are some irregularity between mu minus sigma and mu plus sigma, probably because there are some data that are kind of spread out in the outlier, which we will see in a next activity. But that kind of tells me, gives basic, not tells me anything. It basically allows me to have a better understanding of the data set that we are dealing with, and what is the distribution, what is the nature of data, and whether we need to do something out of the ordinary to kind of make this data usable. Now, if you ask my opinion, which I'm sure you might be thinking like, yes, be nice. So what? What is the outcome of this analysis? So I would say the outcome of these analysis is, if I'm going to have to use this data for a statistical machine learning, I can use it. It doesn't seem to be terribly unuseful, but I have to keep an eye out, and I probably need to run multiple different exercises. Maybe I will run one training with the data itself. I'll then probably run another training, training by getting rid of the outliers and so on. But since the data is not too far deviating from the standard normal distribution, if I have to run it using, let's say, some neural network based model, there should be no problem. I can just use the data access. I don't need to normalize anything further. So.
+
+Unknown Speaker  40:01  
+So this the 74%
+
+Unknown Speaker  40:04  
+or 75% is that supposed to be 68%
+
+Speaker 2  40:08  
+Is that why you're saying it's out of it's out of deep money,
+
+Speaker 1  40:11  
+that's why I'm saying and that is that is because we don't have all the data, because we saw it is a recorded temperature at LAX between January to April. So
+
+Speaker 1  40:30  
+okay, so now we understand the concept of percentile very well, and we also understand the concept of mu and sigma. So then one last concept to understand here is there is this measure called Z score. So Z score is basically just, you can say, of another way of measuring percentile. So this is a type of score that mathematician and statisticians use, which is basically just a ranking given a data point. A Z score basically tells you from the mean, mean, meaning this, this middle line mean from the mean, how much standard deviation away that particular data point is, okay, so the way you calculate z score is you take any particular data point, let's say one data point. Let's say I'm talking about 42 degrees Celsius. Okay, so if I have this temperature distribution in hand, what is the z score for 42 degrees? So the z score would be 42 minus whatever the mu is, which was what 57 I believe, 42 minus 57 divided by standard deviation, which was 5.6 something. So since 42 is less than your mu, you will get a negative z score. You basically get X minus mu, and divide that by sigma. So now think about this. If you have a data point x which is right at the middle like at the median, what would the z score be 00? Exactly because your x would be equal to mu, right, as opposed to that, if something is in this dotted line, mu minus sigma, what is the Z score of something on this line would be
+
+Unknown Speaker  42:21  
+negative?
+
+Speaker 1  42:24  
+Negative one, negative one, negative one. Because this line, by definition, is mu minus sigma. So that means, if you do x minus this, you will get a sigma, and then sigma divided by sigma is one, well, negative one in this case. So basically, the Z score for data at this line would be negative one, this is negative two, this is negative three, this is zero, and then positive 123, so essentially Z score is nothing but a quantification of how many standard deviation away from the mean a given data point is, and for all the data that are not outlier, It will basically be coming between negative three to positive three. That's essentially what the z score is. Now, how do you calculate that? Well, going back to that sci fi stats library that we imported earlier, using St. So st actually does have a function called Z score and you can basically supply a whole bunch of list of data, which is our temperature list. So what it does is the z score function. It calculate give. So you what you are doing is you are giving it the whole population of, let's say, 3500 data points here. So what this Z score function does? It calculates the mean, it calculates the standard deviation, then it sets it aside, then it goes through each and every point of the data set, and then it applies this x minus mu over sigma for each of this point, and it gives you a corresponding series or list that will contain the corresponding z score for all the values. So now, since the temperature, if you just have the temperature, you will have values like 4849 5152 those Fahrenheit. Now, when I'm applying this st dot z score, you see that I'll get value between negative three to positive three,
+
+Unknown Speaker  44:18  
+because these are all the z score values. So
+
+Speaker 5  44:20  
+okay.
+
+Speaker 1  44:24  
+These may not be something you would immediately need to use, but sometimes maybe down the line, if you under need to understand, like, hey, where the particular data point lies. Like, what is the percentile score? You might want that now talking about percentile score. Sometimes you might want to say, hey, I have this group of students who have scored in a test. Let's say anywhere between, I don't know, 6065, 70% all the way to 98 99% but then I have 10,000 students who have taken this test. Now I need to find. Find the percentile score. Well, using this approach, what you can do is you can take all of these scores, put it in a list or a data frame column, apply the st dot z score, which is sci fi Star Z score, and that will give you the z score for all these data points. And then you can take the z scores, and then you can apply another function from sci fi, stats, Norm class. And then there is a function called cdf, these st dot, Norm dot, CDF basically calculates the percentile of all these data points that you are giving with the Z score. Alternatively, if you do a quick Google search, Z score to percentile, you will see your first search result will be a table, which is what high school stats students use like. When last year, my son took stats, they were not allowed to use calculator. They were given a z score conversion chart. So looking at the z score, there is a conversion it's almost like those logarithmic chart, right? I don't know whether you guys have used, well, these days, we all use technology, but when I took Algebra back in those days, we actually use logarithm chart, right? So, so similarly here we will also see a z score chart. So, so they were told in some of the classes, I believe, they were told like, hey, you need to learn how to convert Z score to percentile, right? But digitally, like in all of your scientific calculator, in like anywhere, and in pandas function, here you have these operations, sorry, functions available that give it a z score, it will basically find what is the percentile of that data point will be in that population. So that's what it will do. And then what I did is I took this percentile and basically created a data frame that shows me all three things side by side. So I basically created a new data frame where I took the original temperature here in the temperature column, I took the z score that I calculated earlier, and then the percentile that I calculated here, and I put side by side. And this is what kind of gives me like, hey, for these temperature distribution, these are the corresponding z score and these are the percentile. Okay,
+
+Unknown Speaker  47:25  
+any question.
+
+Speaker 1  47:32  
+So many and I will make sure that I've made these, these notebook available, because not all of these was given. There's considerable amount of addition that I have done, so I'll make sure that I make this available. Yeah, I think I heard someone trying to say something. No,
+
+Speaker 2  47:52  
+I was just saying, I have so many questions. I don't know, don't even know where to start. No,
+
+Speaker 1  47:57  
+fire away. We have time. So
+
+Unknown Speaker  48:02  
+I'm still trying to, like, understand
+
+Speaker 2  48:06  
+the benefit of having these Z scores in a data frame. Is it to plot them out so that you can see, maybe from a scatter plot standpoint, or where they lay?
+
+Speaker 1  48:20  
+I Sorry, can you try to reframe your question a little bit better? Jesse, yeah,
+
+Speaker 2  48:26  
+I'm just trying to figure out, like, so what? So I'm trying to figure out why I care about z scores.
+
+Speaker 1  48:33  
+Oh, this last piece, yeah, as I said, this is just another way to kind of try to understand where in the whole population of particular z score lie this Z score, this last piece, does not have any direct bearing on your actually being able to train the model or do the prediction. No, it does not. I think I already said that before.
+
+Unknown Speaker  48:53  
+Thank you. Yeah, you
+
+Unknown Speaker  49:14  
+Okay,
+
+Speaker 1  49:17  
+okay, well, then, if there are no other question, I am going to go through the next activity, which is the activity number three, which is finding outlier from these same data set, which is the LAX temperature data set, and I'm skipping the activity number two, which is just doing some outlier finding, but Using some cosmetic data, like a randomly generated number which doesn't have any additional value. And instead, I'm choosing to do the activity three, instead of doing it as a student activity, because I do not believe just me running through the activity two, you guys would be a good position to do the activity three yourself. So I'm taking a liberty to skip activity two altogether. And convert the activity three as a instructor demonstration, so that I can use this opportunity to explain this whisker plot and the outlier finding a little bit better in the context of the same data set that we have used. Okay, okay, so the data set here, as you can see, is that Alex temperature data set, and we are taking that one single temperature column, which is that hourly, dry bulk temperature. Okay. Now what we are going to do here is we have seen bar plot, we have seen line plot, we have seen histograms, we have seen scatter plot, and we also have some same density plot in the last activity, right the KDE, here we are going to see another, yet another plot, which is called box plot. So what does the box plot do? So the box plot basically plots something like this. It's also sometimes called box and whisker plot. Like think of these as a box, and these are the whiskers on the top of the bottom. So in the blog box plot, what you will see if you provide a column, which is basically a data set, which is temperature in this case, and when you provide a column, you will see there would be a one line at the middle of the box, which is where the 50th percentile is. Now if you compare this with what we found in our previous notebook, because this is the same data set, and that's why I like this. So you see my 50th percentile is at 57 right. Now, if you try to compare this with here you see my orange line. It comes right around 57 so that's your 50 percentile line. And then the upper bound of this box this, do you have any guess what value this is 60?
+
+Speaker 4  51:59  
+There is like line you can go, but
+
+Speaker 1  52:03  
+why 75th percentile? That's the 75th percentile, yes. So if you look in here, you see 60/75, percentile. And now you probably have already have guessed the bottom line would be at 25th percentile, which is 54 so if you kind of see here, yep, these almost like Alliance, right? So essentially, this box gives you, gives you between upper to lower quartiles, right, 25th to 75th now the question is, what is this way over there. What is this line? And what is this line that the IQR? That's the 1.5 times IQR. So basically your interquartile range, what's your IQR? So IQR is basically the difference between this middle of the box to the top or middle of the box to the bottom. That's your, I actually know, my bad. The IQ part is the difference between top line of the box and bottom line of the box. That's your IQR,
+
+Speaker 2  53:11  
+which is, it's not 1.5 time. I'm sorry,
+
+Speaker 1  53:18  
+yeah. So you will see here, you will see in the bar, in the cell, next cell. This is where the calculation is, what we are doing. So if you apply this function called quantile you take that column, let's say temperature. And this is a pandas function, by the way. You can apply these on a data frame column or the whole data frame. And this quantile function. What it does is you can ask it which quantiles to calculate, and you can provide as many quantiles as you want, right? Like 2550 and 75 these are the most known quantiles, which are also known as quartiles. And then one, when your quantile is, are at a range of one percentage, then that is a special name that's called percentile. So quartile is a special type of quantile, which is 25th 25 percentile each, that's called quartile. And then when quantiles are one percentile each, those are called percentile. But in general, quantile could be at any level, like you can have a quantile at, let's say, 2030, 2040, 6080, 100, whatever. Right. So this quantile function in general allows you to find any quantile. And this is yet another way of doing something that pandas data frame dot describe already gives you, but describe already only gives you 25th, 50th and 75th quantile. You can use this to get quantile at any level. In this case, we are just getting the 25th 50th and 75th which is those three. We could have done this with describe as well, but this is just to show that you have another function that allows you to pull quantile at any. The arbitrary value. So now this quartile will give you these three things that you have. Now if you take the 0.2 fifth office, that will give you lower quartile, which is the lower line of the box here, and then upper queue will give you the upper quartile, which is the upper line of the box. Therefore your inter quartile range will be upper minus lower. So if you do this and print, you will see that same result that you have seen other from the in our other notebook, that your lower quartile of temperature is 54 which is your 25th percentile. Upper quartile is 60, which is your 75th percentile. Therefore inter quartile range is six, and which is what the height of this your box is in your box plot, so that's your IQR, okay. And then the definition of outlier is, it has to be 1.5 times IQR away. So that means if IQR is six, so 1.5 times of six is nine. So if something is nine above this line or nine below this line, those are considered outliers. So what the box plot does is at a nine here, above here and nine below here, or whatever that value would be. In this case, it is nine. It will plot these two lines, which is where the this vertical line will end. So this basically tells you, like all of your data, at least the well behaved one, should fall within this very top line to this very bottom line. And then if in your data you have points that are coming above or below these lines, then box plot will actually put pointers for those data. So just by looking at this quick taking a quick look at this box plot, you can quickly say whether you have lot of outliers or not. In this case, I do have a quite a few points here, and quite a few points down here, below this line. So that means this data does have some outlier. I don't have a whole lot of points. Like, consider being there are 3265 data points. Like, it's not that everything is outlier, but there are some.
+
+Unknown Speaker  57:21  
+So that's just a quick view of this.
+
+Speaker 1  57:25  
+And then if you actually want to find it, you can take your lower five and you can find what this range would be like, lower lower quartile, minus 1.5 times our QR, and upper minus 1.5 and that tells you that any value below 45 or above 69 would be your outlier. And then you can basically, if you actually want to get the outliers, you can do something like this, like what I did here, right when I did this thing, like the location function. So what I can do is now that I know what are the what are the IQR ranges would be, I can actually apply that to quickly get the outliers. All I need to say from temperatures dot lock. Give me everything that is greater than upper bound where temperature is greater than upper bound, and we don't need the second condition here, so I'm going to get that second condition and then do that. And if you do that, you will see 123 data points I'm getting, which is more than the upper bound, meaning more than 1.5 IQR above right? So I'm getting 123 data points. And then if you want to see how many data points are below, you can do the same thing. You can just say, Give me those one, the ones that are lower than the lower bound. And these are the outliers in the low end range, which is only 30 data points. Okay? And if you want to actually see what those data points were, just print that and you see the lower outliers are 4043 4442 and according to our calculation here, we said anything below 45 would be outliers, right? So I have 30 data points that are coming in below 45 and so on.
+
+Unknown Speaker  59:25  
+So that was just a quick
+
+Speaker 1  59:29  
+overview of finding the range and outlier.
+
+Speaker 2  59:35  
+Did you to where you did the quartiles equal with temperatures? Quartile
+
+Unknown Speaker  59:42  
+No? Yeah,
+
+Speaker 2  59:57  
+yeah, that can work, huh? I cannot get that to work. Yeah, okay.
+
+Speaker 1  1:00:12  
+Well, next one we are going to learn about correlation, and this would be okay. So here another thing is, I am skipping the two activities, which are activity four and activity five, which basically talks about the standard error of measurement. And this is, again, one of those stats that you don't need to know for machine learning ever. So this is where we are talking about systemic error, or systematic error, I believe. So essentially, the thing is, this type of error occurs. Why? Because you have an incomplete view of the world, right? So let's say you want to get an understanding of
+
+Unknown Speaker  1:00:58  
+let's say
+
+Unknown Speaker  1:01:02  
+something. So let's say you are trying to,
+
+Speaker 1  1:01:05  
+you know one of the very common example in machine learning that they say, Hey, you can use machine learning or or classification algorithm to look at, let's say, extra images, right? And basically find whether a tumor is, has is a benign tumor, or whether it is a cancerous tumor, right, malignant or benign tumor, right, something like that. Now in order to be able to do that right, you need to have a data set whereby your model has probably seen everything right. So essentially, in general, in order to know the nature of a population, the most foolproof way of knowing or learning about the nature of a population is basically be able to see all the data points in the population, but except for the very trivial cases, that is always, almost always, never possible. And that's why this science of Statistics has evolved over time. Because how do we take decision when we do not have incomplete data, right? So the systemic error is when you have a data about a population, and based on that, you are trying to measure a value, and then you don't have the full data of the population. All you have a sample of the population. Because of that, you basically have something called a standard error in measurement. Sem, so in activity four and activity five. I mean, if you want, you can take a look. Basically all they're showing is like, Hey, if you have a population of 3000 dataset, you if you calculate a standard error, the standard error will be kind of maybe low. But if you take a smaller data set about from subset of that, let's say you take 300 out of 3000 your standard error of measurement would be higher. Why? Because now you do not considering 3000 data point is your whole universe. If you are only looking at a subset of a universe, your chance of making systemic error will be higher. Obviously, yeah, because I don't have the whole view. So whatever from this sub subset of data, whatever mean, median, mode or standard deviation we are going to find that is not going to be the representative of the whole population. In fact, one application of the standard error measurement we probably have often heard of and come across without some time realizing it is these exit polls like before the election cycle. Remember how they kept predicting, hey, according to these exit poll, Harris is up this point, or Trump is up this point and stuff like that, or Biden is up this point, within a error margin of 3.5 or 4% and all of that. Remember they said that. So there is an error margin, and that's why they were basically saying The races are very neck to neck, but yes, because sometimes Trump was up, sometime Kamala Harris was up, but they were never leading more than the error margin, which is around, I think, 4% or so for most of the opinion polls. So that error margin that they say talk about in the opinion poll, is your standard error of measurement, or your systemic error that comes because you are doing a sample of the data set and you are not looking at the whole data set, okay? And then there is a simple sem function that you can apply to basically find a sample of the data set. And I do not believe that this is something that you are going to be using or applying in any of your machine learning, and therefore I'm choosing to skip activity number four and Five and jumping right onto activity six.
+
+Speaker 5  1:04:38  
+Okay, so
+
+Speaker 1  1:04:43  
+in activity six, we have a much larger data set. What data set do we have? Well, we have this data set actually. Hang on, yeah. Do we have the right data set? Yeah? So in this data set, we have a data about different countries in the world on different economic and demographic data for all these different countries, such as adjusted net income, population, median age, percentage of population over 65 life expectancy and at birth and so on and so forth, right?
+
+Unknown Speaker  1:05:28  
+So this is a huge data set that we have,
+
+Speaker 1  1:05:32  
+and if you quickly take a look at what columns do you have? So these are the columns that we have. So we have about 14 columns. The first one is the country, and then we have around 13 columns with different other economic and demographic data point. Now let's say, if you want to try to find how these data points are kind of correlated, and why do you do that? So let's see, remember earlier, I think last class, we basically looked at this World Happiness data and tried to predict basically how happiness will correlate to what so this is the same such kind of exercise. So let's say you want to basically, maybe train a machine learning model out of these and try to find out some output target variable, which could be maybe whether these 1012, or 13 feature does have any impact on, let's say, well, let's say happiness of the country, or anything for that matter. Right? So in order to do that, it will help if you kind of get an understanding of the interdependencies of this data, which is what we can find by doing or by deducing the correlation between the different data points. So how do we do that? Our first attempt, very simple. You use a scatter plot, and then you basically do choose two columns that you are trying to find correlation between. So again, there are multiple different ways to do that. You can use panda scatter function, or you can do matplotlib scatter different ways. And then there is obviously other graphing library that are available, such as seaborn and so on, which we haven't even touched. But this is just one way of doing just know that we are doing a scatter plot with these two column, which is total income, national income per capita, and the alcohol consumption per capita, which, yeah, kind of makes sense. I would like to know whether, how wealthy a country is, whether that affects the total alcohol consumption per capita, right? Which sounds like two interesting things I need to know, so I did that, and I find a scatter plot like this. So what do you think from that? Do you think these two data points are correlated? I To some extent, I would say, and we have done this before, right? We can also apply this correlation function, and that will give us a mathematical value. And I'm assuming, if you apply a correlation function on this, you will probably get,
+
+Unknown Speaker  1:08:18  
+I don't know, 0.4
+
+Speaker 1  1:08:20  
+ish, maybe something like that, but it's not zero. You will get a non zero number because this is not a completely random blotch. It's not a nice, nice line going up, but there is still some correlation, right? And you can do that for different things. For example, if you want to know, hey, does the median age affect how much mobile subscription do we have this in this country? And this one, you can actually see, yeah, these actually does have a stronger correlation. Because, well, I don't know why. Because, well, no, actually, hang on a second. As the median age is growing, the cell phones per 100 people is growing. Okay, that's actually opposite of what I was thinking. I was thinking, the more younger people will cause more mobile subscription. But here looks like, the higher the median age is, the higher the mobile phone subscription is, yeah, maybe then you can plot something like, how does life expectancy get affected by access to clean water? And when you do that, you can see there is also a very strong correlation. Obviously makes sense if you want to say how income per capita affects the percentage of immunization on certain diseases, which, in this case, in measles, this is the odd one. What do you think about this one? What is your interpretation of these? Percentage of immunization versus income per capita? And we are seeing, it's almost like a right angle, like a. Immunization is probably very low, below a certain threshold income, and then it kind of goes flat, right? It is correlated, but not a linear correlation. There is probably some kind of a step function there, like a for some very poor countries, probably immunization rate is low, but above a certain income per capita level, most of the countries have achieved almost near complete immunization, which is actually a good thing, but looks like there is still some work for us to do, kind of around this area of the graph, or some very, very low income countries where the immunization rate is, some very low, right? And so on and so forth. You can keep doing this as long as you want. Or you can do another thing, I'm not going through the whole thing. Or you can do another thing. You can take the whole data set, and then you can use a particular type of plot, using Pandas, plotting dot scatter matrix. So what this, this does, this is a very cool thing. So in scatter matrix, what I what you can do is you can give a whole data frame to scatter matrix. And what it will do, it will plot each of the column in the big charts x axis and big charts y axis. And then what it will do, it will do a pairwise character plot, so the first column and here also before passing this, since the column names are pretty big. So if I had to use this column name, then this chart, the things on the levels on the axis, it will basically be completely illegible. You cannot read those. So what I did is I basically added a little more, like an aggregated type column name like country, income, population, medium age, median age population over 65 health expenditure, percentage life expectancy of female male, alcohol consumption and so on, mobile phone, mobile subscription, percentage Access to health, healthy water, clean water percentage and so on, immunization percentage and something like that. So then what it does is it takes all of these variable pair wise and shows a nice scatter plot. So if you look at, let's say what kind of looks like a good correlation, yeah, like this one here looks like a very good correlation. Well, let's see median age here, if you go along the horizontal axis. So this is all median age. So median age is here plotted next to life expectancy of female. Yeah, of course they will have high population because median age of the population and life expectancy of female, they are kind of measuring the same thing. That's why they have a high correlation. But they are that does not mean there is a causality, because both are basically same variable you are just measuring from a slightly different viewpoint. It's not that one is causing the other, but that's a different interpretation. But statistically, by looking at this, you can do a very quick like go through and scan visually and see which one of these data frame data points does have interesting correlation between them, and therefore worthy of further deeper exploration. That is why, instead of doing all these pair by pair, pair by pair plot, you can just do one pair wise car plot, and that will show everything. And then if you like one of the particular plot, then you can deep dive, and you can plot those two variables separately and so on. Now one thing notice here, if you look at the diagonal, right? So in Y axis, I have all the variables. In x axis, also, I have all the variables. So then the corresponding pair wise scatter plot are at the intersection of the right, x and y, right? So now see what comes at the diagonal. So diagonal is basically the plot of same variable against the same variable, like income over income. So obviously there cannot be a scatter plot of income versus income. So that's why the default behavior is for the diagonal. Well, I have actually provided this here. I'm saying, hey, plot this scatter matrix. And oh, while you are at it, by the way, what are you going to do in the diagonal? You just you plot the histogram of that column. So this is basically a histogram of all the income. This is a histogram of population. This is a histogram of median age or so on. So the diagonals are basically the histogram of that particular variable, because all the diagonals, they have same x. And Y intersection. So that's why we choose to plot the histogram there. So that way you basically do everything in one clean sweep. You can get all the pair wise scatter plot, and you can get all the histogram in a little icon type way. But that is good, like, unless and until you have this, this technique will probably not work if you have, let's say 200 or even 100 things, right? Because it will be too clumsy and too confusing. But if you have something like 1015, 2030, column this, this technique kind of works pretty well, like I have used this in a lot in my personal work, actually.
+
+Unknown Speaker  1:15:39  
+So do you like this?
+
+Unknown Speaker  1:15:42  
+That's really cool. Yeah, that's really cool. Yeah, yeah,
+
+Unknown Speaker  1:15:44  
+I like that a lot, for sure,
+
+Speaker 1  1:15:48  
+cool. Now, remember what I showed earlier, so when you are doing scatter plot, that gives you a rough idea about what the correlation would be, right, and the correlation would always be between negative one to positive one, right, positive one meaning perfectly correlated. Negative one is also same, but perfectly correlated with the inverse relation, and zero is basically no correlation at all, and then everything in between. So we can use a pandas correlation function or NumPy correlation function to do that. Now, the other thing you can also do, along with this scatter plot, box wise scatter plot, or pair wise scatter plot, you can actually find correlation between each of these pairs of variables, which this plot does not show you, because this is just showing you a rough pictorial view of what the correlation might be. But what you can do, you can take the data frame
+
+Unknown Speaker  1:16:43  
+and apply
+
+Speaker 1  1:16:46  
+a heat map function, and this is something new that you have not used before. Remember, I kept talking about another library called C bond. So in order to do that, what I did here, I ran a pip install sea born. It's a C bond. Okay, A, C, A, B, O, R, N, and once you have this you will have access to this c1 library. Now, understanding learning C bond is not within the scope of these boot camps, so c1 similar to matplotlib, it can do everything in a much better way. It's actually much richer library than matplotlib, but hey, we are, this is not a data visualization class. That's why we are not dig, digging deep too much into this. But this is one feature of c1, I just wanted to share with you, because I have, again, from my own professional experience, I have used this feature a lot of time, and that feature is called heat map. So these heat map I'm applying on the C bond, which I'm importing as SNS, as a library here import seaborn as SNS, and then when you do SNS dot heat map, you can provide a data frame, which, in my case, W di data, you do will see that I am providing set access that just because I just want to shorten the column name. But otherwise you can just provide WDI data. It will do that. And what it will do is it will do something similar to what this matplotlib box plot does, except it does not show the scatters, but it will show the pair wise correlation between all these variables. And here looking at these and the color coding, you will see, the higher the correlation is, the darker the color is. And there are a lot of different color map that you can use. I have used the C map of blues. There are a lot of different color map, both for matplotlib and c1 you can actually change the look and feel of the graph so here. But the thing is, no matter what color map you choose, usually you will see the higher number will come in darker color. Now you can take a quick look and say, okay, which variables have higher correlation? Let's see something dark. Well, 0.84 life expectancy of female versus median age, that's like a slam down. Well, let's take something else. Let's take these mobile subscription versus population. 0.99 looks like the higher the population is, the higher the mobile subscription percentages, maybe Raul, and then something that have very low correlation, which is, let's say, something like 0.01 like any these, these light numbers, sorry, lightly shaded boxes. These are basically columns with very low population, low correlation. And then obviously, if you look at the diagonal, which is a correlation of a variable against itself, which is one so you can basically just ignore the diagonal. And another thing I don't know whether you guys have already noticed in either. Of these, whether the pair wise scatter plot or these heat map, you can basically look at either the top diagonal of the box or the bottom diagonal of the chart, because the top and bottom diagonal are the mirror image. Sorry, the everything above the diagonal, like the top right triangle, is basically the mirror image of the bottom left triangle. So it's basically the repetition of the same numbers, right? So all you have to do is look at all the numbers either above the diagonal or below the diagonal, because there is a repetition. And the same goes for this chart as well. So everything above and below the diagonal, they are just mirrored images of each other. So okay
+
+Unknown Speaker  1:20:47  
+question I was
+
+Speaker 2  1:20:49  
+going to say that following along. And what was kind of impressive about this heat map is that I didn't do the shortened names, and it made it very legible, because it's a horizontal and a vertical. Ah,
+
+Speaker 1  1:21:00  
+yeah, yeah. So actually, that's a good one. So if I, let's say do this, then is good thing you pointed this. So let's say, if I do this without the name shortening, so you are saying it will, yeah, because it kind of oriented this and it's still legible.
+
+Speaker 2  1:21:22  
+Yeah, it was just really, it was just interesting, yeah,
+
+Speaker 1  1:21:27  
+yeah. I'm sure you can do that in matplotlib as well, but you actually have to change the orientation yourself, and that's why I said c1 is sometimes people like it, because it does lot of these things more smartly than matplotlib. Lot of defaults that it comes up with,
+
+Speaker 1  1:21:53  
+yeah, and then you see how it kind of opened it in a new tab, and you can zoom in, zoom out. So imagine, imagine if these were a chart right, like a bar chart or line chart, you could actually move in and zoom into a particular position of the chart and so on. So there are a lot of cool things you can do with a c1 plot. And then, of course, you can also save it, which is what we could do in matplotlib using that pi widget as well. But, yeah. Okay, cool. So then the last thing that is remaining to talk about today is regression. Well, the first, our first attempt at doing the regression and fitting the data with some carp, right? Which is, which is the beginning of the machine learning. So let's take about 15 minutes break and then come back at
+
+Unknown Speaker  1:22:48  
+10 after that's okay.
+
+Unknown Speaker  1:22:56  
+So everybody back.
+
+Unknown Speaker  1:23:02  
+So in
+
+Speaker 1  1:23:04  
+the next demonstration that we'll be doing, we are going to fetch a data set in a different way. The data set here is not provided as a CSV file. Instead, we are going to fetch a data set from scikit learn, which is one of the libraries that you will later also make use when you do the regression and classification. So I am not sure whether you guys have that installed. So can you do a quick check. Actually, let me share my screen. So this import, right? If you do these psychic learn from SK learn. SK learn is the library,
+
+Unknown Speaker  1:23:56  
+import data. Do you think you're showing something?
+
+Unknown Speaker  1:24:01  
+Oh, am I not sharing the
+
+Unknown Speaker  1:24:02  
+wrong screen?
+
+Unknown Speaker  1:24:04  
+Oh, I shared the wrong screen. Okay, sorry, that was
+
+Unknown Speaker  1:24:07  
+nice for you, though. Yeah, great.
+
+Unknown Speaker  1:24:12  
+Thankfully I didn't have anything open.
+
+Speaker 1  1:24:16  
+Okay? So, yeah. So if you can quickly run this from SQL, learn import data sets and see whether it runs. If not, you have to do a P install.
+
+Unknown Speaker  1:24:45  
+They work for me.
+
+Speaker 1  1:24:49  
+Okay, perfect. I see thumbs up from Jesse as well. Okay, cool. So the scikit learn basically provides lot of data set, and these are used for. Academic Purposes and scikit learn people. They basically what they did is, instead of going through all those hassle of knowing what the API is and what data you build you pull, they basically created a library called SQL learn data sets. And through these data sets, there are a lot of different data sets that you can actually fetch,
+
+Unknown Speaker  1:25:22  
+in fact, if you want to do data sets.if
+
+Speaker 1  1:25:27  
+you just do a dot, you will see there are a lot of fetch commands that you have. So these are some of the data sets that people often use for learning machine learning, like when you do regression or classification. These are some of the commonly used, like this one. I think they have probably named the added COVID type. I don't know whether it is COVID type or something, but something I don't know. I haven't used all of those. But like, there is a wine data set, there is a California housing data set, which is the housing data, data, which is what we are going to use, right? So the data set that we are pulling here is called California housing data set, and this is what the data set does, okay, so let's pull the data set. Okay, so the command is data set, start fetch California Housing, which is basically a method in that library, and then you have this California data set. And the California data set itself is not your pandas data frame. So what California data set is, if you look into that variable, this basically gives you a dictionary of arrays. And in here, the first item in the dictionary is data, and inside the data, you have a two dimensional array. This is your two dimensional array inside data. So it is this data that you are going to then capture and convert into a pandas data frame. So how do you do that? You create a PD dot data frame, and you provide the California data set these result variable dot data, which is these two dimensional array, and you say, Hey, what are we going to use as a columns? So for columns, if you look down here, there is another field in the dictionary called feature names. And this feature names basically gives a list of text items, which are the column names in that order, which in this case is medium income, median income, house, Age of house, average number of rooms, average number of bedrooms, population, average occupation and so on, and latitude and longitude. So what you do is you create a pandas data frame, providing these data, which is this ly array as the actual core of the data set, and use this feature name as the column. So that's your housing data, and it also says what your target is. So see, this is a machine learning data set. So what they have done, the publisher of the data, they have already figured out, like, hey, if these are your feature column, then you can use this data to predict the value of this column, which is median housing value, and that is the standard use of this data set. So the idea is that you will create a machine learning model with this housing data, that will have different attributes of a house, and not only of the house, but also of the location where the house is in, the average income of that community where the house is in, like some demographic data, some geo data and some property of the house, like square footage, bedrooms and so on. And based on that, there will be another column which are. You can think of that as training level, and you can basically do a regression analysis with this to try to predict if you have some other house which is not part of your data set, but if you can have another house where you can collect all of these attributes, such as age of house, number of room, population and so on, then you should be your model should be able to predict what the value of that house would be. This is kind of a model which like a real estate listing site like such as Redfin and Zillow, when they show value of your house, or any house for that matter, they show a red fin estimate. So these are the kind of model that they use to train their machine learning model behind the scene. So this is a data set that you can actually use to build such a price estimation model, which, by the way, is a regression model right in today's activity we are. Not going to go all the way to do a full scale linear regression, but we are going to see some of it. So essentially we now, once we have that, then you basically have, if you run this column, sorry, this cell, you will basically have your housing data as your pandas data frame. Let me print the paradise data frame here, and it looks like that. So here you see all these medium median income, age, room, these. All of these are feature column and then med V, which is basically the median value of the house, which I think this is probably in hundreds times 100,000 so 4.5 to six is probably meaning 452,000
+
+Speaker 5  1:30:47  
+something, and that's your output, right? Or target.
+
+Unknown Speaker  1:30:55  
+So we basically have this data set.
+
+Speaker 1  1:31:00  
+Then one thing I'm going to do here, instead of trying to look into this column versus that column and trying to do the correlation, since I have already showed you that you can use this scatter matrix, I'm going to use this first, and that will give me a quick view of the correlation of different columns within this data frame. So what I'm doing is PD, dot plotting, dot scatter matrix. And here I'm providing the whole housing data frame. So it will basically have what, 123456789, column, right? So it will basically give me a nine by nine plot. Each of those will be a pair plot. Sorry, scatter plot. And since it is plotting all these data, it will take some time to render the whole plot. And now it renders the whole plot. Here you have see, you will see that I have not provided diagonal equal to hist, but that is the default behavior. If you don't provide what your diagonal is going to be, it will put a histogram of that column across the diagonal anyway.
+
+Unknown Speaker  1:32:10  
+So this is what I get. Now,
+
+Speaker 1  1:32:16  
+when you are doing training a model with multiple feature obviously, you don't expect to see any pair wise correlation, very high correlation between two pairs, because if you get all the pairs very highly correlated with the target, then you have a different problem. It is not uncommon to see only one or two column probably will have high correlation, and then others will have some correlation, but not very high. But from this, you can quickly pick up, pick out, maybe one or two column that will possibly have high correlation. And the reason we are looking into and hear this very carefully, the reason we are scratching our head to find the two column that will have high correlation in today's class is because in today's class, we are trying to do a very simple curve fitting, whereby you have a two dimensional curve of a form y equal to f of x, so that you can plot y and x in a scatter plot, And you can try to find or identify what functional relation exists between two variables, y and x in a two dimensional plot, which is not how you will do machine learning, because there you will have n dimensional data, space, right? Like in this case, you will have 12 dimension and one output. So it will be in real machine learning. It will be y of y equal to f of x1, x2 x3, x4 up to, let's say x 12 or x 20 or x2 100. That is what your real machine learning will happen. But today we are going to learn how to do that only with two variables, x and y, and try to build a basic fundamental understanding of what machine learning actually is. So in order to do that, I would like to look into two two things that probably is highly correlated, so that I can make a car fitting and draw a car that kind of plots the relation between the two. So when I look through these plots, which one do you think I should pick?
+
+Speaker 2  1:34:37  
+I think I'm the most interested in median income versus medium value,
+
+Speaker 1  1:34:41  
+yeah, and that's what I thought as well, because everything else looks looks like a blush of things, yeah, I mean value and income,
+
+Speaker 2  1:34:54  
+except for longitude versus latitude, and I have no idea why. Yeah,
+
+Speaker 1  1:34:57  
+longitude versus latitude. That see that's not a cause effect relation, right? And that's why that's not something that you will get any any value up to in doing,
+
+Speaker 2  1:35:08  
+right? And there and the average rooms to average bedrooms seems also pretty related, but that's that feels like it
+
+Speaker 1  1:35:15  
+makes Yeah, because a bigger house will have average bedroom and average room, they're kind of Yeah. Okay, so let's take people now median value of the house.
+
+Speaker 6  1:35:26  
+It's interesting the shape of those plots for latitude and longitude, though, because
+
+Unknown Speaker  1:35:30  
+everyone's settling near the equator because it's warmer, or
+
+Unknown Speaker  1:35:35  
+that plot, it looks like California.
+
+Speaker 1  1:35:38  
+It looks like California. Oh, yeah, that
+
+Speaker 6  1:35:43  
+because you're seeing locations, yeah, locations, yeah, things in California. So you get points, you start to see the shape of the state.
+
+Speaker 1  1:35:51  
+It's a California housing data set. That's right. Good observation. Carolyn, I almost missed that. Yep, that is California.
+
+Unknown Speaker  1:36:02  
+Cool.
+
+Speaker 1  1:36:05  
+Okay, but Jesse, you are absolutely right. That's what I thought. Also that it's probably a good idea to look between these two, okay, but before I do these two, let's say I don't know. I mean this activity you like, there is not much value in doing that. So essentially, I'm trying to understand whether there are any outliers there in my medium income, right median income, which is using the same thing that we have learned in the first activity today. So you get the 25th 50th and 75th percentile, and you find the IQR, and then you find the upper and lower bound, and that will give you this and then it will show that values below this thing is outlier, and values below that is also outlier, below and above. So then, like here this thing is done. So what, what we are doing here is we are filtering the data set by applying a location and only keeping the one that are not outlier, which is basically where the median income is greater than zero. So even though the value below negative 0.7 are outliers, here we are rounding it off to the next higher integer, which, in this case, is zero, and for median income upper bound, it's 8.01 we are taking the nearest integer which is the next lower integer, which is eight. So we are saying, hey, let's keep all the data between zero and eight. Now, whether there is any value in doing that, that's lot of people will have different opinion in that, but just for the purpose of our understanding of finding outlier and selecting the data set that doesn't have any outliers. Let's just do it anyway, but please make sure that this is by no means any indication that in doing actual machine learning, if you have a column, if you have a data set with 20 columns, you have to find IQR and outliers for all 20 columns and do a reduce your data set by reducing the removing the outliers. That is not advisable, actually, unless there is some very wild oscillation in some of the data points, like even then, you should first try just filling the data as is. But just for the purpose of today's class, we are getting a reduced data set, which gives me 19,900 columns, as opposed to 20,000 something that was there for the first data frame. So we got reduced a little bit, not too much. Yeah, from 20,640
+
+Unknown Speaker  1:38:57  
+we went down to 19,949
+
+Speaker 1  1:39:01  
+so we lost about what 100 or so, which is not too bad, but sometimes, let's say, doing this outlier, you've lost, lose maybe 1000 out of 20,000 then I would advise that probably is a big model, because data is valuable, and the more data that you have, the more accurate your model will be in general. So again, understand that this can be done, but use it judicially. Don't just blankly, go there, blindly go there and remove all the outliers.
+
+Unknown Speaker  1:39:36  
+So cool. So that's our data set.
+
+Speaker 1  1:39:40  
+Now we know that we are focusing on these two particular x and y value, which is medium income, median income and median value of the house. So now let's do just a specific scatter plot with these two we did see this plot earlier as part of our pair wise scatter but that. Was like tiny little picture. Now we have a full plot with this data, and yeah, it clearly says, looks like there is a there is a correlation. Now what we are going to do is we are going to try to fit this mathematically
+
+Unknown Speaker  1:40:21  
+with an equation.
+
+Speaker 1  1:40:24  
+So what do you think the mathematical equation should be looking like if I have to find a y equal to f of x between house price and medium income
+
+Unknown Speaker  1:40:34  
+aligned with the positive slope?
+
+Speaker 1  1:40:37  
+Yes, so basically a straight line with a positive slope, and that will be y equal to a, x plus b, right, A being the slope and b being the intercept. And by changing the two values, the slope and intercept value, we can turn and tweak the line to make sure that the line fits most closely to this data. That's essentially what machine learning does using linear regression in a multi dimensional data space. Today, we are going to do this just between these two pair of data in a two dimensional data space, and we are not going to do use scikit learn regression. Instead, we are going to use a much simpler technique called curve fitting, and we are going to do that using two different ways. One was already provided by boot camp, and then there is another way that I have added, which you will see when we do it.
+
+Unknown Speaker  1:41:33  
+So let's go ahead and do it.
+
+Speaker 1  1:41:38  
+So the first way of doing it is using this function called line regress. So these line regress function if you go up all the way up. So this is a function that I'm using from sci fi stats library, which is something that we have used before, also right to find the variation and standard deviation and more. So it is that same sci fi stash library, and there is a function called line regress. And with that line regress, I'm going to provide X values and Y values. So x being my income, and y being my median house prices. Now
+
+Unknown Speaker  1:42:29  
+these line regress function
+
+Speaker 1  1:42:33  
+assumes that there is a straight line in the form of x y equal to x plus b that can be drawn through your data frame like you cannot specify what the functional form should look like, because if you look into the name of the function, you will understand the designer of this function already made that assumption on behalf of you as the user, like you are probably trying to fit a straight line through it, so you don't have to specify what functional form would be. Instead, you are going to use this function called line regress and provide your x and y values. Now this result will give you two things, slope and intercept. So let me do this separately in a cell and print result to have a oops, sorry, wrong. Auto Complete print result, just to get an understanding of what kind of thing it produces. So it basically gives me line regress result object, and that has a slope. This is the slope of your straight line that has a intercept, meaning where the slip straight line will intercept with the y axis, and then we have standard error, R value a bunch of other things, which basically tells you, in general, how good a fit is this line with your data. If your line is an exact fit, these R value basically would be zero. If your data can pass through all the lines, your R value would be zero, which, of course, as you can imagine, that will never be the case. Because if that is the case, then you have a different problem. Then that basically, probably will tell you you probably have some cosmetic data. Because in real life, real life data, there would always, never be an exactly near match. So out of this, it looks like you see this is kind of a tuple of five values wrapped around in an object called line regress result. So now I can take the result dot slope and that will give me these values, 0.44 and result dot intercept will give me 0.35 now. Now in order to create the straight line, remember I said it is a form of y equal to x plus B, A being the slope and b being the intercept. So in this line here, I'm creating that algebraic equation, which is x multiplied by slope, which is x plus b, which is the intercept, and that is my regress values, or y values. So essentially, what I'm saying is, according to this little, teeny, tiny machine learning model, if you have some x value, meaning some medium income, according to this, whatever regress value you come up with that would be the house price for that location, with having that X medium income as an x value. So now, since I'm doing this for x values, which itself is a series, so therefore my regress values also would be a series of number. So let's try this in our little this test here, and let's print the result and see what the result looks like. So it will basically be a series of number, and all of these numbers will be perfectly aligned in a straight line, which we cannot see.
+
+Unknown Speaker  1:46:20  
+Oh, sorry, wrong here.
+
+Speaker 1  1:46:27  
+So you will see a whole bunch of number, and you have to for now, believe me that all of these numbers, when plotted, will draw a perfect straight line with that slope and intercept, which is what we are going to do here in the next step. So what we are going to do so forget about this line for now. This is just for printing the legend on top, but plotting part is here. So I'm creating a figure and then on that plot. So first I'm creating setting the size of the figure 15 by eight. And then I'm doing a scatter plot of x values on y values, which basically will recreate these scatter plot again, which is PLT, dot, scatter. No different. And then I am doing another plot of x values and regress values. So these Y values are the original y value, y values that came with the data set. And these regress values, which is basically the equation of this straight line. Think of these regress values is what your model is predicting the y should be. So essentially, this scatter plot gives me the real points, and this plot, which is a line plot I'm choosing, by the way, not PLT dot scatter. It's PLT dot plot. And I'm choosing a red color and with the hyphen as a data point, so it will basically create a line. And then I'm putting an annotation. And in the annotation, I'm basically providing this equation of a line, which will basically show on the top of the graph, like, what is the equation of the line look like, and then your x level and y level and so on. So when you do that, you will see that red line will basically be overlaying on this scatter plot.
+
+Unknown Speaker  1:48:15  
+So let's run the whole thing now.
+
+Unknown Speaker  1:48:21  
+And there is our red line,
+
+Speaker 1  1:48:25  
+and this is the equation, and we have rounded to two decimal. That's why we are not getting that huge decimal number. So 0.44x plus 0.36 so that is your simple one dimensional regression model.
+
+Speaker 1  1:48:51  
+So please take a pause and think through whether there is any question. I want everyone to have a good conceptual hold of this. I
+
+Speaker 7  1:49:06  
+so if we're if we're trying to predict the median house price, are we and then the rooms in the house, which is the x axis, are we going to skew more left or right? Like those are whole values, right? So
+
+Speaker 1  1:49:23  
+no, but here we are not talking about the rooms in the house. We only choose one variable which is median income.
+
+Speaker 7  1:49:29  
+Oh, sorry, my bad. Yeah,
+
+Speaker 1  1:49:33  
+this is our ninth approach to try to predict the house price using only one variable which is the median income of the neighborhood, which obviously is not true in real life, and that's why I'm saying this is our naive approach. So don't think that this is a real machine learning. This is just so you understand the mathematical model behind it. Yeah. Gotcha. Machine learning, we have to scale it in multiple dimensions that. When it will look like a truly machine learning model. Right now, it is not. But the matter mathematics is still going to be the same, just spread over many, many dimensions.
+
+Speaker 2  1:50:13  
+So if you were to, like, just kind of try to sum this up in maybe two sentences for the best thing to take away from the last 15 minutes. What would it be?
+
+Speaker 1  1:50:27  
+It would be the understanding that when you are trying to do a regression analysis using a machine learning model, essentially what you are doing is you are taking a n dimensional data point in an n dimensional space and trying to fit that with a n minus one dimensional surface going through that plane that most closely follows all the data points and that plane or that line would be your machine learning models, target output. Thank you.
+
+Speaker 2  1:51:18  
+Yeah, this would be hard to really conceptualize if we started from like, more than two dimensions,
+
+Speaker 1  1:51:24  
+yeah, and that's why I want you to go through this and understand that two dimension and let it sink in. And that is one of the reason I kind of moved this class earlier so you have more time to think towards the later part, right? Rather than spending lot of time in understanding different ways of plotting, and now like plotting and all of these things, yes, you can just do a quick search and find out. Okay, so this is one way of doing curve fitting. I want you to show. Show another way of doing curve fitting that gives you little bit more control compared to the line regress function that we have used, it produces the exact same outcome, but with more control in your hand. And that is some additional code that I have added on top of what was provided by BCS, okay,
+
+Unknown Speaker  1:52:19  
+and that code is here in this cell.
+
+Speaker 1  1:52:23  
+So earlier, we use a line regress function from sci fi dot stats. Here we are going to use another function from a different sci fi library, and it's called sci fi dot optimize. So I want to understand this thing optimize. What does this optimize really mean? Right? So you have to understand that any car fitting that you are doing, it is essentially an optimization problem. So what is it you are trying to optimize. So let's say here so there are like 1000s of data points. So just think for a moment that there are not 1000 data points. So let's say you pick 10 of these data points. Let's say you only have 10 rows in your data frame. So if you do a scatter plot of 10 rows, what you will look like. Your scatter plot will have 10 data points. Maybe one will be here, one will be here, one will be here, like something around the line. Right now, whichever function you use to fit that line, why is that line chosen in the first place? Why is the line here? Why is the line not sloped further right or left or further moved up or down? Why is the line drawn in the particular location that it is drawn? What is the reason for that? It's optimized right right now optimized with respect to what? So that is something you have to think through.
+
+Unknown Speaker  1:54:06  
+There's a, it's a optimized to a linear equation, right?
+
+Speaker 1  1:54:12  
+No, the linear equation. The linear equation is optimized to do in a design, to optimize something else. And what's that? Something else is called the distance, the average distance between the line and each data points, right. So if you have 10 data points, and if you can draw, you can draw any line, right, but whichever line you draw, then one way to see how good a fit of how good of a fit that line is, would be to see what is the distance from your line to each of the data points, and what is the total aggregate distance you have, because in the ideal scenario, if you happen to be able to draw. Line that touches all the data points, then the distance from your line to data points would be zero, which is basically minimum in real life. Though. It will never be zero, but you can twist and turn and tweak the line in a way so that total of all these distances becomes as minimum as possible. And that is a minimization problem, which is a special case of optimization, right? So when you are doing optimization, you are essentially Max, trying to maximize something or trying to minimize something. So in this case, you are trying to minimize the distance, overall distance of your data points from the line of fit that you are trying to derive, and the way these distances are calculated. If you remember, I think, the first week of this boot camp, I talked about Euclidean distance, like, if you have two points x and y from origin, the Euclidean distance is x square plus y square, right? And whole square of that like which basically comes from your Pythagorean Theorem, right? So similarly, here, you calculate the distance by using the x square plus y square from the line to that point, and then you sum up all of these squares, and then you divide by your number of points minus one, and that has a specific term called root mean square error, or R, M, S, E, and that is what in our output here, when it said R value. This r value is that root mean square error, or the distance, average distance of all the points from the line that we are trying to come up with. And that's why I said, if it were ideal data, which will never happen, but if it were that R value would be zero. So given any data, when machine learning practitioner run these different experiment tweaking the models, what they are trying to do is they are trying to get a model with as low R value as possible, essentially, because that will indicate this is the better fit through the data than the other model. Version of the model
+
+Speaker 6  1:57:19  
+that's not our value, our value is not RMSE, RV, so which one is correlation? So measure correlation between So which one is our value? Gear, it's not our value. Our value is not RMSE, the closest thing shows your standard errors, closest to that, but it's not using, oh, so this
+
+Unknown Speaker  1:57:43  
+relation, it's the fitness of the
+
+Unknown Speaker  1:57:45  
+line. Oh, it is the fitness of the line. The minus
+
+Speaker 6  1:57:48  
+one would be perfect negative correlation. One would be
+
+Speaker 1  1:57:51  
+and the last one would be the perfect positive correlation. Zero
+
+Speaker 6  1:57:55  
+would be like random noise. Okay, so
+
+Speaker 1  1:57:59  
+no. So tell me one thing do you know? Does this give any RMSE directly here, or No? No. It does not. No. Standard error. Standard error is a different it's a different, but slightly different concept, yeah. Okay, yeah. So then, so then in the ideal case, so then I stand corrected. So standard error would basically be almost zero. Well, no, hang on, in this case, standard error is almost zero. How do you define that? Then, even though the line is not going too close to most of the point, why do I getting a standard error which is almost zero? You see, it's 10 to the power negative
+
+Unknown Speaker  1:58:38  
+calculation there. But I know that's
+
+Speaker 1  1:58:42  
+yeah. I have to look into the documentation for these. That's why, yeah. I
+
+Speaker 7  1:58:47  
+looked it up. And NumPy has a has a function, mean squared error to, or, sorry, square or you square root the mean squared error. That's
+
+Speaker 1  1:58:59  
+yeah. That is RMSE, yeah, yeah, yeah, yeah. NumPy
+
+Speaker 7  1:59:03  
+has a built in function that you call,
+
+Speaker 1  1:59:10  
+yeah. But the thing is, we are not going to use any of the any of these functions actually, when we do a regression problem, because we are going to use a different set of classifiers, right? Which is where you will see all of these things coming more clearly. Okay, so we kind of went little bit sideways. My point was to explain why this thing is called optimize. The Optimize is because of this, by that we are trying to optimize the thickness of this curve through this data by trying to optimize the root mean square distance from each of the data points collectively to the line of best fit that we are trying to plot. And in order to do that, this car fit method, it actually gives you a little bit more control, because if you come. Compare how this curve fit method is called, as opposed to how we call this line regress, where we only pass the x and y values in curve fit, you can actually pass another function. The first parameter is a function where you are defining any custom defined function as how it what you want to look like. So it doesn't only have to be a linear function. It can be anything else. And that is the beauty of this. You can actually pass any function that you want and try to fit your data to that function. So instead of always fitting, confining ourselves to y equal to x plus b, or y equal to mx plus b. In this case, I have used that same function here, like this is the return value, but I could have used a higher order function. I could have used a quadratic cubic or even higher order polynomial. If I wanted to, not that it is advisable for machine learning, but if I wanted to I could, or I could even use any exponential, sinusoidal function, logarithmic function, anything and everything that I can think of. So this is a scientific curve fitting function, okay, so with this, everything else will still be the same. It will give you the linear coefficient in an array called Param and then param zero and param one, which are the first two elements of the parameter, will give you these two slope and intercept these two. And then you basically create your line equation just like we did before. And then do the we do the exact same plot, and we get the exact same outcome. Now let me do one thing. I'm going to try to do this just for the fun of it. This is not something that you will do. I'm trying to fit it with a quadratic line, and let's see what it looks like.
+
+Unknown Speaker  2:02:03  
+So what would the general form of a quadratic equation be?
+
+Unknown Speaker  2:02:10  
+X squared plus?
+
+Speaker 1  2:02:12  
+Yeah. So there would be, let's say, three coordinates, A, B, C, linear. Had two coordinate, and here we'll have three coordinate, and it will be a x squared plus, yeah, so it will be a plus. Hang on,
+
+Unknown Speaker  2:02:33  
+a plus b times x
+
+Unknown Speaker  2:02:38  
+plus c times sorry,
+
+Speaker 5  2:02:45  
+c times x to the power two.
+
+Unknown Speaker  2:02:53  
+So that is the quadratic equation.
+
+Speaker 1  2:02:57  
+And then when I'm doing the regress values for this, I'm going to have to recreate that so I need to then have param
+
+Unknown Speaker  2:03:10  
+zero
+
+Unknown Speaker  2:03:13  
+plus
+
+Speaker 5  2:03:17  
+X values times param one, and then it will be x values, times param two
+
+Unknown Speaker  2:03:32  
+to the power two.
+
+Speaker 1  2:03:38  
+So that's how my quadratic function I'm going to build. And let's see how that works. And here also to print this, we have to also print, change the printing so it will be y equals
+
+Unknown Speaker  2:03:58  
+str, round
+
+Unknown Speaker  2:04:02  
+around, zero.
+
+Unknown Speaker  2:04:07  
+I'm going to train this in a different way, using my F string,
+
+Unknown Speaker  2:04:19  
+phase zero plus
+
+Speaker 5  2:04:22  
+this times x, plus this times x to the power two. And then in here, I'm going to provide pair of zero
+
+Unknown Speaker  2:04:40  
+by the parent one.
+
+Unknown Speaker  2:04:44  
+And I'm going to provide
+
+Unknown Speaker  2:04:47  
+two
+
+Speaker 1  2:04:50  
+here, and everything else will stay the same. And these would not be linear coefficient. It will be quadratic coefficients.
+
+Unknown Speaker  2:05:01  
+And let's give it a go.
+
+Unknown Speaker  2:05:04  
+Oh, what happened? Oh,
+
+Speaker 1  2:05:12  
+oh, sorry, I'm not using my new equation here. I have to change this to quadratic. Yeah. So in this particular case, it didn't make much sense. So it's probably part of a very, very long parabola because of the number of points, right? And as you can see, yeah. I mean, if you look close enough you will see that I can see at least. I don't know whether you can
+
+Unknown Speaker  2:05:44  
+your finger size to see if it curves
+
+Speaker 7  2:05:49  
+the what size can you change the figure size to see if it curves or like this? I don't think,
+
+Speaker 1  2:05:54  
+I don't think it will no. Because the thing is, it's not about the figure size. So overall, it came up with a parabola that is so big, because even if you change figure size, it will still plot between here to here. The X and Y limit is not going to change. And within that small limit, it will still have the exact same parabola, right or quadratic function.
+
+Unknown Speaker  2:06:19  
+But what you can do is,
+
+Unknown Speaker  2:06:23  
+we pass it a step function instead.
+
+Speaker 1  2:06:26  
+You can, you can. So that's the thing with with this, this one, you can basically put any function. No. What I want to do is I want to put that in Desmos and see how that parabola looks like.
+
+Speaker 5  2:06:44  
+Let's see. So this becomes y equals 0.61
+
+Unknown Speaker  2:06:53  
+plus 0.27
+
+Speaker 1  2:06:57  
+0.29x 0.297x point 297,
+
+Unknown Speaker  2:07:02  
+x plus
+
+Speaker 1  2:07:06  
+zero. Yeah. See the problem here is, you see the coefficient of x square is very, very small. 0.01 only compared to the linear coefficient, and that's why the curvature is so big. 0.0 it's not a problem. It's actually that's what it could find the best it could do. Yeah, so that is actually a parabola, if you zoom out enough. So this is the same equation that I have plotted here, and this actually is a parabola. But why it is looking like almost straight line? Because we are looking from one through eight, yeah, basically, essentially there we are looking into this section, and that's why it almost looks like a straight line.
+
+Speaker 5  2:08:05  
+Hang on, isn't there a way that I can change the X and Y? Limit, ELT, dot, x, link, and this is a tuple, so let's do this from,
+
+Speaker 1  2:08:26  
+let's say negative 10 to positive 20, and That should help us show the curvature.
+
+Speaker 1  2:08:42  
+Oh, but the line is only plotting that way. The curve is, yeah, so I have to do something to basically get the data all the way. Anyway. I'm not getting into that too much, but basically this part of the graph is basically this section here. So anyway, you don't need to do this, because you never, never, never. In machine learning, use car fitting in yourself, you basically use a function called linear regression, and that takes care of all of this for you. Okay, so forget about this last activity. What I showed you that was just out of my curiosity. But other than that, I hope it was helpful for you to understand in a two dimensional context what a regression model does. Again, we didn't do regression quite because we just took one variable, which is a stupid idea in the first place, like take the median income and try to correlate it with the housing prices. But I hope you understand the concept behind this, the foundational concept so.
+
+Speaker 1  2:10:03  
+Okay, and then I had one other activity, which I'm still debating whether we should just do and discuss it here, or whether we should make you guys do it in group, which is activity number nine, which is basically very similar activity, but using a different data set, which is a motor vehicle data, and it basically gives you The cons, what is called
+
+Unknown Speaker  2:10:35  
+your type, engineer number. So
+
+Unknown Speaker  2:10:43  
+let me actually take a quick look at the read me of this thing.
+
+Speaker 1  2:10:52  
+So in a petrol electric cars as a dependent, and then use the line regress to perform a linear regression with the Renew, get the written by start, start line, regress, so on. Okay, what do you think? Do you guys want to take a stab at it within your groups?
+
+Unknown Speaker  2:11:16  
+I mean, you can we have about half an hour left? I
+
+Unknown Speaker  2:11:24  
+give me some yes, no,
+
+Speaker 6  2:11:27  
+no, yeah, I'd be worried about getting stuck.
+
+Unknown Speaker  2:11:32  
+That was a strong No, yes, I'm sorry.
+
+Speaker 1  2:11:39  
+Okay, that's fine. Am I still sharing my screen? Oh, I stopped, right. Okay. Again, okay, let me then quickly run through this. Okay, okay, so these data set, let's see what this data set is about Singapore, motor vehicle population. Okay, so this basically tells me, in different years,
+
+Unknown Speaker  2:12:11  
+what are the
+
+Speaker 1  2:12:14  
+different types of cars or vehicles, and what is the engine type and how many of those vehicles are flying on the roads of Singapore, okay,
+
+Unknown Speaker  2:12:32  
+let me quickly do A describe
+
+Unknown Speaker  2:12:36  
+just to see what we have.
+
+Unknown Speaker  2:12:42  
+390 to rows,
+
+Speaker 5  2:12:46  
+four columns. Oh, sorry, didn't even do the okay. Yeah, okay, so 390 rows we have.
+
+Speaker 1  2:12:57  
+And here is a numeric column, and this number is a numeric column, and then these are categorical, Right, text column, type, of course, and all, okay.
+
+Speaker 1  2:13:19  
+Okay. Okay, fine. So the first thing is generate a scatter plot of er versus number of petrol electric cars. Okay, so one thing I need to do is I need to find
+
+Unknown Speaker  2:13:39  
+how many
+
+Speaker 1  2:13:42  
+times any types of vehicles we have and how many types of engines we have, any idea. How do we get all the unique type that we have?
+
+Speaker 1  2:13:58  
+We have done this at the very beginning of pandas. Was
+
+Unknown Speaker  2:14:01  
+it just dot unique, I forgot,
+
+Unknown Speaker  2:14:04  
+or N unique?
+
+Unknown Speaker  2:14:07  
+Dot unique.
+
+Unknown Speaker  2:14:09  
+Dot unique
+
+Speaker 1  2:14:13  
+doesn't have anything I thought it was n unique.
+
+Speaker 7  2:14:19  
+Or is that just a number unique values and unique Yeah.
+
+Speaker 1  2:14:25  
+So that gives me that there are three types of, sorry, five types of vehicle with eight types of engine and 13 different years and then different numbers. Now, how do you print all the different unique types that you have. This is the end unique but how do you define all the unique type How do you print so how do you print these five types of vehicles that you have? So.
+
+Unknown Speaker  2:15:05  
+Any clue?
+
+Unknown Speaker  2:15:16  
+Would you put the types in the parentheses
+
+Speaker 1  2:15:22  
+so you are saying vehicle data and then type that, but that will give me everything. How do I find which one of these are unique?
+
+Speaker 7  2:15:35  
+I mean, like the type in the parentheses for any unique?
+
+Unknown Speaker  2:15:40  
+Would that work or not?
+
+Speaker 1  2:15:43  
+No, no, no. That will give me number of unique that will not give me the actual unique values. Oh, okay,
+
+Unknown Speaker  2:15:51  
+I'm trying to see the unique values that we have. So,
+
+Speaker 2  2:15:54  
+so wouldn't it be vehicle data? Then you're looking at the engine
+
+Speaker 1  2:16:01  
+type in this case, yeah, tight engine we are going to do. Oh, yeah. Oh, this is when you do the dot unique, huh?
+
+Unknown Speaker  2:16:07  
+The dot unique with the
+
+Unknown Speaker  2:16:10  
+I was close, but I just
+
+Speaker 1  2:16:13  
+Yeah. So basically, you have cars, taxes, motorcycle, goods and other vehicles and busses, right? Because the reason I wanted to do this is because I don't like to start working with the data unless I know relatively well what is there in the data, right? So I know that there are 13 different types or five different types of vehicle with eight different engine types, but I want to see for myself that what kind of things are there so, engine, oops. Engine, vehicle, data, engine, right. Dot, unique. Okay, so I have petrol, diesel, petrol electric, meaning hybrid petrol electric, plugin, petrol, Cng and so on. Okay, so we have a whole bunch of petrol design plugin hybrid, all of these type of engine and these type of cars. Okay, so the first one, the prompt is generated plot, scatter plot of year versus number of petrol electric cars, meaning we have to take data with the lock function, where engine type is petrol electric and vehicle type is car. And that's what we are doing here. Vehicle data type equals car, and vehicle data engine equal to petrol electric. And then we are getting the year column, and that's our year column, and then we are doing the same thing, but this time we are getting the number column. So that gives me the two variables here and number now you might want to say, Hey, why are you doing this? You could have just done a full data frame and do a data frame, dot scatter. Yes, you can. Obviously there are many, many ways of doing it, but that's not the point. The point is what we get. So we basically get a graph of the petrol electric cars that are on the road and how that correlates with the different year. So looks like the petrol electric cars have grown steadily over the year, and the growth has accelerated after 2015 these are basically the hybrid cars, which kind of makes sense, right? Because in more recent time, the data set only goes up to 2018 I'm sure if you go all the way to 2024 then you will see this growth trend steadily, growing, maybe even more steeply, right? Because these are all the hybrid cars.
+
+Unknown Speaker  2:18:44  
+So we get that.
+
+Speaker 1  2:18:50  
+Okay, and then the next prompt is, perform a linear regression on year versus petrol electric car. So how do you perform the linear regression. If you look into the first method here, you can use this line regress method from the SCI pi stats library, and you can pass the x and y values and that will give you the result. So we will do the same thing here. We will do stats line regress. And my x and y values are your and petrol electric cars. And that gives me these variables, which is the slope these, and then R value, and then the next one was, I think, P value, and then standard error. So I'm basically grabbing all five variables, and then I have to use the slope and integer to actually create that straight line equation, which is the line of fit. So this is my y equals x plus b, where x is here, and this is the slope, which is a, and then B is the intersect. So that is my line of fit that I have drawn. And now. Have to draw this on top of the scatter plot to get the similar graph that we got earlier, which is where we are getting this straight line now. Now this looks actually much cleaner, because unlike the housing data here, you don't have 1000s of points, you have only a handful of points, so you can kind of probably more intuitively see and appreciate that how this straight line is kind of trying to bear, trying its best to be as close as possible to all these 12 data points that you have,
+
+Unknown Speaker  2:20:35  
+the line of best fit that we have here.
+
+Speaker 1  2:20:39  
+Oh, and I think in the previous one, we did a R hyphen, and that draws that in a red line. Yeah, that's what I did, R hyphen that gives a red line.
+
+Unknown Speaker  2:20:53  
+So that was not bad.
+
+Unknown Speaker  2:20:55  
+Exactly a repetition of what we did before.
+
+Speaker 1  2:20:59  
+Then in the next prompt, we are saying, they're saying, repeat the plotting scattered and linear model for year versus petrol cars. So here they're saying, hey, take a different subset of the data, which is type equal to cars and engine equal to petrol, and do the exact same thing. Everything else is the same. And then when you do that, you basically get a data like this. And you see, within that same period, going from 2016 to 2000 2006 to 18. The number of hybrid cars grew steadily. But the number of pure patrol cars, which here we call gasoline cars, by the way, they basically increased initially, and then they started declining more recent time. And this decline kind of coincided points. Coincides very well with the steep in incline that happened in the hybrid electric adoption, which is where the pure gas car started to go down in numbers. And now we are going to repeat that with the linear model for cars. Oh versus electric cars. Oh year versus electric cars. So electric cars would be what, and this is where we need to have this electric with the upper case. So let's do that with engine equal to electric, and then these will also be electric cars. Yeah, electric cars kind of showing the same trend, except it was not growing as steadily. And then last two years, it has suddenly jumped. But that to the jump is from what almost zero to 400 around 500 but you see the total number is still so small compared to petrol cars. Hybrid cars, on the other hand, has gone to 20 5000s which is still much smaller than hundreds of 1000, but still much higher than the pure electric cars, which kind of makes sense, knowing that we have data only up to 2018 if we do that, up to 2024 then obviously we will see a very different view. Okay? And then the last thing, what I did, this is where I started to play with the curve fit function from the Sci Fi optimized library, and I decided to fit it with a 1234567,
+
+Unknown Speaker  2:23:44  
+dimensional polynomial.
+
+Speaker 1  2:23:49  
+And when I draw this, look how the curve looks like. So this is what happens as you increase the complexity of your model, which in this case, the complexity of your linear equation, then your model basically tries to learn all the patterns, all the nooks and crannies of your data, and tries its best to kind of make everyone happy, meaning be as close to the as close as possible, to whatever data you have. And if you can recall, in math, right? I don't know whether you have learned like things like Taylor series and stuff. So in theory, you can approximate any function using a polynomial with a very high degree no matter how hard the function is. So if you so here, this is a degree seven polynomial. I'm sure if I go up to degree 15 or degree 20, this will actually look like a curve that goes straight and then goes up like a l like whether it is a step curves. Line, curve, exponential curve, anything can be approximated using a polynomial, which is what Taylor series does, and that's what this function is doing. But again, is this a good choice of model in a real machine learning scenario? Maybe, maybe not. The problem with this type of fitting is yes, the curve looks like very closely, going through all the model, all the point. But can you guys see what the problem would be if we do that? Let's say, in theory, I have these, let's say 12 data point, and I come up with a polynomial that basically exactly touches all of these data point, and your root mean square error becomes zero. Almost what is the problem in doing that?
+
+Speaker 2  2:25:51  
+I think you're not really identifying trends. You're just kind of mapping the points. Yes,
+
+Speaker 1  2:25:56  
+that essentially is what in machine learning terminology called over fitting. So basically, your model gets too blindsided that it tries to like, you know, there are some students who can memorize things very well and do very well in a standardized test, but then when they go in a competitive test, sometimes they fail poorly because what they have done, they have learned what the type of question should be there in a standardized test, and does very well in a given format, but they cannot really apply their learning outside of the given format of test. It's the same thing happens with the model. With this 10 or 20 model, your graph, your polynomial is so complex that it is fitting all of these data point but tomorrow, if another data point comes in, your model will fail miserably. So if you try to measure the accuracy of such a model with the data that you are training the model on or fitting the curve, you will see your accuracy score will be very high. But if you get a another set of data which may be, let's say, if you have a, let's say 100 data point, you take out 10 data point randomly, like your test set, and take the remaining 90 data point and train such a complicated curve, a very complex model, you will see that it will do very well on those 90 data point, but those 10 that you held out earlier that you will test later. You throw those and it will fail miserably, because your model basically over fitted on the data you have.
+
+Unknown Speaker  2:27:36  
+So that's why it's never a good idea to do this.
+
+Speaker 1  2:27:40  
+You can do sometimes to certain extent if you have lot of data so basically, the thumb rule is your degree of your polynomial should be less than at least 1/10 of the number of data points that you have. So if you have 100 data point, you can probably go up to 10 as a degree of polynomial, but not more. So if you have more and more number of data, that provides you a little bit more luxury to play with a larger model. So
+
+Speaker 2  2:28:16  
+is that kind of the magic of it to find that sweet spot of like, how accurate or how
+
+Unknown Speaker  2:28:22  
+how fitting you want to make it
+
+Speaker 1  2:28:27  
+ideally in the theory, like the book that I was referring to other day, the bishop book, the pattern recognition book. So if you go there, you will see the book opens in the first chapter with a description of this. But the problem in this approach is, in a in a industry setting, it will be an immense task to actually sit there for each and every individual classes of problem and find out what is the ideal degree of polynomial that you are going to train your model on so you will that is a never ending process. You cannot do that, and that's why, in reality, you are not going to use this kind of car fitting ever.
+
+Speaker 6  2:29:14  
+So that's where. But no, I'm curious. So what happens if you do have it do a 13 degree polynomial. How's it going to plot? Would be interesting to see 13 degrees, 13 points. So do a 13 degree, yeah? Again, talking about actually saying, if you have the same number of degrees of freedom of the number of points, you're going to get something vastly over fit,
+
+Speaker 1  2:29:40  
+yeah, yeah. It will basically. So what we'll do is it will take wild twist and turn, and it will basically touch all the points.
+
+Unknown Speaker  2:29:48  
+I know that's gonna be fun to see. Yeah,
+
+Unknown Speaker  2:29:52  
+so you have read that book, the first chapter, I believe,
+
+Unknown Speaker  2:29:57  
+or a river going through all the points. Yeah.
+
+Unknown Speaker  2:29:59  
+Yeah, cool.
+
+Speaker 1  2:30:07  
+And then the last one, it basically says, Hey, create a plot with all three points before, like, not my wild plot, but these three before that, we did petrol, petrol, electric and basically plot them in a one single plot, which is basically what you get here. And I don't want to go through the details of this. It's basically just doing a subplots and then fitting each of the plot in one slot of the subplots, so you can study the code and you can figure out exactly how it is doing.
+
+Unknown Speaker  2:30:44  
+And then finally, this thing is kind of,
+
+Unknown Speaker  2:30:46  
+yes,
+
+Speaker 1  2:30:48  
+this kind of gives you an impression that this is a real predictive model, and you are actually using this pro model to predict what is these number of petrol, electric or petrol cars are going to be in the following so and so here, which, again, as I said, because this is a very naive approach. So you actually shouldn't be asking this question to this model, because in reality, you cannot train any realistic model with just a two dimensional data.
+
+Unknown Speaker  2:31:15  
+So this is, this is, yeah,
+
+Speaker 1  2:31:19  
+anyway, so that's about it all about today's class,
+
+Unknown Speaker  2:31:27  
+and we finished 11 minutes early.
+
+Unknown Speaker  2:31:34  
+Well, what will tomorrow bring
+
+Speaker 6  2:31:41  
+tomorrow? I really, actually enjoyed that first chapter of Bishop's book where, yes, fitting, fitting a polynomial to a sine function.
+
+Speaker 1  2:31:51  
+Really interesting. Just, I actually have a notebook. I wrote a notebook to actually do that myself.
+
+Speaker 6  2:31:57  
+Yeah, it would be fun. Actually, I have so much do that. It's a problem. Yeah,
+
+Speaker 1  2:32:01  
+I was playing around that, and I wanted to actually write code to do that. And I did do that, yeah, but this is very similar to that. What we just did with the digital electric car pill, right? It's a very similar just,
+
+Speaker 6  2:32:13  
+yeah, same basic idea. That's why, from his chapter, though, I was thinking, I want to see what you do if 13 Romeo on it,
+
+Speaker 6  2:32:27  
+would be totally not generalizable or any kind of predictive model. What
+
+Unknown Speaker  2:32:32  
+will tomorrow bring?
+
+Speaker 1  2:32:35  
+Even tomorrow's class? Yeah, so we'll basically go on on the next weeks of class, right? The week eight of classes. And so essentially, in that space, what will essentially, what will happen is you are going to get one or two day extra to do your project work. Since we we have stepped up on a gas a little bit, so you will get a one or two extra day to complete your project work. Now, the three classes that we have for week eight, I still haven't thought through whether I'm going to go for three days or I'm going to kind of compress that in two days and give you another extra day. We'll see. I still have another day, which is tomorrow, to think through what would be the best way to kind of arrange that, but we'll see how it
+
+Speaker 6  2:33:23  
+goes. But Jesse, what comes tomorrow is going to be in the next module. Time Series prediction?
+
+Speaker 2  2:33:30  
+Yeah, you know, I was, I was kind of feeling relieved because I have a work trip next week, and I think I'm going to miss, miss next Thursday. So I was like, well, that's not going to be too bad, because I can review 8.3 but if it's going to be project, hang
+
+Unknown Speaker  2:33:44  
+on, hang on. Which Thursday you were talking about these 6/23,
+
+Unknown Speaker  2:33:49  
+yeah, yeah. So
+
+Speaker 1  2:33:51  
+23rd Hang on. Let me open the calendar real quick here. Actually, I do have the calendar open. So 23rd was supposed to be 833, Tuesday. Hang on. Hang on. No.
+
+Speaker 4  2:34:11  
+Monday is a holiday too. I don't see the Zoom call for the Monday. The 20
+
+Speaker 1  2:34:16  
+Monday is a holiday, that's right. So today, we did seven three. Tomorrow we are going to do eight one. Thursday, we are going to do eight two, and then next week, Monday, there is no class. And then Tuesday, we are going to do eight three. So Thursday, 23rd basically would be the first day of project work. Now, if you can arrange with your group Mets offline and set expectation, like when you can or cannot join, you are all good, right? You are all set. So,
+
+Speaker 8  2:34:55  
+yep. So question our group day. Is, are you guys just going to be online and just assisting any
+
+Speaker 1  2:35:04  
+questions? Yeah, yeah. We will be joining in. We'll be joining in just like what we do in some of your little break room activities. So you guys, so first what we what we do is you all come to the main room, and sometimes people have general question that they want to ask everyone, like to the instructional staff or anyone. So we'll probably stand spend 510 minutes if somebody has any general question about their work and expectation and stuff, and then you break into the breakout rooms in those days, and essentially, for the remaining of the class, like almost all three hours, you just stay within your room, and it is up to you guys to decide whether you want to take a break or when to take it or all. And what we will do, four of us, we will basically come and visit your rooms time to time, to give you a opportunity to ask question. Or, let's say we are not there and we are probably sitting still in the main room, any one of you can ping us like, Hey, can be no Can you come in? Come here? Or, Karen, can you come here? I have a question, and then we will be there to help, right? I mean, idea is that we are going to be standing by, but we should not be dictating what you are going to work on, because it's a completely on the each and individual group to figure out what is the topic of the project going to be and how you're going to implement. Okay, to that note, the another thing, and it's actually good that we have a few minutes to discuss that, what I would suggest is, sooner rather than later, create a common GitHub repository for the project. And this project you are going to do one repository, so we have three projects, right? So second project you will do another so these needs to be separate GitHub repository and initialize that GitHub repository, like the readme page with a rough project overview. Like idea write up, like, what is it? What is the proposal, right? So come up with a project proposal, create that as a readme file in your GitHub homepage and the reposit repo homepage, and share that with us through the Slack channels that we have created for the individual groups. And if you can do that, that maybe sometime next week, like maybe by next Thursday. So that way, when you finally get into the project room. You already have something, already you have thought through, written up. Or, in case you are deliberating at between two or three different ideas, write them up. All right. Let's say two different team members have different ideas. Write them both, right. And then you can use that time, maybe first few minutes or maybe hour or so, to discuss with us and kind of finalize on one idea or the other, or if you already have an idea, and if you want to kind of elaborate the idea a little bit, if you have some question, like, Hey, we are thinking this idea in general, but we want to dive deep and do these other thing. And you can brainstorm those things also with us, especially during the first day, when you are going to engage into the project activities. And since you are going to be doing this first time, this boot camp, that's why I think having another extra day or two is going to be really, really helpful for you, for all of you. Thank you.
+
+Unknown Speaker  2:38:18  
+Do we know when the project presentation today is going
+
+Speaker 1  2:38:22  
+to be, that is the last day of project. So let me refer to the calendar again.
+
+Unknown Speaker  2:38:30  
+That's February 7.
+
+Speaker 1  2:38:33  
+That would be week 10, day three. Week 10, day three. I'm seeing February 6. Yeah. February 7 is a Friday. We don't have a class. February 6, yeah,
+
+Speaker 2  2:38:44  
+I see. And so February 7 is the submission,
+
+Speaker 1  2:38:48  
+yeah, by February 7, you have to submit the GitHub report, okay,
+
+Unknown Speaker  2:38:57  
+so we have to make sure our projects are done before the sixth.
+
+Unknown Speaker  2:39:02  
+So we can present them, right?
+
+Speaker 1  2:39:04  
+You will present them on Sixth. Your work has to be done at least by fifth, hopefully by fourth, because fourth is the last formal class before we that we meet before the presentation day. If you have some work left over, I mean, and you guys are good at working offline. You can also they use that day in between. But, yeah, if you have everything wrapped up by February 4, that's ideal.
+
+Unknown Speaker  2:39:31  
+Cool. That's a lot. I like having extra time for the
+
+Unknown Speaker  2:39:34  
+project.
+
+Unknown Speaker  2:39:40  
+Make our PowerPoints much better.
+
+Unknown Speaker  2:39:53  
+Thank you for class today. Benoit
+
+Unknown Speaker  2:39:55  
+here, thank you for being here. Yeah, thank you. Thank. Have a good night. Great night.
+
+Unknown Speaker  2:40:01  
+Good night. You.
+

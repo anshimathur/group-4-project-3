@@ -1,0 +1,600 @@
+Unknown Speaker  0:03  
+I'm on Slack, yeah, yeah.
+
+Speaker 1  0:07  
+I messaged you earlier today, yeah.
+
+Speaker 2  0:12  
+So I just wanted to talk to the TS before we jump in. So one feedback I'm having, and which I think I'll agree to that that having six, five or six rooms, and letting people kind of just work on their own, at least from the beginning, because there is kind of some people is more experienced in Python and some people are not, so it's probably not providing the best experience for everyone. So a request has come in that the TA and the instructional staff kind of just watch over during the student activities that that are happening in the breakout rooms. So with that suggestion in mind, what I was thinking is, since there are four of us, right, me and three of you guys, um Karen Muhammad and Kian. So today, instead of creating five or six room, can we create four rooms and one each? One of us take one room each and just let them work independently, but just be there standby in case they need any help before we come back. Can we do that works? Yeah, it's a good idea.
+
+Speaker 3  1:23  
+Usually, when there's more than than a than, you know, any number of rooms, I usually try to get to a cup two or three of the rooms of the canned area, okay, where people were at and if they're happily going along and maybe moved to another. But I like that idea too.
+
+Speaker 2  1:36  
+Okay, another thing I'll do is there are these whole bunch of breakout room, like going into breakout coming back, and that is kind of a messing up with our scheduling little bit. So I would, at my discretion, discretion, some of the activities I would not have you guys go into the breakout room. Instead, we'll stay in the main room, and then we'll just go through the activity together, everyone with me. And then some of the activities, maybe two or three activities, maybe two activities, I'll ask you to go to the breakout room, but not all to kind of save on some time.
+
+Speaker 3  2:08  
+Just let me know when you want room. Yeah, people to go there, and I'll hit the button. You say, to go. I'll have I usually have them ready. So ready is good for four rooms and, yeah, that's, I think it's good idea for you just do that a number of us, yeah, usually I've just kind of wandered between rooms and see where if I can be useful.
+
+Speaker 2  2:33  
+Yep. Okay, cool. So then let's get started to share my screen
+
+Speaker 3  2:41  
+back then we include us into rooms for Okay, so be assigned to rooms automatically.
+
+Speaker 2  2:52  
+Okay, do you guys see my screen now? Yeah, yep, okay, cool. Okay, so I think we are almost half the way to our expertise in being a Pythonista, right? Like a person who is expert in Python, we are almost half the way there. Believe me, there are just a couple of things that we need to learn about, the core basic Python before we jump into in the coming weeks, whether, which, where we jump into specialized libraries of Python, and few of those four things that we are going to do this week, starting today with how to use function to organize your code better, right? That's kind of the focus of the today's class. So in this class, we will understand why we should write in Python and how, sorry, why we should write program in functions, how to create function, how to use function, when to use them. And we will learn about three things that are very, I'd say, advanced feature in Python. Unlike many other programming language, we do not have those kind of feature, one of those we kind of touched upon during the discussions yesterday, which is using the lambda feature and then couple of other feature of map and filter. And you will see that these tools are can come in very handy when you are dealing with complex data structure and iterating over the objects and manipulating the different data within the complex data structure. So that's kind of the in summary what we'll be doing in our class today. So first, why do we use functions? Okay, the reason we do functions is because we don't want to repeat ourselves if we have one, if we have to do some task that is repetitive, right? Whether very simple, mundane task, or even a very complex task, if, if you have to write a code, let's say a whole process works. Data is coming from some point, then you are massaging the data. You are putting the data somewhere. And then you are doing some calculation, and then you are taking the data and putting into a machine learning model, and whole bunch of thing you are doing. And while doing so, you figure out that there are some kind of operation. You are repeating a very various different step. Wherever you see that pattern, it's you should not be actually copy pasting those codes into multiple different places in your program, because, number one, there's a bad practice. It becomes very hard to maintain. It makes your code very error prone, very brittle, easy to kind of get, I'd say, all out of sync. So let's say if you have a bunch of code, let's say 10 lines of code that you wrote that basically does some statistical calculation on a whole bunch of data, and later you want to use that code. If you copy paste that code into another place, the risk there primarily is, first of all, your code looks very ugly. And the second thing is, if you happen to have changed one word in one line and anywhere now you have to go and make changes to everywhere you have the copy of that code. And that's why, whenever there is a reuse of the code involved, the idea is, do not repeat yourself. Instead, put the code sorry. Is there a question now
+
+Speaker 4  6:19  
+going to do? Because once you install it on the Windows PC, just hit the download button and
+
+Unknown Speaker  6:26  
+go on mute please.
+
+Unknown Speaker  6:30  
+Thank you.
+
+Speaker 2  6:33  
+Okay, so the idea is, do not copy, paste your code. Do not repeat your code. You put the write the code in one place as a function, and then you just call the function whenever you need to. So that way your code becomes more modular, manageable, comprehensive and better organized, right? So that's what the that's the reason that we use functions. So then let's do some quick demo. How do we write functions? So let's say I want to basically do something. Let's say very Monday, daily. Let's say just to have a world program, right? If I want to say print, hello and it will say print hello. Now imagine I'm saying print hello, but instead of print hello, maybe instead of one statement, there are multiple statements there, right? So let's say you want to say print hello, and let's say print.
+
+Unknown Speaker  7:42  
+How are you doing today?
+
+Speaker 2  7:46  
+And then whole bunch of other statements. So imagine these 10 Step 10 statements are very complex statement that you want to repeat every time. So if you want to repeat every time without function, you have to copy paste this in 10 different places whenever you want to run this code, and then that gets very ugly very soon. So the idea of function is, what you do is whichever the piece of code that you want to reuse over and over again, you put it inside something called function. And the way you define a function is you start this word called def, D, E, F, and then you provide the name of the function. And this name can be anything, although, just like variable name, function name also needs to be meaningful so that your code is more readable to human so this is the definition of a function. So what it says is Hello, is a definition of a function. And then, as the function starts in the first line the definition, you have to have a colon. And then after that, however many lines you have in the function that's called the function body, and all of the lining function body needs to be indented by a tab like this. Now, as soon as you have these, now these Hello becomes a function or a package. So again, think through instead of these two simple print statement, even if there were 200 statement of complex mathematical computation, you could put those 200 lines of things inside function definition, and then later, wherever you have to repeat those results, all you need to do is call the function like this way, and when I do, you see the outcome of this cell is basically two lines of print statement, which I have defined here. So this thing, it's called a function call, or function invocation. So this is where we are invoking the function that I have defined in other place. So essentially, this is a custom, user defined function we have just created, and then we just called it. So that's what function is. So is the. A syntax clear to everyone the different parts of a function definition. Okay, so this part is the name of the function. This part is the dev keyword that defines that this is a function. And then inside parenthesis we will pass something which will come little bit later in the class today, for now, it's just a pair of parenthesis, and then inside that, with a one tab indentation, however many Python statement that you want to write. That's all okay now, quick knowledge check question before we move further ahead, can you think of some function that you have already used without defining them yourself. Like think of five function that we have used in last few classes that have already been made available to you by Python,
+
+Unknown Speaker  10:54  
+print.
+
+Speaker 2  10:56  
+Print is one. Yes, we are using printable here. What else? Maximum? Maximin. Maximin, yeah, break, similar, huh, break. Break is not a function, no. What about type? Is type you can call as a function. Another thing is, remember Len, which we use to find the length of a list, how many items. So that's the function, right? So all of these are different Python function, and all of this function that you just talked about, these are basically natively available functions, so you don't need any additional libraries. Then later on in the course, you will see there are a whole bunch of, like, almost an endless supply of Python libraries with an endless number of functions that are available to you, and that makes Python so useful. So it is function is basically the centerpiece of everything. It is because of so many libraries with so many useful functions among them that Python is such a good Chad programming language. So it's very important that you understand how functions work. Okay, so the next activity is basically your the student activity, but this is one activity I would like to skip for today. I mean skipping. We will do it together. So we'll skip going into the breakout room, because this is a very simple thing. I think it's lot of overhead going into breakout room and coming back and we do that. So let's just go through this right here. So first what I'm going to do, I will go to our GitLab and pull up the prompt for these activity, which will be week number three plus one, and the activity would be this. So what it is saying is, in this activity, you are building the back of a new payment processing system each time a payment occurs through your system, a 75 cent fee is charged to the merchant who uses as these will be run on millions of transactions. Your task is to write a single, reusable function for this process. So just by reading the prompt, you see how the prompt is written. Kind of alludes to what I was talking just a few minutes back. Like, whenever you come with this situation where you have to apply some block of code multiple times, then that is a good candidate for you to use function. Okay, so let's write a function. So for this one,
+
+Unknown Speaker  13:44  
+if you look into the unsolved
+
+Unknown Speaker  13:48  
+it is,
+
+Speaker 2  13:53  
+so this is the file that is given which I will open from here. Also
+
+Unknown Speaker  14:02  
+not that this one.
+
+Speaker 2  14:08  
+So essentially, what it is saying is you have to create a function named process balance. Now these crosses payments will be called from somewhere else, which is the main body of your program. So then your job is to so here you see this yellow squiggly line currently, and that is because this process parent, Python does not know what process payment is. There is no such function that have been defined yet. So as soon as you do def process payments, you see the Quigley line for here, from here goes away, okay, and then here you can basically do something. Let's just put a brand print statement for now. So that is the overall anatomy of the program. Like you have a process payment function to implement. Element. So you start with Def Process Payment, and inside that, you have to write a few print statement. That's all you have to do as part of this activity. Now, before writing the function, I would like to pay attention to this line, which is line number 12. Does anyone know what line number 12 is doing here?
+
+Speaker 5  15:26  
+Yeah, actually, I've had that question. You know, usually in earlier Java and also Java and suplex was usually the main is the one where the program starts. So want to understand what exactly happens with Python. So even Python goes with the same kind
+
+Speaker 2  15:41  
+of interpretation, correct. But Python is actually flexible. So even if you don't write your main body of code inside a main method, it still works. In fact, there is nothing called Main method in Python, but it's kind of a what in Python is known as an idiom, like in a English language, right? You have you have grammar, you have syntax, and you have idiom. So these, putting your main body of code inside if condition where it says name equal to main it basically helps a better organization of the code. And these, and you will probably see this later in few other cases where there are some variable names that starts with two underscore and ends with two underscore. So these are special kind of variable names that Python uses for its own purposes. Okay, these are not the kind of variable name that we use. So this name equal to main is something that is tied to the Python runtime. So whenever you are invoking the Python from the Python program from a terminal or any other way, that first invocation that is coming from the user that has this attribute name with two underscore, of course, with the value of main, again, with two underscore associated with that invocation. And that is our way to kind of back door that and specify to the Python program like, Hey, Mr. Python program, I know that you are looking for this variable name main, and therefore when you find this, I am instructing you to start from here onward and then follow the sequence. So this is kind of a sneaky way to back door and kind of use a similar kind of construct as you correctly said in Java, C, C plus, plus people are already aware of. So in Python, there is no direct way to create that main method which will be the starting point in the program. In fact. The matter of fact is, if I run this program without these, and if I just say this, the program will run fine. So essentially, if you don't put that name equal to main block, if you run this whole program, Python will let see what is the first line of Python statement that does not start with a def and it will just run that line. But the problem is, if you have 100 different functions streamed all over in a python file, it becomes very hard for you to even understand where is the actual processing first starts. That's why, for a complex piece of code, it is always better to clearly mark where your processing is starting and where your declaration is ending, because anything else you are doing above when you are basically declaring your tools, meaning your functions, which is kind of a prerequisite for your program. And that's why, when you are done defining all of your function, if you clearly mark your beginning of your program with this if statement, then the code loop will look very clean and very easy to understand at a later point.
+
+Speaker 5  18:50  
+So to put it across, like, it's more for like, whoever is going to or trying to understand the code main helps them. But like, not, in fact, from the Python standpoint, okay, yeah,
+
+Speaker 2  19:03  
+let me prove that to you. So let's say in this print statement, I say hello, right? So now you know that process payment is just saying hello, and I'm calling Process Payment from main so therefore, if I run this program, it should print hello in the term, right? So let me run the program, and here it printed hello in the terminal. Okay, now what I'm going to do is I'm get rid of this name main, and I'm just going to put Process Payment just like that.
+
+Unknown Speaker  19:37  
+And I run the program,
+
+Unknown Speaker  19:40  
+I get the same output.
+
+Speaker 2  19:44  
+That is not because you This is an unnecessary complication, but this is because Python is such a forgiving language, like if you are dealing with any other language, those are like very angry language. If you make a little mistake, it will slap you on your face. In a sense, Python is kind of forgiving you. Okay, so just be thankful for that. Okay,
+
+Unknown Speaker  20:07  
+yes, question.
+
+Unknown Speaker  20:11  
+I thought someone else asking something.
+
+Speaker 2  20:15  
+Okay, okay, so now let's go back and actually change this to actually make it a useful function. So what does it say? Create a function that prints two message. First message should state that the cost of the transaction, state the cost of the transaction, and second should state the payment of payment has been processed, okay? And then the cost of transaction it saved,
+
+Unknown Speaker  20:42  
+how much did you say?
+
+Speaker 2  20:48  
+75 cent? So essentially, all it is saying is the cost of transaction would be, let's say dollar 0.75
+
+Unknown Speaker  21:05  
+and
+
+Unknown Speaker  21:08  
+then print.
+
+Speaker 2  21:14  
+Your payment have been processed again. This first activity, you are not really doing anything useful. Obviously, no one will write a function just to do two print statement, right? You can understand that. So you will basically in a real function. You would actually be passing some data to the function, and the function will actually calculate the what the total transaction and cost or whatnot, and then apply the function, apply the transaction to some back end database, and then finally, print the confirmation message in a real world. But this is just to get the concept of function a little clear right. So essentially, that is what your activity statement was, that in the first line print the total transaction of this, and second line is your payment has been processed. That's it. And then it will call it right. But again, if you look at the last sentence, does it do what it expect you to do? Does it? Yeah, it does. It does what you expect it to do, given what you have written, but it really doesn't do anything other than printing. So Process Payment name is kind of misleading. Is not really processing anything, but just given the limited scope of the function that we have, the code that we have provided, it does do what we are supposed to do. So this is just a quick primer about the function. Any question before we move on to some more exciting functions.
+
+Speaker 2  22:54  
+Okay, I will take that silence as a no, and then we will move on. Function anatomy, well, we already talked about this, Len, Max, mean, oh, then some append, pop, remove all of these different function we talked about the function anatomy, which is the function definition starting with the dev keyword. And then this is the function name. In this case, hello, and then function body, which is basically indented, and then the function call is where we are calling the function. So we already talked through this. This is just some sample function, and then we did this activity. That's good. Okay. Now moving on to the next topic, which is the scope of the variables.
+
+Unknown Speaker  23:44  
+So
+
+Speaker 2  23:47  
+when we define a variable, so let me actually go to the code and
+
+Unknown Speaker  23:55  
+try to understand from here. So let's say
+
+Speaker 2  24:00  
+I define a variable outside, I'm just going to use this file like the file is already open. But why not? So let's say if I call a variable which is price, and I'm putting a value, price equal to 50, okay. And then inside the function, if I say, print,
+
+Speaker 2  24:31  
+print price. So if I run this now, do you think it will print 50? Yes, yes. And why you did do that because it because it's a global scope. So if you run this function, it will print 50 here it printed because it is in the global scope. Now what will happen if instead of use. That price variable that is declared up. If I declare a price variable here and call it 20, so what would be the output if I print this function now,
+
+Unknown Speaker  25:13  
+if I run this function, now,
+
+Unknown Speaker  25:16  
+is it 20? Because 20 is within your function. Yeah.
+
+Speaker 2  25:24  
+So what will happen is now it will not look into the global variable. It will take into the local variable. I mean, look, it will print it. Now, is that really true? Or do you think in this price equal to 20 statement is actually changing the value in the global scope. Which one is true.
+
+Unknown Speaker  25:47  
+It's using the price defined in the function.
+
+Speaker 2  25:53  
+So you are saying the price that is defined outside the function, that value will still stay 50. That's
+
+Speaker 6  26:01  
+a global value. But so the price equals 20 is within the function. So it's
+
+Speaker 2  26:09  
+so what if, if I try to print price after the function has been called, What do you think output from this last print statement would be 2050? It should be 5050, global,
+
+Unknown Speaker  26:27  
+huh? It'll be 50. Uh,
+
+Speaker 7  26:33  
+let's try it, because it's within the if, now, if you put the price is like indented out, not within the if, I think it will be 50, I don't know. I'm just guessing.
+
+Unknown Speaker  26:45  
+What have been indented out, indented in.
+
+Speaker 7  26:47  
+So your price 50 on line eight, if you put another print on line 22 or 23 but not within the if,
+
+Speaker 2  26:55  
+no, no, no, that doesn't matter. No, that doesn't matter. As I said this, if statement is just a convenience. This, if statement doesn't matter. So this, if statement basically means everything inside this is the body of your function, sorry, body of your main program, and they are always running. Okay. So, okay, so I think I'm getting a consist consensus that the second statement will print 50 let's do this. Least, yeah, so it printed 50 and why? Because this variable is considered a locally scoped variable instead of a global scope variable. So that's why, when we I'm printing the value of price variable from inside the function, I'm getting 20, but that is not changing the value outside. And here we are printing the global variables value, and we are getting 50. Now,
+
+Speaker 8  27:55  
+what makes it global Is it just because it's not in the function and defined,
+
+Speaker 2  27:59  
+that's it. It's basically where you are different defining it. Anything that is defined inside a function are called Local. Anything that is defined outside a function is called Global. Okay. Thank you. So if you now look into the slide, right, so local variable is only accessible to the body of the function, and you cannot access the local variable code outside the function. So let me actually prove that also. So let's say this statement is not there. So let me comment it out. Now you see the moment I delete this statement, and even though I'm saying deleting, you might think like, Hey, you didn't really delete. I argue, no, I actually deleted because I basically turn that statement into comment. By doing that, I make Python blind to the statement, so Python doesn't know that statement exists. Now, immediately, as I do that, you see this print statement. There is a yellow squiggly line appeared. Why this print statement is fine? This print statement is fine, because it's not inside the body Exactly. Now, when you are calling this print with the price outside of the process payment function, this line, 21 has no clue what price is. And if you ignore this squiggly line, if you still are insist on running it, then it is going to slap you on the face. You will say that. It will say that this thing file, blah, blah, blah, in Module, yeah. So the error message is this, that name price is not defined. So essentially, this is what the error message is. It says this price is not defined because price is only a local scope variable and not a global scope variable.
+
+Unknown Speaker  29:54  
+So with that question,
+
+Speaker 9  29:57  
+I didn't understand the idiom thing with the double. Underscore. What does that mean?
+
+Speaker 2  30:05  
+That basically means, whenever you have a piece of code that you want the program to execute, when you call the program from your terminal, you put those piece of code inside the if statement that says, if underscore, underscore, name equals within double, quote, underscore, underscore, main, that's it. Just keep that in mind for now, because these are some special variables inside Python that Python uses to figure out when user is calling a particular function. That's all,
+
+Speaker 9  30:42  
+that'll always be name and main, or is that will
+
+Speaker 2  30:45  
+always be name and name. So these, this is one of those very rare cases where the variable name actually matters, because this is a variable that you are not defining. You see in this whole code, I have nowhere defined a variable name, name, why? Because a variable named, underscore, underscore, name, underscore, underscore, can somebody Thank you. This special variable name is not defined in my program. This is Python's only variable name Python uses internally. Okay, that's why the name matters,
+
+Speaker 9  31:24  
+and it only is used when we want to call this via terminal. I Sorry, I still don't fully understand. It's perfect.
+
+Speaker 2  31:32  
+Any, anyhow, anytime, anytime, when you invoke a program, that's where the execution starts,
+
+Speaker 9  31:38  
+always, every time a program starts with that, yeah, okay,
+
+Unknown Speaker  31:43  
+thank you.
+
+Unknown Speaker  31:46  
+Okay, so we talked about local one
+
+Speaker 2  31:52  
+second. I'll come to you Margarita just one second. So let's finish this global, variable conversation. So yeah, so this is basically kind of the same similar example here, where we have a two variables which are global, and then inside a function, we are declaring two variable with a similar name, but that are local. And when we are doing a computation, if you run this, it will you will see that the computation will be done using the local variable, and then not the global variable. But we have already seen that through our print statement. Okay, so that's good. I did not
+
+Unknown Speaker  32:33  
+understand what you just said.
+
+Unknown Speaker  32:36  
+You did not stand this code.
+
+Unknown Speaker  32:42  
+I didn't understand any of what you just said. Yeah, I don't have
+
+Unknown Speaker  32:48  
+this part right here. Will you re explain that?
+
+Speaker 2  32:51  
+Okay, I'll come to you, Margarita, your question first. So
+
+Speaker 10  32:54  
+I kind of confuse why we're using the global value outside the purpose of that. Maybe I will understand it in future. But why we're using the outside value then we're used at the same time we're using the whole one.
+
+Speaker 2  33:16  
+We are we are not using any India right now, guys, what we are trying to understand is the concept that, what is the different scope of variable like? Where can you see which variable from all we are trying to understand here is, if you have a variable that is defined outside of any function, that is visible from anywhere else within your code, if you have that defined, we are not doing anything. This is all toy code. This is just a demo. You're not doing anything. On the other hand, if you define some value, some variable, can someone please go on mute? I think there is a noise still coming. Thank you. On the other hand, if you do define a variable from inside a function, this variable is not visible from outside the function. That's all the point is, Okay, got you thank you. And Ryan, does that answer your question?
+
+Unknown Speaker  34:15  
+Or do you want to rephrase your question? You are on mute, by the way.
+
+Speaker 8  34:22  
+Go back to that other screen that you were on in the PowerPoint. Yeah. So I understand the first portion, where it comes down to define a function that will add two numbers that second piece, what are we doing with that?
+
+Speaker 2  34:38  
+All we are saying here is, if we do have a global variable, two global variables, let's say first number and second number, and then you have a function that we are naming the function at just another function, all it does is it adds two values which are locally defined. To be four and six, so the total should be four plus 610, and it should not be two plus three, five. And all we are doing is we are simply calling this add function from inside your main function. Sorry, not main function, main code, main program, to prove that it will only be printing the value of the global variables and not the local variables by the fact that it is printing 10, which is, which is your four plus 610, and not your two plus 310, which is the exact same thing what I showed you with my simple one line rule statement, yeah,
+
+Speaker 8  35:43  
+okay, I understood the first one. I just didn't understand what I was looking at it this way, so you're good. Okay, cool. Sorry, no problem.
+
+Speaker 2  35:53  
+Okay, so we did that. The next thing we are going to talk about is how we can pass some parameter to a function. Okay, so it's actually good that I copy pasted this here, so think about this function called act. So in the way that it is written right now, there is a function that says, add two numbers, meaning, add. But there is no way for me to tell the function when I'm calling the function which two numbers you add. Ideally, when I'm going to invoke a function to do something, I would like to pass some data to it on which it will do something, like if it is adding, I need to be able to pass two numbers to add. So how do I do that? Currently, we have no way to do that the way that it is written. Every time you say add, the function will blindly say, here your result is 10. Even if I want to add 20 plus 30, it has no way to know that. It will always print 10. So then, how do you pass data from your main program into your function? That is why we need to add parameters like this. So what are parameters? Parameters are nothing but placeholder for variables that makes Python aware that when the user will call me, meaning the function, they will give me something that I would need to use. So what the way that you can do is just put to variable name. Let's say there one and where two. Now the moment you say where one and that two, Python knows that these are the variables that I'm going to use for my locally scoped variable, which then user will pass. So now if I pass, add 10, comma 20, then these 10 and 20 will basically be assigned into var one and VAT two, and then that's how the computation will occur. Now, of course, if you use var one and VAT two when you are doing your computation, you need to make sure the variable name matches. The reason I did var one and VAT two just to show the concept that it could be any variable name, but if you do ver one where two, so you have to basically say total equal to ver one plus two, or if you just want to retain that first number and second number, well that's also fine, because variable name should be meaningful anyway. So if you just do variable sorry, first number and second number, and you don't have these two line so now you suddenly have a way to tell the function what to add. So you see how the flow is going. It will come to this main section of the code, and it will invoke the function 10 and 20. And the invocation will go here it will go inside the function, and then 10 will be assigned as a first number, 20 will be assigned as a second number. And then this line will be executed. Total will come to 30, and that's the 30 that it will be printed. So the beauty of doing this is I can add, call, add in any number, for that matter, any arbitrary number, right? And as many times as I want, like, whenever I need, at various places of my program. So every time I can call with a different number. So if I run this now, you will see three different values. So first is from this invocation, 10 and 20, which printed 30, and then your eight and 30, which printed 38 and then your 24, and 37 which printed 61 why? Because now I have a I have a way to interact with my function by passing some data to the. Function when I'm calling it by using these parameters.
+
+Unknown Speaker  40:10  
+Clear.
+
+Speaker 9  40:20  
+Any question there. So, yeah, I still have a question about the the idiom thing, why are we putting what's what? I don't know how to formulate a question about it. What? What is it doing for us? What? Why are we doing it this way with, why are we doing that portion of the thing under that, and what makes it a big reusable or or
+
+Speaker 2  40:47  
+this? No, this is not. This has nothing to do with reusable. So whenever you write this, think about is that is the beginning of where the program will start. That's all only.
+
+Unknown Speaker  40:57  
+So then, why did we put this?
+
+Speaker 9  41:02  
+Then why did we put the the logic outside of it?
+
+Speaker 2  41:05  
+Because this is not what the program is doing. These are the tools that I am building. So when you are building function, so functions are reusable tool that you are building for future, like, think about what people do before the winter comes, right? Or in the older days, what people used to do before the winter comes, they will basically process lot of food. They will basically make their sausages and pickles and whatnot, and then store throughout the winter when there is no food, so that they can go and eat the food. So think about Python this, sorry, function the same way whenever you are writing function, the idea is that you will need them later, when the program actually executes. So these add function, this process, payment function, these lines are not being executed in the order that are there written. The order of execution will start wherever you have this name equal to main thing here, what you are right going to write. That is the order this it will be executed. And the execution will jump from here, back to wherever you are processing or calling the function to that function. And you can have a mix of function, right? You can have a add function followed by a process payment function, followed by whatnot, like in any order, it doesn't matter. So it will basically start from Main and jump back and forth, depending on how you have you are invoking the function. But wherever you have shown equal to main, that is always the beginning point of the function.
+
+Speaker 9  42:30  
+Okay, so anything under the anything under name main, is done in order, in order, and it just references back to the things outside of it. And however it needs to, however we determine it does. It's kind of the back end of of what's underneath the name main is that kind of a way
+
+Unknown Speaker  42:49  
+to decide, okay, thank you.
+
+Speaker 2  42:53  
+Okay, so cool. Moving on. There are a couple of different way that I'm going to show you how you can actually call these, sorry, pass these parameters or arguments. So in here, when we are saying first number, second number, and you can put 2427 37 which is fine. What you can also do is you can invoke this function with a specific keyword. First, number equal to 24 and second, number equal to 37 while calling this you can actually specify which number is which. And when you call it this way, the output is exactly the same, 61 which is 61 before, but this particular way of calling, uh, sorry, invoking a function parameter is called the keyword arguments. So keyword arguments are nothing but name value syntax, unlike the previous case, where you are just simply passing them in order. So here, when we were doing add eight and 30. So this thing is called
+
+Unknown Speaker  44:10  
+positional
+
+Speaker 2  44:13  
+arguments, which basically means that by the position of the sequence of the values that we are passing, Python will decide which value will go to first number, which value will go to second number, whereas this thing is basically these other way of passing, which is keyword based argument with the name value syntax, right? So this is called keyword based arguments.
+
+Speaker 11  44:45  
+And you could change the order of those, and it would still have second number
+
+Speaker 2  44:49  
+Exactly. That's That's what I was going to show very good thinking. So to prove that, I'm going to first write a print statement inside the add function. So just to make sure which number comes in which order, so I'm going to say print
+
+Unknown Speaker  45:09  
+first
+
+Unknown Speaker  45:12  
+number
+
+Unknown Speaker  45:15  
+equals
+
+Unknown Speaker  45:17  
+first number and
+
+Speaker 4  45:21  
+second number equals second number.
+
+Speaker 2  45:27  
+So now what it will allow me to do actually let me
+
+Unknown Speaker  45:33  
+get rid of these other things
+
+Speaker 2  45:37  
+so that the output is clear, just one line output. Okay, so, so what is it saying? First number is 24 second number is 37 why? Because I'm saying first number is 24 second number is 37 now, if I call this the other way. That's like the simple way add 24 and 37 which is basically only based on position, not using a keyword, it should still produce the same output that first number is 24 and second number is 2037 so let's see if it does that. Yes. It did that first number 24 and second, number 37 because when you are calling something based on position, the sequence of the variable matches with the sequence of the parameter that the function expands. So if I put 37 and 24 the reverse order, you will see the output will change. It will say, first number is 37 second number is 24 because here, because we just change the order for the positional arguments.
+
+Unknown Speaker  46:57  
+But what if
+
+Unknown Speaker  47:01  
+I say
+
+Unknown Speaker  47:05  
+second number 37
+
+Speaker 2  47:11  
+sorry, I want to do second number 24 and first number 37 so instead of switching these, I simply switch the keyword, and now let's see what it prints.
+
+Speaker 2  47:31  
+So I don't need this line. I just want to see this line whether it prints first number 37 or not. And yes, it did. It did clearly say first number is 37 even though 37 is 37 here comes in the second position. But it still was successfully able to map this to the first placeholder parameter here, because we have specifically used a keyword and not simply relied on the positional sequencing of the parameters. So that's the difference between these two, two way of invoking function with arguments.
+
+Speaker 12  48:10  
+I guess the reason why it's still printed the first number first is because, as part of the definition of ADD, you defined it as first number then second number,
+
+Speaker 2  48:23  
+right? Of course, what I'm saying here is so here, when we are using the keyword based argument, I can provide the arguments in any order. I don't have to stick to the implicit order as specified by the parameters. That's all I'm saying. So you are free to use any order as you like, but, but
+
+Speaker 12  48:42  
+the output, the output follows the definition of
+
+Speaker 2  48:47  
+ADD. Output follows the definition output follows basically these. So what happens is these becomes your local scoped variables, right? So first number is a local scope variable. All I'm saying is when I'm invoking the function here in line, 43 I'm saying, Hey, first, take this value 24 and assign it to this local scope variable called second number, even though that comes first. So I'm basically criss crossing by explicitly providing the keyword that's all
+
+Speaker 7  49:21  
+is there any limitation on the parameters that you can pass? But now Rana, you have two is there any limitation how far can you go and put in it?
+
+Speaker 2  49:29  
+No, you can provide as many as you want. Okay, that actually is a good question, which we will see later. So when you have, let's say, 100 values that you want to pass, it becomes very nasty to write a function with 100 things here, like variable one, variable two, variable three, wouldn't do that. So when that thing, that type of situation comes, people use some other data structures, such as list or tuple or dictionary or something like that. Okay, so. When you have lot of arguments, lot of different variables, you basically need to use some data structure, and that's why we did the data structure in the previous class before we did to this class. Okay, so that's keyword argument, positional and keyword arguments. Okay, so the next topic is basically talking about how I can basically do what is called an iterable unpacking. So first I want to you to look into this word, iterable. So what does iterable mean?
+
+Unknown Speaker  50:40  
+Anyone knows,
+
+Unknown Speaker  50:41  
+you can iterate upon it like n plus one.
+
+Unknown Speaker  50:47  
+Can you give me an example?
+
+Speaker 1  50:50  
+I think I saw an example in one of the things is just like for like for the homework assignment, like menu choice. You want menu choices to be iterated upon. So like, first choice, you know, the first thing they select is number one, the second thing they select is number two, etc, kind of,
+
+Speaker 2  51:11  
+kind of looping. But so, okay, so let's, let's think about it this way. So let's say I create a variable, right? Let's say that one and I assign a value to it, let's say an integer value 42 is var one iterable? No, because this is a single value, right? If I put a decimal point, is it iterable?
+
+Unknown Speaker  51:35  
+No, single value.
+
+Unknown Speaker  51:39  
+If I put two
+
+Unknown Speaker  51:47  
+values
+
+Speaker 2  51:50  
+in a string. Is it alterable? Yes, yes. So basically, whenever you have a structure that has that is kind of works as a container of other data elements, all of those things in Python, are iterable.
+
+Unknown Speaker  52:10  
+If you have dictionary,
+
+Speaker 2  52:15  
+is this iterable and then you have key value pair? Is the dictionary iterable?
+
+Speaker 11  52:21  
+Yes. Because the items are iterative.
+
+Speaker 2  52:26  
+Yep. So dictionary is iterable. List is iterable? If you have a tuple, is that iterable? Yes, tuple is also iterable. Does anyone know what is the difference between list and taco? I think we discussed this last
+
+Unknown Speaker  52:44  
+week. Bubbles are, you can't change them,
+
+Speaker 2  52:48  
+immutable, exactly. But other than that, they are both comes under the iterable category, right?
+
+Unknown Speaker  52:58  
+Okay, so,
+
+Speaker 2  53:02  
+okay. So now let's define a function. So
+
+Unknown Speaker  53:12  
+let's define a function for
+
+Unknown Speaker  53:21  
+traverse.
+
+Unknown Speaker  53:24  
+Eye trouble.
+
+Speaker 2  53:26  
+So that's my function definition, and you will see in a moment, why am I doing it this way. Okay. Now in this function I want to pass, let's say four parameters, A, B, C and D. Okay.
+
+Unknown Speaker  53:45  
+Inside the function,
+
+Unknown Speaker  53:48  
+I want to
+
+Speaker 2  53:52  
+concatenate these or add these using a simple plus statement, a plus b plus c plus d, and then I finally create the result
+
+Unknown Speaker  54:15  
+like that. Okay,
+
+Speaker 2  54:19  
+so now that is my function definition, called traverse alterable. Now I'm going to call, try to call this function on different things, and before I run I want you guys to predict what is going to happen before I run the statement. So let's do traversable. And I'm calling it with, let's say one value 10.
+
+Unknown Speaker  54:45  
+Would it work?
+
+Speaker 6  54:49  
+Why? It doesn't match the parameters what you're putting in correct?
+
+Speaker 2  54:54  
+And it will not work because it clearly says missing. Three required positional arguments, B, C and D. Very clear error message, because we have only provided one, and that goes to A. So if you do want to make it work, you actually have to provide exactly, oops, sorry, exactly four. What if, by mistake, you provide more than four, five, then also it will error out. It will say text four, positional argument, but five were given, right? So you have to provide only four. And when you do provide four, it is finally working. It is adding up this four variable and giving me the result which is 100. Okay, so now look at this magic. So let's say I call a variable called numbers, I declare a variable, and I make it a list, and inside that list, I basically put four values.
+
+Unknown Speaker  56:07  
+Now, see numbers is a single variable.
+
+Speaker 2  56:11  
+Now I'm going to call traverse iterable, not with four different variables, but with one variable. Would it work?
+
+Unknown Speaker  56:25  
+Yes,
+
+Speaker 2  56:26  
+yes, and no, I think yes. Okay, anyone thinks no,
+
+Unknown Speaker  56:32  
+it does go
+
+Speaker 13  56:34  
+to the contents of numbers, the indexes to the positional arguments, so you need to put that star before it
+
+Speaker 2  56:44  
+Yes, so I'm going to come to that, but you are always one step ahead, so that's a good thing. So anyway, so this will almost work, right? So what you guys probably thinking is, hey, this guy this function, and he's expecting four things to be passed on, and these numbers has four things. Therefore it should work. Unfortunately, no, because numbers itself is a single variable. And if you do it this way, at least in the current version of Python, it is not smart enough to know that it has four different things. Who knows? Maybe in version 13 or 14 or 15, maybe Python becomes smarter, and then they might actually handle it like just like we saw in yesterday's class, right when we had that double quotation and single quotation mark, which did not used to work in previous version of Python, but it's working in python three, dot 12. So as of now, this version, it doesn't work. It would work if you specify a star symbol in front of this, which essentially allows you to allow Python to unpack that. So essentially, think about this number kind of as a package and envelope containing four things inside the envelope. Now, in order for this function to work, this function need to be able to open the envelope and unpack the content inside. So normally, Python does not have the permission to do that, or Python does not give the function to permission to do that. And this star symbol, think about it kind of an override to the default behavior that allows the function to unpack and see what is inside it, and bingo, it will see that there are four items, therefore everyone is happy and the code just works.
+
+Unknown Speaker  58:38  
+So this is called iterable unpacking. Okay,
+
+Speaker 5  58:46  
+so, like, if we just mentioned the start, like, how is that doing that iteration? Like, is there any inbuilt thing which gets called, of course,
+
+Speaker 2  58:54  
+yeah. But we are not going to discuss how Python internally. Does it just know that when you are passing an iterable variable, providing a star allows the function to unpack it, just given how it does it. Even I don't know that that's our language syntax. It's part of the syntax of the language. Yeah,
+
+Speaker 5  59:14  
+got it. Got it. So there is no specific package to be used with the
+
+Unknown Speaker  59:17  
+default Python
+
+Speaker 2  59:21  
+now let's do it in a slightly different way. Now I'm going to write numbers instead of a list. I'm going to write it as a dictionary, and in this dictionary, I'm going to say key value pair, where a is 10,
+
+Unknown Speaker  59:42  
+B is 20,
+
+Speaker 2  59:45  
+C is 30, and D is and these ABCD, by the way, does not have to be matching with these ABCD. I'm just using these ABCD. It doesn't matter. Or I can probably. Let's just use something else. Let's do because otherwise you might think, Oh, these ABCD is causing it to match. I just want to prove that that's that doesn't have any meaning there. Let's call it W, X, Y, and okay,
+
+Unknown Speaker  1:00:15  
+so oops.
+
+Speaker 2  1:00:17  
+Now I'm going to call traverse iterable on these numbers. Would it work? No, because I forgot to put that star Mark, that asterisk symbol right now. What would the output be if I put a asterisk symbol here before I run it, try to guess W, X, Y, Z
+
+Speaker 3  1:00:41  
+is the W error out because there's not a
+
+Speaker 11  1:00:45  
+why, because, because you're passing in strings, and plus means concatenation,
+
+Speaker 2  1:00:52  
+correct? So this because it basically needs a two level unpacking, kind of right? Because think of dictionaries and iterable list is an iterable but in list, if you open the envelope, you can see the content right there. But in dictionary, there is another level of abstraction inside if you open the envelope, you will not see the content. You will see basically four little boxes with W, X, Y and Z marked on there. Think about it this way. And then you have to open each of these four little boxes to actually get to the 1020, 30 and 40. So essentially, two level of unpacking needs to be done. So that's why, when we are passing the same four numbers and form of dictionary, and we are doing only a single asterisk sign, it will print w, x, y, z. Why? Because it is only going to this level. It it sees the levels inside this which are the keys of the dictionary. And these W, X, Y and Z get passed on to A, B, C and D, and the result is basically concatenation. And as you already know, that when you add two or three or four numbers using a plus sign, it basically gives the arithmetic sum. But if you add two or three or four string or characters, it basically puts them next to each other, which is called concatenation of the string. So it is concatenating W X, Y and Z, and giving me w x y z as an answer. Now, what do we need to do to actually get 1020, 3043, from here. Well, as I said, we just have to add two stars before the alterable.
+
+Speaker 2  1:02:36  
+Oh, okay, no, so sorry, when you do the double packing, then it does matter, because it says it got an unexpected keyword argument, w, that was what I was
+
+Speaker 3  1:02:47  
+gonna say, that like, didn't recognize the parameter,
+
+Speaker 2  1:02:51  
+yeah. So, yeah. Sorry, I almost forgot that. So when you are doing the two level argument, sorry, two level unpacking, then these keys have to be equal to the parameter names that the program is expecting or the function is expecting, and now it will do that. Okay, so that's that iterable unpacking.
+
+Speaker 12  1:03:17  
+Is it? Is it accurate to say a single Asterix is calling up the keyword and the double asterisk is calling up the value behind the keyword.
+
+Unknown Speaker  1:03:27  
+That is exactly what
+
+Speaker 11  1:03:30  
+it sounds like. There's a nuance to that, though, because if, if that were true, it would have worked with it being x, y, z, w, x, y, z, but you had to change it to be a, b, c and d to match the parameters of the
+
+Speaker 2  1:03:43  
+function. So yeah. So basically that means, when you are doing this double asterisk internally after unpacking it, is invoking this this function with a keyword based argument, not a implicit position based argument. So it is basically taking these dictionary keys as the keyword like similar to how we were calling this before, with the first number and second number. So it is literally using the dictionary key to call it using a keyword based argument rather than a positional one. That is the only explanation I can think of why it is sensitive to these keyword sorry, sensitive to the dictionary keys,
+
+Speaker 11  1:04:25  
+kind of like how you passed it before, where you gave it the actual Yes,
+
+Unknown Speaker  1:04:28  
+they'll be equals, yep.
+
+Speaker 11  1:04:32  
+Do we talk about default values and functions and function parameters?
+
+Speaker 2  1:04:37  
+I was going to, I don't think it is covered in your course here, but you are right on point. Before I was going to break you guys out, I was actually going to talk about default values. So good thought process. Okay, so, okay. So here, as we have seen, so. If I do a function with four variables, if I don't do any iterable or anything, if I want to pass call the function, then I have to exactly pass core value, right? And the function will be what hat now think about a situation, and it does happen more often than not, where sometimes we have to call a function with one variable, sometimes with two variables, sometimes with three variables, sometimes with four variable, with the expectation that if the user calls the function with one variable, the second variable will always be two. And the, if the function is called with the two variables, then the third variable will be three. And the if the function is called with three variable, then the fourth variable would be four. So essentially, what I'm saying is, what if, if I say, if you pass a variable, that is fine, if you don't pass let the function assume a default value. So essentially, what I'm saying is we can say, hey, let's call it 20. So let's say B default value is 20, c equal to 30, and d equal to 40. So all I did is I basically to sum of these parameters, I provided a default value during the declaration of the function, and when that happens, I can still call the function the normal way, and I'll still get 156 Make no mistake, but this time, it is possible for me to call it even with one argument. Why? Because now Python says, Okay, this guy has provided one argument. So what? I already have default values of all of the other argument provided to me. Therefore I'm happy with this one argument, which is 45 and then add 2030, and 40 to it, which comes to 135, you can also pass two variables here. Let's say 45 and 45 I pass. And let's see the matches up. So it is 90, and then 30 and C and D will come from the default, which is what 70 right, and 70 and 90 becomes 160 Yeah, it works. You can also pass it with three variables. Let's say 4545 is 90. Let's do a 10, which will make it 100. And the third variable is 40. So it should print 140 Yes. And then, if you want to pass all four variables, be my guest. So this way, you can make a function except variable number of argument. One thing you have to keep in mind, though, you cannot declare a function with a non default parameter, then a parameter with default value and then a non default parameter that is not allowed. You see, as soon as I did that, there is a red squiggly line appear. The Python God became very angry that you are doing this like, How come you stupid programmer do not know that this is not allowed, and I'll show you what the error is. It says parameter without a default follows a parameter with a default. So that is not allowed. So if you think you want to provide two parameters without default and two parameters with default, the one without default always has to go first before the with default one start to appear. So there is no mix and match. So that is only one limitation that we have to keep in mind, okay, and that I believe, makes us ready to tackle the Next student assignment, which should be car loan calculator. You
+
+Unknown Speaker  1:09:23  
+yeah,
+
+Speaker 2  1:09:25  
+that's all you will need. We have covered everything that will need to do this assignment. So this would be your assignment number, sorry, which 104 so assignment number 04 so let's break into the breakout rooms. At this time, I'm going to stop my screen share so Karen, if you can have everybody, like all the students, split into four rooms, and then let them go start working, and then four of us, we will basically visit one of each rooms. You. Now you are. Now you are. I don't know what is going on so, so for me, it is showing me that I'm still in room four, and yet I see everyone here. So I was it didn't even show me when the room closed and I was looking to how to get back to the main room, I see that I'm already here.
+
+Unknown Speaker  1:10:21  
+Um, but we all came back, right,
+
+Speaker 3  1:10:23  
+yeah, it says open all rooms, which means they're closed now, okay,
+
+Speaker 3  1:10:29  
+oh yeah, because I didn't see you at first, and I thought you got lost.
+
+Speaker 2  1:10:33  
+I see, I see, no, yeah, maybe I lost my connection in between, and something weird happened, so
+
+Speaker 3  1:10:39  
+you kind of got lost in another dimension for a little while. Yeah,
+
+Speaker 2  1:10:44  
+yes, okay, okay, now that I'm back. So I was in room four, and I actually did notice that Jesse was helping a lot to the other members in the room, which is good. But one thing I'd like to emphasize is guys, I know that probably in each room, there were some people who have done Python before, and they are helpful, which is really good. But in order for your learning, you need to be able to kind of get into that growth mindset, fight your inner fear. And even if you have not done this before, you need to be able to roll up your sleeves and start doing it. Okay, because there is only one way to learn Python or any programming for that matter, which is to try and fail and then try again and a fail and a try again, maybe third time is a Chad. Okay, so, please.
+
+Unknown Speaker  1:11:43  
+Okay, so, and
+
+Speaker 3  1:11:44  
+there maybe people have experienced my kind of step in, my kind of sit back a little bit and let people fumble around and stuff too.
+
+Speaker 2  1:11:53  
+Okay, so, so this is the salt code. I hope you guys all did it the same way, except I have only one change that I made. I don't know whether you guys did it this way, which is the actual invocation. So I don't know. I'm not sure whether you guys noticed, but this invocation you can actually do using the double asterisk method, right, which is the iterable double unpacking. Is anyone who have done it this way, or did you actually pass in new car loan, loan value, new car loan, loan interest this way? Because there are two different ways you can do it, right? So I just wrote it here just to show that you could also pass it this way. Okay, so just check note, in case you didn't notice that that this is one way you can call it, okay, any question regarding this assignment, anything that you got stuck with particularly or didn't understand, just for this assignment, okay, I will take the silence as a no, and then I'll move on. So the next it's a very short, quick thing that I'm just going to add to this, which is how to return value. So one thing now, I want you guys to look into some of this function that we have written. For example, let's see our traverse iterable function. Right? What is this function doing? I'm giving it four values. It is adding the values, and then it is just printing it. That's it, which is good, but lot of time the situation will demand that wherever you are calling this function, you need to grab whatever the function is outputting for later use, maybe save it in a variable, or use it for some further computation, downstream or whatnot. So when this kind of situation arise, you would like your function to be able to return something back to the program that calls it, and that's how, that's what you do, by adding a simple statement at the end of your function that will say, return. So if you return something and any local variable inside the function, you can return. Well, in this case, result is that local variable that I'm computing the sum of the phone numbers. So all I'm going to do is I'm simply going to return the result and then nothing else changes. I can still call the function the way that I want to. But one thing now I can also do, I can grab that return value and put it a variable here from where I'm calling it. And when I do that now, you will see that it is not printing anything, because raise is something that I have already saved. And. Later I want to do something else with the results. So let's say, if I want to call it twice, let's say res one and rest two. And for both of these times I want to call it, let's say, with different things,
+
+Unknown Speaker  1:15:18  
+you still need to change the second res one to Yeah,
+
+Unknown Speaker  1:15:20  
+I will. Okay,
+
+Speaker 2  1:15:24  
+so now you see it is printing. It is printing still, because I still have the print statement, but at the same time, I also have the res one and rest two that remembers what is the return value from the first call and what is the return value for the second column, and then later, at any time, if I want to use these, I can use it. I can print rest one. I can print rest two. I can do some any further computation. Let's say my situation demands that I add this four set of number, and let's say I multiply those. If I want to do anything with these numbers. I can do that, because what I'm having here is so think about this function is kind of a recipe, and I put in four raw material for ingredients for it to cook, and the function knows the recipe on how to cook it, cooks it, but after cooking it, the cook, the chef itself doesn't eat it. So up until now, what was happening is there was a recipe, and inside that box there was a cook. But the cook was so hungry, he was cooking the food with the recipe that we are passing, and then he was eating it himself. Now what did the cook is doing is cooking the recipe and passing it back so that when we put the order, we get the food back, the prepared food, which is my result one and result two, so that I can do with the result anything that I please at any point in time later. So that's the reason that we need to use the return value from a function.
+
+Speaker 2  1:16:58  
+Okay, so let's do look into the next student assignment, which is to we did, what car loan you did, the return value we talked about six. So then next assignment is number six. Yep, the returned goods.
+
+Speaker 2  1:17:26  
+Okay, so let's take a look at the time. So we have six, and then we have eight and 10. I think we would have time. Okay, so let's do another 10 minute this time we will complete this, come back to the main room, and then we will get into 10 minute break right after So, Karen, let's go ahead and recreate the same rules on top of these, like a payout fraction. And then in this section, we said, we have to, you have to make the function return something back, instead of just printing it right away inside the function. So whatever the result was, we put that in a variable, and then instead of printing the variable, we have a return statement, and that is the last statement of the function. And then in the main section of your program, which is from line 20 to 25 you basically had to call this function. So line four is the declaration of this function. Line 23 where you are using the function. This is the function call or function invocation. This is where you are invoking the function and passing what you promised that you will pass, which is claims, which in this case happens to be this local variable called weekly claims, which were already typed in for you in the unsolved file. So essentially, what you are doing is you are passing these six values as one list through these weekly claims, which goes into these claims, and then it goes into the function, and it does what it needs to do, and then it comes back. And then when it comes back, since you didn't print or anything, so you need to have a way to grab that. So think about going back to my example of our kitchen, you know, like a black box. And there, there is a cook sitting there, a chef sitting there, waiting for you to pass the raw material, which in this case is claims. And then there is a little window, so after the cook is done with the cooking, and then there's a little window through which the cook is going to shoot the food out. And you need to have a bag or something to catch the food, otherwise it will drop and it will get spoiled and you'll never see it. So this is where I'm catching it. The catching variable is, in this case, insurance payout like here, and then once I am catching it at that time, function is done at a later point in time, which so happens to be line number 25 here. I can do whatever the hell I want to. In this case, just a mundane print statement, but if you wanted to do something more fancier than. Is I could have done it. But the point here is to understand two things, to make sure that two things, that you can pass a variable into a function, and after the computation is done, you can return the result to the calling method and then do something with that result outside the function. So that is the whole flow. Now we are going to get into a break right now, but just bear with me for one or two minute. I want going to show you something that is going to make you understand this little better. And I have seen this feature to you before. Let me show that to you again, and this way you can actually follow like you don't have to take my word for it. I mean, you probably see like when you see me, hear me talking. Or, I mean, people like Jesse or or there are people in students body who who knows exactly how the flow goes, people who have done the programming, but those who have not done it, you can probably you are having little hard time visualizing it. But let me show you a cool feature which is used for debugging code. But if you do it, you can actually see how the program flow is going. So what you are going to do, you are going to in this left column, right you, as you move the cursor up or down, you will see that red dot going up and down, and wherever you click, then the red dot will permanently appear and disappear. So I'm moving up and down, and I think, okay, wherever my first function is, if name equal to main, that's the first line of my function. I want to see what the program is doing. I don't want the whole program to run in one shot, print output and then I have no clue, because I'm at a learning stage right now. I want to see step by step, what the program is doing. So I put that dot here, and then instead of hitting this play button here, there's little drop down here, and that has another option here. It says, Python debugger, debug Python file. So I go into the debug mode and then I wait for a minute or not, a minute, a second or two, and then you see this line appears. And you see here, there is a arrow. So that means the program has executed up until this point. And then there are a whole bunch of arrows here. So if you do this arrow or press F 10, it will go to the next line. As you see that shadded line moved and right now you see in under the local there are no variables here. There are some special variables which are all those variables? One of them is name equal to main, as I was talking about, like all these variables that start with two underscore and ends with two underscore, those are special variables, and those get created the moment the program is invoked. And then there are some functional variables, which is process claim, and why? Because this process claim has already been defined, but there are no other local or global variable here, because I actually haven't executed anything. Program is waiting for me to step this is kind of seeing things in slow motion, right? Like you see the sports broadcast. Things happen so fast, and then in order for viewer to see exactly how the ball came, how, how exactly, the better hit. They show it in the slow motion. So this is like a slow motion of that, right? So now I'm going to hit the next button again, which is this little arrow. And now it came here. But now something see happened here under the local variable, these weekly claims that you have here. Now it is appearing here. So this is basically a peek inside what is happening inside your computer's memory right here, printed in front of your eyes. And the program has declared weekly claims, and it is now waiting here to do process claims. Now process claims is a function, so if I just do F F 11, which is this, it will not go inside process. Claim, it will just jump over. So in order for it to go inside process, claim, what I can also do is inside process claim, I can add another break point here, so that way I know that after this process. Claim it will go here.
+
+Unknown Speaker  1:24:23  
+Python debugger. Have a step into I
+
+Speaker 2  1:24:26  
+am, I am going to say that, yes, everything, yeah. So now I
+
+Speaker 3  1:24:30  
+can wrap into F 11 will take you into Karen.
+
+Unknown Speaker  1:24:33  
+Can you hold on for a moment? Please? Thank you.
+
+Speaker 2  1:24:40  
+So now I can hit F 11 and it will go there. Or if you know how what are the different buttons? You see that this button is, sorry, F 10 is step over. Hang on. Where is the tool tip? Yeah, so F 11 is actually step into so if you don't put up the. Point here, you have to remember to hit step into here, which is F 11 instead of step over. So when you do that, you will see that now it will go into process claims. And now my local variable is claims. So whatever my local variable before, when I was in the main portion, it was weekly claims. Now when I came into function, it changed into claims, and I have not done anything, so there are no other variable. Now I can do next button, which is step over, because I don't really want you to go into the sum. This is pythons internal. So now you will see that this new variable, total claims should be coming here. Where is total comes here. So this is my total claims, which is 30,500 and this is my function variables which are basically 5000 1000 all of these. So these are the local variables, right? And then this is the final total variable, sorry, total claims here. And then I hit one more time, and the total payout, which is this multiplied by 0.3 so these also came. And now after this, this return statement will execute, and the control will go back to wherever we started, which is here. So see carefully how what it happens. So now I'm going to hit F 10 again, and bingo. Now I'm here. Now my function is done, closed. Cooking is complete. The Cook has given me the result, which is nine, one, few, five, zero, which I am now going to assign into total insurance payout after I hit the next button, and now you see the total pay insurance payout is now my new local variable, which contains the output that came back from the function, which is 9150, and then when I print it, it will just print that, and the program will end and that's it. So try making use of this feature if you are confused at any point in time, if you don't understand how your program flow is going, put this break point and use the debugger, and you will see that you can actually see for yourself how the program is doing. People often use these in the cases where, let's say there is a complex piece of code, and let's say the programmer himself is kind of lost. He doesn't know there is some kind of a bug program is not expecting the working the way that it is expected. So that's the time that people use these features. But this is also a very good learning feature, right? Especially when it comes to to like at the beginning phase in a simple program that you are starting to trying to learn how the execution flow goes. So try to make use this feature. It will It will come in very, very handy as we go forward. So with that being said, we are almost at the two hours mark. So let's take 10 minutes break, I'd say, and then come back. So now it's a 26 Actually, let's do go back up to 40. So let's convert at at 1140 my time, which is 840, your time.
+
+Unknown Speaker  1:28:06  
+Let's give ourselves a little room to stretch out. Okay?
+
+Unknown Speaker  1:28:18  
+My other browser will go there.
+
+Speaker 2  1:28:38  
+Okay, let's Buckle up for some Python magic. So this is what we kind of briefly touched upon. Karen suggested lambda last class yesterday, and I said, Let's not go there right now, because today we are actually going To learn what these are. So
+
+Unknown Speaker  1:29:04  
+okay, everyone back? You?
+
+Speaker 2  1:29:35  
+Let's give it one more, like one minute extra
+
+Unknown Speaker  1:29:40  
+for people to come back.
+
+Speaker 2  1:29:54  
+Okay, let's get started. Okay, so guys do. So we have used some, actually quite a few, built in Python functions before, such as your Len, some min, max. So these are all built in function. So today we are going to learn about three other built in feature in Python, which is map, lambda and filter, and we'll see how this can make our work little bit easy, and when we write the code, for most part, actually, in all cases, you can get by without knowing what this does. If you have followed the chat in the Slack channel where I asked people to kind of put put forward solution for that problem from yesterday, where you had these birds, and you were asked to find out what, what is the bard with the lowest and highest height to weight ratio? And you have seen different people, at least three different distinct solution. I saw people have posted, and those were all good solution. And there are some pros and cons for each of these problems, which I have posted some comment on as well. So I hope you saw that, and also after your studies. Plus, just on record, I put a one liner solution there using something called lambda, and with that lambda, as you probably have seen, all these different lines of codes could be just done in one line, and these are so powerful feature in Python, so let's see what these are. So first talking about mapping, okay, and by the way all of these functions work on iterable, meaning your list, right or tuple. So what does the map function do? So you see it says, map function is similar to function that we use for list comprehension, because its purpose is to apply a function to each iteration or each element in an iterable object. So if you have a list with 10 things, and you apply a map function, it applies whatever function that you are passing to each every individual element of that object without you having to write a for loop yourself. So essentially, this is kind of a shorthand that you can use so that you don't have to write the for loop yourself. The Python will do that for you internally, and we are going to see some example for that, how that works. So I had some code written here,
+

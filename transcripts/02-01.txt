@@ -1,0 +1,399 @@
+Speaker 1  0:03  
+Hey, welcome everyone. So how are you guys feeling after the first week? Excited to roll up excited to roll up sleeves and do something i Okay,
+
+Speaker 2  0:24  
+a lot of things was new for us, and I hope, I think all of us really happy about
+
+Speaker 1  0:31  
+another another thing, I'll tell you, the thing that are new. You are probably thinking, This is too much, but as you start to use these and do something like use this environment to actually do the programming. This will all come naturally to you. It's just a matter of maybe couple of days initially, and then it will just come all natural. This is not rocket science, so, yeah,
+
+Unknown Speaker  0:58  
+oh, you're talking on mute. That's fine. Okay, I
+
+Speaker 2  1:01  
+said yes, for sure. It's not okay. It's not a networking for sure. No, no, right?
+
+Unknown Speaker  1:07  
+Yes.
+
+Unknown Speaker  1:10  
+Okay, cool. Okay,
+
+Unknown Speaker  1:12  
+so in today's class,
+
+Speaker 1  1:16  
+it's programming basics, right? And not just today. This whole week, we are just going to learn how to do programming in Python. So we are not specifically going to do any machine learning or AI programming as of today. And the reason is that this cohort has variety of backgrounds. Some of you have not done programming, so we are going to take it real slow and steady to make sure that we bring everyone up to a level so that everyone can feel very, very comfortable when it comes to actually doing the manipulation of machine learning libraries or manipulating data. Because when it comes to machine learning, the first thing you need to learn is how to manipulate data, right? Because machine learning cannot be done without data, right? The Machine Learning only works because you have lots and lots of data without data, no machine learning model will be able to train. So first a few classes, we are going to learn the basics of Python programming, which is our language of choice here, because that's kind of a universally accepted language across the data scientist, machine learning scientist. So that's why we are choosing Python. And this is the most relevant skill that you can learn. And you can basically take this Python skill, the new, newly learned Python skill as your Christmas gift for this year, okay, and you will thank us later that you basically joined this for those of you who do have programming background, and first day, we did a little voting, and I think About a third or more of the class have done Python programming before, if I'm not mistaken. So my message to those people would be, Be little patient. We will pick up speed very soon after this week. So this week, you can do one of two things. One is sit back and relax and chill. And number two, which is much better, you can actually help your peers understand, whether it is in the breakout room or even informal study groups that inform and it is very common in all of the other cohorts that I have taught, the students do kind of tend to form some kind of a self study groups, which I have seen usually starts coming together towards, like, about week five or six, when students starts thinking about, like, Hey, we are going to do this project work together, right? Because there are three projects that you have to do right around week seven, eight, and then week 1516, and then one project towards the end. And those are two week long, long projects. So what I have seen is specifically around the first project, students start to form these very closely lead community study group, peer group, or whatever you call it, and they help each other, right So, and it's never too soon to start that early. And so my request for those of you who already have good Python programming background is to kind of help other people. Because, to be honest, the matter of the fact is, learning Python itself like become an very expert in Python can take a lot of practice, right? And we are going to give you some hands on practice, some of those you are going to do in class, some with me, some in your breakout rooms. And then there are some weekly assignment that you will do. But when it comes to learning a completely new language, it is not different from let's say you are a first language, speaker of English, and you will start, starting trying to learn. German, right? So you can, you can go subscribe to Duolingo or whatever, but unless and until you are actually speaking that language and talking then it did not you, it would probably be challenging to become very fluent in that, that language. So when it comes to learning programming language, it's not that different. So you need to have a lot of practice. What I will do it is at different point in time. I will share some link to the other Python books. If this is not totally optional, and there is no it's not mandatory at all. If you want to kind of do some additional practice and Python problem, I can share some books with you so that you can go and do those exercises yourself and just, just study, just read the book, and you will see, right? But we'll do as best as we can, not just me or like all of our instructional staff member, we will be there with you, and we'll help you along this journey, specifically for those who are doing the programming for the first time in their lives. Okay? Thank you. And if at any point of time you feel that the class space is kind of too fast, so you want us to or want me to slow down, feel free to interrupt me if you don't understand something. And it if it happens, my apologies in advance, because what happens is people who have done programming for, let's say, 2030, years, they might think, Oh, this is, this is kind of given, right? This is intuitive, but for someone who has not done that before, they might need a little bit more time for that idea to sink in. So if that is you, feel free to stop me anytime. Okay, please don't hide behind your turned off cameras, please speak up. Okay. So with that being said, let's get started. So the first section of the class today is to basically understand the principles of programming using something called pseudo code. So pseudo code is something where you are not really writing a code. You are simply writing the English language statements. But this is a way to, kind of have, get your mind around on how to solve a problem in a very structured, step by step manner. And it could be very common everyday problem, but these kind of thinking, which we call computational thinking, it extends well into other realms of life, in this case, in your Python programming or anything that you do. So we will spend some time understanding that what the computational thinking is and then from there on, we are basically going to start to learn the first Python syntax, which is where how to create variable, meaning variables are nothing but placeholder of data. How you use those variables or placeholders of data to perform certain mathematical operation, like simple mathematical operation, addition, subtraction, multiplication and so on. And then we will also learn how to print those the output of those little commands or operations that you are doing. And we will end the class by understanding what are data types. So when it comes to programming language, there are different types of data depending on what the data represents. And that will be basically the end of today's class. Um,
+
+Unknown Speaker  8:33  
+any question at this point before we jump right in.
+
+Speaker 1  8:41  
+Okay, so for the computational thinking, I'm sharing my screen, right? Okay, so it's basically, as I said, it's the process of understanding a complex problem by breaking them into smaller chunks and taking a larger complex problem and breaking it into smaller chunks. That is the number was number one skill you have to adopt as you start becoming a programming professional, Python or any language, right? How you take a bigger problem and break it out into smaller chunks, and then you basically go bottom up, develop the solution to the smaller chunks, and then integrate the solution in a way that it basically turns into the solution of a much larger and more complex problem. So break it down into smaller parts, solve the smaller problems, and tie everything back in towards your ultimate goal, which is solving the original problem. That that's intent. So that's essentially what the process of computational thinking is, right? So when it comes to these computational thinking there are four cornerstones you have to keep in mind. Number one is decomposition, which is basically what I just said. You have a lot bigger problem and you break it up into smaller problems. Problem, right? And you can think of like anything, like, let's say very mundane things like, hey, given a plate of food, we eat the food so. But if you think about it, eating food, it's kind of our second nature. We don't think about it. But if you think about how you decompose this, let's say, if you, let's say you want to program a robot to eat a food from a plate presented in front of it, right? So think about the program person who is programming the robot. How would that person program the very act of eating food? Right? And it has to deal with things like, Okay, well, first you have to identify and recognize that's a food number one, after you recognize the that it is food, then you have to recognize the relative position of the food in comparison to your hand and mouth and eyes, right? It's very easy for us humans to do, but think about it, if you want to have a machine to it right, and then the next act would be, well, move your motor nerves to basically go and grab the food and so on and so forth. So essentially, what you will be thinking is you take a bigger problem, which is eating food, and you are decomposing into smaller problem. Hopefully the solution to the smaller problems are more manageable, easier to think of, rather than thinking of the bigger problem, because if you have a very complex problem in hand, the solution might still seem a little bit daunting and overwhelming at times if you are not decomposing it into smaller problems. That's why the first thing that you have to keep in mind, given a problem, you need to develop this practice of how you can effectively decompose these into a smaller problem. That is that more manageable? So that's the pillar number one. Then pillar number two is pattern recognition, meaning recognize the pattern. So what happens is, sometimes, when you see, let's say multiple different things, you have to, you have to basically identify, Okay? So I have these five different set of tasks. There might be some underlying pattern behind between those, right? So when you recognize that, or also, if you can match that to some of the known pattern that you have learned before, then you can easily relate, right? And so let's say, talking about, going back to my example of eating food, right? So one pattern you have, you can identify, like, Okay, well, I see there are multiple things on the table, there is a plate, there is a bowl, there is a fork, there is a spoon, and there is some food on it. So you have to recognize how you how you find the pattern that which one is your food. So that's one type of pattern recognition. The other type is, well, when you think about these little, smaller steps, which one of these steps you have seen before? For example, the act of moving your hand, by moving your joints in, shoulder, your elbow and all these are some common patterns that you use elsewhere. Also, right? Like, let's say you are picking a bucket of water, or you are carrying, carrying an apple from from plate one point to another point. So many of these, you will see that there are common patterns that you use across elsewhere. So how you can find those patterns and reuse those patterns? So in programming world, these patterns are often going to be available to you as something called library. So library basically means some code that have been pre written by other people and readily available to you if you can identify that your job, that the task that in that you are trying to accomplish, can be decomposed number one and can fit and can be fit into some of the commonly known patterns, then it will be very easy for you to figure out, okay, these are my known patterns. So therefore I can use those patterns to put together a solution to these little decomposed problems that we have. So that's why the second pillar, or cornerstone, of computational thinking is pattern recognition. And number three is abstraction. So abstraction basically means it's kind of opposite to decomposition. So when you are doing doing decomposition, you are taking a bigger problem and thinking about how we can split it up into smaller problem. Well, sometimes it also happens that if you go too small, then you might get bogged down with the little, nitty, gritty, tiny details that you don't want to so there is a right kind of balance you have to strike here. Sometimes, in order for you to prevent not to get bogged down with the little, little details, you have to think at a higher level. Well, I'm doing these five steps, but what is my goal, actually? So that's called abstraction, right? So going back to my food problem, one abstraction could be move the food from your plate to your mouth. Now, if you think about it, these, if you think it at an abstract level, these, act. Can be made up with five different smaller tasks that composed into a bigger task, right? So when you decompose into a smaller detail and when you abstract that is, that is a one of the very important programming skill that you have to develop, right? So that's our third new cornerstone, and then third, fourth and final one is testing and debugging the algorithms. So what that means is, so after you decompose, after you recognize the pattern, you put together some of these patterns, and then go one step up. You basically abstract the pattern, meaning you put smaller tips, steps back together, and now you are close to kind of get to the solution of the original problem that you had in hand, and you think that you have done a very good job. But how do you prove it right? So in order to prove it now, you have to put these things that you have created, this little piece of program or pseudo code for now, through some test and to see that whether the steps that you have written, which is also called algorithms, really actually solving the problem that you intend for it to and in order to do that, you have to test the code, meaning run the code, and see whether it is doing it perfectly, if not, if there are some steps that it is kind of A going other direction, not where you want to go. Then you debug. Debug, basically meaning where you find the cause of the failure. So let's say there are five steps, and after second step there is a conditional it has to go right or left. Now, instead of going right, it is going left. So then you have to debug what is causing it? Maybe there is some conditional matching that you wrote it instead of a greater than you wrote less than, right? So these are the kind of the debugging that you will do, and after you do several round of testing and debugging, hopefully your algorithm will then be basically be in a correct state so that it can fulfill the objective that was given to you, right? So that's why to summary, decomposition, pattern recognition, abstraction, and then finally, testing and debugging. So these are the four corner stores of computational thinking that you will use over and over again. Now there are a couple of activities, initially to understand what a pseudo code is. So what we will do is we will use a plain language description to basically take one example, and with the example, I'm going to explain these four cornerstones of computational thinking and how you can put this together. Okay? And there is a student activity there you probably have seen which it is asking you to do kind of the same thing with a slightly different problem. And these are not really programming problem. This is where you will be asked to write sort of pseudo code, quote, unquote. For today's purpose, what I am thinking of doing is I'm going to go through the first example of writing a pseudo code, and the second example, I think we can skip it. You'll see why I say that we will have a better utilization of our time by skipping that first student activity and jumping right into the Python after after our pseudo COVID demonstration here. So the problem for our pseudocode example, and hopefully it will help you tie some of these things that I talked about, the four pillars, which kind of might seem little bit abstract, but hopefully this example will help tie this together, right? So, so here, the problem that we have is
+
+Speaker 1  18:42  
+like, you have a bunch of plates and bowls, and let's say, in your dishwasher, as the picture shows, and you are racking those dish dishes and bowls up into the shelves in your kitchen one the once the wash cycle is done. So that is the problem. Now, couple of things I want you to note here, and this is, this is kind of a side learning. So you will see in the first paragraph, it says, user story, right? And user story, it says, As a member of a household, I want to use computational thinking to develop an algorithm for putting away the dishes. So how does that make you feel like why it is written this weird way? Does it sound like a plain, normal English to you?
+
+Speaker 1  19:36  
+No, right? One thing, it feels like a math problem. Yeah, it feels like a math problem. So if you work in technical field, like as a programmer or developer, you will see that we follow this process of planning the task within the project, and when we plan those different tasks. So what the stakeholders do? Stakeholder, basically. Your customer or user, who you are creating the program for. So they will often brainstorm with the analyst, even before the task come to you as a programmer. And then they will have some kind of a system where they have this bunch of user stories, and each user story is basically, you can think of it as a feature request that your users have given to you as a developer. So they are basically saying, this is our role. This is what we intend to do. How can you help us do it? So this is the standard format that in the industry people use to write quote, unquote, user story, right? So in this case, it is written in form of a user story. And the format goes like, first you have to say who you are as a stakeholder, which in this case, is a member of a household, and what you want to do, which is, I want to use computational thinking to develop an algorithm for putting away the tissues. Okay, now other part of the user story. So this first part is basically the description of the user story, but often time, your stakeholders or users will provide additional details for you as a developer to understand what they really intend to do. So that part is captured in form called acceptance criteria. So that means the working piece of code or software that you will be creating has to meet those criteria so that your user can now say, Okay, I accept this. They put their stamp of approval, and that user story is then marked as completed, right? And then you go and take on the next user story and so on. So that is how a software development is done. When you will see, I mean, some of you have already worked in the software industry, I'm sure, and those who have not, in future, if you intend to, you will see this is kind of a standard way of planning technical task between a non technical business user and communicating that task back to the technical team members. So in the acceptance criteria here, for example, it says, well, it is done when I can read through the code demo and apply the four cornerstones, which are decomposition, pattern recognition, abstraction and debugging and testing of algorithms. So that means, in your code that you have to write, you have to make sure that the user, which in this case is a member of household, can actually relate how the steps that you have written are basically aligned to the computational thinking and the four corner store of computational thinking, like if you just say, Hey, you have this problem a go, put away your dishes, and You just write, write a pseudo code, look at the dishes, take, pick up the dishes, and put into shell. That's not really fulfilling that acceptance criteria, right? So that's why these acceptance criteria helps it explain a little bit more, little bit better, what the expectation is from the user to you. And then the second point, it says it is done when I have identified a task that I complete regularly, and when I have the pseudo coding, when I have used the pseudo code to apply the four corner stores. So that's kind of the structure of the user story. So now we understand what the problem is. Now we still don't know what are the different what is called conditions or constraints are so for that, typically what happens in a software development environment? It often happens iteratively. So you might come here and you might say, Hey, you might just write a simple program or one line pseudo code, in this case, stack your plates and bowls into your shell, and then you show it to your user, and then your user might say, no, no, no, that's not going to work. Instead, there are these things that you have to consider, and these things could be like, hey, I need to stack the plane plates together. I need to stack some of the fancy plates together, and I need to stack the balls together, and I need to organize them in a certain way, right? So often time, and this is also very common, the user story tells you something, and then once you start working on it, you see that, oh, my god, there are new constraints that users are imposing on us. And that is totally fine. That is how interactive software development works. So in this case, instead of just saying one line pseudo code, saying, hey, stack your plates and bowls into your shelf, you now have three different tasks that you have to accomplish, which is stacking the plane plates, then stacking the fancy plates and stacking the balls. So this is an example of decomposition as well. Now, instead of having just stacking as a one task, you divide it into three sub tasks, stacking three different kind of utensils, instead of just one. Uh, the next thing is recognizing the pattern, right? So here, in this particular case, the pattern might be recognized either by talking to the users and taking requirement for them from them, or the pattern might be recognized by looking at other other work, like how that stacks of plates and dishes are stacked on elsewhere in the cabinet, in the kitchen cabinet, and by doing this pattern recognition, you might find some constraint, some additional condition that you have to include in your code. And in this fictitious case, the patterns might be, well, the plane plates should go on the bottom shelf, fancy plates, you don't want to kind of get scratched or anything like that. So the fancy plates go on a different shelf, on a top shelf. And then after you stack all the plane plates, then the bowls go on top of the plane plates, not the other way, so that they don't keep over or something whatever, right? So the idea is there, here first in the previous slide, the one large task that you had, which is stacking the plates and bowls, you decompose those into three different tasks. So that's an example of a decomposition in the second next slide, you are recognizing the pattern. Like, what is the pattern of decomposition and stacking the different three different kind of things that you have, or three different kinds of data in a programming world, right? So that's an example of a pattern recognition. Now, once you recognize the pattern, then you have to think of some kind of abstraction. So abstraction basically means, well, when you are looking at things to pick up from your dish washing, rack and pudding, there would be there could be other things like there could be a towel, there could be a knife, there could be a spoon and stuff like that. Well, you have to ignore those, right? So even though you might not want to write that specifically in your code, how you are going to ignore those, but you need to have an abstraction level in your code that will basically only focus on the plates and bowls and ignore any other kind of stuff that are there present in the dishwasher. So that's one kind of abstraction, right? So imagine if you are actually doing this for a robot, and the robot is using some kind of automated vision recognition, like using the camera to recognize the image, right? So when you are trying to program so there might be some libraries or things that you will use that will allow you to identify only particular object and ignore other kind of object, right? So by you reusing those pattern, those libraries or function, you can then abstract away the things that are not really important, which in this case is your knives and spoons and towels and other things. So that's an example of your abstraction.
+
+Speaker 1  28:08  
+Now, once this thing are done, now is your time comes where you are actually putting this sequence of steps together, right? So what are the sequence of steps? So before we do that, think about it now. So what we have done, essentially, we have taken a problem and we've broken them down into manageable parts, right where we have identified the patterns and we have excluded the irrelevant information, and now we can write our sequence. So our sequence would be, well, first step put away the plates. Second step is put away the balls. That's your first attempt. Well, it's a good attempt, because at least, you know the bowls and plates are two separate things, but it might not be complete. So then what you do is, so the first two lines here, as you see on my screen, this is like your first attempt, right? Put another plates and put away the balls, which is good. But then there are further details that you have to add. What are those details? So in your second attempt, you basically say, well, let's put a condition. The condition would be, if a plate is fancy, stack it on the top shelf, else, stack it on the bottom shelf. So you see, in the second attempt. We basically took the first two events and we and we added additional information to the second event to make it more kind of aligned to what the user is expecting, right, which is looking at the pattern on the plate and stack it in two different places accordingly. Now does it solve the problem fully? Not yet, because there could be other things. So what happens? Let's say, if a plate is cracked, do you still want to put it so then, so typically, what happens is, you write this. You. Write a version of program according to your user story, and you give it to separate team who basically wants to find anyhow, that the code can be broken right where the code is not providing the output. So in this case, let's say the testing team comes in, and just to test your sequence of steps, they put in some kind of some cracked plates, like broken plates. Now, what is your code going to do if your code is running on a robot? Now the robot will have no idea with the previous version of code, like, what to do in a cracked plate, and your goal will not be fulfilled. Now, when you learn about this, then, well, let's do debug and then add additional condition. Well, if a plate is cracked, then put it in the trash, right? So that way, you are basically identifying where the data error might happen, and handling those error using special treatment, special condition, which you will see how to do that in programming and make sure those bad data does not blow up your program. Does not cause your good data to crash or your program to crash, right? So that is one example where you are using debugging to improve your program, right? So you see how step by step, our program is getting better and more accurate. But then what about the bowls? So all of these like use this sequence that we added, we talked about the plates, and then we added some additional condition to handle the cracked plate. But this is still the plate, but we haven't even thought about the bowls yet. Well, we did think about the bowl in our first attempt, where we said, Put away balls. But then we in this in when we improve that we really didn't handle the balls yet. So because that is another thing, conditional branching, now we have to think right so now we know that we have balls, then we have to say, well, when you come to event two, hopefully all of your event one is completed, meaning all of your plates have been stacked wherever they go, and then the balls. Now, you know, based on the domain of your problem, like, if you look back here, the bowls are only one kind of bowl, so there is no fancy bowl versus regular bowl, balls or bowls in this case. So what you can do is you can do be little smarter. And instead of writing sequential event that put bowls, you can basically say, hey, now look through all the bowls like iterate through all the bowls and repeat something that will apply to all the bowls in general. So therefore, you basically write a statement that say, Well, look for each bowl on the dish rack and stack it on the bottom shelf on top of the plane plates. So now, when your program execute this at this time, it will be able to perfectly attain this order in this picture, because when this event one is completed, all of your plates, depending on whether it's a fancy or plain or or it is cracked. They have all been sorted out, and the only thing remaining is just the bowls. And then you basically blindly take each of the bowls and put it on top with the dish rack, and you are done.
+
+Unknown Speaker  33:13  
+So imagine if robot is running this program,
+
+Speaker 1  33:18  
+how then accurately, it will be able to produce this pattern on the shelf right. You can see that it will be now, this is a very simplified example. Of course, in real life, there could be lot more challenges. For example, when you are doing this, what if there is an obstacle? What if your dog runs in between, right and crashes on you? What are you going to do? I'm just saying so. So in real life, you will see this simple looking task can get very, very complicated depending on the different, unexpected situation or event or condition that you have to handle, right and that is also very common in programming world. Hang on one second. I see your hands up, and that's why you need to think through and get into this habit of thinking of things in an algorithmic way, using the computational thinking, using the four pillars of decomposition, pattern recognition, abstraction and testing and debugging of your algorithm. So once you practice this, you will see you will be able to solve much more complex problem in a more confident manner.
+
+Unknown Speaker  34:25  
+Yes, go ahead, Gary. So on that
+
+Speaker 3  34:29  
+second where you put loop, I see additional things you put else if, but then down on the bowls you put loop, what's the what's the reasoning for the word loop. So
+
+Speaker 1  34:41  
+loop, basically, as I said, if you have some repetitive step that you can apply to, no matter how many objects or elements or data that you have instead of writing. So
+
+Unknown Speaker  34:57  
+what other example that I can give you? Um. Um,
+
+Speaker 1  35:02  
+well, think about it this way. So let's say moving a bowl from dishwasher to rack is a task right now, if you have five bowls there, since the bowls are all of the same kind, is there any differentiation? Differentiation between moving the first bowl versus second bowl versus third ball. No, right? Because balls are all the same. So why would you write five different statement? Instead of writing five statement, you can just write one statement and wrap that around with a loop statement that say, well, for everything that you have in your front, apply this step repetitively on however many five or 10 or 50 or 100 things that you have just keep applying this repetitively. That's what the loop leads okay? And so I
+
+Unknown Speaker  35:52  
+think I'm sorry. I think maybe
+
+Speaker 4  35:56  
+I think you missed the point Gary had. If you look at neurological problems in this pseudo code. First thing is that you're going to loop through the plates under the conditional and put the plate, yeah,
+
+Speaker 1  36:10  
+that's not in there. I know that's not in there, but the point
+
+Unknown Speaker  36:14  
+there's also a logical flaw. And
+
+Speaker 3  36:17  
+you think, okay, so basics in a loop as well, since multiple plates that are fancy plates. Okay, okay, let's say,
+
+Unknown Speaker  36:23  
+let's say I have a cracked plate.
+
+Speaker 4  36:28  
+If I go through that conditional in order, I go, Oh, it's a fancy one. I'll put it on the top shelf, even though it's cracked. So really have to check for cracks before. So it's not perfect.
+
+Speaker 1  36:39  
+It's not perfect. Yeah, that's so now the next thing is the student demonstration, as I was showing telling you earlier. So in this student demonstration, they will give you a different problem. Hang on, where did my other window go? It's hiding somewhere. I here. I'm not going to ask you to do that right now. I'm just going to show you here so. So if you go look into the files, the activity files for this class, you will see there is a prompt where
+
+Unknown Speaker  37:26  
+the prompt will basically say this,
+
+Speaker 1  37:30  
+that in this activity, you will practice writing pseudocode for this scenario of sorting and washing your laundry. And you have to obviously show, demonstrate that you are actually using the four cornerstone of cornerstone of computational thinking. And then these are the conditions given whereby it says laundry should be sorted into four basket, white clothes, red clothes, delicates and everything else going into four different baskets. And you should consider the order in which to sort this item, and you have to include abstraction, meaning laundry may be mixed with other things, such as beddings and towels. You have to somehow ignore those. So abstraction. And then each basket of laundry should go through the washing machine and follow a sequence of steps, which is, put the basket in the machine at the so apply this machine setting, turn the machine on, and then remove the laundry and then return it to the basket. And then finally, there is another condition that says only the delegates basket has special settings on the washing machine and requires a conditional check to ensure the appropriate settings are used, because delegates are important. So this is the prompt for today's student activity. Now I could put you into groups and ask you to think through and basically write the pseudo code, but what I think would be a better use of time is for us to look into the how the pseudo code will look like. And as Karen mentioned, this does not need to be a full proof computer code, just to get an idea of how the computational thinking can help you kind of develop your approach towards problem solving. So for that, I am just going to show one of the sample solution given and how the Swedish pseudo code might look like for this problem of sorting a laundry, which is not very different from the problem of putting rack in the dishes and bowls, right? So in this case, what are my tasks? So my tasks are sort delicate clothes, sort the white ones, the red one, remaining clothing, and then wash the clothes in the washing machine. So in the high level, these are my five tasks that I have to do as part of this problem. Then we have to recognize what are the different patterns we have, which was clearly written in the problem statement, which is delegate to go in basket one. Why? To go in basket two, red in basket three, and the remaining in basket four. So that's your patterns, and your abstraction is your ignore your beddings and towels. So with these tasks and patterns and abstraction, then you move on to write the sequence. And the sequence again, kind of very similar to your the plate and dish problem, plate and bowl problem, which is sort clothes. And then you add a conditional, if an item in delicate place, it in basket, one or two or three or four, depending on the different conditional. And then your second event, in this case, is just wash the laundry. So laundry wash, you can use a loop for each basket of the laundry, because as part of event one, you are putting your clocks into four different basket. Then you take one of the basket, you apply event two, which is a loop, and for each basket of laundry, you then again, execute a sequence which you are these exactly what they ask you to do. It is, put the basket of laundry into the machine, add soap, add washing machine, turn machine on and remove clothes. Except the last statement in the problem, it said, if it is a delicate machine, make sure that you use the delegate setting. If not else, use the regular setting on your washing machine. So essentially, what you just did is you basically provided they basically created a prescriptive guideline for someone. Let's say you are leaving the house and you give give your key to your, let's say housekeeper, and you want him or her to basically execute the laundry washing routine even though you are not around. So this kind of algorithmic thinking is something that you should think of, which we kind of do anyway, right? I mean, we probably write this on a sticky note or put it on a figure like, Hey, do these, these, these, these, that this is just another more structured way of thinking about the same problem, which should help you think about computational problem using the similar kind of discipline and rigor. So that's kind of the outcome of this section of the course in that's why I didn't want you to actually go through and write this code, because at this these codes are basically what is called pseudo code, and you see all of these hash sign what this means is, if you write this in a Python code, the Python knows that any line that starts with a hash are basically something that it needs to ignore. So you basically use any interject your Python code using English language statement, which are called comments by beginning a line with a hashtag. So even if it were a python file, your Python program would actually not execute anything, because this is just for your understanding. So that's why I didn't want you to break go into a breakout room and do this. But feel free to come back to this section, and then this solution file will also be available on your GitLab repository after the class, so feel free to just review it in your own time. Just this is something just to keep in the back of your mind. This is not something that you will actively use on a day to day basis.
+
+Speaker 1  43:20  
+Question, before we move on, Karen, were you trying to say something? I think you were. You're on mute.
+
+Speaker 4  43:35  
+Not really, but, but I will say for, especially for people beginning a really great approach is to write comments, as Benoit was saying, with the hash, and write just simple pseudo color, just plain explanations of what you're trying to do, and then kind of have that in front of you, and then figure out how to actually code it. I think that's a really good way, especially for for people just beginning programming. In fact, write up steps like forever, the whole program you're going to do, and then in between that, fill in each little piece of code. I mean, I think that's just a helpful thing for folks, but, you know, you won't end up doing forever. But for beginners, I think it's great.
+
+Speaker 1  44:19  
+Okay, so that was about pseudo code. Now it's time to write real code, not pseudo anymore. Okay, so let's jump into actual writing code. Oh, before that, talking about that comment, remember that the hashes that we used in pseudo code, these are the comments, right? And we will see how we write the comments in the code as we go through the different activities. So first concept that you need to learn here is data types, and before data types, also, another thing you need to learn is something called a variable, right? So. For that, I want you to kind of go back a few years, or maybe a decade or two, maybe in your life, to that middle school class when you first learned algebra. Hopefully, right? So, given an algebra problem, what we were told? We were told that the way to solve an algebra problem is, let's say you don't know what something is. Create a placeholder for us, like call it an x. Let's say a simple algebra problem. Let's say 10 years back from now, you were 20 years old. How old you are now? Well, it's a simple arithmetic problem. If you think about it, I was 20 years old 10 years back, so therefore I must be 30 now. The other way of thinking is, well, I don't know how much how old I am, so let's say, Well, I am X year old now, and 10 years back how old I was, so therefore I must have been x minus 10 years old. And the problem says, x minus 10 is equal to 20. So you basically form an equation, and then you form solve that equation, and you get the value x must be equal to 20 plus 10, which is 30. This is very simple algebra that we all have learned. So those x's and y's and z's that we used to take in algebra, conceptually, they are very similar to what we call variable in programming. So in programming, often time the data that we will be using, it will be loaded into the memory at different point in time during the execution of the program. Some of the variable might have the value from the beginning of the program. Some of the variable might change the value over the course of the program. Some of the variable might acquire value, some from somewhere else, like from some database or some internet call that you do to some other external system. So there are many different ways you will acquire value during the course of an execution of a program, and when you do that, you need to have a placeholder to hold that value so that you can take those value and do the algebraic operation throughout the program, and that's what we call variable. So how do we define a variable? Just like our algebra example, if I have to do write this in Python, I will simply say x equal to 10, and when the moment I write x equal to 10, that basically becomes a Python program like, well, one line of a Python program, and that is a variable. So instead of just talking like that on a very abstract way, let me do this as I speak, so that you will be able to connect. Now, can you confirm if you see my command line terminal, is my terminal visible? I can see it. Yeah, yeah. Do you see the text? Or do I need to zoom in further,
+
+Unknown Speaker  48:21  
+maybe a little bit zoomed a little bit more.
+
+Speaker 1  48:24  
+Okay, let's see. Looks good. Okay. So first thing, if you look into the terminal, right now, when I open the terminal, what is the first word in here? Base? Remember when we talked about the virtual environment, when you first go in there, it goes into base environment. And we talked about why creating a virtual environment is important to sort of have a separate sandbox area within your computer within which to run, or every program now, the program that we are going to run today are not going to be using any special library or any library for that matter, but it's always a good practice if you choose to run when you are choosing to run a program, use the virtual environment you created. Now there are many different way of running program. One way of running the Python program is right here from the command line. Okay. Now, before we do that, first thing we need to keep in mind that we have to switch to that dev environment that we created. So I just wrote a command to say, conda, activate Dev. And when I did that, it took me to the dev environment and then how to come back. Just as a refresher to your memory, I wrote the command, which is conda deactivate. That brings me back to the base environment. Now I want to go back again into the dev environment, so I'm going to rerun the conda activate, dead again, and now I'm inside Dev. Now we can. Start our work, so let me just clear the screen for now. Now.
+
+Unknown Speaker  50:08  
+Gary question,
+
+Unknown Speaker  50:13  
+are you muted? We can't hear you. Oh, can
+
+Speaker 3  50:19  
+you hear me? Yes. Okay, what's the difference? Why do we go into dev versus base? What's the difference in those two
+
+Speaker 1  50:27  
+so there is no difference as of this point, but there will be difference throughout the course of this boot camp, as you keep going and installing more libraries, you will be installing those libraries inside your dev environment, as opposed to base, because remember, I gave an example. Let's say you have a nice quartz kitchen countertop, and you are cutting some meat or doing something that can make it dirty. Instead of doing it right on your countertop, you put a rubber mat or something, do your work, throw it away. So your dev environment is kind of your rubber mat that makes sure your original conda environment remains pristine at all the time, and you do all of your work on top of your dev you install all the libraries dependencies so that it at any point, if something goes wrong, you can throw it away and create a new environment.
+
+Unknown Speaker  51:21  
+Okay, awesome.
+
+Speaker 1  51:25  
+Okay. But again, as I said, we are not going to be using any such thing today. We are just simply learning Python. But this is a best practice that you should follow always. It's a highly, highly advisable, even if you don't do it, your programs will run just fine. But it's a best practice, and for that reason. Okay, so one way of running Python here is just type Python or python three in your terminal. In my case, it is python three, and then see now the command prompt change. Now it is showing these three arrows. So here I can now write any Python pro command or Python statement here, just like I used in a conda environment. But this is one way of running Python quickly. And one other thing you should know is Python is called something called interpreted language. So basically, what that means is, if you have a 10 line of Python program or 100 line Python program, for that matter, when you run that program, the Python compiler interprets each and every line one by one sequentially. It does not try to read all those 10 or 50 or 100 line of program at once. So that's why it is called interpreted language, because it treats each line of the program separately. Okay, so here in this Python prompt, so what I was going to show you is, I wanted to show you what a variable and data type is. So going back to my example, as I said, when I say x equal to 10, so x equal to 10 is now, x is a variable, and 10 is the value that we have put in the variable. So x is a variable which is a whole number or an integer number. So similarly, you can see that we could put a decimal number. So let's say, if you want to put decimal number, say x, or let's call it Y. Y equal to, let's say 15.35 something. So now y is another variable, except it is storing a decimal number. Now, instead of a whole number, so x is a variable, Y is a variable. Similarly, if you want to put some text, save some text. So let's say I can put a variable name, and having the variable name is kind of having a meaningful name is also kind of advisable, because when you are running a multi land program, if you call something with some weird name, then it might be hard for you to even understand, or anyone else reading your code to understand what that variable is supposed to do. So let's say I'm now going to call a variable and I'm naming it a person, and I'm putting the name of the person, let's say James. So in the statement, person equal to James, person is also a variable, and the value of that variable is James, except the value is a different kind of variable. It is not a whole number, it's an it's not a decimal number. Instead, it's a piece of text, like a word or sentence or whatever might be. So in programming world, it's called a string, string of things. Another type of variable could be, like your true or false, right? So sometimes we say, hey, if something is true. You then do this. Else you do that so you can write true or false statement using conditional checking, or you can also have those true or false saved as a variable, like condition equal to true. Now if you see here when I said James, here, I put it inside double quotes, because James is not something that computer will understand. That's why I'm saying, hey, just remember this sequence of four letters, j, A, M, E, S, and do not try to interpret what that is. Just take my word for it. Just save these five letters together and I will use those letter so that's why this is a different type of variable, which is called string, whereas in the 4/4 example here, when I used a variable name called condition, I'm saying it is true and with a specific syntax, with the upper case T and then r, u, E, all lower case, and I do not have any double quote around it. Why? Because this true itself is a thing you cannot just say, T, R, E U, it will error out because T, R, E U, with an upper case T is only recognized by the computer, by Python, as a Boolean or conditional variable, which will have only two values, true or false, nothing else. So if I say condition equal to false, it will work. But if I say condition equal to true, boom, what does it say? It gives me an error. It said name true is not defined. Did you mean true? It's actually suggesting like Did you mean true with a double with a coat? Well, it's not If you do true with a coat like that, then yes, it is a variable, but now it becomes the same type of variable as person, which becomes a text and not a conditional. In order to be a conditional, it has to be true with the upper case T. So essentially, what we just saw is four different kind of variables, which you can see also here some random example in this slide. Some are whole numbers, some are decimal numbers, some are some are text and some are condition. So these whole number ones, they are called integers. So this could be positive whole number or negative whole number, the one that has decimal point these are called floating point numbers. Floating point number, decimal number. They are kind of these words are kind of used interchange interchangeably. So the idea is that these have fractional part, not just the whole number part, and these could be also positive or negative. Then is the string, which is text, basically, and inside the text you can have anything. You can have any text character, any number character, or anything. So anything and everything that you can think of the like all of the keys in your keyboard, if you can use any of those and have a bunch of those things together, and put a pair of quotes in the front and then the end, and that become makes the whole thing a string. And then the last one was Boolean, which could be either true or false, with a T uppercase and F uppercase. So Boolean can be only two types.
+
+Speaker 1  58:40  
+And as I said, these variables are the data items that you can think of as containers for the values that you will be processing as part of solving your problem. So why do I say container? So let's say now I have x equal to 10, I have y equal to 15.35 but in the next statement, I can do, hey, x is equal to, let's say, X plus five. So when I do that now, the value of x is not 10 anymore. It changed. It took the previous value of x and added five to it, so the new value of x will be 15. And that is why X is called a variable in the first place, because its value can vary over time depending on the computation that you are doing. That's why it's called variable question.
+
+Speaker 5  59:38  
+I had a question. So if you do that throughout your program where you're changing the variable, what happens if you change the original instance, like say that x equals 10 at the top, will it cascade down, or is it set lower and it won't change no matter what you do higher up
+
+Speaker 1  59:59  
+the. It will always take the last operation that you did. Okay, so, and one way to check what the variable currently is that actually kind of gives us a good segue to the next point. How do I even know what is the current value of x at this point?
+
+Unknown Speaker  1:00:18  
+Well, I can
+
+Speaker 1  1:00:20  
+print x, and what do you think it will print? Now, if I hit Enter, should it 10? Should it print 10? Or should it print 1515? 1515, there you go. So you see going back to, I didn't see who asked the question. So does it answer that like it's it's not going to so it whatever it will do depending on what you are asking you to do, right? So I am taking x and overwriting the value of x with something else. So whatever I have done last that will be the current value at that point in time. And then if I take x again and say, Hey, x is equal to x minus three, obviously, now its value would be 12, because I just changed it.
+
+Unknown Speaker  1:01:09  
+Is this Jonathan, who has the question,
+
+Speaker 5  1:01:12  
+yes, yeah, no, that helps. Thank you. Okay, yes.
+
+Speaker 6  1:01:18  
+So essentially, if you, if you type some, can you hear me? Yes, I can hear you. Okay, sorry. I just wanted to make sure it was stolen. So if you're writing in a Python and you realize that in your line one, you put x 10, and then keep going down, and at the bottom you're at like, line 30, and you look up and build crap I meant to write x equals 11. You could just correct it by writing a new one. You wouldn't go back up and correct it
+
+Speaker 1  1:01:51  
+when you are running this way. Then, yes, you would not. But imagine when you have these lines of code written in a single file. So there are multiple different ways you can run it, right? So if you have many, many Python statements together, and then you want to execute the whole thing as a one single program, as a file, and then after writing that initial version of the program, then you realize, oh, no, no, the initial value should have been 15, not 10. Then you can just go to the file, the Python file, and change the 10 to 15, and then just read on the program,
+
+Unknown Speaker  1:02:26  
+really how you're executing
+
+Speaker 1  1:02:27  
+it. It is how you are executing it. Yes. Oh, that
+
+Unknown Speaker  1:02:31  
+makes sense. Thank you.
+
+Unknown Speaker  1:02:35  
+Okay, cool. Can I ask one? Yes?
+
+Speaker 6  1:02:41  
+What is the advantage of executing Python command on terminal rather than somewhere like idle?
+
+Speaker 1  1:02:54  
+Yeah, so you would actually not execute Python command in terminal almost like ever so Python terminal. Python on terminal, I sometimes use it as a quick fire way of testing something when I'm actually writing some program somewhere else, either in idle or VS code or maybe on a online cloud version, like on Amazon Cloud or Azure cloud, you can go and run this Python program to run on cloud as well. Now, when you are running this, sometimes I forgot something, how something is done. I kind of forgot what that function does, or which library I should import, right, or if I have a very complicated data manipulation, I need to find out what exact conditional statement that I need to write. So sometimes I use this terminal kind of as my test playground, where I come and write some quick commands to make sure that what I'm thinking is working, and then I go back and type that command in wherever I'm writing, either in a Jupyter notebook or Amazon Cloud, Azure cloud, Google Cloud, or in my VS code, wherever. But in practice, when you are developing a piece of software or piece of functionality using Python, you will almost never use Python from terminal. That is just for your quick test and making sure that you are thinking on the right track. That's all. Thank you.
+
+Unknown Speaker  1:04:21  
+Okay, so
+
+Speaker 1  1:04:23  
+then, then there are some example here, yeah. So create and declare a name. We have already talked about it, how you will refer your variable throughout the remainder, maintain a good naming convention, which I just said, right, like, that's why, when I created these name person, I didn't just say x equal to James, because if I want to use X, like, Who is X, I mean, I don't know, but if I say person equal to James, then I know that just by the name person computer doesn't care whether you call it a x or whether you call it a person computer just. Just fine. But as a human, when you are reading the program, or someone else is looking reviewing your program, having a variable name that does not really that is not really meaningful, is kind of not a good practice, because it makes it much harder for other people to read and debug your program. So so that's what this is saying, that maintain good naming convention for maximum reliability. And then another thing, this is also kind of a convention that the variable name should always start with the lower case. And if you have multiple names, it should be separated with underscore, right? So for example here, let's say you have two team score, Home Team and away team. You can call them home underscore team, underscore score, even if you don't use the underscore, if you just use home team score, all in one word, computer just doesn't care, right? But these are some of the style guide that people uses that makes the program universally readable, because all other Python experts all over the world, they have gotten accustomed to certain way of writing programs, and that's why it makes your program like universally more acceptable, right? This is similar to your like, let's say Oxford writing style guide for English language, right? This is a similar thing for Python programming, program writing as well.
+
+Speaker 1  1:06:26  
+So there are a couple of things here. So why don't you just read, oh, my God, look at that. What he did. This is an application of AI. I didn't intend to show you, but I have a Gen AI plug in enabled here. So what it did is there was this prompt that is given in the activity, which is with a hashtag, create a variable called profession with a string, software engineer, and I hit an Enter, and it is showing me with Amazon queue, which is actually a Gen AI agent, which is integrated with my Visual Studio code that helps me write code with much less typing. So it clearly says like, hey, yep, professional equal to software engineer. So essentially, this is what the problem statement was, create a variable called provision and assign the value software engineer to it, and this is it.
+
+Unknown Speaker  1:07:29  
+The next one is, yes. Do you
+
+Speaker 7  1:07:31  
+mind to share with us again that AI tool that you put so that in auto authority fill.
+
+Speaker 1  1:07:38  
+This is you see what the tool tip says Amazon queue. Yeah, so this one is Amazon queue. Do you see here in my side of my VS code so you can
+
+Unknown Speaker  1:07:52  
+Okay, thank you.
+
+Speaker 1  1:07:53  
+And I think it should be available if you go to 123, 4/5, icon here, which is extension, and if you type Amazon queue here, it will show up.
+
+Unknown Speaker  1:08:08  
+Is it a month save? Uh,
+
+Speaker 4  1:08:10  
+I'd make an advisement, though, that when you're first beginning, maybe you don't turn on something like that, so you actually learn it can become a crutch too fast later, when you're doing like work, life in noise, doing, or maybe I am, you know, it really speeds up your productivity.
+
+Speaker 1  1:08:33  
+Yep. So, yeah. So the next one create a variable called years with an integer 20, right? So what you have to do is write years equals 20. So now let me ask you this. So when I execute this line, what do you think the type of this profession variable would be, knowing that there are four types right, integer, decimal, text and Boolean, what do you think the type of the variable profession would be
+
+Unknown Speaker  1:09:04  
+three.
+
+Speaker 1  1:09:06  
+What did? What? How about the years? It's an integer. That would be an integer. How about the next one? Hourly wage? Loading number, floating number. Another thing. Good thing about using any IDE such as Visual Studio code or Python idle, is that, or even you on your Jupiter notebook, you will see that it will color code so that it becomes very easy to understand what is what. So these lines that are starting with this hash, you see that it is coming with a with a flat green color, and that is because these lines are not being treated by computer as a code. Instead, these are just comments for people to read, whereas the one that does not start with that it actually color codes that the variables are color coded in a different color, which. This light blue color, and then whatever you are assigning to the variable is coded in a different color. Now you see that both the integer and floating point number are encoded in these light green color, showing that, indicating that these are both numeric type of data, whereas when we have a string that is this kind of a reddish maroon color, which is the color for text. And if you don't like this color, you can go to the color palette and change the colors. But why would you right? I mean, I'm perfectly okay with whatever the color. By default, it comes with so and then the next one is a Boolean variable, I have to say, expert status. And we have to assign the value of true with the variable expert status. And I just did that. And here also you see this true because this is a Boolean. This is, again, a different shade of blue, so you you see three different color, one for text, one color for numeric, for both floating point and integer and a different color for your conditional or boolean variable. Got it Okay. So then we are going to do some print statement two. So now the first print statement is saying print a statement with the profession string, right? So what do I do? I just say print
+
+Unknown Speaker  1:11:32  
+profession.
+
+Speaker 1  1:11:34  
+So when I run this program, what would be the output of this line for line number 14? I
+
+Unknown Speaker  1:11:44  
+uh, software engineer,
+
+Speaker 1  1:11:45  
+software engineer. So now, before writing the other three lines, now, let me show you how you can actually run this program as a file. Now, please note that the way that I'm going to run the program now is different than one what I showed you initially where I went into Terminal and typed each and every Python line as a command. So that was the interactive python shell. Instead, here I have a bunch of Python statement written in a single file, and the name of the file is here, variables.pi, and then I'm going to run these, the whole thing as a Python program. Now, from inside VS code, you can do that by hitting this little play icon, and it will actually run the program. Now before I click the Play icon, I need to show you something about the Python run time, which is also called kernel. So in your VS code, if you do have this open press Command, Shift P, and then dialog like this will open up on top of your VS code. I do not know exactly what the shortcut would be for Windows, but those who are on Mac, you can press Command Shift P, like press and hold COMMAND SHIFT p at the same time, and then release, and dialog box like this will appear on top. Those on Windows, you might have to figure out, or anyone, any one of our TAs who know how to do the same thing on Windows, you can help them later. Now here, once you do this, you can basically do whole bunch of configuration using this command, shift P dialog box. Now, recently, I have used Python interpreter. If you have not you can just type python and it will basically the drop down will keep changing as you type, you can actually see Python, select interpreter, Python, create environment. And there is a whole bunch of Python configuration comes in. So remember how we did a conduct create environment in the last class from a terminal, we created that dev environment. Had we not done that, we could have actually done that from here, right from VS code, you could have done create environment and selected the name of your environment, and that will create a virtual environment. But in this case, I already have my environment created. So therefore I will select the first one which says, Select interpreter, which is also called kernel. So when you will run this, you will see on your Jupiter notebook, they will say, hey, select kernel. So kernel and Python interpreter kind of used interchangeably depending on which software you are going through. So you will see select interpreter. And then it will say, since I have a boot camp workspace, it will say, select the workspace of folder. So I have this AI, 24 week boot camp. So now I selected that, and now it is telling me, like, Hey, Mr. User, you have the. Different Python version installed on your computer. Which one of this Python you want to use to run this program? Now, this is something you will do only once and not change unless and until you have to. So in your case, what you need to do is, in this drop down, if you have created the virtual environment before, you should see that virtual environment showing up here, which in my case, is this using the Python version three, dot 12.7, I have this environment called Dev, which, by the way, is a conda environment. So I select that, and that's it. I don't worry about that again. So now I know that I'm going to run this program with my dev environment, even though I am not doing conduct, activate Dave or anything like that. That is that setting is now enabled in my Visual Studio code, so I am safe from here on onward, I can just go and create and run any program without even have to worry about dev environment, provided you do this step one time. Now, with that set, now I can hit this play button and you see, here is the output. So actually, let me delete this terminal because there were some other thing it got mixed up. So inside Visual Studio Code, when you run a run a Python command or Python program, it creates a version of terminal inside your VS code, the terminal that we were working outside, like either on Git Bash or your Mac. Terminal that is outside of your VS code, it is running on your computer, but one instance of the same terminal will show up inside your VS code, and that terminal is exactly same like your other terminal, so you don't even have to go out of VS code at all, and that terminal will show you the output of the command or whatever you are doing there. So in this case, I am hit, going to hit run, and it is running the program. So, so now here is the output. So, yeah, this is the variables.pi so it basically shows, hey, this is the program that you are running. And the output of the program is this line software engineer, because I have only one print statement, and that print statement is producing this one line of output, I will take question now, Gary, I think I saw you raised your Hand.
+
+Speaker 1  1:17:37  
+I'm sorry your voice is kind of muffled. I right,
+
+Speaker 3  1:17:43  
+when you went into VS code, you up in the search bar. What did you type into there to get the button,
+
+Unknown Speaker  1:17:50  
+Command, Shift, p.
+
+Speaker 1  1:18:00  
+So going back to my program, I have only one print statement. Now let's say I have another print statement where it is saying, hey, print a statement with years. So let's print a statement with years. Now I have two step print statements. So therefore, if I run the program now, I should expect to see two output. One will say software engineer, and other will say 20,
+
+Unknown Speaker  1:18:28  
+right. So let's run this program now.
+
+Speaker 1  1:18:34  
+So this is my second run of this program, and this time it is printing two lines of output, software engineer, and 20 from this line and this line. And similarly, I can add more print statement, and it will create the output for our language, which is 72.12 and you can add the last one, which is expect status, which will say true. Now if I run this, it will create four lines of output, as you can see, software engineer 20, 72.12, and two. So what we did is here, we created four different variables with four different kinds of data, and we have shown that we can print all these variables individually when we run the whole program as a python file. So in the next activity, there would be a student activity on the files that you have downloaded, where you would be asked to do the same and we will put you into the breakout room like we did in the previous class, and then you will basically do some very, very similar activity there. So in that activity, if you have downloaded the file, you will see the prompt will say, you. So the prompt will say this, create two variables, full name and country to visit, that will hold strings, and then create one variable for days that will hold an integer, create another variable called exchange rate that will hold a float, create a variable called satisfied that will hold a Boolean, and then print out a sentence for each of these variables, basically exactly the same thing that I did, but I still want you guys to do it and practice it in by your yourself. That way you will get a good comfort level and good feel for how to write this simple statement and how to select a Python interpreters from your VS code, and how to execute the code and see that the your code is producing the correct output. There is not much programming logic here. It's just declaring five variables and then printing them. But I think this is a very, very good start for you guys to do. How
+
+Unknown Speaker  1:20:55  
+long do you want and how many
+
+Speaker 1  1:20:58  
+Well, let's do 15 minutes and in your downloaded file, you would see a python file there that says hello, variable world and there, just like the file that I was working on, these are the different prompts that are written as comments. Your job would be to go after each prompt and write the piece of code or variable declaration in this case, just like what it is saying, and then do the same thing for print statement, just like what I did in my example, right? So essentially, you have to create 12345, statement to create the variables, and then five statement to print out their values as for the values of the variable, like it says, create a variable called Full Name that holds a string. So you have to say full name equal to something. So I do not care what value you put. You can put anything, but it has to be a stream. You can put your own name, your your friend's name, my name, or whoever other person you like, similarly country to visit. I don't care which country's name you put in. You can put XYZ, anything. The idea here is for you to be able to assign the right kind of variable, sorry, right kind of value to the intended variable. That is what the test and practice here is, right? Well, I shouldn't say test. I should say practice, because this is not
+
+Speaker 6  1:22:22  
+credit. So question, when you break out, when you break out into groups, I think there's a few of us that do not have our Visual Studio connected to the boot camp. Can we try and put everybody that doesn't have it in one group so that we can get that done really quick. Yeah.
+
+Speaker 1  1:22:42  
+So we will be visiting all the rooms anyway, and for those in the rooms who do not have the visual, good Visual Studio code installed and or configured, we can take a quick look. Also feel free to again, as I said before, feel free to stay back after the class if you are still living, having any issue in installing or configuring in any of the tools, I just
+
+Speaker 4  1:23:05  
+added an empty room because they're random, but I added added room six, which is empty, so people want to go to room six if they have a kind of issues, one of us can help out there.
+
+Speaker 1  1:23:15  
+Okay, um, how many people do we have? 30? I think
+
+Speaker 4  1:23:23  
+3131 no 30, because it's 430
+
+Speaker 1  1:23:26  
+right? Because I see 34 participant and four instructional, five rooms. Yeah, that's perfect. I was just going to say five, yeah. So that's that would be six, six people in each room. So let's see the room, and then let's do it for 15 minutes.
+
+Speaker 4  1:23:44  
+Somebody gets with that visual code stuff and stuck, we can meet in room six as a separate extra room. How do you get to room six? Oh, that's right, I kind of have to assign you, let us know, and we can move you to there if need be or whatever. Yeah, let's go
+
+Speaker 1  1:24:02  
+to your initial room, and then if needed, you can then hop on to the room. Yeah,
+
+Speaker 4  1:24:06  
+we can. We can. I can move you to to where you want to be, anywhere. So, yeah, let's go have fun. You.
+
+Speaker 4  1:24:20  
+I think a couple of people didn't get a sign, so let me take care of them. Next we got and he let's go to I
+
+Unknown Speaker  1:24:46  
+two, okay. That means us
+
+Unknown Speaker  1:24:51  
+guys, Eve did not okay.
+
+Speaker 4  1:24:56  
+We got Eve. Were you able to get to your room?
+
+Unknown Speaker  1:25:10  
+Okay, seems lost.
+
+Unknown Speaker  1:25:14  
+Okay, I can sound there, good.
+
+Unknown Speaker  1:25:22  
+I see two people are still here. Yeah,
+
+Unknown Speaker  1:25:26  
+they're a sign, but they're not in their
+
+Unknown Speaker  1:25:28  
+rooms for whatever I picked myself up.
+
+Speaker 4  1:25:31  
+Oh, okay. Do you guys need to go to the other side for the visual code, Studio Code, step six. Okay, so you are you want
+
+Speaker 1  1:25:39  
+to go to six as well. Okay, so, Karen, are you heading on to six?
+
+Speaker 4  1:25:43  
+Um, I think can is there, but I'm just going to move people saying, oh,
+
+Speaker 1  1:25:48  
+Ken is there, yeah, sorry, yeah, I didn't see that. Yeah. Ken is there, yeah, they're in good hands.
+
+Speaker 4  1:25:53  
+Yeah, just sex. Anyone else need to go six?
+
+Unknown Speaker  1:25:58  
+Red Dion, do you need to go to six? Yeah? Sex,
+
+Speaker 4  1:26:03  
+yes, okay, let me find what. Okay. There you are. So maybe just six. There you go.
+
+Speaker 1  1:26:18  
+Chad, you were talking on mute. We can't hear you. I can see your lips moving.
+
+Speaker 4  1:26:25  
+Yeah. Brad Chad, you need to hear me now? Yeah,
+
+Speaker 8  1:26:29  
+yeah. I was in room six for a couple seconds, and then I got throw over to five,
+
+Speaker 4  1:26:34  
+back to six. Thanks. It's being stubborn, right there. I shouldn't be doing there. That's timing probably
+
+Unknown Speaker  1:26:50  
+is where I turn into being, like the traffic away at travel agent, yeah.
+
+Speaker 4  1:26:59  
+So do we usually want to kind of split up the attendance and the room stuff?
+
+Unknown Speaker  1:27:06  
+Yeah, so let's talk about that. I know nobody else
+
+Speaker 4  1:27:09  
+doing attendance. I just did it because it didn't look like anyone who had been doing it last couple of times. No, I think
+
+Speaker 1  1:27:15  
+who said, Mohammed, you said you have some kind of a script, right, that you run.
+
+Unknown Speaker  1:27:21  
+That would be really cool,
+
+Unknown Speaker  1:27:23  
+or was that Kian? I forgot
+
+Unknown Speaker  1:27:25  
+who might have been key on.
+
+Speaker 4  1:27:29  
+I like that idea, but I like I don't mind doing it, because I get to know people's names, and I don't really get upset if I do both, you know. So
+
+Speaker 1  1:27:39  
+do you like to take, would you like to take it onto your soap and do it every class? Is that what you're saying?
+
+Unknown Speaker  1:27:44  
+Well, not necessarily
+
+Speaker 4  1:27:48  
+depends on on what's going on. Like right now, you know this kind of stuff. Sometimes you'll be doing something where I'll be wanting to listen, because it might be an area that I'm not as solid with. So sometimes I like to pay more attention to the instruction, but other times, like this, it's like, how to make variables in Python, yeah, you know, you can. I do that often in my sleep, actually,
+
+Speaker 1  1:28:13  
+I dream. So if you want to rotate, hang on. Hang on, Karen. But the thing is, if you want to rotate, then either one person has to have the responsibility. Or if you want to rotate, then you have to kind of communicate with other TAs, like, raise your hand. Like, hey, I'm doing it this class. Are you doing this class
+
+Unknown Speaker  1:28:32  
+in the private in the private channel? Okay,
+
+Speaker 1  1:28:34  
+that's fine. So if you do that, then it's okay. Well,
+
+Speaker 4  1:28:38  
+we've usually done other times. I just know folks want to do this time.
+
+Speaker 4  1:28:48  
+Yeah, so I can kind of talk.
+
+Speaker 1  1:28:53  
+The other thing is, when you created the rooms, did you put an automatic timer that the rooms will close after 15 minutes?
+
+Speaker 4  1:29:00  
+Yes, you did. There are set to 15 minutes and 10 seconds warning. So that's 15 minutes and 10 seconds actually, because they get at the end so they can count down and being rooted from it, I
+
+Speaker 4  1:29:23  
+uh, because when I was a student in a similar situation, I really hate it when it just were like, Boom, I was like, having a little warning.
+
+Speaker 4  1:29:42  
+I can see what people are doing. Jump around somewhere.
+
+Speaker 9  1:29:49  
+Let's go this one. I.
+

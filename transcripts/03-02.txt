@@ -1,0 +1,807 @@
+Speaker 1  0:05  
+Okay, let's get started for today's class. We see almost 30 people here. Okay, so we can get started. Okay. So one thing I'm thinking, guys in today's class, like last class, we didn't do as much breakout room. I'm thinking, given the kind of content that we are going to cover in today's class, it will probably be kind of repeat that, or even take it up a notch, and not going to breakout rooms at all. Rather, just stay here and all the activities we will do together, but I'm going to take time to basically make sure that I don't do everything myself. I'll do some, but then I'll need active participation from all of you guys, okay? And the participation cannot be just a select few person people. I need participation across the board, so please don't shy away. Don't hide behind your turn of camera. Please speak up. Okay, and the reason I'm not doing breakout room is because the kind of thing that we are going to do today, while it is not rocket science, we are not going to do radically, completely new compared to what we have done up until last class. But then still, there is a lot of kind of a thinking to go on, kind of ideas that you have to deliver it as a group. And I believe it will be better to basically all of us stay here, myself and all the tears and every one of you here. Okay,
+
+Unknown Speaker  1:43  
+everyone good with that? Okay,
+
+Unknown Speaker  1:48  
+let's get started then.
+
+Speaker 1  1:51  
+So in today's class, we are only going to have very tiny incremental learning compared to what we have learned in the past, which is, if you look in the class objectives there, the first part is important, use of external Python modules on and functions. This is something we touched upon on various occasion over the last few classes. Remember I told you guys like, hey, Python is one of the language that have the richest set of libraries available to you, for you to import and use, depending on what you are doing. But we actually haven't used any of those, because all the functions that we have used, they were all built in function, mostly like your length, your max and mean, your sum and all of these, right? And then your lambdas and your maps and filters, all of those are built in functions. So we really didn't have a need up until now to kind of import something that is not readily available. Okay, so today we are going to do that, so that's the first part, and then the remaining of the class, we are going to focus little bit on more on how to organize our codes better, and majority of the class today. We are not going to unlearn any new Python language syntax or anything like that, but we'll kind of go back and take a step back and try to understand when you write a large piece of code, not just a little toy example code. If you want to write a large piece of code, what are the some of the disciplines that you have to follow to make your code more manageable as you start building more and more complex software package? So that is the reason I said it will probably be worthwhile to stay in this main room all the while and discuss everything deliberate and brainstorm things together. Okay, so I'm going to first go to some of the module import thing. So when it comes to module, you would see that there are several different ways you will see throughout the from now on till the end of the course, there are various things you are going to have to import. It will always be the case that you are importing something or the other from now onwards. Okay. Now when it comes to import, there are two kinds of libraries, two broad kind of libraries. Some of the libraries that we are going to import today, we don't have to do anything, install new install or anything, because Python, when you install Python, it comes with many of these libraries pre installed with your Python, three point 10, three dot 11 or three or 12, or whichever version you have used. So we will start by using those Then, starting from next week onward, you will see that we are using another class of library that does not come readily available in Python. So for that first time, you have to go and do a little install using a Python package manager, which is not going to cover today. That. We will cover next class, but just to give you a heads a heads up in today's class, we are going to see how we import some of the libraries that are already available in Python, but you still have to import them right available, meaning it is already installed in the Python, but it is not readily available. Unlike your max mean land map average functions, those are pre installed and those are also readily available. And then there are some libraries which are pre installed with your Python, but that's not readily available to you, and that's the first class of libraries that we are going to import. We are going to look into couple of different libraries, math function, date, time function, and so on, before we move on to the next section of the class, which is organizing the code and understanding the requirement and so on. Okay, so the first library we will want to understand is the math library. So what I'm willing I'm going to do is I am going to actually, let's open a new file, a new Jupyter file, and when I open new Jupyter file, I have to select a kernel, okay, so that's my new file. Okay. So the first thing we are going to do, we are going to do a simple math. So if I give you a simple number, so let's say number, and I say number equal to, let's call it nine, and I want to, I'll ask you to raise the number to the power of two. So basically, square it. Can you do that in Python without using any library.
+
+Speaker 2  6:44  
+You say you wanted a square to get the square root square, square? Yes. How?
+
+Unknown Speaker  6:52  
+By giving it an exponent of two.
+
+Speaker 1  6:55  
+And how do we do that with two asterisks? Okay, so if we print actually, let's put num equal to nine in one cell. So you are saying num, star, star two, and that will print you 81
+
+Unknown Speaker  7:14  
+Okay, any other way you can think of
+
+Unknown Speaker  7:21  
+multiplying it by,
+
+Speaker 1  7:23  
+yeah, you can do num multiplied by num, which is basically numb to the power two. Okay, now if I ask you to raise it to numb to the power 10, which one of these. Approach would work, last one, first or second, first, first one. Well, technically both. But if you want to raise something about 10, then you have to write Num, num times num times num times num. It's like a gigantic 1010, variable statement, which is not pretty, right? So you can do numb to the power 10, and it's going to probably blow up. Oh no, it didn't blow up. Okay, so that's basically nine to the I. Is it really nine to the power 10? Yeah, maybe it is. Anyway, I'm not going to check that now, so raising to the power is fine. How about you? If you do square root, what function do you use? So what is the square root of nine? So our number is nine, what is the square root of nine three? Now, how do you calculate that? Using Python. I
+
+Unknown Speaker  8:43  
+uh, S Q R T,
+
+Speaker 3  8:46  
+is it math? Dot, S Q R T, did we you have to import math to do that correct.
+
+Speaker 1  8:52  
+So if you do s q r t, you see that yellow squiggly line appears. What does that yellow squiggly line mean? It doesn't know what to do. It doesn't know what sqrt means. So basically, wherever sqrt is defined, if there it is at all, my current running kernel does not know. So in the current memory space that my program is running, there is no object in the memory that is a that is associated with that name, called sqrt. There is no such thing, and that's why it is showing up, right? So obviously, if you want to ignore you will ignore that at your own peril, and Python is basically going to slap you in the face and essentially say the same thing that name sqrt, is not defined, just exactly what I said. Now someone said you have to import. So what is it we have to import
+
+Unknown Speaker  9:52  
+the math library,
+
+Unknown Speaker  9:53  
+perfect. And how do I do that?
+
+Unknown Speaker  9:55  
+Import math.
+
+Speaker 1  9:58  
+Import. Math. Okay, yeah. So now, if I do import math, then can I run sqrt, Matt, dot math. Dot sqrt, correct. So if you do import math, then you have to do math. Dot sqrt. Did I not run import math? I did. Why is math dot, sqrt? Oh, no. Now it's gone. But for some reason it says math is not defined. That is odd, even though it is now, when you
+
+Speaker 4  10:34  
+have a cell before the cell where you were you imported, that it's going to still put a little squiggly thing. Oh, is that one? Yeah, it'll think so you're not doing it in the right order, yeah? Ah,
+
+Speaker 1  10:46  
+okay, so if you just put it up there, then it will be helping you out, yeah. So that is one way of doing it. Now, if you import it this way, you do realize that wherever you have to use sqrt, you have to use math dot sqrt, which is not that big of a pain, but still, there is like, four or five extra characters you have to type everywhere in your code, right? So what is another way so that you don't have to do math dot sqrt everywhere?
+
+Speaker 5  11:18  
+Could you import the SQRT from the math library.
+
+Speaker 3  11:22  
+The hunter said it in the chat, you could just raise it to the one half power.
+
+Speaker 1  11:29  
+Yes, hang on a second. So let's first do it this way. So we'll do from math import Sq, RT, and then here you don't have to do math, dot, sqrt anymore. It will just work. Okay, so someone said something about power. How do I do that?
+
+Speaker 3  11:58  
+Hunter said it in the Chad, you just do the double asterisk for the power and then do like half, like point five or one over two? Yeah, I
+
+Unknown Speaker  12:09  
+understand. But what is the function for power?
+
+Unknown Speaker  12:13  
+A double asterisk,
+
+Unknown Speaker  12:15  
+num, double asterisk, one half.
+
+Speaker 1  12:20  
+Oh, you are saying, like, here, right? Yeah, that will probably work. Yeah, that's another way of doing it. Yeah. So power is probably something you can get by without even importing a function. But this is just an example, showing you that for some cases you actually have to import now what you might want to do, talking about Google, like as we were talking before, if you want to see what are the other function that I have in math library, you just Google Python math library, and then look into the Python documentation and you see the different things available now, power, yes, what you said is, right. You can probably get by even without using math library. But think about other things. For example, factorial of n. I mean, yes, you can. It's yourself write a function for factorial of L or if you want to do a GCD or LCM or permutation of two numbers right, and CK or NPK, right? Or if you have a floating point number and you want to ceiling or flow rate right. Or if you have a number, whether positive or negative and you want to find an absolute value for it, right? Or whether, yeah, so you can basically look through right. If you have a number, if you want to see, hey, whether it is a not a number or something meaning undefined or not. So there are a lot of different also, exponential is another one, logarithm is another one. Like all of these typical math function, if you have to do you will see that you will have and then trigonometric function, right, sine, cosine, tangent, all of these trigonometric also math.pi gives you the value of pi right away, right? So these are some of the variable, not variable, sorry, functions that are available in the math library, right? So whenever in doubt, you don't know what is available in Python, just go, either do a Google search, or if you want to read the documentation, remember this docs.python.org, that's where all the documentation is. And you can go here, and you can basically find anything and everything you want, right? It is, it is amazing. If you, when you start going doing these, you will be amazed to see how much you can self learn, actually, just by going through the documentation. Okay? So that's that. Let's learn about another library. So let's say you want to basically play like a game of chance, like someone, if you want to living that someone is rolling in. Dice, six sided dice, right? Let's say you are playing designing a board game to be played a digital version of a board game, and every time your turn comes, you have to roll a dice that should give you one to six. How do we do that?
+
+Unknown Speaker  15:16  
+Is it like random? Random functions?
+
+Speaker 1  15:18  
+Exactly. So not random is not a function. Actually, random is a library. Now inside random, there are other function now here, let's do one thing. Instead of doing that right, trying that in the code, let's get into the habit of consulting the documentation again. So if you do Python random library, the first thing that will come up is this, right, which is the Python documentation. So it clearly says, generate pseudo random numbers. So don't ask me why it's a pseudo number, random number, because there that is a very deep number theory explanation. Even I cannot give you a full answer why it is a pseudorandom but for all of our practical purposes, you can just say, Read these as generate random numbers. And then if you go into this, you will see a whole bunch of example there. You can have Rand bytes that will give you a generate n random bytes. If you have a RAND range that will give you random number within a range, you have a random int that will give you a random number of integer within a given given range. So, and you can also have random choice. What that will do is it will return a random element from a non empty sequence, like a iterable, right? So when we want to throw a dice that will that we want to roll either one like any integer number from one to six, which one of these function? Just by taking a look at the names of the function, can you guess which one of these functions would probably be suitable for our requirement? Now,
+
+Unknown Speaker  16:58  
+the random range,
+
+Unknown Speaker  17:01  
+random range, right, yeah.
+
+Unknown Speaker  17:07  
+Say that again.
+
+Speaker 1  17:10  
+Random int, yeah, random int will return our random integers. So maybe that will work. Random range will return a randomly selected element from range, start, stop, step, I think you can use both. You can use random range with start value of one, stop value of six, and range step value of one you can do that. Or you can just say Rand int with one to six, because if you provide a and b, it says the integer it will return, it will be between this these range, right? A less or equal to n, less or equal to b, so that means this will basically include both the start and stop value, right? So now we did the documentation, right? So now you don't have to take my word for it, I showed you how you can find that yourself. So now we have to do what random, right? So we can do, you can do either from random, import random, or if you just do, import random, then you have to say, random, dot random. And if you do random, dot random, one through six, that is basically going to mimic a six sided guys. So if I run it multiple times, you see 653112330,
+
+Speaker 1  18:39  
+I haven't gotten a 48 Yes, now I got a four, but anyway, you got the idea. So this is basically mimicking as if you were rolling a six sided dice, right in a board game.
+
+Speaker 6  18:51  
+Question. So you mentioned about importing math, right? Can we actually import everything under math, or do you always have to define, you know, import, run, import square root, import whatever, right, so,
+
+Speaker 1  19:05  
+so when you do, yeah, so what you can do is you can do from math, import star,
+
+Unknown Speaker  19:13  
+okay,
+
+Speaker 1  19:18  
+okay. So if you do that, then, then, or, or, you can also do from random import star, right? So let's see whether that works. So let me go ahead and restart my kernel, because I already have the other things imported. So to make sure that whether it works with the import stars. So now I have nothing else. This is the first cell I ran. Now let's see whether it works. Yeah, you see random now you don't have to say random dot randint, and you don't even have to say from random import randint, because you are writing great random library. Might have 50. Different function. You really don't want to say from random input these from random input that you really don't want that rather, you might want to do from random input star. But is there any best practice? Yeah, that's what I've said. Yeah. Just hang on. There is a caveat to that. Sometimes there could be lot of libraries, sorry, lot of function within the library. And if you do a import star indiscriminately, especially in the large, complicated programs, especially when you are importing from multiple libraries, there is this thing called namespace collision, right? So what happens is, when you do from math, import star, now inside Matt, if there are 50 library, 50 functions available, all of those 50 function come to your program and it they basically part of your program memory, which we call namespace. Now, what happened tomorrow, if you want to import another library, let's say if you are doing some linear algebra. So there might be some linear algebra library you are you importing, and there might be some function about the same with the same name in another library. And this happens more often than you think of so now when you are using a function, so now you really don't know which function you are using, right? So there is a namespace collision going on. So that's why, going to your question, the best practice would be to only import the things you will need, but for common libraries such as math or random or dead time, it's probably okay to just do a import star, okay, but when you are doing something like, let's say SCI pi or NumPy or pandas, right, these are large libraries, so you don't know what all the functions are. So for those libraries, it's probably a better advice to refrain from using import, store,
+
+Speaker 7  22:01  
+apart from, apart from name, name conflict, do we have any any constraints, like memory constraints, or any of the resource thing being consumed?
+
+Unknown Speaker  22:11  
+It's just a namespace.
+
+Speaker 8  22:17  
+And is that namespace occlusion? Is that the reason for separating the libraries into the built in functions and then the external libraries, yeah,
+
+Speaker 1  22:26  
+that's that is right. Yes. Okay, so now if we try to run this again, we just ran it. It is working. So that proves our point. To Ingrid question, we can get by just by using import star and not having to specify anything. Thank you. Okay,
+
+Unknown Speaker  22:50  
+next quick question. So now let's say so
+
+Speaker 2  22:54  
+could you? Could you avoid namespace collision? If you just, instead of doing import star, you just said, import math, and then you'd have to do math, dot, square root.
+
+Unknown Speaker  23:04  
+That's exactly it. Yeah.
+
+Speaker 1  23:07  
+So if you do think about it, if when you are doing just say import map, if math has a function called, let's say square root. In order to use that, then your new program, you have to write math dot, s keyword. Now let's say tomorrow, and I'm just making it up. Let's say you are importing something. Let's say NumPy. And if NumPy also happens to be have a same function named S Q R T, you have to type NumPy dot S Q R T, so that basically makes sure that in your program, you are not kind of colliding with two namespaces. So just saying, import library is always good, but it's just that it makes a little bit more work. Whenever any function that you are using throughout your code, you have to make sure you provide the function name, sorry, library name, dot, function name. So there is no best practice across the board. It depends on your use case, your complexity, the kind of program that you are writing, and it will come with experience. Guys. Okay, so one other question on random. So let's say I have these five fruits, and I want to randomly pick one fruit. Now, given the functions that we just saw when we quickly picked into the random library documentation, which library, which function do you think we should use?
+
+Unknown Speaker  24:36  
+Import random?
+
+Speaker 1  24:39  
+No. Import random is done already. What I'm saying is, if we want to now use a function from the random library to choose one of these fruits in this list at random, what function we are going to use? Choice, choice. Yes. So what does choice do? It picks a random object from an iterable. Oh, there you go. See in here. So the doc string of that clearly says what it does, right? So you have to say choice groups. Oops, remember where this doc string come from? Towards the end of the last class we talked about this. So in order to provide this kind of definition or description of your function for your user, let's say you are the author of a Python library that other people are going to use in their program, you can create that similar, similar description for your function by using the three double three double quote thing comment at the beginning of your function, which creates a doc string, similar doc string for your function. So anyway, so I have this choice function. So if you run this multiple times, you will see that it's picking one fruit at random from these five fruits.
+
+Unknown Speaker  26:12  
+Okay,
+
+Unknown Speaker  26:17  
+do you guys want to try another library,
+
+Speaker 1  26:21  
+which is actually very commonly used. What is one of the other library that we use very commonly, and not just in Python, in any programming language? Is there a time like sis? Yeah, yeah. So see when you are doing any programming something related to date, time you often encounter, right? And remember, how is it in Java or C plus, plus, probably there also you have to import some library. It's
+
+Speaker 7  26:47  
+been a System IO, System IO, or import
+
+Speaker 1  26:52  
+Yeah, system Yeah. In Python, there is also another library that we commonly use is called OS. I'm going to show you that as well. OS is operating system, okay, and okay, so let's do date time. Okay. So first, let's try to find what is the current time, and what did you do?
+
+Unknown Speaker  27:17  
+I'm a networking engineer, Showtime.
+
+Speaker 1  27:21  
+Yes. Well, at the at the lower level, that is probably the low level command. It will be issued to the operating system like show time. But Python is a high level language, so we have to provide a Python command that Python compiler or Python interpreter will turn into a lower level instruction, right? But what is that Python command?
+
+Unknown Speaker  27:49  
+Anybody to import it?
+
+Speaker 1  27:52  
+Yeah. Well, give me both the library and the function.
+
+Speaker 2  27:56  
+Well, you can easily time or date time, but if you want to do just date time would be, import date time. Yeah, so
+
+Speaker 1  28:05  
+import Date Time, D, A, T, E, T, i, m, e, so import date time.
+
+Speaker 6  28:16  
+Did I please expand your page so this can be there.
+
+Speaker 1  28:21  
+Oh, like you mean, close this. Yes, please, thank you. Okay, okay, so import dead time now. Dead Time library has a little oddity I'll show you. So the particular function you need for dead time is called Date Time dot now, but look what happens. I'm typing dead time, and now I'm saying a dot, and now I'm trying to type now, and it's not showing up, so there is no now, and this probably, I don't know whether it is, it is kind of like a tech debt that Python designers have been carrying from the beginning, or whether it is intentional, I don't know, but the auditing date time is. Inside date time, there is a sub module called dead time. And inside that sub module, then there is a function call now, so you have to do dead time, dot, Date Time, dot, now, and that will give you the current time, which is this. Now, if you don't want to do this, what you can do, you can try to import this dead time the second level, like the nested module, so you can say wrong date time, import dead time, and that way, every time you want to use it, you don't have to you. Repeat that again. You just have to then do date time right now, why some of the function inside dead time library are organized like this. I have no clue why they did that, but I have not seen it in any other well known libraries, only the date time is where I have seen this. I three. Okay, so now what? So let's now. Let's do one thing. Let's save it in a save it in a variable. Let's say current date time. Instead of printing it, we are going to do some other operation on this. So let's do current date time. So now this current dead time, I want to see what is the type of this variable. Remember, if you have any variable, you can add a apply a type function that will show you whether it is a string or integer or floating point number. So here we are going to apply type on this current dead time. And what does it say? It is a dead time type object belonging to the dead time module. So it's a dead time. Dot dead time. And if you print it now, which we did before, but let's try to print it again.
+
+Unknown Speaker  31:28  
+Yeah,
+
+Unknown Speaker  31:29  
+so it prints well.
+
+Speaker 1  31:33  
+As you can see, it is YY, hyphen, mm, hyphen, dd, and then there is a space, and then our colon, minute, colon, second, dot, millisecond. So it all goes all the way to millisecond. So that's the current date, time.
+
+Speaker 9  31:48  
+Can you change the format of it if you want it to be viewed differently? Yeah,
+
+Speaker 1  31:54  
+that's exactly what we are going to do. That is next in that I was going to show you No, don't be sorry. That means you are thinking the right way. Okay, so now, so let me ask you, Tiffany, if I am saying, hey, take this current date time, forget about the hour minutes second. Just print the date in mm, dd, yy, format, mm, slash, dd, slash, yy, what did you
+
+Speaker 9  32:32  
+do? You have to change the format first, but I don't know how to do that. Okay,
+
+Speaker 1  32:37  
+so I can show you right now, but let me actually show you. Let's say if I am starting Python programming today, right? And let's say I'm still a beginner, right? And I want to know, hey, how to format, date, what do I do? And I think someone was asking during the office hours like, hey, how do you guys know so many things? And I made a comment like, you think tech people are smart, but they are not. They just know how to use Google. Okay, so see what happens. All I'm saying is Python format, date time, not a rocket science, right? Because that's what I'm going to trying to do. And I will get Python docs. I will also see w3 schools, which is also a very well known or I will see something from Stack Overflow. Or I will say something from gigs for gigs. See, yeah, gigs for gifts. So there are only a handful of website that I know that will always give me a reliable answer to these type of specific Python question, right? So let's go to the first one Python dead time. And this is the w3 schools. Okay, so here they will actually also give you like examples. So here you see return the year, if someone wants to return the year and name of the weekday. So see you first do data now, and then you do x.tr and it will give you the year. That's one way of doing it. And then there is something called x dot STRF time. What is that about? So STRF time is probably going to give me something even better, but these, well, I see this, but this doesn't seem too comprehensive. So let's look into the Python documentation. Python documentation is also kind of sometime it takes a little bit more experience to read through, especially when you have lot of things. Stack Overflow could be a best bet. Probably Python how to format these. So here and and you have to spend some time. Okay, here. So now this, here is an example or answer someone posted that I love. So what does it say? First, the question. Yeah, as you see, which you can probably lot of you can relate to. I'm new to Python, and I cannot find my specific answer. I need to do so and so things which is formatting a timestamp to these exact format Right. Kind of sounds like the exact question Tiffany asked. And look at some of the answers. So they say, import the date time library, then whatever you get from Date Time, dot now apply a function on top of that called STRF time, which is basically a shorthand of string formatted time. Okay? And when you pass so these different types of format, depending on that, your output will change. So now let's just take this for now. Okay, so I'm pretending I don't know about them. Okay, so let's just do this for now. What happens so dead time? Dot, now, well, I don't have to actually do dead time. Dot, now, because, in my case, I have already saved it in a variable called current dead time. Well, let's do that then instead of dead time right now, I'm going to do current dead time.
+
+Unknown Speaker  36:06  
+Huh? Did anything happen?
+
+Speaker 1  36:10  
+Do you see any difference between this print statement here and this print statement here?
+
+Speaker 6  36:17  
+Yeah, one of you see for hours. The other one is not, is using the AMPM, I think I don't know. Yeah,
+
+Speaker 1  36:25  
+so here, first of all, here, we don't have the millisecond. We still have the y, M and D, and then in between there is a T, T basically means time. So date, and then time, and then our Minute, second, which is not different from this. And then they have added a Z, meaning the time zone. So basically it says this is in your local time zone. But I'll ask Tiffany to like, print it in a mm, dd, yy format. So now that I have done this, however, I get rid of everything after the date, forget about the time. Now I know that I have a percentage D, I have a percentage M, and I have percentage y, and my percentage y is replaced by 2024 percentage M is replaced by 12, and percentage D is replaced by 12, five. So how about we try to put it in the format that we want, which is, start with month, then put a slash, then put a percentage D, and then put A percentage y. What happens? Bingo,
+
+Unknown Speaker  37:40  
+so we saw that
+
+Speaker 1  37:44  
+right now. Remember someone also provided an example saying percentage A, so what if I take a dead time object and do a STRF, term, percentage? A? Wow. Look at that. It prints what is the current weekday, right? So now I know percentage M will print the month, percentage D will print the day, percentage y will print the year, percentage a will print the weekday. And then there were other thing, which is percentage H, meaning the hour. So this is the 22 hour percentage. Upper case m will provide the minute, and percentage upper case s will provide the second. So now, using any combination of these placeholder you can use STRF time To format the date in any way you want. Okay?
+
+Speaker 1  39:06  
+And there are a lot of interesting functions in dead time library that you will have to use over the course of your not just boot camp, like if you really want to be in tech. Dead Time library is something that you will use very often. There are things like data arithmetic. So let's say you have a date and you want to add five days to it, and what did you derive? Or you have to do a difference between the two dates, right? Like delta between the two dates. Let's say you have a two dates. Let's say December 5 and December 15. How many days between two? So you cannot just take two date data object and do a subtraction, because these are not integer. These are dates. So all of these kind of date arithmetic operations, you will see that inside that date time function, our dead time library, you will see all these functions are provided. There also some. Times. Let's say you are getting the date from some from some text file, right? So here the date we got using Date Time. Dot now, which basically gets the current system time. But what if, if I want to read the date from a file? Now, in a file, whenever I'm reading something from a file that is coming as a text. Now how do you convert that text into a dead time? So for that, you have to use a similar function to STRF time, but it will do the opposite way. It will go from a string to a date. STRF time goes from a date to a string. And then you can do the other way, using STRP time. So how do you do that? So now that I said STRP time, now you can say
+
+Unknown Speaker  40:53  
+STRP time.
+
+Speaker 1  40:57  
+And here, let's go to gigs for gigs, and it says, date, time, dot, STRP, time, and then time data and format data. So how does it work? So the formatting are all same, but then you have to provide an actual text. So here there is an example. So let's say your time data is actually a string like this. So think about this line here that I highlighted. This is not a dead time object. This is a string object because it is enclosed within two double poles. And the same thing will be true if you happen to read it from a file which is stored somewhere. When you are reading something from a file, it will come to your Python memory as a string object. Now, if you want to do convert it to date time, you have to, if you have to do some dead time related calculation, first you have to convert it to a date time type object, so that you need to do using the STRP time, and then here you have to provide two argument your string time, and then the same kind of formatting that you provide for STRF time, and then it will use that formatting to interpret the string data and load the corresponding Date Time parallel into memory. So it's just the opposite arithmetic. So let's quickly do it. So let's say you have time data, which is this and what type of variable it is. And when you are trying this type of new thing, it is always good idea to keep checking the type. So time data is a string, which is good, which is what I expected. Now I'm going to do this date equal to date time, dot, STR, P time, and here I'm going to provide the formatting data. So for formatting data, I purposefully did not copy paste it. So think about what the formatting looks like. So first is 25 so that cannot be a month. So maybe it is a DD, mm yy formatting, because a month cannot be more than so these formatting data that you are going to provide, it has to match the data that you are reading like. If you know, let's say in us, we mostly use MMD yy format, right? If you go to UK, they probably use the other because British people always do the things the opposite way, right? So they will use the DD mm yy format. So looks like this is a DD mm yy format. So if I want to interpret it correctly, I have to match my formatting to what the original string is supposed to say which is percentage D, which is for dead and M, sorry, not uppercase M. Uppercase M is for minute, lowercase m is for month, and then percentage y, yep, that's what they have done, too. And then there is a space, and then there would be our colon minute, and then colon second, and then there is a millisecond here too, after a decimal. So to capture that, we have to put a percentage F similar to that when you spring the floating point. So now, now if you do that, so now the code ran, but now let's see what is the data type for the new object that we created, which is date, and you see it says data under date time. So that means our conversion was successful. We were able to take a string data and apply STR P time, which applied the opposite operation of STRF time, and it actually indeed converted the string data into a date object, which is actually a date time object. Date Time Time.
+
+Speaker 3  44:57  
+Can you put anything you want in that string? And like, besides the slashes and the colons, like, if I wanted to do like, a file name and then, like, put those like, like, does it, does it construct the streaming or do you have to do it in that this
+
+Speaker 1  45:11  
+string, this formatting string, has to match the string that you have here? Oh, okay, thank you.
+
+Speaker 2  45:18  
+Yeah, that's, that's an interesting point done, because what if you had a file that you were generating that had the date time appended to it? I assume that you could put the file name and then view the percentage and say, like, this is how the time came in.
+
+Speaker 3  45:33  
+Yeah, yeah. They're like, like tag builds and or like automation systems for like or like tags some and I was like, wondering if you could just like, like Mark, like zips or builds with like that.
+
+Speaker 1  45:47  
+Yeah. So here, here is a puzzle. So I did some change while you guys were talking in this cell, which was running perfectly fine. I made some change. I ran it, and now it is giving me a weird error. Can you guys debug why the error is happening and what is it trying to say?
+
+Unknown Speaker  46:08  
+It says does not match format.
+
+Unknown Speaker  46:12  
+The last line, right this line?
+
+Unknown Speaker  46:16  
+Yeah. But why?
+
+Unknown Speaker  46:18  
+Because of that space, yeah.
+
+Speaker 1  46:22  
+So what I did is here purposefully, I deleted that space. So now when I delete this space, now in the string that I'm passing here, I have month, sorry, day, month, year, and then the hour starts right after but I'm telling STRP time that in the format it should expect, to expect, expect a space. It doesn't have that space. So it's saying, No, it doesn't match the format.
+
+Speaker 1  47:00  
+Cool. What other library you want to learn?
+
+Unknown Speaker  47:06  
+The sympy.
+
+Unknown Speaker  47:09  
+We are not going there.
+
+Unknown Speaker  47:12  
+So we are not so let's save this those kind
+
+Speaker 7  47:15  
+of something scary or complicated. No, no, no, no,
+
+Speaker 1  47:19  
+no. Sim pi is basically for symbolic algebra. That's not something even within the purview of this course, but we will do something called NumPy, which is something that we will make, I think that will probably the be the most used library throughout the remainder of the course, but that is in next week's class. So that's why I didn't want to go there today. But here, let me show you another library that is kind of a utility that people use all the time, which is called OS. So os basically allows you to provide command that you otherwise would have been provided from the terminal directly to your underlying OS. So it basically
+
+Unknown Speaker  48:03  
+interacts directly with your share
+
+Unknown Speaker  48:06  
+from Python,
+
+Speaker 1  48:09  
+right? So let's type one thing, OS, dot.
+
+Unknown Speaker  48:18  
+What did you say? Does
+
+Unknown Speaker  48:22  
+it allows you to
+
+Speaker 1  48:24  
+send command Hang on, not print current working directory. You know, what was the command to print current working directory? Hang on, even I forgot. Yeah, I thought, but I'm not seeing that now,
+
+Unknown Speaker  48:44  
+hang on, or maybe dir,
+
+Unknown Speaker  48:46  
+depending on,
+
+Speaker 1  48:50  
+it's not Dir. I know I can do mkdir to make directory. I can do C, dir, it changed, huh?
+
+Speaker 7  49:03  
+I believe we use pwd right present working directory.
+
+Unknown Speaker  49:08  
+Yeah,
+
+Unknown Speaker  49:11  
+this one get CWD,
+
+Speaker 1  49:17  
+so you see what it says. So why it is showing me this path, because if you look here, this path up to AI 24 week boot camp, this is basically where my work space is. So it is basically same as issuing a pwd command right here. So think about in the first week where we created a folder and went inside the folder and created a file and then deleted the file and then came up from the folder. All of these you can do from your Python program yourself. So can you guys think why this library could be useful if
+
+Unknown Speaker  49:59  
+you're trying to. Import Files,
+
+Speaker 7  50:01  
+yeah, files. Import Files, yeah. Or maybe
+
+Speaker 1  50:05  
+you do some computation and you want to save the data in a file, in a CSV file or something, right? Or if you know that there is a file lying there somewhere, you want to open the file and read the read everything from there. So all of those kind of thing would require you to actually interact with the file system, the underlying file system of your machine, and OS is the library that you will use for that. Okay, so I'm not going into super details into this thing, but just wanted to know that this library exists in future during the course of your work. You know you can Google, you can go to Python doc or or gigs for geeks, or any of those things, and then you can find it out yourself, just it is for now, it is important to know that This library exists. That's all
+
+Speaker 1  51:00  
+Okay, so that's all about libraries. Did we miss anything else? No, okay, now we are going to look at one other thing. So here all of these example that we have done up in today's class. Here we are importing something that other people have written and made it available to us via the Python installation. Now another scenario could be, or would be, definitely, or should be, I should say that when you are writing a complex, complex piece of code, it is often best idea to not write everything in one shot in one Python file. It will actually be better for you to reorganize those code, because when you write code, you will see there are some pieces of code that you will have to reuse in different scenario, something that you can almost think of as a toolbox, like your utility, right? Like, let's say, when a when a handyman comes to work in our house, he carries a toolbox, and he has all kind of ran screwdriver, drill machine with different drill heads, all of these things. These are readily available. He doesn't have to think, right? So similarly when we write Python program, or any program for that matter, right? So we need to use this kind of toolbox. So these libraries that we saw these are those kind of toolbox that are providing sometimes you want to use these tools that language is providing you and build a tool one level above that helps you do something better. So going back to the handyman example, so those driving the screw hammer and drill machine, those are, let's say, the basic tools. But how about let's say someone is building a house, and then all the houses are kind of have certain building blocks. Now let's say someone comes up with a with a kind of a contraption that will allows him to easily cut out a window in drywall, something like that, right? Maybe someone came up with with a set of processor tools that they will just fit in a drywall, and then Bucha lever, and then, boom, a window will be cut out from a dry work, right? So these type of tool would be more higher level and more reusable, and makes the person's day to day life much easier that construction worker or builder or handyman, right? So similarly in our work, so we are crafts person, right? So we also need to build this, build this kind of tools for ourselves so that we can be better at doing our job on the field when we go down in the field. And how do we do that? Well, we refactor our code so that every time I have to repeat the same thing, I don't have to open my basic toolbox and use our drill drivers and drill bits and whatnot. Instead, we will use them once, and then we will create something that is more valuable, more useful, so that I can input use those later on. So these are your user defined libraries or user defined functions that you will use, or your friends or colleagues will use, or if you want to publish those on open source via your open GitHub library, then other people from the community will use that. And there are a lot of Python libraries that are also available this way, which is not provided by through the official Python distribution channel, but lot of these libraries you will find in other people GitHub repository that they are providing just as good Samaritan, just a good citizen, they want to help others. So all of these are examples or scenarios when you would want to write your own code and package it like a library. So we are going to we are not going to go too deep into these, but we are just going to see a quick example on how the. How that might work. And this would be in your activity two, which is supposed to be a student activity, and this is the activity that I said, rather than doing it in breakout room, we will just talk through this, and we'll try to learn here. So if you open the activity file. So this is what that activity say. This is activity number two, by the way, in your GitLab. Okay. So here, hang on, where is the file?
+
+Unknown Speaker  55:36  
+So there is a file given called car loan.pi,
+
+Speaker 1  55:41  
+and then so this file, card loan.pi is going to be the library file. This is where you are going to use the tool that you will then use in your actual program. And that program file is called import car loan function.pi so now if you open the utility file, which is car loan.so, let's see what is there. So this function, you will see, sorry, not function this file, it has only one function, which is this guy, def, calculate future values, and then this is a function, and it takes three parameters, which is the loan value, interest rate, and the remaining month, meaning the amortization terms. And this is a simple future value calculation of a loan. And this is the arithmetic formula that is in implemented inside this function, using this formula, given a current value of a loan, outstanding amount, interest rate and amortization period, you can find what is the future value of loan going to be? So that's what this function does. Now, obviously this is somewhat complicated formula. I mean, I know most of many of us probably learned that when we are in high school, but we don't remember that. So if we do happen to come across a scenario like this in our professional life, we might Google search and we might find that formula, but we don't want to keep getting bogged down by that formula over and over again. Rather, we are going to implement that formula once in a library, and we will have it available to us whenever we need it, whenever we want it. So in order to do that here, they have supplied this as a user defined function in this car loan.pi library file. Now in that same folder, there is this other function, which is where you are supposed to import this function from car loan.pi, file and use that function to actually find the future value of a loan with these three parameters. Okay, so this is what we are going to work on jointly. The first prompt here is import the calculate value function from the car loan file. So can someone help me writing that statement?
+
+Unknown Speaker  58:20  
+Import car loan,
+
+Unknown Speaker  58:23  
+and then calculate future value in parentheses,
+
+Speaker 1  58:27  
+import. So what is my import statement going to be?
+
+Speaker 5  58:31  
+Import, space, car loan, which I use the cat the title of the file without the.py Yeah,
+
+Unknown Speaker  58:42  
+yep, yep, yep. And
+
+Speaker 5  58:44  
+then in parentheses I put calculate underscore, future, underscore value,
+
+Unknown Speaker  58:49  
+where, where, in which line, uh,
+
+Unknown Speaker  58:53  
+in line two.
+
+Speaker 1  58:55  
+Well, you can, but here the idea is that you basically follow the prompt, right? So here the prompt is import and then create the new car loan dictionary, which basically the car loan object, and then set the function call equal to a value variable called car value, pass the relevant information from the dictionary as parameters to the function call. So this is the line that it is prompting you to write that code, not in line number two.
+
+Speaker 5  59:26  
+Got it online. You have to, I thought you would have to import the actual function on line number two. Just based off of that, if you
+
+Speaker 1  59:37  
+want to import the function, then that would be a different import statement understood, okay, what is that other import statement? Can someone else please fill in here?
+
+Unknown Speaker  59:45  
+From car loan import
+
+Speaker 1  59:50  
+value, correct? So that will make us not using car loan, dot function, name every time if we do from car loan, import. It oops.
+
+Speaker 2  1:00:03  
+The comment says that you're supposed to do, right? It says, import, calculate future value, function from the car loan, yeah,
+
+Speaker 1  1:00:13  
+so from car loan, import, calculate future value. So now where am I going to use this function here, and it says, set the function call equal to a variable called card value. So card value, so now what the function call will be,
+
+Unknown Speaker  1:00:36  
+calculate future value,
+
+Unknown Speaker  1:00:39  
+and then what are we going to pass to the car?
+
+Speaker 1  1:00:45  
+Yeah? So no, how many parameters we need to pass this
+
+Unknown Speaker  1:00:48  
+one? Yeah, asterisk, asterisk, car loan.
+
+Speaker 1  1:00:54  
+Yeah, that's a smart one. Yes, since this is a dictionary, we can just pass asterika asterik, new Carlo, now, would it work? Remember, we learned something the other day. Then when you do this, these three keys that you have has to match the expected parameter names here, so you have what, current loan value, annual interest rate, months remaining. It's out of order. It's out of order, yeah, but because it becomes, maybe it
+
+Speaker 2  1:01:31  
+doesn't have to be in order, because it's not, it's not implicit, it's explicit.
+
+Speaker 1  1:01:36  
+Okay, so you think that it will still work? Yes, let's try. I'm not sure either. I haven't tried it that way, like I don't know everything, right? So let's try, but we know that it might or might not work. Okay? So now we have to provide a print statement. So print statement is nothing but to print the feature value, so there is no nothing to deliver it here, just the print statement. Now let's see when I run it. Yeah, JSA is right. It actually works. The order would not matter here, but if I change the name of a variable here, so instead of months remaining, if I call let's say month remaining, would this still work? No, it did not, because month remaining does not match any of the expected parameter. So what we learned is we can do double star to do the like a indirection, instead of keeping them, providing them separately, but the keys in the dictionary has to exactly match in with the parameter that the function expects, and that's it. That was our group activity. So I would want to pause here. And for those of you who might not be following, I want to you guys to take another good look and understand what it is, what is it we just demonstrated, what we achieved, and feel free to ask any question. Remember, no question is dumb question. So please,
+
+Speaker 7  1:03:19  
+oh, I have a question regarding the function. There is a.to F. Where is King this?
+
+Speaker 1  1:03:31  
+Oh, from this? Yeah. So this basically remember what we did earlier, that if we want to print till two decimal places, yes, dot nine seven, because this is a, this is $1 and cent, right? So whenever you have a monetary value, it is always good. Like, what will happen if we don't put this?
+
+Unknown Speaker  1:03:56  
+What will happen?
+
+Unknown Speaker  1:03:58  
+Huge, really, long float.
+
+Speaker 1  1:04:02  
+Yeah, correct, because, because that arithmetic calculation will basically provide you a floating point number, and there might be 678, decimal, six or seven or eight digits after the decimal point, which doesn't look good when you know that it's a monetary value. So by providing point 2f you are specifying that only print two character after the decimal point.
+
+Speaker 9  1:04:28  
+So question for clarification, so you were able to import from your car loan file, because it's all underneath the same project, correct?
+
+Unknown Speaker  1:04:42  
+Or is it because I'm sorry,
+
+Speaker 5  1:04:46  
+oh, I was just, I basically had the same question. I'm just wondering, is it because it's in the same exact directory as the import car, loan, pi file?
+
+Speaker 1  1:04:58  
+Yeah, yeah. That's why, then my next different directory, then you have to basically follow that directory staff structure to do that.
+
+Speaker 9  1:05:08  
+So that was going to be my next question. So let's say that you start a new project, and you're you know that you did car loans, and you have this formula, you'll just have to figure out what directory that's at and kind of identify it and put it in there. So can you give an example of how you would do it from a different or directory?
+
+Speaker 1  1:05:33  
+Ah, that's a good question. Let me see if I can find something readily available. Hang on difficult.
+
+Unknown Speaker  1:05:41  
+I'm just curious what that looks like. Yeah,
+
+Unknown Speaker  1:05:51  
+I'm trying to see
+
+Unknown Speaker  1:05:55  
+whether I can
+
+Speaker 1  1:05:58  
+possibly get something from my previous work.
+
+Unknown Speaker  1:06:05  
+Where have I used this? I
+
+Unknown Speaker  1:06:28  
+Nobody. Yeah, here. So
+
+Speaker 1  1:06:36  
+actually, why don't I add this thing to my VS code, then, then I can show you there. That's actually a very good question, by the way. So Add Folder to workspace documents that okay, so I have added it here. Now, here. Okay, so this is a project that was actually done to run on AWS lambda, which is a serverless service that AWS provides. So inside a lambda, there is a concept called layer. So lambda is basically it provides you, like a, like a, what is called, I'll call a mini computer, you can say, which provides you a Python runtime on the cloud. So you can basically invoke a quick API call and provide it with a Python code, and that way your Python code will run on the cloud, which is a very, very powerful tool, by the way, a lot of things you can do on the cloud that you cannot do from your computer. Now, when you do that, sometimes you have to declare and include libraries additional libraries, which is what we have done here. So all of those libraries that I have written in this project are basically inside this folder called layers, and inside this folder called lambdas, this is where my actual Python functions are. So if you look into, let's say, actually, all of these, like even this lambda function. So these are all the actual lambda Python function that works, that runs.
+
+Speaker 1  1:08:29  
+Okay, so, yeah. So this is so all the Python functions that are actually doing the work are inside this folder called lambdas. And therefore these are the different entities, like officer, phase, report, scorecard. So these are basically, this is, this is basically a full stack project, so where the back end is also done in Python and frontis is also done. Frontend was done actually using what is called React Native. So this is a full stack project done on AWS cloud. But my point is to what Tiffany mentioned, the library that we have defined is in a separate folder. It's not in the same folder. You see, lambdas is a different folder. Layers is a different folder. So here what we have done, we have created a folder called Python, and inside this Python, then there are these functions that are available. So if you go into here, then you will see, here, I have provided this, all of these depths, which are my basically different methods that I'm going to use in my Python function. And another thing where you have to do is you have to provide a file called underscore, underscore, init, underscore, underscore.py, so in that file you have to provide these lines. What it does is, when you are importing this, it helps Python think that your what is called the module structure you. Be starting from here, like it will be dow dot handler, dot entity handler. So if you have to use these, you have to then import Dow dot handler, dot entity handler. And then from there you can say, import these, or import that. Or you can do an import star, like here you can see that I have I am doing from model dot report, import star, from model dot phase, import star. Where are all of these? These are other library function that I have written that I am calling or importing from this library function. So now if you look into this model dot phase, model dot officer, so matching that I have a separate folder called model, inside that I have those functions written. Now, how do how does Python know that if I say model, dot phase, it has to go into a folder called model, and then inside that it has to go for a file, look for a file called phase. The reason it does that is because in this folder, I have provided this init.py file with this couple of lines added there. Without these, you cannot do that. So you have to basically add these files, this init.py file, to make sure that the Python understand that your module name, dot module name, dot module name, like that. However many level you do that, it can match that to the corresponding folder structure in your file system, in your machine. So if you want, what I can do is I can probably copy this file and send it, or maybe just put this thing in Slack channel if you want to save it, because this will be like no matter where it so this one was AWS cloud based project, but even if you are writing Something in your for your local machine to run. This technique will always work. So what I'm going to write is here is code or underscore, underscore in it, underscore, dot,
+
+Unknown Speaker  1:12:18  
+I file
+
+Speaker 1  1:12:20  
+that is required to create A
+
+Unknown Speaker  1:12:29  
+module structure
+
+Speaker 1  1:12:33  
+following your file system folder structure so going to put this code here, put it in a code block, and there you have it.
+
+Speaker 1  1:12:56  
+Yeah, I posted in the general channel, so you should have it in Slack.
+
+Unknown Speaker  1:13:01  
+Thank you for doing that.
+
+Unknown Speaker  1:13:03  
+Yeah, no problem.
+
+Unknown Speaker  1:13:11  
+Cool, that was a very good question. What else
+
+Speaker 6  1:13:19  
+on the on the import function. Blair mentioned earlier, where you use it, you know, importing, using the function, right? What? What if you just do the straight import, import. What is the car loan? Because it when I try to give the same result, so instead of using but he said, you know, importing the function in a car loan. What if I just use car loan. You know, just import car loan. And then, you know, the next thing is just new car loan. Equals whatever.
+
+Speaker 1  1:13:48  
+No, if you do import car loan, sorry, yeah.
+
+Unknown Speaker  1:13:51  
+And then remove the calculator,
+
+Unknown Speaker  1:13:57  
+okay? And then what?
+
+Speaker 6  1:13:58  
+And then just run it right? So basically just importing the car loan.
+
+Speaker 1  1:14:03  
+How would Python know that this calculate future value is inside car loan?
+
+Unknown Speaker  1:14:12  
+Oh, yeah, okay,
+
+Speaker 6  1:14:16  
+yeah, okay, so then on the Calculate future value you have the color dot function.
+
+Speaker 1  1:14:22  
+So that is something that we said at the very beginning of the class, right? So this is one way of doing it. Either you say, import library name, and then here you provide library name, dot function name. Either that way or you do import, sorry, from library, import function and there, if you do that, then you don't have to provide the library name here when you call it. These are the only two way. This is exactly like how it works for Python supplied function. It's the same way that works for your own user defined function as well.
+
+Speaker 6  1:14:55  
+They both give you the same results. So it is a preference of how. Are you on it? Okay, make sense?
+
+Speaker 1  1:15:11  
+Okay, let's move on then. So the next thing what we would do is we do something called refactoring. Now refactoring basically means, I think you can probably understand just just from the English language, meaning of it, right? You have something, it's kind of you can you can almost say restructuring. Let's say you have something. You have designed a system which is somewhat complicated, but it works. It is not optimized. It's not very fine tuned, but it works. And you can probably deal with it sometimes, but then sooner or later, you know that you have to kind of fix it. And that happens in our daily life all the time, right? Like things break around our house. The builder has built the house a window is not closing properly. I mean, yeah, we can probably wiggle it little bit and close it, but when the winter comes and all this cold weather, then we have to kind of refactor the window and make sure it closes properly, like all the modules kind of fit properly, right? So that's the idea of refactoring, which is not very different from code, also, right? Lot of time your code will work, but it could be brittle. So what do I mean by brittle? Brittle basically means, for now, it is working, but some under some different condition, running condition, it might stop. What like one scenario could be like what I was talking about before, name, space, collision. Maybe you wrote a code and you did import a library in a certain way, and now after some time, someone is adding new feature to that same piece of code, and they choose to import some different library, and now you will have an embed name, namespace, collision, and the program behavior will change unexpectedly. So that's called, the code getting brittle or deteriorate over time, even though, unlike a regular physical thing, 10 line of code exactly remains the 10 line of code even 10 years down the line. But how that 10 line of code behave will change depending on how things change. Also. The other thing would be the underlying operating system might change, or the Python version that you are running that will change. Or if your code is getting data from some outside service through cloud, that service might change. So there are a lot of way a code can kind of go bad over time, and these incidents will be better manageable if you do write your code, number one, in a modular way, like kind of what we saw, if we put the utilities in a function, also, if we put those utilities even outside of the core Python file, and put it in a separate library file, like what we saw, those are some of the best practices. Sometimes also there are multiple ways of writing things in Python, like, for example, when we learn this map thing the other day, right? Remember, first we did things using a normal for loop, and then I said, Hey, this is good, but this is not a Pythonic way. Then we did that for loop in line inside the list, and then from there, we did another improvement, where we completely got rid of the for loop, and then we use maps and lambdas right, which makes your code more manageable. So these are some of the things that we refactor. Now, one thing to keep in mind, though, refactoring does not mean bug fixing, so let's say if your code is running, running, running, suddenly it's not running, what you will be doing then is bug fixing or defect fixing. That is not refactoring, but refactoring you typically do on a forward looking basis. Even though your code is running good today, you might still want to take a look at it and refactor to make it more robust and more well written, nicely written, maintainable in the future. That is what is called refactoring. I say, hands up. Jesse, go ahead.
+
+Speaker 2  1:19:16  
+Something you said, just made me curious. Does Python support function overloading.
+
+Unknown Speaker  1:19:26  
+That is why you have to avoid name speculation. But yeah,
+
+Unknown Speaker  1:19:29  
+that that's that makes a lot more sense.
+
+Unknown Speaker  1:19:32  
+Yeah, it does not. It
+
+Speaker 9  1:19:34  
+can, can you? Can you symbolize that question a little bit so that my brain understands.
+
+Speaker 1  1:19:42  
+I was just going to say exactly that if someone did not understand the question, don't worry about it. That is that question is for someone coming from a C plus plus a Java background, starting with your programming journey with Python, you don't have to worry about that question at all. Yeah.
+
+Speaker 3  1:19:59  
+It's like, if you if you want two functions named the same thing, but you want to pass different parameters into one. Yeah,
+
+Speaker 1  1:20:07  
+that's the plain English. But the significance of these you don't need to understand right now, because you don't have to worry about that in Python at all. I have a question
+
+Speaker 3  1:20:16  
+if there's a moment, yep, um, how does Python handle like the like the dependency trees, like, if I by import one package in a module, and then I call another script that I wrote that imports that module as well. Does it? Is it twice the size, or is it just use the one?
+
+Speaker 1  1:20:38  
+It does not work that way. It does not increase the size because it is an interpreted program. Again, for rest of the guys, assume that you didn't hear the question, and for you that, since you know that if you do that in other programming language, it will actually unnecessarily increase the size of the package the executable file in Python that does not apply, because Python is not a compiled language. It's an interpreted language. Sorry, your Python program stays at the Python program. It does not turn into a exe file or a DLL file or anything of that sort. Every time you write Python, your Python program is interpreted as is, and those modules just only get loaded into memory. Now, if you have dual dependency through two different channels, it will basically load the both. But guess what? If you have Module A and Module B, and from both module you are importing Module C, you will have Module C in your memory anyway, so there is no problem there. So
+
+Unknown Speaker  1:21:41  
+that is not a problem. In Python warranty.
+
+Unknown Speaker  1:21:43  
+Okay, thanks, yeah,
+
+Speaker 1  1:21:47  
+for rest of the people, sorry to deviate, but that was a good, good question, but may not be for everyone. So, okay, okay, so yeah. So refactoring some of the common refactoring tips, although I kind of despise the word common tips, because when it comes to refactoring, there is nothing common, believe me. I mean Python is so vast, and when you do refactoring, you can come across so many different things, like there is no common things. But what they mean by common here, is essentially what I was referring to the other days, more Pythonic way. So this is that example where you have a list of numbers, and you are printing this list of numbers using a regular loop, which is for i in range of length of numbers. And then you do this, instead of that, you can do it in a slightly more Pythonic way, using this thing called enumerate that gives you the index and the value. Remember, I showed this. So this is, I would not say these are common tips for refactoring, but these are ways people say these are more Pythonic way of writing code. If you write the code in the left hand side, someone reading your code will probably know that this person is probably programming Python in Python probably less than a year or two. And someone writes this code, reads this code, they will know that this person is probably doing Python between two to five years. And then someone reads the code. You can rewrite the same code without using a for loop at all. Now, you know? And then someone reading your calendar, like, Okay, this guy is a Python like a guru. So it's like, like, just in English language, right? So think about how a native English speaker and maybe a non native, like a second language English speaker, they're using the same sentence grammar structure, and everything it's English as English. But knowing the like, not even you don't have to even listen to them, like the looking at their produce written English, you would probably know the level of language fluency from person A to person B. It's the same thing. It's a matter of language fluency. So
+
+Speaker 1  1:24:04  
+yeah, so I'm not going to go into this. I mean, these are like naive examples, so I don't like if. So here basically code without a function. So here basically they are, well, actually, no, they this thing. We can probably talk about it. So here basically saying, Hey, you have something which is counting an average. So if you have a list of five numbers, and if you have to count an average, what is the basic, naive way of doing this? That's the left hand side, like it's probably an elementary schooler would be able to do, because all elementary schoolers learn how to code these days, right? Starting from, I don't know, God knows, like how young, probably grade one, or even younger. So this is probably something they run learn with their Blockly type code, right? So the left hand side and in the right hand side, you are kind of doing the same thing. But then there are some. Little improvement. First of all, instead of doing this in line, you are putting this piece of code inside a function, and you are calling the function calculate average. So that makes it a little bit more modular your code. And then when it comes to calculating average, instead of running a for loop, now you are You just figured out, oh, there is a built in function called sum and another built in function called Len that I can apply. So therefore that saves me writing the for loop. I can just say sum divided by length. So again, that's why you can probably see how naive this example is. This is very simplistic example. I mean today, I mean even if you're coding in Python, probably in less than two weeks. Now, I don't think any of you will probably write the code this way on the left hand side, because you already know that there is a sum. You already know there is a Len. So why do you will do this way, right? So, but this is just to drive home the point that sometimes the code might work but it might not be written in an optimized way, so therefore refactoring would be helpful In those situations.
+
+Unknown Speaker  1:26:17  
+Okay, any other question on refactoring.
+
+Speaker 1  1:26:25  
+And here is a activity, and I am not even going to ask you to do the activity, and I'm not going to do the activity here also. And the reason is that, in my mind, this activity does not add much value, because that activity essentially says you refactor a code which is basically a whole bunch of code written. And they're saying, take all of this code, put it in a function, and then just call that function just one line inside your if name equal to main. So I would give about save you about 1015, 20 minutes of time. I would rather spend that time taking little break today, like a good maybe, let's say 1012, minute break and come back. And then let's talk about something else which is not directly related to Python, but something related to like how in a project, how requirements are managed, right? Which is type of project management called agile project management, so which is going to be the last section of the class? And we will also basically, kind of build a mock ATM program as well. So let's break now and come back at 1110, my time. That will be 810, your time. So that gives us about 12 minutes. Oh, this one atm application code file, and there we have this list of accounts, we also have the login, but in this case, the login is already written for you, but we actually know that we have a better way to write the login. So what I'm going to do is I'm going to take my login code, because it has a little bit little bit more feature which is handling invalid pin case. So let's do that. And then there are two other code which is which is check balance and make deposit.
+
+Unknown Speaker  1:28:36  
+Now let's see what the prompt says here.
+
+Speaker 1  1:28:40  
+So design business logic and then write the code for the following function, check the account balance, make a deposit, make a withdrawal. Before you start to write code, think through the business logic associated with each function. Now this thinking through thing. This is where I mentioned earlier. So typically you would write this out as a pseudo code. Now, these things are kind of simplistic, so I'm not going into and demonstrating what pseudo code you would write, because that is totally dependent, depending on you, right? I mean, if, if you are kind of an experienced programmer for some of the things that you can probably think and just go and write the program that probably be not the same true for another person who is kind of maybe just a beginning level programmer, right or starting early out on his or her career. So whether or not you will write a pseudo code before you write a program, it's totally up to you, but for in a real life, in an industry standard program, it is often a good idea to do write a pseudo code. And it doesn't have to be writing a pseudo code, meaning you have to write it in an MD file. You can just take a good old pencil and paper and just to scratch it. I mean, I do that a lot of time, so. In fact, what I do is I have these. I'm going to show you guys. I have these tablets which is linked to my this is a writing pad which is linked to my computer. So I just use that to sketch out. And there is a cool software from Microsoft Office. It's called one note. So I do one note lot of time, and one note, one cool feature of OneNote is you can type, you can hand sketch, and everything goes together in a single document. So whenever you have some idea that you want to work with and deliver it upon things, using one note is a really, really good idea. I mean, one note you can use even without a pad, like, like a writing pad, like this, like you can type in there. But if you do have a writing pad, or if you have a touchscreen computer with a pen, you can just use that, right? So, okay, so here, let's come back to this problem. So we have these login function written. Now what we need to do is we need to fill out the other two, which is the check balance and make deposit.
+
+Unknown Speaker  1:31:03  
+Actually, hang on.
+
+Speaker 1  1:31:06  
+Our login is also checking balance. Yeah, what the heck? I mean? Login actually should not be printing the balance, but yeah. So essentially, they are saying write two different function. One is to check the balance, one is to make the deposit. So let's think through what are these functions going to be, and these are, again, placeholder, just like before, and our job is to write the code to fill in this function. So let's take a moment to Read these doc string here. So
+
+Unknown Speaker  1:32:23  
+So do you see any oddity in here,
+
+Unknown Speaker  1:32:32  
+other than it just wants you to print the balance.
+
+Speaker 1  1:32:34  
+Yeah. It says the function uses the account balance as a parameter. So if you have to implement in the way that it is asking, it just says, you print, you pass the balance and in here you basically return, yeah, so then, basically, maybe, maybe, I think what they are thinking here is you return The balance in a formatted way with a point 2f but that's kind of not very good way to think about this code. Like, why do I pass a balance to a check balance function only to have it printed? I don't think that's a good way. So let's use some of our own a good judgment to change this. So we are going to say, define the check balance function. The function uses the account balance as a parameter. Instead of that, we can say, the function uses the account pin as a parameter and returns the balance of the account. So if you do that, then it actually does make sense. So then you can actually use this print statement from here, and this, by the way, also serves as a good example of refactoring. So then you have to say with that pin. Now you know accounts, so you have to print the balance from the account that has the same p now that means you have to first find the account from that list of accounts that has the balance that has the matching pin. Now we can use the same for loop as here. But can you guys think of a more Pythonic way of finding the corresponding account dictionary from the list of accounts matching a pin?
+
+Unknown Speaker  1:34:40  
+I would reuse the login.
+
+Speaker 1  1:34:44  
+Yes, you can. But can you think of a more Pythonic way of doing it? Remember, we are also practicing refactoring in the same exercise.
+
+Speaker 2  1:34:57  
+Well, it won't be dry. But you could just copy the code on line 34
+
+Unknown Speaker  1:35:04  
+to 36
+
+Speaker 1  1:35:06  
+I know I can do that, but my point is, how about we do this without using any for loop? Let's do it like a more seasoned Python programmer,
+
+Speaker 3  1:35:17  
+be like a felt like a list filter and the lambda, yeah,
+
+Unknown Speaker  1:35:22  
+yeah, yeah, yeah. How do you do that?
+
+Speaker 3  1:35:29  
+It lists, open parentheses, filter, open parentheses, and then lambda, like, yeah,
+
+Speaker 1  1:35:35  
+or X, Y, or Yeah, or you can, you can we learned it when in the previous class, right? Hang on in this class, and it was, did we do map in the last class? Yes, we did, right?
+
+Unknown Speaker  1:35:54  
+That are anonymous functions. I think it's
+
+Speaker 2  1:35:57  
+either that or away. Ah, here, that's a I think,
+
+Speaker 1  1:36:08  
+yeah, see, you can always do something like this. You can always copy, paste code that you have painstakingly written before. So what we can do is we can filter from accounts now see how I'm going to take this. So you have to understand the logic of this, right? So filter applies on two things. First is your condition, the lambda function, and the second is your iterator. I'm sorry, the collection. So in this case, the collection is account, accounts, and what is my lambda? So lambda x is what it's
+
+Unknown Speaker  1:37:00  
+going to be a dictionary.
+
+Speaker 1  1:37:03  
+It is going to be so accounts is a dictionary, right? Accounts is a list of dictionaries. Accounts is a list of dictionaries. So my lambda x, which is going to be the So x would be a dictionary. So that means we have to say x
+
+Unknown Speaker  1:37:22  
+sub 10, P pin
+
+Speaker 1  1:37:26  
+equals the pin that have been supplied, right? And then I'm going to call this account, but I know that there is going to be only one. Item, what does the filter reply return? It returns a filter object. I'm converting it into a list, but I know that that list is only going to have a single element, and that single element would be the zero element, and that's what I need. Now,
+
+Speaker 2  1:37:55  
+if that fails, will you throw an error?
+
+Speaker 1  1:38:00  
+Now, that is the question. So what you can do, since I'm doing this here, what I can do is here I can even get rid of any print statement at all, and here I can say, I I can do even better. I can actually do a return account from here. So that way my login function is going to return me the account dictionary object, if there is a matching P,
+
+Unknown Speaker  1:38:39  
+and then with that dictionary object,
+
+Speaker 1  1:38:44  
+or I can even just return a pin. Let's say return a pin, because I'm going to pass this pin to the next function here. So if the pin is matching, I'm going to just return pin. If it does not, then I'm going to return none. And if this first function does return a pin, indeed, then I'm going to pass that pin to the second function, which will use a lambda filter to get the corresponding account balance. So that way, I make sure that this line will always return something, because in the main program, I'm always going to use this followed by logging. And here, instead of printing the balance, I can say something like, welcome to ATM, something like that, basically indicating that, yes, your session is active. So
+
+Unknown Speaker  1:39:47  
+make sense.
+
+Unknown Speaker  1:39:57  
+What about the next method i.
+
+Speaker 2  1:40:04  
+Well, the arguments are defined in 64 to 66 right?
+
+Speaker 1  1:40:12  
+It says account, balance and deposit. So it basically says, so here also, this is a very nice way you are. All they are saying is, if the account balance is specified and if deposit amount is specified, you basically add the two and then print the balance. But in a real world, you probably are actually let's do it that way, because account balance you are already going to get from here. So here you also have to return account balance, because otherwise you cannot get the balance from the next function you see, how am I thinking through? What are the what is the flow of the overall program is going to be, and this is why pseudo coding is actually helpful. Here. We are not doing this just in the interest of time, so we are just improvising on the fly. So the first function then returns your pin it is valid. The second function uses the pin and returns the account balance, considering the pin is valid anyway, and now in this function, then we can put the balance and deposit amount as to what is called as to parameter. So then what your code here is going to be, so
+
+Speaker 2  1:41:46  
+don't Chad to capture the deposit as an input from the user.
+
+Speaker 1  1:41:51  
+Yeah. This is why this is a parameter the deposit, because, as part of this exercise, we are not writing the main because the main part of the code. This is going to be a library that we are going to use in the next activity. To show how we are going to use this library to put and and basically put together and like a fully functioning software program. So that's why in this program, I'm not going to write any main portion of the code. So here, all we need to do is just make deposit. So what do I do?
+
+Speaker 1  1:42:29  
+So one thing you can do is just add the two thing, right, deposit, sorry, balance, which is the current balance, and add the deposit and call it, let's say new balance after deposit, right?
+
+Unknown Speaker  1:42:49  
+Just like my shoes, huh?
+
+Unknown Speaker  1:42:53  
+New Balance just like my shoes.
+
+Speaker 1  1:42:57  
+Yeah. Okay, so now if I write just these two line of code. Do you guys see any problem in that?
+
+Speaker 2  1:43:04  
+The only problem is, and I know we're taking a lot of liberties and improvising. How Much focus do we want to put on the design requirements that are in the doc of this function?
+
+Speaker 1  1:43:20  
+So ideally, the doc of this function should clearly say, what are the expectation from argument and return? And then it is advisable to use the note section to add any behavior of the function, like, what does the function do when it encounters some unexpected scenario? So ideally, you should use these notes section to specify that, to make it as what I'd say as clear as possible to the user of your function.
+
+Unknown Speaker  1:43:51  
+And I'm just looking at line 62 and 63
+
+Speaker 2  1:43:55  
+so, so if I were following those directions on the design, I would say deposit balance equals account balance, and then I would do an if statement to make sure that the deposit is non negative, and then I would go ahead and I would, I would do the deposit math, and then I'd return the new balance.
+
+Speaker 1  1:44:12  
+Yeah. So basically, you are right. So essentially, what they're saying is, don't just go ahead and blindly add the deposit to the balance. What if someone adds a negative value, which is a weird like in a real ATM machine. You cannot actually type in a negative value, but imagine, like if you do so, all it is saying is just add an if statement to make sure that the deposit is always a positive number and not zero either. So it has to be greater than zero, right? So if deposit greater than zero, then New Balance is balance and deposit. You can also even print your new balance here. Let's just copy this print statement
+
+Speaker 4  1:44:56  
+so you. Sure we write tests.
+
+Speaker 3  1:45:05  
+Are we able to write tests for Python? Are we going to do that?
+
+Speaker 1  1:45:08  
+We are not going to cover unit testing as part of this course, okay, but you certainly can. Okay. So here, all we are saying is, if deposit is greater than zero, you add these and say your new balance is this, and then return balance. If not, then you basically print a error statement. Deposit must be positive amount, and that's it. So and if that's the case, you can just return none. It is also a good practice. Whenever you you think your function is going to have to return something. And if there could be a condition where the function is blowing up, which in this case is this, when function, when the number is not positive, you should always return something to indicate the error condition. And it could be returning a none or returning a negative one, like something out of the ordinary that will not happen during the regular course of execution. So it's always a good idea to return something that then your letter functions. Can use it as a flag to do further follow on conditioning in emails or anything. So that's why, here also, I have done a return none. If pin is invalid. Here also, I'm returning none. Your deposit is not a positive amount.
+
+Speaker 5  1:46:38  
+This doesn't really update the actual value, though, right? Yeah, just
+
+Speaker 1  1:46:44  
+this is a target, yeah. Now, in order to do the actual value, what you need to do, you then need to actually grab that corresponding account from there and then go back there, update the value. But even that would not be the end of the story, because what happens when this program execution stops? You run the program again, because your values are picked up from here, so your account will still have the old value. And that is why your account balance should never be part of the program file anyway, right? So ideally, you don't not only have to add the value here, you actually have to write a statement to save the value into a database. But we are not doing a database programming here, right? So the idea here is to understand the organization of the code and the modularization so
+
+Speaker 1  1:47:47  
+Okay, in the next activity, I'm not going to bother to write the code anymore, but I'm going to tell you what the idea here is. The idea here is to basically show when that program kind of evolves closer to more something more of something that looks like a functional piece of software.
+
+Unknown Speaker  1:48:10  
+How would you typically
+
+Speaker 1  1:48:14  
+organize your files, your user defined functions and so on. And this is not very different than the real example I showed you earlier in the class in my police trading database application, right? Remember how I had all of these different modules and classes and all of that, but that was like a industry standard application. So that was way more complicated, right than this, but here, if you see that how the program is organized, actually, there is graphic here that shows the structure here.
+
+Unknown Speaker  1:48:52  
+So this now looks like more like what
+
+Speaker 1  1:48:56  
+standard piece of software package that you will basically deploy to production and publish how that might look like, right? So you might have your data sitting in somewhere. Well, ideally, it will be in some database, but at least to demonstrate the fact that your data is coming from somewhere else, you can have your data written into an actual CSV file instead of typing the whole thing in your Python program, because that's just a toy example. So there could be a data folder with account data sitting in a CSV file. CSV, by the way, is comma separated value, which, for all practical purposes, looks like a Excel sheet, Excel file, almost like a spreadsheet. So your data comes from, let's say, spreadsheet, Excel file, and then your actions, which is deposit and withdrawal. These are your action classes, because these are the things that your user is interacting to your machine with right. To your ATM machine. So it is a good idea to use a package called action, and then have a make deposit and make withdrawal part of that package actions. So you put those into two different Python files, or you can even put it in a single Python file. It doesn't matter, because it's just only one, but the idea is to put that in a separate folder called actions, then you might have some common method that does not relate to your business activity. So here, when it comes to ATM, making deposit and making withdrawal, are the poor business activity that your user is performing now, sometimes, or even in this case, there are other activities that your user perform that are more like technical activities, not really business activities, which is, for example, loading things from somewhere, validating some securities, validating some username and password, those kind of things. So those are usually called like utility functions or utils. So it is a standard practice in software engineering world to put your utility type function into a separate package, which we are calling here a utils.com and things like load components, validate, pin, those kind of function go in there, and then comes your main program, which will actually be executed, that will show a menu and then interact with the user, take the input so they that will be your main file called atm.py, so that's how the overall organization is going to be. But again, keep in mind that this is a very simplistic organization of the program. Just to highlight the importance of modular modularization based practices, I'm hearing my voice back. I think someone has a speaker turn, Ryan, you might want to go. Okay, now it's gone. Thank you. So if you look at this and now, compare with this folder structure here. So let's see what's inside my actions. Yes, just like the diagram here. So make deposit and make withdrawal are the two files. And in the make deposit, we have the deposit function. And here we actually have put interactive things like asking the user, how much would you like to deposit, and take the amount, converting the amount to a floating point, checking that the amount is greater than zero. So we have added little bit additional features. And then similarly, there is make withdrawal, which is again doing an interactive prompt, how much would you like to withdraw, and then checking that the account balance is greater or equal to the amount that user is requesting, because you cannot really overdraw the account. So here the check is not greater than zero, but here the check is the amount requested should be less than the balance balance in the user's account, right? And if it is, then it will subtract the amount and print the balance, or in this case, withdrawal is successful. If not, then it will say you do not have enough money. Now one little example here is using this sys dot exist. Exit. So this is another way to kind of quit your program and take the user back to the terminal, which, in order to do that, you have to use this library called sys, which is the system library. So sys dot exit actually makes your program exit to the terminal. And these are my actions, and then inside data. Now all of my account, pin and balance now they are going into a separate file, not in a python file. As you can see, it says accounts dot CSV, which basically means a comma separated values and multiple of those. So this is how a CSV file looks like, and your utils. So utility basically has your pin validation and loading the account from the CSV file. Right? Like, how do you load data from a CSV file? Now I'm not going to go inside the details of this thing, but feel free to study this in the next class, and the classes after, we will do lot of loading from CSV file. So in order to save time, I'm not going to go into the loading from the CSV file right here in this class.
+
+Speaker 1  1:54:37  
+So as you see that as we are going through these so called, quote, unquote, agile sprints. The term industry uses a sprint. So we are basically getting closer and closer to what our original or whatever intended behavior of the software should be that will make the customer happy, whoever. Put the order to make the software you
+
+Speaker 2  1:55:32  
+and Benoit. Does that solved solution work for you on your Mac
+
+Speaker 1  1:55:38  
+you have not tried, actually? Which one the activity number
+
+Unknown Speaker  1:55:44  
+10, nine, yeah. The,
+
+Speaker 1  1:55:50  
+let's see. Let me try. I haven't tried it actually, the, it's the ATM that you want to the modular design this thing, yeah.
+
+Speaker 2  1:55:58  
+So if you do go to the ATM modular design solution.py, that's what you want to run.
+
+Unknown Speaker  1:56:04  
+The one right above, yeah, there's one right,
+
+Unknown Speaker  1:56:09  
+nope, no, hang on. There are two files here.
+
+Unknown Speaker  1:56:13  
+Oh, they're the same.
+
+Speaker 1  1:56:21  
+Yeah, whatever. So you're saying this is not running,
+
+Speaker 2  1:56:24  
+yeah, I'm on a Windows system, and it's a file path issue. Okay, let me
+
+Speaker 1  1:56:28  
+see, I see one problem could there be, which is reading the data.
+
+Unknown Speaker  1:56:34  
+No, it is actually, let's see,
+
+Speaker 10  1:56:39  
+isn't the whole purpose of this, this section to like, take what's already there and make it, put it into modular because if you follow the readme instructions, it just it tells you how to break it all down in different files,
+
+Speaker 1  1:56:56  
+right? But it's not going to. So we are not asking you to like, hey, we give you this 100 line code and you break it down into 10 different files. What we are saying is these are the best practices for modularization. And if you follow through these examples and the solved unsolved files, I mean the unsolved files are structured in a way that show points you towards the best practices on how you should ideally modularize a somewhat rather complex program. And that's why these graphics here in the slide that you will see that kind of goes hand in hand with this structure. Also, all you have to do is you have to understand this structure and then be able to relate back to the file structure in your unsolved folder, and wherever there are some placeholder where you have to write the code, you have to just write the code. Okay, so to just this point, this is what I figured that this is going to happen, that these data slash accounts, dot CSV, it says it is missing, is that the same problem you are having? Okay, yeah, I'll tell you why. I'll tell you why. So you see, when you are running this terminal, this terminal assumes that you are at the root of your workspace, and that's what is why it is happening. So in order to run that, you have to open the terminal at this folder level, at this level. So what you can do is you can right click on this solved folder and just say, open in integrated terminal. So now my terminal is inside the solved folder, and then I can actually run the Python program using the python three command, and then I say whatever my file is, and then it should run fine, yeah, your pin is valid. Then make deposit B, D or W, if I say B meaning balance, it shows me my balance is 340, $5.65
+
+Unknown Speaker  1:59:08  
+so it is just a path thing,
+
+Speaker 1  1:59:16  
+which is not a problem, because in a real life program, you should not be even reading this from the CSV file, so, but if you do have to read the CSV file, you have to make sure that you fire the program from the appropriate folder in your in your terminal. That's all you
+
+Speaker 1  1:59:48  
+Yeah, and then the last activity was basically asking you to so this activity that I showed that was supposed to be demoed by me, which I did, and the last activity basically gives you a whole bunch of. Solve files and asks you to complete the code to basically make this ATM program work all by yourself spending 15 minutes within your group you
+
+Speaker 1  2:00:23  
+cool. So that will be all for today's class. Use last few minutes to ask away any question that you might have in your mind.
+
+Speaker 3  2:00:38  
+When do we start like learning about the AI libraries and like the AI part, of course.
+
+Speaker 1  2:00:45  
+So it will be around week seven, I believe. So next class, we are going to learn about object oriented programming in Python, and then you should have this whole thing in your BCS though. Oh, yeah, I can just look at that. Thank you. Yeah, you can look into BCS, and it will basically show you how the post progresses.
+
+Unknown Speaker  2:01:14  
+Yeah, how many freaking
+
+Speaker 1  2:01:19  
+so next two weeks, we are going to be spending with this library called pandas. And the reason is that pandas is such a like an integral part of doing any machine learning or any data analytics in general, because machine learning can only work when you have lots of data, and when you have lots of data, the data will often be coming into database or CSV file, like that tiny CSV file we saw here, but there will be large CSV files with 1000s or sometimes millions of records, and how do we read that file and feed it into a machine learning model to train? So that's why we need to understand how to do those operation with pandas. So that's why next two weeks we are going to spend with pandas, and then in module six, we are basically going to talk talk about how to get data from different sources for your machine learning model. The next week is exploring the data through different visualization technique. Because when you are going to learn machine learning, when you are going to start machine learning, it is often helpful to visualize your data, to understand whether this data is trained worthy. Because you, if you get junk data, your model will basically provide junk output. So it is very important for you as a machine learning practitioner to visualize the data, to do the scatter plot, to do the correlation diagram, to see what story the data is telling you. So machine learning can only work if you have a good data that actually provides a good story. So that's what that week is. And then week eight is where you are doing your first machine learning prediction. And that week, we are basically going to look into doing a time series forecasting using a time series data, like looking at, let's say, weather data in the past and trying to predict whether in the future, or looking at stock market data in the past and trying to predict how the stock market will behave in the future and so on.
+
+Speaker 3  2:03:17  
+So how in depth Do we go into stuff like that? Like, do we go into Markov chains or like Stochastics, or is it just like,
+
+Speaker 1  2:03:24  
+No, no, okay, we are just going to use some libraries. We are not going to actually learn the underlying statistical model behind it. Okay. Thank you.
+
+Speaker 1  2:03:41  
+Okay, so that will be all I can. I am more than happy to give you three minutes back today.
+
+Unknown Speaker  2:03:53  
+Thank you, Benoit, it's been really awesome and great.
+
+Unknown Speaker  2:03:56  
+Plus, thank you,
+
+Speaker 1  2:03:59  
+yeah, thank you for everyone for staying here and listening to me blabbering you.
+

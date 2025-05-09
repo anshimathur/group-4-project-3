@@ -1,0 +1,705 @@
+Speaker 1  0:03  
+Them in one screen. So I'm loving it. You guys are amazing, so just know that. Okay, cool. So, okay, so my this thing is visible. So as I said, the class objective today is basically just talk about some of the real world application of AI and the benefits the AI provides. That's the majority of the time that we are going to spend. And then we are going to do a little bit of refresher from last couple of classes, whereby we will go back to our command line. We will clone a GitHub repository into command line, and we will going to create some files, and then we are going to do some commit and push into the GitHub and see whether that works. And then we are going to reverse those changes and push it again, and this kind of thing right. And then towards the end, we will also learn about how to write good markdown. Markdown is basically what you see when you go to GitHub or get lab, you will see nicely formatted page that kind of tells you, hey, what the project is about, or what this page, this course material, is about. So all that formatting, that nice formatting that you see on a GitHub or GitLab, that's actually a specific formatting language similar to HTML, which I'm sure many of you have learned or at least heard about at some point of time in your life. So this is kind of similar, but it's actually much, much more simpler than that. So there are only a handful of syntaxes that you need to know for the formatting, and there was one of you who have already started doing her assignment for the challenge assignment, and she was saying, Hey, I wrote this assignment in Word, and in word I could easily do like Heading One, Heading Two, right title case or bullet point, bulleted list, numbered list. You can do this thing very easily in what right, just by from the menu. In a Microsoft Word, you can do the same thing for markdown, is just a very few syntax that you need to know, and you can actually produce mark, great markdown, right? Which is, by the way, one very important skill to learn, which we are going to look into about, let's say, last half an hour of the class today, because the idea is that going forward, when you are submitting your project assignment, right? The three big project that you are going to do with your group, right? We are not going to be looking only at the work that you do, but we are also going to be looking into how you are telling the story, how you are telling what you have worked on, right? What is the project is about, what problem you are trying to solve, right? So that kind of storytelling will you will use that Markdown syntax to to basically tell the story, because the stories will go into MD file, not into your Python file, right? And I'm going to show you some of the example, some of the cool GitHub Pages. I will also show you some of my work from my previous job, when I was working with Amazon, some of the things that I have done. Okay, but for now, let's talk about,
+
+Speaker 1  3:09  
+just discuss about, how do we interact AI with AI on a daily basis? So this is again, a very open forum discussion, so I would like you to come forward and share your thought from your experience. If you can recognize, what are the different things that you do on a day to day basis, right, where you are knowingly or unknowingly interacting with some intelligent machine behind the scene, right? Okay, so I can give you some pointer, but I would prefer rather not. I'd like it to be more student driven. So let's get started.
+
+Speaker 2  3:57  
+I'll start with Amazon. Alexa, I use Chad GPT daily for my
+
+Unknown Speaker  4:04  
+research, for homework.
+
+Speaker 2  4:07  
+Yeah, there's a eyes everywhere Google. We all use Google. So, so
+
+Speaker 1  4:12  
+Chad GPT, that is, that is, like, very obvious, right? Chad GPT, that is very obvious because you are knowingly interacting with AI, yeah, because you know that you are, you are expecting the machine to give you an answer with the almost human like skill, yeah, that's very true. So a side question for you. So when you say you use Chad GPT for work, do you use the free version, or do you have paid subscription? I have a paid subscription. You do have a paid subscription? Just wanted to, wanted to know that, that you understand the difference between paid and paid subscription and the free version.
+
+Speaker 2  4:53  
+I don't really know other than the the free version runs out too fast. Uh, give you a limited amount of content to work with,
+
+Speaker 1  5:04  
+yeah. And what else does anyone else know the difference between free and paid version?
+
+Speaker 3  5:09  
+Yeah? Yeah. So one of the one of the best things is that you can create a custom GPT so you can train and so like, for example, let's say you have a bunch of manuals at work, and people keep asking you a question that's clearly in the manual. You can write a robot that finds manual, or an RTFM that goes ahead answers questions.
+
+Unknown Speaker  5:28  
+You can do that on Chad, DBT, the paid version,
+
+Speaker 3  5:32  
+yeah, because, because what, what, what it does is it has you're allowed to train it. You don't have to remind it, so the memory, it doesn't disappear like it does when you just are interacting with Chad, G, P, T, and you have what's called you go from zero shot to few shot to like something that's really knowledgeable about one thing. And you can also browse it like an app list. Even with the free version, you can go find something that's an expert on. Let's say you're working with elastic search and you need to find a manual and you're just not finding it. I did that the other day. Or swagger, or you're, you're, you're having some problems with Python, and you want to go look up something difficult, like an error code. Okay, thank you.
+
+Speaker 1  6:14  
+Yeah. So that is one very good difference from the feature side. So thank you for sharing that, Jesse. But on the model side, like on the neural architecture, do you know what the differences are between they
+
+Speaker 3  6:25  
+get access to oh one, which is nice, yeah, the reasoning basis, and I think they're they're doing 404, pretty much everybody. I'm not sure if just just the Mini or no,
+
+Speaker 1  6:38  
+yeah. I mean, recently, they are kind of starting to give access to even some of the more advanced model, even in the free tier. But I mean, as Gary was saying, right? I mean, there will be a limitation. It will run out. But traditionally, what these companies have done since the beginning of this whole large language model, large language model, GPT thing came along. The idea was that, hey, state of the art model, the one that have millions of nodes with very, very deep neural net, those were kind of saved first for mostly for the researchers and scientists, right? And then as it became more and more popular, they started to offering them to the general population, but behind a paywall, and that's where the paid versions are right for the rest of the hours. Who are just playing, they will give the model, but the model is probably not as deep the neural net structure also, it may be that the model is the same model. Maybe it has the exact same, let's say, 100 layer deep neuron, but it is not trained as much, right? And one thing you should know that when it comes to AI trading cost a huge, immense amount of value, like even if you start with a model with a fixed architecture with 100 layer deep neural, neural architecture with convolutional layer, or all of that, even if that is fixed, when you keep doing this training, right? So you train the model for a few iteration, and then you publish the model, right? And that takes you, let's say, a couple of million dollars, right? And then you take the model, and then you go and grab more knowledge from internet, like you can feed in Wikipedia, you can, you can feed in whole encyclopedia, or you can feed in specialized knowledge, right? You can, you can feed in whole scientific journal, right? Like, talk about physics, journal, math, journal, space science journal, and you can have a different version of these bots, but all of these uses a technique called transfer learning, right? So what happens is, they take the same neural network, they take all the learning it has been done before, but then when you keep training it with more and more data, all of those weightages between the connection of the neurons, right? They go through multiple iteration of change, and this is very heavy mathematical process that goes on right inside all of those GPUs, where the tensor calculation calculations run in parallel, and this costs a lot of money, right? One other thing you should know recently, I'm sure some of you guys know, but these recent rise in renewable energy, do you know what is driving it? I mean, AI, yes, nuclear
+
+Speaker 4  9:24  
+reactor that Amazon and Microsoft are pushing, yeah? Well,
+
+Speaker 1  9:28  
+no, I'm not talking about nuclear. I'm talking about renewables, like other renewables, like wind, solar, I mean, Google, Amazon, like all of these companies, any company that deals with AI, right? You might think, Oh, they're just being good corporate citizen. They just want to reduce their carbon. Carbon Footprint might be but that's not the whole story. The real story behind that interest is they want to train large neural network model, and that takes a lot of power and lot of money, and that's. Why often time when you are using that same AI software is like, the more you pay, the more better trade model you get, sort of that's kind of almost always the case. But the thing is, the industry is still kind of not fully mature, although I'm actually very surprised to see like when this whole thing started, like, what, two, three years back, I didn't imagine that within three years they will actually turn it into a money making venture. Like, think about not only Chad GPT. Like, think about Microsoft co pilot, right? Amazing product, very polished product. And within two to three hours since the first inception of publicly available large level model companies like Microsoft, Google, they have actually turned around and married into a money making thing, not just a research interest, right? Like, just think about how amazing, how cool that is, right? And in order to do all of these, they need a lot of electricity, lot of power, right? And that's what is actually driving this? Yeah, yeah. So anyway, so co pilot, Chad, GPT, these are very obvious way that we are interacting with GPI, sorry, AI, in general. What other things that you can think of, and I'd like someone else to
+
+Unknown Speaker  11:17  
+I love my Alexa app.
+
+Speaker 1  11:21  
+Alexa, yes, so Alexa is one form of AI, and there are also other similar things from other companies similar to Alexa, such as
+
+Unknown Speaker  11:33  
+any other name comes to mind, theory.
+
+Unknown Speaker  11:37  
+I'm sorry, which one theory going off. Yeah,
+
+Speaker 1  11:42  
+in fact, these days everything like I have this Samsung watch, these guys sometimes start keeps talking unsolicited, this stupid watch, like I'm talking to someone else, and this guy starts talking the car that I drive, like I cannot say anything that remotely sounds like Mercedes. Then my car says, How can I help you? Like, come on, I'm not talking to you. Just keep driving. So yes, all these voice assistants and smart pickers, right? What else? So,
+
+Speaker 5  12:18  
+sorry, sorry I was I was going to say I was reading that Johnson, and Johnson has been doing a bunch of stuff with AI in the medical field, where they've actually got a program that they're using, where the they where the doctors or the surgeons are able to record themselves, and then AI will go through and look at all the footage and Cut it down to a highlight reel that takes maybe an hour or so to to come up with the highlight reel, and then the surgeons can watch that and send it out to other surgeons so that they can critique their work and figure out better ways to to work in the operating room. Is actually pretty fascinating. Yeah,
+
+Speaker 1  12:57  
+yeah. I mean, see, the possibilities are endless, right? But let me ask you, team, are you a doctor?
+
+Unknown Speaker  13:04  
+No, but my brother in law is okay?
+
+Speaker 1  13:06  
+No. The reason I'm saying, the reason I say that, is for this part of the class. Let's focus on how you personally use AI. What you said is very true, but that will be our next activity, right? But for now, let's focus on how people like you and me come an ordinary human being, how we use AI on a day to day
+
+Unknown Speaker  13:25  
+basis? Okay, well,
+
+Speaker 5  13:28  
+sorry, in that case, I so I, I've got an iPhone 16, and I downloaded the AI tools early, and I've been using those to screen emails and text messages and things like that. It's, pretty cool, because it'll take all the spam emails and put them lower down in the chain, and anything that it thinks is important, it'll actually put up to the top. It's very cool. So
+
+Speaker 1  13:50  
+this is, this is the kind of thing I was trying to get out, get out right? Like yes, smart speakers, or Chad, GBD and copilot. Those are very obvious, but sometimes things that are very nuanced and that always we don't think that there is actually a work of AI behind the scene, like when we look into our mailboxes, like, as you said, I mean, the unimportant or spammy looking mails kind of gets pushed down also. The other thing is, the emails that kind of seems to be like a similar topic. You can group those together as well. So there is application of AI in email, right? Talk about Google email, or even Outlook email in your work everywhere, right? That's one thing,
+
+Speaker 5  14:34  
+and there's even in those tools. It's actually pretty cool. I was looking through my photos. There's actually even a deal where you can name someone in a photo, and it'll actually go through and do a facial recognition exactly like, and pull pictures with that individual
+
+Speaker 1  14:49  
+Exactly, exactly. And this is so cool, like, I can find out sometimes, like, let's say there is a person I haven't seen for 20 years. Years, right? I mean, you guys should know I'm from India originally, and there are some distant friends or family that I haven't interacted with some time. And sometimes I think about them and say I want to look at them, but magically, like, during like last 2025, years, whenever I like, wherever it like, we all keep out, pull out our camera, and even before camera right. Lot of my not like before cell phone, lot of my digital camera photographs right. Even before, when they were film camera, I have scanned, digitized a lot of those photos, and I have uploaded everything on my Google Drive. In fact, I have a space subscription. Like, the other day, I was thinking about my one of my high school friend. I just know his name, and I wanted to find his photo somewhere, and I typed his name, and it comes up. And another thing is, it's just not name like I was trying to look for my marriage photos from more than two decades back, I just typed the word marriage, and it found all the different marriage photos, not just our marriage, but all the other friends marriages that we have attended over the last 25 years. So that's cool.
+
+Speaker 6  16:18  
+So what about, like, GPS apps, or even Uber?
+
+Speaker 1  16:25  
+Yeah, yes. So okay, what about, let's talk about GPS apps. Where do you think in the GPS apps, they do use AI
+
+Unknown Speaker  16:36  
+when they're well, so
+
+Unknown Speaker  16:40  
+what about when they're identifying
+
+Speaker 6  16:44  
+traffic accidents back up in traffic, or where places are?
+
+Speaker 1  16:51  
+Yeah, not maybe the accident, because those accidents are usually reported by some people, but you will see sometimes they will actually show you some area of a road is very congested. You can say there is a limited application of AI, like, probably some subset of AI, some machine learning. Basically, what they are looking at is, and this is kind of going back to what we are talking about the other day, anomaly detection, right? Like the there is a, probably a model running there that knows the expected traffic pattern at a given time of day at a given road, and if there is a deviation from that behavior, it knows that there is some kind of anomaly, there is some traffic piling up, and they'll color that in orange or red or something. So yeah, that may be but the actual routing algorithm that is not AI, by the way, like if you when you are routing from point A to point B, that is, that is basically pure math. There is no so AI is basically statistical tool. And that routing from point A to point B, looking at the the path that you can go the fastest, avoiding all the traffic jams and everything all the way that is actually deterministic programming. There is no AI in there.
+
+Unknown Speaker  18:05  
+Okay, yeah.
+
+Speaker 1  18:09  
+How about Uber? So you guys think Uber uses AI, or at least the Uber app, the one that we interact
+
+Unknown Speaker  18:18  
+what's the general consensus here
+
+Unknown Speaker  18:22  
+for ads, yeah.
+
+Unknown Speaker  18:25  
+What about predicting? Yes,
+
+Speaker 3  18:28  
+yeah, I'll get notifications all the time from Uber. And I'm like, No, I don't want to go there. Now.
+
+Speaker 7  18:36  
+How about magic? Yeah, never. Like, maybe the way you tip them, if it is not generous enough, then you may not get a good driver. What about we
+
+Speaker 1  18:46  
+don't know. We don't know whether they're doing that right, because the algorithm is a black box, right? Then I'm going to tell you that all those sneaky tactics, whether they are using that against you or me, I
+
+Unknown Speaker  18:57  
+bet they're probably using AI models for like dating apps.
+
+Speaker 1  19:01  
+Oh, my God. Yeah, no, that is actually a good one, because the dating app they use AI all the time, like, they look at people picture, they look at their bio data and all, and they kind of come up with some kind of a similarity score, right? And that is an application of machine learning model, like, like, basically your KNN, the K nearest neighbor algorithm, right? So they're like, you are looking to find your soulmate, and there are like, like, million other men, and who is basically your nearest neighbor, depending on your profile and his profile. So, yeah,
+
+Unknown Speaker  19:38  
+sorry, yeah, you're saying something. Tiffany,
+
+Speaker 6  19:40  
+no, you're fine when you ask the question about Uber would AI be when they're predicting, like, high demands, to figure out up charge and to figure out when they'd be more likely to have Ubers available versus not? Because wouldn't that be historical data? So that they would be reviewing constantly and updating possibly,
+
+Speaker 1  20:04  
+but that would be the use of AI in maximizing their business their benefits, not the use of AI in maximizing your benefit. Okay, so
+
+Speaker 4  20:16  
+there's, like, a subtle difference, because, like, normally, we can just, like, rely on, like, rely on like statistical models, or just normal statistics to, like, drive a lot of these algorithms. So it's like, it's like, the difference we're looking for is for like examples of like nearest neighbor clustering and like like employed in these algorithms.
+
+Speaker 2  20:37  
+I have an example that I use when my wife do 3d printing, and I know that in the software, there's AI built in that it monitors the camera to monitor the building whenever it sees anything like spaghetti, you know, stop the print.
+
+Speaker 1  20:56  
+Yes. So basically, you are talking about the the home security cameras, right?
+
+Speaker 2  21:02  
+Well, it's the camera for D printer.
+
+Speaker 1  21:06  
+Oh, okay, okay, so camera inside a 3d printer, right? It
+
+Speaker 2  21:11  
+first, so you can, you can watch, watch the print, and monitor yourself, but the software for the three printer itself actually monitors it too. So when it starts detecting like an error in the print that the build, it'll actually stop the print so that you don't Oh,
+
+Speaker 1  21:32  
+okay, yes, yes, okay, yes, okay, now I get it, yeah. So in fact, that is something. That printer is a small scale, but it is a manufacturing machine, right? So even in the large scale manufacturing, like, if you go to, let's say, automobile where there is a production line, right, I'm in debt, right, right here in the Motor City, right? So when, when, if you go to a Ford factory here, you will see that technology is applied all the time. Like they keep looking at all these in the production line, these robots are working at any point, if there is a slight deviation, they will stop the production line right away. Other otherwise, a whole bunch of car will be totally wasted, right? So, yeah, that's certainly a good one. What
+
+Speaker 2  22:12  
+about like social media, Facebook, Instagram, Tiktok. They the algorithms that pull what you're interested in exactly they are
+
+Speaker 1  22:21  
+the biggest one, and that, I think, is the most, I'd say controversial use of application. AI algorithms, right? Because you have seen like people talk about all the time, there is concern, like, hey, what has happened to our society? Are our lives being controlled by algorithm? And this one is something that I also deeply agree and acknowledge that, yes, at some time, at some point of time, I think you need to, you should have some kind of a reset button, like if I go to YouTube, log into YouTube, right, or to Netflix, as opposed to me, let's say my son logs into YouTube and Netflix just by looking at someone's home page, right? Probably FBI can use it is a good tool. Just by looking at someone's home page, law enforcement can figure out a lot about that person, but which is a good thing for law enforcement, but at the same time, what that tells you is, anytime you need to log into any of the social media or streaming media app you are basically being fed more and more of the same kind of thing that you have watched or interacted with or engaged in in the past. And that what it does is it sort of tends to put individuals in a bubble, and over time, it becomes so hard to go out of that limit that behind you, like, opinion is there should be kind of a reset button somewhere, like, Hey, forget everything about me. I'm going to start fresh. But unfortunately, that is not there. But So yeah, social media and streaming media both are some of the biggest users of AI in user facing application. So
+
+Speaker 2  24:07  
+just an example, I've been putting together this self development coaching program, whatnot, and so I look at it a lot, all over social media on the Internet, but for me to see what everybody else is actually seeing, I have to go somebody else's computer, their logins, just to see different varieties of what the rest of the world's seeing, versus just my limited view. Yeah. So
+
+Speaker 1  24:33  
+that's why I like I like Wikipedia so much more, because Wikipedia doesn't do any, I'd say this kind of algorithmic filtering for you, like if you go to Wikipedia, I go to a Wikipedia, we will say that see the same kind of random things. And if we go tomorrow, the day after and the day after, we will see random things not controlled by an algorithm.
+
+Speaker 7  24:59  
+You. Yes, go ahead. Yes. I have a quick question. So AI, users, right? A lot of people are using that for their resumes, maybe for their job search and stuff like that. On the other hand, from the human resource side, they do use a lot of tools to kind of screen people out based on how is that going against the people that are not using the right AI tools, you know, to kind of polish and buff up, you know, the rest of my system, that's kind of like, Yeah,
+
+Speaker 1  25:25  
+this is kind of a ethics in AI question, right? I mean, see, the thing is, just like any new tools, especially something as powerful as AI, when as a society, we first start to learn, learn the tool, just like when I give a new toy to a baby. So first few days, the baby has no idea what to do with that tie, right? So when the AI booms finally started happening like around, let's say 510, years back, I'd say around 2010s, no one had, no one had any clue that how fast this is going to share. So all these regulatory framework kind of, it's taking a little bit time to catch up, right? And also some of these moral and ethical standard, right? I mean, yes, regulation can go to certain extent, but not everything can be controlled by regulation. There has to be an ethical, moral ethical standard that, as a users of AI, both us and the big corporations that are using the AI, it will take some time for those ethical standard to develop, over time, and they are developing right, but right now, at this point, it looks very messy. I do agree with you. Companies are using this thing to filter out people not knowing what they are doing, right, yeah. And
+
+Speaker 7  26:42  
+it's like, you know, bank, right? There's a lot of modern stuff to kind of like, potentially, you know, maybe not allowing people to get the right loans or whatever based on the model they see. And that model may not be even right, you know, yeah, we might have different ways to collect, you know, the credit or whatever. Yep,
+
+Speaker 8  27:01  
+yep. So I don't know
+
+Speaker 9  27:05  
+if this counts, but I use AI for work pretty often. And the conversation that we have a lot that actually is about that is a lot of companies I'm seeing, especially in like the customer service like sector, they are really hesitant to implement AI because they are worried about how to manage bias in terms of of not just like HR recruiting, but also like just in the quality of responses that you get based off like the inputs that you get. So currently, right now, we just use it for like customer replies, so I manage like the prompts and like the feeding the like our knowledge base to the actual chat bot, so that it produces like the right answers. And then we also have an internal tool that I like monitor for internal agents that they are able to kind of like rank the relevancy. And that also helps train the AI to know if, like, the documentation that they're providing is actually relevant to the context of the case, because the AI scans the case notes offers like a solution based off of that, and then they can rank whether how, like it was relevant or not. And so, like, the whole bias thing has really been something that we talk about a lot in the IT department, because it's, it is not I, AI isn't new, but AI in the business is so new that there's a lot of, yes, there's like, so much like gray area, and people are really concerned about how to like, how far to implement it in their day to day.
+
+Speaker 1  28:46  
+Yeah, that's exactly what I was saying, just when to increase response, right? I mean, this is the kind of moral and social, ethical standard that we are going to develop over time. And I'm very happy to know, I don't know which company you work for, but know that you are actually in a very good company, because not all companies think that way, right? I mean, the way that they are kind of using this man human and machine interplay. They are not relying completely on the AI that actually have a human intervention to make sure that any unwanted bias does not creep in. That is exactly the kind of morality and ethics that we hope to see that over time that corporations and individuals develop who are using the AI, very good example. Thank you for sharing. So
+
+Speaker 2  29:30  
+I had a gentleman that I was trying to purchase some services for for one of my businesses that did AI, and he had a chat bot answering his messages, sending me emails, stuff like that. Well, in the discussion, it got mixed up and sent me a contract, a back end entry to write my own contract. Basically it was like supposed to go to one of his salesmen, and so I put his $30,000 service for $1 and sent it to. And it sent it back to me, and I signed it just, I didn't hold the guy to it, but yeah, he would have been locked into a contract. He would have been, yeah, yeah. So you gotta be really careful. You
+
+Unknown Speaker  30:11  
+don't even listen. Yeah,
+
+Speaker 10  30:12  
+yeah, no, I made it sweater for a couple days
+
+Speaker 11  30:19  
+at my workplace. I'll talk about how it's optimizing our workflow, because I know we're talking about some of the shenanigans that can happen. But in accounting, we've been using API connectivity to connect Oracle, NetSuite with order.co which is a procurement platform, and AI has actually been able to help us, like, flag any duplicates or any discrepancies, and it automates really smoothly from one to the other. So kind of takes out that middle man of having to key in invoices or manifests and things like that. And it helps, like, predict insights. It helps us know, like, Hey, you guys are up for another procurement purchase. Like, it kind of helps us, in some ways, to be ready and to streamline, if that makes sense, yeah,
+
+Speaker 4  31:06  
+I like that a lot. That's like, mostly how I approach AI is, like, just asking it for feedback, like, like, having a having some sort of data set, and being like, Hey, can you help make sense of this? Because it's something that I can validate myself, but like, it's like having AI as, like the front man, like making decisions like that contract thing. I think that's the problem partner.
+
+Speaker 11  31:29  
+I feel like it's like a thought partner who's like, really reliable, really accurate, but then might see a different angle, and then if you bounce off ideas with it, it'll kind of like create a flow, which it's nice sometimes to have that kind of feedback. Yeah,
+
+Speaker 12  31:46  
+yeah, I agree with you on she I use, I use my, my AI and my company very similarly, where I use it as kind of like a bouncing partner, but I don't even it. I treat it more like a co worker, where I ask it to check my work, and I check its work, yes, like, yeah, it's just a co worker. Yeah, that that can kind of help, but you have to check its work. You have to 100%
+
+Unknown Speaker  32:14  
+Indubitably.
+
+Speaker 1  32:16  
+Aaron, could you elaborate a bit more, like when you said, how you are using AI as your partner, as your co worker, like, what kind of work do you usually ask AI to check yes.
+
+Speaker 12  32:26  
+So I'm a data scientist, so I actually work a lot with SQL and a little bit of Python and stuff like that. And so if I'm trying to analyze some some data sets, or I'm trying to summarize something or write pieces of code. I'll ask Chad GPT to kind of help me out and say, okay, hey, I just this is beyond my skill set. How would I do this? And then I will go and I'll double check its work, or I'll check the summaries or check the analysis. It's kind of just like a double set of eyes, and definitely not a replacement,
+
+Unknown Speaker  33:02  
+but, but that's kind of how I use it,
+
+Speaker 1  33:03  
+basically in a very technical context, like, you ask it to generate a set of code. Okay, so is it something similar to, let's say, how you can use copilot for coding these days? Like, do you use copilot or something else?
+
+Unknown Speaker  33:18  
+I don't use copilot. I haven't used that,
+
+Speaker 12  33:22  
+but it's, it's, it's more along i along the lines of, I encounter an issue with in the code where I get stuck and I and then I go to Chad, G, P, T, and I just kind of outline exactly what I'm trying to do. Oh, I see, okay. It's like, Chad, yeah. It's kind of like, I'm leaning over to my coworker sitting in the desk next to me and saying, Hey, how would you do this? You
+
+Unknown Speaker  33:46  
+got it so
+
+Speaker 13  33:47  
+pilot, if you're, if you're doing anything with Python, it's actually really handy. I've used it a lot in my work. Sometimes it's like, oh, that's a clever way to do that. And think about that. Other times it's way off base, so you have to check literally everything. But it is really probably, probably one
+
+Speaker 1  34:09  
+of the more, yeah, does? Does others know what? What we are talking about here when we say co pilot, probably people who have not done coding probably would not know. So as
+
+Speaker 13  34:22  
+for me, I use it as a plugin. And VS code, it gives, you know, real time completion feedback suggestions on, you know, hey, it looks like you're about to do this function right here. It gives like a predictive output. Hey, is this what you're doing? Yes or no. And you can press tab and all of a sudden you've saved yourself five minutes, as long as you go back and review it,
+
+Unknown Speaker  34:46  
+Yep,
+
+Unknown Speaker  34:48  
+pretty cool stuff.
+
+Speaker 1  34:50  
+And there is also another similar plugin also available to analyze code and even write codes from Amazon. It's called Amazon queue. So co pilot, Amazon queue. These are a class of GPD that, basically people, people use to write code for them and sometimes also interpret code written by others. Because think about, let's say you are hired by a company and you are being tasked to analyze, let's say, 10,000 lines of code that the guy they fired last month wrote, and the guy basically ran away with all the documentation. He basically burned the whole damn thing. Only the pure code is what is staying behind. Because, thankfully, the code was backed up in the company server, right? So now they hired you. They say, hey, you need to first reverse engineer this, you have to first understand what this piece of code is doing. Now, for you, what are you going to do? So thankfully, either with copilot or Amazon Q, you can actually ask this AI to analyze the code, to understand what the code is actually doing.
+
+Speaker 3  35:59  
+My work, there's actually a huge debate over using any kind of CO pilots because of AI generated code. Like, who owns the rights? What do we have to disclose to our customers? And has it been trained on insecure code?
+
+Unknown Speaker  36:12  
+Yeah,
+
+Speaker 4  36:15  
+it's kind of like a huge export class, like nightmare too, because, like, if, like, the AI happened to get its hand on, like expert restricted code. You have no way of telling where that, where that came from, and you could, you can no longer export that if someone finds out.
+
+Speaker 1  36:37  
+Cool. So I think we covered a lot. How about using in office suite of products? Has any of you noticed anything when you use Microsoft Word, PowerPoint, anything like that?
+
+Speaker 4  36:57  
+They're rolling those changes out slowly. Have they integrated that completely.
+
+Speaker 1  37:01  
+Some of them you will some depend on which one you are referring to.
+
+Speaker 14  37:12  
+For for my, for myself, on Outlook, there's a lot of really cool features that they just rolled out. Obviously, one of the easiest ones is just, you know, validating and verifying your your emails or communications. But you can also program it to send out emails to make sure that it's not sending it out during off hours, and it's just a simple plug in that they put together. Now, I use that one a lot, which is great,
+
+Speaker 1  37:50  
+yeah. And what about, what about simple your auto complete or spell check grammar correction, right? I mean, spell check is not new, right? I'm telling you, like, 25 years back, probably, or 30 years back, even when the first generation word processors came out, spell check was always there. But pure, simple spell check does not need any machine learning or AI. But having seen the spill or grammar check today, they just don't check your spelling. They basically check the overall syntax. So they take a very holistic view of the whole paragraph that as you write, and it will basically suggest you to convert it into something that sounds better, easier to understand, right? The other thing I have seen in Microsoft PowerPoint is the design ideas it generates. Have you guys tried that? Anyone in PowerPoint slide, if you put some some like text, a table, a bunch of picture, and it can actually the AI generates design ideas that shows on the side. And you can pick some of the layout that AI suggest that it thinks that it will look good for your slide given the content, if you have not tried that. And if those of you who do have to use or create PowerPoint deck in your day to day work, feel free to give it a shot. You will be surprised to see so.
+
+Speaker 15  39:11  
+So I will say, I'm sorry. I would say iPhone 16 already use the AI.
+
+Unknown Speaker  39:20  
+I'm sorry. Say that again.
+
+Speaker 15  39:21  
+Oh, sorry, my, my hair parts. So I said iPhone 16 already. Use the AI. Install the AI.
+
+Speaker 1  39:33  
+Yeah. I mean, most devices this day, most new phones, computers, they will say, like they're in Microsoft. Like, I went to Best Buy the other day. I was looking to buy a computer for my son, and instead they're saying aipc on the aisle. Like, I don't know what an aipc means, but actually, let me ask this question to the class. So what margaritas said? It comes with AI in. Installed. Do you guys really know what that means?
+
+Unknown Speaker  40:05  
+It costs more, yes.
+
+Speaker 15  40:10  
+Also, I think, also, I think the data which is inside of that device could be part of some cloud somewhere, yeah, and someone could Chad the
+
+Unknown Speaker  40:25  
+control. Sorry, yeah,
+
+Speaker 1  40:27  
+yeah. So what? What others think? What does the aipc or AI cell phone mean? Actually,
+
+Speaker 16  40:35  
+I would be wondering what, what version of AI is being installed to you,
+
+Unknown Speaker  40:40  
+who they are installing.
+
+Speaker 4  40:42  
+Well, they have their specific hardware that is geared towards, like, AR workflows, like member resistors, that that can, like, remember when there's a voltage? Yeah, exactly. Stewardships are, like, built on that kind of architecture,
+
+Unknown Speaker  41:00  
+yeah. What about platform exactly like this, like
+
+Unknown Speaker  41:02  
+Canvas or typeset
+
+Speaker 2  41:07  
+or not canvas, Coursera, like, there's a bunch of different. I guess Canva is one as well. Uh huh. So are those. Those are all those. All have aI generated. So they all in the
+
+Speaker 1  41:22  
+same way, as I said, Microsoft PowerPoint, right? So when you are trying to create a slideshow, you can type a topic, right, and then it will create a PowerPoint slide on that topic. Same thing with Canva. Canva is just a non Microsoft tool, but that basically helps you create this presentation. So yes, it does create AI, use AI, yeah, sorry.
+
+Speaker 11  41:50  
+There's a website where you can actually have a video generated from words that you put in, and it'll create a video with random people and things, and you can create the text with it, and it'll edit the text and have somebody speaking over the video for like, social media.
+
+Unknown Speaker  42:08  
+Yeah, I want to learn how to do that. It's, it's
+
+Speaker 11  42:10  
+interesting, if you I'll try to find the website and put in the chat. But I was messing around with it about a month.
+
+Speaker 16  42:18  
+Let me see it's actually a download on the Play Store, it's easy to find.
+
+Speaker 1  42:31  
+Yeah, so going back to my question. So my question was that when Microsoft is selling a computer saying, this is our quote, unquote, aipc, or like, margaritas said, Hey, iPhone 16 comes with AI. What does that actually mean? Like, do they actually have anything special installed on these devices? Or is it more on the hardware side? Yeah,
+
+Speaker 4  42:53  
+are the chips, like, just more catered towards, like, in memory computations? Is that the idea, not
+
+Speaker 1  42:59  
+only that, but also the kind of GPU devices that they have. So one thing you have to know that CPU, which is a central processing unit, which is basically the device that we keep hearing about, like the Intel devices or AMD devices, right? Like AMD Ryzen or Intel core cities Core i Five, I seven, I nine. So these are very powerful computer right, powerful chips, right. They are the one who run all of these operating system right, and most of our software today, when we are doing all this video calling, voice calling, streaming, video, playing computer games, all of these very computational heavy so these CPUs are what basically keeps our devices, our mission sticking. But when it comes to making decision using a neural network model, you actually need a different kind of chip, which is called GPU, or graphic processing unit, which is traditionally used by video gamers who want to render very high frame rate computer generated graphics, right? Like under 20 frame rate per second, right? So when you do that, you have and if you want to do that, you know, with a 4k display or more. So imagine the amount of computation you have to do, and no matter how high power CPU you have, that CPU is going to fall short. You need a GPU, because GPUs are very good at multiplying n by n dimensional matrix of numbers or array of numbers, and very quickly do this multiplication and generate the render the pixels in the in the picture. It so happens that when you do the neural network computation, computing the weightages with inside this neural networks, all those neural connection it is not that different from then when you are generating the different images, frame by frame in a video game. You. So it's basically the exact same kind of capability that you need in your device. So what all of these companies are now quote, unquote, marketing as an AI device is basically nothing but something that prioritizes the GPU, or basically even have a dedicated GPU, right? Those of you who are gamers, you would probably know, like when you go to, let's say, Best Buy, and you look into this very fancy looking computer in the aisle, and you read into the specification, and I say, yeah, it has onboard graphics. And then you kind of meh, it's not really my test. So what that means is, for most business computer, like the kind of things that people use, and a day to day, like executives would use, or even the like accounting people, like angshi would use, those does not need any advanced rendering capacity, right? So they but they do need some kind of a GPU to render the whatever the Windows or Mac user interface. But in order to do that, they have something built in along with the CPU, and that is the onboard graphics. So there is no separate graphical rendering device in most of the regular computing devices that we buy. So before this whole AI boom, like all of this Chad, GPT, large language model thing kind of became household name, like even couple of years back. If you go to Best Buy, if you go down to gaming aisle, that's when you will see the computers that are specifically designed for gaming that has a separate RTX GPU and all of that with with a different fan, because it generates a lot of heat. So you will see a computer with the three fans jutting out from the back of this humongous tire tower computer, and that's because it has the GPU. Now, those GPU, those machines, you can actually use those to train a pretty deep neural network. In fact, my son has one of those that he built, and sometimes I use his computer. I borrow his computer to train some of these very deep neural network model now for the remaining of us, rest of us, all these computers used to have something called onboard graphics, where there is no separated GPU. And today, all these AI PCs now, because of these artificial intelligence explosion now, they will need some GPU like capability on most of the devices, for your Chad GPT software to run right, for your co pilot software to run for, like, I don't know, like, maybe for creative people, people who do use some kind of a AI generated, AI assisted creative things, they will need a lot of capacity, like GPU capability on their machine to run those computations. So that's that. So even the phone makers are starting to incorporate some of those additional these GPU type capacity to be able to run those neural network computation right on the device, right? So it is also called edge computing, edge, meaning something is running on the edge of the cloud. Because when these machines, the brain of this neural AI is on the cloud, either on the Microsoft Cloud or Google Cloud, Amazon Cloud, wherever. That's where the real brain is. But when your computing device, your cell phone or your laptop, is connecting to that so it will get the data. But then there still need to be some computation happening at the edge location, meaning the device on your hand. So this is called the edge computing, right? So that's where it was kind of falling behind. And then since last couple of year, I kind of tend to see that the manufacturer is, kind of manufacturers, kind of trying to take advantage and leverage this gap. They're putting these a little bit more GPU capacity and then bumping up the price, slapping a sticker, nice looking sticker, that's a holographic, let's say, aipc, and then there you go. They got your money, so
+
+Unknown Speaker  49:04  
+that's that.
+
+Speaker 16  49:09  
+Yep, did you mention that there's like a virtual brain and the in the cloud or something?
+
+Speaker 1  49:15  
+Yeah. So anything that we are talking about when we are interacting with the AI the brain is in the cloud. It's not happening in your computer, though. The brain is happening in the cloud. Your computer is just a dumb machine that doesn't know anything. So
+
+Speaker 3  49:34  
+Chad, G, P, T, for anything. Do it at 3am if you got to do so.
+
+Speaker 4  49:38  
+Yeah, that's what I was I was talking about that yesterday. Like, one of the biggest downfalls, I think, of AI, is that it's not very portable. Like, you can't just, like, stick it on your like, watch or something, or take it, like, into space or something. You need some kind of network infrastructure to, like, pass it along, or, like, to haul, like, tons of equipment to, like, like, some kind of data center. A
+
+Speaker 1  50:00  
+Yeah, yeah, absolutely so AI is not portable. The brains need to be sitting in huge data center with a large cooling tower jutting out with a huge power system running it with a backup power system and a backup of those backup power systems and all the kind of stuff. So it's not portable at all. Yep. What about any other case? Oh, I can actually share one example. So
+
+Unknown Speaker  50:35  
+couple months back,
+
+Speaker 1  50:38  
+I opened my door box and I see there is a packet left at the door with a couple of things that I have not ordered. I don't know who ordered for them. The name is someone's different, but the address is actually my home address. I said, Well, I don't know. Maybe it was the previous owner of this house. In fact, I've been living in this house for only four years. So who knew who owned the house before? I didn't put much thought into it. The next day, another couple of things show up. And then things kept showing up for two three days, and then on the third day, I get a call from my bank, and the agent tells me, are you? Mr. Das, I say, Yeah. And they say, Well, we think that your account has been compromised. Can you identify these, these, these transaction? And I said, No. So basically, what happened is, this is an actual application of AI, which is fraud detection, right? And this transaction are not huge transaction, by the way, right? They are like it to the tune of like, somewhere between 50 to couple of $100 which is something we will within my daily transaction, have a transaction limit, and couple then the things that they bought are like, kind of a little $100 cosmetic jewelry. Someone bought a kid's bike and those kind of thing, and they kept sending it to my address. So the poor guy, whoever got hold of my credit card number, I don't know why, when he decided to use it. I don't know whether it was the hacker or whether he was playing dumb, stupid or something, but he also used my address as a shipping address. So he stole my credit card and then he bought something, but he used my address as a shipping address, so now I get the thing he doesn't anyway, that's a different story. But the thing is, bank was actually able to track that. Mr. Benoit Das is not authorized these purchases, so they called me right. So think about that application of AI, and this is a very real good application of AI for all of our benefit and and this happened. This is just the latest example I shared within last five years. This incident happened three times, and every time bank actually caught the incident before I could actually spot those fraudulent transaction
+
+Unknown Speaker  53:06  
+so, so just
+
+Speaker 6  53:07  
+recently, I traveled to Europe, and there were a couple times when I was in Europe and using Apple Pay, and I just activated Apple Pay that I made a transaction, and before They can even tell me that my card declined, my phone received a text message asking me or telling me that my card was declined and asking me if it was a true purchase for me. Click yes or no, and then you'll just run your card again.
+
+Unknown Speaker  53:37  
+So they're very they're very quick,
+
+Unknown Speaker  53:39  
+Yes,
+
+Speaker 1  53:43  
+yep, that's the fraud alerting system in the bank these days.
+
+Speaker 6  53:49  
+So what about deployment opportunities that they use in a sense of so they Amazon actually just worked on with a client on this, but they created an artificial intelligence dispatch center so that when you call 911, it filters through and tries to eliminate some of the low acuity calls, to save the dispatchers, because there's just not enough dispatchers in the centers to accept The calls. In addition, my father owns a trucking company, and some of these big companies like knight or swift and all of them, they actually use AI in their operations as well for deployments,
+
+Speaker 1  54:33  
+yeah, of course. I mean, that is definitely a very good use of AI as well, but I hope that they are kind of pairing that with human insight as well, right? Because what happens if AI mistakenly filters out or de prioritizes a call that otherwise turns out to be a very high priority? So hopefully they have some kind of checks and balance there, but otherwise that's a real good use of AI. Yeah, and 911 Dispatchers, they do receive lot of bogus calls, right? I mean, I don't know, but you probably know the stats given your background, but, like, I have just seen things in some of the TV series, right? Like, how much, how bogus call does this these dispatch receives, right?
+
+Speaker 6  55:16  
+So it's a lot more frequent than you could even imagine. Yeah,
+
+Unknown Speaker  55:20  
+yeah, yeah.
+
+Speaker 6  55:30  
+So, another one that Amazon just did was they worked with a school district that in somewhere in the Phoenix Valley was having issues with a lot of fighting, so Amazon worked with the school district, and they were able to put an AI algorithm inside their security systems to identify fighting and To notify the school staff so that they could respond to fights more quickly. And so they were telling me that it looks for like when students start to form a circle, or like different things that you would normally see in a fighting situation among students, and it can actually pick up those repetitive things that you see and notify people,
+
+Speaker 1  56:24  
+yeah, yeah, that is true, but unfortunately, that particular area of AI is very, very controversial, right? I mean, I worked at Amazon for quite some time, and I know their video recognition software, the algorithm that they have,
+
+Unknown Speaker  56:44  
+can you mute? That's like the one
+
+Speaker 4  56:48  
+thing that was standing between us and a surveillance state was the manpower to actually do the surveillance.
+
+Speaker 1  56:54  
+Yeah, no. So what I was going to say that? Yeah, the technology does exist. The five years I have worked there, I have seen how it basically improved leaps and bounds. But the regulatory approval is not easy to come right, like what you said, Tiffany, for this school district, like, imagine, like, this same technology can be used in a much broader scale as well, right? Like in public place, airport, government offices, places of worship, anywhere, right? Like, if you go back a few years, there was a TV series called Person of Interest, right? Has any of you watched that person of interest, where basically all the all the cameras everywhere, and I think the telephones also are all hooked up to some super AI. And then the super AI kind of identifies this possible crime pattern where a crime is going to happen, and then finds out the social security number of the person, and then calls this guy, just gives him the social security number. And now you go figure. So that was kind of the premise of the show, right, which is basically what you just said, Tiffany, what Amazon did. And that is something like when I was in Amazon during that time, they basically tried to show in various through various these kind of outreach activities, like how they are the good guys. And I was actually in Amazon at that time when this was happening, but I don't know. Now, I am not directly connected with Amazon. I don't know how much success they have, but they I know that they have the technology, but they are not getting like people don't trust corporation to kind of deploy this type of surveillance in our public life.
+
+Speaker 6  58:40  
+Yeah, so yes, a lot of people are hesitant to it, but I will say, and I don't know about Amazon in specific, but I do know that they're looking in and utilizing AI and crime centers right now for your local police departments, and so they're looking at ways to incorporate that in to help identify car accidents quicker, or help identify just different things, like, if a gunshot goes off, it sends a notification where it could tell you kind of what the potential for the caliber of the gun is and notify it. Like the notification goes to police officers phones and they know that something's going on in a certain part of the city, so they're, they're utilizing it a lot more in public safety than I think people realize that
+
+Speaker 1  59:30  
+one, the last one that you just said, I know that in Detroit. I mean, Detroit is high ground city, right? I think you guys know that. But recently, they have done a lot of improvements in taking the crime rate down. I mean, I think today, in fact, I was hearing a news story that since 1960s this year, Detroit saw the lowest number of homicides since 1960s so it just kept going down year over year. And one of the technologies that they were testing, I know this just. Like what you said, the hearing the gunshot, and then somehow triangulating the exact location, made from multiple sonar devices that are installed in different city blocks, and they can actually triangulate almost the exact location where the gunfire is erupted. So, yeah, I
+
+Speaker 4  1:00:17  
+went to, I went to Detroit the other the other month, and it's beautiful downtown now,
+
+Speaker 1  1:00:21  
+now it has come back. Yes, Detroit downtown has come back, like anything. What were you doing here?
+
+Unknown Speaker  1:00:30  
+Oh, I was with my girlfriend and her family. Yeah,
+
+Speaker 1  1:00:35  
+okay, yeah, I know that a couple years back there was cube con happened here. Do you guys know what cube con is? It's one of those industry conference So Kubernetes is a technology which is basically the containerized computing to services. And this is the kind of technology that most cloud computing vendors use. They basically put their application in little containers so that they can run this computer containers on commodity hardware and cloud. So just like any technology, there is conference. And then I was surprised to see, couple of years back, like whole Detroit downtown is taken over by Silicon Valley types. And I'm like, what's going on in Detroit? And I didn't know, I didn't join the conference myself, but then I looked up and I see there is a it conference happening in Detroit. So, so yeah, whatever crime fighting that they're doing, it's definitely helping. It's bringing the people back. And I'm so happy to see that actually,
+
+Speaker 4  1:01:33  
+the housing market's really good out there. I was looking for jobs, but it seems like mostly car companies now. So I'm not maybe, there are. They're trying to bring back more tech companies to
+
+Unknown Speaker  1:01:42  
+increase
+
+Speaker 1  1:01:44  
+the economy. Yeah. I mean, you will still get like. You will go to like, if you go to like, Google, Amazon, any of these job companies, job site, you will see some jobs that says Detroit, or somewhere in Michigan or Midwest in general, like, sort of, quote, unquote, Rust Belt. What is this known for this area? So there are tech jobs, but not nearly as many as there are in the coastal cities, for sure. I mean, not yet. Yeah.
+
+Speaker 14  1:02:15  
+So my company is also using there are we're selling AI as a service. Now, Dell is selling AI as a service, which just it kind of makes it easy for us to, like, go to our customers and offer, like, be able to do capacity planning and look at storage and, you know, resource allocation and things like that, yeah.
+
+Speaker 1  1:02:43  
+So everything is a service these days, right, yeah, which is the term is SAS software as a service, right? Yeah. So there are a lot of companies that are actually selling things that they what they basically do is they take some of core AI engine, let's say Chad, JpT, or co pilot or whatever, and they'll put a wrapper around it. They will basically put a broader AI into a much narrower use, and then they will create a product just for that use, right? So I'll give you one example. So during my time, I was a partner architect in Amazon, and Amazon has many different AI services. So one of those services is basically your recognition of your like, not just handwriting recognition, but there is a service called textract. It can basically extract the everything, all of the thing that is written in form of text, like either from a printed page or a handwritten like a bill, invoice, receipt, right? All of this thing, and it could be a mix of printed and handwritten text, and it can extract the structured data from there, so which is a very good service. In fact, I was in the launch team when the service came out, and I basically went out, I created a bunch of thought leadership content showing some of the solution pattern that you can do with this service. And now and then, there are partners who used to came to us partner, meaning these are all other product companies who take these core AI services and then put them into a product. So then there was one company who came in and they, hey, we are actually working for another company to read all their invoices. Because this company receives lot of invoices, small amount, but lot of them. And it was, it was a big pain to actually read through all these invoices, and someone actually sitting in front of a computer and typing these invoices. And yes, sometimes they do scan it and try to use like a simple PDF text extraction tool, but those are not very accurate. Also, different invoice have different structures. So how do you have something that can read anything? And everything, all the invoices, no matter which vendor it came it from. So they basically use this to wrap it in a product and then sold it as an invoice processing product, right? Similarly, in other industries, like some other company would come and they will say, Okay, we are going to read, do a thing that will read all the different legal documents, right? Like, you know how large the legal documents are, right? So let's say you are buying your property, right? So I think many of you here have bought properties at some point in time of your life. How many pages is the agreement like? And and the closing agent will come and we'll sit in front of the closing agent, and we will keep going, signing, signing, signing, sign, like 30 or 40 page you are signing. Each page is like, what? 300 or more words in each page? Who has got time? Like, what if they actually make you sign something and without knowing you just signed it? Well, we trust our closing agent. We trust the overall real estate industry. So I don't think anything bad happens that way most for most people, but think about in other corporate legal contract where there is happening and there's an army of lawyer. They have to sit and read those documents for days on end just to be able to make sense. And there are uses of AI that I have worked with some of the Amazon partners just to do that, which is to read the legal document and do a short summary. So it will probably read 100 page document and create a two page summary of the document. So that was another cool use. So,
+
+Speaker 1  1:06:39  
+yeah, in fact, talking about Amazon, let me show this page to you guys. Hang on
+
+Unknown Speaker  1:06:46  
+so
+
+Speaker 1  1:06:49  
+you, I mean any vendor will have a similar kind of product page. Am I sharing my screen, by the way? Or No? Nope. No, right. Okay, so second and
+
+Unknown Speaker  1:07:31  
+Okay, how about now? Yeah, there's
+
+Unknown Speaker  1:07:33  
+your bank account. It's good,
+
+Speaker 1  1:07:36  
+yeah, okay, cool. So, yeah. So here, if you go to AWS, right? Amazon.com, artificial intelligence use cases, right? So, actually, I can probably just slack it here as well. But with so many windows, sometimes the windows don't show up. Yeah, so let me put that into the general channel. Okay, so if you go here, you can actually look for the different AI use cases. So you can look by use case category, so such as customer experience, employee productivity, process optimization. This is what I was looking at. And you see here, inside process of optimization, there are these different case studies, right? So, so omnichannel, Contact Center, intelligent document processing. Let's look into this one.
+
+Speaker 8  1:08:46  
+Is my tabs hidden here. I don't know what's probably this thing missing up. Okay, now I can see the tab.
+
+Speaker 1  1:09:01  
+Yeah. So this is, this is what I was referring to, and in fact, I was part of this work, right? You see what it says that unstructured documents, audio, video images, right? So intelligent document processing leverages the OCR along with natural language processing and machine learning to automate processing these data, and now they are also integrated that with the llms, which is the large language model, or quote, unquote Gen AI, and that can not only just extract and classify, but also generate concise summaries and derive actionable insights
+
+Speaker 3  1:09:37  
+using an OCR, because you're scanning in documents, yeah, yeah,
+
+Speaker 1  1:09:42  
+yeah, that's why. So OCR part is just for that part, right? So there are, like, several steps in this solution. Or CR is basically simply scanning the documents, and then it is under using the natural language processing to understand the semantics of the language, the written language, and then it is using some statistical model. Modeling to do some summarization. And more recently, it's using actually LLM to do better summarization and derive some action insights in a much more sophisticated manner that than it was possible, even, like four or five years back. So, so yeah, you can feel free to read through some of these use cases. Now, one thing is, when you read through these like, you have to kind of keep your eyes and ears open, because some of these probably will sound salesy, and it's because they are, because it's basically companies, companies claiming like how good they are in doing certain things, but hey, overall, if you you can still cut through the noise and get a general idea of what are the different use cases that different companies are using it for. And the reason I wanted to show you this is this might actually be helpful for some of you who want to do your research for your week one challenge,
+
+Speaker 1  1:11:09  
+and I posted the link in the general Slack channel, so feel free to bookmark and then just explore. And I'm sure you can. You can look at the same thing for Microsoft website as well, because they are also another big AI power house in the market, and Google, right? All these three big cloud service providers are also the big AI providers, right? And there is a reason because, as we are just discussing, right a few minutes back in AI, everything is running in huge, gigantic data centers. And guess what? These are the three companies that run the three largest cloud services in the world. So they already have the infrastructure at their disposal. So for them going to AI, it's a very good business, business decision, actually.
+
+Speaker 2  1:11:57  
+So as far as doing research on our papers and stuff like that, wouldn't it be smarter to use AI to do the research, to narrow it down, like that's, I mean, all my research that I do for my other classes, I'm not going to waste time reading through article after article.
+
+Unknown Speaker  1:12:12  
+Of course not. Yeah, I just
+
+Speaker 17  1:12:15  
+want to make sure that was okay. Yeah, that's okay. Yeah, that's okay, as
+
+Speaker 1  1:12:22  
+the long as make sure whatever you produce that is your own writing. Like, do the use the AI to get the ideas, but the writing should be your own work.
+
+Unknown Speaker  1:12:31  
+Absolutely. Yeah.
+
+Speaker 1  1:12:35  
+I mean, we all do that, like I am a consultant in my job and customers like have weird question, weird demands, without Gen AI like, the job of consulting would have been so much more difficult. I mean, it was more difficult before, and now it is much, much more easier. Yeah, that's
+
+Speaker 2  1:13:01  
+what I love about I think our our youth. I mean, the education is increased so much because you can narrow it down and you can get so much information, like going to school is kind of obsolete to the point that you can get whatever you want.
+
+Speaker 1  1:13:18  
+Yeah, you're really good at what you do. I mean, no, I mean, actually, in one sense it is true. I mean, I have seen companies in tech sector basically, right? I have seen they are not always looking at the school that you went to and Lord, looking at the degrees that you have, like, if you have just a high school diploma, and you are really good at what you do, you can still make well into mid or even high six figures? Yeah, yeah,
+
+Unknown Speaker  1:13:47  
+yeah, we still need people
+
+Speaker 8  1:13:48  
+to be able to read and Ryan, so
+
+Unknown Speaker  1:13:54  
+who else will feed the algorithm?
+
+Unknown Speaker  1:13:59  
+Exactly? Yeah,
+
+Speaker 1  1:14:03  
+yeah, okay, so let's do one thing. So we were actually supposed to do some refresher on this command line tool and so on. But hey, we talked a lot. I need to go stretch out a little bit drink some water. So let's take a little bit premature break today, and since we have some time on our hand, we can afford to take a little bit longer break. So let's come back quarter after that would be 815 Pacific, I suppose what time it is now, 750 right? Yeah, so let's come quarter after 850 Pacific. Have you guys all installed Anaconda? Was that part of your pre work? Because I. Not sure what was the
+
+Speaker 6  1:15:02  
+pre work? Yeah, it wasn't pre work. It was the first module.
+
+Speaker 1  1:15:08  
+Okay, it was the first module. So you guys all have Anaconda installed at this time,
+
+Speaker 5  1:15:13  
+installed, but it didn't. It said that we needed to wait to set everything up, because that would be done in class as the I'm positive I read that in the module,
+
+Speaker 1  1:15:29  
+how that was for the virtual How did you guys install Anaconda? Did you just download a binary and just install it, or some other way, or Windows, it has
+
+Unknown Speaker  1:15:39  
+just an installer. Sorry.
+
+Speaker 6  1:15:42  
+It gave specific instructions on how we need to install it for Windows and Mac. And then once you installed it, it said, stop there, and we'll set it up in class.
+
+Speaker 1  1:15:56  
+For some reason, from my side, I'm not seeing that instruction where it was given to you,
+
+Speaker 18  1:16:04  
+just for clarity, if you're at the point where you can type in conda, activate Dev, you've gone as far as you need to for the course, you have everything set up.
+
+Unknown Speaker  1:16:14  
+That's that's one thing.
+
+Speaker 1  1:16:18  
+Yeah, do you know in the in the module, when they're saying there was instruction for installing Anaconda. Um, yeah, I just posted in the chat. So where they okay, you posted in the chat? Okay, let me see it's in one
+
+Unknown Speaker  1:16:33  
+getting started. Yeah, module
+
+Speaker 18  1:16:35  
+one and Module two is getting started. Section both mentioned Anaconda. Oh,
+
+Unknown Speaker  1:16:41  
+okay, yeah, okay, so
+
+Speaker 18  1:16:43  
+I'm looking at the instructions for number one, and it looks like it does walk you through the entire process. So my assumption is, is that it will show you how to select the right kernel inside of Python or inside of VS code, in which case I think that's the only step left and you guys are able to use Anaconda. Okay,
+
+Speaker 1  1:17:10  
+okay, got it. Yep, I see it now. Thanks. Yeah. So what I'll what I'll do is I'll actually install it in front of you guys when we come back from the break. So I'll share my screen. I'll install everything from scratch so you can follow along. And in case some of you might not have been able to do it, just follow along. And then we'll use it. We will install it, and then we will use it to make sure that it works end to end right. And that's why we'll leave it for today's class. So we'll do that after the break. Then,
+
+Unknown Speaker  1:17:45  
+what are we? What are we back again?
+
+Speaker 17  1:17:48  
+815, yep.
+
+Speaker 1  1:17:57  
+How many different files? I don't know a lot probably,
+
+Unknown Speaker  1:18:04  
+like when and
+
+Speaker 16  1:18:05  
+down and down and down with other files that that I saw, I was like, Whoa,
+
+Speaker 1  1:18:12  
+yeah. It's, it's a big piece of software, and that's why some people prefer not to even download it at all, just run the cloud version, like the one I showed, and,
+
+Speaker 4  1:18:22  
+like, the cloud version has, like this built in AI assistant that, like, will give you debt data sets for stuff,
+
+Unknown Speaker  1:18:27  
+yeah, that you can use. Yeah.
+
+Speaker 4  1:18:32  
+Like, I just saw that, I was, like, geeking out, yeah.
+
+Speaker 1  1:18:38  
+So it is still installing. It will take some time. And this, I hope, is the instruction you guys followed, right from your module.
+
+Unknown Speaker  1:18:53  
+Yes, yeah.
+
+Speaker 1  1:18:56  
+Well, this screenshot looks different because I think this is for a Windows based install, and mine is a Mac best,
+
+Unknown Speaker  1:19:05  
+yeah, windows.
+
+Speaker 19  1:19:09  
+I think the biggest difference when you're doing a Windows, I think it you want to check I think there's a check box where you wanted to create a path on your machine and you want to check that, yeah, because on Windows, it won't be able to find the stuff unless you have a tier system for you, or you have to do it manually. And that's panel. But so if you see that check box, if you're on Windows, just go ahead and check it. Yeah,
+
+Speaker 3  1:19:35  
+there's a window. There's a screenshot of both that shows,
+
+Speaker 19  1:19:38  
+yeah, just telling people, just watching what when I was doing, the big difference with Windows, rather Mac, is that,
+
+Speaker 3  1:19:46  
+yeah, it actually, actually screwed up my path, so it wasn't the best thing,
+
+Speaker 1  1:19:51  
+yeah, but I, when I installed in my previous MacBook, I don't remember actually having to set any path myself. Of manually. I think the installer takes care of that. I think
+
+Speaker 19  1:20:03  
+that's a Windows thing. Yeah, that's a window Mac
+
+Speaker 18  1:20:06  
+handles it so much better than Windows does for a lot of the software. You have to go on and do it manually on Windows.
+
+Speaker 1  1:20:11  
+I agree, totally agree. Yeah, yeah. All the
+
+Speaker 4  1:20:15  
+all the installers are, like, meant to, like, drop the binaries into like, your user bin, which is where the the path goes to, by default for UNIX systems, but yeah, windows, you have to, like, reset the PATH variable.
+
+Unknown Speaker  1:20:32  
+It said less than a minute. Okay,
+
+Unknown Speaker  1:20:38  
+it's gonna take five days to download.
+
+Speaker 19  1:20:40  
+So in short, for your windows, folks do check the check box so we don't sit in office hours trying to create paths on your system manually.
+
+Speaker 2  1:20:50  
+So mine just came up. Says everything you love about Anaconda now available from the cloud. No setup required. Get Started for free code in the cloud with Anaconda notebooks.
+
+Speaker 1  1:21:02  
+That's, that's exactly what I showed you, Gary, what you were saying, that is exactly what I was showing here. Yeah, this is the Anaconda running on Cloud.
+
+Speaker 19  1:21:12  
+Yeah. But here's the thing, you're working on your local machine, and you're not doing notebooks. You're writing writing Python code and you want to create a virtual environment, I don't think you can do that with it on the cloud.
+
+Speaker 1  1:21:29  
+You don't actually need to do the virtual environment on the cloud. Karen, you because that's not working on your own machine, your environment,
+
+Speaker 19  1:21:37  
+and you're not working in a Jupiter Notebooks, and you're not on your own machine. It's not going to give you that those specific,
+
+Speaker 1  1:21:43  
+let's not get ahead of ourselves.
+
+Speaker 20  1:21:50  
+ID is like, why only Anaconda? Any specific reason for that?
+
+Speaker 1  1:21:54  
+Okay, so. Vijay, so Anaconda is kind of the become the de facto standard in the industry, within the data science machine learning community, and that is the simple answer. Now, once you have this conda installed, you can actually not ever go to Anaconda at all. You can run everything from inside your VS code, or you can run everything from your terminal, if that's what you're saying. So there's so many different ways you can run it, and there is no right way or wrong way. It all comes down to personal preference. But the reason they show you as part of the course content is this is kind of the industry de facto standard, since you are looking to get into machine learning AI space, it's kind of something that that's kind of like is a it has to be part of your toolbox. So,
+
+Unknown Speaker  1:22:53  
+thanks. Thanks.
+
+Speaker 1  1:22:55  
+Yeah. So while this happens, I want to talk a little bit about that virtual environment. So what does a virtual environment mean? Right? I'm sure you guys have gone through these. Where does it go? This one where,
+
+Unknown Speaker  1:23:14  
+let me actually zoom in a little bit here. So
+
+Speaker 12  1:23:17  
+these instructions, they actually said, don't do these until we do that, live in class.
+
+Speaker 1  1:23:23  
+Yes, that's fine, and we will do it. But while my conda downloads, I wanted to give you an overview of what a virtual environment is, right? So think about so what is virtual environment first of all, right, so I'm going to give you a different example. Let's say you are working in your kitchen, and you have a nice quartz countertop installed on your kitchen. And let's say you cook your lot of meals at home in your kitchen, and you do lot of fun stuff, like you cut raw meat, you grate vegetables, make juices and lot of messy stuff. Do you really want to spoil your fancy granite or quartz countertop, doing that and then spend hours to clear the stain? No, probably won't. Right? What would you do? What's the most common sense? Basically, put something on top of it, maybe a cutting board, maybe a rubber mat or something, right? So that when thing is done, you just take it out, wipe it, and then everything is good. So conceptually, virtual environment is very similar to that. And here the comparison to cooking is so let's say you are working on a project, and you might have to go and install five different libraries from various sources in order to do your work. And those libraries most part, they will work perfectly fine. But sometimes tomorrow, if you want to do another project, maybe you come across a library you have to install, and that somehow messes up your previously installed libraries. So what might end up happening in those unfortunate days, your Python installation can go total mess become a total mess, it can go broke. You really don't want to do that, and that's why what you call is create something called a virtual environment. So with the virtual environment, what happens is, within your conda installation, or even within your Python installation, for that matter, if you want to install some new library that is not part of the original installation, that does not come out of the box, but that you have to install after the fact, it is after the best idea to create this virtual environment, which is like sandboxes. And inside those sandboxes, you download your library, you do whatever, and once you are done, you just deactivate that sandbox. And tomorrow, if you want to work on a different project that needs a different set or combination of libraries, you just create a new sandbox and do the new project in the new sandbox. And there is no limit on how many sandboxes you can create. You can create as many as you want, and you can pick and choose which one you want to fire given the day, which you want to do, which project you are working on a given day. So that's essentially what virtual environments are. Oh, and My anaconda install seems to be complete. I'm going to say continue, and then close. I don't need to keep the binary around and My anaconda is done. Okay, so now that My anaconda is done, I can go to my terminal and do a quick check to see whether that is coming up, but probably my terminal is hiding on another window. Here you go. Okay, okay, so I'm going to just type a command, Honda. Oh, Honda is not activated yet. Why
+
+Speaker 17  1:27:22  
+do I need to restart my computer? Let's see, did you do a conda and get bash?
+
+Speaker 18  1:27:33  
+I think that commands only necessary if you want to use the Git Bash terminal to do condo commands,
+
+Speaker 4  1:27:38  
+you need to reopen up the terminal so that way it sources the files. Let's
+
+Unknown Speaker  1:27:42  
+do that. Yeah, good idea.
+
+Unknown Speaker  1:27:48  
+I have suspended jobs. Let me just wait. I
+
+Unknown Speaker  1:28:09  
+so I just finished
+
+Speaker 2  1:28:10  
+mine, and it says close. It asks me, do you want to move the Anaconda three installer to the trash? Do I move to the trash?
+
+Speaker 1  1:28:18  
+Yeah, yeah, you can do that. That's what I did as well. There you go. So now I have my conduct, yep, restarting the terminal worked. So now conduct gives me something. So that means Anaconda is running on my machine. Okay, so what it is saying is first update the conduct base environment. So what does this mean? So what it means is, so when you are creating some virtual environment, those are some environment, some sandbox you are creating on top of your base environment. Even if you don't create anything, you already have a base environment there. So what it is saying is, before you do anything, just run this command to make sure your base environment is up to date. In my case, I probably didn't need, don't need to do that because I just downloaded and installed it today. But let's just go and fire up those command anyway and see what happens. I mean, it would probably say, hey, everything is updated. So first I have to deactivate anything to go back to my base environment. And then I would say, conda, update conda. Let's see what it does, and you guys can also do the same channel defaults. Oh, okay, so it is looking for any updates that might be available, and it actually did find something that it can update. So it says Honda 24 dot 11.0, package. Okay, so now you see that it is asking a question, yes, no, if I hit you, why? Then it will update. Now, before I update, I want to do one thing. I want to hit no and come out. And I want to see what my current version of conda is, because according to this, it claims that conduct 24 dot 11.0, is the latest version that I need to install in my machine. I might but I still want to double check first. So in order to check version, I can issue this command, conda version. And it is right the conda installer package, even though I downloaded literally today, just couple of hours before the class, it gave me 24 dot 9.2, well, there is nothing wrong with it, but it is always a good idea to keep up with the latest and greatest version, which is 20 four.eleven.or which of these more recent that 24.9 right? So then let's go and do the update conda again.
+

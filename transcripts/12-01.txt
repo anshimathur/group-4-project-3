@@ -1,0 +1,768 @@
+Speaker 1  0:02  
+And and I was sitting here and for first, and then I realized, oh, wait, wonder no one.
+
+Speaker 2  0:09  
+Some schools have given today off as well, like mid winter break in some schools.
+
+Speaker 1  0:15  
+Oh, I was thinking, maybe yesterday, I was thinking, Oh, wow, look, they woke up and really, they just don't bother coming fat right away anymore. They're just
+
+Speaker 3  0:27  
+in in Tucson, we celebrate rodeo weekend instead of President's Day, so we have Thursday and Friday off. Well, the kids do from school so they can attend the rodeo
+
+Unknown Speaker  0:48  
+in Beverly Hills, they have rodeo weekend.
+
+Unknown Speaker  0:52  
+We're not that upscale down here in Tucson. I
+
+Speaker 1  0:55  
+guess that's like some form of patriotism, well,
+
+Unknown Speaker  1:01  
+encouragement or something, trying to write,
+
+Speaker 3  1:03  
+yeah, that been long standing tradition. They've been doing it for ages. Oh, I know they do a rodeo parade, and then, you know, they got the fairground where they'll do the bull riding and half wrangling and all that stuff.
+
+Speaker 1  1:21  
+I guess one time in Washington, I went to a rodeo, and I was at the wrong time, I guess because it was actually really boring, but I think maybe I was at the wrong time of the day.
+
+Speaker 1  1:39  
+I mean, I'm sure. What was it boring? What do the you know rodeo cowboys doing the stuff they're doing? Sure, right? It's boring. But to me, it was boring. Boring.
+
+Speaker 2  1:50  
+Well, I see now the attendance numbers are probably up to 19 people, because there are 23 including four of us, 19. Okay? I guess we can get started.
+
+Unknown Speaker  2:15  
+Okay, do you guys see my screen?
+
+Unknown Speaker  2:19  
+Yes, yes, it looks like the right screen,
+
+Speaker 2  2:21  
+right? It looks like the right screen. Yes, thank you confirming that. Okay, okay, so we are week 12, right? So week 12 is, what about halfway? By end of this week, we'll be halfway done. Okay? So today we are basically going to start one form of supervised learning, which is linear regression. So do you guys remember what are the two different types of supervised learning we talked about earlier in the first week of classes, regression and classification, regression and classification, exactly. So this week 12, we will do regression, and the next week is classification, okay, and then the week after is basically something that generally applies to any machine learning you do, like between these two right? Any meaning between regression and classification, like different other optimization technique that will be week 14. So the focus of this week is regression. So first we will start understanding, like kind of a recap, what is the difference between supervised and unsupervised learning, and what is regression and what is classification? We will understand some of the key terminologies. And then in this class, we will basically do this model fit predict methodology to basically do a few linear regression models. We are not going to go deep in this class in optimizing the linear regression model. That is something that we will talk about in next class, okay, the second class of this week. So to start with, so supervised learning and unsupervised learning, right? So what we have done in the last week was unsupervised learning. Why do we call it unsupervised?
+
+Speaker 4  4:33  
+Because you're just giving it unlabeled data. Unlabeled
+
+Speaker 2  4:37  
+data. Okay, so basically, what we are doing in unsupervised learning, which is this little picture on the right hand side where we are giving Hey, these are some data, and we humans don't know which data belongs to what. So you the machine figure out which. One of these data points kind of looks similar in groups. That's what is unsupervised Largo, so where the algorithm just uses the input data set, and the goal is to determine certain patterns or grouping in the data right? Which is what we did last week using our clustering, the k means clustering. And towards the end, we also learned about that K means was not the only algorithm. There are some other algorithm as well. And depending on your data set, some algorithm might work better than the other, right? So that was unsupervised. Now coming back to this week's focus supervised learning. It is called supervised because we are giving the machine the data, and we are also telling which data is which. So that means the data set that we will be using in this week and the next week are going to be the data set where humans have looked into that data set and either provided what the output will be for each each data point. So what is the output value, or what is the output classification group. So that means, and that's why we call it supervised, because it's not that when machine is doing the work. So when we when we take the data, when we take an algorithm and we do fit, the machine will go and do the fit, so it will do its job just like it did during last week's class. So there is no human supervision during that training phase that fit is called the training so when we are fitting an algorithm to a data, meaning when we are training the data, during the training process, algorithm will do its own thing. But it is called supervised, because before we provide the data, we do provide supervision in form of levels. So we are basically providing an additional column in the data that will tell the machine that the training data that we supplied, what is the what is the output of this training data, or what is the classification of this training data, depending on what kind of problem we are trying to solve. And that's what in this picture showing here. You see this little, little box here that says level one and level two. So essentially, this kind of shows like, Hey, you have a whole bunch of data point and, oh, by the way, I'm also telling you that these data points are belong to group one and these data points belong to group two. So then the question would be, then, what is machine supposed to do? We are already telling the machine, Hey, these are group one. These are group two. What is machine trying to do? Well, machine what will do is, it will look into the features of each of these data points and try to figure out, okay, what is so special about this data point that makes it belong to the blue class versus the white class? Hopefully, by doing so, it will be able to understand the pattern, so that in future, when we give it another data point where the level is not present, which is basically during the prediction phase, that the machine will be able to correctly determine whether that data belongs to this group or the other right or what the output of that unknown data would be given. We have given it a whole bunch of at least sufficient number of data with the training level provided, and that is what the supervision is. So that means someone has already looked through the data and has done the supervision right. So some common supervised learning is like this, we do all the time, like hey, given a picture of whole bunch of things. If we are trying to do a supervised learning, then we will basically give, we will basically give the machine a whole bunch of data belonging to each class, like here, like, Hey, these are the pictures of banana. These are the pictures of apple and pears and so on. But we have to provide sufficient number of these input so that even without us writing conditional logic, like if I have to write it without a machine learning, how would you like? Okay, so if the fruit is wild yellow, if it looks like a kind of elongated shape, then it is banana. If it is a if it is this kind of shape, almost like a circle, and looks like a red, it is apple. So that's what you will do. But that's not what we do in machine learning. In machine learning, what we do is we provide different pictures of things, or not only just pictures or different data point. It could be picture, it could be pneumatic data, it could be whatever. And if we provide a statistic. Fairly significant sample size, then hopefully the machine will able to pick out the general trend that makes a particular data point belong to either the bananas class or the apples class or the pears or oranges class and so on. So in order for the machine to be able to understand that part pattern, we need to provide a lot of data, right? So the success of supervised learning depends on the amount of data you provide, and the more complex your data set is, your algorithm will perform better the more data that you provide, if you have, let's say, a very complex data sets such as such as these classification of images, let's say. And if you only provide four or five images, the mesh that would probably not be nearly enough for the machine to understand the underlying pattern. What makes a image belonging to one class versus the other. You need to provide a whole bunch of data set, and the more complex your data set is, the higher the dimension is, then the more training data you will need. So keep an eye out for these things when you during your project, or anytime after these good campaigns, whenever you are doing a supervised learning if you have a limited data set, keep in mind that your success would be limited. Your model would either over fit or under fit if you have a limited data set, depending on how you are setting up that ready, right? So data is the key. So you need lot of data for your machine to understand the pattern in a supervised fashion. Okay? So what we do provide is something called features. So what are features, essentially? So feature is basically numeric representation of data. So in case of image, it could be pixel so let's say each of these are, let's say 100 by 100 pixel wide, right? So then each of the pixels RGB value would be your feature set, right? And then machine will take that and try to understand, okay, if I have 100 by 100 pixel frame of picture, depending of all of those hundreds of pictures that I have seen before, what are the feature vectors that makes a fruit belonging to banana versus Apple versus pears. Okay? If you have a numeric problem, data set, for example, that housing data set or any, any other data set that you think about, those are not pictures, but even there, you are basically providing a whole bunch of columns or features, as we call it, right?
+
+Speaker 2  12:44  
+So a quick difference between the supervised and unsupervised learning. Don't read too much into it, because most of these is kind of common sense. So supervised learning, human intervention is needed. Unsupervised learning, human intervention is limited. So one thing to note here is, even for unsupervised learning, human intervention, we are not saying not needed. We are saying limited. Why? Because even for unsupervised learning, remember all of those analysis we have done to clean the data if there is null value to get rid of the null value. If the data is not scaled, then scaling the data right using the standard scalar. So there is human supervision needed before you prepare the data for training. So that's why we are saying unsupervised learning, human intervention is limited. And for supervised learning, you need to do all of those, plus on top of that, you need to make sure that your data has previously been reviewed by a human and someone has provided the levels. So that's why it's called human intervention. Needed data, as we already talked about, these are level data for supervised unsupervised learning. We have on level data right? Some of the algorithms for supervised learning. Some we will do this week and the next week, you will see we are going to do linear regression, logistic regression. We are going to use an algorithm called decision trees. We are going to use an algorithm called support vector machine and so on and so forth. So these are different algorithm that we use, unsupervised learning we have seen last week. We do clustering like K means or agglomerative or birch or HDB scan. Those are different clustering algorithm. And we do dimensionality reduction like PCA principal component analysis, right? So those are the different algorithms on two sides. So the models, the two different kind of models that we use, like all of these different algorithms here, belong to either regression or classification, plus all of these models. Similarly in here, the two different kind of models that we use, one is a clustering model, one is the association model. So clustering model is all those k means and a glow. And birch and all of those and association is basically your PCA, okay? And when it comes to the action that model is trained to use the known results and to update the models parameters. And here, the model segments the data into groups or reduces the dimensionality of the data. What is the goal for supervised learning? The goal for supervised learning is to forecast and predict a predefined output, whereas for unsupervised learning, the goal was to find the hidden patterns in the data. So essentially, unsupervised learning is mostly used for exploratory purposes, not any particular objective because unsupervised learning we don't have level so we cannot ask the machine to exactly tell me which data is which. So there is no objective function for unsupervised learning. All we can do is do some exploratory analysis and help identify the different groups or something that look anomalous, right? Like, if there are, there are a whole bunch of data, and then most of these data belong to one of the, let's say, four different clusters. And then there are some data over there that are kind of outliers, right, which are the analysts? So those are the kind of exploration we do with unsupervised learning. Whereas for supervised learning, the result that the machine will produce that will objectively specify what group the data belongs or what output the particular data is expected to produce. So this is more objective in nature, whereas this is more exploratory in nature, unsupervised, right? And that's why we are saying here that it may not produce many meaningful result for the unsupervised learning, because the results are always subject to interpretation. Like, think about that segmenting of customer, right? So depending on you have, if you have a bank, if you have a whole bunch of customer using their credit card in certain way, based on that you are trying to find out, like, hey, how many groups of customers are there? Are there customers who are heavy spenders? Are there customers who are kind of thrifty, or that kind of thing? But those are some of the just the grouping that machine will produce. The machine will not tell you which group is. Which machine will say if you ask machine to produce two different clusters or groups from that unsupervised data or unlevel data, machine will tell you, okay, here is one group, here is another group, but then you have to interpret as a human which group means what, right? And that's why it says it may not produce meaningful results, and the results are subject to interpretation, whereas, for the supervised learning, the the benefit is that it can objectively provide what is the output of a data. But the disadvantage is that the data needs to be labeled right. And because that's what the whole premise is, the data is leveled. And also, another thing is, if you are not careful, Your model may suffer from underfitting or overfitting. But to be honest, guys, if you ask me, I would not call these disadvantages. I would rather call these featured
+
+Unknown Speaker  18:16  
+off supervised learning.
+
+Speaker 2  18:21  
+Okay, any question up until this point,
+
+Speaker 5  18:27  
+I believe later on, you can give us some example of what overfitting or under fitting looks like.
+
+Speaker 2  18:34  
+Yeah, we definitely will. Yeah, yeah. Thanks. Okay. So then coming to supervised learning. We talked about there are two kinds of supervised learning. One is regression, one is classification. So when do we use what? What is the really the difference between regression and classification? So regression is, whenever we our output is a continuous variable, continuous variable, meaning it may be truly continuous variable, like a graph, or it could be a series of discrete values, but there are many values, and you are going to predict which is which, whereas classification, your output will always be discrete values which are limited in in number, like two, class three, class four plus, or even five or 10 plus, like something that you can count, like these are the types of classes, or these are the number of classes that we Want to group our data into. So basically, classification produces discrete output, and discrete meaning it will say, hey, whether it is group one or it is group two or it is group three, whereas regression will provide continuous value. So given a particular data point, what is the output going to be? On a certain scale. And that scale could be, depending on your domain of the function. It could be, let's say, a numeric output with between zero to 100 or something like that. But essentially, it will be, always be a numerical, okay, on a scale. So that's really the difference between your regression and classification. So if you look into here, for example, classification, if, let's say, you ask a question. So someone is asked send you are a bank, and then someone has submitted an application for loan, and then you ask certain question to the loan applicant. If you ask, when, hey, do you own a car? So what the possible answer is going to be yes or no, either you own a car, either or you don't own a car, right? There is no middle ground. So that is example of discrete valued variable, right? There is no middle ground. It would be one or the other. It could be one of the two, or one of the three, one of the four. Whatever it is, it would be one of a certain limited values that you can pinpoint. So that's when we do classification. So if you look into this image, that will actually give you a good idea of the difference of the classification and regression model, right? So for example, this is, this is one example from that housing data set that we looked into before. And now let's say you have the floor area of the houses and you have the listing price of the houses right. And if you want to predict something like, Hey, given all of these house data that we have, we know the square footage of the different houses and what price the house was listed. Now, given that we can try to predict for an unknown house, if we supply the floor area, what is the most likely listing price going to be? Now, if you formulate your problem this way, it becomes a regression problem. Why? Because house price is a continuous variable, right? It could vary anywhere between 100k 200k 300k or maybe up to million, couple of millions, right? But it's a continuous value, and based on certain attributes of the house, which in this case is floor area, you are trying to predict a continuous output of a continuous, continuous valued variable, which is your listing price. So if you formulate it this way, it becomes a regression problem. On the other hand, you could also try to figure out, okay, given these whole bunch of houses that we found and based on the floor area and listing price, if you are trying to predict that whether that house is actually a single family home, or whether his house is a multi family home, like an apartment, right? So if you want to try to predict this kind of outcome, then it becomes a classification problem, because using the same set of data, you are trying to train a model that will be able to tell given these two featured very given the value of these two features, what is the target grouping going most likely going to be whether it is an apartment or a house? So you see, you can use the same data depending on how you are formulating the problem. You can use the same set of data either for a regression purpose or for classification purpose
+
+Unknown Speaker  23:24  
+make sense.
+
+Speaker 4  23:33  
+Any question. So, so I guess the way my mental model is working is regression is a spectrum, whereas classification is, is a set of discrete values, set
+
+Speaker 2  23:45  
+of discrete values, yes, so is the right way word, yeah, yeah. It
+
+Unknown Speaker  23:49  
+would be like,
+
+Speaker 4  23:52  
+say it's like, the difference between using fewer or less. If you're using less, you can't count it. If you use fewer, you can count it. Yeah,
+
+Unknown Speaker  24:00  
+yep.
+
+Speaker 2  24:03  
+So you are right. So if you are trying to do a classification problem with a whole number of bunch of classes, like, let's say 100 classes, it almost becomes a regression problem, right? Yeah,
+
+Speaker 4  24:18  
+I can see that where we're like, you could you can have a bunch of discrete values, but the discrete values are so many, then it's it just,
+
+Speaker 2  24:27  
+it's better that it is almost a continuous function. Yes, yep.
+
+Speaker 2  24:36  
+Okay, so let's do a quick fun activity here where we are going to look into a whole bunch of different problem statement, and we will try to say whether it is a classification problem or regression problem. Where is my slide show? I.
+
+Unknown Speaker  25:03  
+Where is the slideshow menu? Here,
+
+Speaker 3  25:08  
+up, right? It says slideshow with a little drop down.
+
+Unknown Speaker  25:14  
+Oh, right here,
+
+Unknown Speaker  25:18  
+but I don't want to start from beginning.
+
+Unknown Speaker  25:22  
+No, if you just hit the slideshow button, it'll start from that
+
+Unknown Speaker  25:28  
+slide. Something happened? Hang on.
+
+Unknown Speaker  25:37  
+No, there is a,
+
+Speaker 2  25:40  
+there is a, shouldn't there be a Slide Show button somewhere here?
+
+Unknown Speaker  25:51  
+I think I saw it under, under your view.
+
+Unknown Speaker  25:55  
+Very tall. Second,
+
+Speaker 2  25:57  
+right there, yeah, yes. Thank you. Okay, so what we are going to do is we are going to do this quick phone activity. So we will start from the top left, and we'll go like that. So let's start with spam filtering, classification, classification, because what are the different classes? Then here, span not spam, spam or not spam, right? So in order to train this model, you probably have a whole bunch of email that people have grouped into one of the two classes, whether it's a spam email or not spam email. So that's your level. So your level have has discrete values, zero or one, and based on that, your model is going to fit the data, fit the fit to the training data to be able to classify whether unknown email, unknown willing to not previously seen email, whether it belongs to a spam category or not. Okay. Next one predicting whether a company will go bankrupt. Regression, regression, it's classification,
+
+Unknown Speaker  27:08  
+because it's either yes or no, right? It's a binary output,
+
+Speaker 6  27:11  
+yeah. It is whether, yeah,
+
+Speaker 2  27:15  
+yeah. So let's say you are a venture capitalist, right? And and you have a whole bunch of data of different startups, right, who have probably came to you before asking for investment, and you have collected a whole bunch of data about these companies, and now you want to be doing able to do it smartly, without lot of human intervention. You want to learn from these previous experience because you know as an investor that whether you invest, whether the startup finally succeeded or it went bankrupt. So essentially, it becomes a classification problem. The next one, the stock price prediction progression, that is definitely a regression, right? In fact, this is something we had done during the time series week, right? And that is why, if you guys remember when we did the time series prediction, I basically mentioned that this is essentially a special form of regression, right, where one of your dimension is time but yes, stock price prediction is regression predicting Age Classification?
+
+Speaker 4  28:22  
+Is it too many data points to be classification? Yeah, if you're saying age of like a rock, yeah,
+
+Speaker 2  28:34  
+little bit in the middle, right? It's a great idea. Depending on like, how you want to predict the edge, it could be treated either as a classification or a regression, right? I'll call it a regression for now. But if you think that age can only take maybe one of the 100 values, it's probably you can also think of it as a classification,
+
+Speaker 7  28:55  
+right? Or a range of ages, I guess, too, or
+
+Unknown Speaker  28:59  
+range of ages, yes, yeah,
+
+Unknown Speaker  29:04  
+predicting solar energy production. How about this one
+
+Unknown Speaker  29:08  
+progression? Yeah, so
+
+Speaker 2  29:11  
+given a particular climate data or latitude longitude, you're trying to predict, like, hey, if I want to put up a solar cell up on my rooftop, how much I'm I'm going to get, how much I'm going to produce right over the year. So essentially, it's a regression problem, no doubt about it. Uh, predict the predicting the price of a used car.
+
+Unknown Speaker  29:37  
+Also, regression, regression, yeah,
+
+Unknown Speaker  29:39  
+regulation, application,
+
+Speaker 8  29:41  
+okay, it will be regression. Video, yeah, because price is a continuous variable, usually we they, they're using the how much that has been worn out and what is the life of a engine, kind of thing. And rest All right, so it's. Was thinking it might be a classification.
+
+Speaker 2  30:03  
+You are right. So if your attributes are a lot of attributes, you can think of it a regression, whereas if you only have a handful of attributes, it probably would be better to model it as a classification, right? And that's what, what JC also mentioned, and I agreed sometimes, depending on how you formulate the problem, how your data set is how many features you have a particular problem can either be modeled as a classification problem or a regression problem.
+
+Speaker 4  30:31  
+And I guess it kind of matches the example from before of housing prices, right? Because there's just too many variables, and the pricing is very well, yep,
+
+Unknown Speaker  30:46  
+predicting e commerce, sales, revenue,
+
+Speaker 6  30:49  
+billing regression, regression, yeah, that
+
+Unknown Speaker  30:53  
+definitely is a regression,
+
+Speaker 2  30:57  
+predicting if a crowd funding campaign will succeed. Classification, yeah, regional temperature prediction, like weather forecast regression, migration, but another weather forecast problem that predicting if it is going to rain today or not, on a spectrum location
+
+Speaker 4  31:22  
+isn't rain on a spectrum, like drizzle versus point,
+
+Speaker 2  31:27  
+yeah. Again, if you want to like, how much it will rain, if you say, Hey, how much, how many millimeters precipitation it is going to be, it becomes a classification problem. Predicting if an animal in a picture is a cat or dog. Classification, that's the classification, and then identify digits from images classification. So handwritten image and, yeah, so that becomes a classification, but this is a how many class classification i
+
+Unknown Speaker  32:03  
+In how many area of the image,
+
+Speaker 2  32:08  
+10 digits, right? So in a decimal world, decimal world, yes, not in a binary or hexadecimal or any other number system. In decimal world, it will be 10. In a binary world, it will be just two. So that was a quick fun exercise. Okay, so now let's talk about, I mean, we did talk about this, but let's just formally try to understand, what are the some of the different terminologies that we are going to use. So what are features and what are levels, right? So features are basically your all of your unknown variables or X variables, right? So these problems are basically you are trying to find a function y, which is a function of x. Now, when we say x, x x may not be just 1x it could be x1, x2, x3, up to n, right? So essentially, we are trying to find y as a function of multiple x's or x i You can say so all of these x's are your features, which are also known as independent variable, and the output you are trying to predict that is what is called level, but that you go using that functional notation, you can think of it as a it as a dependent variable, because when you are writing y as a function of x, y is your independent, sorry, dependent variable, which are the levels. So levels are dependent on the feature, which is the outcome that you are trying to predict. Sometimes you will also see the term target variable. So target variable, levels, dependent variables, they all mean the same thing, and your independent variables are basically features. Sometimes you will also hear the term called attributes. So attributes are basically the different columns in the data. So attributes, independent variables, features. They all mean the same thing.
+
+Speaker 4  34:14  
+You're using labels to train. You're using labels to train so that you can find features right. The labels tell you, like how to predict an output feature correct. So
+
+Speaker 2  34:28  
+the labels are telling you, given a combination of features, what the outcome was in the data that you provided during the training. It's like your why. It's like your why. So you are basically assuming that somehow this outcome is dependent on the combination of these feature values, but you don't know what that math. Medical function is instead what you are doing is you are throwing this whole bunch of examples, which is the trading data set, and the machine will find that function. And that function might be a black box to you, but the machine will be able to look into the statistical interdependence between this right and able to find that mathematical function that, if correct, then you can apply to any other set of features that is not present within this training data. So that, for that data point with all those features, what is the outcome? So at that point, prediction is very simple, because when you are training the data, the more once the training is completed, the model is actually finding the mathematical function internally, like all the coefficient of the function. And at that point, the prediction becomes simple. You basically take another set of data point, let's say if he has 10 feature, you plug in these 10 data points as an input to the function, and it computes a simple mathematical out.
+
+Speaker 4  36:07  
+I think what I'm getting confused by is an earlier slide we talked about you needed to label the data so that it could be trained. The model could be trained in supervised training. So do labels have more than one meeting, because it feels like in this grid, we're saying labels are an output. But in an earlier slide, it felt like labels were an input.
+
+Speaker 2  36:31  
+No. Levels are not input. Levels are also known as dependent variable, which is the y collar, which is this. So you will see, when we do go into the code, we will basically, often time we will take this output and create data frame, and that data frame we often call a y. So we will call these, all of these columns in the data frame. We will separate it out, we'll call it x, and we'll call it y. So this y is your level.
+
+Speaker 9  37:01  
+So for like the the recognizing like numbers from an image, like our features would be like the the the color gradient, or what are the value on?
+
+Speaker 2  37:12  
+So and then it will be basically the RGB values of individual pixels. That's the outcome would be like zero through nine, and then outcome would be what the image is off, right? Whether it's a 012345, digits, or whether it's a cats or dogs or horses or whatever it is. So that's your level. Oh, thank you. But as part of this week or the next week, we are actually not going to do any classification based on image, because we are going to save that for later when it do when we do neural network based classification, and that's because the scikit learn based statistical algorithms are not nearly efficient enough to Be able to properly understand or grab the pattern between all of these hundreds or 1000s of pixel in the image. That is what you will need neural network for.
+
+Unknown Speaker  38:10  
+Okay, I'll hop off on that. Then next, yeah,
+
+Speaker 1  38:16  
+that's odd. Nothing about decision trees or
+
+Speaker 2  38:24  
+or No, no, no, we will do decision trees here as well. That's
+
+Unknown Speaker  38:28  
+okay. I could learn classification.
+
+Unknown Speaker  38:33  
+What is that? That's
+
+Speaker 1  38:35  
+classification. SVM is classification.
+
+Speaker 2  38:42  
+We are going to talk about the different methods of regression and classification. Okay, yeah, today's regression, and the next week, well,
+
+Speaker 1  38:50  
+you said there's no classification involved at all, until neural networks, and that doesn't make sense.
+
+Speaker 2  38:58  
+Um, let's, let's keep on that part, um, because that is not the focus of today's class, carrying, um, okay, so for the regression, then what we are going to do is we have dependent variable which is all the feature column, and, sorry, independent variable which is all the feature column, and we have the dependent variable which is what our target column is, right, and essentially going back to what I was alluding to for the mathematical function. So now the mathematical function could be any function, but the first attempt, what we are going to do is we are going to assume that there exists a linear relation between your x columns and your output, which is the y and if you have one variable x, if you go back to your high school algebra days, what is the equation of a straight line that you can draw
+
+Unknown Speaker  39:58  
+in an x and y plane? Okay.
+
+Speaker 2  40:02  
+So that equation looks like this, which is basically the slope intercept form. It is called right. So if you draw an arbitrary straight line on an XY plane, that equation of the straight line is y equal to a plus Bx, where a becomes your intercept, meaning at which point this function cuts the y axis and B becomes the slope, which is basically the rise over run. So this is the simplest form of function that we are going to use to train our model, given a whole bunch of X and trying to predict y. Now first couple of example that we are going to look into, we will see that there is only 1x and therefore it is very simple to see how it can calculate that. Now, obviously, in a real data set, it will always be multiple X feature, but we are going to look into the 1x variable, or data set with one single feature or 1x variable, and try to do a linear regression to find that line that best fits the data. Okay? So we are going to do that. And essentially, if I go back a few slides here, so you see this dotted line here in here. So basically what our model will do if you look into this picture. So think of all of these variables. They have x and y in this case, or actually x. So let's say the you have this as a two dimensional data set, where you have one feature column, which is floor area, and one target column which is listing price. So now, since we are assuming that our underlying function, mathematical function, which is unknown at the beginning, is going to be of the form y equal to a plus b x, so when we finally are able to find that function, and we plot the function, that function will, when plotted, will basically show a straight line, which you see kind of hidden behind these points, and that is the line of your best fit, which is what we are going to try to predict With the data set that we have. Okay,
+
+Unknown Speaker  42:20  
+so
+
+Speaker 2  42:23  
+now we are going to start going into do some activities to see how that works. Any other question before we start looking into some of these code examples?
+
+Speaker 2  42:40  
+No, okay, so let's get started. So in our first demo, so we'll need NumPy and pandas, of course, and this time we are doing linear regression. Okay, so linear regression is some is basically like, going back to here. It is called linear regression because we are trying to fit the data with a linear model. That's why it is called linear regression. Okay, so we need the linear regression from SK learn dot linear model, so we import those and now we take a data set which is stupidly simple. So this stupidly simple data basically gives me only two column years of experience and the salary of certain professionals. Now in real life, we know that the salary of a person does not only depend on years of experience. Although years of experience is a strong does have a strong influence, but it's not the only influence. But just to understand how linear regression works, we are going to take a baby step. We are going to take this data with two columns, where years of experience is my x and salary is my Y. And we are trying to find out how this is related through this equation, y equal to a plus bn. So how do we do that? So before we try to plot, let's try to train. We are going to first take the salary and we are going to do a scatter plot with this data frame, plotting years of experience in x axis and salary as a Y axis, because that's what we are going to predict. But first, let's just do a scatter plot to see whether a linear, whether a correlation, in fact, exists. And from this cutter plot, as you can see, that there is a strong correlation that does exist between these two variables, right? So if I want to find a straight line that describes this data frame. Okay, can you see, looking at this scatter plot that I should be able to find draw a straight line that kind of goes close to most of these data points and kind of captures the linear relation between the two day two variables here, in real life, you will not get a data set as clean. But again, this is a artificially created data set just for learning purpose. So essentially, we are going to try to find what that straight lines equation is going to be in this form. So if we find A and B, that's it, we are good. So essentially, what we are trying to do is given all these different x1 x2 x3 or x n values, we are trying to find what are the slope and intercept for that straight line equation. And then we are going to draw the straight line, superimposing on this kind of plot and see how the data fits,
+
+Unknown Speaker  45:55  
+because that essentially shows what a linear regression does.
+
+Unknown Speaker  46:01  
+Okay. Now how do we do that?
+
+Speaker 2  46:05  
+So we take these feature column, which, in this case, only one feature column, which is years of experience, years underscore experience. So we take the years of experience, and we basically take the value of these and we call this x. So these x basically becomes a numpy array.
+
+Unknown Speaker  46:25  
+So this is our numpy array.
+
+Speaker 2  46:29  
+So all the x's are here, and then if you do a x dot shape, you will see that it is a two dimensional array. Why two dimensional? So this is something that you need to keep in mind, the algorithm expects x to be a two dimensional array, even though, here I have only one dimensional x, because I have only 1x but whenever I'm going to pass this x as a numpy array to the linear regression algorithm, the algorithm always expects your x to be a two dimensional array. So what I'm trying to tell say is, let's say, if I just do this, if I just do this, and don't do the reshape and just apply a shape. Here you'll see that we are going to get something that says 30 comma, and there is nothing Why, because when you are taking one column from a pandas data frame that gives you a one dimensional array. Now here, since we have only one column to deal with, we are getting this one dimensional array. But we cannot pass this one dimensional array to the linear regression algorithm, because the linear regression algorithm expects a two dimensional array, because there, there is going to be multiple x's. In this case, we don't, because we have a stupidly simple data set. So what I'm trying to do is I'm applying this dot reshape negative one to one. So basically what it is saying is, hey, take this one dimensional array of length 30 and convert it into a two dimensional array of length 30 and width one. So if you just print this, you will see it gives a one dimensional array with these numbers. But when you are doing a reshape and printing that you are basically going to get two dimensional array. So you see the difference between this output and difference between this output. So this is your one dimensional array with a length of 30 This, however, is a two dimensional array, as you can see, these opening bracket, square bracket and the closing square bracket. And inside each of these, you have another array. But each of these array has only one data point so and then there are 30 of these, and that's what makes it the two dimensional array of shape 30 by one, instead of 30 by nothing. So that's why we need to do if you have a one dimensional array somewhere as part of your extraction of the feature or levels, you should always reshape these with negative one to one, and that will turn this into a two dimensional array. Sorry,
+
+Speaker 7  49:26  
+but no. Can you explain the arguments negative one and one?
+
+Speaker 2  49:32  
+So, yeah. So basically, what this is saying is negative one meaning so for basically it's saying for the length of the array, don't try to interpret anything if you have 30 here. So this one has a length of 30, right? So it's basically saying as the first dimension of your target array, just ignore, ignore. Meaning not ignore. So basically, do not. Not expect any user defined input. Just take whatever the original address dimension is, and as the second dimension, use whatever you are supplying which is one. So the two arguments is in reshape. The first argument says how many rows should be there, the second argument says how many columns should be there. Now, if you provide a value for these, then it will reshape those. It is kind of like, you know, when you have a image and you are trying to trim the image, right? So you basically click on a trim button and then drag the corner of the image, and then you basically trim the image to a certain to look into a certain portion of the image. So reset reshaped us something similar, but except here you are saying for the first argument, which is the the length of the array, minus one, basically means use whatever you see in the data set, in or in the in the in the original array that you are applying it upon, and don't use any user input. That's called a negative one. But if it is a positive number, then it is going to honor the size that you are providing. So basically, the first component of the size is saying, don't take my word. Go and look whatever the original length is, which will come to 30. But for the second argument, I'm saying one. So that means it has to be 30 by one. So that's for the x, and then y would be my salary column from here, right? So this salary column would be my y. So that is pretty simple. All we are going to do is we are going to take DF, salaries, salary column is white, but here we don't need to do reshape. If you do the shape, it's 30 comma, nothing. And that is totally okay, because linear classifier expects your column to be as one file, all in one file. It does not need to be multi dimensional, but your x, the features need to be a two dimensional array, so that's why you don't need to reshape the y, but you do need to reshape the X if you happen to have only one feature for multiple feature, you don't have to which you will see in in some of the later activities that we are going to do in the class Today. So that's our X and that's our y. Okay, so now we have the data processing done. So now it's basically selecting the model and then doing a fit and predict. So we create the model using this linear regression class, and that is our model that we created. Now we are going to do model dot fit. So this is where the training will happen. When you do call the Fit function, you have to provide two arrays. The first array would be your features, and the second array would be your levels, which in our case, we called it x and y. So we invoke this and now the model is straight. Now this model has basically computed these mathematical function internally when we click that fit cell, when we executed that cell, but what we can do is we can look a peak in into the model and see, hey, what is the what are those values? So if you invoke this, not function, this is basically a parameter of the model which is called coefficient, coef, underscore. It shows that the slope is 9449, it's a number. So this slope is basically this B here. So that's my slope. And then you can find the intercept, which is a by looking into another attribute of the model, which is called intercept underscore. So if you do intercept underscore, it says that 25792, so basically what this says is, if I draw a line on this data, it will part the y axis at 25,792 and the rise over run of that of that straight line would be 9449 so now with these A and B, our formula will look like this, which is simply a print statement, nothing else. So basically y is equal to 25792, plus 944, 9x, so I hope you can see how these mathematical formula is exactly same as this, with the following values for a and b2, 5792, and 9449, so that is the numerical sorry, the linear model that we found. So. Uh.
+
+Speaker 2  55:05  
+So now that we have this model available, now if I want to say, Hey, what is going to be the salary of a person who have a five years experience, 10 years experience, 20 years experience, it is just a matter of plugging in that value of x5, 1015, 20, whatever, and then computing this simple arithmetic to get the y and that will be the predicted salary given the number of years of experience. Which is what we are doing here. We are trying to predict, Hey, what is the salary going to be for someone with seven years of experience? Well, which will be, if we are trying to do it manually, it will be intercept plus coefficient times seven, because that's what it is, intercept plus coefficient times seven. So this is where how we are manually, basically using these arithmetic formula and plugging in our x value, which is seven, and we are basically predicting that this is going to be the salary of someone who has seven years of experience. Okay. Now you don't always have to do this way, because often time what will happen is when you are going to do the prediction, the data that you are going to predict upon that will also come in in form of another pandas data frame. So in reality, you don't actually have to extract this intercept and coefficient, and you don't actually have to write this mathematical function to do that. Instead, what you are going to do is you are going to take that train model instance and you are going to say predict, and you are going to pass a data frame that contains some of the other data points that you want to predict upon. But in this case, we don't have a separate data set that we are going to do the prediction, because the purpose of this particular activity is to see whether we can draw a straight line that fits through that scatter plot that we draw earlier. So that's why we are taking the training data itself, which is x, and we are trying to fit the model on, sorry, not fit, predict the model, predict the outcome of the model using the same access that we trained upon. And then this are the mind predicted values. So before you say predicted values, all of these predicted Y values are basically output up applying this equation to all these 30 data points that you have in the training set. Now, if you plot these numbers on a graph and do a line plot, it should actually show a straight line that basically satisfied this equation, which is what we are going to do now. So in order to do that, what we do, we create a new data frame with these predicted values. And now I have a data frame where I have the original two columns, years of experience and the salary, original salary, and now we have the predicted salary. So this is the original, this is the predicted. So what we are going to do now is we are going to do a plot where we are going to plot the original salary and the predicted salary side by side, and that will show how our models prediction matches up with the original data. So what we can do is we will take these data frame and do a line plot, as we are doing here with years of experience as x like before and the predicted salary as y, and we will draw it in a red color,
+
+Unknown Speaker  58:52  
+and that's the line we are going to get
+
+Speaker 2  58:58  
+now we can also superimpose this line on the original scatter plot that we did up there. So for that, what we will do is we will first do a scatter plot with the original salary, which is this column salary, and then we are going to do a line plot with the predicted salary, and we are going to take both of this plot and plot it on a single plot, which is salary plot. So the way that I'm doing is using this matplotlib handle, is when I'm doing the scatter plot, I'm saving that reference to that plot, and then when I'm going to do the second plot, which is line plot, I'm just passing the reference to the scatter plot as another variable called AX, right? And then I'm finally displaying the salary plot, and that way you can now have. Have two things superimposed on each other. And as you can see, the model did a pretty good job in coming up with the central tendency of the data with that straight line. So therefore our linear regression was successful. So
+
+Unknown Speaker  1:00:26  
+okay, any question.
+
+Speaker 2  1:00:36  
+Okay, do you guys want to do practice this in a group in the next activity using a simple one dimensional X feature. So if you look into activity number two for today, right? So here you have actually let me also open the unsolved file here. Yeah, so use basically a ad versus sales, number of ads that you run versus the sales revenue it generates, with the assumption, which is against stupidly simple assumption that as you increase the number of ads, your sales revenue will almost linearly increase, which always does not happen in real life. But for our case, we are basically having a data set that looks like this catapult. So what you need to do is you need to take this data set and do a linear regression model and draw that line of best fit to show how this data set fits with the linear regression line. So let's take maybe 10 minutes to do that in the groups. And I strongly suggest that you actually do try it out in your group or by yourself. But instead of everyone being here, I think it will be a better idea to actually break out, going to breakout rooms for 10 minutes, and then we'll come back, we'll review the work, and then we'll move
+
+Speaker 1  1:02:19  
+on. So do you want people to go to the groups they had before? Or, sure, okay, I just want to, I guess I can make them random, or I can make them in that, or I can
+
+Speaker 2  1:02:29  
+have them do that. Let's, let's make random. Let's make Okay,
+
+Speaker 1  1:02:33  
+give me one moment then to do that. So we're going to this, recreate, and five is good. Five is good,
+
+Unknown Speaker  1:02:48  
+okay? And then 10 minutes
+
+Speaker 2  1:02:50  
+is it also going to put us also in one of these groups randomly? No, it should not.
+
+Speaker 1  1:02:55  
+It should not, right? Yeah, hopefully I told it not to. We'll listen. We'll see. Maybe
+
+Unknown Speaker  1:03:02  
+it has a mind of its own. Anyway, here we go.
+
+Unknown Speaker  1:03:11  
+Okay,
+
+Unknown Speaker  1:03:17  
+so I heard you guys found it very easy
+
+Unknown Speaker  1:03:23  
+is that true?
+
+Unknown Speaker  1:03:27  
+Anyone who found it hard, or was
+
+Unknown Speaker  1:03:31  
+it pretty straightforward?
+
+Speaker 2  1:03:35  
+I see one not. Yes. It is straightforward. How about others? Anyone got stopped doing this?
+
+Unknown Speaker  1:03:46  
+Well, I'll take that silence as a no.
+
+Speaker 3  1:03:50  
+Well, I got hung up with some syntax stuff that was just the issue on my part, so I didn't get as far as I'd hoped, but I'll keep going.
+
+Speaker 2  1:04:03  
+Okay, fine, yeah, that's fine. You're doing it the first time. So if you get stuck once or twice, that's fine. So let me go back and run through this very quickly again, there is, this is exactly the same as what we have done there in the instructor demonstration, just different data set, different names of columns, but exactly the same steps, no difference at all. So we need that copy and paste, yes, copy and paste, yeah. So you basically have the two columns except the names of different ads and cells. You do the scatter plot, you look like this, and then you get here. So this is where you basically hang on. Let's just run through this thing. What this? Have the Carlo here? Oh. Okay, yeah, so the up to scatter plot is good, and then we are going to take the x column out, sorry, adds column out and call it x, which is what we are doing here. And since this is only one column, we are going to take do a reshape with a minus one and one, and that gives me all the x data here. And the y is very simple. You just take the sales column out and call it y, and then you build the linear regression model, which essentially needs two line of code. One is model equal to linear regression, and then model dot fit x, comma y, and that's it. Your machine learning is done right. And then if you want to find the coefficient, you can find the coefficient which is the slope and the intercept, which is this, and your formula will look like y is equal to intercept plus coefficient times X. Okay. Actually, one thing Have you noticed how when you print the intercept, it gives you one single number. When you print the coefficient, what does it give you? Does it give you a single number? Yeah,
+
+Speaker 7  1:06:24  
+I wanted to ask about that. It looks like it's giving you a list, right?
+
+Unknown Speaker  1:06:31  
+So when you do model.co
+
+Unknown Speaker  1:06:34  
+down in the formula, you have to
+
+Speaker 9  1:06:36  
+basically for multi dimensions, because I'm higher dimensionally,
+
+Speaker 2  1:06:41  
+because the linear regression model is a general model that will work for multi dimensional X feature. It is just our first warm up activity. We are doing it with 1x column, and that's why you are seeing one coefficient only. If you have 5x column, your coefficient would be five numbers here, because essentially where you have then it will be y equal to a plus b1, x1 plus b2, x2 plus b3, x3 and so on, right. So all of those B ones and B twos and B threes, corresponding to your x ones and X twos and X threes are your coefficient. So that's why these coefficient will always be a list of length equal to the number of feature columns you have. If you have 10 feature column in your training data, this here, you will get a list of length 10, but in this case, we have only one. That's why we are getting only one. And that's why, for our simple one dimensional case, we are getting the first one model dot coefficient zero times x. If I had another variable, it will be model dot coefficient zero times x1 plus model dot coefficient one times x2 and so on and so forth.
+
+Speaker 2  1:08:06  
+Okay? And then we calculate the predicted values using, and again, one line of code, which is model dot predict. And then we create a new data frame, taking both the original data and the predicted values, right? Or my original wise and Y hat. Remember that terminology that we used to use y hat when we are doing the time series forecasting. So essentially, this is your y column and this is your y hat column, right? So then you basically do plot. Where you do a scatter plot, save the variable, save the reference to the plot in a variable, and then do a line plot, and pass that variable as x, and then you essentially get this which is exactly the same as before. Okay, so that's why I just wanted you guys to kind of try it out at least once. It is very easy, but trying it out once it will help, right? Because we are going to repeat this over and over again in all the activities except our data frame will be different, but these steps will exactly be the same. And that's the good thing about machine learning, once you get the hang of it, actually executing the algorithm is not hard, because the hard part comes in, exploration of the data, cleaning of the data, preparing, of preparing the data, and all of this thing, right? So that's where the human intervention, that's the that's where your analysis comes in. But actual execution is very simple.
+
+Speaker 6  1:09:42  
+So okay,
+
+Speaker 2  1:09:46  
+and then there is a whole bunch of thing in this cell. They're asking you to, hey, do a manual prediction when number of ads equal to 100. You basically take the 100 and put it into these equation. So. With the interceptor coefficient, and you get the value. And then this is where they are basically asking, hey, what if, if you have to predict on multiple different values, which then would become array? So let's say 100, 150, 200 so five different values, and I want to predict for all of these five values. So how do we do that? Well, we take all of these five values, so these now becomes my test data so instead of one single value, I have five values that are in my test data set. So I take that test data set and again, remember, this is x, so that means it has to be a two dimensional array. So when you simply do NP, dot array, it gives you a one dimensional array. You do a reshape to turn it into a two dimensional array, and you basically get these two dimensional array. And then you do model, dot predict, and pass this two dimensional array, and that will give you a whole bunch of wise actually, let's also do the predicted cells printed, and then you are basically getting these five predicted values. So
+
+Speaker 4  1:11:10  
+so I didn't use a numpy array, I just used a regular list for array and fed it in to reshape and it worked just fine.
+
+Speaker 2  1:11:21  
+Yeah, it will because NumPy, most of these functions are kind of a Python functions, you will see they are kind of interchange, interchangeable. That is one of the beauty of Python, right? Like, unlike, like a more strongly typed language, you have to have the exact same types. But most of these NumPy pandas function, they are pretty interchangeable with the native collections that you have. That's what you have seen.
+
+Speaker 4  1:11:48  
+I did need to convert the array into numpy array, so again, okay, thank you. But
+
+Speaker 2  1:11:53  
+you do need to have these, these dimension, though, right, right?
+
+Speaker 4  1:11:56  
+The Resha. I mean, I could have done the length of the array comma, one, yeah.
+
+Unknown Speaker  1:12:05  
+I mean, you can hand code these also. But why would you guys? Yeah,
+
+Speaker 4  1:12:08  
+exactly, it's a nice it's a nice shortcut. It's a nice shortcut.
+
+Unknown Speaker  1:12:11  
+Yes,
+
+Speaker 2  1:12:15  
+cool. And then this is what your predicted data is. Okay, okay. So if there are no question, let's move on. Then
+
+Speaker 4  1:12:28  
+we are good. The the last reshape that was that was doing it basically the unshape of it.
+
+Speaker 2  1:12:37  
+So this is basically yes. So it's basically, since you are trying to create a data frame right your x ads, you basically converted it into a two dimensional array. So you are basically reverting that and converting into a one dimensional array.
+
+Unknown Speaker  1:12:55  
+So the flattening would have also, yeah,
+
+Speaker 2  1:13:01  
+again, these are little things, and now that we know that there are multiple different way that you can, you can, yeah.
+
+Speaker 2  1:13:12  
+Okay, so now, how do we know how, how well this model clock performs. So if you, if you look into this model right, or even the or even the one in this is, this is the first one we saw, and this is the second one right looking at that, I hope you, all of you, have a kind of An intuitive feeling that these fit of regression line is a pretty good fit, because it is more or less able to capture the linear trend in the data very well, right? But is it exact fit? Like, is it a 100% accurate like, if I take any x values, let's say 100 my output value would be somewhere here on this red line, but my actual value for 100 is here. So you see there is a little difference, but the difference is overall small, because most of these points kind of fall or fall very close to the line, because that's what the regression algorithm did. So it is a very high but would you call it 100% accurate? Probably not right, so, but then that means is we have to have a way to figure out what is the performance. We have to be able to objectively measure the performance of the model, or the accuracy score, for that matter, right? So now we are going to look into how we can measure that right. So one couple of things that you have to understand when you are drawing this line, the best fit line, basically right. So when you are your algorithm is drawing this best fit line. So essentially, what you are doing, or your algorithm is doing, is it is basically calculating the distance of each of these data points from the line. So if you have a data point, y, I and then the corresponding point on the line is y, i hat, your distance is basically y, i minus y i hat, which is basically the length of this little line segment, and this line segment and this line segment, right? So the algorithm, when you call that little fit function, what that algorithm tried to do is it tried to draw a straight line so that the total of square of these distances, these and these and these and these and this and square of all of these is as low as possible. So essentially, any of these training, when you are doing the training, it's an optimization problem, where the particular optimization problem here, that the algorithm did is try to minimize the square of the distances from each of the data points from the line. So essentially this mathematical function, it computes the lines coefficient in a way so that these mathematical function is minimized. And that's why you end up with this straight line that very closely goes through most of the point. So that means, in order to find out how good our model is, we need to be able to understand what is that minimum value that it came up with. Right? So that particular measure is called mean squared error. So what is mean squared error? Which is the average of the square of the errors of the data set, which basically means these whole thing divided by n,
+
+Unknown Speaker  1:17:19  
+which is the average.
+
+Speaker 2  1:17:22  
+So that is your mean square error, MSE, you can also think of as the variance of the errors in the data set. And then another related measure you can think of is taking a square root of this, which then becomes root mean square error, or R, M, A, C, which can also be thought of as the standard deviation of the errors in the data set. So all of these little things, these are the errors. So these errors, in a statistical model, these errors will basically have a normal distribution. So if you just take all of these error put it in as like, let's say, let's say you draw the you come up with these you fit this model, and then for each why? You see why? What is y and what is Y hat, and you take the differences, and you plot a normal distribution curve, right? And then that normal distribution curve will basically just like a bell shaped curve, which will have its own standard deviation and mean. So this particular measure, RMSE, is basically the standard deviation of errors in the data set. Now obviously the higher the standard deviation is, that means your error curve is more flatter. So that means these errors are basically randomly distributed further and further apart from the two lines. So what that means is higher value of MSE or higher value of RMSE basically means your model is performing not very well, but lower values of this will tell you that the model is performing well. Now you might think like, okay, lower value, meaning what, how much is low? Does low mean zero? Well, not necessarily. Because what happens is, if you look into the formula here, y, i minus y, i hat, right, if you think about this, and this y is a variable. So now if you go to here, for example, so what is the scale of your Y? 10s of 1000? Right? 10,000 15,000 20,000 25,000 and so on. So since the scale of the Y is very high, so that means these y i minus y i hat, these would probably be in maybe hundreds. So from here to here probably would be 100 something like that, in the order of 100. Then you square that and 100 times two, that becomes 10 to the power four. Which is basically means 10,000 ish, and then you take a average of that. So that means you basically get a MSC value in the order of 10 to the power four, which by no means is a very low number, but that is totally fine for a data set where the y scale is in 1010s of 1000s. So my point of saying this is just looking at this MSE or RMSE in itself, you would not be able to predict whether your model is a good model or a bad model. But what this model, what these, why these two measures will be useful is, let's say you take a particular data set and you apply different modeling techniques on these or you do different data pre processing right like how you encode your data, how you feel your null values, and depending on different data preparation different or depending on the different algorithm, you basically do the regression in more than one ways. Then, when you are trying to compare the performance of these different model on the same data set, then you can try to say, Okay, I have tried five different ways to do the linear regression on this data set. Which one of these gives me the lowest RMSE value? So that one is the best, and I'm going to keep those. But even then, that lowest RMSE value could be in hundreds or 1000s, and that's totally fine. So even though the model tried to minimize this, this minimization point may not be zero. The minimization point could be also be a very high number. So my point in saying is, don't think of these numbers is going to be a small number. These numbers itself could be very high numbers. Now that now represents a different problem. So if my MSc and RMSE, if these are very high numbers, how do I know my single particular model, which is, for example, this model, whether this model performed well or not. So I need to have some more objective measure of performance that will give me maybe, let's say, in a scale of zero to one, zero meaning the meaning the worst performance, one meaning the best performance. Where does it stand? So we need a measure such like that, that will tell me objectively the performance of these model on a scale, on a rating scale, much like how we performance measure performance for anything like students performing in an exam, right we use percentile value, right meaning between a scale of 02 100, how much a student particularly performed in the test. So we need to have a more objective measure similar to that, and that measure happens to be this last one, which is the R squared value. So these are squared value is the correlation coefficient which describe to which extent change in one variable is associated with the change in other variable. So basically it tells you this model that you draw you calculated which is this straight line, how much of the variance of the data in the x values were captured by this particular y values that the model is predicting in a scale of zero to one. So if you have a whole bunch of random points with no correlation at all, right, like a random noise where correlation is zero. If you try to draw a straight line, that straight line will basically be a horizontal straight line with zero slope. If you find R square value of that straight line, it will give you R square value of zero. Whereas, on the other extreme case, if all of these training points happen to be perfectly aligned on the line, then the line will touch all of the data points exactly, and that will give you an R square value of one. So that means using these R square value you can objectively measure how well your model has performed, and the exact mathematical expression of these R square value which is present here, which says R square is one minus sum of square of resident residual divided by total sum of squares. So this is the mathematical value. But if you want to see for the first hand how it is actually calculated, I would ask, I would basically encourage you, to look into this particular page that actually gives the mathematical formula in a little bit more detail, where the R squared value is one minus sub of squared residual. All divided by total sum of squares. And how you calculate that is, you take each y i and y i hat, and you take these difference square, which basically is this value here, y i minus y hat square. But the reason that whole thing is normalized between the zero to one scale is because you are taking these squares and then dividing that with y i minus y bar, whole square. So now what is this y bar? This y bar is basically the average value of these all these y is so if, let's say this is 10, this is 20, this is 30, this is 40, this is 50, this is 60. So all of the the average value would be 10 plus 20, plus 30, plus 40, plus 50, plus 60, divided by six, that would be your y bar then you take the y i minus y bar, which is basically the average distance of each predicted value from the average of the overall data point, and that's your denominator. Now when you do that, you and then subtract that by one, you will basically get a number which is between zero and one. And here you will see a calculation where they are taking the different data set and calculating the R square value. So these are, this is that noise example that I was talking about, right? So if you have a completely random, noisy data, so your linear regression line would be a horizontal, straight line. And if you calculate r square on that one, you will see a value that will almost be zero, whereas for this perfect case, your R square value would be one. For something that is a very good fit, like we saw, your R square value would be like more than 0.8 or maybe even 0.9 range.
+
+Speaker 2  1:27:01  
+And if you go through this, it basically takes this example of these four different data point, and it actually hand calculates these values for Y, i minus y, i hat, and then it does a square of some and then it also calculates the average of the values. And then this is where it is calculating the denominator and then using these two here in this mathematical formula to find the R square value. So I'm going to encourage you to look into this to be able to better understand I'm going to post this link into the live channel so that you get a better intuitive feeling of what our square value is and how it is calculated. But that does not mean you actually have to calculate this by hand, because we do have methods, the scoring methods that we are going to use from scikit learn that will calculate this for us.
+
+Speaker 4  1:27:57  
+So there has to be some reason why one? They wanted to make one good, right? Because otherwise they could have just said, Don't forget about subtracting that from one. Just leave it alone. And now one is bad and zero is good.
+
+Speaker 2  1:28:13  
+So, so there must be some bad. There must be if you don't do that, then a good model will become close to zero and a bad model will become close to one, since that counter that is kind of counter intuitive, because when you have a zero to one scale, our human intuition basically thinks like, okay, one means good, zero means bad. So it is just a way reason. It is just a way to flip that result, right? So there's nothing mathematical, it's
+
+Speaker 4  1:28:37  
+just esthetics. Yeah, that's exactly Okay,
+
+Speaker 2  1:28:48  
+so that's the measure that we are going to do now in our next activity, which is basically the same data set. How wonderful. So we have this exact same data set that I used in the first exercise, which is years of experience versus salary. So that means we know that when we are going to train the model, the model will basically create that exact same regression that we saw earlier. So all we are going to do is we are, so this is our prediction. So up to this point, exactly the same. So this model is basically this model. So what we are doing here is we are simply calculating the performance here, which we could have done here as well. So let me actually so here, hang on.
+
+Speaker 2  1:29:56  
+Yeah, so we did this, and I. We did this. So this is my activity one. So just to show that this is the same thing, what I'm going to do is I'm going to run these two in that first notebook itself, and you will see that you will get the exact same value. So how do we find the mean squared error? So which basically is mean squared error. Now, when you do this mean squared error, you have to pass two things, your y values and the Y hat values, which in this case, my Y is Y and Y hat is predicted y values, and that gives me my mean squared error. So that this calculation essentially give me the first one, the mean square error. And see how I told you that this could be a very high number and which it is. It is a very high number. Now, how would you find the second one, the root mean, square error? Well, you can simply do a square root. You can NP, dot square root, and you can do a mean, take this value and do a square root, and that gives you your RMSE value, which, again, it's still a very high number. This is what I predicted would be around the order of 10 to the power four. So this is close to about order of 10 to the power four, right? So, and this is why I said, just by looking into the absolute values of this number, you cannot say whether this model is good or bad, but this helps you do a comparative analysis with another model that you might want to try to fit with the same data. Then lastly, we are going to do our to score which is the which is this guy r square.
+
+Speaker 2  1:32:09  
+So when we do our two score, now we are getting a value of 0.9569
+
+Unknown Speaker  1:32:15  
+so that means
+
+Unknown Speaker  1:32:18  
+this model predicts 95.69% 95.69%
+
+Speaker 2  1:32:24  
+of variation variance in that source data for this model. So that's what you get, basically, right? So you basically do a so this thing actually, you can do it two ways. So one way of doing is using our two sport which is what I did here. You can also use, remember, we have the fitted model already available in a variable, so we can also use that fitted model and find the score of that model, and that will also give you the same number. So you can either use the model dot score and use that x and y that you have used for training, and that will give you the art to score, or you can use the separate function from the SK LAN dot metrics library, which is called or to score and pass the Y, n and y and y hats, which will give you the same value. Okay. Now, one thing to remember here, though, this value that you are getting from model dot score is exactly the same when you are getting from with y and predicted Y, and that is because in this stupidly simple example, we use the training data itself to do the prediction. So that's why these y and these y is exactly the same. But in a real use case, though, you will have a separate set of data that you use for training and then another set of data that you use for testing. So that's why, if you do a model dot score with your training data, you will get a different R square value. But now, if you take your test data and find the y and y hat on your test data, you will get a different value, and a good model will actually show a lower R square value on test data than it will be on training data. If you see that test data and training data are getting the exact same R square value, that means there is something wrong with tomorrow. On the other hand, if the test data R square value is very, very low, then you will see that, okay, the model is probably very well capable of predicting the variance of the training data, meaning the data that it has already seen before, but the data it hasn't seen it is failing measurably and. That is what we call over fitting, which you will see more in further details later of this week.
+
+Speaker 2  1:35:13  
+So I ran this here, there and that notebook. Now, if I run this whole cell as is, you will see that even in here you will get the exact same outputs, right, 0.956, for your score. Well, here we have this rounding to five decimal. This one is rounded to four decimal and so on. And this is your MSC, and this is your RMS, because this is the exactly
+
+Speaker 2  1:35:41  
+same data. So, so any question on these scoring measures? So,
+
+Unknown Speaker  1:35:47  
+so you're saying that if the
+
+Speaker 4  1:35:50  
+trained score is the same as the predicted score, that's an example. That's that's the indication of overfitting, right?
+
+Unknown Speaker  1:36:00  
+How do you, how do you, I not
+
+Speaker 2  1:36:02  
+say the indication of over fitting, so these basically means you have set up something wrong, because test score should not be exactly equal to training score. So that basically say tells, should tell you that somehow during your training, your test data, information in the test data kind of got leaked into the training. So is that? So basically your model, essentially your model cheated.
+
+Speaker 4  1:36:29  
+So when you say test score, do you mean the model score
+
+Speaker 2  1:36:35  
+or the so when we do model dot score, you see how I'm using the same x and y that are used for training. So this score is basically the score on your training data,
+
+Unknown Speaker  1:36:47  
+right? And that's what you're referring to as test score.
+
+Speaker 2  1:36:51  
+No, this is the score on the training data. This, on the other hand, is the score on your test data. In this case, your test score is the same, because when you are doing model dot predict up here, here you are using the same training data for testing also, ideally, this should not be x. This should be some other copy of x, something that we have not presented during the training. Since we have these predicted y values, which are predicted based on the x that we have already presented to the model, that's why my predicted Y values here, basically, when I'm using these with our score, r2, score, it is giving me the exact same as the model dot score would be with the training data, because these predicted Y values is mapped to these exact x values. I'm just
+
+Speaker 4  1:37:51  
+trying to get my terminology right. So test scores on predicted values. What's the other terminology? What's the other score?
+
+Unknown Speaker  1:38:00  
+The other terminology used?
+
+Speaker 2  1:38:04  
+Well, there is no other terminology here. Jesse, what I'm saying is your R square value, or r2 score, whatever you call it, these R square value for training data computed on training data, ideally would be higher than when computed on the test data, and because, because your model. So essentially, what you will do is, so, I'll tell you so, so Exactly. So let's say there are 30 points here, right? So ideally, what you will do is, out of these 30 data points that you have here, you are going to withhold maybe 10% of data point, let's say three data point that you take out right? And then you model, you train the model on the remaining 90% of the data set. And then you will come up with a straight line that is slightly different, because you have, you are withholding some information. Then you take the information that you withheld and then you try the model to predict the y values on those x values that you did not use during the training. Now, if the trading and test both are drawn randomly from the same population. The idea is that they will follow the same statistical mean and variance and standard deviation. So therefore the value that you compute on your test score would be very similar to the value that you compute on your training the same score, but it would not be exactly numerically same. What I'm saying is it is totally fine to get 0.9569
+
+Unknown Speaker  1:39:51  
+for the training and 0.94234
+
+Speaker 2  1:39:54  
+test, it will be very close, but here you are getting exactly identical. So is because we are using the training and test data as a same so train, training and test using for training and
+
+Speaker 4  1:40:06  
+test of the two terms you're using, okay, so training is what the data that you gave it to David, and test is
+
+Speaker 2  1:40:12  
+the predictions. Test is what we did not give it okay, that's, that's, that's the short answer prediction in future, yeah, we'll do an activity very quickly, actually, so just hold on to your thoughts, and then the terms will become more clear to you as we go on to that activity. Okay. Okay, so that was the model performance.
+
+Unknown Speaker  1:40:42  
+Now, but
+
+Speaker 4  1:40:43  
+no, I see your slides that we had a break set too.
+
+Speaker 2  1:40:49  
+So we are doing time wise, I probably it is a good time to take a break. Now, one thing is, before we take a break, I just want to run through activity four, and this is basically the same data that you used in your group activity that you did today, which is basically the ads versus sales. So if you run through that, you will basically be able to see what is the your MSC, RMSE and r2 score for your ads versus sales. So I'm not going to ask you to actually do it, because essentially it's the same thing. You take that same data, you do a fit, you do a predict, and then you create a new data frame with both y and y hat, and then you basically,
+
+Speaker 2  1:41:39  
+basically compute the metrics for this linear regression model. Oh, this solved, by the way, Hang on. Let me just copy from here.
+
+Speaker 2  1:41:54  
+Then just copy from here, and I just want to show you what happened.
+
+Unknown Speaker  1:42:00  
+I just want to show you that even for this one,
+
+Unknown Speaker  1:42:05  
+you are going to get a
+
+Speaker 2  1:42:09  
+very high R square value. Yeah, 0.922 so this is the R square that you will get from what you guys have worked on as part of your activity. Two. So if you apply these score functions on there, you will get high MSC or RMSE, but that's because the scale of the y axis is high. That's totally fine. But R square is the score that you are in interested in knowing, and you will see that you will get a above 90% r square, which is not as good as the to the one that I did, which was almost 96% but you can still say above 90% is good. In fact, in any real life model, anything below, like, I don't know, 70 80% is pretty good, actually, although it depends on what kind of problem that you are trying to solve. And this is one thing people often compete on, like you will see, if you go to Kaggle, you will see there are a lot of these type of competition goes on where they give a data set, and then you are going to try to do a unsupervised, sorry, supervised model, and try to get as as high accuracy as possible for the classification that you are doing. And then people basically submit their work, and then they're basically graded based on their score, and you will get a leaderboard, right? So people kind of take these as kind of a game. So, and it is possible by doing different level of pre processing of the data, it is possible to get higher R square value from the same data set, depending on feature selection, depending on your scaling, depending on your encoding, and all of that will have effect on your R square value, right now, obviously, that does not mean that there is a way for you to know what exact feature manipulation will improve your R square and that's why you have to try with different values, right? So machine learning is basically just about doing lot running lot of experiments, right? And see which one gives you the best for okay? So with that being said, let's take a 10 minute break. So it's 824, right now. So let's say 25 let's say so let's come in 10 minutes at 835, okay,
+
+Speaker 2  1:44:32  
+you can see a few people whose cameras are on, and some thumbs up. Okay, cool. Okay, so let's get through quickly, through the remaining of the class, some of these will probably not, probably definitely, will seem to you like it's kind of a recap. So essentially, what we are going to see is what kind of data pre processing that we need to do before we present the data to the algorithm. Right? And you will see some of these techniques, such as your one hot encoding, your scaling. We have done all of these. But then I'm also going to talk about that splitting of the training and test data, which is what I was discussing before we went to break. And then finally, we will take a more realistic data set that does not just have 1x column, but that has multiple X column. And then we will do linear regression with a multi variable data set. Okay, so let's run through this quickly. I'm not going to spend more time, lot of time doing this. And then in the last activity on the activity number nine, I'd like you guys to actually go into the groups again before we finish the class today, and do the activity number nine yourself during the class. Okay, so let me share my screen first.
+
+Unknown Speaker  1:45:59  
+Um, okay.
+
+Speaker 2  1:46:03  
+Okay, cool. So first, we are going to work with this data set, which is basically auto imports, data set with these attributes, right? And you can see the different attributes here, but you can also just load the data set here and see for yourself. So this is basically a like a what is called the markdown column, where you will see some of the details of this data set, data set attribution to the source, the author of the data set, how the data set has typically been used in the past and some other relevant information. How many feature columns are there, which is 26 how many rows are there, which is 205 what are the different attributes? What are the different ranges, which ones are categorical, which one are continuous, and so on, right? So this is basically more realistic looking data set which has 26 features, right? Which is kind of a typical In fact, you might have data set with even more features. What is not ideal in this case is we, you have only 205 rows, which not, is not nearly enough to train meaningful statistical machine learning model, because 205 would not give you a statistically significant output, especially when you have 26 features, right? You need way more data. But that's not our focus here. Our focus is to understand what are the some of the pre processing we might need to do for a data set like this. Okay, so this is the data set we have. So we load it, and you see, as is specified, there we have 205 rows and 26 columns. Okay, we can probably want to see, hey, is there any null value? So if you do easy, dot some, you say, yep, some of the columns do have null value. So these column called normalized losses, it has a most number of null values, which in a real world you will probably do a drop in a to drop the null values, or fill in a to basically do front fill or back fill the null values with the value above or beyond it, right? So that's something you will do when you have not lot of null values. And there are some other columns have null values as well. You would also want to check, Hey, what are the data types? Because for all of these scikit learn algorithm, remember what we discussed earlier last week when we did the unsupervised clustering, that all of the columns need to be numeric column. So anything that is an object which basically is a string, needs to be converted, right? So when we do D types, we do see that there are columns such as make fuel type aspiration, number of doors, body style drivers, lot of string columns. So we need to do something about those. Okay? Now there are two special kind of columns. There are two special columns which does have string if you look into number of doors. So number of doors in a car would be, what? Two, door, four door, five door, things like that, right? But for some reason it says object, and so is number of cylinders. Number of cylinder would be, what, four cylinder, six cylinder, and so on. But this is also object. So these are not string, sorry, not number. And if you look into here, you will see, actually, or if you read here about the description, you see the number of doors. It says, Sorry, number of door. It says four, two, so it's basically number, but written in. English language, world, and same for number of cylinders, 854632, right? So these columns, we don't need to one hot encoding or do anything like that. What we can do is we can simply take these and map it to the corresponding integer numbers, right? So this is just one example. So for these, what I have done is I have imported a library called Word to number. So there is actually a Python library called Word to number, and in the these library has a function that you that's called Word to numb, and if you pass a string that actually spells out a number. Like, if you pass the string E, I, G, H, t8, it will give you the integer value eight. So pretty cool library. So since we know that for those two columns, number of doors and number of cylinder, all of these values are basically so you can so what I have done here is I say, Hey, what are the number of doors I have? So I have two, I have four, and I have some null values. How many of these values we have? Well, I have 114 force, 89 twos and then remaining on. Now, similarly for number of cylinders. If I do unique, you will see these are the unique values that I have, just to confirm that all of these are actually valid English language spelling of numbers, because, other than that, we cannot really apply what to numb, right? So that's why I did this. And how many of these things we have? Well, we have 159 force and 24 sixes and so on. So we are good. Now what we'll do is, I'm going to use that apply method with a lambda, and we will say, hey, apply this function called W, 2n which is the what to numb library, dot, what to numb for all of the items or the all the column value, or the, yeah, all the column values, or all the row values for this column, which is number of doors, and then call that the new number of doors. So essentially, when you do that, and then you print these, you will see that num of doors have become now numbers. And now, if you do a data types, you will see that num of cylinders have become integers and num of doors have become slow. Now you might want to think like, Hey, how come none of doors ended up becoming floating point and num of cylinder ended up becoming integer? The reason for that is, if you go up here, you will see that number of doors had two and a four and it have a Nan. So Nan is, by default, treated as a floating point none. So it's basically, whenever you convert that it be it, it forces the whole column data type to be float, because of that null value, Nan value, not a number value. And since we haven't actually done any drop, any or anything. So that's why, for that column, I'm getting a float, whereas the number of cylinder column, it doesn't have any Nan value. So for that, I am getting a proper Integer data type here, right? In a real world, you would probably would want to handle those Nan values first, because the doors has to be two or four. It cannot be none. So it has to be something like those, right? So you'll probably need to dig into it and basically find out what the number of doors would be for those cars. So anyway, that is one, one little, but this is, this is not very typical, but like it is not very common everyday scenario that you will get a column where number is actually spelled out using a English language word. But if you do happen to come across a data site, data set like that, you can use this word to number library that I have used here to basically convert that very easily from English language, word to integer, number.
+
+Unknown Speaker  1:54:13  
+So just something to keep in mind,
+
+Speaker 2  1:54:17  
+okay, so that's that then we are going to look into like, okay, what are the remaining features that are still categorical, meaning the string feature, and what are those their values? So for that, what we are going to do is we are going to run our loop on all the columns that are object type. To do that, you can use a function called select D types. And this select D types function will basically and then you will pass a filter called include equal to object, so it will basically give you all the columns that are of type object. So. And then for all of these columns, you will go one by one with a for loop. And then I am basically doing applying a unique on that that will give me how many unique values are there, and then printing those unique values. So when I do that, I basically see my first categorical column is make, and it has 22 unique values. And these are all my unique values in the make column, fuel type, two unique values, gas and diesel aspiration, two unique values, standard and turbo body style, five unique values, and so on and so forth. So these are basically the columns now we have to encode now, do you guys remember for these type of columns, what encoding technique that we have used before,
+
+Speaker 2  1:55:54  
+when we have categorical column with a limited set of discrete values, what is the technique that we use,
+
+Unknown Speaker  1:56:05  
+yeah. That means,
+
+Speaker 2  1:56:07  
+yeah. So essentially it is called one hot encoding. But we have used the use this pandas function called Get dummies to do that one hot encoding before, which is what we are going to repeat it here. And when you do that, you totally basically all these, what? 12345678, all of these eight columns now get blown up. Actually, this is not eight. This is the applying get dummies on the whole of card data. So one cool thing about here is you see, when I'm applying these on the whole of car data, it the get dummies function will automatically select which are the categorical columns that get dummies apply and the ones that are not categorical. For example, length, width, height, these column will be left untouched. It will only apply to these columns that are categorical, and blow them up. And that's why, instead of 26 columns now we end up having 69 columns with these true false values. And we all know how this one content coding output, right? So we are not going to go in details in understanding the output, but that is what you need to do. Now, if you take these dummies, if you look in the columns, that will basically like what we expected, right? For example, make so make alfa, Romeo, make Audi. So make had 22 unique values. So in our get dummies that make column got blown up into 22 columns, one for each make similarly fuel type we had diesel and gas, so that got blown up into two column, fuel type diesel and fuel type gas, aspiration had two values that got blown up into two columns, aspiration standard and aspiration turbo and so on. So we know how this works, right? Okay, so that's one way of doing it. Now you might say, hey, is this the only one way of doing or is there any other way? Well, another thing sometimes, or at least for some columns, people might want to do, if you don't want to blow up the number of column, you might want to take like, what is called like, keep the data as is in their column, but replace each of these values. Like, when you have 22 values of Mac, maybe we'll call it let's say one for Alfa Romeo, two for Audi, three for BMW, four for Chevrolet, Chevrolet and so on, right. So which is basically categorical coding, which is not the right thing to do. So don't apply this blindly, because one part encoding almost always produces a better result. But for some columns, you might want to do categorical coding where the ordering does not imply anything. For example, let's say, if you have, I don't know. I mean, these are kind of open to interpretation and debate. Sometimes people will say, Okay, let's say, if you have a marital status column, married and married unmarried, right? You can either do a one hot encoding, which will say, marital status, married, marital status, unmarried, and you will have true or falses in each of those columns. Or some people might say, You know what? Just for marital status, just converting them to zero and one is not a big deal, because you are not really implying that one is better than the other, because it's just two values, zero and one, whereas, if you have, let's say, Make which have 22 values. And if you start applying levels 012345, and so on, your model might inadvertently end up thinking that something with higher value probably is of higher significance, which is something you don't want your model to do, because there is no reason. And Subaru, Subaru, Tata or Volkswagen, have higher significance than your all alpha ROM, your audio BMW. So that's why people don't always use that categorical coding. But here, what we are showing here is, if you do want to do categorical coding, what you can do is you can choose the column that you are going to do a categorical coding on and apply this function called S type with attribute of category, and then get the cat codes from there using this syntax. And when you do that, and then, if you look into some of those column, for example, make, so you see now make has zeros and ones. Fuel type also has ones and zeros. So all of those feature columns. So now 26 column still remain. 26 columns. It did not got blown up into 69 columns, unlike what it did when we did the one hot encoding. But within each of these column in place, the values got converted into corresponding category codes.
+
+Speaker 4  2:01:07  
+Is there a lookup for those categories like this? Feels like this is like a foreign key relationship? Yeah,
+
+Speaker 2  2:01:14  
+yeah. So what you can do is you can, so let's say
+
+Unknown Speaker  2:01:21  
+you can take these thing
+
+Speaker 2  2:01:25  
+and then say, what was that? Let's say the body what was the body type? Right? No, not body type Make, make. So let's,
+
+Unknown Speaker  2:01:38  
+let's take the make. I
+
+Speaker 2  2:01:47  
+so you have zero through 21 because there were 22 values, right? So that's how it basically converted all of those 22 values of individual categories to 21 zero through 21 numeric values. So now, if you do the T types here, you will see everything has now converted into integers. Now I'm not saying, do do this. In fact, I'm saying, on the contrary, I'm saying, Do not blindly use this categorical coding. This could be a recipe for disaster for your model. So use this selectively on selective columns. Do not use these across the board.
+
+Speaker 4  2:02:24  
+So, so is there some sort of internal mapping that it's done to those codes where you could look up what the internal mapping like, if I want to say what's too corresponding? So,
+
+Speaker 2  2:02:33  
+yeah, I don't think using it this way you can. No, okay, you cannot. Yeah. I it.
+
+Speaker 2  2:02:47  
+Okay, so now these ones were using Pandas default methods, right now the next, what I'm going to show is, remember, I used to use this term called one hot encoding, but even though I was saying that particular technique of encoding is called one hot encoding, but we always ended up using Pandas dot get dummies, but there is actually an one hot encoder as a SK learn method that is available, which works in a very similar way how we have seen the standard scalar works before. So any scikit learn method that you use to either train the model or transform the data. They kind of works in a very similar way, whereby you create an instance of that transformer, which in this case is the one hot encoder, which is the transformer that we are going to use. And with that transformer, then you first do a fit, and then you do a transformer. So you basically initialize fit transform, much like what you do for even for the machine learning algorithms, take the algorithm fitter transform. So one hot encoder happens to be one of the transformer that is available in psychic learn. And we are going to do something on the third class of this week, which will make you realize why this one hot encoder is a better, better method to use than pandas. Dot get dummies, although the outcome is the same. So with this one, one hot encoder, I am saying, Hey, do the fit on the car data, but only use this column which has columns to encode. Now, these columns to encode, if you go back up, you will see this is the columns to encode that I already selected before in here. So these are my columns to encode, which I did by using select D type. So these columns to encode basically are my set of categorical columns. So now, when I'm doing the one hot encoding here, what I'm going to do,
+
+Unknown Speaker  2:04:43  
+sorry. What was that?
+
+Speaker 2  2:04:49  
+I lost that place? It's kind of ah, yeah. So when I'm doing going to fit, I'm not passing only the data frame, but I'm also passing the list. Oops. Is the list of columns that I want to fit for, and then I'm going to do a transform using the same column. Or you could have used one method, which is ENC dot fit transform that would have the same effect. So essentially initialize fit and transform, and then when you do that, what you will get this, this one, this, in fact, is a sparse matrix, and then you have to take this sparse matrix and then convert it into the feature names. And these are the feature names you are going to get like, now with this, you have a little bit more control of the encoding. So when you are doing feet and transform, the output of the transform is not a data frame in itself. Instead, when we print it, you see that it basically gives you a 205 by 51 sparse matrix of NumPy, dot float 64 so it's a sparse matrix, meaning it's a matrix where most of these are zeros, which is what you get. That's what's the term sparse mean. So when you do one part encoding, most of the values are zeros, only a few ones. So that's the sparse matrix. Now, if you use this function on the transformer called feature names out that will give you the feature names of the columns that it is supposed to be. So then this is the feature name. These are the feature name for the 51 features. And then you have to do something to transform that into a data frame. How do we do that? Well, what we do is, so here we got this first matrix. But if we created this one hot encoder with the set output, which is transform equal to pandas, then when you do fit transform, then it will actually directly give you a actual pandas data frame. The only difference between this cell and what we did here is we did a one part encoder with a parameter that says, handle unknown, ignore, meaning something is unknown, ignore it. But in the second example, we applied another attribute here, called Set output before I did the fit and transform steps. Where I said is, when you do the output, instead of creating a sparse matrix, a sparse NumPy matrix, you basically transform the whole thing into pandas. Anyway. So that's what gives you the full pandas data frame, because otherwise, what you will have to do is you have to take these feature names and the sparse matrix and compile this pandas data frame yourself, which is possible. You can try, if you have spare time, but you don't have to, because with this additional feature, it will give you the sparse matrix, sorry, the pandas data frame with zeros and ones. Now, if you look into this output of these is exactly same as what you get from pandas. Dot get dummies. But this is using the scikit learn machinery, which makes it easier to integrate into the machine learning pipeline, which is going to be the topic of discussion on the third day of the class this week. So and
+
+Speaker 2  2:08:23  
+then the other method that we saw where we did the categorical coding, which is, where did it go? Yes. So when we took the column, converted into category type, and then the dot cat dot codes to convert these to the categorical codes like this. This is also another transformation you can do in a similar way, using a scikit learn transformer, and that transformer is called label encoder. So pandas dot get dummies can be done same feature can be done using one part encoder, and categorical coding can be done using a scikit learn feature called level encoder. So with this level encoder, so what we do is we basically initialize a level encoder, and then we take we basically do a fit transform with the data frame and with each of the columns that we have to encode, which is this columns and code, and then that will give you all of those column encoded to a numeric value, which is the categorical code, instead of one not encoded. So essentially, we basically saw two different ways of doing one hot encoding and categorical encoding. First, we saw how to use pandas dot get damage to do one hot encoding, which is the same as what we did last week. And then we saw how to use one hot encoder, which is. A psychic learn transformer to do the same one hot encoding, but using the psychic learns fit transform way. Then we saw that there is a alternate way to do the coding, which is using the using a numeric sequence your numeric value, instead of blowing it the blowing up the columns. And we can do that using a pandas function called as type category, or we can do the same thing using a scikit learn transformer called level encoder. So these are some of the techniques that you will need to do, in addition to, in many cases, your standard scalar, which is something that we saw. So the point is that when you get the data, you do not jump in and then pass the data to your machine learning algorithm. You do scale it, you do normalize it, you do encode it. You do trans encoded in basically in two different ways, right? Like a categorical encoding and one part encoding. And even after that, you are still not done. Even after doing all of these, you still need to do something else, which is what I was mentioning before we got into the bread, which is splitting the train and test data. Because the idea is that if you get a 10,000 record data set, you will take out maybe 1020, or 30% of data and separate it out and not even let the model see those data when you are training the model, because that is your chance to test the model afterwards. Because if the model sees all the data, then it will predict everything. But the real test of the model comes when it can predict on the data that it has not seen before and still gives you a 5r two score. So which is what we are going to see in the next activity. So, and the doing this is very easy, actually. So what you need to do is there is a function called train test split so with this train test split function, what you can do is you can basically take this function, trains test split and provide your x and y, which is your features and your levels. And then you basically, it will basically give you four data frame. So it will take the x and split it into two data frame and X train and X text. These are variable. Then basically you can do anything. And then it will take the white data frame, which is the label, and that will also split it into white train and white test. So if you run this, you will be able to see so the data set here is our car data, which is 205 rows, and then we basically take everything other than the column price as x, because price is my level. So now my test data becomes five rows and 25 columns, and the price data, price column, we are calling it in y. So now y has just that right now we take this x and take this y and pass it to this function called train test split with some random state. Again, random state is just for to be able to reproduce the same random split, because this split happens randomly. If you do provide a random state that basically ensures that if you run it multiple time, it will create the same split. So then it will create four data frame instead of two. Now, if you display the X train, that gives you 153 rows out of out of 205
+
+Unknown Speaker  2:13:41  
+which is what 70%
+
+Speaker 2  2:13:44  
+so it basically takes 70% of data, and call this x train. And if you look at X test, that is basically another 52 rows. So the remaining 30% of data goes into train. And then same thing for white trend. White trend does have 153 levels. And why test will have corresponding
+
+Unknown Speaker  2:14:13  
+52 I think,
+
+Speaker 2  2:14:16  
+however many so basically, the size will exactly match between the x train and y train and X tested twice test, meaning the number of rows will exactly match. And then the idea is, then you take these and you fit the model using x train and y train only, and then when you do the predict, that's where you are going to use the X test and y test. Now, in my next notebook, I'm going to quickly show you what the outcome of that is, and I'm going to drive on the point about our two score that I was talking about earlier, the thing that Jesse were asking question. So let's look through this here. So here we have the. This same car data set, and this case, the data set is already pre processed, so all of these encoding and all of that is done. So that's why we have 200 and as sorry. Oh, so this is basically level encoded, not one hot encoded. So that's why we have fuel type zeros and ones and makes also zero through 21 and so on. So this is a level encoded data. So we don't need to do worry about that. We are simply going to do a if there is any null value value, we will just simply do a drop in it, and then we are going to basically take a subset of features. Now this is, again, not really related to what I was trying to drive, essentially, if you want to, if you think that, hey, some of these features are probably not going to be very meaningful in predicting the price of the car, you might want to discard those feature. And maybe you will, you will be doing some exploratory analysis before finding the pair wise correlation coefficient and so on. And let's say you figure out that only these columns will have some meaningful impact on the predicted price of the car. So this is what the feature selection we will be doing. So let's say we take these many features instead of this 205 features. So now we take these features and we call our y as price. And now we do a train test split that gives me 7030 split between train and test. And then I'm going to do a linear regression. And here, instead of passing x and y, this is what I was mentioning before, we are passing X train and y train, not the whole x and y, and now you will see what I'm going to do for prediction. So the training is done. Now when I'm going to prediction, at prediction time, I'm passing X test, training time x train, prediction time X test, this is what is ensuring that I am asking the model the question that it has not seen before. That 153 data point is what I'm trained on, the model is trained on, and the remaining 52 model is what I'm going to try to evaluate the model on and see whether the model still holds up. Now, though, so this would be my predicted now we can find the MSC score and the r2 score on the model using the mean squared and the r2 score on the test value and the predicted value. And when we do that, we basically get a very high MSC. But we know the reason for that, so we don't read into that at all. We only look into the R square value, and we see the R square value is 73.28% this is not as high as 92 95% we saw in our first couple of example, because this is more a realistic looking data set, not just a simple toy data set, artificial data set. So this is actually not bad, 73% but another reason it is also low is because if you look into this art to score calculation, we are not using the training data for scoring. We are using the test data for scoring. Now what I'm going to do is I'm going to apply these on the train data and test data both, and you will see now how the art to score varies. So remember, there are two ways of doing the art to score. One is using the art to score function in itself or using the model dot score. So when we did the model dot score in my previous example, we did pass x and y the whole thing, because there are no train and test split. So now we have train and test split. So now I am passing the X test and y test to the model dot score. So what the model dot score do? It will tell take all of these X test values. You will do the prediction, and it will compare the predicted values with the white test values. And it will do all of those new calculation that I showed you in that link that I posted on Slack. So it will basically do that whole calculation on all of these test data, and it will basically create a model. Dot score, which is 0.7328 which is exactly the same we get from the standalone up score function. No surprise here. Now the last one is I'm going to now see if we given the training data itself to score the model. How would it perform? And you will see the score of the model on the training data will be much higher. How much higher? Look at this, it's getting above 86% accuracy, but getting a 86% accuracy on the training and. 73% accuracy on test is actually not too bad. Now, does that tell us, objectively, that model is not over fitted? No, we still have to do some more analysis compare different methods, but going from 86 to 73% on the surface tells me like model is probably doing what it is supposed to do. On the other hand, if from train to test if there is steep drop, let's say 86% here, and you are only getting like maybe 55 or 60% on the test data, then that will indicate that model is probably overfitting, and it is doing very well on the training data and underperforming on the test data. But for these rents, 86 to 73 I said there might be a slight chance of overfitting, but not too much. We cannot say for sure. But all I'm trying to say here, this is very common to have a lower test score on the test data than on the training data. What would be a good deal trying to drive away what
+
+Speaker 4  2:21:00  
+would be a good delta between them to say this is definitely not overfitting, but this is not under Yeah,
+
+Speaker 2  2:21:05  
+there is there. There is no, at least not that I know that there is any objective measure that you can actually do. I
+
+Unknown Speaker  2:21:26  
+a question. So
+
+Speaker 2  2:21:27  
+one thing you can do is, there is a thing called this K fold cross validation. So instead of taking these one set of training, one set of test after time, what people do is, you will probably say, You know what, instead of taking this training and this test, I'm going to do, run these with different set of training and test data, and I'm going to do that 10 times, right? Let's say 10 fold cross validation. So first I'll do some training and test, and then I'm going to do another set, do a completely different set of training and test, and I'm going to do this 10 times and do an average of art to score. If I see that the art to score is basically fluctuating, then that basically tells me that model is not performing well because different training data is producing different accuracy score on the corresponding test data. If, on the other hand, you will see that the art to score remains the same across your different K fold cross validation, then you can say like, oh, well, yeah, maybe the model is then performing very well. But these are all of some of the more optimization techniques that we will talk more on week 14, by the
+
+Speaker 5  2:22:38  
+way, just a quick summary on that. So the over fit is the training training data is higher than a test, and the under fit is if the training is lower than test,
+
+Speaker 2  2:22:55  
+is that under fit is not that under fit is basically means your model is becoming so simplistic that it is not able to understand the nuances of your data. You cannot you that will, in general, result in a low art to score. Oh, okay, not like this. Training is higher than test, so if your model is under fit, you will basically get a very low art to score all across even during training with training data,
+
+Speaker 5  2:23:24  
+okay? And I think maybe to echo what Jesse was saying, What is a law model like? What Is there, like, a specific percentage below
+
+Speaker 2  2:23:33  
+anything below 0.5 basically means that your model has not been able to extract any statistical, significance, right? It's kind of like what you get for correlation, right? If you have a correlation below 0.5 that means, like a well, in correlation, case no correlation case is little different, like perfect random chaos. Is your correlation of zero correlation, 0.5 meaning, yeah, there is still something, but in art to score again. This could be my personal opinion, but what I have seen anytime people kind of get a r2 score below 0.5 they they always go back to the drawing board so they would want to do some more feature engineering, get some more data. People usually do not get happy if they get as less than 0.5 as there are to score from the model.
+
+Unknown Speaker  2:24:29  
+Okay, thank you.
+
+Speaker 2  2:24:31  
+Okay, so the last one is basically just this thing. You basically have data set that gives you for different car models, fuel economy, cylinder displacement, horsepower, weight and acceleration and what you are supposed and then you can do some scatter plot to basically see how whether there is correlation. And you will see most of these does have some correlation, at least. And then what you need to do is you basically need to create a multivariate regression, and you also need to do the train test split and then score your model to see how your model performs. So can we take maybe, before we break for today? Can we take 10 minutes go into our groups and try our hands on this last activity?
+
+Unknown Speaker  2:25:34  
+Everyone okay with that?
+
+Unknown Speaker  2:25:38  
+This will be activity number nine. You
+
+Unknown Speaker  2:25:46  
+shall I take that silence as a yes or no? If,
+
+Speaker 4  2:25:49  
+if I say no, will you? Will I be able to eat?
+
+Unknown Speaker  2:25:55  
+You don't want to do that?
+
+Speaker 4  2:25:57  
+No, no. This is this is great. Yeah, I'm good with it. I'm good.
+
+Speaker 2  2:26:03  
+Okay, okay, so let's create the breakout rooms and random is fine, guys,
+
+Unknown Speaker  2:26:12  
+random groups.
+
+Unknown Speaker  2:26:19  
+Guys
+
+Speaker 2  2:26:22  
+who Oh, awful. Any any surprise? Yeah, it didn't work. It didn't work.
+
+Speaker 5  2:26:30  
+I've got a different result than was provided.
+
+Unknown Speaker  2:26:35  
+Okay, I got a
+
+Speaker 7  2:26:38  
+r2 score of lower when I calculate the score for the train data. So in other words, the test the R score, or the the score for the test data was higher than the actual for the train data.
+
+Unknown Speaker  2:26:51  
+Yeah, I got
+
+Speaker 2  2:26:54  
+that too, that that might be the case because you have a limited data here, right? And the amount of data in these data frames are probably statistically not significant, and given the number of features that we have, and that is why people, as I said, they do K fold cross validation, they will take different combination of train and test and see how the model performs overall. Okay, so that's totally fine. So essentially, this activity was to kind of get used to, like this train test split. This is essentially the only thing that you would probably have done differently than the last activity that you guys have done right, other than that, it's, it's the same you are taking the x values, and they have asked you to use the two feature variable only, which is that appear to have the most linear relationship with the liter per 100 kilometer. Now the question here is which two feature variable that you ended up using,
+
+Unknown Speaker  2:28:04  
+weight and displacement. Weight
+
+Speaker 2  2:28:06  
+and displacement, okay, based on based on your finding here, right, based on the correlation here, yeah. So weight, as we can see, that has a very high correlation, or spar, not so much, and displacement also has a very good correlation here. Now we used weight and displacement here, and we reshape it to negative one and then two, and then that gives you your x of 398, by two and y is so here. Why you can do a reshape. But even if you don't do this reshape, it will still work just fine, okay, and then you take this x and y and then pass it to the train test split, and that gives you x and y. I mean x train and white train, and X test and white test. And then you run this through the regression model, and when you do that, your score comes out to be 0.813 and you are saying that you got a actually. Let me first run all of these here on mine. So
+
+Unknown Speaker  2:29:25  
+in and that
+
+Unknown Speaker  2:29:28  
+that is giving me 0.81
+
+Speaker 2  2:29:32  
+if I do model dot score, that is also giving me the same thing. And what you guys are saying when you do model dot score on train, you've got a lower coefficient like this. Is that what you
+
+Unknown Speaker  2:29:47  
+got? Yeah, we got a lower one, right?
+
+Speaker 2  2:29:51  
+Yeah. Did you happen to use a random state here when you did the
+
+Speaker 7  2:29:55  
+split? Yeah? 42 default, four.
+
+Speaker 2  2:29:59  
+Into default, yeah. So I think if you use a different random state, it will probably, you will probably see some change in the values. Yeah, it's giving me 0.84 now on the test data and train data is still lower at 78 Yeah, yeah, because I'm using a different random state right now, another thing you can do on train test split is, if you look up the train test split function, you will see that there is another parameter that allows you to actually provide what is the size that you want? So for trend size, for example, you can use a floating point number between zero and one.
+
+Unknown Speaker  2:30:53  
+By default, it is 0.7
+
+Speaker 2  2:30:55  
+I think for these no 0.75 and 0.25 right. Test size and trend size if you don't provide anything. Now, if you do provide a train size, so let's say train size equal to let me give since we don't have lot of data, I'm doing a trend size of 90% so I'm shifting more data towards the train and less towards test. So let's see how the model performs.
+
+Speaker 2  2:31:31  
+Okay, so now this is giving me a score of 0.87
+
+Unknown Speaker  2:31:36  
+on test
+
+Speaker 2  2:31:38  
+and train. Yeah, for some reason it's still giving me low score on train.
+
+Unknown Speaker  2:31:46  
+Okay, yeah,
+
+Speaker 2  2:31:51  
+it is consistently low on train compared to test. That is odd. I thought it will probably change, but looks like for some reason it is not changing. Yeah, no matter what you do, you end up getting a lower train score and test score.
+
+Speaker 2  2:32:16  
+Yeah. Well, it is what it is, um, Karen, or anyone. Do you guys have any opinion on why this particular data is giving a lower trend score than test?
+
+Speaker 7  2:32:33  
+This is just an observation, but I changed my random state to 22 and somehow that got me a higher train score.
+
+Speaker 2  2:32:41  
+Yeah, that's what I'm saying. If you do, if you do the random K fold, it will be a beer. So let's see if that I can reproduce 0.8 No, I'm still getting little low, 0.80 and 0.79 but Yeah,
+
+Speaker 7  2:33:00  
+mine's points seven, six for Tessa, then point eight, zero for training.
+
+Speaker 2  2:33:06  
+Oh, that's probably because I have used the train size. Also, you probably changed the random state, but you didn't do the train size. Yeah,
+
+Speaker 7  2:33:11  
+I kept my train size as the default. I didn't actually, yeah.
+
+Speaker 2  2:33:19  
+So let's see without the trend size with the default size 0.7 Yep, that's
+
+Unknown Speaker  2:33:26  
+right, yeah.
+
+Speaker 2  2:33:32  
+Okay, so that's it, pretty much for today's class. Any other general question observation, anything,
+
+Speaker 4  2:33:45  
+I think, where I got lost on this was just even how to reshape the data, having two columns and then doing a negative one to two versus negative level one. I wasn't, I wasn't really getting, I guess, two dimensions on the two dimension array.
+
+Unknown Speaker  2:34:05  
+Yeah, that's
+
+Speaker 2  2:34:09  
+so for this one, I think without even reshaping, you should be able to get the same result. Yes, I just confirmed that. So let me share my screen back up again. So that's what I was I thought too. Like, since you have more than one feature column here, the reshaping is not really needed. So here you have, you will see that I took off the reshape. So now I have for x, I still have 398 by two. And for Y, instead of having 398 by one, I'm just having 398 and then I ran through the whole thing, and it still produces the exact same output. So the reshape is not really needed for this one. I got real lost on that one study. Yeah, the reshape is the. Only absolutely needed, only in a very limited case, when you have only one feature column, which is almost never going to be the case in real world, you never try to do linear regression with 1x column. So, yep,
+
+Speaker 4  2:35:23  
+anyway, yeah, I just got really frustrated on that one step. I felt the instructions.
+
+Speaker 2  2:35:32  
+Did the instruction actually tell you to reshape? It? Reshape. It was reshape, yeah, you actually don't need to use reshape,
+
+Speaker 4  2:35:42  
+yeah, and didn't even talk about the word setting the y value, and lost them Back and forth.
+
+Unknown Speaker  2:35:53  
+Anyway, scars are how you learn. I
+
+Unknown Speaker  2:36:04  
+Hey, thanks for class today. Benoit,
+
+Unknown Speaker  2:36:05  
+yeah, okay, cool.
+

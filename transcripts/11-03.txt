@@ -1,0 +1,456 @@
+Unknown Speaker  0:02  
+Recording started. Yep.
+
+Speaker 1  0:06  
+Okay. So the good news is, today's is going to be another short class that gives us time to kind of ask as many questions as you guys might think of or engage into these kind of enlightening discussion, right? So we don't have to rush. So one thing I'm going to start with today, even though today's focus is dimensionality reduction, right? So when, no matter what kind of algorithm that you are using or what machine learning you are doing, supervised or unsupervised. So what happens is, well, having a more number of attributes, it's good, but sometimes when you have a lot of number of attributes, and that creates a very high dimensional space, that kind of also makes your model more complex, right, and also more difficult to interpret with higher dimension, right? So this is a phenomenon known as curse of dimensionality. So because of that, often time, what people do is, if they have a really, really high dimensional data set, they try to reduce it to lower dimension, like, for example, if you have a data set that has 200 300 dimensions, it becomes very, very expensive to train the model, and the model tends to get more biased in unknown way that even like no one can interpret so often time this process gets much simplified if you go down from 100 dimension to 10 dimension by using a technique called dimensionality reduction. Now, obviously, when you are going to reduce the dimensionality, you are going to lose some details in the data, but the idea is that, well, it is probably better to sacrifice some level of accuracy for simplicity and for better interpreter interpretability of the data. Now, one thing you will see that in any of our activities, we are not really dealing with super high dimensional data set like we are. We are not even going to highlight a couple of hundreds dimensions in any of our data set that we are using, but what we will see is we have seen, remember, even when we have, let's say, eight, nine or 10 Dimension Data, and we did k means clustering. Now if you want to visualize the cluster, remember when you only have two dimensions in the data, like think about those toy data set right the moves and blobs and circles, those are all two dimensional data set that we created. And it is easy to visualize how your clustering algorithm is performing in two dimension, because there are only two dimensions, and you are plotting both of those dimension. And by applying the color coding, you can clearly see how your algorithm clustered these into different groups, right? But when you have 4568, 10 dimensions, obviously there is no way you can plot it. So then what we did is we tried to basically plot different things, like a pair wise like plot column one against column two, or column two against column three. But each time you take a pair of columns and you do a scatter plot, most of the time, if you are not lucky, you will see that your perceived cluster seems to be overlapping. And that's because that's that I'm not saying that's wrong. Is just as a human, it becomes hard for us to interpret, even though machine is probably doing the right thing right lot of time we can measure that like using the score the scoring method that we saw today, we are going to see another scoring method I'm going to show you. But if you think about it this way, even when you have relatively low dimension, like, let's say five to 10 dimension. Let's say and you want to cluster. What if you can reduce those to two dimension so that way you can easily see how your cluster clustering algorithm is performing on these two dimensional down from five or 10. So that means in this two dimension, you are trying to retain as much information as was there in the original five or 10 dimensions. So that makes your code much like output of our performance of your code much easier for you to understand, aside from applying all of those additional scoring method that we do apply, okay, so that's kind of the core learning for today, this dimensionality reduction using this algorithm called PCA, as you are seeing, which is called principal component analysis. Okay, so we will look into this, but before we. Do that there is the activity, one that is given there, which you will see, which is supposed to be a warm up from the previous class, from Tuesday's class, to basically do the k means clustering. So what I'm going to do is, I'm going to show you a couple of thing additional on top of what we have already learned before we go to the dimensionality reduction. So this is the notebook for your activity one. And here in this notebook, I have added a few things extra, which I'm going to post in your GitLab after the class is done, right on top of what was already provided.
+
+Unknown Speaker  5:40  
+But do I just check in? Do you think you're sharing right now?
+
+Unknown Speaker  5:43  
+Oh, am I not? No,
+
+Unknown Speaker  5:47  
+I thought I did. It's recording.
+
+Unknown Speaker  5:52  
+Okay. Your VS code is coming
+
+Speaker 1  5:56  
+up. Yep, that's what it's supposed to be. Okay. Cool. So, yeah. So what I was saying is, we are just going to do a warm up activity for clustering, but here I have done a couple of things on top of what we have learned, and I'm going to walk you through that. And after the class, I'll make this version of the notebook available on your GitLab. Okay, so what we are going to do is, basically we will take one data set, which is, let's say this one. This is a two dimensional So this one says, hey, the interest differential, like, I don't even know what this data set actually means, but basically you have two columns, and then you have a country port. So these two columns, whatever the interest differential is, and next month currency return. Oh, this is probably from that currency data set. So this is basically extracted from the current currency data set, similar to kind of what I did with that stock market data. Example, where I pulled data of SP, 500 S, p5, 100 stocks from Yahoo Finance. And then, instead of trying to do the clustering with everything, you remember how I took only the percentage return and volatility over the one year period, and then did a clustering over that. So this is a similar kind of data set, except this is probably from the currency data set that we saw before. Now, instead of using everything, the data set basically looks into probably average interest difference and next month's return on pairs of currency and for these and for these different currency codes. So that's what the data is, and we are going to do clustering on this. But what another thing I'm going to do is I'm going to use a thing called silhouette score to basically measure how good my clusters are. Okay? And I'm going to talk about silhouette score. I'm going to send you a link to a medium.com article that will basically help you understand what silhouette score is. But let's first run through this, and then I'm going to flip to medium.com and show you that article there. So now we have this data set. So we were going to do, Oops, oh, probably I forgot to run this one, so all the input, and then we have the data set, and then we use the standard scalar scaler to do the scaling. And when we did the scaling, you see we are only taking the two columns interest differential and the next month's return, because IMF country code needs to be handled through one hot encoding, because that is a categorical column, and you all know this. And then we take these two column, set it aside in a scaled data frame, red DF scaled. And then we are going to take this IMF Country Code column, which is this one, and apply this get dummies function to one hook, one hot encode the country code. And since there are these many countries, it basically blows up to that many columns. And then, as you know what one hot encoding does, which is basically all zeros except one country, that will be one depending up on the original value of that row, right? So GBR. So that's why here you are getting GBR as a one, and then we take these one hot encoded columns and concatenate with this one, which is our scaled columns for interest and next month currency return. And when we march these two. Oops, sorry, I forgot to run this again and watch this too. So then we merge these two. This is finally our data frame, which is what we are going to do, the clustering. So up until this point, is basically exactly what you would have done anyway, like if you if at this point, if I throw any data set with to you, you are. Probably going to do these steps. What you are going to do, you are basically going to see, what are my numerical column, and what are my categorical column, or string columns, and you are going to take the numerical column, you are going to do scaling using the standard scalar, and then you are going to take the categorical column, and then you are going to do one hot encoding, turning it to zeros and ones. And then you take the scale column and the one hot encoded column, merge them back, and that is your training data. So that's the data that you are going to apply your algorithm on. So pretty standard stuff up until here now, which is what we are going to do now, at this point, what we have been doing up until now is that we have done something called Yellow plot, right? So in order to do elbow plot, what we did is we basically ran the clustering from two through 10, let's say, and then for each number of cluster. What we did is we calculated the model inertia, and with that model inertia, then we plotted an elbow. And we are going to do the same thing here as well. But in addition to that, I'm going to throw in another new thing, which is called silhouette score. So silhouette score is basically another measure that tells you how tight these groups are, like how tight the data points are within one cluster and how different they are from other clusters, right? So the tighter the points are around one cluster, and the further array they are from another cluster, the better your clustering performances. So that's what we are going to do now before we run the code. Now I'm going to show you this article here that what is silhouette score. So silhouette score basically means so the way that it is calculated is this, so it is basically commonly used to assess the performance of clustering algorithm like cables. Okay. Now how you calculate you basically take each data point and you find the average distance of that data point to all other points within that same cluster. So let's say you have three different cluster, red, blue and green. So you take each data point and then you find how what is the distance from that data point to all other data point within the same cluster? So if that data point is red, so you basically find the average distance from that to all other red colored data points. And then you take these and call it AI. AI meaning a underscore, I, right. So that's your average distance measure for live data. Then you for that same data point, then you compute what is the average distance for from other points that do not belong to its own cluster, meaning that do not belong to the red cluster. So if you have blue and greens to other cluster, then you will take the average distance of your red data point from any other blue or green green points. And then you collect all these distances and average it and call this B for your i th data point. And then you calculate the silhouette score for that data point that you are considering using this mathematical formula, which is Bi minus AI, divided by whichever is maximum max of AI and BI. And this formula gives you the silhouette score of one data point. And then what you do, you basically repeat this for all data point within a cluster, and then you average, and that gives you your silhouettes point, silhouette score of the overall population. Now if you see here, Bi minus AI, so BI is the distance from dissimilar cluster, and AI is the average distance from similar cluster. So difference between the two basically tells you how So basically your idea is these AI needs to be minimum and bi needs to be maximum. That's your goal in your ideal clustering. So that means what you need is you need Bi minus AI to be as high as possible for any clustering output that you derive. So that means, when you do. Calculate the silhouette score. You need to look for the optimization by changing cluster type, sorry, changing cluster center or changing clustering algorithm, whatever you do, so your goal is going to be getting as high silhouette score as possible. Now, since we are dividing this by maximum of a, I or B, bi, so basically what we are doing is we are not getting that exact value of this. We are getting a scaled value of this, and the scale will be between negative one to positive one. When it will be positive one. It will be positive one if AI is zero in ideal sense. So let's say all of your clusters, all of your data within a cluster, are so tightly packed that the average distance is almost zero.
+
+Speaker 1  15:58  
+And when would the first one be one? That means when the average distance from your cluster for from any point to all the dissimilar clusters are very, very high, almost infinity. So then, if you take that and divide by maximum of BI, so then your first term would be one. So basically, what I'm trying to say is ideal output from a clustering algorithm in a perfect world will give you a shield score of one. And if your clustering algorithm completely fails to get any cluster, you will get a shield score of negative one. Basically negative one, basically we means any point in those clusters are closer to the dissimilar cluster than its own cluster, which basically is a complete anti pattern. So negative one to positive one is going to be the limit of the shield score because it is standardized because of this division that we are doing. So essentially, what we are going to do in our code, we are going to use this method called silhouette score, which I imported here and here again. The good news, as you probably have seen, for all of these scoring and scaling and anything you do, even though there is a math behind it. You actually don't have to do that math. It is good enough to know what is going on. And then you just import the corresponding method from the library, right from the psychic learn library. So we are going to use this silhouette score method. So what here I'm doing is, in addition to do the Elbow Method, which is basically finding the inertia. I am also getting a array of silhouette score, and for each of these values from two to 10, I am appending the silhouette score to this class, sorry to this array. And when you use silhouette score, you need to provide it two things, to data frame. The first data frame that you provide to silhouette score is your original training data before you apply the clustering. And the second input, second parameter to the silhouette score, is the output of your predict method with your k means clustering, or whichever other clustering you do came in barge, agglomerate. It doesn't matter. So essentially, in order to measure silhouette score, you need two things, your data frame and your prediction result with your trained clustering model, with these two then silhouette score will basically do this math, because within these two data frame, it will have all the information needed to basically do this over all the data point. So you don't have to actually have to write a loop and do this, although you can, because I already told you what this what the math behind this is, and which is not rocket science, it's pretty simple. So if you can, if you want, you can write a code for shield score, but you don't have to, because it's already available. So then we are going to have shield score and the the inertia, which we have used for the Elbow Method. So now we are going to take of both of this, and then we are going to plot. So here, if you run this, and here, I also printed the silhouette score when I'm running from two through 10 cluster number, and this is what I am getting. So now what I did is, well, silhouette score. I could have also done a line plot. It would be the same, but here I just did, just for no particular reason. I just thought, Okay, I'm going to use the bar plot. So basically, your idea is the reason i. Plotted two of these side by side. Is earlier we said that, okay, we are going to apply a heuristic like that. We are going to take a k value, where the curve has a distinct change in slope, or an elbow. Now, sometimes finding an elbow becomes little subjective, like from this curve, what is your elbow going to be. Someone can argue one is a elbow, someone can argue three is a elbow. Someone can also argue that four is also an elbow. So I look like three different potential elbow. Now if you draw the shield score on the side, that gives you an additional decision making point. I mean, even with this, your decision making may not be perfect, but since I am having this shield score, and my goal is to obtain the highest silhouette score possible, I'm going to take the one that has the highest schedule score, which is at k equal to three, right? Just some additional tool in your toolbox, so inertia values and shield score. Now you take these two and then you do your clustering. So clustering is the same. K means clustering. And then after I do did the clustering, I printed the shield score again, and that shield score should match whatever initially we got 0.2044 and that's what I printed here, 0.2044 for k equal to three. So I got a clustering of 0.2044 now, knowing what I said about the silhouette score and how it should be negative one from for a totally imperfect clustering to positive one for a perfect clustering. What do you think the general performance of this algorithm is with 0.2044
+
+Unknown Speaker  21:51  
+is this a good cluster?
+
+Speaker 1  21:54  
+Not really, not really? Yeah, I would say anything below 0.5 I would not really count on that, right? So I'll say, okay, you know what the data that you give me that does not have enough information, go ahead and collect some more data and come back to me. That's what you are going to tell your stakeholders, right? If you are the data scientist, if you are the analyst, right? So, but hey, here, whatever the data we have, like we are basically here to learn the techniques, right? Not to get a good data set. But this is something probably you could do, try to do when you get into your project, too, right? So if clustering is one of the things that you want to do, and you do happen to get a data set, and you are doing this, and you're applying shield score, and you are not getting anything above 0.5 scratch that idea, or go and try to find if you can have more features in your data set that might give you a higher score. Sometimes it could be opposite to sometimes you might want to get rid of some of the columns in your data set, because sometimes having more column might also mess up your schedule at score, right? So you have to experiment with different things, or in some other cases, you might also want to take a high dimensional data, reduce it into lower dimension by applying PCA, which we'll do in a minute, and then do the shield score before applying PCA and after applying PCA. So there are many different combination, permutation, combination you can do with the goal in mind that you need to, you need to strive to get the highest silhouette score possible from the data that
+
+Unknown Speaker  23:33  
+you have. For example, you can't get higher than one.
+
+Speaker 1  23:35  
+You cannot get higher than one because in this formula, it is normalized, right? Because it is divided by this denominator. So obviously, in the in the perfect clustering, it will go as high as plus one. And that's why it is a better measure, because it very objectively tells me, in a known scale, which is very easy to think in our mind, oh, negative one to positive one, I am 0.2 maybe not good enough. So, in fact, you should think of it from zero to positive one instead of negative one to positive one, because anything below zero is kind of anti pattern, right? Zero is basically, if you have a completely random noise, your clustering algorithm should give zero. If you are getting something less than zero, that means there is something wrong in your algorithm, which would never be the case, which could be the case. Let's say if you are trying to create your roll out your own clustering algorithm, and you make some mistake, you might get something below zero, but given that you are using the standard library method, you should never get anything below zero. So mathematically negative, one to positive, one are the possible values. But when you are using any of the standard library method for clustering, you would see anything between zero to one as values. You will never see negative values for silhouette score.
+
+Speaker 1  25:07  
+Okay. And then you can take the output of this and you can, you can basically plot this, and this basically gives you, hey, this is what now looking at this, it looks pretty good. I mean, there is no overlap and all then you might think, hey, wait a minute, this looks like a good cluster. Why is my shield score still so low? Why it is 0.2 is because the data set do not have just these two dimensions. Remember all of those one hot encoded columns. We added those in there as well. And living in a two dimensional computer screen, there is no way for us to plot exactly in a 3d vector space how all these 1520, dimension plays out, right? So that's why, mathematically, when it is calculating the shield score, even though on a 2d plot, it looks pretty well separated out. Your schedules for calculation is coming pretty low, right? But if you want to live with it, you can like, for example, in this cell, what we are doing here is we are taking this prediction and the country cluster is basically the column that we added, which is basically the classification which will give which will give me three values, zero or one or two, because we ran it with cluster center of three. Now if you, if you group by these prediction column, then you will basically get, get three groups of countries right? Some would be zero, some will be one, some will be two. And let's say, if you want to calculate the average of one of these variables, right, let's say next month, country return. So you will see, for all the country cluster that have been marked to as zero, your average is coming at negative 1.14 for all the cluster that are marked with one, your average is 0.62 and all that are marked with two, your average is negative 0.22 so if you if you are satisfied with your shield score, what you can do is you can take this output and go back and say, Hey, report back to your user Like, Hey, these are the three groups of things, or countries, in this case, we found, and you can then provide some commentary on what are the things that they can expect to get different from one cluster to another, right? For example, all the countries with value of zero, they expect to see a very negative return for the next month currency which is negative 1.14% for all the countries within that are group one, they expect to see a good positive return, which is 0.62 right? Month over month, 0.62 is not bad, actually, right? So that's one way to interpret this result. But as I said, giving given the shields for 0.2 you might not actually want to provide this recommendation. You might want to go up do some more exploratory analysis, maybe try to get some more data or whatsoever, right. Also, if you want, you can take the same data set and remember the two other clustering algorithm we learned. One is called Burch. So if you run this through batch, so it's basically just these three, four lines of code, right? You take the batch model with three cluster you fit and predict, and then you do a shield score, and let's see whether this shields code is higher. Oops, looks what happened. Burch performed even worse than K. Means only 0.14 right? Then you can take that same and you can so and this is the, basically the plot of batch, which basically, as you can see, the shield score is much lower we saw. And even in this output, you can see how these data are kind of overlapping, and compare these scatter plot for barge versus this scatter plot for K means, so at least for this particular data frame, K means is performing better than barge, which you can see from these data This cluster combined with your silhouette score of 0.2 versus these output combined with your silhouette score of how much we got 0.14 so you see how 0.14 score is much, much worse off than something with 0.2 so Okay, so just wanted to throw these additional piece score. You might want to use these in some of your project, or anytime going forward in your work or whatever you do. So.
+
+Unknown Speaker  30:00  
+Any questions
+
+Speaker 1  30:03  
+before I forget. Let me put this in Slack. Oops.
+
+Unknown Speaker  30:21  
+Very good.
+
+Speaker 1  30:24  
+Okay, so let's move forward to do the actual dimensionality reduction. Okay, so before we do dimensionality reduction, you will see in the Slack message, I posted a video, which is basically this link here, so I just posted there anyway. So it's basically a Google AI experiments. It shows dimensional like a reduced dimension plot of a very high dimension vector space in this demonstration. And you can watch through the video, or you can just launch this demonstration. And so what this is showing is you do you notice that there are three axes there, like this, this X, Y and Z axis, and you can actually turn it. So what I'm doing is I'm dragging it and I'm rotating it so you see that blue is one axis, the yellow is one axis, and this green is one axis. So it's basically a XYZ plane, a three, three dimensional Cartesian plane. And in here lot of pointer plotted, even though originally it is basically a 10,000 dimensional data space. Why 10,000 dimension? Because if you look here, so you can actually select what is your vector space, and these, what to back, word to back. This is basically a vector space of English language words. So there is a small model that has 10,000 words, so 10k and then there are what to effect all and then there is data, MNIST, data set that has all the images and so on, right? So, basically, essentially, this is a very high dimensional data set where each word is a unique vector. Now, if you randomly click into any word, so,
+
+Speaker 1  32:35  
+not a good word, okay, dairy, okay, so I randomly clicked a word dairy, and now look what it happened. So what it is showing is, in these high dimensional data space, which words are more closely related to dairy? Does it make sense? Look at these other words, beef, rain, vegetable, maize, wheat, potatoes. So, lot of commodity items, right? Lot of food, food items that are commodity alcohol, bread, wine farm, I just randomly selected dairy, right? Instead of randomly selecting, you can also search here, so and here also, this is basically showing what are the nearest points in the original space, right? And what is the distance from your point to these points, right? So essentially, what you are doing is when you did the silhouette score. So silhouette score is basically where we did Ai minus Vi, right? So your AI is basically average of all these points. So basically average distance from that data point to all other data points within the same cluster. So looks like this cluster is basically a cluster that contains all the food names. If you want to search with any other data point, let's say I want to search Bart. Okay, well, looks like there is no other there are only three birds, Bard, bards and bird. So Bard is not because this is a, this is a limited data, right? Only 10k
+
+Unknown Speaker  34:16  
+let's try something else.
+
+Speaker 1  34:19  
+Let's try. Let's say musical instrument, piano. Oh, look, that gives me lot of other musical instrument, violin, guitar, orchestral, and not only instrument, some other words that are related to music, like portrait, concerto, instrument, keyboard, drums and so on. Oh. Beto van, right. So this basically, this is a very nice experiment. This demonstrate two things. One, it demonstrate how a very high dimensional data can be effectively reduced to a lower dimensional data and still retain a lot of information. Here, as you can see if you look through these. Word Cloud, you will see these are kind of around the same region in the galaxy, like, if you think of all of these as starts in a galaxy, right? So similar stars are kind of in the same region of the galaxy. That's like one way of thinking about it. And it also shows like, if you do want to do clustering, how your other what is called members of that cluster, going to be right? The beauty of these though, how these vectors were generated and how it notes the nearest point. Now, in order to do this, no one actually taught the machine. No one said, okay, these words are close together. The way that this word, this is the what to wake is basically an algorithm here. So in that word to work algorithm. So essentially, what you are doing is you are basically feeding lots and lots of text in English language. What the algorithm there does? It basically tokenizes all this text, and from repeated appearance of different tokens within close proximity, it automatically figures out which words in English language are kind of related to each other without us teaching the model the grammar of the language, right? So it really doesn't know the actual English semantics or syntactic meaning of these words. It doesn't. So what it does is it has basically read through 1000s of pages of English language text from various sources, and based on that, it figured out, well, these words often appear closer together within the same context. Therefore it is basically taking all of these as part of like one cluster or one group in that high dimensional space. And this, by the way, is very, very important technique that today's modern day large language model use, right this kind of tokenization and transformation from your English language to your vector, high dimensional vector, data, space,
+
+Speaker 2  37:07  
+fun. There are different methods to there are different methods to do that. Yeah, one I know best is actually you create a neural network. You get all these sentences. What you do is blowing each sentence, you block out each word, and you have it predict that that hidden word from the rest. And then you get those, those weights from the neuro neural network, and that becomes the vector for each word. In other words, the weights that predicted successfully predicted that word that was masked from the surrounding words, from the surrounding words value? Yeah, I did. I did a small one once myself on just a novel. It was really fun, very interesting, and I created a cluster like that, but just based on the words in one novel, how the words in the novel related to Yes,
+
+Speaker 1  38:04  
+statistically speaking, though, it's basically just probability calculation, right? Like given the prior occurrences of events happening, what is the most probable case of these event happening? What Karen is saying if you have a sentence with 10 words and one is missing. So then, essentially, what your model is doing is it is looking at all the prior events of different words appearing next to each other, given all of those probabilities summing up all those probabilities. So what is the most probable outcome of one particular word coming into that missing word. You could
+
+Speaker 2  38:41  
+do that more directly. That would be more of an angry but it's a skip engram. But yeah, you could do that with statistics and with probabilities, or you could do with a neural network,
+
+Speaker 1  38:51  
+which, no, I'm not saying you are doing that. What I'm saying is the interpretation, the mathematical interpretation that lot of people don't understand, even though you are not actually coding that way, but the mathematical interpretation is that,
+
+Speaker 2  39:05  
+yeah, it becomes the most likely to replace the masked word with proper water, yeah. And by the way, that's called
+
+Unknown Speaker  39:14  
+self supervised learning,
+
+Speaker 2  39:17  
+and that you don't have actual labels, but the model gets the labels basically from the training data.
+
+Speaker 1  39:24  
+Yep, cool. So now coming back to today's topic of the day, which is PCA. And this is something we also briefly touched upon in the very first week of the boot camp when we are talking about unsupervised algorithms in general. Now, PCA is an unsupervised algorithm. Now, PCA does not do any kind of a machine learning. In a sense, it is more like a optimization algorithm. So what does it try to optimize? Okay, so what it tries to. Optimize is, so let's see which one. So what PCA does is, let's say you ask it to find you give it, let's say three dimensional data set or and then you ask it to reduce it to two dimensional data set. So what it will do is it will come out, come up with two orthogonal access. So by orthogonal I mean perpendicular to each other. So obviously, if you whatever your source dimension is, 2345, 10. Doesn't matter if you are trying to reduce it to two dimension, then your outcome of the PCA will have x and y, so essentially values against two different axes. Now they have to be perpendicular to each other, because, as we all know, when we are plotting the Cartesian plot, right? If you have a two dimensional plot, your x and y are 90 degree to each other in that other visualization, as we saw here when you have a three dimensional so each of these axes are also orthogonal to each other, right? So one of the key criteria here in dimensionality reduction is no matter what does the dimension of your what is the dimension of your lower dimensional target vector space, the axis that you have will always be orthogonal to each other, meaning perpendicular to each other. Now, with these two axes, what it is trying to do is it is almost trying to cast shadow by using some kind of a projection technique from your higher dimension. Let's say 3d to 2d it is trying to see what is the projection from this higher dimension into the two dimension. So let's say going back here. Sorry, here. So let's say this is a three dimensional space, and all of these points here, they are randomly strewn around across this three dimensional space, and you want to reduce it to two dimension,
+
+Unknown Speaker  42:11  
+think about from a common sense, what is it you are going to do?
+
+Speaker 1  42:19  
+This is three dimension. If I have to reduce it to two dimension, how can I do that?
+
+Speaker 3  42:27  
+You assume a value for the for one of the dimensions,
+
+Speaker 1  42:32  
+got it so you will basically, let's say x, y, z. So essentially you retain x and y, and you can turn the Z to zero, right? So essentially, physically, if you, if you, if you compare that with, like, physically, what you can do here. So let's say you have these blue axis and these yellow axis. So let's say these are x and y, right. What if, if you draw a plane on x and y, like, put a piece of paper right, and then these green axis is basically your z direction, and then you shine a light from the top. So what you will see in that piece of paper that you are putting on your x and y, you will see some shadows corresponding to the location where the objects really are. So essentially, for all of these object, even though they are living in three dimension, when you are looking at the projection on that two dimensional surface, you will basically see some data points in two dimension, and that's your dimensionally reduced data set right now, obviously, in doing so, you are losing some fidelity in The data, because what happens if there are two point that have exact x and y value, but there are different altitude, meaning different Z value? If that is the case, then when you are projecting those two points will appear to be one point, right? So some point gets squashed. Sometimes two point in an X and Y, X, Y, z3, dimensional may be far apart because their z value is so high, right? But their X, Y value are very close. Now, when you are projecting this, you will see the two point ordinary, therefore far apart, they seem to be much closer, so there would be some loss of details. So the reason I said your PCA algorithm is actually a optimization algorithm is what PCA will do. Conceptually, it will create a set of orthogonal axes which are perpendicular to each other, and then it will draw the projection from your data point onto these two axes, and then it will change the orientation of the axis to find out an optimal orientation that makes this distance smallest, and that is what I showed in this. Is animation.
+
+Speaker 1  45:06  
+So what is happening here is, one is your major axis, one is your minor axis. Now. So here, when you see when these longer axis aligns to these two pink lines. Here, look at the shadows of these things, and look at how the shadow of these points on the long line keep changing, and when the long line aligns to here. So you see how the distance of errors got minimized. So that's essentially what your algorithm is doing. It is taking a set of n orthogonal accesses and then rotating them around the plane to minimize, to minimize any loss. Basically, it will choose an orientation that will maximize the amount of information retained and minimize the loss. So that's why, and this is a slide that I also made available in the first week of the slide. So these are the process steps here. So it identifies a set of orthogonal access called the principal components, capturing the maximum variance in data. Like going back here in this example, what I said is, if you are putting a piece of paper in x and y plane, and you are shining a light from the top, if there are two data points that have exact x and y value but different Z value, and then they will turn into one data point, that means there would be a loss. But if you switch this little bit, if you instead of putting your piece of paper in that plane of x and y, if you tilt it little bit, then those two point will not be colliding with each other. They will still show us at different points. So that means the variation between the two point will be retained by tilting it little bit. And that's exactly what this algorithm is doing here. It is basically tilting it at various angles, and overall, on an average. I mean, obviously it is not possible. Whenever you are doing reduction, there will be some point you will lose for that reason, but it will try to align it an angle where the loss of data points is minimal due to overlap of the data point that you are omitting. So that is the optimization, right? And then this principal components you will find end of finding they will always be linear combination of the original variable. So what is linear combination? Meaning, meaning simple, let's say if you have a vector space i, j and k, right, which are the three unit vector in a 3d space, right? So any unit, any vector r in a 3d space is basically x times i plus y times j plus z times k, which is basically the three unit vectors in the vector space. So that means, in a 3d vector space, you can or 3d like this space here right. You can take any data point and that has a x, y and z component, and you multiply that by whatever the unit of distance across that axis, and then you add them up, and that gives you the value. So this basically does the same thing, principal components, which are linear combination of the original variable in the data set, ordered in the decreasing order importance. And then the total variance captured by all the principal component equals the total variance in the data set, where the first principal component, which is the longer axis, captures the most variance variation, and the second component captures the maximum variation orthogonal to the first component, and then the third component will capture the maximum variation with respect to the first two combined and so on.
+
+Unknown Speaker  49:02  
+So that's what the PCA will do. Okay,
+
+Speaker 1  49:10  
+so conceptually, is pca somewhat clear in your mind, what we are doing here?
+
+Speaker 3  49:17  
+I think it's really cool what that's doing. Yeah,
+
+Speaker 1  49:21  
+it's basically casting light from different angle and taking the shadow. I mean, if you think this from two dimension this, this particular animation is trying to do a two dimension to one dimension reduction, basically. So you can reduce from any dimension to any dimension, but the more you reduce dimension, the more you will suffer loss, like if you go from 10 dimension to five dimension, yes, you will suffer some loss. If you go from 10 dimension to two dimension, more of the details will be lost. Okay, so. Cool. So ready to look at some Python code example then,
+
+Speaker 4  50:09  
+and we know, like, is there any standard of looking at like, how many dimensions we should stick to? I mean, though, there is no hard and fast rule like, what would be the best view we get by choosing the dimensions there,
+
+Speaker 1  50:21  
+whatever gives your model the best performance. There is no such role, of course. Well, sometimes there might be a rule saying that, like your users might not want to lose, let's say, more than 10% of the variance explain variance, then that will put you a constraint on you as a data scientist, like, okay, whatever you do, you have to retain at least 90% of the details of the original data, right? But from a data science perspective, there is no room. But there could be business requirement that have been put in.
+
+Unknown Speaker  51:06  
+So,
+
+Speaker 1  51:10  
+so let's look at an example of doing PCA. And what we will do is we will do PCA and then followed by clustering, and then we will compare the performance of the clustering
+
+Unknown Speaker  51:26  
+after we do the PCA. Okay,
+
+Speaker 1  51:31  
+so and here also, I'm going to use the silhouette score, because that gives me real good measurement of the performance. So what I have is this, is that credit card info data set that we looked in before credit card info, but it is already transformed. So that means all the categorical column have been one hot encoded, all the numerical column have been standard scaled, so it is already transformed data set, and this particular CSV file that have been given for these activity, it also has the segments. So basically, what that means is someone already took these data set and ran it through a clustering algorithm of some sort, and then appended the output of the clustering algorithm in this column called customer segments. And that's why you are seeing 0123, different values there. So this is a data set that is not only a just a random points, but it is also clustered someone by someone previously, but by using whatever method we have, we can assume that it's probably Kevin's cluster. So then, if you take this and if you plot this with age and balance, age and balance, you clearly see that the three cluster that was done. You can try to plot these with another one, another two set, and you will get a different view. Obviously, when you are plotting against age, the views would be very giving you very linear cluster boundaries. But as it happens, for any high dimensional data set, depending on which to access you choose, you may or may not actually see a clear linear separation. That does not mean that mean that the clustering was bad. It just means that you have no way to actually visually interpret the clustering with from using any two random access. So that's what the data that is given. So now what we are going to do is we are going to take these data set and actually this is probably not needed. Yeah, this was already cleaned. There is no reason to actually clean and do anything, yeah, okay, so clean basically means just drop the customer segments. Okay? So there is no standard scaling or anything needed, because this data set is already scaled. So all we are doing is these customer segments that was already present there from a previous clustering exercise. All we are doing is we are just forgetting that that column exists, because we are going to do this fresh on our own. So we take the data set and we drop that customer segments column, and this is the new data set. This is the original data set that we are going to work with right now. So first what we will do is we will apply a dimensionality reduction on these what, 12345678, 10, from 10 dimensional data set to two dimension. So we want to return only two components, or transform these two two components only. So how do you do that? So your algorithm is called PCA, and you import it from this library. Called Escalon decomposition. So with this library, the initialization is kind of very similar to how we do with K means. So you initialize with the name of the algorithm used as a function, and you provide how many components you you want to turn it down to. So here n components equal to two. That means my target data set will have two columns, even though my original data set has 10 columns. So then, just like what you do with the other algorithm, you fit with the data, and then you use the transform method like we did for standard scalar. So here also we take this PCA, and we do fit and transform together using one combined convenience method, fit transform, and that will give you a, oh, sorry, I think I forgot I run this, that will give me array. So this is not a pandas data frame. The outcome of this is an array, but each of the array elements basically has two elements, and this first element is your x component, and think about the second element as your y component, right? So first element is basically your principal component that captures most of the variation, and the second component is the orthogonal to that.
+
+Unknown Speaker  56:29  
+So that are the two components that you are getting
+
+Unknown Speaker  56:32  
+now,
+
+Speaker 1  56:35  
+like Vijay asked. When Vijay asked, right, like, hey, is there a Is there any rule? I said, well, there is no rule, but you might want to retain up to a certain variable, certain percentage of variance from your original data set. So that means you need to have a way to measure what is the explained variance. So if the total variance is, let's say, 100% if these two column together can explain 100% of the variance of the original data set, then you basically is able to perform a lossless transformation, where nothing is lost. But in reality, it will never be lossless. There will be some loss, like think about when you take a raw image and transform into JPEG right to our naked eyes, they look the same, but essentially, when you are doing that, that algorithm is actually very, very similar to PCA. It is a lossy algorithm, but the loss is so low that to the naked eye, a JPEG image does not look any different than than raw image. So the difference will only be perceptible if you are printing that image in a very, very large canvas or something. So this is kind of the similar concept here. So here, what you can do is you can use this attribute of our trained PCA model, which is called explained variance ratio. And explain variance ratio will give you the total variance captured from by the principal component and the component that is orthogonal to that and any other component thereafter.
+
+Unknown Speaker  58:15  
+So if you look at this, this is 95.6%
+
+Speaker 1  58:19  
+of the variance in the first component alone. So 95.6% of variance of the original data frame is captured by your principal component, and then another 1.9% of variance is captured by the orthogonal component. So if you compare these two together, that gives you what 97.5% of variance, which I would say is a pretty good outcome for a PCA, because even though you are coming down from 10 dimension to two dimension, you are still retaining combination of these two, which is About 97.5% of the information obtained in retained in the present, in the original data frame, with the additional benefit that now your algorithm, which be much simpler to do and much easier to visualize the outcome, because now we have two dimension even though we have all of 10 dimensions data, but all of this data is actually hidden into just two dimensions. So now we don't have to go and keep chasing around by doing this, like, hey, let's plot age versus balance amount, pay amount versus bill amount. We don't have to do this because now all of these have been squeezed into two dimensions. Now we are going to do clustering, and then we will plot the the scatter plot with these two dimension and that will very clearly tell us, or indicate to us visually how good our clustering algorithm is performing, right? So let's do that. So first thing we need to do. Is, since this is an array, this is not a data frame, this is not a pandas data frame. So first we take that array and convert it to a pandas data frame by using the PD data frame, and then we name the two columns. Let's call it PCA one and PCA two. So these are my new data with just two columns. So this is the new transform data frame. Now in order to do K, means with this, we can either directly do with k equal to two or three, or in this case, we are going to do a same thing as we have done before, which is doing the elbow and since we also learned about shield weight score, we are also going to compute the shield score with various different k values from two to 10. And we are basically saving the inertia in here and saving the shield score in here in two different
+
+Unknown Speaker  1:00:58  
+array list. So let's do that. It
+
+Speaker 1  1:01:03  
+is going to take a little time. Yep, 4.3 second. Not too bad. So here we are getting the inertia value and shields for
+
+Unknown Speaker  1:01:14  
+now we can do a plot.
+
+Speaker 1  1:01:19  
+So I could have done two plots side by side, like I showed you before, but this one, I just added one more here anyway. So this is my silhouette. Sorry, elbow card that basically tells me, where do you think the elbow is? Maybe three or four, right? Yeah, and then, so that's the elbow. And now I'm looking into the silhouette. So silhouette for this, so for this one, highest silhouette is actually two. So if you want to maximize your silhouette score, seems like two is your best bet. But looking at this, since there is a clear elbow at three, so if we discount the k equal to two, case, then k equal to three gives me the highest shield score, because after that, shield score keeps going down. Now this thing, unlike a elbow, which will always go down, silhouette can go up and down. For example, in the previous notebook, as you saw when we did the silhouette, it did not go down like that. It first it went up and then went down and then went up here again, so it can go up and down. So unlike your inertia, which will basically unilaterally go down and asymptotically approach zero, for Shiloh, it can keep going up and down. It just so happened for this data set, it kept going down. So the idea is basically we need to have fewer cluster here, because if we go with higher number of cluster, it will basically result in lower silver score, meaning the clusters will not be tight enough with this PCA dimension, reduced data frame.
+
+Speaker 5  1:03:12  
+Did you show up to where you call this select scores function? Yeah, yeah.
+
+Speaker 1  1:03:20  
+So remember I said shield function, you have to provide two are parameters. The first one is your data itself, which is your CC, info, PCA, DF, which is this two dimensional data frame, and the second would be your prediction outcome from a fitted model. In this case, this K model is our fitted K means model, so we basically do a dot predict, and the second is basically the prediction outcome, meaning the zeros And ones and twos.
+
+Speaker 1  1:03:56  
+Okay, so since we see three kind of optimal then you can take these n cluster of three, and you can do a prediction, and then you do a plotting. So now we have only two dimension, PCA one and PCA two. So that means there is only one plot you can do, which is pca one versus PCA two? And here you can see that, yes, your clustering indeed, very cleanly separated these three. Right now, does that mean that it is a very good clustering? Yeah, actually not bad. Because remember how I said earlier, anything above 0.45 you can take it seriously. So even with k equal to three, my shield score is coming above 0.54 here. This is the shield score, right? So overall, this is not such a bad clustering, after all.
+
+Unknown Speaker  1:05:02  
+Uh, with the reduced dimensionality.
+
+Speaker 1  1:05:07  
+Now, one exercise that is not given here, what you could do is probably you could take the original data frame, which is this one here, and you can find out what are the what is the optimal silhouette score you can get without doing PCA? And then do a PCA and take the compressed two dimensional data frame and then run it through a set of k values and see which one is the best shields for and whether your Compressed Data Set provides you a better or worse shield score than your original, uncompressed data set. That is something that is not done here. I thought I will do that, but I didn't get time. But I hope you understand what I'm talking about, and I strongly suggest that you actually do that experiment with this data set. So
+
+Unknown Speaker  1:06:08  
+it makes sense.
+
+Speaker 1  1:06:11  
+So I hope the what is called the value of dimensionality reduction is somewhat clear now.
+
+Speaker 5  1:06:21  
+I think in my head, I get stuck thinking that you were just going to pick two dimensions and then reduce to those, but then the whole shadow projection explanation, I think that really helped with just understanding like, Okay, you're actually taking the whole set of all of these columns being plotted in this in dimensional space, and just reducing it to two with projection, yeah,
+
+Speaker 1  1:06:45  
+and, but, but that, that is like, if you think it in two dimension, it becomes easier to visualize, but mathematically, there is no reason that you cannot extend the two dimension to three or four or 10 dimension. So even if, let's say, if you have, let's say, if you have, let's say 100 Dimension Data Set, and when you are reducing it to two dimension, you see your explain variation is much lower. Let's say you are only having, let's say 70 or 80% of the variance of the original data set, right? So that will tell you, Oh, you probably went too far ahead. Going from 100 to two is not a better idea. So maybe then you try to go from 100 to 10 and see what is the total explain variance in across 10 dimension. And if you end up getting like this kind of more than 95% variance, then you should be good to go. Then you go with 10 dimension,
+
+Speaker 5  1:07:32  
+and the variance percentage is the addition of those all
+
+Speaker 1  1:07:36  
+Yeah, addition of all of those. Yeah. So here when, when we printed explained variance here, so here, when we did explain variance ratio, you got an array of two elements. If you do it with three, then you will get an array of three elements. Okay, actually, why not we do that? So let's do one thing. Let's repeat this with n components three. Okay, so same code, same data, but I'm now going to do three components. So now you see how now I'm getting three components for each one of these. And now if you do explain variance ratio, you get first two plus another one, which basically means even more information retained. So because another point 7% added, right, right,
+
+Speaker 5  1:08:29  
+but, but that doesn't necessarily help, because you're still you might have too many dimensions. You're just trying to get the dimensional dimensionality down to like an acceptable 95%
+
+Speaker 1  1:08:39  
+or better. Yes, exactly. So in this case, it doesn't. But I just wanted to show you how this explain variance ratio will look like. Because you ask the question, hey, is the total return value, well, retained variance, or some of these two? That's what I wanted to show you, that it's not just these two, it's just these two or three or 10, or whatever dimension that you are going down, it will be the sum of all right, I would say there is no reason to go to three, two to three, because two dimension, some of the two dimension, is good enough, right, right,
+
+Speaker 5  1:09:10  
+right, yeah, and you should expect to have better variance with the more dimensions that you retain. That just makes sense. Yeah. Okay,
+
+Speaker 1  1:09:18  
+so if you happen to end up having, let's say having a 200 Dimension Data Set, right? Try to reduce that into two dimension, you will see that it will probably not satisfy your your need. Explain variance would be too low here, since even the original data says is only what 10 dimension, even in two dimension, you are getting more than 97% already. Yeah, I think this
+
+Unknown Speaker  1:09:38  
+is my biggest aha moment. I something.
+
+Speaker 1  1:09:57  
+The next activity is kind. Kind of just the same so where so it is a student activity, but I'd say, let's just run through it, and then we are going to take, let's say, about 15 minutes break, and then it will come back. And then what I would suggest you guys do, take the last activity, which is activity number four, and do it with your group after we come back from the break. So that way you will do at least hands on, practice on at least one activity, and then we can call it today.
+
+Unknown Speaker  1:10:28  
+You guys good with that plan. Sounds good?
+
+Speaker 1  1:10:33  
+Yeah. Okay, so let's just run through the third one, which you will see is basically the same steps. So here you are given a data of customers. Now in here the customers dot CSV. It probably was a higher dimension data set, and the whole thing is transformed into some kind of ideal scale, probably even dimensional reduced data set. All you see is feature one to feature 10. You don't know what those features are, and this, by the way, is more common than you think. So if you happen to end up working in a in a as a data science in a big company, often time you will see that you will be asked to go and do some analysis, to do some supervised or unsupervised learning or whatever, and then the data set that you get from your repository of data set in your company will more often than not look like this. Because guess what? Companies are really, really careful about not to have any sensitive data leaked out to the data scientist, right? So there is a separate group that is sitting there who are not only cleaning and masking and office getting personal information and all of that on top of that, they might actually do scaling. And when they do scaling on the numeric variable, that is one way of first getting the original values, right? So let's say you have some pneumatic value. Let's say people's annual income, right? People's credit score, those kind of thing. The moment you are doing standard scaling, those values are gone. You don't see the original values right? And then on top of that, if there are a high dimensional data set, if they reduce it to a lower dimension, then you will get a data set that looks like this on the screen now, and that makes it even more impossible for anyone to figure out what the original data set was about, right? But somewhere, someone is keeping track in some database, like which one of these row belongs, maps to what original customer record that we have. But as a data scientist, you might not ever see that, and you don't need that either, right? Because this serves your purpose just perfectly fine. So this is one of that on the data set. Okay? So this is the 10 dimension. So what we are going to do is we are going to reduce it to two dimension and see what is the variance that we can retain going from 10 to two. Oh, what happened? Oh, I forgot to run that one. So PCA, and then we have two dimension and if we do explain variance ratio, this actually is not good enough, 55 and 30. So, like, what? 85% not that good enough. So this is probably one case where you might want to go more components. So let's do three components, and then we will have three components, and then we'll have 55 plus 30, which is 85 plus another six, which is what 91 probably at least above 90. But one thing you will notice that the more components that you add, they will have a decreasing amount of variance that they are capturing. Because, by definition, the first component will capture the most of the variance, and then the second will be less. Third will be less. So looks like when you do PCA, you are definitely even if you go four or five dimension, it will probably not be 95% maybe it will 9293 ish, because it will keep going down very quick.
+
+Unknown Speaker  1:14:16  
+Okay, so let's stay with three dimension for now. Um,
+
+Speaker 1  1:14:23  
+now, since I changed here to three dimension, if you have to create a data frame, so then you need to have another column. So let's call it a PCA, one, two and three. So now we have a three dimension data frame down from 10. So from 10 to we have three. Now let's do Elbow Method. And that elbow method gives me, Oh, this one has a very clear elbow at three. Therefore you will then. Do a k means clustering with that,
+
+Unknown Speaker  1:15:04  
+and you can plot the clusters.
+
+Unknown Speaker  1:15:09  
+Pretty good, very good clustering, actually.
+
+Speaker 1  1:15:13  
+But now, since we chose to retain three so let's do another cluster, which we are going to do two versus three, because now we have three dimensions, actually. Yeah, two versus three is also not bad. But as I can see, like the green is completely separate, and then there's light blue and dark blue, even though they are overlapping, I think you can kind of think in your mind. So think about like z value is changed, right? Even though green light and dark blue are overlapping. Looks like the z value is separate, right? Like one is deeper than the other set. But looks like when you combine this with this, this is from another, so it looks like it's not a bad clustering at all. Let me do another one, which is Three versus one. Yeah, even Three versus one perspective, it looks pretty good. Now, one thing you can also do is you can try to find the silhouette score for this right. Since it is showing silhouette score is probably not imported here, okay, so let me import it, that one here,
+
+Speaker 1  1:16:41  
+silhouette score. And then we are going to go and find
+
+Unknown Speaker  1:16:49  
+where is our,
+
+Speaker 1  1:16:51  
+yeah, so here so we can find the shields for right after where our model fitment and prediction is complete. So you can do oops, oops, Sheila score, and we have what customer, PCA, predictions, DF,
+
+Unknown Speaker  1:17:13  
+and then we will have
+
+Unknown Speaker  1:17:16  
+k3 which is our predictions. So
+
+Speaker 1  1:17:24  
+0.59 remember the scale zero to one, and anything above 0.5 is pretty good. We are getting almost 0.6 right, 0.59
+
+Unknown Speaker  1:17:34  
+and that also
+
+Speaker 1  1:17:37  
+goes well with the fact that how clearly we are seeing that the data set are separated for this one, yeah, from two to three dimension perspective, it looks like little overlap, but because you know, right, when you have three dimension, you look from this perspective to this perspective. From some perspective, they might seem overlapping, but they actually are not right. So, yeah. Oh. Another thing you can also see is which one will have the strongest, what is called influence on each component, right? So when you do PCA, you can do things like PCA components. And that basically tells you, so this is actually the output for three. This will probably not run here. Yeah. So, because we did it, we changed the PCA components from two to three. So PCA components, right should be PCL components list some cell to run here.
+
+Speaker 1  1:19:02  
+Oh, sorry, yes, no, I didn't miss anything. It's just that, since we added uh three dimension, we have to do three dimension here. Yeah. So what this does is it basically tells you out of the 10 original column that you have in your data set, which column is the stronger influence on which component? So for example, if you look into this one feature, one it has a 30% influence on the second column, only 3% influence on the third column, and negative 34% influence in the first column. So feature one is mostly dictating the second orthogonal component. Feature two is mostly dictating the third orthogonal component, and so on. So you will see each column will have a maximum you. Influence on some of these ECA column, right? So, yeah, I mean, I mean, not that it really matters for your case. I mean, I guess you can plot that, which is basically this, right? You can take any of these three things and plot, and that will help you show
+
+Speaker 1  1:20:26  
+yeah. So essentially, what you can do is, if you want to map this to the original components. So let's see which one will have the highest influence on PCA one. So negative, 3.2 negative, negative, negative. Okay, so this is for 3%
+
+Unknown Speaker  1:20:45  
+Oh, this is 28%
+
+Speaker 1  1:20:48  
+this is 9% 909. Yes. So PCA one is most strongly influenced by feature nine, and PCA two is most strongly influenced by whom. Let's see picture six, feature six, feature six. Yeah. So that means if you plot feature nine versus feature six, your plot should be very similar to when we plotted PCA one versus PCA two.
+
+Unknown Speaker  1:21:22  
+What happened here?
+
+Unknown Speaker  1:21:24  
+What did I miss?
+
+Speaker 1  1:21:31  
+Customer? Transforms, transform predictions, DS. I
+
+Unknown Speaker  1:21:43  
+There's no check mark at the bottom of that. Yeah,
+
+Speaker 1  1:21:54  
+this one I don't even need. So anyway, so this one I should be able to run now. Okay, yeah, so feature nine and feature six is this. And if you go back up here, this is what we did, PCA one versus PCA two. So you see, when you look from PCA one and PCA two perspective, look at the separation that you are getting. And now keep in mind which column has highest influence on PCA, one, which is nine, and highest on PCA, two, which is six. Now we are doing the same plot this time using using original feature nine and feature six, you will get a very similar separation. Because essentially, after the dimensionality reduction, feature nine and six is kind of acting as a sorry PCO one and two is kind of acting as a proxy for feature nine and feature six, and that's why these two plots are looking very similar.
+
+Unknown Speaker  1:22:59  
+Now let's do one more.
+
+Speaker 5  1:23:01  
+And what is it that's determining the the influence? Again, what was, what was the name of that function, the influence of each feature on which PCA?
+
+Speaker 1  1:23:09  
+Oh, that's PCA components. It's not a function. It's one of the attributes. So remember how we did the PCA explained variance. So which is, go up? Go up, up here. So once you have a PCM model that have been fitted, then you can take the model variable, and there are certain attributes inside the model variable that you can print. This is similar to how, how, with the K means model we are doing dot inertia with the underscore sign at the end, which is not a function, which is an attribute that you can access from the trained model. So similarly here, explain variance ratio is one of the attribute. It basically gives you a list of all the variances that are captured in the first and second and third, orthogonal component, orthogonal access. So that's that a similar type concept here. So this is an attribute which is pca dot components, and we are transforming it because when you if you just do PCA dot components, it will basically be the other way. So it will not be very easy to turn it into a data frame. So you will basically get it this way. So you will get, basically, for all original 10 values, you will get in one array, and then for all original 10 values, for PCA two, you will get one array. That's why, if you do transpose of this, which is dot t, and then you convert it to a pandas data frame with PCA, one, two and three that makes it easier to understand and visualize. That's all. But the function to your question is dot components,
+
+Speaker 5  1:24:50  
+sorry, and the T is the transpose that turns it into the name feature one, yeah,
+
+Speaker 1  1:24:57  
+no, no. T is basically the trans. So let's see here. So this is the one that you are getting for component. If you do a T here, it basically changes the X and Y. It's basically a matrix transposition. So then you are taking this, and this is what you are turning into a data frame, and you are just using these three column name. You are just slapping the column header here, right? And, and
+
+Speaker 5  1:25:21  
+the value of feature one is coming because you're transposing the value that feature one contained into the label feature one, I'm trying to figure out where, where you got the value of that column, the value of each row, that column.
+
+Speaker 1  1:25:37  
+Oh, okay, okay, so that is from this index.
+
+Unknown Speaker  1:25:42  
+And it's the index maps to the value from that's from the transpose
+
+Speaker 1  1:25:45  
+index. Index maps to the index. Index has nothing to do with transpose, by the way. So when you this this thing, for example, this thing could be any two dimensional array, and if you provide a two dimensional array to data frame, it will convert it to a data frame. Now you can, if you don't provide columns and index, what will happen? So let's see this, if you don't provide columns and index, what happens? It basically creates it and creates a numeric, default numeric range index for both column and row, right? That's what you get. Then, if you apply only the columns, that basically overrides the column names, but your row index is still the default range index, then what you do is you basically take the customer transform DF, dot columns, which is your original first data frame that you had with feature one, feature two, feature three. Those were the column names there. So I'm taking that, which give me a list of 10, and I'm taking that list and slapping that into the index of this data frame, and that's where these things are,
+
+Speaker 5  1:26:50  
+see, and they're in order. Okay, got it. They're in order. Yeah.
+
+Unknown Speaker  1:26:56  
+Okay, thank you.
+
+Speaker 1  1:26:58  
+Yeah, yeah. So what I was going to do is just one more so PCA, one and three. We know how the pattern looks like, so now we are going to try to do similar plot, but using the maximum retention here. So feature one we found which one was feature one's maximum. Sorry, PCA once, maximum nine. Feature nine. So now let's see PCA three. Maximum is it? Feature three?
+
+Unknown Speaker  1:27:34  
+Yeah. Feature three, right? Yeah.
+
+Speaker 1  1:27:41  
+So now what I'm going to do, I'm going to do one just one more plot, just to satisfy my curiosity, actually feature nine versus feature three. Yeah, it's not exactly the same, yeah. Oh no, actually, I think I have to transpose this. So let's do feature three versus feature nine. Yeah, so feature three versus nine looks very similar to PCO one versus three, because of which column is retaining, which column is being more influenced by which feature. Okay, cool. So let's take a 15 minute break and come back at actually 14 minute now. Let's come back at 850 Okay, and then you guys will break into rooms groups and do the last activity. And that's it.
+
+Speaker 5  1:28:49  
+Could you? Could I one of the TAs upload the solved version of these because, because that was pretty fast and I got pretty lost, yeah,
+
+Speaker 3  1:28:56  
+I was just tired. It was
+
+Speaker 5  1:29:01  
+a lot of fun. It was, but towards the end, my data started to vary from what was shown as, like the sample data. So I'm going to be curious, super curious, to see what, maybe one misstep I made,
+
+Unknown Speaker  1:29:12  
+or maybe maybe random state.
+
+Unknown Speaker  1:29:14  
+That's what I was thinking. Just Is
+
+Speaker 6  1:29:16  
+it is it negative? Is it PCA to negative? Yeah, it's, we think it's the data that they've changed the data and but they didn't update the practice.
+
+Speaker 5  1:29:29  
+Yeah, that's what I thought, too, second guessing myself like crazy.
+
+Unknown Speaker  1:29:33  
+Yeah.
+
+Speaker 1  1:29:38  
+Okay, but any, anything that anyone got stuck on. I mean, Matt, I think he got stuck on couple of things, and he came back to our main room and asked, Are Are you okay? Mostly
+
+Speaker 5  1:29:53  
+it, most of it was just looking at the looking at the sample data, and going like, that's not right. But. Not what I got, but just keep, keep on going. I'm really glad you posted the solution to the last one, because I know the COVID went pretty lowest.
+
+Speaker 1  1:30:07  
+Yeah. Did you happen to use any shilly bird score, or any of those things from my example here to see how tight your clusters are?
+
+Speaker 5  1:30:17  
+I did at one point because I was curious, and it was really terrible, terrible.
+
+Speaker 1  1:30:24  
+Yeah, well, don't blame me. I didn't make this data for you, and you are not working for a real company, so you really cannot go back to your process owners. Anyway. Okay, so this is basically the solid file. I'm sure most of the groups you guys already probably got it, but just to run through this. So this is our data, eight columns only, and 30 rows. That's it. Yeah, you are not going to be able to do much clustering with only 30 data point spread across eight features. Now, I mean, in order to get good statistical behavior, when you have eight column,
+
+Unknown Speaker  1:31:16  
+I would expect at least
+
+Unknown Speaker  1:31:19  
+maybe 100 plus rows, right?
+
+Speaker 1  1:31:24  
+More than one is to 10 only. With 30 rows eight columns, it's you're probably not going to see any statistically significant behavior. So that's why probably your silhouette score was probably low also, right? So this is just an exercise to kind of try out some of the syntacting thing, syntacting syntactic, what is called function of your psychic learn methods that you have learned. That's all so first one here you are doing standard scaling for all the columns except for sector, right? So everything else, everything that are except for company name and sector, so all of these floating point columns, right? So that will give you a scaled data frame. And then you take that scale data frame, and in original data frame you had ticker
+
+Unknown Speaker  1:32:29  
+as an index.
+
+Speaker 1  1:32:33  
+So here what you are doing is you are taking that index from the original data frame and adding into your scale data frame as a regular column. That's what it is, sticker column in the DX stock, scaled using the index of the original data frame. So this is the original data frame index, which you are assigning to a regular column. And then, after you do that, then you take that column and put it as an index. I guess you could have directly done that. You could have just said, DF, stock, scale, dot, set index, and you can have probably done that or no, no, I think,
+
+Speaker 1  1:33:21  
+yeah, you could have done this way. You could have said, index equal this right here. You could have done index equals, yeah, actually, AI got it right, index equal to DF, stocks, index. You could have done that that would have the same effect as adding the index as a column and then taking that column and converting to index, it would have had the same effect. Let me actually run it. Let me comment out these two.
+
+Unknown Speaker  1:33:57  
+And if I run it,
+
+Speaker 1  1:34:00  
+yep, you could have just added index of the new data frame equal to the index of the original data frame, and it would have the same effect. You really didn't need to do that. Two lines, okay? And then you take the sector, and you one hot encode that thing, and all of this one hot encoded column, you do a concatenation using PD concat to your scaled data frame here, and then this becomes your final data frame. And then it asks you to initialize the K means model with three clusters, so it clearly tells you use three cluster. So you N clusters equal to three, and then you put some random state, let's say one. And then once the model is fit, then you are going to predict, but to add the prediction. So you take the. Scaled stock data frame, which is this guy here. First you copy it in a different prediction data frame, and then you take the prediction outcome and then append that as the last column there, using this name, called stock cluster. So that way, you basically have the prediction data frame, which is this last column added as a prediction output, right? And now you can take these and plot any two variables. In this case, they ask you to do, mean open and percentage return and color map will be your stock cluster, of course, because that's your plus value, 01, or two. And when you do that, yeah, I am basically getting the same thing that was provided. I'm running this for the first time, so I don't think there is a change of data, huh? Maybe
+
+Speaker 5  1:35:57  
+you're not, because that blue that you have your arrow on is green in the example data. Really? Yeah. And then there's also a lot of other variations in the data that's towards the middle.
+
+Speaker 1  1:36:15  
+Maybe the data was changed then, okay, anyway, I didn't worry too much about that. And then you take that scale data frame and perform our dimension reduction on this using PCA, and it says, Use two components. So we use two components, and we do a fit transform that gives us the two dimensional array. We find the explained variance ratio, and that is capturing 82% of variance, which is not good, right? But you just have to follow this as part of these activity. I mean, you should actually think about these things when you are doing your project. But here is just the assignment, just in the in class activity, so you would just follow as long as you are getting the expected outcome right. And then you take these PCA, transform data frame, and you then add back the ticker as an index, just like we did in the previous case. So now this is our data frame that we are going to do gaming song again, using cluster three. And then we take the stock cluster from prediction output and then create our new prediction data frame, this time only with the PCA, one two, and then slap on stock cluster on top of that. And now you do a scatter plot, which let me see here. Okay, and then you do a scatter plot so so looks like scatter plot between PCA two and PCA one is kind of not much difference between mean open and mean percentage return. So now let's look into the PCA components.
+
+Unknown Speaker  1:38:22  
+So for PCA one
+
+Unknown Speaker  1:38:28  
+mean open is the highest
+
+Speaker 1  1:38:32  
+right, and PCA two which one is the highest mean percentage return, which is what you expected, right? Since PCA one is mostly contributed by mean open and PCA two is mostly contributed by mean percentage return so that's why PCA one versus PCA two clustering looks very similar to mean open versus mean percentage return cluster.
+
+Unknown Speaker  1:38:59  
+So that's kind of the takeaway from this activity. Okay,
+
+Speaker 1  1:39:08  
+so that's the solution. Now let me know if any one of you have done anything differently,
+
+Unknown Speaker  1:39:17  
+or did you guys follow pretty much the same steps? It
+
+Speaker 5  1:39:22  
+pretty much the same steps. But I'm really glad you showed your data or your output, because I was like I said. I was second guessing myself, but when everybody came No, it's negative. Does
+
+Speaker 1  1:39:34  
+your output look similar to mine? Yeah. Okay, so have on one thing you see at two, if I look in PC at two is mean percentage return, right, and you see a one is mean, open. Ah, okay, yeah, mean person, okay, correct, yeah,
+
+Unknown Speaker  1:39:54  
+that's why these two plot look very similar. Cool. So.
+
+Speaker 1  1:40:01  
+So now you should consider yourself as master in cluster. Could
+
+Speaker 5  1:40:05  
+you scroll down to the final step 10 that you did?
+
+Unknown Speaker  1:40:10  
+Step 10?
+
+Speaker 1  1:40:13  
+No, Step 10. I think I didn't do Step 10. I mean, I didn't run through Okay, so step 10. What are they saying? Um, plot, the features that have the strongest influence on each component I
+
+Speaker 1  1:40:52  
+uh, main, open, high, low, close, open, high, Low, Close, have the strongest positive influence on PCA, one and mean volume has the
+
+Speaker 4  1:41:07  
+what is mean volume here? Mean volume has the stronger No,
+
+Speaker 1  1:41:13  
+no, even if you take a modulus of this, like absolute value of this, even then this is not true, yeah, I think the data is different Jesse, because if you see the answer written here, it says mean volume has the strongest on PCA two, but in my output, you see that mean percentage return has the strongest on PCA two, not the main volume. So this confirms that the at the time, the data that was used to write this notebook was different than the data that was provided in here, in the resources. So that's pretty much.
+
+Unknown Speaker  1:41:48  
+I appreciate you showing that. Thank you.
+
+Unknown Speaker  1:41:55  
+That just shows me I need to trust the data, not the instructions,
+
+Speaker 1  1:41:57  
+not the instructions. Yeah, data is the key. So cool, yeah, well, if there are no other question, I guess that's it for today,
+
+Unknown Speaker  1:42:15  
+having another early finish. So
+
+Unknown Speaker  1:42:20  
+see a Tuesday. See you
+
+Unknown Speaker  1:42:23  
+guys. Tuesday, have a great night. Great night. Everyone, safe and stay warm. Thank you. Bye.
+

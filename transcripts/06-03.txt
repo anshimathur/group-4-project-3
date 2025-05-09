@@ -1,0 +1,1188 @@
+Unknown Speaker  0:01  
+I will show. We'll see just now, like right after this is the census gov. You might argue that, hey, instead of installing a census pan a panda, sorry, Python library for Census, I can probably do the same thing using the direct HTTP request. And you are not wrong if you're thinking that, but we'll just know that in some cases, in for some API, there is this other way of getting data as well,
+
+Unknown Speaker  0:28  
+if not anything, at least one place I have seen these using Pandas Library Help, is that these libraries usually gives you back a JSON, a pretty well formatted JSON, so it becomes easier to process that Jason and consume that, and then to convert that into pandas data frame and whatnot. So for that reason, some API where they actually do provide a pandas, not Panda, sorry, Python package around it. It's probably a better idea to use the Python package rather than the HTTP request method. So and we will do a quick demo. But I think Margarita had a question.
+
+Unknown Speaker  1:07  
+Not anymore. Hello, Benoit. So I've asked, like, start recording. Because,
+
+Unknown Speaker  1:14  
+for example, they, I mean, they first format six. It's kind of so hard without video. Sorry to resolve something. Okay, are we recording today? Yeah, I see recording it started. Yes, we did.
+
+Unknown Speaker  1:30  
+Okay. Thank you.
+
+Unknown Speaker  1:32  
+Thanks for the reminder. Okay, so the first thing we would need as a prerequisite is for all of us to go and grab an API key from that census data website that gov, census.gov website. Is that something all of you guys have done?
+
+Unknown Speaker  1:50  
+Okay, yeah. Now
+
+Unknown Speaker  1:53  
+one disclaimer, though, even after you got the API key, it may or may not work. So seems like that census.gov system is kind of broken. Sometimes it works, sometimes it doesn't. So couple days back, first I generated an API key using my instructor email here, and that key never worked. It kept getting an API key error all the time.
+
+Unknown Speaker  2:19  
+Whereas Kian has a key, he did the same thing, and his key just works. So somehow, the key that I generated, it kind of fell through the cracks, and the system has no idea that the key was ever issued. Then yesterday, what I did is I used my personal email to generate another key, and initially it was not working. Then after a few minutes, it started working, and then after a couple of hours, it stopped work.
+
+Unknown Speaker  2:46  
+So just to keep in mind,
+
+Unknown Speaker  2:50  
+so if you are not happy, take it up to your government,
+
+Unknown Speaker  2:55  
+whoever runs, or maybe take it up to Elon Musk, right?
+
+Unknown Speaker  3:02  
+Maybe he'll be able to fix it. But anyway, if your key doesn't work, don't ask me, but we will do the demo. If your works is fine, if not, not a big deal, right? So
+
+Unknown Speaker  3:14  
+okay, and Kian, I will be using your key. I thought yesterday my new key is working, but then this morning, I saw it stopped working again at for some reason, it kept returning the same API key error for me. So I'll be using your key today. Okay, no worries. Okay,
+
+Unknown Speaker  3:34  
+okay, so let me share my screen.
+
+Unknown Speaker  3:41  
+Cool.
+
+Unknown Speaker  3:43  
+Okay, so if you do have census API key, right? So you should have something like this, census API key, where your API key will be there.
+
+Unknown Speaker  3:55  
+In fact, in my case, census API key, and this is the API key that I'll be using. So make sure you have the census API key saved in your EMV file. That's the first thing.
+
+Unknown Speaker  4:10  
+Okay,
+
+Unknown Speaker  4:12  
+then
+
+Unknown Speaker  4:14  
+looking into the actual work. So what we'll be doing? Okay, so we will do these API key Well, these import we don't need because we are not using request library anymore. Instead, we are going to be using this new library called census. So let's first see whether I can run this. If I do have this library installed, then I will be able to run it,
+
+Unknown Speaker  4:40  
+or meaning, import it successfully.
+
+Unknown Speaker  4:44  
+So yes, so you see that Python didn't complain when I when it ran this statement from census. Import census. There was no problem. In case you do not have it installed, and if you are getting an error there, what you need to do is create a new code execution.
+
+Unknown Speaker  5:00  
+Cell. And there do this. You do pip
+
+Unknown Speaker  5:07  
+install
+
+Unknown Speaker  5:11  
+census. Did you mention? Just run this code,
+
+Unknown Speaker  5:17  
+and once you run this once, and then you can delete that cell. So when I'm running this, you see, since, in my case, my environment already have it installed, it basically says require, already requirement, already satisfied. So I don't need this anymore. I'm going to delete it. Okay, so now we have the API key, fine, okay, I should not be having the API key in this cell, anyway. Okay, so now, what do we need to do? So we need to create a something called a census as an object. Okay, because remember, compared to the other approaches that we have done up until yesterday's class where we have a URL where we are appending all the query string, attribute, parameter, whatever other search option criteria that we need to provide, and then we use one method that is request dot get, and we provide the URL.
+
+Unknown Speaker  6:12  
+Here we are not doing that, and that's why, from up here, there was a statement that says, import request. I even deleted that statement because we don't need it, because we are using the other approach, because census guys, thankfully do provide a pandas library. So we are going to treat these as a first class pandas class and object. So, so when you so actually, let's actually put it this way.
+
+Unknown Speaker  6:39  
+This is little bit more. Can you expand?
+
+Unknown Speaker  6:44  
+Yes,
+
+Unknown Speaker  6:46  
+there is a echo coming. Is this good now?
+
+Unknown Speaker  6:52  
+Okay, cool. Can you go a little bigger?
+
+Unknown Speaker  6:55  
+Little bigger.
+
+Unknown Speaker  6:57  
+So whoever is asking you have having an echo, maybe you want to mute some other mic or something. But anyway, cool. Okay, so here, what we need to do is, in order to query data from census, first, you need a census object. So underlying mechanism of this is, whenever you create this object, it basically inside the census class, they have some code written which basically makes you and that code knows what the end point URL is, and that's why you don't have to ever worry about the URL. All you are doing is you are creating an instance of the class, and you are providing two parameters which are useful, well, necessary. The first one is the API key, because without API key, your request will not be authorized. And then everything that you do this census API applies to a particular year when the data is taken. So this thing is something to important to keep in mind for Census library only that the year that you are getting the data from you need to provide the year when you are declaring the census object, not when you are actually fetching the data,
+
+Unknown Speaker  8:12  
+which, if you ask me, is a pretty odd design choice. I mean, if I were designing it, I would not probably design that way. I would rather let user pass on the year in every request that they are sending to our API. But for some reason, the census API designer thought that it's probably a good idea to provide the ER upfront, and that's what you need to do.
+
+Unknown Speaker  8:38  
+So here I put 2023 because I don't know, 2024 might not have all data published, yes, because the year just ended, and I think we kind of know how this Census Department works. So just to be on the safe side, I put 2023 hopefully we'll have full year data at least up until 2023
+
+Unknown Speaker  8:56  
+so that is your Census object.
+
+Unknown Speaker  9:00  
+And then what we are going to do as part of this example is we are going to retrieve what they call data table.
+
+Unknown Speaker  9:10  
+Now there are two links here, so the first link here, if you follow this link, it will take you to the Python library documentation for these census Python library that we are going to use. So before we run any code, let's take a quick look at the Python library documentation. And if you look at the link here, you see how it says census wrapper at the end. So the term wrapper in this context means that these Python library basically acts as a wrapper around the underlying HTTP REST API, and that's what it's called wrapper. So I'm going to go there now.
+
+Unknown Speaker  9:54  
+Okay.
+
+Unknown Speaker  10:02  
+Different browser I usually do
+
+Unknown Speaker  10:21  
+this to just scroll down? Yeah, no, no, I don't want to scroll down that one. Oh, what is happening here?
+
+Unknown Speaker  10:31  
+Then, then click on the read me.
+
+Unknown Speaker  10:34  
+No, so Karen, what I'm trying to do is I basically have two chrome profile.
+
+Unknown Speaker  10:40  
+So I'm trying to I have a whole bunch of thing opened in this profile. Okay, now it's good.
+
+Unknown Speaker  10:45  
+So I have one chrome profile that I use for the class, and it was going to my other personal chrome profile. Yeah. Okay. So if you link on this first link here, you will come to this GitHub page, which basically tells you, hey, how to install this library. There is also another library called us. Install us if you want to do and this library kind of, it's, this is kind of a metadata library, like, let's say, if you want to get a list of all the zip code or all the counties in all the different states, that kind of thing. So you can do that using the US Library,
+
+Unknown Speaker  11:24  
+like for example. Here you will see that there is a
+
+Unknown Speaker  11:27  
+example where they are using these from us import states. And if you do states, you say states.md It will get you MD as a state object. So they're kind of trying to make all the country and the different regions at the different level, like a state level, county level, zip code level, as almost like a Python object. So that's something that they are doing. But we don't need to do that. Essentially, what we are going to do primarily here is we are trying to understand what is this ACS five mean. And in order to understand that, you have to scroll down little. And here you will see that this is a census API user guide. And then there are a whole bunch of different data sets that are given here. So if you look here. So SES five is a name of a data set that through which they provide five year estimate on certain things, like certain parameters that they collect data on. Ses three will give you three year estimate. Ses one will give you one year estimate. And then there are a whole bunch of other data profile. And all we don't need to learn everything, right?
+
+Unknown Speaker  12:44  
+And all we need to know is ACS five gives me five year three is three year and because as part of this activity, what we are going to do is we are going to use this SES five, which will give me five year profile on certain data, and then on that ACS five, like SES five data set, we are going to use a get method. And in the get method we are going to provide a few things. So what are these things? So these looks very cryptic, the way that they have designed, but in order to understand what that is, what you can do
+
+Unknown Speaker  13:24  
+is, well, this is probably a longer way of doing this.
+
+Unknown Speaker  13:31  
+Yeah. So here, if you go there, you will see the actual URL that Your call will go to.
+
+Unknown Speaker  13:38  
+But to understand all these things you have to click on the second link that is provided, which is the data levels. Okay, yeah, so if you click on that link,
+
+Unknown Speaker  13:51  
+I think no, hang on,
+
+Unknown Speaker  13:54  
+yes, yes, here. So variable. So now b1, times 01300,
+
+Unknown Speaker  14:01  
+1e, 1e,
+
+Unknown Speaker  14:03  
+which is this one? So this is basically these are the different economic variables that the Census Department keep the data on, and this variable gives you income. So which is just description says median household income in the past 12 months in 2013 inflation adjusted dollars, right? So that's our first one. The second one is B, 01003
+
+Unknown Speaker  14:31  
+what is B? 01003,
+
+Unknown Speaker  14:38  
+so this is the population. So this variable gives you the total population of the region that you are getting the data for. So basically, one thing you can do is you can add,
+
+Unknown Speaker  14:56  
+how does it know
+
+Unknown Speaker  14:58  
+is that a Python color?
+
+Unknown Speaker  15:00  
+It hashtag, no, that's a co pilot.
+
+Unknown Speaker  15:07  
+Oh, like, yeah, it guess what the code was, huh? So smart, yeah, except it's dumb, because it made the world comment,
+
+Unknown Speaker  15:16  
+look at that so it knows that this particular census code is total population.
+
+Unknown Speaker  15:24  
+Is there a Microsoft, right? It's, it's a Gen AI. It's a co pilot working
+
+Unknown Speaker  15:31  
+like GitHub, like the GitHub link there, is it reading that from that link?
+
+Unknown Speaker  15:37  
+Either that or maybe. So, you know, like some of these codes, just looking at the code, a large language model can figure out where in the world this code appears. And this particular code, if you look at the format, the format is kind of very unique, probably typical that the Census Department only uses. And as the train these large angle, more language models with everything. It knows that, oh, this is closest to what I saw. I mean, the model thinks that what I saw when I was reading the Census Department web pages, and that's where it is. So now let's see the next one. So let me check the validity.
+
+Unknown Speaker  16:19  
+Yeah, median age, it is correct,
+
+Unknown Speaker  16:28  
+per capita income, but I will always validate
+
+Unknown Speaker  16:33  
+per capita income. Yeah, that's right. That's most impressive thing I've seen. Co pilot,
+
+Unknown Speaker  16:41  
+yeah, and that's why poverty, yeah. Anyway, so now we know that. And then there are many, many these different economic variables, right? So there are economic data, there are poverty data, there is a demographic data, a whole bunch of things, right? A family, poverty,
+
+Unknown Speaker  17:01  
+age variables anyway, but we are not going to go on a full scale research on us demographics and their economic behaviors, right? So just grab a few um now. So that's what you need to do. So that would be your first
+
+Unknown Speaker  17:20  
+um tuple that you have to provide. So you see the from the syntax of this, all of these variable it has to go as a tuple. How? Why do I say tuple? Because this is enclosed within a pair of parenthesis that makes it a tuple. But then, if you just do that, your request is not going to work. So it will say, it will give you an error message. And the data message says missing one required positional argument, Geo. So basically, and then this error message is not very
+
+Unknown Speaker  17:55  
+helpful, because what is geo? And I try to look into the API documentation. It's not very clear, but looking at this code, what I understand is what you need to do is you have to provide a second search parameter, and there it will go as a dictionary. And here you can say, hey, give me this for county wise, or give me this for state wise, right? And then you can say, if you just say, Hey, give me this for state, it will give this data for all states. If you want to do specific state, you can do specific state like this. If you want to do all state, you can also do this way. So that's how the syntax is. So what it's saying is, give me all of these data for this so and so region like do we want this to be grouped by state or county or zip code and stuff like that?
+
+Unknown Speaker  18:54  
+Okay? So let me show you, if I pull it by state, what happens?
+
+Unknown Speaker  19:08  
+Why didn't it so it got 52 because there are 52 steps. But why didn't it clean the head?
+
+Unknown Speaker  19:19  
+Let me put a display around it. Yeah, okay,
+
+Unknown Speaker  19:23  
+yeah. So basically, since I have mentioned state, here it is giving me state WISE data, right? So this name is state. Let me try putting a specific state. Let me put
+
+Unknown Speaker  19:36  
+one state like that.
+
+Unknown Speaker  19:40  
+Oh,
+
+Unknown Speaker  19:43  
+isn't Utah ut
+
+Unknown Speaker  19:47  
+or maybe, yeah, but the whole state name, maybe the state column was a row, was a series of digits. Was it
+
+Unknown Speaker  19:57  
+name? Had the state names? It?
+
+Unknown Speaker  20:00  
+You like,
+
+Unknown Speaker  20:01  
+oh, they will. They basically use this abbreviation, probably no. So Alabama is 01
+
+Unknown Speaker  20:09  
+huh? Try state 49 to get Utah. Okay. Well, let's try 01, first, yeah. So you basically need the now, if you do use the US Library, what you can do is you can do us.state.ut
+
+Unknown Speaker  20:25  
+and it will give you your state as a Python object. And then you can probably pass on that. So I don't know why they're spending so much our tax dollar doing this, frankly speaking.
+
+Unknown Speaker  20:36  
+Like I don't see justification of doing this,
+
+Unknown Speaker  20:40  
+but they are doing it for some reason. But anyway, so the idea is that if you do by state, then it will give you by state. If you do it by county, let's say, then notice that, let's say, I'm trying to get this data for all counties in all of United States, and we will have lot more data. So you see 3222
+
+Unknown Speaker  21:01  
+data,
+
+Unknown Speaker  21:04  
+I guess, probably that's as many counties that we have all over the country.
+
+Unknown Speaker  21:11  
+Now, there are some oddities here. So
+
+Unknown Speaker  21:17  
+one thing I noticed that if you want to do it by zip code. If you just do zip code, that doesn't work, and for some reason, these also smart, what is called co pilot, knows that that if you want to pull it by each and every zip code, just writing zip code is not enough. You have to put this whole thing ZIP Code tabulation area.
+
+Unknown Speaker  21:46  
+Why that is Don't ask me. And it is not very well documented, but somehow copilot figured this out. So if you do this way, then you will see that you will get way more data.
+
+Unknown Speaker  21:58  
+So county gave us 3222
+
+Unknown Speaker  22:01  
+zip code give us almost 10 times more data because it is much more granular level. It is going zip code by zip code, because one county can have multiple zip codes. So 33,000 data that we are carrying,
+
+Unknown Speaker  22:15  
+okay?
+
+Unknown Speaker  22:17  
+And then, since we are directly we are basically using these cryptic
+
+Unknown Speaker  22:24  
+variable name, this b1, 9013, so on. So that's why all the data like median household income is basically this column that is v1, 9001300,
+
+Unknown Speaker  22:35  
+1e, right? So all of these are coming with this cryptic column name. Now obviously, if we want to use this. So what we do need to do is we need to convert this into our user friendly column name, which we are doing here. Instead of name, we are saying zip code, and then population, median age and so on. And then you have a data frame. Then you can do whatever you want to do with this, right? So this is basically just simply choosing column with your chosen name right through your rename, just like we have done in any other pandas data frame, because at that point it's just a pandas data frame. Another thing in example here you're saying you will see that we do have a poverty count, and do we have, we also do have a population. So this is one example. Let's say, if you want to see what percentage of population are under poverty line in a particular zip code. So we can use these total number of poverty divided by your population, which is this column, and you can create a new column. And this is also something that we have learned before, when we were doing the pandas study a few weeks back, that how to create a new column deriving data from other columns, right? So this is one example of that. So this poverty rate is basically a column that we are deriving which is not directly coming from the API.
+
+Unknown Speaker  24:04  
+So that's about it. And then if you want, you can do a.csv.to
+
+Unknown Speaker  24:10  
+CSV, and it will save it in local CSV file. And that CSV file will look like this with my nice CSV preview plug in on my VS code.
+
+Unknown Speaker  24:30  
+So overall, the concept is pretty straightforward, but I would be lying to you if I say, hey, getting data from census API is very straightforward because it is not and that reason is because at this point you this is not a part of your course killer knowledge. What happens is, people who work on a particular API, either the because of their personal interest or because of their job requires them to do. So they basically play around with a lot. And then, if you play around with it a couple of days.
+
+Unknown Speaker  25:00  
+Maybe a week or two, you will basically know everything, all the nuances of the API, right? But since we are not doing that, our focus is to not to learn any particular API. There is no point to dive deep into any particular API, whereas, as part of your project, let's say which is coming up, by the way, and if not today, maybe in the next week, sometime, we will start to find time to talk about the project and what you guys will be doing now as part of that, if you happen to choose to work with some data from certain particular API, then it will be up to you and your group to go and basically master that API and figure out what data you can pull in and how you can pull the data, maybe visualize the data, or do any cool things that comes to your mind, right?
+
+Unknown Speaker  25:52  
+So that's everything that we have to learn today, formally, which is basically getting data through a Python wrapper with the example of census.
+
+Unknown Speaker  26:05  
+But I do have something else that I'm going to show you any question before we start there.
+
+Unknown Speaker  26:12  
+So, yeah, go ahead. Yeah. So in a scenario where it's not the census data and a link is provided with, like the data labels. How would we how would we do this? How would we find that equivalent information to do this? Because we had to rummage through that data label link to find those be whatever labels. I can't imagine. That's always going to be the scenario. So like in a maybe more everyday scenario, what would that look like? I think there's one word that you used you still have to rummage through if you don't know.
+
+Unknown Speaker  26:50  
+So the thing is your context. So let's say you are working, let's say in a data analyst or some kind of a position, right? Data analyst position in a company, you will know what to look for, or you are working in an academic setting, in a group where you are basically focusing to get data from somewhere. So you will need to spend some time to understand how that particular API works. And just hold your thought for a few minutes, and I will show you some work using another API. And as I said, some API providers, they are pretty good in providing all the details of what the methods are, what are the data structure, what are the attributes, option, query parameters. But some data providers are not that well organized. So the answer to your question is that there is no straightforward answer that applies across the board, right? Okay, it depends on a case by case basis.
+
+Unknown Speaker  27:47  
+And Google is always your friend, and now these days, your co pilot and Jim and I and all of the chat bots.
+
+Unknown Speaker  27:58  
+Cool. Thank you. You
+
+Unknown Speaker  28:03  
+Yeah, I actually like the term co pilot, right? So I was actually
+
+Unknown Speaker  28:07  
+listening to, there is a YouTube channel called machine learning street talk. And there I was listening to interview of an author.
+
+Unknown Speaker  28:18  
+And this is the author whose book I'm reading right now, which is Christopher Bishop, oh, I don't have the book handy right now. So he basically leads the research group in Microsoft Research. It's called AI for science group that leads
+
+Unknown Speaker  28:34  
+so so I was like, hang on, what I was saying? Yeah. So I was listening to his talks, right? And he he basically says some of the cool things, right? So one of the thing that he said during this talk, if you guys are interested, I can probably send you the link. It's about one and a half hour talk. So he basically recently published a new book on how to use pattern statistical pattern recognition. So basically provides the theoretical background that basically underlies this deep neural network based AI, right? So couple of things that he mentioned in the talk that earlier, like up until three, four years back, all we were doing was just machine learning. So we were fooling ourselves when we used to call them AI, because there is really no intelligence up until very recently. And this is something which even the experts got very, very surprised, like even experts were not sure the mathematical model was already there. Jeffrey Hinton won Nobel Prize this year right in physics because of that, but no one knew. No one could predict that when you scale up that neural network architecture many, many fold orders of magnitude, it could actually start to mimic something that you can possibly turn.
+
+Unknown Speaker  30:00  
+Is intelligence, right? And this is the term that he always he's using. He was using in his talk, which is co pilot. And I was first thinking, like I used to think when I heard the Tamil Google is calling Gemini and Chad GPT. The OpenAI is called Chad GPT. So why is Microsoft calling co pilot? So he basically said that the proper use of AI is not that AI is going to drive us or that AI is going to take all our work from us, but the right way to do this is just like what we are doing here in this class, right? We are using that AI is a co pilot, because sometimes you don't want to like, for example, those five lines of comments that I added in the census demo, right?
+
+Unknown Speaker  30:46  
+If there were no copilot, I had to go flip back and forth and read through lines of lines of pages in paragraphs in different pages and do that. Why do that? Right? So see how I did. So I started typing. Copilot suggested something first, I was even not believing what I saw with my own eyes, and then I started double checking. So keep a tab on what AI is producing, because AI sometimes they kind of hallucinate, right, which is a very well known fact, right? But then once I got some confidence, then I say, okay, you know what? This is not that critical. Even if it makes some error in some comments, it's fine. I'm going to take its comment, right? So this is an example of collaboration in other cases in which you have seen, when I'm typing lot of time, co pilot is writing the whole code for us, right? Not just the comment, it's writing the code for us. Now, obviously, when you are using it or when I'm using it, all of us. We have to be more careful when we are going to adopt a executable code, as opposed to just comment, because if there is something wrong in that code, right, the consequences can be more severe, especially if you are trying to use that coding in some kind of a industrial grade, production ready system, right? So, but nevertheless, it is. It is basically helping us doing our whether it is a scientific work, engineering work, or even artwork, right? So let's say you are trying to draw something, right? You are trying to have some idea, abstract idea, like, if you have good experience with basically talking to the AI, which is also known as quote, unquote, prompt engineering, right? So there are people who have done this for quite some time now, two, three years, and they are better at getting results out of the AI by asking the right question in the right sequence, right so that, in a sense, is kind of a human and machine collaboration, and that is what is going to shape the future of how things are going to look like, like so and he basically says, he talks about this thing in a very nice way. So I'll send that link to that video. So take a listen. It's about our almost an hour and half long, but it is very, very nice to watch. So
+
+Unknown Speaker  32:58  
+what's cool is I took off the part or renamed the columns. I just took that code out and then just comment to rename the columns, and I wrote, started edit, filled in the whole thing.
+
+Unknown Speaker  33:13  
+Yes, because, well,
+
+Unknown Speaker  33:16  
+they're pretty Yeah. I'm saying that this, these tools are increasing productivity by incredible percentages, because people aren't having spending time like you said, having to go look up that information. Yeah, every time since since, copilot already knows that b1, 9013, or whatever means household income and so on. It as soon as you type PD, dot rename, right? It knows that this person is probably trying to take those columns and rename it to this right, and which are pretty good renaming suggestion. I have seen that too in many, many, many occasions over the last few days. So,
+
+Unknown Speaker  33:50  
+okay,
+
+Unknown Speaker  33:53  
+okay, cool. So, so essentially, this is all for the class today, and you will see that there is another activity on census, which is basically the same thing. It's if there's no point repeating that thing again. And then your final thing, if you read here, it says, Hey, you guys need to kind of do a mini project in this class where it's totally up to you. Free Form. These are the different APIs that they are suggesting. You can choose one of these API or you can even choose something else which is not here, and then spend some time explore the documentation, kind of what William you were asking, right? Like rummage through all the mess that are out there and try to understand how the API what kind of API data does the API provide, and what are the, what are the good strategies to get meaningful data from that API and kind of a transform the data and maybe create a summary data, or maybe create some kind of a chart or plot or whatnot, right, whatever you can think of, right? So that.
+
+Unknown Speaker  35:00  
+Was the idea for today's class, which I really like, because this is essentially what you have to do in one week from now, right? So the next week we have class. Well, no, next two weeks, we have class. But then after that two weeks, you guys will be working with your peers, with your group mats, to actually, essentially do something like this, on which you will be graded upon, right? So the idea is that in today's class, you kind of do that in a classroom setting which is not graded to kind of get some comfort working with people. So which What do you guys think? Would you guys like to do that?
+
+Unknown Speaker  35:43  
+Yeah, okay. So another thing then, if you do want to do that, what I suggest,
+
+Unknown Speaker  35:52  
+maybe you stick to the groups that you work today when you actually do your first project, right? Your like your group, week eight and week nine, right? Or week nine and 10, whatever it is, basically the first project up to you. But that is just a suggestion. Okay, so I will let you guys do that work in a group, but I don't know when Karen, when you, you create the breakout room every day. Does it randomly shuffle people around, or is it the same group of people? It randomly shuffle some memory, randomly shuffle any way to make, I don't know if any way to make, like a list, and have it always do this list. So usually, can we? Can we do one thing? We just have people go at the beginning, go to the group. Yeah.
+
+Unknown Speaker  36:41  
+Yeah. So I was going to suggest Karen, if we can do this way. So let's say you create a room now today, right? And we are creating How many rooms these days, five rooms, right? I did five. But whatever you want, five. Yeah, five is fine. So
+
+Unknown Speaker  36:57  
+then if you note down the the like, which people have been put in which groups somewhere, and then we can even share that with everyone. And then if everyone is happy within the group, then we can basically make those group permanent for the project work. And that, I would suggest, keep that same group for all the project, not just the first one, because throughout the course, you have to do three projects, right? Each two week long project, yeah, what I have seen is, you know, I speak to a group. I've seen this before as a TA in other groups, and there's a lot of attrition after, after project one. And there's also, I don't think keeping the same groups for every single project is an awesome idea.
+
+Unknown Speaker  37:41  
+Well, again, as I said, I this is not something that I am mandating. It is open, but I have not seen in all other classes that I have taught, usually, the attrition happens in first couple of weeks once people are done project one, I haven't seen much other than some extreme circumstances where someone has to move, or some job situation changes, or something like that. Usually that doesn't happen, but
+
+Unknown Speaker  38:08  
+you are always free to choose another group. It's not a problem. But what I suggest is, let's keep it track on the group that are being created today, and we are, Karen is going to take
+
+Unknown Speaker  38:22  
+note of the group, and we will share that group with you. If you guys are happy, then we will make sure that you guys stay in that group, in that same
+
+Unknown Speaker  38:31  
+category, same grouping, for your first project, at least, right? And then, obviously, if you are not, if you don't want to work in that group for whatever reason you don't want to join another group, that's fine. You can always tell us it's not a big deal. It's everything is very informal here, so no problem. Okay, so we'll do that. But before that,
+
+Unknown Speaker  38:55  
+I wanted to show you an example of getting stock market data from
+
+Unknown Speaker  39:03  
+trading system.
+
+Unknown Speaker  39:06  
+And this is something I basically wrote today, this morning, taking hints from some of the FinTech class that I have taught before
+
+Unknown Speaker  39:15  
+in the FinTech class, it was more important because it's a FinTech class, but FinTech also has a machine learning component, and all of that. In fact, in week eight, the first machine learning that you will be doing is time series forecasting, right? And when it comes to the time series forecasting, which is basically looking at the past data on something that could be a movement of a stock or that could be a weather or whatever, and trying to predict how that series will look like few days or weeks in future, right? So I think it is a good idea to kind of put together things that you have just learned, which is getting data through an API, and see how you can get a time series data from there. So I wrote a notebook for you, so before you jump into.
+
+Unknown Speaker  40:00  
+Your mini project. If you guys all agree, I can run you through this, and you can even take some of the idea from what cha what I'm about to show you. If you guys are all okay with that,
+
+Unknown Speaker  40:12  
+okay, cool. So let's do that.
+
+Unknown Speaker  40:15  
+So the first thing you need to do is
+
+Unknown Speaker  40:20  
+you need to if you want to follow along, or if you don't want to follow along, that's fine as well. I am going to make these available on your GitLab.
+
+Unknown Speaker  40:32  
+This one. No, not this one. This one.
+
+Unknown Speaker  40:36  
+Okay. So what I did is I basically provided all the information instruction here what you need to do. So in this example, we will be fetching stock price data using the alpaca market data API, and this is one of the very rare cases where you can actually get stock market data for free.
+
+Unknown Speaker  40:58  
+There are other stock market data API that gives you more real time data, kind of the data that people use in like automatic trading system and so on, but those come at a hefty price, so alpaca is one of the rare cases where you can sign up for free, and yes, there are paid plan, but even you're using Free plan, you can actually get lot of data. You cannot get real time outputted data. You the data will come at a lag, but that is good enough for any project that you will be doing in this class. So if you do want to follow along, what you need to do is you have to so this is the market data API page, right? So you get go to this sign up, and there are two APIs, trading API and Broker API. So Broker API, we don't need. What we do need is trading API. You can go to trading API and sign up just like you have signed up for any other APIs, right?
+
+Unknown Speaker  41:59  
+And you will sign up, and then you will provide all of your details. And so there are instructions here. So then it will send an verification email to your inbox. So with that link, you have to verify your account, and once verify then you will actually go to the alpaca account that it creates for you.
+
+Unknown Speaker  42:23  
+So here, if you go to then account, and then if you go to Configure,
+
+Unknown Speaker  42:32  
+hang on, wasn't it under Configure?
+
+Unknown Speaker  42:35  
+Was it trading or broker? Sorry, that was trading.
+
+Unknown Speaker  42:41  
+Okay, so it is, yeah, so if once you are done, you can actually follow this link from number four. Oh, actually, I don't have the file produced yet. So
+
+Unknown Speaker  42:53  
+I don't have the file published yet. So let me
+
+Unknown Speaker  42:59  
+put the link in Slack if you want to follow along.
+
+Unknown Speaker  43:14  
+So it's called app dot alpaca dot markets.
+
+Unknown Speaker  43:19  
+Okay, so, so, yeah, what I was here, yeah. So now, if you go here, you will see that there are two type of accounts, individual accounts and paper accounts. Now the paper accounts basically means I, I would prefer that you create a key for your paper accounts, because in paper accounts, what it does is it gives you $100,000
+
+Unknown Speaker  43:43  
+virtual money, like mock money, and if you are, let's say, new into the stock trading game, you can actually use this mock money to do some trading, to kind of get some confidence and understand how the stock market really is working, and kind of sharpen your stock selection skills. That's why people usually use this alpaca account for but for our purposes, we are not going to actually making any trades, which my students do in my FinTech class, by the way, but here, that's not the goal, but we can still use that same API to get the opening and closing prices and volume and like basically all the stock detail for any stock ticker or even, like other
+
+Unknown Speaker  44:25  
+derivative product or currency, even crypto. So you can basically get data for a lot of, I think almost all, of financial products. So essentially, what you will do is you will, after your sign up is done, you will come to these profile page and here you see the keys here, but initially you will see that there would be just a button to create a new key. In my key case, I have already created so it is basically showing, hey, this is the end point, and this is the key. But when you are going to generate, so let me actually generate new.
+
+Unknown Speaker  45:00  
+Is one here. So take a look here. Unlike the other APIs, where it just generates a key, in case of alpaca, it generates two pieces, one is called key and one is called Secret,
+
+Unknown Speaker  45:17  
+a pair of things. So you can always think this like a username and password combination that you use to log into the different websites. So you need to grab both. You need to copy the key and you also need to copy the secret, and you need to save both in your environment variable. Sorry, environment file like this, alpaca API key and alpaca API secret.
+
+Unknown Speaker  45:44  
+And this secret, by the way you see the note here, it says, secret will disappear after refreshing or navigating away from this page. So secret is only visible once when you generate this so before you do anything, make sure that you copy the secret key. You can come and get any time, but the secret is only one time.
+
+Unknown Speaker  46:04  
+That's why it is called Secret, and you need both of these things.
+
+Unknown Speaker  46:10  
+Okay,
+
+Unknown Speaker  46:12  
+so that's your Where is where did my file
+
+Unknown Speaker  46:19  
+go? Oh, it was probably hiding under something else.
+
+Unknown Speaker  46:23  
+That's what we are doing, that secrets area.
+
+Unknown Speaker  46:26  
+I'm sorry, how do you get to the secrets area?
+
+Unknown Speaker  46:30  
+Oh, so when you say, generate key, you it will show two boxes here, right? But where do you get to the profile? Like, I'm I'm like, I was trying to, like, navigate and start taking it to stock prices. Can you click on the link that I just posted in Slack, in the resources channel? I believe that will take you directly to the profile.
+
+Unknown Speaker  46:50  
+Let me try if I
+
+Unknown Speaker  46:53  
+it's basically under Manage Accounts. Yeah, if you click on that, that basically brings me here directly.
+
+Unknown Speaker  47:02  
+Do?
+
+Unknown Speaker  47:07  
+And then you said, generate the key there.
+
+Unknown Speaker  47:10  
+Generate the key under the paper account section, there are two section, individual and paper. Okay, so under the paper account there is a generate KEY button. Click that and you will see two pieces of information, grab those and put it in your environment file.
+
+Unknown Speaker  47:25  
+Mine's asking for MFA,
+
+Unknown Speaker  47:29  
+so first time. So I also wrote that here, if you look in here, so when you are confirming,
+
+Unknown Speaker  47:37  
+so then once you verify the login, then set up the MFA for account configuration page. So first time when you log in, and this is something new that alpaca guys started, they are kind of forcing you to choose at least one MFA. So unless you do that, it will not let you do anything with your account. So choose an MFA. What
+
+Unknown Speaker  48:00  
+do you mean? Choose, you can use authenticator, that's what I use, yeah, like duo or something. You can just scan the QR code, duo, yeah, oh, it doesn't matter, just any of them can, yeah, yeah. I didn't know that.
+
+Unknown Speaker  48:19  
+Just like you choose the NFA for, I don't know, like your online banking profile or anything, right? I mean, all the banks I have seen now, they kind of force you to choose an MFA when you first run register. It's the same thing. Well, when it's a QR code, it's usually like a dedicated app, like download this app, because they only use duo, or they only use Octa only, I know, but these guys, that's what I these guys are little bit more liberal, so they give you more choice. That's cool. I didn't know that was possible. Yeah, yeah. Actually, my company's done like, a bunch of articles on how two factor authentication is is broken and super easy to hack for if you're just using, like, one time passwords.
+
+Unknown Speaker  48:57  
+So when you do that, when you choose the MFA. They will also give you a one time special secret, and they will ask you to put that into a in a secure location, in case your MFA gets compromised anytime. So then you can get that key so put that in some secure vault, or something
+
+Unknown Speaker  49:17  
+like maybe even just write it up in a piece of paper and
+
+Unknown Speaker  49:22  
+put it, put it in a locker somewhere. Like, I'm not saying you have to do that for this now, but that's kind of like what Jesse is saying, right? Like MFA can may not be
+
+Unknown Speaker  49:34  
+solution to everything, so that's why, in this case, you will see that they will provide you that one time code that you will never see again, only one time. And I believe more and more companies will try to kind of adopt these and also like the other thing is because of this quantum computing, like this, this whole this access key and secret thing, which is unbreakable, almost, but unbreakable.
+
+Unknown Speaker  50:00  
+By classical computers right now, as the quantum computers are coming up, this becomes a trivial solution.
+
+Unknown Speaker  50:08  
+So what do you do? So, in essence, everything is broken or will be broken soon. So we have to find something new, y, 2k,
+
+Unknown Speaker  50:19  
+history repeats itself, as they say. And you said, we need both the key and the secret in the API. You
+
+Unknown Speaker  50:26  
+need both in this case,
+
+Unknown Speaker  50:31  
+because unlike other APIs, these guys are more secure, and they are using asymmetric key encryption. Some of the other API that we have seen, like census and all. They just use the symmetric key. So there is no public private key pair. But in this case, they do. That's why you need to. I'm not going to get into the details of the cryptography, because that's not the focus of this. But that, in case you are thinking, why do the answer is that?
+
+Unknown Speaker  51:00  
+Okay? So there's already work on making quantum safe encryption. That's gonna be, yeah, it's already being worked on on how to do that, because eventually, yeah, it's the math to go from a public you can go from a public to a secret key,
+
+Unknown Speaker  51:17  
+but you can't go from a secret key to a public key, given the current system, but because it would take millions of years for a classical computer to break, or a classical computer now they have, there's algorithms that could probably crack it in, like, a few minutes on a quantum computer.
+
+Unknown Speaker  51:36  
+Okay, anyway, so back to this now. So after you have done this, and then I have provided three link so the first one is a link to the alpaca API documentation, which will take you here. And for now, I'm going to
+
+Unknown Speaker  51:53  
+publish this file. But for now, I'm just posting this on Slack channel. And then the next one is the so this is the documentation for alpaca API in general. And then, just like what we saw in the census case, they have a Python SDK, which is a wrapper. So alpaca also have a Python wrapper. So the second link here will take you to a GitHub page, which basically is the official Python SDK documentation for alpaca.
+
+Unknown Speaker  52:24  
+Okay, so that is the second link, and this Python API, Python SDK, is what we are going to use.
+
+Unknown Speaker  52:32  
+And then there is also a Getting Started page, which will actually tell you how to do the pip install, like it's basically how to start using this API, which might be handy if you want to quickly learn alpaca API. And this is one API you might want to learn actually, either for the purpose of this class, like as part of your project, when you are trying to get some stock market prediction or whatnot, or even in future, like, if you want to do some kind of, you know, like a learn about automated trading and stuff, like lot of people do that these days. So this, this library, might actually be helpful for you. So bookmark this link if you want to. And then
+
+Unknown Speaker  53:22  
+the next thing you need to do is you need to do this, pip install alpaca pi.
+
+Unknown Speaker  53:29  
+That is the Python SDK that we are going to be using. And I'm also going to post that peep install command here. So if you run this command, it will install. In my case, it is already installed. So it will say the requirement is already satisfied,
+
+Unknown Speaker  53:49  
+yeah.
+
+Unknown Speaker  53:51  
+So in my case, this requirement is already satisfied, good,
+
+Unknown Speaker  53:57  
+okay, so now getting to the actual work. So I had a whole bunch of input here I have done.
+
+Unknown Speaker  54:05  
+So
+
+Unknown Speaker  54:08  
+one thing I'd like you to take note here that in order to query the alpaca API, since we are going to be querying the historical stock data, there are different kind of client available, like if you just want to historical query, historical prices, there is one client if you want to place active trading order, this is actually our system that you can actually place real trading order. That's a completely separate Python client for that which we don't need. So for our purpose, we are only going to do a read only query to get the stock historical data. So that is the climb that we have to import, which is under the alpaca dot data dot Historical Library. And this is a very well designed API, by the way. This is not like census API,
+
+Unknown Speaker  54:56  
+okay, so that's something that you need to
+
+Unknown Speaker  54:59  
+know now.
+
+Unknown Speaker  55:00  
+Now here
+
+Unknown Speaker  55:03  
+you see that I have the two thing, API key and API secret, and then you have to first initiate a client of that stock, historical data client, and you have to pass both the key and the secret. And now you have an instance of alpaca client. And this is the client that we are going to use throughout the remaining of the work to send request the alpaca client.
+
+Unknown Speaker  55:32  
+Now, in this example, what I have done is I have chosen six stocks, Nike, Amazon, IBM, Apple, Home Depot and Cisco,
+
+Unknown Speaker  55:45  
+for no particular reason, you can choose as many as you want.
+
+Unknown Speaker  55:50  
+So I have these stocks data that I'm going to fetch now. This is where you need to now see how the request work here. So in alpaca, you have a client that we initiated up here in this line. So that's the client. And by the way, I have everything actually put mark down here so that we should be able to read and follow through easily later. So this is the client. So I create a client and set it aside. Now what I'm going to do is, let's say I want to send a request to get the latest quote, latest post, meaning the last price that has been recorded in the market, which is basically at the close of the market, like 4pm today, right? So that's your latest quote request. So if I want to get the latest quote, I need to create a latest quote request. This is a particular request type. And why this request type is here, because, if you see here, the another import that I have is from alpaca data dot requests, import star. There are many, many different type of requests, so different type of client and different type of request. So if I didn't do star, then
+
+Unknown Speaker  57:06  
+here, this is not alpaca data client. It is making a mistake here. So there is no such thing at alpaca data client, stock, latest data quote,
+
+Unknown Speaker  57:17  
+yeah, so stock bars request, stock, latest bar request. So these are the different type of requests that are available now, depending on what is that you are trying to do, you have to create one of these request object with your query brand,
+
+Unknown Speaker  57:34  
+and then you need to use that client that you have created and send a request through the client and pass this request object. So this request object is essentially think about you, what you append in your URL query string. So instead of appending in a URL, you have to create a corresponding request object, and using that request object, then you send the request to the client, and in response you get, not a JSON. You get a response object which you then convert to JSON. So everything is very strongly typed here in apaca API. So instead of importing all these different type of requests, what I did is I did import star, and that's why, no matter which request I use, that is already available in my namespace here in my Python file. Okay, so in this first little example, I'm going to send a request to get the latest stock quote, and one of the parameter that it takes is called symbol, or symbols. So that's the named parameter. And name of the parameter is very, very self descriptive, it says symbol, or symbols. So by the name of it, you can now realize that you can either give it a single code, like just one string, or you can give it a list of string. So in my case, I have a symbols, which is a list of string. So I'm going to pass that to this, and this is the request object I have created. I still haven't sent the request, so what I did here is I created the request and I created the client talk above here, so the client is already created. Now, I created the request. Now in the next line here, this is where I'm going to use the client, client, and then I'm going to use a particular method, which is get stock latest code, and then use the corresponding request object that I have created here, and then only I'm going to get the response, which is this, which I'm going to do a JSON dumps, and it will look like this.
+
+Unknown Speaker  59:38  
+So, 123456,
+
+Unknown Speaker  59:41  
+so for each stock, it tells me what is the symbol, what is the time stamp, which, as you see, is January, 7, 859,
+
+Unknown Speaker  59:51  
+oh. So it does have after market, after hours data as well. Even the stock market closes at four. So I think it gave me.
+
+Unknown Speaker  1:00:00  
+The data from last just before the last hour of closing, but it ends.
+
+Unknown Speaker  1:00:10  
+Oh, actually, you are right. This is UTC time. Oh, this is UTC time. So UTC is what, five hours ahead. Okay, so sorry, I take that back. So this is time. Sorry, price at market close, because this is UTC, and we are what UTC minus five. I am UTC minus five, right? You guys are further behind. So, yeah,
+
+Unknown Speaker  1:00:30  
+well, Sarah, and I think in in Mountain Time, so let's see minus seven. Yeah, yeah. Okay. So now with this, we can get the latest price of the stock of our choosing, okay, which is good to know.
+
+Unknown Speaker  1:00:45  
+But in the next example, what we are going to do is, now we are we got some good data. Now we got very interested. Okay, let's see what else we can do.
+
+Unknown Speaker  1:00:55  
+Can we get a history of prices in a given time range, like last week, last month, last year, last two, year three, year five, year, right? Things like you get on Yahoo Finance or whatever, right? So you can get all of those kind of data here through this alpaca API.
+
+Unknown Speaker  1:01:13  
+So what you are going to do is, in order to get historical data, we need to use a different use a different request, and that request is called stock bars request. Remember in the previous request, the request was stock, latest quote request. As I said before, there are different type of requests to get accomplished different things the client is still the same. Is the historical data client, but historical data client can accept different types of request. So now we are going to do this bars request. So why is it called bars I guess probably the naming convention is like, you know, like, how these prices like show up in a bar chart. So instead of saying stock history request or something, they call it stock bars request. But what it request does, essentially, it lets you pull stock data within any time frame and with different granularity, like you can say day by day or hour by hour or minute by minute. I don't know whether you can get second by second, because those are something on the territory of the more premium API where you need to pay up, like second or even millisecond frequency. And for that, you need to pay, you need to use something like,
+
+Unknown Speaker  1:02:29  
+what is that name of that other API? Actually, I do have another for polygon. Yeah, polygon. So polygon is another API, but you need to pay a fortune to get that kind of high delete granular data. But anyway, so for this one, we are going to fetch by
+
+Unknown Speaker  1:02:45  
+day and daily data for our six stocks that we have using this stock bars request. And we are going to use our same stock historical data client, but we are going to be sending a new type of request, which is the stock bars request. Now how do we do that?
+
+Unknown Speaker  1:03:03  
+So first, let's take a start date and end it. So for end date, I am taking today's date,
+
+Unknown Speaker  1:03:11  
+and for start date, I'm taking today minus 365 days. And this is all Python method, by the way, within the Python date turn library. So my start date, start date is 365 days back, or 366 I said, because last year was a leap year.
+
+Unknown Speaker  1:03:27  
+So I chose 366
+
+Unknown Speaker  1:03:29  
+so this is my end and start, and then this is where I am forming the request here. So just like your latest quote request, the first parameter here is symbol, or symbols, same as the previous one, but here you also have to provide three other parameters, which is, what's your time frame, what's your start date, and what your end date?
+
+Unknown Speaker  1:03:53  
+And we have all of these. So we create the request, and then we send the request through this client using this function, which is get stock bars,
+
+Unknown Speaker  1:04:05  
+and that will give our give us a stock bars as a response. Now what we want to do here is we want to see what kind of response it is and what is the response. So let's run this,
+
+Unknown Speaker  1:04:18  
+and it's pretty fast. Actually. It got a lot of data, but very, very fast. So if you see the output of this line,
+
+Unknown Speaker  1:04:26  
+is this.
+
+Unknown Speaker  1:04:28  
+So the reason I put type printed type in here to show you that it is not a JSON data. The data is actually this alpaca data model dot bars. Dot bar set. So this is an alpaca model object,
+
+Unknown Speaker  1:04:44  
+and then inside the data, if you do a print, it does look like a JSON. So it is essentially wrapper around the JSON, but it is not the JSON itself. That's why, when I did print stock bar response, it is showing me our familiar looking JSON. But this.
+
+Unknown Speaker  1:05:00  
+Is a little difference, but very important distinction. Like, if you immediately try to get this response and try to do in a load into a data frame, it will fail because it is not a JSON. So that's what I just wanted to show you. But no problem for that. There is just simple one line that will allow you to convert it to a regular Jason, and that is, you take that response and use a function called model dump Jason. So these model dump Jason takes the content of the response, spits out Jason
+
+Unknown Speaker  1:05:35  
+as a string.
+
+Unknown Speaker  1:05:38  
+Then we have to use our old friend, or JSON library. And in JSON library, we have a function called JSON dot loads. And JSON dot loads now will take the output of the model, dump JSON, and that will give you your regular plane, regular JSON format. And all of these is basically enclosed in a master key called data, which is kind of a placeholder for everything which I don't need. So then you can just peel off the outer layer, which is the data. And this is where I'm peeling off the outer layer and basically grabbing whatever is inside the data as the key. And that is where all the data for all six stocks are residing. So these stock bars is now a JSON object where I have 366, days worth of data for all six stocks.
+
+Unknown Speaker  1:06:31  
+Okay, so now, then you run it, now you see your familiar JSON with no funny character, and this is for Apple, and then, blah, blah, blah. So this is a long, long list, right? So I don't want to even expand that, and we don't need to, because the next thing, as you probably already know, we will take this and we turn it into a fundus data frame.
+
+Unknown Speaker  1:06:54  
+So what you can do that like you can say, hey,
+
+Unknown Speaker  1:07:00  
+let's call it.
+
+Unknown Speaker  1:07:02  
+What was our first stock, apple. So if you say APL DF,
+
+Unknown Speaker  1:07:09  
+APL stock DF, right? And you can do look at that.
+
+Unknown Speaker  1:07:19  
+I don't need to buy anything. But anyway, so you can take the this is stock bars, right? This is the variable, and inside that, a PL is one, Cisco is one, Amazon is one. So there are basically different key value pairs, but the keys are the names of the stock that we passed. So if you take this and then convert it to this, then it will, oops,
+
+Unknown Speaker  1:07:45  
+it will turn it into
+
+Unknown Speaker  1:07:50  
+a pandas data frame, which you can see here.
+
+Unknown Speaker  1:07:54  
+So this is the first five lines, but you see here the first line is from January one.
+
+Unknown Speaker  1:08:01  
+No, sorry, January 8, 2024,
+
+Unknown Speaker  1:08:04  
+Today is January 7, so, yes, one year before, and then January nine, January 10, 1112, and so on and so forth. Right now, if I do little bit more, let's do a head of 10. You will see that there are some gaps in the data, which is fine, because those are the days that stock market is closed. So you see eight, 910, 1112, and then there is no data for 13 and 14. Then you have 1617, 1819, 20. So you will see each five days, and then two days market is closed, and this is in stock trading circle. This is called OHL CV data, which basically means Open, High, Low, Close and volume. So what was the price of the stock when the days trading started? What was the price of the stock when the trading closed? What was the highest point the stock has reached during that day? What is the lowest point that the stock has reached? What was the total volume of sale and how many trades were met, and this, VW, AP, I don't even know what that is. Some, some weightage, probably. But anyway, we are going to be only working with the close, which is this, because essentially, this is the price of the stock at the close of the market on very, that very day. Okay, so this is the thing now. So we can do it now. So if you want to convert it into six data frames, you have to write six of these statement. You will say, Apple stock data frame, Amazon stock data frame, and so on, which you can do. But here I wanted to show you another little trick of Python, which is,
+
+Unknown Speaker  1:09:42  
+I don't know how many of you guys actually have done Java, and in Java, there is a concept called reflection mechanism, right? So you can actually dynamically create variable in Python as well. The trick in Python is this, in Python.
+
+Unknown Speaker  1:10:00  
+So there is this thing called globals. So if you type, let's say globals, which is a function.
+
+Unknown Speaker  1:10:11  
+So what do you see
+
+Unknown Speaker  1:10:14  
+these globals is a namespace that
+
+Unknown Speaker  1:10:19  
+is used by the Python runtime, and it basically works like the key value pair, like a dictionary, and it has the names of all the variables and including the names that you have defined and all the built in names that Python uses, it has basically everything in the world. So that's what global says. So here, what I want to do is I have these six symbols in a list, right? So I don't want to type those again. I want to take those symbol names from my list of symbols, and I just want to create a variable called, let's say, Apple, underscore bars, Amazon, underscore bars, Cisco, underscore bars. So essentially, this is how I'm creating the variable. So if you take the globals, and this globals is just a dictionary, so then you are basically creating, oops, another key in the dictionary. Just, you would, in any dictionary is just another key. The here, this is our variable name that I am choosing. So essentially, when I run this, it will create six variable for me, even though I'm not actually creating the variable.
+
+Unknown Speaker  1:11:24  
+So dynamically created variable, and each of these variable, I'm basically creating the PD dot data frame and taking the corresponding list from that stock bars, the response we have up there.
+
+Unknown Speaker  1:11:37  
+And then, if you basically print
+
+Unknown Speaker  1:11:40  
+what you get, like the shape, just to make sure that we got everything. Now, let's see what happens. So you see each of these has 252, times nine. So nine is because we have nine columns in everything that open, whole, high, low, close, and so on. And 252, because out of these 366, days, only 252, days markets were open. So even though we said 366, days of worth only, we got 252, days worth of data. Which is the market open day, which is good? So now
+
+Unknown Speaker  1:12:12  
+all of these variables have been created. How do I know? So now we know that, let's say Amazon, right?
+
+Unknown Speaker  1:12:20  
+Amazon bars is a variable that we have never created, but Amazon bars is a variable that stores the corresponding Amazon stock data frame which have been created here dynamically, and that's why you see. The weird thing is, when I type Amazon bars dot head, Python is showing a yellow squiggly line, because this kernel has not seen me creating the Amazon underscore bars variable
+
+Unknown Speaker  1:12:48  
+because I kind of backdoored it and directly created the variable into the global.
+
+Unknown Speaker  1:12:54  
+But nevertheless, this code will work.
+
+Unknown Speaker  1:13:00  
+Okay.
+
+Unknown Speaker  1:13:02  
+So this is why, instead of making it like a set of of data frames, I mean, like your particular reason, I just, I just wanted, I was just feeling geeky this morning, there's I, you know, I actually, it's actually the in Java you obviously have reflection, but in JavaScript, there's also something called eval, where, yeah, yeah, JavaScript to write JavaScript is the same concept. It is the similar to eval in JavaScript, yeah,
+
+Unknown Speaker  1:13:33  
+no. The good thing is, you will see this whole page. In this whole notebook. There is only one cell up there where I have declared the list of symbols after that. I have not used that name anywhere,
+
+Unknown Speaker  1:13:46  
+but it just would does the work like magic. So it just feels good to me. This is nice, huh? I think that is kind of, I actually really dig that you showed this. It's, I think that the general
+
+Unknown Speaker  1:14:00  
+concept is awesome. I think the caveat needs to be that this isn't the only way to do it.
+
+Unknown Speaker  1:14:07  
+No, this is not the only way to do it. No. And that is that is true for most things in life, or at least in Python, that is never the only way to do anything.
+
+Unknown Speaker  1:14:17  
+Yeah. So anyway, so Okay, so now we know that we have six of these, like, just like Amazon bars, we have a Cisco bars, we have a HD bars, and so on. So now what we are going to do is we are so, so let's just display all of this in a one single loop. So for symbol in symbols, I'm doing a display. And here also I'm referring to that in using this dynamic way from globals, and then it will basically print a snapshot of all six. The first one, you see all the row says NK, the second one, all roses, Amazon, and then IBM and apple and so on. So these are my six reference that we have
+
+Unknown Speaker  1:14:58  
+now what I'm.
+
+Unknown Speaker  1:15:00  
+To do is what I need for my purpose. What I set out to do is I want to create one data frame with just the closing prices. I don't need anything else. I just want to discard everything. Just take closing price of IBM and call that IBM. Take closing price of apple and call that apple. So I just need six columns, and I want these dates to be in the index. So I want a six column database with a date index that will give me the closing prices of the call respective stocks. How do I do that?
+
+Unknown Speaker  1:15:34  
+So I do that here this way. And again, Jesse, going back to well, you might say, Hey, why did you do this? Do it this way? There is this other way. Yes, obviously there are many different way of doing things. I just did it the way that came to my mind in the first place, right? This is kind of, I think, when you program long enough, there are kind of a natural way of thinking that you develop. So, yeah, I think the danger is just that you have folks of like, different levels that are that, are that are looking at this and saying, is this exactly how I have to do it? I That's which is why I wanted to make sure that it was really important to say, like, there are a lot of ways this. There are, this is a, this is a, a wonderfully nerdy way to do it, but there are simpler, clunkier ways to do this, clunkier way.
+
+Unknown Speaker  1:16:21  
+Okay, so point taken. So if you want to, if you want to rewrite a copy of these and share, feel free like which is not as nerdy
+
+Unknown Speaker  1:16:32  
+anyway. So what I'm doing here is I'm creating an empty data frame,
+
+Unknown Speaker  1:16:36  
+just dot data frame which is an empty and then I'm going through all the symbols, and for each of the stock specific data frame, I'm only taking one column which is close, and I'm appending that column into my empty data frame with that stock name as a column header,
+
+Unknown Speaker  1:16:54  
+right? So here the only nerdy part is this globals part. But overall, this mechanism, I think this is probably the
+
+Unknown Speaker  1:17:01  
+easiest mechanism. Again, there are multiple ways of doing this, but this probably is the easiest, except for the globals part, right? And then I am adding the date also the timestamp column. I'm adding that as a column called date, and then I am converting that date to index, because I want these two date as an index. And if you see here, the date actually contains your month, day, and then a time zone, and then hour minutes second. So this hour minutes second is overkill for our purpose, because we are looking at a daily data. We are not looking at hourly data. So then what I'm doing is I'm basically taking just the date component of it and discarding the hour, minutes, second, which is this line. And then now, since I converted the date column into index, I don't have to keep the date column around anyway, because that would be duplication of data. So then I'm actually dropping the date as a column. First I created the column, then I converted it to index, and now I'm going to delete the column, and then I'm going to take a look at how the data frame looks like. And this data frame I'm calling daily close DF. So this is a data frame that contains a daily closing data for all the six stocks of our choosing.
+
+Unknown Speaker  1:18:18  
+Okay? And you see here, this is an index. This is not a column,
+
+Unknown Speaker  1:18:22  
+okay? And we got rid of the timestamp part, just yy, mm, dd, so that's good, but no, I could you as an alternative, could you drop the timestamp column and make the index the date column?
+
+Unknown Speaker  1:18:39  
+Well, that's what I did right?
+
+Unknown Speaker  1:18:43  
+I thought I'm
+
+Unknown Speaker  1:18:45  
+now, so this timestamp column was coming from the original data set that I loaded from the JSON response. Then I took that column added into our this data frame as a column named date, yeah. And then I took that date column and changed to two date time to set it as an index. So convert it to PD, dot two date time, because that was a timestamp, you have to convert it to a pandas date time. And then the output of that I said, Hey, this is my index.
+
+Unknown Speaker  1:19:20  
+And then that index also has a date and time part. So there I took the date part of the index and re indexed it so that the time part is discarded. And then once I'm done, finally, then I deleted this date column, which I added up here. This is where I'm getting rid of the date column.
+
+Unknown Speaker  1:19:40  
+Got it? Yeah, I thought both date and time stamp were in the original data frame. That was my mistake.
+
+Unknown Speaker  1:19:49  
+Okay, so now we have this
+
+Unknown Speaker  1:19:52  
+So, so far so good.
+
+Unknown Speaker  1:19:56  
+Cool. So now we are going to do some statistics. Do.
+
+Unknown Speaker  1:20:00  
+Okay, this is the first glimpse of
+
+Unknown Speaker  1:20:03  
+thinking about doing something with the data. So if you have realized, which I hope you do, that we really haven't done anything remotely related to machine learning up until now, even in this exercise, we are not going to but I'm just going to give you some food for thought. Maybe you can start thinking ahead for what is going to come in next two, three weeks. Okay, so follow.
+
+Unknown Speaker  1:20:28  
+So first what I want to do, I'm just curious. I just want to plot it. I just want to see how these stock prices are moving, just like people do in Google Finance and Yahoo Finance, right? So I do, took this daily close data frame, and I just say, hey, plot it. And then after the plot is done, then there is a function called PLT, dot, show which, by the way, is coming because that PLT thing is coming because of these
+
+Unknown Speaker  1:20:54  
+input that I have, matplotlib.py, plot as PLT. So by doing this that gives me more leverage to pull and to twin and tube, how my
+
+Unknown Speaker  1:21:08  
+tune and tweak, how my plots look like. So I'm here actually specifically importing matplotlib.py plot as under a shorthand called PLT.
+
+Unknown Speaker  1:21:19  
+So now down here,
+
+Unknown Speaker  1:21:22  
+what I'm going to do is, first, I'm going to take that whole data frame and do a plot I can also do, take a particular one column of the data frame and do a plot also like I can do, take this data frame and then inside that data frame, take a particular column and plot, then it will plot just that one column.
+
+Unknown Speaker  1:21:43  
+If you apply plot on the whole data frame, then it will plot all the columns, well, all the numeric columns. And that's why we needed to have our date time as an index, because this index will basically come as a horizontal axis, the x axis. And we are calling these plot closing prices, and you can change the shape and size of the plot and so on. So this is how it looks like.
+
+Unknown Speaker  1:22:09  
+Okay. So this is the pure prices.
+
+Unknown Speaker  1:22:13  
+So that's our first exploration of data.
+
+Unknown Speaker  1:22:19  
+Okay. Now if you do want to do it separate instead of so here one thing is,
+
+Unknown Speaker  1:22:26  
+all the stocks may be healthy, but just because some stocks are essentially higher price, because maybe they haven't done as much split and so on, so they are showing higher up on the graph. So looking at this, people might get a false idea like, Oh, these Home Depot stock looks higher price, therefore I'm going to go for Home Depot stock. I'm going to put my money there. Well, not necessarily lower price. Does not mean that stock is not a good investment, right? So sometimes people don't like this way. They want to show it separately. So to do that, you can use the same command, but just add another parameter called sub plots equal to true. And when you do that, it will basically generates the plot separately
+
+Unknown Speaker  1:23:09  
+with corresponding Y column, instead of putting everything again across against a common y column. Now we have tiny little strips of graphs with their own y column bands, right? So the good thing is, just looking at that, you can actually see last one year which of these stocks increased in value and which one of these stocks decreased in value. The only thing stock that I can see that has underperformed over the last one years is Nike. Everything else is has has increased the value.
+
+Unknown Speaker  1:23:39  
+But does that mean Nike is the worst stock,
+
+Unknown Speaker  1:23:44  
+may or may not be right, which we will do some further analysis to see. Again, we are not going to do the full scale analysis. This is not a FinTech class, right, but some of this thinking would be helpful for you when you are actually doing the forecasting.
+
+Unknown Speaker  1:23:57  
+So this is the closing process. Now you see what I have written here. The series of closing prices does help visualizing the movement, but you cannot really compare the volatility of the stocks, because you see how each of these lines going up and down like a random walk.
+
+Unknown Speaker  1:24:17  
+So now one thing people look in, they think the stock that is less volatile is a better, more stable investment because it is less risky.
+
+Unknown Speaker  1:24:29  
+Now, how do you calculate volatility? So volatility is defined as how the stock is changing from day to day.
+
+Unknown Speaker  1:24:38  
+So in order to calculate the volatility, you have to take each day stock price, subtract from the previous day stock price, and then divide by stevia, previous deck stock price, and then multi by 100 that will give you the percentage change that the stock shows on every day of these last one year period. So.
+
+Unknown Speaker  1:25:00  
+And then you can do apples to apples comparison, because otherwise each stock has its own trend. But in looking at just the price, it is not possible for you to figure out which one is a better stock, because you do not have any clue about the volatility. So for that, what I'm going to do is, so there is a pandas been built in function called PCT change. So I'm going to apply this PCT change function over on the overall data frame. And what that function does. It takes all the numerical column and calculates the percentage change, and I'm going to take the whole thing and assign to a new pandas data frame, which I'm calling daily return data frame.
+
+Unknown Speaker  1:25:41  
+Now when you do that, you will get a null in the first one, because in order to do percentage change, it has to take a particular day, and it has to compare that with the day before it. So for the first row, there is nothing to compare before. So the first row will always give you a now, that's why I do a drop in is to get rid of that first row, and does it implicitly create, like, a new column in the data frame? That's the percentage that depends. Like you can if you do it on a single column, that will give you a series, and in return, you will get also a series. Here I'm doing it on the overall data frame, so it gives me a overall data frame. Um, instead of adding a particular column to this, I'm just choosing to put it in a new data frame altogether.
+
+Unknown Speaker  1:26:29  
+But sometimes you might want to look like, Hey, these are my three columns in the same data frame. I'm going to create three more columns with the percentage chain, which is fine, you can still do that within using the same function,
+
+Unknown Speaker  1:26:42  
+just like we did in the in the what is called the
+
+Unknown Speaker  1:26:49  
+census example, when we created that poverty rate, we created that and added the poverty data as a another column. So you can also do that. But here I'm just choosing to create a new data frame, and now look at these data frame. So these data frame does not give you prices. What it does have is this decimal number.
+
+Unknown Speaker  1:27:09  
+So that means on this particular day, Nike strap stock dropped 0.18%
+
+Unknown Speaker  1:27:16  
+compared to the previous day, and the next day it gained 1%
+
+Unknown Speaker  1:27:22  
+and the next day it gained 2% next day it lost point 7% and so on. So that will allow you to do a more side by side comparison and be able to figure out how volatile its stock is.
+
+Unknown Speaker  1:27:39  
+Okay.
+
+Unknown Speaker  1:27:41  
+Now
+
+Unknown Speaker  1:27:44  
+we are going to plot this. Now we are going to take this and we are going to do a plot of this data frame.
+
+Unknown Speaker  1:27:51  
+And this is what you get, right? All you get is, quickly lines and looks like from the choice that I have, maybe all of the stocks have kind of same volatility, except one outlier I can see here is Nike.
+
+Unknown Speaker  1:28:09  
+You see how widely varying these jumping some of these blue lines are, so that shows Nike is very volatile here. How do you change the scale on that is, what is, what is the fig size argument there, yeah. So if you, if you, let's say, if you do these 10, the plot will be wider.
+
+Unknown Speaker  1:28:30  
+Oh, sorry, the second one is, the plot will be how long? Uh, basically, uh, taller.
+
+Unknown Speaker  1:28:37  
+Okay,
+
+Unknown Speaker  1:28:40  
+so I took this five, and if you do 15,
+
+Unknown Speaker  1:28:44  
+it will make it stretch it out further here. Okay, copy that. So it's basically length and width, sorry, width and width and height. Width, first, height, second.
+
+Unknown Speaker  1:28:56  
+Okay,
+
+Unknown Speaker  1:28:59  
+cool. So now this kind of tells you Nike is kind of an outlier, maybe highly volatile, but hey, we don't have to do any guesswork. What we can do is we can simply do that pandas describe function, and that describe function will give me the stats, and this is what we get.
+
+Unknown Speaker  1:29:17  
+And now looking into the standard deviation, you see Nike standard deviation in point 02,
+
+Unknown Speaker  1:29:23  
+Amazon, point 017014014012,
+
+Unknown Speaker  1:29:28  
+and 011,
+
+Unknown Speaker  1:29:29  
+so you see all like all of these four, they are much lower than Nike,
+
+Unknown Speaker  1:29:38  
+which kind of supports the intuition that We are developing here, that Nike is probably the outlier.
+
+Unknown Speaker  1:29:44  
+Now, if you look up here,
+
+Unknown Speaker  1:29:48  
+Nike, actually Nike is also going down. So it not only it is more volatile, but it is also performing poorly over last one year, right? So.
+
+Unknown Speaker  1:30:00  
+Now the other thing you can see is probably what is the mean. So the mean will basically tell you, on an average, over last one year, the stock price has increased or decreased. So you see Nike has the only one that has a negative mean, everyone else has a positive mean, and that shows there was a net decrease net loss in the Nike stock price. Everyone else actually had a net gain over the last one year period, and they are also less volatile. So looks like Cisco is probably the best stock to invest. Then please take that as an investment advice. There are a lot of other things. I'm just saying, just looking at this, you can get the stats.
+
+Unknown Speaker  1:30:45  
+Is that outlier, like pushing it down,
+
+Unknown Speaker  1:30:49  
+and that's not really overall gains. It's really just, this is your median gain or median volatility, rather,
+
+Unknown Speaker  1:30:58  
+no, no. So this is so volatile. It's not a median volatility, STD, that standard deviation, that is the volatility, right, right. Mean is not a median volatility. The mean is basically it says, Of all these daily jumps that happened, what is the average jump?
+
+Unknown Speaker  1:31:15  
+So if a stock has gained most number of days, the average jump will be positive. If a stock has lost most of the day, the average jump will be negative. And if the stock has kind of stayed flat over the year, average jump would be very close to zero. That's all
+
+Unknown Speaker  1:31:35  
+okay. So then what we can do, so now we have this. Now we need to visualize this. So in statistics, there is a thing called histogram, which is a very useful tool that people in who do plotting in Python, they also use. So to do that, we have to use this function called histogram, h, i, s, t, and so essentially, what you are doing is you are counting the frequency of these occurrences of these different jumps, and you are dividing into buckets of 50, so that you will basically get 50 bars, and that will show you, for each stock,
+
+Unknown Speaker  1:32:16  
+how Many days
+
+Unknown Speaker  1:32:19  
+it has gained or lost how much? So it will be clear when I draw this.
+
+Unknown Speaker  1:32:26  
+Okay. Now, well, so this one, I did it on the daily close price. So now see the problem. So daily close price, if you take and if you do a histogram of daily close price, it's all over the place. There is not even a statistical distribution, since stock market is more like a random walk. When you do a distribution, you kind of expect to see a bell shaped curve like a normal curve. Now, when you take a daily close price and draw a histogram,
+
+Unknown Speaker  1:33:00  
+it's all over the place. Why? Because that is a wrong variable to get statistics on.
+
+Unknown Speaker  1:33:08  
+This is a not what is called a stationary variable. It's a non stationary variable. Therefore, if you do want to take daily closes price by mistake and try to train your machine learning model, it's garbage in garbage out, your machine learning model will predict something, but that prediction will have no statistical significance whatsoever, because you are not taking something that actually follows a statistical distribution. So in machine learning terminology, this is called non stationary data set. So you cannot take a non stationary data set to do any kind of prediction.
+
+Unknown Speaker  1:33:42  
+And that's why the other reason that people do the percentage change, which is, well, I can do another plot, which is doing the same plot, but this time overlapping on one single plot. There are multiple ways of doing plotting. This is just to show you different things, but this is not really useful in particular, because this is just a bar chart, sorry, histogram of daily closing price, so it's all over the place. Not useful. Now, what we do need is we need to have a time series that is considered stationary, meaning that there is a central tendency, and the distribution follows a well formed pattern, like a normal or Gaussian distribution.
+
+Unknown Speaker  1:34:24  
+So to do that, you can do that same histogram function on the daily return data frame that we have already calculated for, and now look at the beauty of the daily return data frame.
+
+Unknown Speaker  1:34:39  
+Do you see the difference now. So compare this with when you are doing the plot of the closing price.
+
+Unknown Speaker  1:34:47  
+So this shows you my closing price is not stationary, whereas my daily return is stationary, because for each individual stock, the return tends to cluster towards a central mean.
+
+Unknown Speaker  1:35:00  
+With some sort of standard deviation of the spread around the two sides of the mean,
+
+Unknown Speaker  1:35:06  
+and when we did, dot describe the amount of standard deviation that you saw there, numerically, that will roughly correspond to the amount of spread that you see here in these graphs.
+
+Unknown Speaker  1:35:22  
+Okay, another thing you can do, just like I did up above, you can try to plot all of this histogram on the same graph to kind of see overlap.
+
+Unknown Speaker  1:35:32  
+And here you can see Cisco, the brown color. This is the narrowest, so that's basically less, least volatile. And NK Nike. You see the blue bars here, blue verse here, blue birds. And the other is IBM. So IBM is also volatile somewhat. So IBM, Amazon, Nike looks like. These are more volatile than Apple Home Depot and Cisco.
+
+Unknown Speaker  1:35:59  
+And no wonder, in fact, I already
+
+Unknown Speaker  1:36:04  
+take a look at the market data outside of this Python and I actually put the stocks in that way from most least volatile, and that's what it is showing here also.
+
+Unknown Speaker  1:36:17  
+Now this plot looks like your minecraft graph, right? Very Blockly, because here I said beans equal to 100. So it is taking the whole distribution. It looks like kind of a smooth normal distribution, but it will be normal distribution in the limit when the data point goes to infinity, right? So this is a approximation to normal distribution. Now, the cool thing is, Python does have a function that allows you to draw that smooth function, even if you don't have infinite amount of data. So here we have, what, 250 each data. So it will take that and draw smoothened out curve. And that function is called, it is also a plot, but you have to say kind equals density.
+
+Unknown Speaker  1:37:05  
+So that creates a probability density curve, and that's what it is look like. Looks like now this final graph, very clearly shows you the nature of each stocks, daily movement, where you can clearly see
+
+Unknown Speaker  1:37:25  
+Cisco, the brown one,
+
+Unknown Speaker  1:37:28  
+narrowest and tallest.
+
+Unknown Speaker  1:37:33  
+So at least from these example, out of these six stocks, Cisco looks to be a better investment,
+
+Unknown Speaker  1:37:41  
+okay. But please don't take this as an investment advice. There are a lot more things here, but this is, this is some of the things people analyze. This is one of the input to your
+
+Unknown Speaker  1:37:53  
+stock picking process if you are a professional investor. So,
+
+Unknown Speaker  1:37:58  
+um, so the reason I wanted to do this also because you can actually take these and use this in two weeks from now, when we actually do the time series forecasting
+
+Unknown Speaker  1:38:09  
+and see how that works. So what you can do is you can basically take your start and end range, maybe not from today, but maybe one month from back. So you take one year or two year worth of data, but stop one month before and don't take the last one month's data, and then you take that data, train your machine learning model and ask your model to do the prediction for future one month. And then you get these current, last one month data separately, and you plot them side by side, and that way, it will be a good way to measure the efficiency or the effectiveness of your model, right? So, so you can reuse some of the work from this notebook when you do that.
+
+Unknown Speaker  1:38:55  
+Okay, so that's all then. So now let's take about a 15 minutes break and come back at 830 and then we will break into a room, into groups soon after, and then you can brainstorm the project. Now don't think that you within this last one hour, you actually have to brainstorm those suggested data project and actually do something, but you can, even if you want to do something you can find, or you might want to leverage this time to kind of start thinking ahead and think about what you are going to do as a project work
+
+Unknown Speaker  1:39:29  
+in week nine and 10. So I leave it totally up to you whether you actually do want to do some hands on work or maybe just use this term time as a
+
+Unknown Speaker  1:39:41  
+like a preemptive discussion, right? Um, like, start strategizing, because we have got this little bit of time today, so let's make good use of it. So let's come back at you the 830
+
+Unknown Speaker  1:39:53  
+and then we'll go from there one during nine and 10 week and then 16 and 70.
+
+Unknown Speaker  1:40:00  
+One the last two weeks. So if you look into the instructions or requirements,
+
+Unknown Speaker  1:40:09  
+so there are different areas that they have suggested. One is finance, another could be healthcare. And there are some sample ideas also, or anything custom, right? Any industry can then that can benefit from exploratory data analysis, and that could be from science, from marketing, from information security, or any business intelligence type analysis, like, for example, aggregation of crime data get getting data from Uber, that's also a fair game. Always, sorry, from Kaggle. I mean getting where data, or any data from Kaggle, right? That's always a fair game, game, because Kaggle is basically the go to place for all machine learning practitioners all over the world. So if you want to get some data from Kaggle, that's fine as well.
+
+Unknown Speaker  1:40:59  
+And then these are some of the milestones that you might include, which is the ideation of the project, fetching of the data exploration, data transformation, analysis, testing and creating documentation. So this is a big one. You have to very well document your project. Um, like using your inline comment or the markdown, like I did in the Jupiter notebook that I shared with you guys. You saw how I have used the markdown cell interspersed with the actual code. So to kind of tell the story what what your notebook is doing, right? So that is also very important. And finally, you also have to create a PowerPoint presentation. In presentation, you don't need to actually put any code. So this presentation will be just like any business presentation, like, let's say you have a product idea and you are trying to pitch in front of a, like, a group of, let's say, potential investors. You want to present your idea, right? So that's kind of the presentation that you need to put together. Jesse. Do these have to be Jupiter Notebooks. Or can they be Python applications? They can be Python application as well.
+
+Unknown Speaker  1:42:07  
+I have seen sometimes students go all the way and then they end up creating a full blown web application.
+
+Unknown Speaker  1:42:13  
+If there is already skills existing in the group, some people in the group, they may be very hands on when it comes to creating a web application. Sometimes groups do that as well, but you don't have to, because your your grading rubric is how good your idea like, how well articulated your idea is not good meaning. It doesn't have to be very complex or very deep, right? But how well articulated whether you are doing data fetching from external API. That is something where, whether you are exploring, taking time to explore the data, whether you are exploring,
+
+Unknown Speaker  1:42:54  
+basically commenting on, okay, this is the data. These, this. This is something that are valuable in the data. This is why the data would be useful, but these are some of the loopholes in the data. This is how you need to cleanse the data. This is how you can transform the data. And these type of analysis that you can produce from the data, which is, for example, if you think of the example that I showed before the break, which is where I did not do machine learning, because in this first project that you are doing in week eight and nine, even if you don't do any machine learning, that should still be fine, and that's why my example, I stopped short of actually doing a forecasting analysis, but I still done some analysis, and I hope I was able to show that I can still tell a story with the data, doing The analysis, like I said towards the end, like, Hey, this is the analysis we did based on this. We can comment like this stock is more volatile, therefore these would be probably be a better investment, right? So
+
+Unknown Speaker  1:43:53  
+that's the same kind of thing that you have to follow in your project as well. So,
+
+Unknown Speaker  1:43:58  
+but again, as Ingrid said, if you think that financial data analysis is too complicated for you. You didn't have to do that. You can do anything else.
+
+Unknown Speaker  1:44:09  
+Okay, so, so
+
+Unknown Speaker  1:44:12  
+what do you say? Let's break into the group and start thinking through these many project today. And then what we'll do is, I'm going to me and the Ts. We are going to come and visit the rooms.
+
+Unknown Speaker  1:44:26  
+If you want to talk to us, spend some time exploring, brainstorming some of your ideas. We can do that. So what we'll do is we'll break you guys into the rooms and give you maybe first 510, minutes to discuss brainstorm within your group, and then we'll start coming and joining your rooms. And then we can do some discussion there. Okay,
+
+Unknown Speaker  1:44:48  
+so for how long should this be set to be?
+
+Unknown Speaker  1:44:52  
+So the rest of the we can actually go all the way. So let's do already. I.
+
+Unknown Speaker  1:45:00  
+Let's do for 40 minutes,
+
+Unknown Speaker  1:45:04  
+so we're not going to present the data. Then,
+
+Unknown Speaker  1:45:07  
+no, no, not for this mini project. No.
+
+Unknown Speaker  1:45:10  
+I mean, you won't have time to go all the way
+
+Unknown Speaker  1:45:14  
+like the work I did today. This morning, it took me almost three hours to complete all that work, right? So it takes time. So it'll take us, like, maybe 30 minutes.
+
+Unknown Speaker  1:45:25  
+Was that so, take us 30 minutes? I get it so, so how are we facilitating? Like, are we just all writing our own code? Then,
+
+Unknown Speaker  1:45:34  
+like, how are we sharing code? Are we? Are we like, live, can I get to GitHub? Or, for today's class, there is no such requirement. I'm holding you guys on to
+
+Unknown Speaker  1:45:46  
+as I said, I mean, discussion and getting into the groove is the main thing. If some of the groups end up writing some code and then you want to share, that's fine. You can do that, but you don't have to do that. Like coming back to the main room. You can even show us when we visit your group.
+
+Unknown Speaker  1:46:03  
+Yeah, it's just kind of, you know, trying to get in the habit of starting to work with your peers within a group. That's the whole idea.
+
+Unknown Speaker  1:46:12  
+Okay, thank you.
+
+Unknown Speaker  1:46:17  
+Was it decided then that the groups that we're going to be a part of today. Are going to be our project groups? Yeah, so that's what I said earlier, right? So Karen is going to take note of the groups. It will be created randomly, and then, if you guys are okay, we can keep that group. If you want to change for whatever reason, you can ask it any one of us, and we can accommodate as well. Because what will happen is, when we actually do the project on week eight and nine, we will just be creating rooms and not randomly assigning people. And then you will have to remember which are the people that you have grouped with. And you can even name your group, or we can just say group one, group to group three, or if you want to put a name, and then you will then choose go and join the corresponding room by yourself when it comes to prod week eight and nine, right? Because during those two weeks there will be no lecture, so I am not going to be demoing anything the whole six days of class, you will be working with your groups only all three hours, and most group also end up working outside of the class hours as well, because just three hours six days may not be enough.
+
+Unknown Speaker  1:47:30  
+So okay, and for that, you have to kind of like, think of like any Google meet or any other additional outside channel, but people do that all the time.
+
+Unknown Speaker  1:47:39  
+Thank you. So I'll just just write the names for each group and the live channel. Yeah, perfect one place of all those, listing them all
+
+Unknown Speaker  1:48:00  
+the type them, I guess.
+
+Unknown Speaker  1:48:06  
+So we're gonna go there. Okay, let's go.
+
+Unknown Speaker  1:48:13  
+And I see for the most part, the group seemed to be very well balanced. And I visited most of you guys in your room, and I noticed that you guys were kind of enjoying working together. A lot of group I have seen that within this limited time, you guys have already gone very deep into one of the APIs, Data APIs, and started doing the work. So I'm very happy to see the progress. One thing I noticed though, room two had six people and room three had four people. So what we'll probably do, we'll put keep the group as is, more or less, I just have to transfer someone from room two into room three, okay, just to kind of balance out the groups. And other than that, my understanding is the groups are okay. If any of you guys have any different thoughts, or if you want to switch groups, you can always let me know. But I think overall, the random picking was kind of spot on. Long as Jesse's in my group, I'm good.
+
+Unknown Speaker  1:49:17  
+I knew you were going to say that.
+
+Unknown Speaker  1:49:21  
+Okay.
+
+Unknown Speaker  1:49:30  
+Okay, cool. So I think we can wrap up. Oh, another thing I wanted to tell I stole to some of you in your rooms that on BCS week nine and week 10 material, I think they are accessible right now for you, and that's where you will see the instruction and the expectation for the project. So now you know who those people are. Now start brainstorming. Now one thing you should do is you need to have a separate.
+
+Unknown Speaker  1:50:00  
+Slack channel for your group. So question to Karen or Kian, either of one of you, do you know, is this something that we create for them, or are they free to go and create this a Slack channel for just for the group? I think they can do side channels just for the group. Yeah, we we created one already. Yeah, we created one already. Okay, yeah. I want to do is include uh, and I was just going to say, so invite uh, instructional stuff in your respective Slack channel, so that way in any time, if you have any question, you can ask us. And also keep in mind that, as I was saying before, in order to pull this off when it comes to the project week, which is week nine and 10 from now, you might have to work outside the class hour as well. I know we are all busy in our professional and personal lives, so even if you do not get a common time that works for everyone. Try to see, like wherever, little bit of time here and there, as and when required, right? Like when you guys want to do collaborative work. And another important thing is planning and dividing the work. Because even if you guys are not working together while being online at the same time, spend some time to kind of set expectation. Who is going to do what? Who is leading the research, who is doing more of the ideas, who is doing the execution. Although, when it comes to the execution part, I would expect all of you to kind of more or less contribute. And then finally, presentation. I know some people are really good at making presentation, and some people are not. For example, I'm really bad at creating presentation so, so see who has the best skill set in your group. But when it comes to actually presenting your project, like doing a PowerPoint slide, is one thing, but when it comes to actually telling the story in the last day of the project, we will have like a 1520 minute or, depending on how much or maybe we have what five groups, right? So we can probably give you 20 minutes to present, followed by 10 minutes of Q, A, so that way we have 30 minutes from each group and we have three hours plus. So that will work out. Now, during that time, we would expect to see all of you guys are contributing to the presentation, right? So it shouldn't be that only one guy knows everything, and others are just following along. Okay? So, so please make sure that you kind of set that expectation among your group, division of work, but at the same time, make sure the effective collaboration happens within the group as well.
+
+Unknown Speaker  1:52:39  
+And those of you who have not created a group our Slack channel, please do the only thing is from group two.
+
+Unknown Speaker  1:52:50  
+I would like to ask someone to move to there's two groups with six people,
+
+Unknown Speaker  1:52:58  
+yeah, but there is one group with four people? Yeah, I was gonna say, okay, that's fine. That's fine. I thought you said there's only one group. No, only one group of four people. That's me, and I need to do something about it. Yeah, there was one group that had two Garys, and so, yeah, it's all, it's all because of Gary's two computers.
+
+Unknown Speaker  1:53:21  
+I have two computers, and I can get it.
+
+Unknown Speaker  1:53:32  
+Okay,
+
+Unknown Speaker  1:53:34  
+okay, so let's wrap up. I
+
+Unknown Speaker  1:53:43  
+I mean, we'll be staying here for some time, so feel free to hang, hang around if you have any question.
+
+Unknown Speaker  1:53:49  
+But for today's class, that will be all
+
+Unknown Speaker  1:53:55  
+sweet. Thank you. Have a.
+

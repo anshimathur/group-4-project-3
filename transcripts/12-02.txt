@@ -1,0 +1,861 @@
+Speaker 1  0:01  
+Uh, this week's class, we are going to build on the regression technique that we learned, and we will see how we can possibly improve upon the regression results we might obtain from some data set. Now one thing, guys, a disclaimer, so I look through the activities. So the activities are going to be useful for you, if you want to go back at any point in time in future, as you do your project work, or even after this boot camp, if you want to see, hey, how some things are done for that purpose. These are useful, but the data set that we are going to be dealing with in all of these activities, it's probably not going to give you enough experience playing with different types of data set with different complexity, high dimensional data set, or basically do sort of state of the art type regression. Because these data set, you will see, you have seen that some of the data set that we use, they are very simplistic data set, like kind of a toy data set. Almost the reason the way that these data set is designed these ways, because the goal in this boot camp is for all of you to learn. What are the techniques that you can have at your disposal. But if you really want to actually start playing with it and apply it, I'm going to show you a little bit later, you can basically go on to Kaggle. So on Kaggle, there are competition that goes on all the time, and there are you will see the past competition that have been closed already. You can take the data set and see what are the what is the leaderboard, how people have dealt with the data set, and how they have what kind of techniques that they have used to get a higher our score value are to value right our square value with a lower error value and so on, right? So you can do those also, you will find some of competition that are currently active. So if you feel very confident playing around, so there is no harm, right, you can just go and submit your entry. And some of these do offer a considerable amount of prize money, actually. So, so the point is, basically, don't think that the data set that we are working in this class is basically something that will give you that, like a like a broad, I'd say, exposure on all of the different kind of nuances or challenges that you might find, right? So for that, the only way you can do that, you can have that is basically to lot of practice, right? And, and I know a lot of you guys, probably most of you already know about this website, Kaggle, so I just wanted to put it out there. So feel free to go on Kaggle and practicing. And while you do that, you might actually come across some cool data set and see how people have worked on and that might actually lead you to some great ideas for your project too, as well. So start looking into that if you haven't already done so, okay.
+
+Unknown Speaker  3:17  
+Okay, so let's get started. You
+
+Unknown Speaker  3:25  
+Chad is my screen visible?
+
+Unknown Speaker  3:28  
+Yes, okay, yeah,
+
+Speaker 2  3:30  
+cool. But no, I just had a curiosity. Was the intended data set? It just the root problem was that it was not complex enough.
+
+Speaker 1  3:40  
+Yeah, most of these data set that you will see that I don't think these are like, complex or realistic enough. And also, in order to get that full experience, you need to have, like, a large data set. The data set that we deal with are pretty small, right? Like, often time you will see just a couple of 100 rows in the in the data frame that you have that often time does not give you the full experience, right? So, but large data set, meaning you have to spend more time, you have to do a lot of experimentation, and all of that. And each of the time you are doing these experimentation, you are running your training on your model, so it needs, it needs a lot of time, right? I mean, that's what these projects are for, in fact, in next class, which is today's work, today's Thursdays, Okay, so next class will be Monday. So in Monday's class, we are going to ask you to actually do a mini project. So Monday's class, there will be not much of lecture time. You can, you can take that as a mini project, and that will give you an opportunity to kind of explore some of the data set on your own and give you an opportunity to practice some of the techniques that you were learning in these first two classes of this week.
+
+Unknown Speaker  4:50  
+Cool, looking forward to it. Yeah.
+
+Speaker 1  4:53  
+Okay, cool. So in today's class, we are going to see how we can possibly. Improve upon our regression results, right? So whenever we are basically faced with a regression challenge problem. So what we do? We take the data set, we do a few things. We check whether there are any null values. If null values are there, we either remove those null values or fill the null values with something else, like some dummy values or some average values and so on. Then we do encoding, right? So if, if some of the data are categorical, meaning string data we use, we can use either level encoding or one part encoding to convert that to numerical, numeric data. Other thing we do is we often do either min max scaling, where we basically scale the data so everything falls between a zero to one scale, or we can do standard scaling, which basically feeds the data into a normal distribution with the mean of one, mean of zero and a standard deviation of one, right? So these are some of the technique that we do, which you have done, and not just for regression, even for clustering problems, also right in this unsupervised section. And then we you run the regression and the problems that we deal with, you often get a very high R square, r square value. So it is not uncommon for these academic exercises for you to get our square values of point 7.8, point nine, which, which are really high actually. But if you start dealing with some of the real world data set, you will probably feel like, Oh, someone, just give you a slap on your face. You, you do all of this thing and your R square value is abysmal. You get like 0.2 0.3 which is like nothing, right? So that means your your model is actually not explaining any variance of that, that is, that is showed in the data, right? So then what you do? You feel like, kind of, you kind of hit a wall. So then, how can we improve upon that? Right? So that's that's like, kind of the thinking that we are basically going to work on today. But as I said in the examples that we have here, it's not going to actually show some art shattering improvement, like you go suddenly from 0.2 or 0.3 shooting all the way to 0.7 or 0.8 you are not going to see that kind of art sharing improvement from any of this technique. And that's why I basically wanted to put that out there as a disclaimer. Like, don't think that you are going to get that kind of improvement. But nevertheless, it is very important for you to understand why we what, what are some of the optimization you can do and why that would be helpful, even though the how much helpful that is that may not be apparent when you are playing with just these data that are part of this class activities. Okay, so if you, if you see like, Hey, you are getting 0.73 and after all of these, you got 0.74 don't come back to me complaining, like what happened
+
+Unknown Speaker  8:06  
+is because you don't have a complex enough data set, so
+
+Speaker 1  8:11  
+And sometime for some of these simplistic data sets, sometimes it might happen like you do all of these, and it might actually backfire. You might actually get little less, because you end up probably weeding out some of the valuable feature that you had, and you have limited amount of data in your hand anyway, so it might actually work in a very counter intuitive manner, right? And that's the problem of having less data. Okay? So let's get started. So the first topic that we are going to discuss today is the topic of bias and variance. Does anyone have kind of a mental map of what do we mean by bias versus variance?
+
+Unknown Speaker  8:56  
+Anybody from your previous learning, previous work?
+
+Speaker 2  9:00  
+I'm just going to throw it out there the dart board analogy that
+
+Speaker 3  9:05  
+yes, yes, that biased. The
+
+Speaker 2  9:10  
+higher the bias you have, the further away you are from the bullseye. But the variance would be how tight your grouping is if you threw multiple darts, even if it hasn't, even if it isn't at the bullseye,
+
+Speaker 1  9:27  
+correct? So basically, and I so thank you for putting that out. Chad. In fact, my plan was to after the first opening slide, I was actually planning to go all the way down to this slide, because that is the, my most favorite analogy as well, right? So if you see in this two by two quadrant, right your model? If your model is perfectly like ideal model, 100% you got everything going the way that you want to, you might end up getting a model that is low bias, low variance. What that means is your model. Can predict with a very high accuracy all the data that it has seen before, meaning the training data and the data that it is it has not seen before, which is testing data, and any data that it might see in the future that users might throw at it to your model. So this is the ideal case where your model is predicting very close to the word the original value should be over and over again with very little variance, right? This is like one of your star Olympic medal you winning archer who can hit the bullseye over and over again without miss. So that's the model that you would ideally want. But wanting something and getting something are two different things, right? I mean, we all want things in our life, but we always don't get it right. That is kind of true here as well, even though you want your Archer to be, to be Olympic medal winning like this, with the low bias, low variance. But that's not what you end up getting. So what you often get will get will probably be fitting, either in this category or this category, top right or bottom left. So the top right is basically what it's saying is, yes, your module is accurate. More or less, your Archer is shooting around the bullseye, but the Archer is not consistent enough. Some of those are spot on. Some of those are far but if you look at the central tendency, the average of those is kind of around the target value, the actual value that you are targeting incorrect. Now, when a model does this, that basically means you probably have trained the model very well with your training data. And when your model either seeing some data that are already in the training set or maybe some other data set that might be very close to some of the training data set. That's when your model is kind of Hitting the Bullseye here. But if it sees other types of data that it has not seen before, or has different kind of Prop, well, same kind of properties, but very different sets of values of those property that's when your model kind of tends to keep missing things and shoots arrow or or scores points with much higher variance right outside the bullseye. So this is a model that has high training accuracy but low test accused that is your high variance model.
+
+Unknown Speaker  12:45  
+Now, when can this happen?
+
+Speaker 1  12:49  
+So think about it. When would your model be able to do well on the test sorry, training data, but fail on test data. So when you're overfitted? Yes, so very good. So, so what Jesse said, where do you overfit it? Right. So a simple analogy you can think about when you think about, Hey, what is overfitting? So think about a student who can, who is a who is a avid reader, and who basically have kind of a photographic memory, right? And that student can basically memorize everything he or she reads and then just reproduce that on a test, and that student will probably do very well on a standardized test that basically repeats things from the textbook. But if that same student is basically presented challenging topics that might still be from the lessons covered in the textbook, but with higher degree of complexity, right, not the exact problems that the student has solved in the textbook, some different problem, then that student might perform poorly. So essentially, what has happened is student has failed to achieve the higher order learning. The student has simply memorized what he or she has seen. And that's what happens in the model to a machine learning world as well. So if your market can so happen that your model basically got too much hung up on the nitty gritty, all the nuances, all the noises, or everything that is inherent in the training data that it is failing to see the big picture. Now, if your model is trained that way, then you will get high training accuracy, but low test accuracy. Which is this top right corner? Okay, what is this bottom right corner? So this bottom right corner is basically saying your model is kind of accurate, but that bull size is not the bull. Why you want that Bullseye is somewhere else. So when do you think this might occur?
+
+Unknown Speaker  15:13  
+Is that what basically, is that what the bias
+
+Speaker 4  15:15  
+is, because the the focus is not on the yellow dot, but more on the blue area, right? So the bias has moved
+
+Speaker 1  15:23  
+up, right? But why do you think the model is very consistent in making prediction, but that consistency does not land on the bullseye. It is consistent on some wrong area of the target, but it's still consistent.
+
+Unknown Speaker  15:38  
+There's some like factor, like throwing off the model.
+
+Speaker 1  15:43  
+So something is throwing it off. Maybe your model does not have all the correct features right? So let's say you are trying to predict the weather or temperature, and you have whole bunch of different data, but you probably forgot to include, let's say, a very important column, let's say probably the humidity, right? Or you are trying to predict what is called house price, and you have all these different data about houses, but you forgot to include some very important features, such as square footage of the house, right? So, so basically, this only happen if your data is insufficient. Right now, many times you will also be unlucky, and you will get a model like this, which is the lower right corner, and that's the bad news, right here, your model is shooting all around. It is failing miserably in the training data and also failing measurable in the test data.
+
+Unknown Speaker  16:52  
+When can that happen?
+
+Unknown Speaker  17:02  
+What is the opposite of overfitting,
+
+Speaker 5  17:04  
+under fitting. So it's when you have features that are included that should be that's throwing off your target, but you have the model is incorrect. So it's there's a high variance, right?
+
+Speaker 1  17:19  
+Incorrect meaning, well, I would not use the term incorrect. I'd say the model is too simplistic, right? So basically, your goal is to have a model that can generalize the pattern in the data. But there should be a balance how much you can generalize. If you generalize too much, then you end up getting bad performance across the board, whether in training data or test data. So that's the balance that you have to kind of, uh, achieve, right, to basically have a higher accuracy and higher score, right? So this is clearly under fitting case. This is overfitting case this, sorry, this is and then this is basically ideal case. This is overfitting, under fitting, and this is basically incorrect, incorrect features. Basically you are trying to measure the wrong thing, essentially. So these are the four different kind of scenario that you will see now another graphic probably would help you understand what when we mean a model is overly simplistic, versus when we mean a model is overly complex, right? So this graphic will help you kind of figure that out. So if you look on the right side, the over fitting graph right so when we are trying to do a linear regression, we have a bunch of data point in an n dimensional space. What we are trying to do is we are trying to draw a line or a surface right through those data points by minimizing the mean square distance between the line, average mean square distance between the line and the data points. Now, obviously, if I if my model has the freedom, higher degrees of freedom, to basically draw all sorts of squiggly line. So essentially, the what the model is doing is this model is basically do working like that student who is very good at memorizing everything from the textbook. So basically, the model is drawing that line that can go through all of these models. Now, let's say tomorrow there is a dot that appears here, or here or here. Now it has no clue how to extrapolate that function beyond the data point that it has seen. And when I say higher degrees of freedom, so mathematically, higher degree of freedom basically means a polynomial that has a higher degree polynomial, like if you have. Is a degree one polynomial. What is degree or one polynomial, which is basically a straight line, which is y equal to a plus b x, if you have a degree two polynomial, that gives you a hyperbola right, which is y equal to a plus b x1, plus c x1, square. And if you do that so, you can imagine like going from degree one, that kind of constrains your model to draw only a straight line, nothing else. If you go from degree one to degree two, your model can take a curve, but just one curve, no more, because only two degrees of freedom. Now if you go to degree three, which is a cubic polynomial, so that means your graph can take two twists, right? So number of turns or twists it can take is always one less than the highest degree. So now here if you have 123456789, so you can see, in this case, the model has taken nine turns. So that means what you have tried to do is you have tried to fit a degree 10 polynomial through this data set. And that's why the your this thing has 10 degrees of freedom that allows it to target, take nine turns and twist and with a lot of opportunity to basically be as close to the data point as possible, which is not a good position to be in. Now, does that mean degree 10 is always bad? No, it depends on how much data you have. If you have 10 million data, then your model better be at least degree 10. Because if you have 10 million data and if you have a your model is only degree two or degree three, then what your model will do, your model will suffer something like this, which is the left hand side, which will be overly simplistic. So in this example, you can see that there is a slight curvature trend in the data points, but you have forced your model to only come up with a degree one polynomial, and that's why it is only thing it can do is it can fit a straight line, which is what it is doing. And this straight line, even though it is pretty good, it is basically capturing the underlying overall trend, which is the slightly increasing trend, right with a with a very little slope, but it kind of fails to see that there is a one turn here. So that's your under fitting. So this is an example of a model that is overly simplistic. So the right model would basically be when you achieve the right balance, which is this one, right? So here you basically are fitting the model to a degree two polynomial, and your model just does that, right.
+
+Unknown Speaker  22:53  
+So
+
+Speaker 1  22:56  
+bottom line is your bias and variance, there is always a trade off. Most of the time, you cannot have the best of the both world. Okay? Because if you want to make the model simpler, which is often something that machine learning gurus will always preach, a simpler model is a better model. But that does not mean you can make the model as simple as possible, because the problem is, if you make the model simpler, your variance goes down, but your bias goes up. If you try to make your model more complex by employing a higher degree polynomial, your bias goes down, but your variance goes up, meaning your models tends to memorize things too well for the training data. That's why fails miserably in the test data. So the goal is to kind of somehow achieve this balance, like basically optimal model would basically be this where your total error will be at minimum, if you go, if you cannot achieve that, then your your you are basically not not optimal, right? And this is basically what people try to optimize when they when they compete in those competition, right? So it's all about finding this point. Now, obviously it is very easy to draw on a graph, but when you have a large like a real, real world data set, it is very hard to actually get this optimal point and and it gets lots of trial and error, right? Lots of different cross validation, trying different technique, trying different what is called regularization, which is something that we are also going to talk about so that that's the game, basically.
+
+Speaker 6  24:42  
+What does that say? Bias squared is that? Is that like a note, like note two, or is that actually squared?
+
+Speaker 1  24:49  
+I don't know. I didn't see that. No, it doesn't Yeah, it's bias and variance. I think it's kind of a typo. I don't see any speaker notes or anything here. Yeah. Yeah, maybe, maybe it was there in a previous version, but someone deleted the speaker note and yeah, so that it shouldn't be bar square. It's just a bars versus variance. Because this, this graph, is just a, just a qualitative it's, it's not a rigorous mathematical graph, right? This is the kind of graph, like economist I'll draw all the time, just to kind of show the overall trend that he's talking about, right? So,
+
+Unknown Speaker  25:30  
+okay,
+
+Speaker 1  25:32  
+so So it's clear, bias, variance, the trade off and what overfitting and under fitting means, right?
+
+Unknown Speaker  25:42  
+So now,
+
+Speaker 1  25:44  
+how we do that is basically we, and we, you have seen this before in the last class. So there are many ways to validate the models, bars and variants right, which obviously is like. One thing you can do is you can do a train test split, and you can score the model on train data and score the model on test data right, which is something that what we have done. And if we see that the train score is much higher than the test score, then you know that the model has over fit, right. And then you might want to regularize the model. So if you do find that module has higher bias, so what you can possibly do? So first of all, let's recap higher high bias means what? What will cause high bias, referring to this graph, again, overfitting so high bias basically means overfitting. I'm sorry. No, hang on your feet bias, you're
+
+Unknown Speaker  26:49  
+missing a feature.
+
+Unknown Speaker  26:50  
+You're missing a feature. Yeah,
+
+Speaker 1  26:53  
+yeah. So what can you do to reduce the bias? Number one technique, add more features. So if you have a high bias, that means you do not have enough data. High bias can also occur for overfitting, which basically means your model is overly complex. So you might want to limit the complexity of the model by using like regularization technique. Sometimes it could be that your algorithm has an inherent problem, so you might want to use a different algorithm. Sometimes, in order, instead of applying an algorithm across the board, you might want to use an ensemble of algorithm. And this mostly happens when you will see in the next week when we talk about classification. So in classification, when you are doing the classification, you can use a classifier that is a very strong classifier that tries very hard to basically draw a class boundary between your Class A and Class B now that may or may not produce good result, sometimes you can use weak classifier that does not want, that does not even attempt to classify accurately. But you can do many different weak classifier together and then use kind of a voting method to basically see which one of these classifier gives you, gives you better average result, and then go by that. So that's kind of an ensemble method of learning, right? So by doing so what, essentially, what you are doing is you are trying to make your model less deterministic. You are basically trying to find safety in numbers. You are not depending on only one learner. You are depending on multiple deeper, different learner and have the learners compete with each other. And other thing is also, if you have not scaled the data, you might try to scale the data using the normalization technique that you have seen the standard scaling, and that might also, in some cases, help you reduce the bias.
+
+Unknown Speaker  29:17  
+What about the variance?
+
+Speaker 6  29:20  
+So could you explain the ensemble of weaker models? Again, really quick.
+
+Speaker 1  29:27  
+Yeah, you you probably would not be able to connect this right now, because that technique usually applies for classifications on ensemble of weaker models. So just hold on to the your thought until next week of classes. Just thank you, because if I try to explain that now, I think we will be kind of deviating from today's topic. So okay, so if you have a high variance, what does that mean? I.
+
+Speaker 1  30:02  
+Your high variance basically means your model is not experienced enough, your model has not seen a statistically significant enough data to be able to come up with that mathematical function that can explain the distribution. Right? So the first thing you if you see that you might want to add more training data. Now, obviously this is not in your control, similar to here, right when you are having high bias. So that means your model does not have enough information about the world, so you need to have more features that contributes to the target. Now, again, these may or may not be under your control, right? Because your hands are tired, you cannot suddenly go. If you have a 10 million record data set and you think the columns are not good enough, you cannot go and have more columns, right? So, but if you can, these are some things to keep in mind, similarly, adding more training, training data. Well, these might be little easy to get right, so let's say you are trying, trying to predict the forecast, and you tried with last one year's worth of data, and you see that your model is showing by variance. Now you might want to scale that up and add two years worth of data, or three years worth of data. So this might be a little bit more under your control, not always, but sometimes, right, and then obviously validate the model before deploying. These basically applies across the board. You should always, always validate the model, and like using across the test set, across the validation set, using cross validation. So this, this is kind of, I'd say, Mistress, because that validation, there is no shortcut for validation. You always have to validate your model. In fact, it is through the validation you are finding whether it is a high bars or high variance in the first place, right? And then you are basically tweaking the parameters of the model. Use multiple types of validation, which basically means is use K fold validation, like the cross validation, also, like other thing, like you might want to find the accuracy, precision, accuracy and recall right, in addition to your just, not just R square value. So there are values that call accuracy and recall which, which kind of more applies to your classifier model, actually, so that's why it says multiple types of validation. Now, depending on what algorithm you're doing, there are different validation you can try. Another thing is you might want to remove the feature that are either undervalued or overvalued by the model. So basically, what you can do is you can look into the different coefficient that the model is applying to the different feature columns, and if you see that some of the coefficients are way higher than the others, so that means your model is latching too much on one single column. So you might want to take that out. Similarly, if one of the columns might have a displays way lower coefficient than the other columns, then you might want to look into that as well, right? And there are reasons that it could happen. It could be due to multicollinearity, or it could be this is something you can also kind of validate using the null hypothesis, like using the p test, um, which is something that we will see in this class as well. So by doing this beforehand, you might be able to actually find this kind of problem column even before you try this, try the model out, right? But that does not mean you have to do that. I mean, it is totally okay to just get the data as is, with all the columns and everything, and try it out. And then, if you are not satisfied, and then you basically go and find, hey, whether there is any multi collinearity, multi co linearity, between the between the columns, right, or whether some of the columns are basically supporting your null hypothesis. Null hypothesis basically means when a particular column does not have any contribution to your output value, the target value at all, right, which you can do by P testing, right? So you can try that afterwards, after you try the model as is with all the columns that you have, right? So these are some of the judgment calls you have to make, and then you have to do lot of experimentation, right? Okay, and then retrain the model regularly while using prediction. This is also something that applies across the board, because what happens is this, this one is basically talking more from like a production ready, deployed model perspective. So what happens is, if, let's say, as a business, you want to train your model to basically, let's say, find out whether a particular credit card transaction could be fraudulent, right, based on certain financial transactional behavior or democratic demographic data and so on. So you train your model, you get a very high precision, very high accuracy, very high recall from the from the model, and you deploy it, and you. Go home, become happy, right? But guess what? What happens is, over time, the your data landscape keep changing, right? Because people, people come up with a different kind of behavior, different kind of pattern, kind of sneaks their way into the data, right? So the data that you train the model today might not be the same kind of data that your model will be seeing couple months or six months down the line. So that's why, what companies do, they regularly train the model. They don't just train the model, put it in production and forget about it. You have to keep retraining the model, right? So, so that applies across a boat. Is that
+
+Unknown Speaker  35:38  
+what to call model drift? Think I've heard that modern
+
+Unknown Speaker  35:41  
+drift. Yes, yes. That's what exactly it is, yep.
+
+Speaker 1  35:46  
+Okay, so I think we covered all of these.
+
+Speaker 1  35:55  
+Let's try to answer some of this question. Let's start with this one to address over fitting. Is it better to increase or decrease the complexity of
+
+Unknown Speaker  36:02  
+a model. Decrease,
+
+Unknown Speaker  36:06  
+decrease, yes,
+
+Speaker 1  36:08  
+is a model that performs well on training data but poorly on testing data. Would you call that under fitted or over fitted? Over
+
+Unknown Speaker  36:16  
+fitted,
+
+Speaker 1  36:18  
+over fitted, a model that performs well on the training data but poorly on the testing data. What is the problem? Is it a high high bias problem or high variance problem?
+
+Unknown Speaker  36:30  
+So like high bias?
+
+Unknown Speaker  36:36  
+Is it high bias or variance?
+
+Unknown Speaker  36:39  
+Well, the way you ask that question, it's very
+
+Unknown Speaker  36:42  
+so the way you ask that question, it must be high variance.
+
+Speaker 1  36:47  
+So performing well, I'll tell you why. Performing well on training data basically means this case. So basically what it means is, if it sees the data that were already present in the training data set, or something that is very closely, very similar to the training data set, it will basically hit the bulls eye, but it will start deviating if it sees data that is very much, that are very much dissimilar from the data that it has seen during the training.
+
+Speaker 6  37:13  
+Oh, I thought it was described in the lower left, saying that it performed well on training, but in the test it was
+
+Speaker 1  37:20  
+off, no lower left, basically meaning it is off across the board.
+
+Unknown Speaker  37:28  
+This is off across the board I
+
+Speaker 6  37:30  
+see. So it completely off, versus a little off, right,
+
+Speaker 1  37:33  
+right. So that that question number one in that slide basically respond, corresponds to this case here, this one performs well on the training data, but poorly on the test data, which is basically a high variance case. Okay, let me actually, I was looking for some good article to read. I mean, I know. So I found one medium.com, article. So let me put it on the live channel, if you just want to want to go and give it a quick read. And then another one I found is actually on cattle.
+
+Speaker 1  38:15  
+Okay. Okay, cool. So the other thing that I kept talking about is the K fold cross validation, which basically means like, Hey, don't just take 80% of data as training and 20% as test and then train your model on the trade training data and test your model with the test data, and then that's it. Call it a day, right? Because the with the real world data set that that's not going to give you the full picture, right, like your your data set can be imbalanced, right? Maybe when you take 70 or 80% of the data, right, and even if you randomize it properly, you might just end up getting lucky. You might just end up getting lucky, so that all of your training data is good data, and now your model, even after all of your good intention and everything that you put in place, your model might start performing poorly on the training data. Right? So it is always, always advisable to do that multiple times. So you what you can do is, let's say you have all of the data. Let's 100% of the data. Let's say 100 data you have. You basically split it into K, number of partition, right? So if k is equal to, let's say five, so you will basically have five partition with 20 records each. Now what you do? You basically choose one of this partition as test and the remaining four partition as training data, and then you train the model, calculate the score with the partition one as test data, and then you take the partition two as test data, and. And then partition 134, and five combined as a training data, and you repeat the same thing again and so on. So basically, you use each of the partition once as test partition and the remaining partition as training partitions. And you do this five times, obviously, right? So this, this, basically, this will help you understand better. So here with the K equal to four example, right? So you have a data set. You basically creating four folds there. Now you are taking fold one as the test data or validation data, and using fold two through K as a training data. And then you do that for each fold being used once as test. So that will give you four test, and then you get the forced test, and then you average out. You see what is your mean and what is your standard deviation between the test, right? So that will give you a better perform, a better measure of the performance of your model instead of just doing it once, right? It's not basically rocket science, very simple. And this code you don't even have to write so psychic learn or have all of these already written. Like, don't think that you have to actually write a for loop to do this yourself? No, you don't. You just have to choose the correct library method, the correct estimator from the circuit plan library. Okay. So now we are going to go into our first activity to see some of these, design these in action. Any questions before we go into the code examples.
+
+Speaker 1  41:46  
+Okay, so I'll assume that's all good then. So let's first do the first activity, which is measuring the bias and variance, right? So how do we do that? Okay, so here is all of our library that we are getting importing, and I'm not going to go into which library is used for, what we will see as we go through. So now we are going to load these data set. So this data set is basically that car data set, which is your fuel economy, liter per 100 kilometer. I don't know it's probably British or Canadian data set, because they are not saying MDG, they're saying litter per 100 kilometer. So that's the first column. Is your fuel economy, and then your weight of your car, cylinders, displacement, horsepower and the acceleration now with this data. So what do you think is the target variable here, like, if I, if I without going through the code, if I say, Hey, can you do a regression model there with this data. So what do you think your Y column would be,
+
+Unknown Speaker  43:06  
+the liters per 100 kilometer? Yep,
+
+Speaker 1  43:09  
+the first one, right? The fuel economy. Because it is very clear that fuel economy will depend on how many cylinders it has. What is the total displacement of the engine, cylinder, what is the car, spot, horsepower, engine, horsepower, wet and how aggressive the acceleration is, right? So all of these will take have an effect on the fuel economy, right? So now with this, if you want to predict fuel economy, I think all of these five column together, it's looks like a pretty good data set, at least on theory right, using our common sense. But what we are going to do is, since we are going to see the bias and variance, and we will see how having less feature versus more feature has an effect on the bias and variance of the model. So what we are going to do as part of this exercise, we are going to take two different data set out of this. The first data set, we will use only one column as x simple one column, which is this wet column. So what we are going to do this is basically in our very naive attempt to do the regression, we are going to do simple one variable linear regression using the weight column and the second one, not so naive, but still very naive. We are going to take, instead of one, we are going to take two columns, which is weight and number of cylinders. So basically, we are just cherry picking which columns to use for no particular reason. I'm not saying you should pick this. In fact, in some of the later activity we will see like, you should cherry pick columns, but not randomly, not based on your hunches. So don't take this as a learning like, Hey, why we are suddenly doing this? Because the point is different here. Okay? So we are basically going to see, when we train a model with one feature versus two feature, how the behavior could be different. Okay, so basically, now our x1 is a data frame that contains only one column, which is wet. So you take that data frame and you reshape. So for this one, reshaping is necessary, because you are doing taking only one column, and then for the second one x2 we are taking two columns, as you can see, between a between a pair of square brackets, weight and cylinder. So we are taking two columns now. So x2 has two columns. This one, it will work even without reshaping, I suppose. Let me actually run this without reshaping, because you have two columns. There is no need for you to reshape a thing and then your y. For both cases, we are going to use the fuel economy column, which is the liter per 100 kilometer, as our y. So that's our x1, x2 and y. Okay, now we are going to split this data into training and test. Test. So train, test, split. The cool thing about this training test split function is you can provide as many data frame as you want to these train tests function, and it will basically split all of these data set in equal proportion. So if you just so basically what you have often seen probably is not, probably, definitely. So you basically do train test split, and you give it an X and a Y, X is basically all of your features, and y is basically your target, which is fine, it will work. But if you have multiple different sets of feature there is no limit how many data frame that you can pass to train test split. So here, here, since we are basically building up two very different feature data set, and which are x1 and x2 I can easily pass both along with my Y. And since I'm passing three here, so that means it will now return six items. If I pass two, it will return four items. So this function is pretty cool, a very, very dynamic function. The number of things it will return will depend on how many things that you are going to pass, right? So if you pass one, it will return two by splitting one thing into two, if you pass two, it will return four or so on. So now here we have trained test data for both single feature case and double feature case right, which we are calling x1 and x2 so that's the setup of the problem. So let's do the split, and the split is done. Now what we're going to do is we are going to take two different, completely separate linear regression model, which we are going to fit to these two data set, which you can probably see already now, right? So L r1 is my first model, which I'm going to fit with the x1 data, which is basically single feature data, and l r2 is the second model, which we are going to fit with the double feature data, but y is the same for both is just the x car x difference, right? So let's face fit both model so models are now fitted, meaning trend. Now we are going to have prediction from the first model using the x1 test data, and prediction from the second model using the x2 test data, and it will give me two sets of prediction values. Now is the time to evaluate how this model performed. Now to evaluate we are going to do two things. We are going to find the mean square error the MSE using the same function that we saw in last class, and we are going to do the R square value. So basically the same thing that we did in the last class. So no difference. And we find that for single feature, my MSA is 2.76
+
+Unknown Speaker  49:20  
+and my R square is 0.82
+
+Speaker 1  49:23  
+See, this is what I was saying at the very beginning in the class. Even with our naive attempt, with using only one feature column, we are still getting a 0.82 it never happens in real world. So, so that's why I said don't get too excited, like, don't get too used to getting a 0.8 and above values. That's not normal. Okay, cool, so that's the performance of our first model. Now we are going to do the same thing, same measurement, but with two feature so.
+
+Unknown Speaker  50:03  
+And what do you see?
+
+Speaker 1  50:05  
+So basically, it shows, in this particular case, the two feature model had about the same R square value. But remember, the R square value itself does not mean anything much. Sorry, mean square mean square. Mean square error does not mean anything match. But the R square value, yes, it improved slightly, slightly, but only at the fourth decimal plus. So basically, not much improvement at all.
+
+Unknown Speaker  50:35  
+So the difference is only 0.000
+
+Unknown Speaker  50:40  
+then 1177, negative.
+
+Speaker 1  50:43  
+Right now, there is one slight problem here. The problem here is, when you are taking the R square value in general,
+
+Unknown Speaker  50:59  
+remember what was the formula for r square it
+
+Speaker 7  51:10  
+was like one minus sum of like the model function, something
+
+Speaker 1  51:15  
+here, right? No, no, not this one. Did I not post something in the last class I is, or, Ah, this one, I think, yeah, so this one, right? So this is the formula, y, i minus y, i hat square and sum over all y is, and then this, right? So basically, even though this is good, but when you have many number of eyes, like i equal to one versus i equal to two, we are not adjusting for the different number of eyes. In our current case, we have in one case, we have a i of one, the first one and the second one, we have a i of two. So we are not really accounting for that fact. So a better measurement would be to scale the R square value to take into account the sample size and the number of independent variable that you have, so that your R square value is not artificially inflated. Okay, so in order to do that, you can calculate something called adjusted R square. And this adjusted R square is calculated using this formula, which is, first, you have to calculate the R square value using the method that we used here. These are two score right, or any other method, and then you apply this mathematical formula, which is one minus and then one minus r square times n minus one over n minus c minus one. So what is n? So n is basically the number of rows you have, and C is basically the number of feature columns that you have. So that is the formula to find the adjusted R square. Okay, unfortunately, there is no readily available function for it, which I don't know why, that is just not there. So what you do need to do is we actually have to define a custom function to find our score adjusted where you are passing the x and y in the model and you are doing the model dot score. Or you could use the r2 score anyway, it will give you the same thing. But after you get the r2 score, then you basically find what is your n, which is number of columns, and then you basically and then your so C is basically N calls, and n is basically your length of y basically means how many rows are there. And this is the mathematical formula which I basically printed here. This. This the way that in here it is showing like this way. This is basically a latex formula. So if you look into the markdown, so this is a markdown cell. So if you want to show something like cool mathematical formula in a proper math type setting, you can write whatever it is between a pair of $2 sign and using the latex syntax, and it will basically show a mathematical formula like how it is supposed to be shown. So that's what I did there, and that's why. But obviously you won't see that your when you are doing in Python. It's basically just a plain text, right? So anyway, so that's why our R square adjusted. So now what we are going to do is, instead of just looking at the R square value, we are going to look into our adjusted R square value. Now, again, don't see any x. Effect in your arm on earth shattering improvement, but you will see that the scales will shift a little bit when you do do the adjusted R square value. So this is what you get now. So when you do the R square adjusted you see, with the feature one, you have 0.818
+
+Unknown Speaker  55:19  
+and the two feature, you are getting 0.816
+
+Speaker 1  55:23  
+so yes, there is a difference, but this is the difference at the second third decimal plus, instead of the fourth decimal plus, which basically still tells me that
+
+Unknown Speaker  55:37  
+actually, hang on two, feature is getting
+
+Unknown Speaker  55:41  
+less R square value, actually in this case, yeah.
+
+Speaker 1  55:47  
+So in this particular case, your second one, the second column you are adding, which is your cylinder, it is basically having a lower R square value. So what basically tells me, tells that is the first column that we took, which is the weight of the car, it has a higher predicting power of the fuel economy compared to when you add something like number of cylinders. That's why, when I'm adding number of cylinders, I'm actually getting a lower R square value on an adjusted basis.
+
+Speaker 5  56:28  
+Would that be example, multi co linearity, or like? No,
+
+Speaker 1  56:33  
+this is not multi co linearity. This like. So these are the things that you will basically measure with the P testing, the hypothesis testing, which we will see in a second. So basically, if you do the P testing, you will basically get a different P value for the columns, right? So if you get a like a less than 0.05 that basically means your null hypothesis is true. So that means those those columns are not going to be a good predictor. Now, in this case, I it doesn't seem to me like the column two is not a good predictor, but looks like column one is a stronger predictor than column two. Okay, actually, I'm just curious. Let me try printing the coefficient for the models. So what are the name of my models? LR one and LR two, right. Let me print LR one, dot
+
+Unknown Speaker  57:34  
+coefficient, 0.009,
+
+Speaker 1  57:39  
+and if I print lrq dot coefficient,
+
+Unknown Speaker  57:52  
+huh, that's
+
+Speaker 1  57:56  
+odd. So the second one is actually getting a higher coefficient, meaning higher slope
+
+Speaker 6  58:01  
+is that cylinders? Huh? Is that the cylinders column,
+
+Speaker 1  58:06  
+the second one is cylinders, actually, yeah, the second one is cylinders. So basically what I was thinking before that cylinder is not a better, good predictor. That might not be true, then we have to attribute it to the fact that we probably do not have enough variable, or enough, what is called enough number of training data in order to basically find more statistically significant the prediction out of the second column. That's all I can say. Because initially, when I saw that r square adjusted R square for two column is less, my first hunch is the second column may not be statistically as significant. Now, when I do the coefficient of this model, I see the second column is getting a much higher coefficient and the first one, that means the model things, the second one is more, more of a stronger of a predictor. But then my next hypothesis would be, well, we only have a handful of values, maybe 2468, and we only have a limited data set. So I would then attribute this to the fact that we have. I'm just trying to see how many data we have, yeah, less than 400 data row. So that's what it is. So you have less than 400 rows, and cylinder probably will have how many unique values? Probably 246, and eight, maybe right, or just four, six and eight, so you basically do not have enough variation there, and that's why you are getting a higher variance model here with your two variable feature instead of one variable.
+
+Speaker 4  59:58  
+So I. Have a quick question. Sorry, Bino, if you go back to the second cell all the way on the top. So by doing all of these exercises, what is the true answer from the five rows that we got right which one is the most feel efficient? Then
+
+Speaker 1  1:00:13  
+that is not the goal of these that is not the goal of this particular activity. The goal of this particular activity to is to see that if you use less number of features versus more number of feature, the variance of your model will get affected. Okay, yeah, because of the in general, in general, the trend will be if you add more feature, your variance will be lowered. But what we actually saw here that looks like the variance got higher with a lower feature, right? Because we got, we got lower adjusted r2 score for the two feature instead of one. Again, that's why I said some of these data set are not very effective in highlighting the point, and that's why you have to pay attention to what I'm what we are discussing here, and not just get too hung up on the result that you are actually getting in the in these activities. So, and you might need to go back and listen to the recording so that the ideas kind of sink in a little bit, right? So just
+
+Speaker 5  1:01:16  
+out of curiosity, I changed the random state to one, and I got the two feature R squared to be higher for this case. So yeah, the random state kind of like affects the way that the model performs.
+
+Speaker 1  1:01:33  
+Yes, because think about it, what you are doing. Another thing we are not doing is we are actually not doing cross validation. So when you are doing random state, you are just looking at a snapshot of training and test data, and with only 400 rows, your random state will have a very, very high significance of you on your performance. But if you have 4 million rows, the random state would not matter that much. So you always have to think of this like in a real world data set, random state is just to make sure that you are producing the same result and not varying even to the fourth or fifth decimal point. But even if you do vary the random state, you will see the difference in your output would be very less. Here you might see the higher different, much higher difference, because your amount of data is much less, right? So like, if you take 70% of data and for training and 30% for tests, out of out of these 400 rows, you only have 120 rows for training, and what seven times for 280 node rows for training and 124 testing, so that is not statistically significant sample size, yeah.
+
+Speaker 1  1:02:54  
+Okay, so in the next activity, then what we are, and this is a student activity, but I'm choosing to because all of these activities, this is more like you have to discuss this thing. And I think it is better for today's activity to just remain in class and discuss here. So that will give me an opportunity to kind of explain what we are seeing here, right. There is not much to learn in the code. It is more like this kind of higher order thinking and discussion, like, what really is going on here, so we are not going to do any student activating group for today's class.
+
+Unknown Speaker  1:03:30  
+I know some of you would be very happy hearing that.
+
+Unknown Speaker  1:03:35  
+So anyway,
+
+Unknown Speaker  1:03:38  
+yeah, okay,
+
+Speaker 1  1:03:41  
+so in the next activity, what we are going to do is we are going to do some cross validation. Okay, so to do the cross validation, we take our data set, and this is also a very small data set, right? Only 205 number of rows, 26 columns, fine, but many of these columns are because this is that original that card data set, but it is already encoded by someone, right? So all of that one hot encoding and everything has already been done. So it real. Data Set does not have 28 columns just because of the one hit hot encoding it gets fills bloated side wise, but it's still only 205 data set. So 205 records, okay, so what we are going to do is we are going to take the price and horsepower only because these are the two columns that we are going to do the regression on with this price of horsepower, I wanted to just do a check to see whether there is any now. And I do find that there are four Price column that are null and two horsepower that are now, therefore I'm going to do a drop na and that. Reduces my data set size even more, down to 199 but we have to reduce because we cannot work with the null values. So that's that. So now what we are going to do, this is a very interesting exercise. So these exercises, if not anything else, it will basically show how adding meaningless column kind of does not matter. So what we are going to do, we are going to create a feature column with only 1x
+
+Unknown Speaker  1:05:29  
+and 1y
+
+Speaker 1  1:05:32  
+1x and 1y where horsepower is by x. So one column horsepower. So I'm going to try to predict the price of the car based on the horsepower of the car. That's going one test, and then other test is very funny. I'm going to create meaningless column where the first column would be a real column, which is this horsepower. And then second column I'm going to fill with all ones, the third column I'm going to fill with all twos, so basically all the same values with no variation at all. So basically, the idea is to create a column that basically does not have any effect on the target output at all, like basically a column with zero correlation, without artificially so we basically create this, and we will see whether this kind of messes up the data, messes up the training, or what kind of effect that we have on the R square value that we get from these Two model training. One is this, and one is this, Boba H, another column added in,
+
+Unknown Speaker  1:06:49  
+and y is our y, which is the Price column.
+
+Speaker 1  1:06:53  
+So now we have a one column x, we have a multi column x, and we have a y. So we take all of these. And we do a train test split, and we get train and test split for one column, case, train and test split for multi column, case and train and test split for our target, which is the y column. So we get six of these things good. And just like the previous one, we do this kind of the same thing. We do create two linear regression model. The first one we fit with the one column, which is this thing, and the second one. LR, two, I'm fitting it with the multi column, which is this thing, separately. Okay,
+
+Unknown Speaker  1:07:41  
+so if I do
+
+Unknown Speaker  1:07:45  
+LR one
+
+Speaker 1  1:07:47  
+coefficient, how many coefficient I expect to see? Only one, right? Because LR one has only one feature column, and I'm getting a coefficient of 162 something, obviously, now I'm going to check the coefficient of LR two, which is this bogus data set with eight meaningless column. So there has to be what nine total coefficient, right? So we have eight plus one nine columns. So let's see what these coefficients are. So
+
+Unknown Speaker  1:08:24  
+do you see what the model did? It
+
+Speaker 1  1:08:27  
+basically completely ignore these eight coefficient sorry, eight feature by setting the coefficient to zero, because they have no effect on the output at all, and the model understood that. Okay. So now, if you take so you expect what same R square value for both then, because the second one did not really do anything much. So if you find the R square from the first model and R square from the second model, they should match up. So let's see if they do. So we are basically taking the two model and running the prediction on the first and second separately, just like we did in the previous activity, and we are finding the MSc and R square value for two models separately. Let's see what we get. Yeah, so we got same MSC,
+
+Unknown Speaker  1:09:31  
+same r square with a zero difference.
+
+Speaker 1  1:09:39  
+Now what do you expect to see if we find the adjusted R square for this? So adjusted R square is basically using this formula right now, the difference between our first and second case would be this number c, because the first one I have a C of one, and the second one I have. C of eight. So do you think, based on that, this formula will change? Yeah, right, slightly. But again, how much it will change will also depend the relative values between n and c. If n is very, very higher than C, then n minus c would not matter that much. So let's say if your n is 10 million and C is 10, so 10 million minus 10, or 10 million minus one, it's about the same thing. It's not that much difference. So we may expect a difference, but for a large data set, your adjusted R square value is not going to give you much difference, but this is a smaller data set, so let's see what we get, and we see that we do get a difference. And here you see that multi column, R square is coming at a much, much lower 0.54,
+
+Unknown Speaker  1:10:59  
+which actually I would say,
+
+Speaker 1  1:11:03  
+starts to objectively show that when you have columns that does not have a high collinear co linearity, sorry, high, not collinear. Ah, high, ah, correlation with the target, it actually makes your model performance really actually worse, and that is that was not evident when we are looking at the R square value, when you are getting the same R square value for both and you might say, yeah, what is the big deal? We just have eight columns that have very low correlation, or in this case, zero correlation. But that's why computing these adjusted R square would help you see what the real performance of the model is. And as you can see, the multi column model suffered on the artist adjusted R square basis by almost like, what eight percentage point, which is a big suffer now, then again, don't expect to see this. When your n is very, very higher than C, there will still be some suffering, but not as much as you have seen here. You'll probably see a difference at maybe third or fourth decimal, plus, if you have a data set that contains maybe 10s of 1000s of feature sorry, not feature row,
+
+Unknown Speaker  1:12:26  
+so there would be some difference, but the difference will be lower,
+
+Unknown Speaker  1:12:38  
+okay,
+
+Unknown Speaker  1:12:40  
+so then the last one
+
+Speaker 1  1:12:43  
+is to do the cross validation. And this is what we are talk I was talking about that you really don't actually have to write cross validation, like you don't actually have to write anything. So what we can do is we can use these library function called cross Val score. And with this cross validation score function, first our parameter would be your algorithm, which is linear regression. And see, I'm passing an object of linear regression. So this is basically a empty model that I'm passing. So then I'm passing my x data and y data, and I'm passing what measure I want to perform to compare my model, which is the r square. So scoring method is r square. Now, if you run that, the model will basically give you all the scores, and you will see like five scores, because this is by default, a K fold a five fold cross validation. Although you can change that, there is a parameter that you can say how many cross validation you want to do, and then you can take that and do a mean of those and a standard deviation of those in a regular way that we do first mean and standard deviation. So when you run this, you basically get five score, because this is a five fold cross validation, and you see how the R square values are widely varying from 0.37 to 0.77 again, you are seeing this much variation because you have limited amount of data for a statistically large amount of data. Yes, there would be variation, but not this type of dramatic variation, if everything else remains the same, right? But the idea is that by doing this, you are basically avoiding any chance of getting randomly lucky on a particular day or randomly unlucky on a particular day. Like, what kind of mat always keeps talking about like, Hey, I changed the random state and I am lucky. But by doing this, you are basically reducing that chance. Right? So that's about this activity. Any question, let's see how we are doing time wise. Actually,
+
+Unknown Speaker  1:15:16  
+any questions so far? Guys,
+
+Unknown Speaker  1:15:22  
+yeah, can we consider this so? So
+
+Speaker 6  1:15:23  
+the whole purpose of just putting in that effectively dummy data was to just just disprove that you got lucky.
+
+Speaker 1  1:15:35  
+The purpose of this is to show that if you do have features in your data set that has lower effect on your outcome, then your model will perform poorly than if you omit them, which is what we are going to do in this Next section that I'm going to go in. So this was basically a build up to that I
+
+Speaker 6  1:16:05  
+see. And so the the art. So basically the thing is,
+
+Speaker 1  1:16:09  
+exactly. So the thing is, in general, having more feature is a good thing, not the bad thing. But in cases where you might have feature that does not have any predicting power on your output, then you might actually be worse off, not other, not better. Thank you. Now, how do I know that? How do I know which column will have higher predicting power versus lower predicting power? Right? So what this activity showed us is that if somehow you can find columns with low predicting power, here artificially, we created eight columns with zero predicting power. Now ideally, you probably won't have anything with zero predicting power, but you can probably find out which one have a lower power versus higher power. So that's that's how you can possibly cut down certain feature and cherry pick on the good ones, and then that might actually give you a better or adjusted R square value on your model. So that's what we are going to see. Now how to do that. Okay, so in order to do that, we have to go back to some high school level statistics that I think many of you have learned, which is hypothesis testing. So what is hypothesis testing? So hypothesis testing is basically you are testing two things. So let's say you do a survey or you do an experiment to find out whether some event A has some effect on another event, such as event B, like let's say you are taking flu shot and you are either getting sick with flu or you are not getting sick with flu in a given flu season. Now, how do you prove that statistically? Well, you have to collect data from a large enough and diverse sample size, right? And then you basically come up with a hypothesis. Your hypothesis will become the way that you will do it is you basically come up with two mutually exclusive hypothesis. Your null hypothesis is basically to kind of refute the claim like no no flu vaccine do not have any effect on the actual outcome. No matter whether a person takes flu vaccine or not, he will or she will get sick with flu. That's your null hypothesis. Now, is that true? Or is it true that the vaccine really does have an effect on a person's getting flu or not? So the proof comes in a way of an indirect proof. So basically what you are trying to do, instead of proving the alternative hypothesis, the way we do is we try to disprove the null hypothesis. Because if we can disprove the null hypothesis, which basically means that no statistical significant exists between these two variables, if you can disprove that, then indirectly, you have proven the alternative hypothesis, which is yes, the first variable indeed does have an effect on the second variable. Now if you do that for one feature column and your target, and if you do if you can disprove the null hypothesis. So that means that call for that particular column, feature column, your alternative hypothesis is correct, therefore that's a good column. So you can keep it if it's our way, then you can toss that feature column out.
+
+Unknown Speaker  1:19:56  
+You follow me, you. Okay,
+
+Speaker 1  1:20:03  
+so, yeah, so this is basically the example I was talking about, right? Like in the medicine industry people, that's the common thing that people use, right to basically say, see whether a drug is a placebo or whether it's a real drug, right? Which is kind of a flu vaccine thing. It is a flu season, and I think this is a pretty bad flu season we are having this time. So so that just example came to my mind. So anyway, so the steps are basically you determine your hypothesis, non hypothesis, and this is just basically statistic recap. So I'm not going to go into this, but the idea here is to basically compute the p value, right? So statistically, you can compute what is called the p value. And you have to based on the P value, you can determine that if the p value reject the null hypothesis. So the idea is that if p is greater than point 05 meaning, sorry, not greater, less than point 05 which is less than 5% that rejects the null hypothesis. That means, if you see for a column pair, that the P value is less than 5% that means alternative hypothesis is true. That means that is a good column
+
+Unknown Speaker  1:21:24  
+you still following me? Oh,
+
+Speaker 1  1:21:30  
+okay, so we are now going to see an example of this. We will test the hypothesis and decide whether we can reject the null hypothesis, and if we can, then the only option left is the alternative? Yeah, that's fine. So you got the point. So we are going to see quickly how we can do that using a code sample.
+
+Unknown Speaker  1:21:53  
+Okay, so
+
+Speaker 1  1:21:57  
+let's take the same car data set,
+
+Unknown Speaker  1:22:02  
+same data set back again.
+
+Speaker 1  1:22:06  
+There were null values before we saw so let's drop the null values, and now let's take one column. Sorry, let's take no so here we are given, sorry. I'm sorry. We are basically not dropping any column. We are not doing any feature selection at all. We are basically taking everything else other than the Price column as x. So what we are doing is we are taking the card data, copying to a temporary data frame, and from that data frame dropping the price column. So basically all the remaining column becomes my x. So we have 25 columns, and then we only take the price and we take the price values, reshape it, and that becomes my y. Okay, so everything else like no selection at till this time. So now we have my x and y, and then we do my our train test split, so we have that. Now we can do our psychic learn linear regression that we do, but in this case, we are going to, since we are going to do a statistical hypothesis testing, we are going to take this training and test data set and run it through a different linear regression algorithm, which comes from the stats model API library. So in order to do that, I think you will probably have that. If you don't have that, all you have to do a pip install stats models, okay. Now there is a function called Zero LS, so this function basically
+
+Unknown Speaker  1:23:52  
+is a linear regression function.
+
+Speaker 1  1:23:55  
+Now you will see in a moment why we do this. So we doing this is kind of very similar to how we do with the what is called the psychic learn, except here we are in initializing the algorithm with y and x values, and we are not providing these x and y values inside the fit. So the syntax is little different from what we are used to for psychic learn. And the reason we are doing this is this estimator, these stats, model estimator actually has a attribute called P values. So by doing this, we can easily find the P values of all the columns just by looking into the attribute of this model. After we do a fit,
+
+Speaker 6  1:24:47  
+it's interesting that they reverse the order of the Y and the X train for this fit, yeah, what we've seen before,
+
+Speaker 1  1:24:55  
+the Y feels so that is, yeah. So that is, so this. This is reversed. And also, unlike Scikit, we don't provide those inside fit in. Instead, we put that actually inside the constructor function, which
+
+Speaker 6  1:25:09  
+just feels like a problem waiting to happen. I'm going to forget that. Yeah, yeah,
+
+Speaker 1  1:25:15  
+that's a good observation. Surely. Okay, so now we So after you do that, then you can do LR dot p values, which will give you a list of values. And then you can sort the values to get them in a from the lowest to highest. So now remember, what's our cutoff? Point, 5% point 05, right? So which columns do you think will make the cut.
+
+Speaker 5  1:25:46  
+Make drive wheels, stroke, yep, curb weight aspiration,
+
+Speaker 1  1:25:50  
+weight aspiration and normalized losses too.
+
+Unknown Speaker  1:25:56  
+So these ones, right?
+
+Speaker 1  1:25:59  
+So basically, what this is saying is these five or six columns does have a much stronger influence, because for these five cos six columns, we can very definitely say that the null hypothesis is false, therefore alternative hypothesis is correct, whereas, if you look at the bottom one wheel base, right, think about from a common sense, what is the predictive power of wheelbase on the price of a car? Not that much. And that kind of shows with the very high P value that you have here.
+
+Unknown Speaker  1:26:42  
+I don't even know what a wheel base is.
+
+Unknown Speaker  1:26:45  
+The length of the wheel was like,
+
+Speaker 1  1:26:50  
+How many centimeters are inches between the two wheels, the front and rear wheels. I mean, obviously the trucks will have a pickups will have a higher wheelbase than SUV, right? Even if you take, like, not even like, a truck frame truck, like, if you take those unibody truck that are that, they say, oh, it's kind of a built on the SUV frame. But if you like Honda Pilot, and let's say what is called Honda ridge line, honda ridgeline have a longer wheelbase than a Honda Pilot, but that does not mean that that basically decides on the pricing of the car.
+
+Unknown Speaker  1:27:25  
+So anyway,
+
+Speaker 1  1:27:27  
+so that's that so now, so now that we know that these columns are better column, like stronger predictive power column, right? So now what we are going to do is, now we will do two linear regression after this test. So one linear regression, we are going to take all the x values, x4 and then another one, we are going to take just these top six ones, the ones that have less than point 05 outcome on the p test. So full, full featured and selective feature. And then we basically do what we always do. We do our train, test split. We feed the two separate model, LR one and LR two. First one, remember with full data. Second one is with selective data. So let's do the fit. Fitting is done now we have to measure the adjusted R square value, because that is a more correct measure of the performance of the model, as we have seen in the previous activity, right? So for that, we need our own custom defined function. As I said, psychic learn does not have this function built in, so you have to write it every time by hand. And now finally, we are going to calculate the R square value for the full and selective let's see.
+
+Unknown Speaker  1:28:56  
+You see now what is happening.
+
+Speaker 1  1:29:01  
+This is actually a really good test. You see how much the improvement we are making by just selectively taking six columns out of 30 something, not what 25 columns. So we basically disregarded 19 columns, and we still got a much higher R square value because of the p test. So if you guys happen to compete on the keggle competition and trying to go for that $120,000 prize money in one of the competition that is available active today, definitely use this
+
+Unknown Speaker  1:29:37  
+feature. Okay,
+
+Speaker 1  1:29:42  
+so that's about the p value. Any question,
+
+Unknown Speaker  1:29:52  
+is there a good definition of P value?
+
+Speaker 1  1:29:58  
+Ah, okay, so you are. Saying, like, like, this 0.05 kind of seems like just, just abrupt value. Is that what you're saying? Yeah,
+
+Speaker 6  1:30:07  
+I mean, like, it's, it's, it's sort it's without the context to serve. Like, by the way, this, this magic food, is being less than 0.5 that
+
+Speaker 1  1:30:18  
+is one reason I dislike stats during my high school because tax, for some reason, is full of these heuristics where you are basically told, Hey, don't ask the question. Just do it before, because the experts say so. So the bottom line is, I don't have a good answer for you. Why 0.05 should be the kind of point. And I'd say, when you are trying this, I mean, there is no reason for you to stick to one cut of point, because it's the machine you are going to let do all the work, right? So, so what you can do possibly is like, Hey, you take 0.05 as a cut off point, or 0.06 as a cut off point. And instead of hand coding which features that you are doing, you can quickly write a for loop and basically take a different cut off point and Hey, cut up at a point 5.0, 5.1 0.15, and point two, zero. And that will give you different sets of subsets of columns. And you run this and see which one, which combination gives you highest are to score. And you keep that so don't believe what the statisticians say to you, because I didn't have an explanation why it is only point 05 isn't it?
+
+Unknown Speaker  1:31:32  
+95% confidence? Yeah,
+
+Unknown Speaker  1:31:35  
+so, but, or is
+
+Unknown Speaker  1:31:37  
+that just? Is just rephrasing the same? Yeah. Oh, is that what P 95
+
+Speaker 6  1:31:41  
+means? Yeah. Oh, you know what? I see that I work all the time, and I'm like, I don't know what the hell this means. P 90 5p. 95 statistically significant. Got it, yeah.
+
+Speaker 1  1:31:53  
+But the thing is, why P 95 Why not P 97.5 I could argue, hey, it should be p 97.5 wanted to. Why not so, yeah, 99% or 99 Yeah, depending
+
+Speaker 8  1:32:06  
+on the criticalness of what you're trying to originally, it's like your 95% confidence that, that your, your the statistics you arrive on the sample represent the population within a 95% confidence range. So you're, you get a mean and a sample, and you're, you have 95% confidence that's within point 05, of the
+
+Unknown Speaker  1:32:36  
+population mean,
+
+Speaker 8  1:32:40  
+I think. But then that just tell you, and you're supposed to just believe the same way, right?
+
+Speaker 1  1:32:47  
+Yeah, okay, so, yeah, it's almost about the time for us to take a break, but let me quickly go through another one of the same example with a different data set. So this one, we are basically going to do exactly the same thing, except I have done a little tweak here whereby I am selecting the columns dynamically, instead of hand coding the top six columns or top 10 columns right with a different data set. And we will see whether the magical result that we found here, whether that also holds up in a different data set. So this one is the housing rent data. Okay, so actually, house price data, right? Okay, yeah. Why do you say rent data? Clean? It's basically a house price data where this price, basically, is your predictor column. This is the not predictor, sorry, this is the target column, the Level column. So basically, you are trying to predict the price of a house based on bedroom, bathroom. So basically a real estate listing, right? So we have this data set, and we basically take everything other than the price as x, so no feature selection at the beginning, because we are going to do that with our p test. And then we take y, which is the price, and then we split now, before we do the scikit learn model exactly same thing we did in the previous one, right? No difference at all. Same copy, paste code, basically just with a different data set. So we take our stats, model, zero, LS, we fit it, and we get the P values. Here. There are a lot of columns, lot of p values. What we want to do is we want to keep the one that are less than 0.05 so what I did, instead of hand coding, I basically wrote this code, which he said, Hey, from. These p values give me the one that are less than 0.05 and that's my selection columns. And I'm getting starting from square feet all the way down to get it so here, yeah, 3.97 times 10 to the power negative two means 0.397 right? So this is zero point sorry, 0.0397
+
+Unknown Speaker  1:35:28  
+and then here you are going to 0.072
+
+Unknown Speaker  1:35:31  
+which is above your threshold.
+
+Speaker 1  1:35:34  
+So basically everything from top until here, these are all less than point 05, so you see how I met this dynamically and not have to type this thing. So that's basically the only difference. So now we are going to repeat the exact same thing whereby we are going to take a full feature, X value, x columns, and then we are going to the selective feature. So we get two things. We get two sets of two pairs of train and test split. We take two different LR, two regression, regressions, we then define our adjusted R square, and then do it.
+
+Unknown Speaker  1:36:19  
+Now you see what happened here.
+
+Speaker 1  1:36:26  
+So that's why I wanted to run this before we get into break, to basically drive this point that don't get too excited from this magical improvement here,
+
+Unknown Speaker  1:36:38  
+from 41% to 78%
+
+Speaker 1  1:36:41  
+here, even though we have way more column that we selected based on this threshold value, the improvement is marginal from 34.1% to 34.8%
+
+Unknown Speaker  1:36:56  
+okay, so,
+
+Speaker 1  1:36:59  
+so There is no silver bullet. That's what I was trying to say. Okay, cool. So let's take about 15 ish minute break, maybe come back at 828, 25 I think we have covered most of these. Let's take a little longer. Break straight out little bit, we'll come back at 825,
+
+Unknown Speaker  1:37:34  
+okay, so
+
+Speaker 1  1:37:37  
+now we are going to talk about another improvement we could do. So we you noticed how doing the hypothesis testing, we were able to improve the r square, right? Now, sometimes the improve can be dramatic, sometimes not so much, right? But the thing is, this is these are the one of the many, many tools that you should have in your toolbox. And depending on the situation, you basically pull out one or more of these tools, right? Depending on how your model performs in a particular data set. So the next thing we are going to look about, think about is the multicollinearity, right? So multi co linearity, meaning, what so? Meaning, let's say you have 10 columns, feature columns and target column. It might sometimes happen that multiple of these columns are kind of expressing the same thing. So think about that house price database, right? It might happen that if you have a feature column that said square foot, square footage of the house, and you have another feature column that says number of bedrooms in the house. Guess what? They're probably giving you the same thing in two different way, because they are interdependent. So one way to look into this is you, you can do that pair wise scatter plot. Remember we did in the first section of the boot camp. So if you see that, you happen to have two feature column with almost like a near perfect correlation. So that basically means you are basically having unnecessary column. And when you do have that kind of situation your model might actually suffer. So basically that means your data set design is not correct. You are basically measuring same thing using multiple different proxy variables. So that's one reason it might happen. Another time it could also happen is. Just because you have insufficient data. So if you have only, let's say, 100 rows, it might show that two columns are very highly, highly correlated. But if you end up having 1000 or 10,000 rows, you'd see that they will not be as tightly correlated as they they as they would seem, if you have a limited data set. So that could be another reason, right? Sometimes it could also happen from inaccurate use of dummy variables. So for example, instead of doing one part encoding, let's say you end up doing level encoding on multiple columns. Now you will see you have, let's say, two categorical column, and you use level encoding for both. So you'll have a zero through five, let's say five different individual values, so you will have a zero through five in one column and you also have zero to five in another column. So even though those zeros zero in one column means completely different thing than a zero in another column. But when you are using level encoding for multiple columns, they might end up being collinear, and that is also another reason one hot encoding is a better encoding technique than using level. So there could be many different reason. Some of these might be under your direct control. Some of these might not be under your direct control, but what you can always do is you can run some test to identify the columns that seems to be highly collinear. And if the root cause behind the collinearity happens to be in your control, such as poor dummy variable, choose, choosing, or, let's say, insufficient data. And if you have the ability to go and gather more data, you can do that, if not, at least you can think of dropping those columns that are highly collinear in the first place. Right? Now, which strategy you will use when there is no right or wrong answer, it all depends on the scenario, particular situation that you have in fact, right? So what we are trying to see now is how we can measure the multicollinearity. To measure that, we basically use a metric called variance inflation factor, or fifth for short. So this is one of the way that we can check the multicollinearity between the different feature. So the idea of this vif is, when you calculate this, if you get one between the two columns, let's say feature one and feature two shows a value of one. That means they have or not feature one, feature two. So basically, if you calculate this way, you basically take each column and compare that with the what is called the target column, and you do the repeat the same thing for second column and the third column and so on. And when you do that, if you get for certain columns, you get a value of one. That means that is perfect scenario. That means there is no correlation between that column or any other column. The higher the value of V goes, more likely that they are contributing to this problem of multicollinearity. So you basically have to cut out the column that have a high fifth. Similar to the p test that we saw, we basically cut out the column that have a has a high P value greater than point 05 so similarly here, we will calculate the width for each of the columns, and we are going to cut out the column that has higher vif values. Now, how high is too high? Well, it kind of is a heuristic you have to apply again. There is no right or wrong rule. Some people say 1.5 is the cut off. Some people think, Okay, five is cut off. Some people think 10 is cut off. Now, how high it will go will also depend on how many feature column you have in the first place, if you go too low on the cutoff point, and if that ends up cutting more than half of your feature column, then you have a different problem. Now you have a data set that does not have as many feature right?
+
+Unknown Speaker  1:44:33  
+So 1.55
+
+Speaker 1  1:44:36  
+10, these are typically the values people use. But again, which one you will end up using depends on a case to get case basis. So what we are going to see now in our next activity is how we can calculate that. So what we will do is we will calculate v for all of these, and since higher vif indicates stronger multicollinearity, we will drop. Feature with the highest vif. Now what happens is, unlike the p value test, you cannot run fifth test one time and say, Hey, these are the five column with highest view. Therefore I'm going to cut down these five column and then go with the remaining column. That's not how it will work. So what ideally you should do is you should take the column with the highest vif out. Let's say you have 10 columns. You do the V for all. You take the highest one, drop that column, and then you have to run that vif again. If you want to like you have to do multiple passes of this, because when you cut down one column, so out of 10, let's say one gun, then you have nine. Now, if you run the fifth measurement again with nine column, the VP of those nine, remaining nine columns will change compared to when you ran with all 10 columns. So then you have to run it again, and then cut down the one that you think are too high. And then after you drop that, you run the VF again until you are satisfied that you have all the columns with sufficiently lower width below your cutoff point. So you have to do these on an iterative manner, until you are satisfied.
+
+Speaker 6  1:46:22  
+Could you do that in a loop? And is there any kind of decision making that you might Yeah,
+
+Speaker 1  1:46:27  
+you basically, if you want to do that in a loop, you have to write a utility function yourself, and then you do both that way, like there is no library function available that will do it for you. There is a library function to calculate VIV but to do it in a repetitive manner, you have to write a utility function as a helper function to do that.
+
+Speaker 1  1:46:52  
+Okay, so let's look at our next activity, which is the VIV test. Okay, so we are going to use that same car data, where our target column is price and everything else is x. So we get everything else as x here, other than the price, and we get price as our Y column. Now to calculate the variance inflation factor, we have to use that same stats model API, stats model library, but in a different library, stats model dot. Stats dot outliers influence. So I know these are kind of not very easy to remember, but that's why you will have all these notebooks, so you can refer back to when you need to right. So, so that's the variable. That's the library we are going to use. Now, the way that we work is you call this various variance inflation factor function. When you do that, you basically pass all the values that you have. So if you have 10 feature column, you are basically passing the values of all 10 feature column as numpy array, not the pandas data frame itself, you see here, we are not passing x, we are passing x dot values, which is basically a two dimensional numpy array. And then you pass all the columns, and then you say, out of all of this column, which particular column you are trying to calculate v4 so that second is basically the column index that will vary from like, if you have a 10 column this, I will vary from zero to nine. So that's what we are doing with this inline for loop, right with the list comprehension. So this is an utility function that we wrote. So with this we are basically what we are doing, we are creating a first empty data frame called fifth and then the variables in this data frame are basically all the columns that we have in our original data frame, which will be 25 columns, because we are going to pass This one so x dot columns will give you 25 column headers, and that's your variables. And then what you do is you calculate, you basically create another column in this pandas data frame, and you fill in this column with this list. And this is that pandas, Python shorthand that we have used few times before. Instead of writing a for loop outside and accumulating the value in an empty list, what we do is inside a pair of square brackets, you basically write the for loop in line. So basically what I'm doing is for i in. In range of x dot shape one. So x dot shape gives you a tuple row and column. So x dot shape one is your number of column, so meaning your I will go from zero through 24 because we have 25 columns here. So for each i I'm using that that I combined with all 25 columns as the first argument. So what I saying is, with these 25 columns, then find the various in inflation factor of column zero, and then in the next iteration, find that for column one and column two and so on. And you do the whole thing and capture that as one panda series in this pandas data frame that you are having. And then you return that fifth as a two column data frame, basically variables and fifth. So with this utility function, it becomes very easy to see the V values for the different columns. So now I'm going to take this calc view and apply this calc view on x and then on the resulting data frame. I mean, I can just do this. If you do this, you will basically get all the columns and their give values. Now if you want to see how they are, it is better to sort them by values, and that way you will get something from lowest to highest. Now, even though I say remember, some people use 1.5 as a cut off. Some people use five as a cut off. Some people use 10 as a cut off. But there is no like it's there no hard and fast true. So in this case, you see the lowest is 4.8 so even the lowest column is not showing low enough. And then there is another column that is showing a non value. So what is this engine location? None. Why is this coming as a none? Well, if you just print the engine location to see what it is, you will see that column is basically a bogus column. So engine location is zero for everything. So that column, like you can easily drop that out. So no use for that column at all. And this will happen in real life, many, many cases where you get data from somewhere and someone else collected data for some reason, and then when you try to fit it and you see that some column remains, basically becomes useless, right? So, so engine location we can drop, yeah. So 159 all of them are zero, as you can see. So basically, this is all zeros, so no use at all. So then what we do is we will drop engine location, and let's drop again. There is no hard and fast rule, but here we are choosing to drop the top four, or tough top four. Actually, I think we should also drop fuel type, so that way, at least we can say, hey, anything above 1000, we are dropping, right? Anyhow, so, so we drop whichever you think should be dropped, and you drop this, and then you recalculate the vif again after dropping it, and now you see the VF of other columns have also changed. So if you look here, highway MPG had 691 before, and now highway MPG is 666 right? So things will be more or less the same, but it will not be exactly the same aspiration. So moral assembling fuel system may Yeah, so they are more or less the same order, but sometimes this value could drastically change. Sometimes they may not. So that's why it's always important after you drop these columns, you run this again. Also another thing, it is not done very well. Here, you should not be dropping four columns at once. Ideally, what you should do is you should actually write a loop here with the condition, drop the one with highest deep value, and then with the remaining n minus one column, then run the calc V again, and then you repeat that same thing. So you shouldn't be actually, so this is actually even though it is done here for simplicity. But in practice, you shouldn't be dropping multiple columns at the same time. Engine location is different because that's a bad column. You can just drop it, but then you should be dropping, ideally, just the width column, and then calculate again, and then drop the wheel base column, or whatever, the next highest column, and then calculate again and so on. But I guess in this case, you. Is okay with this, because these things are way too high. So for this case, I would say probably still okay to drop a bunch of them altogether. But in cases where you will see that v value has kind of much closer, it is probably a good idea, not probably it is definitely a good idea to drop one at a time and check again and then drop one and check again and so on.
+
+Speaker 1  1:55:31  
+Okay, so now you probably realize what we are going to do kind of similar to what we did with the p test. Now we are going to do two linear regression, one with all feature and then one with a selected feature, and see whether the model performance has any difference, shows any difference. So we have our full feature, which is x, and then we have a selected, selective feature which is x, div, and then we create two different test trends, split data set, and we create two different model and train them, one with a full one with this modified one. And then we are going to define the adjusted R square. And then we simply measure again, here we see there is substantial improvement. Here, after we drop the high heat columns,
+
+Unknown Speaker  1:56:34  
+would it always be the same? No guarantee,
+
+Speaker 1  1:56:39  
+but most of the time you should see some improvement. Okay, so both of these techniques, the one that we showed earlier before the break, which is p value based selection, and this one is the best selection in general terms, these are basically called the feature selection. So feature selection is always an important step in machine learning. You should not be blindly using all the features that are thrown your way. You should be doing your done, doing your due diligence, like we saw in these two techniques, and keep the good feature to be able to improve the performance of your model. So okay.
+
+Unknown Speaker  1:57:32  
+Any question on this, I
+
+Unknown Speaker  1:57:48  
+Okay, so seems like we are all good.
+
+Speaker 1  1:57:55  
+So then we will go on the last topic of the day, which is regularization, which is something I remember in greed you were asking in the last class. So this, I would say, is the most important strategy of all of this, in reducing over fitting. So whenever you see your model is performing well on training data and substantially poorly in test data. For most cases, test data performance would be slightly lower than the training data performance, that is fine, but if you see a dramatic drop, that almost always means that your model is overfitting. So overfitting basically means your model is too complex. So what does too complex model mean. So let's try to understand that from a mathematical standpoint. What is that? What does that mean? Okay,
+
+Unknown Speaker  1:59:10  
+so
+
+Speaker 1  1:59:13  
+what is the central idea behind linear regression is that we are trying to come up with. Even though we are saying linear regression, there are a lot of coefficient I mean when we say y equal to a plus b x, which is a truly linear equation. If X has only one feature, then this is a simple, one dimensional linear equation, right, or, yeah, two dimensional linear equation right in x and y. But what happens when you have 10, dimension 20, dimension, 30, dimension, you still have one intercept, which is a but you end up having. In 1020, or 30 different coefficient, as many coefficient, as many features you have. So essentially, going back to this graphics that we were talking about here,
+
+Unknown Speaker  2:00:17  
+this graphic.
+
+Speaker 1  2:00:19  
+So even though you are thinking that you are training a linear model, but because of a high dimensional nature, your linear model is now, so if you have a 10 dimensional model, the line that you are trying to plot that not that is not a line. Now that is a nine dimensional space. When you have a two dimensional model X and Y, your line is a one dimensional construct, which is a line. If you have a three dimensional model X, Y and z3, axis, and you are trying to draw a regression. What you are calling at a line that becomes a plane, which is a 2d construct. So your regressor that you are trying to compute is a n minus one dimensional hyperspace within n dimensional hyperspace. So process. So what that means is, even in the linear world, your regressor have lot of degrees of freedom, and since these algorithms are written in a way that it will do whatever it can to take turn and twist, to try to be as close as the data point. It might happen in some case, that your model is over, using the freedom that you gave him and doing all sorts of crazy things, kind of what we are seeing in White House right now, lot of freedom
+
+Unknown Speaker  2:02:05  
+I couldn't control.
+
+Speaker 1  2:02:09  
+So anyway, so basically, your model, basically can tend to abuse the power that it has got, and the power comes from all these different dimensions that you gave your model. So then what you need to do is you need to add some additional constraint on your model. When the line of best fit is being computed. By adding some penalty function, you will basically say, Well, you are trying to reduce the square of these distances, sum of square of these distances, which is fine. You can do that, as long as you do not end up putting some very high weightage on some feature. Because when you do that, that basically almost always mean that your model is trying too hard to being overly complicated and creating a very convoluted end n minus one dimensional surface, which is why your model will be good in memorizing the data, the training data almost and getting too hung up with memorizing and may tend to see miss the big picture view. So we have to penalize. So essentially, we will say, if you have a very high value of b,
+
+Unknown Speaker  2:03:37  
+then don't take that
+
+Speaker 1  2:03:42  
+and the way that all of these algorithms work, even though, when since these are tiny little data set, you see that when we do our model dot fit, we hit the play button and even before you blink an eye, that model training is done. So it might seem that it is not doing anything, but it's actually doing a lot of thing. It's actually starting with a arbitrary line, and then computing the all these sum of square values distances, and then changing the line in a one direction or the other little bit, and then computing the values again, and then doing that again until a point there is no further improvement done. So there is lot of iteration goes on, which you are not realizing now because we are playing with tiny data set. But when you deal with real data set, you will see that this training will take much, much, much longer. It is not uncommon to see model that can take minutes or even hours to train just for one one experiment. Now what we are doing, essentially by regularization, is we are adding a penalty function with an weight edge. We will see, hey, if some of these bees get higher, then whatever reward that you are giving to that particular. Line or plane, your reward is basically how much you are optimizing this distance. That's your reward, but then offset that reward with a penalty for coming up with very large values of b, and that's what we do by regularization. So now we have two goals in our model, with a regularizer, regularized, regularized model, the normal model, your goal is only one, minimize the sum of squared residuals. So basically, minimize the sum of the squared distance, which is also called residual residuals, is nothing but distances. Right now, when you are going to do regular, regularized model, you are basically saying minimize the sum of squared residuals, okay, plus a penalty for large coefficient. So you find this sum of square residual. But then you also add a penalty for large coefficient, and these whole thing becomes your net reward function, the original reward, plus some penalty. So by the word penalty, you can probably think, you can imagine that this penalty basically works in a negative way. So it will basically take out any score that any brownie point that it awards, because the model has minimized the square of residual in doing so, if it ends up having large coefficient, then it will get a penalty. And when the algorithm will run multiple different iteration, it will then, based on these additional constraint that you are adding, it will basically try to stay away from the direction where the B's are getting higher because of the penalty function. So now there are two different ways you can add this penalty. One penalty is so both of these penalty basically you provide a multiplication factor called alpha. So alpha is what you are multiplying the large coefficients by. So that basically is the degree like how harsh the punishment is. If your alpha is too high, that means your you are punishing too heavily. So that's where you also need to kind of be careful and tune your alpha, because if your alpha is too low, that means you are not punishing enough. So your regularization might not have the intended benefit that you are looking for, but if you end up punishing too high, then what it will do is your model will under fit, because now, in an effort to simplify the model, you have simplified it too much that it fails to understand the underlying pattern. So it is very important to come up with the right optimal value of alpha, which again, is a matter of trial and error. And these particular techniques in machine learning world is called hyper parameter tuning. So alpha is one of the hyper parameter for a linear regression model you've got now two different ways we can apply this penalty. One is called the ridge regression, where what we do is we take the sum of the square coefficient. So if you have b1, x1 b2, x2 b3, x3 let's say you have a three, the three feature variable, right? So instead of a plus b x you will have a plus b1, x1 plus b2, x2 plus b3, x3 so in the ridge regression model, you will take the sum of square of the coefficient. That means you are going to take b1, square plus b2, square plus b3, square and then multiply that by alpha, and that will be your punishment, a penalty. And you add that penalty to the to the reward, which is the sum of squared residual. So that is the ridge regression. Now what is happening here is because we are doing a squaring of the coefficient. So that means, essentially we are even, even some of these B's get very high on the negative scale. When you are squaring it, it becomes positive. So basically it is almost similar to taking the absolute value of this, where you are not basically making any difference between the high positive and high negative, which is almost always a good thing to do. For that reason, ridge regression is almost always a better regression, sorry, a better, better what is called a regularization technique, the ridge one. But then there is also another technique, where you take the alpha and there is a half factor there. Don't worry about the half. So this comes from the underlying mathematics. You can think of your alphas as alpha by two that. Half doesn't matter. It's just a multiplication factor. But what matters is here in the lasso model, this is the second model of regularization. You are taking the sum of the absolute values. You are not squaring them. Now, the difference is when you are doing the lasso now, because you are not squaring now, lasso has the potential ability to push some of the variables down to zero almost so when you do lasso regression and you find the coefficient of the resulting model, you might see that some of the feature variable for some of the features coefficient is zero. But for ridge regression, none of the coefficient will be zero. It will always retain all the feature. So lasso is good if you have not done, let's say, multicollinearity feature before, or if you have not done the P checking, p test checking before. So that means there could indeed be some variables that are not useful for you at all. So lasso has the side effect, benefit of automatically pushing the coefficient for those useless feature variable to zero or near zero. Ridge will never do that. It will push all the coefficient down, but it will not going to take anything to zero. But what it happens is, so people have seen over time, through their experience, it is always better to do your p test, to do your VIV test before, and then when it comes to regularization, use the ridge method and not the lasso method, because lasso mess method might have some other problems, but that does not mean you cannot use lasso at all. These are all kind of open to interpretation, and there is no right or wrong answer for your purposes. You can try both. I mean, there is no harm. I mean, both will give you some result, and you will at the end of the day, you will end up keeping the one that gives you better, best score anyway, right? So, but it's still important to kind of keep in mind the difference between the region,
+
+Speaker 1  2:12:21  
+lasso, oh, is the concept clear? Somehow? Can you, like, see it in your mind, what we are trying to do here?
+
+Unknown Speaker  2:12:26  
+Absolutely not,
+
+Unknown Speaker  2:12:29  
+not, no. What
+
+Unknown Speaker  2:12:30  
+question do you have? Oh, ma'am.
+
+Unknown Speaker  2:12:34  
+I am. I am not getting this fault.
+
+Speaker 1  2:12:37  
+Okay, so do you want to discuss, or do you want to is not going to example is not going to actually be helpful, because the code examples, since scikit learn, unfortunately makes things so simple, you actually don't see what is going on under the hood. And unfortunately, as I said at the very beginning of the class, since we are basically working with very simplistic data set. Many of these effect that we are talking about will not be apparent when you see the output of the code. So
+
+Speaker 6  2:13:08  
+so if I, if I was trying to voice it back to you, I think what we're trying to do is we're trying to reduce the error.
+
+Unknown Speaker  2:13:16  
+I don't know that that's true.
+
+Speaker 1  2:13:20  
+We are not trying to reduce the so when you say error, what do you mean by error? Well, the
+
+Speaker 6  2:13:28  
+green line that this the distance between the training data and the prediction,
+
+Speaker 1  2:13:32  
+the distance between, yeah, that is all. That is always our goal, yes.
+
+Speaker 5  2:13:39  
+So like the other, the lasso and the ridge. We're basically trying to reduce the coefficients if they're not like, help if they're not this probably wrong. What terminology, but not helpful to the model. Is that like? Is that kind of accurate to say
+
+Speaker 1  2:13:58  
+no. So what it is doing is this regression, sorry, this regularization technique. See, when you are looking at this in two dimension, it's probably not that easy to kind of extend that into higher dimension, but think about it this way. So if so, how do I say visualize it? So okay, so let's visualize it this way. So instead of going to higher dimension, how about think about higher degree of polynomial? Let's say that's let's go back. Is
+
+Speaker 5  2:14:37  
+about, were we talking about higher polynomials, or are we talking about like multi dimensionals? So that's what I
+
+Speaker 1  2:14:45  
+that's what I said earlier. So okay, you can it is very difficult to imagine it in a multi dimensional, higher dimension, because it takes a lot of mathematical experience and background to be able to think in terms of higher dimensional, abstract math. Analytics. So that's why it is easier to see in the context of this, but the effect is the same. So essentially, even if you have a two dimensional model, let's say this now let's say instead of doing linear regression, in the sense, you are doing a polynomial regression, you can actually do polynomial regression. Linear Regression is not the only game in the town. So let's say you have this data point and you are doing linear regression, the linear regression will fit a straight line through this. If you are going to do a polynomial regression, and you give the polynomial a degree of two, then that polynomial regression will fit a curve with one curvature, because it is degree two.
+
+Unknown Speaker  2:15:45  
+If you want your model to be very, very accurate,
+
+Unknown Speaker  2:15:49  
+you give them a higher degree 3456789,
+
+Speaker 1  2:15:53  
+10, like this. One is probably what we calculated, degree nine polynomial, still two dimension, but I'm increasing the degree of polynomial, and when I do that now, my model has lot of freedom, so it will make the line take all sorts of twists and turns to try to fit all the noise that is inherent in the data point, it will try to basically touch all of this point as much as possible, right? So now, when you will do that, and if you find the coefficient of that polynomial for this polynomial, you will see, so this polynomial is what like a one times x1 plus a two times a, one times x plus a two times x square, plus a three times x cubed, plus a four time x to the power
+
+Speaker 5  2:16:50  
+four and so on. Yeah, your highest polynos can be X to nine, right or x to the power nine. Yeah, right
+
+Speaker 1  2:16:56  
+now. Now, what happens is, when your model end up having a curve like this, the higher degree term will have these a values that is also numerically, very high. Now one solution to that is take your degree and turn it down to one, but as you can see, if you can turn it down to one, then your model will be overly simplistic. So other thing you might want to do is keep your degree high enough, but then add an additional punishment term. You will say, Well, try fitting a higher degree polynomial, but don't make any of the coefficient of higher degree terms numerically very high. So that way you will still get a degree nine polynomial, but these turns and twists will not be as sharp, right? It will be much gentle
+
+Speaker 5  2:17:57  
+turning. So you're keeping the coefficients down basically, so that they're not as expressed like, yeah, okay, exactly. That's the ridge and lasso method
+
+Speaker 1  2:18:08  
+that, that is the regularization method. Now, in order to do the regularization, whether you are taking the absolute value or whether you are taking the square value, that basically makes the difference between region less. So that's all in
+
+Speaker 6  2:18:20  
+the lasso. You said, can push to zero. So if I thought of B as slope, a zero slope would be like, like a horizontal line, 00,
+
+Speaker 1  2:18:29  
+meaning basically in one dimension. You are, you are basically cutting out one dimension. So for example, if you do that in a, in these, let's say, higher degree of polynomials still in two dimension. If you do a lasso, your model might decide that I don't, even though this guy asked me to go up to degree 10, I don't need to go up to degree 10. Some of the higher degree, like degree 910, coefficient could actually be turn out to zero. Lasso can do that. Ridge will never turn anything to complete zero, it will lower them as much as possible, but it will never take anything to complete zero.
+
+Speaker 6  2:19:06  
+And if it goes to complete zero, that's the that's the exponent in that math, and that we turn it into that
+
+Speaker 5  2:19:14  
+particular polynomial becomes negligent, basically, like, it doesn't have, like, a very sharp turn or whatever,
+
+Speaker 6  2:19:21  
+right? I can imagine it from the shape, the shaping. I'm just also trying to, like, think about the math, or the math, but if we've gotten out to this polynomial that's nine degrees, and goes to x to the ninth, ax to the ninth, if it's, if you turn that to a x to the zero, that's a
+
+Speaker 1  2:19:40  
+so if you, if you turn a i to zero, let's say I polymer i th term becomes zero. That means you are basically completely cutting out that particular degree term.
+
+Speaker 6  2:19:51  
+Right, right, right, right, yep. So I get Yeah, I thank you. I think Yeah.
+
+Unknown Speaker  2:19:57  
+That makes sense
+
+Speaker 1  2:19:58  
+now that we. Reason I said in this thing now in terms of higher degree of polynomial, because it is easier for you to visualize. Now, if you are doing linear fit, but in a higher dimension term, the effect is the same, that if your let, if you let the model do whatever it wants, it might end up having a very high value coefficients, and that will make your model tend to be overfitting to the curve to the data that you have, especially when you have limited amount of training data. Now this is less of a problem if you have a large data set. Regularization often becomes a problem when you have a limited data
+
+Speaker 5  2:20:50  
+set. Oh, you shot you stopped sharing your screen, by the way. Yeah,
+
+Speaker 1  2:20:54  
+hang on. I am trying to find so I do have a book. I think I have shared this book with you, but let me find, try to find one thing, Hang on one second.
+
+Speaker 6  2:21:07  
+So just from a what, while you're doing that, it kind of feels like it said that jagged example, that you're smoothing it out. You're you're making the turns less less severe, but you're trying to aim to not flatten it like that's conceptually, yeah, you're so
+
+Speaker 5  2:21:26  
+maintaining those degrees, those those polynomials, still accounting for them, but we're just giving them less like weight if they're not, if they're negligible. Basically,
+
+Unknown Speaker  2:21:38  
+yeah, yeah. That's
+
+Speaker 1  2:21:40  
+right. Thank you. Okay, so I found that book. So this book, I think I did share it sometime back. So this book is, let me show you the cover. This is the deep learning book by Christopher Bishop, okay, the first chapter is basically nothing to do with deep learning. It's basically to develop that this intuition that I'm talking about for linear models. So I'm not going to read this book to you, but I'm just going to bring your attention to some example, like a plots that the author has used here. So this is that polynomial that I'm talking about, right? Your W, zero plus w1, times X plus w2, time x square up to m, right? So this is the polynomial, let's say we are trying to fit.
+
+Unknown Speaker  2:22:38  
+Oh, what's happening? Ah, one,
+
+Unknown Speaker  2:22:43  
+enable, scrolling,
+
+Speaker 1  2:22:46  
+okay. And then your error function is basically this. This thing the sum of square of residuals. So this is your error function that you are trying to minimize. Now, talking about the model compare complexity, right? So here what the author is doing is he is created a toy data set. And the toy data set, it is created using a sinusoidal function. So this blue.as you can see, so this is basically the training data set. So the way that he generated these data set is he took the sine curve, and then for each of the point, he added a random noise. And that's why these blue dots. So the green.is the original function it should be, and that is the function of best fit, if your model is able to do a excellent job at finding the underlying pattern. So in that magical world, your model will be automatically be able to find this sine curve from this slightly imperfect data where some noise is built in. Now, in order to try to fit this model, you first do a polynomial fitting with a degree of zero, and what you end up getting, well, you end up getting a horizontal line, which is not good. And you think, Okay, this is not good. I'm going to go to degree one. And this is your linear regression, equivalent to your linear regression. So when you do a linear regression, it comes up with a straight line, because that's all linear regressor can do. And that's not good enough either. Now you turn the degree up to three, and now you see how well the degree three polynomial is mimicking this graph. It's not perfectly signed, but between zero to one, our sine curve has two turns. And guess what? A degree three polynomial also has two turn between these two interval. So this is good. So now you get. Website. And now, if you keep measuring the R square value of this model, you will see that it will increase, right? And you can go degree four, five, and so on, and it will keep increasing. What happens it at degree nine, your R square value becomes 100% it's zero error. So what the graph has done it basically touched all of the points exactly. And this is a good way to see in your mind what overfitting means. So this will get 100% accuracy in training data, but this will fail miserably on test data, because these degree nine polynomial, with all its twist and turn, is nothing like the underlying sinusoidal curve. So if you take other point, beyond here or here, like beyond zero or one, so your data point will continue follow this sinusoidal pattern, but your graph will completely diverge and go in a opposite direction. So your test accuracy would almost be zero. So this is one extreme example. Now what you do is and this is one example that shows how the error changes as you change the degree of polynomial and error of training data and error of test data. So you see how, as you go higher degree, your training error keeps going down and down. But after degree three, your test error creeps up at a degree nine. It is shooting through the roof. This is a test error. Training error keeps going down, but that's not that doesn't matter. What matters is the test error that should be going down, and it is not going to happen in this model, because there is no regularization in this model. So then what you do is you add a penalty term, and you run that model. And I'm just walking you through the graphics. Okay, so now someone has run the same model, well actually before going to the penalty. So first author has shown. So let's say you are still using the degree nine polynomial, which is this, but now, instead of having only 10 data you have more data point. You have 15 data point. So now this is a degree nine polynomial between the same interval, but with more training data. Here also it is overfitting. As you can see at the end, it is like diverging completely, but it is still a much smoother curve than when you got with a less number of training data. So this is also overfitting, acute overfitting. This is also overfitting, but not as acute. Now you suddenly increase the training data to 100. So now you have 100 data point, and you are still fitting the degree nine polynomial. Now you see your polynomial is not over fitting at all. And this serves to show that if you have large amount of training data, you may not have to use a regularization at all, because your model will likely not overfit with large number of data.
+
+Unknown Speaker  2:28:31  
+So that's one way to get rid of overfitting problem.
+
+Unknown Speaker  2:28:38  
+Now,
+
+Speaker 1  2:28:41  
+now we are taking a look at the coefficients, and this is for the first case where the graph is taking y terms with only handful of training data. Now these are the model coefficient with different degrees, so M equal to one which is a straight line. The coefficients are 0.9 and 1.5 8m, equal to three, these are the coefficient. And look what the coefficient becomes when you get m equal to nine.
+
+Unknown Speaker  2:29:10  
+Wild.
+
+Speaker 1  2:29:14  
+That is what end up happening. And there is a GitHub code base, by the way, that actually shows this. If you guys are interested, I can point you to that code base so you can actually run this in your machine and you can see it right. So this is what is happening underneath, and that's why the graph is taking this wild twist and turn. So our goal in regularization, if we still want to maintain M equal to nine, we want to have some penalty function to suppress this wild coefficient, to make it more manageable, like within the same order of magnitude, at least, if not zero.
+
+Unknown Speaker  2:29:54  
+That's what the regularization do.
+
+Unknown Speaker  2:29:57  
+So this is perform those ridge and last. So
+
+Speaker 1  2:30:01  
+like, this is this? This coefficient is without any regularization, yeah,
+
+Speaker 5  2:30:04  
+right. This is before, okay, yeah, that makes sense for those methods are to suppress those coefficients with penalties to make negligent, basically,
+
+Speaker 1  2:30:15  
+right. So now here you are applying the coefficient. So what we are calling Alpha there, here, mathematically, it is basically basically apply that this thing as a logarithmic function. So ln, lambda is basically your alpha. So now you are applying a regularization coefficient. Now ln of lambda, if it is zero, that basically means your penalties too heavy. So see what it says. Plots of M equal to nine fitted to the same data set using the regularized error function for two parameters, lambda, corresponding to LA, ln, lambda is equal to negative 18 and ln lambda equal to zero. So what is happening when ln lambda equal to zero, you basically end up having a overly simplistic curve. So basically this red line is your curve fitting. So you have penalized ln lambda equal to zero, basically means your lambda equal to one, which is very high, because one is the highest, that is the highest penalty you can provide, right? So basically you end up almost being like a straight line with a slight little card. So now your model is under fitting. So you basically push the model all the way to the very simple side, and now it is up under fitting. Now if you play around the value of this lambdas, you might come up with something like this, where you will end up a graph like this, and then obviously you would not know what this is. So you have to basically calculate the score, test score on the sorry, error score on the test data to basically see your test data is still producing low enough error margin right, and you will basically, when you do a right amount of regularization, even with a high degree of polynomial and low amount of data, you might end up getting a curve that almost very well mimics the original pattern or underlying pattern in the data. So that's what regularization does. Now you might say, Hey, this is in a higher degree polynomial, but what you see here conceptually also applies when you go to higher dimension feature set.
+
+Speaker 6  2:32:38  
+So So could this be thought of as dementia, dimensionality reduction.
+
+Unknown Speaker  2:32:44  
+This is not dimensionality reduction now.
+
+Speaker 1  2:32:48  
+So dimensionality detection reduction is where you are basically cutting out some of the high number of fees, cutting out some of the feature by taking a projection onto a lower dimension.
+
+Unknown Speaker  2:33:01  
+Here you are not doing any projection. Oh, this is different.
+
+Speaker 1  2:33:07  
+I mean, you can try, like when you will be trying different technique on your linear regression or classification, if you think that you have a very high dimensional data set and you think that your model is overfitting, and you have tried all different forms of regularization with different alpha values, and you are still not being able to do get any good improvement. Your last result would be actually to try dimensionality reduction. But this is different, usually in usually in regression and classification, that is probably the last thing you will try. In clustering, that is probably the first thing you will try, but not in supervised learning, because you have all of these other things that will hopefully give you better results.
+
+Speaker 1  2:34:02  
+Okay? I'm not going to go into the text. This is a pretty heavy text. My math math, best text, like, even though it says deep learning, if you flip through the pages of the book, is basically like a 400 level University mathematics course, like abstract math course. There is basically nothing related to coding here. Not a single line of code. It's all math.
+
+Speaker 7  2:34:27  
+This is kind of stuff gets into, like optimization, that's right, yeah.
+
+Speaker 1  2:34:36  
+Oh, so are we ready to try this with our psychic learn?
+
+Speaker 7  2:34:43  
+Yeah, I'm kind of curious to see how low you can actually get the numbers this so I could kind of get the like relaxing of like the curves to, kind of like, bring the polynomial away from hitting every exact point in the training data, right? It's like, like, lets it. Kind of Intuit, like, the on the real data, right? More, but I'm trying to figure out how to word this, um, but like, what's like the benefit of like relaxing those curves, other than just like, allowing the model to like,
+
+Speaker 1  2:35:17  
+what's the benefit of relaxing those curve? Meaning not let the curve take the sharp twist and turn,
+
+Speaker 7  2:35:23  
+yeah, and getting, like the number lower, right? Yeah. Basically what
+
+Speaker 1  2:35:27  
+you are effectively, what you are telling the curve is, don't get too much hung up on the noise in the data. Try to understand the underlying pattern. But if you try to fit each and every data point, then Mr. Regressor, you are basically trying to fit to the noise of the data, not the actual data,
+
+Speaker 7  2:35:49  
+okay? And that lets it perform better with the like, test data, yeah, okay. Test data, right? Thank you. That's the only benefit but like getting with the number lower, I guess, yeah, we're just concerned with how it's able to work with the trend. Yep.
+
+Speaker 1  2:36:07  
+So, so see, there are two ways I said the regularization, sorry, not regularization, the overfitting problem can be handled. One is to have more training data, and the other is to apply a regional lasso regression. Now, whichever you do, so even if you don't do regression, let's say you are only applying more and more training data, what the model then will be able to do, since it has more experience in seeing different kind of variation of the data, it will be able to, even without regularization, it will be able to better cut out the noise, because it has seen lot of examples of what the underlying pattern of the data would be. So that's why, if you don't have enough training data, that's why the regularization becomes more important, because then the model, the poor model, cannot really see through the noise. It tends to get hung up with the noise. Then you have to artificially penalize it if it tries to get too much fit into the noise.
+
+Speaker 1  2:37:19  
+Okay, so let's quickly just see the code example we are almost getting towards the end of the time. And then if you have still question, we have the after hours, office hours, so hold on to your question for a few minutes. So let me just finish it, because some of you guys probably have to drop off. So in the code example, you will see that the data that we will be using, you will not see dramatic improvement, but just pay attention to the library method, like the functions that we are going to use, so that you can kind of go back and refer to that and use it in future. Okay, so this first one, this is basically a simple toy data set that we are using that make regression. This is similar to that make blob or make moon that I did, right? So this is a toy data set we are creating with one feature and one target. You can actually create this toy data set with as many features and targets that you want, and then we basically get a data set which basically has 5000 samples, right? Because we said 5000 here. Now if you plot this data set, so this is what the plot is going to be, because we created this data. Now we are going to try to fit a line through these data. So you do a train test split. Now we are not going to try a linear regression without re without regularization here, because here we are here to learn how to apply the ridge regression. Now psychic learn make things so stupidly simple that often time, if you don't go through all of those heavy text book you probably don't see the thing. And that's why I'm taking so much time to explain because the code is very simple. All you do it. Instead of saying linear regression, you just use another function called Reach, or another object called Reach. And when you are creating this object, the only difference is you have to provide a value of alpha. That's the only difference. When you are using linear regression, like in any of these examples, right? We just say linear regression. That's it. Here we are just saying rich with alpha equal to one. But what it this reach does you? It does give you. It actually gives you a linear regression with a rich method of regularization applied to it with a penalty value of one. And then everything else is this. N You still do a model, dot fit with your x's and y's, and then you do a predict. And then you want to see, hey, what is my RMSE value? You do the mean square error, you get some value. If you want to see the r square, you see the r square, and that's what you get,
+
+Unknown Speaker  2:40:20  
+right? So that's all
+
+Speaker 1  2:40:23  
+Now, remember, I said doing this alpha fine tuning. This alpha is important, because if your alpha is too high, you end up penalizing the model too much, and the model becomes overly simplistic. If your alpha is too low, then your regularization does not have the effect. It becomes almost meaning no regularization at all. So that's why we have to try with different values of alpha. Now you can always take different values and write a for loop and do a ridge regression with different values. That's one way of doing it. Another way of doing it is using these another learner called Read CV. So this is very similar to Ridge, but it can take a list of alphas, not just one alpha. So here we had one Alpha when you use reach CV, the full form is reach with cross validation. So then what the model will do is it will automatically try to cross validate. So it will basically run. So here as many numbers that you give, it will train as many models. So if you give 10 different alpha values, it will train 10 models, and it will give you the best one. That's all without you actually having to write a for loop and do that and check the model performance. All of this is done behind the scene. And then what you will do is so in this case, you don't have to predict. All you have to do is you take a rich CV model, you specify a series of alphas. And it is actually very common for people to use the alpha values that varies not by magnitude, but by the orders of magnitude, like people usually don't say, hey, let's do a cross validation with alpha value of 12345, because the thing is, this is a logarithmic scale. So if you change from one to two, two to three, that does not make any difference. So since the alpha value is basically the ln lambda that you saw saw in the book. So that's why, when you are changing the alpha values, you have to change by orders of magnitude, like 10 to the power negative 310, to the power negative 210, to the power negative one, and then 10 to the power zero and 10 to the power one. So you basically are varying by orders of magnitude, because it's a logarithmic scale. So now out of these five values, it will tell you so after you do the model fit right, and then you don't have to predict then after this model is fit, then there is a attribute of the model, which is called Alpha underscore. This attribute will automatically capture Out of these five or however many alphas you provide, which one was the best Alpha? Like which one of this alpha gives you the most optimal regularizer. So all you have to do is, after you fit it, you do model dot alpha, and it tells you 0.01 is your ideal alpha for this data set. And then you run the model with that alpha, and you go happy knowing that this is the best you could do. So that's essentially how you apply the regularization. So what do you do? Instead of using the plain vanilla linear regression function, you apply a ridge function or Ridge class, and you provide the alpha value and then fit and predict the model. But then, if you don't know what alpha value to use, what you first do is you use a rich CV class, and you specify as different alpha values, ordering by varying orders of magnitude, and you see which one gives you the best fit, and keep that one, and keep that one meaning, use that alpha value and then finally, do the range. If you don't know that 0.01 is going to give you the optimal value anyway. Now, even though here you are saying 0.01 there is nothing stopping you from trying 0.02 or 0.05 So you can still trying that, try that. But as I said, because it is logarithmic scale, you might get slight marginal change going from point 01, to point 05, but what it is telling is that in the order of magnitude, something around 10 to the power minus two is the right alpha for this regression problem,
+
+Speaker 5  2:45:27  
+does the does a model have an attribute that outputs the coefficients? Sure,
+
+Unknown Speaker  2:45:38  
+so model two,
+
+Speaker 1  2:45:46  
+so in this case, you wouldn't see changing the coefficient, because this is, as I said, this is a simple two dimension. It's a line, right? It's a line like, what coefficient. So the only idea here is to basically show you the syntax of this region, reach city. That's all. You do not see that full mathematical beauty behind this, like you will see in a higher dimension,
+
+Speaker 5  2:46:09  
+yeah, just, I guess I maybe another example with a higher polynomial fit. It'd be interesting to see all the coefficients and then just see how they're all, like, squashed, you know, they're ball penalized, to
+
+Speaker 1  2:46:25  
+see, well, the effect higher, yeah, you can do higher polynomial regression, or you can even try linear regression with higher number of features. Okay, so let's actually take a quick look at we are actually over time, but this is just the same thing, but except here we are using that house price data set to do the regularization. Well, hang on, this is not that same house price, though. This looks like it's the distance to the nearest MRT station. Okay, anyway, so this is some kind of house price difference by data set, but it does not have just your room and square footage and so on. Instead, it has the age distance to the nearest public transit, number of convenience stored in the vicinity. I think this is actually a better day data set, although I'm not so sure about the latitude, longitude or that, well, I think the Transaction Date might matter, yeah, because there is a seasonality anyway, let's not try to read too much into the data set, because that's not the goal for this. So what we are going to do is we are going to take the house price of unit area as y and everything else as x, which gives us six feature data sets, so six dimension, but still a very limited number of data, 414, which is very, very low. So first, we are going to try doing a ridge regression. So let's do a train test split. And looks like this data is not scaled, right? So looking at these values, it's a probably a better idea to do use a standard scalar to scale the data. So now we have the scale data here under the transformed now, we are going to try just a ridge regression right away with a random alpha value of one. And when you do that, you do that. And then let's look at the model coefficient. And this is the model coefficients I'm getting, so six features, so I have getting six coefficient right. So that basically also means six degrees of freedom, even though it is not a polynomial in that sense, but it's still a mathematical function with six degrees of freedom. Now we have to do that prediction, but since we scale the train data, we also have to scale the test data using that same scalar, and then we have to use that scaled test data to do the prediction, otherwise the prediction will not be right. So now we did the prediction, which is there in our y predicted, and we can calculate our MSc, 53.69, now, while we are calculating our MSc, even though I said MSC by itself, does not mean much, but if you are trying multiple different types of regression on the same data set, which is what here, what We are going to do then comparing MSC between one method versus the other method. That makes perfect sense, because ideally you would want to keep the one with lowest MSc and highest r2 value. So you can also measure the r2 value. That's fine, but here we are just measuring the lmse. Okay.
+
+Unknown Speaker  2:50:00  
+So this is the ridge regression.
+
+Speaker 1  2:50:02  
+Now we can run the same data set through a linear regression, which is our plain old, simple linear regression, and the mean square error is higher, not too much higher, but still higher, 53.72,
+
+Unknown Speaker  2:50:21  
+on the predicted data set.
+
+Speaker 1  2:50:25  
+You see that on the predicted data set here also we are doing on predicted data set. We are not trying the mean square editor on the train, because that is not a good estimate. You should always do the RMSE on your pretty test data set. Test and a predicted, not trained and predicted so now, obviously it shows me not very dramatic change, but linear regression without regularization gave us a higher R square value compared to when we used with regression, slightly lower, but still lower. If you look at the coefficient of regular regression model, and compare that with the coefficient of a regularized model here. Also, you see, given the nature, the effect of regularization is very slight, but still, nevertheless, each of the coefficient, or most of the coefficient, I would say, is little lower here than they are here. First one is little lower, second one is also lower. Third one is lower, fourth one is actually higher. And that might actually happen when you have multiple degrees of freedom and you are trying to make the curve smoothen out. Some of those might end up getting little higher than without regular regularization, but the point is, when you do the regularization, none of these will get absurdly high. Now obviously it is not easy to see that, because we it did not get absurdly high in the first place, given the limited data that we have, but you will see that most of these got slightly lowered. Four out of six got lowered, and two got little higher. Now again, we randomly use the alpha of one. Ideally, what you should have done is you should have done this first, and then you should have done a ridge cross validation, like what we did here with multiple different alphas, and then you should have taken the best alpha and then run the ridge with that alpha.
+
+Unknown Speaker  2:52:32  
+That's the ideal flow.
+
+Speaker 1  2:52:36  
+Now if you are thinking why we are not doing this here in this class today, that's because here we are just giving you the tools. In the next class is where you are going to put all of this together and put it in something called a machine learning pipeline and actually create a mini project,
+
+Speaker 1  2:52:56  
+the lasso regression. That's the last thing. It's the same thing, except, instead of reach, you do the lasso, just the change of the world, everything else is still the same. You have to provide an alpha. Oops, sorry, I forgot to run this. You have to provide an alpha. And if you look at the coefficients,
+
+Unknown Speaker  2:53:17  
+you see what happened here.
+
+Speaker 1  2:53:20  
+It actually pushed one coefficient down all the way to zero. So this is what I was talking about when we did reach which is the first one. You see, none of them is zero, but the lasso has this tendency, if it can, it will drive one or more coefficient all the way down to zero. And that's why, unless your back is in the wall and you have no other way out, you should not be using lasso, because it has this unintended consequence of driving one or more feature completely to zero, rendering this that feature meaningless.
+
+Speaker 5  2:53:59  
+In this case, is it, is it actually not? Is it meaningless? And that's why I did it
+
+Speaker 1  2:54:08  
+may not be, may not be. That's what I'm saying, yes, because of the way that the lasso does it, thinks that it is meaningless, but that's why you shouldn't be depending on lasso. You should be running your own p test and VIV test to see whether that it is okay to actually drop that column. Yeah. So you actually doesn't look into that, because lasso is not a statistical method. All it does, it's basically a car fitting method.
+
+Speaker 5  2:54:32  
+So this is a way for us to kind of verify, like the P tests and
+
+Unknown Speaker  2:54:38  
+Okay, got it? Yeah?
+
+Unknown Speaker  2:54:44  
+Cool.
+
+Unknown Speaker  2:54:47  
+And if you want, we can, let's say,
+
+Unknown Speaker  2:54:50  
+calculate the mean square we are getting, what 60.63
+
+Speaker 1  2:54:54  
+Yeah, so you see, lasso actually performed much worse. So because of this, you see it. Did this, but this is not the right thing to do. So we actually get a much higher r square, sorry, RMSE value, which is not RMSE. This is MSC, 60.63 as opposed to 53 point something for the two others. So the bottom line, don't use lasso. Sometimes you might have to, but don't use it unless you are absolutely sure and you know what you are doing.
+
+Unknown Speaker  2:55:30  
+This is neat. I like this stuff.
+
+Unknown Speaker  2:55:32  
+Yeah,
+
+Unknown Speaker  2:55:36  
+it's pretty interesting to play with.
+
+Speaker 1  2:55:39  
+Cool, Hey, did I show you that Kaggle competition? Yes, I actually had this open so let me ping you here quickly in the live channel. Can we work with you
+
+Speaker 5  2:55:52  
+and split the money me? Yeah,
+
+Unknown Speaker  2:55:57  
+my days are so busy I wish I could have
+
+Speaker 1  2:56:01  
+so yeah. So these are some of the competition, and these are all regression. So I applied the tag regression, because you guys are learning regression, right? And if you see like, hey, closing soon, which basically shows active. So this is the one that has 120,000 somehow, like, this one is like, what is your reward knowledge? You don't get anything. You're getting some knowledge. But this one is actually offering real cash, 120 grand, so go for it.
+
+Unknown Speaker  2:56:33  
+Cool. Okay,
+
+Unknown Speaker  2:56:35  
+so that is the end. Sorry, we went 15 minutes over. But.
+

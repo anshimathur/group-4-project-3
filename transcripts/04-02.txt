@@ -1,0 +1,1245 @@
+Speaker 1  0:11  
+Minutes over. So let's get started. One good thing is, in today's material, I don't think we'll probably need full three hours. So just like last class, it's it's more exploratory in nature. And one thing, I'm seeing a very good trend. I'm seeing the overall class participation, I think, as we started pandas, compared to when we are just doing Python, I have seen there has been a considerable increase in participation and enthusiasm within the class. So that's really good to see, and I hope we'll continue down that path. And today, I am not going to talk too much, except in one section where we are talking about some statistical values. Other than that, I basically try one to make the class more driven by all of you guys, right? We will do lot of activities together here, and then maybe one or maybe two activities within your breakout rooms, right? But consider this class basically kind of your opportunity to kind of show what you got, right? So we'll basically go through different prompts, and then you I will expect you guys to pitch in, like, Hey, these are the step we need to do. How can I do this? And I will, I will do the coding here, so that everyone can see, with the expectation, that you will also do that simultaneously on your VS code, or whatever way that you are running your Jupiter Notebooks.
+
+Speaker 2  1:42  
+Okay, yeah, I liked our last class. I think it was the best one we've had so far. So thank you. Okay, thank
+
+Speaker 1  1:47  
+you. Yeah, yeah. We'll basically continue follow the same type of strategy in today's class. So, in fact, you will see, as we start lot of these things, the function that we are going to use today on on your on our data frame. We have done quite a few. So you will most of these will come intuitively to you, and I hope that you have also done the reading yourself over coming to the class. So so it will be fun. We will do some summary statistics, thing like mean, some square Mean, Median mode and so on. But that also is not too much deep statistics, just to very basic foundational statistics, and we'll see how we can calculate those easily using NumPy and Psi Pi, which are two other libraries.
+
+Unknown Speaker  2:33  
+Okay, so let's get started.
+
+Speaker 1  2:39  
+So what I'm going to do is today's class basically starts with an activity to kind of review what we have learned today. So what I'll do, I'll jump right into that activity. And what I have today here is these are the unsolved file that you also have on your site. So instead of asking you to go into the breakout room. We will do this together here. Okay, let me close this thing. Okay, actually, no, I do need time to time to open this. So the first activity, what we are going to do is, as I said, recap of these. And in order to do this recap, we are going to use these data set in here, activity number one, and then under the Resources folder, you have this temperature data so where, basically, as you can see, hourly temperature is being reported from a certain weather reporting station on so and so, date and time. Okay. And the last column is basically the temperature. So this is the data set that we are going to make use of. So we'll keep that data set open in one tab, and then we are going to read these data from here.
+
+Speaker 1  3:58  
+Okay, so I imported pandas, so then, first, then I have to import the file. So how do we import the file? This is, again, recap. So I would like you to kind of say out loud, or like, cooperate in the I mean, contribute to the class. How we are going to do the steps. So how do we import the data set into pandas data frame?
+
+Unknown Speaker  4:26  
+Gonna give it a name like raw data.
+
+Unknown Speaker  4:29  
+Raw data, fine.
+
+Speaker 1  4:32  
+We can call raw data DF because it is kind of customary to use an underscore DF with a variable name whenever the data set we know that is going to be a data frame. I mean, it's just something people use. I mean, even if you don't do it, it's not a big deal. But okay, so let's say raw data, DF, and how am I going to load that file?
+
+Unknown Speaker  4:52  
+PD, read underscore, CSV.
+
+Speaker 1  4:55  
+PD, dot read CSV, and we have. To provide the file path. What the file path would be, knowing that I'm sitting here in the unsolved folder, and the file is one folder up and then one folder down into resources. So what is the file path going to be?
+
+Speaker 3  5:15  
+Dot.is. It Forward? Slash? Yeah, resources, resources,
+
+Speaker 1  5:24  
+and then the name of the file, and then the name of the file, which is this one, auto complete, cannot help me, because it doesn't know what file is there. And that's it. And then how about showing the first five rows in that data frame?
+
+Speaker 4  5:47  
+Well, that's just importing the CSV. Don't you have to actually do PD dot data frame and then the raw data file?
+
+Speaker 1  5:56  
+Well, the read CSV, if you remember, read CSD gives you a data frame. Okay? PD, dot. Data Frame you do when you have some cosmetic data that you are basically like, let's say you have a list or something that you are declaring the code and you want to create a data frame from that list in your Python code. But here, that's not the case. Here, instead of providing a list of dictionary or dictionary of list, instead of doing any of those thing, we are basically saying, Hey, Mr. Pandas, this is the path. Go grab whatever you find in that path and give me the data frame. So these raw data frame, the raw data DF, this is your data frame. Okay, cool. Thank you. Okay, so now, how do we show the first five rows?
+
+Speaker 5  6:47  
+I think it's the DF dot, head header. I got five.
+
+Speaker 1  6:51  
+So you mean rod it a DF dot has not a header. It's head. Yes, head, okay. I think for the head function, the default is five, and it is asking you to show five. So even if you don't specify any value, I think it will show five. Yes, I'm right. If you do want to show more, like, let's say if you want to show 10, then you have to provide 10, and it will show 10. But provide if you want to just show five. Basically you just providing five is same as not providing anything, because the default is files. Okay? The next is rename the columns. So essentially what we are trying to do so you see how these columns are like. Some of these are upper case. Some of these have a underscore in between. Some of these have these kind of camel case thing. So what we would like to do, we would like to rename the column, and we will turn everything to lower case. And these hourly dry bulb temperature, which kind of sounds very like annoying. Let's just call it temperature. So let's call station lowercase, date lowercase, report type lowercase and temperature lowercase. So we want to rename all those four columns that we have. Help me write the code that will rename these four columns from their current values to the new values
+
+Speaker 6  8:22  
+you could start with, renamed underscore data, underscore DF,
+
+Speaker 1  8:31  
+okay, so you are saying you want to put in a new data frame, okay, yes, renamed, renamed data, underscore DF, Yep, that's a good choice of variable, and very good equals
+
+Speaker 6  8:43  
+raw underscore, data, underscore, DF,
+
+Speaker 1  8:48  
+dot rename data. DF, dot rename, yeah, and
+
+Speaker 6  8:53  
+then yeah, parentheses, columns equals, and then do a dictionary for the
+
+Speaker 1  8:59  
+columns equal. Anyone knows. How do we do dictionary?
+
+Speaker 6  9:05  
+Squiggle squiggly parentheses, what's actually speak
+
+Speaker 1  9:08  
+up? Squiggly print something on with your finger. Curly brackets, curly braces, yeah, so a pair of calibrated dresses, yes. Okay, and then what are the key value pairs going to be?
+
+Speaker 6  9:25  
+I had cap station capital and then colon station, lower case. I don't know if there's an easy way to just lower case at all, or seems kind of repetitive, but
+
+Speaker 1  9:39  
+you can try using applying a lambda function, but let's just do it in a plain way. Yeah, okay, for now, yeah, I know. I know what you're saying. It's okay, so station becomes station.
+
+Speaker 7  9:56  
+Sorry. Why would you need to use a lambda? Couldn't you just. Use the Rename,
+
+Speaker 1  10:02  
+no no inside Rename. So the question is, if we are going to apply same kind of operation for all four columns, instead of writing key value pair, can we use something so that we can basically take the column name and just say column name dot lower.
+
+Speaker 7  10:20  
+Yeah, can't you columns equals STR dot lower.
+
+Speaker 1  10:26  
+Columns equal to str dot lower of what
+
+Speaker 7  10:31  
+of the of your renamed? So I, what I did is I renamed my column, because you only have to rename one column,
+
+Unknown Speaker  10:39  
+and then I made them all lower.
+
+Speaker 1  10:42  
+But what we are trying to do here is we are trying to rename all four columns.
+
+Speaker 8  10:50  
+So David, like, I think Aaron's Right. Like, if
+
+Speaker 7  10:53  
+because the readme statement says you only have to rename one column,
+
+Unknown Speaker  10:59  
+the readme file,
+
+Speaker 1  11:03  
+oh, that's what you're saying. Okay, let's see No, no. It says all columns should be lower case. Use underscore instead of spaces, and rename this column to hourly temperature,
+
+Speaker 7  11:15  
+yeah. So I renamed the first one, and then I just put I made all of my columns lower after I renamed that one column using columns equals str, dot lower.
+
+Speaker 1  11:25  
+Oh, okay, okay, so let's try your wedding. So you are saying that's that's good. So you are saying you did what, so did raw data, DF,
+
+Speaker 7  11:36  
+and then I dot rename parentheses. Columns equals curly bracket, the hourly dry bulb temperature in so you mean this one in single quotations, colon, then hourly, underscore, temp, sure, closed, curly brackets, close parentheses. And then I turned that into a the renamed variable, yep. And then I reformatted that with the
+
+Unknown Speaker  12:16  
+renamed,
+
+Speaker 1  12:19  
+uh, no. So. So So did you do anything in this statement? Or do you use another statement? I used another statement. Okay, so what is that? Another statement?
+
+Speaker 7  12:29  
+So it would be I'd used my variable reformat underscore, df equals, renamed data DF,
+
+Speaker 1  12:39  
+or let's call it, let's, let's overwrite on the same variable. That's fine too, yeah,
+
+Speaker 7  12:47  
+dot rename parentheses. Columns equals, STR, dot lower. Close parentheses.
+
+Unknown Speaker  12:59  
+Str, dot lower, just that. Yes, no,
+
+Unknown Speaker  13:02  
+no, open, close brackets. Just
+
+Unknown Speaker  13:06  
+mine worked, I guess. Oh yeah,
+
+Speaker 1  13:11  
+see, there you go. So let's see how that work. Let's do ahead on the Rename data column, actually, right? You don't need to use a lambda. So it actually just says, Chad, dot, lower, huh? See, this is, this is why I said this is going to be fun. So yes, if you do it that way, like, yeah, it applies that function across all the columns that you have. Okay, that's pretty good.
+
+Unknown Speaker  13:43  
+Thank you for putting that up there.
+
+Speaker 1  13:47  
+Okay, so now let's do some query. How many reports are there of type FM 16. How do we do that? What function we are going to use? I
+
+Unknown Speaker  14:04  
+Okay, look Loc, yep,
+
+Speaker 1  14:06  
+on our data frame, right? So our loc selector and then what we are going to put inside LLC. So
+
+Unknown Speaker  14:23  
+the data frame again.
+
+Speaker 1  14:25  
+This is a conditional selector, okay, so, yeah, data for a name, again,
+
+Unknown Speaker  14:29  
+bracket, quote
+
+Unknown Speaker  14:35  
+or sorry, report type.
+
+Speaker 1  14:41  
+I want to I know that works. I want to try this way to see whether that also work or not not. Report type equals this. This is what you mean, right. What
+
+Speaker 4  14:54  
+I did with mine was I put report type in brackets depending. Quotes,
+
+Speaker 1  15:01  
+yeah, I know, I know you do that, but this also works. Yeah, that works too, yeah. So, so what, basically, what you are saying is you are providing report type as a column of the Rename data, DF. This is what the syntax you are using, right, and it will produce the same result. You will get 510 rows, basically. But what I'm also trying to show here is, and this is, this is pretty interesting, right? Even though report type is a column. But whenever this is a data frame, pandas have a very nice shortcut. It can almost treat it as if it was a behavior of a class. So you can just say report. I don't know why these auto complete not working. Now, in my previous setup, in my older computer, the auto complete would actually show report type df in the drop down, right, which, which, which, no, not report type, DF, ah, report, uh, report type, yes, not report type, DF, yeah. And then the prompt basically says how many. So if you do it this way, you will see 510 if you want to do how many, you can do it two way. Guys. Instead of just printing the whole thing, you can apply a len function, and that will give you 500 the other way of doing is also using the Shape Method or shape attribute. So if you do dot shape, it will give you 510 comma four as a tuple. And if you are only interested in the length of meaning the number of rows. You can take the Zero out of it, and that will give you the same as what Len does. So there are 510, rows of report type FM, 16.
+
+Speaker 3  16:59  
+Okay, but the count function. I use the count function to do this.
+
+Unknown Speaker  17:05  
+Yeah, count also work.
+
+Speaker 1  17:10  
+Okay, so why don't we do the next one using count? So why don't you walk me over? How would you use this thing? So let's first write the selector, right? So the next one is a different condition, so I'm copying the same selector, but now just tell me what condition I'm going to put here.
+
+Speaker 1  17:35  
+370 Yeah, but what not on report type, right? It says temperature over 70, hourly temp. Yeah, so it will be hourly temp greater than 70, and that will work. Now, how are you going to use the count on this?
+
+Speaker 8  17:58  
+You can, you can just go to do the dot shape, sub zero after that.
+
+Speaker 1  18:03  
+No. Someone was saying using count, dot count, yeah, yeah. So this will give you 96 and what is the other way you were saying
+
+Unknown Speaker  18:12  
+that count,
+
+Unknown Speaker  18:15  
+whatever dot count.
+
+Speaker 1  18:19  
+Well, dot count does not give you exact like a nicely formatted number. I mean, even though 96 rows here, it's not giving you nicely formatted number, right?
+
+Unknown Speaker  18:31  
+William mentioned, value counts.
+
+Speaker 1  18:34  
+We can do that, but this is not the case for value count. So if you do value counts.
+
+Unknown Speaker  18:51  
+Oh, actually, hang on.
+
+Speaker 1  18:54  
+So what I did, I think, is this, yeah, you can dot count. So I was wrong. So count is not a property, it's a method. So you have to call the count, and this count will give you how many entities, how many, sorry, how many cells are there in each column, which is 96 which is same as what you get when you do a shape zero or when you do a Len, right? So, but this will give you little bit more than what you are originally asked to do, pure, right? It gives you for every data, every column, how many are there?
+
+Speaker 1  19:34  
+Okay, so next one is, what is the temperature for 276th reading,
+
+Unknown Speaker  19:42  
+what selection we are going to use for this one?
+
+Speaker 5  19:50  
+So for me, I use the print, whatever the data frame is, and a dot Loc, the square bracket. 76 square bracket.
+
+Unknown Speaker  20:04  
+You do a print, print, yes,
+
+Speaker 1  20:08  
+like you type print, I'm not sure what you mean.
+
+Unknown Speaker  20:14  
+So I do print and then bracket
+
+Speaker 5  20:18  
+renamed dot loc square bracket, 276 and then you have to have that square bracket again. Oh,
+
+Speaker 1  20:28  
+so you're saying this, 270 well, 275 you mean, right,
+
+Unknown Speaker  20:33  
+yeah, 275 if you were
+
+Unknown Speaker  20:36  
+to use and, yeah, but that's not going to work. I
+
+Speaker 1  20:43  
+because, oh, so you said you missed the dot Loc,
+
+Speaker 5  20:47  
+yeah, and then LOC is not indexed, so that should be 276 right? There are so
+
+Speaker 1  20:53  
+in here, if you do LLC, 275 what?
+
+Speaker 1  21:05  
+Uh, this is a case for I lock, not Loc, but let's see what loc returns it anyway. So loc returns this Now, ideally, what you should have done is you should have gotten this with I Loc, right? And with I Loc, you can put 275
+
+Unknown Speaker  21:29  
+and if you do put 275
+
+Speaker 1  21:32  
+that will give you, yeah, these are not the same, though, right? You see the time is different. So if you do Loc, 275 you so you can also do it with Loc, and you are giving going to get the same value. But the original thing was, what was the temperature? So now you have to also find what is the column number? Temperature is what? 0123, what is column three out of this? So how do you find the third column of 2/75, row, or 276, row. This is giving you all the columns of that row. The question here is asking, how do you find only the temperature rating? So how do you do that? The column two? Yeah, not not colon two. No. So remember, I lock has two things, comma separated, the row selection and the column selection. If you do colon, that basically gives you a range. So colon is not going to work. Colon will give you row number, so and so, up to row number, so and so. But that's not what we are. We're using we are using single number to select a specific row, and now we have to select a specific column. So essentially what we are doing now, what if you just say, I lock 275 which is same as saying I lock 275 comma, colon, so this now basically means give me row number 275, but all columns, as you will see, because after comma, the second selection comes in. That is the column selector. Now we have to modify it further, because the question is asking, what is the temperature? And we know that temperature is column number three. Now these colon, which is basically a wild card like give me all the columns instead of that. Now you have to provide free and that will only give you the temperature as a single scalar value, which is 61
+
+Speaker 4  23:37  
+so another way that I found to do that was to do a second set of brackets afterwards. So 275, in brackets, and then a second set and then actually name the column, name the column in a second set of brackets after. Is that just as valid?
+
+Unknown Speaker  23:55  
+If it works. So what did you do? You close
+
+Speaker 4  23:57  
+another set of square brackets, another days, yeah, and single quote, hourly, underscore 10,
+
+Unknown Speaker  24:04  
+oh, okay,
+
+Speaker 1  24:07  
+hourly, underscore 10, yeah, that also works. Because why this is working is because this is working for this reason, because if you do this, you are getting it as a series, not a data frame. Now, if you do have a series, you can use the series almost like a list, right, which is also index list. So you are basically adding a list selector of here after this. But instead of using a list selection by index, you can also use this selector by name, and that's why you would get are getting let me actually see if straight of this. If I do a three here, this work? Probably not. No. Actually, it does work. It does work. It used to work before, and now there is a future warning that it is getting. Question that in a future version, integer keys will always be treated as levels consistent with the data frame behavior. Therefore, to access a value by position, use dot I lock. So if you don't use I lock, which is basically same as using lock. So it is saying, hey, currently in this version of pandas, we are kind of understand that when you do this, when you are providing a single integer, we will apply that from as a index, but in a future release, it will not it will think that is an actual value. So therefore you better do like what you mentioned, either that where you are getting the series with I lock and then you are selecting a column by name, either that or even within iloc itself. There you can actually provide the name of the column as a numeric value this way, so both of these line will give you the same output for this reason.
+
+Unknown Speaker  26:01  
+Okay,
+
+Speaker 1  26:05  
+next is, what were the dates and report types of row, 500 through 505 How do you do that? 500 through 505 so which selection we are going to use lock or I lock. Which one would work? I lock, I lock, and what would be the row selection in iloc, 499,
+
+Unknown Speaker  26:30  
+colon, 505.
+
+Unknown Speaker  26:34  
+Why 499 because that's the five on your
+
+Unknown Speaker  26:36  
+throat if it's zero based
+
+Unknown Speaker  26:40  
+Oh, hang
+
+Speaker 8  26:42  
+on, yeah, depends on how you read. If you're reading that as a five minute row, it's 499 depending
+
+Speaker 1  26:47  
+on how you read it, yes, yeah, I understand. And through 506 so that means you have to, sorry, it's through 505 so that means you have to put 505 because that way you will get up to 504 which is the row number 505,
+
+Speaker 8  27:04  
+then comma, space one, colon, three, correct,
+
+Speaker 1  27:08  
+and then it says dates and report types. So why one column three? Because date is column one, and then this is two. This is three. We want one through two. That means we have to put one prolong three, and that way it will give me one and two only. So one colon three, and that should do the trick. Yep, 800 hold tight.
+
+Speaker 8  27:40  
+I think we have done, by the way, get just get worse from here. It's, this was a really frustrating module,
+
+Speaker 1  27:47  
+yeah? Well, the thing is, yeah, I know what you're saying, but, like, some of these that, so your frustration is some of these a prompt kind of to open ended, right? Like you can interpret it in multiple different ways. Is that what you're saying?
+
+Speaker 8  28:03  
+Yeah, that like the yeah, there's one coming up where I'm like, wait a minute, which, which data frame are they talking about?
+
+Speaker 1  28:10  
+Yeah. Okay. And then the last one is show the last few, which is basically tail, right? And if you have to show last few with the tail, then what do you provide a tail 10? Okay, now question, can you do this same thing without using tail?
+
+Unknown Speaker  28:30  
+How do you show last 10 without using a tail function?
+
+Speaker 8  28:38  
+Would it be negative one, or negative 10, or versus negative 10, negative negative nine, the negative one on
+
+Speaker 1  28:46  
+I love, right? Yeah. So you can basically say, Hey, give me negative 10 onwards. That's it,
+
+Unknown Speaker  28:57  
+and see you get the same set of rows on both. So
+
+Unknown Speaker  29:15  
+okay, so we did this activity. E,
+
+Speaker 1  29:22  
+okay, so now we are going to basically learn one little other thing, which is how to sort the values so, so it's, it's a, it's like an Excel table, right? Like an Excel table, you can sort value by any column, and you can also sort by multiple column, like you can if you have three column you can say, hey, Sort by Column A, then by Column B, then by Column C. So basically you can say, if column A is a tie, then use the column v b values to as a type record, and if column B is also a tie, then use column C value as a type record. And you can also sort both ascending and descending both way, right? So. So by default when so the function that you use to do that in pandas is called sort underscore values. Now, if you do not provide any order of sorting, by default, it treats us ascending, and then if you do want to, this is kind of little bit weird, also for me, they don't say sort type equal to Ascending or Sort type equal to descending. With the designers of panda chose to design in a way that you say ascending equal to true or ascending equal to false. Now ascending equal to true is the default behavior of sorting meaning lower to higher. If you do want to change that, then you have to change that default behavior by saying ascending equal to false, and that will give you a Descending Sort. Okay, so that's what we are going to do in the next activity here. So, so the data we have here, let's take a quick look in the data. Ooh, this one has lot of different data. Town, meals, meals. Count, rent, rent, count, alcohol count.
+
+Unknown Speaker  31:18  
+I don't know what is the source of this data. Look
+
+Speaker 1  31:22  
+like some kind of a city housing data or something, anyway, so that's our data.
+
+Unknown Speaker  31:40  
+I'm going to clear all output first.
+
+Speaker 1  31:49  
+Okay, and here the code is already written to load the data from the CSV file. And this is our CSV file, right? So the first thing we are going to do here is sort the data frame based on the meals column. So how do we do that? We'll sort from lowest to highest if no other parameter is passed. So first thing is we have to sort based on the meals column.
+
+Unknown Speaker  32:18  
+So what is our data frame? Taxes? Right?
+
+Speaker 1  32:25  
+So what function we are going to use? What we just saw in the slide,
+
+Unknown Speaker  32:34  
+that's sort underscore values. Yes,
+
+Speaker 1  32:36  
+so sort underscore values, and it says based on certain column, which is meals. So you just basically provide the name of the column, and that's it.
+
+Unknown Speaker  32:55  
+Now, obviously, if you do
+
+Speaker 1  33:00  
+do, we actually have to save it? If you do have to save it, you have to put a new variable name, Texas sorted by new DF. Let's call it that way. Okay. Do
+
+Unknown Speaker  33:26  
+so now we sorted by
+
+Speaker 1  33:29  
+me meals, but meal count. Sorry, meal count. But how? Why are we getting all 00? I think first few meal count are all zeros. So that's why we really don't see how the sorting is because all of the first few so let's do, instead of doing head 10, head, let's do head 20 and see if we can know even the first 20 is all zeros. Yeah. Maybe, if we do tail, maybe you will see something, yeah. So if you do the last 20 then you can confirm that, yep, they are indeed in the ascending order of males. And why they are ascending order. Because when we sorted by mails, we did not provide any parameters saying what the order of ascent, ascending or of descending should be. So by default is of sending equal to truth, which meaning low to high. Hence, that's what we are getting. But hang on a second. What about this thing?
+
+Speaker 3  34:32  
+That's meal count. Meals is one, one column over. Oh, okay,
+
+Speaker 1  34:36  
+okay, sorry, sorry, that is okay. My bad, I was looking into the wrong column. Yeah, that is mail. Okay, yeah, so it is ascending, indeed. Okay.
+
+Speaker 1  34:55  
+Okay. Now if we have to do the other way, what we have to do is. Yes, we basically have to provide this with like, sorry, use this with another option, which is ascending equals
+
+Unknown Speaker  35:12  
+what is it? Again? Ascending equals false.
+
+Speaker 1  35:20  
+Now, when I'm doing tail, I'm getting all zeros, because now the higher order males are on the top. So in order to see this, now, we have to do a head.
+
+Unknown Speaker  35:31  
+And in the head, let's see,
+
+Speaker 1  35:35  
+do they look ascending? How many digital is even 745, so it is what, 74 million.
+
+Unknown Speaker  35:47  
+So, and then next one is 64,000,034
+
+Speaker 1  35:50  
+38,000,030 Yep. It is in descending order, yep.
+
+Unknown Speaker  35:56  
+So now we started in the reverse order.
+
+Speaker 1  36:02  
+Okay. So now what we are going to do is we are going to try to sort it with multiple order. Sorry, multiple values. So now we have mail count. What if now we want to sort mail count and sorry, meal and rent, or meal count and rent count, actually, let's see one thing. In order to see the effect of multiple you need to have a tie. So when we are seeing this, is there any tie?
+
+Unknown Speaker  36:39  
+Do you see guys? Anywhere two meal count is same.
+
+Speaker 1  36:46  
+Actually? No, we won't see this. We won't see this because we have sorted it with meals. So first thing, let's do one thing. Instead of sorting by multiple, I'm going to sort by one, which is meals
+
+Unknown Speaker  37:05  
+count, okay, and meals
+
+Speaker 1  37:09  
+count, and tax sorted by then I'm going To say taxes sorted by mail. Count, dot head, friend, now let's see what happens. Yes, we can. So you see here this row and this row, they have the same mail count, the next two row again, we have the same meal count. The next three rows again, we have the same meal count. Now we have to see, hey, if the meal count is same, then can we use another variable, another column, let's say rent count to do a time record. So currently, when mill count is the same, 4646 Well, in this case, these are zero. But in this case you see 4545 45 and I have 1250, 6067, so if now the theory is, if I apply rent count also as a second sorting column, then these three should come in 67 first, and then 56, and then 12, because then it will go, it will be using this rent count as a tie breaker. When the meal count is a tie, then it will do a descending order of the second column here, right? So now the question is, question to you guys, how do we provide two values, two columns for sorting. Currently, the way this statement is written on providing one value, how do I provide another color? Yeah, for sorting.
+
+Unknown Speaker  38:57  
+Would you just name another column
+
+Unknown Speaker  39:00  
+after the comma, after the
+
+Unknown Speaker  39:03  
+right now you have wheels count,
+
+Speaker 1  39:05  
+so you are saying rent count, yep. With this, okay, then you have to have another comma like write this, yeah. So this, this will be all everyone thinks is good,
+
+Unknown Speaker  39:22  
+both those two need to be in square brackets. Why? Uh?
+
+Speaker 4  39:28  
+To to list the two columns as like, the value before the comma for the like ascending, yeah, they're both sides. I can't explain it, but just pretty sure, it has to be in square brackets. Yeah. So
+
+Speaker 1  39:43  
+I think the way that sort value is designed, function have been designed. The first argument or parameter that you pass that has to be either a single column or list of column. But if you don't do a list, then if you just provide then this becomes multiple parameters, right? So this is one parameter. And this is another parameter, but that's what will make the function very confused. So it has to be first parameter, should be column, or columns. So if it is a one column, then it will be one string. If it is multiple column, then it will be multiple strings in that order within a list. But let's first run these and see what error message we get. We know that we are going to get another message. So you see the error message. If you read it, it says sort values take two positional argument. The first has to be the column and the second has to be the ASCEND, ascending or descending thing like true, false, but it says three were given. So what it tells me that, hey, if you have to combine the two into one list, and then the function will be happy, and we will get our result. Now, if you see here, just like what we expected for these three rows where the mill count are exactly the same. It has uses the rent count as a tie breaker, and here the highest rent count has gone first, and then the next lower, and then the lowest. So
+
+Speaker 9  41:23  
+is there a way where you could sort by ascending for one category and then descending for the other, or
+
+Speaker 1  41:29  
+vice versa? Don't think, I don't think in one single sort values, you could do that. Then you have to do one column sort and save it in a data frame, and then you have to apply sort on the other column and with a different value of ascending, because one single call to sort values, I think it gives you only one. But let me actually give it a try. I haven't tried this, so what if I turn this into a string? Also? Yeah, length of ascending. So no, it is not. If they designed it in a way that there's ascending could also be a list of Booleans, then I'd say yes. But this little experiment told me that the parameter for the ascending has to be a single boolean value, not a list of Booleans. So therefore the answer to your question is no, like combined ordering of ascending on one and descending on the other is not possible. If you do have to have that use case, then you have to do, let's say, first column ascending, and then save it in a data frame. On that data frame. Now you do the second column as a first column, of course, in a descending so you have to have a different sort values. Okay. Now, other thing is here, even after did a tie breaker with rent count, right, sometimes there could be third level ties also, for example, here, let's see
+
+Unknown Speaker  43:02  
+do we have any third level die here?
+
+Speaker 5  43:10  
+Sorry, I was gonna ask, you know, if we don't want to spell out the column name, I thought earlier, we could just use the column order so like, maybe three, comma five. Is it possible to do it on this, or do we really have to spell out the column name?
+
+Speaker 1  43:25  
+I don't know. Like, these type of things, if it comes to your mind in great like, these are the things. There is no like, there is no really theory behind it. It all depends on how the designers of pandas have done it. And there are so many functions, so many features, your best bet would be two things, one thing and or the other, which is try to yourself and or refer to the deck of documentation for pandas. Like there are so many different questions, so many different permutation and combination you can come up with. It is not possible, not neither possible, nor expected, for someone to actually remember all the nitty gritty details and feature that you have. And most of the time, what people do is, when they come across with a use case, there's some requirement that they're trying to fulfill, and if you feel you have eat a wow. And then you try out and you basically figure it out. But one thing, the most important thing for you to know, you can do anything and everything when it comes to manipulating a set of data that you can think of, everything can be done. Some are more straightforward than the others. That's all
+
+Speaker 5  44:24  
+okay. Thanks so much. Yeah, okay.
+
+Speaker 1  44:28  
+So no, what I'm trying to do is because the next prompt is to use basically three column. But in order to do that, I have to be able to find where the second level also has a tie, and I'm not finding a tie in the second level.
+
+Unknown Speaker  44:49  
+Are you seeing any tie here? I.
+
+Unknown Speaker  45:00  
+5454 we have 22 zero, I
+
+Speaker 1  45:34  
+Yeah, no, I'm not finding so basically, what I'm trying to say is that it is possible to actually use multiple things also, like more than two things also, let's say the third column is alcohol count. If you want to use as many columns you can as possible for your sequential this thing multiple sorting. So
+
+Unknown Speaker  46:17  
+let's do
+
+Speaker 1  46:20  
+let's see if we find anything. So this one now is first sorted by meal, then by rent, and then by alcohol count. Meal based we already saw, but I'm not finding a case where the meal is same and also the rent is same. If we did put fine. Oh yes, actually, here, here, here, here, yes, yes. So this one male count is same 46 rent count, which is the second level sort column, which is also same zero and zero. Now it is using the alcohol count as a third column, which 19 and 16, and we are seeing that it is coming in the correct order. Yeah. Okay, good, that I printed a little bit more. Yeah, we can see that now. Okay, then the last thing is, see when you do sort this. Now, take a note at what is printing on the first column, right? So now first column which is original index, and if you go back all the way to the top of this file where the file was first loaded, you see it had a sequential index which goes increases from 0123, like that. Now we have taken this data set. Now we have sorted on some other columns. So what happened is that initial index we had now those index kind of gotten all jumbled up because we have sorted the column based on other value, so that's where the index got jungled up. So sometimes what people like to do is, after the all of the sorting and everything happens, then they want to kind of fix that in place with this by resetting the index. So the reason is that if you now want to do a I lock on this thing that I look will give you wonky results, because now your index is not sequential because you have done the sorting. So if you are happy with the result of your sorting that you have done, then you have to do the reset the index. So how do we reset the index? So let's say this, this is my final data frame, and I don't want to do any changes. Now I want to reset the index. What do I do? I
+
+Unknown Speaker  48:47  
+what is the function?
+
+Unknown Speaker  48:50  
+Can anyone help here?
+
+Speaker 5  48:51  
+Is it? Reset, reset, index, reset, underscore, index, yeah.
+
+Speaker 1  48:57  
+So most of the time the function names are very intuitive. So is that all?
+
+Speaker 4  49:04  
+And you have to specify drop true if you don't want the old index to be put into its own column,
+
+Speaker 1  49:11  
+correct? So, so let's first, first. Let's first do it. Okay? So if you do this way, so what happens is, the old index now has become a new column with the heading index, and the new sort order has been kind of finalized with this new index. Now this index column has no use anymore. So what we can do is we can say drop equals true, and that way that unnecessary index column is gone, but now my sorted data is properly indexed in a increasing order. Now let's see what happens. So I'm saying I have taken this and I have reset the index. Now let's say somewhere. Else later in the program, I want to print this again. You see indexes are all messed up again. What just happened? So here we did reset index with a drop equal to true, and we got the data with the right index numbering. The data is still the same. But now next, when I did as head on, that same data frame, now we are back to those jumbled up indexes. Why?
+
+Unknown Speaker  50:29  
+And then you didn't actually save it back to the variable,
+
+Speaker 5  50:32  
+yeah, and then call that variable. Got
+
+Speaker 1  50:35  
+it. You can do that, but most of this function also allow it to do it in another way, which basically says in place equal to true. Now remember the difference is, when you say in place equal to true, this function is not going to return a data frame. So therefore, when you run this cell right now, it will not print anything, because what it has done is, instead of returning back a new data frame it has done the work in place and return now. So no return. You see, I run this cell and this step, these output is gone. But now you know that the whatever work this function has done, that work is permanent, even though I have not assigned it to a different variable, in fact, within place equal to true, if you cannot assign to it to a different variable because it does not return anything. But now, if I run this cell now you will see that it is correcting with the right index, so which essentially is the same effect as assigning it to a different variable. But I like this approach better, because that way you don't unnecessarily create additional memory overhead in creating another copy of the data frame and saving it into a separate variable. Instead, you basically do that in memory.
+
+Unknown Speaker  52:02  
+So that was good, any question.
+
+Speaker 10  52:07  
+I just checked Benoit. And actually, you can use a list of Booleans the way you're trying. It does work,
+
+Speaker 1  52:13  
+that's but when I tried, it didn't it. I know, I don't know it did, because
+
+Speaker 10  52:18  
+I just did it and worked. And I also checked and everything said, yeah, you can do that. So,
+
+Speaker 1  52:23  
+so you were saying, here I can use a list of Boolean Yeah,
+
+Speaker 10  52:27  
+I just, I checked and I asked. And
+
+Speaker 1  52:31  
+so since here I am providing three, you are saying I can provide three Boolean values here,
+
+Unknown Speaker  52:40  
+like that.
+
+Unknown Speaker  52:46  
+Oh,
+
+Unknown Speaker  52:53  
+then why did it give me an error in the first place?
+
+Speaker 1  52:59  
+Yeah, look at that. So here we are going descending order on Mills count, and when there is a tie in, meals, the rent count. We are indeed getting ascending order because I have used a true in here. I'm thinking what my common sense said, and that is what I tried first. But for some reason, it did throw me an error at that time.
+
+Speaker 11  53:24  
+I'm thinking that once you put the the brackets around the Boolean, it's expecting three parameters, because you have three parameters,
+
+Speaker 1  53:36  
+yeah, yeah. So let's validate that if you have only two parameters here, yeah, length of ascending too long. Not okay, yes, I was not. I didn't scroll down and carefully read what was the final error message? If I did then, then I would have figured out here. It says length of ascending is two, not equal to length of by three. So basically, it is saying is the length of by meaning this one which is three, but length of ascending is two, and they has to have to be equal. So if you do provide that as equal, then it is going to work. That means you can do a combination of ascending and descending when you have multi level Cool. Thank you, Kara for figuring that out.
+
+Unknown Speaker  54:26  
+Yeah, you keep that up. Benoit, we're going to put you
+
+Unknown Speaker  54:30  
+on the bench. You keep that up and we're going to put you on the
+
+Unknown Speaker  54:34  
+bench. Yeah. Okay,
+
+Speaker 1  54:41  
+okay, what else I think this one we covered everything on sorting.
+
+Speaker 1  54:56  
+Okay, the next activity would be to do. Some additional things, such as deleting a column. If you have to delete a column, how you can just do a del on a column and the column is gone. Also, sometimes you will see that there are some rows that have null values, and you can either drop those rows or fill those rows with something else, like, let's say, if you have a data set, and some of the roles are actually coming as a no or none. So then if you want to put those data set as a training input to a machine learning the models don't like that, because the models like numeric values. So there is a function called fill na that allows you to take all the non values and fill it with something that you want, like, let's say, by zero, or if it is a yes, no column that live by a nodes, or by if it is a true, false column by a false so basically, whatever value you want, and then you can use the value counts function to basically find what are the different what is called different columns, and how many items are there in these different columns. And these are all, as you will see in the next activity, these are all going to be very, very useful for your initial data exploration in preparation for your mission model training. So let's go into this one where we have the data, or, sorry, this code is already given, which is this donors file. And we have loaded the data. So now let's just preview the data frame, which, well, in the code, it just says, DF, okay, that's not a very good name, but anyway, so DF, dot, head. So the first thing what we are seeing here is that particular this column called memo, CD, it has a bunch of Nan values, right? If I do a DF, dot, tail, that's also has none. So looks like this is a column that we probably don't need for our purpose. We need the name, employer, city, state, zip and amount and so on. But memo city, we probably don't need. So we want to drop that column, because that is the unnecessary column. So how do we drop the column?
+
+Unknown Speaker  57:40  
+Well,
+
+Speaker 1  57:42  
+yeah, so one thing you can do is Dell. And you can do provide the, basically the column of not just the column name. You have to provide the column of the data frame, which is data frame, and then followed by the column within the square brackets. And then, if you do that, then that color will be gone. And this is permanent, by the way, this, this actually happens in plus. So after this, you see, this is a this is basically an operator. Now, question to you. So let's say, instead of dropping one column, let's say you have a data set of let's say it comes with 20 columns, and most of the columns you don't need. Let's say you only need five columns and you have to delete 15 columns. What would be the best way of doing that? So
+
+Speaker 1  58:45  
+are you going to write del 15 times to delete 15 out of 20 columns? Or is there any better way just
+
+Unknown Speaker  58:50  
+set it to the
+
+Unknown Speaker  58:53  
+center the columns that you want to keep?
+
+Speaker 1  58:57  
+How do we do that? So can we practice that here in the context of this. So let's say, instead of Dell, I'm asking you to create a data frame that will keep name employed, city, state and zip. How do we do that?
+
+Unknown Speaker  59:17  
+Repeat the question one more time.
+
+Speaker 1  59:18  
+So I'm saying, instead of deleting the column, memo, CD, I want to create a data frame that will keep the other columns main employer, city, state, Zep, and amount, effectively achieving the same result as deleting a single column. But what I'm asking you to do, presume momentarily that this is a data set with, let's say, 20 column, and you have to only keep five column, and don't need 15 of those. So if that is the case, keeping five is probably much easier than deleting 15. So assuming that is the case, how do you show. That effect by keeping this five column on this data set,
+
+Unknown Speaker  1:00:09  
+DF
+
+Speaker 1  1:00:11  
+is equal, yeah, yeah, you DF double brackets. Yep, exactly. So then inside double bracket, you have to say which columns you would like to keep, and then assign that into either the same data frame or in a new data frame. So
+
+Unknown Speaker  1:00:43  
+and then zip
+
+Unknown Speaker  1:00:46  
+amount
+
+Speaker 1  1:00:48  
+right. And if you run this, you get it right. But if you want to keep this, all you have to do just DF equal to this, and then do a DF dot head. That will have the same effect as doing a Dell. But here we already have done Dell. To see the effect of these you have to run this again to load all the data with the unneeded unwanted column of memo city and make sure that unwanted column is there. Then you skip this Dell part and then run this part to see that whether we have achieved the same effect. And yes, we did. We I just ran it now, and it gives me the same effect as it would have done with Dell. Now, if I run these again, do you think this cell will now work, now that there is no demo city here, or should we give an error. Now
+
+Unknown Speaker  1:01:42  
+shouldn't work. I'll give an error.
+
+Unknown Speaker  1:01:47  
+Yep, it says key error memo city,
+
+Speaker 1  1:01:52  
+because I have already removed memo city by selecting everything else other than memo City column. So that's all. I just wanted to show you that depending on whether you are going to drop more column or keep more column, depending on that one approach or the other would be more Practical.
+
+Speaker 1  1:02:19  
+Okay, so now we are talking about someone. We're talking about Chad. So in that exercise, I think it was the first exercise we are doing, when we did a count, we basically saw it is showing me all the all the column names and the number of rows for that column. That was because in that data set, there were no non value probably. But if we do that, count here. So what it is now giving me is that name has 2000 items, employer has 1820 items, city has 1999, so why do you think it is different, even though, let's do a shape on this so there are 2000 rows in total. And Name column indeed has 2000 values, but all name and amount has 2000 values each, right? But all three other columns, employer, city, state and zip, all four other columns, they all have less values than 2000 Why do you think that's the case?
+
+Unknown Speaker  1:03:27  
+Because there's some empty entries,
+
+Speaker 1  1:03:31  
+yes, yeah, because there are entries in those column that does not have any values. Okay? And we will see in a second that how to identify, sorry, how to remove those. But I'm asking you to do one thing. Can you find the rows where the name, all of the name have value? Can you find the rows where employer does not have any value?
+
+Speaker 1  1:04:15  
+So how do I get the role where the employer is missing? I
+
+Speaker 1  1:04:30  
+It has to be some I lock right? Or would it be lock?
+
+Speaker 8  1:04:37  
+It will be a lock. And then you do, yeah, yes,
+
+Unknown Speaker  1:04:42  
+I should. DF,
+
+Unknown Speaker  1:04:47  
+dot name, and what is the condition?
+
+Unknown Speaker  1:04:51  
+I don't know if it's going to be is empty is equal to none,
+
+Speaker 1  1:04:55  
+yeah, something like that. I am also trying to see, let's try, is. None, and see whether that works. Boolean level cannot be used without a Boolean index.
+
+Unknown Speaker  1:05:09  
+Yeah, so this thing is little,
+
+Unknown Speaker  1:05:14  
+so there is nothing called none.
+
+Unknown Speaker  1:05:18  
+Is no is
+
+Unknown Speaker  1:05:19  
+his
+
+Unknown Speaker  1:05:20  
+exclamation point?
+
+Unknown Speaker  1:05:22  
+Yeah, let's say is.
+
+Unknown Speaker  1:05:30  
+No
+
+Unknown Speaker  1:05:33  
+is equal to exclamation point.
+
+Unknown Speaker  1:05:38  
+Is equal to exclamation point. I'm
+
+Unknown Speaker  1:05:47  
+not understanding so you are saying DF
+
+Speaker 2  1:05:58  
+isn't exclamation point, the symbol for not,
+
+Unknown Speaker  1:06:02  
+yeah, but then, what about it? How do you do that?
+
+Unknown Speaker  1:06:05  
+I'm trying to think of it. I don't know.
+
+Unknown Speaker  1:06:09  
+Or is it? Is any
+
+Speaker 1  1:06:16  
+it should be, is an A, but it's not working that way. I know guys.
+
+Speaker 1  1:06:41  
+Oh, hang on. My bad. I did not provide a column name. So what I'm trying to do is, hey, find me. Find me. Where this column. Why did I say df? I have to say df.employer.is.
+
+Unknown Speaker  1:07:04  
+Na. There you go.
+
+Speaker 1  1:07:08  
+I forgot to put the column name, so what I'm doing is I'm applying a lock selector, and I'm saying, give me only those columns where the employer is none. And now I want you to look at how many rows has gotten selected.
+
+Unknown Speaker  1:07:22  
+You see how many rows it is saying,
+
+Speaker 1  1:07:26  
+180 right? And what is the total number of rows we found, 2000 and how many rows have employed data, 1820, so you see how this is matching up. 2000 minus 1820 is what 180 so when I'm doing this, I know that 180 employers does not have a value, and that's exactly what it is telling so now let's try this in another one. Let's try this on zip. So I want to see how many zip have null values. How many do you expect based on the result of the count? How many rows do you expect to get where zip is now four. Yes. So now I'm going to run this same selector with zip, and let's see if we get four. There you go. It gives me four, and as expected, all four of these have a null value in zip.
+
+Speaker 1  1:08:42  
+Okay, okay. So now, when you do machine learning, as I was saying before, you, depending on the scenario, you take different action with null values, unless you are doing let's say some using some neural net function, most of the statistical machine learning function, they do not work with null value at all. They don't. They simply blow up if your data set has a now, so you have to do, you must have to do something with the null values. Now, what you are going to do with the null values? It depends on what the null is about, right? Sometimes, what people do, they try to fill in the null values with kind of an average of values. And I'll give you an example. So let's say, in this particular case, all the amount had values, because amount is 2000 and the total size of the data set is also 2000 but let's say, imagine if these were a data set where some of the amount have now values. So what is your approach? Could be? Well, one approach is, hey, delete all the rows where we have now. And that always works, except the prop. Them is, if you happen to be a very dirty data set, like lot of incomplete data, and you might have, let's say, 2000 rows, and out of that, 2000 rows, maybe more than 1000 have null values here and there. So if you keep dropping null rows, rows with null value indiscriminately, you are going to lose lot of valuable data, and when you have less data, your model will not be able to train as well. So what do you do? Sometimes you have to kind of deal with this. There is nothing you can do, but sometimes you can. So what I'm saying? I was saying one strategy people use if a numeric value has now numeric column has null value. What people do they basically sort the data set on that numeric column. And now, if you have a null value in between, what people do is they take the one on the top and one on the bottom and then do the average and put the average of the previous and the subsequent values in fill in the null values with that average. So that is one approach you can use.
+
+Speaker 3  1:11:07  
+No way. Do you do that? Do you do that after you sort on that column?
+
+Speaker 1  1:11:11  
+Yeah. So when you do that, it is typically, if you do that, you have to do that after you sort on that column. Yes. But then there would be another problem you will face that you should not be giving a sorted data set to your machine learning model, so then you have to kind of jumble it up again before you feed it to the machine learning model. Otherwise, the machine more learning model will get kind of short sighted. It will get biased. But those are like different things. We will discuss those later part in the course when we come to those. But I just wanted to let you know that there are different strategies that you have to adopt, similarly for alphanumeric value, like the text or string value, sometimes what people do is they kind of find like, Hey, what is the most commonly occurring string value in that column, and take the common value and then put in the null value, use those to replace the null values. But again, that may or may not work the strategy, depending on how many null values you have. If you have only, let's say, one or 2% values now, then maybe you can do that. But then you also have to be careful, like you cannot kind of go on and keep doing this kind of cosmetic data like these are basically not cosmetic. What is a manufactured data? So you cannot really do dot a lot of manufacturing of your data, because then your model is not seeing the true data set, right? So for now, it will be safe to assume that, hey, if there is null value, what we are going to do is make the machine learning model happy. We are going to drop all the rows that have null values, which is what the next prompt is about. But the reason I talked about all of this is because later I have to kind of ask you to unlearn what you just learned here, and I have to tell you, like, hey, when you see missing information, do not go ahead and drop all the rows, because you might get into trouble, because you will end up losing lot of data. So that's why I just wanted to kind of give you a heads up that these are, these are the things, and this is all subjective, right? There is no right or wrong, right. So if five people does a machine learning problem, they'll probably get five different accuracy from their model, depending on what strategy they are they have used, right? And then accuracy is also not a single measure for your model performance. There are precision recall and other things. So there are various dimensions of model performance. Now, depending on what strategy you choose, your model could be good in one dimension, but kind of come short in the other dimension, right? So that's why they say machine learning is more of an art than it is a science, and you probably are not seeing it right now at this level, but as you go on and when you go into actual machine learning, you will actually see how many different ways that you can actually strategize this thing, right? So anyway, so for now, coming back to today's discussion here, how do we drop all the values that are now, what the function is,
+
+Unknown Speaker  1:14:08  
+drop any? Our drop? Na,
+
+Speaker 1  1:14:12  
+yeah. So basically we do DF, dot, dot drop any. So if I do DF, dot drop in a what will happen?
+
+Speaker 1  1:14:29  
+So now it gives me 18 118 rows. But if I do a DF again,
+
+Unknown Speaker  1:14:38  
+let's do a DF, dot count again,
+
+Unknown Speaker  1:14:42  
+it still has 2000 even though I did drop any
+
+Unknown Speaker  1:14:47  
+what went wrong. You got to do it in place,
+
+Speaker 1  1:14:53  
+either in place or assign it back to D,
+
+Speaker 12  1:14:59  
+to DF. Yeah.
+
+Speaker 1  1:15:07  
+So now if I do DF, dot shape, oops, sorry, not that shape. Now I am getting 1880 right. And now if I do a DF dot count, that will also show 1819, and all the columns here have 1818, because, why? Because I just removed any row that had a null value anywhere throughout the whole data set. So that's why now I have a data set with no missing data. And since in this particular case, we lost, what, less than 10% of data, right? Yeah, we have 2000 data, and we have still more than 1800 data, so we basically lost less than 10% so for this, I think it is okay to just blindly delete all the null values. So Benoit. Just keep in mind that this may not be the ideal situation everywhere. Yes, so if
+
+Speaker 2  1:16:06  
+you have collected a bunch of data, and you don't want to lose what you do have on certain people or clients or whatever, you want to keep the information that you do have say it's minus the zip code or the city. You want to clean up the list that you have, you still want to keep those contacts. How do you? How do you do that and keep those without you
+
+Speaker 1  1:16:26  
+basically, you basically not, either do not touch the original data frame. And whatever manipulation you do you create in a new data frame variable and do there, and an original data frame just stays as is. That's it. And if your original data frame is already coming from a file. You know that the original data of data is saved in a file, so you don't have anything to worry about. Okay, see these, all these manipulation you are doing here. But why think about it? What is the purpose of all of this? The purpose of all of this is you are doing all this cleanup in preparation to feed the data to a machine learning model. Now some data might be valuable to you as a owner, a business owner or a customer or whatever, but that data may not have any value to the machine learning model whatsoever. So what we are doing here is trying to make sure the model, training model is happy and the training can run, okay, but obviously, yes, you can have valuable data, and then that's a different discussion, right? If you have a valuable data, you have valuable data, you save it in a database or in a file or wherever you have, right, securely, you don't touch that. Okay, let's move on. So the next one is, if you do a DF dot, D type, oops, sorry, not D type, it's a D types. So when you do D types, it basically shows, for each column, what is the data type, and it is showing me name is an object, which basically string. If something is a string or a text, it shows an object. So name is a string, employees object meaning string. So is city, state, amount is integer. But think about zip. It is treating it as a floating point. Why? Because you see what I was telling you. Sometimes your data could be noisy, because God knows what the source of the data is, right? There are a lot of people or process who have touched the data, and there could be programming error, there could be error in communication, data transmission, or whatever. So the bottom line is, your data can actually look ugly and nasty, not ideal. So this is the exact same case here, somehow, where the data was sourced due to some mistake in the process, somehow the zip were basically stored with the original value, then with the dot zero somewhere. And what pandas did when pandas read this, it treated this correctly as a floating point. But that is not going to do us any good, because zip cannot be floating point. We have to create this zip as a unique what is called tokens, almost like string. So now what we need to do is to prepare this data properly. We have to convert this data into string. So how do we do that?
+
+Speaker 13  1:19:35  
+Is it? What it says right there? DF as type, yeah, what
+
+Speaker 1  1:19:39  
+it says right there. Yes, it basically gives away the solution. But here what you provide inside S type, zip, yeah. So you basically have to provide the name of the column as a key, and then the type here that you'd want to convert, which is str. So. And that's what you will get. But it still is not perfect, because it will treat this. It will not get rid of the dot zeros. For that, you have to do other manipulation, right? So you have to actually apply some lambda function to basically cut the zero, cut the zip after decimal places and so on. But for now, we are not doing that. All we are doing is we are doing as type, and then you can but even after that, if you do DF, dot, D types, it will still slow. Show us float, and that is because we haven't done in less. So this one you cannot do n plus, so it's not coming up. So some function, most function, provide n plus in plus option. Some function do not. If it does not, then you have to assign it back to the data frame itself. So now that is done. Now if I do D types again.
+
+Unknown Speaker  1:21:02  
+Now it is showing zip as an object. So we are good, okay.
+
+Speaker 1  1:21:11  
+The next one is, how can you view all the unique values in a column? So let's say we have 1800 or something. Name probably would be, not be very unique, but employer could be unique some, some would be common, overlapping. Same would be city, state z. So if you take any one of these, let's say df, dot,
+
+Unknown Speaker  1:21:33  
+employer,
+
+Unknown Speaker  1:21:36  
+you can apply a function called unique,
+
+Speaker 1  1:21:42  
+and that will give you all the unique values that are there. Now if you want to know how many unique values are there, what you can do is you can take this unique value and
+
+Unknown Speaker  1:22:01  
+apply a land function on it,
+
+Speaker 1  1:22:05  
+oops, and that will give you 519 so basically it is telling you that out of those 18 118 rows, 519 employers are only there. Now obviously, instead of employer, if you do it with city, you will get much less unique values, probably, oh, no, actually, more 919, unique cities. Let's try this with state
+
+Unknown Speaker  1:22:32  
+and 52 states.
+
+Speaker 1  1:22:35  
+So basically, the data says is kind of equally spread all over the country. So 52 state unit values. Now there is another way of doing accounting the unique values instead of Len, and that is called N unique. So what any does? It does not give you all the unique values. It simply gives you a number back, which is 52 in this case, which is basically same as doing a lane on unique. So lane of unique is basically same as N unique, which basically means number of unique.
+
+Speaker 1  1:23:11  
+And then next, I think someone was telling before that you can use something called Value counts, right? So, what does the value count does? So what value count will do? It will basically give you the unique values. So here, for example, if I do DF state dot n unique, I'm getting 52 but if I want to see what are those unique values, so then what we can do, we can do, and what are those unique values and how many times they occur. So, what are those unique values? Is easy, right? If you do dot unique, it will give you, Hey, these are the unique values which is expected, right? These are the scores of the states. So, but if you want to see how many times, let's say NY appears, how many times CA appears, how many times il appears, then that is not something you can do with this function. So that is where you will use this function called Value counts. So what that will do? It will tell you, for each of the unique values. How many rows we find with those unique values? And this is where it is showing. California is 360 times. Florida is 123 times, and so on. Now let's take one state. Okay, let's take empty what I want to do is I want to be able to pull the rows where state is empty to see whether we are indeed getting three, just to validate the work that value comes has done, or any state for that matter, right? I'm just taking one on the smaller side. So what I'm. Going to do, I'm going to say df dot block. And here I'm going to say df dot,
+
+Unknown Speaker  1:25:09  
+state.
+
+Speaker 1  1:25:12  
+It was state right within upper cases, yeah, equals empty. Yep, indeed, I'm getting three rows. And that's what the value count is telling me, if I put California here, value count is telling me 360 rows have California. So if I put a CA here, yep, I'm getting 360 rows here. If they're working, value count is good.
+
+Speaker 8  1:25:42  
+I'm sorry. Empty values, would that? Would it count them as unique values as well?
+
+Speaker 1  1:25:48  
+Yes, if there are empty values, it will count all of the empty as one unique value. Yes. But in this case, you don't. You are not seeing it because we already removed all that dropped all the empty values. I
+
+Speaker 1  1:26:17  
+Hi, Okay, so next, if you apply these on employer, one thing you will see again, this is a case of noisy data. So you have self you have self employed, and it's actually, it is truncated. So let's do these ahead of let's say 15. So here you will see there are some rows, even though unique values are there. But some unique values may not be the as unique, because there is a there is a unique value that says self hyphen employed. There is a one value that says self, one value that says self space employed. And this is also pretty common occurrence, because if this data is collected through some manual someone filling a form or something, and the people's input is not validated, you will often get this kind of thing where you have multiple things which kind of means the same. So how do we do the cleanup? How do we make sure that all of these self self employed, self hyphen employed, self space employed, all of these are basically converted to one single standard format? How do we do that?
+
+Speaker 1  1:27:41  
+You have to do something on DF, dot, employer, but what is it we need to do place, dot replace. This is kind of similar to how we are doing the column, relay, renaming, same concept.
+
+Speaker 8  1:27:58  
+Then you have to give it a dictionary, yeah.
+
+Unknown Speaker  1:28:05  
+Again, there might be a better way of doing this.
+
+Unknown Speaker  1:28:11  
+If someone can think of a better way,
+
+Speaker 1  1:28:15  
+please come forward with any suggestion this way that we are doing it here, it will probably work now. So basically, what we are doing is, if it is self we want to trans, convert it to self hyphen employed. And if it is self space employed, we also want to convert it to the self same value, which is self hyphened. Uh, employed, right? And then we have to do in place equal to true. So this way all of the self thing will be basically combined into one single value. So
+
+Speaker 1  1:29:03  
+uh, it's done now if I do a value count again, now you see the self employed has been combined into one count, sorry, one category with 165 which is more than what we had before. So all three category have been combined, and the noise we had in that column has now been contained. But again, as I said, there would probably be that would definitely be a way to do this. If, if, let's say, what if there is a many, many different values, right, and you want to convert them into a single value, there is a way to do this. I'll have to do, look into. So keep in mind, so this would be very, very common, when in pandas, you are, you were, you have you faced a large data set, and you were doing something, you are applying all the learnings that you have acquired so far, or everything you have learned so far, and then you see, oh, my God, I am having to do this. And it. Is being very, very tedious. It is. It happens to everyone, even to the professionals. So when that happens, please don't just sit there and accept that. Hey, this is how it is. Most of the time. There would be a better way to do things. Most of the time there way would be a way to kind of apply some kind of a map lambda function or something to make your code more, I'd say, less repetitive, right, less tedious, right? So please try to look into those before you accept something as the only way of doing something that is almost not the case when it come to pandas, and especially Python, sorry, Python, and especially pandas, there are very many, many different ways when you combine the power of Python and pandas together to get something done.
+
+Speaker 8  1:30:51  
+So Benoit, when I do that again, an enormous warning about the behavior I'm working on a slice and a lot of caveats. And it's interesting to me, because you and I are both on the same Python version, I'm just not seeing you generate the same errors.
+
+Unknown Speaker  1:31:11  
+What are you trying? Trying water.
+
+Speaker 8  1:31:13  
+It's not an error, it's a warning. So I'm doing, I did exactly what you typed for the employer. Replace, like this, this, yeah, they gave me a deprecation warning.
+
+Speaker 5  1:31:25  
+Oh, yeah, it's the same with me too. I think if you remove the in place equals true, it will work. So I don't know if it is something to do with the version that we have. Jesse have the same.
+
+Speaker 1  1:31:35  
+I have three, dot 12.7, here are you have running the same.
+
+Speaker 8  1:31:39  
+Yeah, yeah. And then the reason why in place, removing that would probably work is because you're not setting it. You're actually not replacing the data. So even doing like df, dot employer equals DF.
+
+Speaker 5  1:31:56  
+Oh, okay, yeah, I did create another variable. Okay, you're right. It's,
+
+Speaker 8  1:32:01  
+I mean, it's I mean, it's just, it's interesting to me that you're not getting rewarding, by the way, I wonder if it's just because you're going, I honestly, do
+
+Speaker 1  1:32:08  
+you do DF, dot employer, or do you, did you use this way? I did both and got the same. You did both and got the same. Okay,
+
+Speaker 8  1:32:19  
+yeah. And I don't know if I'm not in condos or Anaconda, or if that's the problem. I don't know, but it's super it's just interesting. It's nothing big, yeah, yeah,
+
+Speaker 1  1:32:28  
+I don't know. Maybe there is something. Have you removed the null values?
+
+Unknown Speaker  1:32:36  
+We're trying to change the column names.
+
+Speaker 8  1:32:40  
+It's okay. I don't. I don't want to go down a rabbit. Super interested to see why. But,
+
+Speaker 1  1:32:50  
+yeah, okay, um, so before we, before we go to the next Okay, so let, let's keep that aside for now, as Jesse correctly said, right, this is, this is not a cause of concern, there might be some little difference between your and my runtime. That's fine for now, I can take a look at it later. Okay. So one last thing is, there is a one quick way to get some of the statistical value, which is called DF, dot describe. Okay. Now, if I do DF, dot describe, so what it is telling me, what is the total count of something? What is the mean, what is the standard deviation, what is the minimum value, what is the maximum value, and what are the quartile values, meaning 25 percentile, 50 percentile, 75 percentile, value of these. But it is only telling me for one column, which is amount this data set had multiple colors, right name, employer, city, state, zip, amount, and I did DF, dot describe to get a statistical overview of how data is present distributed, and it is only giving me one column. Can someone tell me why to do with the data type? Yes, because what it does is it basically applies to only the numeric data type. Because, by definition, describe gives you a statistical report of each of the columns. Now, if a column is non pneumatic, then there is no statistical report you can do at least not these statistics. So Mean, Median mode, standard deviation, percentile values, all of these applies when it's a numeric column. Since there happens to be only one numeric column, that's why you only get one here.
+
+Speaker 1  1:34:39  
+Okay, and in case you want to do these things separately, you can also do it like this. You can say, hey, DF, amount dot count, and that will give you 1818, which is the same count you are getting from describe. You can say, DF, amount, dot mean which is the minimum value, which will give you the same minimum value as you get here, which is. Is negative 1000. Maximum value is 40,000 and so on. But one thing you cannot really get this way is the standard deviation, or these quartile values. These things, you have to use a different library, which we will learn after the break. But let's see how we are doing on the timing now, so let's do one thing. Let's have you guys do one activity before you go to the break. Which is this San Francisco Airport utility consumption? Yeah. So that one is this one activity number four, and here you basically have to interpret certain things from the data and answer some of the question, right? Like print out the highest users months, and then basic summary statistics. Is easy, average users, total users on certain month, and then also some basic sorting, right? So let's have you guys break out, go into breakout rooms and complete these activity and we can spend let's see what is the suggested time? 20 minutes. Yeah, 20 minutes is fine. So let's do one thing, guys. So now is 808. So let's finish this, and, actually, no, let's finish this and come back. And then we do a quick review, and then we will take another break, quick break. So
+
+Speaker 8  1:36:27  
+this one, really, can I? Can I get just one piece of clarification on the instructions? Sure, are we? We're going to filter down the two utilities. Are we working on that data frame or the original data frame from memory?
+
+Speaker 1  1:36:42  
+Um, the data frame. What do you mean? So data from already given here, right? Yeah, the
+
+Speaker 8  1:36:47  
+second bullet of the relay says, print out the unique value with the utility column, and then it says, create a new data frame that only includes electric electricity usage for the tenant owned units. Am I using the tenant owned data frame from there on out, or the original data frame from there
+
+Unknown Speaker  1:37:10  
+uses from tenant terms?
+
+Speaker 1  1:37:13  
+Yeah. I think the idea here is you basically do these like an accumulative basis. Whatever you do in the previous step, you take that as your data frame in the next step, and then apply some more operation on top of that. Yeah, I was just
+
+Speaker 8  1:37:24  
+getting frustrated because the sample outputs weren't matching up.
+
+Unknown Speaker  1:37:28  
+It was not well, but
+
+Speaker 12  1:37:30  
+that's okay. Well, we'll see what happens. Yeah.
+
+Unknown Speaker  1:37:37  
+Okay, so let's start the breakout rooms for 20 minutes.
+
+Unknown Speaker  1:37:41  
+There we go. I
+
+Unknown Speaker  1:38:13  
+from the room.
+
+Speaker 1  1:38:16  
+Okay, so I don't want to be standing between you guys and break that you deserve. So I'm just going to quickly run through the solution and just make sure that you validate that this is how you have done it. So this is the data set where you have these utility consumption data for different months. And then some of the let's actually load the data here. And when you load the data, you do see that different months, January, February, Jan, like all of these months. And then utilities, gas, electricity, water, so on. Owner is campus, commission, tenant and so on, and then bunch of different units. So the first prompt is asking you to find how many different kinds of utility there are, how many unique different kinds of utility there are. So I have, I hope you got this right, very easy. You just take the utility column from the data frame, and you apply the unique method, and you see that there are four different kinds of utility. Everyone got that right? Okay, that was that one. The next one is create a new data frame that only includes the electricity uses for tenant owned units. So then, what are tenant owned units? Obviously, then we have to find all the rows where the value of the owner column is equal to tenant, which basically means lock. Of method, sorry, lock selector with, actually, hang on. No, no, I have to read it again. It said electricity uses for tenant out. So, so that means two things we have to say. We have to do. We have to see whether utility is electricity and owner equal to tenant. So we have to provide two conditions inside a location, inside a lock selector. So how do we do that? We take the data frame dot lock, and inside that one condition is this, which is the utility column of the data frame equals electricity. And for the second column, we have to put an ampersand, which is an end condition, and where we say the owner column of the data frame is equal to tenant, and then this is the row selector. And for the column selector, I'm saying colon. Basically that means, give me all the columns, and that's how you get all the rows, where utility is electricity and owner is tenant. And it clearly said, create a new data frame that includes so therefore, instead of overwriting the original data frame, we are creating a new data frame, and we are calling it electricity DF. And then the next from there is sort the data frame based on users most to list. And this is where I believe, Jesse, you had a question, which data frame that you use? So you can use either. But I think the idea for here is that you basically progressively build on to this. So in the previous one, you are creating a new data frame with electricity tenant, electricity owner, and you save it here, and then you sort the data frame by users, which is this new data frame that you have. And you sort values by users, and reset the index, and you will basically get this right. So sort the data frame based on users from most to list and reset the index of the data frames so that the index is in order. So these two are achieved by this sort by users ascending false and then reset index. So question to specifically to Jesse, is that somewhere, something that you saw that you got a different output than what was provided. You
+
+Speaker 8  1:42:26  
+know what? Actually, it was Liam that pointed out to me that I missed the electricity filter on my filter, and that's why I was getting all these different numbers. And
+
+Speaker 1  1:42:35  
+I'm like, you basically did it. So you made the same mistake that I was about to make when I was reading. I did not look into the electricity. I was only going to use one condition, which is owner, tenant. But then I realized, nope, there are two conditions there. I'm a good company. So then we have,
+
+Unknown Speaker  1:42:52  
+yeah, so we are good. Then
+
+Speaker 1  1:42:55  
+okay, and then the next prompt is, print out the details of the highest users month. How did you do it?
+
+Speaker 1  1:43:09  
+It's probably easy, right? Because here we have already sorted in a descending order, because ascending is false, so highest uses will always be the first one. So all you have to do is simply take the I lock with zero as a row selector, and that will be your highest so
+
+Speaker 13  1:43:25  
+question, this is one thing we ran into on ours. Is that okay, it's the highest usage, or is it the overall compound of like, if you were to take all the months and average amount and find
+
+Speaker 1  1:43:38  
+out which one, just, just what? Exactly what it says, print out the details of the highest users month. So basically means highest users. So don't look into the month, because users is the column you have to select. So you don't sum has the highest users. So you
+
+Speaker 8  1:43:57  
+don't sum all the months, and then find the max. You just find the one the one entry is that you're saying,
+
+Speaker 1  1:44:02  
+Oh, you're okay. So your question is whether you find August across all year, July, across all year, January, across all year, like that, yeah, or whether you Okay, yeah, I understand. So if you interpret that way, then yes, you have to do a group by a month. Then for each month, you have to do a sum. But we haven't gone to that level where we do all those slicing and type dicing and grouping. So in this case, and now I see you, there is a potentially way, or potentially you can misread these because it says highest uses month, so it should basically have said highest usage and entry, or monthly any year, single entry, yeah, single entry, yeah. Highest use is single entry, basically, yeah, not the highest month on an average overall, that's yeah.
+
+Speaker 13  1:44:54  
+Thank you, Jesse. I didn't know how to put that out there. Yeah.
+
+Speaker 1  1:44:57  
+So Jesse, did you run into this problem? Yeah? Did you interpret the other way? You
+
+Speaker 8  1:45:01  
+know, I think it's a really interesting way to interpret it. I think it makes a lot of sense to interpret it that way. But I was also trying to think of, like, what did they just show us? And keeping it simple, and hoping that,
+
+Speaker 1  1:45:13  
+yeah, yeah, we actually haven't gone to that point where we are going to be basically, you know, group by, like, you know, in SQL, how we do, right? You do a group by, and then you basically say, having the aggregate clause in a group, group by, you can do the same thing here, but we haven't learned all of those yet. So for now, this is good, okay? And then basic summary statistics, which is described. And then finally it was finding the average users, which is mean. So what mathematician and statistics say mean? We common people call that average. So mean and average is the same thing. Just keep in mind whenever they ask you to find an average that is simply a statistical mean. Now, there are other kind of averages they also use, which we are going to talk about after we come back from our much desired track. But for now, the mean is all you needed. And then the last one was find the total uses for all August. So that is very simple. You basically apply a lock with a month equal to August, and then take only the column as a uses, and then sum the column the last one. Did everyone get this answer? Or Did anyone do the things differently? Oh, another thing is here you see in the column selected, they have actually used the name of the column, right? I think you can also use
+
+Unknown Speaker  1:46:43  
+the index of the column like 0123456, right. 0123456,
+
+Unknown Speaker  1:46:49  
+I think you can also get this with the six here.
+
+Speaker 1  1:46:57  
+No, actually, no. It will not work because this is a location. If you do I lock, I lock will also not work because then you have to provide a lock here. Now you think it is better to keep it that way?
+
+Speaker 8  1:47:13  
+I I did do it a different way. Yeah, you can do it. Wasn't just month number, but I actually just said the data frame result of filtering on the month of August. And then I said, Give me the column usage from that data frame. So it would be like ending. It would be like an end bracket, right there, and then begin bracket.
+
+Speaker 1  1:47:35  
+Oh, okay, I see. So you basically did it this way. You ended the bracket here, yep. And then
+
+Unknown Speaker  1:47:44  
+I said, use the column usage from that data frame.
+
+Speaker 1  1:47:46  
+And then you did that. Yeah, same thing, yeah, that will also work. Yeah. I
+
+Unknown Speaker  1:47:55  
+didn't realize you could give it.
+
+Unknown Speaker  1:47:58  
+I realized you give it another argument. Yeah.
+
+Speaker 2  1:48:04  
+Okay, I think you were just talking about a second ago. Benoit was what Ingrid was talking about earlier, as far as putting the numbers of the columns instead of the actual names.
+
+Speaker 13  1:48:15  
+Does that make sense? Gonna put number six in there? Yeah. Ingrid was asking about that earlier,
+
+Speaker 5  1:48:22  
+yeah, although it doesn't work, though, and I tried, I think you still had to spell it out, yeah.
+
+Speaker 1  1:48:26  
+In this case, it would not work, because here we have to use lock. We cannot use I lock, because here the row selector, we are not doing any using any index. We are doing a conditional. So for that, I cannot use I lock. And since I'm using lock. I really cannot use the index of a column. I have to use the name of the column.
+
+Unknown Speaker  1:48:44  
+Okay,
+
+Speaker 1  1:48:49  
+okay, so let's take a nine minute break and come back right at 850 Okay. Thing we are going to talk about is how to measure the different statistical attribute of a data set, particularly what are collectively known as the central tendency of the data set, right? So when we talk about that central tendency, how many different attributes we typically measure, right? So in statistics, we measure three center tendencies, which are your main Median and Mode, right? And I think most of us kind of have intuitive understanding of what these means. So what is a mean? A mean is simply you take all the values in the data in a particular column, let's say in this case, and you sum them up, and you divide by the number of items that are there, which is basically what common people say average, right? So if you have one. 12345, you add it up to 15 divided by five, you get a three as a mean. That's your mean. What is median? Median is slightly different. It basically tells you what is that value in that data set where there are equal number of values less than it, and so like an equal number of values that are less and greater than it. So if you have, let's say 10 values all over the place between, let's say one to 10, and then five is not, may not be your median, so let's say you have,
+
+Unknown Speaker  1:50:45  
+you have basically, let's say
+
+Speaker 1  1:50:49  
+some data set five, data sets around nine and 10 and five. Data Set around six and seven. So then eight will be your mean, sorry, eight will be your median, because before below eight there would be five. And above eight there will be five. So it is the middle value on a sorted data set. So in order to find a median, you have to be able to sort the data set and then take the middle one from there. Now, depending on whether you have odd or even number. So if you have, let's say, 10 values, when you sort it, you take, there is no exact middle, so you take the average of fifth and sixth, and that's your median. If you have a 11 numbers in the data set, then you sort it in an ascending order, let's say, and you take the value number six out of it, because then there would be five above it and five below it. So that's your median, and mode is basically what value is most common. Like, remember, when we did the value counts, it basically showed, Hey, these are the unique values and how many items there are for each unique values. So the one that we found at the very top, that is the mode of the data set, which is basically the most frequently occurring value in the data set, and for most of the real world data set that we will find, you will see that these value will be different. How do we calculate these. The good news is we actually don't have to do basic arithmetic to do that, like we don't have to run a for loop and find the what is the average, or anything like that. Instead, we are going to use other library. So in this case, there is a library will be using called NumPy. So NumPy library gives us a method to find the mean and the median, and we will also use a library called which has a function to find the mode of the data set. So if you plot a data set, they often say median is a better measure of the central tendency. And the reason is this. So let's say you have a data set which is normally distributed in a bell curve, which is in an ideal world. If that is the case, your main median mode
+
+Unknown Speaker  1:53:13  
+will be the same value.
+
+Speaker 1  1:53:16  
+But in real world, the data set that we mostly deal with, they are anything but ideal, so they are skewed in one way or the other when you do a distribution. So for example, in this graphic that you can see your mean is here and the median is here. Why? Because this is a data set that is skewed on the right hand side, which is positive skewed, which basically means that there are lot, there are very few data that has a big value, which kind of is the case when you try to do a income distribution. And this is one complaint, people always say that there is a disparity of wealth. And if you take any population of a country or society, if you find the income, you will see the mean would be much higher than the median. And if you just take the mean, you will have a wrong understanding about the overall economic health of the population. You will see think that everyone is rich, but guess what? That's because maybe there is a handful people who has billions of dollars in wealth where the rest do not, and that's why main is often a very, very misleading characteristic of a data set. And that's why median is a much better value, like if you take the US population, wealth or income, let's say you will see the mean is probably very high, probably around three 400 or maybe even half a million dollar. I don't know the exact number right now on top of my head, but the median will come at a much lower, maybe around 100k level, and that's because there are a few. Very well the individual that kind of skews the distribution,
+
+Speaker 1  1:55:07  
+and then finally, the variance. So what are the variance? So variance and standard deviation, there are two things that you will hear. They are very related. So what variance is basically tells you how dispersed a particular data set is. So if you think about, let's say, go back to this curve, right? If I, if you see this curve, actually, hang on. How can I draw on this? Let's see.
+
+Speaker 1  1:55:42  
+Okay, so let's say this is a curve that already is there. Now think about another curve which is, which looks like this, which is also normally distributed, but you will see in this new curve that I put this new population, majority of the data are much closer to the median, meaning the data set is more tightly packed across the central value, which is median. So we will say these, that these data set, the distribution that I draw in a red ink has a much lower variance or standard deviation compared to the one that was there in the blue ink. Similarly, if we take another one, let's draw it in a different color. Let's try draw it using let's say green, if you have another data set which is like
+
+Speaker 1  1:56:49  
+that. So this green population also have the same median, but the data set is much more widely dispersed across the central tendency that you have. So these green data set have higher variance and higher standard deviation than the blue data set. Okay, so now the question is, how do you calculate this?
+
+Unknown Speaker  1:57:17  
+So to calculate this?
+
+Speaker 1  1:57:21  
+Um, yeah. So basically, the definition is what it says, what I said, right? It describes how far the values are in the data set from the mean overall. Actually, the this is not not mean. It will be from median, actually, and that's the variance that describe how much data variation exist within the data. Now, how do you mathematically calculate that? So the the way that you calculate variance is this. First, you take a mean of the data set, which is, here we are calling x bar. X bar is basically the mean, simple arithmetic mean, average. And then for each point in the data set which we are calling x, I, meaning the i th point, you find what is the difference between the particular data point and the mean. And you basically take a square of this, and then if there are 100 of these, then you will have 100 square terms. You sum up all the square terms and divide by n minus one, meaning 99 Why n minus one? Because if there are 100 data set, then one data one of the data point is your central so then how many these distances are there? There are 99 pairs of distances from the center. So that's why you take the central value, you find a square of differences with rest of the 99 points, and divide that by 99 and that is the expression for your variance, and we call it S square. Why s square? Because s is your standard deviation. If you take now this whole thing and put a
+
+Unknown Speaker  1:59:07  
+square root on top of this,
+
+Speaker 1  1:59:10  
+a square root term, the square root of variance would be your standard deviation. So people sometimes like to use standard deviation more than variance, although they are they measures the similar tendency. But the the good thing about standard deviation is the unit is the same. So here, if the unit is let's say this is money, right? So let's say each data set is dollar. Now, when you are taking $1 minus dollar. The unit of this difference is also dollar. But when you are doing the square, now you have $1 squared. And now when you sum this up, that is still dollar squared. Divide that by 99 or n minus one, which is a unitless number, so the result basically becomes dollar squared. So variance does give. View a measure of how dispersed the data set is, but the scale is not same as the data itself. It is square of the data. So that's why people like to use a square root of that to bring it back down to the same unit as the original data. So that way you will basically get the standard deviation in terms of dollar but variance would be in terms of dollar squared. So in your mind, if you think about it, variance will basically give you a much bigger looking number, which might tend to make you falsely think that, oh, there is a big variance. That's why take a square root and standard deviation is a much better measure of the dispersion of the data set. So okay, so that is standard deviation, which I talked about, which is a square root of S, square which is the, what is called variance. So square root of variance is standard deviation. Now the other thing you have to think about is the distribution. So if you have a data that is distributed like this, so your mean is in the middle, now you have some data above the center, some data below the center, right? So now, if you take one standard deviation, any data set between plus so standard deviation is called sigma, so any data set within median plus minus sigma is one standard deviation away, and then you have two standard deviation away, and then you have three standard deviation away, and so on, right? So then the question is, what is so? When you have any random data set that you get, you will see that most of the data kind of fits within two or three standard deviation, but there are be very few data that are very, very far away from the center, and those are we are called outlier for machine learning. Knowing this is important, because often time what happens is this outlier kind of tends to screw up your accuracy of your model, because your model might tend to latch on to the outlier. So sometimes, in order to increase the precision of a data set, to in order to train the model, sometimes people like to find, Hey, what are my outliers? And I'm going to remove the outliers, right? So for example, if you have a data set of, let's say income data again, right? And then data set can have income and whole bunch of other demographic data, right, like their race, ethnicity, education, level and so on. And you are trying to train a machine learning model to predict, like, hey, is there a way looking at a person's age, race, ethnicity, background? Can we successfully predict what the income of that person is going to be, if you are trying to train a model to these, to this kind of a regression analysis, then those, remember, those billionaires I was talking about, who are like, crazy rich, like Elon Musk, Jeff Bezos, Rich. And then there are some poor people, like, who is like, they don't want to earn anything, right? They are happy in their way, like they are like very poor. So those people will kind of tend to mess up your whole data set, and those are the outliers. So it is important for you to mathematically distinguish what you call as an outlier, and if possible, if the outliers is too far out there, then remove those from your data set to begin with. So that's why understanding this is necessary. So so we are going to talk about how to find what you can do to find the outlier. But before that, another, another data, another measure that you have to understand is what is called a z score. So what is Z score is, it is a data points distance from the mean in terms of standard deviation, which is also called the standard score. So basically here, if a data point is here, which is one standard deviation away, then it's Z score would be plus one. If, as something is here, right in this line, the Z score would be minus one, and similarly, anything between plus one and plus two would be one point something. So that's your Z score. So essentially, you take this scale and normalize it so that it starts from zero, which is your center of your data, and then goes plus one for one standard deviation, plus two for two standard deviation, and any floating point number in between. So that is your Z score, or standard score. So how do you find the Z score? You basically take that data, point X, subtract the mu, which is the mean, and divide by the standard deviation, and that way you are. Basically scaling it down to a scale where you get basically the z score, where the value right at the center would be zero. At a standard deviation one, it will be plus one, and so on. So this is basically the scaling formula, x minus mu divided by sigma.
+
+Unknown Speaker  2:05:20  
+So that's a scaling how the scaling works.
+
+Speaker 1  2:05:24  
+And again, in sci fi, you have a function that you can use to find the Z score, which we will see when we do the demo. Now, before we go to the demo, I want to finish this theoretical discussion about the quartile ranges, right? So now, when we are dividing the data, we can divide the value into certain buckets or beams based on the position of each data point in the overall distribution overall curve. Now the two most common way people use is one is called quartile and one is called percentile, right? And it's like, percentile is very common. I mean, we hear about percentile all the time, like, whenever you are, let's say doing a course, or whenever you are your performance is measured against a population. You will often hear that percentile score, right? Let's say, when you are writing a test, standardized test, you will say, Oh, I have scored 99 percentile. What does that mean? That means my score is higher than 99% of people. So percentile is basically much more granular, where each 1% is in one is one bin, and then the others other, much more, larger size bucket that you use is called quartile. So in quartile, you basically use 25% 50% and 70% right? So 21st 5% of the data values less than the first quartile. 25 to 50 is your second quartile, and 50 to 75 is your third quartile. And similarly, on the minus side as well. And percentile is you basically divide the whole thing equally into 100 bins. So percentile is the whole population chopped into 100 pieces, and quartile is whole population chopped into four pieces. So that's your percentile value and quartile value, now coming back to the outlier. So we talked about outlier, meaning the data set that has that are far apart from the center. Now, knowing the quantile quartile range, now we can actually define mathematically what we call as an outlier. So outlier, as you can see here in this it's like here coming here. So it basically says, if the particular value is more than 1.5 times of IQR, beyond the first or third quartile, then it is an outlier. So if a particular value is within the first quartile or second quartile or third quartile, then they are not outlier. It has to be beyond the third quartile, but how much more or less than the third quartile? Well, it has to be 1.5 times or more of the width of any particular quartile. So each of these colored bucket vertical grouping is one quarter. If this thing is more than 1.5 times the distance between the two quartile, then we will call this as an outlier if it is that much beyond the third so another way of thinking, it is this way. So you basically take the range between first and third quartile, right? So, and then anything less than or below the quartile one minus 1.5 times IQR. So IQR is basically the rent the width of each quarter. So basically, you take the first quartile, if something is less than one minus 1.5 times range, then it's an outlier. On the higher side, you take the third quartile, and if anything is third quartile plus 1.5 times the width of one width of one quarter, then it becomes outlier. So that's how the quartile sorry, IQ outlier calculation works. And all of these, you don't have to actually do this by hand. All of these we are going to do using different library methods, but that's as much statistics that you have to know for today's class. So.
+
+Speaker 1  2:10:03  
+Uh, later, when we do some plotting, you will see there are some plotting function that we can use, and this particular plot is called a box and whisper plot. So in this box and whisker plot, it basically shows that, hey, this is the center of the data, and then this box is the lower and upper quartile, and then the data is spread all the way up to here, and anything here and here, these are basically your first and third quartile, where the whiskers are, and any data point that comes visually comes about 1.5 times the distance between this to this, or 1.5 times that below the distance between this to this, will be your outlier. So that's just a visual way to put it. Now in today's class, we are not going to do the box and whisker or any visual, but we are simply going to use the numpy and sci fi libraries to calculate these values.
+
+Speaker 1  2:11:08  
+Okay, now let's go on do some demonstration here and see what we can learn from here. So let me just clear all output here. Okay, so in this particular activity, what we are going to do, we will basically read temperature data frame. This is that same temperature where we had that we loaded that earlier, right that hourly temperature, and we are only looking into the hourly dry bulk temperature, because that is the column that we are looking to find. Actually, let me just first print temperatures DF so temperatures DFS have these, these data, station, date report and hourly dry bulb. Out of this, we are only going to learn the statistical function on this hourly temperature this column. Now in here, when we are doing the import, you will see, other than NumPy, we are also importing two other classes. One is the pandas, and then another is the Sci Fi stats plus sci fi dot stats. And we are using the short form STS for this, np for NumPy, and PD for pandas as always. So these are the three libraries that we are going to use. Now the first thing we are going to do is find the Mean, Median and Mode, the first three central tendency we talked about, right? So what is mean? You simply take NP, meaning NumPy, dot mean, and you pass a temperature. So what is this temperature? So this temperature is basically these temperatures that you have, which is, what data type is this temperature? It's a series. So if you pi pass a series or a list, if I do a type of temperatures, you will see it's a panda series. So when you use NumPy dot MIN function, you can pass a pandas series, meaning a one column of data, and if the data is numeric, which, in this case, it is numeric data because data type is int 64 then your mean method will return the mean value. And you can use the same thing with mp dot median function. And for mode, NumPy does not have a mode function, but sci fi does so you do sci fi stats, dot mode, which is STS dot mode function, and if you print these, you will get slightly different values. So in this particular case, I would say this data set is kind of very well balanced, because mean and median are very close. One is 57 one is 57.655 so if you do plot this, it will look like a very balanced curve, not skewed too much. And the mode here is 57 itself. And the mode function also tells you how many you have. Because remember, what is mode? Mode is the value that has the highest occurrence. So these function mode function is telling you 57 is the mode, but it is also telling you the count of that count of data point having this value is 327
+
+Unknown Speaker  2:14:36  
+so there are total of 3529
+
+Speaker 1  2:14:39  
+data points out of that 327 so almost close to 10% data has one value, which is 57 and that is the mode of the data set, because that is most frequently occurring value in this data set. And then we talked about variance. And standard deviation. Variance is based. Sum of all the square distances divided by n minus one, and standard deviation is basically a square root of that. And remember what I tell told you like it is important for you to keep those formula in the back of your mind, but you actually don't have to apply those formula, because thankfully, the authors of NumPy have already made those formula and turned it into a function and made those available to us, which is dot var and dot STD. So the STD function is for standard deviation. There is for variance. You just apply those and you will get the formula here. So here you see the value for variance is 32.33 and the value for the standard deviation is 5.68 so why? Because if you take a square root of 32.33 you will actually get 5.68 so this is a much better value to work with, because this has the same unit as the original values, which is temperature. This is squared, even though this gives you the same idea, but the value is inflated because it is a square of the whole thing. So this is the square root of that, and this basically tells you what is the how much the data is dispersed around the mean. Okay, then we talked about the z score. So how do you find the Z score? Well, you use another function from sci fi stack library, which is called Z score, and you pass the same series, which is temperature. And when you print this series, this is what you get, you basically get another series. Now, what it is telling you is, for each of the 3529 data points that are there, what are the z scores for each one of these point? So the first point is getting a z score of negative 1.17 so what does that mean? That means this first point is 1.17 standard deviation below the mean.
+
+Unknown Speaker  2:17:13  
+The last point here is getting 0.06
+
+Speaker 1  2:17:16  
+that means it is 0.06 standard deviation above the mean. So now, if I ask you, just by looking into the first point here and the last point here, which one you think is closer to the mean, the first one or the last one
+
+Unknown Speaker  2:17:33  
+should be the closest to the zero is the best, right?
+
+Speaker 1  2:17:36  
+Yes, okay, it's not the best or worst. The question is just simply state which one is closer to the mean, meaning closer to the zero, the last one, because 0.00 right, which is almost at the middle. So that's what the z score is telling you. Now, one thing you can do, and this is in machine learning, it is called kind of a feature generation. So basically, let's say these. Let's say temperature is a featured in your data set. So sometimes, in order to make your training data set more richer, you might want to add additional information as additional column in your data set, and which is where you are doing some this kind of statistical analysis and providing these as additional training input. So here, let's say Z score. As we can see that Z score is returning a series which is one vertical column, and our temperature DF has five columns. But if we want to use this Z score, also as part of our data set, we can take the temperature df and add a new column called Z score, and assign this zip pi to that. And when you do that, you will see that we will have a new data set where all the previous columns are there, and we added another column to the side, which is the z score. So by doing this. Now you enrich the data set by adding some additional information about the statistical distribution of the data set, which sometime is also referred to these type of activities, also referred to as a data enrichment. Now I'm not saying this is the only data enrichment you do. I'm just saying this is just one of the many, many, many data enrichment examples that people often do sometimes when they are making their data ready for training of a model.
+
+Unknown Speaker  2:19:37  
+Any question i
+
+Speaker 1  2:19:44  
+Uh. So the next one we are going to use the data set, and this time we are going to this is the same data set, but this time we want to see what are the. Quartile ranges for the data set. So the quartile ranges, one good thing is in order to find so you know what quartile ranges I'm talking about, right? So quartile ranges, meaning this calculation, right? What is the interquartile ranges, and what are the outliers? You really don't even have to use NumPy or sci fi at all, because pandas provides this as a built in function to a data frame itself. In this file, you see that I have only used pandas as an import. Do not use NumPy. I do not need sci fi. So what you can do is you can take any column of a data frame or any series. In this case, temperature is one series that we extracted from this data frame, and you can just apply a quantile function and provide 0.25 or 0.5 or 0.75 and that will give you your first second or third quantile, and then I QR would be basically your q3 minus q1 so when you do that, and you and you print that, if you let's actually just do this separately.
+
+Unknown Speaker  2:21:25  
+Just in here.
+
+Speaker 1  2:21:27  
+So it tells you that the lower quartile of the temperature is 54 the upper quartile is 60. Therefore the interquartile range is six,
+
+Unknown Speaker  2:21:39  
+and the median is median, which is 57
+
+Speaker 1  2:21:43  
+so median is basically the same thing as quantile 0.5
+
+Unknown Speaker  2:21:49  
+now,
+
+Speaker 1  2:21:51  
+in previous example, how did we Find median? We found median using np dot median. When we found np dot median, we found a median of 57 in the second example, we are not using NumPy, we are using Pandas, built in function quantile, and when we invoke the quantile function with 0.5 that exactly gives me 57 which is the median that you would have otherwise found if you use the numpy median function. And just like you have already realized, when you are doing other data, selection, searching and all in pandas, there are often multiple ways of doing something. When you are doing this kind of statistics, also during the course of your learning and exploration, you will see there are multiple ways of doing something. These are very, very rich libraries. So often there are one thing can be accomplished in multiple different ways, using function from either NumPy or pandas and so on. And this changes all the time, by the way. So between version to version, they keep adding new features, new functions and so on. So this is not something that is static. So you just have to know what are the kind of things that there are available, and know where to look for if something you are trying to work on your data and it is not working, just go and look up the documentation. Maybe in the new library, maybe they have changed the expectation of a function, maybe you are getting an error, or maybe getting a deprecated warning that something is working now, but maybe it will not work in future. So that can happen all the time. Okay, so now with this quantile function, we can find the first second and third quartile, and we can find the interquartile ranges. Now the question is, how do we found what below or above, which value we will call it outlier? Well, we already found IQR, and our IQR is six. So that means, if something is six multiplied by 1.5 which is nine, if something is nine below q1 or nine above q3 then we will call this a outlier, which is what we are doing here. So if you do these lines also, it will clearly tell you that the value below 45 could be outliers. Why? Because your q1 q1 is 54 and your interquartile range is six. So six multiplied by 1.5 is nine. So nine less than 54 is 45 so 45 is your lower whisker, and nine above 60 is your 69 so 69 is your upper whisker. So anything between 45 to 69 you can safely take as a good data and. Anything below 45 or above 69 you can treat that as an outlier. So now we have given this temperature data, we know that temperature below 69 doesn't happen that often. Temperature below 45 also doesn't happen that happen that often. And if you take a note at what the file is, it is the temperature taken at LAX, which is the lar port. And knowing the climate of LA, we know that it does not get that hot or that cold. Well, actually it does get that hot. I don't know which month data it is. Here, the upper outlier range we are seeing is 69 degrees lower 45 kind of makes sense. Like any temperature below 45 at La would be an outlier. But 69 I'm not sure which month data it is. In summary, does go above 69 all the time. Maybe it is from January. I don't know which month was it actually. Was there any month value here? Ah, January, January to April. Yeah, that's why, it makes sense. It's not in the middle of the summer, right? So that's why below 69 or above, sorry, build above 69 or below 45 for LA between January to April is an outlier that kind of makes common sense, and that's what the statistics is also telling us. So now that we know that these two values, if we actually want to found the outliers, which you might want to do in a real machine learning model enrichment like, Hey, you might you see that maybe your model is kind of working for the most part, but that precision and accuracy is not that good. How about we try to remove the outliers? So if you want to do that, you will basically do the exact same set of step and then apply a lock function to basically select whichever rows that has temperature below 45 and above 69 and that will be your outlier. And that's the new data frame that you are getting, which is only 12345, only. There are only five values out of these 3200 or so values that you can consider as an outlier because they are very, very far away from the center. So if you, oh no, actually, not five, why? Oh, sorry, not five. My bad. It was a head 153 values. My bad. So it's about 5% of values are outliers. Now if you you do not want your model to latch onto those outliers. All you want to do, you basically select these and do a drop, and then you basically drop those rows and move on. So that way you will have a data that is kind of a nicely packed within the three quartile ranges.
+
+Unknown Speaker  2:28:02  
+Oh, cool any question
+
+Speaker 5  2:28:06  
+on the outliers, is that also excluding the no values
+
+Speaker 1  2:28:14  
+this particular data, I don't think there are any null values you can check for yourself. Okay, this one probably doesn't have any now values,
+
+Speaker 1  2:28:38  
+Okay, and that is everything. There is a another last student activity here, but which is not any different from what I just showed you here. Also you are given a data set, except the data set is kind of a toy data set, where the data set itself is provided here in a list. And that's why I think just going through this is not going to add any much value. And then you are basically asked to find the mean median mode. And then, oh, then they were also given another data set, which is a California housing data set. And on that housing data set, there is a population column, and you are asked to find the mean median mode of that column, and then you find the q1 q3 and i q r, and then the lower and upper bound, which is q1 minus 1.5 times out here, and plus 1.5 times our I, q r of q3 and then basically apply that same log function to basically find what the outliers are.
+
+Speaker 1  2:29:42  
+So you can go through this and you will see that the last demonstration I did did this is basically the exact same set of steps you have to do there as well. So do this in your own time. And then after this class, we will make these salt file available for you very soon as well. So on your GitLab so in case you get stuck, just do a git pull on the GitLab repo, and you will see the salt file for this as well.
+
+Unknown Speaker  2:30:09  
+Then there's an enormous pandas recap,
+
+Speaker 1  2:30:13  
+huh? Oh, yeah. I'm not even going there because we just did the pandas. There's still significant, yeah, I saw that. So why don't you take it up on a challenge, and if you get stuck, then bring it to my attention. But I'll tell you the the Kaggle link that I shared with you guys the day of before yesterday, that probably gives you even more significant and much more richer and broader set of activities if you want to practice your panda skill.
+
+Unknown Speaker  2:30:46  
+Because in this material like
+
+Speaker 1  2:30:50  
+it's not everything that pandas has to offer. It's a huge library, lot of rich features. So the more you practice, the more you get better. If you want to practice, be my guest. I'd say, as you go forward, as you do lot of I'd say, like a data manipulation, data transformation, data enrichment, during the course of your machine learning journey, you will get to know all of these anyway. But the thing is, when it comes to pandas, even it happens to me, if I don't use Pandas for a month or two, some of those I don't remember on top of my head, and then I have to go and look up again. It's not possible, and it's not even required to know everything and each and everything that pandas has to offer you.
+
+Speaker 8  2:31:49  
+I will say the challenge for week three, really, it's very straightforward, but it's frustrating, because they harp on us so much about writing dry code, and it's just repeating yourself, like two different function modules, like, over and over again, and then unnecessarily for a savings account with, like, pretty months in it. I'm just like, this is
+
+Speaker 1  2:32:14  
+i Yeah, have you taken a look at this week's assignment? Not yet.
+
+Speaker 10  2:32:23  
+That's Jesse. I'd say, if you want to do better than it, do better than it, and if I gave you trouble, let us know.
+
+Speaker 8  2:32:29  
+Yeah, I Well, the rubric was so specific. I'm like, looking for these exact things. I was like, Oh man, I'm really, really
+
+Speaker 10  2:32:38  
+afraid if you read, redo it better, they're going to give you a hard time. If you do better, improve on it and they give you a hard time, let us know. Yeah, we can, we can. We can override them if they do a poor grave or something like that on you. Yeah.
+
+Speaker 8  2:33:00  
+Is there something about the week four challenge, the money that you're going to you're going to mention, or you just ask, if anybody,
+
+Speaker 1  2:33:08  
+no, I actually haven't gone through this. So week four challenge is you'd actually find Week Four challenge much more enjoyable.
+
+Speaker 8  2:33:25  
+Looks. Looks pretty straightforward from the pandas, yeah,
+
+Speaker 1  2:33:28  
+um, in the last class of week four, which is have going to happen when on Monday, we are actually formally going to learn how to use that apply function and how to pass a lambda to the apply to do much more fine tune data manipulation and modification, right? So we are going to formally learn that on Monday, and that will also be part of your week for challenge. So you will see when you go there.
+
+Speaker 8  2:33:56  
+I wish they would show more function chaining too. You get a lot done in one one line. If you could just go,
+
+Unknown Speaker  2:34:03  
+yeah, yeah, yeah.
+
+Speaker 10  2:34:07  
+Might be a little hard on some of the people who this is newer for.
+
+Speaker 8  2:34:13  
+It kind of reinforces that this is the data type that's coming back. It's like you're still getting a data frame. Therefore you can call it a good
+
+Speaker 10  2:34:19  
+idea. It's a good thing. Yeah, some of the newer people, that might be a little little bit much for them to parse
+
+Unknown Speaker  2:34:26  
+that for a little while. Eventually they'll get it. Lots of
+
+Unknown Speaker  2:34:31  
+ways to skin a cat still make Oh, yeah, yeah.
+
+Speaker 10  2:34:34  
+My kitty is in here right now, so she wouldn't, didn't have to hear that. I uh, somewhere else. Otherwise she's lying right here. She'd have to hear you say that she might get it look at me like, What? No,
+
+Speaker 5  2:34:52  
+she's funny. I have a question, but no, so conceptually, right when I'm just on my video. So I work with data before. Or more, like on the SQL, and that's long time ago, so I forget a lot of the you know, syntax and stuff, but this is pretty close. I think, I hope, conceptually, when you have to deal with so many data, right, millions of data, what would be the best practices in machine learning? Is it always good to start with getting rid of the nulls, is it best to get rid of, you know, the lows, the low, the highest, the high kind of like what you're talking about earlier. What are the best practices?
+
+Unknown Speaker  2:35:32  
+There is no single best practice.
+
+Speaker 1  2:35:35  
+Unfortunately, in some cases, you might have to do a lot with the data, like try to scale those, transform some of the values, get rid of the Now, fill the null with some, like an engineered value, right? But not always, not always. It kind of depends on what you are trying to do, also when you use lot of the traditional statistical machine learning model, you will have to do some of these. But you will see that when you are trying to do neural network, for example, the neural net model, they don't mind dirty data set. In fact, the idea there is the guidance there is when you are using neural nets, especially when you are using the deep neural nets, let the data be Do not try to engineer your data. Let the data be with all the dirty, noisy data. Everything live there. Let the neural net figure it
+
+Speaker 5  2:36:36  
+out. So the curve Bell is not perfect. It may be skewed some somewhere or another, right? And that's okay,
+
+Speaker 1  2:36:43  
+yeah. Well, the thing is so talking about that curve fitting, if the data is skewed, there is nothing you can do, or there is nothing you should do about it. If the data is skewed, the data is skewed. You know that data is skewed. Now, if the data is too much skewed, your model might have developed, might develop a lot of bias, because if there is one class that is much more prevalent that the than the other classes, then your model will definitely tend to build have some bias, right? But there is nothing you can do about it. Maybe that is not the right data set. All you have to do is now go and collect what other data that you can add to that to make the data set much more well balanced, and that's why, like, not every model is trainable to a machine learning model. Not every data set is trainable to a machine learning model. Some data might be totally worthless, totally useless. Okay, so I mean, obviously, in the course of your boot camp, you are not going to be given that kind of data set that is worthless. But if you are working as a real data scientist or a machine learning practitioner, lot of time, you When, when, like business will come to you like, hey, we think we have these lot of inventory data, sales data, marketing data. Let's try to make a machine learning model. But the thing is, execs do what execs do best, right? They will go and promise the world, and then the thing will come on you as a data scientist, and then you go down the field, and then you say, oh my god, I'm not getting a high precision, high accuracy model. And then you start looking into the data set, and you figure out the data is crap. The data is so much skewed, there is so much gaps in the data there, like you cannot really good, a good get a good model training out of this, right? So,
+
+Unknown Speaker  2:38:26  
+garbage in, garbage out.
+
+Speaker 5  2:38:28  
+So, yeah, I'm not a question. So, I mean, again, this is long time ago when I did, you know SQL work. You know, you deal with different tables, like, right now, what we're working on is only one CSV file with a bunch of columns. You know, sometimes from left to right, there's a lot in machine learning. Is that what the required data sources? Or can it be multiple CSVs, multiple data sources that you can start manipulate and work on, like having so many tables that you join here, join there? Yeah.
+
+Speaker 1  2:39:00  
+You might have to Yeah. So it was these, these data sets, that you are getting in an academic setting. These are data set that has purpose, that are purposefully built and tested by people before you who know that this is a data set that you can use to train a model to prove a concept of a classification or regression model. So these are all kind of a manufactured data set. You can say, well, some of these data might be real data, like, let's say you get a weather data right, like that. So that weather data might be actually real data. It's not that, I'm not saying that people have kind of typed the data out of their out of thin air, no, but they these data set have already been used by people and validated that they will give you something, right? They are not complete garbage, but in a real field, no one will give you that data, like talking about, look, when you are working in a company or a bank and you are trying to find a model that will help you to predict what the demand is going to be within next couple of quarters, what data you are. Going to use your company exits do not know they have a whole bunch of data. And everyone is happy, though we have lot of big data sitting in but no one really knows how much that big data is actually going to be helpful for you to achieve the objective that that the leaders think that they will be right. So you have to get the data from many places. Sometimes you also have to get the data from outside, like market data right to kind of like if you are trying to figure out how the inventory is going to be stocked over next few weeks or months, it is not always enough to look at your past sales data for your company. You might also have to go back and look into how the market in general, is doing for that particular industry sector. And for that, you have to go to lot of open data sources that are available that gives you actual, real data for that particular industry, right? So there's lot of exploration you have to do,
+
+Speaker 5  2:40:53  
+yeah, and then I guess maybe sometime in the future, we're going to learn to connect through some kind of API,
+
+Speaker 1  2:40:59  
+yeah, that is, in fact, I think week five or week six. I think Week Six where we are basically going to learn about how to get data from external API and load that into pandas. Yeah, that is part of the course
+
+Speaker 5  2:41:10  
+I love data. So this is actually because, you know, yeah,
+
+Unknown Speaker  2:41:15  
+you seem to be having a good time here. Yeah, I
+
+Unknown Speaker  2:41:17  
+do. Thank you. Yeah, Ingrid,
+
+Speaker 10  2:41:19  
+I think what you're asking, If I understood you right, if you have, like, let's say, a typical SQL database very normalized, so you have, yes, you have a number of different tables, and have to be joins and so on. Generally, the kind of machine learning models we will be training required their input to be one table. So So you would have to do that beforehand, to prepare that data ready. So you'd have to do whatever joins you want to do whatever, and make one consistent data set or table, and that would become the input for training the model. And then examples of the like that would be used for actually inferring once you have a model,
+
+Speaker 5  2:41:59  
+yeah, yeah. That was the question I was asking. It won't have, it won't have the
+
+Speaker 10  2:42:03  
+intelligence to take in your database and do the joints and everything someday, some, some will do that, I think maybe, but not, not now, but not with what we'll be doing. But
+
+Speaker 8  2:42:14  
+I think in no sequel, those are instead of tables of documents. Yeah,
+
+Speaker 10  2:42:19  
+yeah. Like, like MongoDB? Well, there are different kinds of NoSQL. MongoDB is a document kind of store. Other things might be graph databases. And things are other forms of NoSQL that are less commonly known, or whatever. I think they're becoming important. Vector database is another kind of no sequel, the
+
+Speaker 8  2:42:42  
+full stack boot camp done through this company is, is Mongo is in the stack. It's a merge that,
+
+Unknown Speaker  2:42:53  
+well, friends, I like
+
+Speaker 10  2:42:55  
+MongoDB, but actually doing stuff right now Django, Django doesn't really handle MongoDB very well.
+
+Speaker 1  2:43:03  
+The my police training application code that I showed couple of times, remember the officer training and all of that? The database powering that application is MongoDB?
+
+Speaker 10  2:43:13  
+Yeah, I saw that. I could see that in the code you were showing us. Oh, you did, yeah. I noticed I kind of caught on what you're doing when I see how you're doing ORM stuff with it,
+
+Speaker 1  2:43:22  
+yes, yes. That's a Mongo ORM that I used in that MongoDB is actually it's Amazon version of MongoDB. They call it DocumentDB,
+
+Speaker 10  2:43:32  
+yes, because this is running on AWS, right? Yeah, yeah.
+
+Speaker 1  2:43:37  
+ORM, AWS managed MongoDB. It's called a DRM
+
+Speaker 8  2:43:41  
+when you do NoSQL, because instead of object relational mapping, it's
+
+Speaker 10  2:43:46  
+done. Okay, that makes sense. Yeah, that's probably better language for it. Yeah, little, little fine. You know, subtle, dude, you
+
+Speaker 1  2:43:57  
+probably saw some of my Mongo engine import right on the top. That's
+
+Speaker 10  2:44:01  
+what I noticed when you're showing that example. Well, this complicated for folks to look at? Yeah, yeah.
+
+Speaker 8  2:44:12  
+All right, friends, we'll see you later. Okay, everybody, guys, have
+
+Speaker 13  2:44:15  
+a good night. I'm going to dip out too. Good night guys.
+
+Unknown Speaker  2:44:20  
+Good night.
+
+Speaker 10  2:44:23  
+Yeah, it's just, I've been doing more with Django, but I've been doing a lot of ORM stuff. Okay, one way. Okay.
+
