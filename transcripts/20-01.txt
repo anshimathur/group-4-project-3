@@ -1,0 +1,648 @@
+Speaker 1  0:00  
+Uh, convolution neural networks, or,
+
+Speaker 2  0:07  
+well, even more broadly, what was the goal of doing all of those? Yes, convolution neural network is one of the techniques that we learned. But what was the goal? Why did we learn those techniques last week? Image to recognize things in image, right? What we didn't do is we didn't go all the way and try to recognize things in videos. That is way beyond the scope of these boot camp but I hope what we did last week gives you kind of a glimpse of what could be going on in a video recognition as well. But video recognition adds a whole another dimension to it, because now each of the frame is one image on its own, and they're moving through the time, right? So you have basically having one whole dimension, which is time dimension, and now you have to each of the frames basically create one data point, and each data point is your different pick, like a, like a maybe couple of 100,000 pixels, right? So that's why that's way more harder for a neural net to do. But the same principle applies. So this week, we are going to shift our focus to another major area where we have had very good success, good progress in recent years, which is understanding language. Okay. In fact, everything that we keep hearing about in media blog, like everything, everything, mostly all around us, is because of the success that how neural nets have gotten better stronger to analyze human text, human language, text in many different languages, and not to just analyze and classify, but also to predict what text will come next. So that's what going to be the focus of this week today, starting with an intro. Our class, first class today, you would probably see kind of a very laid back kind of thing. We are just going to see. Okay, what are the it's kind of the first class we did in last week where we were basically just learning how to look into the pixel, how to convert the pixel into numpy array, how to scale the array by dividing it by 255, how do we represent if the images are RGB color instead of a gray scale. How do we pickle the image so that we can handle this later better? All of those things we learned in the first week our first class of week 19, so similarly in this week, in the first class today, we are actually not going to do any modeling or any training with any data. What we are going to learn instead is, how do you pre process the data to make it ready to train a model? And what we have seen when we were doing the image processing, especially if you think about that last activity that we did yesterday's class. Right? Remember, there were two activities, one after another, with the second last activities where we spend a whole lot of time pre processing those data and finally creating a checkpoint, where we saved all of those data in a pickle. And that tech took an inordinate amount of time as compared to what it took for us to actually build the network, right? Because by this time, we kind of know how it goes. We know when to use sequential, when not to use sequential. If we have to use sequential, it becomes very easy to do. You basically do a dense, fully connected layer, followed by a activation function, and you keep adding as many of them as you want, and then finally output layer. And we also, by now, we are very familiar with especially thanks to the last class, we know that if sequential model is not something that we we can use how we can teach the network by hand, layer by layer, and put it in any kind of, I'd say, any kind of a layout that we want, right with branching and all that sort of fancy stuff. But the majority of the work went into actually taking the image data and making it ready for processing.
+
+Unknown Speaker  4:44  
+Now, it was hard work,
+
+Speaker 2  4:47  
+but at least in the image world, our raw image that we had, at least all of those were numbers to begin with, because all of those pixels were filled with RGB values, or your grayscale value. They were still numbers, even then we had to do all these sorts of pre processing to make it ready for fitting into the neural network. Now imagine what happens when now you move your focus to a spoken human language, like English, German, Hindi, whatever it is, right? So these language have their own nuances, because our human language does not always follow a logical pattern. Well, it almost never follows a logical pattern, and that's why, for us, even human, it is so hard to learn a foreign language right after we become an adult, right for the kids, it's probably easy, because their brain, they're still growing. It can adapt for us. It's, it's very hard, right? So no wonder for machines, also, it is very, very hard to understand the structure of the human language, even if it can. Now, when you and I are talking, we can understand each other because we understand the syntax, the grammar, even though we are not always thinking actively, it kind of become our like a basically our reflex action, like, based on the context, how the word is said, how the how the words even the same word, depending on how the words are being thrown or how which other words they're combining, we can easily pick up the what is the intent behind the spoken or written word? In case of machine, there is no way that you can specify these using any kind of rules, because if you want to do that, it's going to be extremely hard, and people have tried that before. Before the whole neural network was a thing, and that didn't go anywhere much the rules driven way of teaching machine how to interpret human language. So then what should we do? Well, we have to find alternate ways to make the machine understand what is there in the language. So when I say understand, the machines never understand the language that we the way that we do. The machines understand language almost like how it understands the different pixels as laid out in an image. Why do I say that? Because when you have, let's say, 10,000 pixel in an image with different values of R, G and B, essentially, what you are having is a n dimensional space, like 10,000 dimensional space, where each of the point can be thought of as a vector in the space with certain coordinates that it is pointing to. And when you have lots of these vectors in the spaces that you throw into your neural net based on their orientation in the space your neural net, after you run a few epoch and you add objective function in your output, your neural net starts to pick up certain pattern. In order to help the neural net to pick up the patterns better, we added convolution also so so when it comes to expressing the natural language in a way that a network can understand, a machine learning model can understand, we need to find a way to put it in a way, express it in a way that Can you can consider as a vectors or vectorized way, so the different data points in the space, except here, in this case, the number of these data points in the in the demand in the vector space, would be much, much higher because of the different variation of words, languages and phrases that human that can occur in human language, and that is why our first class here, we are going to attempt to learn, what are the different techniques that there exist that can help us going forward, to convert the language. It could be a sentence, it could be a paragraph or a whole essay or a whole book. How do you take these large bodies of text, like small or large, whatever bodies of text, and convert it into a series of numbers or a series of tokens that you can then represent as if vectors in an n dimensional space. So that is the goal, and the machines really is never going to try to pick up the nuances of the English language, grammar like it is not possible for you to train a model with. Lots of examples of written language, and expect the model will learn English language grammar, or any languages grammar in the way that we learned. But what it would learn is it will over and over time, when you provide it with lot of enough training data, it will try to learn mathematically the hidden pattern that exists, which is something that we do not understand, because we have strength in understanding human language, understanding the nuances of the language, depending on the context, and lot of things, we are good at that, but we are not really good at understanding understanding what are the statistical pattern that exist in the way that we are using the words, like which words occur after which word and when it does happen, what it means. So for example, we can read a paragraph right. Let's say that we are reading a new story right, and the new story is probably 10 paragraphs along, right. Nobody has time to read all of the 10 paragraph today. So what we do we'll probably just quickly scan the headline and then maybe read the full first paragraph, or maybe just a few sentences first paragraph, and then we will quickly glance through some of the other paragraphs. And then we kind of tend to form an opinion in your mind, like, oh, okay, I see. So in this new story, they are talking about this particular topic, and that's it. Move on, right? So when you think of understanding natural languages this way, that is kind of closer to what machines are going to do. They're not really going to be bothered about understanding each and every word and their syntax and their grammar, but what they're going to do is they're going to look into how in the vector space all of these words, phrases, or group of words, basically, which is phrases, how they occur, how frequently they occur, right? And based on that, and then on the training level, of course, then the machine can understand, like, Okay, this is a paragraph about politics. This is a paragraph about business. This is a paragraph about sports and so on right or in a paragraph, if you want to train a model that way, okay? This is a paragraph where author has a strong positive sentiment about something that is being spoken or talked about, or have strong negative sentiment. So, so all of these things, machine will learn based on the statistical distribution of the tokens, or in this case, like parts of text, right? Which is like words, how they are occurring, how often they are occurring, and in what frequency, in what order they are occurring within the text. That's what machine will pick up on. Okay, so that means, as data scientists, our job is to help the machine in doing that by converting our regular English language or any language text into tokenized series of data that we can then feed into your dense network, your input layer. So that is the background. But as I said today, we are just going to learn a few techniques, so starting with tokenization, and then we will say how we can improve our tokenization, how we can make it more meaningful, like how we can return more meaningful words or tokens, how we can ignore less meaningful words, how we can understand, how we can basically take out kind of group of words and see whether that kind of gives a little bit more sense based on how the two words are grouped together and so on. And all of these, we are going to take it to the next class and the class after where we are going to apply this to the actual learning process.
+
+Unknown Speaker  13:48  
+Okay? So,
+
+Speaker 2  13:52  
+so to before we jump into that, just think through. Just think of it as a thought exercise, right? So natural language processing is we probably all have heard this name. But if we ask, if I ask you to think through in your daily life, where do you come along? Come across machines that you are talking to, or where do you think this natural language understanding by machine is happening in your day to day life? Any example you can share
+
+Unknown Speaker  14:22  
+text to speech. Seems really obvious.
+
+Speaker 2  14:25  
+Text to Speech, yes, but that is a case of generation, right? Yes, but that is also in natural language processing. It is more of a generative language, generative processing. So that's one. What else isn't it
+
+Speaker 3  14:40  
+used in, like compiling, huh, like compiling, like the machine code from,
+
+Unknown Speaker  14:47  
+like, higher level languages, like
+
+Speaker 2  14:50  
+for programming, no, that is rule driven, though compilers are rule driven, but there's
+
+Speaker 4  14:56  
+still you have to tokenize the source code and you have to be. You
+
+Speaker 2  15:00  
+have to tokenize the source code. But what my question specifically is it think of examples where natural language is being processed by machine, like Jesse provided one example when natural language is being generated by machine. So think of other examples as well
+
+Unknown Speaker  15:17  
+any customer service line.
+
+Speaker 2  15:21  
+So when you are basically talking to a bot, to an agent, yeah, that's one yes. What else Siri your it's Yeah, so like your smart speakers, yes.
+
+Speaker 5  15:38  
+What about the auto generate or auto correct text. Like, yeah, pretty big right now, right through your Grammarly and even, like, Apple have their own checkers or Duolingo. So,
+
+Speaker 2  15:52  
+translation, yes. So translation, like, when I went to Japan, right? So I was basically having my camera up all the time, because many of the levels or product levels or street signs are in Japanese. So I could point my camera and then it can read that text, understand what is written in Japanese, and then translate that into English language. So essentially, what it is trying to do is understanding the context from the one language, and then taking the context and based on the training we have or people have provided to it, it is trying to generate the sequence of tokens in another language that will hopefully express the same meaning based on their past occurrences of those phrases in one language and this phrases in other language. So that's definitely one case. What else? Chad, GPG. Chad, GPD, yeah. So that is the that is all the rage, right? That is kind of the culmination of natural language processing, right? The the generative AI model, using the large language model. So we are going to touch upon those things also towards the end of this boot camp, even simple things like think about how we search in Google. That is also for in a form of natural language processing. I mean, these days, when you search in Google, you are actually talking to, even without knowing probably you are actually talking to a large language model behind the scene, because the answers that Google provided actually uses the large language, large language models to basically try To understand the context, not by analyzing the grammar, but by analyzing the probabilistic nature of the and the distribution of the what is called the text and Word and phrases that you are using, right but even before AI the Google search, the original Google algorithm that they developed, even that is a natural language processing in some form, maybe not in the form that we think of it today, but even back in those days when we were doing Google search, right? So basically, that search algorithm is executed based on the tokens that you are providing in form of words, like a spoken word, human language word, right? So, yeah. So basically, the thing is, all of these exams, so these examples are all around us, right? And they, as we all know, these are used in various different fields, like starting from legal to government, to medical research, to finance, like everywhere you name it, right? Like text classification model, that is one we are going to use. We are going to learn, in fact, like looking at the text, try to classify what topic this text belongs to. Information extraction. This is also one big thing, like looking at a doctor's note, or maybe looking at a legal document, right, and trying to try to extract, what is the summary, right in a in a brief, concise form. So that's the summarization, or information extraction that is also one application area, document summarization, or complex question answering. This is what Chad GPT does, basically, right? So that is also one area. So all of these are basically application areas of natural language processing. Now we probably won't be touching everything to the fullest extent that we are experiencing in our day to day life, because this boot camp cannot go all the way to the to basically cover all the state of the art development that has happened, but at least after spending this week and the next two weeks, you should probably be in a much better shape to understand how things work, that basically the things that we get amazed right all the time, or maybe not guest amazed these days, because we kind of gotten used to it. Right in last 234, years, right? But we will see how these things actually work behind the scene,
+
+Unknown Speaker  20:07  
+and we are going to be building some, right,
+
+Speaker 2  20:11  
+okay? And we talked through this why natural language is hard, because it is our this is because this is ambiguous. It is not based on any logic or reason, there are a lot of nuances and all of these, and that's why the NLP comes in, where we basically have to pre process, prepare the text, and then extract the interesting or meaningful features or tokens, and then do the analysis using the using the model, right? So let's, let's start with the power first activity here, which is tokenization, right? So the first thing we need to do, so let's say we have a body of text, and we want the machine to identify whether the text is about business or entertainment or sports or politics or whatever. Let's think about this simple example. So this would be supervised classification model, kind of similar in a way, how we were trying to train a image net model to understand about 20 different users and the shape and position of their head and whether they had sunglasses and all kind of similar thing, except we have to provide the machine with different bodies of text, like paragraphs or something, sentence or paragraphs, and we have to tell the machine what this text is about based on that. Then eventually the machine will be able to figure out, if you give it a new paragraph, like, oh, this paragraph, I see this is talking about sports, or these other paragraph is talking about business and so on. So in order to do that, we have to present this paragraph to the machine, to our dense layer, the network that we will be building. So our first step would be to take all these words out of these paragraphs and make it in a list, right? So now, if we do that, then that's one good first step that we can take a body of text and then we can tear it apart into tokens. So that's what tokenization is. So tokenization basically means you take a body of text, which, in machine learning terminology, is called corpus, or corpus is a single body of text. If you have a multiple body of text, it's called corpora, which is large structure, organized collection of text documents. So what we will do is we will take these bodies of text and we will split it into pieces. That's all there is to tokenization. So as you can see here, if there is a sentence, let's eat grandpa. So you take this and you split it into three tokens, let's eat and grandpa, which is basically it's very similar to a split function that we have used many times in the past weeks, the split function that we use in Python. But you will soon see as we dive into the code, even though it is kind of conceptually similar, you can say, hey, let's take these sentence and split it based on our space, like a one space character, and then you will basically get three words. So that's it, that is tokenization. So what is more there can be for tokenization. But when you drive into this, you will see that there is actually more to it that we need to do instead of just doing simple split using the Python string split function. So let's look into our first example. Here the first activity, which is your tokenization. Now, in order to tokenize this we are we basically need not just this activity, but most of the activity in this week. We need bodies of text that we can try our techniques on as we are learning different techniques. So you can get bodies of text from many different places, right. You can basically probably put some kind of a bot that will go and scrape the web, right web scraping tool and go and scrape different new site, different blogs, forums, and then get you text so you can do that. But then, if you want to take those and then try to clean those data up, try to label those data and present it to a machine learning model. There is lot of pre work you have to do which is possible to do, but fortunately for mostly for learning purposes, there is a library that is available, which is called nltk, or natural language toolkit. So. This library gives you a few different things. One things is, if you see here, it's a platform for building Python programs to work with human language. It provides easy to use interface to over 50 corpora and lexical resources. So this, if you click on this link, then you will come to this page, and here it says nltk corpora, which basically means the different bodies of text, right? Remember, corpus is a one single text. Corpora is a group of text so they have what they call corpora, available on many different topics, I think 100 or so, maybe no, actually, more than 100, 120, different text corpora, they have available in nltk that have been collected over time from many different sources. For example, if you look into the first one, there is a this text corpora basically has a whole bunch of articles from Australian Broadcasting commission database. Similarly, there would be a corpora from like, say, Here city database, or Reuters, the new agency database, right? Or the Gutenberg, Gutenberg Project. I hope you guys know that it's basically a project where, basically, we try to save or archive all the good books that are kind of out of the copyright, of course. So all the books that have ever written right in any language, I believe, not just English. You can actually find it freely. So it's kind of a online library that stores archives all the book that have been written in the world ever, excluding the one that are more recent, where the author is still living and author still holds the copyright, excluding those right? Like you can find all the classics and everything in Gutenberg library, right? So there is a corpora here for Gutenberg. So, so these are the different groups of texts corpora that are available in this library called nltk, right? So what we are going to do in many of these activities, we are going to take this nltk and we are going to choose one of these corporas corpus that are available. In this particular case, we are going to use these Reuters, which is, if you go here, you can see that, yep, the Reuters is basically one of the corpus here, available, and you can download here. If you see, when I'm hovering my mouse over here, the link here at the bottom, it says Reuters, dot zip. So you can basically download all the text document that they have in a Reuters collection, download the whole thing as a zip file, and just like you do with any other thing, you can have that zip file on zip, put it in Resources folder, and you can load using Python file load function from there. You can do that. But since nltk also provides us API to do that. We really don't need to download the whole zip file and expand and explore the zip file and load it from here. Instead what we are going to do, we are going to use these nltk dot download writers instead of we downloading ourselves. So what this does is it basically gets these Reuters downloaded within where the analytical Python library is loaded in a compacted form. So we really don't have to have a whole bunch of like, 100, 200 300 files sitting in our code base, because that's going to make our code base very heavy and clunky. So instead, we are basically asking the analytical library to use the analytical API to make sure these Reuters corpus here is available locally, so that after this you can basically do some basically load anything that you want from your local copy of Reuters corpus that you have. So that's why we are going to use that
+
+Unknown Speaker  29:06  
+now,
+
+Speaker 2  29:10  
+after that is done, oh, in order to do that, you need to do a pip install nltk, which I believe you guys have already done. If not, you have to do a pip install nltk, and then that will give you the nltk database there
+
+Unknown Speaker  29:27  
+in the repo for the classes. It's actually the pumped
+
+Speaker 1  29:32  
+tokenizer that they have. So pumped tab you have it fixed. But folks, if you just pull
+
+Unknown Speaker  29:38  
+like this one, on,
+
+Speaker 2  29:42  
+yeah. So the original was punked, right? And now they have changed to punk too. I don't know whether we will even need this.
+
+Speaker 1  29:50  
+Well, you need it because it's for the tokenizer,
+
+Speaker 2  29:54  
+yeah, yeah, because we are doing the nltk tokenize, yeah, that's right, yeah. Okay, yeah, so you need to do these two download in here. And in my case, since I have ran these notebook before, it says that these packages are already up to date, right? So that's good. So now if you do Reuters dot categories, so you will basically get all of these categories there, right? So let's see how many categories we get. So what I'm doing, oh, here, actually, I'm getting 90 categories, even though, here they are showing 120 here, so I don't know 30 are missing. Anyway, we have 90. That's more than enough. So, so when you do writers dot categories. So that gives you the different categories that they have, these corpuses under, and there are 90 different categories that you have. So these are all the different category names, nothing else. It's just your group name. And then inside each category, you will have something called files, which in nltk term, they call it file IDs. So if you do, writers is our category. Let's say if you do, writer start file item. Sorry, not. Writers is not our category. Writers is basically our corpus, okay? So under these Reuters, if we see, see, hey, give me all the categories, then it will give me all the categories. But if we want to then go into any one of these categories, let's say Coco. Coca is one category. So when I say writers dot file IDs, and then I say categories equals Coco, it will give me the IDs for all the different articles that are grouped under this category. So 90 categories out of these 90, we are just using one, which is Reuters. Now under, sorry, we are. We are using Reuters. And then under Reuters, we are basically saying, Hey, give me every all the article that is classified as an article about Coco. So you will give get this. Now, if you don't specify this, then what will happen is, you see, I'm getting 10,788 articles. So under writers, there are 10,788 articles that nltk repository is venting these 10,788 articles is split into 90 different categories. And these, out of these 90 different categories, if you do provide one category name, then it will only give you articles under that category. And we see there are 73 articles. Now when you just try to find the file IDs. So think of these as almost like your file names. So think about the Reuters, sorry, Coco as a folder name, and these are the file names under the CoCo folder. So think about it this way. Now these are just the file names. Now, if we want to get the data for this file, meaning what is the article or paragraph, or whatever it is there, or book, if it is good and work, then it's a book. Then you have to issue another call, saying dot raw. So on that same Reuters group, I'm saying Reuters, dot raw. And then when I'm saying raw, I have to provide any one of these article id like either test slash 15095, or test slash 17499, any one of these, and then it will fetch the actual text body of that article. So here what I'm doing is, since I have saved all of these file IDs under a array or list called articles. Now in order to get the first article, I am simply saying, Hey, give me this first article from here, which is basically this, and then I'm going to print the article. And this is where you will see one article from the cocoa collection, which is a news article about some cocoa export, how they were limiting cells and whatever. Right now I just want to show you here I have not hard coded because I have all of these articles saved in a list. But if I wanted to, I could have hard coded it. In fact, in your version of notebook, you will probably see it is hard coded like this. So this test slash 15095, which is the first one here. That's the same file that you are going to get, as you can see. So anyhow. Up so we get a text, a body of text. Now what we are going to do? Well, first, we are going to try our plain old split function, not anything fancy, simply a Python split. So Python split works on any string. Now, what is this article variable? This article variable is nothing but a long string. So that means we should be able to use the string split on the article. And when you do split, you can split on many different any different character. So if I split on these period character, so that means, what would be the result of my split? It is going to take out. What if I only split based on period?
+
+Unknown Speaker  35:59  
+Look at this. What are each of these things?
+
+Speaker 2  36:05  
+Sentence, no sentence, because I'm splitting based on a period. So when does a period comes a period comes at the end of every sentence. So therefore, when you are still splitting based on a period character, whatever you are getting, it's basically a list of all the sentences that you have, right? But since this has lot of new line characters and all so all of those things are coming into your splitter thing, which kind of is not really needed, but this is a good first attempt. Also. Another thing is, instead of a period, if you wanted to split on a empty space, then you will have gotten a list of words, right. So here we will get a list of individual words. So there are many different ways to like depending on which character that you are splitting on your output, basically will be different when you are doing the Python split. So that is a good first start. Now, can you guys think of what is the problem with this type of split? Anything you can think of like, can we just do this split and say, hey, that's it. Let's go home. We are happy. We all got our tokens. Can we just do that and not worry about any other tokenization technique. I mean, obviously the reason I'm asking this question, the fact that I'm asking this question, tells you that, no, it is not enough. But can you think of why it is not enough to just do do this kind of a Python split?
+
+Unknown Speaker  37:38  
+What is the problem here?
+
+Unknown Speaker  37:39  
+You need more granularity, don't you?
+
+Speaker 2  37:43  
+Okay, can you expand on that? What you mean by granularity?
+
+Speaker 6  37:47  
+Well, like sentences coming like, it would be really hard to predict when one sentence is coming after another, but it's a lot easier to predict when, like, a syllable is coming after another,
+
+Speaker 2  37:58  
+yeah, but tokenization is not going to give you that granularity, right? Remember what I was saying at the beginning of the class, the machine is not going to have that kind of granularity, at least not in the way that we are going to train our model this week. What you are talking about is kind of having some kind of a memory, right? So when we are reading a paragraph, right? We have, we have basically short term memory in our mind based on the previous sentences that I have read. Like, let's say there's a five sentences in paragraph, right? So I'm reading a sentence and then goes into my short term memory and I reading another sentence. So my short term memory of something that I have wrote I have read just before influences my understanding of what I am reading in the next sentence, right? Similarly, the paragraph that I just have read influences my understanding about the following paragraph that I'm going to read. But that's a different technique, so that is used, that is done in machine learning using a technique called LSTM, or long, short term memory. We are going to touch upon that later. But for tokenization perspective, we are not going to be able to like we are in nowhere going to retain this order of token, not that our machine will try to decide anything based on the order these tokens are appearing. That's never going to be the case. What else do you think will happen or is not going to happen if we just use this split function?
+
+Unknown Speaker  39:34  
+Is it the over fitting?
+
+Unknown Speaker  39:38  
+Over fitting?
+
+Unknown Speaker  39:41  
+Tell me why. Explain why.
+
+Speaker 5  39:44  
+Um, just because the sentences are kind of like, designed from, like, what you showed in there based on certain ways of phrasing. It's not like, I don't know.
+
+Speaker 2  39:56  
+Okay, no, that's fine. That's a good first attempt. Okay, so both of you guys. I think you guys are kind of getting it, but the real problem that will happen is which you will see very soon, actually, let me not tell you what the problem is. Okay, let's look at what else we can do, a proper tokenization. So, so in nltk here, you will see that there is a library called tokenize. And from this tokenize library, I have imported two methods, one to tokenize a sentence, one to tokenize a word. So sentence tokenize and word tokenize. Okay, so what I'm going to do is I'm going to take this same article, and use the sentence tokenize, to tokenize the sentence and see what we get. And then I'm going to print how many sentences are there, which is the length of sentences? This is a list. And then I'm going to print each of the items in the list. So let's see. Okay, so now you see it says 12 sentences, which is kind of same thing here, also, right? So let's say, let, let me pull sentences here and let me print, do a print statement, and just to do an apples to apples comparison
+
+Speaker 2  41:26  
+in a sentence, yeah, typo. So this is where we are trying to do. So first of all, in Python. Way it is giving me 13 sentences, okay? And then these are the sentences. I think the sentences kind of came out okay. And here it is, giving me 12 sentences. And yeah. So one other thing you see here, when we are printing the sentence after each sentence, there is a gap, like a line spacing. Why? Because in original text, there is a backslash n character here, which is a non printable character, but that causes a new line character. Now, since we are splitting on a period, so that means that backslash n that is in the sentence after the period that is being captured in your tokens. That's why, when you print out all the tokens from the Python way, you basically see there is a new line being printed before each token. That is because the original new lines are being written there. And also there is, let me do a scrollable I think there is a one new line at the very end where, in the original text, after the author has written everything before saving the file, the author hit just another enter and then save the file. So there is an empty line at the end that only contains a new line character. So Python tokenize is also picking up on that, and that's why it is getting total of 13 sentences, including our empty paragraph here, which you cannot see, but you can probably imagine, because of the gap here, the spacing right? So that's why you are having 13 sentences, as opposed to that when you are using sentence tokenize all of those additional thing, like non printable character, they kind of falls out, which makes your sentence tokens much cleaner than your Python split function,
+
+Unknown Speaker  43:37  
+right? So that is one difference. So
+
+Speaker 2  43:43  
+yes, now let's take one of the sentence so this is sentences. So if you take one of the sentences, let's say sentences zero. Oops, zero. So sentences zero, hang on. Hang on, sentences zero. Okay, so sentences zero is basically everything starting from the beginning at the end to where Coco producer alliances set. So basically everything here is one sentence. Now we are taking that one sentence and now we are trying to chop it up further, using word tokenize again, instead of using Python split with a blank space character, which could have done. But here we are going to use what tokenize? And you will see that it gives you 41 words. So here I would say, if you do the same thing with a Python split function, let me try that, you will probably have gotten the same result. So let's do that. So I'm going to so what tokenize is one way. So the another way to do is sentence dot split and split based on spaces. So if you do that, you are getting 41 words. Here, also you are getting 41 words. But here, what is happening here. Oh, some of the words are having a new line character at the end. That's what is happening. That's why after sales, it comes to the next line. And you basically think that this and this is same line, because in the original text after sales, there is a new line. So the new word measure comes in a new line after this. So when you do is this Python based split, so that new line character is now into the cells word, the last word, and that's why it is going to the next one. So when you do the word tokenize, similar to the sentence tokenized case, it basically ignored all of those additional non printable white space, new line, all of those characters. So again, the point here I'm trying to drive is sentence tokenize and work tokenize are kind of doing the same thing as your Python split will do either a period or space character. The only difference here is the tokens will be cleaner because it will not have all those non printing character it will only have basically the ASCII characters, right, the alphabet and the numeric characters. So that's why the tokens will be cleaner,
+
+Speaker 1  46:33  
+right? It also tokenizes the punctuation where the split doesn't
+
+Speaker 2  46:41  
+create. Yes, so if there are punctuation, and if you are doing the split based on this, the punctuations will be also part of the token using the Python way. But if you are doing what tokenize from nltk, it will also not do the not take the punctuations. So that's also another benefit, which is kind of the same as saying like non printable characters or new lines and stuff like that. So this gives you a little bit cleaner set of tokens. Okay, now,
+
+Unknown Speaker  47:17  
+are we going to be happy with this clean set of tokens?
+
+Unknown Speaker  47:23  
+Or do you think anything else we should do
+
+Unknown Speaker  47:28  
+return them all the lowercase, so there's no like different,
+
+Speaker 2  47:31  
+that's one. Yeah, right. So if, let's say, in a in a later stage in your training, if your model is trying to learn the how many times a token has occurred, and based on that, it is trying to understand the pattern and the behavior right. So then having mixed case, some upper case, some lower case, might throw your model off. So it's probably a good idea to convert everything to lower case or everything to uppercase, so basically same case. So that's one thing. What else you can think of? How else we can improve this tokenization?
+
+Unknown Speaker  48:04  
+Get rid of the title, because that's not part of the sentence.
+
+Speaker 2  48:08  
+Yeah, that is not but if you are looking into this whole paragraph, so let's say you are trying to build a article classification model, and you are going to you know that this class paragraph is about Coco, and there are 90 such classes, right? So you can easily turn it into a supervised classification problem. So then, wouldn't it be better to supply the title and the paragraph, the whole body as is, yeah, but not as part of that's a subjective decision, yeah, but that's a subjective decision, whether, how you want, like, do you want to make it easier for your model? Because I think what you are saying is, if you put the title, throw in the title, it kind of gives it away, kind of thing, which is fine. I mean it well, there's
+
+Speaker 1  48:55  
+also, there's also the context of the words in the title being associated to the first sentence.
+
+Speaker 2  48:59  
+That's right. Yeah, that's true. Okay, so that's one thing we can get rid of, the title if we want to. Not a big deal. Now, what I'm trying to draw your attention mostly is, let's say, think about how as a human, we are reading, we are reading each and every, verbs, adjective, parts on speech, parts of speech, preposition, each and everything we are reading, it's coming in front of our eyes. But are we paying conscious attention, like when I'm saying this sentence, major cocoa exporters are likely to limit sales in the weeks ahead in an effort to boost world prices, right? What are the main words that are catching our attention in our subconscious mind? Major coca exporter, limit sales weeks ahead, effort boost world prices so. Like things like are likely to in the in an in an effort and then two, these are all these niceties, all the glues that have been put together to make it a complete, grammatically correct sentence in English.
+
+Unknown Speaker  50:18  
+But when we are doing a quick read,
+
+Speaker 2  50:23  
+even without those those words, we should be able to kind of get the meaning of what the speaker is trying to say, right? So I think about sometimes when two people who don't speak each other's language and they're trying to talk to each other like when I was in Japan, some people who know very little English, they were kind of communicating with me like that because they don't understand the full structure of English, right? So they will say bus, right. Go something like this, right? So they will only give you some of the keywords. And even though it is very painful to understand sometimes, for most part, even if this someone says that for you is good, you kind of understand the intention.
+
+Unknown Speaker  51:12  
+So what if we can
+
+Speaker 2  51:15  
+retain just those kind of tokens to make it simpler for our model. So kind of reduce the noise in our training data, because all of these additional things that niceties that we are using in this text when you are tokenizing this and sending it to a machine, these are nothing but noise. So in order to bring in order to prepare a good training data, we need to try to find a way to get rid of this noise and just bring out the main words that helps express the main idea or intention in that paragraph in that body of text.
+
+Unknown Speaker  51:59  
+Do you guys agree with that?
+
+Speaker 7  52:05  
+Yeah, that's, that's kind of where I was leaning. But I also wonder if you have to, do you have to maintain the relationship of the words as they're written out in the sentence as well.
+
+Speaker 2  52:16  
+Hold on to that thought. We are going to see that in the last activity. Yes, there is that. So keep that. Hold on to that part. We will see that. Okay, so next activity I am not going to spend time. It is supposed to be a student activities activity, but it's basically trying, asking you to do the same thing. Where is, which is, take the same writer's corpus, and from the writer's corpus, print all the categories, and instead of the CoCo category, now look into the income category and find what are the articles are there? And you will see, when you do categories equals income, instead of Coco, you will get how many articles, 16 articles about CO income. And then it is going to ask to basically get all the raw stories and the IDs in separate list. So this is where it is little different. So in this previous one, we got all the how many articles were there in Coco, 73 articles. And we saw how to take the first article and then tokenize it. But if we can do one, we can do all 70 or all 700 it doesn't matter, right? It's the same thing, just putting it in a loop. So here in this they are asking you to look through all of these stories, which, in this case, only 16, and fetch the raw stories for all of this, which you can easily do, you can say, hey, for article in articles, writers dot raw, provide the article id. We can do that. But now that we have done Python long enough, we can do that in a shorthand using one line, using this list comprehension syntax, so raw stories is basically a list, and the content of that list is populated by using a for loop, which is looping through all the articles. And for each of the article do a writers dot raw that will fetch all the articles, right?
+
+Unknown Speaker  54:17  
+So that gives you 16 IDs and 16 raw stories.
+
+Speaker 2  54:21  
+But these raw stories are actual stories that you have.
+
+Speaker 7  54:25  
+Hey, by the way, I think you stop sharing your screen. Or is it just
+
+Speaker 2  54:29  
+me? How come I didn't do anything? You're
+
+Unknown Speaker  54:33  
+not sharing your screen here. Oh,
+
+Speaker 2  54:38  
+it's a glitch. Then on Zoom. I
+
+Unknown Speaker  54:41  
+think I'm the glitch.
+
+Unknown Speaker  54:44  
+I had a wrong thing in the menu, and I think it ah,
+
+Speaker 1  54:47  
+sharing this background shame.
+
+Speaker 4  54:53  
+I was trying to change the zooming, and I just did the wrong menu item. No problem. Okay. No, did I do that? I thought maybe you took it off.
+
+Speaker 2  55:04  
+Sorry. Okay, no problem. No problem. Ken, so we got all the raw stories. And we all get we got all the ID. So if you take any one of these raw stories just to see what it is. So this is the first story, something about yours. Love economy warned in 1986 like, wow, Yugoslavia was a state back then. Does anyone remember that I had, I had some Yugoslavia stamp in my stamp book collection when I was a kid growing up? Bring some old memory anyway. So, so basically, all of these raw stories are now saved, and now the next prompt is to, well, sentence tokenize not just one story, but sentence tokenize all of these 16 raw stories. Big deal. We'll do the same thing, except what I'm going to do is I'm going to look through the raw stories, and for each of the raw story, I'm going to take that corresponding Raw Story and then apply sentence tokenize. And then let's do that. And then the first token is basically the first sentence from this, right? This Yugoslav economy were sent.
+
+Unknown Speaker  56:13  
+So that gives me the that.
+
+Speaker 2  56:17  
+And then in the next they're saying, well, now take all of these sentences you have tokenized, and then tokenize each of the sentences into words and put it in a new list, which is what it is a word tokenized, and then look through all the sentences and basically build a first and empty list of words, keep adding to the list. And then finally, at the end of a story, you add all these work to this parent list, and that gives you your word tokenized. And then if you take the first item of the word tokenized, now you see that first sentence, except now this is basically tokenized, one for every word, not a big deal. And then finally, if you want to just display this, you can display it in a data frame used for raw storage, sentence and word. You can just do a pandas dot data frame, so you will see this in a data frame. So this last, last thing is not very useful, like, I don't know any any reason why someone would want to show this in a data frame, because this is not a data frame that you can feed into any model or anything. So it's, I think it's just for you guys to get some practice, like, hey, how do you take things in a data frame? But I don't think this is the right time to do that, because you have done all of this data from practice. So let's, let's not get too much into that. So going into the next one. So this is where we are starting to we are going to start to see how we can make this set of tokens cleaner, meaning, reduce some extra noises. And when I say noise from machines perspective, those are noise from language perspective. Those are very valid words, because if you don't say those words, if you just say the words, then people will think you don't. English is not your first language, like you probably just barely know few English words. That's how you would sound like but from machines perspective, that is the kind of representation that is good, because now you can cut through all those fluff, extra fluff. So that's what we are going to do. Now to do that, there is a analytical library called stop words. So what does stop words mean? So stop words are basically just that, like all of those extra words that makes a language, language that makes a sentence a complete, meaningful, correct sentence, a grammatical sentence, but those stop words are something that are used as glue between the other parts of the sentence over and over again, right? So, if you have a story about coca, if you have a story about income, if you have a story about sports, you will see the stop words in all of these stories. And when you are asking a machine to analyze and classify which story belong to which category these words, you will see when we run these you will see that these words doesn't really provide a differentiating factor, because these are common across any stories that you write in the language. So those are the words that we are going to try to remove from the tokens that we have generated now. So let's see how we can do that. So first thing we need to do is you need to do a nltk dot download stop words, and you need to do this only once, given the kernel that you are using, right? Not just one spark notebook, but once per kernel. So here, the kernel that I'm using, here is boot camp. So this is the virtual environment that I'm using. So since I have done nltk download one, i. Once. I don't really need to do this over and over again. It's just that these things are written here. That's what I'm running over. But you can see that it says These packages are already up to date, right? So you only need to run it once, and once it is done, and then it is done, you basically have everything. So anyway, just like your PP install basically. So now we have this stop words. So let's actually run this first so we have this stop words right as a which is basically a library under nltk. Now in the stop words library, there is a function called words, so stop words dot words, and then you can specify which language is stop words you are trying to get. So I'm just going to run this cell first, and that will give me all the stop words that are there in the analytical library for English language. Okay,
+
+Unknown Speaker  1:01:06  
+so let's go.
+
+Unknown Speaker  1:01:10  
+What do you see?
+
+Speaker 2  1:01:15  
+Do you agree that these words are just glue between other real words. See the words that it has identified as stock words, identifying meaning this. This is basically not machine learning. These words are programmatically put in for some human by some human who have decided that these are the words that are too common between other words in any sentence that you form. Therefore these words do not convey any specific meaning to the other group of words
+
+Unknown Speaker  1:01:52  
+that are being said in the scent in the paragraph.
+
+Speaker 2  1:01:57  
+So that's why these words are not very much wanted for our modeling. Now you might argue like, Hey, these are the words that gives meaning to a sentence, right? Like, for example, when I'm talking in speaking in first tense, right? I have been there. I have been there. So have is a stop word. If I'm talking in a third person, I will say he has been there. So have and has basically puts the meaning together from a language perspective. But as I said before, machine do not care how we are building our languages for machine. I there and he there. These are the main things that machine understands or need to understand machine doesn't need to understand have been, has been, those are your English language grammar. So machine will actually get more confused, not helped by it, by the presence of those words. That's why we need to identify what these stop words are. And that's why in analytical library, they provide these single function called stop words, dot words, and that gives you all the stop words that are there in English language. Now you might argue like, hey, some of the words here may not sound like stop words, some of the words, some other words that I am seeing in my paragraph that sounds like stop words, which is fine. You can always take these list as your base list, and you can add or delete in, add to it or delete from it to come up with your own custom list of stop words based on the set of documents or articles that you are working on. But the idea is that that your tokens will be much more useful when you get rid of these stuff stop words that's the point that I'm trying to drive. And if anyone do not agree, please let me know.
+
+Speaker 1  1:04:12  
+Well, for your example, I have been there. The only word in that sentence that is not a stop word is Ben.
+
+Speaker 2  1:04:22  
+Well, yes, so, so probably that's, that's not a good example, because even I there, well, I mean, there I you, it's probably all stop words, and that's what I said, depending on the context you may have to add or remove from the stop words. But that sentence was a very simplistic example. So yes, you are right. So in this sentence, that sentence, probably all of the words were stop words. So yeah, in fact, it is probably entirely possible to choose some words from this list of stop words and build a complete meaningful English sentence. And if you happen to have such sentence. Is, after you do the stopwatch removal, the whole sentence will get dropped. And that's totally fine. In the scheme of bigger scheme of things, that really does not matter,
+
+Unknown Speaker  1:05:12  
+your machine will still be able to understand the pattern.
+
+Speaker 2  1:05:19  
+Okay, so let's, let's try this in one of the Gutenberg files. So when you say Gutenberg corpus, the file IDs gives you 18 files, which I'm calling 18 books. So these are the different files that you have. And here the file name, basically, very simple file name, unlike the writers one where the file names looked like this, test slash one. Want some number. In case of Gutenberg, it basically says, Hey, this is the book name, dot, txt, right? So book name is basically the author name and the title of the book, or the comma, what the book is commonly known as something like that. So these are all the books we have, and we are going to try the stock word removal on one of these. So let's take one of this. Let's say this book, Jane Austen's book persuasion. So Austin persuasion, dot text. So we are going to get this book out of the 18 books that we have under this Gutenberg corpora corpus. Okay, so there you go. So that's your Gutenberg book. And this is a long book, so I'm not going to make this scrollable because the text is rather long. So now I can take this and then I can do a sentence tokenize. So if I do sentence tokenize, it will give me a whole bunch of sentences. So let's do a sentence tokenize separately first. Wow, right. So what else did you expect? It will have a whole bunch of sentences. Now we are going to randomly take one sentence, let's say sentence number eight, just randomly for no particular reason, and that sentence says he had been remarkably handsome in his youth, semicolon and comma at 54 comma was still a very fine man. Now, when I tokenize this, and it is going to retain all the words except for the punctuations and all because we are not going to use Python split instead, we are going to use nltk word tokenize. So let's work tokenize. Oh no, actually it does return the punctuation. What I'm talking it actually does return punctuation because you see this comma, semicolon, this did exist. Only thing that it does not keep is the new line character at the end. So that is something it does not keep, but it does keep punctuation. So we had this whole bunch of tokens. Now we can throw all of these token in our vector space, in our Vectorizer, and give it to model. But as I keep saying repeatedly over and over again. That is not going to help the model. It is going to create more noise by having those additional thing which are kind of embellishment to the language. We don't need those. So what we are going to do is we are going to look at, hey, what are the stock words? So we know that when we do this, we are going to get all of these 198 words are stock words. So now we can take these words list and then look through this, these all words, and filter to say, hey, if the lower case version of my word. So I'm also doing the lower casing. At the same time, I'm looping through all the words that I have for this sentence in this for loop. For each word, I am first converting it to lowercase, and at the same time also checking if that lowercase converted form of the words belongs to the list of stock words. If it does belong to, then don't consider it only considered the ones that does not belong to, because I'm saying not in so all of this is done using one single list comprehension line, which is this. So that means, in this result, we are going to have only the words here that are not stop words, only the meaningful words will remain. So let's see what remains. Okay? So. So you see he had been removed, remarkably handsome, retained in his removed youth, retained punctuation, still retained because we haven't done anything about it. And then 54 and then was removed. Still fine man, a and very removed. So that is my shortened list of tokens. Okay, now as I said before, depending on the context, I might say, hey, maybe there are other words that I consider as that are basically so frequent in the corpus that I have, I am willing to consider those as stock words. Also, for example, steel, as I can say, hey, steel is a stop word. So therefore you can have an add on list for still, and you can also say, hey, 54 is also a stop word. And again, this is all subjective. This is not a rule, by the way. This is just an example. So now what you can do is you can write the same statement, but instead of just looking into the stock word of the English language, Word, you can look it into the original stock word provided by list of stock words provided by an LTK, and look into the union of that and your custom list, which is this, and you see like, Hey, if your word is not in either of these original list and your custom leads, then only keep it, otherwise drop it. So that's how you will get your modified result where your 54 and steel is gone. All this remaining is remarkably handsome youth and fine man. Now think about this, what we just did. He had been remarkably handsome in his youth, and at 54 was still a very fine man. I have trivialized this down to saying remarkably handsome youth, fine man.
+
+Unknown Speaker  1:12:22  
+Do you guys see how much meaning is still retained?
+
+Unknown Speaker  1:12:28  
+At least how much context is still retained. I
+
+Speaker 2  1:12:43  
+It's still talking about someone who is a very fine man, who is young, who is remarkable, who is handsome. So this fact, this is not change, even after we got rid of all of these. That fact still remains in this list of Word, list of tokens, but we have some other nasty characters dangling around, which is the punctuation mark. But that is easy to do. There are two ways of doing it. One way to get rid of this punctuation mark is using this thing called regular expression. So Re is a Python library which is a regular expression, and you can basically compile a regular expression, and this is using your standard regular expression syntax. So these regular expression basically meaning all character that are not A to Z lower case, not A to Z upper case and not a space, everything other than that will be filtered by this pattern. And what we are trying to say is you basically take the sentence and wherever you see anything that matches this pattern, meaning anything that is non alphabetic and not a space character, you basically
+
+Unknown Speaker  1:14:01  
+substitute that with a space character,
+
+Speaker 2  1:14:05  
+so that way you will have a clean version of the sentence like this with all the punctuations gone
+
+Speaker 2  1:14:18  
+right. So if you want to do fine, like, which one of the things that you just removed, you can just do a find all, and it will basically tell you, like, Hey, these are the garbage that I found here. And that's why these garbages were removed from your original sentence, and at the end, we basically are returned with a clean set of words with no punctuation in between. So that's one way to do it. And then once you have a clean sentence, then you can work tokenize in the same way, and then it will give you the tokens, just like here we got the tokens, but. Here, we had all those garbage throw in, thrown in here, after removing the punctuation mark, we got a much cleaner set of tokens, which is just those six words and nothing else.
+
+Unknown Speaker  1:15:17  
+So that's one way of doing it.
+
+Speaker 2  1:15:21  
+The other way if you don't want to use regular expression, because not everyone does. Some people hate regular expression. There is another way to do it, which is using a slightly different version of this list comprehension where you are going to go through your original text, and you work tokenize, and you add a condition that if word.is alpha. So this is alpha is a Python string function which is true only when that string does not contain any one of these. So essentially, this regular expression, and this is alpha, kind of does the same thing. So you can do that, and you can only return the one that satisfies this condition, which is is alpha. And that is also not in your software, sorry, not in your stop words. So that is also another way of doing it, and that will also so here, since we are applying this overall on the whole persuasion book, that will give you all the tokens that you have across all the sentences in the persuasion book. So all the words, all the sentences, let me actually see what how many we have. So the whole book is turned into how many tokens? Let's see 37,768 tokens. And these are all the tokens from Jane Austen's book.
+
+Speaker 2  1:17:01  
+Well, here we are not doing to slow our case. We should actually do a lower case also. Yeah, we should also do a lower case. But anyway, you get the idea. So the idea here in this activity, what we just learned is the right way to do tokenization is to split the words, make sure you are not returning any of the punctuation character, and then converting all the words into a similar case, either lower or upper, and then getting rid of the words that are most commonly used across most of the text in The language, which is called stop word, remove those. And that's what will give you a clean set of tokens. And that's the one that we are then going to do, final counting, vectorization and so on. So that's the key takeaway from this activity. I
+
+Unknown Speaker  1:18:04  
+any questions.
+
+Speaker 2  1:18:12  
+It might take time to sink in, because what I'm saying, maybe you guys are thinking it's kind of counter intuitive, but it will it will take some time to think sink in, for you guys to realize where getting rid of those additional stop words is actually meaningful. It will probably become clearer when you see the next activity that we are going to do, when we are going to count and vectorize, it will probably be you
+
+Unknown Speaker  1:18:40  
+will be able to do that logical connection in your mind.
+
+Speaker 2  1:18:50  
+Okay? Activity number four, again, it's the same thing, except they are going to ask you to do it from another category called crude, which is all the things about crude oil, all the articles. And here the idea is to basically encourage you to put all of these stopwat removal, like splitting, tokenization, and then stopwat removal, put them in a function, because these are the things that you are going to be using over and over again, so kind of getting into the habit of functional decomposition so that you can leverage those reusable function in multiple places in your machine learning pipeline. But the function here, as you see, is basically the same thing. You set the stock word. You add any additional stock word in your list if you want to, and then you take a regular expression to compile out to basically sub out your punctuation. Then you take the original text and you what tokenize. And then you go through each of the word tokenized words, and. And basically look into whether that word is what belongs to the list of stock words. If not, then only retain the word and then finally print that list. So essentially, everything that we have done in the previous activity, same thing, except here you are putting everything together in a function, and here you were just calling the function. Okay? So you can take a look. It will be pretty easy to understand. And we are we can actually here. What you can do is you can probably put the all the solved files for today's class so people can start taking a look the ones that we are skipping in the class. Okay, yeah, sure.
+
+Speaker 2  1:20:50  
+Cool. So I think we are halfway through, so let's take what 13 minute break come back five minutes after 8805,
+
+Unknown Speaker  1:21:08  
+sounds good.
+
+Speaker 2  1:21:13  
+Okay, so let's get started. So what we have seen so far, right? So we have learned that in order to pre process a body of text, to prepare it, to present it to a neural network,
+
+Unknown Speaker  1:21:32  
+the first
+
+Speaker 2  1:21:34  
+thing that we need to do is we need to split it into tokens, and then these tokens, we learned that that this list of token needs to be as clean as possible. Sometimes there is a saying that is that says less is more, right. So kind of that thing goes so when you have less number of tokens, removing all of those extraneous thing that is more meaningful for your model. Now we are going to look at another approach, how we can make our token, list of tokens,
+
+Unknown Speaker  1:22:10  
+even more useful
+
+Unknown Speaker  1:22:13  
+to reduce even further noise. So
+
+Unknown Speaker  1:22:20  
+think about
+
+Unknown Speaker  1:22:24  
+these three words,
+
+Speaker 2  1:22:28  
+okay, boat is a word, a noun, a plural form of that it boats.
+
+Unknown Speaker  1:22:38  
+Boating is a verb.
+
+Speaker 2  1:22:41  
+Boat, her is another noun. It talks about a person who does boating. But one thing coming across all of these is they all talk about something related to boat. So if there is an article about, let's say boating or fishing or water sports, something like that. And if a machine is trying to classify an article as to belonging to one of these classes, one of these would be, let's say water sports, just mere presence of the token boat is going to be enough. The model does not need to know that different derivative words from the original word boat exist in this document, if it exists frequent enough, by the way. So what we can do is to make it cleaner, make the list of tokens more cleaner. We can use this technique called stemming. So stemming is basically a rule driven technique that takes any work that is not a fundamental word in English language, but that is derived from one of the root word, which in this case being both, and then removes those additional like s or ES or ing or ER to make the word either plural or turn a noun into a verb, and all of those kind of nuances in English language. So it removes those and only retains the original root word called boat.
+
+Unknown Speaker  1:24:33  
+So this technique is called stemming,
+
+Unknown Speaker  1:24:37  
+by the way, I'm sharing my screen, right?
+
+Speaker 2  1:24:42  
+Yes, okay, yeah, okay, so that's what stemming does, right? So it basically reduces the word to their root form, removing suffixes, typically. So another example here, jumps, jumping, jumped. All of these are derived from. The root word, which is jump. So stemming will remove s. If it is jumps, it will remove s. If it says jumping, it will remove ing. If it is says jumped, it will remove Ed and so on.
+
+Unknown Speaker  1:25:16  
+So that is what is called stemming in your
+
+Speaker 1  1:25:19  
+example. Though you have voter in this is really it? I mean, like, isn't that a person who boats that? It feels like
+
+Speaker 2  1:25:27  
+that's not it. That should not be very, very good catch. So it should not be. So boat should not be a stem to boater. But if you try to do stemming, the stemmer that you are going to use, and there are a couple of different STEM or, like porter stemmer, and I think there is a another pulse, no stem or like different algorithm for stemming, so that, since stemming is a more like a heuristic driven, rule based approach, most stemmer will not be smart enough to distinguish between things, and that's why sometimes people use an alternative technique called lemmatization. So what does lemmatization do? It also reduces the words to their base form, base form, but it is cognizant of the parts of speech. So if you have walking, walked and walks, all of these will be limited to walk, but not because it blindly drops ing, ed or s, because it knows that walking, walked and walks, these are all verbs, so it is cognizant of the parts of speech, and it will change it to the original verb, which is walk. So if you have a word, let's say Walker, W, A, l, K, E, R, the levitizer will be probably smart enough to know that Walker is not a verb, therefore it is probably not going to take this Walker to walk. I don't know it might, but that is, in principle, the difference between a stemmer and a lemmatizer. So stemmer is purely rule driven, whereas lemmatize. Lemmatizers are context aware. They are aware of the parts of speech and what to retain and what to remove, okay? And we are going to try both of these approaches to see how they work.
+
+Speaker 2  1:27:40  
+Okay, so let's first do a stemming activity. So there is this stemmer called porter stemmer that we are importing from nltk.
+
+Unknown Speaker  1:27:56  
+And then after you do import this,
+
+Speaker 2  1:28:00  
+you create a instance of this called porter stemmer. This is kind of similar to how we use scalars in scikit learn. So you do porter stemmer, and then you take this variable where you have the instance of the porter stemmer, and then you take that variable, which is that's a step P stemmer here, and dot stem and then you basically provide the words to it, and it will basically step convert. So now, just to try it out, we are giving the stemmer these words separately. Okay, and let's see what words get stem to what so drive probably will be drive. Driven will be drive. Driver probably will be drive. Let's see what do you think driving would be? Do you think it will be drive?
+
+Unknown Speaker  1:29:01  
+Let's see what it does.
+
+Speaker 2  1:29:04  
+So these are my words, and now I'm going to create a list of STEM words by looping through this as you see here. And for each word, I'm doing a stem under stem. So let's see. Okay, it actually kind of is sensitive, so it does not, yeah, it did not convert driver to drive. It said driver to driver. But at the same time, it didn't even convert driven to drive. It still said driven. Oh, it actually is pretty good, because it knows that driving is actually a verb, so therefore driving has been converted to drive, but then it failed to convert drove to drive. Drove is written at drives, drove. And this one is weird that easily. Is converted to something called easily with an i, and same thing with fairly I think they have some I don't even know exactly what algorithm they are using, but some of these things, like stemming rules, like if there are SS Double S, it will map to s, s without the ES, and stuff like that. A singular s map to singular. I don't even know, like exactly, what is the rule? What are the rules under Porter streamer, but hey, it works for most part, except for some silly things like this. But the thing is, if you are, let's say you are working with a body of text and that has 100,000 articles, and you are also going you, let's say you apply your stemmer to all of your training data, the articles that you have in your training, and if you stick to the same stammer when you are converting your testing data, like if you are consistent, sticking to any one of the techniques should be fine. But if you take the same words and run it through a lemmatizer, your conversion will be different, hopefully. So let's actually look into the lemmatizer. So for lemmatizer, we need to import this word net lemmatizer from the same library and LTK, dot stem. Oh, sorry, wrong environment, because my dev environment is broken. Thanks to that our library I was trying to install, so I created a new virtual environment. Okay, so levitizer, now levitizer, you basically do the same thing. You limitize The dot limitize, and you basically pass word boxes, goes to box, gees goes to goose and so on. So let me actually try this. Why don't we take the same set of words
+
+Unknown Speaker  1:32:03  
+that we used for our stemmer,
+
+Speaker 2  1:32:11  
+and I'm going to pass The same set of words through our limitizer also. So
+
+Speaker 2  1:32:22  
+so instead of saying STEM at DOT stem, we are going to do lemmatize That dot lemmatize. And these ones, I'm going to call it lemma words instead of STEM words. Okay, so that way we can do a side by side comparison. So let's see, drive is drive, driven is driven. Driver is driver, which I think is same. And then driving, oh, Levita is a return, driving to, driving. Drove to drove. Hang on.
+
+Speaker 1  1:33:06  
+You want to add on the attribute right after that, or parameter right after word?
+
+Speaker 2  1:33:11  
+Ah, okay, okay, okay, yes, yes, I did not. I did not exactly, good, good, good catch. Good catch. So since the I have since this is parts of speech, aware, I have to basically say, Hey, are you going to be look considering the verbs or adverbs and or so on. So if you do for a verb, now it knows that driven is a verb, and then it converses to drive, but driver is not a verb, so it is not converted. Driving is a verb, so that is converted. Now, drove is a verb that is converted easily. You keep it as is fairly you keep it as is, so that is for verb. If you want to do adjective, let's say a I think it will. None of these are adjectives, right? Yeah, none of these are adjectives. So it will keep it as is.
+
+Unknown Speaker  1:34:10  
+What is the thing for adverb? Or
+
+Speaker 2  1:34:16  
+are? Yeah, I think adverb is R, right. So then let's say no.
+
+Speaker 1  1:34:23  
+Yeah, it doesn't work. But when I look, yeah,
+
+Speaker 2  1:34:27  
+because easily is an adverb, right? Fairly is an adverb, yeah?
+
+Unknown Speaker  1:34:34  
+But it didn't work, yeah,
+
+Unknown Speaker  1:34:35  
+I noticed that, ah, like,
+
+Unknown Speaker  1:34:40  
+it's N for noun, D for verb, a for adjective.
+
+Speaker 2  1:34:49  
+Let me do a quick search word. Let limitizer, pos.
+
+Unknown Speaker  1:34:59  
+This is where you look. I believe
+
+Speaker 2  1:35:03  
+R for adverse, S for satellite adjectives.
+
+Unknown Speaker  1:35:13  
+What is satellite adjective? Let me try
+
+Unknown Speaker  1:35:17  
+s for satellite adjectives.
+
+Speaker 3  1:35:21  
+Now I No, it didn't. Is that like, ground pepper is just pepper? Is that like, what
+
+Unknown Speaker  1:35:35  
+a say that again, is
+
+Speaker 3  1:35:37  
+like a satellite adjective, like, when it's like, like, ground pepper is just pepper,
+
+Unknown Speaker  1:35:43  
+like even ground pepper, one word. It's
+
+Speaker 1  1:35:45  
+like an adjective that adds on to an adjective. Oh,
+
+Speaker 2  1:35:52  
+I see no. I don't think that's going to do anything. Yeah.
+
+Speaker 1  1:36:02  
+Yeah. So the example I found was happy would be a direct adjective and joyful, glad and cheerful, or satellites.
+
+Unknown Speaker  1:36:10  
+Sorry, what is that happy?
+
+Speaker 1  1:36:13  
+It's when I was looking it up what a satellite objective is. It's feels like synonyms. So like happy would be the direct adjective and joyful glad cheerful to the satellite and Chad.
+
+Unknown Speaker  1:36:27  
+But how would that work, though?
+
+Unknown Speaker  1:36:32  
+How about we say
+
+Unknown Speaker  1:36:38  
+Happy Lee?
+
+Speaker 2  1:36:41  
+No, but I think that will that's not because, yeah, that's an adverb, by the way. Yeah, right, huh.
+
+Unknown Speaker  1:36:51  
+Anyway, but you get the idea, right? I mean,
+
+Speaker 2  1:36:55  
+if you are looking to further reduce the tokens to the idea is basically to reduce the token to the smallest subset of words possible. You can choose either stemmer or levitizer, or you can choose both. But whatever you do, all you have to do is make sure that you if you want to do stemmer and a lemmatizer, you have to make sure you apply that on your training data and on your test data, and in the same order, as long as you're doing that, it will be it will be fine.
+
+Speaker 2  1:37:42  
+Anyway, so that's that's basically to it to stemming and lemmatization now in the corresponding student activity here, let's run through this and see because this is where we are going to use the stemming and lemmatization on some text that we are going to get from our Gutenberg corpus. So in the previous example, we used something called porter stemmer. Here, there is another stemmer which is called snowball stemmer, which probably uses a slightly different algorithm for doing the stemming. And we have a lemmatizer, which is the same word, net lemmatizer. So now, instead of passing it random sentences or words. So what we're going to do here is we are going to do the Gutenberg dot raw with this file ID, and that will give me the this Moby Dick book, the whole text. And we are going to use the regular expression. And with this regular expression, we are going to see, hey, where is my chapter one? And it will basically say, hey, search for chapter one in the book, and basically print everything that matches this and find the first occurrence of the match. So match dot group. So this will basically give me so basically it's going to use chapter one as a bookmark. So it basically extracts one chapter from the book, which is chapter one. Okay, so this is my text, so forget about all of these things. This is, this is kind of distracting. The point is to just to have a text. Okay, so these have, this is a text
+
+Unknown Speaker  1:39:30  
+now,
+
+Speaker 2  1:39:33  
+the spirit of the same the functional decomposition that I was talking about in the previous student activity that we kind of just gleaned over so you are going to do stemming. So let's put everything in a reusable function called Text stemming. And in this reusable function, we are going to put everything that we have learned up until now in this class, which is a. First get a stop words of English language, then you compile your regular expression to remove the punctuation mark. Then you check, take the input text of the that is passed to this function, which is the book, and use the regular expression method to basically substitute all the tokens that matches the regular expression with a space. So that way all the punctuation marks will be gone in this variable, in this string. Then you take this string, the cleaned up string, and work tokenize it that will give you all the words, right? Then you take all these words and run it through your stemmer that you have up here, there that snowball stemmer, and do a stemmer dot stem word. So then all of these tokens will convert it to the corresponding stems where applicable, and then you take these stems and check whether any of these stems belong to the list of the known stock words, and if it does belong to the known stock words, then discard those. Else keep it as output, and then finally, return the output as a list.
+
+Unknown Speaker  1:41:24  
+So how many steps then?
+
+Unknown Speaker  1:41:27  
+Number one,
+
+Speaker 2  1:41:31  
+remove punctuation. Number two, tokenize two words. Number three, stem the words number four, remove stop words from the stems. So these are the four steps, four logical steps, and we have captured all these four steps into a reusable function so that we can take that
+
+Unknown Speaker  1:42:04  
+and apply the whole thing,
+
+Unknown Speaker  1:42:09  
+apply the function to the whole text.
+
+Unknown Speaker  1:42:13  
+But then
+
+Speaker 2  1:42:16  
+another thing we could also do, since when you are calling this function, you are going to get a list of tokens. You can keep these tokens, which is fine, but if you take this list and convert it into a set, what does a Python set does? If Python set do it basically make sure that each entry there is unique. So if some of the tokens here occur multiple time. It will remove those, and it will basically give you the token for unique token that are available there, that are present there in that text, and these are the stamped and everything. Now, whether you actually need to do the conversion to set, that's a different question. Maybe you do not. But sometimes, if you just want to say, Hey, what is the list of unique tokens I have? You simply take the list of tokens and convert to set, and if you check the length of this token, that will give you the unique tokens. So in this case, if I want to do this way, so let's say tokens equals process
+
+Unknown Speaker  1:43:30  
+text stemming
+
+Speaker 2  1:43:34  
+Moby Dick, and then if I print the length of tokens it will give me that. And then if I do tokens set, I'm just trying to see whether there is really any duplicate tokens there. And then I want to create print length of token set that will give me this and then finally, here I'm just printing the token set. So I just want to see what is the difference between the two, the list and the set. So yes, as I expected, the list total gives you 110,000 token from the whole book in that order, because the list also returns the order. When you convert that list of tokens into a set of tokens, you get a much smaller set of tokens, which is 10,009 tokens. Now whether you are going to actually convert, that's a different topic. But what it is useful for you to understand at this point is that, let's say this book, this Moby Dick book, this is basically your universe of all the texts that are available to you or to your model. So then. And what is the size of the total size of the language, universal language available. So these 10,009 has a significance there, because that gives, tells you those are the unique vectors that will be present in your n dimensional space, or in other words, your size of the language is 10,009 now this language is not English language, by the way. This language is a language built out of tokens. So these 10,009 tokens in your models virtual mathematical world. So there is a language that you are creating in form of that vector space, and that language has 10,009 unique tokens, just like in English language, we have different words. So this is similar to that, but now we have a cleaned up version that tells me like these are the 10,009 tokens that are there in that mathematical language that we are representing in the vector space. Now some of these vectors are occurring more than once. That's why I have total of 110,000 occurring. But I only have 10,009 unique words, or unique tokens that are available in my universal language, and that has a significance to it, like, what is the size of language, overall size of language, and based on that, how many times a particular token is appearing, that ratio becomes valuable, because if that ratio is high, so Let's say, out of these 10,009 tokens which are occurring 110,000 times. If one particular token occurs, let's say 600 times, whereas the other token occurs only six times. So now the machine will be able to, through training, it will be able to find that pattern that oh, okay, so the one that is occurring 600 times must be something important. So that's why the purpose of doing this conversion to set is not that you actually have to convert to set before you pass it to your machine. No, you want. But here the idea is to understand what is the size of your overall language that that your model will be analyzing when it goes through the training.
+
+Speaker 2  1:47:31  
+Okay? And then, since we have done stemming, you will see that some of this language feels weird. These are not even proper English language world. But it doesn't have to be, because it's not humans. We are going to read this word. Now if you don't want to do limit stemming, instead, if you want to do lemmatization, you can create a separate function for lemmatization where you are doing exactly all the same things, except in this then this step. Instead of doing stemmer dot stem you do lemmatize The dot lemmatize, but you are going to do the same thing, and then you can, let's do the same way here. So the tokens will be my process text, limitization of Moby Dick. And then we are going to see with lemmatization, how many unique took, how many total tokens we are getting, and how many unique tokens. So total token is also slightly different, but about the same order of magnitude, 110,000, with limitation, number of unique token is slightly more 14,000 something as opposed to 10,000 and then these are the unique tokens that you have available. So again, you can use either of these technique. Now here we know that based on the previous one, where Jesse pointed out to me, when I was trying to do lemme dies without specifying a parts of speech, it really didn't do much. So in this example, when you are doing the lemmatization here, you are not really applying a parts of speech. That's why it's probably not going to do much. So ideally, you what you should do is you should apply parts of speech. Let's say. What was the objective? Was it a or
+
+Unknown Speaker  1:49:36  
+no? Adjective? Oh, adjective, yes.
+
+Speaker 2  1:49:38  
+Adjective was a right, and what was the other one we used?
+
+Unknown Speaker  1:49:43  
+Adverb was our
+
+Speaker 2  1:49:46  
+didn't work much. No, hang on, what was the other one I was using here? Verb, huh? So what I'm trying to say is, let's do two step first do for adjective, and then do for Verb. Two. So that way I can do this. And then I call, let's say LEM one. And then for word in Lam one, I'm creating a new list called LEM Q, so I'm basically chaining two lemmatizer one after another, which probably is a better idea to do. And then if you do down now, you will see that your number of unique tokens will probably be less. So let's see. Yeah, so from 14,000 something, it went down to 12,000 and if you want, you can also take these and do a streaming as well. If you want both, who cares, right? But as long as you are applying these steps in the exact same sequence as you are doing in your training and your test data, then your you know that your model is basically comparing apples to apples. So that's why packaging these in form of a function will allow you to do that to make sure you are applying the same pre processing steps everywhere throughout, okay? And then the next one is basically, it's calling advanced limitation to see basically only adverbs. But we, which we already kind of did it here if you want to do adverb. So it's just in this example, they're saying, hey, just use this POS equal to r1. Thing you can also do, maybe, why not make these an
+
+Unknown Speaker  1:51:33  
+very advanced
+
+Speaker 2  1:51:36  
+lemmatizer and basically do one level of more Cham any chaining. So let's call it LEM three, and then that's also another way of doing it, so we know at adjective, verb and adverb. So we applied the whole thing. Now let's see what the outcome is.
+
+Unknown Speaker  1:51:58  
+Now you see it still stayed at 12,904
+
+Speaker 2  1:52:02  
+because this POS R really does not work, as Jesse has found and I have found as well. So there you go.
+
+Speaker 1  1:52:11  
+There is a noun, and it will slightly reduce it, is it? Yeah, use M for noun instead of r. Okay,
+
+Unknown Speaker  1:52:19  
+so let's do this.
+
+Unknown Speaker  1:52:25  
+Okay, so it was 12,904
+
+Speaker 2  1:52:30  
+Yeah, it went down little bit. 12,099 Yes. Now, obviously I'm not going to look into these hundreds, 100,000 toward and see which one it really operated on. But hey, I will just go by the final result. That number of repeating thing went down right. Number of unique tokens went down. So yes, that means it definitely worked. Yeah, cool. So that's about stemming and limitation, any question on the utility of doing this part, any doubts you guys having in in your mind, like, Why do you think we need to do this step, or is the explanation clear that I provided,
+
+Speaker 2  1:53:20  
+right? Because think about that, that pseudo language, that the mathematical language that I talked about, right? You need that mathematical language to be free of all the different nuances that are present in our real human language. That's why we are doing all of these, to make the language as as easy as possible to mathematically model and present in a vector space. And the more you can shave off these, all of these extraneous construct around the core stem words, the better, because then your number of vectors in the space will be lower, so your model will be less confused. That's why we are doing all of this.
+
+Unknown Speaker  1:54:19  
+Sorry, quick question,
+
+Speaker 5  1:54:22  
+the practice, right? So, looks like the order is always the stop words, tokenize stem mass. Harrison,
+
+Unknown Speaker  1:54:32  
+oh, okay, so you were saying these order of steps.
+
+Speaker 5  1:54:35  
+Yeah, is it always like that in the right order? And then if, if so, why combine the lemma ties with the STEM. STEM.
+
+Speaker 2  1:54:44  
+What can we? Which you can you can combine. So see, that's what I said, right? So in this example, in this function, we are doing stemming. In this function, we are doing lemmatization, but initially, when the function was written, or as given to. You there is only one limitation. I just changed three limitation one after another. But there is nothing stopping you from actually adding this stemming here as well, and take the output of stemming and do the limitation. On top of that, you can definitely do that. Oh, okay, okay, then the other you're going back to your other question. Your first thing have to be removal of semi colon and comma and all of this punctuation mark, because if you don't do that first, which is these two steps, then when you do a tokenize, then all of those garbage will come into your tokens. So you have to do that first no matter what. Okay, then tokenize is the next logical step, because if you don't tokenize, then neither stemming nor limitization matters, because if you don't tokenize, then your whole thing is a gigantic, big string, which is the sentence. So your limitation or tokenization or stemming would not work. So that's why tokenization is your second step. Then third step is take your tokens and take it back to their root form by using either lemmatization or stemming or a combination thereof. Then that gives you the pure form tokens. And then if you take those pure form token and then remove the soft stop words from them. Then that gives you the complete trimmed down list. Now you might say, Hey, can I use do this stop word removal before I do stemming? I think you can, and you should try that to see whether, after you do that, whether there is any number of difference in your tokens. But again, going back to what I said, between limitations stemming and stock word removal, you can do them in any order. All you have to do is make sure that you are doing that same order in your training and test data, and anytime you are running the data through the model,
+
+Unknown Speaker  1:56:58  
+that's all the consistency. Okay, yeah,
+
+Unknown Speaker  1:57:01  
+that's all Yeah.
+
+Speaker 5  1:57:04  
+And then so the end goal, basically just to get the bare bottom words. That's it. The
+
+Speaker 2  1:57:08  
+bare bottom words, exactly. Bare bottom. Trim out all the fat. Just keep the meat.
+
+Unknown Speaker  1:57:16  
+Thank you. Yeah. Okay.
+
+Speaker 2  1:57:24  
+We are the final stretch of the class today, and this time, we are going to see how we can count these tokens. How many tokens appear, how many times? And this count is needed because this frequency analysis kind of tells your model that the token that are occurring more probably carries more weight in your language, in that artificial language that you are creating. So that's why frequency analysis is important, which is what we are going to see now. Oh, and then another thing is so one thing is counting all the token that is one thing. Now, another thing, and who was talking about this sequence of word. Was it? Brad, someone said, I asked you to hold on to that thought, and we are going to come back to that later. So here we are going to consider that. So think about a multi word phrase, right? So sometimes word itself conveys certain meaning, but when a word appears in a certain sequence, like before or after another word, they convey a different meaning.
+
+Unknown Speaker  1:58:50  
+So
+
+Speaker 2  1:58:53  
+one thing is, it is important to count the number of unique tokens, but you can also add more hint to your model, if you also count how many unique to two word pairs are appearing in your text, or how many unique three word three word triplets are appearing in your text. And these are called n grams, where n being the number of multi number of word in your multi word phrase, right? N equal to two, three or so on. So if you look into this example, right? So, this is a sentence. So this is a sentence. Is a sentence. Now, if you count only n equal to one, you will say, hey, these occurs. One is occurs, once a occurs, one sentence occurs, one. If you do n equal to two, it will give you this is, is a sentence. So it will basically take two words in pair and then count those as n gram with n equal to two. Similarly. With n equal to two three, it will give you this is a and then is our sentence. So that's called the n grams. So we are going to count with n equal to two, which basically gives you the simple counter. And then we are going to do n gram by choosing n greater than one. And that will give us other forms of count.
+
+Unknown Speaker  2:00:24  
+Now, when we apply that, you will see how that becomes
+
+Unknown Speaker  2:00:28  
+valuable. So
+
+Speaker 2  2:00:35  
+we will also do lemmatization here. So let's get our limitation, and this time we are going to apply on another corpus from our nltk. So let's take the Reuters, fine. Now in Reuter we are just randomly take one of the categories, which is CPI, fine. So there are a lot of files in the inside CPI, we are randomly taking file number two for no particular reason. So this is the file number two, which is this article about how Hungary is raising price in effort to carb deficit.
+
+Unknown Speaker  2:01:09  
+Okay, so this is our paragraph.
+
+Speaker 2  2:01:13  
+So now, since that, we have learned that it is a better idea to process the text in a function. So this is a repeat of that same function that we did before, where we are doing stop word and then regular expression compile to remove the, what is called remove the punctuation mark, and then tokenize and then limitize. But this limit eyes we know now is not going to do anything. Therefore, I'm going to change it to my sequence of three lemmatizer. Otherwise, this is not going to work, because lemmatization without a POS parts of speech does not really produce anything. So I'm going to do three lemmatization with adjective, verb and noun, and then I'm going to take the final lemmatized form and then do a stop word removal. And that's my process text function. Okay, so then we do process text. And this processed article basically gives me all the tokens that I have.
+
+Unknown Speaker  2:02:27  
+So up until this, we are good. We already have done this before.
+
+Speaker 2  2:02:31  
+Now going to the second part, which is the counting part. Well, for these, we don't even need any machine learning library. In fact, in a native Python there is a library collection, and in that collection library there is a class called counter. So the way it will work is we are going to take a counter class instance and initialize it with the list of words or list of things that we want to count. Which, in this case, is our list of tokens, our clean, lemmatized stock word removed tokens. Which are these guys, these words? So this is my counter. And, oh, sorry I forgot to run this one. And then if you just print this word count as a dictionary, it will basically tell you which word is appearing how many times. Okay, another, better way to print, this would be, let's say, do a for loop for
+
+Unknown Speaker  2:03:48  
+so this is dict of what counts, right.
+
+Unknown Speaker  2:03:57  
+So you can basically say, I
+
+Unknown Speaker  2:04:06  
+K counts equal
+
+Speaker 2  2:04:09  
+dict of what counts. I'm going to just skip it separately and then for K in counts,
+
+Unknown Speaker  2:04:20  
+print K and count K.
+
+Unknown Speaker  2:04:24  
+And here,
+
+Speaker 2  2:04:26  
+in this case, let me find how many different unique keys it have.
+
+Unknown Speaker  2:04:37  
+Counts
+
+Speaker 2  2:04:39  
+dot keys. So how many keys it has, and they are also here, I forgot to add keys. Okay, there you go. So essentially, what it found is, in this article, there are total of. 111 unique token. And this is the distribution of how many times each token is occurring. Hungary, two times, raises, one times, prices, one time, effort, three time and so on.
+
+Unknown Speaker  2:05:14  
+Okay, so this is the simple count.
+
+Speaker 2  2:05:21  
+Now you see some of the words are rare. Some of the words are more common. So if you can sort this dictionary by this number and take highest to lowest, so that will give you the words that are more occurring the most in that paragraph. So a shortcut way of doing so, instead of taking this dictionary and trying to sort it yourself, you can take these original word counts, which is your counter here that you initialized, and on that counter variable, there is a function called most common, and that's the utility function that the counter class provides. And you can give any number, and it will give you the top 10 or top 20, or however much you number you provide, it will give you those top as a dictionary again, and here I am not bothering to actually print it like this, but just looking at it, you can see, say, seven times price, five times, deficit four times and so on. So these are the most frequently occurring tokens in that paragraph that you processed, which is that Hungary news article. Okay, so that is counting, nothing much, much more. Then the last thing is, so what we did essentially, we basically counted with n equal to one. So this is the counting we have done in here, using this, this counter. Now if we want to do n equal to two, three or anything. We can actually initialize this counter, not just the article, but we can use these n grams function to basically say, Hey, count the n grams of process articles with n equal to two, and then print the count of these. And there you will see it says Hungary raises, raises, price, prices, effort, effort, carb, car, deficit, and so on.
+
+Unknown Speaker  2:07:43  
+Now if you want to print it this way,
+
+Speaker 2  2:07:47  
+actually, no, never mind. You can if you want to. But let's look into the top five common bigram count. So where these bigram counts is this, so you are going to take this bigram count and apply that same most common method with five, and you will see the top five most occurring bigrams here. Which are these? Which, in this case, all of them are occurring twice, because this text is not very big. This is just one tiny article. I mean, ideally, all of these counting and bigram make sense when you apply these on a larger body of text, like, let's say, if you applied it on everything that is there in an in your nltk library, then you will see that these occurrence of these things will be more but even then here, just by looking at This, you can kind of see that someone is having an effort to curb something is more important because it has two occurrence, not just one. Similarly here budget and deficit, in that order, is appearing twice. So that means this article must be talking about budget deficit. This article must also be talking about expenditure by a state, because state and spend. So spend is probably a limited form of something, so state is basically spending something, and that has occurred twice. So this problem hopefully gives you an idea that how bigram count probably adds little more insight to your model than simple count, because if two words together, in that order, appears more than once, that is even more valuable than if any or one of these words appear five times because the words together conveys a different meaning, like budget is have one meaning, deficit has one meaning. Budget deficit together has a special meaning. So those are the kind of patterns that starts to evolve that your model. Tool will hopefully latch on throughout the training epochs this that you will run. So if you think from a philosophical perspective, this is kind of not different from what your convolutional layer, layer does for your images. Remember what I said there, that an image is just a pixel, but in order to make sense through these different convolution layers, your model is trying to figure out higher order abstraction like edges and curves and these things around your images. So here you are basically trying to do the same thing yourself, to try to bring out these higher order abstraction from your text that hopefully your model will be able to latch on and be able to correctly identify which topic or category a particular body of text belongs to, or what kind of sentiment the body of text conveys. And that's why having an N gram is going to be useful for you or for your model, rather,
+
+Speaker 6  2:11:07  
+do do n grams ever go above three?
+
+Unknown Speaker  2:11:11  
+Sure
+
+Speaker 2  2:11:14  
+you can eat so when you are doing n equal to three, you can eat two, even n equal to 30. Here. See, it will basically take all three in order. But here you will probably not see anything above one, because the text body is so small. So you are not going to find any occurrence of trigram more than once, because the text body is so small, I see, but you can use any number here. It doesn't have to be just two.
+
+Speaker 2  2:11:48  
+Okay. Now don't think that you actually have to do this yourself, because, just like what I said, Right? In case of image, if you wanted to do something like this by hand, like, let's say you try to put some kind of a hand coded algorithm to help your model try to find, hey, where are the curves? Where are the convex curve? Where are the convex curve? Where at the straight line? What is the horizontal straight line? Where the vertical straight line? It's going to be a ton of work. You cannot do it. That's why we use the convolutional layer to do it so similarly, later you will see that for this purpose, that is exactly why we use RNN or recurrent neural network or LSTM, one of those techniques, so that the model itself, without our intervention, can actually find this type of higher Order abstraction. And that's why I said philosophically, these abstraction in language is kind of similar to those abstraction in image processing, where you are not relying on the underlying core value. I mean Core Data, which, in case of image, is just pixel, and in case of a text, your core data is simply your tokens. That's your core data. But by doing these type of things, you are basically trying to bring out higher order abstraction for your data so that your model can latch on, because otherwise your model is blind. It's like a stupid mathematical model. It really, no matter how hard you try, it will never, ever be able to understand the structure of a language, of an English sentence, never. So, yeah,
+
+Speaker 2  2:13:33  
+okay, so that will be all. And then the last activity, again, the same thing I'm not going to have you go through. It's basically the exact thing of this repeat, except you are just applying this to a different category, which is grain. And then you run through this, and you will see the apply the counter. You can even put the bigram counter in a method, in a function, and then call it, so
+
+Unknown Speaker  2:14:01  
+you can run through it in your own time.
+
+Speaker 2  2:14:06  
+Okay, so that's everything I believe. Yeah. So to recap today, we basically started our journey with NLP. We kind of started to develop an understanding what natural language processing means and what are some of the prerequisite step to start the NLP process, which is to tokenize the text right, pre process the punctuations and all and then get remove of Non alphabetic characters and punctuation then doing either stemming and or lemmatization, and then remove the stop words, which is the most common English language words, and then finally, counting of unique tokens, and counting of pairs of tokens, or triplets and tokens. So these are the technique we learned. So. We haven't really applied any of this thing into actual any model training yet, but we will right in the next two classes. So today was just a build up to that. So that will be all for today, and we are done full half an hour early.
+
+Unknown Speaker  2:15:19  
+Feel free to stay back and ask any question that you might have. I.
+

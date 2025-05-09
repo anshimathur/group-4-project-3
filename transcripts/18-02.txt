@@ -1,0 +1,771 @@
+Speaker 1  0:01  
+The way, but what I'm going to do is I'm planning to actually let you guys get into your group and do two three activities with your group Mets to basically try to tweak the network structure to see whether you can get better and better accuracy on the data set that you going to be working in right and then one next new thing we'll be seeing today is how to do hyper parameter optimization, which is something similar to what we did during the SK learn days using the grid search, if you guys remember, where we provide a range of parameters. And then the grid search basically tries out all of these different combination, all of these permutation and combination of those parameters and see which version of model gives you the best accuracy score. So we are going to do something similar using a library called Keras tuner. Okay, so that's the new thing. Okay, so to get started, let's take a quick look back to that TensorFlow playground play playground that we looked in the other day.
+
+Speaker 1  1:22  
+Am I sharing the right screen the TensorFlow playground. Okay, so, so in TensorFlow playground, you notice that there are four different data set. Some are much easier to separate, like classified, than the others. Now this is one of the easiest one, where you have two classes with not much noise and very clearly linearly separable, right. Now, if you recall what we saw for these very simple classification problem, I could just draw a straight line between these two blobs in any orientation, almost and it will have a 100% accuracy. And in order to do that, we don't need anything more than a single perceptron model, which is this. This is the most basic form of neural network, which is one new one node, one layer, that's it.
+
+Unknown Speaker  2:27  
+And if you run this model,
+
+Unknown Speaker  2:30  
+you will see how quickly it is converged,
+
+Speaker 1  2:35  
+right? It has already converged, and loss is almost zero. And this is the straight line. If you reset it, run it again, it converges right.
+
+Unknown Speaker  2:48  
+So that basically tells us that
+
+Speaker 1  2:54  
+for when there are linear separation, your simpler network will work. Now if you remember what happens when you go to a more complex data set, such as these. Now, if you want to try the same thing with one layer, one node, and you train it, it's not going to be able to do the separation, because with one neuron, it can only draw a linear separation, which it is doing here, which obviously is not good, right? The loss is about 40% so how we can improve the performance of this network when the data set is complex and non linear, the boundary is non linear. What are the two major approaches people take,
+
+Unknown Speaker  3:50  
+increase the hidden layer and increase the E box?
+
+Speaker 1  3:54  
+Well, there is one thing before, instead of increase the hidden layer, what we could also try to do increase the number of neuron in a single layer. So let's say go from one to two. Okay, so let's see what happens if I just add one more neuron. So it's still bad, but looks like it's trying to get somewhere. Now it is not doing doing a single linear boundary. It's probably doing a very elongated, hyperbolic boundary. It's still bad, but not linear.
+
+Speaker 2  4:29  
+I think we've added multi, I mean, two more features. Yeah,
+
+Speaker 1  4:33  
+we will. We will get there. No, not this one, this one. You don't need any more feature. So just with this. So bear with me. So you see going from one to two. From this experiment, you can see the boundary goes from linear to becoming a non linear now, if you add one more, so that means now the boundary could be more complex polynomial. So let's see so. Look at that. We for this for a circle the circular data set. You don't even need to add any hidden layer, just add more neurons to a single layer, and that's it, right? And training loss is what point 004, test loss is point 006, so that means if I add couple more, oops, sorry, not hidden layer. In same hidden layer, if I add couple more neurons, I should be able to take the loss almost down to zero,
+
+Unknown Speaker  5:41  
+let it run for some time.
+
+Unknown Speaker  5:46  
+Is it going to go
+
+Unknown Speaker  5:50  
+to zero? Probably not quite.
+
+Unknown Speaker  5:54  
+Point 003006,
+
+Speaker 1  5:57  
+about the same as before, right? But this gives you an intention, intuition that by increasing the complexity of your model across two different dimension, one is adding more node in a layer, and also adding more layer to your network, you can hope to achieve better and better accuracy when your data set is more complex.
+
+Unknown Speaker  6:23  
+So,
+
+Speaker 1  6:26  
+yeah, see now it has gone 2.001 for training, so almost zero. Now we are going to take the same network and what will happen if we apply it to a more complex data sets such as this. So now you will see, even with this single layer five neuron, it will still probably not be able to do a good job.
+
+Speaker 1  6:57  
+And as you can see, more than 500 600 epoch has passed, and the loss is still pretty high, more than 40% Well, now it is going down, but it's still never going to go to near zero, right? So now what will happen if we add one more layer of hidden. And let's do five and two whatever, and let's look at the numeric value of the loss. So last time we got about got down to about 0.38 so now with this, it should be able to go below. See it is already below 0.3 so just by going one layer deeper. Now there are other thing you can also tweak. One is adding more hidden layers and also adding different numbers of neurons, and all of these is variable, by the way, right? There is no hard and fast rule, as someone was, some of you guys were asking in the last class, is there any rule that we can apply like no, the answer is, there is none. Also it is not always the case that while adding this, your network is going to be better, because here you see the learning. It's probably going to be bit better, but it's very slow to converge. Now probably it's slowly going towards convergence. But my point in saying is these are some of the parameters that you would like to tweak when you have a data set and the data set is not you can. You cannot visibly see the database data set because this is just an experimental data set which you can easily plot in a two dimensional Chad, right for a real world data set, you cannot. So what you need to do is in code. You need to be able to run this type of experimentation by varying the number of layers, by varying the number of nodes in each layer, and also other things such as varying the activation function right so sometimes That will also dramatically change the performance of your network. So now I went from tan hyperbolic to ReLU, and you see the convergence is much, much faster now. Okay, so we saw all of this, we tried a few of this, and we are going to have a little bit more practice on all of these as well in code today. And again, as I said, everything that we are doing here manually, like trying these different network structure, trying different activation function and so on, we will see how we can do the same thing in code using the automatic high. Parameter tuning using that Keras library. Okay, so, so the first activity we are going to look into is that SK learn Moon data set, which is something you guys had already seen before
+
+Unknown Speaker  10:28  
+importing this TensorFlow text, time.
+
+Speaker 1  10:37  
+Okay, so we imported and we loaded the data set, which is basically this moon data set. You can also use SQL learn. Dot make moons that will give you the same but here the data set, someone already collected that data and saved it as a CSV file, which is what you are loading from. But if you remember SK learn had has all of these method that you can use, make moons, make blobs, make something, something, right? So there are some of the standard function that you can use to generate the data set, but whichever way you generate the data set. So these data set is basically having two feature column, feature one and feature two, and then one output column, which basically gives you whether it is a one class or the other. So then what we do, we take our x and y, where target is the y column and everything else, which mean feature one and feature two are your x column. Then you do a train test split, which is what we do all the time. And now we are going to build a simple model. That simple model, our first attempt would be, as you can see, we start with a sequential model, and then we are going to add one layer, which is this, and this layer is basically your input because in this input layer, all we are saying is my first layer need to have a input dimension equals input nodes. And these input nodes is equal to the length of the columns, which will be two, because we only have two columns, feature one and feature two. So essentially, by doing this, we are going to be creating
+
+Speaker 1  12:34  
+this. So essentially this line of code here creates these two connection because you have two dimensions, and then we are going to add only one other neuron, and this is what your real neuron is, which is only one. You see units is one, and activation is sigmoid. So essentially, this code is going to create a network. And then, if you print the model summary, so you see the first layer has one neuron with two input here the representation is little different, even though here it's saying number of neuron is one with three parameters, which basically means you have kind of a neuron here where these two connections are coming in. And that means, do you have two weights for x1 and x2 and then you have one bias, so that gives you three parameter, and then your output layer basically has one neuron with two parameter, which basically is this thing? So that is the Keras representation of model. Keras Model Summary representation of this.
+
+Unknown Speaker  13:52  
+What is the now,
+
+Speaker 1  13:55  
+so dense, basically means a dense layer. Essentially, it basically means a layer. Thank you. Okay, so now we are going to compile the model the first step, using binary cross entropy as your loss function, Adam as your optimizer method and accuracy as your validation metrics. Now, if you guys are thinking, maybe, hey, where do we see the definition of all of these? So let's say, if you want to learn about different optimizer right? You can go to the Keras documentation here, and you will see a list of different optimizers here, and if you click on this, you will see the Adam optimizer. In fact, let's click on overview.
+
+Speaker 1  14:56  
+Okay, so these. Different optimizer basically uses different mathematical function to do the optimizer. Now, as I said before, we are not going to go into the details of it. I mean, if in future, if you think like, hey, I want to do some hyper parameter optimization, and I want to try out a few of these optimizer feel free to do so, but for now, just keep in mind that Adam is the most popular optimizer that are used and works for the most purposes. Okay, for very advanced user, there is actually a way to write your own optimization algorithm. Essentially, you are basically rewriting the stochastic gradient descent algorithm with your your own flavor of mathematical improvement that you want to bring in, obviously, given if you have that those kind of mathematical chops under your belt, right? So all of these function inter functions are basically provided as interfaces as well which you can extend and implement your own version of optimizer, and so for most of this stuff, right? But for now, let's stick with Adam and loss function as binary cross entropy. So that's our model compilation. And then we are going to try to fit the model. Let's run 100 epochs. It's not too big of a data set, so it's not going to take too much of a time.
+
+Unknown Speaker  16:26  
+And now
+
+Speaker 1  16:30  
+you will see that the accuracy is actually not that bad. 86% accuracy, almost right. 86% on test sorry, 86% accuracy on training data. And then when you evaluate that using test data, that goes down only to about 85% so that simple network produced as 85% accuracy. Now we are going to do what we did there in the TensorFlow playground using that toy. So we are going to try to do something similar here. So now we are going to create a new model, which we are calling nn model two here. Our first layer will have six units of neuron, so six nodes each having two inputs coming into them. So input dimension is equal to two, because number of input nodes is two, and then that will be followed by a final output neuron. So essentially, the difference between this network and the one before is here we have one neuron come bringing in the two input and then finally one output neuron in the new model, we have six neuron coming in and then fitting into one output neuron. And when we do run this, you see immediately that the test train accuracy has jumped to 91% or 92% almost, and test accuracy is little lower 88% just by adding six neurons in your first layer instead of one, we managed to go from a test accuracy of 85%
+
+Unknown Speaker  18:19  
+to a test accuracy of 88% okay,
+
+Speaker 1  18:26  
+so then what I would like you to do as part of activity the first one.
+
+Speaker 3  18:32  
+I just want to first because we don't have a soft code, so I'm trying to just try so in the very first instance, when you set up the first layer with one perceptron, yeah, just above that in the code, in the code, yeah, yeah. So you've got the, okay, so you've got one unit, and you're saying that's going to take in two inputs, and then your output is your sigmoid. That's what? Yes, okay, thanks.
+
+Speaker 1  18:57  
+That's right. So one unit in the first layer with ReLU, and then activation is sigmoid. So for classification problem, you will see in the final layer, then the final layer, the output layer, it will always, almost always, be sigmoid. But at the same time, for other layers, like the intermediary layers, you should be using either 10 hyperbolic or ReLU, because if you use sigmoid in both, it probably is not going to work very well. So let's try this with sigmoid in both.
+
+Unknown Speaker  19:32  
+So we achieved
+
+Unknown Speaker  19:36  
+85%
+
+Speaker 1  19:39  
+ish with 10 hyperbolic and followed by sigmoid. Now we are going to do sigmoid followed by sigmoid, with no change in the number of neurons. So let's see how the model behavior changes, if anything so.
+
+Speaker 1  20:08  
+Okay, you see accuracy went down from 85 to 82% right? So it is almost always better to use some other activation function other than sigmoid for any of your intermediary layer, and use the sigmoid as your final layer. You can try also with tan h, which is tan hyperbolic, and rerun this experimentation again. So
+
+Unknown Speaker  20:44  
+it will probably do better than sigmoid.
+
+Unknown Speaker  20:50  
+Looks like it is.
+
+Unknown Speaker  20:53  
+Sorry, what's the output? Is it like a binary classification?
+
+Unknown Speaker  20:56  
+84 this is a binary classification? Yes,
+
+Unknown Speaker  21:01  
+because we the output for sigmoid,
+
+Speaker 1  21:03  
+correct. So because you are using output as a sigmoid, it is a binary classification, because it's essentially similar to your logistic function, right? So using 10 hyperbolic, using 10 hyperbolic, we got 84% using sigmoid, we got 82% but using ReLU, we got 88% so for now, stick to using ReLU for all layers except for the last one, and use the sigmoid for the last layer.
+
+Speaker 3  21:37  
+Okay, could I ask if a TA could upload the instructor solved for this activity one just so if we're going to break out in the rooms, we have something that we can refer to. Yeah,
+
+Unknown Speaker  21:48  
+they're all up now. Okay,
+
+Speaker 1  21:56  
+so now what I'd like you to do is, while Ian is doing that. So Kian, upload the salt file, just for activity one, not for all I did
+
+Unknown Speaker  22:06  
+it for all the instructor files.
+
+Speaker 1  22:11  
+So you uploaded this instructor solved file, right?
+
+Speaker 4  22:16  
+Yeah, yeah, anything that is like prefixed by the ins for instructor, all of those are up right
+
+Speaker 1  22:21  
+now. Oh, no. I actually meant to say, just do that for one activity, not all. Oh, okay, just do that for one place.
+
+Unknown Speaker  22:34  
+You can trust us, but only we won't go there. Yeah, no.
+
+Speaker 1  22:37  
+So the thing is, I, because I want to you guys to do at least two three activities in your group today, and that's why I'm not letting you look into everything, because then what is the finding it, right? Yeah, okay, so as part of the second activity, you are still going to be working with that same data set, but only thing you will be doing is you will try to see whether is there any other way you can improve the accuracy more than what I achieved in here in my deeper network, which was 88% so try adding one more layer, maybe, or also maybe, try increasing the number of nodes in layer. Like, don't give too much thought into it. Like, take, take about 1015, minutes, right? Kian has already uploaded the code for the first one. You can use the same. All you have to do is just add more layers, more nodes into your dense network, right? More dense layers into your network, and then run 100 epochs or so and see what accuracy you can get right, just for a little bit. Just have fun. Now for the grouping. Is it okay for you guys to do random grouping, or do you want to prefer to work with your said group members. And set group members is fine.
+
+Unknown Speaker  24:09  
+Set group members, yeah, random as
+
+Speaker 2  24:12  
+well. I mean, the case is, well, right?
+
+Speaker 5  24:17  
+No, I can do one or the other and not both. So
+
+Speaker 2  24:22  
+I thought, Karen, you can do everything. Oh, I'm sorry.
+
+Unknown Speaker  24:31  
+I try, but you know, okay,
+
+Speaker 1  24:34  
+you know what? Let's let's do set group members, because I got two vote for set members and one vote for them that way, then, so you are, all you are going to do is create five rooms and let people choose their rooms. Yeah, because you guys remember which numbered group you belong to for how long?
+
+Unknown Speaker  24:54  
+Let's do 15 minutes. Okay, got
+
+Unknown Speaker  24:58  
+it 15 minutes for one. Exercise or
+
+Unknown Speaker  25:01  
+we're ready, so just
+
+Speaker 1  25:02  
+activity number two, perfect. Thank you, yeah. Okay, so
+
+Speaker 5  25:07  
+whenever everyone's ready, I'll open and everyone can move to the room ready set.
+
+Speaker 1  25:18  
+And when you guys come back, feel free to share your result, what accuracy you got and what your network structure was.
+
+Unknown Speaker  25:30  
+So what was your network structure? What
+
+Unknown Speaker  25:37  
+did you guys try?
+
+Speaker 6  25:41  
+We just did one ReLU node, and then, like, the output sigmoid, we got 87% with a goal loss of 27%
+
+Unknown Speaker  25:49  
+just to, like, see what the simplest thing would do.
+
+Speaker 1  25:53  
+Okay, and then, then, did you not try to make it a little bit more complex your network
+
+Unknown Speaker  26:01  
+a lot of time, yeah,
+
+Speaker 3  26:03  
+I did see on the output that gave me a hint of Yeah, I did. I did two, two layers of six nodes a piece, yeah, and, and then get to a 99.92%
+
+Speaker 1  26:18  
+accuracy of losses. So almost, almost 100% huh? So basically, yeah. So if you look into the output of these, even in your unsolved file, that will give you a hint that adding two layers of six nodes, each followed by one output layer is kind of a good network for this one. And if you run it for, let's say, 200 epochs, you are Oh no, this is going point 9041,
+
+Speaker 3  26:56  
+on mine, terrible, terrible.
+
+Unknown Speaker  27:01  
+Oh no, I think I know why,
+
+Speaker 1  27:04  
+because I'm using moons data too, whereas you guys are probably no you are using the same one.
+
+Unknown Speaker  27:21  
+You guys are using the same one go up to your
+
+Unknown Speaker  27:26  
+layers,
+
+Speaker 1  27:33  
+661, with ReLU, ReLU and sigmoid. Do
+
+Speaker 3  27:49  
+what was your optimizing? Was it Adam? Yeah, that's so weird.
+
+Speaker 1  27:57  
+That is we Oh, no, I think I know why, because when I did this, I specifically did not do the scaling. So let's see if doing the scaling makes it any different. I
+
+Unknown Speaker  28:39  
+Oh, but no, you're just trying to trick us into learning
+
+Unknown Speaker  28:44  
+the scaling matters. Let's see.
+
+Unknown Speaker  28:48  
+Let's do it with a scaled version.
+
+Speaker 2  28:55  
+Benoit. I remember you said, like, we don't really necessarily need to use a scalar, right?
+
+Speaker 1  29:01  
+There are different opinions, but actually, yes, in this case, using scaling actually does help. Let
+
+Unknown Speaker  29:09  
+me see, so is that?
+
+Speaker 6  29:16  
+Is that just based on, like, because of the distribution of the data?
+
+Speaker 1  29:19  
+That's what I'm trying to understand here. So now with the scaled version, if I do, oops,
+
+Speaker 1  29:35  
+yeah, I'm getting one as an accuracy. So scaling does actually make a difference for these data set at least.
+
+Speaker 1  30:03  
+Okay, no. I mean, honestly, Jesse, that it was not at my plight to treat you guys. I actually did not think, since here your x and y both values are kind of around the same, what I'd say, same range, right, like from around negative two to positive two. I was not thinking that scaling would actually make any difference here, and that's why I didn't do scaling. But looks like it is making a whole lot of difference. And
+
+Speaker 5  30:32  
+seems to me that we're neural networks your best to work with scaled barriers, like maybe between minus one and one or something like that, not necessarily anything bigger than one or less than one. And
+
+Speaker 3  30:47  
+honestly, in the code that we were given, we were only given one cell, approach scaled for us. So I doubt you were gonna find the same problem.
+
+Unknown Speaker  30:57  
+I'm sorry say that again.
+
+Speaker 3  30:58  
+Well, we were we were given the student code. The only starting code that we got was in the first cell, and it already scaled for us, so we didn't, I mean,
+
+Unknown Speaker  31:08  
+I don't think any of us would have thought to take that out,
+
+Speaker 1  31:11  
+right, right? Yeah, no. I mean, I know. I mean, but in the solved code, when I was playing with it, I thought I'd give it a shot without scaling, and that's what I did. And it seems the accuracy was pretty low when when you don't do scaling on this one, but I was actually trying to do the same on other activities as well. The non scaled performance was not that worse in all of the other ones, but in this particular ones, looks like scaling is doing a whole lot of differences here. Nika, okay, so that was that. So you kind of understood that increasing the strength of your network does help for most part. Now the next question is, if you don't know what kind of data set that you have then, or even if you know, like, what kind of data set you do have, for example, going back in, back into the same moons data,
+
+Unknown Speaker  32:21  
+how do you know what is the best way
+
+Unknown Speaker  32:26  
+to build your network
+
+Speaker 1  32:29  
+like, what are the hyper parameter? What are the network structure that you are going to use to be able to get the best accuracy from your data that you have right? And this is what I was mentioning earlier, that you have to do something similar to the grid search that you have done before in scikit learn, which in general term is terminology is known as hyper parameter optimization. Now, the way that hyper parameter optimization works in Keras is basically using these so if you look into this thing called Keras tuner, so if you go keras.io so this is their API documentation. So they have this module named Keras tuner, which is an easy to use, scalable hyper parameter optimization framework that solves the pain point of hyper parameter search. Right? You can easily configure your search space with the defined by run syntax, then leverage one of the available search algorithm to find the best parameter values for your model. So what this means is, when it says here, easily configure your search space with a defined by run syntax. So what that means is, so this defined by Rand syntax, basically means when you are trying to do a search, so you have to take an instance of a tuner and then you have to do a tuner dot search, right? But when you do a tuner dot search, so that tuner that you are specifying, you have to provide a callable function when you are creating your tuner. And that callable function, which in this case, we are calling it create model, that create model function has to be defined by you, which is where you are going to specify. What are the things that you are going to change from one one attempt versus the other. So essentially, the piece of code that you are writing here is basically all the step that you wrote in your previous activity as well, which is starting a sick with a empty, sequential model, choosing an activation function and then adding the first layer, first dense layer with certain number of units, and then providing an activation function and providing an input dimension, which is going to be same as your length of number of columns in your train. Data, and then you add multiple layers. So now the only difference is if you see in this line activation, and if you compare to something that you have used before in the previous activity, where activation we are choosing specifically hard coding a value, either a ReLU or a tan h or a sigmoid. We are using a value specifically, but when you are choosing an activation here, you are going to use this function called HP dot choice. So this choice basically does the same thing, similar thing that scikit learn grid search does for you. It will basically apply different training with one of the values that you are specifying here in this list. So here you can specify the ones that you want to try, which is the three more common one is ReLU 10, hyperbolic and sigmoid. And we are calling this, Hey, this is my activation. But this activation, I want to try three things instead of just hard coding one thing. So anytime you have a choice, that means you are telling Keras tuner to try all those different choices, and then you take this activation as a variable and provide that as the pass that as an activation parameter to your first dense layer. Another difference is, when you are doing just one single set of structure, network structure, you are also hard coding the value of units, which is basically where you are specifying how many neurons you want to add in that layer. Now there also, instead of passing one value here, what you are doing is you are basically passing actually, there is, if I write it in one line, it will be easier to follow. So essentially, what we are doing is, let's write this way activation and input dimension, so your units is oops.
+
+Unknown Speaker  37:10  
+Hang on, I hit a wrong enter.
+
+Speaker 1  37:18  
+So instead of saying units equal to five or something like that, instead of that. Now we are saying your units is equal to then another function called hp.in, T. So these int is not a lowercase int. This is basically a function that gives you one of the integer between these two, these range with a step count of two, you can even do step count of one, right? That means then these units will be 1234, up to 10. All possible values. If you do step count of two, it will be 13579, and so on. So that's your so anytime you want to put something in a as a variable, you have to use either HP dot choice or or hp.int or if it's a decimal thing that you are going to use, you want to vary, then it will be HP dot, float, and so on, and All of this function you will actually see here.
+
+Unknown Speaker  38:22  
+What is that? HP? Dot choice,
+
+Speaker 1  38:26  
+huh? So here, so you can say hyper parameters. Dot Boolean that will give you between true and false. You can do hyper parameter dot choice, which is where you are going to put a list of possible values, which we have seen for selection of activation function, you can do HP, dot, float, if you want to have a range of floating point values, you can use hp.int, if you have want to have a range of integer values and so on. So all of these are methods of hyper chaperometer plus. Okay, so we are saying in our first dense layer, we are going to add anywhere between one to 10 neuron and when we are going to pass these create model to the actual search method. That search method will run different training step by varying these values of values from one through 10 with a step count of one. So essentially, what we just did, did is kind of just like what we are doing playing with the TensorFlow playground. Right where, where we clicking at the button. We are basically increasing and decreasing the size of the layers and so on. So essentially, this is what you are doing here. Programmatically. You are expanding it from one through 10. Then the next thing is after your first layer with the input dimension, then we were adding sometimes. One more layer or two more layer, or three more layer and so on. Now how can you mimic that? So what that means now is, after your first layer, you need to make it very dynamic how many layers you want to add. So that means now you have to add a variable number of layers after your first layer of neurons. Now how do we do that? Well, we like to write a for loop where the index i is within the range of one to six. Here we are using hp.int, again. So now we are adding anywhere between one up to six intermediary layer after my first layer. And then for each of these, I am also adding, for each of this, one through six intermediary layer, I am also going to add dynamically one through 10
+
+Unknown Speaker  41:05  
+neurons in each layer.
+
+Speaker 1  41:07  
+So basically, the largest network this thing is going to produce will have six layers of 10 neuron each. And the slimmest network that it is going to produce will have one real neuron with only one layer, and it is going to vary everything in between
+
+Speaker 3  41:24  
+and range. Is not inclusive of six, right? So it'd be one through five.
+
+Unknown Speaker  41:28  
+No, actually, it is inclusive, one through six. It
+
+Speaker 3  41:31  
+is, it is inclusive, okay, thank you. It is inclusive. It would be the first layer that receives and then up one, one to six more layers and then an output correct.
+
+Speaker 1  41:43  
+So first layer, it is first layer will have to be one first layer, because the difference between first layer and any other subsequent layer is the first layer will have this input dimension that no other layers will have. So you need to have a first layer no matter what. So within the first layer, what you are varying is how many neurons you are adding in the first layer, and then after that first layer, now you are adding either one or two or three, up to six intermediary layer, and then finally you are adding output layer. And why we are adding this separately? Because this is where we are going to use the activation function sigmoid, not a dynamic activation function, all of these other layer. We are using these activation which is dynamic, which will have three possible values, but then whatever we do, finally, we are adding one single neuron with the sigmoid activation, because this is a classification that we are going to use for. So now these whole thing is your callable function. Now we are going to create a tuner, and when we are using creating the tuner, we have to pass these whole function as a first parameter to the tuner method, and we have to tell it, what is the objective, which is value accuracy, how many maximum epochs to run, and what are the hyper band iteration now here, if you look into tuners, there are different tuners that are available. So one is a tuner, which is the best tuner class. And again, if, when you become very advanced, you might also want to extend the tuner class and write your own tuning algorithm, but at this point, you don't need to do that, because there are some out of the box tuner implementation that are already available for you, which is random search, grid search, Bayesian optimization, hyper hyper band, and even an S, K, L and tuner. Now the reason the hyper band is good is because with hyper band tuner, it will look through all the different combination like all the grid that you are providing, but based on the accuracy it finds, it will automatically choose the one that looks promising enough. So even if your search space is much larger, hyper band will not blindly like, let's say, if you run grid search, and if your search space contains 1000 different permitted permutation of these parameters. It will run the training 1000 times, but with hyper band, it will keep running some and then as it finds the accuracy value, it will become smarter and smarter, and it will only look towards that area of the search space where it has a higher probability for your model to get higher accuracy. So hyper band tuner itself is a smart ml driven algorithm, and that's why it is better to use the hyper band tuner, which is what we are using here. So that's why I'm we are saying Chad tuner, dot hyper. Band. And how do you do the hyper band with this create model function with value accuracy to be your objective. Maximum epoch is 20. I mean, you ideally, in a in a production scenario, you will not be satisfied with 20. You probably want to run more. But just in the interest of time, we are going to limit it to 20,
+
+Unknown Speaker  45:21  
+because otherwise you will be sitting here forever,
+
+Speaker 1  45:25  
+and that's it. And then hyper band iteration. I don't think hyper band iteration is actually needed. Hyper band iterations integer at least one the number of times to iterate over the full hyper band algorithm. So one iteration will run approximately Maxi box times log of maxi box to base factor, and
+
+Unknown Speaker  45:56  
+what is factor. So
+
+Speaker 1  46:03  
+uh, integer, at least one. Yeah, I think we can even run it without the hyper band iterations, because if you don't give it so anyway, so let's run this. So we are going to take that same moon data set. We have our have our create model function defined. Now we are going to create the tuner, and then the work will be done when I'm going to do a tuner, dot search, and then pass it the training data and validation data, which is the test.
+
+Unknown Speaker  46:35  
+Now let's see how it goes.
+
+Unknown Speaker  46:39  
+Now, when you run this,
+
+Unknown Speaker  46:42  
+you will see that different trials are going on,
+
+Speaker 1  46:46  
+and as every trials are going on, it will basically say, what is the best accuracy achieved so far, and what is the accuracy for this trial? So you see trial five is going on, trial six is going on, and it is showing that best accuracy, accuracy achieved so far is 0.87
+
+Unknown Speaker  47:05  
+and it will keep going on like this for some time.
+
+Speaker 1  47:08  
+One thing you have to note, as soon as it starts in that same folder where this file resides, there would be this folder created. This is not something that I have created before these random, sorry, hyperparameter search algorithm. It has created this folder, and in this folder, this untitled project folder, you will see it is basically keeping a track of all the different trials that are being executed. And you will see more and more trial files showing up here as the trial gets completed. So essentially, it is keeping a record of all the different trials that it is doing in a file system. The reason is that after you are done with this, if you want to run these tuners, if you run this tuner, dot search again. It will not repeat those trials because the data is already available, saved in the test. So it is not going to waste time by repeating this, and that's why it is keeping a record of this trial. So that's essentially how hyper band, sorry, hyper parameter optimization works with hyper band tuner. Also notice one thing in we said, maximum epochs is 20. If you notice here for some search, it will actually do 20 epochs, whereas for some other search, it will do less, like after three or four epochs. If it sees that it is not going anywhere, it will give up. So we said maximum e box is 20, but it may not necessarily be 20, but as you can probably see, okay. So now it is done. So we are saying the best accuracy so far we have gotten is 1.0 which we got anyway, right? I mean, this is kind of like a stupid thing to do, because we already know that for this moon data set, we can easily get an accuracy of 100% we really didn't need to do hyper parameter tuning here, but the point here is to show you how it is to be done if you do have to do it now. So far, so good. So we basically what it did is it ran how many trial let's see looking into here. So it basically ran 30 trials, okay, starting from trial 00 to trial to zero to nine. So after running 30 trial, it basically got the best validation accuracy is 1.0 so it cannot improve further than that. Therefore it stopped after 30 trial, and that is the beauty of hyper parameter, sorry, beauty of using these hyper band tuners. Five because if you wanted to use something like grid search, it would have kept going, because grid search basically blindly searches for all possible combination of hyper parameters. But with hyper band, it does not do that. So it essentially serves you valuable time. So after 30 trial, it found something. Now let's say, if you have to see what is the best looking model, best performing model, how does that model look like? Well, you can do a get best hyper parameters and take it basically returns a list, and then take the first item in the list and it will basically tell you what that model look like. So it is telling you, hey, in your best performing model, the first units, basically meaning the number of units in the first layer, there were seven, okay. And it used the ReLU as a hyper parameter, sorry. ReLU as a activation function. And then after there, after that first it had six more layers this we with the unit 6526, and six, oh, and then one here. Yeah, this thing is kind of, I don't know why it is messed up like that. So unit zero is the number of unit in the layer one, first hidden layer units. One is the number of units in the second hidden layer and so on. So basically the model is like starting with seven and then going to 65266,
+
+Unknown Speaker  51:32  
+and finally one. And
+
+Speaker 1  51:39  
+it basically found this in the trial number 13 out of the 30 trial it did, and the activation function was ReLU. And then it achieved this accuracy after running seven epochs only. So it didn't even need to run 20 epochs for this best performing model. Now that's the best hyper parameter values. Now if you want to use that model, so this is this is data about the model, right? This is metadata. This is not the real model. This is simply telling you what are the different hyper parameters that have been used in making that best model. But then this itself is not the trained model, we need to actually get handle to that best model that have been trained. Now to do that, we use another function on tuner called get best models, and then take the first element out of it, so that will give you the best performing model. So so now this best model is basically same as your other model, like where you had this nn model. So similarly, anything you can do your with your regular model, like do evaluation, do prediction, you can do everything with this best model, because this is the neural network model that hyper parameter optimization produced for you. Now you take that best model and do the evaluation and see what is the accuracy, and then obviously we see the accuracy is 100% right. So that's essentially how the auto optimization work or auto tuning of hyper parameters. So,
+
+Speaker 3  53:23  
+but no, you said that it saved the data so that if you were to rerun it, it would not try those combinations again. So if you did your search, would instantly come up with the best model.
+
+Unknown Speaker  53:35  
+Yep. Now see that
+
+Unknown Speaker  53:38  
+I'm running it again.
+
+Speaker 3  53:41  
+What would you have to change to make it? Make it think that it had to be, would you have to change? I
+
+Speaker 1  53:46  
+think, I don't know. Let me see,
+
+Speaker 3  53:51  
+like, if you added like, five more activations, would it? Would it go, Oh, I know now that I have, but I wouldn't run through really ton of signal then go,
+
+Speaker 1  54:00  
+yeah. Or maybe instead of, so, let's change this. So let's say up to seven. That's a good thing. I haven't I mean, usually, what I know is, if you go and delete this project folder, then it will rerun.
+
+Unknown Speaker  54:16  
+Yeah
+
+Speaker 1  54:17  
+and yeah, no, just changing that is not enough. Yeah, it basically, you basically have to delete that folder. In fact, not just the folder. I think if you just delete this tuner zero dot json file, which essentially is an empty file, I think that might trigger it to read on. Let me see, Hang on. Let me first empty my trash
+
+Unknown Speaker  54:42  
+and those ash JSON files in them,
+
+Unknown Speaker  54:45  
+yeah,
+
+Speaker 1  54:47  
+yep, yeah, and the models itself. The models are dot h5
+
+Unknown Speaker  54:51  
+the Jimmy data about the model and the model itself do.
+
+Unknown Speaker  55:00  
+No, it still is somehow holding it.
+
+Unknown Speaker  55:04  
+That's so interesting.
+
+Speaker 1  55:06  
+Oh, no. Now it is running. Oh, you had to run this cell, and then followed by this, yeah, so you have to rerun this, which will create a new instance of tuner which is not tuned already, and now, then, on top of that, since I deleted that one file that was tuner dot JSON, which is basically a two white it's like a dummy json file, just the presence of that file indicates that the tuning job has already finished. So once you delete that file, it will basically trigger it again. So
+
+Unknown Speaker  55:45  
+okay. Okay, so let's have
+
+Speaker 7  55:51  
+a I have a quick question sure when it's deciding what's the best model, what is it? What
+
+Unknown Speaker  56:00  
+which highest highest accuracy? Yes,
+
+Speaker 7  56:03  
+but so highest accuracy, but is that based on the
+
+Speaker 1  56:09  
+validation accuracy? Okay, it says objective. You basically have mentioned you your objective function would be accuracy on validation data. That's what Val underscore accuracy means. Yeah, that's why here look here you are providing the training data and in as a validation data. You are basically passing the test card that you did. Remember, we did the train test suite, and then we are providing the test split as validation data. And then here, when we created the instance of a hyper band tuner, we said, hey, your objective function should be the accuracy that your model achieves on the validation data. Okay, then it will keep doing iteration, and it will report the model that achieves the highest accuracy on the validation data, and that is your best model.
+
+Unknown Speaker  57:03  
+Got it? Can it mix and match activations?
+
+Unknown Speaker  57:07  
+It is mixing and matching activations. Well,
+
+Speaker 7  57:10  
+what I mean is like so it has activation ReLU on the first three layers and then sigmoid on the last layer, right? That is it doing that? Because when it gave us that print out of the best model, it only showed ReLU.
+
+Unknown Speaker  57:29  
+Oh, you mean here, yeah,
+
+Speaker 1  57:33  
+let's see. Ah, no. So basically what that means is the winning model, the best model, it basically ended up the one that used ReLU as an activation for all of your layers, but your final layer, you already have hard coded sigmoid, so that is not even being printed here. So it will only print the parameters that are variable that you have chosen to make it variable, and that's why here you see this word activation within single quote. Why is this within single quote? Because these you are providing as an identifier that you can easily see when you are printing the report of the model. So these activation here is the reason why it is saying that this activation is really so what that means is this variable activation, which is denoted in your report metadata as the value activation, ended up taking one of these values, which is ReLU, and that is the value that have been used anywhere where you have used this variable, which is your first layer, and all the hidden layers, but for the final layers, you actually have not used this activation variable. You actually hard coded it as sigmoid, and that's why it did not come up here.
+
+Speaker 3  58:56  
+But, but could it have done like layer four is ReLU, layer three is ton would it No?
+
+Speaker 1  59:06  
+No, because if you want to do that, then you need to have multiple of these variables see what it is doing is once. So for every iteration, this one instance of this function will be called. Now when you are running any one instance of this function, this variable activation will randomly pick up one of these three values, either ReLU, tan, H or sigmoid, and once it does that, since that that point, this is a variable. Now that variable you are using here and here two places. So that means everywhere that same variable will be used if you want to mix and match. Then you need to have a one variable here. Then you need to have another variable inside the for loop, like here. Inside the for loop, you need to have another variable, and you need to call it something like. Activation
+
+Unknown Speaker  1:00:03  
+class, stri
+
+Speaker 1  1:00:07  
+so by doing that, now you are having a local variable inside for loop activation, but you are calling it activation one or activation two or activation three. So now, by doing this, now you are also changing the activation function in each of your six hidden layers, or three hidden layers, or however many hidden layers it ends up having. So the whole thing is all in your control, but the more variability you are going to add, that means your search space is going bigger and bigger, so it will be more time consuming. So that is where you need to strike the balance right. But okay,
+
+Speaker 7  1:00:42  
+one another question. Sorry, so I know so with this data set, I know that with the work we did in the previous student activity, I could get it to a 1.0 accuracy in three layers, but 80 epochs. So is it choosing the best model based on how many epochs? Like, yes, it got to 100 like, 1.0 accuracy. Yeah,
+
+Speaker 1  1:01:09  
+good. Good question, and I do not have a right answer to that, like you are right. We know that we can achieve 100% accuracy on these data set on a much smaller network. But then your question is, then, why is my best model here is saying, hey, you need to have six different, like, a six layer deep neural network, right? Yeah. I was
+
+Speaker 7  1:01:31  
+just wondering if it's because, like, this is probably, it's
+
+Speaker 1  1:01:35  
+probably because of the, because of the, as you said correctly. Where did it go that? Yeah, the initial epoch you see seven. So with this model, the model was has been able to converge with 100% accuracy only after seven training epoch. Maybe that's the reason. Okay, yeah, thank you. So basically, your convergence is much faster. So yeah,
+
+Speaker 1  1:02:06  
+okay, okay, so let's do one thing, let's do another. What? How are we doing? Timing wise, yeah, we are fine. So the next activity is basically very similar to this, but here you are going to work with a different data set, which are two concentric circles. Your job is to use this hyper parameter optimization technique that you just learned and try to find the best performing model
+
+Unknown Speaker  1:02:40  
+on this data set.
+
+Speaker 1  1:02:45  
+Okay, so, Kian, can you do one thing for me? Upload the instructor solve files up to for activity two and activity three. Sorry. Activity Hang on. So basically, yeah, activity three, I'm actually skipping that that does not have any significance here. So upload everything up to activity four, basically, but not five, because now they're going to do the activity five. So upload all the solved files up to activity four. Okay,
+
+Unknown Speaker  1:03:22  
+so basically two, three and four, essentially.
+
+Speaker 1  1:03:25  
+And then while you do that, Karen, let's create the groups again, and let's give it a little bit more, maybe 20 minutes this time. Okay, yeah, everything looks right? Yeah, all you have to do, guys is, if you once Kian uploads this, you basically have to take this thing, this thing, that's all you need to do. I'm saying I'm giving you more time is because when you are actually going to run your search method, it is going to take some time. And depending on the what machine you are using, right, it can take anywhere between three to four minutes, maybe all the way to maybe eight, 910 minutes. So you have to a little bit more patient. But I suggest everyone within your group, even though you are working with a group, everyone try it out yourself. Okay,
+
+Speaker 5  1:04:27  
+are the rooms open? Then whenever you're ready? Oh, sorry, because I'll bring everybody. Yeah, let's go. 321,
+
+Unknown Speaker  1:04:41  
+okay,
+
+Unknown Speaker  1:04:43  
+let's see who won. Which group
+
+Speaker 1  1:04:47  
+guys tell me the your best score, accuracy, best model accuracy. I'm still tuning
+
+Speaker 8  1:04:58  
+in. Okay, Inger, we got. You got like 91%
+
+Speaker 9  1:05:02  
+Yeah, like 93% if I do, the epoch was, let me see. I'm gonna go back. I believe it was like 25 the number of layers is still one to six. Min value one, max value, 15. One thing though, I did on the activation, the first one, the previous code used ReLU, tan h and sigmoid. I remove sigmoid from the first one, I just put ReLU and tan h, okay,
+
+Unknown Speaker  1:05:27  
+yeah, that makes sense.
+
+Speaker 1  1:05:32  
+And then did you scale or not? Um, I just
+
+Unknown Speaker  1:05:37  
+copy and paste the code and yeah, I see this using Yeah,
+
+Unknown Speaker  1:05:46  
+is the goal to get 100% but now I like,
+
+Speaker 1  1:05:48  
+do you? No, no, no, no, there is no such goal.
+
+Speaker 8  1:05:54  
+Okay, I'm kind of wondering, like, it should be possible to get close 100% because this data set is very similar to what we saw on the TensorFlow playground. No,
+
+Speaker 1  1:06:03  
+but if you look into it, there are some Yeah, right. You'll probably not get exactly 100% in this one. So see, I tried, while you guys are doing it, I tried, and my best model gave me a accuracy of 96.8 in training and 96.79 in validation. I don't know how, but it hurt and and this is, this is not scaling, no scaling.
+
+Unknown Speaker  1:06:37  
+Maybe scaling it make it lower. Can
+
+Unknown Speaker  1:06:40  
+you show us your
+
+Unknown Speaker  1:06:43  
+your function definition?
+
+Speaker 1  1:06:46  
+Yeah, so kind of essentially what Ingrid said, right? So for the dynamic activation, there is no need to put sigmoid there, because we know that sigmoid is never a good choice for anything other than the last one. So the same thing and the values of first unit, one to 30 and then between one through five layers, each layers containing one through 30 with the same activation as the first one. So the activation layer is basically same across the whole network, except for the last one, which is sigmoid, that's all,
+
+Speaker 9  1:07:26  
+yeah. So the difference is, you did the 30, I only did the 15. Ah,
+
+Speaker 1  1:07:30  
+okay, okay,
+
+Speaker 1  1:07:39  
+yeah. Because if you see my best performing model, the first layer ended up having 20 units. So since you stopped at 15, so maybe that's why, maybe you needed to go little wider.
+
+Unknown Speaker  1:07:58  
+Yeah, that is good to know.
+
+Speaker 1  1:07:59  
+And that's, that's why, you know, I mean, that's why you should think through, right? I mean, that's why hyper parameter tuning is so I'd say costly, like, these are toy data set, right? So think about a company working with a real data set, right? They don't know what that data set is, so they have to cast a wide net to do the hyper parameter tuning. And this takes a lot of money, lot of money, because with your real data set, if you are trying to create a production ready model, your hyper parameter tuning can go on for hours or days with with very high capacity machine that companies get on cloud, right? So it is not uncommon to spend hundreds of 1000s of dollars just to do the hyper parameter tuning for any standard industry grid model. So what we are doing is a miniature version of that right just to understand the concept. Okay? Cool. So let's take a 15 minute ish break, 13 minute actually, and come back at the bottom of the hour, 830
+
+Unknown Speaker  1:09:17  
+Yep, yeah.
+
+Unknown Speaker  1:09:20  
+Okay, so
+
+Speaker 1  1:09:23  
+what we had to learn for this class is done for most part, right? So what is left is one more activity that I'm going to do here with you guys, which is basically applying the techniques that we learned, but this time with somewhat real data set, not just a moons or circles data set, right? What I'm going to do is I will
+
+Unknown Speaker  1:09:55  
+take the data set and
+
+Unknown Speaker  1:09:59  
+the. Do any transformation needed,
+
+Speaker 1  1:10:03  
+because these are not numeric data set only. So you know you have to do your one hot encoding or level encoding, or whatever is appropriate. And scaling, whether you want, sorry, scaling, scaling, whether you want to do or not that. I'll leave it up to you. My personal opinion is, when you are using deep learning, not to scale your data, because even without scaling, as we saw in the last activity before going into break even without scaling, if you do a hyperparameter tuning, the optimized model will probably be better, even without scaling. So what I'm going to do is, this time, we are going to take these data set, which is an employee attrition data set, where there are certain attributes about different employees, and based on that, you are basically going to predict whether the employee is going to be going through attrition or not. So these attrition column that you have here, you see yes or no. So essentially this is your target column that you are going to be predicting upon, and everything else is your feature column. So as you can see, these data sets have. Data set has 35 columns, so that means 34 columns are your x, and one column is your y. Okay. Now, since many of these columns, as you can see here, are not numeric, so one thing we can do is we can look into the data types of the columns and filter the columns where the data types is object, basically meaning it will give you the list of columns where it is categorical, right, meaning string. And if you do that, the categorical column would be this. So attrition itself is a categorical column with two unique values. Business Travel is a categorical column with three unique values. Department is a categorical with three unique values, education with six values, gender with two values, and so on.
+
+Unknown Speaker  1:12:20  
+So that's our data set.
+
+Speaker 1  1:12:24  
+Now, obviously this is a real data set with lot of dimensions, so you really cannot plot the data set, unlike we were able to when we had only a simple two dimensional data set, because this is a high dimensional data set. So what we do here, we can use that same one hot encoding technique that we have learned during our scikit learn days. So we take our one hot encoder and then we fit, transform with our attrition, sorry, our categorical columns from our attrition data frame. So these attrition DF is our original data frame, but we are only taking the columns which are in this list, which is attrition category. And then, if you do that, encoding these columns now blow up to 31 columns, because this is one hot encoding, right? And we all know how one hot encoding works. So now we have all the numerical columns on one side, and we took out all the categorical columns and done a one hot encoding to convert them into numeric with one and zero. So then what you do is you take the original numeric columns and march these encoded categorical columns using the merge function. And after you do the march, you basically drop all the original categorical columns, and that's how you end up having a total of 57 columns now, instead of original 35 now we have 57 columns in our one part encoded data set. Now, out of these 57 columns, the original column that had that said attrition. Now this has resulted in two columns, attrition yes and attrition No,
+
+Unknown Speaker  1:14:29  
+because there are two unique values.
+
+Speaker 1  1:14:32  
+Now, what is our y going to be? The Y would be either one of these, either attrition yes or attrition No, because both of these will have zero or one. So we take the attrition column and we say, Hey, this is our y. So that means this is our y column, white data set, and then x is basically everything else other than. Attrition Yes, and attrition No. So we drop these two, and then we call that an x,
+
+Unknown Speaker  1:15:08  
+and then we do a simple train test split.
+
+Unknown Speaker  1:15:13  
+And now our data set is ready for training.
+
+Speaker 1  1:15:18  
+There is a scaling part here, but I'm not running it. I want to run it with the unscaled data. But when you are going to do the following activity, feel free to try both ways, scaled and unscaled, if you like. So now, what is our number of input feature, which is the length of x train, X train zero. And as my first attempt, I'm going to create a network which will have eight note in the first hidden layer, five note in the second hidden layer, and then finally, a one output layer with sigmoid. So my first hidden layer activation is ReLU, and input dimension is equal to this number of input feature. Then my second hidden layer has five columns with activation of ReLU, and then my final dense layer with one unit and sigmoid attribution. So this is how my model looks like, eight going into five going into one. So now with this, we are going to compile with binary cross entropy and Adam optimizer, and then accuracy as our score metrics, and then we try to fit the model, and we Use 100 epochs. So let's see what we get. So
+
+Speaker 1  1:17:07  
+okay, so the training is done. Now we are going to do an evaluate, and it is giving me over 86% of accuracy.
+
+Unknown Speaker  1:17:20  
+Okay, so not bad.
+
+Speaker 1  1:17:25  
+Now we are going to do the hyper parameter optimization. So for that, we have a similar function as we used before.
+
+Speaker 1  1:17:39  
+So here we are going the first layer. We are saying up to 10 nodes in the first layer, and then up to six hidden layers. And then for each hidden layer, we are also going to have up to 10 nodes with the same activation function as before. Now if you want to, as I was saying before, if you want to change the activation function from one layer to another, then what you need to do is, inside your for you need to put another activation but this time, I'm going to give it a different name. I'm going to call it activation underscore, i, so this way now each of my intermediate layer will have different activation, and we don't need to provide sigmoid in any one of these, so just ReLU and tan h. So now each of my six hidden layer will have random activation, either ReLU or tab edge, so there would not be single activation across throughout the network. Different layer will have different
+
+Unknown Speaker  1:18:57  
+what is called different activation.
+
+Speaker 1  1:19:02  
+Okay, so that's how we are going to run our
+
+Unknown Speaker  1:19:07  
+optimization.
+
+Unknown Speaker  1:19:11  
+Now we create our hyper band tuner,
+
+Unknown Speaker  1:19:15  
+and now I'm going to run this. I'm
+
+Speaker 1  1:19:25  
+so in our first one, we got 86.68 in our first attempt. Now we are running it through optimization, and I see I have already gotten 87.22
+
+Unknown Speaker  1:19:40  
+which is better than what we got in the first plus.
+
+Speaker 1  1:19:44  
+So let's sit back and keep watching and see whether it gets any better from here onwards.
+
+Speaker 5  1:19:59  
+Yeah, cook. In popcorn, watch your model train, the
+
+Speaker 3  1:20:19  
+famous XKCD comics, where you see the two two engineers fencing each other on rolling chairs, and the manager comes and goes, Hey, what are you doing? Compiling,
+
+Speaker 1  1:20:30  
+yeah. I mean, I'd say, as a machine learning engineer, you can probably see it, yeah. I think as a machine learning engineer, you can probably find a very good work life balance. Like whenever you think that you have to do something, you just start a big model training or a big hyperparameter tuning job and then just let it running.
+
+Unknown Speaker  1:20:54  
+I like your boss can't say anything. I
+
+Speaker 5  1:20:56  
+like that one XKCD cartoon with a big heap of stuff. And so this is your machine learning model. Yep, you just pour the data in here, and then it goes through a bunch of linear algebra and comes up answers. And if you don't like the answers, you stir the pile until you get the right answers. Yeah, I
+
+Speaker 1  1:21:24  
+our accuracy went up little bit more, 875, now from 872,
+
+Unknown Speaker  1:21:30  
+tiny bit more.
+
+Speaker 1  1:21:34  
+And if you look in here, you see that, since I have used the different activation values, you will see that activation zero, activation one, activation two, is showing up, and you will see a combination of ReLU and NH, so it's not the same activation Across the through, throughout the network. Now.
+
+Unknown Speaker  1:22:02  
+Karen, I posted about an o1 live
+
+Unknown Speaker  1:22:05  
+was that
+
+Speaker 3  1:22:07  
+Karen asked me to post that comic, and I posted to o1 live in the slack.
+
+Unknown Speaker  1:22:17  
+Okay? I
+
+Speaker 3  1:22:25  
+Yeah, just change it to hyper parameter optimization. Yeah,
+
+Unknown Speaker  1:22:29  
+my code is optimizing instead of compiling.
+
+Unknown Speaker  1:22:34  
+My code is optimizing itself,
+
+Unknown Speaker  1:22:40  
+and I'm having a very good work life balance.
+
+Speaker 1  1:22:48  
+Well, looks like 875, is as best as it can get
+
+Speaker 5  1:22:52  
+in high school, and I did this little internship with the administrative computer center. Occasionally we would have races with the printout carts in the machine room, yeah, along the, you know, in the space in front of the tape, tape drive space there, along there, so little carts, yeah,
+
+Speaker 10  1:23:18  
+hey, Benoit. One of the things that I'm noticing as it's going through all these trials, is that although the best accuracy has definitely changed, like there's most of the iterative accuracies are almost the exact same. Number
+
+Speaker 1  1:23:36  
+almost the same. That's what I'm noticing as well. Unlike in the previous one here looks like the different permutation of nodes and layers is not having much effect, except only in certain scenario you are getting a little break. Yeah, that's where it is. So now let's see what my best hyper parameters are. Well, let's see first layer with eight. Well, one thing could be, if you see here, I have constrained it to having only up to 10 neurons per layer, because I'm afraid if I go like 2030 it is going to take even longer. So maybe that's the case. So don't think of these as a realistic hyperparameter job, because here we are intentionally simplifying things for the interest of time. I mean, ideally, you probably need to add more like, not 10, maybe 2030, or so, right? Yeah, and that's when you will probably so looks like, if for this, this data set at least looks like, if you are constraining it only to having up to 10 neuron per layer, you are kind of constraining the network, and it is not not good enough. But anyway, you get the point right. But I'm going to then the next activity. I'm going to give you a little bit more time so that you. And if you want, you can choose to try it with a more like a wider levels in your network. Okay, so that's that, and now only one other thing we are going to see now. So we got our best model, and these are the hyper parameter for the best model. And as you can see, the activation functions. Functions are a combination of ReLU and tan h, not just the same throughout. And now, to get the best model, we will see the get use the get best model function, and take the first one out of it, and it will give you point 875, as we saw before, already. Now, after you spend all this time and money right in training this model, what would you like to do? You don't want to repeat all of this again, because the next step from here on is to actually train the model and put it into production so your actual users can use the model. So to in order to be able to do that, what you need to do, because think about it, when you are using this model for generating prediction for any data that comes in future, you cannot train the model. You need to have the train model loaded into some other container, and then only be able to do the prediction based on the train model. So in order to do that, you need to save the model. So here we are going to see how we can save the model, which is actually very, very simple, one line command, which is model dot save. And when you do a model dot save, you have to provide a file path, which is using this Python OS, dot path, right? So then when you do that, you will see, see, I said, saved model. Slash attribution, dot Keras, so a can choose any name and the model will be saved here. So this is our saved model. You cannot open this because this is a binary format, but that binary file is basically your train model with all the nodes and all the weights and biases all set from the training step.
+
+Unknown Speaker  1:27:24  
+So that's your model.
+
+Speaker 1  1:27:28  
+Now, anytime in future, if you want to use this model, you don't have to do any of this thing. All you need to do is you need to just import the TensorFlow, load the model and then generate prediction to show that what I'm going to do is I'm going to restart my kernel. You see, when I restart my kernel, the model that I just trained that is already gone from the memory, so I restarted my kernel. Now imagine now you are using this model, and this time, no training, no optimization, nothing because you already know that someone has already created the best model and saved it for you. All you need to do is just one import TensorFlow, and then you use the same path where you save the model, and then you do Keras, dot models, dot load model.
+
+Unknown Speaker  1:28:32  
+And that becomes your loaded, loaded model.
+
+Speaker 1  1:28:35  
+Oh, sorry, path is not defined because, because
+
+Unknown Speaker  1:28:42  
+here path lead,
+
+Unknown Speaker  1:28:50  
+yeah, you need to have another input for path.
+
+Speaker 6  1:28:54  
+So is that a curious file? I tried doing this with the Scikit models, and I got, like a dot pick pkl file, yeah.
+
+Speaker 1  1:29:01  
+So this one, it actually doesn't matter. You can just say model, the extension does not matter. Okay, you can see any use, any ABC, dot, XYZ, anything,
+
+Unknown Speaker  1:29:13  
+yeah, okay,
+
+Speaker 1  1:29:17  
+okay, so now these imported model is basically what I just loaded from the disk, and then I can do hang on. What happened here? Oh, my test data. Okay, since I restarted the whole thing, now my test data is gone, so now I have to load, sorry about that. So in in a in a actual user scenario, you really don't need to have this test data right, because the model that you are going to be loading, you will be doing the prediction on new data that has not come in yet. But in this scenario, you still need the test data. Data. So that means we still have to go through all of these encoding and then splitting, and that's where you are going to have your train test split. So that's how you will have your test data. Now we are simply going to do that, and this model produces the same accuracy as we saw before we saved the model. And this proves that in this second run, we actually didn't do any training at all. We simply loaded the train model from the file and did run evaluation function, and it gave me the prediction,
+
+Unknown Speaker  1:30:45  
+sorry, not prediction, the accuracy report.
+
+Speaker 1  1:30:50  
+So that's about it. That's all you guys have to learn in the class. So now in your last activity, what you are going to do is you are going to take another set of data, and this is the data set that you have seen before. So this is the sports article data set where someone has already done, done some natural language processing on the different articles. So all of these are the 60 columns that you have. One of this column is level, which basically said, says whether it is the objective or not. So it's, again, a binary classification. What you need to do is you need to take this data. You need to encode the categorical column scaling. I choose it up to you. I leave it up to you whether you want to do it or not. And in here, you will see there is a placeholder for you to actually create the network yourself. What I suggest you guys do is, instead of trying to create it yourself, you use the hyper parameter tuner to find the best model and see what accuracy you can drive with this one. Okay? And this is your activity seven. And the activity six is what I just did, and I already posted the solution file for activity six on your GitLab. So feel free to consult that file if you need to, and then go on and do this and see what accuracy you can derive on this one. Okay, so let's break out into rooms and well, I said 30 minutes, but it's 35 let's do 25 minutes. Karen, okay, I will leave us with a little bit of time to discuss the result. Okay,
+
+Unknown Speaker  1:32:42  
+what is the result?
+
+Unknown Speaker  1:32:47  
+Let's see who did the best.
+
+Unknown Speaker  1:32:54  
+Okay, let me ask you this way, did anyone get 90% No, 85 five.
+
+Unknown Speaker  1:33:03  
+No, 8081 I also got 81 Don got 8083
+
+Speaker 6  1:33:09  
+i reran it, and it got to 86 or 85 Did you? Yeah, I don't know why it changed when I reran it. I guess it's just a seed or something.
+
+Speaker 1  1:33:21  
+Well, it shouldn't vary that much, but around 81 ish is something you are supposed to get on this one. In fact, you will see there is another notebook there that says compare results, which is where you are basically comparing it with what is called your traditional, classical machine learning models, like your logistic regression, your SDC, your what is called, your random forest, and all of that. So if you go through those, you will see the output is all around anywhere between 80 to 85 ish for all of those. And I am actually running on my own, and I basically wrote hyper parameter tuning with more hyper parameter range. And it's still running. And so far, it's around 82.4 and it's been running for almost 10 minutes now. So, so what I did is, in my attempt, I basically said the first layer will have anywhere between one to 30 notes, and then I'm going to have anywhere between one to 10 hidden layers. With each of these hidden layers will have anywhere between one to 30 nodes, and activation functions will also vary from one layer to another layer. So with all of these, I'm running the model, oh, and then maximum epoch, I said, is 100 instead of 20. And. That hyper parameter job is still running on my machine. In fact, I can share with you here. I don't know when it's going to end, but it's still going, as you can see here, and I am around 82.4 best accuracy so far. So anywhere between 81 to 82 is, I think, kind of the limit here. But now look into one thing, very interesting if we look into the compare results. So here we are taking that same data set and we are running it first through a logistic regression or old friend, and it is giving me 85 and a classification report also looks pretty good. 88 and 78 f1 score on the zero and one class. Then you go, make it run through support vector. It's little lower 78 but classification report doesn't look too bad. Then K, nearest neighbor is giving me around 82 with f1 being 86 and 75 decision tree training is 100% so little bit of overfit there with the decision tree, which usually does happen, as we all know, with f1 being 81 and 66 random forest, it it seems like it's also overfitting, although little less one and point eight four,
+
+Unknown Speaker  1:36:45  
+and then with 87 and 78 for f1,
+
+Speaker 1  1:36:50  
+and I, before you guys came in, I was about to run The one for your
+
+Unknown Speaker  1:36:57  
+gradient boost.
+
+Speaker 1  1:37:01  
+Oh, sorry, yeah. Oh. Another thing is, I'm choosing to run all of this without scaling. By the way,
+
+Unknown Speaker  1:37:08  
+96 and 83 Yeah.
+
+Speaker 7  1:37:10  
+Quick question, can you over fit a neural network?
+
+Speaker 1  1:37:15  
+Yeah, you can. That is why the concept of regularization also applies. So if you look in here, where did our TensorFlow playground go here, so you see there is a regularization rate. This is why this parameter exists. I mean, when we were running this, we probably didn't pay much attention. But if you support, I mean, suspect that your model is overfitting, which is your basically, when your training score, training accuracy, is higher than your test, you need to add this parameter called regularization rate, and with this you can attempt to control the over fitting.
+
+Speaker 7  1:37:54  
+Got it so the the key indicator for neural networks is if your training score
+
+Speaker 1  1:37:59  
+is the same, yeah, just like your classic machine learning as well. The same thing.
+
+Speaker 7  1:38:05  
+Okay? Well, so what I mean then is that when we're using these more classic machine learning models, if it's a one for an accuracy score, that tells us that we are overfitting, something's gone wrong, but we've been aiming at trying to get to one or as close as we can. No, that's
+
+Speaker 1  1:38:24  
+because those were toy data sets. Okay, yeah, you see, for these data set, as I'm saying, like anywhere between 80 to 85 is pretty good for this data set. And now what I want to bring to your attention is, if you look through this file, right? You will see using any of the traditional machine learning method I'm getting similar to neural network, or even better, because my neural net, let's see if this thing has completed. No, it's still going on. So my neural net is up to about 83.2 so far, and most of this classic algorithm gave me better than that, and the tree based one did even better, right? So they went above 90 95% so the point to drive home from here is these data set. It looks pretty big, complicated compared to our toy moons data set or blob data set. But this is still not a good use case for a neural net for the most part, and that is why, if you guys remember, during our scikit learn days, I made a comment one day, like lot of people who are new into this arena, they are just learning machine learning as a beginner, fresh out of college, they all go very excited. Yeah, we are going neural net. You like, what are you guys doing? Using psychic learn. You guys are like old school, old timers. Nothing can be further from being incorrect. Do. So statistical, psychic, learn based machine learning has its place, and always would be, because, unless and until you go into the areas of image recognition, natural language processing and so on, neural net is still an overkill, way overkill. I mean, if you run, if you spend a ton of time and money doing hyper parameter optimization like we I am doing now on my other notebook, you can probably hope to get kind of similar accuracy as your
+
+Unknown Speaker  1:40:34  
+vector machine or your decision tree,
+
+Speaker 1  1:40:38  
+but for most part, it will be a waste of your time and money if you use neural net for traditional machine learning problem.
+
+Speaker 1  1:40:52  
+But what we will see next week is when we are going to apply it for an image based algorithm, and that's when these algorithms are to start, going to start to shine over the traditional gardens. Oh, now I am up to 87 See, after so much effort, it's been running for 15 minutes now, and now only I'm getting 87.19 less than 15 seconds it took for me to get that accuracy using a random forest or gradient boosting, right? So I hope you see the point. Okay, so. And another thing I think we have also proven through this is yes, scaling seems to work. Sometimes it will help the data convert. I mean, your learning converge faster. But on the flip side, if you think about it, scaling has its downside as well, right? So think about it. When we are doing scaling, when we do the scaling. We do this. We there are two steps of scaling, right, fit and transform. So in order to take a scalar and fit it, you have to fit it on the unsplit data set, the whole thing, and then you use it to transform test and train and test data set separately, which in all of everything that we have done is not a problem. But now what happens? Let's say you got, let's say 100,000 record training data today, from somewhere you are a machine learning engineer. You train your machine learning model. In order to train the model, you scale the data. Now, once the model training is done, all of that code is gone. Now your model is saved as a chaos file in your disk. Then tomorrow, some other production guy comes in, the DevOps engineer comes in, and the DevOps engineer has to then pick up this file and do some automation to put this file and deploy it on a container and expose your model via some API so that the customers can use it. Now, what will happen when the customer sends one single data point through your API to your model? Now that data point is not scaled, so that means you need to hold the original scalar that you fit it with your training data and make that scalar available during the prediction time. Or you need to have access to the training data during every time you are doing the prediction, because you have to have that same data to fit your scalar in order to able to transform the new data that is coming in. Otherwise the scale will mismatch, and your answer and the prediction will be totally wrong. And that is a real, real operational challenge in the industry. So that is also another reason practitioner do not like to scale the data when it comes to operationalize the thing I mean encoding, one hot encoding, level encoding, you have to do. There is no way around it. You have to. Because if you have a categorical data, you have to convert it to your numerical data, right but scaling right now, now. So 87% here now. So that is also one reason sometimes people want to use the neural net even for traditional method, traditional machine learning. Problem is that there is this belief in the industry that neural net does not mind. It can do just fine, even without scaling. But what we are just saying now, yes, it can do but after an investment of ton of time and money and energy, it can probably match the random forest based classifiers. But within the classical domain, you. So even if you have a large, complex data set, yes, logistic regression probably not going to cut it. Even support vector machine or KNN is not going to cut it, but any random forest based classification using using bagging or boosting method will almost always be a better worth for your time and money when it comes to to the classification and without scaling, because tree based algorithm does not need scaling, right? So, okay, so with that, I will leave this running. I don't know why it is going to complete. It will complete when it is complete, but yeah, looks like I cannot get more than 87% on this one anyway, so that's fine. Let's Let's be happy and go home. I think with this learning, thanks. Cool. Next class, we are going to do recommendation engine, basically something that we all come across in our daily life, in this today's day, right? When we go on to Netflix, YouTube, or any social media, right? All of this algorithm that basically keeps us kind of going in a loop, like you watch a couple of movies in certain genre, and then you kind of get stuck, right? Sometimes we love it, sometimes we hate it. So we will see why, what happens underneath, right in the next class. So cool. Thank you. Thank you guys, thanks. Thank you. Thank you. Bye.
+

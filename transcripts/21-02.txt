@@ -1,0 +1,1686 @@
+Speaker 1  0:01  
+You're here. I think some of most of you probably heard already. So what I'm thinking is
+
+Unknown Speaker  0:09  
+today is 21.2
+
+Speaker 1  0:11  
+now 21.3 the class, last class of week, 21 that's basically really light. So it shouldn't take even half an hour to cover all of that. It's basically just looking at a nice little web framework that you can just write a web application with literally one line of code. So that's essentially it. So if we covered that today, then next week, 2829 and 30, you will be covering all the week 22 material. And even on that Thursday, we can cover all the class material for first half. And you can actually, I can give you the second half of the class to go in your group and start ideating about about your work that you are going to do on for project three. And that way, if you, if you have some kind of idea ready by first of May, then going into next month, you are going to have 123456,
+
+Unknown Speaker  1:21  
+full day
+
+Speaker 1  1:23  
+of class just to work on the project. Okay? And the reason I think that will be good is because I suppose that you guys will be playing with stuff that is hard to get right to. The first time you'll probably build a model. You will see the performance. And these are not like our scikit learn models, right? I mean, some of the model you basically build architecture, you trade it with, let's say, natural language processing or something. And the training is also going to be taking quite some time. And then after that, you will find like, well, let's see what we can do, right? Maybe that was the good architecture, but maybe you can push you will basically have to do lot of experimentation, like increasing your depth, increasing your breadth and depth of your network, adding your, what is called dropout layer, changing your activation function, and so on, right? So I'm hoping that most of you guys will probably end up doing something with neural net and the neural net models, as we have discussed many time before. Unfortunately, there is no thumb rule like what works or what does not. So the only way to get your model better and better. Basically, try out various different combinations the design dimensions, basically. So that way you will get six full days of work to do.
+
+Unknown Speaker  2:55  
+Is everybody good with that? I
+
+Speaker 1  2:58  
+don't think anyone is going to complain if they can start working early on the project. JC, I know last time when I did this, it kind of got a little mad on me, because he got you off guard.
+
+Speaker 2  3:10  
+No, that was, that was when you completely redid. I was like, dang it. But yeah, yeah, I will be more graceful. I apologize.
+
+Speaker 1  3:23  
+Yeah, no, no, I didn't take any offense. So okay, cool. So let's get started then with today's material, and we'll see, hopefully we'll be able to cover both of these material and, Oh, also, I asked Karen to do some demo of hard work. We can do that either today, if time permits, and then, if not, maybe Mondays. Okay. Okay, so let's get started today. So today's topic, basically the conceptual topic is not that much, and then all of the activities today, you are basically going to just play around with the different transformers that are available on hugging face, which is the machine learning model repository that we briefly mentioned about in the last class. Okay, but before we start diving in there, let's try to understand what is transformers actually right? What is transformer and what do they do?
+
+Unknown Speaker  4:23  
+So transformer,
+
+Speaker 1  4:27  
+at a very simple sense, it's basically transform one series of token to another series of token. Transformer just does that. It transforms. Now what is the use of it? One very common use that keeps in mind, logically very easy to understand, is translating English from English to French, English to German, or any language translation, because when you are saying something in English. Right? You are generating a series of tokens. You have to take that and translate it to another language. You have to convert into some kind of token that makes sense in the target language, and then you decode that back. So basically, any language translation is basically three step. You take the source language, you encode this language, right? And by encoding, when you encode a text, what do you generate? Tokens. Tokens. There is also another word we learned, a last class, embedding, yeah. So in this case, I think more proper way to think about is, is embeddings. So you basically use tokens, but not just tokens. You also generate embeddings, which is basically representations of how your tokens are placed in a in a high dimensional vector space, right? That's what embeddings are. So you generate these tokens and embedding which is encoding, and then you do a transformation, Transform, transform, that transforms it these sequence of tokens and embeddings into corresponding tokens and embeddings into a target language. But that can just give us a non numbers, and then you decode it back. So that means, in order to make a translation work, you need to have the model trained on both languages right. Because if you think of that activity that we did in the last class, right where we had a tokenizer, right when we are doing our text generation, so we did our tokenizer and we saved the tokenizer when we build read the model back from the drive, because the model was pretty big and it took it was going to take several hours for that to train, so we had to load the model from the from the disk. But we didn't only just load the model. We also loaded the tokenizer, because it is the same tokenizer we use to decode the token as well. Right now, in case of a language translation, you need to have two such thing. So if you are trying to trans a translate from English to German, you need to have a model trained in English language that can tokenize and de tokenize things in English language, and then you need to have a same thing trained in German language, like your source and target language, and then you need to have a transformer that can transform one one to the other. So that's essentially what transformers do. And we, we this is something very easy to kind of us to for us to think. But now what happens is, when you use this transformer architecture, it turns out they are not just good at doing translation. They are good at doing lot of other stuff, such as if you give it a text, and you ask it to create a summary of the text. It can do that like you can give it a paragraph, maybe with 100 sentence and you ask it to summarize, it will probably bring out, like a five or 10 sentence summary out of the paragraph, right? So it can do that too. Also, another application is if you give it a body of knowledge, maybe like a book to read, like when we prepare for a test, right on some particular subject, we read a book or books, and then we expect that on the test day, when we go to the test, the questions are going to come somewhere from the text that we have already read, and we can answer that. So which is the question answering, classic question answering. So that's also another application of transformer. Another application is kind of similar to what we did in our last exercise in the last class, which is generative, generating text. You give it a prompt, and based on the prompt, it will basically write out a paragraph for you, and then obviously other things, such as something, things that are kind of seemingly impossible, that large language models make it possible, like you can basically ask anything. And is not just taking a just a few sentence summary, it can basically go through everything that has read upon and then basically present with you, in many cases, very meaningful summary, with deep insight and so on. All of these are handy work. Of these transformer architecture. Now, if you think about it in your mind, thinking about how transformer is useful is in doing trans language translation. It's very easy to understand, and it's actually one of the easiest job you can do with transformer, and we basically nailed it many. Back even before the advent of the modern transformers, language translation is not new. Machine driven translation. I mean, yes, with transformer, the translations have become bit better, but it could be done. It is one of the easier problem to solve. But how do you solve let's say question answering problem. How do you solve text summarization problem? If you think about it, it's not very easy to wrap your heads around why that is the case. Now, obviously, in this boot camp, we are not going into detail modeling, but I'm going to try my best to help you see why transformer architecture is also able to solve those problems with a very, very simple thought, if you think about it. So think about our how we were initially doing the tokenization. We did the count vectorization, we did the TF idea, vectorization, all of these tokenization method produced, what?
+
+Unknown Speaker  11:07  
+A series of tokens,
+
+Speaker 1  11:10  
+right? With no relation between the tokens. If you have 10 word, 20 word sentence, it will create 10 or 20 tokens, right? So that's what they do. Then in the last class, we used a vectorization technique where we actually generated the embedding using a trained language model that all mini LM, l6 v2 that model right now, what did that model generate? Did that only generate tokens
+
+Unknown Speaker  11:44  
+or something else.
+
+Unknown Speaker  11:50  
+Embeddings? Remember?
+
+Unknown Speaker  11:52  
+Yeah, I just can't find the mute button. Pass,
+
+Speaker 1  11:56  
+okay, so they generated embeddings, not just tokens. So do you guys remember what was the dimension of the embeddings?
+
+Unknown Speaker  12:05  
+394 384
+
+Speaker 1  12:08  
+I believe, right, if it's 384 dimension. So if you think through, what is it? It actually did. So if you in a normal tokenization. If you have a sentence, let's say, Hello, how are you today? You run it through some kind of a tokenizer, either your NLP space tokenizer, or any scikit learn based tokenizer, anything, right? It will basically create, give you six tokens. Now what we said is, without any context, these tokens. If you try to train a model with these tokens, you are not going to go very far, because the model cannot really understand the context between the tokens, because the model sees the tokens as just random numbers with no memory for what has come before the last word and the before the last one and before that word and before that word. And that is why, when we did our rudimentary text generation model, we used something called LSTM, long, short term memory. And why did we have to use that? Because we didn't generate embedding for our tokens. Our tokens were just pure tokens. All we did is we took chunk of 25 tokens, because in that example, our horizon was t, t minus 25 so we basically took 25 tokens h, and then ran it through a LSTM model, hoping that, because LSTM model does render to some kind of a short term memory, long short term memory, which is short term for most part, in some cases, it could go somewhere to the long, hopefully that LSTM model will able to make our model understand the interconnection between the different tokens. In theory, yes, it did, but in practice, we saw that it didn't do very well. So our text generation, it worked, especially the second model that I did, that I didn't run that remember, it took me 11 hours or so to train, and it at least created some coherent English language text, maybe not so much of a story. But then that's what kind of this thing ended and the reason it could didn't do that is because
+
+Unknown Speaker  14:29  
+even no matter how well intentioned our
+
+Speaker 1  14:34  
+acts were to create that, LSTM and so on, it was not possible for us to generate unique representation of the sentence as they were coming in. If, let's say in that Charlotte come book, if the Charlotte come books have, let's say 5000 sentence in the whole book. If you use the technique from yesterday's class. US, where we not yesterday, the day before, where we use the language model based tokenizer that created 384 dimensional embedding. If you did that, then what would have happened is all of these, let's say, 5000 sentences in the corpus. They will have 5000 different vector in the vector space, in the 384, dimensional vector space. And these vectors would have derived in a way that their cosine distance is a good representation of how similar or how dissimilar they are. So basically, just by looking at the distance between the vectors, the model would pick up some useful clue about how these sentences are related to each other. That's why the embedding works. Now, what happens in this transformer architecture? It takes it to another level, higher up. What it does is it not only just creates embedding for words or sentences. Yes, you do create embeddings first which you supply to the first layer, and then there is a layer which has a technique called self attention mechanism. So what that layer does? It not only looks at your embedding in a sequence as they come in. Instead, it uses hyper parallelism as much as possible using huge, gigantic machines that it basically looks at a single shot all the tokens that are there in the whole body of text. So think about how when we go from vectorization to count, vectorization to embedding. So in order to do vectorization, we are going word by word and picking up a word and converting it to a token using some simple logic. When we go from there to coming up with the embedding for the sentences. What we are doing is we are internally using some LSTM based model that is not looking at each word in isolation. Rather, it is looking at the group of words in sentence and creating a whole embedding for one sentence, which is one vector. So in transformer architecture, we are taking that same concept even one level higher, where in the input layer, we are looking at all the tokens that have been generated, or all the embeddings that have been generated for the all the texts that are there in your corpus, and then your self attention mechanism is basically taking into account how all of these sentences are connected to each other, and then coming up with embeddings which represent a higher level concept that are inherent in the language that We cannot even really Fathom using our simple human mind. So essentially, now it is tokenizing, not just sentences. It is looking at in parallel. And that is why GPU is so much essential these days, and that's why Nvidia stock is going so high, right? So in parallel, you are looking at maybe couple of million embeddings in one shot, and you are trying to find out based on their interrelation, if we have to represent one concept in a higher dimensional vector space, what is the embedding value for that concept going to be? And that is the higher level embedding that these attention network, sorry, attention layer generates, which is like these embedding so it's basically embedding going up one level higher, which in a sense, is kind of similar to how in a convolutional neural network, when you are doing the image processing as you Keep adding one convolution layer upon another. And if you look through, remember, I gave you a code that actually allows you to look through how each of the filters are seen after at each convolution layer. So if you look through, you will see that as you go higher and higher and higher up in the convolution layer, it basically starts to bring out more abstract concept in the image, the first layer only looks at the pixel. The second layer only looks at, let's say, the edges. The third layer may be looking at a light or dark areas. The fourth layer may be looking at something that a more higher level, that something looks like a blob, something looks like looks like a rod or some kind of a geometrical shape. So as we go higher and higher level in convolution, the network tries to bring out at a more higher level abstraction of the underlying features. So that is the similar concept that happens in a language world through the self attention mechanism. So essentially, you are not just transforming your. Four 5000 sentence Charla com book into 5000 embeddings, but you are basically transforming it into a much higher dimensional vector embedding that essentially then you can run it through any other classifier, summarizer or text generation model. Now that model has so much more knowledge about that underlying text that it when, hopefully that you will ask it to do, like, hey, find out where this particular concept lies in the text, which is like in your question, answering it will be able to do a much more better job than you if you didn't do that. So essentially, yes, you are transforming, but you are not simply transforming a series of token in one language and decoding it in another language. Instead, you are taking a series of token in one language and applying a self attention mechanism that allows the model to look across all the embeddings that you have feed in and generate another series of token at a higher level of abstraction in the same language. So that is what the transformation is. But both this kind of transformer, one thing is common, it takes one series of token and creates another series of token. But you will see when we do this with a large language model, this process of tokenization is able to look at multiple like all the embedding that have been generated for the lowest level, which is, let's say, ward level or sentence level embedding, whichever level you do, and then it comes up with a higher level of embedding. So that is why all of these models are so good at accomplishing things that seems to be seemingly impossible for a machine to do. So that's, in a sense, lends to the power of what we see today, every day.
+
+Unknown Speaker  21:55  
+Okay? Now,
+
+Speaker 1  21:59  
+the thing is, we are not going to build any of these ourselves, which may be a good thing or which may be a bad thing, right? If we had to build all of these ourselves, then it would not be a boot camp. Then you basically probably have to do a full two year, like a course, right, a master's degree or something, and then you need to have a lot of mathematical background, so that's why we are not doing that. Instead, what we are going to do is we are going to go back to hugging fest, or friends there who have actually done or not. I don't think hugging face actually did any building model, but they are kind of an aggregated that basically makes all of these different transformers that have been built by different companies, in some cases by companies like Facebook, Google, and also, in some cases, models built by researcher in academia. And they basically make all of these different transformer that are used for different purposes, available through their repository, which you can go and download the model right and then you can build your workflow around it, but they go one step higher above from that, and they actually provide a Python API so that you can use This model, just by naming the model and kind of trying to do similar thing what scikit learn has done for us, which is, no matter which algorithm we use, your code syntax looks the same. You basically take the algorithm you initiate and you fit and you transform. So hugging face kind of does the same to all these seemingly wild array of transformer models that are out there all over the place, so hugging face basically does the aggregation and gives us a gives us a nice, convenient API that we can just use from our Python program. And that's the kind of activity that we are going to do today. Okay,
+
+Unknown Speaker  24:02  
+any questions so far,
+
+Speaker 1  24:04  
+and these are, by the way, if you go to hacking face, you will basically see like, Hey, these are the different models that are kind of available. But as Karen was saying, I mean, it's always kind of a running target. I mean, things keep changing. So don't, don't think that these are the only types of models available. But we are going to take a look at some of these models actually. Why don't we take a look at a few models that we are going to use in the activities today? So this model is called t5 base, and if you go here actually, let me start, just for record, let me start pinging these in our live channel, all the model cards for the model that we are going to use in today's class.
+
+Speaker 1  24:55  
+Okay, so this is the t5 base model. Now what is this model used for? However, if you look in here these tags, it basically says the first tag here. It clearly says, What is this model used for? And it says translation. So t5 base is a model that is used for translation, and there are implementation for this model, using pytorch and TensorFlow, and that's whole bunch of other things. It supports four languages, which is English, French, Romanian and German, right? So these are kind of some of the metadata, and then if you scroll through, it will give you model detailed uses. And in many cases, it will actually give you a link to the academic paper. Yes, here. So the academic paper that basically resulted in this model, most of this model came out from academia, right as as a result of the research that the PhD and doctoral candidates do. So you will get all of these when you go to the model card for that corresponding model that we are going to use, right? So t5 base is the first model we are going to use today for translation. The next one is GPT Neo 1.3 billion parameter. Now, what is the use of this model in the model card you see the use for this is text generation, which we did two classes back in a rudimentary way, using LSTM and training the LSTM with just a few chapters from one book. But this is kind of close to that state of the art model. This is still not state of the art, but it is close to one that have been built, not just with material from one book or one chapter of one book, but that have been trained with many different texts from various different sources, right books, news, news, website, blog and all kind of thing. So that's the model that we are going to use for text generation. The next model we are going to use is basically this distilled Bart model, which is based on the BART architecture. This was, I think, built by Google. Do you guys know Karen Kian? Anybody was Bart built by Google? I think I
+
+Unknown Speaker  27:26  
+anyway, you can look, yeah, I just looked it up.
+
+Unknown Speaker  27:28  
+It looks like it was built by Google, I
+
+Unknown Speaker  27:30  
+think so. Yeah,
+
+Unknown Speaker  27:35  
+the original model was but
+
+Speaker 1  27:38  
+by directional encoding, something transfer. Does anyone remember the full form of Bert on top of your head? Kia and Karen? Anybody Mohammed?
+
+Speaker 3  27:50  
+So anyhow, bi directional encoder representations, correct.
+
+Speaker 1  27:55  
+Bi Directional encoder representation. So that is the model that we are going to use for question answering. And then lastly, we are also going to use this model, which is built by Facebook, which is Bart large CNN, and this model is used for text summarization. So again, as I said, there are many, many, many, many models available, like, if you, in general, if you go to these models, you will see all of these models. And there are models for computer vision. There are all these models for natural language processing, there are models for audio processing, even tabular data processing, reinforcement learning. Lot of different models available under each of this category, right? So, for record, let me just put the model card for the four model that we are going to use today, and the next one is the Bert. Oops, so the next one is Bart. And then there is large CNN model. So these are the four models that we are going to use in our activities. Okay, cool. So shall we dive into the code now,
+
+Unknown Speaker  29:23  
+everybody feeling excited to be able to do something cool,
+
+Speaker 1  29:28  
+yay. Let's go. What is happening with my monitor? Are you guys seeing my screen continuously?
+
+Speaker 2  29:35  
+No, we're just seeing your VS code. Oh, that's,
+
+Speaker 1  29:39  
+I'm saying the VS code. But is it continuous? Because, for some reason that is on my external monitor, and that's like, goes on and off, hang on. Yeah, it's
+
+Unknown Speaker  29:47  
+it's not blinking or flickering. No, for
+
+Speaker 1  29:50  
+me, it is blinking because my monitor is somehow not able to support them. Okay, let me. Me bring it to my main screen, and now I'm going to screen share again.
+
+Unknown Speaker  30:05  
+My external monitor was acting up basically.
+
+Unknown Speaker  30:11  
+What are you seeing now?
+
+Unknown Speaker  30:16  
+You are seeing VS code.
+
+Unknown Speaker  30:21  
+What's going on?
+
+Speaker 1  30:25  
+Okay, you are seeing my VS code is correct, yeah, okay, cool, okay, and it's not flickering for me anymore, so that's good. Okay, cool. So hang on, not this one. So we are basically going to start with translation. Okay, so last class, we already did the installation of the transformers. Correct? You guys already did that.
+
+Unknown Speaker  31:01  
+Okay, so we don't need to do that.
+
+Speaker 1  31:04  
+Okay. So then here what we are going to do is we are going to use that transformer, and then this is the language translation, right? So how language translation works? You basically need to use something called Auto tokenizer that will look at a language, look at a text. And you have to provide which model that you are using and which is t5 base. Now, obviously, when you are providing like, hey, I need to create a tokenizer using a from pre train, pre trained, meaning I have to pass is a pass data model that has already been trained. And then I have to pass the name of the model, which is t5 base in this case, and the name of the model is basically one of those models that are available in hugging face. And you do that, and you say maximum length is 50 so basically, it will tokenize up to a maximum of 50 length,
+
+Unknown Speaker  32:09  
+50 length. So your input needs to be at 5050,
+
+Unknown Speaker  32:12  
+tokens, or 50 characters,
+
+Speaker 1  32:15  
+50 tokens. I think it will only look at 50 tokens, not these are not character based. These are word based. Then let's say you have a piece of text in your language. Let's say hello. How are you today? And now, actually, you know what? This tokenizer is not even needed. I think, oh no, you do need, I'm sorry. You do need this tokenizer, and then you have to do this tokenizer. Hang on a second. I did make some changes here. I
+
+Speaker 1  33:10  
+uh, yeah. So in this here we are saying that our tokenizer is basically being initialized with the t5 base model. And here we are saying we are basically providing some additional metadata to the tokenizer in form of like a key value pair, where the key is basically a instruction that you are giving. Again, from using something that looks almost like a in, like a instruction that you are giving, like translate English to French, and then you are basically passing the target text in this, not target text, sorry, the source text that you have to translate. So you are basically telling the tokenizer that this is the activity that I'm requiring you to do. And then your return tensor is TF, basically meaning a TensorFlow tensor it is going to return. And then out of these, all of these tokens that it is going to return, then we are going to look into the input IDs. So these input IDs are going to be a series of tokens generated from this sentence in English language. So it generated a tensor here, and the tensor is of shape 113 this 13 here is basically the embedding in a 13 dimensional vector space, and then one basically means we have only passed only one sentence here. So that's why, when you do the tokenization and then get all the IDs that you get, you will basically see a tensor which is one by 30. So this is your token, and these are the exact values of the 13 tokens. This 139591566, these are basically the tokens, and it is also accompanied by a one by 13 dimension tensor.
+
+Unknown Speaker  35:18  
+So that's our tokenization.
+
+Speaker 1  35:23  
+Now what we need to do is way to get this auto model for sequence to sequence language model so with this. So that is, that is basically one way. And here. Okay, so I think this is how I did it,
+
+Unknown Speaker  35:47  
+or did I use different? Let?
+
+Speaker 1  36:08  
+Okay, yes. So basically, this first step generated a list of tokens in the English language. Even though we said our intention is to translate it to from English to French. We haven't done that translation yet. Then what we do? We basically take these IDs, which is the which is now the input to the transformation, and then we generate, we basically create a translation model, again, using t5 base, but this time, the model class is different. It is the model for sequence to sequence generator. So the purpose of this model is it takes a sequence of token in one language and converts into another language. Now you might say, hey, how does this? Does this transformer know that my target language is English and my destination language? Sorry, source language is English and target language is French. Well, this model does not know that directly, but when we did the tokenization, we already provided our intent to be able to convert this text from English to French. So therefore, when these models did the embedding, so that information is already built somehow in this vector embedding or tensor embedding that it generated.
+
+Speaker 2  37:30  
+So, so you had said it was, um, like, key value pair, but I think it's, that's the equivalent of a prompt,
+
+Speaker 1  37:37  
+right? What do you mean? Key value Oh, you mean this, yeah, no, this is key value pair. In a sense, I said key is your prompt, and value is what you are trying to act upon. So the key is the like, Hey, you are giving the order to operate upon something, and that something is your value. So inside here, like in the whole thing, is a list as, sorry, a string, but you are providing the string as a key value, where the key is the command that you are passing to the transformer and the value is the text that you are passing to the transformer. So key value in that sense, but the whole thing is a string. Is a F string, as you can see, but the string needs to be structured in a key value type
+
+Unknown Speaker  38:20  
+setup because I removed the
+
+Speaker 2  38:23  
+colon and I put like bolts around it, and it still works. So I was like, Okay, well, man, is this, like, truly a key value or but I think you're, you're, you're saying metaphor,
+
+Speaker 1  38:33  
+yeah. So also you are saying you have removed this colon and it still works.
+
+Speaker 2  38:39  
+Oh yeah, yeah. I just, I just straight up, remove the colon, just try that out. And I'm having it work now. But what I did was I put quotes around it, but then I was trying to say, I was trying to use, like a prompt and say, translate English to French, but make it as angry as possible. And it just translated, make it as angry as possible. So there's some, there's some, like, prompting that it's doing that some kind of this, yeah,
+
+Speaker 1  39:03  
+yes, so that that prompting is taken into account when there's a set of input IDs or tokens have been generated, and then you pass those IDs into your actual transformer, which is a sequence to sequence transformer Using that same language model, which is t5 base, and then you will basically get a set of output IDs, which is, again a tensor, very similar structure as the input. And then the only thing that is remaining for you to do is decode it. So for decoding, you basically take that same tokenizer instance here that you have used to encode and use that same tokenizer to decode the output IDs. Now why output ID is zero is because, if you just bring the output IDs, it basically gives you a two dimensional tensor. So when you they I'll say output ID is zero, the. Basically brings out this origin, actual list that is wrapped around with another list. So that's why output ID zeros is this list. So then you pass this list of tokens, or transform tokens to the tokenizer for decoding, and then transform token gives you that same text in a different language, which is, in this case, is French. Now there are some special characters that are added, which is some padding here, and then a backslash is, which I guess, is probably useful if you want to put this token as part of like something else, to build out a whole paragraph and render but if you just want to see what this particular sentence is, you can add another parameter there, which is called skip spatial token, and set it to true, and then it will skip those additional spatial token and only keep the the the sentence, the translation of the sentence, which is this, okay, so was it a lot of work you guys think, or was it very simple to
+
+Unknown Speaker  41:13  
+be able to transform English to French? What do you guys think? I
+
+Speaker 2  41:19  
+mean, that was, that was, that was like 10 lines of code. We do, yeah,
+
+Unknown Speaker  41:26  
+huh? Whale now.
+
+Unknown Speaker  41:29  
+Rail, well, noises, I'm sorry,
+
+Speaker 1  41:35  
+I'm not sure I'm getting it. Did the animal the whale? Huh?
+
+Speaker 2  41:39  
+Yeah, translate well, well calls into English. Oh,
+
+Speaker 1  41:43  
+the well calls into English. Yes, maybe there is a, I mean, I don't know. I mean the marine biologist, I hear that they kind of trying for quite some time to try to encode well calls. Maybe someone under there have already built a model. This model, however, another, if you they are, but this model, however, if you remember, if you look into the data card, it actually says that it works for Ford language only, English, French, German and Romanian. It
+
+Speaker 2  42:18  
+worked. It worked for me when I changed the word translate to transform. But it did something slightly different. It put an, there's an extra voo in this translation that it took out,
+
+Speaker 1  42:29  
+okay, yeah, play around with it. I didn't even know how you can, how exactly you can change this, right? Because and these things, I mean, yeah. I mean, this kind of a prompting. This is a prompt you
+
+Unknown Speaker  42:45  
+are giving to the model, right?
+
+Speaker 1  42:48  
+Some prompt might work a little bit better than the others, so you can always play around. But anyway, so that was pretty easy, I'd say, but we can actually do things even easier using even less lines of code, which is by using these class called pipeline from the same transformer library. Now using this pipeline, these few lines of code becomes even easier. All you need to do is you import the pipeline, and then from that pipeline, you take that pipeline class, and then you basically specify, what is this that you are trying to do, what is the work we are trying to do? Translation. So you say, hey, initiate this pipeline for translation using so and so model, which is your t5 best now, obviously you need to make sure that t5 best model is intended for translation, which you can see when you go to the t5 best model card on hugging face, and it will tell you that, what are the use cases that you can use this model for? And yes, t5 best appeared to be a translation model, so you can basically cut out through all the details that we did earlier, which is doing an initial tokenization, and then take another model class with the same model to do the sequence to sequence transformation and then decode. You don't need to do any of that if you use this pipeline class, use that same defi based model and just provide in one word, what is the action that you are trying to take, which is translation with just this one line, your tokenizer is Ready, and then all you need to do is, let's say you have this text. You basically say translation text, translated text. And then here, obviously you also have to best provide like prompt from which language to which language. So you are essentially writing. One line of code here, this is your translator. And your second real line of code is this, that translator you need translate English to German. And here is my English text, and that's it. And then you print the results. So essentially it comes down to, I think I did not run this, it comes down to three lines of code instead of 10 lines of code, and you get
+
+Unknown Speaker  45:32  
+translation. That's it.
+
+Speaker 1  45:37  
+Now, if you just change this German to French. Read on. You see this is German language output. You chase this change this German to French, it will give you a French language output for the same text.
+
+Speaker 1  45:58  
+What if you give it something that it does not support let's say I call it Italian. What do you think will happen?
+
+Unknown Speaker  46:10  
+Probably complain,
+
+Unknown Speaker  46:12  
+no,
+
+Speaker 1  46:19  
+it says something Italian, and then says the German. I don't know how, why. It basically says, Hey, you take this German language and then you basically convert that to Italian. But I saw another cool thing when I tried to translate it to Hindi. I was just trying the other day. Oh, no, actually it is doing the same thing. Okay, so it's actually taking the German as the base language. If it does not know which language you are trying to translate to. And then they're saying, Hey, by the way, this is the German language. Then you go ahead and deal with it. You translate it to it to Hindi, Italian, or whatever you need
+
+Unknown Speaker  47:03  
+to, that's funny,
+
+Speaker 1  47:05  
+but Romanian, it should be able to, because the model card said it does support Romanian.
+
+Unknown Speaker  47:15  
+Yes, Romanian, it did support. Okay,
+
+Speaker 1  47:24  
+so then, basically, for any text, you take the text, you add a prompt, translate from what to what like. You basically append that prompt to the text, and you just do a one function called translator, and you are done. Now, obviously, when you just print the results, you will see the result is printed as a list of dictionaries. If, since there is only one sentence we are passing here, that's why in this list we have one item, but that item is a dictionary where the key is translation text and the value is the actual text. So that is the return value. Now, obviously, if you want to get the actual text out of it, you basically take the corresponding list element, which in this case is zero the element, and then you specify the key which is this, to get the actual value of it, to take the value out from that nested dictionary of list structure, which is pretty simple. Now, obviously, in your if your original text contains more than one sentence as a list, then your result will also contain multiple of this, which we are going to see in a second in the next activity. Actually, okay, so
+
+Unknown Speaker  48:46  
+so this one is pretty clear the translation.
+
+Speaker 1  48:50  
+Okay, so the next one is supposed to be a student activity, but I think it's, it's not that big of a deal. Let's just run through here. So here they are asking you to do the same thing instead of except, instead of a one sentence, they have given you a list of sentences like news headlines, and you guys are supposed to do the transformation first in a in a more, I would say, detailed way where you take tokenizer and then you tokenize, and you then you take a sequence to sequence transformer with which you transform, and then you use a decoder to decode the transform token back into the target language. So that is one approach you have to use, and then you have to repeat the approach using a pipeline model, pipeline class, which basically brings all of this down to single one line of function call. So that's all you need to do. So how do you do it? So here, if you see, it's just like in some of the other. Um activities that you have also seen, they're basically promoting the use of these reusable function that you can leverage in different places. So let's say you have a whole bunch of headlines. So this is your list of headlines. So what do you need to do? You need to take this list of headlines and use the tokenizer to convert these two tokens and get the list of tokens so you could run that just like that, which is what we did in our previous activity. We basically took the not this one. Sorry, so
+
+Unknown Speaker  50:46  
+in our first activity that we saw,
+
+Speaker 1  50:49  
+we took the initialize the tokenizer, first with defi based model, and then we did a tokenization, and then we did translation, and then finally we did a decode. So what we are going to do is we are going to try to break it into logical step and capture it in a function. So the first function that we are writing here is we are calling create input IDs, where you basically you pass a list of headlines, instead of just one text, basically list of texts. And then you take one text out of these, so one headline each. And you do this, you take that tokenizer, you provide the command from which to which language, return tensor TF, and you get the input IDs. And you save this input IDs in a list, and essentially, you basically return the list at the end. So then if you write it in this function, then you can just do that function call and that will, oh, sorry, that will create your what is happening? Oh, I forgot to run this.
+
+Unknown Speaker  52:08  
+Yeah, okay,
+
+Speaker 1  52:13  
+this and then just create input IDs, and that will give you how many input IDs, again,
+
+Unknown Speaker  52:21  
+10, I suppose. 1-234-567-8910,
+
+Speaker 1  52:26  
+so we are supposed to get basically 10, uh, embeddings. So let's see what we get.
+
+Unknown Speaker  52:34  
+Yeah, so you see, 1-234-567-8910,
+
+Speaker 1  52:41  
+so we are basically get 10 cancel embeddings for the 10 different headlines that we are provided. Now when I did length of input IDs, so obviously we are getting 10 because this is 10 here. Now what I did is for each of these tensors, I printed the shape of it. And do you notice something in this shape?
+
+Unknown Speaker  53:13  
+You do see
+
+Speaker 1  53:15  
+the number of embeddings that it has generated is not same, all across, which is kind of different from what we did in the previous class, where all the embeddings for the sentences that it was generating was all 280 4.2 84 dimension. But this is a different type of transformer. So here how many embedding values will be generated. Part tensor part sentence will depend on the structure of the sentence and the language that you are trying to transform to. So that's why the number of embeddings that is it is being generating, it is variable, and these number that it is generating has no direct connection with how many tokens it have. It depends on how these tokens can be represented meaningfully so that it becomes easy to convert these tokens into the series of tokens into the target of the target language. So based on how simple or how complex the structure of a sentence is in your source and your target language based on that these dimension of the vectors or the tensors is are going to change, and you cannot predict that before, because that's what the algorithm is doing on behalf of you. But we have 10 of these because, unlike in the previous activity, where we had one sentence, where we had 10 sentence, so that's our input IDs. And then when we are doing it the long way, hard way, then we have to take these input IDs, and now we have to take an actual sequence to sequence translation model, which we are initializing here. And now we have to run a loop. To all of these input IDs, and for each of the input ID tensor, then you have to apply a generate function on using your translation model, and that will generate the sequence of tokens in your output language. Now, using the same philosophy as up above here, what we are doing is we are writing this as a function.
+
+Speaker 4  55:31  
+Oh, I this function is not treated correctly. So this is your function.
+
+Speaker 1  55:40  
+Now you take these headline input IDs and just do a decode, and that's where all of the decoding is going to happen. Now, obviously it's going to do the decoding for 10 sentences, so it's going to take a little bit of time. And then after that decoding is done, then you have to take all of these 10 translated headline tensors that it is returning, and then go through one by one. And for each of these, you just bring this. And here, when we are appending, I am already doing output ID zero. You see, after the transformation, what I'm doing is, I'm appending, I'm taking the output ID zero, so that means I'm already and also I'm doing skip special tokens, true. So I'm going to get the neat result, minus any of these additional thing, like not that list of dictionary structure, nothing. We are just going to get just simple sentences with no padding character, nothing. Oh, wow. It is taking longer than I was thinking. It's taking over a minute now. Okay, exactly one minute it took, and then there you go. That's your translation, yeah. So that's your English to German translation for these 10 different news headlines. So essentially the same thing that we did in the previous activity two. Here, we just applied it on 10 text instead of just one. And then in the second part, you are asked to repeat the same thing, but this time using a pipeline function instead of doing your three step like tokenization, transformation and de tokenize, decoding, encoding, transformation and decoding. Instead of that, this time, we are going to do this using one step, which is pipeline. And we are going to say this pipeline is a translation pipeline based on t5 base model. And then the step we are going to do for each headline is we are going to add a prompt which is translate from so and so language to so and so language for that headline. And then this is just one function call that we are doing, translator, no encoding, transformation, decoding, separately. Everything is happening inside one translator call, because this translator is actually a pipeline, and then it returns the result in a JSON structure. So we get the first element of that, and then we take the translation text, and that's it. So you apply that, sorry, you define that, and you get your translated headlines. Now, obviously we know that it is going to take a while, so let's actually see whether it takes one minute or not. Last one it did take one minute for exact same 10 headlines. This would be a good test to see whether pipeline is computationally any efficient or not. All right,
+
+Speaker 3  58:44  
+I might have missed it. Is the pipeline for the Transformers The same built on that same pipeline that we used before,
+
+Speaker 1  58:51  
+before, meaning in the previous notebook, was a different notebook, right? Yeah,
+
+Speaker 3  58:55  
+but there was, like, a capital P pipeline that we use to, like, build, like custom model pipelines. Is that built on the same thing? Or is it
+
+Speaker 1  59:02  
+like, are you talking about the psychic land pipeline? Yeah, this is, this is, see, this pipeline is from transformer, which is the library, which is the library that goes with the hugging face. This is not the scikit learn pipeline. Then, okay, so, completely different. Okay, okay, different, yeah, yeah. So here you see it actually took 30.5 seconds. So it's computationally efficient too.
+
+Unknown Speaker  59:30  
+Yes.
+
+Speaker 1  59:35  
+So pipeline not only makes you write less code, but it also makes your execution faster. So we just have proven that there is one thing bothering me though. Let me try it in a different way, guys. So here what we are doing is we are not providing all the 10 sentences together. We are providing one headline each. What I want to see is, what if,
+
+Unknown Speaker  1:00:10  
+instead of doing this loop myself,
+
+Speaker 1  1:00:14  
+what if I provide all 10 headlines together?
+
+Unknown Speaker  1:00:21  
+Let me actually write a different function for that.
+
+Unknown Speaker  1:00:29  
+Actually, this is supposed to headlines
+
+Speaker 1  1:00:34  
+anyway, so what I'm going to do is what I want to do. I So
+
+Speaker 4  1:00:40  
+here,
+
+Speaker 1  1:00:46  
+when we are doing this thing, translate English to French.
+
+Speaker 1  1:00:58  
+What if we do this outside of a loop.
+
+Unknown Speaker  1:01:06  
+Oops, what happened?
+
+Unknown Speaker  1:01:11  
+Didn't I do Control X? So
+
+Speaker 1  1:01:22  
+so instead of passing one headline, what if I pass the all of the headline, the whole list, and then my results would be translator. And now, instead of looping over the headlines, what if, if I just loop over the results,
+
+Unknown Speaker  1:01:49  
+oops,
+
+Unknown Speaker  1:01:52  
+and then,
+
+Speaker 1  1:01:55  
+instead of doing results zero, dot result zero, I'm going to Take it from the corresponding results. So I'm just looking over the results. But I'm not calling this translator 10 times. I'm calling it just one times, giving the list of all 10 headlines. I haven't tried this before, but looking at this syntax, it just came to my mind, maybe this could work. Let's see. Okay, so then I'm going to actually, yeah,
+
+Unknown Speaker  1:02:30  
+I should give it a different name, by the way.
+
+Unknown Speaker  1:02:41  
+Let's call it translate all.
+
+Speaker 1  1:02:52  
+And then I am going to print the output from translate all. Let's see.
+
+Speaker 1  1:03:06  
+Are you guys seeing the difference, the difference in the two approaches, the last one that I'm just trying out, keeping my fingers crossed, because I haven't tried this before. So just wanted to see whether it becomes possible and computationally efficient or not?
+
+Speaker 5  1:03:23  
+Living Dangerously, huh? Moving dangerously.
+
+Speaker 1  1:03:29  
+Oh, come on, no, it's past 30 seconds. The last one was done in 30 seconds. I just lost the rest, but at least it didn't give up any error. Yep,
+
+Unknown Speaker  1:03:43  
+I got it.
+
+Unknown Speaker  1:03:45  
+Mine is a little different,
+
+Speaker 1  1:03:47  
+yeah, but why did all of this come in one line? Though? No, hang on, no.
+
+Speaker 5  1:03:52  
+It's the last it's just not. They're just not, no, no.
+
+Speaker 1  1:03:57  
+But why it is not? Why it is giving me my original English back.
+
+Speaker 5  1:04:03  
+Oh, did you do the right did you print the right? Right list?
+
+Unknown Speaker  1:04:12  
+What is going on here, guys?
+
+Speaker 1  1:04:16  
+Okay, hang on. Let me see what is my headlines currently? Headlines is in English. Fine, passing all of these headlines to this guy. And this guy is saying, translate English to French, and then translate English to French. And I'm saying this is a F, but that's not how it is going to work.
+
+Unknown Speaker  1:04:52  
+So how do I pass a list
+
+Unknown Speaker  1:04:59  
+I'm looking through? Doesn't know understand how to do this stuff. It
+
+Speaker 1  1:05:02  
+doesn't understand that because this is an F string, and I'm passing it f string, I'm passing a list into the placeholder for F string, and that's why it gets messed up.
+
+Speaker 2  1:05:13  
+Yeah, I had to do the same thing. I was, I was getting, I was like, I was in this translating, and then looking at you, like, oh, okay, that's why, because
+
+Speaker 1  1:05:23  
+I do this. How about I do this? How about I do Dart join?
+
+Speaker 2  1:05:31  
+Oh, making one string. Well, aren't you going to exceed your max tokens? Oh, right. Why don't you just loop through, like the previous approach, and you just append to the translated headlines
+
+Unknown Speaker  1:05:43  
+joining no
+
+Speaker 1  1:05:44  
+but then that would be no difference than the previous approach. I
+
+Speaker 2  1:05:47  
+did the same thing, and it was way faster. I went from two minutes to 22
+
+Speaker 5  1:05:53  
+seconds. Well, that's a trial join, because it doesn't look like it's that many tokens.
+
+Unknown Speaker  1:05:59  
+I'm sorry, what did you do? Jesse,
+
+Speaker 2  1:06:01  
+again, I looped through it inside the function and my previous approach, the previous section, took me two minutes, 22 seconds.
+
+Speaker 1  1:06:11  
+No, but in looping through, what did you do? Oh, I
+
+Speaker 2  1:06:15  
+just, I just did a similar approach, where I took the headlines and I did a for loop. So like for headline in headlines, and then fed up the headline and then appended to that, that translated headlines list that you have find the set function. So basically exactly this. So
+
+Speaker 1  1:06:32  
+that one I that's what then that is different, yeah, so, but then you are still calling the model 30 times, sorry, 10 times. So I was trying to see whether I can get it done with one call to the model. I see, I see what you're saying, but yeah, I Yeah, you see what I mean, right? Like you are, yeah, this would probably work, but it probably let's do a space to join. But then that is not it might actually exceed your token limit. I don't know. Well, that
+
+Unknown Speaker  1:07:06  
+doesn't work that long. I
+
+Unknown Speaker  1:07:09  
+have an idea, though, if that works, I have an idea.
+
+Speaker 1  1:07:18  
+No, it didn't do anything. It didn't do it. That's weird. It didn't do it. Never mind. Then what I was
+
+Speaker 5  1:07:26  
+going to say, if you get it working, and you have one string where you do is you put inside of the the empty character,
+
+Speaker 1  1:07:33  
+uh, it is not working. I'll tell you why it is not working. Because now, since I'm joining all these sentences, so it thinks the whole thing is one sentence, and that sentence if you put this token, because these are language aware model, right? So it is not just blindly transforming token to token. So essentially, this is a case where you are giving 100 word sentence you which you are forcing on the model. But model is like, No, that is not a grammatically correct sentence. Therefore, I'm not going to do anything. I'm just going to split that speed the token back in your source language. I'm not going to even attempt to translate it into the target. What if
+
+Speaker 2  1:08:10  
+you joined on a on a period space instead of on an empty string? Yeah. So inside your function, go to the join and then do period space that, yeah. And then
+
+Speaker 1  1:08:20  
+I don't think it's also going to work, but it
+
+Unknown Speaker  1:08:24  
+turns it into a paragraph, right?
+
+Speaker 1  1:08:28  
+What are these things ending with? Oh, there is no period at the end, right? The original headlines does not have a period. Okay, let me see.
+
+Speaker 1  1:08:56  
+Yes, it worked. So basically, now you giving all these 10 things as like, what is called paragraph, 10 sentence paragraph. And it is giving you a 10 sentence paragraph,
+
+Unknown Speaker  1:09:11  
+yeah, and you could split that on the period.
+
+Speaker 1  1:09:14  
+You can actually do that. So here, instead of saying return translated headlines, you can say return translated headlines, dot split on the same thing. Period.
+
+Unknown Speaker  1:09:28  
+Where did this come from
+
+Unknown Speaker  1:09:31  
+that thinks it knows better than you?
+
+Unknown Speaker  1:09:34  
+So
+
+Unknown Speaker  1:09:37  
+here I am going to split it back. I
+
+Unknown Speaker  1:09:49  
+What?
+
+Unknown Speaker  1:09:52  
+Oh, oh, my bad, my bad, my bad. But.
+
+Speaker 1  1:10:00  
+So we if that is the case, then we don't even really need this. All we need to do is for result in results translated. So okay, so we don't even need this. We just say,
+
+Unknown Speaker  1:10:25  
+return oops,
+
+Unknown Speaker  1:10:29  
+return
+
+Unknown Speaker  1:10:32  
+result.
+
+Unknown Speaker  1:10:38  
+That's what
+
+Unknown Speaker  1:10:40  
+translation, text.
+
+Unknown Speaker  1:10:45  
+You have to do result. This thing
+
+Speaker 1  1:10:49  
+you have to do, do result, translation text, and then just apply a split right there
+
+Unknown Speaker  1:10:58  
+and return the whole thing
+
+Speaker 1  1:11:01  
+the list. You don't need to save it as a list and that's it. You are done in even less line, number of lines,
+
+Unknown Speaker  1:11:10  
+yeah, forget about this thing. I
+
+Unknown Speaker  1:11:29  
+what is going on,
+
+Unknown Speaker  1:11:36  
+and it should be in array.
+
+Speaker 5  1:11:37  
+Why don't you just display results and see what we're translated headlines by itself without your
+
+Unknown Speaker  1:11:49  
+no I know why
+
+Unknown Speaker  1:11:52  
+I have to take that.
+
+Unknown Speaker  1:11:57  
+It's going to work now I
+
+Unknown Speaker  1:12:07  
+so the first approach to
+
+Unknown Speaker  1:12:11  
+There you go, but only
+
+Speaker 5  1:12:12  
+lost your periods. But you know,
+
+Speaker 1  1:12:15  
+but why do I not get 10? Why do I get five back again? How
+
+Unknown Speaker  1:12:21  
+many do you have to begin with? More? Or you had 10.
+
+Speaker 1  1:12:27  
+Maybe there is a limit to how many? Oh, right, right, right. So it is basically, you see, it has just finished up to here. So, Jesse, you are right now, these approach work, but now we are hitting the limit of the tokens. Not that bad, yeah, that's why. Now, where did we build that token? Here?
+
+Speaker 1  1:12:54  
+No Hang on, that is using the tokenizer, but when I'm doing the pipeline,
+
+Speaker 4  1:13:00  
+um, here
+
+Unknown Speaker  1:13:03  
+we are not saying anything.
+
+Unknown Speaker  1:13:07  
+It might have a default, and maybe, maybe
+
+Speaker 1  1:13:09  
+some, there is some. So we have to look into this anyway. So these are some things you can probably dig in, I don't know, look into the hugging face documentation. Or maybe there is a because these models are not like truly state of the art. These are still model that probably have been trained and published few years back, like 567, years back. It's not very up to the date. So maybe this model does have a limitation of, I don't know, 256, tokens. So that's why
+
+Speaker 5  1:13:39  
+that's everything. Of the pipeline is, it's kind of a black box, and
+
+Speaker 1  1:13:43  
+their pipeline is kind of a black box, yeah, so you have to look through. You
+
+Unknown Speaker  1:13:46  
+have more flexibility the other way too,
+
+Speaker 1  1:13:49  
+if you do it the other way. Yes, correct.
+
+Unknown Speaker  1:13:52  
+This is pipeline. Is just a really quick way you can do it. Yeah? It
+
+Speaker 2  1:13:57  
+does take a max length. Oh, it does a parameter
+
+Unknown Speaker  1:14:01  
+in pipeline.
+
+Unknown Speaker  1:14:03  
+It seemed to, it didn't, it didn't barf on it. So let's see,
+
+Speaker 1  1:14:06  
+where did you provide the max plan, like in this here, you
+
+Speaker 2  1:14:10  
+know, hold on a second. I might have, I might have just given it something and then ignored it. Oh, okay, I'm looking for the parameter list. I
+
+Unknown Speaker  1:14:18  
+don't see it. Let's see there's some other
+
+Speaker 3  1:14:20  
+in the pipeline comment about like how the max length defaults to something,
+
+Speaker 1  1:14:39  
+not Seeing max length right away. But anyway, I didn't worry too much about it during the class. Maybe these are something you can figure out. Try and figure out when the need becomes. Need is there. If not, you will just do that way. Cool. Okay.
+
+Unknown Speaker  1:14:57  
+Are you guys now ready to do some text? General? Generation,
+
+Speaker 1  1:15:01  
+and let's see who is a better text generator, my program that took 11 hours to train, or whether any of the model that we get from hugging face. Okay. Okay, so this is one thing I'll warn you. This will take, actually, very long to run. So what we are going to do, I'm not going to run everything, and I'm just going to show something that I have already run, because it takes that, like for that very large model. It takes really, really long. Okay, so since we learned that, yes, transformer is this cool way, it kind of gives us a shortcut. We don't have to worry about initial tokenization and then transformation and then de tokenization. We don't need to worry about that. We just take a type pipeline. We basically say two things. One is, what is the task we are trying to achieve, and second is, what is the model we are going to use for that particular task? That's it, and we are done. So now if you look into the second model card that I select, which is the GPT Neo 1.3 billion. So what we are going to do here is we are and that model card, it says the purpose of the model is text generation. So that's why here we are creating a pipeline with the task of text generation, and with this model, and then with this generator, I'm just saying generator, and then provide the prompt. Let's say I like gardening because and then the idea is that model will basically generate next 125 tokens. We are saying next, sorry, max length, 125 and then it will generate. And then we will do the same thing. We'll take the first element of the result and get the generated text out of there. And then, when we did that,
+
+Unknown Speaker  1:17:00  
+you see how crazy this is
+
+Speaker 1  1:17:03  
+the model. And if you run this multiple times, every time, it will spit out different text. There is no guarantee whatsoever. Now, I did run it few times, and in some cases, it started off on a good note, and then after a few word, looks like someone got really drunken. And then the guy started blabbering without any idea what he's talking about. But in this particular run,
+
+Unknown Speaker  1:17:33  
+the drunkard was so drunken,
+
+Speaker 1  1:17:37  
+he basically, well, kind of the same thing. He says, I like gardening because so up to this point is fine, it said because the work is therapeutic. So it completed the sentence in a meaningful way that actually makes sense, like makes human sense. But then it didn't stop there. Then it kept hallucinating, and some, for some reason it started quoting an American poet named Lillian valve from something, and I don't know why he did that.
+
+Unknown Speaker  1:18:10  
+It just kept going on and on, for
+
+Speaker 1  1:18:14  
+reasons beyond my understanding. But if you take all the blabbering out, it kind of completed the sentence, but if it stopped there, I'd say, well, it's probably pretty good. But now so that's that I'm not running this, because it actually takes quite some time to run this. There is a small text generator that you can use, which is basically the same GPT Neo, but instead of 1.3 billion, there is a smaller model with 120 5 million only. And that model is completely, utterly useless. That model does not take as long to generate the text, but when we actually let me, let me just run the smallest one, and let's see what happens. Right now.
+
+Unknown Speaker  1:19:07  
+We'll have some fun.
+
+Speaker 1  1:19:09  
+Let me import this. First other thing is, there is also a large model I'm going to show, which I would say, Do not even attempt to run into your machine. Your machine will go out of memory like you're not machine, your Python kernel will crash. Basically, you should run it on colab. Okay, so I did the transformer pipeline. I'm going to skip this 1.3 billion parameter model because it takes little long to generate. So I'm going to take this small generator with 125 million parameter model, and I'm getting a prom giving it a prompt my favorite animal as Chad because, and let's see what it does. So.
+
+Speaker 1  1:20:05  
+Because it says, I've never seen a cat before. That's why your favorite animal is cat. Like, come on, how can something be your favorite if you haven't even seen it before? But then it kept adding this, like it said this again, and here our max length is 25 that's why it stopped. But if you do it with a max length of, let's say 250 it is going to do something really weird. It will keep repeating these last few words over and over again. For some reason,
+
+Speaker 5  1:20:41  
+I looked at, I Googled Lillian balf. There is no such poet but, but if you just do just the name poet, yeah, she turned Jennifer. Lillian balf was pleaded guilty on August 9, 2014 for bank robbery.
+
+Speaker 1  1:21:02  
+Oh. So that is, this is the like case of model hallucinating.
+
+Speaker 5  1:21:10  
+It wants this. It wants to please you so it doesn't know it makes stuff up, or just make, yeah, the
+
+Speaker 3  1:21:16  
+the text, the text repeating part reminds me of, like, like, when you do iPhone autofill and you just keep it in like the top one, it'll start like repeating itself, yeah. But
+
+Speaker 5  1:21:28  
+also, some early, early generative models would do kind of repeat themselves. Oh.
+
+Speaker 1  1:21:32  
+Now see, even in the small model, since I did max length, 250 it is taking long because in earlier I said 25 and now I'm saying 250 so it is basically thinking hard, and it is trying to feed all of these 250 and then it failed again miserably and repeated the same mistake. I have never seen a cat before.
+
+Unknown Speaker  1:21:57  
+Just get done repeating. I
+
+Speaker 5  1:22:00  
+remember thinking like GPT two would do stuff like that too.
+
+Speaker 6  1:22:05  
+Yeah. But now I quick question on that, on the model, oh, sorry, the path token ID 50, 256, is that the same number, or is it something that you can change?
+
+Unknown Speaker  1:22:18  
+Um, that one
+
+Unknown Speaker  1:22:20  
+like, how do you know it is 50, 256, now,
+
+Unknown Speaker  1:22:27  
+bad token ID, right?
+
+Speaker 1  1:22:35  
+I am not sure about why we are using that particular ID. I so
+
+Speaker 6  1:22:45  
+I was just wondering if we can change it and maybe, okay,
+
+Speaker 1  1:22:48  
+what if? What if we don't use this? Let's say, oh, oh no. It said setting back token ID to us. Token ID, 5256 for open end generation. So looks like it is saying is, since you have not asked me to set anything, I'm going to set it to 5256 anyway, and then give you what you need. So there is your answer. Is
+
+Speaker 2  1:23:16  
+EOS in the sentence, yeah, yeah.
+
+Speaker 1  1:23:20  
+So pad and EOS. So pad basically goes, I think, before the sentence, and EOS goes to the end of the sentence. And in their library, like this is where you need to read the basically the document in for the model, in the model card. And you will probably get some idea. But, yeah, so 5256 probably means there is not going to be any EOS at the end.
+
+Speaker 5  1:23:45  
+So is this even a transformer, or is this an earlier sequence to sequence model?
+
+Speaker 1  1:23:53  
+This is well, sequence to sequence. Is that transformer too? Karen,
+
+Speaker 5  1:23:58  
+yeah, but I'm thinking an earlier one, so that sometimes did weird things like that. And they also did the hat though at the end of the sentence. Yeah.
+
+Speaker 1  1:24:05  
+Okay. Now the next activity there that you have, which is basically the same thing, instead, they are asking you guys to do it with no difference whatsoever, with the exact same thing, but it's just a different prompt, all the world stage. All the world is the stage, and we are and that's your prompt. Now, this is the one that I actually ran here on my collab notebook, which I'm going to
+
+Unknown Speaker  1:24:41  
+whoop do we miss the night?
+
+Speaker 1  1:24:54  
+No, I think my computer froze. Can you hear me now? Yes, yes, yes. So what I was saying is, I don't know how much you are able to hurt you are able to hear me. So in the next activity, they are asking you to do the exact same thing, but with a different prompt, which says, All the Worlds is a stage and we are and then the ask is to basically generate first using the small generators, which which is 120 5 million, which is if you do that
+
+Speaker 1  1:25:30  
+here, so it kind of repeats something does something that we have already seen. It says and we are. It basically added these four words, and we are all in it together. For some reason it picked that up, which doesn't make any sense, but at least it's a grammatically correct sentence. And then it kept on repeating that same thing, oh no. And then it said also something. I'm not saying that. I'm not a great writer, but I'm saying, Oh. And then it kept repeating that I'm not saying, I'm saying that I'm not a great writer, and it keeps repeating that kind of similar to what I what we saw before, and it will keep doing that. And then I repeated that with the 1.3 billion, which is the medium sized model. And this took me, like, I think good, like, almost 10 minutes or so, and it comes up with something like this. It says, We are all actors, fine. And then it added that old saying, play. What's on your mind, really? So it kind of did the same thing to what it did with our previous exercise, where it finished the sentence correctly and then added a completely useless quote from a supposed poet, which is who is not even a poet, as Karen find out, right? So it kind of did something similar here, too. It says, Yes, we are all actors. And then it kept on going on a completely tangent. It did not kept repeating, huh? I know it's interesting. Yeah, it did not keep repeating itself, but it went on saying something else, and then finally it I did it 2.7 billion model. And this is the one that I tried in my computer, and it couldn't even execute. It ran out of memory, and I ran it on Google, colab, and I was sitting in my front of my computer, doing other things almost more than half an hour. And then I had to do something. I walked out, it was still running, and then I came back and checked out in, checked on it after a few years, a few hours, and then it was done. I don't exactly know how long it took, and that's why I said do not try to run it. But if you look into the output of this, let's say all the world's stage, and we are all players up to this is fine. And see, even after these 2.7 billion parameters, it still went completely off the tangent and started blabbering about something,
+
+Unknown Speaker  1:28:23  
+not a coherent idea,
+
+Speaker 5  1:28:25  
+bothering and the previous example, it actually makes it makes sense. Does it repeat? You did you expected to repeat the original quote? No, you're not gonna necessarily get the original quote. But if you read it, I did see it says the world is always changing and adapting new strategies to our meet our needs. We must always do what makes us feel stronger and better in spite of things we do not like. I mean, it's really a creative tax. It's really nice now, yeah,
+
+Speaker 1  1:28:56  
+goals, our goals that drive us to be better. That's why, our why and how and what we do. Yeah, it basically is talking like a philosopher, like, big, big, yes.
+
+Speaker 5  1:29:07  
+But if you want just the original quote, it's not just a quote chain. It's own tax. It's generating its own text from
+
+Speaker 1  1:29:17  
+it is generating its own text. But that has nothing to do with our problem. That's what I'm saying.
+
+Speaker 5  1:29:22  
+Well, your prompt was just a segment of text. It's not, you're not telling. It complete this quote you're telling. There's a beat some words make a story from that, predicting each word and the next word and the next word. So you kind of auto generatively, you know, yeah, when you kind
+
+Speaker 1  1:29:41  
+of, you know. But again, these models, do you know Karen on top of your head, like around which time these models came out?
+
+Unknown Speaker  1:29:48  
+These are not the latest llms, right? No,
+
+Speaker 5  1:29:51  
+no, yeah, that's probably around the time of GPT two, from what I'm saying, Neo 2.7
+
+Unknown Speaker  1:29:58  
+so maybe, what, four, five years back?
+
+Speaker 5  1:30:01  
+Okay, on the card, on the model card, okay, but they're cool. I mean, it makes cool text, yeah, that's a lot better than your model than mine.
+
+Speaker 1  1:30:12  
+No, yes, no, go, go. Run my second model that I trained for 11 hours, and you will see that. Come on, that's good.
+
+Unknown Speaker  1:30:22  
+Be fair here.
+
+Unknown Speaker  1:30:25  
+Okay, anyway.
+
+Unknown Speaker  1:30:28  
+Okay, so let's take
+
+Speaker 1  1:30:32  
+14 minute break ready and come back at 815 and then we will just run through couple of other activities here, which is your question answering and summarization. Okay, and then, as we plan, if time permits, we'll just go and take a look at the next classes activity, which should be really quick. So let's come back at 850. Guys, we did the summer translation and we did the summary. Now we are going to look at which model to use for question answering.
+
+Unknown Speaker  1:31:18  
+Just give me a moment here.
+
+Unknown Speaker  1:31:26  
+Okay,
+
+Speaker 1  1:31:34  
+okay, so for question answering, we are going to use this Bart based model, which I forgot, the full form of Bert, which is bi directional encoder representation from transformer. So these basically architecture allows you to bi directional information flow, meaning it will use the past and future token to understand the meaning. So past token meaning when you are supplying it a body of text to read from. So that's your past token. And future token is basically when you are asking it a question. So it basically need to accommodate the flow from both directions, what it has learned in the past and then going forward, what the few user is asking to make sure that it can connect the context of what we are asking to what it has learned from the body of text that it has seen before. So that's what it is. But now the particular version of Bert that we are going to use is called distill Bert, which is kind of a more like a more manageable size, concise form of a bus Bert model, not the full, full scale model. So this is the model that we are going to use. And this says here, as you can see, it is used for question answering, and it is available for English language only. So what we need to do is basically the same thing as before, since we know now that we can use pipeline and that way, we can do things very easily, not worry about encoding and decoding at all. So we are creating a pipeline with our task specification, which is question answering, and the name of the model, which is this, which basically directly comes from the from here. So whatever the model name here in your hug infest model card. So you basically provide that, and that gives you the model that we are going to use. So then what you need to do is two steps. I mean, two things you'll need. One is you need a body of text. So these body of text is this, which is basically talking about what a transformer is. So essentially what we are learning here. So that's your body of text that we are supplying it that clearly says it Transformers The Deep Learning Model and so and so. And keeps on going three paragraph which is basically taken from our Wikipedia article on that topic,
+
+Unknown Speaker  1:34:27  
+and then we are going to ask it three questions.
+
+Speaker 1  1:34:31  
+And the three question would be, when were transformers first introduced? What are the what are transformers better than meaning, what came before transformers, and what are the applications of transformers. And you can try out changing the question, maybe changing slightly, changing the wording of the question, or even read the paragraph first and think about what are the other meaningful question you can ask and expect an intelligent entity to be able to add. Answer you based on the reading of these three paragraphs here.
+
+Unknown Speaker  1:35:04  
+So that's what we are going to do.
+
+Speaker 1  1:35:09  
+Okay, so how we do that? Well, we take one question, let's say, when were transformers first introduced, and then we call our model the question answerer model, which we initialized here the question answered model. And then we pass we pass it two things. One is the question, which is this question, and then the context, which is the text. So now if you run this,
+
+Unknown Speaker  1:35:40  
+oh, sorry,
+
+Speaker 1  1:35:43  
+text is not defined. Okay, yeah, I have to define the text.
+
+Unknown Speaker  1:35:50  
+Okay, now
+
+Speaker 1  1:35:54  
+let's try to understand what is the result. So result basically says, if you look at the last key of the result, Jason structure. This is the answer that the model is providing to our question, and the answer is 2017 so what was the question? The question was, when were transformers first introduced? And it says your answer is 2017 and this parameter the score. It basically says confidence level, what is the model's confidence level that this indeed is the right answer. So as you can see, it has a fairly high confidence that this must be the right answer. And it says where in the text it found this. So it will give you the start and end position in the text where it thinks that these answer is coming from, which is position number 864, to 868, and that's basically what it is. So if you look into here, here Transformers were introduced in 2017 by a team at Google Brain. So this is where it is getting this answer from and giving us the answer.
+
+Unknown Speaker  1:37:17  
+So that's all there is.
+
+Speaker 1  1:37:20  
+Now, if you want to ask, ask a series of question, like this list of question, well, the same thing, you can create a function, and you provide a list of questions to the function instead of one question with the same text, of course. So read the text and then answer this list of question for me, that's what this function is supposed to do. So how would you do that? Well, you do the same thing. You call this question answerer, but inside a for loop, where you are looping through all the questions that you have here, and you are basically asking one question at a time. You are taking the result, and from the result, you are getting the answer, which is this key here the score, which is this key result, start and end. So basically all four keys you are extracting and the question itself. So you are basically adding these five list of five elements to this data list, and then you finally creating a pandas data frame so that you can see this very nicely printed in a table structure. So that's your question answer function. Then all you need to do is you just call this function, and then function will give you answer to all the question, when were transformers first introduced? 2017, what are transformers better than? Well, RNNs, because after RNN then came transformers. What are the application of transformer? It says translation and text summarization. So if you look into the this thing, it shows you that sometimes it not just taking only one word out of it. It actually says translation and text summarization. So the answer can be little complex also. Now I don't know whether it will be able to actually summarize something and give you the answer, this model probably would not so these answers, whatever it is, whether it is a single word or single number answer, or whether it is a group of word, the way this model works, from what I have seen, is that answer needs To be presented verbatim somewhere within your text. So this model, I don't think it has the ability to basically summarize the body of text and give you a summarized answer. It cannot do that. Maybe there are other models that it can do that. But at least the Bert model did not do that, because it was kind of one of the first generation of language model. That came to the came in the market few years back, so that that's how you basically build a question answer model using Bert, or question answer application using Bert,
+
+Unknown Speaker  1:40:22  
+any question,
+
+Unknown Speaker  1:40:33  
+Are we all Good?
+
+Speaker 1  1:40:39  
+Okay, so the next activity, again, is the same thing. It is supposed to be a partner activity, so two people grouped together. But again, we can just look through here. So here, the text is given in form of a separate file, and it is basically a history of video games, how video games evolved, instead of a history of RNNs or transformers. This is a history of video game. This is your body of knowledge that you are going to pass to the same Bert model. Exactly same model, distal Bert, base case, digital squad. But here you are going to load the data from a file. So therefore you have to open the file and read the file to get the text. So that's our file. And then we are basically reading the text into this string called video game history. And that is your string. So that is basically the whole string, the whole text. Now we are asking three question. When did Nintendo release its entertainment system in the United States? What was the first home video game? And when did Internet gaming start, and then I'm just skipping this. Let's just do the whole function. And if you run the function, it will basically give you the answer to all three question.
+
+Unknown Speaker  1:42:20  
+So when did Nintendo release its game, 1985
+
+Speaker 1  1:42:24  
+with a 98% confidence level? What was the first home video game, Magna box Odyssey? Okay, let's actually check whether that is true.
+
+Unknown Speaker  1:42:37  
+We can,
+
+Speaker 1  1:42:42  
+ah, uh, Magnavox Odyssey and the first arcade video games. Hang on. Where did this go? Magnavox, huh, the first home video game console. Yeah, it clearly says here, the first video home video game console was the Magnavox ODC.
+
+Unknown Speaker  1:43:04  
+That was the first video game,
+
+Speaker 1  1:43:07  
+yeah, and the first video games were computer, space and Pong, and I think that's why the confidence is little lower here only 0.57 not in 80s or 90s, because it said, no, sorry, I'm looking at the wrong one. This one, sorry, point seven, seven. Because the question we asked is, What was the first home video game? And here it says that first home video game console and the first arcade video game yeah, that's why the model, even though it says Magnavox, it still is not sure. So what we can do is, let's do this way. What was the first video game console? Let's change this question, just to see that whether the confidence changes. And I'm also going to add another question that will say, what? Where the first No, hang on. Oh no, this is actually game console and the first arcade video games. Okay, let's say, what is the first arcade video games? So let's see if the model is more confident this time. Yeah, you see I just added that word console. What was the first video home video game console? It is giving the same answer, but instead of 77% confidence now it has a 90% confidence level. And what were the first arcade video games? It actually said two things, computers. And Pong, because that's what it says here, Computer Space and Pong.
+
+Unknown Speaker  1:45:08  
+So it actually picked up both of those.
+
+Speaker 1  1:45:13  
+Now I suppose if I say instead of what, where, if I say, What was the first home market video game, it will probably still give both of those answers, but with a lower confidence level, that's what I suppose it is going to do. Let's try. No, it did not make a difference between was and where it still gave the same answer and with the same high confidence level, so it you understand what I'm saying, right? Like if you say, what were the first video games? And what was the first video game? These two questions, they have subtle difference, but it looks like it is model, huh.
+
+Unknown Speaker  1:46:04  
+Did you run? Did you run that?
+
+Speaker 1  1:46:05  
+I think I did. I think I did because, because, yeah, it sounds like, yeah, yeah, yeah. What was the I changed the where to was okay, but it did not make a difference. So I
+
+Unknown Speaker  1:46:26  
+What else can we ask? Let's see.
+
+Speaker 1  1:46:34  
+Let's put the model to test. These things are so long. I
+
+Speaker 1  1:46:52  
+yeah, you can actually ask a lot of question think through guys, what are the other questions we want to ask our model? Do
+
+Speaker 6  1:47:15  
+maybe ask the question about what happens in Japan's or something to do with Japan's video in this reader, okay,
+
+Speaker 1  1:47:27  
+let me just do the line break. Or actually, hang on. Why am I doing this? What is mine? Oh, actually, this is the
+
+Unknown Speaker  1:47:37  
+the text is that way. I
+
+Unknown Speaker  1:47:44  
+I just want to read it better myself.
+
+Unknown Speaker  1:47:49  
+What is your question? You said, repeat that again.
+
+Speaker 6  1:47:55  
+Ask everything about the video game industry in Japan. I don't know it's like a second paragraph there. Which one?
+
+Unknown Speaker  1:48:07  
+Second row? Row 13.
+
+Speaker 1  1:48:11  
+Line 13, yeah, because it has like a fresh prompted Japan's video game industry to take leadership of the market. Okay, so shall we act? Ask like, what prompted Japan's video game industry to take leadership in the market?
+
+Unknown Speaker  1:48:27  
+It will probably just say, the crash.
+
+Speaker 3  1:48:30  
+Yeah. Can you, can you lead it less or or? No, huh? Can you lead it less meaning? Can you use less less direct, verbatim.
+
+Unknown Speaker  1:48:43  
+Okay, late, less, okay,
+
+Unknown Speaker  1:48:46  
+tell me, give me an idea. Like,
+
+Speaker 3  1:48:48  
+what were the results of the video game crash in 1983
+
+Unknown Speaker  1:48:53  
+Yeah, I like that. I think that's better. Don't, don't tell the
+
+Unknown Speaker  1:48:56  
+whole
+
+Speaker 1  1:48:59  
+the results of the video game crash in 1983
+
+Speaker 3  1:49:03  
+Yeah, I'd be interested to see what, what it comes up with.
+
+Unknown Speaker  1:49:07  
+Okay, let's see.
+
+Speaker 1  1:49:16  
+Hang on, how many question I have? 1230, heaven.
+
+Unknown Speaker  1:49:22  
+Question answerer,
+
+Unknown Speaker  1:49:26  
+why is it giving me one less?
+
+Speaker 1  1:49:30  
+Oh, no, I have 10 columns per page.
+
+Unknown Speaker  1:49:39  
+What is really going on here.
+
+Speaker 1  1:49:42  
+So these are my questions, and I have 12340,
+
+Unknown Speaker  1:49:48  
+I forgot a comma here. That's what happened.
+
+Unknown Speaker  1:49:59  
+Ah. Yeah.
+
+Speaker 1  1:50:01  
+Look at this. What were the results of the video game crash of 1983 it says a flood of too many games. Is it? Yeah, which was
+
+Speaker 3  1:50:12  
+like the first part of that answer? I think there was a couple things after it.
+
+Speaker 1  1:50:19  
+Oh. By a flood of too many games. Sorry, yeah, that's pretty good. Opted up. Not bad, not bad. And what prompted the Japan's video game this thing, what is called, What was the question? What prompted the Japan's video game industry to take leadership of the market. It just says the crash, yeah, which is kind of what I was expecting. It will say the crash, yeah. Like, you can probably feel right. I mean, this model is good, but it basically like, it, it doesn't talk much. It's like, you know, some people are like that, like, like, they'll whatever you ask them, they always will try to answer it in one or two words. It's that kind of model, right? And it definitely rewards like the most, most direct, huh? I was just saying.
+
+Unknown Speaker  1:51:13  
+It rewards being specific, yeah?
+
+Speaker 6  1:51:21  
+So if you are, if you ask a question that has nothing to do with the video game, maybe you ask, what is a cat? It probably doesn't know what the answer is, right, just going to hallucinate.
+
+Speaker 1  1:51:32  
+That's a good idea. So let's add that. So what you want to ask, like, what is a cat? Or what? If I do this,
+
+Unknown Speaker  1:51:41  
+what is a video game?
+
+Speaker 6  1:51:43  
+No, don't want to put anything about video games. I want something. Let's see. Let's see.
+
+Speaker 3  1:51:52  
+Like that. It only knows like about the video game history. Nothing about video games.
+
+Speaker 1  1:51:57  
+What? What is a video game? It's a space for with a 99% confidence level,
+
+Unknown Speaker  1:52:05  
+I guess. I guess it likes space for
+
+Speaker 2  1:52:08  
+Yes, like ethereal about the or expanded about what a video game itself is. It's just saying. What is a video game? Give me one. Yeah,
+
+Unknown Speaker  1:52:19  
+and it was space for exclamation, ask
+
+Speaker 1  1:52:21  
+it, ask it to give its own definition. Now it is, so that's what I'm saying. This is not an LLM, guys. That is exactly what it is not going to be able to do, because this is just a transformer now, so these transformers are built on top of RNN and LSTM, right? So think about how the industry evolved. So there were neural network, then people realized, no, we need to make it deeper. So then kept deep neural network. And then people realize deep neural network are not enough. We need to have different, exotic architecture. That's where convolutional neural network, recurrent neural network, LSTM network, all of this came in, and that helped us do something better, such as some embedding. But then we figured, like embedding is not enough, we need to do some transformation. That's when the attention mechanism came in. Remember, the paper that we talked about, the attention is all you need, and that's where the these are. These are all the results of that attention mechanism. But LLM goes beyond that. So llms are built on top of that. So these itself are not llms. Probably it's an extension of that, but these are, these models are nowhere near the as sophisticated or as large as what you would expect from an LLM, so, like, even, like, five, six years back when people were thinking, Yeah, I mean, people were making mock carry of AIP. AIP. Folks like the scientists, like, yes, these guys like they don't know what they're talking about. Their models are stupid. They cannot do anything. They're basically talking about these models. So what we are thinking they it is not going to be able to do that. For example here, if it were an LLM, let's try to think of an abstract question, actually. Let's add a completely off topic question, what is a cat?
+
+Unknown Speaker  1:54:33  
+Let's see what the model does.
+
+Unknown Speaker  1:54:39  
+And
+
+Speaker 1  1:54:46  
+let's ask a question that is related to video game, but maybe not directly. There difference between a video game and a computer game. Oh, here I made a typo. So.
+
+Speaker 1  1:55:06  
+For the cat. One, it should just give up space for and look at the confidence level. Point, 0002, it the model is basically saying, Okay,
+
+Unknown Speaker  1:55:17  
+it's it's pretty not sure that a cat is space for. What
+
+Speaker 1  1:55:20  
+is the difference between a video game and a computer game? It said poor or cloned qualities, again, completely off. So you see it is trying to do what it does based which is trying to find verbative answers, but at least the model know when it is failing at finding the verbatim answer. It is giving something but with a low confidence level. So that is what this model is good for. It would not give up, but it will give you a very low confidence score. Now, if you want to use this model for something useful in your app, then you, as a designer of the app, you will basically set up some kind of a threshold of the score, like maybe point five or something, below that, you just throw that answer out.
+
+Unknown Speaker  1:56:08  
+I mean, that's, I think, the best you could do,
+
+Speaker 5  1:56:10  
+yeah, below a certain threshold, you can have it say, I don't know, yeah,
+
+Unknown Speaker  1:56:15  
+you can put that in your app.
+
+Unknown Speaker  1:56:20  
+Or can you answer everything as Space War
+
+Unknown Speaker  1:56:26  
+a cat? What is a cat? Space War
+
+Speaker 5  1:56:33  
+so similar to what is a video game? What is a cat was probably so similar that it got the first part of it in a small, a small, a small, a very small similarity between then, yeah.
+
+Speaker 1  1:56:50  
+Okay, now on to our last one, which is text summarization. And this is going to be done with this model by Facebook, which is Bart large CNN. It is a encoder, encoder sequence to sequence model with a bi directional Bart like encoder and an auto regressive GPT like decoder. BART is pre trained by corrupting the text with arbitrary noise function and learning model to reconstruct the original text, particularly effective when fine tuned for text generation such as summarization, translation, but also works well for comprehension tasks such as classification, question answering and so and so. So you can use this model for different thing. But according to the people at hugging face, they are clearly said, this model is good for summarization. Okay, so therefore we go with summarization. So we take our pipeline and we create the pipeline with the task name summarization and the model name, cart, large, CNN,
+
+Unknown Speaker  1:58:03  
+and then we give it an article,
+
+Speaker 1  1:58:06  
+which is the same article that we gave our other model, which is the deep learning article, which is pretty big. And now we are saying, okay, use the summarizer model. Pass in the article and ask to do, ask it to do the summary with a minimum length of 30 and a maximum length of 130 So, and you get the answer.
+
+Unknown Speaker  1:58:39  
+The answer will obviously come in here that JSON structure.
+
+Speaker 1  1:58:49  
+Now while that does, I'm going to do a length on Article, just oh, this is also going to take some time. I want to see what was the length of the length of the original article and what was the
+
+Unknown Speaker  1:59:05  
+length of the summary like, how much it has shortened down.
+
+Speaker 1  1:59:09  
+And then you should run this and see what the quality of the summary is. Okay, that one is done now. Article is 1800 character, and then summary should be much shorter. Which is this. Let's see what's the lane of this thing is
+
+Unknown Speaker  1:59:35  
+so 405 characters.
+
+Speaker 1  1:59:39  
+So it will create between 30 230 tokens. But here we are measuring the characters. So 1800 character text came down to
+
+Unknown Speaker  1:59:51  
+405 character summary.
+
+Speaker 1  1:59:55  
+Now you might say, hey, let's read the summary and try to figure out whether the summary. Makes sense, if you are thinking that, I would say, yes, you should be doing that. But let's hold on to that thought until we go to the next exercise from the next class, and then where we are going to actually build the app. And through that app, you will be able to read this summary in a better way.
+
+Unknown Speaker  2:00:25  
+These two
+
+Unknown Speaker  2:00:27  
+hang on here, what I'm trying to see is there are,
+
+Speaker 1  2:00:32  
+yeah, I have seen this. It does not make any difference. So here, if you see, when we first did this, we said, said, Do sample equal to false. So when you say, do sample equal to false, it is supposed to give you a more focused summary, which will be kind of more like with a single focus, kind of repeatable. And when you say, do sample equal to true, that means you are kind of asking the summarizer model to generate a few different samples summary and take one of the sample out of there randomly that should able to give you a more diverse set of output every time you run at least. That's what the literature says. But I have ran it both with do sample false and do sample true, and I have noticed that every time it generates the exact same summary. So I don't know it is supposed to give you a diverse summary, but it is not. So do sample essentially does not have any effect at all. That is not from what I have seen.
+
+Speaker 5  2:01:37  
+What if you try a subscript one, zero, huh, what have you tried to do something other than zero, maybe like one. You
+
+Speaker 1  2:01:46  
+were saying like, well, if I need to do that, then first I need to see how many we have in diverse summary,
+
+Unknown Speaker  2:02:00  
+whether we have only one or zero.
+
+Speaker 1  2:02:04  
+And then let's do from
+
+Unknown Speaker  2:02:11  
+summary in diverse, summary,
+
+Unknown Speaker  2:02:16  
+print, summary text,
+
+Unknown Speaker  2:02:20  
+oh, why do is it from four, okay,
+
+Speaker 1  2:02:28  
+but I think it will still return only one. Karen, let's see, yeah,
+
+Unknown Speaker  2:02:37  
+I did one,
+
+Speaker 1  2:02:41  
+yeah, oh, it didn't print the Oh, I didn't add that print. And this is in the middle of oops.
+
+Unknown Speaker  2:02:51  
+I think it did only one,
+
+Unknown Speaker  2:02:59  
+zero a second, maybe, yeah, yeah,
+
+Unknown Speaker  2:03:02  
+it only one,
+
+Unknown Speaker  2:03:04  
+and it was up to you to decide which one to use.
+
+Speaker 1  2:03:12  
+Yeah, word for it is word for word, character by character, it is the exact same. Your diverse summary is exactly same as your focus summary. I'm not seeing any difference at all.
+
+Speaker 5  2:03:22  
+What if you make min length, like five and max length? And I'm just curious what it does then,
+
+Speaker 1  2:03:27  
+um, main length, I'm not sure whether it will have an effect.
+
+Speaker 5  2:03:31  
+Well, smaller or output.
+
+Speaker 1  2:03:36  
+So max length you want to increase or decrease?
+
+Unknown Speaker  2:03:39  
+Max length of 1010?
+
+Unknown Speaker  2:03:42  
+Yeah, I think it will fail.
+
+Unknown Speaker  2:03:50  
+That's actually not a bad attempt.
+
+Unknown Speaker  2:03:53  
+It looks like I just took the first you are
+
+Speaker 1  2:03:55  
+basically tying the hand of the poor guy. Give me deep
+
+Speaker 5  2:04:02  
+learning is a family of the first, first, 1234, so it looks like it just the first seven, kind of, well, yeah, no, I
+
+Speaker 1  2:04:14  
+see it here. It says deep learning is part of a broader family of machine learning method, blah, blah, blah. And when you tie this much tighter. Constraint is shorter. Deep Learning is a family of machine. There you go.
+
+Unknown Speaker  2:04:36  
+Yeah, little too short. Interesting, cool.
+
+Speaker 1  2:04:44  
+So that's all the four different models that we learned, right? So which is to recap here again. T5 best by Google for translation, the GPT based model. GPT do 1.3 billion token for text generation, although it doesn't do a good job at it, which we saw, 23
+
+Speaker 5  2:05:11  
+huh? 2023 is last. Oh, this model. This was well updated May 3. 2023
+
+Unknown Speaker  2:05:20  
+so I'm gonna say, Oh no,
+
+Speaker 1  2:05:22  
+but I think someone did some further training. But I don't think the architecture is updated at that time. If you look at the architecture, is probably pretty old.
+
+Unknown Speaker  2:05:30  
+Yeah, the paper might tell you,
+
+Unknown Speaker  2:05:32  
+yeah.
+
+Speaker 1  2:05:35  
+And then the third one is the distill Bert, based on Google's Bert model for question answering. And the fourth one is Facebook's implementation based on the BART model, but it is used for your text summarization. So these are the fourth thing we saw. But obviously, as I showed you here, there is a whole bunch of different model like, if you go to, let's say,
+
+Unknown Speaker  2:06:05  
+summarization,
+
+Unknown Speaker  2:06:08  
+you see how many different models are there for summarization?
+
+Speaker 1  2:06:14  
+Just look at that. It says Page 77 and in in one page of, what, how many, 50 or so, 40 or 50, so, almost like, what, close to 1000 models that you can potentially use for summarization. And we, obviously, we cannot afford to try each we just picked one. But what I would suggest, if you guys, let's say any of you the five groups, if any of you want to just go and explore some of the more promising hugging face model or more advanced, more recent models, you can do your own research and play with those model and try to create some cool app with it. I mean, that would be a perfectly valid project as well, if you'd like to do that.
+
+Speaker 1  2:07:11  
+Okay, any question on transformers, so
+
+Unknown Speaker  2:07:17  
+the class for transformer is essentially done. I
+
+Speaker 6  2:07:23  
+you know, actually, I do this may be a super dumb question. I'm so sorry. Nothing is done. Go ahead, go back to your Jupiter notebook again. Please Benoy, um, I went to the hugging face page and I couldn't find where you okay? So for example, right? You have that diverse summary equal. Summarizer article, min, line 30, Max, line 130 do somebody goes through and so forth? How do you know you have to put that?
+
+Speaker 1  2:07:50  
+Oh, these ones. So this is not something you are going to find in theirs, because this thing is summarizer is what summarizer is a pipeline object, and pipeline class is in Transformers. So for that, you have to, that's a very good question. Actually, for that, you have to find the Python API
+
+Unknown Speaker  2:08:12  
+for hugging face transformer.
+
+Speaker 6  2:08:15  
+Okay, so not on the BART CNN page.
+
+Speaker 1  2:08:19  
+But no, no, no, no, hang on. I will show you. Okay,
+
+Unknown Speaker  2:08:25  
+there has to be some kind of a Python documentation.
+
+Speaker 5  2:08:28  
+Well, one thing first, if you go to the model card, usually it says, Use this model in the upper right hand corner and transformers and give you the basic code you need to write,
+
+Speaker 1  2:08:38  
+huh? So that it will give but I'm what Ingrid's question is, how do I like here when I'm saying summarization? So if you go to summarizer model, it will you will see the same code, kind of what we have written, max length, main length. But her question is, how do I find that? So these API is not provided here.
+
+Speaker 5  2:09:03  
+Oh, it's the well, it's in the notebooks you install the transformers.
+
+Speaker 1  2:09:10  
+But there has to be a separate page, like a documentation page for the API. I'm sure,
+
+Unknown Speaker  2:09:18  
+nowhere. That's what I'm trying to find.
+
+Speaker 4  2:09:36  
+Would it be this? Docs, let's send a docs, core, ml libraries, transformers, farmers,
+
+Speaker 3  2:09:55  
+pipeline. I posted it in the Zoom chat. Oh, this one. Yeah. Where you see where it says pipeline, underline, yeah. If you click that, it'll take you, oh, here. I think this is the the main doc page, yeah. But there's also another one that has, like, a tutorial as well.
+
+Speaker 1  2:10:14  
+That's the one I'm looking for. Where did you post that? Behind the zoom, chat, live, live? Yeah, put it in live channel, please. Thank you.
+
+Unknown Speaker  2:10:27  
+Yeah, it was there. Pipeline, API,
+
+Unknown Speaker  2:10:31  
+pipeline, API tutorial, yeah.
+
+Unknown Speaker  2:10:35  
+But does it give you everything?
+
+Unknown Speaker  2:10:39  
+It gives quite a bit across multiple pages,
+
+Speaker 3  2:10:44  
+and then you can the next few pages, like machine learning apps, what's web server inference and like adding a new pipeline? It's quite a bit.
+
+Unknown Speaker  2:10:59  
+Yeah, I
+
+Speaker 1  2:11:07  
+Oh, look at also this thing. So it is saying for large model, you can install another library called Accelerate, which accelerates some optimal, like, optimizes some of the computation throughout the large model.
+
+Unknown Speaker  2:11:22  
+But I don't know whether that will work with
+
+Speaker 1  2:11:25  
+why the same torch? Do you really need to import, install pytorch?
+
+Speaker 5  2:11:36  
+Might need to have it available, have it in your environment. I don't know.
+
+Unknown Speaker  2:11:41  
+I don't know,
+
+Unknown Speaker  2:11:43  
+but earlier, and I did that,
+
+Speaker 5  2:11:47  
+and I use that Excel, and fact, I couldn't write that, importing that accelerator.
+
+Speaker 1  2:11:51  
+I am actually liking this page, Kian, because, well, what is this? A endless scroll, or what? Oh, no, look at this
+
+Unknown Speaker  2:12:02  
+information.
+
+Unknown Speaker  2:12:06  
+Are we on the same page? By the way?
+
+Speaker 1  2:12:09  
+This one is pipeline tutorial. This is the docs page. This is the proper docs. Yeah, so I'm going to post this also in grid. What you can do is you can bookmark both the one that he and posted and the one I posted.
+
+Unknown Speaker  2:12:30  
+This one.
+
+Unknown Speaker  2:12:34  
+Yeah, this also more like
+
+Speaker 1  2:12:38  
+you probably won't get very nicely structured, API document documentation, unlike you get for more standard library, established libraries such as psychic learn, and I think that's what Karen was mentioning before. It's like, always like a moving target. So you have to kind of, kind of wherever you are, doing something. If you get stuck, you have to kind of do something, look into the blogosphere and see what people are doing, using recently and so on, and then obviously come here. But I suppose some of these might not work also as intended, like what we just saw when we are doing the summarization. There is a way to do diverse summary versus focus summary, but that really didn't work. So that do something
+
+Speaker 5  2:13:23  
+that's pretty good. I was like, Lang chain, but hugging, facing, I think is pretty good. Line, chain, that's definitely LAN. Chad, you said, yeah, that's definitely a moving target. They just like, I have, I always, a lot of times I've end up fixing bugs in the, you know, class, you know, make a child class and then override a function that wasn't working right with one that would work. Yeah.
+
+Unknown Speaker  2:13:50  
+Okay, um,
+
+Speaker 1  2:13:53  
+so Ingrid did that kind of answer your question? I know, not in a perfect way, but somehow, yeah. Resource,
+
+Unknown Speaker  2:14:00  
+this is very complex. The Amazon, it is, it is, yeah, but yeah, I'll,
+
+Unknown Speaker  2:14:06  
+I'll read that. Okay, so, thank you.
+
+Speaker 5  2:14:11  
+Okay, cool. I like hugging face, even though they didn't get they didn't invite me for an interview when I applaud there.
+
+Speaker 1  2:14:19  
+Okay, um, let's quickly look through the next week's couple of activities. There is basically no need to go through the slides even. Essentially what we are saying here is, hey, by the way, there is a this app building framework called Radio, which is this thing which I have? Oh, no, sorry, not this one. So radio. This is one of the many, many, many, many framework of today's the it's kind of, I'd say, like a new trend. I don't know whether it's a fair or not, but this is kind of an industry strain to build this low code, no code, application to buy, basically, quickly, pro. To type your work and show to the world, like how cool you are, how cool your work is, and that kind of thing. So this radio is one such framework that that allows you to create somewhat sophisticated looking web application without writing almost any code. Almost there's a little bit of code you have to write. And now, why you do use this particular app? Out of many, many apps, I have no clue. These are some of the things that have been provided in this class. So I'm just going to walk you through this, what it does, and then you can take it or leave it. So essentially, this whole gradio thing is basically a Python library which you import and on that Python library the moment you say, hey, create an interface, it basically creates a UI application like this, and you can basically provide what are the inputs that are going to be there in your UI and what are the outputs? So basically, think about any use use case where you are going to build an application where you are going to ask your user a bunch of question, and then you are take, going to take the data that your user is answering through typing or selecting from a drop down or clicking on a check box and stuff like that, and you take the data, then you go back and you do some kind of a computation. It doesn't have to be machine learning based computation or AI it could be any computation. So you do your computation in a Python function, and then you take the computation output, and then you basically display the output. Instead of doing a print on a Python console, you are basically displaying the output through a browser based application. That's all it does. Take input from user do some computation and do output in Python world. What we do? We use the input function to take user input, then we use whatever Python content code that we want to write, and then we print the output using print statement. So all it does it, it just puts a web application wrapper on top of this that makes taking user input and providing your output to the user little bit like cool looking through a browser based application. That's all it does.
+
+Unknown Speaker  2:17:13  
+Okay? So
+
+Unknown Speaker  2:17:14  
+how do you do it?
+
+Speaker 1  2:17:17  
+You basically first if you see you need to do a pip install radio. If you have not done it, you can do it now. It doesn't take much and then. So first we are going to take a look. How do you do it in a Python world? So let's say, if we want to take a input from a user, how do we do it in Python? You know, in Python we have this input function, which is a default Python function, by the way, here you provide a prompt. What is the message that you have you want me to send? And if you run this, it will basically create a prompt in here. So if you run this, you see, here it is creating a prompt, and here it is expecting me to type my response. Let's say I type Hello World, the response is kept captured. And then let's say I have some function, any function where I'm doing the computation. This is just a dummy function to show that you have some kind of function where you are passing some parameter and you do, you are doing some computation, and you are returning a value, very simple. So let's say you have this monk function, and you are calling it run for no particular reason. Let's say run function. It could be anything, XYZ, whatever, and then if you execute this function with this message that you have captured from the user, and then print it will say, basically, print the value, returning this message, hello world, right? So essentially, what we are doing is going back to Python. 101. How do you create an input from a user? How do you do the computation using a function, and how do you print the result of the computation back to the user, which is something we last learned in first week of the bootcamp. Now what we are going to do see is, what if we want to do this very simple, three step action, but using a no code web application where we don't have to do much. So what we do, we use gradio. We still have our execution function. We are calling it run, but again, this run could be XYZ, whatever, basically a function that is the executor of your three it takes an input and it returns an output. So you take that function and then you just write two line. One is Radio dot interface, and here you provide the name of this function that you have as your execution function as a fn parameter. Here, and then you say, what is the kind of input that you want to generate, and what is the kind of output you want to generate. So when you say inputs equal to text, meaning your input is going to be a text box, if you say input equal to list, then it will be a list, and that kind of thing. So in this case, I'm going to simply create two text box, one to capture the user input and one to provide the user output back to the user. So that's my interface, and this is your app. So essentially, in one line, you created an application, and then you take the app, just say, app dot launch, and that's it. So when you launch the app, it basically shows little web application, and it is also running in a port in your local machine. Which is this port, your localhost, 7860, now if you click on this, it will take you to that app running on browser.
+
+Unknown Speaker  2:20:59  
+Now here, if I
+
+Unknown Speaker  2:21:01  
+provide a message,
+
+Speaker 1  2:21:08  
+it is going to do the exact same thing what it did in our non GUI Python program. So essentially it's doing the same thing, except it is doing a GUI wrapper on top of it
+
+Unknown Speaker  2:21:22  
+is this concept clear
+
+Unknown Speaker  2:21:25  
+what radio is doing.
+
+Unknown Speaker  2:21:28  
+Okay? Now,
+
+Speaker 1  2:21:31  
+another thing you could do when you do the same thing, you basically create a radio interface, and you do say, app, dot launch. This is very cool. Actually, this part, you can just add another extra parameter that says, share equals true. By doing share equal true, it actually creates two URL one is your local URL and one is the public URL which anyone from internet can click, not just you in your local machine. So if I want to create a web form right now to capture, let's say, let's say I want to do a survey. I want to create a web form with five question that I want to circulate with all of you guys and want to want your input. I can do that right now. Do a app dot launch with share equal to true. Copy that URL post in the Slack channel, and you will all be able to go into the app and submit your input. So that part is really cool, just by adding this one line, sharing, sorry, one parameter, share, equal, true, it actually creates the public URL.
+
+Speaker 2  2:22:49  
+So just upload it to to their server, I guess. Yeah,
+
+Unknown Speaker  2:23:00  
+of course, otherwise, how would it run? Right?
+
+Unknown Speaker  2:23:04  
+So people behind radio probably have some
+
+Speaker 1  2:23:08  
+way to make money. Maybe they have a enterprise plan or something. I haven't looked into them much, actually, where they make money and they just provide these kind of as a, kind of just a playground, like a hook to basically bring people in through the door. That's all. I mean, obviously you don't, you won't do that in an enterprise setting. You know that Jesse, so, but yeah, and you can do whole bunch of stuff. You can create custom component these, that smart thing. Anyway, I'm not that much into app design, anyway, so,
+
+Unknown Speaker  2:23:44  
+so that's all your
+
+Unknown Speaker  2:23:47  
+last class is done almost because
+
+Unknown Speaker  2:23:53  
+the core thing to learn is just this.
+
+Speaker 1  2:23:57  
+And then, let's say you want to create a pizza order application. Fine, you create a pizza ordering function like, Hey, you are asking your user to provide what pizza you want, large, small, medium, what topic you add, what are the prices? So you have all the logic built in here inside your pizza order function. And then it will basically simply return a message that says your total cost is this, and it will also add tax or whatever you want, right? So this is just expanding on that concept, just to show that you can do anything. You can do some computation locally. You can send the data to other API to do some computation. You can take the data and call some hugging face model to summarize or answer some question you can do whatever, right? I mean, there is no limit what you can do, everything, whatever you do in a function that you have to define, you have to then pass that function as the FN input to your radio interface, and that's what. All the magics is done. That's all
+
+Speaker 1  2:25:16  
+good. So here I have four things, size, stopping 123, so that's why here I have to put instead of one text. So in previous example, I had inputs equal to text. So basically only one thing here I have to provide inputs equal text, text, text, text. And that's why these four text boxes are created. Now, where are this name coming from? Size, topping one, topping two? Well, they are coming from the parameter name that you are using in the FN function, size, stopping one, topping two, topping three. So these parameters are basically used as the levels of the fields in your input in your front end application. So you can say my pizza is large, and let's say my this thing is, let's say olive chicken, and let's go with two. And then it will say, Hey, this is your total cost.
+
+Unknown Speaker  2:26:20  
+What if you say huge for a large
+
+Speaker 1  2:26:22  
+size, yeah, it will probably give you an error. Yes, if it
+
+Speaker 5  2:26:26  
+gets an error, it goes upset, yeah, it will give you an error.
+
+Speaker 1  2:26:37  
+And the error message will be printed here. Oh, cool, that's good. Okay. Now, if you want to do summarization, we have done summarization before. You can do the exact same summarization, but except just add a gradual wrapper on top of it. You take your pipeline from HUD and paste transformer, and you take that same Bart model, Bart CNN model, which is your summarizer, and then you create one method, summarize which you are going to pass as your fn parameter. And this article is basically whatever the user is going to type in there. So that's going to be your article. And then you provide the minimum length, maximum length, everything that you have do done. And then the result comes in a list of dictionaries. So you take the first item from the result. Basically this whole thing is essentially everything that you have done in the previous activities just written in one line. That's it. That's your text summarization. And then you have these and then you take a radio interface with that function, with one text input, one text output, and you do an app, dot launch. And then this is the text to paste, so that I don't have to write the whole thing. I'm going to copy this. And then you basically run this. And this is where I was saying earlier that you should play with this radio thing instead. Let's say if you are doing it in a part of a project, even the radio itself, I don't know how much value it is, but at least by doing this, you can play around with different text. And instead of looking into the text on your Jupiter notebook, when you see it here, it probably gives it makes it a little bit easier to kind of see your input and output and kind of make a make that kind of a judgment, like how good the underlying hug and press model is, right? So,
+
+Unknown Speaker  2:28:55  
+oh, it's actually showing the running time right here. Yeah.
+
+Speaker 1  2:29:01  
+Now you can see read yourself and see whether this summary is really able to capture the core theme of this paragraph. So in this respect, I'd say the radio thing is good to use, at least in the concept development phase.
+
+Speaker 1  2:29:26  
+Yes, is there anyone here who have done previously, as part of any other course or as part of their work, have used anyone any framework like this, like radio or similar framework? Anybody has any experience, no. Jonathan,
+
+Unknown Speaker  2:29:45  
+I've done stuff from scratch,
+
+Speaker 2  2:29:50  
+like a lot of React stuff, but yeah, do you mean like something that is a helper like this?
+
+Speaker 1  2:29:56  
+Huh? When it's something like this type of low code, I. With that framework I'm saying, You mean, like, flask, uh, flask, yeah, I think flask kind flask is not this local, though, right? You have to do little bit more in flask, uh, yeah, a little bit, but,
+
+Speaker 5  2:30:15  
+yeah, yeah. In flask, you define routes and stuff. It's right, you know. But this is, like, it's very simple, a very quick way you can play off the model and not making it first, yep, and then later you can build the front end and stuff that you really want. Yeah, I did figure
+
+Speaker 2  2:30:32  
+out how to change the labels, the label titles, at least.
+
+Speaker 1  2:30:37  
+Yeah, I know you can. That's actually in the next one, right? Is it? Yeah,
+
+Speaker 1  2:30:50  
+there is one other one activity where we have the level type change. Well, this one is the next one. There is one little change here. Activity number four, you see that we still have this, still same summarizer and same everything. But here, when we have the in this, this last second example, so you see in the summarize function, we are making this max length variable. So in the original first way that we did the summarizer is this, where all of the parameter we are hard coding. So now let's say you want to make this variable. You want to make the summarize the user to be able to change the output length. So what you can do is you can add another variable here, max length, which is max output, and then you add that max output as a parameter here. And then, since max output is a number, when you are providing the inputs, you can say text for the first one and the number for the second one. And that way, you see, you cannot even type any text. Here, you have to, like, no alphabet. Here, you only have to type a number, and then you can provide, yeah, so that's one way. And you're
+
+Speaker 2  2:32:17  
+right. I just looked at 05 and it has the gradient Text Box component.
+
+Speaker 1  2:32:24  
+That's where I'm going to go next. Yes, you can. So now you see,
+
+Speaker 3  2:32:27  
+huh, I was gonna say you can make sliders too. You
+
+Speaker 1  2:32:31  
+can make slider. You can make, yeah, if you look into their documentation, you can make slider drop down. So basically, all the function that you can do in any standard web application, you can do everything. So, yeah, I used
+
+Speaker 3  2:32:45  
+this radio last earlier this week, I was making an image generator using stable diffusion medium, and pretty nice. But I also made another kind of platform, using streamlet, which is another kind of low, yes,
+
+Speaker 1  2:33:00  
+that is another one. Yeah, stream lit is also. Stream lit is kind of similar to this one. I would say, yeah,
+
+Speaker 5  2:33:09  
+one, one thing, of course, of those, is that that's how it looks.
+
+Unknown Speaker  2:33:17  
+Kind of session, yeah, I can't look
+
+Speaker 5  2:33:20  
+yeah. So everything looks the same, yeah. Otherwise, if you want to be different, then you have to bite the bullet and like Jesu said, like React, or, you know, or or vanilla JavaScript and CSS and HTML, yeah,
+
+Speaker 2  2:33:39  
+this is, this is pretty straightforward, forms with some CSS. Well, that's
+
+Speaker 5  2:33:46  
+what I mean, I mean. But this is you guys. It's gonna look the way they make it. It's
+
+Speaker 1  2:33:50  
+one way, yeah, if you look into so for that, then you have
+
+Speaker 5  2:33:54  
+to look at the other tools and that work. Or you hire a red end designer.
+
+Speaker 2  2:34:01  
+I bet it's customized. To, like, include your own CSS and stuff like that. Yeah,
+
+Speaker 1  2:34:05  
+that's where you see all these custom components that people have created, right? Okay, yeah, like, email, slider, well, oh no, but they are not giving the code here. They're saying, if you want to use the cost this custom component, then you have to do another peep install and then just use it. Okay, I thought they're going to actually give, oh, I'm sure build those. Maybe the docs. You will find in the docs how they have JavaScript and Python, okay, yeah,
+
+Speaker 5  2:34:37  
+it's gonna say how people build those things is probably that, like, yeah, like, WordPress can use already made themes and widgets, and you can also build your own and, like, PHP, usually, yeah,
+
+Speaker 1  2:34:50  
+it's basically the same concept, right? You basically have this event listener, right? And then you have a renderer, which you basically customize with custom CSS and JavaScript. Up
+
+Speaker 5  2:35:00  
+any UI like, any interaction, any UI like, that's going to work is for the event listeners and some event loop, yeah.
+
+Unknown Speaker  2:35:19  
+Not that,
+
+Speaker 5  2:35:21  
+but I like writing struggling and writing hundreds of lines of JavaScript. Yeah.
+
+Speaker 1  2:35:33  
+Okay, so this one we saw, if you want to provide a number parameter, what you do, right? You provide a text and a number, and that becomes a number article and max output. Now here what we are doing is in the max output. So let's say you want to so you see max output. Here it is showing as a number, because we have provided it as a number here. But what if you want to put a default value, let's say 100 or 200 or something whatever, how do you provide a default value there? So if you want to provide a default value, what do you need to do is you need to first take a value, number, which has to be a gradual, own definition of number, which is, which is gradual, DOT number. And then you decide the define what the value is, which is 150, and then you, instead of your inputs become a number. Your inputs now become a gradio DOT number with the corresponding value. And that's how you launch the same thing. This is an this is a number, but by default it will be filled with 150
+
+Speaker 1  2:36:58  
+I think there would be something called gr dot text, yeah, so let me try this.
+
+Unknown Speaker  2:37:07  
+So if I say gr dot text
+
+Unknown Speaker  2:37:12  
+and say,
+
+Speaker 1  2:37:15  
+Sure value equal to summarize that this thing below
+
+Unknown Speaker  2:37:20  
+and
+
+Speaker 1  2:37:24  
+what am I going to do? Is, I'm not going to do that. I've been outside. I can do that even in line. Then I suppose that article text box will be filled in, yes, yeah. So I basically did the same thing. What they showed for number. I used a radio dot number. If I want to fill in a text box with the default value, I just put a radio dot text. Instead of just the word te XT text, I provide an instance of gradio dot text and provide the initializer, Val, initial value there, and that will be the default value that will be showing in that field.
+
+Speaker 1  2:38:07  
+And this is where you are saying earlier, right? Jessica, if you now these names here article Max underscore output. This does not look very nice. If you want to change the name, you have to basically do something what we are doing for the output, like level. You can do the same thing with inputs to you can override these with explicitly specified level here, like here as an input, instead of just using a plain vanilla text, we are using a great order text box, and that gives me a placeholder text. Way to provide a placeholder text, a label that will go on top of the text box, how many lines it will be and so on. Similarly, we can do a slider for our like, Min level and max level. So that way you can basically control how many character minimum or maximum you want. For some reason, these are not working very well here, here is going to work? Oh, why is it? Oh, now it is going
+
+Unknown Speaker  2:39:21  
+it's kind of buggy.
+
+Unknown Speaker  2:39:24  
+I cannot slide it though. It's not smooth. Is
+
+Unknown Speaker  2:39:26  
+there an increment attribute in there that
+
+Speaker 1  2:39:30  
+provide any that's what I'm thinking, too. But there is, oh
+
+Unknown Speaker  2:39:34  
+no, it is. It is, yes, there goes step
+
+Speaker 1  2:39:37  
+okay. So let's say, if I do step one, what will happen?
+
+Speaker 1  2:39:46  
+Yeah, yes, you are right, yes, yeah, and now the field names looks more meaningful, more pleasant to the eyes, not just your. Parameter name in the function. So even,
+
+Unknown Speaker  2:40:05  
+huh, even have like, little kind of hints or two,
+
+Speaker 1  2:40:09  
+you can be very creative. I have a strong feeling somehow. JC, you are probably going to end up using it in your
+
+Speaker 2  2:40:14  
+project. I'm pretty sold on it. Jonathan,
+
+Unknown Speaker  2:40:21  
+and he's already used it, so it's a no brush, yeah, cool.
+
+Speaker 1  2:40:34  
+And you can do that same thing if you want to, like, how we are playing with that question, answer thing, how we were adding like, what is a cat? What is a video game? If you created a tool like this, then you can basically just play around it, with it, and basically have fun there, play around with the model, try to make a fool out of the model, laugh at your own model. Well, not your own model that relate, actually, yeah. So you have a text, ask a question, and here it will be there. And then you can also become fancy. Instead of showing all of your probability score and location, you can take these out separately and show it in a nicer way, whatever you want
+
+Speaker 2  2:41:22  
+to wonder, I wonder if in your output you could do something that's styled or, or, or maybe not HTML, but maybe like, Huh? I was just thinking, I wonder how customizable the output style is. Yeah,
+
+Speaker 1  2:41:39  
+inside, yeah. Try it out. Give it a shot. Maybe, maybe you can build in HTML.
+
+Unknown Speaker  2:41:51  
+Hello, oh, your device is cutting. I
+
+Speaker 2  2:41:55  
+was just saying that that would be fun, because the other thing that you can do inside the web browser is it allows you to inspect the web page, so you can even, kind of like see what's in there. And there might be ways to just kind of play, play with the components and customize them further, if it's like CSS or JavaScript,
+
+Unknown Speaker  2:42:14  
+why don't I try this quickly here?
+
+Unknown Speaker  2:42:18  
+Let's see if I add a bold tag here. Oh,
+
+Unknown Speaker  2:42:21  
+that takes me back.
+
+Unknown Speaker  2:42:31  
+No,
+
+Speaker 1  2:42:33  
+it does not, hey, just spitting out the HTML, well,
+
+Unknown Speaker  2:42:37  
+you, you, I didn't close your bull tank. Oh,
+
+Unknown Speaker  2:42:40  
+oh, I'm sorry,
+
+Speaker 2  2:42:43  
+yeah. I mean, I doubt it's gonna matter, because what should have done is it should have golden, like trail. It should
+
+Speaker 1  2:42:48  
+have, yeah, if it were aware, it would have already taken it. I don't think it's an HTML aware control. Yeah, no, it's not,
+
+Speaker 3  2:42:57  
+yeah, I know it's maybe, what if you try feeding at a raw string instead of a formatted one.
+
+Speaker 1  2:43:03  
+I didn't think that's going to work, that that would not make a difference. Because why? Why does it care whether the inside Python, how am I building the string? It shouldn't be caring about that. So, yeah,
+
+Speaker 2  2:43:14  
+I'm going to be trying like ampersand, LT, semicolon,
+
+Speaker 5  2:43:18  
+we know what else it might have done. It might have escaped the HTML, yeah,
+
+Speaker 1  2:43:22  
+maybe I was just going to say you can, I was exactly going to suggest you can escape that. Or, as Jesse said, you can do Lt. HD, those kind of thing. But hey, I don't want to, I don't want to open my old wounds. And I'm sure most of us have those kind of wound I did a lot
+
+Speaker 5  2:43:42  
+of things. Will just sanitize him, but if you do HTML, we'll just escape it. We'll just show the literals of the HTML,
+
+Speaker 1  2:43:59  
+by the way, on a so the class is done, right? So you guys do agree, right? I mean, it was worthwhile to just cover this in today's class and free up one day, because there is basically nothing. And these are kind of gives you some food for thought, like, hey, if I want to use something and be a little creative and show off our work. So anyway, on a totally off topic, have any of you used these? What is the app? There is a, basically a separate, what they're called search engine. I was using it today that they're saying that it provide better summary than like when you do a Google search, they provide these AI generated summary, but people are saying that that's not enough. So there is a there is an app. I forgot the name. I was looking into it today. Perplexity, perplexity, yes. Perplexity, have you guys do. That
+
+Unknown Speaker  2:45:01  
+I use it frequently, yeah,
+
+Speaker 2  2:45:04  
+good for citing. Yeah, that's,
+
+Speaker 7  2:45:07  
+that's exactly. It's really great for citation. And it, it'll explain every step of the way of its logic. It lists out all the steps it took answering your question.
+
+Unknown Speaker  2:45:19  
+And it's so how
+
+Speaker 1  2:45:21  
+is it different from, let's say, Chad, GPT or deep sick or co pilot or anything? What is it
+
+Speaker 7  2:45:31  
+good? Oh, in its function and usage, not much difference. But in its delivery of results, I find it to be a little better just because it includes all of the citations and like it will actually break down the steps of how it got to that answer. Not only is it citing where it answer that answer came from, it breaks down how it got to that point.
+
+Speaker 2  2:46:00  
+And I use something similar, called Lean at work, which has a, it's a, it's, it's more search powered. So perplexity is really like its biggest use case is searching, whereas Chad GBT is, is summation, its creation, its generative in perplexity. It's, it's really kind of like a souped up search engine that like does very well at citing its sources and very well at contextualizing what's going on, but it can, but it can do a lot of the other stuff that Chachi PT does too. Like Aaron said, I
+
+Speaker 7  2:46:32  
+use it a lot for after we're done with our classes, if there was a part, a portion, that I didn't quite understand, I'll ask, maybe ask it. I'll ask it to create a study guide for me, and then I'll go work through the study guide to like highlight on the areas that I wasn't quite solid on.
+
+Speaker 8  2:46:50  
+So question, Aaron you said that it does citation? Does it do better with citation? In a sense of it actually cites things that exist and not stuff that used to exist but doesn't exist anymore. I
+
+Speaker 7  2:47:06  
+haven't run across anything that didn't exist. I don't know if it doesn't but I have not experienced that. It's a
+
+Speaker 2  2:47:17  
+good question, because it's just like any, any of the other AI stuff, it's trained up to a certain point so you could encounter something that might have been removed, like, like a way back machine kind of effect.
+
+Unknown Speaker  2:47:31  
+And, yeah, that's kind of, that's, that's an interesting
+
+Unknown Speaker  2:47:36  
+rights issue.
+
+Speaker 8  2:47:41  
+I just feel like there's been a lot of times that I've gone to Chad, G, P T, and it gave me a resource, and when I go to the resource to review it and to look into it more, the resource or the reference doesn't even exist. So I don't ever look at references on Chad, GBT, I do my own references and Benoit,
+
+Speaker 2  2:48:03  
+all those numbers that are in the text, those are, those are like footnotes, those are citations that are clickable, which
+
+Speaker 1  2:48:09  
+numbers? Oh, okay,
+
+Unknown Speaker  2:48:13  
+yeah, Chad,
+
+Unknown Speaker  2:48:16  
+references a lot.
+
+Speaker 1  2:48:17  
+Oh no, this is really good. Okay, I didn't notice those numbers first. Okay, this is really good. Try to talk, okay. I'm just sold out, just based on this feature,
+
+Speaker 2  2:48:28  
+yeah. And then you and then the issue, though, is that sometimes, if you look at those references, you're like, there's absolutely nothing in this article that makes me think that that information that you just gave me came from this article. So there is okay, so it is not always correct, yeah, but, but that's a great way to just kind of like, check your sources and say, like, Okay, what like, give me a little bit more. So I'm gonna look at this as like, oh, you absolutely hallucinating.
+
+Speaker 1  2:48:56  
+For these. I need to sign in again, get more queries with pro and off. Okay, cool, yeah, I haven't heard about this. I used to I usually use copilot, Gemini, Chad, GPT, and then deep sick. I use these four in parallel, and sometimes one does better than the other. But perplexity I have never heard about before. I just learned about this today, so just wanted to talk to you guys, if you guys have any experience. So cool. Okay, so thank you for sharing your thoughts on this.
+
+Speaker 6  2:49:34  
+You know, if you have XFINITY, you can probably get the pro version for free. I'll put it on the on the Chad with
+
+Speaker 1  2:49:41  
+XFINITY. Come on Xfinity Internet service, yeah,
+
+Speaker 6  2:49:45  
+yeah, because I only have seriously, yeah, for free, one year, free pro version, I just put it on the chat. Oh,
+
+Speaker 1  2:49:56  
+one year. Now you are talking just free for one year. It,
+
+Speaker 6  2:50:00  
+yeah. I mean, one year is still pretty good, because, I don't know, 20 bucks a month, I'm 12,
+
+Unknown Speaker  2:50:06  
+okay. But then who at
+
+Speaker 2  2:50:09  
+XFINITY was like, you know, we should partner with perplexity. They've got an x in their name
+
+Speaker 7  2:50:15  
+because it's because it describes their customer service experience. Perplexing. That's right, yeah.
+
+Speaker 4  2:50:21  
+But it
+
+Speaker 1  2:50:26  
+seems like a very uneven marriage, like, why an Internet service provider will provide a AI service like,
+
+Speaker 7  2:50:38  
+it's honestly, it makes a lot of sense, because I bet perplexity reached out to them, not the other way around, because they're now trying to compete with Chad, G, P, T, and deep seek and Gemini, and so they're reaching out to xfinity saying, hey, we'll give your users a year free to get traffic. Because if you get traffic, we get funding, we get money. Yeah,
+
+Speaker 1  2:50:59  
+people will and also people will get hooked, right? I mean, yeah, and then after that, they will probably become a paid customer after year. So
+
+Speaker 7  2:51:07  
+I'm not a paid customer yet, but I get I inch closer every day. Yeah, yeah.
+
+Unknown Speaker  2:51:16  
+I am a paid customer of copilot now. So, okay, cool.
+
+Speaker 1  2:51:24  
+So thank you guys. So we are basically going to start on Lang chain stuff next week, Monday. So we got all the week 21 staff out of our way, so we'll jump right into lunch
+
+Unknown Speaker  2:51:38  
+and Karen,
+
+Speaker 1  2:51:41  
+if you wanted to demo some of your past work, I'm sure we will get some time Monday. So okay, yeah, exactly lined up. Keep those. Keep those handy. If you want to show off some of the great work you have done, okay,
+
+Unknown Speaker  2:51:54  
+all lined up. But you know, yeah, better, I don't know. I.
+

@@ -1,0 +1,1128 @@
+Unknown Speaker  0:03  
+I hope we didn't bore you guys.
+
+Unknown Speaker  0:08  
+When, when you get around to it,
+
+Speaker 1  0:12  
+yeah, around to it. You ever see that? You know? You say, when I get around to it, well, around to it, round, T, U, I T, those. Then, then you have to do whatever it is. Yeah, that's just kind of a funny thing.
+
+Speaker 2  0:29  
+Okay, so let's get started for today. So today is the last class for week 20, and this is where I'm going to tell you we are going to build the most complex model that we have ever built in this boot camp. Okay? So we are going to build models today that will take hours to train, if not days. Okay, so just a disclaimer, so there are activities here that you cannot even hope to solve before this class is ending. Okay, so it will be that long, but then, starting from next week, we are kind of going to switch shift gear and then start using some of the large model that other people have trained, that are also available through various channels. We'll see where we are going to just use those as building blocks and basically start to play around with cool stuff in the last two weeks. But up until this week, this is very important, because this is where everything that you have learned kind of comes together where you build that key Cast model that we are going to build, okay, but then, obviously, no matter how complex we build, that is nowhere near the state of the art model that the industry uses today. We cannot, we do not have resources to scale it up to that level. So we will do this and then leave it there, and then kind of have everything that we have learned so far kind of get blurred a little bit. Those things we are not going to forget about it, but with those techniques, are going to stay in the back of our mind as we go and start picking model that other peoples have people have trained, and start using them, almost like how we use an API, right? API is basically some canned functionality that someone else has provided for you to be consumed over the internet. So we are going to start using the model like that starting next week, meaning starting from tomorrow's class. Okay, so in today's class, we are going to do two main things. One is to basically do unsupervised learning. Remember how we did the unsupervised clustering problem at the very beginning of the scikit learn where we had data but the data was not leveled, right? So when you have a data training data, and you have level, then you do classification, right? But when you don't have that, we still can try to group them into k clusters, right? Remember, what was the algorithm that we used back then?
+
+Unknown Speaker  3:19  
+Is it K means, k
+
+Speaker 2  3:21  
+means yes. So with the K means, we've said, okay, hey, this is 1000 data, data point that we have, and I think that there is probably four different clusters here. So therefore, I asked the machine to go and figure out what those four different clusters are meaning. The machine would not be able to interpret which cluster means which physically. But if you give it 1000 data and they say, hey, there are four cluster it will be grouping maybe couple of 100 into Cluster One, couple of 100 more into cluster two, and so on, based on the similarity of the data point, right? So we are going to do the same thing with textual data this week using these so that generally, what we are trying to going to do is this, apply this technique called topic modeling, whereby we are going to have a group of text, each text or headline, like news headlines and stuff that belongs to different topic, and it could be your politics, business, entertainment, technology, sports and so on. But we are not going to have them leveled. So we are simply going to take the data and give it to the machine and ask the machine in an unsupervised way to do the topic modeling without any prior knowledge of the topics. Now, obviously, machine does not know, what is sports, what is business, what is an entertainment? We will tell them how many topics we think there might be in the Database, Data effect, and the machine will do that many clusters it will find from the topic. So. Which kind of very similar to what we did, except the only difference here we will see that how we are pre processing the data, how we are vectorizing the data right the text, and then we are providing those feature vectors to the model, and the model is doing the clustering, just like we did with the K mins clustering. So that's one part, and then the second part of the class we are going to do is we are actually going to use a different type of network called LSTM, long, short term memory. And this is the kind of main network that we are going to use to actually create our first model that you can call a generative model, whereby we are going to provide this with the body of text, and based on the body of text, it basically will try to generate the text looking forward, looking ahead. And you will see how cool that feels from when we do that.
+
+Unknown Speaker  5:59  
+Okay, so let's get started.
+
+Speaker 2  6:04  
+Okay, so the first thing we are going to learn about is a topic modeling using a specific algorithm called Latin Dirichlet allocation, which is an unsupervised algorithm. So the way that we are going to use this algorithm is, so let's say we have two text, right? We have, this is text number one, this is text number two, right? So if you do a quick scan manually in the text, you can see in this text, there are celebrities here, right? There might be a mention to movies, but not that much. It talks about Oscar win, which is related to movie, but it doesn't talk about any specific movie. It probably does not have any reference to live performance, and it doesn't have any reference to sports either. Now, if you look at the second news headline, you will see that it definitely has so it also has a reference to some celebrity. It does not have any reference to movie at all, but it does have reference to live performance, because Super Bowl and it also have performed reference to sports, because, again, Super Bowl, right? So now, based on these, as a human, we can probably think which one of these word belong to which topic. We can figure that out, that's stage one. And then in the next stage, we can see, Okay, which one of these document has how many of the words belonging to certain category. If a particular document has more occurrences of words that could possibly belong to movie category, then there is a higher probability of that topic belonging to movie category, right? Does that seem like a common sense thing to do? So that is what our algorithm is going to do. So if we turn this into algorithm, we will say, Okay, well, in this one, we can then, like our algorithm will start assigning some weight based on this right. And then it will say, Well, this topic has a 85% chance of belonging to celebrity topic, 50% 55% chance of belonging to movies category, and a very low 19% chance of belonging to sports category and so on. And it will do that for all the different document that we represent it with, right? So that essentially is Latin Dirichlet algorithm, or LDA algorithm in short. So essentially there are two steps in the algorithm, as I mentioned earlier. So the document topic distribution, which is look into each of the document and find what is the probability of it belonging to each of the topics. But how do you do that? The prerequisite step for doing that is fine. So essentially, this is a basically statistical machine learning, right? You are finding the probability distribution of the topic belonging to a sorry document belonging to certain topic, but that probability distribution is dependent on some prior probability distribution, which is the probability of a certain word belonging to certain topic, which is a topic word distribution. So that's what our model is going to do. So it will find for each topic, what is the probability that a given word is associated with that topic, and it will then take these probabilities from here, even though it is in second. Actually, when the algorithm applies, it basically goes apply. This one first, because these are the prior ulterior probability, and based on that ulterior probability, then it will do a cumulative probability, posterior probability distribution, which is this one, right? So that's essentially what LDA does. Now, obviously it is. It is kind of good to understand what happens. But as you will see, that when we look into the code, all of these is kind of abstracted away, right? Because, as we have seen, fortunately for us, we don't actually have to be met with to basically be able to do this kind of probability distribution, because everything is kind of a abstracted away. Now, the only thing you have to understand here is how it is possible, even for the model to come up with this topic, word distribution,
+
+Unknown Speaker  10:51  
+how? What does the model even know about world?
+
+Speaker 2  10:56  
+We know that machine does not know the English language at all. So what do you think the the key to success for these type of classification?
+
+Speaker 3  11:14  
+Maybe a previously trained data with certain keywords already been done? Yes,
+
+Speaker 2  11:19  
+yes, yes. That is one way I would go even one step higher than that, I will say the secret sauce, the key lies in the vectorization. Now we know the vectorization we can do very simple using count vectorization, which is a very simple, naive way of doing vectorization, where you basically count the number of each of the this thing, what is called the words, and vectorize it. Or you can do more sophisticated such as TF, IDF, remember the term frequency, inverse document frequency, which gives you a better representation. Or you can use some Vectorizer that people have trained with other language like, possibly, like a lot of English language texts have been used to train a particular Vectorizer. And those type of advanced Vectorizer will give you a vector present a representation of certain words in a n dimensional hyperspace, and just by the placement of the words in those hyperspace now, machine can figure out what is the proximity between word a and word B. And those vector vectorizers, they are, they already have been trained. They are very using very sophisticated, complex model. So the even though the machine does not understand the language grammar the way we do, but when we are going to use those type of advanced Vectorizer, the vectorizers are trained to look into millions and millions of pages of English language document, or any language document for that matter, and internalize those that knowledge based on many, many, many, many prior probabilities of how different words tend to appear with each other. From that that Vectorizer kind of tries to make what is called the positioning of the words in the vector space that closely reflects the different context and closeness and these things, right? So that Vectorizer is basically the secret sauce. The better Vectorizer you have, the better success you will have with models like this. Now we are going to for both of our activities. We are going to use some Vectorizer, but feel free to look out and do your own research and see, hey, in our class, we saw that we can do this model using so and so Vectorizer. Can we use some other Vectorizer to make it better? Right? So obviously, when you dig, dig, look around in internet, you will, you will basically find other Vectorizer. But one thing is important for you to understand what to look around if you are you think that you have done whatever you can, but your accuracy is kind of still stuck around 70 to 80% okay, what you can do better, you should look for other factorizers that you haven't used yet, right? So,
+
+Unknown Speaker  14:16  
+so that's where the secret sauce lies.
+
+Speaker 2  14:21  
+Okay? So I think we can, yeah. So these are like, Yeah, that's fine. We can just directly go into the activity, so that way you will see this in action. Okay, so let's see. So we are going to use a simple count Vectorizer for now, okay, and we are going to use this unsupervised classification algorithm, lda, and this is from our plain old scikit learn. You don't even need a neural net. To do this kind of classification, because, essentially, this is not different from K means, guys, is just the input, how you are processing and providing the input that is different, the algorithm is is pretty similar, okay. So what do we have as our data? So we have these news articles. There is this whole bunch of news articles. You can even open this new art news articles, right? So these are the different news basically, headlines of news articles, essentially. So these are the different headlines of news articles that we have, okay? And we load this data in here, and we have over 23,000 news articles, which is not bad, which is a pretty sizable data set, I would say. So now the news article does have a headline, because that's what we saw, but we really don't need the headline as per say, oh no. Actually, one thing we need to do, there are some non alphabet characters here, like some of these have double quotes, single quote and stuff like that, right? So the one thing we are going to do to clean it up, we are going to take these, all these headlines, and apply a function using the lambda syntax, where we are going to say, Hey, if you have anything that does not so this is a regular expression that does not look like either alphabet or a space, then replace it with a empty string. So by doing that, it will get rid of any non alphabet character from the data set.
+
+Speaker 4  16:55  
+So we're going to include like numbers as well.
+
+Speaker 2  17:00  
+You can, yeah, you can use numbers, yeah? Because,
+
+Speaker 4  17:05  
+if you like, for example, row zero just get number 22
+
+Speaker 2  17:08  
+Yeah. So if you do this, then if you want to retain the numbers, then you have to add a zero to nine here as well, right? So if you want to run it with zeros, that's fine. Let's do a zero to nine
+
+Speaker 4  17:20  
+re, run it from there from the top, though, because it over, oh, right,
+
+Speaker 2  17:25  
+right, right, right, right, I have to rerun it from there. Good, catch. Yeah, yeah. Is 22 to young? Yep. Now it is returning the number. Okay, so that's our data. Now let's do our knife vectorization using our count Vectorizer. So count Vectorizer we are going to this is a scikit learn transformer, so we basically take the transformer and we take the headlines here. So this is the headlines, and then we do a fit transform on these headlines, and that gives you this DTM. So what is DTM? So DTM basically means document terms metrics, so if you compare with that, so basically, this is essentially a document, term metrics, right, which kind of is like one hot encoding you can say so essentially here, in this example, there are 68 rows. Why? Because the text that it was fitted on had 68 unique words. When we are applying here, we are getting 3193 rows, because that many unique words that we have across all these 23,000 documents, and then for each row, we only have zeros and one depending on whether that particular document or headline contains that word represented in that column. So essentially, it's kind of like one hot encoding. So that's your DGM, document Tom metrics, right? So that's your DTM. Now with this transformer, you can also get the actual words by using these get feature names out, which we also saw in the previous class. And you will see that that get feature name out. Also gives you 3193 and let's print a few of them. And these are some of the unique words that we have. Okay, including the numbers, because Jesse wanted to retain the numbers, so I added that zero to nine into the into the regular expression. So if we remove that, then we will have a few less right watch.
+
+Speaker 4  19:45  
+I just screwed up all the accuracy backs. Let's see.
+
+Speaker 2  19:49  
+I mean, we can always come back and replay it again. Okay, so that's your document term, metrics. Okay. So. Uh, if you want to convert it to array and then. So this is basically just saying, hey, for the first document, these are all the zeros and ones you get. So this basically is like one row that you are looking at, right? Just to get an idea, you don't actually have to run this cell. This is just to clear the concept in your mind, like, what we have, right? Because each of these, each of these 23,377 rows, have a whole bunch of bunch of zeros and ones, right? 3173 zeros and ones, to be exact. So we are just looking at a snapshot like, Hey, show me the first 500 zeros and ones. And we see most of these are zeros. Only very few are one. Obviously, that's what it is supposed to be, because the individual headlines are not that long, right? So there are 3000 plus unique words, but each each headline is, what about 10 word long? 10, 1215, word long. So when you have 3000 plus columns, most of the values will be zero, only a very few handful of them will be one for any given row, which is what we are seeing here.
+
+Speaker 1  21:05  
+Good, noise, yeah, just wondering, did you gloss over something on the undefining, on, on, instantiating the the vector account Vectorizer.
+
+Unknown Speaker  21:20  
+What do you mean? Gloss over, yeah, look
+
+Speaker 1  21:22  
+at it, the max df and min DF, those, significance of those.
+
+Unknown Speaker  21:29  
+Oh, okay, so you have
+
+Speaker 1  21:32  
+things that aren't really super common and things that are really rare that connect maybe once, yeah,
+
+Speaker 2  21:39  
+yeah. So based fact, I thought, yep, yep. So basically, Min DF is 10, which basically means that it will only count the words that has at least 10 operands, right? I believe that's the case. And Max GF is basically mean it will take anything above 95% to be one. I kind of forgot what that actually means. Hang on. So it will basically say here, huh. Okay, so Max Dev is ignored, ignored the terms that have a document frequency strictly higher than the given, okay. So this is different, okay, so by default, it is one by like changing the value you are basically saying if, when you are building all these walkability of terms, if you have something that has a more than document frequency, strictly higher than given threshold use, the proportion of the document integer, absolute count. Okay, so basically, what it is saying is, yes, thank you for pointing that out, Karen. So what it is saying is, when you are building this vocabulary of 3193 terms in doing so, if you see that certain words are appearing in more than 95% of document, then don't even count that. Take that word in your vocability, which basically is very common word, which in this case is stop words. Now we are also providing stop words English. So that means it will ignore the stop words of English language. But even after ignoring stop words for the remaining words, if it sees that if any word is occurring in more than 95% of the documents out of all these 23,000 document you have in this case, then it will ignore. That's what that means. And mean DFA is when building ignore the terms that have a document frequency strictly lower than the given this value is also called cut off. So basically, if a particular word is occurring less than 10 times across all these 23,000 documents, then also ignore that kind of treat that as an outlier. Now, do you really have to use exactly these values? No, I mean, just like when we were cleaning up the text right where Jesse said, Hey, I think we should keep the digits. I said, Okay, fine, let's try keeping the digits. Similarly here, you can either use this, or you can just get rid of this and try with the default values, because all of these will have a default value, right, like main DF, default value is one, so if you don't use this so basically that will mean is, if a word is appearing only one time across all of your document, then ignore it. But even if it applies two times, then pick it up. You are increasing that to 10 with the assumption that the word that are occur. Less than 10 times are kind of very like a edge case, and therefore we don't need to be worried about that. But what is the value of doing that? Maybe reduce the model complexity, reduce the dimensionality. But given the size of vocabulary that we have only 3000 something, even if you go with the default values of these and not do anything, it will still be fine. Okay, let me actually try one thing. Let me
+
+Speaker 1  25:28  
+say. Put it really simple, if a word only occurs in a couple of documents, it's probably not. Yeah. Use for, for, for topic classification, yeah, in every word in every document, that's also not worthwhile for trying to classify the topics.
+
+Unknown Speaker  25:48  
+Yeah, yeah. It just become pointless,
+
+Speaker 2  25:51  
+yeah, but let, let's see one thing so we know that 3193 we got last time. But if I do it again, it will probably be little more,
+
+Unknown Speaker  26:03  
+Oh, no. How come we are getting this? Wow.
+
+Unknown Speaker  26:12  
+How come we are getting so many different words. Then,
+
+Speaker 2  26:22  
+hmm. Let me do one thing with this.
+
+Unknown Speaker  26:34  
+Ah,
+
+Unknown Speaker  26:36  
+I know why. Let's say every doc, every I
+
+Speaker 2  26:38  
+know why. I know why? Yes. Take the dashes away. Aha, yes. So what I think we should do? So, Jesse, I'm going to, that's okay, do your suggestion, and I'm going to do this. Oh, sorry, I have to now load this again, and then do this cleanup, and that way we don't have that now, if I want to do this with the values,
+
+Speaker 2  27:17  
+And let's see what my vocabulary size becomes, 3149 and and this time, I'm going to remove the values and go with the default, and I want to see what my probability size is. Oh, it still is. Yeah, I think there are lot of junk word that comes in, like AV, ABC, ABCs, AB, a and also like proper nouns, like Alia, Aaron. So these are all getting into your vocabulary, and it's basically
+
+Unknown Speaker  28:01  
+uh, polluting your
+
+Speaker 2  28:03  
+space, the vocabulary space, okay, so let me try this one. Now. Let's get rid of the max GF. Let's just put them in DF, because going to one does not Yeah. So you see without Max DF, because Max DF default value was one and the suggested value was 0.95, which does not make much of a difference, but changing the mean DF from one to 10 makes all the difference, because now if you see that, you will see lot of the meaningless words. Well, it still has some proper noun. But I think these proper nouns are appearing more than 10 times. I suppose so. If you move the min DF higher, then some of those will also start to drop off, right? So if you say, let's say mind DF, let's put it to like 25 or something, and then your walkability size will be smaller, I assume, yeah, see down to 1200 37 only. And then if you want to look into this, yeah, so all the proper nouns are gone now. Now you see that this
+
+Speaker 1  29:18  
+an example where I think using point of speech could be useful to basically filter out proper nouns. Yeah, the people don't matter much for the using,
+
+Speaker 2  29:28  
+using something like spacey, yeah, yeah, you can do this
+
+Speaker 1  29:32  
+unless, yeah, some person could be the topic.
+
+Speaker 2  29:38  
+Unless some person could be the topic, yes, like, let's say there is a name of a celebrity, right? Yeah, yeah. Like, Kenny Perry, just Carrie Perry is a proper noun, but by just having the word Kari Perry, it will clearly tell you that this probably is something about celebrity, about entertainment, something, right? So. So, so, yeah, so it's all a subjective decision. So anyway, so let's take it back to 10 and then continue here with our 3149 size vocabularies, and which will have some names, but let's leave it that for now. Okay, so now you can also take the feature names out. You can also take these DTM array, and you can basically print out the word and the number of times that is in a row. Like, if you want to do that, this is just again, just for you to kind of get an understanding like hey, the word bachelor, for example, it this is a word index 183, appeared one year old. Word index 3131, appeared once, and so on.
+
+Speaker 2  30:57  
+And then you can take these DTM, dot two array, which is basically this whole thing. These all zero and one metrics. You take the array form of this, and you can take all the feature names, which are basically the word, and you can put them together into a pandas data frame whereby your feature names, which basically means the word will be your column name, and the count will be there in the data frame. So you will basically have that same data basically now represented as a pandas data frame that you can see these many rows and these many column and you can easily see, oh, this word appeared, how many times in this sentence and so on?
+
+Unknown Speaker  31:46  
+The index is the count that we say
+
+Unknown Speaker  31:49  
+that which index we are talking about?
+
+Speaker 4  31:52  
+So what represents the count? Is it a number that would be in the column, or is it one in like the two, like with two so,
+
+Speaker 2  32:02  
+so, no, no. So this, this, this is just a default index. Don't go look into this, because you see here we are not changing any column index. So when you create a data frame by default, it get, gets a sequential index. So this is the sequential index. This does not mean anything. This basically tells you that this is for this particular row. Is for news headline, number zero, meaning the first news headline. This is for headline number second headline and third headline and fourth headline. That's that now for each headline, it is saying for this particular headline, whether this word has appeared in the headline or not, that would
+
+Unknown Speaker  32:40  
+be just a one. It wouldn't be a count, right? It would just be a one or zero.
+
+Speaker 4  32:42  
+Would just be a one or zero. This is just one or zero, so it is just a one or, like you said,
+
+Speaker 2  32:49  
+it did, I'm sorry say that again, it is a lot like one hot encoding. It is a lot like one hot encoding, yes,
+
+Unknown Speaker  32:55  
+yeah, but yeah. I was just
+
+Speaker 4  32:57  
+wondering if it would be a count or just a one true value, yeah,
+
+Speaker 2  33:00  
+no, it's just a one or zero value, meaning true or false, whether it appears or not. Okay, so now these pandas representation is, again, as I said, just for cosmetic purpose, just so that you can look at it and you can make a connection mentally. Okay, what that means, but you really don't need that data frame. What you need to fit in the model to the model. Is this thing, the one that you got at the very beginning when you did the fitment. Where did you go? Here you see this DTM. So this DTM is basically a numpy array right of this dimension. This 23,377 by 3149, so this is a pure numpy array. What we did after this is just, it's kind of a like machine does not need it. It's just for our purpose understanding. But now look at this DTM, which is a numpy array, and that is the one that we are going to feed into our algorithm for clustering, which we are going to do here, right? So what we are going to do we are similar to K, means we are going to initiate a latent, direct slash digital location algorithm, and we are going to provide how many topic that we want it to find similarly how we were providing that k value. When we are doing the k means clustering. You have to provide, based on your understanding of the data, how many cluster there could possibly be. So in our sense, this is the unsupervised algorithm, right? So you need to know, offline from some other using some other information, how many topics that you have collected the data from. So in this case, we are assuming that there are seven different topics. So we are doing that, and we are providing a random state, just like we do for most scikit learn algorithm to make the
+
+Unknown Speaker  34:57  
+outcome repeatable. So.
+
+Speaker 2  35:00  
+And then we do the fit. So this is where the LDA algorithm is being trained with this DTM in the numpy format. I believe you if, even if you pass the pandas data frame here instead of the numpy array, I think it will still work, but you really don't need to convert it into a pandas data frame for this purpose. Okay? So now the model is fitted, right. So now what we are going to see is get the value for each topic word distribution, right. So let's see. So what do we get here? So we are actually let me do one more thing. I'm going to print the shape of this thing also, so that way we can easily make that connection in your mind. Okay, so now we are getting another numpy array as a result of this training. Now how many rows do we have in that array?
+
+Unknown Speaker  36:05  
+Seven?
+
+Unknown Speaker  36:07  
+Why seven?
+
+Speaker 2  36:10  
+Because we asked the algorithm to assume that there are seven topics that all of these documents belong to all of these headlines belong to. So now what it is saying is, for Topic number one, the probability of the first word. What is the first word? Hang on, Aaron the so the probability of the word Aaron belonging to topic one is 0.14143217 the probability of the word abandoned, belonging to topic one is 0.14 like this. So that's what the probability distribution is, and it is going to do that for all the seven topics that you asked, and for each of the 3149
+
+Unknown Speaker  37:06  
+words that we have in our vocabulary,
+
+Speaker 5  37:09  
+right? Is this skill? Sorry, is a scale from, I see a 23 there. So does that mean it's, it's a scale from zero to 100
+
+Speaker 2  37:19  
+Yeah. I think it is scaled from zero to 100, yeah, you can do a max, yeah, it's probably scale, because this is not a zero to one scale, because otherwise there would not have been 15. So it's probably zero to 100 scale. Okay, and then here we are basically looping through all seven of these and printing the length. And we are seeing 3149 which you can also say, see very clearly here, seven rows and 33149, columns each. So obviously this, this will print 31449, now if you take the first topic, let's say which will be the LDA components zero, and if you print the first topic, you will only get one line of this, like this one will be printed here, which, as you can see, that same numbers here, right? So that is basically your topic.
+
+Speaker 4  38:27  
+And why is it seven again? It's seven
+
+Speaker 2  38:30  
+because we asked the model to assume that there are seven topics here,
+
+Unknown Speaker  38:35  
+seven topics. Yeah, I
+
+Speaker 2  38:43  
+Okay, so now what we are going to do, we are going to take the first topic and actually it is not 02 100. So basically we are sorting this by value, and we are getting the highest value for 390
+
+Unknown Speaker  39:06  
+so it is not 02, 100 actually.
+
+Unknown Speaker  39:11  
+Let me do one quick thing.
+
+Unknown Speaker  39:15  
+SK learn,
+
+Speaker 2  39:18  
+lda, components, core range. Let's see whether, uh, Karen, or anyone. Do you guys know what this is like? It is not 02, 100. Initially, that's what I was thinking. But looking into this, I see the highest value is 390, some
+
+Speaker 1  39:38  
+value I don't know. Yeah, probably have to get into the math for that. Lda, that's heady topic. So it's just a score, I don't think it's necessary.
+
+Speaker 2  39:49  
+So it's just a score, the higher means, the higher probability. That's all,
+
+Speaker 1  39:53  
+yeah, yeah, that's what I would say. So it's not scaled in anything. You could normalize those values and that. You can, yeah,
+
+Speaker 2  40:00  
+of course. But for that normalizing, you need to know what is the maximum value, and then you can basically divide that by max value, non
+
+Speaker 1  40:06  
+pi. You can find that out, min, max, yeah, yeah. You can, you can. You can find out the min and the max, and then you can use, yeah, yeah. I'm
+
+Speaker 2  40:16  
+not getting a good answer for that anywhere. But anyway, this basically is the Yeah, child play,
+
+Unknown Speaker  40:31  
+or maybe maybe adolescent.
+
+Speaker 2  40:35  
+Okay, so now what we need to do. So how do we know which one of these belongs to which topic.
+
+Speaker 2  40:50  
+So if you take this, let's say, define an array of values zero to 10, index one, 200 right? So this array, so if you let me just do this array first.
+
+Speaker 2  41:22  
+Okay? So what is this array tell giving me? So it is basically giving me an array of three by 110, 201 now the indices the the array, 10 201 from greatest to list, if you do, np.org, sort, and then this is from greatest to list. If you do that, then you will get two, zero and one. Why this is this? Is this code? What I'm trying to show here is we are not applying to the code. This code to the our actual data. Yet this is what we are trying to learn, is how we can use arc sort to find the maximum probability here, because we have a whole bunch of scores, or not probabilities, in this case, score. So what we are trying to see here is, let's say we create a dummy array with only three numbers. We have 10, we have 200 and we have one. Now, if we want to find the index of the lowest number and the next highest number and so on, in that order, what would the index of lowest number be two?
+
+Unknown Speaker  42:38  
+The index of the
+
+Speaker 4  42:40  
+number of the number one is at index two.
+
+Unknown Speaker  42:44  
+Index two, correct,
+
+Unknown Speaker  42:48  
+right? So 10, 201
+
+Speaker 2  42:53  
+so when I'm doing arc sort I'm getting 201 Hang on, two zero, so zero is the highest right, so 200 is zero because that is the highest right. And hang on, then, why is one getting one?
+
+Unknown Speaker  43:20  
+Ah, ah.
+
+Speaker 4  43:28  
+So, so one is that index two, so that would be the smallest
+
+Speaker 2  43:34  
+number. Yes, yes. So basically, what we are doing here is we are doing, I forgot that, so we are doing an arc, sort, actually, yeah, so let me do one thing. Let me do Arr, can we do error? Dot, sort, yes, error. I think you can do a sort on the other oops,
+
+Speaker 2  44:12  
+I'm trying to see what the sorted value gives me, huh? Just print a R,
+
+Unknown Speaker  44:17  
+A R, R after that, right?
+
+Speaker 1  44:19  
+It's our it's arcsord not sort. So you're not sorting the values that you're sorting is the indexes of the values in the array.
+
+Speaker 2  44:29  
+I know, but is it not also sorting the array internally before?
+
+Speaker 1  44:35  
+Well, no, no, no. What it what it means is index 10 is the biggest 200 is the next biggest one is like the next biggest, I guess, or wherever it is, where is the actual Arg, sort result. That's not the arc, sort, whereas so
+
+Speaker 4  44:55  
+Benoit, if you print, if you print Arr, after that line, you just did one.
+
+Speaker 1  44:59  
+So. So those are the greatest. So those are two is the smallest. And you have, like, three of them, I guess. Let's see. I don't know. What does it do?
+
+Speaker 4  45:09  
+Yeah, see now it's sorted. So if you run that again, the next cell, yeah, it'll be 012, for the least.
+
+Speaker 1  45:14  
+Well, look at, look here, right? Okay, 10, 201 so zero, the biggest is one, the the next
+
+Unknown Speaker  45:25  
+so zero, the next one, next two,
+
+Speaker 1  45:28  
+smaller is zero and the smallest is two. So 012, those are the indexes. Of them got it sorted by the order of the values in the array. But those are the indexes. That's why it's arc sort, not just sorting, yeah.
+
+Speaker 2  45:42  
+Now what I'm saying here is, if we have this 10, 201 sorted, then we will have 110, and 200 and then it, it is easier to see why arc sort is going is basically applying zero for one and this,
+
+Speaker 1  45:59  
+right, okay, if she run it, then what does it do? Then, yeah, it
+
+Speaker 2  46:02  
+doesn't. What I'm saying is, if you do Arr, dot sort, because it will do this. And if you don't sort it, if you just do
+
+Speaker 1  46:13  
+it, and for NumPy, if that's the numpy sort, it does sort that does not in place, unlike the Python sort correct, you have probably have to sign that again.
+
+Speaker 2  46:27  
+No, no, no, no, no, no. Here you see that. What I did, I did an Arr, and then I did error, dot sort, and it sorts in place. And that's why I had
+
+Speaker 1  46:37  
+to. NumPy does not really anything in place. You will need to just try it. Trust me,
+
+Speaker 2  46:42  
+I tried here. You see here you have your Arr, and you have the error. Dot sort, and then I print error, reassign
+
+Speaker 1  46:50  
+the error result of the sort to air Arr, again, that will
+
+Speaker 2  46:55  
+give you a none. Karen, I already did that. That will give you a none, and that
+
+Speaker 1  46:59  
+already tells you. Okay, I didn't think that was in place. Yeah,
+
+Speaker 2  47:03  
+it is in place. It's actually in place. Okay, yes, anyhow. So the idea is that, using arc sort, we can basically find out in a given list, what like, what are the indexes in the order? Now why this is important? Because now I can take one of these right for any one of this topic and apply the art sort and it will basically tell me these numbers. So basically, what it is going to give me for a given topic, I can excuse me, I can find in these 3149 vocabulary list that we have which one is lowest and which one is highest based on the score. And I saw that,
+
+Speaker 1  47:59  
+and I look, that's why you didn't get to decide you wanted from the argc, because you redefine the array as the original
+
+Speaker 2  48:07  
+order. Okay, we Yeah, I know that. No, I did not. So that was, that was before, and here I got this,
+
+Speaker 1  48:15  
+yeah, because you read reassigned the array as the original, as the original 10, 201 correct. Yeah. Okay. I was thinking you were wondering why you didn't get like, like, 210, for the degree, at least the greatest or something.
+
+Speaker 2  48:30  
+Yeah. So that is understood. So here, what I'm saying is, let's try to focus here. So if I do take the topic and then didn't I do an arc sort then it is going to give me the relative, what is called relative ranking of these different score of the different words for that particular topic.
+
+Unknown Speaker  48:56  
+So this is the relative ranking.
+
+Speaker 2  48:59  
+So what we had is we had this course. Based on this course, we are basically saying how these topics are ranked. Okay, now, so this is for first topic. But what is my first topic? If you look into my first topic. So first topic is this array. Now I'm applying first topic, dot, arc short. What it is telling me that out of all these numbers, which one comes in which order. So the first number, 0.143217, that is number 17 116 in that order and so on. That's what this is saying.
+
+Speaker 4  49:48  
+Is, is that? Is that right? Or is it saying that the the number at the index 1716, is the least value, is the smallest value?
+
+Speaker 2  49:59  
+Number? Are at the index, yeah,
+
+Unknown Speaker  50:04  
+what did? Oh, number,
+
+Unknown Speaker  50:08  
+yeah, that's
+
+Speaker 2  50:11  
+what does or does. Yes. Sorry, yes. So it basically saying the number out of this 3149
+
+Unknown Speaker  50:18  
+numbers. The smallest one is at 1716, yes,
+
+Unknown Speaker  50:20  
+yeah. Okay, thank you, sir, yes.
+
+Speaker 2  50:24  
+Okay. So now if I find okay, what is there in 17 1616, which is the lowest and the highest is 1688, then it will give me the lowest and highest value. So the lowest value I got is 0.14 and the highest is 390 which basically matches with these. What we saw here. Three 90.5 was the highest, and 0.1428 was the lowest. And now I know where do they belong. So the lowest number belongs at position number 1716, because that's what this is. And the highest number belongs at position number 1688,
+
+Speaker 2  51:08  
+okay, so now, if we want to get the top 10 words for the first topic, let's say what are my top 10 words? So I can basically take the last 10 of these, and that will give me my top 10 words, which are at position number 1680, 820-869-2801, so essentially, the last 10 numbers from this list. These are the words with top 10 score for the first headline that we have, or, sorry, the for the first topic that we have, because we have only seven not headline for the first topic. So these are the words that have the most, what is called most, the strongest association with Topic number one.
+
+Unknown Speaker  51:57  
+That's what that means.
+
+Speaker 2  52:00  
+Now we don't know what are these words yet, but what we can do is we can go through the stock word indices, which is this, and then use this index with the get feature name out, which is what we did at the beginning when we did the count Vectorizer. Remember this. So here we already have a record of all the words in the vocabulary. So then what we can do is, now that we know that these are the top 10 words, we can use those corresponding 10 indices of the top 10 words and pick out the corresponding word from the feature name of the count Vectorizer. So that way we will see that the top 10 words are these. Looking at this. What do you think this topic is about travel tips? Probably, yeah, some kind of a travel blog or something, right? And you can do the same thing to get the bottom 10 words. So first topic, dot, arc, sort, and now you are doing the bottom 10 because the first 10, and you see if this topic is actually travel tips, these are the words that the model has found to be least significant to that topic, which kind of fits our intuition. If that topic is travel tips, then yeah, looking at this, it doesn't seem to have any correlation with travel tips at all, even this crude way of doing the classification, because remember, here we are not using any of those advanced Vectorizer. We are simply using the stupidest, dumbest Vectorizer that we can get our hands on, which is the count Vectorizer. But even then, you can see it kind of is able to pick up something. So now we are going to do the same thing, except we will do that for all seven component or not component, sorry, all seven topic. So for all seven topic, we are going to go through in loop of all the components, and then we are going to do an arc, sort and pick up the top 20 words for each of the component. And what do you think about these topics? The first one we already saw before, make travel things way best, better reason vacation. So this is probably about travel. What do you think about these topics? The second one,
+
+Unknown Speaker  54:38  
+sports,
+
+Speaker 2  54:39  
+sports. Everyone agrees, right? This one,
+
+Speaker 2  54:50  
+dining cooking, maybe dining cooking, yeah, something like that, dining. This one, it's probably very easy to say, Okay. I can see Trump and Biden. What else do you need?
+
+Unknown Speaker  55:06  
+That's politics.
+
+Unknown Speaker  55:08  
+LeBron, for some reason, huh?
+
+Unknown Speaker  55:16  
+Yeah, the next one.
+
+Unknown Speaker  55:22  
+Business. Or technology, something.
+
+Speaker 2  55:25  
+Now, obviously, don't expect this thing to be 100% perfect, because this is not a sophisticated model guys, right? But you can still see the how this kind of aligns, right? So, so this is what these are, right? The travel, sport, food, politics, business, and then this one is about entertainment, and the last one is about technology. So this is our best guess, according to BCS, right? So now, so this is something we did. So what you need to do now is to get the results. All you need to do is just do a lda, dot transform, and see what you get. And you get the results and shape, right? So why do I get the shape of this result? Because there are 23,377 topics that we have. And when we are doing the transform, this is where we are actually doing the prediction, and what it is saying is, for each of these headlines, this belongs to topic one versus topic two versus topic three and so on, right? But it will do that in a one hot, encoded way, and that's why there are seven columns. So if you look at any one of these, it will basically tell you for topic results zero. That means for the first headline that you have,
+
+Unknown Speaker  56:59  
+these are
+
+Speaker 2  57:02  
+the possible possibility of that topic belonging to topic zero versus topic one, versus topic two, versus topic 345, and six. Now these are probabilities, and what you need to do is you need to take the highest one, so which one is highest out of here looks like this one, so maybe the first headline belongs to topic one. So let's me actually quickly go up there and see what the first headline was.
+
+Speaker 4  57:39  
+Wouldn't it be topic two? Because topic two
+
+Unknown Speaker  57:45  
+index, topic two, yeah.
+
+Speaker 2  57:48  
+Topic two, yes. And the topic two is, what was the topic two? We decided, or Yes, let me actually have this open. Does it look like sports? I don't know. Anyway, yeah,
+
+Speaker 3  58:17  
+quick question, if the end components that you had earlier under LDA was not seven. If you increase that to, I don't know, 20, for example, it will
+
+Speaker 2  58:26  
+give you 20. Yeah, it will give you 20, because it is totally blind, right, yeah.
+
+Unknown Speaker  58:31  
+But could it give you better accuracy, though?
+
+Speaker 2  58:35  
+No. I mean ideally, if you, if you in ideal world, if you do really know how many topics are there in the documents, list of documents that you have, you should your end component should be exactly that. If you do not know, then you have to do a best guess, and then you have to look into the results and then see whether it makes sense. Like you need to have some way to validate that, even if you are not providing any level data during the training, you need to be able to take the clustering output or with the topic output in this case, and you need to able to validate yourself, right? What that means. So
+
+Speaker 3  59:14  
+you may have to see some guessing at the very beginning if you don't know that many. Yes, okay, no, yes.
+
+Speaker 2  59:21  
+Okay, so then these are the different probabilities, and we are now saying we are basically just taking these and printing like, hey, rank one, topic two. Probability is this. So rank 1234567, yeah. So basically it's saying, for this particular headline, my number one rank is topic two. Why? Because topic two probability is 0.49 and the lowest possibility, rank seven is topic five, because the probability is lowest which is 0.035714 right? So. So again, this is just for you, but you even don't need to do that. All you can do is you can take this result and simply do a arg max plus one, and that will exactly give you which topic it belongs to. Because when you do an arg max, it will basically take what is the maximum argument here, and if you'll take the corresponding index. But since the index is zero, best in Python, you add a one, so index zero meaning Topic number one. Index one, winning, Topic number two, and so on. So it basically tells you your first headline belongs to Topic number two. Now that you know how to do all of this, now you can go back and take your news articles again, which is the original news, news article. And then you can basically do this topic results, dot arg max. Instead of applying it to the first topic, you can apply, apply this to all the topic and then you slap the result of our max as a separate column, which is topic. And as basically add a new column to the data frame, and then you print the data frame, and you get this
+
+Speaker 2  1:01:13  
+right? So it says the first one towards topic two, two, and then 647, so what was, what? Topic two. Topic two is sports, right? This one, I'm not sure, the only shopping guide you need for cyber one for Cyber Monday you need, well, it is classified this as topic two, also, and the next one is topic six. What is our topic six? Entertainment, Taylor Swift dances where no one can see her. Yes. The third one looks accurate. The next one is topic four. Topic four is politics, how to say cheers in 20 languages. Yeah. So now, looking at this, it probably seems that, as you are saying in grade, there are probably more than seven topics, and that's why some of this topic, like, if you look into this, this does not seem to belong to any of the seven topics that we have. No matter which way you put it, you will probably feel that it is still kind of misclassified, which may be because we are assuming that there are seven topics in reality, they are going to be more. There might be less, depending on how you see. So anyway, the idea here is just to take away from this is, if you vectorize in some way, all the documents that you have, and you put the Vectorizer through some kind of plus plus clustering algorithm, you can essentially do the same kind of clustering as we have done using our K means algorithm in our previous class, right in the scikit learn when we are doing unsupervised clustering. So that is the key takeaway from this activity.
+
+Unknown Speaker  1:03:10  
+That's your lda,
+
+Speaker 2  1:03:20  
+okay, now there is another activity, which is basically where they are asking you to do, is there is a whole bunch of articles, news article, again, similar to this one, and they are asking you to essentially do repeat the same thing. Okay? And here I'm just going to run through so in the previous notebook, we did look into lot of this thing because we are trying to understand how the internal works. But this one is much cleaner. So if you look into this, you will see how easy it is to actually apply an LDA with the count Vectorizer here, so you have all of your news articles here,
+
+Unknown Speaker  1:04:05  
+you do remove the special character and all,
+
+Speaker 2  1:04:09  
+and then you do the count Vectorizer. Here they're saying, take the mean DFS five. Now these values will also affect your classification accuracy, right? So you have to try different values and see which one gives you the most explainable answer. So that's your count Vectorizer. Then you do the Fit transform, and you get your document term metrics right. Then you take your LDA and this one, if you look into the suggestion, you will see that they will say there are five topics. So you are doing this with components five. And this is check feature names out. Is basically just all the words which we know. Two. Now you can look through all the components and find the top 15 components by applying an arc sort and you will see the top 15 words for each of these. So looks like the first one is entertainment. Looks like the second one definitely is port the third one is business, I suppose, yep. The fourth one is minister, new party, election, labor, Blair, government, okay, politics. And the fifth one is technology, yes, and that is the suggested
+
+Unknown Speaker  1:05:43  
+topics, the five topics.
+
+Unknown Speaker  1:05:47  
+Now
+
+Speaker 2  1:05:50  
+for you to actually do this classification for all the articles, then what you need to do, you take the fitted LDA and do a transform with your DTM. So first we did the fit. Now we are doing the transform. And then you take the outcome of the transformation and using these arg max and whatever topic that you get, and then you use this map function to map it with the known topic levels that you have, which is one for entertainment, two for sports, three for business, four for politics and so on. So essentially, what you are doing is you are taking these data frame with all the new summaries again. So that's your first column in your data frame, and then the topic results that you are getting. You are doing a org Max, which gives you the index of the maximum, maximum probability, and you adding a plus one to that, because the python list is zero, best, that will give you 12345, and then you taking that and applying that to this key value pair this JSON dictionary structure to get the actual names, and you show it, oh, sorry, this is the function. And then you call the function, and then that will give you the topics. So it will say, This is business technology, business politics, and so on. So if you go through these, you will see this one did somewhat better job, at least from a few of these that I saw, because in the previous one, some of those topics seem to be misclassified, which is not a big deal. I mean, we know that these models are not going to be perfect, but this one seems to have, we do have been doing a better job of classification into the different topics. Okay, so that's one way to do the topic modeling, using LDA algorithm, Latin Dirichlet algorithm,
+
+Unknown Speaker  1:08:03  
+latent Dirichlet allocation algorithm. Now
+
+Speaker 2  1:08:09  
+there is another algorithm that you can also use, which is called mmf algorithm, which is basically based on
+
+Unknown Speaker  1:08:23  
+matrix factoring. So
+
+Speaker 2  1:08:28  
+without getting into too much details into this, the output of both of these algorithm is basically going to be the same. So what this algorithm does is, if you have a vector like this, which is words by documents, basically our DTM vector. If you have a vector like this, it is going to split this vector mathematically into two different vectors. So words by documents will be split into two different vector. The first vector would be words by topics, and then second vector would be topics by documents. So if you have, let's say 10,000 words, 10,000 unique words, or let's say 1000 unique words in 10,000 documents, and you provide that as a matrix. So by this matrix factoring algorithm, it will convert that into and then, let's say you are trying to split it, classify it into five topics. Then what it will do is it will give you two matrices. The first one is going to be 1000 words, or, let's say 10,000 words, if we have by five topics, and that intersection, each intersection here, will tell you which of these words belong to which topics. And then it will give you another vector, which is topics by documents. So if you have five topics and if you have 1000 documents, it will be five by. 1000 where it is going to tell you that which document belongs to which topic, kind of very similar to what LDA does, but it uses slightly different algorithm behind this, under them, under the same Okay, so we are going to look in our next activity, we are going to look how we apply
+
+Unknown Speaker  1:10:24  
+these
+
+Speaker 2  1:10:27  
+technique. But this time, we are going to use a slightly better vectorization instead of Count Vectorizer. We are going to use this term frequency inverse document, frequency Vectorizer, because count. Vectorizer just simply looking into the count of a word across all the documents. Here it is going to this Vectorizer is going to look into what is the count of a word in this document and what is the count of the word in all other documents. Right? Remember, if a doc word, if the count is high in this document, then it is more important significant word. But at the same time, if that count of that word is also high in other documents, then these words significance goes down, because then it becomes kind of treated like a more commonly used word, therefore not that significant anymore. So that's why TF IDF would give us a better vectorization. Now, before applying the vectorization, we take all of this news article and we apply that regular expression based substitution to get rid of any weird character, like any punctuation mark and stuff. So we got rid of that. Now for Vectorizer in the previous activity, we used count Vectorizer, as we saw here. Count Vectorizer here, we are going to use a TF, DF, IDF Vectorizer with same two parameter for Max and mean, meaning if something is appearing in more than 95% document ignore, meaning that is too common. Main DF 10, meaning, if something is appearing in less than 10 documents ignore, and we are going to take that Vectorizer and do a fit transform, and that gives me, oh, this is the same set of documents that we have before. So 23,377 document, but this time, we vectorized it within using TF, IDF, using instead of count.
+
+Unknown Speaker  1:12:43  
+Now this DTM that you have,
+
+Unknown Speaker  1:12:46  
+if you look into the DTM,
+
+Unknown Speaker  1:12:50  
+now, this DTM looks different,
+
+Speaker 2  1:12:56  
+right? So this DTM is not a xy y array instead, if you look into this, this is a compressed, sparse row matrix of type float, 64 so this is some internal representation. So what is basically telling you is you have to read it in this way. So think about when you have, let's say, a two dimensional space that you have, right? And you have a space in point. That's the coordinate of the point is three, four in an x, y plane, if you take a point three, four, and then you draw a vector starting from 00, which is the origin to the point three, four, what is the length of that vector? Using Pythagorean theorem, it is square root of x, square plus y square, right meaning five. So the vector three, i plus 4j if that is the vector, the length of the vector is five, because that is the spatial distance, Euclidean distance, from the origin to the tip of that vector. So here, what this Vectorizer is telling you is kind of similar. What it is telling you is for all these words that you have. So this is the doc, the coordinate of the word in that vector space, and the length of that vector is this. So that is a simpler way of thinking this in your mind. So it gives you coordinate and the Euclidean distance. That's why you get a couplet tuple followed by a floating point number coordinate of the word and the Euclidean distance of the word from the from the center of the cluster center, which is the origin. Yeah, got
+
+Speaker 4  1:14:54  
+it. Got it. I was trying to think. I was like, Wait, what's what's the other point? That's 00,
+
+Speaker 2  1:14:58  
+yeah, the other point is 00, Yeah, basically the center of the universe, center of all the words. So that's what you are going to get in TF, IDF, Vectorizer. Now for your understanding, you can try to get the feature name out. You can try to convert this DTM to array, and you can find all the non zero elements, and then you print them side by side, and you will get a similar output. It will say, hey, for the word bachelor, the index is 183 and the value is this. So basically means that hey, this particular word is coming 183 in the index among all those 3149 words. But the Euclidean distance of this word, this particular word, bachelor, is 0.63 which I am saying Euclidean distance. But since this is TF IDF, this is basically your IDF score,
+
+Unknown Speaker  1:16:00  
+so smaller is better or smaller more
+
+Unknown Speaker  1:16:03  
+relevant. Smaller is yes, yes.
+
+Unknown Speaker  1:16:09  
+Okay, so that's your DTM.
+
+Speaker 2  1:16:12  
+Now if you compare here, so Vectorizer is one thing we are doing differently. Now comes the actual clustering. So we used latent Dirichlet LDA. This time we are using NMF. So same thing, seven component, and we do a model dot fit, and the fitment is done. So training is done, and then we look into the components. So we have 3149 same thing, basically, as the previous one. And then you can look into the first topic, which will give you for the first topic. These are the 3149 scores that you have. And you can apply an arc sort and look at the top 10. And these are the top these are the indices where the top 10 words are. And then you can map this with the feature names, and that will give you the first topic, best world America. Food America. So this first topic was, what was our first topic? Again, here, travel. Yeah, makes sense. These are probably the word for travel. And then let's do that. Do the same thing for all to an all seven topics. So the first one was travel, the second one was
+
+Speaker 4  1:17:42  
+sports. I think these are completely different topics. Yeah, if you scroll down just a little bit, you'll see what the what the index, or rather, what the answer key is.
+
+Unknown Speaker  1:17:59  
+So topic one is entertainment in this case? Oh,
+
+Unknown Speaker  1:18:04  
+yeah,
+
+Speaker 2  1:18:07  
+right. So we basically said seven topic. Now this is a different algorithm. There is no wait reason to think that this algorithm will also find the topic in the same way, because the algorithm does not know, what is entertainment? What is technology? What is politics? Algorithm simply knows topic one versus topic towards topic three and so on. So now the interpretation of these algorithm you have to do as a human, according to your knowledge. So our best guess they're saying, Well, does this look entertainment? So
+
+Unknown Speaker  1:18:47  
+yeah,
+
+Speaker 2  1:18:50  
+this is technology. Yeah, YouTube videos. This is food and drink. Now, this is I am. I didn't know about you guys, but looking at this, I think this is probably less accurate than LDA. What do you guys think food and drink? But I have Instagram. Well, remember
+
+Speaker 4  1:19:12  
+that Instagram is famous for like, people taking pictures of
+
+Speaker 2  1:19:16  
+Yeah, that's true. This one is politics for sure.
+
+Unknown Speaker  1:19:24  
+This is politics. One is spot on.
+
+Speaker 2  1:19:27  
+The next one is business, okay, I'll take it. This is food. This is zucchini, stopped bread chips, but it's saying sport now, so I would say my personal take would be to go with LDA in this case, rather than NMF. What do you guys think? Yeah, I agree on that. Yeah. Well, I think so too. One thing,
+
+Unknown Speaker  1:19:56  
+sorry, go ahead. Was
+
+Speaker 1  1:19:58  
+that. One thing you can do is you. Can you can change that list of topics. So, Matt, we're using and then see if that works better.
+
+Speaker 2  1:20:10  
+No, but I am so Karen, I am not doing anything. This is unsupervised algorithm. I am just simply asking the model to give me seven classification cluster. And it is giving me the seven cluster. We look
+
+Speaker 1  1:20:20  
+at a set of words, we have to kind of guess what the topic name is, right?
+
+Speaker 2  1:20:24  
+But then the topics here, but so like what I'm saying is looking into grilled zucchini, stuff, bread, chips. You will think that and potato and pie and things. You'll probably think, this is food.
+
+Speaker 1  1:20:41  
+You can rearrange that, but
+
+Speaker 2  1:20:44  
+then you also have breakfast, chocolate, taste, coffee, Italian dinner. This is also food. So I'm saying there is some kind of a spillover across the cluster boundaries.
+
+Speaker 1  1:20:56  
+But the Norfolk has a sports which doesn't make sense. So,
+
+Unknown Speaker  1:21:00  
+yeah, yeah, yeah, that's I'm saying. While
+
+Speaker 1  1:21:02  
+you're at it, I have to, I'm sorry, to be a pest and interrupt everything. How did you describe the sparse Ray? Again?
+
+Unknown Speaker  1:21:14  
+How did I describe the sparse array? Yeah,
+
+Unknown Speaker  1:21:16  
+you mean here,
+
+Unknown Speaker  1:21:21  
+up here, yeah, no,
+
+Speaker 2  1:21:24  
+oh, you're talking about the internet, yeah, or, sorry, TF, idea, Vectorizer, right there,
+
+Speaker 1  1:21:31  
+huh? There's nothing different distances. Read the just read the comment, sparse, a sparse array basically it does is it counts the number zeros, and then has a value, the number of zeros and then the value. So
+
+Speaker 2  1:21:46  
+what is these values? Now you tell me what this value is.
+
+Speaker 1  1:21:50  
+Those are the values in the sparse array that are not zero. So you have a bunch of a whole string of zeros from zero to 3138, then you have a value, and then for and then not after, you have on 303,038
+
+Speaker 2  1:22:07  
+my understanding. My understanding is, these are the IDF scores. No, that's my understanding. I might be wrong. And the reason I said, read the
+
+Speaker 1  1:22:15  
+comment, read the comment. If the comment says it's the IDF score, okay, Chad, you have score, but sparse array, 3138
+
+Unknown Speaker  1:22:25  
+zeros, then you have a value, then you have 3131
+
+Speaker 1  1:22:29  
+zeros, then another value, not zero value. You're saying something about Euclidean distances. Which I
+
+Speaker 2  1:22:36  
+that? So I are. So what did I met say? I said you can think of so these are, first of all, these are not number of zeros. This is an index that, in some way, it is saying that out of all 1149, word that you have in your vocabulary, the corresponding index of these word is this, using some algorithm, and this is a TF IDF score. And I already made clear that you can think of these almost like if you have a xy plane, and if you have a XY as a as a data point, which is this, and if you have to find the Euclidean distance of that, this is akin to that. This is not Euclid Euclidean distance. This is based on your idea, yeah, because that inverse, standard inverse document frequency, that's
+
+Speaker 1  1:23:27  
+just because you can condense your sparse array by just going to the index that has a non zero, then you go to another index that has a non zero.
+
+Unknown Speaker  1:23:38  
+So what is your interpretation of these values.
+
+Speaker 1  1:23:41  
+So well, that is the TF, the value is the TDF, TF, IDF score. But there's a lot of the sparse array, so it's mostly zero. So you right, you don't have all the zeros. You just have indexes into it to the actual values that are not zero.
+
+Speaker 2  1:23:59  
+So how many rows are here? How many items are there in your DTM, I'm not sure what you're saying. I'm just saying, how many rows and columns are there in your DTM,
+
+Speaker 1  1:24:12  
+okay, but I'm just explaining, talking about how sparse array works.
+
+Speaker 2  1:24:17  
+Okay, so let's, let's park that for now, but we can come back and discuss that, how exactly, what is the representation of the sparse array? Okay, so let's move on, just in the interest of time here. Okay, so now that we know that these are likely this, but this is not our what is called actual prediction. The for the to generate the prediction, we have to take that trained model and do a transform using that DTM matrix. And that gives me exactly like what it did in our LDA case. For each of the document that you have, what is the topic, and then you go through each of the. Five, and then find the do the art sort. So this is just showing for the first one. So if you do an art sort, it will basically give you what is the ranking for the first topic. And looking into these, it looks like the first topic has rank one has been topic seven, which is the highest of all of this, even though the highest one, as you can see, is pretty low, which kind of explains why the accuracy is not that high. Because for first topic, for example, what the model is predicting is the probability of the topic one belonging to each of these seven topic probability of the headline one belonging to the seven topics are so and so and so and so. Now even the highest one is very low, which is around 2% so that's why we are saying that the prediction, the clustering, is not aligning very well to what our common sense tells us looking into the
+
+Unknown Speaker  1:25:58  
+sentence the headline,
+
+Speaker 2  1:26:01  
+but hey, you get what you get, and then you do the same thing. You basically slap it with a with your news article data, and then you map it
+
+Unknown Speaker  1:26:13  
+with your
+
+Speaker 2  1:26:15  
+with your basically slap it with your topic number, and then you will get the topics. And then, if you already have something like what we did on the BBC News, example, if you have separate what is called dictionary, that will say Topic number one is sports, two is politics and so on, you can do the mapping, and it will give you a basically what you think the level of these topics are so as you see, there is no real difference between these two methods, except for,
+
+Unknown Speaker  1:26:52  
+except for using NMF.
+
+Unknown Speaker  1:26:56  
+That's the only difference.
+
+Speaker 2  1:27:00  
+Now what I would suggest you do, you use the TF IDF Vectorizer like you do the other way. So the two example that we showed is using count Vectorizer along with LDA and using TF IDF along with NMF. But there is no reason for you to do so. You can also do the other way. You can take the TF IDF, Vectorizer output and push it into your lda, or vice versa, you can take the count Vectorizer output and put it into your NMF. I am thinking, if you take the TF IDF, put it into lda, that will probably give you a much better accuracy in the clustering. So try this. I would suggest, if you are really curious to see how changing the Vectorizer kind of behaves affects the performance of a particular algorithm. And then other thing, like, as Karen was suggesting, if you want to be fancy, you can use other things, such as, hey, let's use spacey to find out some parts of speech and remove, let's say, some named entity or some particular parts of speech, some proper noun, or stuff like that. So you can try different techniques to see whether things get better. Also, the other one is the threshold for vectorization. You saw how when you change the minimum threshold, that kind of tends to get rid of lot of extra noise. So that is also something you need to tweak. Like, Hey, can I should I choose five or 10 and so on, right? So which one, which one is better? I think, you know, let me do one thing. While I said that,
+
+Unknown Speaker  1:28:43  
+let me do this with five.
+
+Speaker 2  1:28:47  
+No, actually, hang on, which one did we do with five? The BBC One we did with five, right? This one we didn't do it with five. So if I do it with five, you will get a much bigger vocabulary,
+
+Unknown Speaker  1:29:04  
+of course,
+
+Speaker 2  1:29:09  
+yeah, I'm just trying to run the same NF, NMF algorithm, but with low threshold being five rather than 10, Just to see whether I can see any difference, yeah, well, no, the first topic kind of gave me the same 10 top ranking words.
+
+Unknown Speaker  1:29:38  
+Okay,
+
+Speaker 2  1:29:40  
+this one looks like there is a change. Now there is still some food related word going into the travel category and so on. Yeah. Yeah. Yeah. Didn't make much difference here. But anyway, these are some of the things you should try out to see whether you get the best, better outcome.
+
+Speaker 1  1:30:09  
+Yeah. Monoi, yep. Just information. I just put an article on the live channel about sparse arrays. But other than that, I was going to just throw in here in the middle. I didn't when I went through all this stuff, actually, when I was a substitute for another cohort. And what I did was I was like, Well, how can I tell how accurate maybe those are? So what I did, basically, is I had Chad, GBT or chat, you know, LM, label, all of them with the same set of topic names, and then compare the what the like the LDA or this other one or this other algorithm came up with, and then actually calculated scores.
+
+Speaker 1  1:31:02  
+Okay? And the the first student example of LDA was 56% matched what, what the llms would say. They just find an interesting experiment. Okay,
+
+Unknown Speaker  1:31:19  
+just throw it out there.
+
+Speaker 2  1:31:22  
+Okay, cool. Thank you for putting it up there. Yeah,
+
+Speaker 1  1:31:25  
+I haven't looked at for people who see, but that's something I did. I can, if people want, I put sparse, right? But I'm sorry. I just if I don't engage, somehow I start falling through the pier side.
+
+Unknown Speaker  1:31:39  
+Okay, so let's take a break here.
+
+Speaker 2  1:31:43  
+So after the break, we are basically going to talk about the recurrent neural networks architecture and the LSTM, and then we will do that activity that obviously we cannot complete in this time, which is the generation predictive text generation. But I actually have ran the train the model before, and I have saved that like I have pickled the model. So I'm going to load the model from the saved model, just to save time, because otherwise it will take more than an hour for you to train the model. Okay, so let's take a break for about, let's say, 15 minutes, and come back 820, yes, okay, cool. Let's get started. Okay, so we have done some text based modeling so far right, including the one that we just did, right. And previously, we have also done, like a text input to a neural network as well. Now, if you take a normal neural network, like what we kind of what we also used for our image processing right when we did the image classification. So one thing it does very good is looking at the state of data at any given point, like in case of, let's say, a pixel, you have 100 by 100 pixel image, you have a 10,000 image, 10,000 pixel of the image. All of these images are available. So we basically put that into an array, right 1000 element array, and pass it to the first input layer and then through the subsequent layer.
+
+Unknown Speaker  1:33:37  
+And it does a very good job at that.
+
+Speaker 2  1:33:40  
+Now, this type of network is not good at one thing, which is to remember what they have seen in the past. So there is no time dimension in your traditional neural network model, it looks into all the data at once through your input layer, and adjust the weight based on your gradient descent algorithm over the epochs. And then you put another image for prediction. It looks into all the image at once and based on the weight that it has derived during the training, then it applies those weights and then does calculate an activation in the output layer. That's what it does. Now the problem here is, if we want to create a neural network that will be able to look into what has happened in the text before, and based on that, if you want to predict what is going to happen next, then this is a little different, because what the model has to do now it needs to look at not only not. Not all the words at one shot, but it has to be able to remember how the words comes in sequence, like which word comes after which word and what has happened in the recent past. Like, if you have a sentence which is, let's say, 20 word long sentence,
+
+Unknown Speaker  1:35:19  
+looking at word number 20,
+
+Speaker 2  1:35:23  
+if you want to predict, it's kind of like think about your time series forecasting that we did right looking into the past 20 period we were trying to predict what is what is going to happen in the next period. Similarly, here, we need to look into all the words, yes, all the vectorized form of the bag of words representation. But then at the same time, it will also need to remember in what sequence the words are appearing. So that means it need to have a way to sort of memorize the order or sequence that the tokens are appearing in the text that you are inputting. So the normal neural network does not do that. In order to do that, you need to use something called recurrent neural network. So what recurrent neural network does? It basically takes decision influenced by what they have seen in the past. Okay, so that means your input layer then will not go directly into a fully connected layer. Instead, it will go into something called a recurrent neural network, whereby there would be some connection back into the nodes that has come before it, and based on that backward connection, it will be able to remember the weights of the previous connection in that sequence, so that it has some sort of memory, although that memory is not very long, maybe going back to five or 10 words at a time, but based on recent history, then it will be able to try, it will try to predict what is going to happen next. So that's what recurrent network. Recurrent neural networks are RNN, for short, and this application of RNN is used not only for NLP, as I was saying, time series data. So RNN is also used for time series data. In fact, if you remember, I long time back, I think I posted one of my Amazon, GitHub code that I published back in that time, where I took a stock market data and do the did the prediction. So I tried three different algorithm. One of the algorithm is where I actually built a recurrent neural network from scratch, instead of using any of the shelf algorithm. So RNN is also used for time series data. Also think like things like DNA sequencing, right? If you want to make a sense of what the sequence of DNA mean, it not just that particular strand of DNA, it whatever happened before, like how the pattern is going through the time. So DNA sequencing, composing music, and music composition, it Yes, but also composing language, like type ahead, like even in our like everything, like when we type in our Word document or type in a phone keyboard, it predicts based on what we have typed so far. It predicts what is going What am I going to type next? Or we all have seen when we code in VS code with this type ahead, right? It basically predicts based on the code that I have typed so far, what is it I'm going to slightly, most likely going to type next, and it does the prediction. So all of these are basically due to this recurrent neural network, which builds in some kind of a memory into your network. Also these type of agent behavior, right? Or chat bot, right? If you are asking your chat bot to do something, it tries to figure out what is the intent behind your words. So based on that it has to, it will then predict what the answer is going to be. So again, remembering the past. The common thing here is the network needs to have some ability to remember what has happened in the past. And that is why natural language, pre speech processing, analyzing video healthcare, like your DNA sequencing. In finance, such as your. Stock Market forecasting in video games, like if you if you basically want to have some kind of a cheat, right? Like using the cheat, you basically can predict how the characters based on how the characters have behaved in the past, how the characters is going to behave in the future, and then maybe take some preemptive action on behalf of you, for you, behalf of you, right? Autonomous driving also another thing. So all of these are basically cases where you can probably think or appreciate the fact that your network needs to have some kind of a memory. So that's where brings us to the domain of RNN, as opposed to plain, simple, an n. So that's what the purpose of RNN is, okay? Like, for example, this is the one thing, right? So when, if you are trying to build a image of a car, or not, not image of a car. So let's say, sorry if you, if you, if your car basically is trying to predict what action it is going to take next based on what is happening around it. It is not enough for the car just to see what is happening right at this point. It also has to analyze what has happened few seconds before, like if there is a guy there, if there is a pedestrian there based on the movement. Is the pedestrian supposed to cross the road? Should I apply the brake, right, or the car ahead of me, right? Is that car speeding up or slowing down based on that? Do I have to take my feet off with a gas right? So all of these thing is possible based on these architecture for RNN, right? So basically, where your output state is based on not just t but t minus one. And this is just one simple graphic, but it could be based on T minus 1t, minus 2t, minus three, maybe up to, let's say, t minus five or t minus 10. Based on that, then it will predict what is going to happen at TMA, t plus one. That is, in general, what RNN network does. Okay? So it does that because there is a feedback loop in your hidden layer, your hidden layer in RNN, as opposed to your normal hidden layer, where you have all these 128 or so neurons, and they are all just connected to the previous layer and the layer before. Instead of that in RNN, there is also interconnection between the neurons in each of the layers themselves, and that provides that feedback loop that helps the RNN network remember what has happened in the past. So these feedback loop across the perceptrons in the same layer that is the differentiating factor between our regular dense network versus your RNN based network, the feedback loop. Okay, and then in this graphic, what we are say, showing here is, so let's say this is a sentence, and I want to invest for retirement, right? Let's say you are saying that to your chat bot, the network behind the chat bot, it is going through word by word, and as it comes across one word, the second word, and third word and fourth word, you will see the weightage it associates for each subsequent word kind of keeps diminishing, so after a certain point. So let's say when this is at word number six. So these gray area, this is the weightage for the sixth word. But if you look into this yellow shaded area, right? So this has a very high weightage when the model has only seen the first word, then it goes to the second word. So the diminish the weightage of the first word gets diminished by half, and then it goes to the third word, so this one gets diminished even further, and so on. So that means after, let's say, five or 10 steps, it will almost not remember anything about what has happened in the past. So that's why RNN does have memory, but it is also forgetful. It can remember only up to a certain state, maybe t minus five or t minus 10, because the successive word or token, as they come across, it keeps assigning more weight to the more most recent token, and the weightage for the previous token gets diminished subsequently, as it progresses through all the tokens in the sentence in that order. Okay,
+
+Speaker 2  1:44:51  
+so that's what RNN does, which is, which is pretty good to have a short term memory, and for a lot of things, for. Example, finance application, stock market prediction. This is probably good enough, like when I did my work there just using RNN on stock market data, I got a much better accuracy than just using a regular Ann. So that's good. But then there is a little problem when you try to apply this for natural language processing, because what happens is, when you are reading a paragraph, or your model is reading a paragraph, just looking at last five or 10 words may not be enough in order to get the overall context of what is being said, the model needs to have a much longer term memory rather than last five or 10 words. But RNN network by itself cannot do that, because what you are seeing in this graphic right like after five or 10 steps, the weightage of the past tokens should be so small, they will almost be gone. And that problem is called the vanishing gradient. So it will basically this slope of the space due to these tokens that have occurred far away in the past will almost vanish, meaning become almost zero. So that's why RNN is good for many application. You can use RNN for NLP also, but it will have its limitation. So then what can be done? You need to have a way to find a much longer term memory built into your model. Now, there is a problem in doing that. The problem is, if you somehow are able to create this long term memory your models, basically there is no end of how long it can go, right, like instead of five or 10 token, do you make your model? Remember 500 token, 1000 token, or how long is long Right? Or how long is too long also, that is also another thing, how long is enough and how long is too much? So you really cannot do that. Instead, what you can do is you can let the model decide how much it needs to remember, like whether it needs to remember short term or whether it needs to remember some words from the longer term, based on how those longer term words, basically The words that have occurred maybe 200 300 words back based on their correlation with or their similarity with other words. Let the model decide, on a case by case basis, how much further back it needs to remember. So basically, make your memory itself tuneable because RNN itself is short term memory, but you need to have a selective long term memory. Why selective? Because you cannot go all out long term because then your model will just blow up in size and nothing will be able to return. So you need to have something called LSTM, which the full form is long, short term memory. So basically this is not short term but not fully long term either. So LSTM stands for long, short term memory. So these type of model will definitely remember something for the short term, but something for the longer term, it will decide based on the data itself. And we are not going to go too much into the detail of the architecture, but this diagram, just think about it at a high level. So essentially, what we are going what the architecture does is think of it like kind of a logic gates. So different condition like you Boolean logic, right? You have your and, or or NAND gates that you can use to do any binary computation, in general computing so similar to that, these interconnection of neurons are interjected with logic gets that basically allows the model to conditionally turn on or off. Certain gets based on the previous training behavior, on the previous epochs, and based on that, it will switch on some of the long term memory, but not all. So conditionally starting on or off some long term memory based on a whole bunch of logic gates that are built into your perception layers. That's how the long, short term memory network is architected. Now, obviously the exact design of this architecture is one. Well beyond our scope, right? Even I don't know how this is built, because for that, you need to be in core as a as a AI scientist, the the core mathematics behind it, but at a high level, what I understand, and which you guys also need to understand, is just this concept that RNN builds in some memory into your network by providing a feedback loop, but that memory is short term. LSTM improves on that by adding conditional logic in your network that automatically turns on or off certain layer certain previous layers based on the based on the interdependency of the tokens to selectively remember some of the things from way past back, not all the thing. So that is what LSTM is, and that's what we are going to use now to build a model that will be able to look into the series of text that has happened in the past, and based on that, will try to predict what are the tokens that are going to come in Future. Okay, so that's, that's kind of the the concept, the theoretical concept that we are going to implement, which we will see in couple of activities that we are going to do. So any questions so far?
+
+Speaker 4  1:51:40  
+So, nope. So in this case, so it goes through the forget game, then it figures out if it's worth meeting or not. And then is the H, the yellow, like that meant to be, I forget output. The blue is, remember,
+
+Speaker 2  1:51:59  
+no. So basically, those gates will turn on or off. Basically, the gates will be activated based on the convolution that happens before. So this convolution is kind of similar to what you have seen in the image network also. So this convolution layer before the net before the gates will be able to tell your model the abstract presentation, or abstract ideas as expressed by the tokens that has come before. And then it will turn on the gates that it needs to make certain abstract concept surface out and turn off the other gates to suppress the abstract concept that it does not need to understand the meaning of the character.
+
+Speaker 4  1:52:53  
+And in this diagram, is c1 the output. I'm just, I'm just trying to, like, make sure I'm getting the flow of this right. I think it goes left to right.
+
+Speaker 2  1:53:02  
+So then, so this is just one so there are many of these things, right? So it's basically saying this is one cell. So instead of one perceptron, now you have one cell. Now one cell can have multiple complicated get logic here. So it is basically saying this is your input state. This is your output state from that cell, not from your whole layer, just from that cell. It's basically zoomed in into one memory cell. And unlike your perception case, where one memory cell is basically a bunch of input coming in and going through some of wi xi and run through one activation function. Instead of doing that, it basically runs through a whole bunch of logic gets also and the output of all gates are combined to basically decide what the outcome of that cell is going to be.
+
+Unknown Speaker  1:53:57  
+That makes a lot more sense. I appreciate that. Yeah,
+
+Speaker 2  1:54:03  
+okay, so anyway, the good news is we don't actually have to build this. All we need to know is what Keras function allows us to put in a LSTM layer versus our plain old dense layer. That's all we need to know. And we need to know when to apply. What is the use case? What is the scenario when we should think of applying a LSTM layer in our network? Kind of when our image classification case right? When we did the convolutional neural net, right? So we did, added a convolutional layer, then a pooling layer, and then we added a whole couple of times, right? And then we added a regular dense layer. Similarly here, we will add one or more LSD, LSTM layer, and then the output of that LSTM layer will pass into your regular, traditional dense layer to do the final prediction. So when you see we will see in the. Code you will see that is not very different from what we did for convolution, although the underlying network architecture for LSTM is very different from just convolution, this is a much more sophisticated architecture. But the good news is all this sophistication is wrapped around one function call in Keras or in any other library. For that matter, here we are using Keras, but people who are using pytorch, they will use the corresponding library from pytorch. So,
+
+Unknown Speaker  1:55:33  
+okay,
+
+Speaker 2  1:55:35  
+so now let's go to the most uh,
+
+Unknown Speaker  1:55:41  
+exciting,
+
+Unknown Speaker  1:55:45  
+example of all our activity.
+
+Speaker 2  1:55:50  
+So what we are going to do here is, if you look into the resources, we have a chapter from Moby Dick, right? So just one chapter from one book. Our goal is to tokenize this and use this sequence of tokens to train an LSTM network, LSTM based network, and then after the network is trained, then just to test it, we are going to take maybe just a one sentence like this, and then ask the network to predict what will come next and after and after and after, basically see whether our network can kind of recreate what was there in the original text, text. And we are going to do the training using only these tokens. In reality, though, in any of the model that you are going to be using from next week's class onward, those models do the same thing, but they are trained not just using one chapter from one book. They're trained from millions of chapters from millions of books. So that's why those models will be much more accurate than our model that we are going to build today. But even here, within this limited context of training this language model from one chapter of one text, I hope you will see how that model works, and even though the model is far from perfect, you will still be able to appreciate that the model does have some generative power.
+
+Unknown Speaker  1:57:31  
+So that's the goal. Okay,
+
+Speaker 2  1:57:38  
+so we are going to use spacey for this. And we are going to use English core web large model instead of a small or medium model, the previous spacy class that we did. If you go back and see we use the small model this time, we are going to use the large model, and we are not going to do tagging, pos tagging or named entity recognition or limitation for now, so we are disabling those three features. Okay? So now what we do? Well, we have a simple utility function to basically load the file. So open this file, which is basically these Moby Dick chapters, right? Four chapters, essentially, and then basically do a read of all the text from the file. And then we also have a one utility function that will basically look through all the tokens. These tokenization here will be done by using this NLP. Now, what is this? NLP? This NLP is nothing but your spacy load the loaded spacey instance. So that's your natural language processor. So we are going to use spacey to do the tokenization. And of all these tokens, we are basically going to remove all these new lines and special characters and all of these tabs, special character, dollar sign, ampersand, semicolon, star sign, like all of these characters we are going to remove. So that's what this little utility function does. So go through all the tokens. If the token under Text not in this, then only you keep the token, else you discard the token. So essentially, this gives us the clean set of tokens from the four chapters of the book. Okay, so then we basically use these two files to read this and then parse all the tokens. So now my tokens are done, and I have got 11,338 tokens, so meaning these many words are there in that four chapter long book that we have. So that's the number of tokens we have, if you. Want to print some of the tokens you can print it you see, call me Ishmael Sami or Sego, never mind how long, which is basically, as you can see here, right? And all of these are basically lower case, right? And we got rid of punctuation mark like such as these dots, these hyphens and all of these. So essentially, as a token, we are only keeping the pure words, no punctuation mark, nothing. So that's the tokens that we have.
+
+Unknown Speaker  2:00:36  
+Okay? So
+
+Speaker 2  2:00:39  
+now the way that training will work is we are going to create a network with memory, right? So then we have to decide how long sequence of what we are going to give to our model, and we expect the model to memorize the sequence. So here arbitrarily, just arbitrarily, we are deciding that our sequence should be 25 so basically, we are going to train our model to look into sequence of 25 tokens out of these series of 11,000 or so tokens, right? Look into any 25
+
+Unknown Speaker  2:01:28  
+consecutive tokens,
+
+Speaker 2  2:01:31  
+and the prediction would be the 26th token. So that means it will get 25 token from position one to position sorry, position zero to position 24 because it is a zero best. And then take the token at position number 25 as the target, and then it will slide by one. And then take one through 25 and then 26 will be target. And then two through 26 and 27th will be target. Three to 27th and 28th will be target, and so on. So basically, we are going to take a sequence of 26 tokens on a sliding window basis, and slide the window from the beginning to the end of this token, and we are going to create these sequences. So that means these sequences will basically have 25 tokens as my x, and that 26 corresponding 26 token will be my y. So that's my training and test data. Not sorry, not training and test sorry, my x and y portion of the my data. So now, how do we do that? Very simple. We decide what our sequence length would be, which is 26
+
+Unknown Speaker  2:02:50  
+then we loop from
+
+Speaker 2  2:02:53  
+loop from training length, so from zero through training length up to the length of tokens. So basically, we are going to look so loop from 26 in this case, and length of tokens is 11,338 right? So what we are doing, we are looping from 26 going up to the end for each eye, we are looking into the token, starting from i to train length. So what is train line? Which is 26 so i minus 26 so that means when my first i, value of i is 26 my first token would be at position zero, and the last token would be at position i, meaning 26 so that will be zero through 26 then the i becomes 27 so that means my first token would be 27 minus 26 which is one, and then it will be 27 right? And in order to make it clear, I put a print statement here whereby when I'm running this, it is basically outputting the initial and final, the starting and the end index within the list of tokens that I'm going to cutting it out. So for each of these, I'm going to cut out the sequence of tokens, and I'm going to append it into an empty list of text sequences. And that's how we are going to generate a whole bunch of text sequences here. Now how many text sequences will there be? Well, I had 11,338
+
+Unknown Speaker  2:04:37  
+so that means I will end up having 11,338
+
+Speaker 2  2:04:41  
+minus 26 text sequences, right? So let's see whether it works that way. So let's, let's run this so that is done. So the first token is from zero through 26 one through 27 and so on. And you see the last one is from 11,311 to 11. 337 so that means, if you print the length of
+
+Unknown Speaker  2:05:09  
+text sequences, you will get 11,312
+
+Unknown Speaker  2:05:13  
+which is 11,338
+
+Unknown Speaker  2:05:16  
+minus 26
+
+Speaker 2  2:05:22  
+so now just randomly printing the first three. So the first it's starting from this call ending on on, and the second one is so it was called me Ishmael, and then second one started from one after, so from me Ishmael, and then it ended and not me on also one after Sure. So you see how the window slided by one one token and the next one started from Ishmael, and then it went one further word along. So these are my sequence of 26 tokens. How many such items are there? 11,312
+
+Speaker 2  2:06:12  
+Okay, oh, so I already had the length here. Okay, so that's my tokens. So now what we are going to do is we are going to tokenize this meeting. Vectorize it so we can earlier. We have used count Vectorizer. We have also used TF idea Vectorizer. But here we are going to use another Vectorizer, or tokenizer, which is from Keras library instead of scikit learn. So this is the tokenizer that we are going to use from TensorFlow, dot, Keras, dot, pre processing, dot text library. So that is our tokenizer. Oh,
+
+Unknown Speaker  2:06:57  
+what is happening? So,
+
+Unknown Speaker  2:07:13  
+it didn't happen before.
+
+Unknown Speaker  2:07:18  
+Is it just a warning or
+
+Unknown Speaker  2:07:27  
+just the import gave me this error
+
+Unknown Speaker  2:07:30  
+that is odd. I didn't even do anything,
+
+Unknown Speaker  2:07:34  
+some kind of version mismatch or what.
+
+Speaker 2  2:07:38  
+Let me try this and see whether these work. And then I take the tokenizer, and then I do the fit on text. Looks like the fit on text did work. Now let's see the tokenizer length, yeah, it did work too. Then let's see the word index, yeah, it did work anyway. So basically, what this tokenizer did is this tokenizer applied some kind of algorithm in which internally and converted each of the word to a corresponding numeric value. So if you say, Hey, what is the numeric value for call, you will say, Hey, you will see 956, so each of the words in the vocabulary, total of 2718 word it found in the vocabulary, and it basically applied a single numeric value to each of these words based on some algorithm. Okay? Karen Kian Muhammad, if you guys know by any chance what is the algorithm that the Keras tokenizer uses? Feel free to pitch in. Or if you know of any, any where we can refer to, feel free to post the link into the Slack channel. If you guys happen to know what algorithm it uses, it does not use count. It looks like it is somehow sequencing the word and doing some kind of a one hot encoding, or some or not even one hot encoding. It's kind of a level encoding, from what I see. But I am not sure exactly what logic it uses to do this level encoding.
+
+Speaker 1  2:09:18  
+I think that that was doing is like, let's say you take the whole vocabulary and if in a whole list of index of words, yeah, and then each one has an index, right? And is it just that nothing else? I think that is. That's what it looks so, So then what's what is it going to do? If a word appears in multiple places, would it take the index of first occurrence, yeah, yeah, yeah, if you like, if you were just that
+
+Speaker 2  2:09:47  
+does not work, because you see the call, the word call appears in the first position, and yet, the index for the word call is 956,
+
+Speaker 1  2:09:59  
+right? But. That's because however, however organized it may be sorted, I don't know, but, uh, yeah, basically, that's what I was doing. Is the index of, if you take all the words in the set, okay, that's not necessarily going to be in determining order. Remember, set will be any, whatever order it's in, so maybe one of us might be the first word in the set. But it usually is a simple way to do it is to do a set. So you have, you take all the words from all you separate, get all the words from all the doc, yeah, and so on order, you get one of each word, and then you just have an index number. And usually that's where you put it in place of the word itself. In in the input, you put just the number Yeah,
+
+Speaker 2  2:10:41  
+and also in the next cell, if you guys notice, if you so, this was tokenizer dot word index. So this gives me what is the index of the word but you can also do what counts, and it will tell you how many times the word call appeared. So the count is 27 but the index of the word call is 956, so word number 956. Appeared 27th time, and
+
+Speaker 6  2:11:04  
+so on. 56 is the index in the in the list of all the words you need, in
+
+Speaker 2  2:11:08  
+the list of all the words Yeah, vocabulary, yeah.
+
+Speaker 1  2:11:11  
+And then usually you also have a number that is like out of vocabulary for words that it won't recognize. And
+
+Unknown Speaker  2:11:20  
+yeah. So my vocabulary size is 2718
+
+Unknown Speaker  2:11:23  
+and I have a sequences of 11,312
+
+Speaker 2  2:11:28  
+so now if I print just the first sequence out of these. Now that sequence here, which originally was this sentence, right? This one, call me small, this thing. So that sequence has now been converted to a corresponding sequence of token which is using all numeric values.
+
+Unknown Speaker  2:11:51  
+Okay. So essentially, we
+
+Unknown Speaker  2:11:55  
+reverse it, then you can easily, then you can
+
+Speaker 2  2:11:57  
+easily reverse it, yes, yeah. So that's why, when we save the model. So this tokenizer that we just fitted, we also have to save this, this fitted tokenizer, because later, when we are going to retrieve the model and do the prediction, we not only need the model file, but we also need the tokenizer fill file, because this is where the mapping of word to the corresponding index values are saved. So we need to save this whole thing as as a file. So two files we will need to save, which you will see in later, right? So the and then this is basically showing, hey, 956, is called 14. Is me, 263, this is so basically this sentence, right? Call me Ishmael some years ago and all of this. So this is basically 965, 14 to 6351 and so on, right? This is just, just as an example to show you guys right. Like, what, what lies behind these numbers, which you can always map back using the tokenizer, to the original word, which is what Karen is saying.
+
+Unknown Speaker  2:12:59  
+And we are going to save that. Okay,
+
+Unknown Speaker  2:13:04  
+so now that's that. So we know that we have 11,312
+
+Speaker 2  2:13:09  
+sequences, and each sequence have 26 tokens. So we have a list of 11,312 elements, and each of the list element is another 26 element list. It's a list inside list. So now you take that list inside list, which is your sequence sequences, and you convert the whole thing into an NP array, a numpy array, and that gives you a correspondingly shaped numpy array. 11,312
+
+Unknown Speaker  2:13:41  
+I didn't run this. So 11,312
+
+Speaker 2  2:13:45  
+by 26 so these essentially becomes the data that you are going to present to the model. Now out of so there are 11,300 rows, the 312 rows, right? And then each row has 26 columns. That's what these arrays. So now what we are going to do, let's import Keras first. Now what we are going to do for each of these sequences that we have here, each of these 11,312 sequences, we are going to take everything from the beginning to minus one, meaning, from zero through 25
+
+Unknown Speaker  2:14:34  
+and we will call that x,
+
+Speaker 2  2:14:39  
+So you can see this selector, right? It is basically saying, Do this for first semi colon, meaning for all the all the rows and the column should be colon minus one, colon minus one, meaning starting from the beginning ending with one before the end. It. That's what colon minus one means. And when you do that, it will basically keep you see from 956 through.
+
+Speaker 2  2:15:15  
+So we had 956 14 and all the way through 24 but we kept 956 up to 14, which is here we did not take the last one, because that last one for each of these will go into my y, because this is my x, so that's my x. And then if you look into only the last one, that will give you 24, 957, so this is basically the last one. So this is just for you to see. So now what we are going to do is so these two cell I just ran just to show you guys how it is you how it looks like. You don't actually need to run this cell. All you need to do is, after you convert the list to numpy array, you need to just run these, which is for each row, for all the rows, take columns from the beginning to one but last and call it x. And also for all the rows, take only the last column and call it y, and that will give you your x and y. So that means your x will have a shape of 11,312 by 25 not 26 but then y will have a shape of
+
+Unknown Speaker  2:16:32  
+11,312 by one.
+
+Speaker 2  2:16:38  
+So is it clear for everybody, like, how we are creating the x and y for the training. So it's kind of we are creating a training data with 25 column data frame, and then one column is your target,
+
+Unknown Speaker  2:16:51  
+which is my why.
+
+Speaker 2  2:16:58  
+Okay, now the why? What is why? Why has these values right? These values? Now, what we need to do similar to think about how we did the when we did the handwritten digit recognition right, when the output could be any values from zero through nine. But what we did is we can did the one hot encoding to basically convert that single output column into 10 column. And then for each rows, there will be only one column that would have a number one, everything else will be zero. So essentially one hot encoding. So here my vocabulary size was how much 2718 now my Y column has one of these 2718 values in each of the rows. Now, if we want to one hot encode this thing, we will end up having 2718 y columns with all zeros except only one one.
+
+Speaker 4  2:18:06  
+So, but no, when you do a prediction later, is your prediction have? Have to be on a on a word count of 25 or can it be smaller word counts? So when
+
+Speaker 2  2:18:18  
+I do the prediction, when we do the prediction, we will basically see, hey, given this 25 input token sequence, these 20 out of these the for the corresponding output. Now we will have 2719 columns in output. Which one have the highest probability score, just like how we did for handwritten digit recognition. So that's
+
+Speaker 4  2:18:40  
+you could do a size smaller than 25 and have an accurate
+
+Speaker 2  2:18:45  
+size smaller than 25 No, that 25 is completely arbitrary. You could do that with a 50 100 or so on. But the higher you go, that means your model needs to be deeper and bigger. So that means your training time will go up a lot.
+
+Speaker 4  2:19:01  
+So I guess, because it's a sliding window, I guess my fear would be with that, it would be that you wouldn't be able to predict anything within the first 25 words of the book.
+
+Speaker 2  2:19:11  
+Oh, you that's No. I mean, no, you can. Why not? Because my first line in my sequence is basically first 25 word from here. So first line is basically first 25 word from oops, sorry, first 25 words from here. However, that is so that was my first so why wouldn't you be
+
+Speaker 4  2:19:32  
+well? Well, the only reason I would think that it wouldn't is because you're not having a target that you're giving into training data that's within that 25 words. So if I, if I gave it, for instance, if I said, Call me, and then what do you think should come next? Would it predict Ishmael? Or would it be able to because that was never a target? Oh,
+
+Speaker 2  2:19:49  
+no. So, huh. So when you are doing the prediction, you need to give at least 25 tokens, if that's what you are, okay, yeah, that's what I was asking. Yeah. Okay, so your prediction horizon. Has to go back by at least t minus 25 got
+
+Speaker 4  2:20:02  
+it, yeah. So you have to get 45 Yeah, yeah. Okay, yes.
+
+Speaker 2  2:20:10  
+Okay. So now we are going to do the one hot encoding using these two categorical method from Keras again, again. There are obviously many ways of doing this. But here we are doing so now you see why dot shape was 11, 312, by one, and now it will be 11, 312, by 2719, because we just one hot encoded our Y column.
+
+Unknown Speaker  2:20:34  
+Okay, so that's it. Your data prep is done.
+
+Speaker 2  2:20:38  
+So now comes to the actual modeling. So for modeling, we need the sequential model, of course, and we need the dense layer. We need the LSTM, and we need embedding. Now I'm not going to actually run the training, because if I run the training, that's it. We cannot even go to bed today, so we are not going to run but I'm going to show you the structure of the network. So the way it is structured is so first you have to have an embedding layer, which basically maps this word index to a corresponding vector representation. So presentation, okay, in a high dimensional vector space. So that's your embedding. So this embedding is generated. This vectorization is generated internally by Keras, just by adding this embedding layer. So you don't have to worry about anything else how the vectorization is done. You basically simply pass the stream of tokens, and the embedding layer will take care of it, but you have to provide what is the size of your vocabulary, which is 271818, and what is your sequence length, meaning 25 basically means you have to go to T minus 25 so your Instead of input layer, unlike your regular Ann here, your first layer is embedding. You have to have that embedding layer, and then you can have one or more LSTM layer. So here we are using two LSTM layers with 150 cells each. Now, these 150 is obviously completely arbitrary. If you can, if you grow, go wider, it will probably be more accurate, but the training time will be much long, and if you have more than one LSTM layer, the first one, the last one, will just have an LSTM layer, but anything before that will also need to have these additional parameter called Return sequences equal to true. What that means is the sequence that LSTM decided that it is going to memorize these sequences, it has to return that to the next LSTM layer. But you don't need to do it on your last LSTM layer, because after that, you don't need to worry about your sequences anymore. At that time, you are only basically going to take whatever coming out as a normal activation output from LSTM and pass it to your regular dense layer, kind of similar to how we did convolution, max pooling, convolution, max pooling, and then followed by dense layers. Similarly, here we are going to do embedding, and then LSTM, LSTM, LSTM, however many times we want. And then dense, dense, dense. And finally, another, last dense as an activation, the only thing is in these activation since we have done this one hot encoding the activation function has to be a soft max, right? And then you use the same thing. You compile the model with the your choice of optimizer loss function and metrics, and then you train the model. Okay? Now, actually, I think I can run this right, because this is not going to actually kick in the training. This one is simply going to print the model output, like the model, how it will it will show the model, right? So this is what the model is, my embedding layer, then my LSTM layer, then my next second LSTM layer, then one dense layer, and then the final dense layer, with this many soft max output, because that's the size of the vocabulary. So that is my layer. And then you do model dot fit. And for these models to work, you need to train at least couple of 100 epochs, otherwise the accuracy. Below. So if you see like, I'm not going to run this. So each of these epochs takes close to 10 seconds. And if you look into is the first few epoch, the accuracy started very low, like point 03, and then it kept going. And the final at epoch 300 it went up 2.8598,
+
+Unknown Speaker  2:25:25  
+I'm not going to run this.
+
+Speaker 2  2:25:27  
+And then I plotted the accuracy. You see the how the accuracy climbed. Looks like after here, it kind of fell off. Maybe I should have stopped at around 280, ish, maybe I and then the loss function. So here also you see after this the loss starts creeping up. Maybe 280 epoch would have been better. Okay, and then I saved the model. So two things I saved. So first on the train model that we have, which is this variable here, model. So this is our sequential model. So if you do model, dot save, that will save the model in using whatever file you provide, which, in this case, I chose this file dot Keras extension, and you cannot open this file because it is a binary file. This is the internal Keras representation of all the weights of the model. But the tokenizer that I had that basically has the mapping between the number token index to the corresponding word. So I chose to pickle that file into another binary file, which I called this one, which also you cannot open, because this is a binary file. But this binary file is simply saving the tokenizer. So essentially I have two files. Now a quick look into the size of the two files. So my model is about close to 10 Meg, and the tokenizer is like 100 KB. So obviously, tokenizer is much small. The model is bigger, 10 mega model. And how many parameter does the model have? So if you look into this output up here, so it has 787,000 parameter, which is inconsequential, right? Because the state of the art model today have billions of parameters, right? So as opposed to that, we have not even a 1 million. So obviously these we do not expect great things to happen from this model, but we will see what happens. Okay? Now what we are going to do, since I did not run any of these, but I have told you, and you have to take my word that I have run this before, and that's why you see this file share. So what I'm going to do is now I'm going to load this model and try to use this model to generate new text.
+
+Unknown Speaker  2:28:01  
+So
+
+Speaker 2  2:28:03  
+so what I'm doing is I'm randomly picking a sequence from that book, just a random from somewhere I picked. So this is using the randomizer. I'm basically picking a 26 sequence token randomly from the book. Now I'm going to load the model. So for loading the model, I need a load model function. And that load model function, I have to pass the file name, which is this dot Keras file. So this line will load the model into memory, and this line is basically unpickling the pickled tokenizer. So this is my tokenizer. So now I am back in business. Now I can start my text generation. So now what is my input text? So this is my input text, right? Which is my seat text. So now, in order to do the generation, I have to convert this input text into a list of tokens, but I have to use the same tokenizer that I have used during the training time, and that's why that tokenizer was saved and which I have subsequently loaded here. So I have to use that same tokenizer and apply the text to sequences method, which I wrote up earlier. Now, sorry, tokenizer dot text to sequence. No, this is a built in method, and then you basically convert that. This these random 25 character token into corresponding index sorry, 25 token to corresponding index values. Okay, and in case, this sequence of token is more than 25 Let's say if it is 3035 so on what we are going to do is we are going to pad it to bring, keep only last 25 and truncate everything else that comes before. So that's why I'm going to use this pad sequences method. In case my list of tokens is more than 25 so in this case, I had, oh, right. So here I used, when I loaded this token, we use text sequences which is 26 not 25 Yes. So now that's why, when I'm padding it, it is basically keeping these 25 only because I don't need 2625 is my prediction horizon. So I dropped the first one and I kept this 25 and then this is the list of token tokens, the the basically the corresponding numeric values that I'm going to pass to the model and ask the model to do the prediction. And when it does the prediction, the prediction will give me 2719 probability values, because remember, our output is one hot encoded, and the activation function is soft max. So when we do this, even though we are supposed to get only one prediction output, but it is in form of this 2719 probability values. Now how do I know which one it is simple. Same thing we did for handwritten digit recognition. You apply this NumPy arcmac function and you get a value, let's say six. But what is six? Well, six is one of these things. Now you have to convert this six back to the corresponding word, which becomes two.
+
+Unknown Speaker  2:31:58  
+So basically what it did is
+
+Speaker 2  2:32:01  
+looking into these 25 tokens, dead American blah, blah, blah, blah, blah. It predicted the next word that is likely going to come will be two. And then you print the input text, give chase, and then append the output to it. So you basically given this input. You predicted one word.
+
+Speaker 2  2:32:36  
+And then you can do this. If you do this for, let's say, five times,
+
+Unknown Speaker  2:32:40  
+so it says to the Livid and saving site,
+
+Unknown Speaker  2:32:46  
+I don't know. So it did, that's what it did, right?
+
+Speaker 2  2:32:51  
+So that's your this thing. And now you can take the whole thing and put it inside a generate text function, and then you can use that
+
+Unknown Speaker  2:33:03  
+to generate text.
+
+Unknown Speaker  2:33:06  
+And this time the generate text function,
+
+Speaker 2  2:33:11  
+I basically ran it with num Gen words of 25 so basically I said, Hey, predict me next, 25 words. We with this 26 initial prompt. So now you can see this is not even good English, but there is some semblance of our English language being generated. But this is a really dumb, really lame model, but even then, it is generating something,
+
+Unknown Speaker  2:33:49  
+if you read through it,
+
+Speaker 2  2:33:55  
+so the model is so small it cannot really understand the or generate the grammatically correct English sentences. But hey, it is generating something, and you can play with different so let's say this is another set of tokens that we got seeing now that there were no cartons to the window, and that the street being very narrow, the house opposite commanded a plain view into the room and
+
+Unknown Speaker  2:34:29  
+and,
+
+Speaker 2  2:34:34  
+okay, so no, so this is not the Generation yet, and let's generate and observing more two eyes so infallible, lead inches go to now. This is like completely out of whack.
+
+Speaker 7  2:34:50  
+I wanted to believe in it, though I really wanted, I really wanted to be like a sweet sentence.
+
+Speaker 2  2:34:56  
+I will show you. I will show you. Hang on. We are going to get there. Okay, and then, just for fun, I wrote this little thing whereby you are going to apply this generate text function over and over again, and it will basically show you how it is generating the words. This is kind of giving that cool feel that it is kind of thinking and generating the words,
+
+Unknown Speaker  2:35:27  
+again, complete blabbering.
+
+Unknown Speaker  2:35:32  
+Now, all you need to do
+
+Speaker 2  2:35:35  
+is just scale this model up and scale your data up. So instead of a model with 700k parameter, if you build a model with 700 million parameter, and instead of feeding four chapters from a book, if you feed 400 or 4000 books to it, then this model will start spitting out meaningful sounding sentence, so that essentially is at the core of the language model.
+
+Speaker 3  2:36:12  
+Quick question, will there be any of the puncture punctuations, and, you know, uppercase, lowercase and stuff like that, that you can train
+
+Speaker 2  2:36:19  
+us? You have to, you have to add those letters like, not in, in this model, obviously we are training it without punctuation, right? So for those, you have to use advanced technique, like, you have to basically come up with some kind of a spacey based technique to basically maybe find out, hey, what is the sentence structure, or use some kind of other library to add those punctuations back.
+
+Unknown Speaker  2:36:44  
+Can't wait. Thank you.
+
+Speaker 2  2:36:47  
+Okay, so that's that, then in your next activity, which is supposed to be a student activity, but again, as I said, we are not going to do any activity today. So here the resource was given was an excerpt from a Charla comes book. Okay, so this is the section of the book, and for this one, you are supposed to build that exact same model.
+
+Unknown Speaker  2:37:22  
+So what I did is I took that
+
+Unknown Speaker  2:37:26  
+and I
+
+Unknown Speaker  2:37:31  
+went little bit
+
+Unknown Speaker  2:37:33  
+crazy here.
+
+Speaker 2  2:37:36  
+So what I did is I created a model that has in the previous model. If you see, I had, let me compare the two models here. So I had one LSTM of 150 and then another 150 in this one I took. So first is my embedding layer, okay, and then I took a 512 node, or 512 cell LSTM, and then I added a 20% dropout after this, and then I added another 512 LSTM with return sequences true, because I'm going to add one more. And then added a dropout, and then added another 512 and a dropout. So instead of two, when I have three layers of RNN, instead of 150 now I have 512 and then I added a 20% dropout to prevent overfitting. And then in here, instead of having here, I had only one dense layer, right? Sorry, two dense layer one is sorry, one dense layer 150 and then an activation layer. So here I added one dense layer of 256, another dense layer of 128, and then the activation layer, with a 20% dropouts all along in between these layers, sandwich between all of these layers. And this is a model with 5.7 million parameters between all these layers. And this model, when I trained, it took me 11 hours and 46 minutes to train the model. So obviously, there is no way I'm going to train this now, but you see how going from half a million to 5 million, how that one hour time went out by went up by 10 times. Because, hey, your parameter also went up by 10 times, approximately, right? So 10 times increase in parameters 10 times increase in training time. Oh, and then, no, I also trained it for 500 epochs instead of 300 epochs. So I basically pushed up each and everything that I could, hoping to see whether I could, because I also really wanted this to actually be. Able to produce some meaningful text, at least. So now let's see what this does.
+
+Speaker 2  2:40:12  
+Okay, I don't know why these errors are coming while I'm importing I hope that will not give me any problem. Okay? And then this is the text I'm going to do this on this text, her jacket was black with black beads even upon it, and a fringe and a little black jet ornament. Her dress was brown, rather darker than I Oh,
+
+Speaker 5  2:40:43  
+hang on.
+
+Unknown Speaker  2:40:48  
+Separate punctuation, wells,
+
+Unknown Speaker  2:40:52  
+what did I miss?
+
+Speaker 2  2:40:58  
+Oh, no, separate punctuation. I remember it is one of the user defined methods. Yeah, I'm also going to, oh, read file is also not defined, okay, so I have to run this file. Okay, so now I think it'll be good.
+
+Unknown Speaker  2:41:22  
+What's happening.
+
+Speaker 2  2:41:27  
+Oh, NLP, is not defined. This is, that's the first, very first import, yeah, because I still need the spacy for there, right, for the tokenization. So yes. So these imports need to be there, oops, sorry. So now it should be able to do the tokenization. Okay, yep, so the tokenization was done. Now I'm going to load the model and then generate just one text, sequence line is not defined. Come on, where is sequence line?
+
+Unknown Speaker  2:42:22  
+But did I define sequence land?
+
+Speaker 4  2:42:26  
+I wonder if you can write off definition. I wonder if you can write aspect on the variable sequence.
+
+Unknown Speaker  2:42:35  
+Yeah, that I can do.
+
+Speaker 2  2:42:40  
+So. Yeah, sequence length was what 26 right? In our case, let me do that. Then let me just write sequence length, 26 there. I
+
+Speaker 2  2:43:03  
+was it 26 or 25 I forgot. What did we call
+
+Unknown Speaker  2:43:10  
+model tokenizer, sequence length,
+
+Speaker 2  2:43:16  
+length of the training sequences used to train the model. Okay, no 25 I think sequence length we have to have 25
+
+Unknown Speaker  2:43:38  
+okay, so
+
+Speaker 2  2:43:47  
+huh? So now if you see darker than what is the next sequence is, token is generated
+
+Unknown Speaker  2:43:55  
+darker than coffee,
+
+Speaker 2  2:43:58  
+color with a little purple plush at the neck and sleeves. Her gloves were grayish and were worn through at the right forefinger. So now you see how more coherent this sentence sounds like. Now if you run through this my other loop, now you will see, just sit back and see how it tells the story.
+
+Speaker 2  2:44:30  
+Does it not almost sound like as if copied from some real text?
+
+Unknown Speaker  2:44:36  
+Almost I
+
+Speaker 7  2:44:46  
+I mean, it sounds a lot better than the previous model that was, you know, 110, the size, right? Yeah,
+
+Unknown Speaker  2:44:53  
+exactly.
+
+Speaker 7  2:44:56  
+Nick. I mean, it's pretty impressive. I gotta admit, this is pretty. Pretty cool stuff. Yeah,
+
+Speaker 2  2:45:01  
+so let me see how much. So this model is 68 megs as opposed to 10 megs for the previous one. So six, seven times the size.
+
+Speaker 2  2:45:21  
+Okay, so that's it, and I am going to actually upload all of these, both of these models, there, so you should be having that in your report
+
+Unknown Speaker  2:45:37  
+if you want to play around with it. So
+
+Speaker 7  2:45:40  
+like we, you know, for, for these demonstrations, we were using 25 words to or 25 tokens to predict the 26th right? What is like? What is a commercially available model use just to, like, wrap my head around that
+
+Speaker 2  2:45:55  
+I don't know they, I, I don't know anyone. Knows, anyone along the tiers. I don't think the commercial model actually depends on that. I mean, commercial model, they probably use something to even make that length of tokens variable. Think about, yeah.
+
+Speaker 1  2:46:22  
+Oh. There's, I've got, I'll find it. There's a play that was written by an LSTM model, and then actors and and then actors played it out, you know, and there's a little film of it, and I've got to find it again. It's really cool, okay, but I love some of the strange phrases that come out of LSTM model sometimes, and they're kind of surreal, like my favorite years ago, I remember reading an early generative model like that came up of a sentence that Beethoven like lettuce,
+
+Unknown Speaker  2:46:57  
+lettuce sipped with seltzer. I
+
+Unknown Speaker  2:47:03  
+it. But you know, totally makes kind of weird sense.
+
+Speaker 1  2:47:09  
+But you have to find a son, something you want to look for. I
+
+Speaker 2  2:47:26  
+Yeah. Now, obviously the commercial model, which you will be using from next class, right? I mean, they are not just doing this, because they are also like, let's say, when you when you ask something to to Chad, GPT, right? It's not just generating text based on the words that you have asked. It is basically converting your text into intention and based on the intention then it is looking from within this large body of text that it has trained on, and then it is trying to fit the intention and based on then it is generating. So it's way, way more sophisticated, but I hope you can see in some way that it's basically an extension of this. So if you were doing this thing, what we just did 10 years back, this would be considered state of the art. That
+
+Speaker 7  2:48:29  
+was actually going to be my next question. Like, when the LSTM model, like became a thing that people were using? Yeah,
+
+Speaker 2  2:48:38  
+yeah. So about 1012, years back, ish, I think around that time.
+
+Speaker 2  2:48:54  
+The other thing is, when they train the model, they don't use CPU, because this model, so this tiny model, I mean tiny in the sense, like, compared to the state of the art model, this is tiny. It still took me, like, half the half the day, right? Almost 12 hours. But that's because I'm not using GPU. But in industrial model, they they train it much, much faster, and that's why they are able to push up the number of parameters by orders of magnitude higher.
+
+Unknown Speaker  2:49:29  
+Sorry, you were saying something. Chad, no, I'm
+
+Speaker 1  2:49:32  
+just trying to figure out why I can't get some things to tell
+
+Unknown Speaker  2:49:39  
+me. I'm muttering to myself. I Okay,
+
+Speaker 2  2:49:44  
+so that will be the end of the class today, guys,
+
+Unknown Speaker  2:49:51  
+thank you. Benoit, thanks. Thank.
+

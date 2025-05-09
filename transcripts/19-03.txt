@@ -1,0 +1,999 @@
+Speaker 1  0:03  
+So today's class again, another good news, it's probably going to be a short class. I mean, I know some of you guys think, like, why does he say so? Even the days that he says short class, he ends up taking almost whole three hours anyway. I mean, I know that that's like one of my problem, right? Sometimes I kind of get carried away and keep talking a lot. But anyway, so before jumping into and since this is a short material, we can probably take a step back and try to reflect upon some things that we have done before and try to connect, right? So before going into today's class material, I'm going to pull up two activities that we did in the class before, like the last class and the class before, and I'm going to ask you to think through and figure out what was behind the choice of the network architecture that we have done.
+
+Unknown Speaker  1:05  
+Hang on which screen I'm sharing.
+
+Unknown Speaker  1:12  
+You're sharing your slack.
+
+Speaker 1  1:15  
+Yes, that's what I figured. I chose the wrong one. Okay?
+
+Unknown Speaker  1:23  
+How about now,
+
+Speaker 1  1:25  
+do you see my VS code? Okay, cool. Okay. So if you think about the first class of this week, week 19, day one, okay, so remember, in that class, we basically spend most of the time learning how to pickle an image and so on and so forth. But since that was also a short class, I basically gave you guys a new activity here, which is recognizing the handwritten digits. Right now, if you contrast the approach that we did in this particular activity that's on my screen, you will see that we have not done convolution.
+
+Unknown Speaker  2:12  
+We learned convolution the following day
+
+Speaker 1  2:16  
+when we are trying to process the train the model with those face images, right? That's when we said, Okay, we are going to have to use convolution. Can someone explain again? Think through and explain again. Why did I have the audacity to try the handwritten digit recognition without using a convolutional layer? So
+
+Unknown Speaker  2:43  
+and philosophical answer is fine.
+
+Unknown Speaker  2:47  
+So why did we do that?
+
+Unknown Speaker  3:01  
+Anybody
+
+Unknown Speaker  3:03  
+is it because the you felt that the
+
+Speaker 2  3:07  
+like the model size was small enough that you could get away without using convolution?
+
+Speaker 1  3:16  
+What do you? Can you clarify what you mean by model size?
+
+Speaker 2  3:21  
+I don't know, like, in my head, the image sizes, like, the resolution is 64 by 60 on all these images, and it's just not producing a tremendous amount of, like, computational data. And I didn't know if maybe just not using convolution was
+
+Unknown Speaker  3:40  
+going to be that is possible
+
+Speaker 1  3:42  
+one answer? Um, anybody else would like to add any other perspective? And again, as I said, there is no right or wrong answer, and that's why I said philosophical answer is fine, because
+
+Speaker 3  3:54  
+it was a simpler set data to analyze. Yeah,
+
+Speaker 1  3:58  
+like, if you think about these images, right? Think about the kind of abstraction that you have to do, like, how do you even differentiate between looking at people's faces? Which one is Benoit, which one is key on, which one is JC, which one is Karen? Like we all have hair, forehead, eyes, eyebrows, nostrils. Here. How do you do that? As opposed to that, when I'm looking at digits, every digit have shape signature shape. So I'm like asking you guys, when I like, because I keep thinking about this in my mind. Do you think the so think about if these digits, they are kind of vector in n dimensional spaces, right? And we are basically trying to do fine. This cluster of similar vectors. Now, when I'm presenting 10 different digits and like 30, 40,000 image, but repeating only 10 digits, if you think about the vector distance between like, let's say, if you take all the pictures that represent the digit five, all the picture that represented, Is it zero and so on. And if you can somehow visualize all of these in an in dimensional hyperspace, can we think that that region of the space where all the fives are clustered together, and the region of the space where all the zeros, or all the twos and nines are clustered together, are far apart, way far apart, because these groups look distinctly different than each other,
+
+Unknown Speaker  5:55  
+whereas it's like a very binary output, right?
+
+Speaker 1  5:59  
+Well, not binary. That is a multi class, but what I'm saying is very well separated in space, yeah.
+
+Speaker 2  6:06  
+Sorry, that's what I meant by binary. Like, there's highly defined, like, highly
+
+Speaker 1  6:10  
+differentiated, highly differentiated, you mean, yes, as opposed to these things, they are not. So that means, if we simply put the 60 by 60 pixel values,
+
+Unknown Speaker  6:25  
+and each of the values would be just a number, between one to 255
+
+Speaker 1  6:30  
+the model probably will struggle really, really hard to identifying the identifying feature, what makes an eye open, versus sunglasses, and that probably is a easier one to solve. Now imagine in this data set, we also have emotions, right? So each of these files are tagged by four things. One is the name of the person who that is, like their social media handle or something not the real them, but some unique identifier for the person. So that would be a 2020, class classification. And then another one is, I think, the positioning of the face. That probably is the easy one, sidewise or straight, or upward or downward, that probably is also probably easy, sunglass or not, that is a binary that is definitely easy. But then there is also an emotion where it says angry or happy or sad or something, right? So think about this last piece, or any of this classification for that matter, is going to be harder than classifying these digits based on their shape, and then the emotion here would be even particularly harder, because it is really hard to get The emotion, especially given how low resolution these images are, right? And that is why I made a bold attempt that day on the first class of week 19 to make this model, create this model without adding any convolutional layer. Okay, I just wanted to have this clear in case you guys are thinking now, when in the next day, the following day, when we started
+
+Unknown Speaker  8:33  
+building model for these
+
+Speaker 1  8:36  
+we had our dense layer, we had our final outcome, output layer. But then before that, we basically had a whole bunch of convolution, pulling, convolution pooling. Well, in this case, this was the first tiny network we built. So we had one convolution, which is basically finding those different filters, and then pulling is basically applying this two by two aggregation to make the dimension a little little less, because otherwise it becomes higher dimension. And then you can add multiple of these two, and then finally you flatten the output. And this outcome of this flatten then basically goes into your traditional dense layer, right? And the reason is this. So I hope that is clear in your mind. Now that does not mean that you cannot add this convolution and max pooling layer to your digit recognition problem as well you can. I mean, currently, the way that I wrote this architecture, there is no convolution here, layer here, but you can definitely add convolution here. So the reason I wanted to have this discussion is maybe some of you who want to be more hands on and basically try things out, very adventurous, take this and. Don't think the network that I built there that is the only way you can do it. So building a neural network is more of a art than in science, right? So try using different approach. Well, in this case, one different approach is like, Hey, you can try increasing or decreasing the width of the layer, number of layers, the activation that you are using in each layer, whether you are going to use same activation throughout, or whether you are going to use something like a combination of ReLU versus tan h or whatever, right? The other thing is also to figure out whether we are going to apply convolution on this problem or not. For more complex problems, such as looking at like a proper picture, because handwritten, written digits are not really pictures, right, in that sense. So in these cases, when you have these you probably need to have convolution. But hey, you can try this problem, which, this one is basically class two problem number one activity number one, where we build a tiny neural net with one convolution, one pooling, and then obviously flattering, and then one level of dense layer, one layer of dense and then followed by output. So you can try both way. You can take this and try to get rid of the convolution and flattening layer instead adding more dense layer to see whether you are still able to do sunglass versus no sunglass case, and how does that accuracy matter? Then on the flip side, you can also take this digit recognition and apply convolution there and here. If you remember, we saw a really, really good accuracy right like around 98% accuracy. So apply convolution here to see whether you can take it to 99.9% which should be possible with convolution. So try these things out. Okay? And talking about your project three, it will be totally okay if you take some of these activities, kind of your research initiative, and show that that is essentially your whole project, is that be fine, too? Okay. So the point is, try to be creative with neural nets. Okay, another question comparing these two activities. So other than this one having not having convolution, this one, which is a digit, and then this is the that classification of sunglass versus no sunglass. So this one has convolution, this one does not have convolution. What other fundamental difference do you see in these two architecture, other than presence of convolution? What other fundamental difference do
+
+Speaker 1  13:07  
+you see flattening is part of because you have to do flattening because you are doing convolution. In this case, you are actually flattening before. So you see, when you take this 28 by 28 and turn it into a numpy array of 784, you are essentially doing flattening there too. It's just that you haven't added it as a layer. Instead, you added done the flattening offline before supplying it to a to the network. But I'm sure in Keras, probably there would be a flattening layer. Also, if you look into the Keras API, so flattening we are doing because anything that is a two dimensional matrix, you have to convert into a one dimensional flattening. Is not the differentiator. There is another one.
+
+Unknown Speaker  13:57  
+Is it sigmoid? Yes.
+
+Speaker 1  14:00  
+So the output so what is the output on the digit recognition versus what is the output in sunglass? No sunglass guess. And why do you think output function are different? I
+
+Speaker 4  14:24  
+does sigmoid have to deal with a binary output zero or one?
+
+Speaker 1  14:32  
+Well, both actually gives you binary output,
+
+Unknown Speaker  14:37  
+but that is basically something that
+
+Speaker 1  14:41  
+we are basically starting to get into, like today's this classes topic. So essentially, the idea is, if you have classification of multiple classes, and then these classes are not interdependent, they are. Like mutually exclusive, then the best activation function to use is a sigmoid function, whereas, if you can think your output class as output as a probability distribution with a probability value rain, taking different probability values, taking different range within the spectrum, and based on that value, if you have to decide whether the output belongs to one class or the other, then the sigmoid is a better option. So essentially, people do use sigmoid when there are multiple things to predict and then things may overlap. That's where the sigmoid function comes in, and softmax is used when there are multiple things to predict but that are clearly independent of each other. So that actually takes us back to the topic of today's class, where we are going to see when to use softmax and when to use sigmoid. Now, again, these are just guidances. The cases that you can do with softmax, probably you can also do with sigmoid, but these are some of the heuristics that industry has kind of adapted over the years. Like what I'm saying is it should be entirely possible to take this digit classification so here when we have a 10 class classification problem, right? So that's why we created our output layer with 10 perceptron and we added a soft max. What that means is each of these 10 perceptron will basically model a separate probability distribution, and that for any given input, only one of these probability distribution will be high, everything else will be low. But it should be entirely possible for you to express this in a way where the output will be one neuron with an activation function of sigmoid. Except if you do that, your interpretation of the results will be different difficult, because, if it is a binary you can easily do that, and with that sigmoid output, you can do a simple high, low, like, below the threshold, threshold is class zero, above the threshold is class one, right, positive, negative outcome. But if you want to do that with a 10 class classification, and then have a sigmoid, now you have to tweak like 10 different threshold value in that continuum, and that's what makes it difficult, as opposed to here, where we only had two so we can easily use sigmoid.
+
+Unknown Speaker  18:13  
+Okay, so going back here,
+
+Speaker 1  18:17  
+so what we are going to learn today is this type of classification where you can classify more than one classes. So think about, let's say you are on an e commerce website and you are, let's say amazon.com and you are trying to filter on things, on attributes of product.
+
+Unknown Speaker  18:42  
+So if you are looking for shoes,
+
+Unknown Speaker  18:46  
+you find the product category that is shoe.
+
+Speaker 1  18:49  
+Now that product category shoe is a clear delineation between all the shoes that are there in your data fit versus everything else that are there also in that e commerce website.
+
+Unknown Speaker  19:04  
+But then for that shoe,
+
+Speaker 1  19:07  
+there are other sub categories like you can think shoe as like, whether it's a dress shoe, whether it's a running shoe, whether it's a trail shoe, right? Also, shoe can be list or no less.
+
+Unknown Speaker  19:25  
+The shoe can be
+
+Speaker 1  19:28  
+men's shoe, women's shoe or unisex. A shoe can be black or white or yellow or blue or pink. So there are different attributes of that particular same product. So now, if you have a many of these images and you are trying to identify which category a particular product belong to or a picture belong to, you can have classes that are overlapping to each other. So. There will be shoes inside shoes, there will be running shoes, there will be dress shoes, there will be trail shoes, right? And then some of those running shoes are black, but hey, some of the dress shoes are also black, right? Sometimes some of the trail shoes are also running shoes, right? So these classes can have overlap, and a product can belong to each of these classes, irrespective of whether it is a member of another class. Similarly, if you are classifying shows on a streaming service, right or movie genre, let's say, right? The movie genre, if you look at it, there is multiple thing you can say about the movie genre. A movie can be quirky, witty and action film at the same time, right? Similarly, a particular news article or particular streaming video could belong to entertainment and business at the same time. How about it? What if it is a business of entertainment, right? So these are all different examples of real world classification, where classifications are not mutually exclusive of one another, where classification can happen overlapping. So when that is the case, then the question is, what we are going to learn in today's class is, how can we build a network that will be able to do these type of real world classification on our data set? So that is essentially the core of this class. Okay, so this is a very high level schematic. So essentially what you will need to do whenever you are faced with this kind of problem where your classification is not straightforward, but there are multiple, multiple classes of classification, multiple groups of classification that has to happen and independent of each other. What you need to do is something called branched network, where you have your input layer and then you have a whole bunch of hidden layer, like your 128 64, or 512, white dense layers and so on. And then, unlike in the previous cases, where after all of these dense layer, then you have one output layer instead, now you will have multiple output layer that will branch off of your final dense layer, or fully connected layer, which is what in this diagram this is showing,
+
+Unknown Speaker  22:48  
+right? So let's say you are given
+
+Speaker 1  22:51  
+images of fruit. Some are apple, some are banana. Let's say some are pears. So classifying what type of fruit it is, whether it is an apple or pears or banana, that is one classification. But then you are asking your model to also find out which color the fruit is. A fruit can be green, but the green color can also be a banana. The green color can be an apple, and green color can be pears. Similarly, red, red can be an apple, red can be a pears, and there are red bananas too, right? So essentially, you are doing this fruit type and fruit color classification independent of each other, and the classes that you are going to predict, they need not be mutually exclusive, because there can be overlaps. So when faced with these type of classification problem, your network needs to be branch network, where you will have, if you need to do convolution, you will have convolution, pooling, flattening, all of this thing. And after the your convolution part is done, then you will have one or more dense layers, or fully connected layers. And then at the final stage, instead of having only one output layer, that's where your branching will happen, and you will have different output layer. And these out each of these output layer can have different classification function, either soft max or sigmoid, depending on what kind of classification you are doing. Okay. So even though I said this is kind of heuristics. There is an activity here, so let's go to this activity. And again, don't worry if you cannot think of the right answer. So basically here, you have to read through the problem scenario and think of whether you are going to use softmax or sigmoid as your output. So.
+
+Speaker 1  30:00  
+Few days or weeks or months or quarters, and then trying to train a model to predict what the sales volume would be in the next month or next period. More fewer or less. Sorry, more fewer or same.
+
+Speaker 4  30:19  
+Could you classify it as sigmoid, because you could take the output of these as like a zero if it's fewer or the same, and then one if it's more, you
+
+Speaker 1  30:32  
+could but here the reasoning is there is a clear delineation of these three different outcome. So therefore a soft max is a better choice.
+
+Speaker 5  30:49  
+The one I was thinking of soft max because the last sentence where it said, each potential outcome has its own column,
+
+Speaker 1  30:55  
+right? But then so was the case in the previous one. These levels are in four columns, one my one vegetable, multiple vegetable, red and green,
+
+Unknown Speaker  31:07  
+right? So, anyhow, okay,
+
+Unknown Speaker  31:16  
+next one,
+
+Speaker 1  31:20  
+so predicting which group of flower belong species A, B, C or a large petal, which could be any species.
+
+Speaker 3  31:34  
+Okay, so there's going to be overlap on this, on the large petal, but the overlap is on three distinct outputs. It seems like soft max, even though they're trying to, like, fool you into sigmoid.
+
+Unknown Speaker  31:49  
+Soft max too.
+
+Speaker 1  31:53  
+I'm thinking probably it will be like this one I don't like, because ideally, when there these, there are basically two very different question here, right? Large petal or small petal, and then species A, B or C, ideally we should have two different layer. Here they are kind of forcing you to think like, Hey, you are going to have to predict it using one layer. So ideally it will be two different layer. And for species A, B, C, you can use the soft packs. And for large petal or not, you can use a sigmoid, because large is kind of subjective. That would be the right architecture. But they are saying sigmoid because of that. But again, species, a, well, maybe, like, maybe looking at the flowers, like, whether it belong to like, if this species is close enough, probably there could be, like, a continuum of decision probability, decision making probability, from that perspective, maybe they're saying sigma would be a better option
+
+Unknown Speaker  33:00  
+because of that continuum. Okay,
+
+Speaker 1  33:12  
+okay, so that's that, but now we are actually going to have to see how we are going to build a model. Now forget about these three activities, where they have kind of artificially forced us to think that you have to do the classification in using one single layer of output. But that's not really the focus. I mean, if you ask me, in my mind, that particular activity was kind of little bit distracting from the main focus of the class. The focus of the class today is to be able to identify what is that scenario where you actually need to think of a network that essentially looks like this, where you have branching,
+
+Unknown Speaker  33:52  
+and this is the core focus of today's class,
+
+Speaker 1  33:56  
+okay, so now Let's see how a branch network can be built using a example of simple data set,
+
+Unknown Speaker  34:09  
+which would be
+
+Speaker 1  34:15  
+a data set which is a wine quality data set. This is, I think, also one of the data set that you can find from UCI ml repo. This is also one of those very widely used data set that people use in machine learning, wine quality data set, right? So in this data set, again, we are kind of taking a step back here. We are not applying this right away on our image data. This is where we are going back to, kind of our tabular data that we had, and here in the data set, we have different chemical property of a wine that, like someone has analyzed different samples of wine in lab, and they have come up with all these different. Observation, right? Like acidity, sugar, amount, sulfur dioxide, density, pH level, sulfate and so on, right? And then those samples were tested by actual wine testers, the professional wine testers, and that's the quality. So they said, okay, good, bad, or whatever,
+
+Unknown Speaker  35:22  
+and then the color white and red.
+
+Unknown Speaker  35:27  
+Okay, so essentially, there are two
+
+Speaker 1  35:31  
+outcomes here or two types of classification here. One is you have to classify what is the quality of the wine based on all these chemical properties. And you also have to classify predict what is the color of the wine likely going to be, again, based on all the same access, which is all the chemical
+
+Unknown Speaker  35:51  
+reading from the lab, the lab reading.
+
+Speaker 1  35:55  
+So essentially, I hope you can see that this is a case that can that would probably do better off with a branched network rather than a sequential network. So now let's see how many qualities are there. The quality has three values, okay, good and bad. And how many unique color values are there? Only two white and red. So based on that, how would you encode these? What I mean is, are you going to use level encoding or one hot encoding for quality and color? I
+
+Unknown Speaker  36:39  
+would use label,
+
+Unknown Speaker  36:42  
+label encoding.
+
+Speaker 1  36:44  
+Yeah, you can do level encoding, but for quality,
+
+Unknown Speaker  36:53  
+okay, good and bad, right?
+
+Speaker 1  36:57  
+So then your level of encoding, if you are doing that, you are essentially kind of, I mean, I guess you could do level encoding. You can say bad meaning zero, okay, meaning one and good meaning two. But then, when it comes to quality, doing level encoding, again, there is no right or wrong answer. You can definitely do level encoding, but you are kind of tend to develop some kind of a bias. In this case, probably the bias is warranted. Bias is justified. Because, yes, we are talking about three different thing. One is good, one is bad, one is very good, something like that. So maybe level encoding is work, would work, but people usually use one hot for this, and then color also. The same thing, you can do one hot, or you can do level, either one of these. So here, in this particular example, what is being shown is for the quality column. We are doing a one hot encoding. And this is our plain old scikit learn encoders. So one hot encoding for your quality column. So you take a one hot encoder and fit transform in a one single function you don't need to fit before, and transform like just for the sake of simplicity, we are taking the whole data set and we are fit transforming the whole data set, because we are not trying to be really correct here, ideally you should fit on the training data and then use that fitted model to transform training and test data. That is the ideal thing to do. But here, the focus is not that just to kind of get that out through the door quickly. So you basically take a one hot encoder and feed a transfer feed and transform that on the quality column of the DF, so not the whole DF, just the quality column, and that will give you your encoded quality columns. And then you take these encoded quality columns and convert it into a data frame and the feature names you are going to get from the quality column, sorry, quality encoder would actually give you say quality, okay, quality, good, quality, bad, with an underscore in between, right? So the output of this thing feature names would basically be something like this, quality, oops. Why did I put a hashtag? Sorry? Dollar sign, nope, oops. I needed to put a hash so it will be like, quality, okay, quality, good and those kind of thing, right? So you take those column names, and you provide those column names for your data frame, and that will give you your quality column. Let's actually. Do it in two separate cell.
+
+Speaker 1  40:13  
+Okay, so this is what we expected. This is the one hot encoded quality column, quality, bad, good and okay. Now for the color, there are only two values, white and red, so we decide to just use the level encoder. Could we have used quality? Sorry, one hot encoder, sure. But for two values. Okay, let's just use level encoder, and you do fit transform based on color, and you basically do the same thing. And then after fit transform, you basically take these and you concat these with the original DF. So original DF, basically have all of these columns with that you are concatenating the quality encoded which is these three columns, and this gives you a DF processed. And then you are adding a color encoded column before here that will give you the output of the fit transform of color, so that will give you zero and one, and then you drop the original quality or color column. And after you do all of this, you essentially end up having these four columns, the one column that said color now it has become color encoded, because that's what we are saying here, color encoded. And since it is level encoding, we are just using zero or one in place. We are not blowing it up to two columns, but for quality with this, we are deciding to blow it up to three columns, bad, good and Okay. Again, as I said, it can be done otherwise too, like all different permutation combination will work. This is just one way of doing it, okay? And then original columns are gone, and then these so basically everything here, up to alcohol will be your x column, and these would be your different y columns, like the last four columns. So that's what we are doing here. We basically drop these three quality columns, the one hot and correct quality columns, and the color column and everything else is now my x, right? But now when it comes to y, now we have two different y1 target is to predict what color it would be, which is red versus white. So that's why my y color column for the color prediction, the y column would be color encoded. This is my Y column for color prediction. And then when it comes to quality prediction, since I have one hot encoded the quality this combination of three columns, now my y, so I have y color, which is one column, y quality, which has three columns together, because we chose to do it in a 100 encoded way. And then you take this x, y, color and y quality and do a train test split. Now, since here we are passing three things, it will return six items each of the the strain test split function works this way if you pass it one, a data frame, it will return two. If you pass it two, it will return four. If you pass it three, it will return six in that order. So essentially, using just one single call, we are basically splitting three separate data frame and then we are grabbing corresponding train and test for x, for y, color and for quality, y quality. So that's my six different data frame that we are going to get here. So now my x dot shape how many columns of x would be, 1-234-567-8910, 11, right? It will be 11 by something. I forgot how many fields were there? Yeah, 6497 Well, total was more, but this is after splitting. So we have 6497 rows with all of these 11 columns and x. So why color? Which is just color encoded. So this then would be 6497 by one, which is what this is. And then if you look into y quality, it will be 6497 by three. We. Guys, quality, bad quality, good and quality. Okay, so essentially what it is, what we are just validated. Here is my train data has 6497 samples, right? And the each of these samples have 11 test features, sorry, 11 training features, and one outcome column for color and three outcome color column for quality. Now, based on this, now we are going to build our network accordingly, the neural network. So first thing you have to see, what do you see the difference here? I'm creating an input layer. How do you see this line is different from everything we have done so far. The beginning of the model creation. If you compare that with let's say what we did here.
+
+Unknown Speaker  46:05  
+What is really the difference?
+
+Unknown Speaker  46:08  
+You're using X shape as a variable.
+
+Unknown Speaker  46:12  
+No, how about this
+
+Speaker 1  46:16  
+even before? Yes, very that shape. I'm going to come later. But all of these, even for your CNN, all of this layer I am adding, what is this wrapped under? All of these layers are wrapped under, what
+
+Unknown Speaker  46:33  
+a sequential model?
+
+Speaker 1  46:36  
+Because in all of those use cases, we basically made a sequential model that has the data coming in through the input, go through all the layer and go out through one output. So that's the sequential model. The difference here is we have to do branching, and that's why we have to use an alternate approach. We cannot really start with a sequential and then add all the layers inside. Essentially, we have to build the layers separately and then stitch them together by hand. We do not have the luxury of wrapping everything up with a sequential wrapper around it. So the difference is, when you are saying inside sequential when you are saying five layers in this order, what the implicit fact that you are expressing here is that output of these previous layer will go into the following layer and so on. You are not actually explicitly specifying that in here that is implied because of the order that you have written these layers inside a sequential wrapper. When we are going to build a network ourselves, we don't have that luxury. So what we need to do is we need to build the layers one by one. The first layer, which we are just calling it input layer, and it is coming from layers dot input, right? So if you compare this with here, here, our first layer was also a dense layer. When we are doing sequential here, our first layer is not a dense layer. Instead, it is a specific layer with a name called input. So layers dot input is another one of the layers class that is available within Keras library. So I'm saying my first layer is actually an input layer. These are different from just having a bunch of perceptrons. These are just input so basically this creates the pathway for for all these 11 columns, in this case, to flow in. And that's why we have to specifically mention that the shape of these will be x dot shape one comma, which basically means 11 by one, because x dot shape is six, four times seven by 11x. Dot shape one, which is the second item in the tuple, is 11, and then after comma, we don't have anything. So essentially, we are saying that your input is 11 by one tensor, essentially.
+
+Speaker 1  49:36  
+And then these input features, this is a completely symbolic name, so we are calling it input input features, so that we can identify these when we like, describe the model or create a diagram of the model and so on. These name input features does not really mean anything. What makes this layer an actual input layer is this layers.in Input. And when you do use layers dot input, you have to specify a shape, and this shape has to make match the number of column which you have in your x, which is what we are doing here. So
+
+Speaker 3  50:12  
+it's the number of features. One, that's it. That's the input layer, correct.
+
+Speaker 1  50:19  
+So that's your input layer, then subsequent layer will be your dense layer, which is similar to what we did here too. We kept doing model dot add dense so there are two different ways. Right? One is you create a model sequential, and then you keep doing model dot and model dot add model dot add however many. That's one way of one syntax. Another syntax is you basically create one kind of a sequential function, and then inside this, you basically provide all the layers as a list. Both of these syntax that you are seeing in the those two node notebooks, they're exactly same. It's just two different ways. Sometimes, some people prefer to write this way. Some people prefer to write these other way. But they're essentially doing the same thing. They're creating sequential model. This one, however, is a completely different approach. There is no sequential model that we are tagging it into. So what we are doing here is we created a input layer, standalone, completely standalone. It is not part of any sequence of layers. It's just a standalone layer.
+
+Unknown Speaker  51:30  
+Now
+
+Speaker 1  51:33  
+we are going to create a dense layer, and this dense layer is not added to any sequential layer at all. Excel, except there is something weird here you see, after layer start dense, we are providing within a pair of parenthesis what the previous layer should be. So think of it this way, in the in the previous scenario, like here, let's say what you are doing is, let's say you are taking a cylinder, a cylindrical pipe, right? And all of the layers are, let's say basically, kind of your a disk. And each of these days, kind of you drop into the pipe, and then the fits in place. So once you define the pipe, which is your sequential then you can that just keeping, keep dropping those disk into the pipe, and because they are constrained to fit within the pipe, they will snap on top of each other. So that's that approach. Whereas here the approach is you basically create a layer. Here you create a layer here, you create a layer here, you create a layer here. And then you basically take little pieces of strings, and you grab the two layer from the space, and hey you and you, you should follow this guy. And then you basically stitch the layer underneath the other layer. So then you have two layer and then you create a third layer, and then grab that layer, and you force that third layer to go after the second layer by stitching it instead of dropping it into a pipe.
+
+Unknown Speaker  53:10  
+So I hope you see the difference, right,
+
+Speaker 1  53:14  
+and that is why here, when we are doing shared layer one, this is a variable that we have to use for the next one so that we can reference. So in shared layer one, we are providing the variable that holds the previous layer, which is your input layer, after the layer declaration, within a pair of parenthesis, and that is where that stitching happens.
+
+Unknown Speaker  53:38  
+It's like a linked list. Kind of
+
+Speaker 1  53:40  
+a linked list? Yes. So it's basically a array versus a linked list. Yes, I didn't want to use that, because that basically in a computer science lingo. So yes, it's basically a constrained array versus a linked list, where you are free to and then, so it's when you are doing linked list. So that means now you can do branching, because now you can find out the links right?
+
+Speaker 3  54:04  
+So sequential is an array of steps, and the the input approach, or the layers approach, is a is, is a series of linked nodes,
+
+Speaker 1  54:14  
+correct? Series, not a series of linked node, but series of linked layers. Each layers have a whole bunch of notes, because these layers dot dens is the exactly same as these dense here this so when you are saying dense, so that means you are basically time 64 nodes side by side. So it's a 6064, perceptron wide layer. But each of these layers are independent, and now we are stitching it by providing these variable names at the end. So those are my two dense layer we have added. So. And again, same as before, depending on the complexity of the problem and the accuracy the higher you want to push. You can play around with this right? You can add more layers. You can add more node in a layer and do all the same thing. The only thing is you have to stitch it by hand like this. Now looking into the next step, it will be apparent why these approaches needed here. Because after my dense layers are done, which in this case, we have only two dense layer now is that car time for output layer. So output layer is just another dense layer. There is just no difference, except here, we have to choose the activation function accordingly,
+
+Unknown Speaker  55:50  
+right, which would be soft max or sigmoid.
+
+Speaker 1  55:55  
+Now for the quality where we had quality, good quality, bad quality. Okay, remember, we have binary, sorry, not binary one, hot encoded output, which kind of is similar to how we had this digit, right, digit zero, digit one, digit two. And that's why here we had a output. We had a dense layer of 10 node with an activation of softmax. So similarly here, we are going to have a dense layer of three nodes with an activation of soft max, and we are stitching this layer where we are stitching this dense layer after the previous fully connected layer, which is my shared layer. Two these quality output is not a fully connected layer, it's a output layer, but I'm stitching this output layer to this fully connected layer. But then that will give me one classification, which is the quality. Now we have to do another classification, which is the color. So for color, we are taking another dense layer. This time we level encoded this so we are choosing the output to output layer to have only one node with the sigmoid activation and see how these output is also stitched to the same shared layer as above. So that is where your branching is happening. So going back to this. So this is where your branching is happening right now. The only difference is in this particular schematic, after your last fully connected layer, you have output layer. And in here they are showing you can, in a branch, have more fully connected layers, then followed by output, which you can but in our simple network, after my last fully connected layer, we simply have two outputs next to each other, but if we wanted, we could have, let's say, for example, let's say if the color out color prediction is very simple, so we could have color here, but if the quality output is very hard, instead of adding these output directly after the shared layer on that separate branch, we could have added one or two more dense layer if we wanted to, which is what this schematic is suggesting you to do anyway, in general, like it does not mean that whenever you are doing a branching to get output, it does not mean at the same level, you have to have another branch going From here and to here, even though that's we are doing two things, branching off of the single layer. But here it is saying is, in general sense, you could have another set of dense layer here as well, and you could have branching again. So this branching can be nested, so there is basically, that's what it is saying. So there can be as many branching, and each of the branch, you can either have directly have output layer, or you can have further, fully connected layers, depending on the complexity of your classification that you are doing. Would you
+
+Speaker 3  59:15  
+do that to optimize, like your compute, so that, if you've if you've got enough, yeah, if you've got enough accuracy for your first layer, one layer, yeah, but the next one's not get needs to the next accuracy. Okay,
+
+Speaker 1  59:29  
+good, yes, yes. So let's say if, if this simple layer, if we run these and we look into the accuracy and loss, so let's say we get a very good output for color, but the quality, accurate accuracy is suffering. Then you will come back, and then, instead of having this, then you will have shared layer three. Let's say here. So you could have, I'm not going to run it right now, but if we wanted to, we could have, let's say, Done, shared layer three. Which will tag on to shared layer two, and then this quality output, instead of shared layer two, it will then tag on to shared layer three. So that way we make one part of the network more deeper than the other branch. Okay, let me reverse that now.
+
+Unknown Speaker  1:00:28  
+Let's keep running as is,
+
+Speaker 1  1:00:31  
+okay, and then once you have all of these layers stitched up together, then you create the final model. And this is not unlike here, this model here, we created model equal to sequential. So use, we use this Keras class called sequential here, right in the previous case, here we are saying something called model, which is, if you look into the input, our input is model, not sequential. So model is a more general, generic form of model. Sequential is a specific kind of model. So here we are taking a more general form of model, and that allows us to put all of these custom stitch layer inside it. So that's what we are going to do now. We will create a model and where we are going to say, Hey, what is my inputs? By the way, inputs is input layer, and what are my outputs? Well, I have two outputs, quality output and color output, so I specify that, and then model dot compile is exactly same as we did before. You provide the optimizer, you provide the loss, you provide the metrics. But the difference here is now we have two different measures. So loss function is coming from two layers. One layer is quality output, another layer is color output. So now we cannot say, provide a simple cross entropy function for both. We have to say which layer we are using which cross entropy. Now, remember, we talked about binary and categorical cross entropy, right? So when we did this handwritten digit. What was my loss function?
+
+Unknown Speaker  1:02:46  
+Categorical cross entropy.
+
+Speaker 1  1:02:49  
+Because we are using a soft max here one output. We are using a soft max one output. We are using a sigmoid for a binary classification. So that's why, in my loss function, I'm going to provide two key value pairs. The first one as highlighted here, it says, For your quality output layer, you will use categorical cross entropy, because that's a multi class classification with a soft max output whereas for your color output layer, you are going to use a binary cross entropy. So now, since we have two layers, we have two set of process of cross entropy to be specified. Now these two can be the same, depending on the way that you are modeling the problem. You could have two different branched output, and both of them can be soft max. If both of them are some soft max, then this and these both will be categorical cross entropy. But you still have to provide two separate because otherwise you have to, you cannot map which output is measured by which loss function. So you still have to do both. And if you have three or four or five branches, you need to keep adding to this list of loss functions that you are specifying, right? This is just a JSON then you have to keep adding as many key value pairs, as many output layers are there in your model. Similarly for metrics, which is the metric that the model will measure, you are going to provide accuracy, but for both, but you have to still mention for quality output, your measure is accuracy, for color output, your measure is also accuracy, but we still have to specify both,
+
+Unknown Speaker  1:04:36  
+And then that gives your model.
+
+Speaker 1  1:04:40  
+So input, dense, dense and then quality output which is basically following this dense layer, color output which is also following this dense layer. This last two entry in the table shows that branching right that we just couldn't do.
+
+Speaker 3  1:05:03  
+And so even though both have accuracy as their output, you couldn't just say accuracy and they would apply to both. You have to explicitly apply it to each output in the metrics. Yes.
+
+Speaker 1  1:05:21  
+Okay, and since you have done that, and that's why you see in the history it will it will say color output accuracy, color output loss, and then quality output accuracy and quality output loss, because you have done that differentiation before. So that's why in the history you will have color output accuracy, which is one data series that you will have. Another is loss of color output. And then, I don't know what these loss will provide. Then quality output accuracy, quality output, loss. And then same thing for color quality with validation, set, validation, color output accuracy, validation color but I don't know what this loss is going to do.
+
+Unknown Speaker  1:06:08  
+What is this loss even mean? I don't know.
+
+Speaker 1  1:06:15  
+So anyway, so to plot the history for the color first, we are basically taking the color output accuracy for the training set and for the test set, which is the Val, and that gives me the color output accuracy, which is pretty good. So it started from very low after one epoch, it jumped, and then it went to about 96% and for the quality output, so that's for the color right, which is white versus red, and For the quality a not very good. Point 775, so and you can probably see the same reflection if you take the losses also for the color output, you take the loss. So, yep, loss is very low
+
+Unknown Speaker  1:07:15  
+for the quality output.
+
+Unknown Speaker  1:07:20  
+Wow, the loss is around four, 0.7
+
+Speaker 1  1:07:24  
+so the basically, the model did not do well at all in predicting the quality of the wine based on those chemical markers. Right? So now what we are thinking here, maybe adding that will help, which I haven't added, but let's try, since Jessie brought that up. So since we saw that, quality output is not very easy to do, easy to predict. So let's do this shared layer three. And just for the fun of it, let's add another shared layer. Let's call it shared layer four, which will go to shared layer three. And let me taper it little bit 16, and then this will then latch on to shared layer four.
+
+Unknown Speaker  1:08:25  
+You see what I'm doing, right
+
+Unknown Speaker  1:08:28  
+so now,
+
+Speaker 1  1:08:31  
+but I think I have to restart the kernel, because otherwise these layers are already latched. So let me restart the kernel. Now I'm going to run this with this deeper network on one branch and shallower on one branch, because we already saw the color output is good enough. Now we are trying to deepen just the quality side of the branch. So let's run through these things quickly, since I have restarted the kernel.
+
+Unknown Speaker  1:09:19  
+Okay,
+
+Speaker 1  1:09:21  
+okay, okay, everything else looks good, cool.
+
+Unknown Speaker  1:09:27  
+So now we have that.
+
+Speaker 1  1:09:34  
+So now let's run this. Let's see how this works. So
+
+Speaker 1  1:09:46  
+okay, so color accuracy should still be the same. Well, I don't know how this Oh, I think, because there is so less data, and since the model is stochastic, is in nature. So even though color accuracy still went up to around 97% but the way that it approached is very different from the previous run, because it does not have enough data to be kind of giving you a similar kind of output every time. Okay, so that was for color output accuracy.
+
+Unknown Speaker  1:10:23  
+Was the change that you
+
+Unknown Speaker  1:10:25  
+just made. You just, did you just add more? I
+
+Speaker 1  1:10:27  
+just added two layer on the quality branch. I did not add anything to the color branch to just
+
+Unknown Speaker  1:10:32  
+above up the accuracy. Try to bump up the accuracy. Yeah,
+
+Unknown Speaker  1:10:37  
+yeah. Looks like it didn't work.
+
+Speaker 1  1:10:40  
+It it didn't work. Now it still is very low. Let's see the loss function. Yeah, the color loss looks pretty good, but quality loss is, I'd say, little slightly better, right? So earlier, it was like 0.7 and above. Now the loss has come down to around. Well, train loss is 0.56 test loss is still kind of high, so it didn't matter that much. So probably there is not enough predictability in those columns that we have to be able to predict whether the wine is good or bad, like the subjective outcome that wine testers will have, right? So we probably don't have enough data. So when this, something like this happens as a data scientist, what your response would be to your stakeholders, go get more data, or go get better data, or both,
+
+Speaker 3  1:11:41  
+or quality is hard, yeah, yeah.
+
+Speaker 1  1:11:49  
+Or basically your wine testers, you have made your wine testers work so hard that they all got drunk and now they have no clue what they're talking about. That's awesome. Anyway.
+
+Unknown Speaker  1:12:06  
+Okay, cool.
+
+Speaker 1  1:12:13  
+How about we take a break at this time? Because the only other thing we are going to do is we are going to apply these technique of doing a branch network, but now we are going to apply this technique to that face data set and try to do four different branches to predict user like people in the phrases, The position of the face, the eye sangbase or not, and also the emotion. So we are going to do a very, very hard problem we are going to tackle, right? So I think it's a better to take a 15 minutes break now come back at eight o'clock and start that with fresh mind. And so activity three and four is basically continuation. Activity three is basically to prepare the model, sorry, prepare the data set to be fitting into the model and activity. Four is just take that, those pre processed image, and feed it into the into this branch network. So we are going to do both of them together after the break. Okay,
+
+Unknown Speaker  1:13:20  
+okay, so let's come back right To the top of the Hour. So
+
+Unknown Speaker  1:25:54  
+Okay,
+
+Unknown Speaker  1:26:01  
+Okay, so,
+
+Speaker 1  1:26:05  
+as I said before, we are now going to basically apply this to our image data, where we know that we have a whole bunch of noisy image and there are intra class variation and the different scale variation there, meaning your what is called the different classes that we are going to have to predict, which is people, emotion, eye covering and face positioning. So there are different variation and different scale factor between the classes. So therefore we are going to have to create a convolutional network, convolutional neural net with a whole bunch of convolution and pooling layer added. And then finally we are going to do the branching for your user, face pose, expression and eyes. So this is the network we are going to build now, which it's basically the conceptual to the same thing that we have done in the previous activity in a smaller scale. We are just going to apply the same technique, but we are going to scale it up, and we have to tag on to the tag on the additional convolutional layer in front of the dense layers. So essentially, that's all we have to do. Okay, so let's get started with the preparation of the data.
+
+Speaker 1  1:27:50  
+So our data set is basically two things, if you remember, there was one CSV file, and that CSV file gave us the names of 624, files. What those files were, right? And if you remember from the previous class, each of the files had four part in it, separated by underscores in between, the first part being the user ID, the second part is the face, post posture. Third part is the emotion, and fourth part is sunglass or not. And then we added, basically appended, all of these different file path, sorry, file names, which is so and so the dot png, we basically took a base URL, which is where the server folder is on the server, the FTP server, HTTP server, and then on top of that, we took this base URL and we appended these individual file names. And then you run this, you will basically get all of these. Oops, file name not defined, okay, because I haven't run this yet.
+
+Speaker 1  1:29:18  
+Okay, so that's all of our file names. And we are attending the all of these file names to the base URL, which is this. And we are going to get this type of 624 individual URL for the 624 files. And then if you have to download this whole thing from server, you basically go through each one of these, and you do a request, dot get. That fetches the image from the server, and you open the image with image dot open. And those images, you put it in a list, which is images, IMGs, and that will be your 624, images. Now you. I run these, it will take a couple of minutes, so I'm not going to run it now, because if you don't have these images, then you run this to get all the images, and for future use, remember, we actually put all of these images, which is basically this array inside a single pickle file as a zip, like a compressed, zipped file. So I already had run, have run this before, and my images dot. Pickle file is sitting here, so therefore I'm going to skip this step. Instead, I'm going to run this step where I'm opening this pickle file in read mode, RB, meaning binary file read only, RB. And with that, I'm going to do a pickle, dot load of that file, and these images, essentially will be the same images array that is supposed to be downloaded here. So I'm going to bypass that step, and I'm going to simply open the images and just showing one random image from out of the 624 images that we have. I just bypass that. Okay? And then, if you recall the usual stuff, what was the first thing we did
+
+Unknown Speaker  1:31:19  
+after we got all the 600 images
+
+Speaker 1  1:31:26  
+sizing. Remember, they have different dimensions with different dimension. We really cannot develop a network, because the number of connection going into your first input layer will depend on the dimension of the picture, so we have to resize all of these to bring it to a same dimension, which is what we are doing here. We are taking our target size to be 64 by 60, and using this list comprehension, we are looping through all the images, and we are doing it, image resize, and saving all of my resized images in my new array, which is called resized images. So that's where all the resized images are.
+
+Unknown Speaker  1:32:17  
+What was the next thing to do? I
+
+Speaker 1  1:32:26  
+a knowledge check. If you have an image, you have to feed it to a network. What's the first thing we do with the image?
+
+Speaker 1  1:32:39  
+The code is here. Come on, someone. Speak it up, speak it out,
+
+Unknown Speaker  1:32:45  
+convert it to a floating point, convert
+
+Speaker 1  1:32:47  
+it to an array, to an array, to an array, a two dimensional numpy array. So we are taking these image and applying a function, function, NP, dot array. On top of that, we are converting it to floating point, like you said, but floating point is not the key. The key transformation happening here, here is converting the pixels into a numpy array and making sure that each of the items in the array is a floating point. So now this float images basically becomes 624 2d array. If you take any one of these item in the 624 item, that item itself is a two dimensional array, as you can see here from this output.
+
+Unknown Speaker  1:33:45  
+So all of my images have now converted into 2d array.
+
+Speaker 1  1:33:50  
+Now the numbers here range from zero through 255, because that's the gray scale image brightness. Now what is the next operation we had to
+
+Speaker 3  1:34:10  
+do? Normalize? Huh? Normalize.
+
+Speaker 1  1:34:14  
+Normalize, yes, and normalize is basically take everything, divide by 255, so now all the values that were in the scale of zero to 255,
+
+Unknown Speaker  1:34:26  
+by dividing these values by 255
+
+Speaker 1  1:34:30  
+I change this into into the within a range zero through one, right? So corresponding decimal numbers. So now this gives normalized images. Gives us all the normalized 624 normalized images, each being a 64 by 60 size array.
+
+Unknown Speaker  1:34:53  
+That's why we have up until this point,
+
+Unknown Speaker  1:34:56  
+right? So pixel processing is done.
+
+Speaker 1  1:35:02  
+Now we are going to turn our attention to the file names, because those file names are essentially our training levels, meaning our Y column will come by splitting the file name into four pieces. So since these each part of the file name is delimited by an underscore. So what we are doing is we are getting the file names from our original file names, data frame, which is up here. So this is our original file names, data frame right, which had only one column. So we are taking that single column, which is false, and first we are getting rid of the dot png part. So we are doing a dot str, dot replace, and you replace dot png with an empty string. So the dot png part will be gone. Only the name will remain. Extension is gone. Then you take the outcome of these str replace and apply a STR split,
+
+Unknown Speaker  1:36:13  
+and we split it with the character underscore.
+
+Speaker 1  1:36:17  
+Now when you do that, obviously we know that these are going to give me four pieces of data, or four names, and we take those four names and add those as four columns, user ID, pose, expression and eyes in that order, because that's how the file names were, fortunately, right? All of the file names were very structured, and that's what our y, d, f is. So these are all of our y columns. Okay,
+
+Unknown Speaker  1:36:55  
+what will come next?
+
+Speaker 1  1:36:58  
+So we have our y columns. We have our x columns normalized already. What else do we need to do to the Y columns?
+
+Unknown Speaker  1:37:16  
+We need to make them outputs.
+
+Speaker 1  1:37:20  
+No before that, think about the wine quality example. What did we do with the levels we encoded? Encoded? Yes, you have to one hot encoded, because these are all multi valued. So if you do user ID, let's do a value counts on just the user ID. And if you count here, you will see there are 20 different user IDs, and these are like, how many files belonging to that user ID. So this is a 2020, class classification problem for the user ID. So we take a one hot encoder and we do a fit transform on user ID, and that gives me my encoded user ID. So now user ID has blown up into 20 columns.
+
+Unknown Speaker  1:38:15  
+Then we do the same for the pose.
+
+Speaker 1  1:38:18  
+The pose has 1234, values left, straight up, right, take another one hot encoder and do a fit transform on the pose column.
+
+Unknown Speaker  1:38:31  
+And that gives you your
+
+Unknown Speaker  1:38:35  
+four columns for pose. One hot encoded
+
+Speaker 1  1:38:39  
+so user ID, done, pause, done. Next is your expression, neutral, sat angry. Happy, fourth, again, one hot encoder fit transform for the expression column, and that gives you your expression, angry, happy, neutral and sad with, you know, one hot encoded form. And then finally, our eyes, which is sunglass, are open. One hot encode that as well. Now this one, you might say, Hey, can we level and code it? I was just for sure, yeah, but then you will have to use the sigmoid with a one perceptron. But both are right approach. So here we are just choosing to do one hot encoded across the board for all four classes. So eyes, one hot encoded, and here, oh, actually, this is, this is almost like level encoding, because here what we are doing is we are one hot encoding, but we are only getting the first column right. So I columns is one hot encoding. It get featured in out i columns.
+
+Unknown Speaker  1:40:06  
+And
+
+Unknown Speaker  1:40:08  
+is it that drop equals first up top there?
+
+Speaker 1  1:40:11  
+Uh, yeah, drop equal to first. So, yes, so drop equal to first. So therefore, essentially, this is same as level encoding like zero and one. So okay, so then you take all of these four encoded data frame and these four data frames together becomes your overall y, and that has now 29 columns, 20 from the first, fourth from the second, fourth from the third and one from the fourth. So total of 29 columns, but still 624 rows makes sense. So these huge, gigantic data frame is your why?
+
+Unknown Speaker  1:41:02  
+You okay. So now what we need to do,
+
+Speaker 1  1:41:11  
+let's do a train test split. Now another thing here we are going to do is we are also going to do the augmentation. Remember, augmentation is since we have limited amount of training data, we need to randomly rotate, flip, transform these images to create more training data. But when we are going to validate the model with the test data, we want the validation to be done only using some of the original images that came not using any of the augmented images. So that's why our first step is to take our processed X and processed y. So process X is that numpy array, which was normalized by dividing by 255, and all of that. So that's your x processed and y processed is basically these four columns, one hot encoded. So we take these x and y and do a train test split. But before that, another thing we do, since we have to do augmentation. So in order to do augmentation, just having 60 by 64 dimension is not enough. You also need to have another third dimension, which is the number of channels, because unless and until you have a three dimensional array, the augmentation is not going to work. So that's why, first, we are taking the X all the images, and we are doing that NumPy dot expand dimension, and we are adding a dimension at the very end. That's why x is equal to minus one. So that basically adds a channel one at the end. So it becomes 60 by 64, by one,
+
+Unknown Speaker  1:43:06  
+and then that's your processed images.
+
+Speaker 1  1:43:10  
+And that processed image. And why these? Why we pass this through train test split, and that gives me my training and test. Now, if you want to see how many we have there, if you let's say, do X train, dot shape, Oops, oh, sorry. Extreme is a list. Extreme is a list. So we have to do a length of x train.
+
+Unknown Speaker  1:43:43  
+So out of 624
+
+Unknown Speaker  1:43:47  
+468 is my training data.
+
+Speaker 1  1:43:52  
+And therefore, how many are my test data? You do a Len on X test 156 is my test data. So that's the 7030 split we did. Why we did this first. Because next step, when we are going to do the augmentation, we are going to take these 468 images and augment them multiple times to generate more training data, but we are going to not touch these 156 data. We are going to set that aside, completely untouched, which we are going to only use for validation purposes.
+
+Unknown Speaker  1:44:32  
+That's why we did the split first. Clear.
+
+Speaker 3  1:44:39  
+I I'm getting lost on the expand dimensions. Why are we doing that again?
+
+Speaker 1  1:44:47  
+We are doing that because when we are going to apply this data augmentation function, which is that random rotation, translation, the. Image that you are going to pass to the data augmentation that image niche needs to that img needs to be a numpy array with three dimension the first dimension. First two dimension would be pixel width and height, and the third dimension needs to be channel since this is a gray scale data by default, it did not have any channel dimension. If these were all colored data, RGB data, the channel would have been three and we didn't have to do expenditures. We are only going to have to do this for a gray scale, because by default, the gray scale is just 60 by 64 that channel one does not come in the numpy array shape.
+
+Speaker 1  1:45:48  
+So what I'm trying to say is, let's take so this x, right? So what is X? X is my oops, not small x, uppercase X. So X had 624, images. Now if you take any one of the images from x,
+
+Unknown Speaker  1:46:08  
+let's say we take x zero,
+
+Unknown Speaker  1:46:11  
+and you do a shape,
+
+Unknown Speaker  1:46:14  
+you are going to get 60 by 64
+
+Speaker 1  1:46:19  
+you don't have a channel dimension here. That's why we took these and we did these expand dims and we added these new image in a new array called X processed so now if you take any one of the X processed items and then do a shape. The shape is now changed to 60 by 64, by one,
+
+Unknown Speaker  1:46:47  
+just adding one extra dimension,
+
+Speaker 1  1:46:52  
+because you need this three dimensional structure of the numpy array in order to be able to do the augmentation. That's why we did that.
+
+Unknown Speaker  1:47:01  
+Thank you for the reminder. Okay,
+
+Speaker 1  1:47:07  
+so now our augmentation pipeline, we are choosing to do four steps, randomly rotation, translation, random zoom and flipping, and we are going to apply this only on the train data set. You see this train data. So we are running this from i to i to X train for each i. We are taking a one element from the train portion of it, and this is the IMG. Then we are going to add one dimension at the beginning, because, if you remember, there is one dimension at the beginning, and then 60 by 64, by one again, so total of four dimension. So I'm adding this another dimension here, and then I'm taking this and passing it through data augmentation, and that will give me my augmented image, which we are appending to extreme augmented list. But these extreme augmented list will have five times more image because I'm doing this five times. So it will be five multiplied by 468, I'm not touching this 156, so it will be five multiplied by 468, images augmented in a random fashion, like each image augmented to create four more images of its kind. So total of one image will now spin up five images itself and then four more,
+
+Unknown Speaker  1:48:45  
+so that we are calling x train, Aug,
+
+Speaker 1  1:48:49  
+and y train is simply our data frame of our y process, DF. So that's how we get two data frame, X train org, sorry, one list X train org, and one data frame, which is white train org. And when we are doing the white train we are basically replicating the level that we are getting for the original image that we are augmenting and replicating the same level for all other five images that we are creating, or all other four images that we are creating.
+
+Speaker 3  1:49:25  
+So you're saying that all five of these images trend like they should evaluate to this one result, correct. Correct,
+
+Speaker 1  1:49:32  
+because all those five images represent the same thing, which is so and so user with so and so pose and so and so, sunglass and so on. So that's why, when in the loop, we are getting the image, we are getting the corresponding level. We are augmenting the image, and we are copying the level across the five augmented copy. So this is where we get 468, Multiplied by five, which is 2340 augmented images and corresponding levels like corresponding wise.
+
+Unknown Speaker  1:50:15  
+Okay, now,
+
+Speaker 1  1:50:19  
+what is this extreme org? Let's try to see again, just for clarity, so what is my extreme org? It's a list, right? It's a list of 2340, size.
+
+Unknown Speaker  1:50:36  
+What is each one of these?
+
+Speaker 1  1:50:40  
+Each one of these will be a numpy array of four dimension, one times 65 one by 60 by 64 by one, which you will see. Well, oh, no, sorry. It will be three dimensions, 60 by 64, by one, but you are going to have to first do an expand dims. So these additional axes that you are using so the augmentation basically use that as kind of a pivot point to rotate these images around. And then once the augmentation is done, that is dropped so that 60 by 64 by one carries through as 60 by 64, by one, if you don't exactly remember that. So let's look into that slide. I think that was in this slide, where
+
+Speaker 1  1:51:41  
+was the augmentation section? No, maybe the one after second class
+
+Speaker 1  1:51:53  
+here. So the first one was batch size, so when we did when we did this thing here, np dot expand teams with axis of negative one this statement, added this one here, this step, and then inside the loop, when we did an NP dot expand beams again, and this time with access equal to zero, this basically added a batch parameter. But these batch parameter is only needed when the operation is happening. The output of this operation does not have that batch parameter. It will have just this three parameter. And that's what you are seeing here, 60 by 64, by one.
+
+Unknown Speaker  1:52:54  
+So now we have our 2340
+
+Speaker 1  1:53:00  
+elements in the array, sorry, in the list, and each of the leads list of the list elements are a numpy array of 60 by 64, by one. Now what we are doing is we are taking this list of 2340 elements and converting that whole thing into a numpy array by applying this NP array. So in here, if you see what is the type of my x train Arg,
+
+Unknown Speaker  1:53:38  
+it will show, oops, sorry, typo.
+
+Speaker 1  1:53:43  
+It will show that it is a list. And we saw the length of the list is 2340 now we are taking this whole thing and converting the whole thing into an array, so it will be basically this extreme org now becomes, if I run this again, it will share that say the whole thing has now changed into an array, not array, multiple arrays inside a list, but even the parent data structure has also now been converted into array. So essentially, now I have a four dimensional array. And same thing we did for test also, but in test we have only 156 so that stays as is. So this array is my training images, and these array are my contains my test images. Now the white train org, we know that that will have that same thing that we saw up there. Also, I just wanted to print this again here, just to see what this is. So this is my white train org. So now these white train org has all these 29 columns,
+
+Unknown Speaker  1:54:59  
+but we. Going to do
+
+Unknown Speaker  1:55:02  
+four parallel classification,
+
+Speaker 1  1:55:06  
+right? So that means we need to have a whole bunch of column that are going to be used for user ID classification, 20 columns. Then we are going to have four columns that will be used for expression classification, four columns for Facebook, face, position classification and so on. So we are going to do is we take this 29 columns, which is my white train Arg, and we are going to apply a list comprehension. And by using list comprehend comprehension, we are going to run through all these column names, and we are going to collect the column names where the column names, Column Name contains this word called User ID. And we know only 20 column names will contain user ID in it. So those columns then we are collecting and we are calling it white train for user ID,
+
+Unknown Speaker  1:56:08  
+and we are doing the same thing
+
+Speaker 1  1:56:11  
+and collecting the column names that has the word pose in it, and that will give us four columns, and We are calling those four columns together a separate data frame, which we are calling white train for pose, and then we do the same thing for expression, and then we do the same thing for eyes. So that's how now I have four different y value y data frames. So okay, and then this is for training data. We have to do the same thing for test data, also, because test y also has 29 columns. So these four steps are also repeated for y test and that gives me all my whys. Now if you take, take any one of these, let's say why train user ID, you will see that it will have 20 columns here, 2340 rows, but 20 columns. Why train pose, 2340 rows, but four columns only everything, all the columns starting with pose, underscore, same thing for expression, same amount of rows, but four column starting with expression, and then eyes. Is just one column that says, I sunglasses. So these are my four whys that we are going to use for four different classification problem. Because remember, the model we are going to do one single model that will run four different classification in parallel using the same model. So that's why we have these four. So that's a lot of work, right? And when you do lot of these work, you don't want to have to redo it over and over again. So this is a good point. You should checkpoint your work, meaning you should save your work in a way that in future you can resume from there. So just like up there when we downloaded these files for the first time from the server, we saved everything in a pickle file. So you can think of, think of that as a checkpointing. And since I did that before, I didn't have to run through the 624, download, which will take a three four minutes anyway. I didn't want to do that. Similarly, here is also a whole bunch of what we have done to convert all of these image and the file names into a form that now we can put it, feed it to the neural net. So therefore, what we are going to do is we are going to take all of this thing we have created, my x train, X test, and then why train for user ID pose expression eyes. And why test for user ID pose expression and eyes. So total of 10 things that we have created. First two are numpy array, and then next, these are pandas data frame. Now remember what I said when you are doing a pickle file. You can take any arbitrarily large, complex data structure and you can convert the whole thing into a single binary file in pickle format. So here we have 10 things that we have derived, two numpy array and eight pandas data frame. So we are putting all of this together into a master data structure, which is basically a dictionary as a key value pair, so that, using that single variable, we can then just do a file right, like a pickle dump
+
+Unknown Speaker  1:59:58  
+to save this into one file.
+
+Speaker 1  2:00:01  
+File. So that is our checkpoint so this file here is our checkpoint file, and that's why this whole thing is shown as a different activity. And this is how it separates from the actual modeling part, right? And this is also representative of how in the industry, machine learning is done, right? Like people who do this data preparation, they usually have a different skill set. Like these are mostly done by data engineers, and then the modeling part is where the data scientists come in. They have a different skill set. So by doing this, this is also a good way for the engineering group to do all of this pre work, obviously, in collaboration with the scientist group, and then do this, and then hand their hard work to the data science group so that they don't have to do go through all of this. So okay, so now that's going to be our pickle file, which is where we are going to start the next activity on. Just using that pickle file, essentially, it's the continuation of same thing. We're just checkpointing and handing it over to the next group like in a real industry setting, right?
+
+Unknown Speaker  2:01:26  
+So any questions so far on the pre processing?
+
+Unknown Speaker  2:01:32  
+So it seems like the
+
+Speaker 3  2:01:39  
+the eyes ended up being just one column,
+
+Speaker 1  2:01:45  
+whereas everything else has the eyes ended up being one column, yes. So it's basically like a level encoding
+
+Speaker 3  2:01:52  
+is, is that what we want? I'm not sure why. That's, as I
+
+Speaker 1  2:01:58  
+said, you can do both ways. Yeah, you can do both ways. You can do one column with a sigmoid, or you can do multiple column with soft max.
+
+Speaker 1  2:02:13  
+I guess I thought that you can even do multiple column with sigmoid. Even that will work, believe me.
+
+Speaker 3  2:02:18  
+I guess I thought, as we were going through it that it did a one hot encoder for the eyes. So I was expecting to see two columns for the eyes,
+
+Speaker 1  2:02:27  
+right? Yeah. So if you don't, if you don't do the drop first thing there, then you will end up having two columns. I mean, you can run through the whole thing exactly as is, just get rid of that drop equal to first. If you just get rid of this thing, you will essentially have two columns without any further change. I
+
+Unknown Speaker  2:02:49  
+want to put a comment on that so I don't Yeah,
+
+Speaker 1  2:02:51  
+you can. You can try that on your like. You can run this and then also do the other way, and then run that too.
+
+Unknown Speaker  2:02:59  
+Both will work.
+
+Speaker 1  2:03:03  
+Okay, so then what I did is I copied this pickle file into the next folder for the next activity, so that I don't have to do all of this nasty work. Again, I simply open my pickle file and load the data from there. And you see, since we pickle the dictionary with a whole bunch of keys, when I unpickle here and just give me that Hey, say, Hey, give me the keys. You get all the 10 keys back, and then you use these 10 keys to get the x, train, X, test y, train pole, user, ID, pose, expression, eyes and then y test for those things. So essentially, this is where you are unpickling and getting the data back in where it was.
+
+Speaker 1  2:03:59  
+So now is where the real fun parts begin. Okay, so we are going to do a branching model. So for that same reason, we are not going to use a sequential model. We are going to do as Jesse mentioned a linked list instead of a array. So we start with our input layer. Layers dot input. And if you compare this with what I did with for these simple wine quality activity, so the same thing. So we first had a layers dot input with a shape which was 11 in this case, right? 11 by one. In this image case, we have an input, same thing, but the shape is the image size, and then the. Number of channels, 60 by 64, by one, and we are calling this input layer exactly same as what we did here. Well, in this case, we called input feature. Here we are calling input layer, but that's just a name. That's just a symbolic name that's that doesn't have any many so that's our input layer. Now this is a convolution. So now we have, we need to have a convolution. So we add our convolutional layer with 32 filters, each filter with three by three size, and we add the convolution after the input layer. So after input layer, first is my convolution one, and then we do a max pooling with a two by two aggregation. Apply this after con one. So that's my max pool one,
+
+Unknown Speaker  2:05:51  
+and then I get another convolution
+
+Speaker 1  2:05:55  
+growing broader little bit, going to 64 filters. Add it after Max pool one, which is here, and then max pool two, going after conf two, and then conf three. These one are let's go 128 actually, 128 for conf three. And then hang on a second. So in case of this, yeah,
+
+Unknown Speaker  2:06:27  
+oops, where is my
+
+Unknown Speaker  2:06:30  
+Where did I go?
+
+Unknown Speaker  2:06:32  
+No, no, I here.
+
+Speaker 1  2:06:39  
+Yeah, no, not this was it. I'm gonna run files. Oh, four, huh, yeah. So then this, then what I was thinking is we should probably add, if you compare this with the basic after that, we should actually have a max pooling
+
+Unknown Speaker  2:07:07  
+so let's add
+
+Unknown Speaker  2:07:10  
+a max pooling layer
+
+Speaker 1  2:07:13  
+after this convolution layer to reduce the dimension layer little bit. I mean, even without that, should be fine, but let's just add a max pool three, and this will be after our con three. Okay, so now we have three convolution followed by three Max pools, and then the flatten. Now the flatten will not go after con three, because I added a max pool, so I have to move it down one by adding the flatten after your max pool three, because here we are increasing 228 filters, and that's going to increase the dimension. I think it is the right thing to apply a max pool again before your final flattened layer comes in.
+
+Unknown Speaker  2:08:08  
+So that's that right the convolution part.
+
+Speaker 1  2:08:13  
+And then finally, I add a fully connected layer with 64 nodes with a ReLU, which goes after your flatten.
+
+Unknown Speaker  2:08:34  
+Good.
+
+Unknown Speaker  2:08:37  
+Okay, so I
+
+Unknown Speaker  2:08:53  
+now we have to do the branching.
+
+Speaker 1  2:08:57  
+So essentially, if we go back to the slide, we have basically come up to here. So all this convolution pooling, convolution pooling, finally flatten, and then finally one dense layer. So this is our first dense layer. This bottom part here is essentially your last line here.
+
+Unknown Speaker  2:09:20  
+Now we are going to make this side of the diagram.
+
+Unknown Speaker  2:09:25  
+So how we are going to do this?
+
+Speaker 1  2:09:28  
+Well, since this is a much more complex use case, unlike our wine case in wine, we basically had two layers, and after that, we had basically three branches. So here, after this convolution, we had one layer. Now, before we go to output for each of these branch, we are going to add more connected, fully connected layer. Or a dense layer. So let's build the user ID first. So for user ID, we are slapping on one dense layer with 64 size after the last common layer, which is dense shared this is the shared layer, meaning common layer. So this common layer going into 164 node layer, and then finally, your output layer, which is this,
+
+Unknown Speaker  2:10:24  
+where I'm using sigmoid.
+
+Unknown Speaker  2:10:32  
+We should actually be using softmax.
+
+Unknown Speaker  2:10:34  
+I was going to ask that, because I'm like, why would we use
+
+Speaker 1  2:10:38  
+yeah, as I said, even sigmoid will work. But I'm not going to use that. I'm going to use soft maps.
+
+Unknown Speaker  2:10:44  
+Then the pose.
+
+Unknown Speaker  2:10:48  
+Let's do same thing. 64 Yeah,
+
+Speaker 3  2:10:50  
+you know, you know, on the slide, and then it says, soft maps, the user ID,
+
+Unknown Speaker  2:10:55  
+oh, in the slide, yeah, I see. I
+
+Unknown Speaker  2:10:58  
+wonder why it was in the code. I here
+
+Speaker 1  2:11:00  
+the pose. They're saying sigmoid. Ready there. This is the case. All could be soft, Max, maybe the eyes output. We can do sigmoid, right? Yeah. But then for expression, let me do one thing since expression is little bit harder to do,
+
+Unknown Speaker  2:11:26  
+let add some more layer.
+
+Speaker 1  2:11:30  
+Let's call this expression dense one, and we are going to add it with 128 and then I'm going to add expression dense two, which will go after expression dense one with 64 and then I'm Going to add another one, expression dense three with 32 and I'm going to put it after expression dense two. So I'm choosing to make these deeper just for that, and then these output will then go after expression dense three. So you see what I'm doing, right? This is like, similar to what I did in my second attempt for the wine quality, where I saw that the color is very easily predictable, but quality is not. So I chose to make that one branch deeper. So here I know that the expression in the face like happy, sad, angry, it's much harder to do even with this. It's probably going to fail even with this. But in my previous attempt, I got only about 16% accuracy on expression when I ran this before. So this is why I'm all I know that this is going to be very poor result on this particular one. So that's why I added two more layer to see whether that changes little bit. It probably will not, because the images are very small and very pixelated to meaningfully capture any expression.
+
+Unknown Speaker  2:13:16  
+Okay, but we'll try that anyway,
+
+Unknown Speaker  2:13:20  
+and then for
+
+Speaker 1  2:13:23  
+eyeglasses, we leave it as is okay. So that's that no other change needed. Everything else stays the same. Your input layer your output, these four. And now for loss and metrics, all you both, for both of these, you have four key value pairs, because we have four classifications that we are doing.
+
+Unknown Speaker  2:13:51  
+So that's our
+
+Unknown Speaker  2:13:54  
+what happened now,
+
+Unknown Speaker  2:13:57  
+user ID output not defined. Um,
+
+Speaker 1  2:14:02  
+uh, oh, did I not run this cell? Oh, I forgot to run this. Yeah. Okay. So, okay, so model is compiled. So this is the summary of our gigantic model. And keep in mind, uh, those couple of other cool library that I showed you, if you want to fancy and show some your model, like how it is fanning out. Using some of those, feel free to use those if you choose to do something like this in your project.
+
+Unknown Speaker  2:14:36  
+Okay, so that's our model,
+
+Speaker 1  2:14:39  
+and now we are going to train this for
+
+Unknown Speaker  2:14:46  
+what do you guys think 20 bucks should be fine.
+
+Unknown Speaker  2:14:51  
+Let's do 20 huh? Let's go do.
+
+Unknown Speaker  2:15:03  
+I was wondering, like, how monstrous that was going to be per epoch,
+
+Speaker 1  2:15:06  
+not too much. You see, the first one took 11 second, and the next one is six second. First epoch always takes the longest and then it comes down.
+
+Unknown Speaker  2:15:22  
+So about two to three minutes it should be done.
+
+Speaker 1  2:15:29  
+Okay, so while that happens, let's see expression output.
+
+Unknown Speaker  2:15:35  
+Ah, not that.
+
+Speaker 1  2:15:39  
+Expression accuracy. I got 16% in my last run
+
+Unknown Speaker  2:15:46  
+because expression is the hardest one.
+
+Speaker 1  2:15:51  
+Eyes already gone to 90% class, good pose has also gone to 80% class, I and user ID has also gone to 90% plus.
+
+Unknown Speaker  2:16:09  
+Expression was the hardest one.
+
+Unknown Speaker  2:16:13  
+It is still hovering around 50% 49
+
+Unknown Speaker  2:16:17  
+still much better than 16%
+
+Speaker 1  2:16:21  
+it's never, no matter what you do, you eat, will not go to 90% wrench with this data.
+
+Speaker 3  2:16:35  
+So is that saying that the loss is above 100%
+
+Speaker 1  2:16:42  
+uh, no, the loss is not above. Hang on.
+
+Unknown Speaker  2:16:52  
+Loss is not 100% though, like,
+
+Speaker 3  2:16:55  
+if the number is over one percentage, is
+
+Speaker 1  2:16:59  
+it that is our percentage, okay? No, no, no, no, that's not a percentage. Okay. Oh, that's cool. Too many 10 second. Cool and loud. Let's do an evaluate with the test data. So now this is where the final result is going to come. So all of these 49% or so that is only on the training data, when we tried with the test data, so the expression accuracy came down to only 21%
+
+Unknown Speaker  2:17:39  
+still better than 16.
+
+Speaker 1  2:17:43  
+Okay, so expression, accuracy, 20% 21% eyes, 92% and this is on test data, so this is the real measure.
+
+Unknown Speaker  2:17:53  
+Pose 71%
+
+Unknown Speaker  2:17:57  
+and the user ID 84% so does
+
+Unknown Speaker  2:18:03  
+it make sense?
+
+Speaker 1  2:18:07  
+Like, given what we have seen, all seen the images, right? Like, which one is hard to predict, which one is hard to
+
+Speaker 2  2:18:12  
+Yeah? Is it the expression would be really hard to predict? Yeah, especially getting how low the resolution is
+
+Unknown Speaker  2:18:18  
+correct. And that's why 21%
+
+Unknown Speaker  2:18:21  
+what is the highest we are getting,
+
+Unknown Speaker  2:18:25  
+whether or not has sunglasses, sunglass,
+
+Speaker 1  2:18:26  
+right? That's easy to do. So how you see that? The common sense that you develop, the intuition that you develop, you're basically seeing the same thing coming out of your model. I'm actually surprised to see user ID. We are getting this high 84% not bad. Cool. So that's your branched model, and that's all there had there we have to cover in today's class
+
+Speaker 4  2:19:03  
+Inouye. Can you? Can you scroll just a little bit? Yes,
+
+Unknown Speaker  2:19:08  
+just to there. Yep. Thank you. You.
+
+Speaker 2  2:19:32  
+But no, I in a previous class. I'm gonna forget exactly what this was applicable to, but we had applied some sort of forgetting of what we learned, like 20% or some drop
+
+Unknown Speaker  2:19:46  
+out. Drop out, yeah, the drop out
+
+Unknown Speaker  2:19:50  
+is something like that applicable here, or no, yeah,
+
+Speaker 1  2:19:53  
+you can if you want to. So let's say and you should do that when, for example. Yeah, yeah. I mean, that's not a bad idea. You can probably add a dropout, even for expression. I mean, you can try. So if you want to add a dropout, let's say for expression, right? So then you have to do layers, dot dropout, and let's say you forget 0.2% right? And you basically do that, and you will do drop out. Let's say one so you add a drop out after your first fully connect. So drop out, it is better done after the fully connected layer. But people also sometimes add dropout even after your max pooling. So you will see network where after max pooling also they're added adding dropout. But I don't like that idea. I mean to me, the dropout should be after fully connected layer. So then if you do a dropout here, then your next layer, expression dense two, will come out of after your dropout one, right? And then if you want to add another dropout our after your second dense layer, you can add another dropout here, and that will come after expression dense two, and then your expression dead dense three will come after your dropout two, like that. You can try that and see whether that makes sense. Okay,
+
+Unknown Speaker  2:21:33  
+yeah, thank you. You
+
+Speaker 1  2:21:45  
+okay, that was a good suggestion. Actually, any other thoughts? Question? While we are still waiting, I'm just choosing to run this whole thing with the new three dropout layers that you suggested.
+
+Speaker 2  2:22:03  
+Yeah, curious about it. For sure, it was, it was really helpful to go through the entire workflow. Like found this class super useful.
+
+Speaker 1  2:22:11  
+Okay, okay, so while that runs, I want to bring one thing to your Attention. So in next week's class,
+
+Unknown Speaker  2:22:25  
+week 20.
+
+Unknown Speaker  2:22:42  
+No, not class three.
+
+Speaker 1  2:22:47  
+There is a technical pitfall that I found. I just wanted to warn you about, yeah. So second class of week 20, we are going to use the library called spacey, s, p, A, C, y, it's a, n, l, p library. It basically allows you to find relation between relation of words in a sentence, like which like? It will allow you to find like different parts of speech, which one is noun, pronoun, verb, adjective, and it will also allow you to find which word modify which word modifies what, right? So let's say, if I'm saying a sentence like, hey, I really had a I had a really good day. So the word adjective good is modifying the word day, good day. So it can find these type of relation between words and so on, right? So which you will see. Now, in order to do that, you will see on when you will see the files, you will see that it will require you to install a library called spacey, s, p, A, C, y. So on that day, there would be an activity where you would be able to you would be required to do import space. Now, obviously, if you run this first time, you will it will say there is no module named space, because it's not just something that comes with your conda environment. So then what you have to do is you have to do pip install space. But what I'm going to warn you is, do not do that, because what I have discovered this spacey library is broken, broken in the sense they are not compatible with the current version of NumPy. Now, when you have your you have your NumPy, you have your pandas, and you have your TensorFlow. So if you have done P pins. Of all of these, likely you have the most current version of all of these. Now, unfortunately, what it seems that if you just do pip install spacey, sitting today, it will try to install the latest version of spacey, but the latest version of spacey that they have up there in the PEEP repository is not compatible with the latest version of NumPy, so it will essentially break your virtual environment. Okay. So then what you can do, there are two options. If you run, want to run anything, any of the activity that has a spacey in it, you can upload that into Google colab, and you run it there on the cloud, because Google colab does have all the correct libraries. There correct version of libraries, which is what I did. And then when you go into Google colab,
+
+Unknown Speaker  2:26:04  
+where is my Google colab notebooks?
+
+Speaker 1  2:26:07  
+Yeah, I think here. So which is what I did. And then I was curious why it is working on Google colab and why it is not working on mine. And I found that it's not just only the latest version of NumPy. It's also the Python version. So I was having a Python version of three, dot, 13, dot, something. So then in the Google colab notebook, when I made it work, and then I basically printed these versions, and I found that the specific combination colab is using to make all of this work is basically python 311, 12, three, dot 11, dot 12. On top of this Python version, you need to have a numpy version of 2.0, dot two. You need to have a pandas version of two, dot 2.2, and you on. If these are all prerequisites are true, then the spacey version 3.8, dot five, which is the latest version, will work. Now, if you look into the current NumPy version, it is higher than this. So current specie version is 3.8, dot five, but this 2.0, dot two is an older NumPy version. Unfortunately, the spacey lab library has not caught up with the most recent changes that have been done there in NumPy, and that's what the fiasco is happening. So
+
+Speaker 3  2:27:29  
+we encounter create, like a dev two or something like that. So what
+
+Speaker 1  2:27:34  
+I did is I basically included a set of commands here, actually, let me do one thing, but essentially what we I am suggesting you do. You basically create a new environment. Conduct, create, and you create, specifically with three dot 11, dot something, whatever three dot 11 you have in your machine. In my case, it was three dot 11, dot 11. If you have three dot 11, dot 12, something fine, but don't use three point 12 or three dot 13. And then that's the first thing you are going to do. And then in there you are going to do peep install NumPy. But with this additional flag, additional switch, upgrade. And with that, you can specify which NumPy version you are going to install, and then you can do specific pandas version that will work on that. And then on top of that, you can do specific PIP version that will work, sorry, specific spacy version that will work. And then you also have to do another download, another download for this which is spacey download, English core, web small. So these are the different corpora that they have, the language libraries, basically. So this says a small English. They have a English medium and English large, right? So you can do like, if you want to download the small, then it this small, and then large will be LG, and so on, okay? And then the ipython that you have, you also need to choose a specific version of ipython, which is the Jupiter kernel that you will run. So you basically have to do this in a new environment, in a new environment. And here this boot camp is just an environment I am choosing. This name can be anything, let's say new env name, whatever name you choose. So if you do want to run spacey, create a new environment and do this, and the good thing is, even if it doesn't, if it doesn't work this combination or something, you can just go and get rid of the environment a little bit.
+
+Unknown Speaker  2:29:59  
+So. So just wanted to say that,
+
+Speaker 1  2:30:04  
+because otherwise, I know some of you probably look ahead as the these things get available, so then you might end up breaking your
+
+Unknown Speaker  2:30:13  
+environment. That is my
+
+Speaker 1  2:30:16  
+slack. Okay, so I'm going to post these in the live channel,
+
+Unknown Speaker  2:30:22  
+just so you know, Kian also
+
+Unknown Speaker  2:30:24  
+posted the solution to just install Spacey. Yeah.
+
+Speaker 1  2:30:27  
+Kian was saying, Kian, let's see what he has posted. Yeah. So I just work on this. Okay,
+
+Speaker 6  2:30:34  
+and it works for me. I was able to run all of the module, 19 and 20 content, no issues, including spacey and TensorFlow. Well,
+
+Speaker 1  2:30:43  
+I still have, where did you post your solution? Oh, I have it in
+
+Unknown Speaker  2:30:47  
+the chat. I can also put in the live channel,
+
+Speaker 1  2:30:51  
+oh, in the Zoom chat. You mean yes, yeah. Sorry. Zoom chat, I
+
+Speaker 2  2:31:05  
+I actually wound up installing spacey for a different project that I'm working on and I want I just downgraded NumPy to something below two.
+
+Speaker 6  2:31:18  
+Oh, yeah, you might run into that too, so you'll have to do like another command to make this work. I'll put in a live channel as well.
+
+Unknown Speaker  2:31:28  
+Yep, copy that. Thanks.
+
+Speaker 1  2:31:32  
+Also, here you are saying you are providing spacey less than 3.8, dot two. That's it.
+
+Speaker 6  2:31:38  
+Yeah. And then if you make sure you make sure you have the you have the less than two version of NumPy as well. That should avoid any and all compatibility issues with any libraries going forward
+
+Speaker 1  2:31:48  
+less than two for NumPy.
+
+Speaker 6  2:31:52  
+Yeah, it's an interesting thing. I didn't know you could do this with PIP. But what it does is it grabs the latest version, prior version two. So it's gonna be like 1.26 and then that's compatible with that specific version of spacey, and it works with TensorFlow and everything else, and there shouldn't be any issues. Oh,
+
+Speaker 1  2:32:13  
+I'm not okay, but I was basically going by whatever they have in Google colab environment, and they have a numpy of 2.0, dot two. So you are saying less than two. Okay,
+
+Speaker 6  2:32:27  
+yeah. So if you do the CoLab version, you'll, you'll get all the latest versions of these libraries. It looks like, yeah.
+
+Speaker 1  2:32:34  
+So in Cola, you will get all the latest version together. That actually works. So what I did is my solution, I was trying to basically recreate the exact same combination that I found in the CoLab version.
+
+Speaker 4  2:32:50  
+So if we downgrade to a lesser version of NumPy, will we have to then upgrade for the next class?
+
+Speaker 1  2:33:03  
+Well, less than two, I don't know, like Kian is interesting, I don't know, probably not. I think it should be fine, okay, but if you take this combination here, you should be fine, because Google colab, we know because it is Google Cola, it basically works for everything, right? So we know for sure that this combination will work. So cool. So it's up to you. You can basically create an environment first and try key and sway, because that is much simpler. And if you can get everything to work that way, that's fine. And then my full longer suggestion, you can keep it in your back pocket, use it if you need it at any time.
+
+Speaker 7  2:33:45  
+That's where, that's where you could put your commands into just a file as a requirements, dot text, and then you could just do, just use that to install everything on one command.
+
+Speaker 1  2:33:59  
+Yeah, hey. Adding those dropout, by the way, did not make sense, is actually made it worse. It went down to
+
+Speaker 7  2:34:10  
+seven that network. A lot of often done with where you have a convolutional network to do, like the feature extraction, and then you go into like, one or more classifier heads, instead of where it has at the end of the CNN hardware, instead of having the flattening and dense network we do, instead as a global average and average pooling network that actually, okay, so, so if you have 200 feature maps, the dimension of that output is 200 each number is basically an average of each feature map. And that that's what's often used. I've noticed they must like, like. Uh, oh, I don't what is it? Uh, ResNet, all those kind of state of art free train models, usually at the top most layer of the CNN is usually a pool, average pooling, average global averaging pool, cooling, global averaging pool. Okay, and then you feed that into your into your classifier ads for one or more. So it might be interesting. Try that with that too, I guess. Yeah,
+
+Speaker 1  2:35:28  
+maybe you can share something, if not now, maybe sometime next class, right?
+
+Speaker 7  2:35:33  
+Yeah, maybe a play of it. Not tonight. Yeah, that's fine. Yeah. Barely able to stay awake, and I want to try and say something about this. I came
+
+Unknown Speaker  2:35:44  
+back. No problem.
+
+Speaker 7  2:35:47  
+Okay, a lot of last night, final project, as well as a lot today. So I'm just wiping
+
+Unknown Speaker  2:35:54  
+no worries about it. Too much, of course.
+
+Speaker 1  2:36:00  
+Okay, so that will be officially the end of class, so you guys get 20 minutes back. You.
+

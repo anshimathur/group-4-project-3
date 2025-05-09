@@ -1,0 +1,843 @@
+Speaker 1  0:01  
+So shall we get started with today's class? We don't have a whole lot of ground to cover today, so we can kind of take things lightly there. So that's one good thing. So as of yesterday, we kind of covered most of the techniques, the hard techniques that you are going to learn and then hopefully apply this week and the week after, we are basically going to use models created at different times by other people, by different company, and then use those model to do some first, we are going to see whether how we can probably use some of those to enhance some of the NLP, the natural language processing work that we have been doing. And then from there, we will move on to see how we can kind of move up the value chain, and instead of trying to do all of these low level stuff ourselves, which is really good for our understanding. But if you think of the last activity we did yesterday's class, I hope you realize that we are on the right track, but within the within the scope of an academic boot camp, you really cannot create something that will be state of the art, even though we are on the right track, right So, so we are going to switch focus in this last two weeks and see now that we have the fundamentals in the back of our mind. Now we should be going there and then using models that are available via different Python libraries, and use them, use those models to do stuff higher up in the value chain, right, such as your tokenization, your text summarization, question answering, and so on and so forth, right? This last two weeks, okay, so just to set the tone from that perspective, I would say I think these last two weeks of classes would be more fun and maybe a little less intimidating, because you don't have to go down as much to the deep end, right? Because these things have been solved by people. Yes, we need to understand that, but we don't need to use that day by day, right? At least not in the boot camp. Now, if you, any of you plan to continue to go on to, let's say, do some post graduate diploma in artificial intelligence, right? Or even, like a graduate degree in artificial intelligence from some university, then that's a different story. Then you have to go even deeper into the math and stat and all of that. But that's not what we are here for. So I think we have accomplished what we came here for so last two weeks, we are basically looking to some of the state of the art tools that are available out there in the internet. So okay, so in this week, we are mostly, we are going to take it slow. We are going to mostly look into the different ways that we have learned. We are going to do a little recap, like how we have done tokenization. And remember one statement I made, I think, in the yesterday's class. Like the when you tokenize a sentence or article or a document and do some kind of NLP stuff, right? It could be summarization, it could be text generation or whatever. What is the secret sauce behind it? Like, what makes a neural network best model understand the nuances of the language, even though it really doesn't know the grammar of the language, right? And I mentioned the secret sauce basically lies in the tokenization, because if you do a good tokenization instead of doing our count tokenizer or TF IDF tokenizer, I mean, those are good, solid based on solid, theoretical, understand foundation. But there are other tokenizer that you can do use which goes an extra mile and provide some value in the token itself, that basically will be able to kind of a nudge your model towards an understanding of the actual language. So we are going to just take a glimpse of some of these tokenizer today. We are going to start with a recap of the previous tokenizer we have used, and then we will see how the these modern, large language model based tokenizer, how that kind of ups the game right from what we have done before. Another thing, I think I made a one comment, I think yesterday's class, that what we did in the last activity, it is, it is not state of the art. But if you go like 1015, years back, probably it would have considered state of the art, right? So to that note, let's start the class today, taking a very quick brief look at the history of how the. AI have been developed, being developed over last 78 years, and how we kind of came here, right? So if you go back in 1950s and this is something we already talked about at the very beginning of the boot camp, right, so the concept of machine developing intelligence is not new, right? So Alan Turing first basically created this imitation game where he proposed that the machine can be made, a computing machine can be made that will exhibit intelligent human behavior, and it will be immediate able to imitate the human intelligence, right? And that's where the Turing test and so on, basically, which, still, as of today, stands the golden test of whether a true AGI have been achieved, right where, which is basically when you are talking to an AI, and you you cannot distinguish between artificially intelligent agent versus a real human. So, so the idea started from 1950 but obviously we didn't have the capacity, the mathematical foundation was not there, and obviously the computing capacity was also not there, right? But still, in 1916 at MIT, they were actually able to build Eliza, which is, which is a very early form of Chad bot, and which can actually surprisingly generate surprisingly good, engaging conversation, right? Even though that was not AI based in the way that we see today, it was mostly rules driven, right, because that rule based systems, which is also known as expert systems, where basically all the rage during those those days, 1960s and 1970s right? And then around 1980s nothing much happened, which is kind of known as AI winter, right? I think some of you probably know about this. And then 1990s it started to pick up slightly again, because the computing power started increasing, we still didn't have neural networks back then, right? But with the increasing computing power, some of the statistical modeling, like the kind of thing that we have done using psychic learn type libraries, and we also saw, like in one of the activities yesterday, we were actually able to do grouping of documents or headline into different topics based on completely statistical based model, right? Which is purely Gaussian based probabilistic model, right? So those are the models that started becoming more popular around 1990s which is where people started to find about, hey, how we can do n gram, how we can do d, f, i, D, F, vectorization and using those, how we can basically summarize text. In some cases, find the core idea behind the text, find the tone of the text, and that kind of thing, like very early days of natural language processing, and then in 2000 is where deep learning and neural network started to take hold. On top of that, it's not just neural network, the some of the key invention that kind of happened in 2000 early 2000s where our recurrent neural network, which we have used like in the actually, we didn't use recurrent neural network as per se. We used a further iteration of that, which is long, short term memory, which is based on recurrent neural network. Then convolutional neural network have also been developed around that time, which we also used during our image classification problem, right? So these things started coming up in 2000 early 2000 and then 2014 is some as a time where it's a turning point that happened. And this is something we actually did not cover in this boot camp. This is the time where this mechanism called attention mechanism, through a paper that was basically published by Jan lacuna at that time, attention is all you need. So this is the technique that basically allowed models to go beyond what LSTM does. So what LSTM does what we saw yesterday, and if you think about my explanation, right, long, short term memory is able to selectively memorize some of the tokens that it has seen further back in the text. So therefore it can make a decision, not just based on what it is seeing immediately, but it can recall something from the past. So that is LSTM, but still the LSTM based model that we developed yesterday, it still lacks one thing, which is attention mechanism, meaning it does not still. Understand
+
+Speaker 1  10:02  
+the if you give it a document, a large document, it still doesn't understand the intention, intent behind the different part articles, the different parts of speeches, different phrases throughout your overall text or document that you are prepared you are presenting to it. So for that reason, you need to have something different, which is a special kind of transformer model with an attention mechanism. And this, this is where basically all of our super cool stuff that you see today, where you are asking AI a question, and AI is able to answer that. So all of the recent success that we have, we are seeing is basically the key factor behind that. Is this transformer model, which started with this paper called attention is all you need, right? But even then, even though the paper was published in 2010s it did not immediately catch up, because our computing power, even at that time, I think at that time the semiconductor conducted, industry was really getting excited to bring the transistor size down to about less than 100 nanometer, okay, even like five years back, like Breaking the barrier of 45 nanometer was a big deal. And the thing is, the smaller and smaller the transistor goes, the more you can tax so your CPUs, and especially your GPUs, can get way more powerful. And today, if you look up in the news, right, TSMC, Nvidia, they are trying to break the barrier of three nanometer like It's like there is, there seems to be no ending of the Moore's law. Somehow they keep they they are able to packing more and more firepower in tiny GPUs. So that's why, even after, even after the theoretical underpinning was laid out around 2017 the large language model did not immediately take off. It took another five, six years or so, right? Like until like 2020s I think 20 Chad, GPT first came out when 22 I believe 2022 I believe when it first came up, right? So it took a few years for the idea to catch up. Huh about right? Oh no. Actually, it says here, 2019 is GPT two? Oh, okay, yeah, yeah, 2019 GPT three came. 2020, where? Yeah, GPT two, yeah, GPT two was not that good, but obviously it was still much better than, much better than anything that came before. But GPT, GPT one came in 2018 and nobody even took a notice. It was like, like, kind of like the model that we did yesterday, well better than that, but kind of similar.
+
+Speaker 2  12:59  
+That's about how I would say it did actually, it produced about the same kind of non sequiturs and stuff, same
+
+Speaker 1  13:04  
+kind of Yes, yeah. And then 1.5 billion parameter, GPT two, which seems to be a big leap. And then came GPT three, which is 170 5 billion. And I don't know what is the latest model today. How many billion of parameters?
+
+Unknown Speaker  13:21  
+Huh? I think it's 4.5
+
+Unknown Speaker  13:24  
+but there's 4.5 what trillion?
+
+Speaker 2  13:26  
+No, 4.5 GPT, 4.5 I don't
+
+Speaker 1  13:30  
+know. Oh, no, no, no. I'm saying, How many, how much? How many parameters does it have? GPT three has hundreds,
+
+Speaker 2  13:35  
+even of GPT four. That's kind of they keep a lot quieter about the architecture, yeah,
+
+Speaker 1  13:41  
+and now we are in a position where all of these advanced model like, think about last two, three years, the space that has happened. There's these things that was almost sci fi five years back, it has become commoditized. So now there are a dozen or so large language model you can pick and choose from, right, and that is basically spawning a new industry around artificial intelligence. So one player in the artificial intelligence are the model builders, right, which is like companies like open, AI, and also like Google, right? Google, Facebook, they're all in this whole model building game, right? So about four or five years back, people used to think, well, model building is the holy grail. Therefore, lot of these large companies who have these super brilliant team of scientists and engineers, they spend a lot of money to create those models. And now these models become so good, and so many companies were basically kind of able to recreate their own models, right and so like right now, as I said, I mean these models, there are. Many, many models you can choose from today, right? But now the industry is going kind of in a way, like, well, models are available, but how, what is the new business model? And that's where, like, that's why I was talking about this, vibe coding and all I was like, little like, not that I was not that serious about vibe coding. But one thing that comes out of, like, if you follow the trend is so called, these AI enabled application, right? So this is the new business model that is coming up. Like there you will see there are companies that are building AI enabled application for specific domains, such as, let's say legal or finance or medical and so on, right? So there is a app called Bridge. It's just like the bridge, the name of the app is bridge. They are going after medical industry, and they are saying, Well, whenever there is a conversation happening between a patient and the consultant the doctor, right, or even the patient and the radiologist and stuff like that, or between the doctors and radiologists, right? So you can basically interpret all of those conversation using their large language model. And then, basically you will they will be the practitioners will be able to compare with the conversation that has happened other places in the world, because those knowledge are also being internalized within the model, and then, based on that, the model will be able to provide you some diagnosis to begin with. Or that does not mean the practitioner will go with the diagnosis, so practitioner will take that as a suggestion and then provide his or her diagnosis and then treatment plan. Now, if the practitioner wants, then they can also compare the treatment plan with other what other people have done all over the world using largest, large language models, right? So specific, specifically create created app for specific industry, but behind the scene, they are using some raw material. And it kind of feels weird for me to say the raw material for this application or large language model. So something as advanced as llms have become the raw material of app building today, right? So that's where we stand today. That is kind of the current state of industry, right? So also what is happening is in industry, lot of lateral movement is also happening. So people, not people companies who are traditionally model builders, such as open AI, now they are also trying to move even further up the value chain. And they are trying to come up with their own idea of creating value added apps right for different user groups, like even like when you go on your opener, Chad, GPT, right? So that itself is a value added app, right? Similarly, co pilot, right? So Microsoft, they do their own model building, but they are integrating all of these capabilities with each and every product in MS Office suit and anything that you can have on Microsoft or Azure, like each and everything has these AI tools built in, right? Like, these are the models, these raw materials. The models are the raw materials that are providing the firepower behind all of these that are happening. So, yeah,
+
+Speaker 2  18:10  
+you have a lot of kind of wrapping a lot of stuff around the LLM, the kind of a scaffold around it with different kinds of tools and such. And then agents are where the LM can decide, okay, I'm going to use this tool or that tool for this particular task, or I'm going to make a set of plans of things, of different tools to use, or different actions to do with, with the computer or database or whatever. Yeah, augmented around,
+
+Unknown Speaker  18:40  
+all augmented around the LLM,
+
+Unknown Speaker  18:45  
+that's why they say the big thing is,
+
+Speaker 1  18:47  
+and then the other thing on top of that, the other thing so there is also scientist on the other side. They have already started thinking about, like, hey, where do we go from next? Right? This is the conversation I think I was having yesterday, before the class started, right? There is this concept of jepa, right? So, which is joint embedded, what was the full form? Again, there is basically the next generation of model that people are now trying to build. Like, okay, we have solved the language problem. Even though computers do not understand language, we have made the model intelligent enough that they understand the language at the same level or better than we do. So that is given. So this is, this is where there is basically no debate today that llms can operate when it comes to understanding the language and producing language at a similar level, or in some cases better than what we do. But then does that mean that this is end of everything? Actually not because it turns out that interpreting language and generating language is actually easier problem to solve, because at the end of the day, even though we say like, Hey, human language is not like, it's not a. Like a computer language, right? It there is, it is not rule based, but at the end of the day, it is some kind of rule based. The rules are very complex. We cannot express those rules in words, but that's where the neural nets come in. So they can basically, through lot of effort, right, lot of training, they can kind of interpret these rules, which are unwritten rules of the language. But then the next problem that people are now trying to solve is, Okay, how about understanding the physical world around us, the world that you see, that you feel and touch, not just the world that you speak about or write about, that's the world in expressed in language. How about the world not expressed in language? So that's where the next frontier is probably going to come up with the next five to 10 years. Maybe,
+
+Speaker 2  20:43  
+yeah, because large language models, they can, I mean, people talk about all the world, so they can imitate how people talk about the world, but that doesn't mean they know anything about the world. Yeah.
+
+Speaker 1  20:55  
+So it's called Joint embedding predictive architecture jepa, a novel AI architecture developed by meta that focuses on learning visual representation by predicting hidden information within a video based on the visible content.
+
+Speaker 2  21:09  
+By the way, I put the link to the paper on Live Channel. Okay, this attention. I don't know who you said the author was, but I
+
+Unknown Speaker  21:21  
+don't think you'll sit with you correct
+
+Unknown Speaker  21:25  
+in the live channel. Yeah, yeah,
+
+Speaker 2  21:27  
+you find out who the authors are. I think you said Jan lacuna, no, it's not,
+
+Speaker 1  21:34  
+oh, it was not by young lacoon as a bunch of people. Oh, it was a whole bunch of people, okay, at Google, Ah,
+
+Unknown Speaker  21:44  
+okay, yeah, okay. So it
+
+Unknown Speaker  21:50  
+was not just one person, yeah, it's
+
+Unknown Speaker  21:53  
+a bunch of people, and they're all Google people.
+
+Speaker 1  22:00  
+Okay, so that was kind of the history of philosophy,
+
+Speaker 2  22:05  
+not too hard of a paper to read. So it's good, oh, you can sleep over the math and get the idea of what they're doing. You know, pretty easily. That's
+
+Speaker 3  22:12  
+kind of along the lines. There's a book by Penrose, Roger Penrose that really nice. It's called emperor's new mind. But he talks about how, like, one of like, the key like factors for like next level, like understanding, like dynamic systems and like higher level mathematics, like, kind of like the next like frontier of math is like this, like higher level reasoning, or like non algorithmic computation, he's like after that's what that reminded me of, like when I was taking a Look at jepa just now about like, trying to, like, trying to, like, make that sort of like, higher level human reason, I know computable.
+
+Unknown Speaker  22:47  
+Yeah?
+
+Speaker 2  22:49  
+Actually, he does not believe that compute consciousness can be attained with computation,
+
+Speaker 3  22:56  
+yeah. Penrose, yeah, that's, that's what I mean. But just the trying to make like models more like humans? I guess, learn more like humans.
+
+Speaker 2  23:06  
+Interestingly, AI researcher Suzanne builder has started a new startup company called nirvanic AI, and she thinks she can use Penrose theories about quantum consciousness to make an AI that is conscious using quantum quantum computers, mostly thinking about classical computers. Yeah,
+
+Speaker 1  23:31  
+that's right. Okay, so quantum computers, obviously, I mean, we cannot even imagine what kind of world it will open up, right? So that's not just not go too far into there, but yes, maybe you are right someday with quantum computing, where you can basically solve the problem that classical computer is almost never can solve, which is called the NP hard problems, right? Mathematically speaking. So there are some of the spatial problems, some of the spatial class of NP, hard problems. It has been proven that with quantum computers you can just solve those with a blink of an eye. But but the thing is, quantum computing technology itself is still in its infancy. Quantum computing technology technology has lot of physics challenges to solve, which basically gives rise to error due to these entangle entanglement between the different quantums of computing. And that gives rise to error because it is really, really hard to maintain a steady state at that nano scale. So therefore a lot of further development and refinement needs to happen before quantum computer can become actually useful. But when it does become actually useful, I don't even want to think about
+
+Speaker 2  24:51  
+it aside. On the other side that hard problem, I have to look back for it. I saw a couple of headlines. I didn't go into them, but they were saying all. Now we know what the part of the brain that's producing consciousness, yeah, which can be interesting. I haven't gone into it, but a couple headlines I know this last week.
+
+Speaker 1  25:11  
+Yeah, okay, so coming back, let's get little bit grounded with the reality. I mean, although our reality is pretty exciting, given the time that we are sitting in today. So for today's class, we are going to go back and think about what we did when we came up with this bag of word representation, right, which is basically the tokenization that we did, right? So we our first attempt is to basically take a corpus, which is basically a body of text, and then count how many tokens, what are the unique tokens, and how many times each tokens are occurring, right? And that basically gives you a bag of Word, which is a very, very rudimentary representation. But hey, we have seen before, even with this interpretation of tokenize, this type of tokenization, we have had some success, right? But that is not the only type of tokenization. So this is basically essentially count vectorization, right, if you recall. And then we used another vectorization technique which is slightly better than these, which is TF, IDF based vectorization that not only looks into the count of token in a given document, but it also looks into the ratio of the count of token in the current document, and divides that ratio of that and the count of token across all the documents in the total body of text that you have. And that ratio, it tries to see whether that ratio is low meaning whether these highly occurring or more frequently occurring term in this document is also more frequently occurring in other documents, or is there something special about this document that it is offering, right? So that was the TF idea. So we are going to do a little recap of those two, and then we are going to do something, some different kind of tokenization, or vectorization, you could say, based on language models. So these language models are basically not llms, as per se, but these are models like Bert, b e r t, right? So if you look up for B, E, R t, so Bart is a language model by so Bart, in fact, is kind of the precursor of today's LLM, you could say, right. So Bart language model, I think that was also from Google, yes. So around 2018 so talking about the transformer architecture. So the that transformer architecture, followed by that paper, the attention of all is all you need. I think the first kind of widely available implementation of that architecture is this model called Bert. Right now, these type of models, since they have already been trained with large bodies of text, these models have the, have a have their own understanding of English language, and based on that, you can actually create tokens with the corresponding numeric representation of tokens that is more meaningful. And just by looking at the values of the tokens or embedding that they provide. So I'll talk a little bit when we go into the code. I'll talk a little bit about what is the value of the tokens, like the numeric, single value that we see, versus what are the embeddings. So by when you come up with these encoded token value and the corresponding embeddings behind this so the way that these models are trained, just by getting those numeric value, takes you a long way in understanding the language that is expressed in your in your body of text. And now, when you take those kind of tech token and feed into your actual NLP model, which you use, build using LSTM type network, then your LSTM network could be able to much better produce, like, generic text, kind of what we saw yesterday, right? I mean, if you guys want, for some of you, those are very brave at heart, maybe you can take these up as a challenge and try to do something like this at the small scale as part of your project three, like think if you look at activity five and six from yesterday's class, right, where we just did a simple TF idea, vectorization, I think we did right? So instead of doing TF, IDF, used some LLM based token or not. LLM, well, you can loosely call it LLM, but some these, some of these language model based tokenization, and then feed those tokens into the kind of sequential, not sequential, LSTM based model in Keras, and see whether you can make a better text generator compared to what we were building yesterday's class. Right? Just an idea. So. Okay, so that's what we are going to see, like, how we can, yeah, forget about LLM. We are actually not using LLM today. It says llms are AI models that have been trained, yeah, but we are not LLM today to use the to create the tokenization. What we are using is a transformer model called by bi directional encoder representation from transformers. So this is that remodel that we are going to use to generate some other tokens today. In today's class, you wanted
+
+Unknown Speaker  30:27  
+me to interject here and there.
+
+Speaker 2  30:31  
+Basically, if you look at the classical transformer model, it has two SEC, two phases as encoder and decoder. Now Bert is only encoder. GPT, which is basically the llms, is only decoder. It only uses that one or the other side of that. If you look at that classic diagram in the paper, use one side or the other. So bird is basically it's okay. So you give it a you give it a single value for a token, a single vector of sequence of tax, but it actually takes each of those and it actually does make a regular bedding of each of those tokens. And then it does a lot of not to go into detail, a lot of matrix math and so on, to do the attention stuff, to basically find the relationships among all the tokens with all the other tokens, and updates or rates those basically to to include information about its relationship to all the other tokens. And then the end you get one embedding, which is the whole text, yeah. And then you can put that through any kind of classifier, ahead or anything around, yeah,
+
+Speaker 1  31:43  
+to any other model, correct. Cool. Okay, so let's get started with our first activity today. So we are going to start with our very simplistic tokenization, which you will see using the starting with the word tokenization from the nltk library. This is one of the first thing that we learned how to tokenize the word. So let's say you have some text. Let's say we have three pieces of text here. So you take the three pieces of text for each piece, what you do you first look into the kind of the symbols that you don't want your in your text. To clean it up. Right? Remember using the regular expression we said we are going to clean up everything that are get rid of everything that are not lower case alphabet, uppercase alphabet or a blank space. So we are only going to keep those. So you take these and do a regular expression substitute, and then basically whenever you find anything matching this pattern, you basically replace that with a empty string. So that basically means you are getting rid of those special characters. And then you take your cleaned text, convert it into lowercase, and then use this word tokenize function from nltk, and that will create individual tokens which are just the words right, and no streaming, no limitation, just organization, right? And you apply that for all the text that you have, and essentially you end up getting something like this, which, as you can see, just the words, which is not very different from STR split. You could have done that using simple Python string split also, right? So there is, it's not that fancy,
+
+Unknown Speaker  33:44  
+and then.
+
+Speaker 1  33:48  
+So these are basically all of your filter token. So filter token, basically is you took all of these tokens and look through this and basically remove anything that is stop words. So this is also something that we learned that in many like using nltk or using NLP, most of these libraries, there is a way to actually get a list of all the stock words in English. And these stop words are basically commonly occurring words across language. So you remove the stock words and then the first sentence, which was, I want to invest for retirement, becomes, want invest retirement, right? So you basically removing i two and four, because those are stock words, right? So that was our attempt there. So clean token. Now this is still not bag of words, right? Now, how did we do the bag of words? Well, let's first think of a very, very naive way, like, almost like doing it from scratch. So think about these bag of words. Essentially, what is it you are look you basically take this text and convert into list of. Tokens, which is what we have here, but Bag of Words representation is for each token, you have to have a count how many times that token is occurring in the whole bag of tokens.
+
+Unknown Speaker  35:14  
+So you can simply write a loop
+
+Speaker 1  35:17  
+to look through all the filter tokens you have. And then you create a set, which is called bag of words. In the set, you basically see whether the word that you are you have gotten from here, it is already existing in the set or not. If it does not, you insert the word in the set, and then, if it does exist, then increase the count of that word by one. So it's basically, you are doing it by hand. You are checking each and every token by hand and saying, like, hey, does this token? Is this token something that I have seen before? If yes, then I'm going to increase my count to one. If not, I'm going to take notice. And then, well, this is the first occurrence I'm seeing this token, therefore the count should be one. And then any subsequent time when you see this token, the count will be more than one. So then you can do this. And basically this list of tokens that you have, which is a very tiny vocabulary here, just for the understanding purposes, we kept it tiny so you see the this occurred, one time. Invest, occur three time. Retirement, one occurred one time, and so on. So that essentially is your bag of what representation which is this, which you can do even without using any libraries, just using simple Python functionalities. So that is one way of doing it, but we didn't do it this way. Instead, what we did is we used a slightly more efficient way of doing this bag of words, using our count Vectorizer from our scikit learn library. So with Count Vectorizer, we don't have to write this kind of a loop and count check that the existence of the token in a set, and if it is increased by one, you don't have to do that. You basically follow the nice scikit learn API, which is, you take a take a function, which is, in this case, bound Vectorizer, and you initialize it with any of the attributes that you want to which this case is, stop, words, English, and then you do a fit transform, and you provide whatever body of text or text or series of text that you want, and then you basically take that and print it as an array, and you will basically get this. So what this basically means is this representation is same as this representation, just presented in a different way, right? So in this representation, what you are seeing here is the first sentence, which is, I want to invest for retirement. So what it is saying is, for each sentence, the tokens for each of the words in the sentence, how many times that word is appearing in the whole body of our whole bag of tokens? So that's what these are. The words in the sentence that are not appearing anywhere else are coming as a zero, the ones that are appearing once are coming as one, and so on. So why most of these are zero, because most of these we basically already dropped as stop words, right? So that's why you are seeing zero for these.
+
+Speaker 4  38:28  
+So, so if that's true, how come there's more than six entries in that first array? Does it? Does it normalize it in some fashion?
+
+Speaker 1  38:37  
+I think, yeah, I think it's probably looking into the largest one. Hang on. How many? 1-234-567-8910,
+
+Unknown Speaker  38:46  
+no, 10 entries, Jesse, not six, right?
+
+Speaker 4  38:49  
+But there are six words in the first sevens. So how does that matter?
+
+Unknown Speaker  38:57  
+So this sentence one
+
+Unknown Speaker  39:01  
+is basically,
+
+Speaker 1  39:07  
+yeah, so this is basically a cleaned version of this sentence. So if you do 1234567,
+
+Speaker 4  39:16  
+well, I think it's in the next data frame. But if you just, if you scroll down. That's where it's explained.
+
+Speaker 1  39:23  
+Because, because it Yeah, so you can Yeah. So then you can look into these Bag of Words array, Oh, right. And then get the feature names out, yes, yeah. So it basically shows like this way,
+
+Speaker 5  39:36  
+yes. So that must be a join of the three sensors, so it's
+
+Speaker 1  39:40  
+basically correct, okay, right? So, so it basically, so there are 10 of these here, because the size of the vocabulary is 10. Because if you look in here, there are 1234567, and, yes, so 10 unique tokens. So therefore we have 10, and now you have a. One here, one here, one here. But this is not in order, because this order is not same as the order of tokens that you see here. Want invest retirement instead. It simply says, if you follow these appointment, zero, financial, zero, fund, zero, and so on, invest, it occurred only one time, and the first sentence, retirement occurred one time, and then one occurred one time, everything else occurred zero times. So that is the represent. That is the, basically the significance of the first, first set of counts there, right? So essentially, that's why I said it is kind of showing you the same information as in here, but almost like in a one hot encoded way. You can think of this, right? So for each of this sentence, you are basically one hot encoding across the set of vocabulary. And then you are basically, well, actually not one hot it's a many heart like either zero or the corresponding value, not just one, zero or any positive value. Okay, so that was our bag of what representation using the count Vectorizer. And obviously, if you do a list of that, it will tell you what is the size of the what is the all the what are all the tokens in the vocabulary? Which is those same 10 words, right? You can also take these DF, and if you do a sum of all of these, so then it will tell you, basically, if you are doing some with X is zero. So essentially, what you are doing is you are going column by column and saying, Okay, how many times appointment occurred across all the text. So you are going to do a sum of all these columns in this and then if you do that, you will basically get this representation, which is basically each token and how many times the token has occurred, which again, gives you the same information exactly as when you do it manually, and you can see, invest record only three times. Everything else, all other nine tokens occurred only one times, which is the same thing that you are getting from common factorizer, also, right? So that was our first naive attempt of tokenization. And even though I'm saying naive, we have seen that, even with this tokenization approach, we have been able to produce some pretty cool, exciting results.
+
+Unknown Speaker  42:29  
+But that's just one of the approach.
+
+Unknown Speaker  42:34  
+What other approach we have seen? I
+
+Unknown Speaker  42:43  
+do you remember of any other approach that we have done?
+
+Speaker 1  42:56  
+The other one was TF, IDF, which is something that I think we did in here, right when we did the text generation. Didn't we do TF, IDF there?
+
+Unknown Speaker  43:09  
+Did we do count? I forgot.
+
+Speaker 1  43:18  
+No, we actually used a space based thing, I suppose,
+
+Speaker 1  43:27  
+separate tokens. Ah, so yes, we used NLP. So these NLP was Spacey. So in this one, we basically used spacey to do the tokenization for us. We didn't do nltk tokenize. We use some other tokenization, right? And then when it comes to that is tokenization. And then for vectorization. What did we do for vectorization?
+
+Unknown Speaker  43:55  
+So that's that. Oh.
+
+Unknown Speaker  44:02  
+Then, we used
+
+Speaker 1  44:05  
+here as pre processing tokenizer to convert this to count based tokenization, which is this. And then we looked into what counts. And then, yeah, so basically, we used a Keras based tokenizer to convert that into corresponding like count, which basically, essentially, we ended up doing something which is similar to count vectorization, but we used a Keras tokenizer. So these tokenizer here that we used comes from Keras pre processing text tokenizer, but which kind of gives you the same thing, like, how many times a particular token has appeared in that right? The word in there? No, actually, this is not count. This is dictionary mapping of the words. To their indices. Okay? So this tokenization came up with some kind of a dictionary of all the words, and using some internal logic, it applied index to each of the word in the dictionary, and that is the word that we used to convert all the words to their corresponding dictionary indices. So that is what we did in the last activity of the previous class. So here we are going to in the next activity. We are going to look at something else which is based on Bert tokenizer. So this Bert model is basically that Bert model published by Google back in 2018 so we are going to use this Bart model from for tokenizing. Now, where am I going to get this Bart model from?
+
+Unknown Speaker  45:53  
+So if you look here
+
+Speaker 1  45:56  
+that I am using something called transformer library. So from transformer import, but tokenizer, so what is this transformers? So these transformer, in order to use this, you have to do a pip install transformers. And this transformer is a Python library through which you can get all these different types of transformers, because this Bart is just one of the transformer that is built using the transformer architecture. So this transformer is a generic library that allows you to get hold of different types of transformers that are available out there in the world, and one repository that basically maintains all this transformer is hugging face. So if you go to hugging face.co, so this will let me actually ping this in like channel, so you can bookmark it. So if you go to hugging face, and under the transformer page, you will see that different text model transformer are there, and we are going to use the original one, which is Bart that was published by Google back in 2018 so this is the model that we are going to use to tokenize our text. Okay, the transformer library is just a basically wrapper around it. So behind this transformer library, all of these different part trained Bart models are hosted by hugging this and then transformer basically gives you a Python wrapper. So instead of actually doing a pool from somewhere like Git pool or maybe HTTP based pool or anything. Instead of doing that, you basically do that from the convenience of a Python based library used using your very well known Python syntax as language syntax. So that's what this transformers library do. So once you have this library installed, which I hope you guys will be able to do, it's just a pip install transformer. So try running that. If you haven't done already, then we basically get the Bert tokenizer from this. Now, Bert is the general architecture of that tokenizer that that was published right now, that architecture model, using that architecture have been trained with various different corpus of language. So one particular Bart tokenizer that we are going to use here is called Bart base on guest. So this is basically the name of the model, Bard, base on cast, which is basically this model right here. No Hang on. I think there is a separate page in hugging face just for that particular bar tokenizer. This one. So base model on guest so there are more advanced models also on BART, but this is the base model apart. And then there are other advanced model like large uncased, base cased. So cased and uncased meaning whether they are case sensitive or not case sensitive, right? So we are using the on case so we don't have to worry about being case sensitive. It will basically treat everything as a lower case. And then the large model, obviously, they are trained with a larger body of text, that more parameter that they have used, right? And so on. And then they also have Chinese, they have multilingual and so on. So we are basically using this model here, Bert base on cast. Let me also select this link. This is the link to this specific Bert model that we are using, which is Bert base on kissed. Okay, so that's our tokenizer. And. Then with this tokenizer, we are going to do something very similar to what we did with the spacey based tokenizer. We just take that variable and we say, hey, go tokenize. Dot tokenize. And that's it, and you will get the token. Now, do you see something little odd here in this list of tokens? So
+
+Unknown Speaker  50:24  
+yeah, it split up. The word tokenization,
+
+Speaker 1  50:26  
+huh? Yeah, split up. How about this one?
+
+Speaker 6  50:34  
+It's like, it's like, it removed the dash, or it created another token with the dash.
+
+Speaker 1  50:39  
+Yeah. So this specific technique is called sub word, tokenization. Why? So, if you think about it, when we doing the stemming and limitation, right? So using those techniques. So if you apply a stemming technique, this tokenization will be basically converted to its root form, which is token but if you only retain convert this word tokenization to token, you are kind of losing some something right, some valuable information. Although, recognizing that the word tokenization actually derived from the root word token is useful. But at the same time, you also want to retain what is the modifier that was added to the root word, which is isation in this case. So what this bird guy do? So the bird guy, unlike our streaming and lemmatization thing, they do lemmatize, but they also keep the part that was added to the root word as a separate token.
+
+Unknown Speaker  51:46  
+And this technique is called sub word tokenization.
+
+Speaker 1  51:51  
+And you can see here particular word, sub word was also part of this test text that we have using to kind of highlight that this is a sub word tokenization. So you see how the sub word, the word, sub word, is also split into the root word and the sub word, which is double hashtag word. So in bar tokenizer, all the sub words, all the sub part of the sub words, are always marked with a double hashtag. So that's how you know that that basically something that was an addendum to some other root form of Word, which in this case is sub in this case it is token and so on. So that's how you will do tokenization, using Bert. So
+
+Speaker 4  52:43  
+So wouldn't, wouldn't learn the sort of, I guess. If this is supply,
+
+Speaker 1  52:48  
+I know it should be learn and ing, but I don't know why it didn't do that. Do you want to try this with maybe Bart large on guest?
+
+Unknown Speaker  53:00  
+That's a question for me, then yes.
+
+Speaker 1  53:04  
+Okay, so let's try this with a BART large and see No. For some reason, the learning is not split into sub words, even with the large model. I don't know why I didn't create the model, but I am with you on this one, Jesse, that learning should have been split into the root and then ing as a sub word. But some, some reason, it is not doing that.
+
+Unknown Speaker  53:37  
+So I know anyhow.
+
+Speaker 1  53:42  
+So now, if you compare that with our nltk based tokenization, right? So with nltk, we had this sentence, sentence, tokenize, what? Tokenize these methods. And if you get, let's say a particular article from Reuters, and this is that cocoa article that we have seen several times before. So you can do a sentence tokenize on this one. And if you do sentence tokenize, it will cut these into sentences, not just word, right? So it will basically look something like a period. And then, based on that, it will basically give you the different sentences as a list of sentences, basically. So that is one of the nltk tokenization method. Then you can so these are all the sentences. So this is the first sentence. Basically are 00, at one. And then if you take any or one of these sentence, which, let's say the first sentence, then you can work tokenize it, and then it will basically split those sentence all the words in this sentence, right? So that is the nltk tokenization. So this is just demoing like the different organization that we have done before, just a side by side comparison, right? Just to refresh your memory. So nothing, nothing net new here and then in the. Last Activity yesterday, this is what I we looked right? So we used a space tokenization, using English core web SM, or, I think we used LG on this one.
+
+Speaker 1  55:19  
+And this one, we use the large one, right? We use the large model of space, right? You can use large one. You can use small one. So let's say if you use a LG here. So in this sense, if you look into this, like when we are doing spacey, dot load, English core web large, you will think that the syntax, or syntax of this thing is probably very similar to when we are initializing a BART tokenizer, right? So where we are doing Bart tokenizer from pretend, and we are providing the name of the model. So if you're thinking like, Hey, this is a BART tokenizer being initialized with a BART model, which is very similar to how a special spacey tokenizer was also being initialized with a spacey train model. So if you are thinking they are kind of similar, I agree with you. Yes, they are similar. But only thing keep in mind that spacey based Tokenizers, I don't know, maybe later, they have changed, but these type, these library, I think it predates the transformer architecture that was published by Google in 2018 so bar tokenizer would probably providing, be able to provide more meaningful tokens, supposedly, compared to the space tokenizer, right? But don't take my words on it, because people keep developing and retraining and enhancing these models all the time, but the spacy tokenizer was prior to the transformer architecture of 2018 but came after the transformer architecture. So supposedly, Bart will be able to retain the some of the language features better compared to space, supposedly. So that's your spacy tokens, which kind of does the same thing right? Now, you can also take these sentence tokenizer that we did using nltk, sentence tokenize. Let's say this one, and instead of what tokenize on that like this is like basically showing that mix and match, right? You can. So if you take a one of the sentences, and you can even take our Bart tokenizer. So this is our Bart tokenizer. So this is using Bert based tokenizer, because if you remember, this tokenizer is using the BART up there. So this is basically the bard based so here I see the exporters have been split into sub word export and ours. Same thing here exporters and this was using BART uncast. So that's why everything has been converted to lower case. Right? It did not get rid of the punctuation, though. So if you do want to get rid of the punctuation, like this, parenthesis, comma and all, then you have to apply that regular expression based substitution yourself. So just just like throwing showing these things side by side. When you are doing your NLP, you might want to mix and match, right? Maybe you take the text, text as is, and then use a regular expression subs. Regular Expression substitution to remove all the punctuation mark. Then you can go do, let's say, a bard based tokenization, right, which will give you something like this. Also you can here, we are using the bard based tokenizer on a single sentence. But there is no need to apply it on a single sentence. You can also apply it to the overall article. So these article is like basically collection of all of the sentences together. So and then this is all the watch based token that you are getting from all of this. Oh, look, there is something cool here where 80% PCT, I don't know cool or not, but this is kind of odd. So percent PCT basically supported as PC, and then hashtag, hashtag t, so the original word was 80% something that BART did, I don't know, based on what, but that's how Bard work. But then, other than that, the algorithm, the Oh, then this one, CPA. What was that word? Actually? Ha, the CPA, the cocoa producer Alliance. So, so it didn't do a good job, actually, right? Because it doesn't know that CPA is basically a named entity. It thought it is some kind of a derived word. So it thought CPA. The root and then it added a sub word with a so it's not perfect, as you can see, right? So use it or leave it, or maybe, if you want to stay with spacey tokenizer, it's kind of your choice.
+
+Speaker 1  1:00:19  
+So these are the different kind of Tokenizers.
+
+Speaker 2  1:00:29  
+Doesn't seem a very strong partial word tokenizer, though
+
+Unknown Speaker  1:00:37  
+very strong partial or tokenizer.
+
+Unknown Speaker  1:00:41  
+I see a lot of words that can play split up
+
+Speaker 2  1:00:44  
+like Jesse was saying they didn't split up around learning. Yeah, yeah. The idea of having partial token, I tokens is that you actually have, you have, actually handle words that you haven't more likely handle words you haven't seen because that may have similar pieces, same pieces, yeah? But this doesn't look like that's a whole lot. This doesn't
+
+Speaker 1  1:01:09  
+Yeah. Now continuing on the tokenizer. So those are some of the tokenizer. And then there is a tokenizer that also comes as part of Keras library, right? We also use that one one of our previous activities, which is coming from your Keras text pre processing library. And now I don't know what is happening with my Keras. Whenever I do this, I'm getting these errors, even though it does get imported. I don't know why it is doing this to me, but anyway, so here, let's say you have three, three sentences, right? And then you take a dis tokenizer, and this is a Keras tokenizer. And then, instead of fit transform, unlike your psychic learn based thing in Keras, they're saying fit on text is the method that they have. And then you do a tokenizer, dot fit on text, and then you'd find tokenizer dot word index, and you get something like this. So here what it did is it used some kind of algorithm to basically provide a sequence of, sorry, the dictionary index, which is basically something we saw. Where else did we see that dictionary index thingy?
+
+Speaker 1  1:02:39  
+And uh, what are the tokenizer was giving us dictionary index. Oh, no, this is, this is probably something we used in our previous this thing maybe the, let's see TensorFlow, pre processing text. I think we use somewhere here. No,
+
+Unknown Speaker  1:03:14  
+I know we have used it somewhere. I
+
+Unknown Speaker  1:03:28  
+Ah, yes, we did use
+
+Unknown Speaker  1:03:32  
+in here,
+
+Unknown Speaker  1:03:35  
+in our
+
+Speaker 1  1:03:38  
+Yeah, the four chapters of Moby Dick. Yes, we did use it there. So where we had this tokenizer, and then we tokenized, and we basically got these list of tokens with the corresponding index value, yes, so we have seen that before, and that's what
+
+Speaker 1  1:04:02  
+the that's the same thing that we have here, too. So I love my dog. I love my family. My dog is a lab. So just had three sentences, and the vocabulary size is really small, just eight word vocabulary, and it basically came up with some word indexes. Now these are the indexes. So that means, with these, if you do text to sequence, then what it will do is, I love my dog will be changed to 2314,
+
+Unknown Speaker  1:04:34  
+using the index balance, 2314,
+
+Speaker 1  1:04:38  
+I love my family would be 2315, and so on,
+
+Unknown Speaker  1:04:45  
+which is what you are going to get. 2314231514678,
+
+Speaker 1  1:04:50  
+and so on. So this is the Keras way of tokenizing. And then you can take the sequence. And you can also revert it using the sequence to text generator. So this is text to sequence, so you have these sentences, and it converts to sequence. And then you do the other way, if you take the sequence and convert it to text. If you want to do that, you have to sequence to text generator. It basically brings the original sentence back. But these mapping this, my is one, I is two, love is three. This is something based on the vocabulary that was presented during the training time when you did that fit on text. And that is why, in the last activity that we did yesterday, in addition to the trained model, we also saved this tokenizer, because the thing that you are doing in the training this mapping, it has to be fixed, and anytime in future, you have to use that same mapping, otherwise your tokens will mean different things. So after you fit your token, you cannot discard that. You have to keep that token for future when you are going to generate your text back from your sequence, right? So that's that's indexing using Keras tokenizer
+
+Unknown Speaker  1:06:11  
+now. Now we are that
+
+Speaker 2  1:06:12  
+error in the Keras tokenizer. Where was that? What that error they were wondering about you in this one, yeah, the way, yeah, that one,
+
+Speaker 1  1:06:24  
+yeah, this error is coming whenever I'm doing some import of here, any, any. But for some reason, it is showing attribute error. But it is not basically preventing me to do anything. Some
+
+Speaker 2  1:06:41  
+missing mix, mixed versions of something, because, yeah, Chad, PT says, in general, that kind of error is usually happens when working with protocol buffers and using the wrong method or updated compatible. It's
+
+Speaker 1  1:06:56  
+basically, I know it is some kind of a version mismatch, but I just don't want to look into it,
+
+Unknown Speaker  1:07:01  
+right? It works. We're happy. Exactly.
+
+Speaker 1  1:07:06  
+Okay. So these are some of the tokenizer that we have seen. Now we are going to see another tokenizer which is even more sophisticated than what we have seen before. So what we are going to do now is, let's go back to the slide for a bit before we go there. So all of these tokenization that we have seen, they essentially create some form of bag of Word,
+
+Unknown Speaker  1:07:38  
+some form
+
+Speaker 1  1:07:41  
+now. I kept talking about this vector space and presenting all of these words or sentences in a vector space, right? None of these are actually doing that, Truly speaking,
+
+Unknown Speaker  1:07:56  
+but
+
+Speaker 1  1:07:59  
+you can do that with embeddings. So embeddings is basically a way where you represent your text in a vector space, such as this one. Let's say now in this representation, each of the word has corresponding index which you get after tokenization, I love my dogs became 2314, so this is that, but it does not tell you this sentence, this 2314, which is, I love my dog.
+
+Unknown Speaker  1:08:44  
+This sentence has a particular meaning.
+
+Speaker 1  1:08:49  
+And in the universe of all the English sentences, are there that are there in your whole corpus, if you think about each of the sentence and the expression that they expresses it, it can be presented using a mathematical expression, which should be a vector in a xy plane. So why am I saying x y plane? Even though they are not it's just because, in our mind, it becomes really easy to represent something in a two dimensional space. So let's say, if you have an x y space, a plane, and your first sentence, second sentence or third sentences are basically three vectors. Here is the data point, here is the data point, here is the data point, right? And if you take a data point and you connect that from the origin, you basically get an arrow pointing to that, and that is your vector. So that is the vector representation. Now, if you only have x and y, then you will have two coordinates. So this vector root from. Will be four and two. This vector will be represented by three and four. This vector will be represented by two and five. So basically they are corresponding x and y values along those axes. But obviously, then you only have a very limited number of data point and these two dimensional space is not complex enough to be able to represent all the sentences that there could be in the language. So therefore you need to extend this concept to a higher dimensional vector space, and in that vector space, when you are actually going to do that using the next modeling that technique that you will see, it will generate these numbers. And these numbers are basically nothing but the coordinates of the tip of the vector in a n dimensional space. That's what those numbers are, which in NLP terminology, is called embeddings. So now we are going to get an index of tokens like this, but for each of the tokens, sorry, for each of the sentences, we are also going to generate an embedding, which is basically where the sentence belongs in that space. Now, when you have that then if you want to find Okay, which one of these sentences are kind of more similar than others, you can see okay, vector number three and vector number one, represented by these coordinates. And these coordinates, what is the proximity between these two versus what is the proximity between vector number one and two? If you look into this picture, and if I ask you the question like, Hey, does vector number one look more like two or more like three? Which one is closer to probably looking at these, you can see it is probably closer to three, right? And that kind of gives you another alternate way to find that similarity cluster, kind of what we did in one of the activity in the previous class, where we found the topics based on the similarities. And we used a simple scikit learn based modeling technique, right? The two techniques actually LDA and NMF. And there the tokens that we generated, the tokens did not have these full embeddings built in. The tokens we generated there was using simple TF IDF tokenization, which is much less sophisticated than this technique of token tokenization with embedding that we are going to see today. But if you generate your tokens and embedding using this technique, you don't even need to do LDA. All you need to do is see, okay, take all of these vectors or sentences or topic and see which ones are closer together to others. And you will probably come up with some kind of a idea, like how similar or how dissimilar these sentences are, which we are going to see shortly. So to do that, we are going to use another transformer called sentence transformer. And with this, we are going to also bring in a particular sentence transformer model from hugging face again, which is your this transformer. So this is a pre trained sentence transformer model, which is called all mini L, M, l6, v2 so basically it's a mini language model, some L, 6v to some version number, because at different point of time, people have basically retrained and kept publishing new version. So we are just going to use this version here. Now this one will also require a peeps peep install first, which I hope you guys have done already, and then through that sentence transformer. This is, this is basically very similar to how we did with the bar transformer, same thing, but this one is not using Bart model. This is using another different model, which is this one, which is basically something that creates an embedding, not just tokenization.
+
+Speaker 1  1:14:40  
+Okay, okay, so now that is done. So now let's try to tokenize this sentence. The sentence simply says, I am learning a lot about transformers. Very good. I take the sentence. I do. Hey, this is my model. Fine. Model. Dot, token. Dot tokenize, and I give it the sentence, and then I print the tokens. Oops, sorry, I forgot to run this cell, and now I run this. Okay, so obviously tokenizer does, did what all tokenizer do, which basically split the sentence into tokens. Fine. I am learning a lot about transformer period. Very good. Now, this is just the tokens, but the same tokenizer. When you did the tokenize, it not only split the sentence into tokens, it also did some other things with these tokens, which we are going to see now. So these same tokenizer, after you tokenize, it has also converted each of the tokens to corresponding indices, basically very similar to how the Keras tokenizer did in the previous activity that you saw. Now if you take that same tokenizer and say, well, these are the tokens, fine, but show me the IDs that maps to these tokens, and you will get the corresponding IDs. And unlike the chaos tokenizer, these IDs are not 123, like that. These IDs basically start with some number which we don't know and why it gets this kind of random number. Because this model is actually a large language model, and it is trained with a large body of English language text, and it probably has, I don't know, a vocabulary of, let's say, 100,000 tokens in it. And what it is doing is it is simply looking at the words in your sentence, which are these words? And it is basically seeing in the universe of 100,000 words that it already had has under its strained model. It is basically comparing and doing a look up from there, like, Oh, your word I is basically a word token number 1045, word M is token number 2572, and so on.
+
+Unknown Speaker  1:17:09  
+So that's what it is doing nothing else.
+
+Speaker 1  1:17:15  
+Now you might think, well, what if there is a word that is not a valid English language word? Did it fail? Probably not. I don't know. Maybe someone made a typo. What is it going to do? I don't know. Maybe it will come up with some orbit thing. Let's actually do something.
+
+Unknown Speaker  1:17:34  
+What is a
+
+Speaker 1  1:17:38  
+word that is not a English language word? Let's type some junk character.
+
+Unknown Speaker  1:17:47  
+Just out of my curiosity,
+
+Speaker 1  1:17:53  
+Oh, f, O, E, R, F, it basically turned into sub word,
+
+Unknown Speaker  1:18:01  
+and then it came up with some value,
+
+Speaker 1  1:18:05  
+yeah, I don't know. Based on what I think, if it does not find a valid word, it probably use the corresponding embedding for the character or and character F, and do some kind of merging, something like that. So if it but it will always it is. So my point to see this is to see whether it can blow up on our faces. And the answer is not. It will always try to do something to the best of its ability and always give you a basically a list of tokens and their corresponding IDs that is guaranteed.
+
+Speaker 2  1:18:41  
+Thought it maybe could find parts of the word would match parts of some other word,
+
+Unknown Speaker  1:18:47  
+yeah, something like that, yeah.
+
+Speaker 1  1:18:52  
+Okay, so that's our tokenizer. Then we are going to look into the embeddings. It does okay. So embedding basically means that vector representation. So what am I going to do? I'm going to take that same model again, and I'm going to say now I'm going to encode that same sentence this one, and it is going to generate, not tokens. This time, it is going to generate embeddings. Now how many embedding values it is going to generate, which we will see in a moment? So you see these embeddings. I did a length of embeddings, and you see 384 and then, instead of printing all the embedding, we are just looking into first 20 of those, because this is a really long list. So why 384 Can you guys think of what is, what is the significance of 384 here? Do.
+
+Unknown Speaker  1:20:12  
+Anybody i
+
+Speaker 1  1:20:23  
+So think of this diagram. So if this vector was actually sitting in a two dimensional space,
+
+Unknown Speaker  1:20:32  
+how many numbers do you need to represent this vector? How
+
+Unknown Speaker  1:20:37  
+do you mean it's like the shape of the tensor?
+
+Speaker 1  1:20:40  
+Huh? No, so answer this question. If these vectors were really in a two dimensional space, how many number you need, or how many coordinate values you need? Two right?
+
+Unknown Speaker  1:20:50  
+We need the scope of the vector too, wouldn't
+
+Speaker 1  1:20:53  
+you? Or no, why do you need a slope of the vector? If, let's say, if you have a just x, y, you know, you you just have this number as four and two, and there is only one vector you can draw from your origin to four and two, because one end of your vector is fixed, which is 00, so all you need is just the coordinate of the tip of the vector, and then that's, that's what your vector is. So in a two dimensional space, you need two number, but here you are getting 384 numbers, meaning, what
+
+Speaker 7  1:21:28  
+that the number of dimensions? Yes. So
+
+Speaker 1  1:21:31  
+essentially, the this model is generating the embedding by convectorizing each sentence in a 384 dimensional space. Now the key thing to note here is this, 384 is fixed. How they have come up and decided 384 I do not know. I am assuming that they have trained a large language model with this where, for some reason, in the output layer, they had 384 perceptrons in their output layer. So that when they train this for each of the input combination, each of the sentence that comes in through input in that 384 neurons in the output it generated some values. Now, could they have been done it with a more less? Yes, but I'm sure there are a lot of smart people who tried with different number and for some reason, maybe pure luck or heuristics, or maybe they fought it among themselves. I don't know why they came up with a number 384, the point of me saying this is that this number 384, is not going to vary depending on the length of your system. It does not matter if you have a five word sentence or a 50 word sentence, the embedding generated for each sentence will still be 384, which, if you think of it, is actually a good thing, because now, if you take this embedding and you put it into your own neural net, now you know that input size is going to be fixed no matter how long your text is, so you don't have to go and chase around. You know that you are always going to get a 384, input, so you don't have to resize anything, you don't have to trim anything. It's always fixed 384 embeddings, right? So that's that. So this is model dot ENCODE, and then you can also do model dot tokenizer dot decode and provide these IDs. And if you do that, it will basically give you the decoded token, which basically gives you the original sentence back. Okay, so that is this hugging face transformer based on, based on, sorry, not that one. This one based on all mini LM as six v2
+
+Speaker 1  1:24:14  
+okay. And you can even see this code example here in the did I actually select this link the sentence transformers. No, I haven't
+
+Unknown Speaker  1:24:24  
+Okay. There you go.
+
+Speaker 1  1:24:31  
+I did I before, anyway, but anyway, that's okay. Anyway, that's fine. It doesn't matter you. Wait some power.
+
+Unknown Speaker  1:24:39  
+No, I'm just I Okay,
+
+Speaker 1  1:24:50  
+so the next thing we are going to look into before we go into break is like, here, when I talk. Talked about the similarity measure, measure right, just from a common sense, from this diagram, we can say like, Hey, vector one is closer to three than it is to two. But how do you really find the similarity?
+
+Speaker 7  1:25:14  
+You take the difference of the of the vector components and then square them and take the sun.
+
+Speaker 1  1:25:23  
+Yes, both are good answers. So one thing you can do, let's say this component is x1, y1 and this component is x2 y2 so one way of finding the distance is it's called Euclidean distance, which is square root of x1, minus x2 whole square plus y1, minus y2, whole square. That is one way you can find the distance between the two, which is called Euclidean distance. There is another way to find the distance by looking at the angle between these two vectors, right. And this angle, basically you can get from the dot product of these two vectors, because if the length of these two vectors is A and B, A dot B is equal, by definition, length of A times length of b times cosine theta. So that means, if you do a dot b, whatever value you get, and divided that by scalar value of A and B, like a dot b, divided by mod a times mod B, you will basically get cosine theta. And the theta value between these two will give you a smaller angle versus this two and these, measurement of distance is called cosine distance. And there is always these are always one to one correlated, right? I mean, if the between the two, what is called two point, if the Euclidean distance is higher, their cosine distance will also be higher. But what we are going to see is in the library that we are using, the transformer library, there is actually very easy to find this cosine distance. There is a built in function that allows you to take find this cosine distance without actually taking the dot product yourself. So therefore that's the one that we are going to use. And also computationally doing a dot product would be much better rather than finding the Euclidean distance between the two. So therefore we are going to use the cosine distance function, which essentially does a dot product between two, 384, dimensional vector, and then find the angle between this. And we are going to try this out in on few sentences. Let's say these three sentence, My dog is love I love my dog and my love my family. And we will try to see what is the cosine distance between these three sentences, like pair wise cosine distance, right? We'll find the distance between one and two, distance between two and three, and distance between three and one, and based on that, we will try to make a prediction which of these sentences are more alike than others, which is kind of, in a way, the topic classification. But we are not going to use any of the traditional classification clustering method. We are simply going to use our intuition based on the cosine distance, and we will see what, what, what we get, right? So let's do that. So we are going to use incentives
+
+Speaker 2  1:28:34  
+through that mix. Would be, I love working in my lab.
+
+Speaker 1  1:28:39  
+Sure. Let's do that, and that would be cool.
+
+Speaker 1  1:28:55  
+Okay, so now I have my sentences. I am going to do the tokenize just like I did in the previous notebook here, and this will basically do my tokenized sentences. But I'm not interested in these tokens anyway. I want to see the encoding, and when you do the encoding, so what I'm doing is I'm with the encoding. I'm going to get the embeddings. And I just wanted to see what is this embedding that it is a numpy array, and what is the shape of this array. So this is three by 384, and I hope you guys can see why the size is three and 384 Why is it three the number of sentences exactly, and why this 384 here the dimensional space? Correct? Because each of these sentence has been converted into a set of 384 coordinate values or embeddings, as they say so. That's why we have a three by 384, dimension numpy array.
+
+Speaker 1  1:30:08  
+And these are just some of the embedding, just first 10, right? Just for you to see, like, Okay, I love my dog I'm getting and these are seemingly random, meaningless number. So we don't need to even find the or try to understand what these numbers mean. Now, these utility function that I was talking about is basically something that is also part of the sentence transformer library, and this function is called util and that utility function into utility class does have a function called cosine similarity, cos, underscore, sim. And if you provide these embeddings, so these these embeddings, so there are basically three sets of embedding, so you can provide it any list of embedding and try to find the cosine similarity between any set of vectors and other set of vectors. In this case, I am providing same set of vectors twice. So sentence one, sentence two, sentence three. And in this side also, I'm also providing sentence one, sentence two and sentence three. So what it is going to do now, it is going to do the cosine similarity pair wise. It will take sentence one from the first argument and find the cosine similarity between one and one, one and two, one and three. Then it will take number two, and then it will try to find two and one, two and two, two and three and so on. And then we are going to print the result, and there will be how many items in the result, nine, right? But think about what is going to happen when you are trying to find that similarity, cosine similarity, between vector one with itself, they are exactly similar, right? Yeah. So there would be three item in here that will be combining a vector to itself. Which one those we don't care, and then in the lower half. So if you look into the diagonal, so this similarity is one, basically means we know that cosine of zero is one, right basic trick. So this is basically it is saying, hey, the cosine between these two vectors is zero, meaning one, zero degree angle. And then these are basically the values, 0.5691
+
+Unknown Speaker  1:32:37  
+between vector one and two, 0.5745
+
+Unknown Speaker  1:32:41  
+between vector two and one and three and 0.1410
+
+Speaker 1  1:32:45  
+between vector two and vector three, and then top three. Number is basically the repeat of the bottom three. It's just reversed, basically reflected across the diagonal, because we are comparing the same set three of vectors with themselves. So essentially, only thing that we need to see is these three numbers, because there are uniquely three, because distance between one and two is exactly same between as the distance between two and one, because the direction does not matter. So that's why these top three numbers above the diagonal will be the exact same as the bottom three numbers below the diagonal. Now you can probably see that vector two and three, vector two and three is not very much alike. They have a lower score. Whereas vector one and two and one and three, they are more alike, so therefore they have a higher score, right? So now let's see. So what we are going to do is we are simply going to print this pair wise. So we are going to go through all of these cosine scores with i, and then we are going to do a nested loop j that goes from i plus one to the end. And then between i and j, we are going to form a pair, and we will say, hey, between vector i and vector J, your score is this, which is from these 2d to read two dimensional tensor. This is a tensor, right? So if you print it, print it that way, then you will get this pair wise printing. This basically comes from the print output here, print statement here, I'm saying index zero and two score is 0.5745
+
+Unknown Speaker  1:34:38  
+between index zero and one, score is 0.5691
+
+Unknown Speaker  1:34:42  
+and index one and two, the score is 0.1410
+
+Speaker 1  1:34:47  
+is just a easier way to print so that you can kind of make that mental connection between which to which, but you have the same information even just looking in here, this is just a little nicer way to print this. So. Just for your understanding, again, not for the machine.
+
+Speaker 7  1:35:05  
+It kind of looks like correlation matrix, from what we use,
+
+Speaker 1  1:35:09  
+like correlation matrix, yes. So when you do the correlation matrix, you get this, this similar type of output, right? Okay. So now, if you look into each of these pairs, and instead of just printing i and j, what if I say actually the sentences so I can then say, hey, between this sentence and this sentence, the similarity score is this much. So all we have to do is we just have to do the same ing for all these pairs and then pick up the corresponding ith or J sentence from all of our list of sentences that we have up there. And then you if you do that now, you can see the similarity between I love my dog and my dog is lab is 0.57 I'd say, Hi, I love my dog. I love my family. Yes, they are both talking about I loving something, so score is high, but I love my family and my dog is lab, not that similar, so the score is low, which kind of makes sense, right? Between the first two pair, what is the common thread between the two? Is that dog they're all talking about, talking about dog between the second two. What is the common thread? Is love between these last two. There is nothing much common. So therefore the similarity score is lower. So you can hopefully see with these how you can kind of try to build a rudiment classifier, rudimentary classifier, right? And if you want to print this in a nicer way, you can print this in a pandas data frame, and that will say, basically just another way of representing the same thing. Well, this, this data frame, is basically nothing but this tensor with just the sentence one, two and three on it, I actually love this representation better, because it actually gives you the similarity between each pairs of sentences, right. Cool, all right, so let's take a break. And after the break, I today, I'm going to ask you to do this next activity within your group. And in this activity, you are basically going to look into a list of news news headlines. And I think there are 10 news headlines there, and then you are given another news headline which is not in the list of 10 headlines. So what you need to do is you need, need to generate embedding for all of your headlines in the list that is there in the in the resource folder, I suppose, where is the resource folder? I ah,
+
+Speaker 1  1:38:06  
+oh, this is there under here, huh, under resource folder. So this is where all of your headlines are. So you have to convert everything to corresponding embeddings, and then you have to take these another sentence, which is kind of your test topic, and then you have to look through all of the 10 embedding that you have generated for your news headlines. And then you need to find out which one of these are similar to which other headlines, right? Kind of similar thing. What we did here, instead of three sentences, you are going to do with 10 sentences. Very similar activity. So let's take about a 15 minute break, come back at 830 right at the bottom of the hour. And then soon after, we will break into the our our breakout rooms. And then you guys will do this activity today.
+
+Unknown Speaker  1:38:54  
+You ready with the rooms?
+
+Unknown Speaker  1:38:58  
+You are on mute.
+
+Speaker 2  1:39:02  
+You can't read my lips. How many, how? How many minutes did you want?
+
+Unknown Speaker  1:39:10  
+Let's do 20 minutes.
+
+Speaker 2  1:39:11  
+Okay, I was asking you that, just as you kind of like disappeared. So I'll open them once everyone comes back, yep. So actually, I'm going to make a like. I've been doing seven in 22 minutes, so they have time to sort into their rooms, and so they have 20 minutes. Okay, okay, I try to be really kind. So if you're fine, you're might be fine having fun, looking at more than the others I put in, I put in my link to a GitHub repository I have where I wrote my own transformer encoder. This as a, you know what the punishment? Well, actually more like I wanted to understand the architecture. So we're ready to build something kind of, make. To be understand it better. So it's simple. It doesn't have a lot of training. But then I actually use it with a small classifier to do sentiment classification of sentences.
+
+Unknown Speaker  1:40:13  
+Okay, that's right, and
+
+Speaker 1  1:40:14  
+which is kind of what they're we are doing here now, yeah, we're
+
+Speaker 2  1:40:18  
+doing some similarity. I did it with, yeah.
+
+Speaker 1  1:40:23  
+So you brought you build this from scratch,
+
+Speaker 2  1:40:27  
+I think Chad Harris, but advanced things, so I'm building, you know, custom layers for chaos.
+
+Unknown Speaker  1:40:35  
+Yeah, it worked pretty good. It worked kind of good. It was kind of
+
+Speaker 1  1:40:38  
+fun. Were you doing that as part of any codes that you were taking, or you just did it on your own reading
+
+Speaker 2  1:40:44  
+book, and I wanted to, so I took what they're showing in pytorch, but I decided to rewrite it and using TensorFlow eras, you know, like I said, making custom layers and stuff, so kind of advanced stuff, you know. And so I could make complex models, and it seems to work. Didn't get to have a lot of training, so it's not like, you know, good at encoding, transformer, encoder, kind of model for real use. But I put in similar sentences to what was in the original corpus, and it kind of did okay. And you know what I thought the sentiment was, and it did pretty good. I'm on it once I actually how long back you did this couple of years. I trained I trained it. I trained the transformer, basically thinking sentences. And I would mask off the last word and train it to predict the last word. And then I would, then I would, you know, using a, again, a classifier on top of neural network at the output, so that I could predict the last word. And then I use that model and build a classifier, percentage but sentences on it and played around. But mostly, like I said sometimes I like to learn about architecture by building it. Yeah, even though I'm not gonna make
+
+Unknown Speaker  1:42:07  
+a really useful
+
+Unknown Speaker  1:42:10  
+but I get to play around. I get to actually, yeah,
+
+Speaker 1  1:42:12  
+hey, Karen, open. I think everybody is here. Sorry to cut you there. I think everybody's here. Let's open the rooms. Okay, and then you guys are going to go to your respective rooms with your with your regular group members, guys, as in. Now I
+
+Speaker 1  1:42:52  
+Okay, looks like everybody's back here.
+
+Unknown Speaker  1:42:57  
+So how did it go, guys?
+
+Speaker 4  1:43:01  
+I didn't get the pseudo code in the last cell, so I changed it when I think I made a word, trying to figure out why it was trying to return where we refer to the pseudocode, the 00,
+
+Unknown Speaker  1:43:15  
+spot in the
+
+Speaker 1  1:43:18  
+string, pseudo code, 00, what are you talking about? Hang on a second. Let me open that. I'm going to share my screen, and then we'll talk through
+
+Unknown Speaker  1:43:34  
+which one you were talking about, zero, the last comment,
+
+Unknown Speaker  1:43:38  
+the very last one. Oh,
+
+Speaker 4  1:43:44  
+the way I did, it just didn't make any sense. So I was like, I don't know. Like, I want to see what Benoit does. Because, okay,
+
+Speaker 1  1:43:51  
+okay, how about others? Did anyone else
+
+Unknown Speaker  1:43:57  
+finish the whole thing? I
+
+Speaker 8  1:44:04  
+yeah, I got from the technology category, right? The headline, okay, mine. Mine just says, hacker pleads guilty to stealing over 77,000 passwords for Netflix. Not sure what Netflix, but maybe Netflix or something. Okay,
+
+Speaker 1  1:44:21  
+well, some of these, you will see it will be the similarity score that you get for some of these, it will make more sense than others, right? Because we are actually in this activity. We are not going full on and doing a topic modeling, right? We are just simply coming up with the embedding and then finding the cosine similarity between the embeddings and trying to do a very crude form of classification based on that, like using our our like human observation, basically. So let's, let's run through this so you have all of these news headlines here. Five right? Now, the first thing you need to do is you are going to generate the embedding to so to generate the embedding, you do a model. Dot encode where the model is, basically your sentence transformer with the same model that we used in our previous activity, right? So that's your model. Now, using that model, you do model dot ENCODE, and you pass all the news headlines in a list, right? So this is a list that you are passing where one each headline is one item in the list. So when you do that, and then you print the shape of embeddings, it will be 10 by 384 I assume, yep, 10 by 384 because there are 10 sentences, and the embeddings are basically derived in a 384 dimensional vector space. So that's your embeddings. And then that the other headline that you are trying to match with is this top 10 hacks for traveling like a pro.
+
+Unknown Speaker  1:46:07  
+This is the headline.
+
+Unknown Speaker  1:46:09  
+So looking into this,
+
+Speaker 1  1:46:13  
+is it belonging to technology category, or is it belonging to travel category?
+
+Unknown Speaker  1:46:20  
+Probably travel, right? But
+
+Speaker 1  1:46:23  
+because of the presence of this word hacks, some might think like, hey, maybe it is belonging to technology category, right? But since we have a very small data set, only 10, and we are not actually doing a classification or clustering algorithm, right, we are not going all the way, but we will see just from a like understanding perspective, like how similar that the how similar, how similar the embedding for this sentence is compared to the embedding for these 10 sentences. That's all we are supposed to do here. So we already embedded created the encoding for these 10 categories, 10 headlines here, and then this is the one of headline that you guys have been given. So we have to find the encoding for that one also. And that is a one by 384 because here it you have only one sentence. So 10 by 384 here, and one by 384 here. So essentially you have 11 encodings, right, 10 encodings here, and then one here. So your job is to find the cosine similarity between this one embedding with for each of us, so for these one embedding, and then find the similarity between these, and then each of these in this list of 10 embeddings. That's what you are supposed to do.
+
+Unknown Speaker  1:47:48  
+Why did you why did you encode it as an array?
+
+Speaker 1  1:47:54  
+Why did I what encode as an because this is a list of 10 sentence, right? I
+
+Speaker 1  1:48:04  
+so I have this data frame. I'm taking the headline column from the data frame, which is this, I'm disregarding what the original category is. I'm not paying any attention to that. I'm simply taking a headline column and converting that single column into a list so that I can pass the whole list as a parameter to our encode function.
+
+Speaker 4  1:48:28  
+I met the new headline, not the news here. Oh, the
+
+Unknown Speaker  1:48:33  
+new this one. Yeah.
+
+Unknown Speaker  1:48:37  
+List of one.
+
+Speaker 1  1:48:39  
+So if you do this, yeah, so you see it will get 384, by one, yeah. I didn't also speed play as Yeah. It will work. It will work either way. But if you do it this way, you see how the shapes are similar, right? 10, 384, versus one, 384, then your further code that you are going to write the looping comparing the indices. That is that it will be little easier for you to kind of keep track in your mind that's all nothing else. So now to find the similarities. So we basically have a empty list that we are going to populate as we look through each of the news headlines embedding. So essentially, I'm looping through this one, and I'm going to have 10 iteration of the loop. So for each iteration, I'm going to take that particular headline embedding, which is one out of this 10, and then finding the similarity between that one and the news headline, the single one the news headline, I'm very so that is my cosine similarity score. And then I'm appending this similarity score and the corresponding I value index as a couple to this list of similarities. And then I'm sorting this by. Similarity score. So when you do sort, you can provide a key as a lambda, which is basically x1 basically, we have a couple tuple here for each of the similarity item, and I'm basically sorting this on the second item, which is the score. First item is i, and then second item is score, and then I'm doing reverse, which is basically in descending order. So when you do that, and then you can print the similarities if you want.
+
+Unknown Speaker  1:50:36  
+So what this is saying is
+
+Speaker 1  1:50:40  
+the similarity between news headlines, I meaning the best five restaurants in the world. The score is 0.3216 hacker pleads guilty to stealing over similarity is 0.27 and so on. Okay? So you basically get 10 similarity score. Each of these 10 similarity score is comparing this line, this line, to this line, and then with this line, with this line and so on. You understand what we are doing here, right? Yeah,
+
+Unknown Speaker  1:51:22  
+when I run that code, I only get one item.
+
+Speaker 4  1:51:26  
+That was after I changed it to Matt. You were sending it in as an array of one. What do you mean?
+
+Speaker 1  1:51:35  
+You've got one item. You have 10 item here. This for loop is looping 10 times. Yeah, yeah. So if you do this, it will loop 10 times, actually, because there are 10 different news headlines, embeddings that are there in in here, there are 10 so you are going to get this, and then they are asking you to basically print this in a more meaningful way, which is, first you will print the news headline to categorize, which is my new headline that is given. And then for each of the similarity score that you have here, you already have the one of the 10 headlines here, so you basically get the headline and similarity score, and basically then say that news headlines DF, which is the original data frame, so you basically find the category that is present for this corresponding headline in the original data frame. So the first one original category is business, and the second one is sports and technology and politics and so on. So you are basically getting the category by applying a lock function matching these current headline that you are looking at and doing a look up with the original data frame that you loaded based on this match here. And then for that selected row that you have, you are basically getting the category, and then values, and then zero, the basically the first value that you are getting. So that will give you which category it is. And then you are going to print the rank. And now rank you can print 123, and so on. It is already sorted, right? So rank one would have the one with highest category, and so on, highest similarity, and so on. Now that's what that is. So rank i plus one. So that will be, it will be rank one, rank two, rank three, and so on. Category. It will be printed as travel, politics, business, or whatever the original category is. And the headline is the headline that you are looking into currently. And then you will say, what is the similarity score? And now you are talking about 00, here. Oops, sorry, this 00. Is because when you added the similarity score here, this one, you are basically looking into a two dimensional tensor. But even though it is two dimension, it is one by one. So even though it's a single value, but the way you are getting it here as the output of this cosine similarity function, it always returns a tensor, even though it's a single value. So it's basically a list of list you can think of, but List of one item, and inside this, there is another list of one item. That's another way of thinking of it. So that's why you are going to have to add this 00, thing here. So that means your first you are going to print the news headline to categorize, which is the one, the single headline that is given, and then for each of the 10 headline that are present. And you are printing the origin head 10, the corresponding headline. You are printing the corresponding category value, and then you are showing how similar that category headline is to this new headline that is given
+
+Unknown Speaker  1:55:16  
+so that is going to be your output.
+
+Unknown Speaker  1:55:21  
+And then
+
+Speaker 1  1:55:23  
+this is the output you are going to get. So now, if you look into the this and there would be, yeah. So first, my news headlines to categorize, which is top 10 hacks traveling like a pro. Now it has 10 similarity value with the 10 other headlines that we have in the list, and it is already sorted in the reverse reverse order. That means the one, the top ranking one, rank one, is going to have the highest similarity score of all, 0.32, because everything else is lower, as you can see. And then this one, you can see. The headline in question. Here is the five best restaurants in the world, which is a travel category headline, which we are printing from here. And it is saying, the similarity between this and this is 0.32
+
+Unknown Speaker  1:56:21  
+now think about it for a second.
+
+Speaker 1  1:56:25  
+This is a travel category. We can already see that this one is also a travel category, top five best restaurants in the world, but there is no word that is common between this headline and this headline,
+
+Unknown Speaker  1:56:42  
+nothing common, no common words, nothing
+
+Speaker 1  1:56:47  
+but it still got the highest similarity score based on this limited data set, of course. So that means, according to this crude classifier, you are actually classifying this headline as belonging to travel category,
+
+Unknown Speaker  1:57:08  
+which is not bad, if you think about it.
+
+Speaker 1  1:57:14  
+The next one down the line, the head, the second ranking one is the headline that said, hacker pleads guilty to stealing over 10 $100,000 passwords and so on, which is belonging to technology category. But this is where the model also thought it must have high similarity. Well, high ish, not really high, but high ish because I suppose the word hacker here and the word hacks here, right? And then the third one in that order is, again, travel, the best sub shops in Caribbean you should visit this summer. So if you look into top three, let's say let's take a best of three. If you look at the 10 similarity score that we found, and if we look at the top three, you will see two out of three is travel. So that means this cat news headline that we are testing for, there is a high probability that this headline must be belonging to travel category, even though there is one misclassification here. But if you get best of three, you can kind of feel that your LLM model, that you have used to do this embedding, that LLM model is kind of spot on, even though the data set is very less here. So
+
+Speaker 4  1:58:49  
+I'm hearing and seeing, maybe there's like a class vote we can do. Because I got, when I ran this code, I got the hacker one is the top one. Like, I run it like four or five times, and I can't get it to shift to the five best restaurants in the world being the first one. Is there something that you're doing in the encoding? Maybe, perhaps we've missed?
+
+Speaker 1  1:59:13  
+No, it's just one thing. Model dot ENCODE,
+
+Unknown Speaker  1:59:17  
+right? But what about the headlines?
+
+Speaker 1  1:59:22  
+Same thing. It's just model dot ENCODE. I'm using twice, one with the list of all headlines, and then another time with the that one single headline. Yeah,
+
+Speaker 8  1:59:38  
+I'm with Jesse Joes is wondering when I on your CSB, like my first sentence is how to spend more time with your family, and then and see a football and then hacker pleads guilty and stuff. So I don't know if that actually impact the you know the result, but basically what you got as number one is my number two, and my number two is number one on your so i. Is it? Yeah, it's reverse. You and I have the same result.
+
+Speaker 3  2:00:04  
+I got the buttons different as well. Some of the headlines are just worded slightly different. I mean, some of them are identical, but
+
+Speaker 8  2:00:11  
+yeah, the headlines then,
+
+Speaker 1  2:00:15  
+but you guys have the same resources file. Aren't you having? Well, yeah, let me open the two files side by side and see whether there is any difference.
+
+Speaker 4  2:00:36  
+If you, if you drag that tab to the right, it'll, it'll dock on the right thing to side by side. No,
+
+Speaker 1  2:00:43  
+yeah, I know that I can do that. But even here, you can see, yeah, wow. Best sandwiches, huh, right, yeah. Number different. Let me do one thing. Let me copy the one from unsolved, and
+
+Unknown Speaker  2:01:05  
+put that in here.
+
+Speaker 1  2:01:12  
+And then I'm going to run my file again and see what I get. I'm
+
+Unknown Speaker  2:01:27  
+okay, so first of all, there is a odd
+
+Unknown Speaker  2:01:30  
+space here.
+
+Speaker 1  2:01:36  
+Okay, so 10 embeddings, one embedding and then the similarity scores.
+
+Unknown Speaker  2:01:47  
+Huh, you are right.
+
+Unknown Speaker  2:01:52  
+It was the CSV. He's different, okay.
+
+Unknown Speaker  2:01:57  
+Now we are the same, not the same result for all
+
+Speaker 1  2:02:00  
+of us. Now we are getting the same result. Yeah,
+
+Unknown Speaker  2:02:03  
+so as part of this exercise to massage,
+
+Unknown Speaker  2:02:08  
+that's a good one. That's a good one.
+
+Speaker 1  2:02:13  
+Yeah, that little change makes some difference. But anyway, my point is, don't read too much into it, because this is, this is not a full fledged classification model by an events, right? The only comparing the list and out of only 10 documents, this is not statistically significant, right? If you have hundreds of 1000s of document and you do the similarity in the bigger scheme of things, things will match up. And again, these are all stochastic model. These are not deterministic model, right? So little change here and there can make some difference, but in the bigger scheme of scheme of things, overall, it will kind of fall into the same kind of a pattern. So, yeah, so
+
+Unknown Speaker  2:03:05  
+yeah, cool.
+
+Unknown Speaker  2:03:08  
+So that's that.
+
+Speaker 1  2:03:12  
+And then there is another activity which you guys are supposed to do with partner so basically meaning pair programming, but it's kind of the very similar activity as this one. It is. Remember, we had these spam versus ham messages, different SMS messages. Some are spam, some are not spam. So it is basically going to work with that data set, well, a subset of that. So we have all of these spam versus ham text messages, 100 of them, to be exact. And then you have a whole bunch of other text messages, 25 of them. So think of this first set as if almost your training data, and this set of 25 is like your test data. Okay, now we are going to see using the similar technique, using the vector embedding, if we can kind of categorize these 25 messages correctly to be either spam or ham based on their similarities with these messages, and see what we get.
+
+Unknown Speaker  2:04:30  
+So to do that,
+
+Speaker 1  2:04:33  
+so we are getting the first list the classified text messages, and we are going to get 100 of these messages, and when you do embedding,
+
+Speaker 1  2:04:53  
+and let's print the shape so this will be 100 by 380, 400. By 384, Five, and then I'm going to do the same thing with the unclassified, and that will be 1025, by 384, what happened?
+
+Unknown Speaker  2:05:19  
+Oh, sorry, here I have a two list,
+
+Speaker 1  2:05:24  
+or if you want to convert it to two list, actually, now let's
+
+Unknown Speaker  2:05:30  
+do this here.
+
+Speaker 1  2:05:33  
+So it is basically 25 by Ah. Ah. Why am I getting this? Sorry, sorry, sorry, sorry, no, no, no, no. This is just taking converting it to list. This is not the embedding. Embeddings are here, sorry, my bad embedding is here. So this will give you 25 by 384, so here I have 100 embeddings from the first list, and here I have 25 embedding from the second list, all 384 dimension. So then what we are going to do is we are going to find the cosine similarities between in on each unclassified message and compare that to all classified message. So we are going to take each of the 25 unclassified message and want to see how similar or dissimilar that message is with all the classified messages. And it's going to be a long list, because it's going to be giving you 2500 similar to score. So it is going to be a long list. So what we are going to do is we are going to look through everything, including a union of unclassified messages and embedding the whole thing. And then for each of the unclassified message, I'm going to also look through all of the classified message and find the cosine similarity between unclassified and classified, and then I'm going to append that cosine similarity in this list. And then I'm going to find the top five in here, and then take the top five and append it into this list.
+
+Unknown Speaker  2:07:26  
+So when I do that,
+
+Speaker 1  2:07:29  
+then for each of the unclassified message, the top five classified message that are ranked by similarity is now saved in this list of unclassified similarities, and then all I'm going to do is I'm going to look through these, all of these unclassified similarities here, and then print the top five Ranking messages based on the similarity score with the corresponding unclassified message. Okay, now you're going to get this code, so let's not read too much into the for loop and all, which is pretty simple actually, but let's see what the output we are going to get, and then also when we are going to print, we are going to now print the original level that is present in the classified message so that we can I through this list output and make a kind of a judgment call. So let's see what we got. So our first unclassified message, this is the first out of the 25 unclassified message that we have, which says, would your little ones like a call from Santa? Christmas Eve, text yes to this number and book your time. Now let's see which five classified messages it is most similar to, and these are the five classified messages that it is mostly similar to the top one having a similarity score of
+
+Unknown Speaker  2:09:09  
+point zero, 4.406,
+
+Speaker 1  2:09:14  
+the second one is having a similarity score of point 381, and so on, and it is also printing that that message, this is one of the classified message. What was the original classification level for that message which is spam? So that means this message, which is supposed to be unclassified, is mostly similar to this spam message. Spam message. The second level of similarity is ham the third ranking is another spam message. Fourth is also another spam message, and fifth is also another spam message. So based on this, we can decide that this. Message which is not classified is most likely a spam message, because out of the top five similarity similar messages, four of them are spam. Now, if you think about it for why, you will see that it is actually urging you to either call or text a number, promising that you are going to get something for free, some freebie.
+
+Unknown Speaker  2:10:30  
+And I think that's what this model is picking up on,
+
+Speaker 1  2:10:34  
+and all of the other spam messages, if you see they're all asking the user to call some number, reply to some text message, or send a SMS message to some number and stuff like that. So there is kind of a call to action, and there is also a promise of some kind of a reward. So based on these attributes, I think the model is thinking that the top five ranking, the top five ranked similar messages, most of them are coming from the spam category. Therefore this message must be a spam, or most likely would be a spam.
+
+Unknown Speaker  2:11:20  
+Similarly, if you look into the second one,
+
+Speaker 1  2:11:24  
+which is, where did it go? Oh, this is a long one, right?
+
+Unknown Speaker  2:11:35  
+Yeah, so the second one is this one,
+
+Speaker 1  2:11:39  
+so there is nothing abusive about it. It seems like a normal text message some of your friend or colleague might send you. And then if you see the top five messages that the model thinks it is similar to, you see all of these are ham, meaning, very harmless looking text, something that someone from your contact list would probably send you, and you are getting this similarity score, point four, 9.48, and so on. So therefore, most likely these messages also have
+
+Unknown Speaker  2:12:21  
+and so on and so forth.
+
+Unknown Speaker  2:12:24  
+Next one,
+
+Speaker 1  2:12:27  
+look at this message. Same thing, your friend is trying to set up an appointment to meet you at the pub or Cafe, which doesn't sound like a spam. And the top five similar messages are also not spam and so on. So you will see the same pattern all across that a majority of the cases, if you take a voting out of the voting with this top five ranked similar messages, and get the majority, you will see this classification is almost always correct based on these embedding similarity of similarity between vector embeddings. So the point here is for to make you guys understand that when you are using one of these language model such as these, all mini lm v6 v2 or l6 v2 that we used, the embedding that you are generating, the embedding itself contains a wealth of meaningful information that can tell your neural network a lot about the intent and intention and the summary of the message, just by those 384 seemingly meaningless numbers. Because think about how these 384 numbers are generated. Right? Someone ran this through a deep neural network, probably using a LSTM, and then came up with the output layer with this 384 neuron. That's the model that we are using, and that's why we are getting this 384 numbers. Now, since that model has already been trained with a large body of text from a variety of sources. That's why these models vector embedding seems so accurate for most part,
+
+Unknown Speaker  2:14:33  
+therefore in your project going forward,
+
+Speaker 1  2:14:37  
+the takeaway here is, instead of using any previous tokenization library that you have learned, if you learn these language model based embeddings, if you use this, then your model is essentially already getting a boost, a leg up, even before it starts training, just by having these vector embeddings.
+
+Unknown Speaker  2:15:02  
+So that is the final outcome for today's class.
+
+Speaker 1  2:15:07  
+I hope you see that from from these last couple of exercise we just completed.
+
+Unknown Speaker  2:15:17  
+Okay, so that's about it for today.
+
+Unknown Speaker  2:15:26  
+That's enough,
+
+Unknown Speaker  2:15:27  
+huh? I think that's enough.
+
+Speaker 1  2:15:33  
+Yeah, but are you serious to all of you guys, start thinking through about your project right now, because we are almost nearing that time. Start thinking through this project,
+
+Unknown Speaker  2:15:47  
+what you are going to do? I
+
+Speaker 2  2:15:48  
+said a little disillusioned, because going through that first example with cosine similarity, so I added a sentence, a fourth sentence, which was, I love working in my lab, and it found the highest similarity was between my my dog in the lab and I love working in my lab, yet lab has so many different meanings in each context. Yeah, so who said it didn't
+
+Speaker 1  2:16:18  
+get no, obviously it won't, but that's because you are only finding similarities between four sentence.
+
+Unknown Speaker  2:16:27  
+Yeah, I know, but I'm just saying
+
+Speaker 1  2:16:30  
+if, now, if you have think about it, if you
+
+Speaker 2  2:16:33  
+have vectorization, it should be able to figure out, have some empathy about the
+
+Speaker 1  2:16:38  
+distances, no, that when you are doing a vectorization of one sentence that is just one vector in 384 dimensional space, yeah, that's right now. Now, instead of comparing that with four other vectors, if you compare that with 4 million other vectors with all sorts of different messages, and then you do the do the ranking, and take the top ranking one, then you will see that it
+
+Speaker 2  2:17:01  
+will be better. It would be better. I'm just playing around, and that's right,
+
+Unknown Speaker  2:17:07  
+what so, so, what is
+
+Speaker 4  2:17:12  
+project? Okay, you're saying, start thinking about it. But I mean, there's a project. What's the what's the general goal?
+
+Speaker 1  2:17:23  
+So general goal is basically like, I haven't actually looked through like, there is basically just like any the two previous project, right? There is no specific prompt there. The idea is kind of the same. You need to come up with something that showcases your learning, and if you want, you can show some additional work that you have done based on your own research, your own learning and so on. So since in this section of the boot camp, we are working with training neural network based models, so it would be fair to think that whatever project you do, it will either be training some kind of an image based model, image classification, video based model would be too hard, and we haven't learned those, so don't try video. So either image based or language processing based, like kind of what we did with the Sherlock Holmes and Moby Dick book in the last class, something similar to that, or simple topic classification, like clustering, those kind of things that we have done. And also you will see in the next three, four classes, where we are not going to be doing anything from ground up, unlike we have done so far. Instead, we are going to use available model and try to do some task like text summarization, question answering, building chat bot, that kind of thing. So if you want to do that kind of mash up like you want to use some of the so called commodity models, quote, unquote, because these days, the commodity models are pretty good state of the art, right? You might not get top of the line commodity model for free, but even the models that you do get for free, they are amazing, actually, compared to the model that were available even two three years back. So there are a lot of these amazing models available within that hugging face repository, which we will go and try out some models in next few classes. So that would be also another idea like you can either choose to build some neural net based image or language processing from scratch, or you can try to do some mash up using something that is already available in our hanging arguing phase, and then try to build some application around it.
+
+Unknown Speaker  2:19:48  
+So that would be the general direction that's very helpful.
+
+Unknown Speaker  2:19:51  
+I appreciate, yeah.
+
+Speaker 1  2:19:56  
+And then on top of that, if some of you guys are like, thinking like. We want to go all the way and show some of our cooler work. And then some of you, if you guys, are very good in quickly building some web application to use, quote, unquote, vibe coding, like what I was discussing at the beginning of class. Like you want to do vibe code and come up with some cool app idea,
+
+Speaker 2  2:20:19  
+huh? I said, why not? Yeah,
+
+Unknown Speaker  2:20:22  
+why not, right?
+
+Speaker 2  2:20:23  
+I mean, sure, but I'm looking at G R O Q, rock, but G R O Q, I used to use some pretty large language, large language models for free on that. But still, true or not, I don't know, but they have a lot of the open source, like Lama 3.1 a lot of bigger open source models that you could use, maybe for free. So Microsoft
+
+Unknown Speaker  2:20:53  
+actually didn't, which I
+
+Speaker 2  2:20:55  
+guess now someone were to do a project with that. I'd love to see that, because I'd love to see how
+
+Speaker 3  2:21:00  
+it works. Just feel like one of the lightweight models. Yeah,
+
+Speaker 2  2:21:04  
+that sounds pretty neat. And I was thinking I would play around at some point myself. But if someone wanted to do a project, that's why I put that article. Maybe someone wanted a project of it,
+
+Speaker 1  2:21:16  
+because that's so that is also actually one good suggestion guys, to all of you, use use the TAs, because I think they have done some cool stuff. And I'll be totally frank and open and honest with you guys my expertise, like I have mostly any. Probably you have to already notice the kind of machine learning work that I have done, mostly in my professional life, is basically deep down, like this stuff, right? I actually have built LSTM based time series model. I have built lot of Amazon like sagemaker, you know, the Amazon sagemaker, which is their machine learning library. I have done a lot of modeling on sagemaker, right? But after these whole LLM and GPT models become available, I really haven't done a lot of work on that in my professional life, so I think you guys will be better served to kind of use the office hours time before end or after class, and then run some ideas through the TAs, through Karen Kia and Mohammed, and start thinking early, right? And then use the office hours, come little early, stay a little late, and run through your ideas and try to come up with with something that that could work, right? Do your own research. And to you guys also like TAs, you can also come up with some ideas like based on what you have done, or what your recent search, that you have done something that you have stumbled upon somewhere. Feel free to share those, right. So
+
+Unknown Speaker  2:22:56  
+this is, this is a time to start
+
+Speaker 2  2:22:57  
+logical extension of what we've been doing tonight is that that's actually the basis for doing a retrieval augmented generation. Because you do, you're doing, you have a bunch of documents, and then you find your query most similar documents, and then you feed that to the large language models context, so that I will give a more accurate response to your original question. Rather than hallucinating stuff, it grounds it more in actual, in actual documents. Yeah. And this is very much the basis, this is like, the basis of that. The under this is the what, how that, that's how, like, how it works.
+
+Unknown Speaker  2:23:40  
+How that all works.
+
+Unknown Speaker  2:23:43  
+Thanks all we'll see on the next one. Bye.
+
