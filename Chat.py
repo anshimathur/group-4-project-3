@@ -9,6 +9,7 @@ import time # To check manifest modification time
 import fitz  # PyMuPDF
 from langchain.text_splitter import RecursiveCharacterTextSplitter, Language # Keep Recursive here
 from langchain_community.vectorstores import FAISS # Updated import
+from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_google_genai import GoogleGenerativeAIEmbeddings # Import Google embeddings
 from langchain.docstore.document import Document # Correct import
 from collections import Counter
@@ -316,7 +317,8 @@ else:
 
 # --- Main Chat Logic ---
 # Initialize messages in session state for persistence
-    
+if 'conversation_history' not in st.session_state:
+    st.session_state.conversation_history = ChatMessageHistory() 
 # Initialize messages list for UI display
 if 'messages' not in st.session_state:
     st.session_state.messages = []
