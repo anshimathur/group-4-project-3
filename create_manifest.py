@@ -178,42 +178,8 @@ def create_content_manifest():
                 relative_path = file_path.relative_to(transcripts_dir)
                 abs_path = file_path.resolve()
 
-<<<<<<< HEAD
-                # Extract Module and Day from path
-                module = None
-                day = None
-                try:
-                    # Find first part that looks like a module (e.g., "01-Intro...")
-                    module_part = next((part for part in relative_path.parts if re.match(r"^\d{2}-", part)), None)
-                    if module_part:
-                        module = module_part.split('-')[0]
-                        # Find first part *after* module that looks like a day ("1", "2", "3")
-                        day_part_index = -1
-                        for i, part in enumerate(relative_path.parts):
-                            if part == module_part:
-                                day_part_index = i + 1
-                                break
-                        if day_part_index != -1 and day_part_index < len(relative_path.parts):
-                            day_part_candidate = relative_path.parts[day_part_index]
-                            if re.match(r"^[1-3]$", day_part_candidate):
-                                day = day_part_candidate
-
-                except Exception as e:
-                    print(f"Warning: Could not parse module/day for {relative_path}: {e}")
-
-
-                # Determine the correct root for slideshow lookup (always course-content)
-                slideshow_lookup_path = abs_path
-
-                # Find corresponding slideshow PDF relative to course_content_dir
-                slideshow_pdf_rel_path = None
-                if file_ext != '.pdf':
-                    slideshow_pdf_rel_path = find_slideshow_pdf(slideshow_lookup_path, course_content_dir)
-
-=======
                 # Extract module and day from transcript filename
                 module, day = extract_module_day_from_transcript(file_path.name)
->>>>>>> peyton
 
                 metadata = {
                     "absolute_path": abs_path.as_posix(),
