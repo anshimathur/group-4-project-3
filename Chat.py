@@ -9,7 +9,6 @@ import time # To check manifest modification time
 import fitz  # PyMuPDF
 from langchain.text_splitter import RecursiveCharacterTextSplitter, Language # Keep Recursive here
 from langchain_community.vectorstores import FAISS # Updated import
-from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_google_genai import GoogleGenerativeAIEmbeddings # Import Google embeddings
 from langchain.docstore.document import Document # Correct import
 from collections import Counter
@@ -35,13 +34,17 @@ except Exception as e:
     st.stop()
 
 # --- Configuration ---
-st.set_page_config(layout="wide", page_title="AI Course Tutor")
+st.set_page_config(layout="wide", page_title="Chat", page_icon="💬")
+
+st.title("AI Course Tutor - Chat")
+st.write("Ask questions about your course material and get AI-powered answers.")
 
 # --- Constants ---
 MANIFEST_PATH = Path(__file__).parent / "content_manifest.json"
 FAISS_INDEX_PATH = Path(__file__).parent / "faiss_index_google_v1" # New path for Google embeddings
 GOOGLE_EMBEDDING_MODEL = 'models/embedding-001' # Use the correct format for embedding model name
 COURSE_CONTENT_ROOT = Path(__file__).parent / "course-content" # Define root for relative paths
+TRANSCRIPTS_ROOT = Path(__file__).parent / "transcripts" # Define root for transcript files
 NUM_FETCH_DOCS = 20 # Number of documents to fetch initially for MMR
 NUM_FINAL_DOCS = 8 # Number of diverse documents to select using MMR for the context
 
@@ -103,12 +106,12 @@ def read_pdf_file(file_path):
     try:
         doc = fitz.open(stream=file_path.read_bytes(), filetype="pdf")
         for page_num, page in enumerate(doc, start=1):
-            pages_content.append((page_num, page.get_text()))
+            text = page.get_text()
+            pages_content.append((page_num, text))
         doc.close()
-        return pages_content
     except Exception as e:
         print(f"Warning: Error reading PDF file {file_path}: {e}")
-    return []
+    return pages_content
 
 def read_txt_file(file_path):
     """Reads content from a text file."""
@@ -214,7 +217,13 @@ def build_or_load_index(df):
 
             file_ext = Path(relative_path).suffix.lower()
             reader = READERS.get(file_ext)
-            file_path_to_read = COURSE_CONTENT_ROOT / relative_path
+            
+            # Check if this is a transcript file and use the right directory
+            is_transcript = row.get('is_transcript', False)
+            if is_transcript:
+                file_path_to_read = TRANSCRIPTS_ROOT / relative_path
+            else:
+                file_path_to_read = COURSE_CONTENT_ROOT / relative_path
 
             # Update progress bar
             progress_text = f"Processing: {relative_path} ({processed_count}/{total_files})"
@@ -302,38 +311,42 @@ else:
     st.error("Failed to load manifest. Cannot initialize FAISS index.")
 
 # --- App UI ---
-st.title("AI Course Tutor Chat")
-
 # Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
 
-# Display chat messages from history
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-        # Display sources if they exist for assistant messages
-        if message["role"] == "assistant" and "sources" in message and message["sources"]:
-            with st.expander("View All Sources Used", expanded=False):
-                for source_path, meta in message["sources"].items():
-                    page_info = f", Page {meta.get('page')}" if 'page' in meta else ""
-                    st.write(f"- **{source_path}**{page_info}")
-                    st.caption(f"  (Module: {meta.get('module', 'N/A')}, Day: {meta.get('day', 'N/A')}, Type: {meta.get('file_type', 'N/A')})")
-                    if meta.get('slideshow') and meta['slideshow'] != 'N/A':
-                        st.caption(f"  Related Slideshow: `{meta['slideshow']}`")
 
 # --- Main Chat Logic ---
-# Initialize conversation history in session state for persistence
-if 'conversation_history' not in st.session_state:
-    st.session_state.conversation_history = ChatMessageHistory()
+# Initialize messages in session state for persistence
+    
+# Initialize messages list for UI display
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
 
+# Display previous chat messages when page loads
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        if message["role"] == "assistant" and "sources" in message:
+            st.markdown(message["content"])
+            # Display sources if available
+            if message["sources"]:
+                with st.expander("View Sources"):
+                    for source_key, metadata in message["sources"].items():
+                        source = metadata.get('source', 'Unknown')
+                        page = metadata.get('page', None)
+                        if page:
+                            st.caption(f"📄 {source} (Page {page})")
+                        else:
+                            st.caption(f"📄 {source}")
+                        if 'slideshow' in metadata and metadata['slideshow']:
+                            st.caption(f"  Related Slideshow: `{metadata['slideshow']}`")
+        else:
+            st.markdown(message["content"])
 if faiss_index is not None and gemini_configured:
     if prompt := st.chat_input("Ask something about the course material..."):
         # Add user message to history and display it
         st.session_state.messages.append({"role": "user", "content": prompt})
         
-        # Add user message to conversation history
-        st.session_state.conversation_history.add_user_message(prompt)
+        # User message already added to session state above
+        
         with st.chat_message("user"):
             st.markdown(prompt)
 
@@ -434,24 +447,51 @@ if faiss_index is not None and gemini_configured:
                         print("Note: No conversation history yet")
                         
                     sources_for_display = source_to_meta_map # Use the unique map for display
+                    
+                    # Get conversation history from session state messages
+                    previous_messages = st.session_state.messages[:-1]  # Exclude current message
+                    conversation_history = ""
+                    if previous_messages:  # Proceed only if there are previous messages
+                        # Limit conversation history to the most recent 10 messages
+                        if len(previous_messages) > 10:
+                            previous_messages = previous_messages[-10:]
+                        
+                        # Build a structured conversation history string
+                        chat_turns = []
+                        for m in previous_messages:
+                            role = "Human" if m['role'] == "user" else "Assistant"
+                            chat_turns.append(f"{role}: {m['content']}")
+                        
+                        conversation_history = "\n\n".join(chat_turns)
+                        
+                        print(f"Current conversation history ({len(previous_messages)} messages):")
+                        for i, msg in enumerate(previous_messages):
+                            print(f"  Message {i+1}: {msg['role']} - {msg['content'][:50]}...")
+                    else:
+                        print("Note: No conversation history yet")
 
                     # 4. Prepare Final Prompt for Gemini
-                    # Check for follow-up questions
-                    follow_up = len(messages) >= 2  # If we have message history, this might be a follow-up
-                    
-                    # Prepare the prompt template
+                    # Separate conversation history from content chunks for clarity
+                    if conversation_history:
+                        conversation_section = f"""
+**Previous Conversation:**
+{conversation_history}
+"""
+                    else:
+                        conversation_section = ""
+
                     prompt_template = f"""
-You are an AI Tutor for a Machine Learning Bootcamp. Use ONLY the provided Context Chunks to answer the user's question.
+You are an AI Tutor for a Machine Learning Bootcamp. Use the provided Context Chunks to answer the user's question.
 
 **Instructions:**
-- Answer the user's question using ONLY information from the Context Chunks.
+- Answer the user's question using information from the Context Chunks.
 - DO NOT use any general knowledge not found in the Context Chunks.
 - If you are complimented, feel free to respond in a friendly manner.
 - If the answer spans multiple chunks, synthesize the information concisely.
 - When the question asks **where/when** a concept appears, mention the Module/Day/Source File/Page (if available) and ensure it's listed in the 'Sources' section later.
 - If the question is related to a specific concept (e.g., a formula or method), explain it in a straightforward manner and provide any relevant details from the Context Chunks.
 - If the context includes pandas, numpy, or other libraries being asked about, provide an answer based strictly on how they are presented in the course materials.
-- If answering a follow-up question, refer to our previous conversation only as context, but still answer based solely on the Context Chunks.
+- IMPORTANT: If the question appears to be a follow-up question, you MUST refer to the Previous Conversation section to understand the context of the conversation.
 - Start your response directly with the answer, preceded by `### Answer`.
 - Format code examples, commands, or formulas using ```markdown fences``` for clarity.
 - Use **bullet points** or **numbered lists** for steps or key items when appropriate.
@@ -459,13 +499,12 @@ You are an AI Tutor for a Machine Learning Bootcamp. Use ONLY the provided Conte
 - If the Context Chunks do not contain the answer, clearly state:
   > Based on the provided course material context, I cannot answer that question. You may want to rephrase or check the course content.
 
+{conversation_section}
 **Context Chunks:**
 {context}
 
 **Current Question:** {prompt}
-
 Answer:"""
-
 
                     # 5. Call Gemini API
                     try:
@@ -517,16 +556,8 @@ Answer:"""
                 "content": full_response_content,
                 "sources": sources_for_display # Store sources with the message
             })
-                        
-            # Add the AI message to conversation history in session state
-            st.session_state.conversation_history.add_ai_message(full_response_content)
             
-            # Debug print for conversation history
-            messages = st.session_state.conversation_history.messages
-            print(f"Debug - After adding AI message. Conversation history now has {len(messages)} messages")
-            for i, msg in enumerate(messages):
-                print(f"  Message {i+1}: {msg.type} - {msg.content[:50]}...")
-            
+            # Assistant message already added to session state above
 
 elif not gemini_configured:
     st.warning("Gemini API is not configured. Please check your `secrets.toml` file.")
