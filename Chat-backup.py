@@ -45,7 +45,7 @@ MANIFEST_PATH = Path(__file__).parent / "content_manifest.json"
 FAISS_INDEX_PATH = Path(__file__).parent / "faiss_index_google_v1" # New path for Google embeddings
 GOOGLE_EMBEDDING_MODEL = 'models/embedding-001' # Use the correct format for embedding model name
 COURSE_CONTENT_ROOT = Path(__file__).parent / "course-content" # Define root for relative paths
-TRANSCRIPTS_ROOT = Path(__file__).parent / "course-content/transcripts" # Define root for transcript files
+TRANSCRIPTS_ROOT = Path(__file__).parent / "transcripts" # Define root for transcript files
 NUM_FETCH_DOCS = 20 # Number of documents to fetch initially for MMR
 NUM_FINAL_DOCS = 8 # Number of diverse documents to select using MMR for the context
 
@@ -313,22 +313,6 @@ else:
 
 # --- App UI ---
 # Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-# Display chat messages from history
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-        # Display sources if they exist for assistant messages
-        if message["role"] == "assistant" and "sources" in message and message["sources"]:
-            with st.expander("View All Sources Used", expanded=False):
-                for source_path, meta in message["sources"].items():
-                    page_info = f", Page {meta.get('page')}" if 'page' in meta else ""
-                    st.write(f"- **{source_path}**{page_info}")
-                    st.caption(f"  (Module: {meta.get('module', 'N/A')}, Day: {meta.get('day', 'N/A')}, Type: {meta.get('file_type', 'N/A')})")
-                    if meta.get('slideshow') and meta['slideshow'] != 'N/A':
-                        st.caption(f"  Related Slideshow: `{meta['slideshow']}`")
 
 
 # --- Main Chat Logic ---
@@ -339,60 +323,39 @@ if 'conversation_history' not in st.session_state:
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-# Add a flag to track the current session to avoid duplicating messages
-if 'current_session_messages' not in st.session_state:
-    st.session_state.current_session_messages = set()
-
 # Display previous chat messages when page loads
-for i, message in enumerate(st.session_state.messages):
-    # Create a unique identifier for this message
-    message_id = f"{message['role']}_{i}"
-    
-    # Only display messages that haven't been displayed in this session
-    if message_id not in st.session_state.current_session_messages:
-        with st.chat_message(message["role"]):
-            if "sources" in message and message["sources"]:
-                # Messages with sources (typically AI responses with citations)
-                # Main content
-                st.markdown(message["content"])
-                
-                # Add collapsible sources section if sources exist
-                if message["role"] == "assistant" and message["sources"]:  
-                    with st.expander("Sources"):
-                        for source_id, metadata in message["sources"].items():
-                            # Display source with info
-                            if 'file_path' in metadata:
-                                st.caption(f"Source: `{metadata['file_path']}`")
-                            if 'page' in metadata and metadata['page']:
-                                st.caption(f"  Page: {metadata['page']}")
-                            if 'slideshow' in metadata and metadata['slideshow']:
-                                st.caption(f"  Related Slideshow: `{metadata['slideshow']}`")
-            else:
-                st.markdown(message["content"])
-                
-        # Mark this message as displayed in the current session
-        st.session_state.current_session_messages.add(message_id)
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        if message["role"] == "assistant" and "sources" in message:
+            st.markdown(message["content"])
+            # Display sources if available
+            if message["sources"]:
+                with st.expander("View Sources"):
+                    for source_key, metadata in message["sources"].items():
+                        source = metadata.get('source', 'Unknown')
+                        page = metadata.get('page', None)
+                        if page:
+                            st.caption(f"📄 {source} (Page {page})")
+                        else:
+                            st.caption(f"📄 {source}")
+                        if 'slideshow' in metadata and metadata['slideshow']:
+                            st.caption(f"  Related Slideshow: `{metadata['slideshow']}`")
+        else:
+            st.markdown(message["content"])
 if faiss_index is not None and gemini_configured:
     if prompt := st.chat_input("Ask something about the course material..."):
-        # Add user message to history and session state
+        # Add user message to history and display it
         st.session_state.messages.append({"role": "user", "content": prompt})
         
-        # Add this message to conversation history in session state
-        st.session_state.conversation_history.add_user_message(prompt)
+        # User message already added to session state above
         
-        # Display the user message immediately
         with st.chat_message("user"):
             st.markdown(prompt)
-            
-        # Mark this as displayed in the current session
-        message_id = f"user_{len(st.session_state.messages)-1}"
-        st.session_state.current_session_messages.add(message_id)
 
         # Prepare for assistant response
         full_response_content = "Error: Response generation failed."
         sources_for_display = []
         
-        # Create a placeholder for the assistant response that will be added to session state later
         with st.chat_message("assistant"):
             message_placeholder = st.empty() # Placeholder for streaming/final answer
             try:
@@ -459,29 +422,27 @@ if faiss_index is not None and gemini_configured:
 
                     context = "\n\n".join(context_parts)
                     
-                    # Get conversation history from LangChain session state
+                    # Get conversation history from session state
                     messages = st.session_state.conversation_history.messages
-                    print(f"DEBUG: Retrieved {len(messages)} messages from LangChain conversation history")
                     if messages:  # Proceed only if there are messages
                         # Limit conversation history to the most recent 10 messages
                         if len(messages) > 10:
-                            # Keep the most recent messages when we have too many
                             st.session_state.conversation_history.messages = messages[-10:]
-                            messages = messages[-10:]
-                            
-                        # Create a more structured conversation history format for the AI prompt
-                        chat_turns = []
-                        
-                        # Process all messages in order
-                        for msg in messages:
-                            role = "User" if msg.type == "human" else "Assistant"
-                            chat_turns.append(f"{role}: {msg.content}")
+                        # Create a more structured conversation history format
+                        conversation_pairs = []
+                        for i in range(0, len(messages)-1, 2):  # Process in user-AI pairs
+                            if i+1 < len(messages):  # Ensure we have a complete pair
+                                user_msg = messages[i].content if messages[i].type == 'human' else 'Unknown question'
+                                ai_msg = messages[i+1].content if i+1 < len(messages) and messages[i+1].type == 'ai' else 'Unknown response'
+                                conversation_pairs.append(f"User: {user_msg}\nAI: {ai_msg}")
                         
                         # Format the conversation history
-                        conversation_history = "\n\n".join(chat_turns)
-                        print(f"Using conversation history with {len(messages)} messages for context")
+                        if conversation_pairs:
+                            context_history = "Previous Conversation:\n" + "\n\n".join(conversation_pairs) + "\n\n"
+                            # Prepend conversation history to context
+                            context = context_history + context
                         
-                        # Display what's being used in debug mode
+                        print(f"Current conversation history ({len(messages)} messages):")
                         for i, msg in enumerate(messages):
                             print(f"  Message {i+1}: {msg.type} - {msg.content[:50]}...")
                     else:
@@ -489,13 +450,34 @@ if faiss_index is not None and gemini_configured:
                         
                     sources_for_display = source_to_meta_map # Use the unique map for display
                     
+                    # Get conversation history from session state messages
+                    previous_messages = st.session_state.messages[:-1]  # Exclude current message
+                    conversation_history = ""
+                    if previous_messages:  # Proceed only if there are previous messages
+                        # Limit conversation history to the most recent 10 messages
+                        if len(previous_messages) > 10:
+                            previous_messages = previous_messages[-10:]
+                        
+                        # Build a structured conversation history string
+                        chat_turns = []
+                        for m in previous_messages:
+                            role = "Human" if m['role'] == "user" else "Assistant"
+                            chat_turns.append(f"{role}: {m['content']}")
+                        
+                        conversation_history = "\n\n".join(chat_turns)
+                        
+                        print(f"Current conversation history ({len(previous_messages)} messages):")
+                        for i, msg in enumerate(previous_messages):
+                            print(f"  Message {i+1}: {msg['role']} - {msg['content'][:50]}...")
+                    else:
+                        print("Note: No conversation history yet")
+
                     # 4. Prepare Final Prompt for Gemini
                     # Separate conversation history from content chunks for clarity
                     if conversation_history:
                         conversation_section = f"""
 **Previous Conversation:**
 {conversation_history}
-
 """
                     else:
                         conversation_section = ""
@@ -549,7 +531,6 @@ Answer:"""
                                     # Last resort - convert the whole response to string
                                     full_response_content = str(response)
                                 
-                                # Use the placeholder to show the message during this session only (not duplicated on refresh)
                                 message_placeholder.markdown(full_response_content) # Display final answer
                             else:
                                 st.error("Failed to get a response from the AI model. The response was empty.")
@@ -557,22 +538,18 @@ Answer:"""
                             st.error(f"Error formatting response: {format_e}")
                             st.error(f"Raw response: {response}")
                             full_response_content = f"Error formatting response: {format_e}. Raw response: {str(response)[:200]}..."
-                            # Use placeholder to avoid duplication on refresh
                             message_placeholder.markdown(full_response_content)
 
                     except Exception as gen_e:
                         print(f"Error during Gemini API call: {gen_e}")
                         traceback.print_exc()
                         full_response_content = f"Sorry, an error occurred while generating the response: {gen_e}"
-                        # Use placeholder to avoid duplication on refresh
-                        message_placeholder.markdown(full_response_content)
 
             except Exception as e:
                 # Catch errors in the main try block (retrieval, context prep)
                 st.error(f"An unexpected error occurred: {e}")
                 traceback.print_exc()
                 full_response_content = f"Sorry, a critical error occurred: {e}"
-                # Use placeholder to avoid duplication on refresh
                 message_placeholder.markdown(full_response_content) # Show error in placeholder
 
             # Add assistant response (or error message) to chat history AFTER processing
@@ -582,18 +559,7 @@ Answer:"""
                 "sources": sources_for_display # Store sources with the message
             })
             
-            # Mark this assistant message as already displayed in current session
-            message_id = f"assistant_{len(st.session_state.messages)-1}"
-            st.session_state.current_session_messages.add(message_id)
-                        
-            # Add the AI message to conversation history in session state (for context in future exchanges)
-            st.session_state.conversation_history.add_ai_message(full_response_content)
-            
-            # Debug print for conversation history
-            messages = st.session_state.conversation_history.messages
-            print(f"Debug - After adding AI message. Conversation history now has {len(messages)} messages")
-            for i, msg in enumerate(messages):
-                print(f"  Message {i+1}: {msg.type} - {msg.content[:50]}...")
+            # Assistant message already added to session state above
 
 elif not gemini_configured:
     st.warning("Gemini API is not configured. Please check your `secrets.toml` file.")

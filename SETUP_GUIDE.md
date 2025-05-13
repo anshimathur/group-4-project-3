@@ -76,7 +76,7 @@ This guide provides step-by-step instructions for setting up and running the AI 
 1.  **Ensure Environment is Active:** Verify that your terminal prompt starts with `(tutor_env)`.
 2.  **Start Streamlit:** Run the following command from the `project root` directory:
     ```bash
-    python -m streamlit run app.py
+    python -m streamlit run Chat.py
     ```
     *   Using `python -m streamlit run` ensures you are using the Python interpreter and packages from your active `tutor_env`.
 

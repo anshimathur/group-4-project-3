@@ -88,7 +88,7 @@ def create_content_manifest():
     """
     script_location = Path(__file__).parent
     course_content_dir = script_location / "course-content"
-    transcripts_dir = script_location / "transcripts"
+    transcripts_dir = script_location / "course-content/transcripts"
     manifest_file = script_location / "content_manifest.json"
 
     content_manifest = []
