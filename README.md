@@ -1,4 +1,4 @@
-# 📚 NLP-Powered Q&A Over Class Materials
+# 📚 AI Course Tutor — NLP-Powered Q\&A over Class Materials
 
 ## 🚀 Project Overview
 
@@ -10,98 +10,115 @@ This project was developed as part of our final class assignment to demonstrate 
 
 ## 🎯 Goals
 
-- Allow users to ask natural language questions about class content
-- Return contextual answers pulled directly from course materials
-- Display the original module or document source for reference
-- Compare local and cloud-based approaches for speed, accuracy, and privacy
-- Compare vector-only retrieval vs. full RAG (retrieval-augmented generation) pipelines
+* Allow users to ask natural language questions about class content
+* Return contextual answers pulled directly from course materials
+* Display the original module or document source for reference
+* Compare local and cloud-based approaches for speed, accuracy, and privacy
+* Compare vector-only retrieval vs. full RAG (retrieval-augmented generation) pipelines
 
 ---
 
 ## 📂 Data Collection & Preprocessing
 
-We plan to ingest a wide range of course content, including:
+We ingested a wide range of course content, including:
 
-- PDF lecture slides and reading materials
-- Zoom meeting transcripts
-- Jupyter notebook code and markdown cells (potentially)
-- Class activity files from VSCode
+* PDF lecture slides and reading materials
+* Zoom meeting transcripts
+* Jupyter notebooks and Python scripts
+* Class activity files from VSCode
 
-### Preprocessing Steps:
+### Preprocessing Steps
 
-- Converted files into plain text with LangChain loaders
-- Applied recursive text splitting for token-length optimization
-- Embedded using `sentence-transformers` models
-- Indexed with FAISS for efficient vector search
+* Converted files into plain text using custom readers (including `.ipynb`, `.py`, `.md`, `.pdf`, `.txt`)
+* Applied recursive and language-aware text splitting for semantic chunking
+* Embedded content with Google Gemini Embeddings
+* Indexed documents with FAISS, tagging each chunk with module, day, and source info
+
+---
+
+## 🧰 Application Setup
+
+A full walkthrough is available in [`SETUP_GUIDE.md`](./SETUP_GUIDE.md), including Conda environment setup, dependency installation, and index generation.
+
+### Highlights:
+
+* Uses Streamlit as a lightweight UI
+* Integrates FAISS for semantic search
+* Gemini API is required (set via `.env`)
+* Automatically builds a manifest of all supported content types (`.pdf`, `.py`, `.ipynb`, `.md`, `.txt`)
+
+### Run the App
+
+```bash
+conda activate tutor_env
+python -m streamlit run Chat.py
+```
+
+On first launch, the app builds a FAISS vector index — this may take several minutes.
 
 ---
 
 ## 🤖 Model Architecture
 
-We're currently testing two deployment configurations:
-
 ### 🔁 Vector-Based Retrieval
 
-- Uses FAISS for semantic search
-- Returns top-k documents or chunks as plain responses
+* Uses FAISS for semantic document matching
+* Returns top-k relevant chunks with source metadata
 
 ### 🔍 RAG-Based QA Pipeline
 
-- Integrates document retrieval with LLM generation
-- Maintains limited conversation history to prevent context overflow
-- Uses either a local LLM or cloud-based models (e.g., Gemini)
-- Provides more natural, summarized answers
+* Integrates LLM generation (Gemini) with document retrieval
+* Summarizes or elaborates answers based on context
+* Preserves recent chat history for improved coherence
 
 ---
 
-## 🧪 Model Optimization
+## 🧪 Optimization & Evaluation
 
-- Iteratively tuned embedding model (e.g., `all-MiniLM-L6-v2`) and chunk sizes
-- Compared performance across retrieval top-k values and LLM prompt settings
-- Logged results and timings to CSV for reproducibility and analysis
+* Tuned chunk sizes and overlap for optimal embedding context
+* Tested various embedding models and retrieval depths
+* Evaluated performance in both local and cloud settings
 
 ---
 
-## 🔐 Privacy & Speed Notes
-
-We are testing **both local and cloud-based deployment** options:
+## 🔐 Privacy & Speed
 
 ### Local Mode
-- Fully private — no external calls
-- Powered by SentenceTransformers + FAISS
-- Can integrate with local LLMs (e.g., GPT4All, LLaMA)
+
+* No API calls; embeddings and search are performed locally
+* Privacy-preserving, ideal for sensitive material
 
 ### Cloud Mode
-- Connects to Gemini API (or other LLM APIs)
-- Offers superior generation quality
-- Slight latency due to API call time
+
+* Uses Gemini API for natural language generation
+* Slower due to network latency, but richer responses
 
 ---
 
 ## 🖥️ Presentation Summary
 
-- **Executive Summary**: We built a smart Q&A system over our course materials using modern NLP tools
-- **Data Collection**: Aggregated and cleaned PDFs, notebooks, and transcripts
-- **Approach**: Compared vector retrieval vs RAG; tested local vs cloud hosting
-- **Next Steps**: Add support for uploading new docs, evaluate large-scale accuracy, test with new LLMs
-- **Conclusion**: Shows how AI can make studying faster, easier, and more interactive
+* **Executive Summary**: We built a smart Q\&A system over course materials using FAISS + Gemini
+* **Data Collection**: Aggregated PDFs, notebooks, transcripts
+* **Architecture**: Indexed with FAISS, queried via Streamlit, RAG-capable
+* **Next Steps**: Add document upload, improve UI, test with alternate LLMs
 
 ---
 
 ## 👩‍💻 Technologies Used
 
-- Python
-- Jupyter Notebooks
-- LangChain
-- FAISS
-- SentenceTransformers
-- Gemini API (optional)
-- Streamlit (optional UI layer)
-- GitHub
+* Python
+* Jupyter Notebooks
+* LangChain (preliminary)
+* FAISS
+* Google Gemini API
+* Streamlit
+* GitHub
 
 ---
 
 ## 📌 Authors
 
-- Anshi Mathur, Chad Bradforb, Peyton Lambourne, James Segovia
-
+* Anshi Mathur
+* Chad Bradford
+* Peyton Lambourne
+* James Segovia
