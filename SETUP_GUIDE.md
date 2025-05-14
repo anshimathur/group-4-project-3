@@ -19,7 +19,7 @@ This guide provides step-by-step instructions for setting up and running the AI 
         cd group-4-project-3
         ```
         *(Note: If you have already cloned or pulled the latest changes for this project repository, you can skip this cloning step and just navigate to the project directory.)*
-    *   **If not using Git:** Ensure you have the project files (`app.py`, `requirements.txt`, `create_manifest.py`, etc.) in a dedicated directory on your computer and navigate to that directory in your terminal. Let's refer to this as the `project root`.
+    *   **If not using Git:** Ensure you have the project files (`Chat.py`, `requirements.txt`, `create_manifest.py`, etc.) in a dedicated directory on your computer and navigate to that directory in your terminal. Let's refer to this as the `project root`.
 
 2.  **Create a Dedicated Conda Environment (Highly Recommended):**
     *   To avoid package conflicts (like potential OpenMP errors), create a new, clean environment specifically for this project. Open your Anaconda Prompt or terminal.
@@ -91,5 +91,4 @@ This guide provides step-by-step instructions for setting up and running the AI 
 ## Troubleshooting
 
 *   **`OMP: Error #15`:** This usually indicates conflicting OpenMP libraries. The best solution is to ensure you created and are using a clean conda environment as described in Step 2.
-*   **`KeyError: 'google_api_key'`:** Double-check that you created the `.streamlit/secrets.toml` file correctly (Step 4) and that the key name is exactly `google_api_key`.
-*   **`ImportError`:** Make sure you activated the correct conda environment (`conda activate tutor_env`) before running `pip install -r requirements.txt` and before running `python -m streamlit run app.py`.
+*   **`ImportError`:** Make sure you activated the correct conda environment (`conda activate tutor_env`) before running `pip install -r requirements.txt` and before running `python -m streamlit run Chat.py`.
