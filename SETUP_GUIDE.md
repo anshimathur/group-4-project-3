@@ -7,7 +7,7 @@ This guide provides step-by-step instructions for setting up and running the AI 
 ## Prerequisites
 
 *   **Anaconda or Miniconda:** You need a working installation of Anaconda or Miniconda to manage packages and environments. Download from [Anaconda Distribution](https://www.anaconda.com/products/distribution) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). You can also use venv.
-*   **Git:** This program requires you to clone multipple repositories.
+*   **Git:** This program requires you to clone multiple repositories.
 *   **Course Materials:** You need the course content files (.pdf, .py, .md, .ipynb, .txt) that the tutor will use.
 
 ## Setup Instructions
