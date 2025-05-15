@@ -101,6 +101,7 @@ On first launch, the app builds a FAISS vector index — this may take several m
 * **Data Collection**: Aggregated PDFs, notebooks, transcripts
 * **Architecture**: Indexed with FAISS, queried via Streamlit, RAG-capable
 * **Next Steps**: Add document upload, improve UI, test with alternate LLMs
+* [Presentation Link](https://www.canva.com/design/DAGm7CUO0nY/NkyQaZm8ULOkdbpqUbvh5g/edit?utm_content=DAGm7CUO0nY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ---
 
