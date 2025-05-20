@@ -76,22 +76,25 @@ On first launch, the app builds a FAISS vector index — this may take several m
 ## 🧪 Optimization & Evaluation
 
 * Tuned chunk sizes and overlap for optimal embedding context
-* Tested various embedding models and retrieval depths
 * Evaluated performance in both local and cloud settings
 
 ---
 
-## 🔐 Privacy & Speed
+## 🔐 Privacy vs. Speed
 
-### Local Mode
+### Local Model
 
 * No API calls; embeddings and search are performed locally
 * Privacy-preserving, ideal for sensitive material
+* Con: Very slow message output due to available local resources.
 
-### Cloud Mode
+### Cloud Model
 
 * Uses Gemini API for natural language generation
-* Slower due to network latency, but richer responses
+* Richer responses
+* Con: Requires an API key and has limited use.
+
+We opted to build the app using a Cloud Model.
 
 ---
 
