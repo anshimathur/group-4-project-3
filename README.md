@@ -31,7 +31,7 @@ We ingested a wide range of course content, including:
 
 * Converted files into plain text using custom readers (including `.ipynb`, `.py`, `.md`, `.pdf`, `.txt`)
 * Applied recursive and language-aware text splitting for semantic chunking
-* Used Google's 'models/embedding-001' via GoogleGenerativeAIEmbeddings for embedding course content.
+* Embedded course content through Google Gemini's 'models/embedding-001' via GoogleGenerativeAIEmbeddings.
 * Indexed documents with FAISS, tagging each chunk with module, day, and source info
 
 ---
